@@ -20,9 +20,7 @@ public class SqliteSqlExpressionFactory : SqlExpressionFactory
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public SqliteSqlExpressionFactory(SqlExpressionFactoryDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -35,12 +33,14 @@ public class SqliteSqlExpressionFactory : SqlExpressionFactory
         string format,
         SqlExpression timestring,
         IEnumerable<SqlExpression>? modifiers = null,
-        RelationalTypeMapping? typeMapping = null)
+        RelationalTypeMapping? typeMapping = null
+    )
     {
         modifiers ??= Enumerable.Empty<SqlExpression>();
 
         // If the inner call is another strftime then shortcut a double call
-        if (timestring is SqlFunctionExpression rtrimFunction
+        if (
+            timestring is SqlFunctionExpression rtrimFunction
             && rtrimFunction.Name == "rtrim"
             && rtrimFunction.Arguments!.Count == 2
             && rtrimFunction.Arguments[0] is SqlFunctionExpression rtrimFunction2
@@ -48,7 +48,8 @@ public class SqliteSqlExpressionFactory : SqlExpressionFactory
             && rtrimFunction2.Arguments!.Count == 2
             && rtrimFunction2.Arguments[0] is SqlFunctionExpression strftimeFunction
             && strftimeFunction.Name == "strftime"
-            && strftimeFunction.Arguments!.Count > 1)
+            && strftimeFunction.Arguments!.Count > 1
+        )
         {
             // Use its timestring parameter directly in place of ours
             timestring = strftimeFunction.Arguments[1];
@@ -57,8 +58,7 @@ public class SqliteSqlExpressionFactory : SqlExpressionFactory
             modifiers = strftimeFunction.Arguments.Skip(2).Concat(modifiers);
         }
 
-        if (timestring is SqlFunctionExpression dateFunction
-            && dateFunction.Name == "date")
+        if (timestring is SqlFunctionExpression dateFunction && dateFunction.Name == "date")
         {
             timestring = dateFunction.Arguments![0];
             modifiers = dateFunction.Arguments.Skip(1).Concat(modifiers);
@@ -72,7 +72,8 @@ public class SqliteSqlExpressionFactory : SqlExpressionFactory
             nullable: true,
             argumentsPropagateNullability: finalArguments.Select(_ => true),
             returnType,
-            typeMapping);
+            typeMapping
+        );
     }
 
     /// <summary>
@@ -85,12 +86,12 @@ public class SqliteSqlExpressionFactory : SqlExpressionFactory
         Type returnType,
         SqlExpression timestring,
         IEnumerable<SqlExpression>? modifiers = null,
-        RelationalTypeMapping? typeMapping = null)
+        RelationalTypeMapping? typeMapping = null
+    )
     {
         modifiers ??= Enumerable.Empty<SqlExpression>();
 
-        if (timestring is SqlFunctionExpression dateFunction
-            && dateFunction.Name == "date")
+        if (timestring is SqlFunctionExpression dateFunction && dateFunction.Name == "date")
         {
             timestring = dateFunction.Arguments![0];
             modifiers = dateFunction.Arguments.Skip(1).Concat(modifiers);
@@ -104,6 +105,7 @@ public class SqliteSqlExpressionFactory : SqlExpressionFactory
             nullable: true,
             argumentsPropagateNullability: finalArguments.Select(_ => true),
             returnType,
-            typeMapping);
+            typeMapping
+        );
     }
 }

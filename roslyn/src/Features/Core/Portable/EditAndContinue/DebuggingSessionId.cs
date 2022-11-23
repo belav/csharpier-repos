@@ -11,6 +11,5 @@ namespace Microsoft.CodeAnalysis.EditAndContinue;
 [DataContract]
 internal readonly record struct DebuggingSessionId([property: DataMember] int Ordinal)
 {
-    public override string ToString()
-        => Ordinal.ToString();
+    public override string ToString() => Ordinal.ToString();
 }

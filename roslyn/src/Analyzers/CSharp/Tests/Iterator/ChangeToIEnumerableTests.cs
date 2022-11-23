@@ -18,19 +18,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
     [Trait(Traits.Feature, Traits.Features.CodeActionsChangeToIEnumerable)]
     public class ChangeToIEnumerableTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public ChangeToIEnumerableTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        public ChangeToIEnumerableTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpChangeToIEnumerableCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpChangeToIEnumerableCodeFixProvider());
 
         [Fact]
         public async Task TestChangeToIEnumerableObjectMethod()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -42,7 +40,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -59,7 +57,7 @@ class Program
         public async Task TestChangeToIEnumerableTupleMethod()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -71,7 +69,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -88,7 +86,7 @@ class Program
         public async Task TestChangeToIEnumerableListMethod()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -100,7 +98,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -117,7 +115,7 @@ class Program
         public async Task TestChangeToIEnumerableWithListReturningMethodWithNullableArgument()
         {
             var initial =
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 using System.Collections.Generic;
@@ -131,7 +129,7 @@ class Program
 }";
 
             var expected =
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 using System.Collections.Generic;
@@ -150,7 +148,7 @@ class Program
         public async Task TestChangeToIEnumerableGenericIEnumerableMethod()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -167,7 +165,7 @@ class Program
         public async Task TestChangeToIEnumerableGenericIEnumeratorMethod()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -184,7 +182,7 @@ class Program
         public async Task TestChangeToIEnumerableIEnumeratorMethod()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections;
 
 class Program
@@ -201,7 +199,7 @@ class Program
         public async Task TestChangeToIEnumerableIEnumerableMethod()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections;
 
 class Program
@@ -218,7 +216,7 @@ class Program
         public async Task TestChangeToIEnumerableVoidMethod()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections;
 
 class Program
@@ -235,7 +233,7 @@ class Program
         public async Task TestChangeToIEnumerableProperty()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 namespace Asdf
@@ -271,7 +269,7 @@ namespace Asdf
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 namespace Asdf
@@ -306,14 +304,15 @@ namespace Asdf
             throw new NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(7087, @"https://github.com/dotnet/roslyn/issues/7087")]
         public async Task TestChangeToIEnumerableOperator()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -327,7 +326,7 @@ namespace Asdf
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -340,14 +339,15 @@ namespace Asdf
             yield return 0;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(7087, @"https://github.com/dotnet/roslyn/issues/7087")]
         public async Task TestChangeToIEnumerableIndexer()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -362,7 +362,7 @@ class T
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -376,7 +376,8 @@ class T
             yield return new T();
         }
     }
-}");
+}"
+            );
         }
     }
 }

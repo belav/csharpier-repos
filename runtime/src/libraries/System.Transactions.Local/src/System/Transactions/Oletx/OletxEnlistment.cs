@@ -28,6 +28,7 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
     private Phase0EnlistmentShim? _phase0Shim;
     private bool _canDoSinglePhase;
     private IEnlistmentNotificationInternal? _iEnlistmentNotification;
+
     // The information that comes from/goes to the proxy.
     private byte[]? _proxyPrepareInfoByteArray;
 
@@ -54,8 +55,8 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         Guid transactionGuid,
         EnlistmentOptions enlistmentOptions,
         OletxResourceManager oletxResourceManager,
-        OletxTransaction oletxTransaction)
-        : base(oletxResourceManager, oletxTransaction)
+        OletxTransaction oletxTransaction
+    ) : base(oletxResourceManager, oletxTransaction)
     {
         // This will get set later by the creator of this object after it
         // has enlisted with the proxy.
@@ -72,7 +73,12 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
         if (etwLog.IsEnabled())
         {
-            etwLog.EnlistmentCreated(TraceSourceType.TraceSourceOleTx, InternalTraceIdentifier, EnlistmentType.Durable, enlistmentOptions);
+            etwLog.EnlistmentCreated(
+                TraceSourceType.TraceSourceOleTx,
+                InternalTraceIdentifier,
+                EnlistmentType.Durable,
+                enlistmentOptions
+            );
         }
 
         // Always do this last in case anything earlier fails.
@@ -83,8 +89,8 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         IEnlistmentNotificationInternal enlistmentNotification,
         OletxTransactionStatus xactStatus,
         byte[] prepareInfoByteArray,
-        OletxResourceManager oletxResourceManager)
-        : base(oletxResourceManager, null)
+        OletxResourceManager oletxResourceManager
+    ) : base(oletxResourceManager, null)
     {
         // This will get set later by the creator of this object after it
         // has enlisted with the proxy.
@@ -96,8 +102,10 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         State = OletxEnlistmentState.Active;
 
         // Do this before we do any tracing because it will affect the trace identifiers that we generate.
-        Debug.Assert(prepareInfoByteArray != null,
-            "OletxEnlistment.ctor - null oletxTransaction without a prepareInfoByteArray");
+        Debug.Assert(
+            prepareInfoByteArray != null,
+            "OletxEnlistment.ctor - null oletxTransaction without a prepareInfoByteArray"
+        );
 
         int prepareInfoLength = prepareInfoByteArray.Length;
         _proxyPrepareInfoByteArray = new byte[prepareInfoLength];
@@ -116,66 +124,82 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         switch (xactStatus)
         {
             case OletxTransactionStatus.OLETX_TRANSACTION_STATUS_ABORTED:
+            {
+                State = OletxEnlistmentState.Aborting;
+                if (etwLog.IsEnabled())
                 {
-                    State = OletxEnlistmentState.Aborting;
-                    if (etwLog.IsEnabled())
-                    {
-                        etwLog.EnlistmentStatus(TraceSourceType.TraceSourceOleTx, InternalTraceIdentifier, NotificationCall.Rollback);
-                    }
-
-                    _iEnlistmentNotification.Rollback(this);
-                    break;
+                    etwLog.EnlistmentStatus(
+                        TraceSourceType.TraceSourceOleTx,
+                        InternalTraceIdentifier,
+                        NotificationCall.Rollback
+                    );
                 }
+
+                _iEnlistmentNotification.Rollback(this);
+                break;
+            }
 
             case OletxTransactionStatus.OLETX_TRANSACTION_STATUS_COMMITTED:
+            {
+                State = OletxEnlistmentState.Committing;
+                // We are going to send the notification to the RM.  We need to put the
+                // enlistment on the reenlistPendingList.  We lock the reenlistList because
+                // we have decided that is the lock that protects both lists.  The entry will
+                // be taken off the reenlistPendingList when the enlistment has
+                // EnlistmentDone called on it.  The enlistment will call
+                // RemoveFromReenlistPending.
+                lock (oletxResourceManager.ReenlistList)
                 {
-                    State = OletxEnlistmentState.Committing;
-                    // We are going to send the notification to the RM.  We need to put the
-                    // enlistment on the reenlistPendingList.  We lock the reenlistList because
-                    // we have decided that is the lock that protects both lists.  The entry will
-                    // be taken off the reenlistPendingList when the enlistment has
-                    // EnlistmentDone called on it.  The enlistment will call
-                    // RemoveFromReenlistPending.
-                    lock (oletxResourceManager.ReenlistList)
-                    {
-                        oletxResourceManager.ReenlistPendingList.Add(this);
-                    }
-
-                    if (etwLog.IsEnabled())
-                    {
-                        etwLog.EnlistmentStatus(TraceSourceType.TraceSourceOleTx, InternalTraceIdentifier, NotificationCall.Commit);
-                    }
-
-                    _iEnlistmentNotification.Commit(this);
-                    break;
+                    oletxResourceManager.ReenlistPendingList.Add(this);
                 }
+
+                if (etwLog.IsEnabled())
+                {
+                    etwLog.EnlistmentStatus(
+                        TraceSourceType.TraceSourceOleTx,
+                        InternalTraceIdentifier,
+                        NotificationCall.Commit
+                    );
+                }
+
+                _iEnlistmentNotification.Commit(this);
+                break;
+            }
 
             case OletxTransactionStatus.OLETX_TRANSACTION_STATUS_PREPARED:
+            {
+                State = OletxEnlistmentState.Prepared;
+                lock (oletxResourceManager.ReenlistList)
                 {
-                    State = OletxEnlistmentState.Prepared;
-                    lock (oletxResourceManager.ReenlistList)
-                    {
-                        oletxResourceManager.ReenlistList.Add(this);
-                        oletxResourceManager.StartReenlistThread();
-                    }
-                    break;
+                    oletxResourceManager.ReenlistList.Add(this);
+                    oletxResourceManager.StartReenlistThread();
                 }
+                break;
+            }
 
             default:
+            {
+                if (etwLog.IsEnabled())
                 {
-                    if (etwLog.IsEnabled())
-                    {
-                        etwLog.InternalError(SR.OletxEnlistmentUnexpectedTransactionStatus);
-                    }
-
-                    throw TransactionException.Create(
-                        SR.OletxEnlistmentUnexpectedTransactionStatus, null, DistributedTxId);
+                    etwLog.InternalError(SR.OletxEnlistmentUnexpectedTransactionStatus);
                 }
+
+                throw TransactionException.Create(
+                    SR.OletxEnlistmentUnexpectedTransactionStatus,
+                    null,
+                    DistributedTxId
+                );
+            }
         }
 
         if (etwLog.IsEnabled())
         {
-            etwLog.EnlistmentCreated(TraceSourceType.TraceSourceOleTx, InternalTraceIdentifier, EnlistmentType.Durable, EnlistmentOptions.None);
+            etwLog.EnlistmentCreated(
+                TraceSourceType.TraceSourceOleTx,
+                InternalTraceIdentifier,
+                EnlistmentType.Durable,
+                EnlistmentOptions.None
+            );
         }
 
         // Always do this last in case anything prior to this fails.
@@ -232,7 +256,10 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         lock (this)
         {
             // If we don't have an oletxTransaction or the passed oletxTm matches that of my oletxTransaction, the TM went down.
-            if (oletxTransaction == null || oletxTm == oletxTransaction.RealOletxTransaction.OletxTransactionManagerInstance)
+            if (
+                oletxTransaction == null
+                || oletxTm == oletxTransaction.RealOletxTransaction.OletxTransactionManagerInstance
+            )
             {
                 _tmWentDown = true;
             }
@@ -276,7 +303,10 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
             _isSinglePhase = singlePhase;
 
             // Store the prepare info we are given.
-            Debug.Assert(_proxyPrepareInfoByteArray == null, "Unexpected value in this.proxyPrepareInfoByteArray");
+            Debug.Assert(
+                _proxyPrepareInfoByteArray == null,
+                "Unexpected value in this.proxyPrepareInfoByteArray"
+            );
             long arrayLength = prepareInfo.Length;
             _proxyPrepareInfoByteArray = new byte[arrayLength];
             Array.Copy(prepareInfo, _proxyPrepareInfoByteArray, arrayLength);
@@ -285,12 +315,17 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
 
             if (_isSinglePhase && _canDoSinglePhase)
             {
-                ISinglePhaseNotificationInternal singlePhaseNotification = (ISinglePhaseNotificationInternal)localEnlistmentNotification;
+                ISinglePhaseNotificationInternal singlePhaseNotification =
+                    (ISinglePhaseNotificationInternal)localEnlistmentNotification;
                 State = OletxEnlistmentState.SinglePhaseCommitting;
                 // We don't call DecrementUndecidedEnlistments for Phase1 enlistments.
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.EnlistmentStatus(TraceSourceType.TraceSourceOleTx, InternalTraceIdentifier, NotificationCall.SinglePhaseCommit);
+                    etwLog.EnlistmentStatus(
+                        TraceSourceType.TraceSourceOleTx,
+                        InternalTraceIdentifier,
+                        NotificationCall.SinglePhaseCommit
+                    );
                 }
 
                 singlePhaseNotification.SinglePhaseCommit(this);
@@ -302,11 +337,16 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
 
                 _prepareInfoByteArray = TransactionManager.GetRecoveryInformation(
                     OletxResourceManager.OletxTransactionManager.CreationNodeName,
-                    prepareInfo);
+                    prepareInfo
+                );
 
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.EnlistmentStatus(TraceSourceType.TraceSourceOleTx, InternalTraceIdentifier, NotificationCall.Prepare);
+                    etwLog.EnlistmentStatus(
+                        TraceSourceType.TraceSourceOleTx,
+                        InternalTraceIdentifier,
+                        NotificationCall.Prepare
+                    );
                 }
 
                 localEnlistmentNotification.Prepare(this);
@@ -373,7 +413,6 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         return enlistmentDone;
     }
 
-
     public void CommitRequest()
     {
         OletxEnlistmentState localState = OletxEnlistmentState.Active;
@@ -402,7 +441,11 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.EnlistmentStatus(TraceSourceType.TraceSourceOleTx, InternalTraceIdentifier, NotificationCall.Commit);
+                etwLog.EnlistmentStatus(
+                    TraceSourceType.TraceSourceOleTx,
+                    InternalTraceIdentifier,
+                    NotificationCall.Commit
+                );
             }
 
             localEnlistmentNotification.Commit(this);
@@ -419,8 +462,10 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
                 // If the TM went down during our call, there is nothing special we have to do because
                 // the App doesn't expect any more notifications. We do want to mark the enlistment
                 // to finish, however.
-                if (ex.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN ||
-                    ex.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE)
+                if (
+                    ex.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN
+                    || ex.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE
+                )
                 {
                     finishEnlistment = true;
                     TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
@@ -481,7 +526,11 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.EnlistmentStatus(TraceSourceType.TraceSourceOleTx, InternalTraceIdentifier, NotificationCall.Rollback);
+                etwLog.EnlistmentStatus(
+                    TraceSourceType.TraceSourceOleTx,
+                    InternalTraceIdentifier,
+                    NotificationCall.Rollback
+                );
             }
 
             localEnlistmentNotification.Rollback(this);
@@ -498,8 +547,10 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
                 // If the TM went down during our call, there is nothing special we have to do because
                 // the App doesn't expect any more notifications.  We do want to mark the enlistment
                 // to finish, however.
-                if (ex.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN ||
-                    ex.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE)
+                if (
+                    ex.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN
+                    || ex.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE
+                )
                 {
                     finishEnlistment = true;
                     TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
@@ -566,7 +617,11 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxEnlistment)}.{nameof(Phase0Request)}");
+            etwLog.MethodEnter(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"{nameof(OletxEnlistment)}.{nameof(Phase0Request)}"
+            );
         }
 
         committableTx = oletxTransaction!.RealOletxTransaction.CommittableTransaction;
@@ -635,23 +690,26 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
                 _proxyPrepareInfoByteArray = temp;
                 for (int index = 0; index < txGuidArray.Length; index++)
                 {
-                    _proxyPrepareInfoByteArray[index] =
-                        txGuidArray[index];
+                    _proxyPrepareInfoByteArray[index] = txGuidArray[index];
                 }
 
                 for (int index = 0; index < rmGuidArray.Length; index++)
                 {
-                    _proxyPrepareInfoByteArray[txGuidArray.Length + index] =
-                        rmGuidArray[index];
+                    _proxyPrepareInfoByteArray[txGuidArray.Length + index] = rmGuidArray[index];
                 }
 
                 _prepareInfoByteArray = TransactionManager.GetRecoveryInformation(
                     OletxResourceManager.OletxTransactionManager.CreationNodeName,
-                    _proxyPrepareInfoByteArray);
+                    _proxyPrepareInfoByteArray
+                );
 
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.EnlistmentStatus(TraceSourceType.TraceSourceOleTx, InternalTraceIdentifier, NotificationCall.Prepare);
+                    etwLog.EnlistmentStatus(
+                        TraceSourceType.TraceSourceOleTx,
+                        InternalTraceIdentifier,
+                        NotificationCall.Prepare
+                    );
                 }
 
                 localEnlistmentNotification.Prepare(this);
@@ -662,17 +720,24 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
                 // us Phase0Request.  Just return.
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxEnlistment)}.{nameof(Phase0Request)}");
+                    etwLog.MethodExit(
+                        TraceSourceType.TraceSourceOleTx,
+                        this,
+                        $"{nameof(OletxEnlistment)}.{nameof(Phase0Request)}"
+                    );
                 }
 
                 return;
             }
-
         }
 
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxEnlistment)}.{nameof(Phase0Request)}");
+            etwLog.MethodExit(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"{nameof(OletxEnlistment)}.{nameof(Phase0Request)}"
+            );
         }
     }
 
@@ -683,7 +748,11 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxEnlistment)}.{nameof(EnlistmentDone)}");
+            etwLog.MethodEnter(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"{nameof(OletxEnlistment)}.{nameof(EnlistmentDone)}"
+            );
             etwLog.EnlistmentCallbackPositive(InternalTraceIdentifier, EnlistmentCallback.Done);
         }
 
@@ -737,9 +806,12 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
                     finishEnlistment = false;
                 }
             }
-            else if (State is OletxEnlistmentState.Committing
-                     or OletxEnlistmentState.Aborting
-                     or OletxEnlistmentState.SinglePhaseCommitting)
+            else if (
+                State
+                is OletxEnlistmentState.Committing
+                    or OletxEnlistmentState.Aborting
+                    or OletxEnlistmentState.SinglePhaseCommitting
+            )
             {
                 localEnlistmentShim = EnlistmentShim;
                 finishEnlistment = true;
@@ -787,7 +859,10 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
                 }
                 else
                 {
-                    throw TransactionException.CreateEnlistmentStateException(null, DistributedTxId);
+                    throw TransactionException.CreateEnlistmentStateException(
+                        null,
+                        DistributedTxId
+                    );
                 }
             }
             else if (localPhase0Shim != null)
@@ -802,7 +877,10 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
                 }
                 else
                 {
-                    throw TransactionException.CreateEnlistmentStateException(null, DistributedTxId);
+                    throw TransactionException.CreateEnlistmentStateException(
+                        null,
+                        DistributedTxId
+                    );
                 }
             }
         }
@@ -828,7 +906,11 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
 
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxEnlistment)}.{nameof(EnlistmentDone)}");
+            etwLog.MethodExit(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"{nameof(OletxEnlistment)}.{nameof(EnlistmentDone)}"
+            );
         }
     }
 
@@ -839,8 +921,16 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxEnlistment)}.{nameof(EnlistmentTraceId)}");
-                etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxEnlistment)}.{nameof(EnlistmentTraceId)}");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceOleTx,
+                    this,
+                    $"{nameof(OletxEnlistment)}.{nameof(EnlistmentTraceId)}"
+                );
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceOleTx,
+                    this,
+                    $"{nameof(OletxEnlistment)}.{nameof(EnlistmentTraceId)}"
+                );
             }
 
             return InternalTraceIdentifier;
@@ -857,7 +947,11 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"OletxPreparingEnlistment.{nameof(Prepared)}");
+            etwLog.MethodEnter(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"OletxPreparingEnlistment.{nameof(Prepared)}"
+            );
             etwLog.EnlistmentCallbackPositive(InternalTraceIdentifier, EnlistmentCallback.Prepared);
         }
 
@@ -922,7 +1016,12 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
             // If the TM went down during our call, the TMDown notification to the enlistment
             // and RM will put this enlistment on the ReenlistList, if appropriate.  The outcome
             // will be obtained by the ReenlistThread.
-            if ((ex.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN || ex.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE) && etwLog.IsEnabled())
+            if (
+                (
+                    ex.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN
+                    || ex.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE
+                ) && etwLog.IsEnabled()
+            )
             {
                 etwLog.ExceptionConsumed(TraceSourceType.TraceSourceOleTx, ex);
             }
@@ -950,12 +1049,15 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
 
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"OletxPreparingEnlistment.{nameof(Prepared)}");
+            etwLog.MethodExit(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"OletxPreparingEnlistment.{nameof(Prepared)}"
+            );
         }
     }
 
-    public void ForceRollback()
-        => ForceRollback(null);
+    public void ForceRollback() => ForceRollback(null);
 
     public void ForceRollback(Exception? e)
     {
@@ -965,8 +1067,15 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"OletxPreparingEnlistment.{nameof(ForceRollback)}");
-            etwLog.EnlistmentCallbackNegative(InternalTraceIdentifier, EnlistmentCallback.ForceRollback);
+            etwLog.MethodEnter(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"OletxPreparingEnlistment.{nameof(ForceRollback)}"
+            );
+            etwLog.EnlistmentCallbackNegative(
+                InternalTraceIdentifier,
+                EnlistmentCallback.ForceRollback
+            );
         }
 
         lock (this)
@@ -993,7 +1102,11 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
             State = OletxEnlistmentState.Aborted;
         }
 
-        Interlocked.CompareExchange(ref oletxTransaction!.RealOletxTransaction.InnerException, e, null);
+        Interlocked.CompareExchange(
+            ref oletxTransaction!.RealOletxTransaction.InnerException,
+            e,
+            null
+        );
 
         try
         {
@@ -1003,8 +1116,10 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         {
             // If the TM went down during our call, there is nothing special we have to do because
             // the App doesn't expect any more notifications.
-            if (ex.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN ||
-                ex.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE)
+            if (
+                ex.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN
+                || ex.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE
+            )
             {
                 if (etwLog.IsEnabled())
                 {
@@ -1023,7 +1138,11 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
 
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"OletxPreparingEnlistment.{nameof(ForceRollback)}");
+            etwLog.MethodExit(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"OletxPreparingEnlistment.{nameof(ForceRollback)}"
+            );
         }
     }
 
@@ -1034,8 +1153,15 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"OletxSinglePhaseEnlistment.{nameof(Committed)}");
-            etwLog.EnlistmentCallbackPositive(InternalTraceIdentifier, EnlistmentCallback.Committed);
+            etwLog.MethodEnter(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"OletxSinglePhaseEnlistment.{nameof(Committed)}"
+            );
+            etwLog.EnlistmentCallbackPositive(
+                InternalTraceIdentifier,
+                EnlistmentCallback.Committed
+            );
         }
 
         lock (this)
@@ -1058,8 +1184,10 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         {
             // If the TM went down during our call, there is nothing special we have to do because
             // the App doesn't expect any more notifications.
-            if (ex.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN ||
-                ex.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE)
+            if (
+                ex.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN
+                || ex.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE
+            )
             {
                 if (etwLog.IsEnabled())
                 {
@@ -1078,12 +1206,15 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
 
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"OletxSinglePhaseEnlistment.{nameof(Committed)}");
+            etwLog.MethodExit(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"OletxSinglePhaseEnlistment.{nameof(Committed)}"
+            );
         }
     }
 
-    public void Aborted()
-        => Aborted(null);
+    public void Aborted() => Aborted(null);
 
     public void Aborted(Exception? e)
     {
@@ -1092,7 +1223,11 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"OletxSinglePhaseEnlistment.{nameof(Aborted)}");
+            etwLog.MethodEnter(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"OletxSinglePhaseEnlistment.{nameof(Aborted)}"
+            );
             etwLog.EnlistmentCallbackNegative(InternalTraceIdentifier, EnlistmentCallback.Aborted);
         }
 
@@ -1107,7 +1242,11 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
             localEnlistmentShim = EnlistmentShim;
         }
 
-        Interlocked.CompareExchange(ref oletxTransaction!.RealOletxTransaction.InnerException, e, null);
+        Interlocked.CompareExchange(
+            ref oletxTransaction!.RealOletxTransaction.InnerException,
+            e,
+            null
+        );
 
         try
         {
@@ -1115,8 +1254,12 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         }
         // If the TM went down during our call, there is nothing special we have to do because
         // the App doesn't expect any more notifications.
-        catch (COMException ex) when (
-            (ex.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN || ex.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE) && etwLog.IsEnabled())
+        catch (COMException ex)
+            when ((
+                    ex.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN
+                    || ex.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE
+                ) && etwLog.IsEnabled()
+            )
         {
             etwLog.ExceptionConsumed(TraceSourceType.TraceSourceOleTx, ex);
         }
@@ -1127,12 +1270,15 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
 
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"OletxSinglePhaseEnlistment.{nameof(Aborted)}");
+            etwLog.MethodExit(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"OletxSinglePhaseEnlistment.{nameof(Aborted)}"
+            );
         }
     }
 
-    public void InDoubt()
-        => InDoubt(null);
+    public void InDoubt() => InDoubt(null);
 
     public void InDoubt(Exception? e)
     {
@@ -1140,7 +1286,11 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"OletxSinglePhaseEnlistment.{nameof(InDoubt)}");
+            etwLog.MethodEnter(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"OletxSinglePhaseEnlistment.{nameof(InDoubt)}"
+            );
             etwLog.EnlistmentCallbackNegative(InternalTraceIdentifier, EnlistmentCallback.InDoubt);
         }
 
@@ -1165,8 +1315,12 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         }
         // If the TM went down during our call, there is nothing special we have to do because
         // the App doesn't expect any more notifications.
-        catch (COMException ex) when (
-            (ex.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN || ex.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE) && etwLog.IsEnabled())
+        catch (COMException ex)
+            when ((
+                    ex.ErrorCode == OletxHelper.XACT_E_CONNECTION_DOWN
+                    || ex.ErrorCode == OletxHelper.XACT_E_TMNOTAVAILABLE
+                ) && etwLog.IsEnabled()
+            )
         {
             etwLog.ExceptionConsumed(TraceSourceType.TraceSourceOleTx, ex);
         }
@@ -1177,7 +1331,11 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
 
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"OletxSinglePhaseEnlistment.{nameof(InDoubt)}");
+            etwLog.MethodExit(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"OletxSinglePhaseEnlistment.{nameof(InDoubt)}"
+            );
         }
     }
 
@@ -1185,7 +1343,9 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
     {
         if (_prepareInfoByteArray == null)
         {
-            Debug.Fail(string.Format(null, "this.prepareInfoByteArray == null in RecoveryInformation()"));
+            Debug.Fail(
+                string.Format(null, "this.prepareInfoByteArray == null in RecoveryInformation()")
+            );
             throw TransactionException.CreateEnlistmentStateException(null, DistributedTxId);
         }
 
@@ -1196,5 +1356,5 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
     {
         get => base.InternalEnlistment;
         set => base.InternalEnlistment = value;
-     }
+    }
 }

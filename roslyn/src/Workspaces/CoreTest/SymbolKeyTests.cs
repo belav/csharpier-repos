@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestVersionMismatch()
         {
-            var source = @"
+            var source =
+                @"
 
 public class C
 {
@@ -81,7 +82,8 @@ public class C
         [Fact]
         public void TestMemberDeclarations()
         {
-            var source = @"
+            var source =
+                @"
 
 public class C
 {
@@ -116,19 +118,24 @@ public class C
         [Fact, WorkItem(14364, "https://github.com/dotnet/roslyn/issues/14364")]
         public void TestVBParameterizedEvent()
         {
-            var source = @"
+            var source =
+                @"
 Module M
     Event E(x As Object)
 End Module
 ";
             var compilation = GetCompilation(source, LanguageNames.VisualBasic);
-            TestRoundTrip(GetAllSymbols(compilation.GetSemanticModel(compilation.SyntaxTrees.Single())), compilation);
+            TestRoundTrip(
+                GetAllSymbols(compilation.GetSemanticModel(compilation.SyntaxTrees.Single())),
+                compilation
+            );
         }
 
         [Fact]
         public void TestNamespaceDeclarations()
         {
-            var source = @"
+            var source =
+                @"
 namespace N { }
 namespace A.B { }
 namespace A { namespace B.C { } }
@@ -138,15 +145,18 @@ namespace A { namespace N { } }
             var compilation = GetCompilation(source, LanguageNames.CSharp);
             var symbols = GetDeclaredSymbols(compilation);
             Assert.Equal(5, symbols.Count());
-            Assert.Equal(new[] { "N", "A", "A.B", "A.B.C", "A.N" },
-                symbols.Select(s => s.ToDisplayString()));
+            Assert.Equal(
+                new[] { "N", "A", "A.B", "A.B.C", "A.N" },
+                symbols.Select(s => s.ToDisplayString())
+            );
             TestRoundTrip(symbols, compilation);
         }
 
         [Fact]
         public void TestConstructedTypeReferences()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 
 public class C
@@ -163,13 +173,17 @@ public class C
 }
 ";
             var compilation = GetCompilation(source, LanguageNames.CSharp);
-            TestRoundTrip(GetDeclaredSymbols(compilation).OfType<IFieldSymbol>().Select(fs => fs.Type), compilation);
+            TestRoundTrip(
+                GetDeclaredSymbols(compilation).OfType<IFieldSymbol>().Select(fs => fs.Type),
+                compilation
+            );
         }
 
         [Fact]
         public void TestErrorTypeReferences()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 
 public class C
@@ -181,13 +195,18 @@ public class C
 }
 ";
             var compilation = GetCompilation(source, LanguageNames.CSharp);
-            TestRoundTrip(GetDeclaredSymbols(compilation).OfType<IFieldSymbol>().Select(fs => fs.Type), compilation, s => s.ToDisplayString());
+            TestRoundTrip(
+                GetDeclaredSymbols(compilation).OfType<IFieldSymbol>().Select(fs => fs.Type),
+                compilation,
+                s => s.ToDisplayString()
+            );
         }
 
         [Fact]
         public void TestParameterDeclarations()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 
 public class C
@@ -202,13 +221,19 @@ public class C
 }
 ";
             var compilation = GetCompilation(source, LanguageNames.CSharp);
-            TestRoundTrip(GetDeclaredSymbols(compilation).OfType<IMethodSymbol>().SelectMany(ms => ms.Parameters), compilation);
+            TestRoundTrip(
+                GetDeclaredSymbols(compilation)
+                    .OfType<IMethodSymbol>()
+                    .SelectMany(ms => ms.Parameters),
+                compilation
+            );
         }
 
         [Fact]
         public void TestTypeParameters()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public void M() { }
@@ -270,7 +295,8 @@ public class C<S, T>
         [Fact]
         public void TestLocals()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 
 public class C
@@ -298,7 +324,10 @@ public class C
 }
 ";
             var compilation = GetCompilation(source, LanguageNames.CSharp);
-            var symbols = GetDeclaredSymbols(compilation).OfType<IMethodSymbol>().SelectMany(ms => GetInteriorSymbols(ms, compilation).OfType<ILocalSymbol>()).ToList();
+            var symbols = GetDeclaredSymbols(compilation)
+                .OfType<IMethodSymbol>()
+                .SelectMany(ms => GetInteriorSymbols(ms, compilation).OfType<ILocalSymbol>())
+                .ToList();
             Assert.Equal(7, symbols.Count);
             TestRoundTrip(symbols, compilation);
         }
@@ -306,7 +335,8 @@ public class C
         [Fact]
         public void TestLabels()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 
 public class C
@@ -320,7 +350,10 @@ public class C
 }
 ";
             var compilation = GetCompilation(source, LanguageNames.CSharp);
-            var symbols = GetDeclaredSymbols(compilation).OfType<IMethodSymbol>().SelectMany(ms => GetInteriorSymbols(ms, compilation).OfType<ILabelSymbol>()).ToList();
+            var symbols = GetDeclaredSymbols(compilation)
+                .OfType<IMethodSymbol>()
+                .SelectMany(ms => GetInteriorSymbols(ms, compilation).OfType<ILabelSymbol>())
+                .ToList();
             Assert.Equal(3, symbols.Count);
             TestRoundTrip(symbols, compilation);
         }
@@ -328,7 +361,8 @@ public class C
         [Fact]
         public void TestRangeVariables()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 
 public class C
@@ -347,7 +381,12 @@ public class C
 }
 ";
             var compilation = GetCompilation(source, LanguageNames.CSharp);
-            var symbols = GetDeclaredSymbols(compilation).OfType<IMethodSymbol>().SelectMany(ms => GetInteriorSymbols(ms, compilation).OfType<IRangeVariableSymbol>()).ToList();
+            var symbols = GetDeclaredSymbols(compilation)
+                .OfType<IMethodSymbol>()
+                .SelectMany(
+                    ms => GetInteriorSymbols(ms, compilation).OfType<IRangeVariableSymbol>()
+                )
+                .ToList();
             Assert.Equal(2, symbols.Count);
             TestRoundTrip(symbols, compilation);
         }
@@ -355,7 +394,8 @@ public class C
         [Fact]
         public void TestMethodReferences()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public void M() { }
@@ -376,14 +416,20 @@ public class C
             var compilation = GetCompilation(source, LanguageNames.CSharp);
             var tree = compilation.SyntaxTrees.First();
             var model = compilation.GetSemanticModel(tree);
-            var symbols = tree.GetRoot().DescendantNodes().OfType<CSharp.Syntax.InvocationExpressionSyntax>().Select(s => model.GetSymbolInfo(s).Symbol).ToList();
+            var symbols = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<CSharp.Syntax.InvocationExpressionSyntax>()
+                .Select(s => model.GetSymbolInfo(s).Symbol)
+                .ToList();
             Assert.True(symbols.Count > 0);
             TestRoundTrip(symbols, compilation);
         }
+
         [Fact]
         public void TestExtensionMethodReferences()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -412,7 +458,11 @@ public class C
             var compilation = GetCompilation(source, LanguageNames.CSharp);
             var tree = compilation.SyntaxTrees.First();
             var model = compilation.GetSemanticModel(tree);
-            var symbols = tree.GetRoot().DescendantNodes().OfType<CSharp.Syntax.InvocationExpressionSyntax>().Select(s => model.GetSymbolInfo(s).GetAnySymbol()).ToList();
+            var symbols = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<CSharp.Syntax.InvocationExpressionSyntax>()
+                .Select(s => model.GetSymbolInfo(s).GetAnySymbol())
+                .ToList();
             Assert.True(symbols.Count > 0);
             Assert.True(symbols.All(s => s.IsReducedExtension()));
             TestRoundTrip(symbols, compilation);
@@ -421,7 +471,8 @@ public class C
         [Fact]
         public void TestAliasSymbols()
         {
-            var source = @"
+            var source =
+                @"
 using G=System.Collections.Generic;
 using GL=System.Collections.Generic.List<int>;
 
@@ -435,13 +486,20 @@ public class C
             var tree = compilation.SyntaxTrees.First();
             var model = compilation.GetSemanticModel(tree);
 
-            var symbols = tree.GetRoot().DescendantNodes().OfType<CSharp.Syntax.UsingDirectiveSyntax>().Select(s => model.GetDeclaredSymbol(s)).ToList();
+            var symbols = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<CSharp.Syntax.UsingDirectiveSyntax>()
+                .Select(s => model.GetDeclaredSymbol(s))
+                .ToList();
             Assert.Equal(2, symbols.Count);
             Assert.NotNull(symbols[0]);
             Assert.True(symbols[0] is IAliasSymbol);
             TestRoundTrip(symbols, compilation);
 
-            var refSymbols = GetDeclaredSymbols(compilation).OfType<IFieldSymbol>().Select(f => f.Type).ToList();
+            var refSymbols = GetDeclaredSymbols(compilation)
+                .OfType<IFieldSymbol>()
+                .Select(f => f.Type)
+                .ToList();
             Assert.Equal(2, refSymbols.Count);
             TestRoundTrip(refSymbols, compilation);
         }
@@ -449,7 +507,8 @@ public class C
         [Fact]
         public void TestDynamicSymbols()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public dynamic F;
@@ -460,7 +519,10 @@ public class C
             var tree = compilation.SyntaxTrees.First();
             var model = compilation.GetSemanticModel(tree);
 
-            var symbols = GetDeclaredSymbols(compilation).OfType<IFieldSymbol>().Select(f => f.Type).ToList();
+            var symbols = GetDeclaredSymbols(compilation)
+                .OfType<IFieldSymbol>()
+                .Select(f => f.Type)
+                .ToList();
             Assert.Equal(2, symbols.Count);
             TestRoundTrip(symbols, compilation);
         }
@@ -468,7 +530,8 @@ public class C
         [Fact]
         public void TestSelfReferentialGenericMethod()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public void M<S, T>() { }
@@ -479,7 +542,10 @@ public class C
             var model = compilation.GetSemanticModel(tree);
 
             var method = GetDeclaredSymbols(compilation).OfType<IMethodSymbol>().First();
-            var constructed = method.Construct(compilation.GetSpecialType(SpecialType.System_Int32), method.TypeParameters[1]);
+            var constructed = method.Construct(
+                compilation.GetSpecialType(SpecialType.System_Int32),
+                method.TypeParameters[1]
+            );
 
             TestRoundTrip(constructed, compilation);
         }
@@ -487,7 +553,8 @@ public class C
         [Fact]
         public void TestSelfReferentialGenericType()
         {
-            var source = @"
+            var source =
+                @"
 public class C<S, T>
 {
 }
@@ -497,15 +564,25 @@ public class C<S, T>
             var model = compilation.GetSemanticModel(tree);
 
             var type = GetDeclaredSymbols(compilation).OfType<INamedTypeSymbol>().First();
-            var constructed = type.Construct(compilation.GetSpecialType(SpecialType.System_Int32), type.TypeParameters[1]);
+            var constructed = type.Construct(
+                compilation.GetSpecialType(SpecialType.System_Int32),
+                type.TypeParameters[1]
+            );
 
             TestRoundTrip(constructed, compilation);
         }
 
-        [Fact, WorkItem(235912, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=235912&_a=edit")]
+        [
+            Fact,
+            WorkItem(
+                235912,
+                "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=235912&_a=edit"
+            )
+        ]
         public void TestNestedGenericType()
         {
-            var source = @"
+            var source =
+                @"
 public class A<TOuter>
 {
     public class B<TInner>
@@ -516,16 +593,27 @@ public class A<TOuter>
             var tree = compilation.SyntaxTrees.First();
             var model = compilation.GetSemanticModel(tree);
 
-            var outer = GetDeclaredSymbols(compilation).OfType<INamedTypeSymbol>().First(s => s.Name == "A");
-            var constructed = outer.Construct(compilation.GetSpecialType(SpecialType.System_String));
+            var outer = GetDeclaredSymbols(compilation)
+                .OfType<INamedTypeSymbol>()
+                .First(s => s.Name == "A");
+            var constructed = outer.Construct(
+                compilation.GetSpecialType(SpecialType.System_String)
+            );
             var inner = constructed.GetTypeMembers().Single();
             TestRoundTrip(inner, compilation);
         }
 
-        [Fact, WorkItem(235912, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=235912&_a=edit")]
+        [
+            Fact,
+            WorkItem(
+                235912,
+                "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=235912&_a=edit"
+            )
+        ]
         public void TestNestedGenericType1()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 
 public class A<T1>
@@ -539,7 +627,9 @@ public class A<T1>
             var tree = compilation.SyntaxTrees.First();
             var model = compilation.GetSemanticModel(tree);
 
-            var a = GetDeclaredSymbols(compilation).OfType<INamedTypeSymbol>().Single(s => s.Name == "A");
+            var a = GetDeclaredSymbols(compilation)
+                .OfType<INamedTypeSymbol>()
+                .Single(s => s.Name == "A");
             var a_b = a.GetTypeMembers().Single();
             var a_b_m = a_b.GetMembers().Single(s => s.Name == "M");
 
@@ -554,26 +644,40 @@ public class A<T1>
             TestRoundTrip(a_string_b, compilation);
             TestRoundTrip(a_string_b_m, compilation);
 
-            var a_string_b_int = a_string_b.Construct(compilation.GetSpecialType(SpecialType.System_Int32));
+            var a_string_b_int = a_string_b.Construct(
+                compilation.GetSpecialType(SpecialType.System_Int32)
+            );
             var a_string_b_int_m = a_string_b_int.GetMembers().Single(s => s.Name == "M");
             TestRoundTrip(a_string_b_int, compilation);
             TestRoundTrip(a_string_b_int_m, compilation);
 
-            var a_string_b_int_m_datetime = ((IMethodSymbol)a_string_b_int_m).Construct(compilation.GetSpecialType(SpecialType.System_DateTime));
+            var a_string_b_int_m_datetime = ((IMethodSymbol)a_string_b_int_m).Construct(
+                compilation.GetSpecialType(SpecialType.System_DateTime)
+            );
             TestRoundTrip(a_string_b_int_m_datetime, compilation);
 
             var a_b_int = a_b.Construct(compilation.GetSpecialType(SpecialType.System_Int32));
             var a_b_int_m = a_b_int.GetMembers().Single(s => s.Name == "M");
-            var a_b_int_m_datetime = ((IMethodSymbol)a_b_int_m).Construct(compilation.GetSpecialType(SpecialType.System_DateTime));
+            var a_b_int_m_datetime = ((IMethodSymbol)a_b_int_m).Construct(
+                compilation.GetSpecialType(SpecialType.System_DateTime)
+            );
             TestRoundTrip(a_b_int, compilation);
             TestRoundTrip(a_b_int_m, compilation);
             TestRoundTrip(a_b_int_m_datetime, compilation);
 
-            var a_b_m_datetime = ((IMethodSymbol)a_b_m).Construct(compilation.GetSpecialType(SpecialType.System_DateTime));
+            var a_b_m_datetime = ((IMethodSymbol)a_b_m).Construct(
+                compilation.GetSpecialType(SpecialType.System_DateTime)
+            );
             TestRoundTrip(a_b_m_datetime, compilation);
         }
 
-        [Fact, WorkItem(235912, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=235912&_a=edit")]
+        [
+            Fact,
+            WorkItem(
+                235912,
+                "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=235912&_a=edit"
+            )
+        ]
         public void TestGenericTypeTypeParameter()
         {
             var source = @"class C<T> { }";
@@ -582,12 +686,22 @@ public class A<T1>
             var tree = compilation.SyntaxTrees.First();
             var model = compilation.GetSemanticModel(tree);
 
-            var typeParameter = GetDeclaredSymbols(compilation).OfType<INamedTypeSymbol>().Where(n => !n.IsImplicitlyDeclared).Single().TypeParameters.Single();
+            var typeParameter = GetDeclaredSymbols(compilation)
+                .OfType<INamedTypeSymbol>()
+                .Where(n => !n.IsImplicitlyDeclared)
+                .Single()
+                .TypeParameters.Single();
 
             TestRoundTrip(typeParameter, compilation);
         }
 
-        [Fact, WorkItem(235912, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=235912&_a=edit")]
+        [
+            Fact,
+            WorkItem(
+                235912,
+                "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=235912&_a=edit"
+            )
+        ]
         public void TestGenericMethodTypeParameter()
         {
             var source = @"class C { void M<T>() { } }";
@@ -595,8 +709,14 @@ public class A<T1>
             var compilation = GetCompilation(source, LanguageNames.CSharp);
             var tree = compilation.SyntaxTrees.First();
             var model = compilation.GetSemanticModel(tree);
-            var typeParameter = GetDeclaredSymbols(compilation).OfType<INamedTypeSymbol>()
-                .Where(n => !n.IsImplicitlyDeclared).Single().GetMembers("M").OfType<IMethodSymbol>().Single().TypeParameters.Single();
+            var typeParameter = GetDeclaredSymbols(compilation)
+                .OfType<INamedTypeSymbol>()
+                .Where(n => !n.IsImplicitlyDeclared)
+                .Single()
+                .GetMembers("M")
+                .OfType<IMethodSymbol>()
+                .Single()
+                .TypeParameters.Single();
 
             TestRoundTrip(typeParameter, compilation);
         }
@@ -604,7 +724,8 @@ public class A<T1>
         [Fact, WorkItem(11193, "https://github.com/dotnet/roslyn/issues/11193")]
         public async Task TestGetInteriorSymbolsDoesNotCrashOnSpeculativeSemanticModel()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void goo()
@@ -626,17 +747,25 @@ class C
             var firstModel = await document.GetSemanticModelAsync();
 
             // Ensure we prime the reuse cache with the true semantic model.
-            var firstReusedModel = await document.ReuseExistingSpeculativeModelAsync(position, CancellationToken.None);
+            var firstReusedModel = await document.ReuseExistingSpeculativeModelAsync(
+                position,
+                CancellationToken.None
+            );
             Assert.False(firstReusedModel.IsSpeculativeSemanticModel);
 
             // Modify the document so we can use the old semantic model as a base.
-            var updated = sourceText.WithChanges(new TextChange(new TextSpan(position, 0), "insertion"));
+            var updated = sourceText.WithChanges(
+                new TextChange(new TextSpan(position, 0), "insertion")
+            );
             workspace.TryApplyChanges(document.WithText(updated).Project.Solution);
 
             document = workspace.CurrentSolution.GetDocument(document.Id);
 
             // Now, the second time we try to get a speculative model, we should succeed.
-            var testModel = await document.ReuseExistingSpeculativeModelAsync(position, CancellationToken.None);
+            var testModel = await document.ReuseExistingSpeculativeModelAsync(
+                position,
+                CancellationToken.None
+            );
             Assert.True(testModel.IsSpeculativeSemanticModel);
 
             var xSymbol = testModel.LookupSymbols(position).First(s => s.Name == "x");
@@ -648,7 +777,8 @@ class C
         [Fact, WorkItem(11193, "https://github.com/dotnet/roslyn/issues/11193")]
         public async Task TestGetInteriorSymbolsDoesNotCrashOnSpeculativeSemanticModel_InProperty()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     int Prop
@@ -673,17 +803,25 @@ class C
             var firstModel = await document.GetSemanticModelAsync();
 
             // Ensure we prime the reuse cache with the true semantic model.
-            var firstReusedModel = await document.ReuseExistingSpeculativeModelAsync(position, CancellationToken.None);
+            var firstReusedModel = await document.ReuseExistingSpeculativeModelAsync(
+                position,
+                CancellationToken.None
+            );
             Assert.False(firstReusedModel.IsSpeculativeSemanticModel);
 
             // Modify the document so we can use the old semantic model as a base.
-            var updated = sourceText.WithChanges(new TextChange(new TextSpan(position, 0), "insertion"));
+            var updated = sourceText.WithChanges(
+                new TextChange(new TextSpan(position, 0), "insertion")
+            );
             workspace.TryApplyChanges(document.WithText(updated).Project.Solution);
 
             document = workspace.CurrentSolution.GetDocument(document.Id);
 
             // Now, the second time we try to get a speculative model, we should succeed.
-            var testModel = await document.ReuseExistingSpeculativeModelAsync(position, CancellationToken.None);
+            var testModel = await document.ReuseExistingSpeculativeModelAsync(
+                position,
+                CancellationToken.None
+            );
             Assert.True(testModel.IsSpeculativeSemanticModel);
 
             var xSymbol = testModel.LookupSymbols(position).First(s => s.Name == "x");
@@ -695,14 +833,16 @@ class C
         [Fact]
         public void TestGenericMethodTypeParameterMissing1()
         {
-            var source1 = @"
+            var source1 =
+                @"
 public class C
 {
     void M<T>(T t) { }
 }
 ";
 
-            var source2 = @"
+            var source2 =
+                @"
 public class C
 {
 }
@@ -722,7 +862,8 @@ public class C
         [Fact, WorkItem(377839, "https://devdiv.visualstudio.com/DevDiv/_workitems?id=377839")]
         public void TestConstructedMethodInsideLocalFunctionWithTypeParameters()
         {
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 
 class C
@@ -738,7 +879,11 @@ class C
             var compilation = GetCompilation(source, LanguageNames.CSharp);
             var symbols = GetAllSymbols(
                 compilation.GetSemanticModel(compilation.SyntaxTrees.Single()),
-                n => n is CSharp.Syntax.MemberAccessExpressionSyntax or CSharp.Syntax.InvocationExpressionSyntax);
+                n =>
+                    n
+                        is CSharp.Syntax.MemberAccessExpressionSyntax
+                            or CSharp.Syntax.InvocationExpressionSyntax
+            );
 
             var tested = false;
             foreach (var symbol in symbols)
@@ -751,7 +896,7 @@ class C
 
                 // note: we don't check that the symbols are equal.  That's because the compiler
                 // doesn't guarantee that the TypeParameters will be the same across successive
-                // invocations. 
+                // invocations.
                 Assert.Equal(symbol.OriginalDefinition, found.OriginalDefinition);
 
                 tested = true;
@@ -763,7 +908,8 @@ class C
         [Fact, WorkItem(17702, "https://github.com/dotnet/roslyn/issues/17702")]
         public void TestTupleWithLocalTypeReferences1()
         {
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 
 class C
@@ -778,8 +924,10 @@ class C
             var compilation2 = GetCompilation(source, LanguageNames.CSharp, "File2.cs");
 
             var symbol = GetAllSymbols(
-                compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
-                n => n is CSharp.Syntax.MethodDeclarationSyntax).Single();
+                    compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
+                    n => n is CSharp.Syntax.MethodDeclarationSyntax
+                )
+                .Single();
 
             // Ensure we don't crash getting these symbol keys.
             var id = SymbolKey.CreateString(symbol);
@@ -800,7 +948,8 @@ class C
         [Fact, WorkItem(17702, "https://github.com/dotnet/roslyn/issues/17702")]
         public void TestTupleWithLocalTypeReferences2()
         {
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 
 class C
@@ -815,8 +964,10 @@ class C
             var compilation2 = GetCompilation(source, LanguageNames.CSharp, "File2.cs");
 
             var symbol = GetAllSymbols(
-                compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
-                n => n is CSharp.Syntax.MethodDeclarationSyntax).Single();
+                    compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
+                    n => n is CSharp.Syntax.MethodDeclarationSyntax
+                )
+                .Single();
 
             // Ensure we don't crash getting these symbol keys.
             var id = SymbolKey.CreateString(symbol);
@@ -837,19 +988,33 @@ class C
         [Fact, WorkItem(14365, "https://github.com/dotnet/roslyn/issues/14365")]
         public void TestErrorType_CSharp()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int i { get; }
 }";
 
             // We don't add metadata references, so even `int` will be an error type.
-            var compilation1 = GetCompilation(source, LanguageNames.CSharp, "File1.cs", Array.Empty<MetadataReference>());
-            var compilation2 = GetCompilation(source, LanguageNames.CSharp, "File2.cs", Array.Empty<MetadataReference>());
+            var compilation1 = GetCompilation(
+                source,
+                LanguageNames.CSharp,
+                "File1.cs",
+                Array.Empty<MetadataReference>()
+            );
+            var compilation2 = GetCompilation(
+                source,
+                LanguageNames.CSharp,
+                "File2.cs",
+                Array.Empty<MetadataReference>()
+            );
 
-            var symbol = (IPropertySymbol)GetAllSymbols(
-                compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
-                n => n is CSharp.Syntax.PropertyDeclarationSyntax).Single();
+            var symbol = (IPropertySymbol)
+                GetAllSymbols(
+                        compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
+                        n => n is CSharp.Syntax.PropertyDeclarationSyntax
+                    )
+                    .Single();
 
             var propType = symbol.Type;
             Assert.Equal(SymbolKind.ErrorType, propType.Kind);
@@ -873,18 +1038,32 @@ class C
         [Fact, WorkItem(14365, "https://github.com/dotnet/roslyn/issues/14365")]
         public void TestErrorType_VB()
         {
-            var source = @"
+            var source =
+                @"
 class C
     public readonly property i as integer
 end class";
 
             // We don't add metadata references, so even `int` will be an error type.
-            var compilation1 = GetCompilation(source, LanguageNames.VisualBasic, "File1.vb", Array.Empty<MetadataReference>());
-            var compilation2 = GetCompilation(source, LanguageNames.VisualBasic, "File2.vb", Array.Empty<MetadataReference>());
+            var compilation1 = GetCompilation(
+                source,
+                LanguageNames.VisualBasic,
+                "File1.vb",
+                Array.Empty<MetadataReference>()
+            );
+            var compilation2 = GetCompilation(
+                source,
+                LanguageNames.VisualBasic,
+                "File2.vb",
+                Array.Empty<MetadataReference>()
+            );
 
-            var symbol = (IPropertySymbol)GetAllSymbols(
-                compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
-                n => n is VisualBasic.Syntax.PropertyStatementSyntax).Single();
+            var symbol = (IPropertySymbol)
+                GetAllSymbols(
+                        compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
+                        n => n is VisualBasic.Syntax.PropertyStatementSyntax
+                    )
+                    .Single();
 
             var propType = symbol.Type;
             Assert.Equal(SymbolKind.ErrorType, propType.Kind);
@@ -908,13 +1087,15 @@ end class";
         [Fact, WorkItem(14365, "https://github.com/dotnet/roslyn/issues/14365")]
         public void TestErrorTypeInNestedNamespace()
         {
-            var source1 = @"
+            var source1 =
+                @"
 public class C
 {
     public System.Collections.IEnumerable I { get; }
 }";
 
-            var source2 = @"
+            var source2 =
+                @"
 class X
 {
     void M()
@@ -926,12 +1107,19 @@ class X
             // We don't add metadata to the second compilation, so even `System.Collections.IEnumerable` will be an
             // error type.
             var compilation1 = GetCompilation(source1, LanguageNames.CSharp, "File1.cs");
-            var compilation2 = GetCompilation(source2, LanguageNames.CSharp, "File2.cs",
-                new[] { compilation1.ToMetadataReference() });
+            var compilation2 = GetCompilation(
+                source2,
+                LanguageNames.CSharp,
+                "File2.cs",
+                new[] { compilation1.ToMetadataReference() }
+            );
 
-            var symbol = (IPropertySymbol)GetAllSymbols(
-                compilation2.GetSemanticModel(compilation2.SyntaxTrees.Single()),
-                n => n is CSharp.Syntax.MemberAccessExpressionSyntax).Single();
+            var symbol = (IPropertySymbol)
+                GetAllSymbols(
+                        compilation2.GetSemanticModel(compilation2.SyntaxTrees.Single()),
+                        n => n is CSharp.Syntax.MemberAccessExpressionSyntax
+                    )
+                    .Single();
 
             var propType = symbol.Type;
             Assert.Equal(SymbolKind.ErrorType, propType.Kind);
@@ -958,12 +1146,14 @@ class X
         [Fact, WorkItem(14365, "https://github.com/dotnet/roslyn/issues/14365")]
         public void TestErrorTypeInNestedNamespace_VB()
         {
-            var source1 = @"
+            var source1 =
+                @"
 public class C
     public readonly property I as System.Collections.IEnumerable
 end class";
 
-            var source2 = @"
+            var source2 =
+                @"
 class X
     sub M()
         dim y = new C().I;
@@ -973,12 +1163,19 @@ end class";
             // We don't add metadata to the second compilation, so even `System.Collections.IEnumerable` will be an
             // error type.
             var compilation1 = GetCompilation(source1, LanguageNames.VisualBasic, "File1.vb");
-            var compilation2 = GetCompilation(source2, LanguageNames.VisualBasic, "File2.vb",
-                new[] { compilation1.ToMetadataReference() });
+            var compilation2 = GetCompilation(
+                source2,
+                LanguageNames.VisualBasic,
+                "File2.vb",
+                new[] { compilation1.ToMetadataReference() }
+            );
 
-            var symbol = (IPropertySymbol)GetAllSymbols(
-                compilation2.GetSemanticModel(compilation2.SyntaxTrees.Single()),
-                n => n is VisualBasic.Syntax.MemberAccessExpressionSyntax).Single();
+            var symbol = (IPropertySymbol)
+                GetAllSymbols(
+                        compilation2.GetSemanticModel(compilation2.SyntaxTrees.Single()),
+                        n => n is VisualBasic.Syntax.MemberAccessExpressionSyntax
+                    )
+                    .Single();
 
             var propType = symbol.Type;
             Assert.Equal(SymbolKind.ErrorType, propType.Kind);
@@ -1005,7 +1202,8 @@ end class";
         [Fact]
         public void TestFunctionPointerTypeSymbols()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     public delegate*<ref string, out int, in C, ref C> ptr1;
@@ -1020,7 +1218,8 @@ class C
         [Fact]
         public void TestGenericErrorType()
         {
-            var source1 = @"
+            var source1 =
+                @"
 public class C
 {
     public Goo<X> G() { }
@@ -1063,7 +1262,11 @@ public class C
             }
         }
 
-        private static void TestRoundTrip(IEnumerable<ISymbol> symbols, Compilation compilation, Func<ISymbol, object> fnId = null)
+        private static void TestRoundTrip(
+            IEnumerable<ISymbol> symbols,
+            Compilation compilation,
+            Func<ISymbol, object> fnId = null
+        )
         {
             foreach (var symbol in symbols)
             {
@@ -1071,7 +1274,11 @@ public class C
             }
         }
 
-        private static void TestRoundTrip(ISymbol symbol, Compilation compilation, Func<ISymbol, object> fnId = null)
+        private static void TestRoundTrip(
+            ISymbol symbol,
+            Compilation compilation,
+            Func<ISymbol, object> fnId = null
+        )
         {
             var id = SymbolKey.CreateString(symbol);
             Assert.NotNull(id);
@@ -1090,7 +1297,12 @@ public class C
             }
         }
 
-        private static Compilation GetCompilation(string source, string language, string path = "", MetadataReference[] references = null)
+        private static Compilation GetCompilation(
+            string source,
+            string language,
+            string path = "",
+            MetadataReference[] references = null
+        )
         {
             references ??= new[]
             {
@@ -1101,19 +1313,29 @@ public class C
             if (language == LanguageNames.CSharp)
             {
                 var tree = CSharp.SyntaxFactory.ParseSyntaxTree(source, path: path);
-                return CSharp.CSharpCompilation.Create("Test", syntaxTrees: new[] { tree }, references: references);
+                return CSharp.CSharpCompilation.Create(
+                    "Test",
+                    syntaxTrees: new[] { tree },
+                    references: references
+                );
             }
             else if (language == LanguageNames.VisualBasic)
             {
                 var tree = VisualBasic.SyntaxFactory.ParseSyntaxTree(source, path: path);
-                return VisualBasic.VisualBasicCompilation.Create("Test", syntaxTrees: new[] { tree }, references: references);
+                return VisualBasic.VisualBasicCompilation.Create(
+                    "Test",
+                    syntaxTrees: new[] { tree },
+                    references: references
+                );
             }
 
             throw new NotSupportedException();
         }
 
         private List<ISymbol> GetAllSymbols(
-            SemanticModel model, Func<SyntaxNode, bool> predicate = null)
+            SemanticModel model,
+            Func<SyntaxNode, bool> predicate = null
+        )
         {
             var list = new List<ISymbol>();
             GetAllSymbols(model, model.SyntaxTree.GetRoot(), list, predicate);
@@ -1121,8 +1343,11 @@ public class C
         }
 
         private void GetAllSymbols(
-            SemanticModel model, SyntaxNode node,
-            List<ISymbol> list, Func<SyntaxNode, bool> predicate)
+            SemanticModel model,
+            SyntaxNode node,
+            List<ISymbol> list,
+            Func<SyntaxNode, bool> predicate
+        )
         {
             if (predicate == null || predicate(node))
             {
@@ -1168,7 +1393,10 @@ public class C
             }
         }
 
-        private static IEnumerable<ISymbol> GetInteriorSymbols(ISymbol containingSymbol, Compilation compilation)
+        private static IEnumerable<ISymbol> GetInteriorSymbols(
+            ISymbol containingSymbol,
+            Compilation compilation
+        )
         {
             var results = new List<ISymbol>();
 
@@ -1188,7 +1416,11 @@ public class C
             return results;
         }
 
-        private static void GetInteriorSymbols(SemanticModel model, SyntaxNode root, List<ISymbol> symbols)
+        private static void GetInteriorSymbols(
+            SemanticModel model,
+            SyntaxNode root,
+            List<ISymbol> symbols
+        )
         {
             foreach (var token in root.DescendantNodes())
             {

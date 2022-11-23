@@ -26,5 +26,6 @@ public abstract class LayoutComponentBase : ComponentBase
     // calls of OpenComponent<T> where T is well-known. Consequently we have to explicitly provide a hint to the trimmer to preserve
     // properties.
     [DynamicDependency(Component, typeof(LayoutComponentBase))]
-    public override Task SetParametersAsync(ParameterView parameters) => base.SetParametersAsync(parameters);
+    public override Task SetParametersAsync(ParameterView parameters) =>
+        base.SetParametersAsync(parameters);
 }

@@ -26,7 +26,9 @@ internal sealed class GrpcModelMetadata : ModelMetadata
     public override string DisplayName { get; }
     public override string EditFormatString { get; }
     public override ModelMetadata ElementMetadata { get; }
-    public override IEnumerable<KeyValuePair<EnumGroupAndName, string>> EnumGroupedDisplayNamesAndValues { get; }
+    public override IEnumerable<
+        KeyValuePair<EnumGroupAndName, string>
+    > EnumGroupedDisplayNamesAndValues { get; }
     public override IReadOnlyDictionary<string, string> EnumNamesAndValues { get; }
     public override bool HasNonDefaultEditFormat { get; }
     public override bool HideSurroundingHtml { get; }

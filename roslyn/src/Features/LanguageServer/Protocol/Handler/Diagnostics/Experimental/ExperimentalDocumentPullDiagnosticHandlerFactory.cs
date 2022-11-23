@@ -15,7 +15,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics.Experimental
 // A document diagnostic partial report is defined as having the first literal send = DocumentDiagnosticReport (aka the sumtype of changed / unchanged) followed
 // by n DocumentDiagnosticPartialResult literals.
 // See https://github.com/microsoft/vscode-languageserver-node/blob/main/protocol/src/common/proposed.diagnostics.md#textDocument_diagnostic
-[ExportCSharpVisualBasicLspServiceFactory(typeof(ExperimentalDocumentPullDiagnosticsHandler)), Shared]
+[
+    ExportCSharpVisualBasicLspServiceFactory(typeof(ExperimentalDocumentPullDiagnosticsHandler)),
+    Shared
+]
 internal class ExperimentalDocumentPullDiagnosticHandlerFactory : ILspServiceFactory
 {
     private readonly IDiagnosticAnalyzerService _analyzerService;
@@ -27,13 +30,21 @@ internal class ExperimentalDocumentPullDiagnosticHandlerFactory : ILspServiceFac
     public ExperimentalDocumentPullDiagnosticHandlerFactory(
         IDiagnosticAnalyzerService analyzerService,
         EditAndContinueDiagnosticUpdateSource editAndContinueDiagnosticUpdateSource,
-        IGlobalOptionService globalOptions)
+        IGlobalOptionService globalOptions
+    )
     {
         _analyzerService = analyzerService;
         _editAndContinueDiagnosticUpdateSource = editAndContinueDiagnosticUpdateSource;
         _globalOptions = globalOptions;
     }
 
-    public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
-        => new ExperimentalDocumentPullDiagnosticsHandler(_analyzerService, _editAndContinueDiagnosticUpdateSource, _globalOptions);
+    public ILspService CreateILspService(
+        LspServices lspServices,
+        WellKnownLspServerKinds serverKind
+    ) =>
+        new ExperimentalDocumentPullDiagnosticsHandler(
+            _analyzerService,
+            _editAndContinueDiagnosticUpdateSource,
+            _globalOptions
+        );
 }

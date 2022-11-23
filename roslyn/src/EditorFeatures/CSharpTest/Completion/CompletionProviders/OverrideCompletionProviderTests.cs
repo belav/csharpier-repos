@@ -28,14 +28,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class OverrideCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(OverrideCompletionProvider);
+        internal override Type GetCompletionProviderType() => typeof(OverrideCompletionProvider);
 
-        internal override OptionsCollection NonCompletionOptions
-            => new(LanguageNames.CSharp)
+        internal override OptionsCollection NonCompletionOptions =>
+            new(LanguageNames.CSharp)
             {
-                { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.NeverWithSilentEnforcement }
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                }
             };
 
         #region "CompletionItem tests"
@@ -43,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfFact]
         public async Task InheritedVirtualPublicMethod()
         {
-            await VerifyItemExistsAsync(@"
+            await VerifyItemExistsAsync(
+                @"
 public class a
 {
     public virtual void goo() { }
@@ -52,14 +58,17 @@ public class a
 public class b : a
 {
     override $$
-}", "goo()");
+}",
+                "goo()"
+            );
         }
 
         [WorkItem(543799, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543799")]
         [WpfFact]
         public async Task InheritedParameterDefaultValue1()
         {
-            await VerifyItemExistsAsync(@"public class a
+            await VerifyItemExistsAsync(
+                @"public class a
 {
     public virtual void goo(int x = 42) { }
 }
@@ -67,14 +76,18 @@ public class b : a
 public class b : a
 {
     override $$
-}", "goo(int x = 42)", "void a.goo([int x = 42])");
+}",
+                "goo(int x = 42)",
+                "void a.goo([int x = 42])"
+            );
         }
 
         [WorkItem(543799, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543799")]
         [WpfFact]
         public async Task InheritedParameterDefaultValue2()
         {
-            await VerifyItemExistsAsync(@"public class a
+            await VerifyItemExistsAsync(
+                @"public class a
 {
     public virtual void goo(int x, int y = 42) { }
 }
@@ -82,13 +95,17 @@ public class b : a
 public class b : a
 {
     override $$
-}", "goo(int x, int y = 42)", "void a.goo(int x, [int y = 42])");
+}",
+                "goo(int x, int y = 42)",
+                "void a.goo(int x, [int y = 42])"
+            );
         }
 
         [WpfFact]
         public async Task InheritedAbstractPublicMethod()
         {
-            await VerifyItemExistsAsync(@"
+            await VerifyItemExistsAsync(
+                @"
 public class a
 {
     public abstract void goo();
@@ -97,13 +114,16 @@ public class a
 public class b : a
 {
     override $$
-}", "goo()");
+}",
+                "goo()"
+            );
         }
 
         [WpfFact]
         public async Task NotPrivateInheritedMethod()
         {
-            await VerifyItemIsAbsentAsync(@"
+            await VerifyItemIsAbsentAsync(
+                @"
 public class a
 {
     private virtual void goo() { }
@@ -112,13 +132,16 @@ public class a
 public class b : a
 {
     override $$
-}", "goo()");
+}",
+                "goo()"
+            );
         }
 
         [WpfFact]
         public async Task MatchReturnType()
         {
-            var markup = @"
+            var markup =
+                @"
 public class a
 {
     public virtual void goo() { }
@@ -137,7 +160,8 @@ public class b : a
         [WpfFact]
         public async Task InvalidReturnType()
         {
-            var markup = @"
+            var markup =
+                @"
 public class a
 {
     public virtual void goo() { }
@@ -157,7 +181,8 @@ public class b : a
         [WpfFact]
         public async Task NotAlreadyImplementedMethods()
         {
-            await VerifyItemIsAbsentAsync(@"
+            await VerifyItemIsAbsentAsync(
+                @"
 public class a
 {
     protected virtual void goo() { }
@@ -170,13 +195,16 @@ public class b : a
     protected override void goo() { }
 
     override $$
-}", "goo()");
+}",
+                "goo()"
+            );
         }
 
         [WpfFact]
         public async Task NotSealed()
         {
-            await VerifyItemIsAbsentAsync(@"
+            await VerifyItemIsAbsentAsync(
+                @"
 public class a
 {
     protected sealed void goo() { }
@@ -185,13 +213,16 @@ public class a
 public class b : a
 {
     public override $$
-}", "goo()");
+}",
+                "goo()"
+            );
         }
 
         [WpfFact]
         public async Task ShowEvent()
         {
-            await VerifyItemExistsAsync(@"
+            await VerifyItemExistsAsync(
+                @"
 using System;
 public class a
 {
@@ -201,13 +232,16 @@ public class a
 public class b : a
 {
     public override $$
-}", "goo");
+}",
+                "goo"
+            );
         }
 
         [WpfFact]
         public async Task NotIfTokensAfterPosition()
         {
-            await VerifyNoItemsExistAsync(@"
+            await VerifyNoItemsExistAsync(
+                @"
 public class a
 {
     public virtual void goo() { }
@@ -216,13 +250,15 @@ public class a
 public class b : a
 {
     public override $$ void
-}");
+}"
+            );
         }
 
         [WpfFact]
         public async Task NotIfNameAfterPosition()
         {
-            await VerifyNoItemsExistAsync(@"
+            await VerifyNoItemsExistAsync(
+                @"
 public class a
 {
     public virtual void goo() { }
@@ -231,13 +267,15 @@ public class a
 public class b : a
 {
     public override void $$ bar
-}");
+}"
+            );
         }
 
         [WpfFact]
         public async Task NotIfStatic()
         {
-            await VerifyNoItemsExistAsync(@"
+            await VerifyNoItemsExistAsync(
+                @"
 public class a
 {
     public virtual void goo() { }
@@ -246,13 +284,15 @@ public class a
 public class b : a
 {
     public static override $$ 
-}");
+}"
+            );
         }
 
         [WpfFact]
         public async Task AfterSingleLineMethodDeclaration()
         {
-            await VerifyNoItemsExistAsync(@"
+            await VerifyNoItemsExistAsync(
+                @"
 public class a
 {
     public virtual void goo() { }
@@ -261,13 +301,15 @@ public class a
 public class b : a
 {
     void bar() { } override $$
-}");
+}"
+            );
         }
 
         [WpfFact]
         public async Task SuggestProperty()
         {
-            await VerifyItemExistsAsync(@"
+            await VerifyItemExistsAsync(
+                @"
 public class a
 {
     public virtual int goo { }
@@ -276,13 +318,16 @@ public class a
 public class b : a
 {
      override $$
-}", "goo");
+}",
+                "goo"
+            );
         }
 
         [WpfFact]
         public async Task NotSuggestSealed()
         {
-            await VerifyItemIsAbsentAsync(@"
+            await VerifyItemIsAbsentAsync(
+                @"
 public class a
 {
     public sealed int goo { }
@@ -291,13 +336,16 @@ public class a
 public class b : a
 {
      override $$
-}", "goo");
+}",
+                "goo"
+            );
         }
 
         [WpfFact]
         public async Task GatherModifiers()
         {
-            await VerifyItemExistsAsync(@"
+            await VerifyItemExistsAsync(
+                @"
 public class a
 {
     public abstract extern unsafe int goo { }
@@ -306,13 +354,16 @@ public class a
 public class b : a
 {
      override $$
-}", "goo");
+}",
+                "goo"
+            );
         }
 
         [WpfFact]
         public async Task IgnorePartial()
         {
-            await VerifyNoItemsExistAsync(@"
+            await VerifyNoItemsExistAsync(
+                @"
 public class a
 {
     public virtual partial goo() { }
@@ -321,13 +372,15 @@ public class a
 public class b : a
 {
      override partial $$
-}");
+}"
+            );
         }
 
         [WpfFact]
         public async Task IgnoreSealed()
         {
-            await VerifyItemIsAbsentAsync(@"
+            await VerifyItemIsAbsentAsync(
+                @"
 public class a
 {
     public virtual sealed int goo() { }
@@ -336,13 +389,16 @@ public class a
 public class b : a
 {
      override $$
-}", "goo()");
+}",
+                "goo()"
+            );
         }
 
         [WpfFact]
         public async Task IgnoreIfTokenAfter()
         {
-            await VerifyNoItemsExistAsync(@"
+            await VerifyNoItemsExistAsync(
+                @"
 public class a
 {
     public virtual int goo() { }
@@ -351,13 +407,15 @@ public class a
 public class b : a
 {
      override $$ int
-}");
+}"
+            );
         }
 
         [WpfFact]
         public async Task SuggestAfterUnsafeAbstractExtern()
         {
-            await VerifyItemExistsAsync(@"
+            await VerifyItemExistsAsync(
+                @"
 public class a
 {
     public virtual int goo() { }
@@ -366,13 +424,16 @@ public class a
 public class b : a
 {
      unsafe abstract extern override $$
-}", "goo()");
+}",
+                "goo()"
+            );
         }
 
         [WpfFact]
         public async Task SuggestAfterSealed()
         {
-            await VerifyItemExistsAsync(@"
+            await VerifyItemExistsAsync(
+                @"
 public class a
 {
     public virtual int goo() { }
@@ -381,13 +442,16 @@ public class a
 public class b : a
 {
      sealed override $$
-}", "goo()");
+}",
+                "goo()"
+            );
         }
 
         [WpfFact]
         public async Task NoAccessibility()
         {
-            var markup = @"
+            var markup =
+                @"
 public class a
 {
     public virtual int goo() { }
@@ -406,7 +470,8 @@ public class b : a
         [WpfFact]
         public async Task FilterAccessibility()
         {
-            var markup = @"
+            var markup =
+                @"
 public class a
 {
     public virtual int goo() { }
@@ -426,7 +491,8 @@ public class b : a
 
             await VerifyItemExistsAsync(markup, "far()");
 
-            await VerifyItemExistsAsync(@"
+            await VerifyItemExistsAsync(
+                @"
 public class a
 {
     public virtual int goo() { }
@@ -438,13 +504,16 @@ public class a
 public class b : a
 {
      override protected $$
-}", "bar()");
+}",
+                "bar()"
+            );
         }
 
         [WpfFact]
         public async Task FilterPublicInternal()
         {
-            var protectedinternal = @"
+            var protectedinternal =
+                @"
 public class a
 {
     protected internal virtual void goo() { }
@@ -459,7 +528,8 @@ public class b : a
             await VerifyItemIsAbsentAsync(protectedinternal, "bar()");
             await VerifyItemExistsAsync(protectedinternal, "goo()");
 
-            var internalprotected = @"
+            var internalprotected =
+                @"
 public class a
 {
     protected internal virtual void goo() { }
@@ -478,7 +548,8 @@ public class b : a
         [WpfFact]
         public async Task VerifySignatureFormat()
         {
-            var markup = @"
+            var markup =
+                @"
 public class a
 {
     override $$
@@ -490,7 +561,8 @@ public class a
         [WpfFact]
         public async Task PrivateNoFilter()
         {
-            var markup = @"
+            var markup =
+                @"
 public class c
 {
     public virtual void goo() { }
@@ -523,7 +595,8 @@ public class a : c
         [WpfFact]
         public async Task IntermediateClassOverriddenMember()
         {
-            var markup = @"abstract class Base
+            var markup =
+                @"abstract class Base
 {
     public abstract void Goo();
 }
@@ -545,7 +618,8 @@ class SomeClass : Derived
         [WpfFact]
         public async Task NotOfferedBaseClassMember()
         {
-            var markup = @"abstract class Base
+            var markup =
+                @"abstract class Base
 {
     public abstract void Goo();
 }
@@ -566,7 +640,8 @@ class SomeClass : Derived
         [WpfFact]
         public async Task NotOfferedOnNonVirtual()
         {
-            var markup = @"class Base
+            var markup =
+                @"class Base
 {
     public void Goo();
 }
@@ -582,7 +657,8 @@ class SomeClass : Base
         [WpfFact]
         public async Task GenericTypeNameSubstitutedForGenericInDerivedClass1()
         {
-            var markup = @"public abstract class Base<T>
+            var markup =
+                @"public abstract class Base<T>
 {
     public abstract void Goo(T t);
 }
@@ -598,7 +674,8 @@ public class SomeClass<X> : Base<X>
         [WpfFact]
         public async Task GenericTypeNameSubstitutedForGenericInDerivedClass2()
         {
-            var markup = @"public abstract class Base<T>
+            var markup =
+                @"public abstract class Base<T>
 {
     public abstract void Goo(T t);
 }
@@ -614,7 +691,8 @@ public class SomeClass<X, Y, Z> : Base<Y>
         [WpfFact]
         public async Task GenericTypeNameSubstitutedForGenericInDerivedClass3()
         {
-            var markup = @"public abstract class Base<T, S>
+            var markup =
+                @"public abstract class Base<T, S>
 {
     public abstract void Goo(T t, S s);
 }
@@ -630,7 +708,8 @@ public class SomeClass<X, Y, Z> : Base<Y, Z>
         [WpfFact]
         public async Task GenericTypeNameSubstitutedForNonGenericInDerivedClass1()
         {
-            var markup = @"public abstract class Base<T>
+            var markup =
+                @"public abstract class Base<T>
 {
     public abstract void Goo(T t);
 }
@@ -646,7 +725,8 @@ public class SomeClass : Base<int>
         [WpfFact]
         public async Task GenericTypeNameSubstitutedForNonGenericInDerivedClass2()
         {
-            var markup = @"public abstract class Base<T>
+            var markup =
+                @"public abstract class Base<T>
 {
     public abstract void Goo(T t);
 }
@@ -662,7 +742,8 @@ public class SomeClass<X, Y, Z> : Base<int>
         [WpfFact]
         public async Task GenericTypeNameSubstitutedForNonGenericInDerivedClass3()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 
 public abstract class Base<T, S>
 {
@@ -681,7 +762,8 @@ public class SomeClass : Base<int, Exception>
         [WpfFact]
         public async Task ParameterTypeSimplified()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 
 public abstract class Base
 {
@@ -699,7 +781,8 @@ public class SomeClass : Base
         [WpfFact]
         public async Task NullableAnnotationsIncluded()
         {
-            var markup = @"#nullable enable
+            var markup =
+                @"#nullable enable
 
 public abstract class Base
 {
@@ -716,7 +799,8 @@ public class SomeClass : Base
         [WpfFact]
         public async Task EscapedMethodNameInIntelliSenseList()
         {
-            var markup = @"public abstract class Base
+            var markup =
+                @"public abstract class Base
 {
     public abstract void @class();
 }
@@ -727,14 +811,43 @@ public class SomeClass : Base
 }";
             MarkupTestFile.GetPosition(markup, out var code, out int position);
 
-            await BaseVerifyWorkerAsync(code, position, "@class()", "void Base.@class()", SourceCodeKind.Regular, false, false, null, null, null, null, null, null);
-            await BaseVerifyWorkerAsync(code, position, "@class()", "void Base.@class()", SourceCodeKind.Script, false, false, null, null, null, null, null, null);
+            await BaseVerifyWorkerAsync(
+                code,
+                position,
+                "@class()",
+                "void Base.@class()",
+                SourceCodeKind.Regular,
+                false,
+                false,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            );
+            await BaseVerifyWorkerAsync(
+                code,
+                position,
+                "@class()",
+                "void Base.@class()",
+                SourceCodeKind.Script,
+                false,
+                false,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            );
         }
 
         [WpfFact]
         public async Task EscapedPropertyNameInIntelliSenseList()
         {
-            var markup = @"public abstract class Base
+            var markup =
+                @"public abstract class Base
 {
     public virtual int @class { get; set; }
 }
@@ -745,14 +858,43 @@ public class SomeClass : Base
 }";
             MarkupTestFile.GetPosition(markup, out var code, out int position);
 
-            await BaseVerifyWorkerAsync(code, position, "@class", "int Base.@class { get; set; }", SourceCodeKind.Regular, false, false, null, null, null, null, null, null);
-            await BaseVerifyWorkerAsync(code, position, "@class", "int Base.@class { get; set; }", SourceCodeKind.Script, false, false, null, null, null, null, null, null);
+            await BaseVerifyWorkerAsync(
+                code,
+                position,
+                "@class",
+                "int Base.@class { get; set; }",
+                SourceCodeKind.Regular,
+                false,
+                false,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            );
+            await BaseVerifyWorkerAsync(
+                code,
+                position,
+                "@class",
+                "int Base.@class { get; set; }",
+                SourceCodeKind.Script,
+                false,
+                false,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            );
         }
 
         [WpfFact]
         public async Task EscapedParameterNameInIntelliSenseList()
         {
-            var markup = @"public abstract class Base
+            var markup =
+                @"public abstract class Base
 {
     public abstract void goo(int @class);
 }
@@ -768,7 +910,8 @@ public class SomeClass : Base
         [WpfFact]
         public async Task RefParameter()
         {
-            var markup = @"public abstract class Base
+            var markup =
+                @"public abstract class Base
 {
     public abstract void goo(int x, ref string y);
 }
@@ -778,13 +921,18 @@ public class SomeClass : Base
     override $$
 }";
 
-            await VerifyItemExistsAsync(markup, "goo(int x, ref string y)", "void Base.goo(int x, ref string y)");
+            await VerifyItemExistsAsync(
+                markup,
+                "goo(int x, ref string y)",
+                "void Base.goo(int x, ref string y)"
+            );
         }
 
         [WpfFact]
         public async Task OutParameter()
         {
-            var markup = @"public abstract class Base
+            var markup =
+                @"public abstract class Base
 {
     public abstract void goo(int x, out string y);
 }
@@ -794,14 +942,19 @@ public class SomeClass : Base
     override $$
 }";
 
-            await VerifyItemExistsAsync(markup, "goo(int x, out string y)", "void Base.goo(int x, out string y)");
+            await VerifyItemExistsAsync(
+                markup,
+                "goo(int x, out string y)",
+                "void Base.goo(int x, out string y)"
+            );
         }
 
         [WorkItem(529714, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529714")]
         [WpfFact]
         public async Task GenericMethodTypeParametersNotRenamed()
         {
-            var markup = @"abstract class CGoo    
+            var markup =
+                @"abstract class CGoo    
 {    
    public virtual X Something<X>(X arg)    
    {    
@@ -821,12 +974,14 @@ class Derived<X> : CGoo
         [WpfFact]
         public async Task CommitInEmptyClass()
         {
-            var markupBeforeCommit = @"class c
+            var markupBeforeCommit =
+                @"class c
 {
         override $$
 }";
 
-            var expectedCodeAfterCommit = @"class c
+            var expectedCodeAfterCommit =
+                @"class c
 {
     public override bool Equals(object obj)
     {
@@ -834,14 +989,19 @@ class Derived<X> : CGoo
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "Equals(object obj)", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "Equals(object obj)",
+                expectedCodeAfterCommit
+            );
         }
 
         [WorkItem(529714, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529714")]
         [WpfFact]
         public async Task CommitGenericMethodTypeParametersNotRenamed()
         {
-            var markupBeforeCommit = @"abstract class CGoo    
+            var markupBeforeCommit =
+                @"abstract class CGoo    
 {    
     public virtual X Something<X>(X arg)    
     {    
@@ -853,7 +1013,8 @@ class Derived<X> : CGoo
     override $$    
 }";
 
-            var expectedCodeAfterCommit = @"abstract class CGoo    
+            var expectedCodeAfterCommit =
+                @"abstract class CGoo    
 {    
     public virtual X Something<X>(X arg)    
     {    
@@ -867,20 +1028,26 @@ class Derived<X> : CGoo
         return base.Something(arg);$$
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "Something<X>(X arg)", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "Something<X>(X arg)",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitMethodBeforeMethod()
         {
-            var markupBeforeCommit = @"class c
+            var markupBeforeCommit =
+                @"class c
 {
     override $$
 
     public void goo() { }
 }";
 
-            var expectedCodeAfterCommit = @"class c
+            var expectedCodeAfterCommit =
+                @"class c
 {
     public override bool Equals(object obj)
     {
@@ -890,20 +1057,26 @@ class Derived<X> : CGoo
     public void goo() { }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "Equals(object obj)", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "Equals(object obj)",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitMethodAfterMethod()
         {
-            var markupBeforeCommit = @"class c
+            var markupBeforeCommit =
+                @"class c
 {
     public void goo() { }
 
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"class c
+            var expectedCodeAfterCommit =
+                @"class c
 {
     public void goo() { }
 
@@ -913,14 +1086,19 @@ class Derived<X> : CGoo
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "Equals(object obj)", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "Equals(object obj)",
+                expectedCodeAfterCommit
+            );
         }
 
         [WorkItem(543798, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543798")]
         [WpfFact]
         public async Task CommitOptionalParameterValuesAreGenerated()
         {
-            var markupBeforeCommit = @"using System;
+            var markupBeforeCommit =
+                @"using System;
 
 abstract public class Base
 {
@@ -932,7 +1110,8 @@ public class Derived : Base
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"using System;
+            var expectedCodeAfterCommit =
+                @"using System;
 
 abstract public class Base
 {
@@ -947,13 +1126,18 @@ public class Derived : Base
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo(int x = 42)", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo(int x = 42)",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitAttributesAreNotGenerated()
         {
-            var markupBeforeCommit = @"using System;
+            var markupBeforeCommit =
+                @"using System;
 
 public class Base
 {
@@ -968,7 +1152,8 @@ public class Derived : Base
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"using System;
+            var expectedCodeAfterCommit =
+                @"using System;
 
 public class Base
 {
@@ -986,13 +1171,18 @@ public class Derived : Base
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitInaccessibleParameterAttributesAreNotGenerated()
         {
-            var markupBeforeCommit = @"using System;
+            var markupBeforeCommit =
+                @"using System;
 
 public class Class1
 {
@@ -1006,7 +1196,8 @@ public class Class2 : Class1
     public override void $$
 }";
 
-            var expectedCodeAfterCommit = @"using System;
+            var expectedCodeAfterCommit =
+                @"using System;
 
 public class Class1
 {
@@ -1023,13 +1214,18 @@ public class Class2 : Class1
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "M(int i)", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "M(int i)",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitVoidMethod()
         {
-            var markupBeforeCommit = @"class c
+            var markupBeforeCommit =
+                @"class c
 {
     public virtual void goo() { }
 }
@@ -1039,7 +1235,8 @@ class d : c
    override $$
 }";
 
-            var expectedCodeAfterCommit = @"class c
+            var expectedCodeAfterCommit =
+                @"class c
 {
     public virtual void goo() { }
 }
@@ -1052,13 +1249,18 @@ class d : c
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitVoidMethodWithParams()
         {
-            var markupBeforeCommit = @"class c
+            var markupBeforeCommit =
+                @"class c
 {
     public virtual void goo(int bar, int quux) { }
 }
@@ -1068,7 +1270,8 @@ class d : c
    override $$
 }";
 
-            var expectedCodeAfterCommit = @"class c
+            var expectedCodeAfterCommit =
+                @"class c
 {
     public virtual void goo(int bar, int quux) { }
 }
@@ -1081,13 +1284,18 @@ class d : c
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo(int bar, int quux)", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo(int bar, int quux)",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitNonVoidMethod()
         {
-            var markupBeforeCommit = @"class c
+            var markupBeforeCommit =
+                @"class c
 {
     public virtual int goo() { }
 }
@@ -1097,7 +1305,8 @@ class d : c
    override $$
 }";
 
-            var expectedCodeAfterCommit = @"class c
+            var expectedCodeAfterCommit =
+                @"class c
 {
     public virtual int goo() { }
 }
@@ -1110,13 +1319,18 @@ class d : c
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitNonVoidMethodWithParams()
         {
-            var markupBeforeCommit = @"class c
+            var markupBeforeCommit =
+                @"class c
 {
     public virtual int goo(int bar, int quux) { }
 }
@@ -1126,7 +1340,8 @@ class d : c
    override $$
 }";
 
-            var expectedCodeAfterCommit = @"class c
+            var expectedCodeAfterCommit =
+                @"class c
 {
     public virtual int goo(int bar, int quux) { }
 }
@@ -1139,13 +1354,18 @@ class d : c
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo(int bar, int quux)", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo(int bar, int quux)",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitProtectedMethod()
         {
-            var markupBeforeCommit = @"class c
+            var markupBeforeCommit =
+                @"class c
 {
     protected virtual void goo() { }
 }
@@ -1154,7 +1374,8 @@ class d : c
 {
    override $$
 }";
-            var expectedCodeAfterCommit = @"class c
+            var expectedCodeAfterCommit =
+                @"class c
 {
     protected virtual void goo() { }
 }
@@ -1167,13 +1388,18 @@ class d : c
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitInternalMethod()
         {
-            var markupBeforeCommit = @"class c
+            var markupBeforeCommit =
+                @"class c
 {
     internal virtual void goo() { }
 }
@@ -1183,7 +1409,8 @@ class d : c
    override $$
 }";
 
-            var expectedCodeAfterCommit = @"class c
+            var expectedCodeAfterCommit =
+                @"class c
 {
     internal virtual void goo() { }
 }
@@ -1196,13 +1423,18 @@ class d : c
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitProtectedInternalMethod()
         {
-            var markupBeforeCommit = @"public class c
+            var markupBeforeCommit =
+                @"public class c
 {
     protected internal virtual void goo() { }
 }
@@ -1212,7 +1444,8 @@ class d : c
    override $$
 }";
 
-            var expectedCodeAfterCommit = @"public class c
+            var expectedCodeAfterCommit =
+                @"public class c
 {
     protected internal virtual void goo() { }
 }
@@ -1225,13 +1458,18 @@ class d : c
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitAbstractMethodThrows()
         {
-            var markupBeforeCommit = @"using System;
+            var markupBeforeCommit =
+                @"using System;
 
 abstract class c
 {
@@ -1243,7 +1481,8 @@ class d : c
    override $$
 }";
 
-            var expectedCodeAfterCommit = @"using System;
+            var expectedCodeAfterCommit =
+                @"using System;
 
 abstract class c
 {
@@ -1258,13 +1497,18 @@ class d : c
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitOverrideAsAbstract()
         {
-            var markupBeforeCommit = @"class c
+            var markupBeforeCommit =
+                @"class c
 {
     public virtual void goo() { };
 }
@@ -1274,7 +1518,8 @@ class d : c
    abstract override $$
 }";
 
-            var expectedCodeAfterCommit = @"class c
+            var expectedCodeAfterCommit =
+                @"class c
 {
     public virtual void goo() { };
 }
@@ -1284,13 +1529,18 @@ class d : c
     public abstract override void goo();$$
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitOverrideAsUnsafeSealed()
         {
-            var markupBeforeCommit = @"class c
+            var markupBeforeCommit =
+                @"class c
 {
     public virtual void goo() { };
 }
@@ -1300,7 +1550,8 @@ class d : c
    unsafe sealed override $$
 }";
 
-            var expectedCodeAfterCommit = @"class c
+            var expectedCodeAfterCommit =
+                @"class c
 {
     public virtual void goo() { };
 }
@@ -1313,13 +1564,18 @@ class d : c
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitInsertProperty()
         {
-            var markupBeforeCommit = @"public class c
+            var markupBeforeCommit =
+                @"public class c
 {
     public virtual int goo { get; set; }
 }
@@ -1329,7 +1585,8 @@ public class d : c
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"public class c
+            var expectedCodeAfterCommit =
+                @"public class c
 {
     public virtual int goo { get; set; }
 }
@@ -1350,13 +1607,18 @@ public class d : c
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitInsertPropertyAfterMethod()
         {
-            var markupBeforeCommit = @"public class c
+            var markupBeforeCommit =
+                @"public class c
 {
     public virtual int goo { get; set; }
 }
@@ -1367,7 +1629,8 @@ public class d : c
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"public class c
+            var expectedCodeAfterCommit =
+                @"public class c
 {
     public virtual int goo { get; set; }
 }
@@ -1389,13 +1652,18 @@ public class d : c
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitInsertPropertyBeforeMethod()
         {
-            var markupBeforeCommit = @"public class c
+            var markupBeforeCommit =
+                @"public class c
 {
     public virtual int goo { get; set; }
 }
@@ -1406,7 +1674,8 @@ public class d : c
     public void a() { }
 }";
 
-            var expectedCodeAfterCommit = @"public class c
+            var expectedCodeAfterCommit =
+                @"public class c
 {
     public virtual int goo { get; set; }
 }
@@ -1428,13 +1697,18 @@ public class d : c
     public void a() { }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitPropertyInaccessibleGet()
         {
-            var markupBeforeCommit = @"public class c
+            var markupBeforeCommit =
+                @"public class c
 {
     public virtual int goo { private get; set; }
 }
@@ -1444,7 +1718,8 @@ public class d : c
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"public class c
+            var expectedCodeAfterCommit =
+                @"public class c
 {
     public virtual int goo { private get; set; }
 }
@@ -1460,13 +1735,18 @@ public class d : c
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitPropertyInaccessibleSet()
         {
-            var markupBeforeCommit = @"public class c
+            var markupBeforeCommit =
+                @"public class c
 {
     public virtual int goo { private set; get; }
 }
@@ -1476,7 +1756,8 @@ public class d : c
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"public class c
+            var expectedCodeAfterCommit =
+                @"public class c
 {
     public virtual int goo { private set; get; }
 }
@@ -1492,13 +1773,18 @@ public class d : c
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitInsertPropertyInaccessibleParameterAttributesAreNotGenerated()
         {
-            var markupBeforeCommit = @"using System;
+            var markupBeforeCommit =
+                @"using System;
 
 namespace ClassLibrary1
 {
@@ -1521,7 +1807,8 @@ namespace ClassLibrary1
     }
 }";
 
-            var expectedCodeAfterCommit = @"using System;
+            var expectedCodeAfterCommit =
+                @"using System;
 
 namespace ClassLibrary1
 {
@@ -1555,13 +1842,18 @@ namespace ClassLibrary1
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "this[int i]", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "this[int i]",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitAccessibleEvent()
         {
-            var markupBeforeCommit = @"using System;
+            var markupBeforeCommit =
+                @"using System;
 public class a
 {
     public virtual event EventHandler goo;
@@ -1572,7 +1864,8 @@ public class b : a
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"using System;
+            var expectedCodeAfterCommit =
+                @"using System;
 public class a
 {
     public virtual event EventHandler goo;
@@ -1583,13 +1876,18 @@ public class b : a
     public override event EventHandler goo;$$
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitEventAfterMethod()
         {
-            var markupBeforeCommit = @"using System;
+            var markupBeforeCommit =
+                @"using System;
 
 public class a
 {
@@ -1602,7 +1900,8 @@ public class b : a
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"using System;
+            var expectedCodeAfterCommit =
+                @"using System;
 
 public class a
 {
@@ -1615,13 +1914,18 @@ public class b : a
     public override event EventHandler goo;$$
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitGenericMethod()
         {
-            var markupBeforeCommit = @"using System;
+            var markupBeforeCommit =
+                @"using System;
 
 public class a
 {
@@ -1633,7 +1937,8 @@ public class b : a
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"using System;
+            var expectedCodeAfterCommit =
+                @"using System;
 
 public class a
 {
@@ -1648,13 +1953,18 @@ public class b : a
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo<T>()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo<T>()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitMethodWithNullableAttributes()
         {
-            var markupBeforeCommit = @"
+            var markupBeforeCommit =
+                @"
 #nullable enable
 
 class C
@@ -1667,7 +1977,8 @@ class D : C
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"
+            var expectedCodeAfterCommit =
+                @"
 #nullable enable
 
 class C
@@ -1683,13 +1994,18 @@ class D : C
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "Goo(string? s)", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "Goo(string? s)",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitMethodInNullableDisableContext()
         {
-            var markupBeforeCommit = @"
+            var markupBeforeCommit =
+                @"
 #nullable enable
 
 class C
@@ -1704,7 +2020,8 @@ class D : C
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"
+            var expectedCodeAfterCommit =
+                @"
 #nullable enable
 
 class C
@@ -1722,13 +2039,18 @@ class D : C
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "Goo(string? s)", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "Goo(string? s)",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitToStringIsExplicitlyNonNullReturning()
         {
-            var markupBeforeCommit = @"
+            var markupBeforeCommit =
+                @"
 #nullable enable
 
 namespace System
@@ -1744,7 +2066,8 @@ class D : System.Object
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"
+            var expectedCodeAfterCommit =
+                @"
 #nullable enable
 
 namespace System
@@ -1763,13 +2086,18 @@ class D : System.Object
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "ToString()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "ToString()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitInsertIndexer()
         {
-            var markupBeforeCommit = @"public class MyIndexer<T>
+            var markupBeforeCommit =
+                @"public class MyIndexer<T>
 {
     private T[] arr = new T[100];
     public virtual T this[int i]
@@ -1790,7 +2118,8 @@ class d : MyIndexer<T>
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"public class MyIndexer<T>
+            var expectedCodeAfterCommit =
+                @"public class MyIndexer<T>
 {
     private T[] arr = new T[100];
     public virtual T this[int i]
@@ -1822,13 +2151,18 @@ class d : MyIndexer<T>
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "this[int i]", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "this[int i]",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitAbstractIndexer()
         {
-            var markupBeforeCommit = @"public class MyIndexer<T>
+            var markupBeforeCommit =
+                @"public class MyIndexer<T>
 {
     private T[] arr = new T[100];
     public abstract T this[int i] { get; set; }
@@ -1839,7 +2173,8 @@ class d : MyIndexer<T>
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"public class MyIndexer<T>
+            var expectedCodeAfterCommit =
+                @"public class MyIndexer<T>
 {
     private T[] arr = new T[100];
     public abstract T this[int i] { get; set; }
@@ -1861,7 +2196,11 @@ class d : MyIndexer<T>
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "this[int i]", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "this[int i]",
+                expectedCodeAfterCommit
+            );
         }
 
         // The following two scenarios are already verified through 'VerifyCommit',
@@ -1872,7 +2211,8 @@ class d : MyIndexer<T>
         [WpfFact]
         public async Task CommitFormats()
         {
-            var markupBeforeCommit = @"class Base
+            var markupBeforeCommit =
+                @"class Base
 {
     public virtual void goo() { }
 }
@@ -1882,7 +2222,8 @@ class Derived : Base
 override $$
 }";
 
-            var expectedCodeAfterCommit = @"class Base
+            var expectedCodeAfterCommit =
+                @"class Base
 {
     public virtual void goo() { }
 }
@@ -1895,13 +2236,18 @@ class Derived : Base
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitSimplifiesParameterTypes()
         {
-            var markupBeforeCommit = @"using System;
+            var markupBeforeCommit =
+                @"using System;
 
 public abstract class Base
 {
@@ -1913,7 +2259,8 @@ public class SomeClass : Base
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"using System;
+            var expectedCodeAfterCommit =
+                @"using System;
 
 public abstract class Base
 {
@@ -1928,13 +2275,18 @@ public class SomeClass : Base
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo(Exception e)", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo(Exception e)",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitSimplifiesReturnType()
         {
-            var markupBeforeCommit = @"using System;
+            var markupBeforeCommit =
+                @"using System;
 
 public abstract class Base
 {
@@ -1946,7 +2298,8 @@ public class SomeClass : Base
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"using System;
+            var expectedCodeAfterCommit =
+                @"using System;
 
 public abstract class Base
 {
@@ -1961,13 +2314,18 @@ public class SomeClass : Base
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo(Exception e)", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo(Exception e)",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitEscapedMethodName()
         {
-            var markupBeforeCommit = @"using System;
+            var markupBeforeCommit =
+                @"using System;
 
 public abstract class Base
 {
@@ -1978,7 +2336,8 @@ public class SomeClass : Base
 {
     override $$
 }";
-            var expectedCodeAfterCommit = @"using System;
+            var expectedCodeAfterCommit =
+                @"using System;
 
 public abstract class Base
 {
@@ -1993,13 +2352,18 @@ public class SomeClass : Base
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "@class()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "@class()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitEscapedPropertyName()
         {
-            var markupBeforeCommit = @"public abstract class Base
+            var markupBeforeCommit =
+                @"public abstract class Base
 {
     public virtual int @class { get; set; }
 }
@@ -2009,7 +2373,8 @@ public class SomeClass : Base
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"public abstract class Base
+            var expectedCodeAfterCommit =
+                @"public abstract class Base
 {
     public virtual int @class { get; set; }
 }
@@ -2030,13 +2395,18 @@ public class SomeClass : Base
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "@class", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "@class",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitEscapedParameterName()
         {
-            var markupBeforeCommit = @"using System;
+            var markupBeforeCommit =
+                @"using System;
 
 public abstract class Base
 {
@@ -2048,7 +2418,8 @@ public class SomeClass : Base
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"using System;
+            var expectedCodeAfterCommit =
+                @"using System;
 
 public abstract class Base
 {
@@ -2063,13 +2434,18 @@ public class SomeClass : Base
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo(int @class)", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo(int @class)",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitRefParameter()
         {
-            var markupBeforeCommit = @"using System;
+            var markupBeforeCommit =
+                @"using System;
 
 public abstract class Base
 {
@@ -2081,7 +2457,8 @@ public class SomeClass : Base
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"using System;
+            var expectedCodeAfterCommit =
+                @"using System;
 
 public abstract class Base
 {
@@ -2096,13 +2473,18 @@ public class SomeClass : Base
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo(int x, ref string y)", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo(int x, ref string y)",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitOutParameter()
         {
-            var markupBeforeCommit = @"using System;
+            var markupBeforeCommit =
+                @"using System;
 
 public abstract class Base
 {
@@ -2114,7 +2496,8 @@ public class SomeClass : Base
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"using System;
+            var expectedCodeAfterCommit =
+                @"using System;
 
 public abstract class Base
 {
@@ -2129,7 +2512,11 @@ public class SomeClass : Base
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo(int x, out string y)", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo(int x, out string y)",
+                expectedCodeAfterCommit
+            );
         }
 
         [WorkItem(544560, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544560")]
@@ -2137,7 +2524,7 @@ public class SomeClass : Base
         public async Task TestUnsafe1()
         {
             var markupBeforeCommit =
-@"public class A
+                @"public class A
 {
     public unsafe virtual void F()
     {
@@ -2150,7 +2537,7 @@ public class B : A
 }";
 
             var expectedCodeAfterCommit =
-@"public class A
+                @"public class A
 {
     public unsafe virtual void F()
     {
@@ -2165,7 +2552,11 @@ public class B : A
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "F()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "F()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WorkItem(544560, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544560")]
@@ -2173,7 +2564,7 @@ public class B : A
         public async Task TestUnsafe2()
         {
             var markupBeforeCommit =
-@"public class A
+                @"public class A
 {
     public unsafe virtual void F()
     {
@@ -2186,7 +2577,7 @@ public class B : A
 }";
 
             var expectedCodeAfterCommit =
-@"public class A
+                @"public class A
 {
     public unsafe virtual void F()
     {
@@ -2201,7 +2592,11 @@ public class B : A
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "F()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "F()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WorkItem(544560, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544560")]
@@ -2209,7 +2604,7 @@ public class B : A
         public async Task TestUnsafe3()
         {
             var markupBeforeCommit =
-@"public class A
+                @"public class A
 {
     public unsafe virtual void F()
     {
@@ -2222,7 +2617,7 @@ public class B : A
 }";
 
             var expectedCodeAfterCommit =
-@"public class A
+                @"public class A
 {
     public unsafe virtual void F()
     {
@@ -2237,7 +2632,11 @@ public class B : A
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "F()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "F()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WorkItem(544560, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544560")]
@@ -2245,7 +2644,7 @@ public class B : A
         public async Task TestUnsafe4()
         {
             var markupBeforeCommit =
-@"public class A
+                @"public class A
 {
     public virtual void F(int* i)
     {
@@ -2258,7 +2657,7 @@ public class B : A
 }";
 
             var expectedCodeAfterCommit =
-@"public class A
+                @"public class A
 {
     public virtual void F(int* i)
     {
@@ -2273,7 +2672,11 @@ public class B : A
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "F(int* i)", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "F(int* i)",
+                expectedCodeAfterCommit
+            );
         }
 
         [WorkItem(545534, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545534")]
@@ -2281,7 +2684,7 @@ public class B : A
         public async Task TestPrivateVirtualProperty()
         {
             var markupBeforeCommit =
-@"public class B
+                @"public class B
 {
     public virtual int Goo
     {
@@ -2295,7 +2698,7 @@ public class B : A
 }";
 
             var expectedCodeAfterCommit =
-@"public class B
+                @"public class B
 {
     public virtual int Goo
     {
@@ -2314,14 +2717,19 @@ public class B : A
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "Goo", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "Goo",
+                expectedCodeAfterCommit
+            );
         }
 
         [WorkItem(636706, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/636706")]
         [WpfFact]
         public async Task CrossLanguageParameterizedPropertyOverride()
         {
-            var vbFile = @"Public Class Goo
+            var vbFile =
+                @"Public Class Goo
     Public Overridable Property Bar(bay As Integer) As Integer
         Get
             Return 23
@@ -2332,12 +2740,14 @@ public class B : A
     End Property
 End Class
 ";
-            var csharpFile = @"class Program : Goo
+            var csharpFile =
+                @"class Program : Goo
 {
     override $$
 }
 ";
-            var csharpFileAfterCommit = @"class Program : Goo
+            var csharpFileAfterCommit =
+                @"class Program : Goo
 {
     public override int get_Bar(int bay)
     {
@@ -2349,7 +2759,8 @@ End Class
     }
 }
 ";
-            var xmlString = string.Format(@"
+            var xmlString = string.Format(
+                @"
 <Workspace>
     <Project Language=""{0}"" CommonReferences=""true"">
         <ProjectReference>VBProject</ProjectReference>
@@ -2361,9 +2772,17 @@ End Class
         </Document>
     </Project>
     
-</Workspace>", LanguageNames.CSharp, csharpFile, LanguageNames.VisualBasic, vbFile);
+</Workspace>",
+                LanguageNames.CSharp,
+                csharpFile,
+                LanguageNames.VisualBasic,
+                vbFile
+            );
 
-            using var testWorkspace = TestWorkspace.Create(xmlString, exportProvider: ExportProvider);
+            using var testWorkspace = TestWorkspace.Create(
+                xmlString,
+                exportProvider: ExportProvider
+            );
             var testDocument = testWorkspace.Documents.Single(d => d.Name == "CSharpDocument");
 
             Contract.ThrowIfNull(testDocument.CursorPosition);
@@ -2374,16 +2793,36 @@ End Class
             var triggerInfo = CompletionTrigger.Invoke;
 
             var service = GetCompletionService(document.Project);
-            var completionList = await GetCompletionListAsync(service, document, position, triggerInfo);
-            var completionItem = completionList.ItemsList.First(i => CompareItems(i.DisplayText, "Bar[int bay]"));
+            var completionList = await GetCompletionListAsync(
+                service,
+                document,
+                position,
+                triggerInfo
+            );
+            var completionItem = completionList.ItemsList.First(
+                i => CompareItems(i.DisplayText, "Bar[int bay]")
+            );
 
-            if (service.GetProvider(completionItem, document.Project) is ICustomCommitCompletionProvider customCommitCompletionProvider)
+            if (
+                service.GetProvider(completionItem, document.Project)
+                is ICustomCommitCompletionProvider customCommitCompletionProvider
+            )
             {
                 var textView = testWorkspace.GetTestDocument(documentId).GetTextView();
-                customCommitCompletionProvider.Commit(completionItem, textView, textView.TextBuffer, textView.TextSnapshot, '\t');
+                customCommitCompletionProvider.Commit(
+                    completionItem,
+                    textView,
+                    textView.TextBuffer,
+                    textView.TextSnapshot,
+                    '\t'
+                );
                 var actualCodeAfterCommit = textView.TextBuffer.CurrentSnapshot.AsText().ToString();
                 var caretPosition = textView.Caret.Position.BufferPosition.Position;
-                MarkupTestFile.GetPosition(csharpFileAfterCommit, out var actualExpectedCode, out int expectedCaretPosition);
+                MarkupTestFile.GetPosition(
+                    csharpFileAfterCommit,
+                    out var actualExpectedCode,
+                    out int expectedCaretPosition
+                );
 
                 Assert.Equal(actualExpectedCode, actualCodeAfterCommit);
                 Assert.Equal(expectedCaretPosition, caretPosition);
@@ -2398,7 +2837,8 @@ End Class
         [WpfFact]
         public async Task CommitSurroundingTriviaDirective()
         {
-            var markupBeforeCommit = @"class Base
+            var markupBeforeCommit =
+                @"class Base
 {
     public virtual void goo() { }
 }
@@ -2410,7 +2850,8 @@ override $$
 #endif
 }";
 
-            var expectedCodeAfterCommit = @"class Base
+            var expectedCodeAfterCommit =
+                @"class Base
 {
     public virtual void goo() { }
 }
@@ -2424,14 +2865,19 @@ class Derived : Base
     }
 #endif
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WorkItem(529199, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529199")]
         [WpfFact]
         public async Task CommitBeforeTriviaDirective()
         {
-            var markupBeforeCommit = @"class Base
+            var markupBeforeCommit =
+                @"class Base
 {
     public virtual void goo() { }
 }
@@ -2443,7 +2889,8 @@ override $$
     #endif
 }";
 
-            var expectedCodeAfterCommit = @"class Base
+            var expectedCodeAfterCommit =
+                @"class Base
 {
     public virtual void goo() { }
 }
@@ -2457,13 +2904,18 @@ class Derived : Base
 #if true
 #endif
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitAfterTriviaDirective()
         {
-            var markupBeforeCommit = @"class Base
+            var markupBeforeCommit =
+                @"class Base
 {
     public virtual void goo() { }
 }
@@ -2475,7 +2927,8 @@ class Derived : Base
 override $$
 }";
 
-            var expectedCodeAfterCommit = @"class Base
+            var expectedCodeAfterCommit =
+                @"class Base
 {
     public virtual void goo() { }
 }
@@ -2489,14 +2942,19 @@ class Derived : Base
         base.goo();$$
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WorkItem(529199, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529199")]
         [WpfFact]
         public async Task CommitBeforeComment()
         {
-            var markupBeforeCommit = @"class Base
+            var markupBeforeCommit =
+                @"class Base
 {
     public virtual void goo() { }
 }
@@ -2507,7 +2965,8 @@ override $$
     /* comment */
 }";
 
-            var expectedCodeAfterCommit = @"class Base
+            var expectedCodeAfterCommit =
+                @"class Base
 {
     public virtual void goo() { }
 }
@@ -2520,13 +2979,18 @@ class Derived : Base
     }
     /* comment */
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task CommitAfterComment()
         {
-            var markupBeforeCommit = @"class Base
+            var markupBeforeCommit =
+                @"class Base
 {
     public virtual void goo() { }
 }
@@ -2537,7 +3001,8 @@ class Derived : Base
 override $$
 }";
 
-            var expectedCodeAfterCommit = @"class Base
+            var expectedCodeAfterCommit =
+                @"class Base
 {
     public virtual void goo() { }
 }
@@ -2550,13 +3015,18 @@ class Derived : Base
         base.goo();$$
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task DoNotFormatFile()
         {
-            var markupBeforeCommit = @"class Program
+            var markupBeforeCommit =
+                @"class Program
 {
 int zip;
     public virtual void goo()
@@ -2571,7 +3041,8 @@ int bar;
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"class Program
+            var expectedCodeAfterCommit =
+                @"class Program
 {
 int zip;
     public virtual void goo()
@@ -2588,23 +3059,30 @@ int bar;
         base.goo();$$
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WorkItem(736742, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/736742")]
         [WpfFact]
         public async Task AcrossPartialTypes1()
         {
-            var file1 = @"partial class c
+            var file1 =
+                @"partial class c
 {
 }
 ";
-            var file2 = @"partial class c
+            var file2 =
+                @"partial class c
 {
     override $$
 }
 ";
-            var csharpFileAfterCommit = @"partial class c
+            var csharpFileAfterCommit =
+                @"partial class c
 {
     public override bool Equals(object obj)
     {
@@ -2612,15 +3090,23 @@ int bar;
     }
 }
 ";
-            var xmlString = string.Format(@"
+            var xmlString = string.Format(
+                @"
 <Workspace>
     <Project Language=""{0}"" CommonReferences=""true"">
         <Document FilePath=""CSharpDocument"">{1}</Document>
         <Document FilePath=""CSharpDocument2"">{2}</Document>
     </Project>
-</Workspace>", LanguageNames.CSharp, file1, file2);
+</Workspace>",
+                LanguageNames.CSharp,
+                file1,
+                file2
+            );
 
-            using var testWorkspace = TestWorkspace.Create(xmlString, exportProvider: ExportProvider);
+            using var testWorkspace = TestWorkspace.Create(
+                xmlString,
+                exportProvider: ExportProvider
+            );
             var testDocument = testWorkspace.Documents.Single(d => d.Name == "CSharpDocument2");
 
             Contract.ThrowIfNull(testDocument.CursorPosition);
@@ -2631,16 +3117,36 @@ int bar;
             var triggerInfo = CompletionTrigger.Invoke;
 
             var service = GetCompletionService(document.Project);
-            var completionList = await GetCompletionListAsync(service, document, position, triggerInfo);
-            var completionItem = completionList.ItemsList.First(i => CompareItems(i.DisplayText, "Equals(object obj)"));
+            var completionList = await GetCompletionListAsync(
+                service,
+                document,
+                position,
+                triggerInfo
+            );
+            var completionItem = completionList.ItemsList.First(
+                i => CompareItems(i.DisplayText, "Equals(object obj)")
+            );
 
-            if (service.GetProvider(completionItem, document.Project) is ICustomCommitCompletionProvider customCommitCompletionProvider)
+            if (
+                service.GetProvider(completionItem, document.Project)
+                is ICustomCommitCompletionProvider customCommitCompletionProvider
+            )
             {
                 var textView = testWorkspace.GetTestDocument(documentId).GetTextView();
-                customCommitCompletionProvider.Commit(completionItem, textView, textView.TextBuffer, textView.TextSnapshot, '\t');
+                customCommitCompletionProvider.Commit(
+                    completionItem,
+                    textView,
+                    textView.TextBuffer,
+                    textView.TextSnapshot,
+                    '\t'
+                );
                 var actualCodeAfterCommit = textView.TextBuffer.CurrentSnapshot.AsText().ToString();
                 var caretPosition = textView.Caret.Position.BufferPosition.Position;
-                MarkupTestFile.GetPosition(csharpFileAfterCommit, out var actualExpectedCode, out int expectedCaretPosition);
+                MarkupTestFile.GetPosition(
+                    csharpFileAfterCommit,
+                    out var actualExpectedCode,
+                    out int expectedCaretPosition
+                );
 
                 Assert.Equal(actualExpectedCode, actualCodeAfterCommit);
                 Assert.Equal(expectedCaretPosition, caretPosition);
@@ -2651,16 +3157,19 @@ int bar;
         [WpfFact]
         public async Task AcrossPartialTypes2()
         {
-            var file1 = @"partial class c
+            var file1 =
+                @"partial class c
 {
 }
 ";
-            var file2 = @"partial class c
+            var file2 =
+                @"partial class c
 {
     override $$
 }
 ";
-            var csharpFileAfterCommit = @"partial class c
+            var csharpFileAfterCommit =
+                @"partial class c
 {
     public override bool Equals(object obj)
     {
@@ -2668,15 +3177,23 @@ int bar;
     }
 }
 ";
-            var xmlString = string.Format(@"
+            var xmlString = string.Format(
+                @"
 <Workspace>
     <Project Language=""{0}"" CommonReferences=""true"">
         <Document FilePath=""CSharpDocument"">{1}</Document>
         <Document FilePath=""CSharpDocument2"">{2}</Document>
     </Project>
-</Workspace>", LanguageNames.CSharp, file2, file1);
+</Workspace>",
+                LanguageNames.CSharp,
+                file2,
+                file1
+            );
 
-            using var testWorkspace = TestWorkspace.Create(xmlString, exportProvider: ExportProvider);
+            using var testWorkspace = TestWorkspace.Create(
+                xmlString,
+                exportProvider: ExportProvider
+            );
             var testDocument = testWorkspace.Documents.Single(d => d.Name == "CSharpDocument");
 
             Contract.ThrowIfNull(testDocument.CursorPosition);
@@ -2687,16 +3204,36 @@ int bar;
             var triggerInfo = CompletionTrigger.Invoke;
 
             var service = GetCompletionService(document.Project);
-            var completionList = await GetCompletionListAsync(service, document, cursorPosition, triggerInfo);
-            var completionItem = completionList.ItemsList.First(i => CompareItems(i.DisplayText, "Equals(object obj)"));
+            var completionList = await GetCompletionListAsync(
+                service,
+                document,
+                cursorPosition,
+                triggerInfo
+            );
+            var completionItem = completionList.ItemsList.First(
+                i => CompareItems(i.DisplayText, "Equals(object obj)")
+            );
 
-            if (service.GetProvider(completionItem, document.Project) is ICustomCommitCompletionProvider customCommitCompletionProvider)
+            if (
+                service.GetProvider(completionItem, document.Project)
+                is ICustomCommitCompletionProvider customCommitCompletionProvider
+            )
             {
                 var textView = testWorkspace.GetTestDocument(documentId).GetTextView();
-                customCommitCompletionProvider.Commit(completionItem, textView, textView.TextBuffer, textView.TextSnapshot, '\t');
+                customCommitCompletionProvider.Commit(
+                    completionItem,
+                    textView,
+                    textView.TextBuffer,
+                    textView.TextSnapshot,
+                    '\t'
+                );
                 var actualCodeAfterCommit = textView.TextBuffer.CurrentSnapshot.AsText().ToString();
                 var caretPosition = textView.Caret.Position.BufferPosition.Position;
-                MarkupTestFile.GetPosition(csharpFileAfterCommit, out var actualExpectedCode, out int expectedCaretPosition);
+                MarkupTestFile.GetPosition(
+                    csharpFileAfterCommit,
+                    out var actualExpectedCode,
+                    out int expectedCaretPosition
+                );
 
                 Assert.Equal(actualExpectedCode, actualCodeAfterCommit);
                 Assert.Equal(expectedCaretPosition, caretPosition);
@@ -2735,7 +3272,11 @@ int bar;
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "Prop", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "Prop",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
@@ -2743,7 +3284,8 @@ int bar;
         [InlineData("override required")]
         public async Task CommitRequiredKeywordPreserved(string ordering)
         {
-            var markupBeforeCommit = $@"<Workspace>
+            var markupBeforeCommit =
+                $@"<Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" LanguageVersion=""{TestOptions.Regular11.LanguageVersion.ToDisplayString()}"">
         <Document>class Base
 {{
@@ -2774,7 +3316,11 @@ class Derived : Base
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "Prop", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "Prop",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
@@ -2782,7 +3328,8 @@ class Derived : Base
         [InlineData("override required")]
         public async Task CommitRequiredKeywordPreservedWhenBaseIsNotRequired(string ordering)
         {
-            var markupBeforeCommit = $@"<Workspace>
+            var markupBeforeCommit =
+                $@"<Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" LanguageVersion=""{TestOptions.Regular11.LanguageVersion.ToDisplayString()}"">
         <Document>class Base
 {{
@@ -2813,7 +3360,11 @@ class Derived : Base
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "Prop", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "Prop",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -2845,7 +3396,11 @@ class Derived : Base
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "M()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "M()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -2885,22 +3440,31 @@ class Derived : Base
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "this[int i]", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "this[int i]",
+                expectedCodeAfterCommit
+            );
         }
 
         #endregion
 
         #region "EditorBrowsable should be ignored"
 
-        [WpfFact, WorkItem(545678, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545678")]
+        [
+            WpfFact,
+            WorkItem(545678, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545678")
+        ]
         public async Task EditorBrowsable_IgnoredWhenOverridingMethods()
         {
-            var markup = @"
+            var markup =
+                @"
 class D : B
 {
     override $$
 }";
-            var referencedCode = @"
+            var referencedCode =
+                @"
 public class B
 {
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
@@ -2913,7 +3477,8 @@ public class B
                 expectedSymbolsMetadataReference: 1,
                 expectedSymbolsSameSolution: 1,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         #endregion
@@ -2921,7 +3486,8 @@ public class B
         [WpfFact]
         public async Task DuplicateMember()
         {
-            var markupBeforeCommit = @"class Program
+            var markupBeforeCommit =
+                @"class Program
 {
     public virtual void goo() {}
     public virtual void goo() {}
@@ -2932,7 +3498,8 @@ class C : Program
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"class Program
+            var expectedCodeAfterCommit =
+                @"class Program
 {
     public virtual void goo() {}
     public virtual void goo() {}
@@ -2945,13 +3512,18 @@ class C : Program
         base.goo();$$
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task LeaveTrailingTriviaAlone()
         {
-            var text = @"
+            var text =
+                @"
 namespace ConsoleApplication46
 {
     class Program
@@ -2963,18 +3535,33 @@ namespace ConsoleApplication46
         override $$
     }
 }";
-            using var workspace = TestWorkspace.Create(LanguageNames.CSharp, new CSharpCompilationOptions(OutputKind.ConsoleApplication), new CSharpParseOptions(), new[] { text }, exportProvider: ExportProvider);
+            using var workspace = TestWorkspace.Create(
+                LanguageNames.CSharp,
+                new CSharpCompilationOptions(OutputKind.ConsoleApplication),
+                new CSharpParseOptions(),
+                new[] { text },
+                exportProvider: ExportProvider
+            );
             var provider = new OverrideCompletionProvider();
             var testDocument = workspace.Documents.Single();
             var document = workspace.CurrentSolution.GetRequiredDocument(testDocument.Id);
 
             var service = GetCompletionService(document.Project);
             Contract.ThrowIfNull(testDocument.CursorPosition);
-            var completionList = await GetCompletionListAsync(service, document, testDocument.CursorPosition.Value, CompletionTrigger.Invoke);
+            var completionList = await GetCompletionListAsync(
+                service,
+                document,
+                testDocument.CursorPosition.Value,
+                CompletionTrigger.Invoke
+            );
 
             var oldTree = await document.GetSyntaxTreeAsync();
 
-            var commit = await provider.GetChangeAsync(document, completionList.ItemsList.First(i => i.DisplayText == "ToString()"), ' ');
+            var commit = await provider.GetChangeAsync(
+                document,
+                completionList.ItemsList.First(i => i.DisplayText == "ToString()"),
+                ' '
+            );
             var change = commit.TextChange;
 
             // If we left the trailing trivia of the close curly of Main alone,
@@ -2986,7 +3573,8 @@ namespace ConsoleApplication46
         [WpfFact]
         public async Task NotImplementedQualifiedWhenSystemUsingNotPresent_Property()
         {
-            var markupBeforeCommit = @"abstract class C
+            var markupBeforeCommit =
+                @"abstract class C
 {
     public abstract int goo { get; set; };
 }
@@ -2996,7 +3584,8 @@ class Program : C
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"abstract class C
+            var expectedCodeAfterCommit =
+                @"abstract class C
 {
     public abstract int goo { get; set; };
 }
@@ -3017,14 +3606,19 @@ class Program : C
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo",
+                expectedCodeAfterCommit
+            );
         }
 
         [WorkItem(8257, "https://github.com/dotnet/roslyn/issues/8257")]
         [WpfFact]
         public async Task NotImplementedQualifiedWhenSystemUsingNotPresent_Method()
         {
-            var markupBeforeCommit = @"abstract class C
+            var markupBeforeCommit =
+                @"abstract class C
 {
     public abstract void goo();
 }
@@ -3034,7 +3628,8 @@ class Program : C
     override $$
 }";
 
-            var expectedCodeAfterCommit = @"abstract class C
+            var expectedCodeAfterCommit =
+                @"abstract class C
 {
     public abstract void goo();
 }
@@ -3047,13 +3642,18 @@ class Program : C
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "goo()", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "goo()",
+                expectedCodeAfterCommit
+            );
         }
 
         [Fact]
         public async Task FilterOutMethodsWithNonRoundTrippableSymbolKeys()
         {
-            var text = XElement.Parse(@"<Workspace>
+            var text = XElement.Parse(
+                @"<Workspace>
     <Project Name=""P1"" Language=""C#"" CommonReferences=""true"" AssemblyName=""Proj1"">
         <Document FilePath=""CurrentDocument.cs""><![CDATA[
 class C : ClassLibrary7.Class1
@@ -3084,7 +3684,8 @@ namespace ClassLibrary7
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
 
             // P3 has a project ref to Project P2 and uses the type "Missing" from P2
             // as the return type of a virtual method.
@@ -3092,9 +3693,11 @@ namespace ClassLibrary7
             // reference to P2. If we try to override Goo, the missing "Missing" type will
             // prevent round tripping the symbolkey.
             using var workspace = TestWorkspace.Create(text, exportProvider: ExportProvider);
-            var compilation = await workspace.CurrentSolution.Projects.First(p => p.Name == "P3").GetCompilationAsync();
+            var compilation = await workspace.CurrentSolution.Projects
+                .First(p => p.Name == "P3")
+                .GetCompilationAsync();
 
-            // CompilationExtensions is in the Microsoft.CodeAnalysis.Test.Utilities namespace 
+            // CompilationExtensions is in the Microsoft.CodeAnalysis.Test.Utilities namespace
             // which has a "Traits" type that conflicts with the one in Roslyn.Test.Utilities
             var reference = MetadataReference.CreateFromImage(compilation.EmitToArray());
             var p1 = workspace.CurrentSolution.Projects.First(p => p.Name == "P1");
@@ -3108,7 +3711,12 @@ namespace ClassLibrary7
             var service = GetCompletionService(document.Project);
 
             Contract.ThrowIfNull(testDocument.CursorPosition);
-            var completionList = await GetCompletionListAsync(service, document, testDocument.CursorPosition.Value, CompletionTrigger.Invoke);
+            var completionList = await GetCompletionListAsync(
+                service,
+                document,
+                testDocument.CursorPosition.Value,
+                CompletionTrigger.Invoke
+            );
 
             Assert.True(completionList.ItemsList.Any(c => c.DisplayText == "Bar()"));
             Assert.False(completionList.ItemsList.Any(c => c.DisplayText == "Goo()"));
@@ -3117,7 +3725,8 @@ namespace ClassLibrary7
         [WpfFact]
         public async Task TestInParameter()
         {
-            var source = XElement.Parse(@"<Workspace>
+            var source = XElement.Parse(
+                @"<Workspace>
     <Project Name=""P1"" Language=""C#"" LanguageVersion=""Latest"" CommonReferences=""true"" AssemblyName=""Proj1"">
         <Document FilePath=""CurrentDocument.cs""><![CDATA[
 public class SomeClass : Base
@@ -3127,16 +3736,19 @@ public class SomeClass : Base
 ]]>
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
 
             using var workspace = TestWorkspace.Create(source, exportProvider: ExportProvider);
-            var before = @"
+            var before =
+                @"
 public abstract class Base
 {
     public abstract void M(in int x);
 }";
 
-            var after = @"
+            var after =
+                @"
 public class SomeClass : Base
 {
     public override void M(in int x)
@@ -3146,9 +3758,13 @@ public class SomeClass : Base
 }
 ";
 
-            var origComp = await workspace.CurrentSolution.Projects.Single().GetRequiredCompilationAsync(CancellationToken.None);
+            var origComp = await workspace.CurrentSolution.Projects
+                .Single()
+                .GetRequiredCompilationAsync(CancellationToken.None);
             var options = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Latest);
-            var libComp = origComp.RemoveAllSyntaxTrees().AddSyntaxTrees(CSharpSyntaxTree.ParseText(before, options: options));
+            var libComp = origComp
+                .RemoveAllSyntaxTrees()
+                .AddSyntaxTrees(CSharpSyntaxTree.ParseText(before, options: options));
             var libRef = MetadataReference.CreateFromImage(libComp.EmitToArray());
 
             var project = workspace.CurrentSolution.Projects.Single();
@@ -3162,10 +3778,22 @@ public class SomeClass : Base
             var service = GetCompletionService(document.Project);
 
             Contract.ThrowIfNull(testDocument.CursorPosition);
-            var completionList = await GetCompletionListAsync(service, document, testDocument.CursorPosition.Value, CompletionTrigger.Invoke);
-            var completionItem = completionList.ItemsList.Where(c => c.DisplayText == "M(in int x)").Single();
+            var completionList = await GetCompletionListAsync(
+                service,
+                document,
+                testDocument.CursorPosition.Value,
+                CompletionTrigger.Invoke
+            );
+            var completionItem = completionList.ItemsList
+                .Where(c => c.DisplayText == "M(in int x)")
+                .Single();
 
-            var commit = await service.GetChangeAsync(document, completionItem, commitCharacter: null, CancellationToken.None);
+            var commit = await service.GetChangeAsync(
+                document,
+                completionItem,
+                commitCharacter: null,
+                CancellationToken.None
+            );
 
             var text = await document.GetTextAsync();
             var newText = text.WithChanges(commit.TextChange);
@@ -3182,7 +3810,8 @@ public class SomeClass : Base
         [WpfFact]
         public async Task CommitAddsMissingImports()
         {
-            var markupBeforeCommit = @"
+            var markupBeforeCommit =
+                @"
 namespace NS1
 {
     using NS2;
@@ -3208,7 +3837,8 @@ namespace NS3
     }
 }";
 
-            var expectedCodeAfterCommit = @"
+            var expectedCodeAfterCommit =
+                @"
 namespace NS1
 {
     using NS2;
@@ -3238,27 +3868,37 @@ namespace NS3
     }
 }";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, "Bar(NS2.Baz baz)", expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                "Bar(NS2.Baz baz)",
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact, WorkItem(47941, "https://github.com/dotnet/roslyn/issues/47941")]
         public async Task OverrideInRecordWithoutExplicitOverriddenMember()
         {
-            await VerifyItemExistsAsync(@"record Program
+            await VerifyItemExistsAsync(
+                @"record Program
 {
     override $$
-}", "ToString()");
+}",
+                "ToString()"
+            );
         }
 
         [WpfFact, WorkItem(47941, "https://github.com/dotnet/roslyn/issues/47941")]
         public async Task OverrideInRecordWithExplicitOverriddenMember()
         {
-            await VerifyItemIsAbsentAsync(@"record Program
+            await VerifyItemIsAbsentAsync(
+                @"record Program
 {
     public override string ToString() => "";
 
     override $$
-}", "ToString()");
+}",
+                "ToString()"
+            );
         }
 
         [WpfFact, WorkItem(47973, "https://github.com/dotnet/roslyn/issues/47973")]
@@ -3268,63 +3908,83 @@ namespace NS3
             // could hardcode in the value "<Clone>$", however if the compiler ever changed the name and we somehow
             // started showing it in completion, this test would continue to pass.  So this allows us to at least go
             // back and explicitly validate this scenario even in that event.
-            var cloneMemberName = (string)typeof(WellKnownMemberNames).GetField("CloneMethodName", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
+            var cloneMemberName = (string)
+                typeof(WellKnownMemberNames)
+                    .GetField("CloneMethodName", BindingFlags.NonPublic | BindingFlags.Static)
+                    .GetValue(null);
             Assert.Equal("<Clone>$", cloneMemberName);
 
-            await VerifyItemIsAbsentAsync(@"
+            await VerifyItemIsAbsentAsync(
+                @"
 record Base();
 
 record Program : Base
 {
     override $$
-}", cloneMemberName);
+}",
+                cloneMemberName
+            );
         }
 
         [WpfFact, WorkItem(48640, "https://github.com/dotnet/roslyn/issues/48640")]
         public async Task ObjectEqualsInClass()
         {
-            await VerifyItemExistsAsync(@"
+            await VerifyItemExistsAsync(
+                @"
 class Program 
 {
     override $$
-}", "Equals(object obj)");
+}",
+                "Equals(object obj)"
+            );
         }
 
         [WpfFact, WorkItem(48640, "https://github.com/dotnet/roslyn/issues/48640")]
         public async Task NoObjectEqualsInOverriddenRecord1()
         {
-            await VerifyItemIsAbsentAsync(@"
+            await VerifyItemIsAbsentAsync(
+                @"
 record Program 
 {
     override $$
-}", "Equals(object obj)");
+}",
+                "Equals(object obj)"
+            );
 
-            await VerifyItemExistsAsync(@"
+            await VerifyItemExistsAsync(
+                @"
 record Program 
 {
     override $$
-}", "ToString()");
-
+}",
+                "ToString()"
+            );
         }
 
         [WpfFact, WorkItem(48640, "https://github.com/dotnet/roslyn/issues/48640")]
         public async Task NoObjectEqualsInOverriddenRecord()
         {
-            await VerifyItemIsAbsentAsync(@"
+            await VerifyItemIsAbsentAsync(
+                @"
 record Base();
 
 record Program : Base
 {
     override $$
-}", "Equals(object obj)");
+}",
+                "Equals(object obj)"
+            );
 
-            await VerifyItemExistsAsync(@"
+            await VerifyItemExistsAsync(
+                @"
 record Base();
 
 record Program : Base
 {
     override $$
-}", "ToString()");
+}",
+                "ToString()"
+            );
         }
 
         private Task VerifyItemExistsAsync(string markup, string expectedItem)

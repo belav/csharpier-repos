@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -8,7 +7,11 @@ namespace Microsoft.DiaSymReader
 {
     internal sealed unsafe class ILCompilerComWrappers : ComWrappers
     {
-        protected override unsafe ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count)
+        protected override unsafe ComInterfaceEntry* ComputeVtables(
+            object obj,
+            CreateComInterfaceFlags flags,
+            out int count
+        )
         {
             // passing the managed object to COM is not currently supported
             throw new NotImplementedException();
@@ -24,9 +27,11 @@ namespace Microsoft.DiaSymReader
             // Throw an exception if the type is not supported by the implementation.
             // Null can be returned as well, but an ArgumentNullException will be thrown for
             // the consumer of this ComWrappers instance.
-            return SymNgenWriterWrapper.CreateIfSupported(externalComObject) ?? throw new NotSupportedException();
+            return SymNgenWriterWrapper.CreateIfSupported(externalComObject)
+                ?? throw new NotSupportedException();
         }
 
-        protected override void ReleaseObjects(IEnumerable objects) => throw new NotImplementedException();
+        protected override void ReleaseObjects(IEnumerable objects) =>
+            throw new NotImplementedException();
     }
 }

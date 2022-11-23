@@ -9,14 +9,11 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class UpdatesRelationalTestBase<TFixture> : UpdatesTestBase<TFixture>
     where TFixture : UpdatesRelationalTestBase<TFixture>.UpdatesRelationalFixture
 {
-    protected UpdatesRelationalTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+    protected UpdatesRelationalTestBase(TFixture fixture) : base(fixture) { }
 
     [ConditionalFact]
-    public virtual void SaveChanges_works_for_entities_also_mapped_to_view()
-        => ExecuteWithStrategyInTransaction(
+    public virtual void SaveChanges_works_for_entities_also_mapped_to_view() =>
+        ExecuteWithStrategyInTransaction(
             context =>
             {
                 var category = context.Categories.Single();
@@ -28,7 +25,8 @@ public abstract class UpdatesRelationalTestBase<TFixture> : UpdatesTestBase<TFix
                         Name = "Pear Cider",
                         Price = 1.39M,
                         DependentId = category.Id
-                    });
+                    }
+                );
                 context.Add(
                     new ProductViewTable
                     {
@@ -36,7 +34,8 @@ public abstract class UpdatesRelationalTestBase<TFixture> : UpdatesTestBase<TFix
                         Name = "Pear Cobler",
                         Price = 2.39M,
                         DependentId = category.Id
-                    });
+                    }
+                );
 
                 context.SaveChanges();
             },
@@ -47,27 +46,29 @@ public abstract class UpdatesRelationalTestBase<TFixture> : UpdatesTestBase<TFix
 
                 Assert.Equal("Pear Cider", tableProduct.Name);
                 Assert.Equal("Pear Cobler", viewProduct.Name);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual void SaveChanges_throws_for_entities_only_mapped_to_view()
-        => ExecuteWithStrategyInTransaction(
-            context =>
-            {
-                var category = context.Categories.Single();
-                context.Add(
-                    new ProductTableView
-                    {
-                        Id = Guid.NewGuid(),
-                        Name = "Pear Cider",
-                        Price = 1.39M,
-                        DependentId = category.Id
-                    });
+    public virtual void SaveChanges_throws_for_entities_only_mapped_to_view() =>
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            var category = context.Categories.Single();
+            context.Add(
+                new ProductTableView
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Pear Cider",
+                    Price = 1.39M,
+                    DependentId = category.Id
+                }
+            );
 
-                Assert.Equal(
-                    RelationalStrings.ReadonlyEntitySaved(nameof(ProductTableView)),
-                    Assert.Throws<InvalidOperationException>(() => context.SaveChanges()).Message);
-            });
+            Assert.Equal(
+                RelationalStrings.ReadonlyEntitySaved(nameof(ProductTableView)),
+                Assert.Throws<InvalidOperationException>(() => context.SaveChanges()).Message
+            );
+        });
 
     [ConditionalFact]
     public virtual void Save_with_shared_foreign_key()
@@ -97,15 +98,23 @@ public abstract class UpdatesRelationalTestBase<TFixture> : UpdatesTestBase<TFix
             },
             context =>
             {
-                var product = context.Set<ProductBase>()
+                var product = context
+                    .Set<ProductBase>()
                     .Include(p => ((ProductWithBytes)p).ProductCategories)
                     .Include(p => ((Product)p).ProductCategories)
                     .OfType<ProductWithBytes>()
                     .Single();
                 var productCategory = product.ProductCategories.Single();
-                Assert.Equal(productCategory.CategoryId, context.Set<ProductCategory>().Single().CategoryId);
-                Assert.Equal(productCategory.CategoryId, context.Set<SpecialCategory>().Single(c => c.PrincipalId == 777).Id);
-            });
+                Assert.Equal(
+                    productCategory.CategoryId,
+                    context.Set<ProductCategory>().Single().CategoryId
+                );
+                Assert.Equal(
+                    productCategory.CategoryId,
+                    context.Set<SpecialCategory>().Single(c => c.PrincipalId == 777).Id
+                );
+            }
+        );
     }
 
     [ConditionalFact]
@@ -144,58 +153,66 @@ public abstract class UpdatesRelationalTestBase<TFixture> : UpdatesTestBase<TFix
                 Assert.Null(product1.Name);
                 Assert.Equal(1.49M, product2.Price);
                 Assert.Equal("Apple Cider", product2.Name);
-            });
+            }
+        );
     }
 
     [ConditionalFact]
     public abstract void Identifiers_are_generated_correctly();
 
-    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected override void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) => facade.UseTransaction(transaction.GetDbTransaction());
 
-    protected override string UpdateConcurrencyMessage
-        => RelationalStrings.UpdateConcurrencyException(1, 0);
+    protected override string UpdateConcurrencyMessage =>
+        RelationalStrings.UpdateConcurrencyException(1, 0);
 
-    protected override string UpdateConcurrencyTokenMessage
-        => RelationalStrings.UpdateConcurrencyException(1, 0);
+    protected override string UpdateConcurrencyTokenMessage =>
+        RelationalStrings.UpdateConcurrencyException(1, 0);
 
     public abstract class UpdatesRelationalFixture : UpdatesFixtureBase
     {
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
             base.OnModelCreating(modelBuilder, context);
 
-            modelBuilder.Entity<ProductViewTable>().HasBaseType((string)null).ToTable("ProductView");
-            modelBuilder.Entity<ProductTableWithView>().HasBaseType((string)null).ToView("ProductView").ToTable("ProductTable");
-            modelBuilder.Entity<ProductTableView>().HasBaseType((string)null).ToView("ProductTable");
+            modelBuilder
+                .Entity<ProductViewTable>()
+                .HasBaseType((string)null)
+                .ToTable("ProductView");
+            modelBuilder
+                .Entity<ProductTableWithView>()
+                .HasBaseType((string)null)
+                .ToView("ProductView")
+                .ToTable("ProductTable");
+            modelBuilder
+                .Entity<ProductTableView>()
+                .HasBaseType((string)null)
+                .ToView("ProductTable");
 
-            modelBuilder.Entity<Product>().HasIndex(p => new { p.Name, p.Price }).IsUnique().HasFilter("Name IS NOT NULL");
+            modelBuilder
+                .Entity<Product>()
+                .HasIndex(p => new { p.Name, p.Price })
+                .IsUnique()
+                .HasFilter("Name IS NOT NULL");
 
-            modelBuilder.Entity<Person>()
-                .Property(p => p.Country)
-                .HasColumnName("Country");
+            modelBuilder.Entity<Person>().Property(p => p.Country).HasColumnName("Country");
 
-            modelBuilder.Entity<Person>()
+            modelBuilder
+                .Entity<Person>()
                 .OwnsOne(p => p.Address)
                 .Property(p => p.Country)
                 .HasColumnName("Country");
 
-            modelBuilder
-                .Entity<
-                    LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectlyDetails
-                >(
-                    eb =>
-                    {
-                        eb.HasKey(
-                                l => new { l.ProfileId })
-                            .HasName("PK_LoginDetails");
+            modelBuilder.Entity<LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectlyDetails>(eb =>
+            {
+                eb.HasKey(l => new { l.ProfileId }).HasName("PK_LoginDetails");
 
-                        eb.HasOne(d => d.Login).WithOne()
-                            .HasConstraintName("FK_LoginDetails_Login");
-                    });
+                eb.HasOne(d => d.Login).WithOne().HasConstraintName("FK_LoginDetails_Login");
+            });
         }
     }
 }

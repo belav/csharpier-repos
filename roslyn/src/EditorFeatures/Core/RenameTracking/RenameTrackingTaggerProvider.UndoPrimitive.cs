@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
     {
         /// <summary>
         /// Clears or restores the state machine on relevant undo/redo actions.
-        /// 
+        ///
         /// These may stay alive on the global undo stack well beyond the lifetime of the
         /// <see cref="ITextBuffer"/> on which they were created, so we must avoid strong
         /// references to anything that may hold that <see cref="ITextBuffer"/> alive.
@@ -36,7 +36,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
 
             public bool CanUndo => true;
 
-            public UndoPrimitive(ITextBuffer textBuffer, int trackingSessionId, bool shouldRestoreStateOnUndo)
+            public UndoPrimitive(
+                ITextBuffer textBuffer,
+                int trackingSessionId,
+                bool shouldRestoreStateOnUndo
+            )
             {
                 _weakTextBuffer = new WeakReference<ITextBuffer>(textBuffer);
                 _trackingSessionId = trackingSessionId;
@@ -69,15 +73,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             private bool TryGetStateMachine(out StateMachine stateMachine)
             {
                 stateMachine = null;
-                return _weakTextBuffer.TryGetTarget(out var textBuffer) &&
-                    textBuffer.Properties.TryGetProperty(typeof(StateMachine), out stateMachine);
+                return _weakTextBuffer.TryGetTarget(out var textBuffer)
+                    && textBuffer.Properties.TryGetProperty(typeof(StateMachine), out stateMachine);
             }
 
-            public bool CanMerge(ITextUndoPrimitive older)
-                => false;
+            public bool CanMerge(ITextUndoPrimitive older) => false;
 
-            public ITextUndoPrimitive Merge(ITextUndoPrimitive older)
-                => throw new NotImplementedException();
+            public ITextUndoPrimitive Merge(ITextUndoPrimitive older) =>
+                throw new NotImplementedException();
         }
     }
 }

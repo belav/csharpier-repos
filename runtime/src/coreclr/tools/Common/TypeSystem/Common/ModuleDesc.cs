@@ -7,18 +7,12 @@ namespace Internal.TypeSystem
 {
     public abstract partial class ModuleDesc : TypeSystemEntity
     {
-        public override TypeSystemContext Context
-        {
-            get;
-        }
+        public override TypeSystemContext Context { get; }
 
         /// <summary>
         /// Gets the assembly this module is part of (the assembly manifest module).
         /// </summary>
-        public virtual IAssemblyDesc Assembly
-        {
-            get;
-        }
+        public virtual IAssemblyDesc Assembly { get; }
 
         public ModuleDesc(TypeSystemContext context, IAssemblyDesc assembly)
         {
@@ -31,13 +25,21 @@ namespace Internal.TypeSystem
         /// </summary>
         public MetadataType GetType(string nameSpace, string name, bool throwIfNotFound = true)
         {
-            return (MetadataType)GetType(nameSpace, name, throwIfNotFound ? NotFoundBehavior.Throw : NotFoundBehavior.ReturnNull);
+            return (MetadataType)GetType(
+                nameSpace,
+                name,
+                throwIfNotFound ? NotFoundBehavior.Throw : NotFoundBehavior.ReturnNull
+            );
         }
 
         /// <summary>
         /// Gets a type in this module with the specified name, a resolution failure object, or null.
         /// </summary>
-        public abstract object GetType(string nameSpace, string name, NotFoundBehavior notFoundBehavior);
+        public abstract object GetType(
+            string nameSpace,
+            string name,
+            NotFoundBehavior notFoundBehavior
+        );
 
         /// <summary>
         /// Gets the global &lt;Module&gt; type.

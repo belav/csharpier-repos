@@ -13,14 +13,14 @@ namespace Microsoft.CodeAnalysis.Text
     {
         /// <summary>
         /// get new <see cref="ITextBuffer"/> from <see cref="SnapshotSpan"/> with <see cref="IContentTypeRegistryService.UnknownContentType"/>
-        /// 
+        ///
         /// it is explicitly marked with unknown content type so that it can't be used with editor directly
         /// </summary>
         ITextBuffer CloneWithUnknownContentType(SnapshotSpan span);
 
         /// <summary>
         /// get new <see cref="ITextBuffer"/> from <see cref="ITextImage"/> with <see cref="IContentTypeRegistryService.UnknownContentType"/>
-        /// 
+        ///
         /// it is explicitly marked with unknown content type so that it can't be used with editor directly
         /// </summary>
         ITextBuffer CloneWithUnknownContentType(ITextImage textImage);

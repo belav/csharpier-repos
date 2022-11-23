@@ -5,14 +5,11 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 
 public class AppendThenByIdentityExpressionMutator : ExpressionMutator
 {
-    public AppendThenByIdentityExpressionMutator(DbContext context)
-        : base(context)
-    {
-    }
+    public AppendThenByIdentityExpressionMutator(DbContext context) : base(context) { }
 
-    public override bool IsValid(Expression expression)
-        => IsOrderedQueryableResult(expression)
-            && IsOrderedableType(expression.Type.GetGenericArguments()[0]);
+    public override bool IsValid(Expression expression) =>
+        IsOrderedQueryableResult(expression)
+        && IsOrderedableType(expression.Type.GetGenericArguments()[0]);
 
     public override Expression Apply(Expression expression, Random random)
     {

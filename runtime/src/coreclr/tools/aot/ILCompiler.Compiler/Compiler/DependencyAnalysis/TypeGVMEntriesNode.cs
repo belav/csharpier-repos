@@ -22,15 +22,19 @@ namespace ILCompiler.DependencyAnalysis
                 CallingMethod = callingMethod;
                 ImplementationMethod = implementationMethod;
             }
+
             public MethodDesc CallingMethod { get; }
             public MethodDesc ImplementationMethod { get; }
         }
 
         internal sealed class InterfaceGVMEntryInfo : TypeGVMEntryInfo
         {
-            public InterfaceGVMEntryInfo(MethodDesc callingMethod, MethodDesc implementationMethod,
-                TypeDesc implementationType, DefaultInterfaceMethodResolution defaultResolution)
-                : base(callingMethod, implementationMethod)
+            public InterfaceGVMEntryInfo(
+                MethodDesc callingMethod,
+                MethodDesc implementationMethod,
+                TypeDesc implementationType,
+                DefaultInterfaceMethodResolution defaultResolution
+            ) : base(callingMethod, implementationMethod)
             {
                 ImplementationType = implementationType;
                 DefaultResolution = defaultResolution;
@@ -56,9 +60,19 @@ namespace ILCompiler.DependencyAnalysis
         public override bool HasDynamicDependencies => false;
         public override bool InterestingForDynamicDependencyAnalysis => false;
         public override bool StaticDependenciesAreComputed => true;
-        protected override string GetName(NodeFactory factory) => "__TypeGVMEntriesNode_" + factory.NameMangler.GetMangledTypeName(_associatedType);
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory context) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory context) => null;
+
+        protected override string GetName(NodeFactory factory) =>
+            "__TypeGVMEntriesNode_" + factory.NameMangler.GetMangledTypeName(_associatedType);
+
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory context
+        ) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory context
+        ) => null;
 
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory context)
         {
@@ -66,11 +80,22 @@ namespace ILCompiler.DependencyAnalysis
             {
                 _staticDependencies = new DependencyList();
 
-                foreach(var entry in ScanForGenericVirtualMethodEntries())
-                    GenericVirtualMethodTableNode.GetGenericVirtualMethodImplementationDependencies(ref _staticDependencies, context, entry.CallingMethod, entry.ImplementationMethod);
+                foreach (var entry in ScanForGenericVirtualMethodEntries())
+                    GenericVirtualMethodTableNode.GetGenericVirtualMethodImplementationDependencies(
+                        ref _staticDependencies,
+                        context,
+                        entry.CallingMethod,
+                        entry.ImplementationMethod
+                    );
 
                 foreach (var entry in ScanForInterfaceGenericVirtualMethodEntries())
-                    InterfaceGenericVirtualMethodTableNode.GetGenericVirtualMethodImplementationDependencies(ref _staticDependencies, context, entry.CallingMethod, entry.ImplementationType, entry.ImplementationMethod);
+                    InterfaceGenericVirtualMethodTableNode.GetGenericVirtualMethodImplementationDependencies(
+                        ref _staticDependencies,
+                        context,
+                        entry.CallingMethod,
+                        entry.ImplementationType,
+                        entry.ImplementationMethod
+                    );
             }
 
             return _staticDependencies;
@@ -109,7 +134,10 @@ namespace ILCompiler.DependencyAnalysis
                     MethodDesc slotDecl = type.ResolveInterfaceMethodTarget(method);
                     if (slotDecl == null)
                     {
-                        var resolution = type.ResolveInterfaceMethodToDefaultImplementationOnType(method, out slotDecl);
+                        var resolution = type.ResolveInterfaceMethodToDefaultImplementationOnType(
+                            method,
+                            out slotDecl
+                        );
                         if (resolution == DefaultInterfaceMethodResolution.None)
                             slotDecl = null;
                     }
@@ -148,20 +176,32 @@ namespace ILCompiler.DependencyAnalysis
                     if (!method.HasInstantiation)
                         continue;
 
-                    DefaultInterfaceMethodResolution resolution = DefaultInterfaceMethodResolution.None;
+                    DefaultInterfaceMethodResolution resolution =
+                        DefaultInterfaceMethodResolution.None;
                     MethodDesc slotDecl = _associatedType.ResolveInterfaceMethodTarget(method);
                     if (slotDecl == null)
                     {
-                        resolution = _associatedType.ResolveInterfaceMethodToDefaultImplementationOnType(method, out slotDecl);
+                        resolution =
+                            _associatedType.ResolveInterfaceMethodToDefaultImplementationOnType(
+                                method,
+                                out slotDecl
+                            );
                         if (resolution != DefaultInterfaceMethodResolution.DefaultImplementation)
                             slotDecl = null;
                     }
 
-                    if (slotDecl != null
+                    if (
+                        slotDecl != null
                         || resolution == DefaultInterfaceMethodResolution.Diamond
-                        || resolution == DefaultInterfaceMethodResolution.Reabstraction)
+                        || resolution == DefaultInterfaceMethodResolution.Reabstraction
+                    )
                     {
-                        yield return new InterfaceGVMEntryInfo(method, slotDecl, _associatedType, resolution);
+                        yield return new InterfaceGVMEntryInfo(
+                            method,
+                            slotDecl,
+                            _associatedType,
+                            resolution
+                        );
                     }
                 }
             }

@@ -14,7 +14,8 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class CSharpInterfaceSnippetCompletionProviderTests : AbstractCSharpSnippetCompletionProviderTests
+    public class CSharpInterfaceSnippetCompletionProviderTests
+        : AbstractCSharpSnippetCompletionProviderTests
     {
         protected override string ItemToCommit => "interface";
 
@@ -22,149 +23,180 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InsertInterfaceSnippetInNamespaceTest()
         {
             var markupBeforeCommit =
-@"namespace Namespace
+                @"namespace Namespace
 {
     $$
 }";
 
             var expectedCodeAfterCommit =
-@"namespace Namespace
+                @"namespace Namespace
 {
     interface MyInterface
     {
         $$
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertInterfaceSnippetInFileScopedNamespaceTest()
         {
             var markupBeforeCommit =
-@"namespace Namespace;
+                @"namespace Namespace;
 
 $$";
 
             var expectedCodeAfterCommit =
-@"namespace Namespace;
+                @"namespace Namespace;
 
 interface MyInterface
 {
     $$
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertInterfaceSnippetTest()
         {
-            var markupBeforeCommit =
-@"$$";
+            var markupBeforeCommit = @"$$";
 
             var expectedCodeAfterCommit =
-@"interface MyInterface
+                @"interface MyInterface
 {
     $$
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertInterfaceTopLevelSnippetTest()
         {
             var markupBeforeCommit =
-@"System.Console.WriteLine();
+                @"System.Console.WriteLine();
 $$";
 
             var expectedCodeAfterCommit =
-@"System.Console.WriteLine();
+                @"System.Console.WriteLine();
 
 interface MyInterface
 {
     $$
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertInterfaceSnippetInClassTest()
         {
             var markupBeforeCommit =
-@"class MyClass
+                @"class MyClass
 {
     $$
 }";
 
             var expectedCodeAfterCommit =
-@"class MyClass
+                @"class MyClass
 {
     interface MyInterface
     {
         $$
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertInterfaceSnippetInRecordTest()
         {
             var markupBeforeCommit =
-@"record MyRecord
+                @"record MyRecord
 {
     $$
 }";
 
             var expectedCodeAfterCommit =
-@"record MyRecord
+                @"record MyRecord
 {
     interface MyInterface
     {
         $$
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertInterfaceSnippetInStructTest()
         {
             var markupBeforeCommit =
-@"struct MyStruct
+                @"struct MyStruct
 {
     $$
 }";
 
             var expectedCodeAfterCommit =
-@"struct MyStruct
+                @"struct MyStruct
 {
     interface MyInterface
     {
         $$
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertInterfaceSnippetInInterfaceTest()
         {
             var markupBeforeCommit =
-@"interface MyInterface
+                @"interface MyInterface
 {
     $$
 }";
 
             var expectedCodeAfterCommit =
-@"interface MyInterface
+                @"interface MyInterface
 {
     interface MyInterface1
     {
         $$
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -193,14 +225,18 @@ public interface MyInterface
     $$
 }}
 ";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task NoInterfaceSnippetInEnumTest()
         {
             var markupBeforeCommit =
-@"enum MyEnum
+                @"enum MyEnum
 {
     $$
 }";
@@ -212,7 +248,7 @@ public interface MyInterface
         public async Task NoInteraceSnippetInMethodTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -226,7 +262,7 @@ public interface MyInterface
         public async Task NoInterfaceSnippetInConstructorTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public Program()
     {

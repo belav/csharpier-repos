@@ -24,8 +24,7 @@ namespace System.Linq.Parallel
         // Constructs a new range enumerable object for the specified range.
         //
 
-        internal RangeEnumerable(int from, int count)
-            : base(QuerySettings.Empty)
+        internal RangeEnumerable(int from, int count) : base(QuerySettings.Empty)
         {
             // Transform the from and to indices into low and highs.
             _from = from;
@@ -44,14 +43,17 @@ namespace System.Linq.Parallel
 
             // Create individual partitions, carefully avoiding overflow
             int doneCount = 0;
-            QueryOperatorEnumerator<int, int>[] partitions = new QueryOperatorEnumerator<int, int>[partitionCount];
+            QueryOperatorEnumerator<int, int>[] partitions = new QueryOperatorEnumerator<int, int>[
+                partitionCount
+            ];
             for (int i = 0; i < partitionCount; i++)
             {
                 int partitionSize = (i < biggerPartitionCount) ? stride + 1 : stride;
                 partitions[i] = new RangeEnumerator(
                     unchecked(_from + doneCount),
                     partitionSize,
-                    doneCount);
+                    doneCount
+                );
                 doneCount += partitionSize;
             }
 

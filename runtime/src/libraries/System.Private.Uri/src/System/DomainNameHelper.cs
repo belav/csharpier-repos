@@ -64,7 +64,13 @@ namespace System
         //           MUST NOT be used unless all input indexes are verified and trusted.
         //
 
-        internal static unsafe bool IsValid(char* name, int pos, ref int returnedEnd, ref bool notCanonical, bool notImplicitFile)
+        internal static unsafe bool IsValid(
+            char* name,
+            int pos,
+            ref int returnedEnd,
+            ref bool notCanonical,
+            bool notImplicitFile
+        )
         {
             char* curPos = name + pos;
             char* newPos = curPos;
@@ -72,10 +78,15 @@ namespace System
             for (; newPos < end; ++newPos)
             {
                 char ch = *newPos;
-                if (ch > 0x7f) return false;    // not ascii
+                if (ch > 0x7f)
+                    return false; // not ascii
                 if (ch < 'a') // Optimize for lower-case letters, which make up the majority of most Uris, and which are all greater than symbols checked for below
                 {
-                    if (ch == '/' || ch == '\\' || (notImplicitFile && (ch == ':' || ch == '?' || ch == '#')))
+                    if (
+                        ch == '/'
+                        || ch == '\\'
+                        || (notImplicitFile && (ch == ':' || ch == '?' || ch == '#'))
+                    )
                     {
                         end = newPos;
                         break;
@@ -101,12 +112,17 @@ namespace System
                 newPos = curPos;
                 while (newPos < end)
                 {
-                    if (*newPos == '.') break;
+                    if (*newPos == '.')
+                        break;
                     ++newPos;
                 }
 
                 //check the label start/range
-                if (curPos == newPos || newPos - curPos > 63 || !IsASCIILetterOrDigit(*curPos++, ref notCanonical))
+                if (
+                    curPos == newPos
+                    || newPos - curPos > 63
+                    || !IsASCIILetterOrDigit(*curPos++, ref notCanonical)
+                )
                 {
                     return false;
                 }
@@ -130,7 +146,13 @@ namespace System
         // There are pretty much no restrictions and we effectively return the end of the
         // domain name.
         //
-        internal static unsafe bool IsValidByIri(char* name, int pos, ref int returnedEnd, ref bool notCanonical, bool notImplicitFile)
+        internal static unsafe bool IsValidByIri(
+            char* name,
+            int pos,
+            ref int returnedEnd,
+            ref bool notCanonical,
+            bool notImplicitFile
+        )
         {
             char* curPos = name + pos;
             char* newPos = curPos;
@@ -140,7 +162,11 @@ namespace System
             for (; newPos < end; ++newPos)
             {
                 char ch = *newPos;
-                if (ch == '/' || ch == '\\' || (notImplicitFile && (ch == ':' || ch == '?' || ch == '#')))
+                if (
+                    ch == '/'
+                    || ch == '\\'
+                    || (notImplicitFile && (ch == ':' || ch == '?' || ch == '#'))
+                )
                 {
                     end = newPos;
                     break;
@@ -167,10 +193,14 @@ namespace System
                 bool labelHasUnicode = false; // if label has unicode we need to add 4 to label count for xn--
                 while (newPos < end)
                 {
-                    if ((*newPos == '.') ||
-                        (*newPos == '\u3002') ||    //IDEOGRAPHIC FULL STOP
-                        (*newPos == '\uFF0E') ||    //FULLWIDTH FULL STOP
-                        (*newPos == '\uFF61'))      //HALFWIDTH IDEOGRAPHIC FULL STOP
+                    if (
+                        (*newPos == '.')
+                        || (*newPos == '\u3002')
+                        || //IDEOGRAPHIC FULL STOP
+                        (*newPos == '\uFF0E')
+                        || //FULLWIDTH FULL STOP
+                        (*newPos == '\uFF61')
+                    ) //HALFWIDTH IDEOGRAPHIC FULL STOP
                         break;
                     count++;
                     if (*newPos > 0xFF)
@@ -182,14 +212,23 @@ namespace System
                 }
 
                 //check the label start/range
-                if (curPos == newPos || (labelHasUnicode ? count + 4 : count) > 63 || ((*curPos++ < 0xA0) && !IsASCIILetterOrDigit(*(curPos - 1), ref notCanonical)))
+                if (
+                    curPos == newPos
+                    || (labelHasUnicode ? count + 4 : count) > 63
+                    || (
+                        (*curPos++ < 0xA0) && !IsASCIILetterOrDigit(*(curPos - 1), ref notCanonical)
+                    )
+                )
                 {
                     return false;
                 }
                 //check the label content
                 while (curPos < newPos)
                 {
-                    if ((*curPos++ < 0xA0) && !IsValidDomainLabelCharacter(*(curPos - 1), ref notCanonical))
+                    if (
+                        (*curPos++ < 0xA0)
+                        && !IsValidDomainLabelCharacter(*(curPos - 1), ref notCanonical)
+                    )
                     {
                         return false;
                     }
@@ -246,7 +285,9 @@ namespace System
 
         internal static bool TryGetUnicodeEquivalent(string hostname, ref ValueStringBuilder dest)
         {
-            Debug.Assert(ReferenceEquals(hostname, UriHelper.StripBidiControlCharacters(hostname, hostname)));
+            Debug.Assert(
+                ReferenceEquals(hostname, UriHelper.StripBidiControlCharacters(hostname, hostname))
+            );
 
             int curPos = 0;
 
@@ -279,9 +320,13 @@ namespace System
                     {
                         asciiLabel = false;
 
-                        if ((c == '\u3002') || // IDEOGRAPHIC FULL STOP
-                            (c == '\uFF0E') || // FULLWIDTH FULL STOP
-                            (c == '\uFF61'))   // HALFWIDTH IDEOGRAPHIC FULL STOP
+                        if (
+                            (c == '\u3002')
+                            || // IDEOGRAPHIC FULL STOP
+                            (c == '\uFF0E')
+                            || // FULLWIDTH FULL STOP
+                            (c == '\uFF61')
+                        ) // HALFWIDTH IDEOGRAPHIC FULL STOP
                         {
                             break;
                         }
@@ -305,11 +350,13 @@ namespace System
                 {
                     bool aceValid = false;
 
-                    if ((uint)(curPos + 3) < (uint)hostname.Length
+                    if (
+                        (uint)(curPos + 3) < (uint)hostname.Length
                         && hostname[curPos] == 'x'
                         && hostname[curPos + 1] == 'n'
                         && hostname[curPos + 2] == '-'
-                        && hostname[curPos + 3] == '-')
+                        && hostname[curPos + 3] == '-'
+                    )
                     {
                         // check ace validity
                         try
@@ -367,7 +414,12 @@ namespace System
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool IsValidDomainLabelCharacter(char character, ref bool notCanonical)
         {
-            if (char.IsAsciiLetterLower(character) || char.IsAsciiDigit(character) || character == '-' || character == '_')
+            if (
+                char.IsAsciiLetterLower(character)
+                || char.IsAsciiDigit(character)
+                || character == '-'
+                || character == '_'
+            )
             {
                 return true;
             }

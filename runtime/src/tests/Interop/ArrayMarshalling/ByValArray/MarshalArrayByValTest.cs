@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 class TestHelper
 {
-    public static void Assert(bool exp,string msg="")
+    public static void Assert(bool exp, string msg = "")
     {
         TestLibrary.Assert.IsTrue(exp, msg);
     }
@@ -113,7 +113,6 @@ public struct S_BOOLArray_Seq
     public bool[] arr;
 }
 
-
 [StructLayout(LayoutKind.Sequential)]
 public class C_INTArray_Seq
 {
@@ -198,8 +197,6 @@ public class C_LPCSTRArray_Seq
     public string[] arr;
 }
 
-
-
 //struct array in a class
 [StructLayout(LayoutKind.Sequential)]
 public class C_StructArray_Seq
@@ -251,7 +248,11 @@ public struct S_WORDArray_Exp
 public struct S_LONG64Array_Exp
 {
     [FieldOffset(0)]
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = Test.ARRAY_SIZE, ArraySubType = UnmanagedType.I8)]
+    [MarshalAs(
+        UnmanagedType.ByValArray,
+        SizeConst = Test.ARRAY_SIZE,
+        ArraySubType = UnmanagedType.I8
+    )]
     public long[] arr;
 }
 
@@ -295,7 +296,6 @@ public struct S_CHARArray_Exp
     public char[] arr;
 }
 
-
 [StructLayout(LayoutKind.Explicit)]
 public struct S_LPSTRArray_Exp
 {
@@ -312,8 +312,6 @@ public struct S_LPCSTRArray_Exp
     public string[] arr;
 }
 
-
-
 //struct array in a struct
 [StructLayout(LayoutKind.Explicit)]
 public struct S_StructArray_Exp
@@ -323,7 +321,6 @@ public struct S_StructArray_Exp
     public TestStruct[] arr;
 }
 
-
 [StructLayout(LayoutKind.Explicit)]
 public struct S_BOOLArray_Exp
 {
@@ -331,7 +328,6 @@ public struct S_BOOLArray_Exp
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = Test.ARRAY_SIZE)]
     public bool[] arr;
 }
-
 
 [StructLayout(LayoutKind.Explicit)]
 public class C_INTArray_Exp
@@ -429,8 +425,6 @@ public class C_LPCSTRArray_Exp
     public string[] arr;
 }
 
-
-
 //struct array in a class
 [StructLayout(LayoutKind.Explicit)]
 public class C_StructArray_Exp
@@ -452,157 +446,196 @@ class Test
 {
     //for RunTest1
     [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeIntArraySeqStructByVal([In]S_INTArray_Seq s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeUIntArraySeqStructByVal([In]S_UINTArray_Seq s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeShortArraySeqStructByVal([In]S_SHORTArray_Seq s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeWordArraySeqStructByVal([In]S_WORDArray_Seq s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeLong64ArraySeqStructByVal([In]S_LONG64Array_Seq s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeULong64ArraySeqStructByVal([In]S_ULONG64Array_Seq s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeDoubleArraySeqStructByVal([In]S_DOUBLEArray_Seq s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeFloatArraySeqStructByVal([In]S_FLOATArray_Seq s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeByteArraySeqStructByVal([In]S_BYTEArray_Seq s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeCharArraySeqStructByVal([In]S_CHARArray_Seq s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeIntPtrArraySeqStructByVal([In]S_INTPTRArray_Seq s, int size);
-
-
+    static extern bool TakeIntArraySeqStructByVal([In] S_INTArray_Seq s, int size);
 
     [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeStructArraySeqStructByVal([In]S_StructArray_Seq s, int size);
+    static extern bool TakeUIntArraySeqStructByVal([In] S_UINTArray_Seq s, int size);
 
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeShortArraySeqStructByVal([In] S_SHORTArray_Seq s, int size);
 
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeWordArraySeqStructByVal([In] S_WORDArray_Seq s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeLong64ArraySeqStructByVal([In] S_LONG64Array_Seq s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeULong64ArraySeqStructByVal([In] S_ULONG64Array_Seq s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeDoubleArraySeqStructByVal([In] S_DOUBLEArray_Seq s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeFloatArraySeqStructByVal([In] S_FLOATArray_Seq s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeByteArraySeqStructByVal([In] S_BYTEArray_Seq s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeCharArraySeqStructByVal([In] S_CHARArray_Seq s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeIntPtrArraySeqStructByVal([In] S_INTPTRArray_Seq s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeStructArraySeqStructByVal([In] S_StructArray_Seq s, int size);
 
     //for RunTest2
     [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeIntArraySeqClassByVal([In]C_INTArray_Seq c, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeUIntArraySeqClassByVal([In]C_UINTArray_Seq s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeShortArraySeqClassByVal([In]C_SHORTArray_Seq s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeWordArraySeqClassByVal([In]C_WORDArray_Seq s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeLong64ArraySeqClassByVal([In]C_LONG64Array_Seq s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeULong64ArraySeqClassByVal([In]C_ULONG64Array_Seq s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeDoubleArraySeqClassByVal([In]C_DOUBLEArray_Seq s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeFloatArraySeqClassByVal([In]C_FLOATArray_Seq s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeByteArraySeqClassByVal([In]C_BYTEArray_Seq s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeCharArraySeqClassByVal([In]C_CHARArray_Seq s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeLPSTRArraySeqClassByVal([In]C_LPSTRArray_Seq s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeLPCSTRArraySeqClassByVal([In]C_LPCSTRArray_Seq s, int size);
-  
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeStructArraySeqClassByVal([In]C_StructArray_Seq s, int size);
+    static extern bool TakeIntArraySeqClassByVal([In] C_INTArray_Seq c, int size);
 
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeUIntArraySeqClassByVal([In] C_UINTArray_Seq s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeShortArraySeqClassByVal([In] C_SHORTArray_Seq s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeWordArraySeqClassByVal([In] C_WORDArray_Seq s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeLong64ArraySeqClassByVal([In] C_LONG64Array_Seq s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeULong64ArraySeqClassByVal([In] C_ULONG64Array_Seq s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeDoubleArraySeqClassByVal([In] C_DOUBLEArray_Seq s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeFloatArraySeqClassByVal([In] C_FLOATArray_Seq s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeByteArraySeqClassByVal([In] C_BYTEArray_Seq s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeCharArraySeqClassByVal([In] C_CHARArray_Seq s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeLPSTRArraySeqClassByVal([In] C_LPSTRArray_Seq s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeLPCSTRArraySeqClassByVal([In] C_LPCSTRArray_Seq s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeStructArraySeqClassByVal([In] C_StructArray_Seq s, int size);
 
     //for RunTest3
     [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeIntArrayExpStructByVal([In]S_INTArray_Exp s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeUIntArrayExpStructByVal([In]S_UINTArray_Exp s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeShortArrayExpStructByVal([In]S_SHORTArray_Exp s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeWordArrayExpStructByVal([In]S_WORDArray_Exp s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeLong64ArrayExpStructByVal([In]S_LONG64Array_Exp s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeULong64ArrayExpStructByVal([In]S_ULONG64Array_Exp s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeDoubleArrayExpStructByVal([In]S_DOUBLEArray_Exp s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeFloatArrayExpStructByVal([In]S_FLOATArray_Exp s, int size);
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeByteArrayExpStructByVal([In]S_BYTEArray_Exp s, int size);
-
-    
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeCharArrayExpStructByVal([In]S_CHARArray_Exp s, int size);
-
-
+    static extern bool TakeIntArrayExpStructByVal([In] S_INTArray_Exp s, int size);
 
     [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeLPSTRArrayExpStructByVal([In]S_LPSTRArray_Exp s, int size);
-    
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeLPCSTRArrayExpStructByVal([In]S_LPCSTRArray_Exp s, int size);
-    
-  
-    [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeStructArrayExpStructByVal([In]S_StructArray_Exp s, int size);
+    static extern bool TakeUIntArrayExpStructByVal([In] S_UINTArray_Exp s, int size);
 
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeShortArrayExpStructByVal([In] S_SHORTArray_Exp s, int size);
 
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeWordArrayExpStructByVal([In] S_WORDArray_Exp s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeLong64ArrayExpStructByVal([In] S_LONG64Array_Exp s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeULong64ArrayExpStructByVal([In] S_ULONG64Array_Exp s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeDoubleArrayExpStructByVal([In] S_DOUBLEArray_Exp s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeFloatArrayExpStructByVal([In] S_FLOATArray_Exp s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeByteArrayExpStructByVal([In] S_BYTEArray_Exp s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeCharArrayExpStructByVal([In] S_CHARArray_Exp s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeLPSTRArrayExpStructByVal([In] S_LPSTRArray_Exp s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeLPCSTRArrayExpStructByVal([In] S_LPCSTRArray_Exp s, int size);
+
+    [DllImport("MarshalArrayByValNative")]
+    static extern bool TakeStructArrayExpStructByVal([In] S_StructArray_Exp s, int size);
 
     //for RunTest4
     [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeIntArrayExpClassByVal([In]C_INTArray_Exp c, int size);
+    static extern bool TakeIntArrayExpClassByVal([In] C_INTArray_Exp c, int size);
+
     [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeUIntArrayExpClassByVal([In]C_UINTArray_Exp s, int size);
+    static extern bool TakeUIntArrayExpClassByVal([In] C_UINTArray_Exp s, int size);
+
     [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeShortArrayExpClassByVal([In]C_SHORTArray_Exp s, int size);
+    static extern bool TakeShortArrayExpClassByVal([In] C_SHORTArray_Exp s, int size);
+
     [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeWordArrayExpClassByVal([In]C_WORDArray_Exp s, int size);
+    static extern bool TakeWordArrayExpClassByVal([In] C_WORDArray_Exp s, int size);
+
     [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeLong64ArrayExpClassByVal([In]C_LONG64Array_Exp s, int size);
+    static extern bool TakeLong64ArrayExpClassByVal([In] C_LONG64Array_Exp s, int size);
+
     [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeULong64ArrayExpClassByVal([In]C_ULONG64Array_Exp s, int size);
+    static extern bool TakeULong64ArrayExpClassByVal([In] C_ULONG64Array_Exp s, int size);
+
     [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeDoubleArrayExpClassByVal([In]C_DOUBLEArray_Exp s, int size);
+    static extern bool TakeDoubleArrayExpClassByVal([In] C_DOUBLEArray_Exp s, int size);
+
     [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeFloatArrayExpClassByVal([In]C_FLOATArray_Exp s, int size);
+    static extern bool TakeFloatArrayExpClassByVal([In] C_FLOATArray_Exp s, int size);
+
     [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeByteArrayExpClassByVal([In]C_BYTEArray_Exp s, int size);
+    static extern bool TakeByteArrayExpClassByVal([In] C_BYTEArray_Exp s, int size);
+
     [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeCharArrayExpClassByVal([In]C_CHARArray_Exp s, int size);
+    static extern bool TakeCharArrayExpClassByVal([In] C_CHARArray_Exp s, int size);
+
     [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeLPSTRArrayExpClassByVal([In]C_LPSTRArray_Exp s, int size);
+    static extern bool TakeLPSTRArrayExpClassByVal([In] C_LPSTRArray_Exp s, int size);
+
     [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeLPCSTRArrayExpClassByVal([In]C_LPCSTRArray_Exp s, int size);
-  
+    static extern bool TakeLPCSTRArrayExpClassByVal([In] C_LPCSTRArray_Exp s, int size);
+
     [DllImport("MarshalArrayByValNative")]
-    static extern bool TakeStructArrayExpClassByVal([In]C_StructArray_Exp s, int size);
+    static extern bool TakeStructArrayExpClassByVal([In] C_StructArray_Exp s, int size);
 
     //for RunTest5
     //get struct on C++ side as sequential class
     [DllImport("MarshalArrayByValNative")]
     static extern C_INTArray_Seq S_INTArray_Ret();
+
     [DllImport("MarshalArrayByValNative")]
     static extern C_UINTArray_Seq S_UINTArray_Ret();
+
     [DllImport("MarshalArrayByValNative")]
     static extern C_SHORTArray_Seq S_SHORTArray_Ret();
+
     [DllImport("MarshalArrayByValNative")]
     static extern C_WORDArray_Seq S_WORDArray_Ret();
+
     [DllImport("MarshalArrayByValNative")]
     static extern C_LONG64Array_Seq S_LONG64Array_Ret();
+
     [DllImport("MarshalArrayByValNative")]
     static extern C_ULONG64Array_Seq S_ULONG64Array_Ret();
+
     [DllImport("MarshalArrayByValNative")]
     static extern C_DOUBLEArray_Seq S_DOUBLEArray_Ret();
+
     [DllImport("MarshalArrayByValNative")]
     static extern C_FLOATArray_Seq S_FLOATArray_Ret();
+
     [DllImport("MarshalArrayByValNative")]
     static extern C_BYTEArray_Seq S_BYTEArray_Ret();
+
     [DllImport("MarshalArrayByValNative")]
     static extern C_CHARArray_Seq S_CHARArray_Ret();
+
     [DllImport("MarshalArrayByValNative")]
     static extern C_LPSTRArray_Seq S_LPSTRArray_Ret();
-    
+
     [DllImport("MarshalArrayByValNative")]
     static extern C_StructArray_Seq S_StructArray_Ret();
 
@@ -610,30 +643,40 @@ class Test
     //get struct on C++ side as explicit class
     [DllImport("MarshalArrayByValNative", EntryPoint = "S_INTArray_Ret")]
     static extern C_INTArray_Exp S_INTArray_Ret2();
+
     [DllImport("MarshalArrayByValNative", EntryPoint = "S_UINTArray_Ret")]
     static extern C_UINTArray_Exp S_UINTArray_Ret2();
+
     [DllImport("MarshalArrayByValNative", EntryPoint = "S_SHORTArray_Ret")]
     static extern C_SHORTArray_Exp S_SHORTArray_Ret2();
+
     [DllImport("MarshalArrayByValNative", EntryPoint = "S_WORDArray_Ret")]
     static extern C_WORDArray_Exp S_WORDArray_Ret2();
+
     [DllImport("MarshalArrayByValNative", EntryPoint = "S_LONG64Array_Ret")]
     static extern C_LONG64Array_Exp S_LONG64Array_Ret2();
+
     [DllImport("MarshalArrayByValNative", EntryPoint = "S_ULONG64Array_Ret")]
     static extern C_ULONG64Array_Exp S_ULONG64Array_Ret2();
+
     [DllImport("MarshalArrayByValNative", EntryPoint = "S_DOUBLEArray_Ret")]
     static extern C_DOUBLEArray_Exp S_DOUBLEArray_Ret2();
+
     [DllImport("MarshalArrayByValNative", EntryPoint = "S_FLOATArray_Ret")]
     static extern C_FLOATArray_Exp S_FLOATArray_Ret2();
+
     [DllImport("MarshalArrayByValNative", EntryPoint = "S_BYTEArray_Ret")]
     static extern C_BYTEArray_Exp S_BYTEArray_Ret2();
+
     [DllImport("MarshalArrayByValNative", EntryPoint = "S_CHARArray_Ret")]
     static extern C_CHARArray_Exp S_CHARArray_Ret2();
+
     [DllImport("MarshalArrayByValNative", EntryPoint = "S_LPSTRArray_Ret")]
     static extern C_LPSTRArray_Exp S_LPSTRArray_Ret2();
-    
+
     [DllImport("MarshalArrayByValNative", EntryPoint = "S_StructArray_Ret")]
     static extern C_StructArray_Exp S_StructArray_Ret2();
-    
+
     internal const int ARRAY_SIZE = 100;
 
     static T[] InitArray<T>(int size)
@@ -724,16 +767,17 @@ class Test
         bool result = true;
         for (int i = 0; i < tsArr2.Length; i++)
         {
-            result = (tsArr1[i].x == tsArr2[i].x &&
-                       tsArr1[i].d == tsArr2[i].d &&
-                       tsArr1[i].l == tsArr2[i].l &&
-                       tsArr1[i].str == tsArr2[i].str) && result;
+            result =
+                (
+                    tsArr1[i].x == tsArr2[i].x
+                    && tsArr1[i].d == tsArr2[i].d
+                    && tsArr1[i].l == tsArr2[i].l
+                    && tsArr1[i].str == tsArr2[i].str
+                ) && result;
         }
 
         return result;
     }
-
-    
 
     static bool RunTest1(string report)
     {
@@ -741,59 +785,94 @@ class Test
 
         S_INTArray_Seq s1 = new S_INTArray_Seq();
         s1.arr = InitArray<int>(ARRAY_SIZE);
-        TestHelper.Assert(TakeIntArraySeqStructByVal(s1, s1.arr.Length), "TakeIntArraySeqStructByVal");
+        TestHelper.Assert(
+            TakeIntArraySeqStructByVal(s1, s1.arr.Length),
+            "TakeIntArraySeqStructByVal"
+        );
 
         S_UINTArray_Seq s2 = new S_UINTArray_Seq();
         s2.arr = InitArray<uint>(ARRAY_SIZE);
-        TestHelper.Assert(TakeUIntArraySeqStructByVal(s2, s2.arr.Length), "TakeUIntArraySeqStructByVal");
+        TestHelper.Assert(
+            TakeUIntArraySeqStructByVal(s2, s2.arr.Length),
+            "TakeUIntArraySeqStructByVal"
+        );
 
         S_SHORTArray_Seq s3 = new S_SHORTArray_Seq();
         s3.arr = InitArray<short>(ARRAY_SIZE);
-        TestHelper.Assert(TakeShortArraySeqStructByVal(s3, s3.arr.Length), "TakeShortArraySeqStructByVal");
+        TestHelper.Assert(
+            TakeShortArraySeqStructByVal(s3, s3.arr.Length),
+            "TakeShortArraySeqStructByVal"
+        );
 
         S_WORDArray_Seq s4 = new S_WORDArray_Seq();
         s4.arr = InitArray<ushort>(ARRAY_SIZE);
-        TestHelper.Assert(TakeWordArraySeqStructByVal(s4, s4.arr.Length), "TakeWordArraySeqStructByVal");
+        TestHelper.Assert(
+            TakeWordArraySeqStructByVal(s4, s4.arr.Length),
+            "TakeWordArraySeqStructByVal"
+        );
 
         S_LONG64Array_Seq s5 = new S_LONG64Array_Seq();
         s5.arr = InitArray<long>(ARRAY_SIZE);
-        TestHelper.Assert(TakeLong64ArraySeqStructByVal(s5, s5.arr.Length), "TakeLong64ArraySeqStructByVal");
+        TestHelper.Assert(
+            TakeLong64ArraySeqStructByVal(s5, s5.arr.Length),
+            "TakeLong64ArraySeqStructByVal"
+        );
 
         S_ULONG64Array_Seq s6 = new S_ULONG64Array_Seq();
         s6.arr = InitArray<ulong>(ARRAY_SIZE);
-        TestHelper.Assert(TakeULong64ArraySeqStructByVal(s6, s6.arr.Length), "TakeULong64ArraySeqStructByVal");
+        TestHelper.Assert(
+            TakeULong64ArraySeqStructByVal(s6, s6.arr.Length),
+            "TakeULong64ArraySeqStructByVal"
+        );
 
         S_DOUBLEArray_Seq s7 = new S_DOUBLEArray_Seq();
         s7.arr = InitArray<double>(ARRAY_SIZE);
-        TestHelper.Assert(TakeDoubleArraySeqStructByVal(s7, s7.arr.Length), "TakeDoubleArraySeqStructByVal");
+        TestHelper.Assert(
+            TakeDoubleArraySeqStructByVal(s7, s7.arr.Length),
+            "TakeDoubleArraySeqStructByVal"
+        );
 
         S_FLOATArray_Seq s8 = new S_FLOATArray_Seq();
         s8.arr = InitArray<float>(ARRAY_SIZE);
-        TestHelper.Assert(TakeFloatArraySeqStructByVal(s8, s8.arr.Length), "TakeFloatArraySeqStructByVal");
+        TestHelper.Assert(
+            TakeFloatArraySeqStructByVal(s8, s8.arr.Length),
+            "TakeFloatArraySeqStructByVal"
+        );
 
         S_BYTEArray_Seq s9 = new S_BYTEArray_Seq();
         s9.arr = InitArray<byte>(ARRAY_SIZE);
-        TestHelper.Assert(TakeByteArraySeqStructByVal(s9, s9.arr.Length), "TakeByteArraySeqStructByVal");
+        TestHelper.Assert(
+            TakeByteArraySeqStructByVal(s9, s9.arr.Length),
+            "TakeByteArraySeqStructByVal"
+        );
 
         S_CHARArray_Seq s10 = new S_CHARArray_Seq();
         s10.arr = InitArray<char>(ARRAY_SIZE);
-        TestHelper.Assert(TakeCharArraySeqStructByVal(s10, s10.arr.Length), "TakeCharArraySeqStructByVal");
+        TestHelper.Assert(
+            TakeCharArraySeqStructByVal(s10, s10.arr.Length),
+            "TakeCharArraySeqStructByVal"
+        );
 
         S_INTPTRArray_Seq s11 = new S_INTPTRArray_Seq();
         s11.arr = InitIntPtrArray(ARRAY_SIZE);
-        TestHelper.Assert(TakeIntPtrArraySeqStructByVal(s11, s11.arr.Length), "TakeIntPtrArraySeqStructByVal");
+        TestHelper.Assert(
+            TakeIntPtrArraySeqStructByVal(s11, s11.arr.Length),
+            "TakeIntPtrArraySeqStructByVal"
+        );
 
 #if NONWINDOWS_BUG
         S_StructArray_Seq s14 = new S_StructArray_Seq();
         s14.arr = InitStructArray(ARRAY_SIZE);
-        TestHelper.Assert(TakeStructArraySeqStructByVal(s14, s14.arr.Length),"TakeStructArraySeqStructByVal");
+        TestHelper.Assert(
+            TakeStructArraySeqStructByVal(s14, s14.arr.Length),
+            "TakeStructArraySeqStructByVal"
+        );
 #endif
         return true;
     }
 
     static bool RunTest2(string report)
     {
-
         C_INTArray_Seq c1 = new C_INTArray_Seq();
         c1.arr = InitArray<int>(ARRAY_SIZE);
         TestHelper.Assert(TakeIntArraySeqClassByVal(c1, c1.arr.Length));
@@ -850,50 +929,79 @@ class Test
         return true;
     }
 
-
     static bool RunTest3(string report)
     {
         Console.WriteLine(report);
 
         S_INTArray_Exp s1 = new S_INTArray_Exp();
         s1.arr = InitArray<int>(ARRAY_SIZE);
-        TestHelper.Assert(TakeIntArrayExpStructByVal(s1, s1.arr.Length), "TakeIntArrayExpStructByVal");
+        TestHelper.Assert(
+            TakeIntArrayExpStructByVal(s1, s1.arr.Length),
+            "TakeIntArrayExpStructByVal"
+        );
 
         S_UINTArray_Exp s2 = new S_UINTArray_Exp();
         s2.arr = InitArray<uint>(ARRAY_SIZE);
-        TestHelper.Assert(TakeUIntArrayExpStructByVal(s2, s2.arr.Length), "TakeUIntArrayExpStructByVal");
+        TestHelper.Assert(
+            TakeUIntArrayExpStructByVal(s2, s2.arr.Length),
+            "TakeUIntArrayExpStructByVal"
+        );
 
         S_SHORTArray_Exp s3 = new S_SHORTArray_Exp();
         s3.arr = InitArray<short>(ARRAY_SIZE);
-        TestHelper.Assert(TakeShortArrayExpStructByVal(s3, s3.arr.Length), "TakeShortArrayExpStructByVal");
+        TestHelper.Assert(
+            TakeShortArrayExpStructByVal(s3, s3.arr.Length),
+            "TakeShortArrayExpStructByVal"
+        );
 
         S_WORDArray_Exp s4 = new S_WORDArray_Exp();
         s4.arr = InitArray<ushort>(ARRAY_SIZE);
-        TestHelper.Assert(TakeWordArrayExpStructByVal(s4, s4.arr.Length), "TakeWordArrayExpStructByVal");
+        TestHelper.Assert(
+            TakeWordArrayExpStructByVal(s4, s4.arr.Length),
+            "TakeWordArrayExpStructByVal"
+        );
 
         S_LONG64Array_Exp s5 = new S_LONG64Array_Exp();
         s5.arr = InitArray<long>(ARRAY_SIZE);
-        TestHelper.Assert(TakeLong64ArrayExpStructByVal(s5, s5.arr.Length), "TakeLong64ArrayExpStructByVal");
+        TestHelper.Assert(
+            TakeLong64ArrayExpStructByVal(s5, s5.arr.Length),
+            "TakeLong64ArrayExpStructByVal"
+        );
 
         S_ULONG64Array_Exp s6 = new S_ULONG64Array_Exp();
         s6.arr = InitArray<ulong>(ARRAY_SIZE);
-        TestHelper.Assert(TakeULong64ArrayExpStructByVal(s6, s6.arr.Length), "TakeULong64ArrayExpStructByVal");
+        TestHelper.Assert(
+            TakeULong64ArrayExpStructByVal(s6, s6.arr.Length),
+            "TakeULong64ArrayExpStructByVal"
+        );
 
         S_DOUBLEArray_Exp s7 = new S_DOUBLEArray_Exp();
         s7.arr = InitArray<double>(ARRAY_SIZE);
-        TestHelper.Assert(TakeDoubleArrayExpStructByVal(s7, s7.arr.Length), "TakeDoubleArrayExpStructByVal");
+        TestHelper.Assert(
+            TakeDoubleArrayExpStructByVal(s7, s7.arr.Length),
+            "TakeDoubleArrayExpStructByVal"
+        );
 
         S_FLOATArray_Exp s8 = new S_FLOATArray_Exp();
         s8.arr = InitArray<float>(ARRAY_SIZE);
-        TestHelper.Assert(TakeFloatArrayExpStructByVal(s8, s8.arr.Length), "TakeFloatArrayExpStructByVal");
+        TestHelper.Assert(
+            TakeFloatArrayExpStructByVal(s8, s8.arr.Length),
+            "TakeFloatArrayExpStructByVal"
+        );
 
         S_BYTEArray_Exp s9 = new S_BYTEArray_Exp();
         s9.arr = InitArray<byte>(ARRAY_SIZE);
-        TestHelper.Assert(TakeByteArrayExpStructByVal(s9, s9.arr.Length), "TakeByteArrayExpStructByVal");
+        TestHelper.Assert(
+            TakeByteArrayExpStructByVal(s9, s9.arr.Length),
+            "TakeByteArrayExpStructByVal"
+        );
 
         S_CHARArray_Exp s10 = new S_CHARArray_Exp();
         s10.arr = InitArray<char>(ARRAY_SIZE);
-        TestHelper.Assert(TakeCharArrayExpStructByVal(s10, s10.arr.Length), "TakeCharArrayExpStructByVal");
+        TestHelper.Assert(
+            TakeCharArrayExpStructByVal(s10, s10.arr.Length),
+            "TakeCharArrayExpStructByVal"
+        );
 
         S_LPSTRArray_Exp s11 = new S_LPSTRArray_Exp();
         s11.arr = InitArray<string>(ARRAY_SIZE);
@@ -911,7 +1019,6 @@ class Test
 
         return true;
     }
-
 
     static bool RunTest4(string report)
     {
@@ -975,7 +1082,6 @@ class Test
 
     static bool RunTest5(string report)
     {
-
         C_INTArray_Seq retval1 = S_INTArray_Ret();
         TestHelper.Assert(Equals(InitArray<int>(ARRAY_SIZE), retval1.arr));
 
@@ -1013,13 +1119,12 @@ class Test
 
         C_StructArray_Seq retval13 = S_StructArray_Ret();
         TestHelper.Assert(TestStructEquals(InitStructArray(ARRAY_SIZE), retval13.arr));
-#endif     
+#endif
         return true;
     }
 
     static bool RunTest6(string report)
-    {                
-
+    {
         C_INTArray_Exp retval1 = S_INTArray_Ret2();
         TestHelper.Assert(Equals(InitArray<int>(ARRAY_SIZE), retval1.arr));
 
@@ -1062,12 +1167,22 @@ class Test
 
     static int Main(string[] args)
     {
-        RunTest1("RunTest1 : Marshal array as field as ByValArray in sequential struct as parameter.");
-        RunTest2("RunTest2 : Marshal array as field as ByValArray in sequential class as parameter.");
-        RunTest3("RunTest3 : Marshal array as field as ByValArray in explicit struct as parameter.");        
+        RunTest1(
+            "RunTest1 : Marshal array as field as ByValArray in sequential struct as parameter."
+        );
+        RunTest2(
+            "RunTest2 : Marshal array as field as ByValArray in sequential class as parameter."
+        );
+        RunTest3(
+            "RunTest3 : Marshal array as field as ByValArray in explicit struct as parameter."
+        );
         RunTest4("RunTest4 : Marshal array as field as ByValArray in explicit class as parameter.");
-        RunTest5("RunTest5 : Marshal array as field as ByValArray in sequential class as return type.");
-        RunTest6("RunTest6 : Marshal array as field as ByValArray in explicit class as return type.");
+        RunTest5(
+            "RunTest5 : Marshal array as field as ByValArray in sequential class as return type."
+        );
+        RunTest6(
+            "RunTest6 : Marshal array as field as ByValArray in explicit class as return type."
+        );
         return 100;
     }
 }

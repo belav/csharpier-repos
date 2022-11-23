@@ -18,10 +18,11 @@ public class OwnedNavigationTableBuilder<TEntity> : OwnedNavigationTableBuilder
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public OwnedNavigationTableBuilder(string? name, string? schema, OwnedNavigationBuilder referenceOwnershipBuilder)
-        : base(name, schema, referenceOwnershipBuilder)
-    {
-    }
+    public OwnedNavigationTableBuilder(
+        string? name,
+        string? schema,
+        OwnedNavigationBuilder referenceOwnershipBuilder
+    ) : base(name, schema, referenceOwnershipBuilder) { }
 
     /// <summary>
     ///     Configures the table to be ignored by migrations.
@@ -31,6 +32,7 @@ public class OwnedNavigationTableBuilder<TEntity> : OwnedNavigationTableBuilder
     /// </remarks>
     /// <param name="excluded">A value indicating whether the table should be managed by migrations.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual OwnedNavigationTableBuilder<TEntity> ExcludeFromMigrations(bool excluded = true)
-        => (OwnedNavigationTableBuilder<TEntity>)base.ExcludeFromMigrations(excluded);
+    public new virtual OwnedNavigationTableBuilder<TEntity> ExcludeFromMigrations(
+        bool excluded = true
+    ) => (OwnedNavigationTableBuilder<TEntity>)base.ExcludeFromMigrations(excluded);
 }

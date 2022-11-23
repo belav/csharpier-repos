@@ -19,7 +19,11 @@ public static class JSRuntimeExtensions
     /// <param name="identifier">An identifier for the function to invoke. For example, the value <c>"someScope.someFunction"</c> will invoke the function <c>window.someScope.someFunction</c>.</param>
     /// <param name="args">JSON-serializable arguments.</param>
     /// <returns>A <see cref="ValueTask"/> that represents the asynchronous invocation operation.</returns>
-    public static async ValueTask InvokeVoidAsync(this IJSRuntime jsRuntime, string identifier, params object?[]? args)
+    public static async ValueTask InvokeVoidAsync(
+        this IJSRuntime jsRuntime,
+        string identifier,
+        params object?[]? args
+    )
     {
         if (jsRuntime is null)
         {
@@ -41,7 +45,9 @@ public static class JSRuntimeExtensions
     /// <param name="identifier">An identifier for the function to invoke. For example, the value <c>"someScope.someFunction"</c> will invoke the function <c>window.someScope.someFunction</c>.</param>
     /// <param name="args">JSON-serializable arguments.</param>
     /// <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
-    public static ValueTask<TValue> InvokeAsync<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(this IJSRuntime jsRuntime, string identifier, params object?[]? args)
+    public static ValueTask<TValue> InvokeAsync<
+        [DynamicallyAccessedMembers(JsonSerialized)] TValue
+    >(this IJSRuntime jsRuntime, string identifier, params object?[]? args)
     {
         if (jsRuntime is null)
         {
@@ -63,7 +69,14 @@ public static class JSRuntimeExtensions
     /// </param>
     /// <param name="args">JSON-serializable arguments.</param>
     /// <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
-    public static ValueTask<TValue> InvokeAsync<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(this IJSRuntime jsRuntime, string identifier, CancellationToken cancellationToken, params object?[]? args)
+    public static ValueTask<TValue> InvokeAsync<
+        [DynamicallyAccessedMembers(JsonSerialized)] TValue
+    >(
+        this IJSRuntime jsRuntime,
+        string identifier,
+        CancellationToken cancellationToken,
+        params object?[]? args
+    )
     {
         if (jsRuntime is null)
         {
@@ -84,7 +97,12 @@ public static class JSRuntimeExtensions
     /// </param>
     /// <param name="args">JSON-serializable arguments.</param>
     /// <returns>A <see cref="ValueTask"/> that represents the asynchronous invocation operation.</returns>
-    public static async ValueTask InvokeVoidAsync(this IJSRuntime jsRuntime, string identifier, CancellationToken cancellationToken, params object?[]? args)
+    public static async ValueTask InvokeVoidAsync(
+        this IJSRuntime jsRuntime,
+        string identifier,
+        CancellationToken cancellationToken,
+        params object?[]? args
+    )
     {
         if (jsRuntime is null)
         {
@@ -102,14 +120,17 @@ public static class JSRuntimeExtensions
     /// <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="JSRuntime.DefaultAsyncTimeout"/>).</param>
     /// <param name="args">JSON-serializable arguments.</param>
     /// <returns>A <see cref="ValueTask"/> that represents the asynchronous invocation operation.</returns>
-    public static async ValueTask<TValue> InvokeAsync<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(this IJSRuntime jsRuntime, string identifier, TimeSpan timeout, params object?[]? args)
+    public static async ValueTask<TValue> InvokeAsync<
+        [DynamicallyAccessedMembers(JsonSerialized)] TValue
+    >(this IJSRuntime jsRuntime, string identifier, TimeSpan timeout, params object?[]? args)
     {
         if (jsRuntime is null)
         {
             throw new ArgumentNullException(nameof(jsRuntime));
         }
 
-        using var cancellationTokenSource = timeout == Timeout.InfiniteTimeSpan ? null : new CancellationTokenSource(timeout);
+        using var cancellationTokenSource =
+            timeout == Timeout.InfiniteTimeSpan ? null : new CancellationTokenSource(timeout);
         var cancellationToken = cancellationTokenSource?.Token ?? CancellationToken.None;
 
         return await jsRuntime.InvokeAsync<TValue>(identifier, cancellationToken, args);
@@ -123,14 +144,20 @@ public static class JSRuntimeExtensions
     /// <param name="timeout">The duration after which to cancel the async operation. Overrides default timeouts (<see cref="JSRuntime.DefaultAsyncTimeout"/>).</param>
     /// <param name="args">JSON-serializable arguments.</param>
     /// <returns>A <see cref="ValueTask"/> that represents the asynchronous invocation operation.</returns>
-    public static async ValueTask InvokeVoidAsync(this IJSRuntime jsRuntime, string identifier, TimeSpan timeout, params object?[]? args)
+    public static async ValueTask InvokeVoidAsync(
+        this IJSRuntime jsRuntime,
+        string identifier,
+        TimeSpan timeout,
+        params object?[]? args
+    )
     {
         if (jsRuntime is null)
         {
             throw new ArgumentNullException(nameof(jsRuntime));
         }
 
-        using var cancellationTokenSource = timeout == Timeout.InfiniteTimeSpan ? null : new CancellationTokenSource(timeout);
+        using var cancellationTokenSource =
+            timeout == Timeout.InfiniteTimeSpan ? null : new CancellationTokenSource(timeout);
         var cancellationToken = cancellationTokenSource?.Token ?? CancellationToken.None;
 
         await jsRuntime.InvokeAsync<IJSVoidResult>(identifier, cancellationToken, args);

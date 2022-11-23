@@ -15,7 +15,8 @@ namespace System.Composition.TypedParts.ActivationFeatures
         /// <summary>
         /// A constant shared for subclass use.
         /// </summary>
-        protected static readonly CompositionDependency[] NoDependencies = Array.Empty<CompositionDependency>();
+        protected static readonly CompositionDependency[] NoDependencies =
+            Array.Empty<CompositionDependency>();
 
         /// <summary>
         /// Participate in the activator creation process.
@@ -29,7 +30,8 @@ namespace System.Composition.TypedParts.ActivationFeatures
             TypeInfo partType,
             CompositeActivator activator,
             IDictionary<string, object> partMetadata,
-            IEnumerable<CompositionDependency> dependencies);
+            IEnumerable<CompositionDependency> dependencies
+        );
 
         /// <summary>
         /// Describe the dependencies required by this activation feature.
@@ -37,7 +39,10 @@ namespace System.Composition.TypedParts.ActivationFeatures
         /// <param name="partType">The part type being activated.</param>
         /// <param name="definitionAccessor">The definition accessor.</param>
         /// <returns>Dependencies.</returns>
-        public virtual IEnumerable<CompositionDependency> GetDependencies(TypeInfo partType, DependencyAccessor definitionAccessor)
+        public virtual IEnumerable<CompositionDependency> GetDependencies(
+            TypeInfo partType,
+            DependencyAccessor definitionAccessor
+        )
         {
             return NoDependencies;
         }

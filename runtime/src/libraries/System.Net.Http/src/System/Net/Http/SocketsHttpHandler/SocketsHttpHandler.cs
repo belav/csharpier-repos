@@ -133,7 +133,11 @@ namespace System.Net.Http
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, SR.Format(SR.net_http_value_must_be_greater_than, 0));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        SR.Format(SR.net_http_value_must_be_greater_than, 0)
+                    );
                 }
 
                 CheckDisposedOrStarted();
@@ -148,7 +152,11 @@ namespace System.Net.Http
             {
                 if (value < 1)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, SR.Format(SR.net_http_value_must_be_greater_than, 0));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        SR.Format(SR.net_http_value_must_be_greater_than, 0)
+                    );
                 }
 
                 CheckDisposedOrStarted();
@@ -163,7 +171,11 @@ namespace System.Net.Http
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, SR.ArgumentOutOfRange_NeedNonNegativeNum);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        SR.ArgumentOutOfRange_NeedNonNegativeNum
+                    );
                 }
 
                 CheckDisposedOrStarted();
@@ -176,8 +188,10 @@ namespace System.Net.Http
             get => _settings._maxResponseDrainTime;
             set
             {
-                if ((value < TimeSpan.Zero && value != Timeout.InfiniteTimeSpan) ||
-                    (value.TotalMilliseconds > int.MaxValue))
+                if (
+                    (value < TimeSpan.Zero && value != Timeout.InfiniteTimeSpan)
+                    || (value.TotalMilliseconds > int.MaxValue)
+                )
                 {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
@@ -194,7 +208,11 @@ namespace System.Net.Http
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, SR.Format(SR.net_http_value_must_be_greater_than, 0));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        SR.Format(SR.net_http_value_must_be_greater_than, 0)
+                    );
                 }
 
                 CheckDisposedOrStarted();
@@ -248,8 +266,10 @@ namespace System.Net.Http
             get => _settings._connectTimeout;
             set
             {
-                if ((value <= TimeSpan.Zero && value != Timeout.InfiniteTimeSpan) ||
-                    (value.TotalMilliseconds > int.MaxValue))
+                if (
+                    (value <= TimeSpan.Zero && value != Timeout.InfiniteTimeSpan)
+                    || (value.TotalMilliseconds > int.MaxValue)
+                )
                 {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
@@ -264,8 +284,10 @@ namespace System.Net.Http
             get => _settings._expect100ContinueTimeout;
             set
             {
-                if ((value < TimeSpan.Zero && value != Timeout.InfiniteTimeSpan) ||
-                    (value.TotalMilliseconds > int.MaxValue))
+                if (
+                    (value < TimeSpan.Zero && value != Timeout.InfiniteTimeSpan)
+                    || (value.TotalMilliseconds > int.MaxValue)
+                )
                 {
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
@@ -287,14 +309,21 @@ namespace System.Net.Http
             get => _settings._initialHttp2StreamWindowSize;
             set
             {
-                if (value < HttpHandlerDefaults.DefaultInitialHttp2StreamWindowSize || value > GlobalHttpSettings.SocketsHttpHandler.MaxHttp2StreamWindowSize)
+                if (
+                    value < HttpHandlerDefaults.DefaultInitialHttp2StreamWindowSize
+                    || value > GlobalHttpSettings.SocketsHttpHandler.MaxHttp2StreamWindowSize
+                )
                 {
                     string message = SR.Format(
                         SR.net_http_http2_invalidinitialstreamwindowsize,
                         HttpHandlerDefaults.DefaultInitialHttp2StreamWindowSize,
-                        GlobalHttpSettings.SocketsHttpHandler.MaxHttp2StreamWindowSize);
+                        GlobalHttpSettings.SocketsHttpHandler.MaxHttp2StreamWindowSize
+                    );
 
-                    throw new ArgumentOutOfRangeException(nameof(InitialHttp2StreamWindowSize), message);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(InitialHttp2StreamWindowSize),
+                        message
+                    );
                 }
                 CheckDisposedOrStarted();
                 _settings._initialHttp2StreamWindowSize = value;
@@ -318,7 +347,15 @@ namespace System.Net.Http
             {
                 if (value.Ticks < TimeSpan.TicksPerSecond && value != Timeout.InfiniteTimeSpan)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, SR.Format(SR.net_http_value_must_be_greater_than_or_equal, value, TimeSpan.FromSeconds(1)));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        SR.Format(
+                            SR.net_http_value_must_be_greater_than_or_equal,
+                            value,
+                            TimeSpan.FromSeconds(1)
+                        )
+                    );
                 }
 
                 CheckDisposedOrStarted();
@@ -343,7 +380,15 @@ namespace System.Net.Http
             {
                 if (value.Ticks < TimeSpan.TicksPerSecond && value != Timeout.InfiniteTimeSpan)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, SR.Format(SR.net_http_value_must_be_greater_than_or_equal, value, TimeSpan.FromSeconds(1)));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        SR.Format(
+                            SR.net_http_value_must_be_greater_than_or_equal,
+                            value,
+                            TimeSpan.FromSeconds(1)
+                        )
+                    );
                 }
 
                 CheckDisposedOrStarted();
@@ -387,7 +432,11 @@ namespace System.Net.Http
         /// <summary>
         /// When non-null, a custom callback used to open new connections.
         /// </summary>
-        public Func<SocketsHttpConnectionContext, CancellationToken, ValueTask<Stream>>? ConnectCallback
+        public Func<
+            SocketsHttpConnectionContext,
+            CancellationToken,
+            ValueTask<Stream>
+        >? ConnectCallback
         {
             get => _settings._connectCallback;
             set
@@ -400,7 +449,11 @@ namespace System.Net.Http
         /// <summary>
         /// Gets or sets a custom callback that provides access to the plaintext HTTP protocol stream.
         /// </summary>
-        public Func<SocketsHttpPlaintextStreamFilterContext, CancellationToken, ValueTask<Stream>>? PlaintextStreamFilter
+        public Func<
+            SocketsHttpPlaintextStreamFilterContext,
+            CancellationToken,
+            ValueTask<Stream>
+        >? PlaintextStreamFilter
         {
             get => _settings._plaintextStreamFilter;
             set
@@ -491,7 +544,10 @@ namespace System.Net.Http
             }
 
             // DiagnosticsHandler is inserted before RedirectHandler so that trace propagation is done on redirects as well
-            if (DiagnosticsHandler.IsGloballyEnabled() && settings._activityHeadersPropagator is DistributedContextPropagator propagator)
+            if (
+                DiagnosticsHandler.IsGloballyEnabled()
+                && settings._activityHeadersPropagator is DistributedContextPropagator propagator
+            )
             {
                 handler = new DiagnosticsHandler(handler, propagator, settings._allowAutoRedirect);
             }
@@ -502,11 +558,15 @@ namespace System.Net.Http
                 // if the credential is anything other than a CredentialCache.
                 // We allow credentials in a CredentialCache since they are specifically tied to URIs.
                 HttpMessageHandlerStage redirectHandler =
-                    (settings._credentials == null || settings._credentials is CredentialCache) ?
-                    handler :
-                    new HttpConnectionHandler(poolManager);        // will not authenticate
+                    (settings._credentials == null || settings._credentials is CredentialCache)
+                        ? handler
+                        : new HttpConnectionHandler(poolManager); // will not authenticate
 
-                handler = new RedirectHandler(settings._maxAutomaticRedirections, handler, redirectHandler);
+                handler = new RedirectHandler(
+                    settings._maxAutomaticRedirections,
+                    handler,
+                    redirectHandler
+                );
             }
 
             if (settings._automaticDecompression != DecompressionMethods.None)
@@ -523,20 +583,30 @@ namespace System.Net.Http
             return _handler;
         }
 
-        protected internal override HttpResponseMessage Send(HttpRequestMessage request,
-            CancellationToken cancellationToken)
+        protected internal override HttpResponseMessage Send(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             ArgumentNullException.ThrowIfNull(request);
 
             if (request.Version.Major >= 2)
             {
-                throw new NotSupportedException(SR.Format(SR.net_http_http2_sync_not_supported, GetType()));
+                throw new NotSupportedException(
+                    SR.Format(SR.net_http_http2_sync_not_supported, GetType())
+                );
             }
 
             // Do not allow upgrades for synchronous requests, that might lead to asynchronous code-paths.
             if (request.VersionPolicy == HttpVersionPolicy.RequestVersionOrHigher)
             {
-                throw new NotSupportedException(SR.Format(SR.net_http_upgrade_not_enabled_sync, nameof(Send), request.VersionPolicy));
+                throw new NotSupportedException(
+                    SR.Format(
+                        SR.net_http_upgrade_not_enabled_sync,
+                        nameof(Send),
+                        request.VersionPolicy
+                    )
+                );
             }
 
             ObjectDisposedException.ThrowIf(_disposed, this);
@@ -554,7 +624,10 @@ namespace System.Net.Http
             return handler.Send(request, cancellationToken);
         }
 
-        protected internal override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected internal override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             ArgumentNullException.ThrowIfNull(request);
 
@@ -588,8 +661,12 @@ namespace System.Net.Http
             {
                 if (request.Content == null)
                 {
-                    return new HttpRequestException(SR.net_http_client_execution_error,
-                        new InvalidOperationException(SR.net_http_chunked_not_allowed_with_empty_content));
+                    return new HttpRequestException(
+                        SR.net_http_client_execution_error,
+                        new InvalidOperationException(
+                            SR.net_http_chunked_not_allowed_with_empty_content
+                        )
+                    );
                 }
 
                 // Since the user explicitly set TransferEncodingChunked to true, we need to remove
@@ -625,7 +702,9 @@ namespace System.Net.Http
 
             if (!HttpUtilities.IsSupportedScheme(requestUri.Scheme))
             {
-                return new NotSupportedException(SR.Format(SR.net_http_unsupported_requesturi_scheme, requestUri.Scheme));
+                return new NotSupportedException(
+                    SR.Format(SR.net_http_unsupported_requesturi_scheme, requestUri.Scheme)
+                );
             }
 
             return null;

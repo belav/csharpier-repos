@@ -9,9 +9,17 @@ using Xunit;
 static class Helpers
 {
     public static bool IsConsoleInSupported =>
-        !PlatformDetection.IsAndroid && !PlatformDetection.IsiOS && !PlatformDetection.IsMacCatalyst && !PlatformDetection.IstvOS && !PlatformDetection.IsBrowser;
+        !PlatformDetection.IsAndroid
+        && !PlatformDetection.IsiOS
+        && !PlatformDetection.IsMacCatalyst
+        && !PlatformDetection.IstvOS
+        && !PlatformDetection.IsBrowser;
 
-    public static void SetAndReadHelper(Action<TextWriter> setHelper, Func<TextWriter> getHelper, Func<StreamReader, string> readHelper)
+    public static void SetAndReadHelper(
+        Action<TextWriter> setHelper,
+        Func<TextWriter> getHelper,
+        Func<StreamReader, string> readHelper
+    )
     {
         const string TestString = "Test";
 
@@ -45,7 +53,12 @@ static class Helpers
         TextWriter savedOut = Console.Out;
         try
         {
-            Console.SetOut(new StreamWriter(data, new UTF8Encoding(false), 0x1000, leaveOpen: true) { AutoFlush = true });
+            Console.SetOut(
+                new StreamWriter(data, new UTF8Encoding(false), 0x1000, leaveOpen: true)
+                {
+                    AutoFlush = true
+                }
+            );
             command(data);
         }
         finally
@@ -65,9 +78,18 @@ static class Helpers
             Console.SetOut(
                 new InterceptStreamWriter(
                     Console.OpenStandardOutput(),
-                    new StreamWriter(data, new UTF8Encoding(false), 0x1000, leaveOpen: true) { AutoFlush = true },
-                    new UTF8Encoding(false), 0x1000, leaveOpen: true)
-                { AutoFlush = true });
+                    new StreamWriter(data, new UTF8Encoding(false), 0x1000, leaveOpen: true)
+                    {
+                        AutoFlush = true
+                    },
+                    new UTF8Encoding(false),
+                    0x1000,
+                    leaveOpen: true
+                )
+                {
+                    AutoFlush = true
+                }
+            );
             command(data);
         }
         finally

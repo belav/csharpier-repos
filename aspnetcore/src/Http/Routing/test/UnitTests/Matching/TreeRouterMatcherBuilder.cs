@@ -30,7 +30,11 @@ internal class TreeRouterMatcherBuilder : MatcherBuilder
         var builder = new TreeRouteBuilder(
             NullLoggerFactory.Instance,
             new DefaultObjectPool<UriBuildingContext>(new UriBuilderContextPooledObjectPolicy()),
-            new DefaultInlineConstraintResolver(Options.Create(new RouteOptions()), new TestServiceProvider()));
+            new DefaultInlineConstraintResolver(
+                Options.Create(new RouteOptions()),
+                new TestServiceProvider()
+            )
+        );
 
         var selector = new DefaultEndpointSelector();
 
@@ -63,7 +67,8 @@ internal class TreeRouterMatcherBuilder : MatcherBuilder
                 new SelectorRouter(selector, candidates),
                 new RouteTemplate(endpoint.RoutePattern),
                 routeName: null,
-                order: endpoint.Order);
+                order: endpoint.Order
+            );
         }
 
         return new TreeRouterMatcher(builder.Build());
@@ -95,7 +100,10 @@ internal class TreeRouterMatcherBuilder : MatcherBuilder
             // This is needed due to a quirk of our tests - they reuse the endpoint feature.
             routeContext.HttpContext.SetEndpoint(null);
 
-            await _selector.SelectAsync(routeContext.HttpContext, new CandidateSet(_candidates, _values, _scores));
+            await _selector.SelectAsync(
+                routeContext.HttpContext,
+                new CandidateSet(_candidates, _values, _scores)
+            );
             if (routeContext.HttpContext.GetEndpoint() != null)
             {
                 routeContext.Handler = (_) => Task.CompletedTask;

@@ -73,7 +73,10 @@ namespace System.Runtime.InteropServices
         /// Used to lookup whether a delegate already has thunk allocated for it
         /// </summary>
         private static ConditionalWeakTable<Delegate, PInvokeDelegateThunk> s_pInvokeDelegates;
-        private static ConditionalWeakTable<Delegate, PInvokeDelegateThunk>.CreateValueCallback s_AllocateThunk;
+        private static ConditionalWeakTable<
+            Delegate,
+            PInvokeDelegateThunk
+        >.CreateValueCallback s_AllocateThunk;
 
         private static ConditionalWeakTable<Delegate, PInvokeDelegateThunk> GetPInvokeDelegates()
         {
@@ -95,18 +98,17 @@ namespace System.Runtime.InteropServices
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         internal unsafe struct ThunkContextData
         {
-            public GCHandle Handle;        //  A weak GCHandle to the delegate
-            public IntPtr FunctionPtr;     // Function pointer for open static delegates
+            public GCHandle Handle; //  A weak GCHandle to the delegate
+            public IntPtr FunctionPtr; // Function pointer for open static delegates
         }
 
         internal sealed class PInvokeDelegateThunk
         {
-            public IntPtr Thunk;        //  Thunk pointer
-            public IntPtr ContextData;  //  ThunkContextData pointer which will be stored in the context slot of the thunk
+            public IntPtr Thunk; //  Thunk pointer
+            public IntPtr ContextData; //  ThunkContextData pointer which will be stored in the context slot of the thunk
 
             public PInvokeDelegateThunk(Delegate del)
             {
-
                 Thunk = RuntimeAugments.AllocateThunk(s_thunkPoolHeap);
                 Debug.Assert(Thunk != IntPtr.Zero);
 
@@ -176,12 +178,21 @@ namespace System.Runtime.InteropServices
             //
             //  For open static delegates set target to ReverseOpenStaticDelegateStub which calls the static function pointer directly
             //
-            bool openStaticDelegate = del.GetRawFunctionPointerForOpenStaticDelegate() != IntPtr.Zero;
+            bool openStaticDelegate =
+                del.GetRawFunctionPointerForOpenStaticDelegate() != IntPtr.Zero;
 
-            IntPtr pTarget = RuntimeInteropData.GetDelegateMarshallingStub(del.GetTypeHandle(), openStaticDelegate);
+            IntPtr pTarget = RuntimeInteropData.GetDelegateMarshallingStub(
+                del.GetTypeHandle(),
+                openStaticDelegate
+            );
             Debug.Assert(pTarget != IntPtr.Zero);
 
-            RuntimeAugments.SetThunkData(s_thunkPoolHeap, delegateThunk.Thunk, delegateThunk.ContextData, pTarget);
+            RuntimeAugments.SetThunkData(
+                s_thunkPoolHeap,
+                delegateThunk.Thunk,
+                delegateThunk.ContextData,
+                pTarget
+            );
 
             return delegateThunk;
         }
@@ -189,7 +200,10 @@ namespace System.Runtime.InteropServices
         /// <summary>
         /// Retrieve the corresponding P/invoke instance from the stub
         /// </summary>
-        public static unsafe Delegate? GetDelegateForFunctionPointer(IntPtr ptr, RuntimeTypeHandle delegateType)
+        public static unsafe Delegate? GetDelegateForFunctionPointer(
+            IntPtr ptr,
+            RuntimeTypeHandle delegateType
+        )
         {
             if (ptr == IntPtr.Zero)
                 return null;
@@ -200,7 +214,10 @@ namespace System.Runtime.InteropServices
             //
             IntPtr pContext;
             IntPtr pTarget;
-            if (s_thunkPoolHeap != null && RuntimeAugments.TryGetThunkData(s_thunkPoolHeap, ptr, out pContext, out pTarget))
+            if (
+                s_thunkPoolHeap != null
+                && RuntimeAugments.TryGetThunkData(s_thunkPoolHeap, ptr, out pContext, out pTarget)
+            )
             {
                 GCHandle handle;
                 unsafe
@@ -231,10 +248,12 @@ namespace System.Runtime.InteropServices
             if (delegateType.ToEETypePtr().BaseType != EETypePtr.EETypePtrOf<MulticastDelegate>())
                 throw new ArgumentException(SR.Arg_MustBeDelegate, "t");
 
-            IntPtr pDelegateCreationStub = RuntimeInteropData.GetForwardDelegateCreationStub(delegateType);
+            IntPtr pDelegateCreationStub = RuntimeInteropData.GetForwardDelegateCreationStub(
+                delegateType
+            );
             Debug.Assert(pDelegateCreationStub != IntPtr.Zero);
 
-            return ((delegate*<IntPtr, Delegate>)pDelegateCreationStub)(ptr);
+            return ((delegate* <IntPtr, Delegate>)pDelegateCreationStub)(ptr);
         }
 
         /// <summary>
@@ -280,7 +299,6 @@ namespace System.Runtime.InteropServices
             {
                 // Pull out Handle from context
                 handle = ((ThunkContextData*)pContext)->Handle;
-
             }
 
             T target = Unsafe.As<T>(handle.Target);
@@ -299,20 +317,30 @@ namespace System.Runtime.InteropServices
         #endregion
 
         #region String marshalling
-        public static unsafe void StringBuilderToUnicodeString(System.Text.StringBuilder stringBuilder, ushort* destination)
+        public static unsafe void StringBuilderToUnicodeString(
+            System.Text.StringBuilder stringBuilder,
+            ushort* destination
+        )
         {
             int length = stringBuilder.Length;
             stringBuilder.CopyTo(0, new Span<char>((char*)destination, length), length);
             destination[length] = '\0';
         }
 
-        public static unsafe void UnicodeStringToStringBuilder(ushort* newBuffer, System.Text.StringBuilder stringBuilder)
+        public static unsafe void UnicodeStringToStringBuilder(
+            ushort* newBuffer,
+            System.Text.StringBuilder stringBuilder
+        )
         {
             stringBuilder.ReplaceBuffer((char*)newBuffer);
         }
 
-        public static unsafe void StringBuilderToAnsiString(System.Text.StringBuilder stringBuilder, byte* pNative,
-            bool bestFit, bool throwOnUnmappableChar)
+        public static unsafe void StringBuilderToAnsiString(
+            System.Text.StringBuilder stringBuilder,
+            byte* pNative,
+            bool bestFit,
+            bool throwOnUnmappableChar
+        )
         {
             int len;
 
@@ -326,7 +354,14 @@ namespace System.Runtime.InteropServices
             {
                 fixed (char* pManaged = buffer)
                 {
-                    StringToAnsiString(pManaged, len, pNative, /*terminateWithNull=*/true, bestFit, throwOnUnmappableChar);
+                    StringToAnsiString(
+                        pManaged,
+                        len,
+                        pNative, /*terminateWithNull=*/
+                        true,
+                        bestFit,
+                        throwOnUnmappableChar
+                    );
                 }
             }
             else // Otherwise, convert StringBuilder to string and then convert to ANSI
@@ -336,12 +371,22 @@ namespace System.Runtime.InteropServices
                 // Convert UNICODE string to ANSI string
                 fixed (char* pManaged = str)
                 {
-                    StringToAnsiString(pManaged, str.Length, pNative, /*terminateWithNull=*/true, bestFit, throwOnUnmappableChar);
+                    StringToAnsiString(
+                        pManaged,
+                        str.Length,
+                        pNative, /*terminateWithNull=*/
+                        true,
+                        bestFit,
+                        throwOnUnmappableChar
+                    );
                 }
             }
         }
 
-        public static unsafe void AnsiStringToStringBuilder(byte* newBuffer, System.Text.StringBuilder stringBuilder)
+        public static unsafe void AnsiStringToStringBuilder(
+            byte* newBuffer,
+            System.Text.StringBuilder stringBuilder
+        )
         {
             if (newBuffer == null)
                 throw new ArgumentNullException(nameof(newBuffer));
@@ -355,10 +400,7 @@ namespace System.Runtime.InteropServices
                 char[] buffer = new char[lenUnicode];
                 fixed (char* pTemp = &buffer[0])
                 {
-                    ConvertMultiByteToWideChar(newBuffer,
-                                               lenAnsi,
-                                               pTemp,
-                                               lenUnicode);
+                    ConvertMultiByteToWideChar(newBuffer, lenAnsi, pTemp, lenUnicode);
                 }
                 stringBuilder.ReplaceBuffer(buffer);
             }
@@ -393,10 +435,7 @@ namespace System.Runtime.InteropServices
 
                 fixed (char* pTemp = result)
                 {
-                    ConvertMultiByteToWideChar(pchBuffer,
-                                               lenAnsi,
-                                               pTemp,
-                                               lenUnicode);
+                    ConvertMultiByteToWideChar(pchBuffer, lenAnsi, pTemp, lenUnicode);
                 }
             }
 
@@ -408,7 +447,11 @@ namespace System.Runtime.InteropServices
         /// </summary>
         /// <remarks>This version is more efficient than StringToHGlobalAnsi in Interop\System\Runtime\InteropServices\Marshal.cs in that
         /// it could allocate single byte per character, instead of SystemMaxDBCSCharSize per char, and it can skip calling WideCharToMultiByte for ASCII string</remarks>
-        public static unsafe byte* StringToAnsiString(string str, bool bestFit, bool throwOnUnmappableChar)
+        public static unsafe byte* StringToAnsiString(
+            string str,
+            bool bestFit,
+            bool throwOnUnmappableChar
+        )
         {
             if (str != null)
             {
@@ -416,14 +459,26 @@ namespace System.Runtime.InteropServices
 
                 fixed (char* pManaged = str)
                 {
-                    return StringToAnsiString(pManaged, lenUnicode, null, /*terminateWithNull=*/true, bestFit, throwOnUnmappableChar);
+                    return StringToAnsiString(
+                        pManaged,
+                        lenUnicode,
+                        null, /*terminateWithNull=*/
+                        true,
+                        bestFit,
+                        throwOnUnmappableChar
+                    );
                 }
             }
 
             return null;
         }
 
-        public static unsafe void WideCharArrayToAnsiCharArray(char[] managedArray, byte* pNative, bool bestFit, bool throwOnUnmappableChar)
+        public static unsafe void WideCharArrayToAnsiCharArray(
+            char[] managedArray,
+            byte* pNative,
+            bool bestFit,
+            bool throwOnUnmappableChar
+        )
         {
             // Do nothing if array is NULL. This matches desktop CLR behavior
             if (managedArray == null)
@@ -436,7 +491,14 @@ namespace System.Runtime.InteropServices
             int lenUnicode = managedArray.Length;
             fixed (char* pManaged = managedArray)
             {
-                StringToAnsiString(pManaged, lenUnicode, pNative, /*terminateWithNull=*/false, bestFit, throwOnUnmappableChar);
+                StringToAnsiString(
+                    pManaged,
+                    lenUnicode,
+                    pNative, /*terminateWithNull=*/
+                    false,
+                    bestFit,
+                    throwOnUnmappableChar
+                );
             }
         }
 
@@ -465,10 +527,7 @@ namespace System.Runtime.InteropServices
             int lenInBytes = managedArray.Length;
             fixed (char* pManaged = managedArray)
             {
-                ConvertMultiByteToWideChar(pNative,
-                                           lenInBytes,
-                                           pManaged,
-                                           lenInBytes);
+                ConvertMultiByteToWideChar(pNative, lenInBytes, pManaged, lenInBytes);
             }
         }
 
@@ -478,10 +537,21 @@ namespace System.Runtime.InteropServices
         /// <param name="managedValue">single UNICODE wide char value</param>
         /// <param name="bestFit">Enable best-fit mapping behavior</param>
         /// <param name="throwOnUnmappableChar">Throw an exception on an unmappable Unicode character</param>
-        public static unsafe byte WideCharToAnsiChar(char managedValue, bool bestFit, bool throwOnUnmappableChar)
+        public static unsafe byte WideCharToAnsiChar(
+            char managedValue,
+            bool bestFit,
+            bool throwOnUnmappableChar
+        )
         {
             // @TODO - we really shouldn't allocate one-byte arrays and then destroy it
-            byte* nativeArray = StringToAnsiString(&managedValue, 1, null, /*terminateWithNull=*/false, bestFit, throwOnUnmappableChar);
+            byte* nativeArray = StringToAnsiString(
+                &managedValue,
+                1,
+                null, /*terminateWithNull=*/
+                false,
+                bestFit,
+                throwOnUnmappableChar
+            );
             byte native = (*nativeArray);
             Marshal.FreeCoTaskMem(new IntPtr(nativeArray));
             return native;
@@ -499,8 +569,14 @@ namespace System.Runtime.InteropServices
         }
 
         // c# string (UTF-16) to UTF-8 encoded byte array
-        internal static unsafe byte* StringToAnsiString(char* pManaged, int lenUnicode, byte* pNative, bool terminateWithNull,
-            bool bestFit, bool throwOnUnmappableChar)
+        internal static unsafe byte* StringToAnsiString(
+            char* pManaged,
+            int lenUnicode,
+            byte* pNative,
+            bool terminateWithNull,
+            bool bestFit,
+            bool throwOnUnmappableChar
+        )
         {
             bool allAscii = true;
 
@@ -544,12 +620,14 @@ namespace System.Runtime.InteropServices
             }
             else // Let OS convert
             {
-                ConvertWideCharToMultiByte(pManaged,
-                                           lenUnicode,
-                                           pNative,
-                                           length,
-                                           bestFit,
-                                           throwOnUnmappableChar);
+                ConvertWideCharToMultiByte(
+                    pManaged,
+                    lenUnicode,
+                    pNative,
+                    length,
+                    bestFit,
+                    throwOnUnmappableChar
+                );
             }
 
             // Zero terminate
@@ -564,7 +642,11 @@ namespace System.Runtime.InteropServices
         ///  estimate the length of the buffer in Unicode. It returns true if all bytes
         ///  in the buffer are ANSII.
         /// </summary>
-        private static unsafe bool CalculateStringLength(byte* pchBuffer, out int ansiBufferLen, out int unicodeBufferLen)
+        private static unsafe bool CalculateStringLength(
+            byte* pchBuffer,
+            out int ansiBufferLen,
+            out int unicodeBufferLen
+        )
         {
             ansiBufferLen = 0;
 

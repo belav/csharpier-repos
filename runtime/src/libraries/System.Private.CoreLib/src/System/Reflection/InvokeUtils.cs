@@ -11,7 +11,13 @@ namespace System.Reflection
     internal static class InvokeUtils
     {
         // This method is similar to the NativeAot method ConvertOrWidenPrimitivesEnumsAndPointersIfPossible().
-        public static object ConvertOrWiden(Type srcType, CorElementType srcElementType, object srcObject, Type dstType, CorElementType dstElementType)
+        public static object ConvertOrWiden(
+            Type srcType,
+            CorElementType srcElementType,
+            object srcObject,
+            Type dstType,
+            CorElementType dstElementType
+        )
         {
             object dstObject;
 
@@ -22,7 +28,9 @@ namespace System.Reflection
                     return dstPtr;
                 }
 
-                Debug.Fail($"Unexpected CorElementType: {dstElementType}. Not a valid widening target.");
+                Debug.Fail(
+                    $"Unexpected CorElementType: {dstElementType}. Not a valid widening target."
+                );
                 throw new NotSupportedException();
             }
 
@@ -30,7 +38,9 @@ namespace System.Reflection
             {
                 case CorElementType.ELEMENT_TYPE_BOOLEAN:
                     bool boolValue = Convert.ToBoolean(srcObject);
-                    dstObject = dstType.IsEnum ? Enum.ToObject(dstType, boolValue ? 1 : 0) : boolValue;
+                    dstObject = dstType.IsEnum
+                        ? Enum.ToObject(dstType, boolValue ? 1 : 0)
+                        : boolValue;
                     break;
 
                 case CorElementType.ELEMENT_TYPE_CHAR:
@@ -75,7 +85,9 @@ namespace System.Reflection
 
                 case CorElementType.ELEMENT_TYPE_U8:
                     ulong ulongValue = Convert.ToUInt64(srcObject);
-                    dstObject = dstType.IsEnum ? Enum.ToObject(dstType, (long)ulongValue) : ulongValue;
+                    dstObject = dstType.IsEnum
+                        ? Enum.ToObject(dstType, (long)ulongValue)
+                        : ulongValue;
                     break;
 
                 case CorElementType.ELEMENT_TYPE_R4:
@@ -101,7 +113,9 @@ namespace System.Reflection
                     break;
 
                 default:
-                    Debug.Fail($"Unexpected CorElementType: {dstElementType}. Not a valid widening target.");
+                    Debug.Fail(
+                        $"Unexpected CorElementType: {dstElementType}. Not a valid widening target."
+                    );
                     throw new NotSupportedException();
             }
 
@@ -110,7 +124,10 @@ namespace System.Reflection
             return dstObject;
         }
 
-        private static bool TryConvertPointer(object srcObject, [NotNullWhen(true)] out object? dstPtr)
+        private static bool TryConvertPointer(
+            object srcObject,
+            [NotNullWhen(true)] out object? dstPtr
+        )
         {
             if (srcObject is IntPtr or UIntPtr)
             {

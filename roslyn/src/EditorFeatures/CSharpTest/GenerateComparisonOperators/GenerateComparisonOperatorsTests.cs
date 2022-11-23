@@ -9,8 +9,7 @@ using Microsoft.CodeAnalysis.CSharp.CodeStyle;
 using Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Xunit;
-using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeRefactoringVerifier<
-    Microsoft.CodeAnalysis.GenerateComparisonOperators.GenerateComparisonOperatorsCodeRefactoringProvider>;
+using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeRefactoringVerifier<Microsoft.CodeAnalysis.GenerateComparisonOperators.GenerateComparisonOperatorsCodeRefactoringProvider>;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateComparisonOperators
 {
@@ -22,14 +21,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateComparisonOpera
         public async Task TestClass()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 [||]class C : IComparable<C>
 {
     public int CompareTo(C c) => 0;
 }",
-@"
+                @"
 using System;
 
 class C : IComparable<C>
@@ -55,7 +54,8 @@ class C : IComparable<C>
     {
         return left.CompareTo(right) >= 0;
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -64,7 +64,7 @@ class C : IComparable<C>
             await new VerifyCS.Test
             {
                 TestCode =
-@"
+                    @"
 using System;
 
 [||]class C : IComparable<C>
@@ -72,7 +72,7 @@ using System;
     public int CompareTo(C c) => 0;
 }",
                 FixedCode =
-@"
+                    @"
 using System;
 
 class C : IComparable<C>
@@ -87,8 +87,12 @@ class C : IComparable<C>
                 EditorConfig = CodeFixVerifierHelper.GetEditorConfigText(
                     new OptionsCollection(LanguageNames.CSharp)
                     {
-                        { CSharpCodeStyleOptions.PreferExpressionBodiedOperators, CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement },
-                    }),
+                        {
+                            CSharpCodeStyleOptions.PreferExpressionBodiedOperators,
+                            CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+                        },
+                    }
+                ),
             }.RunAsync();
         }
 
@@ -96,14 +100,14 @@ class C : IComparable<C>
         public async Task TestExplicitImpl()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 [||]class C : IComparable<C>
 {
     int IComparable<C>.CompareTo(C c) => 0;
 }",
-@"
+                @"
 using System;
 
 class C : IComparable<C>
@@ -129,21 +133,22 @@ class C : IComparable<C>
     {
         return ((IComparable<C>)left).CompareTo(right) >= 0;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestOnInterface()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C : [||]IComparable<C>
 {
     public int CompareTo(C c) => 0;
 }",
-@"
+                @"
 using System;
 
 class C : IComparable<C>
@@ -169,21 +174,22 @@ class C : IComparable<C>
     {
         return left.CompareTo(right) >= 0;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAtEndOfInterface()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C : IComparable<C>[||]
 {
     public int CompareTo(C c) => 0;
 }",
-@"
+                @"
 using System;
 
 class C : IComparable<C>
@@ -209,14 +215,15 @@ class C : IComparable<C>
     {
         return left.CompareTo(right) >= 0;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestInBody()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C : IComparable<C>
@@ -225,7 +232,7 @@ class C : IComparable<C>
 
 [||]
 }",
-@"
+                @"
 using System;
 
 class C : IComparable<C>
@@ -251,13 +258,15 @@ class C : IComparable<C>
     {
         return left.CompareTo(right) >= 0;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWithoutCompareMethod()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C : {|CS0535:IComparable<C>|}
@@ -271,7 +280,8 @@ class C : {|CS0535:IComparable<C>|}
         [Fact]
         public async Task TestMissingWithUnknownType()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C : IComparable<{|CS0246:Goo|}>
@@ -288,7 +298,7 @@ class C : IComparable<{|CS0246:Goo|}>
         public async Task TestMissingWithAllExistingOperators()
         {
             var code =
-@"
+                @"
 using System;
 
 class C : IComparable<C>
@@ -325,7 +335,7 @@ class C : IComparable<C>
         public async Task TestWithExistingOperator()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C : IComparable<C>
@@ -339,7 +349,7 @@ class C : IComparable<C>
 
 [||]
 }",
-@"
+                @"
 using System;
 
 class C : IComparable<C>
@@ -365,14 +375,15 @@ class C : IComparable<C>
     {
         return left.CompareTo(right) >= 0;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMultipleInterfaces()
         {
             var code =
-@"
+                @"
 using System;
 
 class C : IComparable<C>, IComparable<int>
@@ -383,7 +394,7 @@ class C : IComparable<C>, IComparable<int>
 [||]
 }";
             string GetFixedCode(string type) =>
-$@"
+                $@"
 using System;
 
 class C : IComparable<C>, IComparable<int>
@@ -433,7 +444,7 @@ class C : IComparable<C>, IComparable<int>
         public async Task TestInInterfaceWithDefaultImpl()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 interface C : IComparable<C>
@@ -442,7 +453,7 @@ interface C : IComparable<C>
 
 [||]
 }",
-@"
+                @"
 using System;
 
 interface C : IComparable<C>
@@ -468,7 +479,8 @@ interface C : IComparable<C>
     {
         return left.CompareTo(right) >= 0;
     }
-}");
+}"
+            );
         }
     }
 }

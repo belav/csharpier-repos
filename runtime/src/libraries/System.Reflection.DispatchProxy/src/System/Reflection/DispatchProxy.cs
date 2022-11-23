@@ -11,9 +11,7 @@ namespace System.Reflection
     /// </summary>
     public abstract class DispatchProxy
     {
-        protected DispatchProxy()
-        {
-        }
+        protected DispatchProxy() { }
 
         /// <summary>
         /// Whenever any method on the generated proxy type is called, this method
@@ -37,8 +35,13 @@ namespace System.Reflection
         // https://github.com/dotnet/runtime/issues/73136 - we can remove the RequiresDynamicCode annotation.
         // This has been done AOT-safely with .NET Native in the past.
         [RequiresDynamicCode("Creating a proxy instance requires generating code at runtime")]
-        public static T Create<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TProxy>()
-            where TProxy : DispatchProxy
+        public static T Create<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                TProxy
+        >() where TProxy : DispatchProxy
         {
             return (T)DispatchProxyGenerator.CreateProxyInstance(typeof(TProxy), typeof(T));
         }

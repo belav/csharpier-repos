@@ -8,13 +8,12 @@ public class Program
     private static int Main(string[] args)
     {
         Option<bool> boolOption = new Option<bool>(new[] { "--bool", "-b" }, "Bool option");
-        Option<string> stringOption = new Option<string>(new[] { "--string", "-s" }, "String option");
+        Option<string> stringOption = new Option<string>(
+            new[] { "--string", "-s" },
+            "String option"
+        );
 
-        RootCommand command = new RootCommand
-        {
-            boolOption,
-            stringOption
-        };
+        RootCommand command = new RootCommand { boolOption, stringOption };
 
         command.SetHandler(Run);
 
@@ -22,8 +21,12 @@ public class Program
 
         void Run(InvocationContext context)
         {
-            context.Console.WriteLine($"Bool option: {context.ParseResult.GetValueForOption(boolOption)}");
-            context.Console.WriteLine($"String option: {context.ParseResult.GetValueForOption(stringOption)}");
+            context.Console.WriteLine(
+                $"Bool option: {context.ParseResult.GetValueForOption(boolOption)}"
+            );
+            context.Console.WriteLine(
+                $"String option: {context.ParseResult.GetValueForOption(stringOption)}"
+            );
         }
     }
 }

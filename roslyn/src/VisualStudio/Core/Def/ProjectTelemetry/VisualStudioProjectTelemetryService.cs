@@ -25,22 +25,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectTelemetr
 {
     [ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.Host), Shared]
     internal class VisualStudioProjectTelemetryService
-        : ForegroundThreadAffinitizedObject, IProjectTelemetryListener, IEventListener<object>, IDisposable
+        : ForegroundThreadAffinitizedObject,
+            IProjectTelemetryListener,
+            IEventListener<object>,
+            IDisposable
     {
         private const string EventPrefix = "VS/Compilers/Compilation/";
         private const string PropertyPrefix = "VS.Compilers.Compilation.Inputs.";
 
         private const string TelemetryEventPath = EventPrefix + "Inputs";
-        private const string TelemetryExceptionEventPath = EventPrefix + "TelemetryUnhandledException";
+        private const string TelemetryExceptionEventPath =
+            EventPrefix + "TelemetryUnhandledException";
 
         private const string TelemetryProjectIdName = PropertyPrefix + "ProjectId";
         private const string TelemetryProjectGuidName = PropertyPrefix + "ProjectGuid";
         private const string TelemetryLanguageName = PropertyPrefix + "Language";
-        private const string TelemetryAnalyzerReferencesCountName = PropertyPrefix + "AnalyzerReferences.Count";
-        private const string TelemetryProjectReferencesCountName = PropertyPrefix + "ProjectReferences.Count";
-        private const string TelemetryMetadataReferencesCountName = PropertyPrefix + "MetadataReferences.Count";
+        private const string TelemetryAnalyzerReferencesCountName =
+            PropertyPrefix + "AnalyzerReferences.Count";
+        private const string TelemetryProjectReferencesCountName =
+            PropertyPrefix + "ProjectReferences.Count";
+        private const string TelemetryMetadataReferencesCountName =
+            PropertyPrefix + "MetadataReferences.Count";
         private const string TelemetryDocumentsCountName = PropertyPrefix + "Documents.Count";
-        private const string TelemetryAdditionalDocumentsCountName = PropertyPrefix + "AdditionalDocuments.Count";
+        private const string TelemetryAdditionalDocumentsCountName =
+            PropertyPrefix + "AdditionalDocuments.Count";
 
         private readonly VisualStudioWorkspaceImpl _workspace;
 
@@ -60,7 +68,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectTelemetr
         public VisualStudioProjectTelemetryService(
             VisualStudioWorkspaceImpl workspace,
             IThreadingContext threadingContext,
-            IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider) : base(threadingContext)
+            IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider
+        ) : base(threadingContext)
         {
             _workspace = workspace;
 
@@ -68,7 +77,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectTelemetr
                 TimeSpan.FromSeconds(1),
                 NotifyTelemetryServiceAsync,
                 asynchronousOperationListenerProvider.GetListener(FeatureAttribute.Telemetry),
-                threadingContext.DisposalToken);
+                threadingContext.DisposalToken
+            );
         }
 
         public void Dispose()
@@ -105,23 +115,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectTelemetr
         {
             var cancellationToken = ThreadingContext.DisposalToken;
 
-            var client = await RemoteHostClient.TryGetClientAsync(_workspace, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(_workspace, cancellationToken)
+                .ConfigureAwait(false);
             if (client == null)
                 return;
 
             // Pass ourselves in as the callback target for the OOP service.  As it discovers
             // designer attributes it will call back into us to notify VS about it.
-            _lazyConnection = client.CreateConnection<IRemoteProjectTelemetryService>(callbackTarget: this);
+            _lazyConnection = client.CreateConnection<IRemoteProjectTelemetryService>(
+                callbackTarget: this
+            );
 
             // Now kick off scanning in the OOP process.
             // If the call fails an error has already been reported and there is nothing more to do.
-            _ = await _lazyConnection.TryInvokeAsync(
-                (service, callbackId, cancellationToken) => service.ComputeProjectTelemetryAsync(callbackId, cancellationToken),
-                cancellationToken).ConfigureAwait(false);
+            _ = await _lazyConnection
+                .TryInvokeAsync(
+                    (service, callbackId, cancellationToken) =>
+                        service.ComputeProjectTelemetryAsync(callbackId, cancellationToken),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         private async ValueTask NotifyTelemetryServiceAsync(
-            ImmutableSegmentedList<ProjectTelemetryData> infos, CancellationToken cancellationToken)
+            ImmutableSegmentedList<ProjectTelemetryData> infos,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -135,7 +155,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectTelemetr
             await Task.WhenAll(tasks).ConfigureAwait(false);
         }
 
-        private static void AddFilteredData(ImmutableSegmentedList<ProjectTelemetryData> infos, ArrayBuilder<ProjectTelemetryData> filteredInfos)
+        private static void AddFilteredData(
+            ImmutableSegmentedList<ProjectTelemetryData> infos,
+            ArrayBuilder<ProjectTelemetryData> filteredInfos
+        )
         {
             using var _ = PooledHashSet<ProjectId>.GetInstance(out var seenProjectIds);
 
@@ -154,15 +177,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectTelemetr
         {
             try
             {
-                var telemetryEvent = TelemetryHelper.TelemetryService.CreateEvent(TelemetryEventPath);
-                telemetryEvent.SetStringProperty(TelemetryProjectIdName, info.ProjectId.Id.ToString());
+                var telemetryEvent = TelemetryHelper.TelemetryService.CreateEvent(
+                    TelemetryEventPath
+                );
+                telemetryEvent.SetStringProperty(
+                    TelemetryProjectIdName,
+                    info.ProjectId.Id.ToString()
+                );
                 telemetryEvent.SetStringProperty(TelemetryProjectGuidName, Guid.Empty.ToString());
                 telemetryEvent.SetStringProperty(TelemetryLanguageName, info.Language);
-                telemetryEvent.SetIntProperty(TelemetryAnalyzerReferencesCountName, info.AnalyzerReferencesCount);
-                telemetryEvent.SetIntProperty(TelemetryProjectReferencesCountName, info.ProjectReferencesCount);
-                telemetryEvent.SetIntProperty(TelemetryMetadataReferencesCountName, info.MetadataReferencesCount);
+                telemetryEvent.SetIntProperty(
+                    TelemetryAnalyzerReferencesCountName,
+                    info.AnalyzerReferencesCount
+                );
+                telemetryEvent.SetIntProperty(
+                    TelemetryProjectReferencesCountName,
+                    info.ProjectReferencesCount
+                );
+                telemetryEvent.SetIntProperty(
+                    TelemetryMetadataReferencesCountName,
+                    info.MetadataReferencesCount
+                );
                 telemetryEvent.SetIntProperty(TelemetryDocumentsCountName, info.DocumentsCount);
-                telemetryEvent.SetIntProperty(TelemetryAdditionalDocumentsCountName, info.AdditionalDocumentsCount);
+                telemetryEvent.SetIntProperty(
+                    TelemetryAdditionalDocumentsCountName,
+                    info.AdditionalDocumentsCount
+                );
 
                 TelemetryHelper.DefaultTelemetrySession.PostEvent(telemetryEvent);
             }
@@ -172,22 +212,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectTelemetr
                 // So, to be very careful, put this in a try/catch too.
                 try
                 {
-                    var exceptionEvent = TelemetryHelper.TelemetryService.CreateEvent(TelemetryExceptionEventPath);
+                    var exceptionEvent = TelemetryHelper.TelemetryService.CreateEvent(
+                        TelemetryExceptionEventPath
+                    );
                     exceptionEvent.SetStringProperty("Type", e.GetTypeDisplayName());
                     exceptionEvent.SetStringProperty("Message", e.Message);
                     exceptionEvent.SetStringProperty("StackTrace", e.StackTrace);
                     TelemetryHelper.DefaultTelemetrySession.PostEvent(exceptionEvent);
                 }
-                catch
-                {
-                }
+                catch { }
             }
         }
 
         /// <summary>
         /// Callback from the OOP service back into us.
         /// </summary>
-        public ValueTask ReportProjectTelemetryDataAsync(ProjectTelemetryData info, CancellationToken cancellationToken)
+        public ValueTask ReportProjectTelemetryDataAsync(
+            ProjectTelemetryData info,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(_workQueue);
             _workQueue.AddWork(info);

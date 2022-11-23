@@ -18,22 +18,24 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LineSeparators
     /// </summary>
     internal class LineSeparatorTag : GraphicsTag
     {
-        public LineSeparatorTag(IEditorFormatMap editorFormatMap)
-            : base(editorFormatMap)
-        {
-        }
+        public LineSeparatorTag(IEditorFormatMap editorFormatMap) : base(editorFormatMap) { }
 
-        protected override Color? GetColor(
-            IWpfTextView view, IEditorFormatMap editorFormatMap)
+        protected override Color? GetColor(IWpfTextView view, IEditorFormatMap editorFormatMap)
         {
-            var brush = view.VisualElement.TryFindResource("outlining.verticalrule.foreground") as SolidColorBrush;
+            var brush =
+                view.VisualElement.TryFindResource("outlining.verticalrule.foreground")
+                as SolidColorBrush;
             return brush?.Color;
         }
 
         /// <summary>
         /// Creates a very long line at the bottom of bounds.
         /// </summary>
-        public override GraphicsResult GetGraphics(IWpfTextView view, Geometry bounds, TextFormattingRunProperties? format)
+        public override GraphicsResult GetGraphics(
+            IWpfTextView view,
+            Geometry bounds,
+            TextFormattingRunProperties? format
+        )
         {
             var border = new Border()
             {
@@ -50,8 +52,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LineSeparators
             // This makes the line separator line up with the outlining bracket.
             Canvas.SetTop(border, bounds.Bounds.Bottom - border.Height);
 
-            return new GraphicsResult(border,
-                () => view.ViewportWidthChanged -= ViewportWidthChangedHandler);
+            return new GraphicsResult(
+                border,
+                () => view.ViewportWidthChanged -= ViewportWidthChangedHandler
+            );
 
             void ViewportWidthChangedHandler(object s, EventArgs e)
             {

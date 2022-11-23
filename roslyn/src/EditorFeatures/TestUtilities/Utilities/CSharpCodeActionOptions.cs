@@ -20,10 +20,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities;
 
 internal static class CSharpCodeActionOptions
 {
-    public static CodeActionOptions Default = new(
-        new CodeCleanupOptions(
-            CSharpSyntaxFormattingOptions.Default,
-            CSharpSimplifierOptions.Default),
-        CSharpCodeGenerationOptions.Default,
-        CSharpIdeCodeStyleOptions.Default);
+    public static CodeActionOptions Default =
+        new(
+            new CodeCleanupOptions(
+                CSharpSyntaxFormattingOptions.Default,
+                CSharpSimplifierOptions.Default
+            ),
+            CSharpCodeGenerationOptions.Default,
+            CSharpIdeCodeStyleOptions.Default
+        );
 }

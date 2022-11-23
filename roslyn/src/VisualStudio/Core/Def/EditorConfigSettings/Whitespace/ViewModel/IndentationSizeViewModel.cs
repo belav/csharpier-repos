@@ -104,11 +104,17 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
             };
         }
 
-        protected override IReadOnlyDictionary<string, IndentationSizeSetting> GetValuesAndDescriptions()
+        protected override IReadOnlyDictionary<
+            string,
+            IndentationSizeSetting
+        > GetValuesAndDescriptions()
         {
             return EnumerateOptions().ToDictionary(x => x.description, x => x.value);
 
-            static IEnumerable<(string description, IndentationSizeSetting value)> EnumerateOptions()
+            static IEnumerable<(
+                string description,
+                IndentationSizeSetting value
+            )> EnumerateOptions()
             {
                 yield return ("1", IndentationSizeSetting._1);
                 yield return ("2", IndentationSizeSetting._2);

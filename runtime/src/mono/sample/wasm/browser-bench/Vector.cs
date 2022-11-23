@@ -12,7 +12,8 @@ namespace Sample
 
         public VectorTask()
         {
-            measurements = new Measurement[] {
+            measurements = new Measurement[]
+            {
                 new Create(),
                 new Add(),
                 new Multiply(),
@@ -31,10 +32,7 @@ namespace Sample
 
         public override Measurement[] Measurements
         {
-            get
-            {
-                return measurements;
-            }
+            get { return measurements; }
         }
 
         public abstract class VectorMeasurement : BenchTask.Measurement
@@ -54,7 +52,9 @@ namespace Sample
 
         class Add : VectorMeasurement
         {
-            Vector128<int> vector1, vector2, vector3;
+            Vector128<int> vector1,
+                vector2,
+                vector3;
 
             public override string Name => "Add 2 Vector128's";
 
@@ -69,7 +69,9 @@ namespace Sample
 
         class Multiply : VectorMeasurement
         {
-            Vector128<int> vector1, vector2, vector3;
+            Vector128<int> vector1,
+                vector2,
+                vector3;
 
             public override string Name => "Multiply 2 Vector128's";
 
@@ -84,7 +86,8 @@ namespace Sample
 
         class DotInt : VectorMeasurement
         {
-            Vector128<int> vector1, vector2;
+            Vector128<int> vector1,
+                vector2;
             float result;
 
             public override string Name => "Dot product int";
@@ -103,7 +106,8 @@ namespace Sample
 
         class DotULong : VectorMeasurement
         {
-            Vector128<ulong> vector1, vector2;
+            Vector128<ulong> vector1,
+                vector2;
             float result;
 
             public override string Name => "Dot product ulong";
@@ -122,7 +126,8 @@ namespace Sample
 
         class DotFloat : VectorMeasurement
         {
-            Vector128<float> vector1, vector2;
+            Vector128<float> vector1,
+                vector2;
             float result;
 
             public override string Name => "Dot product float";
@@ -133,14 +138,16 @@ namespace Sample
                 vector2 = Vector128.Create(23f, 45, 67, 89);
             }
 
-            public override void RunStep() {
+            public override void RunStep()
+            {
                 result = Vector128.Dot(vector1, vector2);
             }
         }
 
         class DotDouble : VectorMeasurement
         {
-            Vector128<double> vector1, vector2;
+            Vector128<double> vector1,
+                vector2;
             double result;
 
             public override string Name => "Dot product double";
@@ -151,7 +158,8 @@ namespace Sample
                 vector2 = Vector128.Create(23d, 45);
             }
 
-            public override void RunStep() {
+            public override void RunStep()
+            {
                 result = Vector128.Dot(vector1, vector2);
             }
         }
@@ -168,7 +176,8 @@ namespace Sample
                 vector1 = Vector128.Create(12u, 34, 56, 78);
             }
 
-            public override void RunStep() {
+            public override void RunStep()
+            {
                 result = Vector128.Sum(vector1);
             }
         }
@@ -185,7 +194,8 @@ namespace Sample
                 vector1 = Vector128.Create(12d, 34);
             }
 
-            public override void RunStep() {
+            public override void RunStep()
+            {
                 result = Vector128.Sum(vector1);
             }
         }
@@ -205,7 +215,8 @@ namespace Sample
                 System.Console.WriteLine($"min float: {Vector128.Min(vector1, vector2)}");
             }
 
-            public override void RunStep() {
+            public override void RunStep()
+            {
                 result = Vector128.Min(vector1, vector2);
             }
         }
@@ -224,7 +235,8 @@ namespace Sample
                 vector2 = Vector128.Create(13f, 32, 57, 77);
             }
 
-            public override void RunStep() {
+            public override void RunStep()
+            {
                 result = Vector128.Max(vector1, vector2);
             }
         }
@@ -244,7 +256,8 @@ namespace Sample
                 System.Console.WriteLine($"min double: {Vector128.Min(vector1, vector2)}");
             }
 
-            public override void RunStep() {
+            public override void RunStep()
+            {
                 result = Vector128.Min(vector1, vector2);
             }
         }
@@ -263,7 +276,8 @@ namespace Sample
                 vector2 = Vector128.Create(13d, 32);
             }
 
-            public override void RunStep() {
+            public override void RunStep()
+            {
                 result = Vector128.Max(vector1, vector2);
             }
         }

@@ -10,16 +10,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class SetKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public SetKeywordRecommender()
-            : base(SyntaxKind.SetKeyword)
-        {
-        }
+        public SetKeywordRecommender() : base(SyntaxKind.SetKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            return
-                context.TargetToken.IsAccessorDeclarationContext<PropertyDeclarationSyntax>(position, SyntaxKind.SetKeyword) ||
-                context.TargetToken.IsAccessorDeclarationContext<IndexerDeclarationSyntax>(position, SyntaxKind.SetKeyword);
+            return context.TargetToken.IsAccessorDeclarationContext<PropertyDeclarationSyntax>(
+                    position,
+                    SyntaxKind.SetKeyword
+                )
+                || context.TargetToken.IsAccessorDeclarationContext<IndexerDeclarationSyntax>(
+                    position,
+                    SyntaxKind.SetKeyword
+                );
         }
     }
 }

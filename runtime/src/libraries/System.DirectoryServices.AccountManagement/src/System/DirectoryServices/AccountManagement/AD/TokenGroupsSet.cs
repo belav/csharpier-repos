@@ -13,19 +13,18 @@ namespace System.DirectoryServices.AccountManagement
 {
     internal sealed class TokenGroupSet : ResultSet
     {
-        internal TokenGroupSet(
-                             string userDN,
-                             ADStoreCtx storeCtx,
-                             bool readDomainGroups)
+        internal TokenGroupSet(string userDN, ADStoreCtx storeCtx, bool readDomainGroups)
         {
             _principalDN = userDN;
             _storeCtx = storeCtx;
             _attributeToQuery = readDomainGroups ? "tokenGroups" : "tokenGroupsGlobalAndUniversal";
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info,
-                                    "TokenGroupSet",
-                                    "TokenGroupSet: userDN={0}",
-                                    userDN);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "TokenGroupSet",
+                "TokenGroupSet: userDN={0}",
+                userDN
+            );
         }
 
         private readonly string _principalDN;
@@ -49,14 +48,20 @@ namespace System.DirectoryServices.AccountManagement
             {
                 if (_currentSID != null)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "TokenGroupSet", "CurrentAsPrincipal: using current");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "TokenGroupSet",
+                        "CurrentAsPrincipal: using current"
+                    );
 
-                    string SidBindingString = $"<SID={Utils.SecurityIdentifierToLdapHexBindingString(_currentSID)}>";
+                    string SidBindingString =
+                        $"<SID={Utils.SecurityIdentifierToLdapHexBindingString(_currentSID)}>";
 
                     DirectoryEntry currentDE = SDSUtils.BuildDirectoryEntry(
-                                                BuildPathFromDN(SidBindingString),
-                                                _storeCtx.Credentials,
-                                                _storeCtx.AuthTypes);
+                        BuildPathFromDN(SidBindingString),
+                        _storeCtx.Credentials,
+                        _storeCtx.AuthTypes
+                    );
 
                     _storeCtx.InitializeNewDirectoryOptions(currentDE);
                     _storeCtx.LoadDirectoryEntryAttributes(currentDE);
@@ -78,9 +83,10 @@ namespace System.DirectoryServices.AccountManagement
                 Debug.Assert(_principalDN != null);
 
                 _current = SDSUtils.BuildDirectoryEntry(
-                                            BuildPathFromDN(_principalDN),
-                                            _storeCtx.Credentials,
-                                            _storeCtx.AuthTypes);
+                    BuildPathFromDN(_principalDN),
+                    _storeCtx.Credentials,
+                    _storeCtx.AuthTypes
+                );
 
                 _current.RefreshCache(new string[] { _attributeToQuery });
 
@@ -89,7 +95,12 @@ namespace System.DirectoryServices.AccountManagement
                 _atBeginning = false;
             }
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "TokenGroupSet", "MoveNextLocal: returning primary group {0}", _current.Path);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "TokenGroupSet",
+                "MoveNextLocal: returning primary group {0}",
+                _current.Path
+            );
 
             if (_tokenGroupsEnum.MoveNext())
             {
@@ -98,7 +109,12 @@ namespace System.DirectoryServices.AccountManagement
 
                 byte[] sid = (byte[])_tokenGroupsEnum.Current;
                 _currentSID = new SecurityIdentifier(sid, 0);
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "TokenGroupSet", "MoveNextLocal: got a value from the enumerator: {0}", _currentSID.ToString());
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "TokenGroupSet",
+                    "MoveNextLocal: got a value from the enumerator: {0}",
+                    _currentSID.ToString()
+                );
 
                 return true;
             }
@@ -141,10 +157,18 @@ namespace System.DirectoryServices.AccountManagement
             string userSuppliedServername = _storeCtx.UserSuppliedServerName;
 
             UnsafeNativeMethods.Pathname pathCracker = new UnsafeNativeMethods.Pathname();
-            UnsafeNativeMethods.IADsPathname pathName = (UnsafeNativeMethods.IADsPathname)pathCracker;
-            pathName.EscapedMode = 2 /* ADS_ESCAPEDMODE_ON */;
-            pathName.Set(dn, 4 /* ADS_SETTYPE_DN */);
-            string escapedDn = pathName.Retrieve(7 /* ADS_FORMAT_X500_DN */);
+            UnsafeNativeMethods.IADsPathname pathName =
+                (UnsafeNativeMethods.IADsPathname)pathCracker;
+            pathName.EscapedMode =
+                2 /* ADS_ESCAPEDMODE_ON */
+            ;
+            pathName.Set(
+                dn,
+                4 /* ADS_SETTYPE_DN */
+            );
+            string escapedDn = pathName.Retrieve(
+                7 /* ADS_FORMAT_X500_DN */
+            );
 
             if (userSuppliedServername.Length > 0)
                 return "LDAP://" + _storeCtx.UserSuppliedServerName + "/" + escapedDn;

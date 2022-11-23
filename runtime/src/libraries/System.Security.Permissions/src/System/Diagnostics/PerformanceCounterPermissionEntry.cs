@@ -5,9 +5,20 @@ namespace System.Diagnostics
 {
     public class PerformanceCounterPermissionEntry
     {
-        public PerformanceCounterPermissionEntry(PerformanceCounterPermissionAccess permissionAccess, string machineName, string categoryName) { }
-        public string CategoryName { get { return null; } }
-        public string MachineName { get { return null; } }
+        public PerformanceCounterPermissionEntry(
+            PerformanceCounterPermissionAccess permissionAccess,
+            string machineName,
+            string categoryName
+        ) { }
+
+        public string CategoryName
+        {
+            get { return null; }
+        }
+        public string MachineName
+        {
+            get { return null; }
+        }
         public PerformanceCounterPermissionAccess PermissionAccess { get; }
     }
 }

@@ -20,401 +20,611 @@ using Xunit;
 
 namespace Mono.Linker.Tests.TestCasesRunner
 {
-	public class ResultChecker
-	{
-		private readonly BaseAssemblyResolver _originalsResolver;
-		private readonly ReaderParameters _originalReaderParameters;
-		private readonly ReaderParameters _linkedReaderParameters;
+    public class ResultChecker
+    {
+        private readonly BaseAssemblyResolver _originalsResolver;
+        private readonly ReaderParameters _originalReaderParameters;
+        private readonly ReaderParameters _linkedReaderParameters;
 
-		public ResultChecker ()
-			: this (new TestCaseAssemblyResolver (),
-				new ReaderParameters {
-					SymbolReaderProvider = new DefaultSymbolReaderProvider (false)
-				},
-				new ReaderParameters {
-					SymbolReaderProvider = new DefaultSymbolReaderProvider (false)
-				})
-		{
-		}
+        public ResultChecker()
+            : this(
+                new TestCaseAssemblyResolver(),
+                new ReaderParameters
+                {
+                    SymbolReaderProvider = new DefaultSymbolReaderProvider(false)
+                },
+                new ReaderParameters
+                {
+                    SymbolReaderProvider = new DefaultSymbolReaderProvider(false)
+                }
+            ) { }
 
-		public ResultChecker (BaseAssemblyResolver originalsResolver,
-			ReaderParameters originalReaderParameters, ReaderParameters linkedReaderParameters)
-		{
-			_originalsResolver = originalsResolver;
-			_originalReaderParameters = originalReaderParameters;
-			_linkedReaderParameters = linkedReaderParameters;
-		}
+        public ResultChecker(
+            BaseAssemblyResolver originalsResolver,
+            ReaderParameters originalReaderParameters,
+            ReaderParameters linkedReaderParameters
+        )
+        {
+            _originalsResolver = originalsResolver;
+            _originalReaderParameters = originalReaderParameters;
+            _linkedReaderParameters = linkedReaderParameters;
+        }
 
-		public virtual void Check (ILCompilerTestCaseResult trimmedResult)
-		{
-			InitializeResolvers (trimmedResult);
+        public virtual void Check(ILCompilerTestCaseResult trimmedResult)
+        {
+            InitializeResolvers(trimmedResult);
 
-			try {
-				var original = ResolveOriginalsAssembly (trimmedResult.ExpectationsAssemblyPath.FileNameWithoutExtension);
-				AdditionalChecking (trimmedResult, original);
-			} finally {
-				_originalsResolver.Dispose ();
-			}
-		}
+            try
+            {
+                var original = ResolveOriginalsAssembly(
+                    trimmedResult.ExpectationsAssemblyPath.FileNameWithoutExtension
+                );
+                AdditionalChecking(trimmedResult, original);
+            }
+            finally
+            {
+                _originalsResolver.Dispose();
+            }
+        }
 
-		private void InitializeResolvers (ILCompilerTestCaseResult linkedResult)
-		{
-			_originalsResolver.AddSearchDirectory (linkedResult.ExpectationsAssemblyPath.Parent.ToString ());
-		}
+        private void InitializeResolvers(ILCompilerTestCaseResult linkedResult)
+        {
+            _originalsResolver.AddSearchDirectory(
+                linkedResult.ExpectationsAssemblyPath.Parent.ToString()
+            );
+        }
 
-		protected AssemblyDefinition ResolveOriginalsAssembly (string assemblyName)
-		{
-			var cleanAssemblyName = assemblyName;
-			if (assemblyName.EndsWith (".exe") || assemblyName.EndsWith (".dll"))
-				cleanAssemblyName = Path.GetFileNameWithoutExtension (assemblyName);
-			return _originalsResolver.Resolve (new AssemblyNameReference (cleanAssemblyName, null), _originalReaderParameters);
-		}
+        protected AssemblyDefinition ResolveOriginalsAssembly(string assemblyName)
+        {
+            var cleanAssemblyName = assemblyName;
+            if (assemblyName.EndsWith(".exe") || assemblyName.EndsWith(".dll"))
+                cleanAssemblyName = Path.GetFileNameWithoutExtension(assemblyName);
+            return _originalsResolver.Resolve(
+                new AssemblyNameReference(cleanAssemblyName, null),
+                _originalReaderParameters
+            );
+        }
 
-		protected virtual void AdditionalChecking (ILCompilerTestCaseResult linkResult, AssemblyDefinition original)
-		{
-			bool checkRemainingErrors = !HasAttribute (original.MainModule.GetType (linkResult.TestCase.ReconstructedFullTypeName), nameof (SkipRemainingErrorsValidationAttribute));
-			VerifyLoggedMessages (original, linkResult.LogWriter, checkRemainingErrors);
-		}
+        protected virtual void AdditionalChecking(
+            ILCompilerTestCaseResult linkResult,
+            AssemblyDefinition original
+        )
+        {
+            bool checkRemainingErrors = !HasAttribute(
+                original.MainModule.GetType(linkResult.TestCase.ReconstructedFullTypeName),
+                nameof(SkipRemainingErrorsValidationAttribute)
+            );
+            VerifyLoggedMessages(original, linkResult.LogWriter, checkRemainingErrors);
+        }
 
-		private static bool IsProducedByNativeAOT (CustomAttribute attr)
-		{
-			var producedBy = attr.GetPropertyValue ("ProducedBy");
-			return producedBy is null ? true : ((ProducedBy) producedBy).HasFlag (ProducedBy.NativeAot);
-		}
+        private static bool IsProducedByNativeAOT(CustomAttribute attr)
+        {
+            var producedBy = attr.GetPropertyValue("ProducedBy");
+            return producedBy is null
+                ? true
+                : ((ProducedBy)producedBy).HasFlag(ProducedBy.NativeAot);
+        }
 
-		private static IEnumerable<ICustomAttributeProvider> GetAttributeProviders (AssemblyDefinition assembly)
-		{
-			foreach (var testType in assembly.AllDefinedTypes ()) {
-				foreach (var provider in testType.AllMembers ())
-					yield return provider;
+        private static IEnumerable<ICustomAttributeProvider> GetAttributeProviders(
+            AssemblyDefinition assembly
+        )
+        {
+            foreach (var testType in assembly.AllDefinedTypes())
+            {
+                foreach (var provider in testType.AllMembers())
+                    yield return provider;
 
-				yield return testType;
-			}
+                yield return testType;
+            }
 
-			foreach (var module in assembly.Modules)
-				yield return module;
+            foreach (var module in assembly.Modules)
+                yield return module;
 
-			yield return assembly;
-		}
+            yield return assembly;
+        }
 
-		private void VerifyLoggedMessages (AssemblyDefinition original, TestLogWriter logger, bool checkRemainingErrors)
-		{
-			List<MessageContainer> loggedMessages = logger.GetLoggedMessages ();
-			List<(IMemberDefinition, CustomAttribute)> expectedNoWarningsAttributes = new List<(IMemberDefinition, CustomAttribute)> ();
-			foreach (var attrProvider in GetAttributeProviders (original)) {
-				if (attrProvider.ToString () is string mystring && mystring.Contains ("RequiresInCompilerGeneratedCode/SuppressInLambda"))
-					Debug.WriteLine ("Print");
-				foreach (var attr in attrProvider.CustomAttributes) {
-					if (!IsProducedByNativeAOT (attr))
-						continue;
+        private void VerifyLoggedMessages(
+            AssemblyDefinition original,
+            TestLogWriter logger,
+            bool checkRemainingErrors
+        )
+        {
+            List<MessageContainer> loggedMessages = logger.GetLoggedMessages();
+            List<(IMemberDefinition, CustomAttribute)> expectedNoWarningsAttributes =
+                new List<(IMemberDefinition, CustomAttribute)>();
+            foreach (var attrProvider in GetAttributeProviders(original))
+            {
+                if (
+                    attrProvider.ToString() is string mystring
+                    && mystring.Contains("RequiresInCompilerGeneratedCode/SuppressInLambda")
+                )
+                    Debug.WriteLine("Print");
+                foreach (var attr in attrProvider.CustomAttributes)
+                {
+                    if (!IsProducedByNativeAOT(attr))
+                        continue;
 
-					switch (attr.AttributeType.Name) {
+                    switch (attr.AttributeType.Name)
+                    {
+                        case nameof(LogContainsAttribute):
 
-					case nameof (LogContainsAttribute): {
-							var expectedMessage = (string) attr.ConstructorArguments[0].Value;
+                            {
+                                var expectedMessage = (string)attr.ConstructorArguments[0].Value;
 
-							List<MessageContainer> matchedMessages;
-							if ((bool) attr.ConstructorArguments[1].Value)
-								matchedMessages = loggedMessages.Where (m => Regex.IsMatch (m.ToString (), expectedMessage)).ToList ();
-							else
-								matchedMessages = loggedMessages.Where (m => MessageTextContains (m.ToString (), expectedMessage)).ToList (); ;
-							Assert.True (
-								matchedMessages.Count > 0,
-								$"Expected to find logged message matching `{expectedMessage}`, but no such message was found.{Environment.NewLine}Logged messages:{Environment.NewLine}{string.Join (Environment.NewLine, loggedMessages)}");
+                                List<MessageContainer> matchedMessages;
+                                if ((bool)attr.ConstructorArguments[1].Value)
+                                    matchedMessages = loggedMessages
+                                        .Where(m => Regex.IsMatch(m.ToString(), expectedMessage))
+                                        .ToList();
+                                else
+                                    matchedMessages = loggedMessages
+                                        .Where(
+                                            m => MessageTextContains(m.ToString(), expectedMessage)
+                                        )
+                                        .ToList();
+                                ;
+                                Assert.True(
+                                    matchedMessages.Count > 0,
+                                    $"Expected to find logged message matching `{expectedMessage}`, but no such message was found.{Environment.NewLine}Logged messages:{Environment.NewLine}{string.Join(Environment.NewLine, loggedMessages)}"
+                                );
 
-							foreach (var matchedMessage in matchedMessages)
-								loggedMessages.Remove (matchedMessage);
-						}
-						break;
+                                foreach (var matchedMessage in matchedMessages)
+                                    loggedMessages.Remove(matchedMessage);
+                            }
+                            break;
 
-					case nameof (LogDoesNotContainAttribute): {
-							var unexpectedMessage = (string) attr.ConstructorArguments[0].Value;
-							foreach (var loggedMessage in loggedMessages) {
-								var isLogged = () => {
-									if ((bool) attr.ConstructorArguments[1].Value)
-										return !Regex.IsMatch (loggedMessage.ToString (), unexpectedMessage);
-									return !MessageTextContains (loggedMessage.ToString (), unexpectedMessage);
-								};
+                        case nameof(LogDoesNotContainAttribute):
 
-								Assert.True (
-									isLogged (),
-									$"Expected to not find logged message matching `{unexpectedMessage}`, but found:{Environment.NewLine}{loggedMessage}{Environment.NewLine}Logged messages:{Environment.NewLine}{string.Join (Environment.NewLine, loggedMessages)}");
-							}
-						}
-						break;
+                            {
+                                var unexpectedMessage = (string)attr.ConstructorArguments[0].Value;
+                                foreach (var loggedMessage in loggedMessages)
+                                {
+                                    var isLogged = () =>
+                                    {
+                                        if ((bool)attr.ConstructorArguments[1].Value)
+                                            return !Regex.IsMatch(
+                                                loggedMessage.ToString(),
+                                                unexpectedMessage
+                                            );
+                                        return !MessageTextContains(
+                                            loggedMessage.ToString(),
+                                            unexpectedMessage
+                                        );
+                                    };
 
-					case nameof (ExpectedWarningAttribute): {
-							var expectedWarningCode = (string) attr.GetConstructorArgumentValue (0);
-							if (!expectedWarningCode.StartsWith ("IL")) {
-								Assert.Fail ($"The warning code specified in {nameof (ExpectedWarningAttribute)} must start with the 'IL' prefix. Specified value: '{expectedWarningCode}'.");
-							}
-							var expectedMessageContains = ((CustomAttributeArgument[]) attr.GetConstructorArgumentValue (1)).Select (a => (string) a.Value).ToArray ();
-							string fileName = (string) attr.GetPropertyValue ("FileName")!;
-							int? sourceLine = (int?) attr.GetPropertyValue ("SourceLine");
-							int? sourceColumn = (int?) attr.GetPropertyValue ("SourceColumn");
-							bool? isCompilerGeneratedCode = (bool?) attr.GetPropertyValue ("CompilerGeneratedCode");
+                                    Assert.True(
+                                        isLogged(),
+                                        $"Expected to not find logged message matching `{unexpectedMessage}`, but found:{Environment.NewLine}{loggedMessage}{Environment.NewLine}Logged messages:{Environment.NewLine}{string.Join(Environment.NewLine, loggedMessages)}"
+                                    );
+                                }
+                            }
+                            break;
 
-							int expectedWarningCodeNumber = int.Parse (expectedWarningCode.Substring (2));
-							string? expectedOrigin = null;
-							bool expectedWarningFound = false;
+                        case nameof(ExpectedWarningAttribute):
 
-							foreach (var loggedMessage in loggedMessages) {
-								if (loggedMessage.ToString ().Contains ("RequiresInCompilerGeneratedCode.SuppressInLambda")) {
-									Debug.WriteLine ("Print 2");
-								}
+                            {
+                                var expectedWarningCode = (string)
+                                    attr.GetConstructorArgumentValue(0);
+                                if (!expectedWarningCode.StartsWith("IL"))
+                                {
+                                    Assert.Fail(
+                                        $"The warning code specified in {nameof(ExpectedWarningAttribute)} must start with the 'IL' prefix. Specified value: '{expectedWarningCode}'."
+                                    );
+                                }
+                                var expectedMessageContains = (
+                                    (CustomAttributeArgument[])attr.GetConstructorArgumentValue(1)
+                                )
+                                    .Select(a => (string)a.Value)
+                                    .ToArray();
+                                string fileName = (string)attr.GetPropertyValue("FileName")!;
+                                int? sourceLine = (int?)attr.GetPropertyValue("SourceLine");
+                                int? sourceColumn = (int?)attr.GetPropertyValue("SourceColumn");
+                                bool? isCompilerGeneratedCode = (bool?)
+                                    attr.GetPropertyValue("CompilerGeneratedCode");
 
-								if (loggedMessage.Category != MessageCategory.Warning || loggedMessage.Code != expectedWarningCodeNumber)
-									continue;
+                                int expectedWarningCodeNumber = int.Parse(
+                                    expectedWarningCode.Substring(2)
+                                );
+                                string? expectedOrigin = null;
+                                bool expectedWarningFound = false;
 
-								bool messageNotFound = false;
-								foreach (var expectedMessage in expectedMessageContains) {
-									if (!MessageTextContains (loggedMessage.Text, expectedMessage)) {
-										messageNotFound = true;
-										break;
-									}
-								}
-								if (messageNotFound)
-									continue;
+                                foreach (var loggedMessage in loggedMessages)
+                                {
+                                    if (
+                                        loggedMessage
+                                            .ToString()
+                                            .Contains(
+                                                "RequiresInCompilerGeneratedCode.SuppressInLambda"
+                                            )
+                                    )
+                                    {
+                                        Debug.WriteLine("Print 2");
+                                    }
 
-								if (fileName != null) {
-									if (loggedMessage.Origin == null)
-										continue;
+                                    if (
+                                        loggedMessage.Category != MessageCategory.Warning
+                                        || loggedMessage.Code != expectedWarningCodeNumber
+                                    )
+                                        continue;
 
-									var actualOrigin = loggedMessage.Origin.Value;
-									if (actualOrigin.FileName != null) {
-										// Note: string.Compare(string, StringComparison) doesn't exist in .NET Framework API set
-										if (actualOrigin.FileName.IndexOf (fileName, StringComparison.OrdinalIgnoreCase) < 0)
-											continue;
+                                    bool messageNotFound = false;
+                                    foreach (var expectedMessage in expectedMessageContains)
+                                    {
+                                        if (
+                                            !MessageTextContains(
+                                                loggedMessage.Text,
+                                                expectedMessage
+                                            )
+                                        )
+                                        {
+                                            messageNotFound = true;
+                                            break;
+                                        }
+                                    }
+                                    if (messageNotFound)
+                                        continue;
 
-										if (sourceLine != null && loggedMessage.Origin?.SourceLine != sourceLine.Value)
-											continue;
+                                    if (fileName != null)
+                                    {
+                                        if (loggedMessage.Origin == null)
+                                            continue;
 
-										if (sourceColumn != null && loggedMessage.Origin?.SourceColumn != sourceColumn.Value)
-											continue;
-									} else {
-										// The warning was logged with member/ILoffset, so it didn't have line/column info filled
-										// but it will be computed from PDBs, so instead compare it in a string representation
-										if (expectedOrigin == null) {
-											expectedOrigin = fileName;
-											if (sourceLine.HasValue) {
-												expectedOrigin += "(" + sourceLine.Value;
-												if (sourceColumn.HasValue)
-													expectedOrigin += "," + sourceColumn.Value;
-												expectedOrigin += ")";
-											}
-										}
+                                        var actualOrigin = loggedMessage.Origin.Value;
+                                        if (actualOrigin.FileName != null)
+                                        {
+                                            // Note: string.Compare(string, StringComparison) doesn't exist in .NET Framework API set
+                                            if (
+                                                actualOrigin.FileName.IndexOf(
+                                                    fileName,
+                                                    StringComparison.OrdinalIgnoreCase
+                                                ) < 0
+                                            )
+                                                continue;
 
-										string actualOriginString = actualOrigin.ToString () ?? "";
-										if (!actualOriginString.EndsWith (expectedOrigin, StringComparison.OrdinalIgnoreCase))
-											continue;
-									}
-								} else if (isCompilerGeneratedCode == true) {
-									if (loggedMessage.Origin?.MemberDefinition is MethodDesc methodDesc) {
-										if (attrProvider is not IMemberDefinition expectedMember)
-											continue;
+                                            if (
+                                                sourceLine != null
+                                                && loggedMessage.Origin?.SourceLine
+                                                    != sourceLine.Value
+                                            )
+                                                continue;
 
-										string actualName = methodDesc.OwningType.ToString ().Replace ("+", ".") + "." + methodDesc.Name;
-										if (actualName.Contains (expectedMember.DeclaringType.FullName.Replace ("/", ".")) &&
-											actualName.Contains ("<" + expectedMember.Name + ">")) {
-											expectedWarningFound = true;
-											loggedMessages.Remove (loggedMessage);
-											break;
-										}
-										if (actualName.StartsWith (expectedMember.DeclaringType.FullName) &&
-											actualName.Contains (".cctor") && (expectedMember is FieldDefinition || expectedMember is PropertyDefinition)) {
-											expectedWarningFound = true;
-											loggedMessages.Remove (loggedMessage);
-											break;
-										}
-										if (methodDesc.Name == ".ctor" &&
-										methodDesc.OwningType.ToString () == expectedMember.FullName) {
-											expectedWarningFound = true;
-											loggedMessages.Remove (loggedMessage);
-											break;
-										}
-									}
-									continue;
-								} else {
-									if (LogMessageHasSameOriginMember (loggedMessage, attrProvider)) {
-										expectedWarningFound = true;
-										loggedMessages.Remove (loggedMessage);
-										break;
-									}
-									continue;
-								}
+                                            if (
+                                                sourceColumn != null
+                                                && loggedMessage.Origin?.SourceColumn
+                                                    != sourceColumn.Value
+                                            )
+                                                continue;
+                                        }
+                                        else
+                                        {
+                                            // The warning was logged with member/ILoffset, so it didn't have line/column info filled
+                                            // but it will be computed from PDBs, so instead compare it in a string representation
+                                            if (expectedOrigin == null)
+                                            {
+                                                expectedOrigin = fileName;
+                                                if (sourceLine.HasValue)
+                                                {
+                                                    expectedOrigin += "(" + sourceLine.Value;
+                                                    if (sourceColumn.HasValue)
+                                                        expectedOrigin += "," + sourceColumn.Value;
+                                                    expectedOrigin += ")";
+                                                }
+                                            }
 
-								expectedWarningFound = true;
-								loggedMessages.Remove (loggedMessage);
-								break;
-							}
+                                            string actualOriginString =
+                                                actualOrigin.ToString() ?? "";
+                                            if (
+                                                !actualOriginString.EndsWith(
+                                                    expectedOrigin,
+                                                    StringComparison.OrdinalIgnoreCase
+                                                )
+                                            )
+                                                continue;
+                                        }
+                                    }
+                                    else if (isCompilerGeneratedCode == true)
+                                    {
+                                        if (
+                                            loggedMessage.Origin?.MemberDefinition
+                                            is MethodDesc methodDesc
+                                        )
+                                        {
+                                            if (
+                                                attrProvider is not IMemberDefinition expectedMember
+                                            )
+                                                continue;
 
-							var expectedOriginString = fileName == null
-								? GetExpectedOriginDisplayName (attrProvider) + ": "
-								: "";
+                                            string actualName =
+                                                methodDesc.OwningType.ToString().Replace("+", ".")
+                                                + "."
+                                                + methodDesc.Name;
+                                            if (
+                                                actualName.Contains(
+                                                    expectedMember.DeclaringType.FullName.Replace(
+                                                        "/",
+                                                        "."
+                                                    )
+                                                )
+                                                && actualName.Contains(
+                                                    "<" + expectedMember.Name + ">"
+                                                )
+                                            )
+                                            {
+                                                expectedWarningFound = true;
+                                                loggedMessages.Remove(loggedMessage);
+                                                break;
+                                            }
+                                            if (
+                                                actualName.StartsWith(
+                                                    expectedMember.DeclaringType.FullName
+                                                )
+                                                && actualName.Contains(".cctor")
+                                                && (
+                                                    expectedMember is FieldDefinition
+                                                    || expectedMember is PropertyDefinition
+                                                )
+                                            )
+                                            {
+                                                expectedWarningFound = true;
+                                                loggedMessages.Remove(loggedMessage);
+                                                break;
+                                            }
+                                            if (
+                                                methodDesc.Name == ".ctor"
+                                                && methodDesc.OwningType.ToString()
+                                                    == expectedMember.FullName
+                                            )
+                                            {
+                                                expectedWarningFound = true;
+                                                loggedMessages.Remove(loggedMessage);
+                                                break;
+                                            }
+                                        }
+                                        continue;
+                                    }
+                                    else
+                                    {
+                                        if (
+                                            LogMessageHasSameOriginMember(
+                                                loggedMessage,
+                                                attrProvider
+                                            )
+                                        )
+                                        {
+                                            expectedWarningFound = true;
+                                            loggedMessages.Remove(loggedMessage);
+                                            break;
+                                        }
+                                        continue;
+                                    }
 
-							Assert.True (expectedWarningFound,
-								$"Expected to find warning: {(fileName != null ? fileName + (sourceLine != null ? $"({sourceLine},{sourceColumn})" : "") + ": " : "")}" +
-								$"warning {expectedWarningCode}: {expectedOriginString}" +
-								$"and message containing {string.Join (" ", expectedMessageContains.Select (m => "'" + m + "'"))}, " +
-								$"but no such message was found.{Environment.NewLine}Logged messages:{Environment.NewLine}{string.Join (Environment.NewLine, loggedMessages)}");
-						}
-						break;
+                                    expectedWarningFound = true;
+                                    loggedMessages.Remove(loggedMessage);
+                                    break;
+                                }
 
-					case nameof (ExpectedNoWarningsAttribute):
-						// Postpone processing of negative checks, to make it possible to mark some warnings as expected (will be removed from the list above)
-						// and then do the negative check on the rest.
-						var memberDefinition = attrProvider as IMemberDefinition;
-						Assert.NotNull (memberDefinition);
-						expectedNoWarningsAttributes.Add ((memberDefinition, attr));
-						break;
-					}
-				}
-			}
+                                var expectedOriginString =
+                                    fileName == null
+                                        ? GetExpectedOriginDisplayName(attrProvider) + ": "
+                                        : "";
 
-			foreach ((var attrProvider, var attr) in expectedNoWarningsAttributes) {
-				var unexpectedWarningCode = attr.ConstructorArguments.Count == 0 ? null : (string) attr.GetConstructorArgumentValue (0);
-				if (unexpectedWarningCode != null && !unexpectedWarningCode.StartsWith ("IL")) {
-					Assert.Fail ($"The warning code specified in ExpectedNoWarnings attribute must start with the 'IL' prefix. Specified value: '{unexpectedWarningCode}'.");
-				}
+                                Assert.True(
+                                    expectedWarningFound,
+                                    $"Expected to find warning: {(fileName != null ? fileName + (sourceLine != null ? $"({sourceLine},{sourceColumn})" : "") + ": " : "")}"
+                                        + $"warning {expectedWarningCode}: {expectedOriginString}"
+                                        + $"and message containing {string.Join(" ", expectedMessageContains.Select(m => "'" + m + "'"))}, "
+                                        + $"but no such message was found.{Environment.NewLine}Logged messages:{Environment.NewLine}{string.Join(Environment.NewLine, loggedMessages)}"
+                                );
+                            }
+                            break;
 
-				int? unexpectedWarningCodeNumber = unexpectedWarningCode == null ? null : int.Parse (unexpectedWarningCode.Substring (2));
+                        case nameof(ExpectedNoWarningsAttribute):
+                            // Postpone processing of negative checks, to make it possible to mark some warnings as expected (will be removed from the list above)
+                            // and then do the negative check on the rest.
+                            var memberDefinition = attrProvider as IMemberDefinition;
+                            Assert.NotNull(memberDefinition);
+                            expectedNoWarningsAttributes.Add((memberDefinition, attr));
+                            break;
+                    }
+                }
+            }
 
-				MessageContainer? unexpectedWarningMessage = null;
-				foreach (var mc in logger.GetLoggedMessages ()) {
-					if (mc.Category != MessageCategory.Warning)
-						continue;
+            foreach ((var attrProvider, var attr) in expectedNoWarningsAttributes)
+            {
+                var unexpectedWarningCode =
+                    attr.ConstructorArguments.Count == 0
+                        ? null
+                        : (string)attr.GetConstructorArgumentValue(0);
+                if (unexpectedWarningCode != null && !unexpectedWarningCode.StartsWith("IL"))
+                {
+                    Assert.Fail(
+                        $"The warning code specified in ExpectedNoWarnings attribute must start with the 'IL' prefix. Specified value: '{unexpectedWarningCode}'."
+                    );
+                }
 
-					if (unexpectedWarningCodeNumber != null && unexpectedWarningCodeNumber.Value != mc.Code)
-						continue;
+                int? unexpectedWarningCodeNumber =
+                    unexpectedWarningCode == null
+                        ? null
+                        : int.Parse(unexpectedWarningCode.Substring(2));
 
-					// This is a hacky way to say anything in the "subtree" of the attrProvider
-					if ((mc.Origin?.MemberDefinition is TypeSystemEntity member) && member.ToString ()?.Contains (attrProvider.FullName) != true)
-						continue;
+                MessageContainer? unexpectedWarningMessage = null;
+                foreach (var mc in logger.GetLoggedMessages())
+                {
+                    if (mc.Category != MessageCategory.Warning)
+                        continue;
 
-					unexpectedWarningMessage = mc;
-					break;
-				}
+                    if (
+                        unexpectedWarningCodeNumber != null
+                        && unexpectedWarningCodeNumber.Value != mc.Code
+                    )
+                        continue;
 
-				Assert.False (unexpectedWarningMessage.HasValue,
-					$"Unexpected warning found: {unexpectedWarningMessage}");
-			}
+                    // This is a hacky way to say anything in the "subtree" of the attrProvider
+                    if (
+                        (mc.Origin?.MemberDefinition is TypeSystemEntity member)
+                        && member.ToString()?.Contains(attrProvider.FullName) != true
+                    )
+                        continue;
 
-			if (checkRemainingErrors) {
-				var remainingErrors = loggedMessages.Where (m => Regex.IsMatch (m.ToString (), @".*(error | warning): \d{4}.*"));
-				Assert.False (remainingErrors.Any (), $"Found unexpected errors:{Environment.NewLine}{string.Join (Environment.NewLine, remainingErrors)}");
-			}
+                    unexpectedWarningMessage = mc;
+                    break;
+                }
 
-			static bool LogMessageHasSameOriginMember (MessageContainer mc, ICustomAttributeProvider expectedOriginProvider)
-			{
-				var origin = mc.Origin;
-				Debug.Assert (origin != null);
-				if (GetActualOriginDisplayName (origin?.MemberDefinition) == ConvertSignatureToIlcFormat (GetExpectedOriginDisplayName (expectedOriginProvider)))
-					return true;
+                Assert.False(
+                    unexpectedWarningMessage.HasValue,
+                    $"Unexpected warning found: {unexpectedWarningMessage}"
+                );
+            }
 
-				var actualMember = origin!.Value.MemberDefinition;
-				// Compensate for cases where for some reason the OM doesn't preserve the declaring types
-				// on certain things after trimming.
-				if (actualMember != null && GetOwningType (actualMember) == null &&
-					GetMemberName (actualMember) == (expectedOriginProvider as IMemberDefinition)?.Name)
-					return true;
+            if (checkRemainingErrors)
+            {
+                var remainingErrors = loggedMessages.Where(
+                    m => Regex.IsMatch(m.ToString(), @".*(error | warning): \d{4}.*")
+                );
+                Assert.False(
+                    remainingErrors.Any(),
+                    $"Found unexpected errors:{Environment.NewLine}{string.Join(Environment.NewLine, remainingErrors)}"
+                );
+            }
 
-				return false;
-			}
+            static bool LogMessageHasSameOriginMember(
+                MessageContainer mc,
+                ICustomAttributeProvider expectedOriginProvider
+            )
+            {
+                var origin = mc.Origin;
+                Debug.Assert(origin != null);
+                if (
+                    GetActualOriginDisplayName(origin?.MemberDefinition)
+                    == ConvertSignatureToIlcFormat(
+                        GetExpectedOriginDisplayName(expectedOriginProvider)
+                    )
+                )
+                    return true;
 
-			static TypeDesc? GetOwningType (TypeSystemEntity entity) => entity switch {
-				DefType defType => defType.ContainingType,
-				MethodDesc method => method.OwningType,
-				FieldDesc field => field.OwningType,
-				_ => null
-			};
+                var actualMember = origin!.Value.MemberDefinition;
+                // Compensate for cases where for some reason the OM doesn't preserve the declaring types
+                // on certain things after trimming.
+                if (
+                    actualMember != null
+                    && GetOwningType(actualMember) == null
+                    && GetMemberName(actualMember)
+                        == (expectedOriginProvider as IMemberDefinition)?.Name
+                )
+                    return true;
 
-			static string? GetMemberName (TypeSystemEntity? entity) => entity switch {
-				DefType defType => defType.Name,
-				MethodDesc method => method.Name,
-				FieldDesc field => field.Name,
-				_ => null
-			};
+                return false;
+            }
 
-			static string? GetActualOriginDisplayName (TypeSystemEntity? entity) => entity switch {
-				DefType defType => TrimAssemblyNamePrefix (defType.ToString ()),
-				MethodDesc method => TrimAssemblyNamePrefix (method.GetDisplayName ()),
-				FieldDesc field => TrimAssemblyNamePrefix (field.ToString ()),
-				ModuleDesc module => module.Assembly.GetName ().Name,
-				_ => null
-			};
+            static TypeDesc? GetOwningType(TypeSystemEntity entity) =>
+                entity switch
+                {
+                    DefType defType => defType.ContainingType,
+                    MethodDesc method => method.OwningType,
+                    FieldDesc field => field.OwningType,
+                    _ => null
+                };
 
-			static string TrimAssemblyNamePrefix (string name)
-			{
-				if (name.StartsWith ('[')) {
-					int i = name.IndexOf (']');
-					if (i > 0) {
-						return name.Substring (i + 1);
-					}
-				}
+            static string? GetMemberName(TypeSystemEntity? entity) =>
+                entity switch
+                {
+                    DefType defType => defType.Name,
+                    MethodDesc method => method.Name,
+                    FieldDesc field => field.Name,
+                    _ => null
+                };
 
-				return name;
-			}
+            static string? GetActualOriginDisplayName(TypeSystemEntity? entity) =>
+                entity switch
+                {
+                    DefType defType => TrimAssemblyNamePrefix(defType.ToString()),
+                    MethodDesc method => TrimAssemblyNamePrefix(method.GetDisplayName()),
+                    FieldDesc field => TrimAssemblyNamePrefix(field.ToString()),
+                    ModuleDesc module => module.Assembly.GetName().Name,
+                    _ => null
+                };
 
-			static string GetExpectedOriginDisplayName (ICustomAttributeProvider provider) =>
-				provider switch {
-					MethodDefinition method => method.GetDisplayName (),
-					FieldDefinition field => field.GetDisplayName (),
-					IMemberDefinition member => member.FullName,
-					AssemblyDefinition asm => asm.Name.Name,
-					_ => throw new NotImplementedException ()
-				};
+            static string TrimAssemblyNamePrefix(string name)
+            {
+                if (name.StartsWith('['))
+                {
+                    int i = name.IndexOf(']');
+                    if (i > 0)
+                    {
+                        return name.Substring(i + 1);
+                    }
+                }
 
-			static bool MessageTextContains (string message, string value)
-			{
-				// This is a workaround for different formatting of methods between ilc and linker/analyzer
-				// Sometimes they're written with a space after comma and sometimes without
-				//    Method(String,String)   - ilc
-				//    Method(String, String)  - linker/analyzer
-				return message.Contains (value) || message.Contains (ConvertSignatureToIlcFormat (value));
-			}
+                return name;
+            }
 
-			static string ConvertSignatureToIlcFormat (string value)
-			{
-				if (value.Contains ('(') || value.Contains ('<')) {
-					value = value.Replace (", ", ",");
-				}
+            static string GetExpectedOriginDisplayName(ICustomAttributeProvider provider) =>
+                provider switch
+                {
+                    MethodDefinition method => method.GetDisplayName(),
+                    FieldDefinition field => field.GetDisplayName(),
+                    IMemberDefinition member => member.FullName,
+                    AssemblyDefinition asm => asm.Name.Name,
+                    _ => throw new NotImplementedException()
+                };
 
-				// Split it into . separated parts and if one is ending with > rewrite it to `1 format
-				// ILC folows the reflection format which doesn't actually use generic instantiations on anything but the last type
-				// in nested hierarchy - it's difficult to replicate this with Cecil as it has different representation so just strip that info
-				var parts = value.Split ('.');
-				StringBuilder sb = new StringBuilder ();
-				foreach (var part in parts) {
-					if (sb.Length > 0)
-						sb.Append ('.');
+            static bool MessageTextContains(string message, string value)
+            {
+                // This is a workaround for different formatting of methods between ilc and linker/analyzer
+                // Sometimes they're written with a space after comma and sometimes without
+                //    Method(String,String)   - ilc
+                //    Method(String, String)  - linker/analyzer
+                return message.Contains(value)
+                    || message.Contains(ConvertSignatureToIlcFormat(value));
+            }
 
-					if (part.EndsWith ('>')) {
-						int i = part.LastIndexOf ('<');
-						if (i >= 0) {
-							sb.Append (part.AsSpan (0, i));
-							sb.Append ('`');
-							sb.Append (part.Substring (i + 1).Where (c => c == ',').Count () + 1);
-							continue;
-						}
-					}
+            static string ConvertSignatureToIlcFormat(string value)
+            {
+                if (value.Contains('(') || value.Contains('<'))
+                {
+                    value = value.Replace(", ", ",");
+                }
 
-					sb.Append (part);
-				}
+                // Split it into . separated parts and if one is ending with > rewrite it to `1 format
+                // ILC folows the reflection format which doesn't actually use generic instantiations on anything but the last type
+                // in nested hierarchy - it's difficult to replicate this with Cecil as it has different representation so just strip that info
+                var parts = value.Split('.');
+                StringBuilder sb = new StringBuilder();
+                foreach (var part in parts)
+                {
+                    if (sb.Length > 0)
+                        sb.Append('.');
 
-				return sb.ToString ();
-			}
-		}
+                    if (part.EndsWith('>'))
+                    {
+                        int i = part.LastIndexOf('<');
+                        if (i >= 0)
+                        {
+                            sb.Append(part.AsSpan(0, i));
+                            sb.Append('`');
+                            sb.Append(part.Substring(i + 1).Where(c => c == ',').Count() + 1);
+                            continue;
+                        }
+                    }
 
-		private static bool HasAttribute (ICustomAttributeProvider caProvider, string attributeName)
-		{
-			if (caProvider is AssemblyDefinition assembly && assembly.EntryPoint != null)
-				return assembly.EntryPoint.DeclaringType.CustomAttributes
-					.Any (attr => attr.AttributeType.Name == attributeName);
+                    sb.Append(part);
+                }
 
-			if (caProvider is TypeDefinition type)
-				return type.CustomAttributes.Any (attr => attr.AttributeType.Name == attributeName);
+                return sb.ToString();
+            }
+        }
 
-			return false;
-		}
-	}
+        private static bool HasAttribute(ICustomAttributeProvider caProvider, string attributeName)
+        {
+            if (caProvider is AssemblyDefinition assembly && assembly.EntryPoint != null)
+                return assembly.EntryPoint.DeclaringType.CustomAttributes.Any(
+                    attr => attr.AttributeType.Name == attributeName
+                );
+
+            if (caProvider is TypeDefinition type)
+                return type.CustomAttributes.Any(attr => attr.AttributeType.Name == attributeName);
+
+            return false;
+        }
+    }
 }

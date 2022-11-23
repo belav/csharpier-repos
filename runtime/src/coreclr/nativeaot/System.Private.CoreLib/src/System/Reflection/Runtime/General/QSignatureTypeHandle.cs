@@ -17,7 +17,10 @@ namespace System.Reflection.Runtime.General
     [CLSCompliant(false)]
     public partial struct QSignatureTypeHandle
     {
-        public object Reader { get { return _reader; } }
+        public object Reader
+        {
+            get { return _reader; }
+        }
         private object _reader;
 #if ECMA_METADATA_SUPPORT
         private readonly global::System.Reflection.Metadata.BlobReader _blobReader;
@@ -37,7 +40,11 @@ namespace System.Reflection.Runtime.General
         {
             if (Reader is global::Internal.Metadata.NativeFormat.MetadataReader)
             {
-                return _handle.TryResolve((global::Internal.Metadata.NativeFormat.MetadataReader)Reader, typeContext, ref exception);
+                return _handle.TryResolve(
+                    (global::Internal.Metadata.NativeFormat.MetadataReader)Reader,
+                    typeContext,
+                    ref exception
+                );
             }
 
 #if ECMA_METADATA_SUPPORT
@@ -47,7 +54,7 @@ namespace System.Reflection.Runtime.General
             }
 #endif
 
-            throw new BadImageFormatException();  // Expected TypeRef, Def or Spec with MetadataReader
+            throw new BadImageFormatException(); // Expected TypeRef, Def or Spec with MetadataReader
         }
 
         // Return any custom modifiers modifying the passed-in type and whose required/optional bit matches the passed in boolean.
@@ -58,7 +65,11 @@ namespace System.Reflection.Runtime.General
 #if ECMA_METADATA_SUPPORT
             throw new NotImplementedException();
 #else
-            return _handle.GetCustomModifiers((global::Internal.Metadata.NativeFormat.MetadataReader)Reader, typeContext, optional);
+            return _handle.GetCustomModifiers(
+                (global::Internal.Metadata.NativeFormat.MetadataReader)Reader,
+                typeContext,
+                optional
+            );
 #endif
         }
     }

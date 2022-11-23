@@ -8,14 +8,17 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
 {
-    internal interface IUnnecessaryImportsProvider<TSyntaxNode>
-        where TSyntaxNode : SyntaxNode
+    internal interface IUnnecessaryImportsProvider<TSyntaxNode> where TSyntaxNode : SyntaxNode
     {
-        ImmutableArray<TSyntaxNode> GetUnnecessaryImports(SemanticModel model, CancellationToken cancellationToken);
+        ImmutableArray<TSyntaxNode> GetUnnecessaryImports(
+            SemanticModel model,
+            CancellationToken cancellationToken
+        );
 
         ImmutableArray<TSyntaxNode> GetUnnecessaryImports(
             SemanticModel model,
             Func<SyntaxNode, bool>? predicate,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

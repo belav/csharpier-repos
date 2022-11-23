@@ -10,7 +10,7 @@ class ThreadStartLong
     public static int Main(string[] args)
     {
         // check args
-        if(args.Length != 1)
+        if (args.Length != 1)
         {
             Console.WriteLine("USAGE: ThreadStartLong <long>|min|max\n");
             return -1;
@@ -18,10 +18,10 @@ class ThreadStartLong
 
         long l = 0;
         // check for max or min
-        if(args[0].ToLower() == "max")
+        if (args[0].ToLower() == "max")
             l = Int64.MaxValue;
-        else if(args[0].ToLower() == "min")
-            l = Int64.MinValue;       
+        else if (args[0].ToLower() == "min")
+            l = Int64.MinValue;
         else
             l = Convert.ToInt64(args[0]);
 

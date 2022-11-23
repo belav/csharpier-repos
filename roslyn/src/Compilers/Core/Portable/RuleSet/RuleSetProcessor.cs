@@ -118,7 +118,14 @@ namespace Microsoft.CodeAnalysis
                         {
                             if (existingAction != action)
                             {
-                                throw new InvalidRuleSetException(string.Format(CodeAnalysisResources.RuleSetHasDuplicateRules, ruleId, existingAction, action));
+                                throw new InvalidRuleSetException(
+                                    string.Format(
+                                        CodeAnalysisResources.RuleSetHasDuplicateRules,
+                                        ruleId,
+                                        existingAction,
+                                        action
+                                    )
+                                );
                             }
                         }
                         else
@@ -137,8 +144,14 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            return new RuleSet(filePath, generalOption, specificOptions.ToImmutable(), includes.ToImmutable());
+            return new RuleSet(
+                filePath,
+                generalOption,
+                specificOptions.ToImmutable(),
+                includes.ToImmutable()
+            );
         }
+
 #nullable disable
 
         /// <summary>
@@ -177,7 +190,11 @@ namespace Microsoft.CodeAnalysis
         /// <param name="analyzer">The analyzer this rule belongs to</param>
         /// <param name="space">The namespace this rule belongs to</param>
         /// <returns>A rule object with data from the given XML node</returns>
-        private static KeyValuePair<string, ReportDiagnostic> ReadRule(XElement ruleNode, string analyzer, string space)
+        private static KeyValuePair<string, ReportDiagnostic> ReadRule(
+            XElement ruleNode,
+            string analyzer,
+            string space
+        )
         {
             string ruleId = ReadNonEmptyAttribute(ruleNode, RuleIdAttributeName);
             ReportDiagnostic action = ReadAction(ruleNode, allowDefault: false);
@@ -233,7 +250,13 @@ namespace Microsoft.CodeAnalysis
                 return ReportDiagnostic.Default;
             }
 
-            throw new InvalidRuleSetException(string.Format(CodeAnalysisResources.RuleSetBadAttributeValue, RuleActionAttributeName, action));
+            throw new InvalidRuleSetException(
+                string.Format(
+                    CodeAnalysisResources.RuleSetBadAttributeValue,
+                    RuleActionAttributeName,
+                    action
+                )
+            );
         }
 
         /// <summary>
@@ -257,12 +280,24 @@ namespace Microsoft.CodeAnalysis
             XAttribute attribute = node.Attribute(attributeName);
             if (attribute == null)
             {
-                throw new InvalidRuleSetException(string.Format(CodeAnalysisResources.RuleSetMissingAttribute, node.Name, attributeName));
+                throw new InvalidRuleSetException(
+                    string.Format(
+                        CodeAnalysisResources.RuleSetMissingAttribute,
+                        node.Name,
+                        attributeName
+                    )
+                );
             }
 
             if (string.IsNullOrEmpty(attribute.Value))
             {
-                throw new InvalidRuleSetException(string.Format(CodeAnalysisResources.RuleSetBadAttributeValue, attributeName, attribute.Value));
+                throw new InvalidRuleSetException(
+                    string.Format(
+                        CodeAnalysisResources.RuleSetBadAttributeValue,
+                        attributeName,
+                        attribute.Value
+                    )
+                );
             }
 
             return attribute.Value;

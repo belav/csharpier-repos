@@ -41,7 +41,11 @@ internal static class WeakReferenceHelpers
             Debug.Assert(newWeakRef != null);
 
             // Try replacing the existing WR with our newly-created one.
-            WeakReference<T>? currentWeakRef = Interlocked.CompareExchange(ref weakReference, newWeakRef, existingWeakRef);
+            WeakReference<T>? currentWeakRef = Interlocked.CompareExchange(
+                ref weakReference,
+                newWeakRef,
+                existingWeakRef
+            );
             if (ReferenceEquals(currentWeakRef, existingWeakRef))
             {
                 // success, 'weakReference' now points to our newly-created WR

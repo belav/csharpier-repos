@@ -34,12 +34,17 @@ namespace Microsoft.CodeAnalysis.Classification
         private readonly ConditionalWeakTable<ITextBuffer, TagComputer> _tagComputers = new();
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public SyntacticClassificationTaggerProvider(
             IThreadingContext threadingContext,
             SyntacticClassificationTypeMap typeMap,
             IGlobalOptionService globalOptions,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _threadingContext = threadingContext;
             _typeMap = typeMap;
@@ -55,7 +60,13 @@ namespace Microsoft.CodeAnalysis.Classification
 
             if (!_tagComputers.TryGetValue(buffer, out var tagComputer))
             {
-                tagComputer = new TagComputer(this, (ITextBuffer2)buffer, _listener, _typeMap, TaggerDelay.NearImmediate.ComputeTimeDelay());
+                tagComputer = new TagComputer(
+                    this,
+                    (ITextBuffer2)buffer,
+                    _listener,
+                    _typeMap,
+                    TaggerDelay.NearImmediate.ComputeTimeDelay()
+                );
                 _tagComputers.Add(buffer, tagComputer);
             }
 
@@ -71,7 +82,6 @@ namespace Microsoft.CodeAnalysis.Classification
             return null;
         }
 
-        private void DisconnectTagComputer(ITextBuffer buffer)
-            => _tagComputers.Remove(buffer);
+        private void DisconnectTagComputer(ITextBuffer buffer) => _tagComputers.Remove(buffer);
     }
 }

@@ -11,6 +11,7 @@ public class test
         x -= x * y;
         return x;
     }
+
     public static int Main()
     {
         // expected: 2 - 2 * 3 = -4

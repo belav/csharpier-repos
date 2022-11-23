@@ -64,7 +64,6 @@ namespace System.Linq.Tests
                 Assert.Null(array[i]);
         }
 
-
         [Fact]
         public void Repeat_ZeroCountLeadToEmptySequence()
         {
@@ -75,9 +74,11 @@ namespace System.Linq.Tests
         [Fact]
         public void Repeat_ThrowExceptionOnNegativeCount()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => Enumerable.Repeat(1, -1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "count",
+                () => Enumerable.Repeat(1, -1)
+            );
         }
-
 
         [Fact]
         public void Repeat_NotEnumerateAfterEnd()
@@ -225,7 +226,10 @@ namespace System.Linq.Tests
         [Fact]
         public void ElementAtExcessive()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => Enumerable.Repeat(3, 3).ElementAt(100));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => Enumerable.Repeat(3, 3).ElementAt(100)
+            );
         }
 
         [Fact]

@@ -28,7 +28,8 @@ internal static partial class Interop
             byte* pbOutput,
             int cbOutput,
             out int cbResult,
-            BCryptEncryptFlags dwFlags);
+            BCryptEncryptFlags dwFlags
+        );
 
         [LibraryImport(Libraries.BCrypt)]
         private static unsafe partial NTSTATUS BCryptDecrypt(
@@ -41,14 +42,16 @@ internal static partial class Interop
             byte* pbOutput,
             int cbOutput,
             out int cbResult,
-            BCryptEncryptFlags dwFlags);
+            BCryptEncryptFlags dwFlags
+        );
 
         private static unsafe int BCryptEncryptRsa(
             SafeBCryptKeyHandle key,
             ReadOnlySpan<byte> source,
             Span<byte> destination,
             void* pPaddingInfo,
-            BCryptEncryptFlags dwFlags)
+            BCryptEncryptFlags dwFlags
+        )
         {
             // BCryptEncrypt does not accept null/0, only non-null/0.
             Span<byte> notNull = stackalloc byte[1];
@@ -79,7 +82,8 @@ internal static partial class Interop
                     pDest,
                     destination.Length,
                     out written,
-                    dwFlags);
+                    dwFlags
+                );
             }
 
             if (status != NTSTATUS.STATUS_SUCCESS)
@@ -96,7 +100,8 @@ internal static partial class Interop
             Span<byte> destination,
             void* pPaddingInfo,
             BCryptEncryptFlags dwFlags,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             NTSTATUS status;
             int written;
@@ -114,7 +119,8 @@ internal static partial class Interop
                     pDest,
                     destination.Length,
                     out written,
-                    dwFlags);
+                    dwFlags
+                );
             }
 
             if (status == NTSTATUS.STATUS_SUCCESS)
@@ -135,21 +141,24 @@ internal static partial class Interop
         internal static unsafe int BCryptEncryptPkcs1(
             SafeBCryptKeyHandle key,
             ReadOnlySpan<byte> source,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             return BCryptEncryptRsa(
                 key,
                 source,
                 destination,
                 null,
-                BCryptEncryptFlags.BCRYPT_PAD_PKCS1);
+                BCryptEncryptFlags.BCRYPT_PAD_PKCS1
+            );
         }
 
         internal static unsafe int BCryptEncryptOaep(
             SafeBCryptKeyHandle key,
             ReadOnlySpan<byte> source,
             Span<byte> destination,
-            string? hashAlgorithmName)
+            string? hashAlgorithmName
+        )
         {
             fixed (char* pHashAlg = hashAlgorithmName)
             {
@@ -161,7 +170,8 @@ internal static partial class Interop
                     source,
                     destination,
                     &paddingInfo,
-                    BCryptEncryptFlags.BCRYPT_PAD_OAEP);
+                    BCryptEncryptFlags.BCRYPT_PAD_OAEP
+                );
             }
         }
 
@@ -169,7 +179,8 @@ internal static partial class Interop
             SafeBCryptKeyHandle key,
             ReadOnlySpan<byte> source,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             return BCryptDecryptRsa(
                 key,
@@ -177,7 +188,8 @@ internal static partial class Interop
                 destination,
                 null,
                 BCryptEncryptFlags.BCRYPT_PAD_PKCS1,
-                out bytesWritten);
+                out bytesWritten
+            );
         }
 
         internal static unsafe bool BCryptDecryptOaep(
@@ -185,7 +197,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> source,
             Span<byte> destination,
             string? hashAlgorithmName,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             fixed (char* pHashAlg = hashAlgorithmName)
             {
@@ -198,7 +211,8 @@ internal static partial class Interop
                     destination,
                     &paddingInfo,
                     BCryptEncryptFlags.BCRYPT_PAD_OAEP,
-                    out bytesWritten);
+                    out bytesWritten
+                );
             }
         }
     }

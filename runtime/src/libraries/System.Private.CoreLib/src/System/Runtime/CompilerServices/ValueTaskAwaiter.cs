@@ -9,7 +9,9 @@ using System.Threading.Tasks.Sources;
 namespace System.Runtime.CompilerServices
 {
     /// <summary>Provides an awaiter for a <see cref="ValueTask"/>.</summary>
-    public readonly struct ValueTaskAwaiter : ICriticalNotifyCompletion, IStateMachineBoxAwareAwaiter
+    public readonly struct ValueTaskAwaiter
+        : ICriticalNotifyCompletion,
+            IStateMachineBoxAwareAwaiter
     {
         /// <summary>Shim used to invoke an <see cref="Action"/> passed as the state argument to a <see cref="Action{Object}"/>.</summary>
         internal static readonly Action<object?> s_invokeActionDelegate = static state =>
@@ -22,6 +24,7 @@ namespace System.Runtime.CompilerServices
 
             action();
         };
+
         /// <summary>The value being awaited.</summary>
         private readonly ValueTask _value;
 
@@ -53,7 +56,15 @@ namespace System.Runtime.CompilerServices
             }
             else if (obj != null)
             {
-                Unsafe.As<IValueTaskSource>(obj).OnCompleted(s_invokeActionDelegate, continuation, _value._token, ValueTaskSourceOnCompletedFlags.UseSchedulingContext | ValueTaskSourceOnCompletedFlags.FlowExecutionContext);
+                Unsafe
+                    .As<IValueTaskSource>(obj)
+                    .OnCompleted(
+                        s_invokeActionDelegate,
+                        continuation,
+                        _value._token,
+                        ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                            | ValueTaskSourceOnCompletedFlags.FlowExecutionContext
+                    );
             }
             else
             {
@@ -73,7 +84,14 @@ namespace System.Runtime.CompilerServices
             }
             else if (obj != null)
             {
-                Unsafe.As<IValueTaskSource>(obj).OnCompleted(s_invokeActionDelegate, continuation, _value._token, ValueTaskSourceOnCompletedFlags.UseSchedulingContext);
+                Unsafe
+                    .As<IValueTaskSource>(obj)
+                    .OnCompleted(
+                        s_invokeActionDelegate,
+                        continuation,
+                        _value._token,
+                        ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                    );
             }
             else
             {
@@ -92,17 +110,30 @@ namespace System.Runtime.CompilerServices
             }
             else if (obj != null)
             {
-                Unsafe.As<IValueTaskSource>(obj).OnCompleted(ThreadPool.s_invokeAsyncStateMachineBox, box, _value._token, ValueTaskSourceOnCompletedFlags.UseSchedulingContext);
+                Unsafe
+                    .As<IValueTaskSource>(obj)
+                    .OnCompleted(
+                        ThreadPool.s_invokeAsyncStateMachineBox,
+                        box,
+                        _value._token,
+                        ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                    );
             }
             else
             {
-                TaskAwaiter.UnsafeOnCompletedInternal(Task.CompletedTask, box, continueOnCapturedContext: true);
+                TaskAwaiter.UnsafeOnCompletedInternal(
+                    Task.CompletedTask,
+                    box,
+                    continueOnCapturedContext: true
+                );
             }
         }
     }
 
     /// <summary>Provides an awaiter for a <see cref="ValueTask{TResult}"/>.</summary>
-    public readonly struct ValueTaskAwaiter<TResult> : ICriticalNotifyCompletion, IStateMachineBoxAwareAwaiter
+    public readonly struct ValueTaskAwaiter<TResult>
+        : ICriticalNotifyCompletion,
+            IStateMachineBoxAwareAwaiter
     {
         /// <summary>The value being awaited.</summary>
         private readonly ValueTask<TResult> _value;
@@ -135,7 +166,15 @@ namespace System.Runtime.CompilerServices
             }
             else if (obj != null)
             {
-                Unsafe.As<IValueTaskSource<TResult>>(obj).OnCompleted(ValueTaskAwaiter.s_invokeActionDelegate, continuation, _value._token, ValueTaskSourceOnCompletedFlags.UseSchedulingContext | ValueTaskSourceOnCompletedFlags.FlowExecutionContext);
+                Unsafe
+                    .As<IValueTaskSource<TResult>>(obj)
+                    .OnCompleted(
+                        ValueTaskAwaiter.s_invokeActionDelegate,
+                        continuation,
+                        _value._token,
+                        ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                            | ValueTaskSourceOnCompletedFlags.FlowExecutionContext
+                    );
             }
             else
             {
@@ -155,7 +194,14 @@ namespace System.Runtime.CompilerServices
             }
             else if (obj != null)
             {
-                Unsafe.As<IValueTaskSource<TResult>>(obj).OnCompleted(ValueTaskAwaiter.s_invokeActionDelegate, continuation, _value._token, ValueTaskSourceOnCompletedFlags.UseSchedulingContext);
+                Unsafe
+                    .As<IValueTaskSource<TResult>>(obj)
+                    .OnCompleted(
+                        ValueTaskAwaiter.s_invokeActionDelegate,
+                        continuation,
+                        _value._token,
+                        ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                    );
             }
             else
             {
@@ -174,11 +220,22 @@ namespace System.Runtime.CompilerServices
             }
             else if (obj != null)
             {
-                Unsafe.As<IValueTaskSource<TResult>>(obj).OnCompleted(ThreadPool.s_invokeAsyncStateMachineBox, box, _value._token, ValueTaskSourceOnCompletedFlags.UseSchedulingContext);
+                Unsafe
+                    .As<IValueTaskSource<TResult>>(obj)
+                    .OnCompleted(
+                        ThreadPool.s_invokeAsyncStateMachineBox,
+                        box,
+                        _value._token,
+                        ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                    );
             }
             else
             {
-                TaskAwaiter.UnsafeOnCompletedInternal(Task.CompletedTask, box, continueOnCapturedContext: true);
+                TaskAwaiter.UnsafeOnCompletedInternal(
+                    Task.CompletedTask,
+                    box,
+                    continueOnCapturedContext: true
+                );
             }
         }
     }

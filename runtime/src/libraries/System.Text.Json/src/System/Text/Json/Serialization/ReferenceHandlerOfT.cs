@@ -7,8 +7,7 @@ namespace System.Text.Json.Serialization
     /// This class defines how the <see cref="JsonSerializer"/> deals with references on serialization and deserialization.
     /// </summary>
     /// <typeparam name="T">The type of the <see cref="ReferenceResolver"/> to create on each serialization or deserialization call.</typeparam>
-    public sealed class ReferenceHandler<T> : ReferenceHandler
-        where T: ReferenceResolver, new()
+    public sealed class ReferenceHandler<T> : ReferenceHandler where T : ReferenceResolver, new()
     {
         /// <summary>
         /// Creates a new <see cref="ReferenceResolver"/> of type <typeparamref name="T"/> used for each serialization call.

@@ -15,25 +15,16 @@ namespace System.Reflection.Metadata
         // writable slice:
         private readonly byte[] _buffer;
         private readonly int _start;
-        private readonly int _end;  // exclusive
+        private readonly int _end; // exclusive
 
         // position in buffer relative to the beginning of the array:
         private int _position;
 
-        public BlobWriter(int size)
-            : this(new byte[size])
-        {
-        }
+        public BlobWriter(int size) : this(new byte[size]) { }
 
-        public BlobWriter(byte[] buffer)
-            : this(buffer, 0, buffer.Length)
-        {
-        }
+        public BlobWriter(byte[] buffer) : this(buffer, 0, buffer.Length) { }
 
-        public BlobWriter(Blob blob)
-            : this(blob.Buffer, blob.Start, blob.Length)
-        {
-        }
+        public BlobWriter(Blob blob) : this(blob.Buffer, blob.Start, blob.Length) { }
 
         public BlobWriter(byte[] buffer, int start, int count)
         {
@@ -54,15 +45,19 @@ namespace System.Reflection.Metadata
         /// </summary>
         public bool ContentEquals(BlobWriter other)
         {
-            return Length == other.Length && ByteSequenceComparer.Equals(_buffer, _start, other._buffer, other._start, Length);
+            return Length == other.Length
+                && ByteSequenceComparer.Equals(
+                    _buffer,
+                    _start,
+                    other._buffer,
+                    other._start,
+                    Length
+                );
         }
 
         public int Offset
         {
-            get
-            {
-                return _position - _start;
-            }
+            get { return _position - _start; }
             set
             {
                 if (value < 0 || _start > _end - value)
@@ -202,7 +197,11 @@ namespace System.Reflection.Metadata
         /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and <paramref name="byteCount"/> falls outside of the bounds of the <paramref name="buffer"/>.</exception>
         public void WriteBytes(ImmutableArray<byte> buffer, int start, int byteCount)
         {
-            WriteBytes(ImmutableByteArrayInterop.DangerousGetUnderlyingArray(buffer)!, start, byteCount);
+            WriteBytes(
+                ImmutableByteArrayInterop.DangerousGetUnderlyingArray(buffer)!,
+                start,
+                byteCount
+            );
         }
 
         /// <exception cref="ArgumentNullException"><paramref name="buffer"/> is null.</exception>
@@ -480,7 +479,13 @@ namespace System.Reflection.Metadata
             WriteUTF8(value, 0, value.Length, allowUnpairedSurrogates, prependSize: false);
         }
 
-        private void WriteUTF8(string str, int start, int length, bool allowUnpairedSurrogates, bool prependSize)
+        private void WriteUTF8(
+            string str,
+            int start,
+            int length,
+            bool allowUnpairedSurrogates,
+            bool prependSize
+        )
         {
             fixed (char* strPtr = str)
             {

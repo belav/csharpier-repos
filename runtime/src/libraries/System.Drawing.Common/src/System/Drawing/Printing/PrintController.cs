@@ -20,9 +20,7 @@ namespace System.Drawing.Printing
         /// </remarks>
         internal sealed class SafeDeviceModeHandle : SafeHandle
         {
-            public SafeDeviceModeHandle() : base(IntPtr.Zero, ownsHandle: true)
-            {
-            }
+            public SafeDeviceModeHandle() : base(IntPtr.Zero, ownsHandle: true) { }
 
             internal SafeDeviceModeHandle(IntPtr handle) : base(IntPtr.Zero, ownsHandle: true)
             {
@@ -61,9 +59,7 @@ namespace System.Drawing.Printing
 
         private protected SafeDeviceModeHandle? _modeHandle;
 
-        protected PrintController()
-        {
-        }
+        protected PrintController() { }
 
         public virtual bool IsPreview => false;
 
@@ -78,9 +74,7 @@ namespace System.Drawing.Printing
         /// <summary>
         /// When overridden in a derived class, completes the control sequence of when and how to print a page in a document.
         /// </summary>
-        public virtual void OnEndPage(PrintDocument document, PrintPageEventArgs e)
-        {
-        }
+        public virtual void OnEndPage(PrintDocument document, PrintPageEventArgs e) { }
 
         /// <remarks>
         /// If you have nested PrintControllers, this method won't get called on the inner one.
@@ -96,7 +90,9 @@ namespace System.Drawing.Printing
             }
             else
             {
-                printAction = document.PrinterSettings.PrintToFile ? PrintAction.PrintToFile : PrintAction.PrintToPrinter;
+                printAction = document.PrinterSettings.PrintToFile
+                    ? PrintAction.PrintToFile
+                    : PrintAction.PrintToPrinter;
             }
 
             // Check that user has permission to print to this particular printer
@@ -125,7 +121,9 @@ namespace System.Drawing.Printing
                 //     <!-- AppContextSwitchOverrides values are in the form of 'key1=true|false;key2=true|false  -->
                 //     <AppContextSwitchOverrides value = "Switch.System.Drawing.Printing.OptimizePrintPreview=true" />
                 // </runtime >
-                canceled = LocalAppContextSwitches.OptimizePrintPreview ? PrintLoopOptimized(document) : PrintLoop(document);
+                canceled = LocalAppContextSwitches.OptimizePrintPreview
+                    ? PrintLoopOptimized(document)
+                    : PrintLoop(document);
             }
             finally
             {
@@ -150,7 +148,9 @@ namespace System.Drawing.Printing
         /// </remarks>
         private bool PrintLoop(PrintDocument document)
         {
-            QueryPageSettingsEventArgs queryEvent = new QueryPageSettingsEventArgs((PageSettings)document.DefaultPageSettings.Clone());
+            QueryPageSettingsEventArgs queryEvent = new QueryPageSettingsEventArgs(
+                (PageSettings)document.DefaultPageSettings.Clone()
+            );
             while (true)
             {
                 document.OnQueryPageSettings(queryEvent);
@@ -188,7 +188,9 @@ namespace System.Drawing.Printing
         {
             PrintPageEventArgs? pageEvent = null;
             PageSettings documentPageSettings = (PageSettings)document.DefaultPageSettings.Clone();
-            QueryPageSettingsEventArgs queryEvent = new QueryPageSettingsEventArgs(documentPageSettings);
+            QueryPageSettingsEventArgs queryEvent = new QueryPageSettingsEventArgs(
+                documentPageSettings
+            );
             while (true)
             {
                 queryEvent.PageSettingsChanged = false;
@@ -248,16 +250,25 @@ namespace System.Drawing.Printing
 
         private PrintPageEventArgs CreatePrintPageEvent(PageSettings pageSettings)
         {
-            Debug.Assert((_modeHandle != null), "modeHandle is null.  Someone must have forgot to call base.StartPrint");
-
+            Debug.Assert(
+                (_modeHandle != null),
+                "modeHandle is null.  Someone must have forgot to call base.StartPrint"
+            );
 
             Rectangle pageBounds = pageSettings.GetBounds(_modeHandle);
-            Rectangle marginBounds = new Rectangle(pageSettings.Margins.Left,
-                                                   pageSettings.Margins.Top,
-                                                   pageBounds.Width - (pageSettings.Margins.Left + pageSettings.Margins.Right),
-                                                   pageBounds.Height - (pageSettings.Margins.Top + pageSettings.Margins.Bottom));
+            Rectangle marginBounds = new Rectangle(
+                pageSettings.Margins.Left,
+                pageSettings.Margins.Top,
+                pageBounds.Width - (pageSettings.Margins.Left + pageSettings.Margins.Right),
+                pageBounds.Height - (pageSettings.Margins.Top + pageSettings.Margins.Bottom)
+            );
 
-            PrintPageEventArgs pageEvent = new PrintPageEventArgs(null, marginBounds, pageBounds, pageSettings);
+            PrintPageEventArgs pageEvent = new PrintPageEventArgs(
+                null,
+                marginBounds,
+                pageBounds,
+                pageSettings
+            );
             return pageEvent;
         }
 
@@ -266,7 +277,8 @@ namespace System.Drawing.Printing
         /// </summary>
         public virtual void OnStartPrint(PrintDocument document, PrintEventArgs e)
         {
-            _modeHandle = (SafeDeviceModeHandle)document.PrinterSettings.GetHdevmode(document.DefaultPageSettings);
+            _modeHandle = (SafeDeviceModeHandle)
+                document.PrinterSettings.GetHdevmode(document.DefaultPageSettings);
         }
 
         /// <summary>

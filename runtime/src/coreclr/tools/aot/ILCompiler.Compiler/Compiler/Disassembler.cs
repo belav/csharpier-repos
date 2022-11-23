@@ -23,7 +23,9 @@ namespace ILCompiler
             // The coredistools library is not available in release builds because
             // we don't want to ship yet another huge LLVM-based DLL.
 #if DEBUG
-            SortedList<int, Relocation> sortedRelocs = new SortedList<int, Relocation>(relocs.Length);
+            SortedList<int, Relocation> sortedRelocs = new SortedList<int, Relocation>(
+                relocs.Length
+            );
             foreach (Relocation reloc in relocs)
                 sortedRelocs.Add(reloc.Offset, reloc);
 
@@ -83,28 +85,40 @@ namespace ILCompiler
 
             public CoreDisassembler(TargetArchitecture arch)
             {
-                _handle = InitBufferedDisasm(arch switch
-                {
-                    TargetArchitecture.X86 => TargetArch.Target_X86,
-                    TargetArchitecture.X64 => TargetArch.Target_X64,
-                    TargetArchitecture.ARM => TargetArch.Target_Thumb,
-                    TargetArchitecture.ARM64 => TargetArch.Target_Arm64,
-                    _ => throw new NotSupportedException()
-                });
+                _handle = InitBufferedDisasm(
+                    arch switch
+                    {
+                        TargetArchitecture.X86 => TargetArch.Target_X86,
+                        TargetArchitecture.X64 => TargetArch.Target_X64,
+                        TargetArchitecture.ARM => TargetArch.Target_Thumb,
+                        TargetArchitecture.ARM64 => TargetArch.Target_Arm64,
+                        _ => throw new NotSupportedException()
+                    }
+                );
 
                 if (_handle == IntPtr.Zero)
                     throw new OutOfMemoryException();
             }
 
             [DllImport(Library)]
-            private static extern int DumpInstruction(IntPtr handle, ulong address, IntPtr bytes, int size);
+            private static extern int DumpInstruction(
+                IntPtr handle,
+                ulong address,
+                IntPtr bytes,
+                int size
+            );
 
             public unsafe int Disassemble(byte[] bytes, int offset, out string instruction)
             {
                 int size;
                 fixed (byte* pByte = &bytes[offset])
                 {
-                    size = DumpInstruction(_handle, (ulong)offset, (IntPtr)pByte, bytes.Length - offset);
+                    size = DumpInstruction(
+                        _handle,
+                        (ulong)offset,
+                        (IntPtr)pByte,
+                        bytes.Length - offset
+                    );
                 }
 
                 instruction = Marshal.PtrToStringUTF8(GetOutputBuffer());

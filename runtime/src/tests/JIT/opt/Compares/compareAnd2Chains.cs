@@ -31,7 +31,6 @@ public class ComparisonTestAnd2Chains
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Eq_ulong_2(ulong a1, ulong a2) => a1 == 10 & a2 == 11;
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Ne_byte_2(byte a1, byte a2) => a1 != 5 & a2 != 5;
 
@@ -52,7 +51,6 @@ public class ComparisonTestAnd2Chains
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Ne_ulong_2(ulong a1, ulong a2) => a1 != 5 & a2 != 5;
-
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Lt_byte_2(byte a1, byte a2) => a1 < 5 & a2 < 5;
@@ -75,7 +73,6 @@ public class ComparisonTestAnd2Chains
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Lt_ulong_2(ulong a1, ulong a2) => a1 < 5 & a2 < 5;
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Le_byte_2(byte a1, byte a2) => a1 <= 5 & a2 <= 5;
 
@@ -96,7 +93,6 @@ public class ComparisonTestAnd2Chains
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Le_ulong_2(ulong a1, ulong a2) => a1 <= 5 & a2 <= 5;
-
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Gt_byte_2(byte a1, byte a2) => a1 > 5 & a2 > 5;
@@ -119,7 +115,6 @@ public class ComparisonTestAnd2Chains
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Gt_ulong_2(ulong a1, ulong a2) => a1 > 5 & a2 > 5;
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Ge_byte_2(byte a1, byte a2) => a1 >= 5 & a2 >= 5;
 
@@ -140,7 +135,6 @@ public class ComparisonTestAnd2Chains
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Ge_ulong_2(ulong a1, ulong a2) => a1 >= 5 & a2 >= 5;
-
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static int Main()

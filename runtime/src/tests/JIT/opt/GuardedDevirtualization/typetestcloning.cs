@@ -15,7 +15,7 @@ interface I
     public int F(int x, int y);
 }
 
-class Add : I 
+class Add : I
 {
     int I.F(int x, int y) => x + y;
 }
@@ -78,7 +78,7 @@ class CloningForTypeTests
             r0 += BothTypeAndArray(m, xs, ys, 0, 3);
             r1 += JustType(m, 0, 3);
         }
-        
+
         return (r0 + r1) / 21;
     }
 }

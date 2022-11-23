@@ -84,8 +84,13 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="provider">The <see cref="IServiceProvider"/> to retrieve the services from.</param>
         /// <param name="serviceType">An object that specifies the type of service object to get.</param>
         /// <returns>An enumeration of services of type <paramref name="serviceType"/>.</returns>
-        [RequiresDynamicCode("The native code for an IEnumerable<serviceType> might not be available at runtime.")]
-        public static IEnumerable<object?> GetServices(this IServiceProvider provider, Type serviceType)
+        [RequiresDynamicCode(
+            "The native code for an IEnumerable<serviceType> might not be available at runtime."
+        )]
+        public static IEnumerable<object?> GetServices(
+            this IServiceProvider provider,
+            Type serviceType
+        )
         {
             ThrowHelper.ThrowIfNull(provider);
             ThrowHelper.ThrowIfNull(serviceType);
@@ -119,7 +124,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="serviceScopeFactory">The <see cref="IServiceScopeFactory"/> to create the scope from.</param>
         /// <returns>An <see cref="AsyncServiceScope"/> that can be used to resolve scoped services.</returns>
-        public static AsyncServiceScope CreateAsyncScope(this IServiceScopeFactory serviceScopeFactory)
+        public static AsyncServiceScope CreateAsyncScope(
+            this IServiceScopeFactory serviceScopeFactory
+        )
         {
             return new AsyncServiceScope(serviceScopeFactory.CreateScope());
         }

@@ -30,7 +30,9 @@ namespace System.Runtime.InteropServices
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void SetLastPInvokeError(int error);
 
-        [RequiresDynamicCode("Marshalling code for the object might not be available. Use the DestroyStructure<T> overload instead.")]
+        [RequiresDynamicCode(
+            "Marshalling code for the object might not be available. Use the DestroyStructure<T> overload instead."
+        )]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static extern void DestroyStructure(IntPtr ptr, Type structuretype);
@@ -39,7 +41,9 @@ namespace System.Runtime.InteropServices
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static extern IntPtr OffsetOf(Type t, string fieldName);
 
-        [RequiresDynamicCode("Marshalling code for the object might not be available. Use the StructureToPtr<T> overload instead.")]
+        [RequiresDynamicCode(
+            "Marshalling code for the object might not be available. Use the StructureToPtr<T> overload instead."
+        )]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static extern void StructureToPtr(object structure, IntPtr ptr, bool fDeleteOld);
@@ -49,7 +53,7 @@ namespace System.Runtime.InteropServices
             if (obj == null || obj is string)
                 return true;
             var type = (obj.GetType() as RuntimeType)!;
-            return !RuntimeTypeHandle.HasReferences (type);
+            return !RuntimeTypeHandle.HasReferences(type);
         }
 
         private static void PrelinkCore(MethodInfo m)
@@ -63,9 +67,17 @@ namespace System.Runtime.InteropServices
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void PtrToStructureInternal(IntPtr ptr, object structure, bool allowValueClasses);
+        private static extern void PtrToStructureInternal(
+            IntPtr ptr,
+            object structure,
+            bool allowValueClasses
+        );
 
-        private static void PtrToStructureHelper(IntPtr ptr, object? structure, bool allowValueClasses)
+        private static void PtrToStructureHelper(
+            IntPtr ptr,
+            object? structure,
+            bool allowValueClasses
+        )
         {
             ArgumentNullException.ThrowIfNull(structure);
             ArgumentNullException.ThrowIfNull(ptr);
@@ -73,7 +85,11 @@ namespace System.Runtime.InteropServices
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern void GetDelegateForFunctionPointerInternal(QCallTypeHandle t, IntPtr ptr, ObjectHandleOnStack res);
+        private static extern void GetDelegateForFunctionPointerInternal(
+            QCallTypeHandle t,
+            IntPtr ptr,
+            ObjectHandleOnStack res
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern IntPtr GetFunctionPointerForDelegateInternal(Delegate d);
@@ -82,7 +98,11 @@ namespace System.Runtime.InteropServices
         {
             RuntimeType rttype = (RuntimeType)t;
             Delegate? res = null;
-            GetDelegateForFunctionPointerInternal(new QCallTypeHandle(ref rttype), ptr, ObjectHandleOnStack.Create(ref res));
+            GetDelegateForFunctionPointerInternal(
+                new QCallTypeHandle(ref rttype),
+                ptr,
+                ObjectHandleOnStack.Create(ref res)
+            );
             return res!;
         }
 
@@ -118,16 +138,25 @@ namespace System.Runtime.InteropServices
 
         private static Dictionary<(Type, string), ICustomMarshaler>? MarshalerInstanceCache;
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "Implementation detail of MarshalAs.CustomMarshaler")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "Implementation detail of MarshalAs.CustomMarshaler"
+        )]
         internal static ICustomMarshaler? GetCustomMarshalerInstance(Type type, string cookie)
         {
             var key = (type, cookie);
 
             Dictionary<(Type, string), ICustomMarshaler> cache =
-                Volatile.Read(ref MarshalerInstanceCache) ??
-                Interlocked.CompareExchange(ref MarshalerInstanceCache, new Dictionary<(Type, string), ICustomMarshaler>(new MarshalerInstanceKeyComparer()), null) ??
-                MarshalerInstanceCache;
+                Volatile.Read(ref MarshalerInstanceCache)
+                ?? Interlocked.CompareExchange(
+                    ref MarshalerInstanceCache,
+                    new Dictionary<(Type, string), ICustomMarshaler>(
+                        new MarshalerInstanceKeyComparer()
+                    ),
+                    null
+                )
+                ?? MarshalerInstanceCache;
 
             ICustomMarshaler? result;
             bool gotExistingInstance;
@@ -139,31 +168,47 @@ namespace System.Runtime.InteropServices
                 RuntimeMethodInfo? getInstanceMethod;
                 try
                 {
-                    getInstanceMethod = (RuntimeMethodInfo?)type.GetMethod(
-                        "GetInstance", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.InvokeMethod,
-                        null, new Type[] { typeof(string) }, null
-                    );
+                    getInstanceMethod = (RuntimeMethodInfo?)
+                        type.GetMethod(
+                            "GetInstance",
+                            BindingFlags.Static
+                                | BindingFlags.Public
+                                | BindingFlags.NonPublic
+                                | BindingFlags.InvokeMethod,
+                            null,
+                            new Type[] { typeof(string) },
+                            null
+                        );
                 }
                 catch (AmbiguousMatchException)
                 {
-                    throw new ApplicationException($"Custom marshaler '{type.FullName}' implements multiple static GetInstance methods that take a single string parameter.");
+                    throw new ApplicationException(
+                        $"Custom marshaler '{type.FullName}' implements multiple static GetInstance methods that take a single string parameter."
+                    );
                 }
 
-                if ((getInstanceMethod == null) ||
-                    (getInstanceMethod.ReturnType != typeof(ICustomMarshaler)))
+                if (
+                    (getInstanceMethod == null)
+                    || (getInstanceMethod.ReturnType != typeof(ICustomMarshaler))
+                )
                 {
-                    throw new ApplicationException($"Custom marshaler '{type.FullName}' does not implement a static GetInstance method that takes a single string parameter and returns an ICustomMarshaler.");
+                    throw new ApplicationException(
+                        $"Custom marshaler '{type.FullName}' does not implement a static GetInstance method that takes a single string parameter and returns an ICustomMarshaler."
+                    );
                 }
 
                 if (getInstanceMethod.ContainsGenericParameters)
                 {
-                    throw new System.TypeLoadException($"Custom marshaler '{type.FullName}' contains unassigned generic type parameter(s).");
+                    throw new System.TypeLoadException(
+                        $"Custom marshaler '{type.FullName}' contains unassigned generic type parameter(s)."
+                    );
                 }
 
                 Exception? exc;
                 try
                 {
-                    result = (ICustomMarshaler?)getInstanceMethod.InternalInvoke(null, new object[] { cookie }, out exc);
+                    result = (ICustomMarshaler?)
+                        getInstanceMethod.InternalInvoke(null, new object[] { cookie }, out exc);
                 }
                 catch (Exception e)
                 {
@@ -180,7 +225,9 @@ namespace System.Runtime.InteropServices
                 }
 
                 if (result == null)
-                    throw new ApplicationException($"A call to GetInstance() for custom marshaler '{type.FullName}' returned null, which is not allowed.");
+                    throw new ApplicationException(
+                        $"A call to GetInstance() for custom marshaler '{type.FullName}' returned null, which is not allowed."
+                    );
 
                 lock (cache)
                     cache[key] = result;

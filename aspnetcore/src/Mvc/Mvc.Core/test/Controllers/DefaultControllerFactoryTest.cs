@@ -25,16 +25,11 @@ public class DefaultControllerFactoryTest
         var context = new ControllerContext()
         {
             ActionDescriptor = actionDescriptor,
-            HttpContext = new DefaultHttpContext()
-            {
-                RequestServices = GetServices(),
-            },
+            HttpContext = new DefaultHttpContext() { RequestServices = GetServices(), },
         };
 
         var activator = new Mock<IControllerActivator>();
-        activator.Setup(a => a.Create(context))
-                 .Returns(expected)
-                 .Verifiable();
+        activator.Setup(a => a.Create(context)).Returns(expected).Verifiable();
 
         var controllerFactory = CreateControllerFactory(activator.Object);
 
@@ -59,12 +54,11 @@ public class DefaultControllerFactoryTest
         var context = new ControllerContext()
         {
             ActionDescriptor = actionDescriptor,
-            HttpContext = new DefaultHttpContext()
-            {
-                RequestServices = GetServices(),
-            },
+            HttpContext = new DefaultHttpContext() { RequestServices = GetServices(), },
         };
-        var factory = CreateControllerFactory(new DefaultControllerActivator(new TypeActivatorCache()));
+        var factory = CreateControllerFactory(
+            new DefaultControllerActivator(new TypeActivatorCache())
+        );
 
         // Act
         var result = factory.CreateController(context);
@@ -86,12 +80,11 @@ public class DefaultControllerFactoryTest
         var context = new ControllerContext()
         {
             ActionDescriptor = actionDescriptor,
-            HttpContext = new DefaultHttpContext()
-            {
-                RequestServices = GetServices(),
-            },
+            HttpContext = new DefaultHttpContext() { RequestServices = GetServices(), },
         };
-        var factory = CreateControllerFactory(new DefaultControllerActivator(new TypeActivatorCache()));
+        var factory = CreateControllerFactory(
+            new DefaultControllerActivator(new TypeActivatorCache())
+        );
 
         // Act
         var result = factory.CreateController(context);
@@ -113,12 +106,11 @@ public class DefaultControllerFactoryTest
         var context = new ControllerContext()
         {
             ActionDescriptor = actionDescriptor,
-            HttpContext = new DefaultHttpContext()
-            {
-                RequestServices = GetServices(),
-            },
+            HttpContext = new DefaultHttpContext() { RequestServices = GetServices(), },
         };
-        var factory = CreateControllerFactory(new DefaultControllerActivator(new TypeActivatorCache()));
+        var factory = CreateControllerFactory(
+            new DefaultControllerActivator(new TypeActivatorCache())
+        );
 
         // Act
         var result = factory.CreateController(context);
@@ -140,12 +132,11 @@ public class DefaultControllerFactoryTest
         var context = new ControllerContext()
         {
             ActionDescriptor = actionDescriptor,
-            HttpContext = new DefaultHttpContext()
-            {
-                RequestServices = GetServices(),
-            },
+            HttpContext = new DefaultHttpContext() { RequestServices = GetServices(), },
         };
-        var factory = CreateControllerFactory(new DefaultControllerActivator(new TypeActivatorCache()));
+        var factory = CreateControllerFactory(
+            new DefaultControllerActivator(new TypeActivatorCache())
+        );
 
         // Act
         var result = factory.CreateController(context);
@@ -168,19 +159,21 @@ public class DefaultControllerFactoryTest
         var context = new ControllerContext()
         {
             ActionDescriptor = actionDescriptor,
-            HttpContext = new DefaultHttpContext()
-            {
-                RequestServices = GetServices(),
-            },
+            HttpContext = new DefaultHttpContext() { RequestServices = GetServices(), },
         };
-        var factory = CreateControllerFactory(new DefaultControllerActivator(new TypeActivatorCache()));
+        var factory = CreateControllerFactory(
+            new DefaultControllerActivator(new TypeActivatorCache())
+        );
 
         // Act and Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => factory.CreateController(context));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => factory.CreateController(context)
+        );
         Assert.Equal(
-            $"Unable to resolve service for type '{typeof(TestService).FullName}' while attempting to activate " +
-            $"'{typeof(ControllerThatCannotBeActivated).FullName}'.",
-            exception.Message);
+            $"Unable to resolve service for type '{typeof(TestService).FullName}' while attempting to activate "
+                + $"'{typeof(ControllerThatCannotBeActivated).FullName}'.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -219,29 +212,30 @@ public class DefaultControllerFactoryTest
     {
         var metadataProvider = new EmptyModelMetadataProvider();
         var services = new Mock<IServiceProvider>();
-        services
-            .Setup(s => s.GetService(typeof(IUrlHelper)))
-            .Returns(Mock.Of<IUrlHelper>());
-        services
-            .Setup(s => s.GetService(typeof(IModelMetadataProvider)))
-            .Returns(metadataProvider);
+        services.Setup(s => s.GetService(typeof(IUrlHelper))).Returns(Mock.Of<IUrlHelper>());
+        services.Setup(s => s.GetService(typeof(IModelMetadataProvider))).Returns(metadataProvider);
         services
             .Setup(s => s.GetService(typeof(IObjectModelValidator)))
-            .Returns(new DefaultObjectValidator(
-                metadataProvider,
-                TestModelValidatorProvider.CreateDefaultProvider().ValidatorProviders,
-                new MvcOptions()));
+            .Returns(
+                new DefaultObjectValidator(
+                    metadataProvider,
+                    TestModelValidatorProvider.CreateDefaultProvider().ValidatorProviders,
+                    new MvcOptions()
+                )
+            );
         return services.Object;
     }
 
-    private static DefaultControllerFactory CreateControllerFactory(IControllerActivator controllerActivator = null)
+    private static DefaultControllerFactory CreateControllerFactory(
+        IControllerActivator controllerActivator = null
+    )
     {
         var activatorMock = new Mock<IControllerActivator>();
 
         controllerActivator = controllerActivator ?? activatorMock.Object;
         var propertyActivators = new IControllerPropertyActivator[]
         {
-                new DefaultControllerPropertyActivator(),
+            new DefaultControllerPropertyActivator(),
         };
 
         return new DefaultControllerFactory(controllerActivator, propertyActivators);
@@ -301,7 +295,5 @@ public class DefaultControllerFactoryTest
         public TestService Service { get; }
     }
 
-    private class TestService
-    {
-    }
+    private class TestService { }
 }

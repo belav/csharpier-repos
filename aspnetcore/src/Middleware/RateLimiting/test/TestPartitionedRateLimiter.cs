@@ -36,7 +36,7 @@ internal class TestPartitionedRateLimiter<TResource> : PartitionedRateLimiter<TR
         if (permitCount != 1)
         {
             throw new ArgumentException("Tests only support 1 permit at a time");
-        }    
+        }
         var leases = new List<RateLimitLease>();
         foreach (var limiter in limiters)
         {
@@ -57,7 +57,11 @@ internal class TestPartitionedRateLimiter<TResource> : PartitionedRateLimiter<TR
         return new TestRateLimitLease(true, leases);
     }
 
-    protected override async ValueTask<RateLimitLease> AcquireAsyncCore(TResource resourceID, int permitCount, CancellationToken cancellationToken)
+    protected override async ValueTask<RateLimitLease> AcquireAsyncCore(
+        TResource resourceID,
+        int permitCount,
+        CancellationToken cancellationToken
+    )
     {
         if (permitCount != 1)
         {
@@ -77,9 +81,8 @@ internal class TestPartitionedRateLimiter<TResource> : PartitionedRateLimiter<TR
                     unusedLease.Dispose();
                 }
                 return new TestRateLimitLease(false, null);
-            }    
+            }
         }
         return new TestRateLimitLease(true, leases);
-
     }
 }

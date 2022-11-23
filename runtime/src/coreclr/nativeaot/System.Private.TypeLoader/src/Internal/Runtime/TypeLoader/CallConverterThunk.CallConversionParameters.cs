@@ -110,21 +110,38 @@ namespace Internal.Runtime.TypeLoader
         internal static GCHandleContainer s_pinnedGCHandles;
 
         // Signature of the DynamicInvokeImpl method on delegates is always the same.
-        private static ArgIteratorData s_delegateDynamicInvokeImplArgIteratorData = new ArgIteratorData(true, false, new TypeHandle[]{
-                new TypeHandle(false, typeof(object).TypeHandle),
-                new TypeHandle(false, typeof(IntPtr).TypeHandle),
-                new TypeHandle(true, typeof(InvokeUtils.ArgSetupState).TypeHandle)
-            }, new TypeHandle(false, typeof(object).TypeHandle));
+        private static ArgIteratorData s_delegateDynamicInvokeImplArgIteratorData =
+            new ArgIteratorData(
+                true,
+                false,
+                new TypeHandle[]
+                {
+                    new TypeHandle(false, typeof(object).TypeHandle),
+                    new TypeHandle(false, typeof(IntPtr).TypeHandle),
+                    new TypeHandle(true, typeof(InvokeUtils.ArgSetupState).TypeHandle)
+                },
+                new TypeHandle(false, typeof(object).TypeHandle)
+            );
 
         // Signature of all the InvokeRetXYZ reflection invoker stubs is always the same.
-        private static ArgIteratorData s_reflectionDynamicInvokeImplArgIteratorData = new ArgIteratorData(false, false, new TypeHandle[]{
-                new TypeHandle(false, typeof(object).TypeHandle),
-                new TypeHandle(false, typeof(IntPtr).TypeHandle),
-                new TypeHandle(true, typeof(InvokeUtils.ArgSetupState).TypeHandle),
-                new TypeHandle(false, typeof(bool).TypeHandle)
-            }, new TypeHandle(false, typeof(object).TypeHandle));
+        private static ArgIteratorData s_reflectionDynamicInvokeImplArgIteratorData =
+            new ArgIteratorData(
+                false,
+                false,
+                new TypeHandle[]
+                {
+                    new TypeHandle(false, typeof(object).TypeHandle),
+                    new TypeHandle(false, typeof(IntPtr).TypeHandle),
+                    new TypeHandle(true, typeof(InvokeUtils.ArgSetupState).TypeHandle),
+                    new TypeHandle(false, typeof(bool).TypeHandle)
+                },
+                new TypeHandle(false, typeof(object).TypeHandle)
+            );
 
-        internal CallConversionParameters(CallConversionInfo conversionInfo, IntPtr callerTransitionBlockParam)
+        internal CallConversionParameters(
+            CallConversionInfo conversionInfo,
+            IntPtr callerTransitionBlockParam
+        )
         {
             // Make sure the thred static variable has been initialized for this thread
             s_pinnedGCHandles = s_pinnedGCHandles ?? new GCHandleContainer();
@@ -152,14 +169,17 @@ namespace Internal.Runtime.TypeLoader
             else
                 callerIteratorData = conversionInfo.ArgIteratorData;
 
-            _callerArgs = new ArgIterator(callerIteratorData,
-                                              callerIteratorData.HasThis() ?
-                                                CallingConvention.ManagedInstance :
-                                                CallingConvention.ManagedStatic,
-                                              conversionInfo.CallerHasParamType,
-                                              conversionInfo.CallerHasExtraParameterWhichIsFunctionTarget,
-                                              conversionInfo.CallerForcedByRefData,
-                                              false, false); // Setup input
+            _callerArgs = new ArgIterator(
+                callerIteratorData,
+                callerIteratorData.HasThis()
+                    ? CallingConvention.ManagedInstance
+                    : CallingConvention.ManagedStatic,
+                conversionInfo.CallerHasParamType,
+                conversionInfo.CallerHasExtraParameterWhichIsFunctionTarget,
+                conversionInfo.CallerForcedByRefData,
+                false,
+                false
+            ); // Setup input
 
             bool forceCalleeHasParamType = false;
 
@@ -168,14 +188,17 @@ namespace Internal.Runtime.TypeLoader
             // bit set.
             if (conversionInfo.CalleeMayHaveParamType)
             {
-                ArgIterator callerArgsLookupTargetFunctionPointer = new ArgIterator(conversionInfo.ArgIteratorData,
-                                                                                        conversionInfo.ArgIteratorData.HasThis() ?
-                                                                                            CallingConvention.ManagedInstance :
-                                                                                            CallingConvention.ManagedStatic,
-                                                                                        conversionInfo.CallerHasParamType,
-                                                                                        conversionInfo.CallerHasExtraParameterWhichIsFunctionTarget,
-                                                                                        conversionInfo.CallerForcedByRefData,
-                                                                                        false, false);
+                ArgIterator callerArgsLookupTargetFunctionPointer = new ArgIterator(
+                    conversionInfo.ArgIteratorData,
+                    conversionInfo.ArgIteratorData.HasThis()
+                        ? CallingConvention.ManagedInstance
+                        : CallingConvention.ManagedStatic,
+                    conversionInfo.CallerHasParamType,
+                    conversionInfo.CallerHasExtraParameterWhichIsFunctionTarget,
+                    conversionInfo.CallerForcedByRefData,
+                    false,
+                    false
+                );
 
                 // Find the last valid caller offset. That's the offset of the target function pointer.
                 int ofsCallerValid = TransitionBlock.InvalidOffset;
@@ -207,8 +230,11 @@ namespace Internal.Runtime.TypeLoader
             {
                 Debug.Assert(_callerArgs.HasThis() && !_conversionInfo.IsUnboxingThunk);
 
-                IntPtr locationOfThisPointer = (IntPtr)(_callerTransitionBlock + ArgIterator.GetThisOffset());
-                _delegateData._delegateObject = (Delegate)Unsafe.As<IntPtr, object>(ref *(IntPtr*)locationOfThisPointer);
+                IntPtr locationOfThisPointer = (IntPtr)(
+                    _callerTransitionBlock + ArgIterator.GetThisOffset()
+                );
+                _delegateData._delegateObject = (Delegate)
+                    Unsafe.As<IntPtr, object>(ref *(IntPtr*)locationOfThisPointer);
                 Debug.Assert(_delegateData._delegateObject != null);
 
                 RuntimeAugments.GetDelegateData(
@@ -216,7 +242,8 @@ namespace Internal.Runtime.TypeLoader
                     out _delegateData._firstParameter,
                     out _delegateData._helperObject,
                     out _delegateData._extraFunctionPointerOrData,
-                    out _delegateData._functionPointer);
+                    out _delegateData._functionPointer
+                );
 
                 if (conversionInfo.TargetDelegateFunctionIsExtraFunctionPointerOrDataField)
                 {
@@ -225,32 +252,42 @@ namespace Internal.Runtime.TypeLoader
                         _delegateData._boxedFirstParameter = BoxedCallerFirstArgument;
                         _callerArgs.Reset();
 
-                        IntPtr resolvedTargetFunctionPointer = OpenMethodResolver.ResolveMethod(_delegateData._extraFunctionPointerOrData, _delegateData._boxedFirstParameter);
-                        forceCalleeHasParamType = UpdateCalleeFunctionPointer(resolvedTargetFunctionPointer);
+                        IntPtr resolvedTargetFunctionPointer = OpenMethodResolver.ResolveMethod(
+                            _delegateData._extraFunctionPointerOrData,
+                            _delegateData._boxedFirstParameter
+                        );
+                        forceCalleeHasParamType = UpdateCalleeFunctionPointer(
+                            resolvedTargetFunctionPointer
+                        );
                     }
                     else
                     {
-                        forceCalleeHasParamType = UpdateCalleeFunctionPointer(_delegateData._extraFunctionPointerOrData);
+                        forceCalleeHasParamType = UpdateCalleeFunctionPointer(
+                            _delegateData._extraFunctionPointerOrData
+                        );
                     }
                 }
                 else if (conversionInfo.IsMulticastDelegate)
                 {
-                    _delegateData._multicastTargetCount = (int)_delegateData._extraFunctionPointerOrData;
+                    _delegateData._multicastTargetCount = (int)
+                        _delegateData._extraFunctionPointerOrData;
                 }
             }
 
             //
             // Setup output argument iterator for the callee
             //
-            _calleeArgs = new ArgIterator(conversionInfo.ArgIteratorData,
-                                                (conversionInfo.ArgIteratorData.HasThis() && !conversionInfo.IsStaticDelegateThunk) ?
-                                                    CallingConvention.ManagedInstance :
-                                                    CallingConvention.ManagedStatic,
-                                                forceCalleeHasParamType || conversionInfo.CalleeHasParamType,
-                                                false,
-                                                conversionInfo.CalleeForcedByRefData,
-                                                conversionInfo.IsOpenInstanceDelegateThunk,
-                                                conversionInfo.IsClosedStaticDelegate);
+            _calleeArgs = new ArgIterator(
+                conversionInfo.ArgIteratorData,
+                (conversionInfo.ArgIteratorData.HasThis() && !conversionInfo.IsStaticDelegateThunk)
+                    ? CallingConvention.ManagedInstance
+                    : CallingConvention.ManagedStatic,
+                forceCalleeHasParamType || conversionInfo.CalleeHasParamType,
+                false,
+                conversionInfo.CalleeForcedByRefData,
+                conversionInfo.IsOpenInstanceDelegateThunk,
+                conversionInfo.IsClosedStaticDelegate
+            );
 
             // The function pointer, 'hasParamType', and 'hasThis' flags for the callee arg iterator need to be computed/read from the caller's
             // input arguments in the case of a reflection invoker thunk (the target method pointer and 'hasThis' flags are
@@ -267,12 +304,15 @@ namespace Internal.Runtime.TypeLoader
         private void ComputeCalleeFlagsAndFunctionPointerForReflectionInvokeThunk()
         {
             Debug.Assert(_conversionInfo.IsReflectionDynamicInvokerThunk);
-            Debug.Assert(!_callerArgs.Equals(default(ArgIterator)) && !_calleeArgs.Equals(default(ArgIterator)));
+            Debug.Assert(
+                !_callerArgs.Equals(default(ArgIterator))
+                    && !_calleeArgs.Equals(default(ArgIterator))
+            );
 
-            _callerArgs.GetNextOffset();     // Skip thisPtr
+            _callerArgs.GetNextOffset(); // Skip thisPtr
 
             {
-                int ofsCaller = _callerArgs.GetNextOffset();     // methodToCall
+                int ofsCaller = _callerArgs.GetNextOffset(); // methodToCall
                 Debug.Assert(TransitionBlock.InvalidOffset != ofsCaller);
 
                 void** pSrc = (void**)(_callerTransitionBlock + ofsCaller);
@@ -283,11 +323,11 @@ namespace Internal.Runtime.TypeLoader
                 _calleeArgs.SetHasParamTypeAndReset(forceCalleeHasParamType);
             }
 
-            _callerArgs.GetNextOffset();     // Skip argSetupState
+            _callerArgs.GetNextOffset(); // Skip argSetupState
 
             // targetIsThisCall
             {
-                int ofsCaller = _callerArgs.GetNextOffset();     // targetIsThisCall
+                int ofsCaller = _callerArgs.GetNextOffset(); // targetIsThisCall
                 Debug.Assert(TransitionBlock.InvalidOffset != ofsCaller);
 
                 bool* pSrc = (bool*)(_callerTransitionBlock + ofsCaller);
@@ -313,7 +353,8 @@ namespace Internal.Runtime.TypeLoader
         {
             if (FunctionPointerOps.IsGenericMethodPointer(newFunctionPointer))
             {
-                GenericMethodDescriptor* genericTarget = FunctionPointerOps.ConvertToGenericDescriptor(newFunctionPointer);
+                GenericMethodDescriptor* genericTarget =
+                    FunctionPointerOps.ConvertToGenericDescriptor(newFunctionPointer);
                 _instantiatingStubArgument = genericTarget->InstantiationArgument;
                 _functionPointerToCall = genericTarget->MethodFunctionPointer;
                 return true;
@@ -336,13 +377,22 @@ namespace Internal.Runtime.TypeLoader
 
             Debug.Assert(!_delegateData.Equals(default(DelegateData)));
             Debug.Assert(_delegateData._helperObject is Delegate[]);
-            Debug.Assert(_delegateData._multicastTargetCount <= ((Delegate[])_delegateData._helperObject).Length);
+            Debug.Assert(
+                _delegateData._multicastTargetCount
+                    <= ((Delegate[])_delegateData._helperObject).Length
+            );
 
             Delegate[] delegateArray = (Delegate[])_delegateData._helperObject;
             Delegate currentDelegate = delegateArray[currentIndex];
 
             IntPtr functionPointer;
-            RuntimeAugments.GetDelegateData(currentDelegate, out _delegateData._multicastThisPointer, out _, out _, out functionPointer);
+            RuntimeAugments.GetDelegateData(
+                currentDelegate,
+                out _delegateData._multicastThisPointer,
+                out _,
+                out _,
+                out functionPointer
+            );
 
             bool forceCalleeHasParamType = UpdateCalleeFunctionPointer(functionPointer);
             _calleeArgs.SetHasParamTypeAndReset(forceCalleeHasParamType);
@@ -408,7 +458,10 @@ namespace Internal.Runtime.TypeLoader
         {
             get
             {
-                Debug.Assert(_conversionInfo.IsClosedStaticDelegate && !_delegateData.Equals(default(DelegateData)));
+                Debug.Assert(
+                    _conversionInfo.IsClosedStaticDelegate
+                        && !_delegateData.Equals(default(DelegateData))
+                );
                 Debug.Assert(_delegateData._helperObject != null);
                 s_pinnedGCHandles._thisPtrHandle.Target = _delegateData._helperObject;
                 return s_pinnedGCHandles._thisPtrHandle.GetRawTargetAddress();
@@ -437,12 +490,21 @@ namespace Internal.Runtime.TypeLoader
                 {
                     void* thisPointer = null;
 
-                    if (_conversionInfo.IsThisPointerInDelegateData || _conversionInfo.IsAnyDynamicInvokerThunk)
+                    if (
+                        _conversionInfo.IsThisPointerInDelegateData
+                        || _conversionInfo.IsAnyDynamicInvokerThunk
+                    )
                     {
                         // Assert that we have extracted the delegate data
-                        Debug.Assert(_conversionInfo.IsReflectionDynamicInvokerThunk || !_delegateData.Equals(default(DelegateData)));
+                        Debug.Assert(
+                            _conversionInfo.IsReflectionDynamicInvokerThunk
+                                || !_delegateData.Equals(default(DelegateData))
+                        );
 
-                        if (_conversionInfo.IsAnyDynamicInvokerThunk || _conversionInfo.IsOpenInstanceDelegateThunk)
+                        if (
+                            _conversionInfo.IsAnyDynamicInvokerThunk
+                            || _conversionInfo.IsOpenInstanceDelegateThunk
+                        )
                         {
                             // Resilience to multiple or out of order calls
                             _callerArgs.Reset();
@@ -458,7 +520,8 @@ namespace Internal.Runtime.TypeLoader
                         else if (_conversionInfo.IsMulticastDelegate)
                         {
                             Debug.Assert(_delegateData._multicastThisPointer != null);
-                            s_pinnedGCHandles._thisPtrHandle.Target = _delegateData._multicastThisPointer;
+                            s_pinnedGCHandles._thisPtrHandle.Target =
+                                _delegateData._multicastThisPointer;
                         }
                         else
                         {
@@ -470,7 +533,9 @@ namespace Internal.Runtime.TypeLoader
                     }
                     else
                     {
-                        thisPointer = *((void**)(_callerTransitionBlock + ArgIterator.GetThisOffset()));
+                        thisPointer = *(
+                            (void**)(_callerTransitionBlock + ArgIterator.GetThisOffset())
+                        );
                         if (_conversionInfo.IsUnboxingThunk)
                         {
                             thisPointer = (void*)(((IntPtr*)thisPointer) + 1);
@@ -493,7 +558,9 @@ namespace Internal.Runtime.TypeLoader
                     // Do nothing, or copy the ret buf arg around
                     if (_callerArgs.HasRetBuffArg())
                     {
-                        return *((void**)(_callerTransitionBlock + _callerArgs.GetRetBuffArgOffset()));
+                        return *(
+                            (void**)(_callerTransitionBlock + _callerArgs.GetRetBuffArgOffset())
+                        );
                     }
                 }
                 else
@@ -511,31 +578,50 @@ namespace Internal.Runtime.TypeLoader
                             // value, of the same type as the return value type handle in the callee's arguments.
                             Debug.Assert(!_callerArgs.HasRetBuffArg());
 
-                            CorElementType returnType = _calleeArgs.GetReturnType(out thRetType, out forceByRefUnused);
+                            CorElementType returnType = _calleeArgs.GetReturnType(
+                                out thRetType,
+                                out forceByRefUnused
+                            );
                             Debug.Assert(!thRetType.IsNull());
-                            RuntimeTypeHandle returnValueType = thRetType.IsValueType() ? thRetType.GetRuntimeTypeHandle() : typeof(object).TypeHandle;
-                            s_pinnedGCHandles._returnObjectHandle.Target = RuntimeAugments.RawNewObject(returnValueType);
+                            RuntimeTypeHandle returnValueType = thRetType.IsValueType()
+                                ? thRetType.GetRuntimeTypeHandle()
+                                : typeof(object).TypeHandle;
+                            s_pinnedGCHandles._returnObjectHandle.Target =
+                                RuntimeAugments.RawNewObject(returnValueType);
 
                             // The transition block has a space reserved for storing return buffer data. This is protected conservatively.
                             // Copy the address of the allocated object to the protected memory to be able to safely unpin it.
-                            callerRetBuffer = _callerTransitionBlock + TransitionBlock.GetOffsetOfReturnValuesBlock();
-                            *((void**)callerRetBuffer) = (void*)s_pinnedGCHandles._returnObjectHandle.GetRawTargetAddress();
+                            callerRetBuffer =
+                                _callerTransitionBlock
+                                + TransitionBlock.GetOffsetOfReturnValuesBlock();
+                            *((void**)callerRetBuffer) = (void*)
+                                s_pinnedGCHandles._returnObjectHandle.GetRawTargetAddress();
 
                             // Unpin the allocated object (it's now protected in the caller's conservatively reported memory space)
                             s_pinnedGCHandles._returnObjectHandle.Target = null;
 
                             // Point the callerRetBuffer to the begining of the actual object's data (skipping the EETypePtr slot)
-                            callerRetBuffer = (void*)(new IntPtr(*((void**)callerRetBuffer)) + IntPtr.Size);
+                            callerRetBuffer = (void*)(
+                                new IntPtr(*((void**)callerRetBuffer)) + IntPtr.Size
+                            );
                         }
                         else
                         {
                             // The transition block has a space reserved for storing return buffer data. This is protected conservatively
-                            callerRetBuffer = _callerTransitionBlock + TransitionBlock.GetOffsetOfReturnValuesBlock();
+                            callerRetBuffer =
+                                _callerTransitionBlock
+                                + TransitionBlock.GetOffsetOfReturnValuesBlock();
 
                             // Make sure buffer is nulled out, and setup the return buffer location.
-                            CorElementType returnType = _callerArgs.GetReturnType(out thRetType, out forceByRefUnused);
+                            CorElementType returnType = _callerArgs.GetReturnType(
+                                out thRetType,
+                                out forceByRefUnused
+                            );
                             int returnSize = TypeHandle.GetElemSize(returnType, thRetType);
-                            CallConverterThunk.memzeroPointerAligned((byte*)callerRetBuffer, returnSize);
+                            CallConverterThunk.memzeroPointerAligned(
+                                (byte*)callerRetBuffer,
+                                returnSize
+                            );
                         }
 
                         Debug.Assert(callerRetBuffer != null);
@@ -573,7 +659,13 @@ namespace Internal.Runtime.TypeLoader
                 {
                     if (_calleeArgs.HasParamType())
                     {
-                        return new IntPtr(*((void**)(_callerTransitionBlock + _callerArgs.GetParamTypeArgOffset())));
+                        return new IntPtr(
+                            *(
+                                (void**)(
+                                    _callerTransitionBlock + _callerArgs.GetParamTypeArgOffset()
+                                )
+                            )
+                        );
                     }
                 }
                 else if (_calleeArgs.HasParamType())
@@ -600,10 +692,10 @@ namespace Internal.Runtime.TypeLoader
                     // Resilience to multiple or out of order calls
                     {
                         _callerArgs.Reset();
-                        _callerArgs.GetNextOffset();     // thisPtr
+                        _callerArgs.GetNextOffset(); // thisPtr
                     }
 
-                    int ofsCaller = _callerArgs.GetNextOffset();     // methodToCall
+                    int ofsCaller = _callerArgs.GetNextOffset(); // methodToCall
                     Debug.Assert(TransitionBlock.InvalidOffset != ofsCaller);
 
                     void** pSrc = (void**)(_callerTransitionBlock + ofsCaller);
@@ -622,7 +714,8 @@ namespace Internal.Runtime.TypeLoader
 
             Debug.Assert(!_delegateData.Equals(default(DelegateData)));
 
-            Func<object[], object> targetDelegate = _delegateData._helperObject as Func<object[], object>;
+            Func<object[], object> targetDelegate =
+                _delegateData._helperObject as Func<object[], object>;
             Debug.Assert(targetDelegate != null);
 
             object result = targetDelegate(arguments ?? Array.Empty<object>());
@@ -631,16 +724,24 @@ namespace Internal.Runtime.TypeLoader
             bool forceByRefUnused;
             _calleeArgs.GetReturnType(out thArgType, out forceByRefUnused);
             Debug.Assert(!thArgType.IsNull());
-
             unsafe
             {
-                if (thArgType.IsValueType() && thArgType.GetRuntimeTypeHandle().ToEETypePtr()->IsNullable)
+                if (
+                    thArgType.IsValueType()
+                    && thArgType.GetRuntimeTypeHandle().ToEETypePtr()->IsNullable
+                )
                 {
-                    object nullableObj = RuntimeAugments.RawNewObject(thArgType.GetRuntimeTypeHandle());
+                    object nullableObj = RuntimeAugments.RawNewObject(
+                        thArgType.GetRuntimeTypeHandle()
+                    );
                     s_pinnedGCHandles._returnObjectHandle.Target = nullableObj;
                     if (result != null)
                     {
-                        RuntimeAugments.StoreValueTypeField(ref RuntimeAugments.GetRawData(nullableObj), result, thArgType.GetRuntimeTypeHandle());
+                        RuntimeAugments.StoreValueTypeField(
+                            ref RuntimeAugments.GetRawData(nullableObj),
+                            result,
+                            thArgType.GetRuntimeTypeHandle()
+                        );
                     }
                 }
                 else
@@ -660,11 +761,11 @@ namespace Internal.Runtime.TypeLoader
             // Resilience to multiple or out of order calls
             {
                 _callerArgs.Reset();
-                _callerArgs.GetNextOffset();     // thisPtr
-                _callerArgs.GetNextOffset();     // methodToCall
+                _callerArgs.GetNextOffset(); // thisPtr
+                _callerArgs.GetNextOffset(); // methodToCall
             }
 
-            int ofsCaller = _callerArgs.GetNextOffset();     //argSetupState
+            int ofsCaller = _callerArgs.GetNextOffset(); //argSetupState
             Debug.Assert(TransitionBlock.InvalidOffset != ofsCaller);
 
             void** pSrc = (void**)(_callerTransitionBlock + ofsCaller);

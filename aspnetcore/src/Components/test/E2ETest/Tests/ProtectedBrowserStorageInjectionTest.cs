@@ -11,15 +11,14 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
-public class ProtectedBrowserStorageInjectionTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
+public class ProtectedBrowserStorageInjectionTest
+    : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
 {
     public ProtectedBrowserStorageInjectionTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture.WithServerExecution(), output)
-    {
-    }
+        ITestOutputHelper output
+    ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -39,7 +38,10 @@ public class ProtectedBrowserStorageInjectionTest : ServerTestBase<ToggleExecuti
 
         if (_serverFixture.ExecutionMode == ExecutionMode.Client)
         {
-            Browser.Contains("cannot be used when running in a browser.", () => messageElement.Text);
+            Browser.Contains(
+                "cannot be used when running in a browser.",
+                () => messageElement.Text
+            );
         }
         else
         {
@@ -59,7 +61,10 @@ public class ProtectedBrowserStorageInjectionTest : ServerTestBase<ToggleExecuti
 
         if (_serverFixture.ExecutionMode == ExecutionMode.Client)
         {
-            Browser.Contains("cannot be used when running in a browser.", () => messageElement.Text);
+            Browser.Contains(
+                "cannot be used when running in a browser.",
+                () => messageElement.Text
+            );
         }
         else
         {

@@ -35,8 +35,8 @@ public class RelationalConcurrencyExceptionEventData : ConcurrencyExceptionEvent
         Guid commandId,
         Guid connectionId,
         IReadOnlyList<IUpdateEntry> entries,
-        DbUpdateConcurrencyException exception)
-        : base(eventDefinition, messageGenerator, context, entries, exception)
+        DbUpdateConcurrencyException exception
+    ) : base(eventDefinition, messageGenerator, context, entries, exception)
     {
         Connection = connection;
         Command = command;

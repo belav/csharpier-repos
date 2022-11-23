@@ -7,9 +7,9 @@ using System.Web.Http;
 namespace System.Net.Http.Formatting
 {
     /// <summary>
-    /// An abstract base class used to create an association between <see cref="HttpRequestMessage"/> or 
-    /// <see cref="HttpResponseMessage"/> instances that have certain characteristics 
-    /// and a specific <see cref="MediaTypeHeaderValue"/>. 
+    /// An abstract base class used to create an association between <see cref="HttpRequestMessage"/> or
+    /// <see cref="HttpResponseMessage"/> instances that have certain characteristics
+    /// and a specific <see cref="MediaTypeHeaderValue"/>.
     /// </summary>
     public abstract class MediaTypeMapping
     {
@@ -18,8 +18,8 @@ namespace System.Net.Http.Formatting
         /// given <paramref name="mediaType"/> value.
         /// </summary>
         /// <param name="mediaType">
-        /// The <see cref="MediaTypeHeaderValue"/> that is associated with <see cref="HttpRequestMessage"/> or 
-        /// <see cref="HttpResponseMessage"/> instances that have the given characteristics of the 
+        /// The <see cref="MediaTypeHeaderValue"/> that is associated with <see cref="HttpRequestMessage"/> or
+        /// <see cref="HttpResponseMessage"/> instances that have the given characteristics of the
         /// <see cref="MediaTypeMapping"/>.
         /// </param>
         protected MediaTypeMapping(MediaTypeHeaderValue mediaType)
@@ -37,8 +37,8 @@ namespace System.Net.Http.Formatting
         /// given <paramref name="mediaType"/> value.
         /// </summary>
         /// <param name="mediaType">
-        /// The <see cref="string"/> that is associated with <see cref="HttpRequestMessage"/> or 
-        /// <see cref="HttpResponseMessage"/> instances that have the given characteristics of the 
+        /// The <see cref="string"/> that is associated with <see cref="HttpRequestMessage"/> or
+        /// <see cref="HttpResponseMessage"/> instances that have the given characteristics of the
         /// <see cref="MediaTypeMapping"/>.
         /// </param>
         protected MediaTypeMapping(string mediaType)
@@ -52,8 +52,8 @@ namespace System.Net.Http.Formatting
         }
 
         /// <summary>
-        /// Gets the <see cref="MediaTypeHeaderValue"/> that is associated with <see cref="HttpRequestMessage"/> or 
-        /// <see cref="HttpResponseMessage"/> instances that have the given characteristics of the 
+        /// Gets the <see cref="MediaTypeHeaderValue"/> that is associated with <see cref="HttpRequestMessage"/> or
+        /// <see cref="HttpResponseMessage"/> instances that have the given characteristics of the
         /// <see cref="MediaTypeMapping"/>.
         /// </summary>
         public MediaTypeHeaderValue MediaType { get; private set; }
@@ -63,10 +63,10 @@ namespace System.Net.Http.Formatting
         /// associated with <paramref name="request"/>.
         /// </summary>
         /// <param name="request">
-        /// The <see cref="HttpRequestMessage"/> to evaluate for the characteristics 
+        /// The <see cref="HttpRequestMessage"/> to evaluate for the characteristics
         /// associated with the <see cref="MediaTypeHeaderValue"/>
         /// of the <see cref="MediaTypeMapping"/>.
-        /// </param> 
+        /// </param>
         /// <returns>
         /// The quality of the match. It must be between <c>0.0</c> and <c>1.0</c>.
         /// A value of <c>0.0</c> signifies no match.

@@ -12,6 +12,7 @@ internal static partial class Interop
         internal static unsafe partial Interop.BOOL TzSpecificLocalTimeToSystemTime(
             IntPtr lpTimeZoneInformation,
             Interop.Kernel32.SYSTEMTIME* lpLocalTime,
-            Interop.Kernel32.SYSTEMTIME* lpUniversalTime);
+            Interop.Kernel32.SYSTEMTIME* lpUniversalTime
+        );
     }
 }

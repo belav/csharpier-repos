@@ -99,7 +99,8 @@ namespace Internal.TypeSystem
         public static bool IsCompatibleWith(this TypeDesc thisType, TypeDesc otherType)
         {
             // Structs can be cast to the interfaces they implement, but they are not compatible according to ECMA I.8.7.1
-            bool isCastFromValueTypeToReferenceType = otherType.IsValueType && !thisType.IsValueType;
+            bool isCastFromValueTypeToReferenceType =
+                otherType.IsValueType && !thisType.IsValueType;
             if (isCastFromValueTypeToReferenceType)
             {
                 return false;
@@ -108,13 +109,19 @@ namespace Internal.TypeSystem
             // Managed pointers are compatible only if they are pointer-element-compatible-with as described in ECMA I.8.7.2
             if (thisType.IsByRef && otherType.IsByRef)
             {
-                return AreVerificationTypesEqual(thisType.GetParameterType(), otherType.GetParameterType());
+                return AreVerificationTypesEqual(
+                    thisType.GetParameterType(),
+                    otherType.GetParameterType()
+                );
             }
 
             // Unmanaged pointers are handled the same way as managed pointers
             if (thisType.IsPointer && otherType.IsPointer)
             {
-                return AreVerificationTypesEqual(thisType.GetParameterType(), otherType.GetParameterType());
+                return AreVerificationTypesEqual(
+                    thisType.GetParameterType(),
+                    otherType.GetParameterType()
+                );
             }
 
             // Function pointers are compatible only if they are method-signature-compatible-with as described in ECMA I.8.7.1
@@ -125,15 +132,21 @@ namespace Internal.TypeSystem
 
             // None of the types can be a managed pointer, a pointer or a function pointer here,
             // all the valid cases were handled above.
-            if (thisType.IsByRef || otherType.IsByRef ||
-                thisType.IsPointer || otherType.IsPointer ||
-                thisType.IsFunctionPointer || otherType.IsFunctionPointer)
+            if (
+                thisType.IsByRef
+                || otherType.IsByRef
+                || thisType.IsPointer
+                || otherType.IsPointer
+                || thisType.IsFunctionPointer
+                || otherType.IsFunctionPointer
+            )
             {
                 return false;
             }
 
             // Nullable<T> can be cast to T, but this is not compatible according to ECMA I.8.7.1
-            bool isCastFromNullableOfTtoT = thisType.IsNullable && otherType.IsEquivalentTo(thisType.Instantiation[0]);
+            bool isCastFromNullableOfTtoT =
+                thisType.IsNullable && otherType.IsEquivalentTo(thisType.Instantiation[0]);
             if (isCastFromNullableOfTtoT)
             {
                 return false;
@@ -148,7 +161,11 @@ namespace Internal.TypeSystem
             return thisType == otherType;
         }
 
-        private static bool CanCastToInternal(this TypeDesc thisType, TypeDesc otherType, StackOverflowProtect protect)
+        private static bool CanCastToInternal(
+            this TypeDesc thisType,
+            TypeDesc otherType,
+            StackOverflowProtect protect
+        )
         {
             if (thisType == otherType)
             {
@@ -158,7 +175,10 @@ namespace Internal.TypeSystem
             switch (thisType.Category)
             {
                 case TypeFlags.GenericParameter:
-                    return ((GenericParameterDesc)thisType).CanCastGenericParameterTo(otherType, protect);
+                    return ((GenericParameterDesc)thisType).CanCastGenericParameterTo(
+                        otherType,
+                        protect
+                    );
 
                 case TypeFlags.Array:
                 case TypeFlags.SzArray:
@@ -168,7 +188,10 @@ namespace Internal.TypeSystem
                 case TypeFlags.Pointer:
                     if (otherType.Category == thisType.Category)
                     {
-                        return ((ParameterizedType)thisType).CanCastParamTo(((ParameterizedType)otherType).ParameterType, protect);
+                        return ((ParameterizedType)thisType).CanCastParamTo(
+                            ((ParameterizedType)otherType).ParameterType,
+                            protect
+                        );
                     }
                     return false;
 
@@ -181,7 +204,11 @@ namespace Internal.TypeSystem
             }
         }
 
-        private static bool CanCastGenericParameterTo(this GenericParameterDesc thisType, TypeDesc otherType, StackOverflowProtect protect)
+        private static bool CanCastGenericParameterTo(
+            this GenericParameterDesc thisType,
+            TypeDesc otherType,
+            StackOverflowProtect protect
+        )
         {
             // A boxed variable type can be cast to any of its constraints, or object, if none are specified
             if (otherType.IsObject)
@@ -189,8 +216,10 @@ namespace Internal.TypeSystem
                 return true;
             }
 
-            if (thisType.HasNotNullableValueTypeConstraint &&
-                otherType.IsWellKnownType(WellKnownType.ValueType))
+            if (
+                thisType.HasNotNullableValueTypeConstraint
+                && otherType.IsWellKnownType(WellKnownType.ValueType)
+            )
             {
                 return true;
             }
@@ -206,7 +235,11 @@ namespace Internal.TypeSystem
             return false;
         }
 
-        private static bool CanCastArrayTo(this ArrayType thisType, TypeDesc otherType, StackOverflowProtect protect)
+        private static bool CanCastArrayTo(
+            this ArrayType thisType,
+            TypeDesc otherType,
+            StackOverflowProtect protect
+        )
         {
             // Casting the array to one of the base types or interfaces?
             if (otherType.IsDefType)
@@ -218,9 +251,11 @@ namespace Internal.TypeSystem
             if (thisType.Category != otherType.Category)
             {
                 // An SzArray is castable to MdArray rank 1. We follow the same casting rules as SzArray to SzArray.
-                if (thisType.Category == TypeFlags.SzArray
+                if (
+                    thisType.Category == TypeFlags.SzArray
                     && otherType.Category == TypeFlags.Array
-                    && ((ArrayType)otherType).Rank == 1)
+                    && ((ArrayType)otherType).Rank == 1
+                )
                 {
                     return thisType.CanCastParamTo(((ArrayType)otherType).ParameterType, protect);
                 }
@@ -239,7 +274,11 @@ namespace Internal.TypeSystem
             return thisType.CanCastParamTo(otherArrayType.ParameterType, protect);
         }
 
-        private static bool CanCastParamTo(this ParameterizedType thisType, TypeDesc paramType, StackOverflowProtect protect)
+        private static bool CanCastParamTo(
+            this ParameterizedType thisType,
+            TypeDesc paramType,
+            StackOverflowProtect protect
+        )
         {
             // While boxed value classes inherit from object their
             // unboxed versions do not.  Parameterized types have the
@@ -261,7 +300,10 @@ namespace Internal.TypeSystem
             else if (curTypesParm.IsGenericParameter)
             {
                 var genericVariableFromParam = (GenericParameterDesc)curTypesParm;
-                if (genericVariableFromParam.HasReferenceTypeConstraint || IsConstrainedAsGCPointer(genericVariableFromParam))
+                if (
+                    genericVariableFromParam.HasReferenceTypeConstraint
+                    || IsConstrainedAsGCPointer(genericVariableFromParam)
+                )
                 {
                     return genericVariableFromParam.CanCastToInternal(paramType, protect);
                 }
@@ -269,7 +311,10 @@ namespace Internal.TypeSystem
             else if (fromParamUnderlyingType.IsPrimitive)
             {
                 TypeDesc toParamUnderlyingType = paramType.UnderlyingType;
-                if (GetNormalizedIntegralArrayElementType(fromParamUnderlyingType) == GetNormalizedIntegralArrayElementType(toParamUnderlyingType))
+                if (
+                    GetNormalizedIntegralArrayElementType(fromParamUnderlyingType)
+                    == GetNormalizedIntegralArrayElementType(toParamUnderlyingType)
+                )
                 {
                     return true;
                 }
@@ -292,9 +337,11 @@ namespace Internal.TypeSystem
                 if (!typeConstraint.IsInterface && typeConstraint.IsGCPointer)
                 {
                     // Object, ValueType, and Enum are GCPointers but they do not constrain the type to GCPointer!
-                    if (!typeConstraint.IsWellKnownType(WellKnownType.Object) &&
-                        !typeConstraint.IsWellKnownType(WellKnownType.ValueType) &&
-                        !typeConstraint.IsWellKnownType(WellKnownType.Enum))
+                    if (
+                        !typeConstraint.IsWellKnownType(WellKnownType.Object)
+                        && !typeConstraint.IsWellKnownType(WellKnownType.ValueType)
+                        && !typeConstraint.IsWellKnownType(WellKnownType.Enum)
+                    )
                     {
                         return true;
                     }
@@ -326,7 +373,6 @@ namespace Internal.TypeSystem
             return elementType;
         }
 
-
         public static bool IsArrayElementTypeCastableBySize(TypeDesc elementType)
         {
             switch (elementType.UnderlyingType.Category)
@@ -347,7 +393,11 @@ namespace Internal.TypeSystem
             return false;
         }
 
-        private static bool CanCastToClassOrInterface(this TypeDesc thisType, TypeDesc otherType, StackOverflowProtect protect)
+        private static bool CanCastToClassOrInterface(
+            this TypeDesc thisType,
+            TypeDesc otherType,
+            StackOverflowProtect protect
+        )
         {
             if (otherType.IsInterface)
             {
@@ -359,7 +409,11 @@ namespace Internal.TypeSystem
             }
         }
 
-        private static bool CanCastToInterface(this TypeDesc thisType, TypeDesc otherType, StackOverflowProtect protect)
+        private static bool CanCastToInterface(
+            this TypeDesc thisType,
+            TypeDesc otherType,
+            StackOverflowProtect protect
+        )
         {
             if (!otherType.HasVariance)
             {
@@ -384,7 +438,11 @@ namespace Internal.TypeSystem
             return false;
         }
 
-        private static bool CanCastToNonVariantInterface(this TypeDesc thisType, TypeDesc otherType, StackOverflowProtect protect)
+        private static bool CanCastToNonVariantInterface(
+            this TypeDesc thisType,
+            TypeDesc otherType,
+            StackOverflowProtect protect
+        )
         {
             if (otherType == thisType)
             {
@@ -402,7 +460,11 @@ namespace Internal.TypeSystem
             return false;
         }
 
-        private static bool CanCastByVarianceToInterfaceOrDelegate(this TypeDesc thisType, TypeDesc otherType, StackOverflowProtect protectInput)
+        private static bool CanCastByVarianceToInterfaceOrDelegate(
+            this TypeDesc thisType,
+            TypeDesc otherType,
+            StackOverflowProtect protectInput
+        )
         {
             if (!thisType.HasSameTypeDefinition(otherType))
             {
@@ -416,14 +478,19 @@ namespace Internal.TypeSystem
                     return false;
             }
 
-            StackOverflowProtect protect = new StackOverflowProtect(stackOverflowProtectKey, protectInput);
+            StackOverflowProtect protect = new StackOverflowProtect(
+                stackOverflowProtectKey,
+                protectInput
+            );
 
             Instantiation instantiationThis = thisType.Instantiation;
             Instantiation instantiationTarget = otherType.Instantiation;
             Instantiation instantiationOpen = thisType.GetTypeDefinition().Instantiation;
 
-            Debug.Assert(instantiationThis.Length == instantiationTarget.Length &&
-                instantiationThis.Length == instantiationOpen.Length);
+            Debug.Assert(
+                instantiationThis.Length == instantiationTarget.Length
+                    && instantiationThis.Length == instantiationOpen.Length
+            );
 
             for (int i = 0; i < instantiationThis.Length; i++)
             {
@@ -457,7 +524,11 @@ namespace Internal.TypeSystem
             return true;
         }
 
-        private static bool CanCastToClass(this TypeDesc thisType, TypeDesc otherType, StackOverflowProtect protect)
+        private static bool CanCastToClass(
+            this TypeDesc thisType,
+            TypeDesc otherType,
+            StackOverflowProtect protect
+        )
         {
             TypeDesc curType = thisType;
 
@@ -483,8 +554,7 @@ namespace Internal.TypeSystem
                     }
 
                     curType = curType.BaseType;
-                }
-                while (curType != null);
+                } while (curType != null);
             }
             else
             {
@@ -513,7 +583,11 @@ namespace Internal.TypeSystem
             return false;
         }
 
-        private static bool IsBoxedAndCanCastTo(this TypeDesc thisType, TypeDesc otherType, StackOverflowProtect protect)
+        private static bool IsBoxedAndCanCastTo(
+            this TypeDesc thisType,
+            TypeDesc otherType,
+            StackOverflowProtect protect
+        )
         {
             TypeDesc fromUnderlyingType = thisType.UnderlyingType;
 
@@ -524,7 +598,10 @@ namespace Internal.TypeSystem
             else if (thisType.IsGenericParameter)
             {
                 var genericVariableFromParam = (GenericParameterDesc)thisType;
-                if (genericVariableFromParam.HasReferenceTypeConstraint || IsConstrainedAsGCPointer(genericVariableFromParam))
+                if (
+                    genericVariableFromParam.HasReferenceTypeConstraint
+                    || IsConstrainedAsGCPointer(genericVariableFromParam)
+                )
                 {
                     return genericVariableFromParam.CanCastToInternal(otherType, protect);
                 }
@@ -564,7 +641,8 @@ namespace Internal.TypeSystem
                 ToType = toType;
             }
 
-            public bool Equals(CastingPair other) => FromType == other.FromType && ToType == other.ToType;
+            public bool Equals(CastingPair other) =>
+                FromType == other.FromType && ToType == other.ToType;
         }
     }
 }

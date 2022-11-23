@@ -24,10 +24,17 @@ public class DirectiveDescriptorTest
     {
         // Arrange
         var called = false;
-        Action<IDirectiveDescriptorBuilder> configure = b => { called = true; };
+        Action<IDirectiveDescriptorBuilder> configure = b =>
+        {
+            called = true;
+        };
 
         // Act
-        var directive = DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine, configure);
+        var directive = DirectiveDescriptor.CreateDirective(
+            "test",
+            DirectiveKind.SingleLine,
+            configure
+        );
 
         // Assert
         Assert.Equal("test", directive.Directive);
@@ -51,7 +58,10 @@ public class DirectiveDescriptorTest
     {
         // Arrange
         var called = false;
-        Action<IDirectiveDescriptorBuilder> configure = b => { called = true; };
+        Action<IDirectiveDescriptorBuilder> configure = b =>
+        {
+            called = true;
+        };
 
         // Act
         var directive = DirectiveDescriptor.CreateSingleLineDirective("test", configure);
@@ -78,7 +88,10 @@ public class DirectiveDescriptorTest
     {
         // Arrange
         var called = false;
-        Action<IDirectiveDescriptorBuilder> configure = b => { called = true; };
+        Action<IDirectiveDescriptorBuilder> configure = b =>
+        {
+            called = true;
+        };
 
         // Act
         var directive = DirectiveDescriptor.CreateRazorBlockDirective("test", configure);
@@ -105,7 +118,10 @@ public class DirectiveDescriptorTest
     {
         // Arrange
         var called = false;
-        Action<IDirectiveDescriptorBuilder> configure = b => { called = true; };
+        Action<IDirectiveDescriptorBuilder> configure = b =>
+        {
+            called = true;
+        };
 
         // Act
         var directive = DirectiveDescriptor.CreateCodeBlockDirective("test", configure);
@@ -120,20 +136,30 @@ public class DirectiveDescriptorTest
     public void Build_ValidatesDirectiveKeyword_EmptyIsInvalid()
     {
         // Arrange & Act
-        var ex = Assert.Throws<InvalidOperationException>(() => DirectiveDescriptor.CreateSingleLineDirective(""));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => DirectiveDescriptor.CreateSingleLineDirective("")
+        );
 
         // Assert
-        Assert.Equal("Invalid directive keyword ''. Directives must have a non-empty keyword that consists only of letters.", ex.Message);
+        Assert.Equal(
+            "Invalid directive keyword ''. Directives must have a non-empty keyword that consists only of letters.",
+            ex.Message
+        );
     }
 
     [Fact]
     public void Build_ValidatesDirectiveKeyword_InvalidCharacter()
     {
         // Arrange & Act
-        var ex = Assert.Throws<InvalidOperationException>(() => DirectiveDescriptor.CreateSingleLineDirective("test_directive"));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => DirectiveDescriptor.CreateSingleLineDirective("test_directive")
+        );
 
         // Assert
-        Assert.Equal("Invalid directive keyword 'test_directive'. Directives must have a non-empty keyword that consists only of letters.", ex.Message);
+        Assert.Equal(
+            "Invalid directive keyword 'test_directive'. Directives must have a non-empty keyword that consists only of letters.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -141,9 +167,21 @@ public class DirectiveDescriptorTest
     {
         // Arrange & Act
         var ex = Assert.Throws<InvalidOperationException>(
-            () => DirectiveDescriptor.CreateSingleLineDirective("test", b => { b.AddOptionalMemberToken(); b.AddMemberToken(); }));
+            () =>
+                DirectiveDescriptor.CreateSingleLineDirective(
+                    "test",
+                    b =>
+                    {
+                        b.AddOptionalMemberToken();
+                        b.AddMemberToken();
+                    }
+                )
+        );
 
         // Assert
-        Assert.Equal("A non-optional directive token cannot follow an optional directive token.", ex.Message);
+        Assert.Equal(
+            "A non-optional directive token cannot follow an optional directive token.",
+            ex.Message
+        );
     }
 }

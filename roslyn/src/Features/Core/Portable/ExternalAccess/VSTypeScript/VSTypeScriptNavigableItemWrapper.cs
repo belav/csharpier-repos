@@ -32,9 +32,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 
         public bool IsStale => false;
 
-        public ImmutableArray<INavigableItem> ChildItems
-            => _navigableItem.ChildItems.IsDefault
+        public ImmutableArray<INavigableItem> ChildItems =>
+            _navigableItem.ChildItems.IsDefault
                 ? default
-                : _navigableItem.ChildItems.SelectAsArray(i => (INavigableItem)new VSTypeScriptNavigableItemWrapper(i));
+                : _navigableItem.ChildItems.SelectAsArray(
+                    i => (INavigableItem)new VSTypeScriptNavigableItemWrapper(i)
+                );
     }
 }

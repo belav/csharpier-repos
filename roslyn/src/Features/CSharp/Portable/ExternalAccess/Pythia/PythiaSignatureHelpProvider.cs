@@ -21,25 +21,40 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia
     /// </summary>
     [ExportSignatureHelpProvider("PythiaSignatureHelpProvider", LanguageNames.CSharp), Shared]
     [ExtensionOrder(Before = "InvocationExpressionSignatureHelpProvider")]
-    internal sealed class PythiaSignatureHelpProvider : InvocationExpressionSignatureHelpProviderBase
+    internal sealed class PythiaSignatureHelpProvider
+        : InvocationExpressionSignatureHelpProviderBase
     {
         private readonly Lazy<IPythiaSignatureHelpProviderImplementation> _lazyImplementation;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PythiaSignatureHelpProvider(Lazy<IPythiaSignatureHelpProviderImplementation> implementation)
-            => _lazyImplementation = implementation;
+        public PythiaSignatureHelpProvider(
+            Lazy<IPythiaSignatureHelpProviderImplementation> implementation
+        ) => _lazyImplementation = implementation;
 
-        internal override async Task<(ImmutableArray<SignatureHelpItem> items, int? selectedItemIndex)> GetMethodGroupItemsAndSelectionAsync(
+        internal override async Task<(
+            ImmutableArray<SignatureHelpItem> items,
+            int? selectedItemIndex
+        )> GetMethodGroupItemsAndSelectionAsync(
             ImmutableArray<IMethodSymbol> accessibleMethods,
             Document document,
             InvocationExpressionSyntax invocationExpression,
             SemanticModel semanticModel,
             SymbolInfo symbolInfo,
             IMethodSymbol? currentSymbol,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var (items, selectedItemIndex) = await _lazyImplementation.Value.GetMethodGroupItemsAndSelectionAsync(accessibleMethods, document, invocationExpression, semanticModel, symbolInfo, cancellationToken).ConfigureAwait(false);
+            var (items, selectedItemIndex) = await _lazyImplementation.Value
+                .GetMethodGroupItemsAndSelectionAsync(
+                    accessibleMethods,
+                    document,
+                    invocationExpression,
+                    semanticModel,
+                    symbolInfo,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return (items.SelectAsArray(item => item.UnderlyingObject), selectedItemIndex);
         }
     }

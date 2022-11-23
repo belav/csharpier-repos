@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.Hosting
     /// </summary>
     public static class Host
     {
-        internal const string RequiresDynamicCodeMessage = "Hosting uses Microsoft.Extensions.DependencyInjection, which may require generating code dynamically at runtime.";
+        internal const string RequiresDynamicCodeMessage =
+            "Hosting uses Microsoft.Extensions.DependencyInjection, which may require generating code dynamically at runtime.";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HostBuilder"/> class with pre-configured defaults.
@@ -32,8 +33,7 @@ namespace Microsoft.Extensions.Hosting
         /// </remarks>
         /// <returns>The initialized <see cref="IHostBuilder"/>.</returns>
         [RequiresDynamicCode(RequiresDynamicCodeMessage)]
-        public static IHostBuilder CreateDefaultBuilder() =>
-            CreateDefaultBuilder(args: null);
+        public static IHostBuilder CreateDefaultBuilder() => CreateDefaultBuilder(args: null);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HostBuilder"/> class with pre-configured defaults.
@@ -79,7 +79,8 @@ namespace Microsoft.Extensions.Hosting
         ///   </list>
         /// </remarks>
         [RequiresDynamicCode(RequiresDynamicCodeMessage)]
-        public static HostApplicationBuilder CreateApplicationBuilder() => new HostApplicationBuilder();
+        public static HostApplicationBuilder CreateApplicationBuilder() =>
+            new HostApplicationBuilder();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HostApplicationBuilder"/> class with pre-configured defaults.
@@ -100,6 +101,7 @@ namespace Microsoft.Extensions.Hosting
         /// </remarks>
         /// <param name="args">The command line args.</param>
         [RequiresDynamicCode(RequiresDynamicCodeMessage)]
-        public static HostApplicationBuilder CreateApplicationBuilder(string[]? args) => new HostApplicationBuilder(args);
+        public static HostApplicationBuilder CreateApplicationBuilder(string[]? args) =>
+            new HostApplicationBuilder(args);
     }
 }

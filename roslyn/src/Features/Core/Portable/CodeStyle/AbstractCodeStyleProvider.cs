@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
     /// the CodeRefactoringProvider codepaths.
     /// </summary>
     internal abstract partial class AbstractCodeStyleProvider<TOptionValue, TCodeStyleProvider>
-        where TCodeStyleProvider : AbstractCodeStyleProvider<TOptionValue, TCodeStyleProvider>, new()
+        where TCodeStyleProvider : AbstractCodeStyleProvider<TOptionValue, TCodeStyleProvider>,
+            new()
     {
         private readonly Option2<CodeStyleOption2<TOptionValue>> _option;
         private readonly string _language;
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             string descriptorId,
             EnforceOnBuild enforceOnBuild,
             LocalizableString title,
-            LocalizableString message)
+            LocalizableString message
+        )
         {
             _option = option;
             _language = language;
@@ -60,7 +62,9 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// handle ReportDiagnostic.Default and will map that back to the appropriate value in that
         /// case.
         /// </summary>
-        protected static ReportDiagnostic GetOptionSeverity(CodeStyleOption2<TOptionValue> optionValue)
+        protected static ReportDiagnostic GetOptionSeverity(
+            CodeStyleOption2<TOptionValue> optionValue
+        )
         {
             var severity = optionValue.Notification.Severity;
             return severity == ReportDiagnostic.Default
@@ -68,7 +72,9 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                 : severity;
         }
 
-        protected abstract CodeStyleOption2<TOptionValue> GetCodeStyleOption(AnalyzerOptionsProvider provider);
+        protected abstract CodeStyleOption2<TOptionValue> GetCodeStyleOption(
+            AnalyzerOptionsProvider provider
+        );
 
         #region analysis
 
@@ -76,13 +82,18 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         protected abstract DiagnosticAnalyzerCategory GetAnalyzerCategory();
 
         protected DiagnosticDescriptor CreateDescriptorWithId(
-            LocalizableString title, LocalizableString message)
+            LocalizableString title,
+            LocalizableString message
+        )
         {
             return new DiagnosticDescriptor(
-                _descriptorId, title, message,
+                _descriptorId,
+                title,
+                message,
                 DiagnosticCategory.Style,
                 DiagnosticSeverity.Hidden,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
         }
 
         #endregion
@@ -92,23 +103,43 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// <summary>
         /// Subclasses must implement this method to provide fixes for any diagnostics that this
         /// type has registered.  If this subclass wants the same code to run for this single
-        /// diagnostic as well as for when running fix-all, then it should call 
+        /// diagnostic as well as for when running fix-all, then it should call
         /// <see cref="FixWithSyntaxEditorAsync"/> from its code action.  This will end up calling
-        /// <see cref="FixAllAsync"/>, with that single <paramref name="diagnostic"/> in the 
+        /// <see cref="FixAllAsync"/>, with that single <paramref name="diagnostic"/> in the
         /// <see cref="ImmutableArray{T}"/> passed to that method.
         /// </summary>
         protected abstract Task<ImmutableArray<CodeAction>> ComputeCodeActionsAsync(
-            Document document, Diagnostic diagnostic, CancellationToken cancellationToken);
+            Document document,
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Subclasses should implement this to support fixing all given diagnostics efficiently.
         /// </summary>
         protected abstract Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor, CancellationToken cancellationToken);
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        );
 
-        protected Task<Document> FixWithSyntaxEditorAsync(Document document, Diagnostic diagnostic, CancellationToken cancellationToken)
-            => SyntaxEditorBasedCodeFixProvider.FixAllWithEditorAsync(
-                document, editor => FixAllAsync(document, ImmutableArray.Create(diagnostic), editor, cancellationToken), cancellationToken);
+        protected Task<Document> FixWithSyntaxEditorAsync(
+            Document document,
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        ) =>
+            SyntaxEditorBasedCodeFixProvider.FixAllWithEditorAsync(
+                document,
+                editor =>
+                    FixAllAsync(
+                        document,
+                        ImmutableArray.Create(diagnostic),
+                        editor,
+                        cancellationToken
+                    ),
+                cancellationToken
+            );
 
         #endregion
 
@@ -125,8 +156,13 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// or even for allowing the user to quickly switch their code to *not* follow their desired
         /// preference.
         /// </summary>
-        protected abstract Task<ImmutableArray<CodeAction>> ComputeAllRefactoringsWhenAnalyzerInactiveAsync(
-            Document document, TextSpan span, CancellationToken cancellationToken);
+        protected abstract Task<
+            ImmutableArray<CodeAction>
+        > ComputeAllRefactoringsWhenAnalyzerInactiveAsync(
+            Document document,
+            TextSpan span,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Subclasses should implement this to provide the refactoring that works in the opposing
@@ -141,8 +177,14 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// warning level), then this would offer 'use block body' on a method that had an
         /// expression body already.
         /// </summary>
-        protected abstract Task<ImmutableArray<CodeAction>> ComputeOpposingRefactoringsWhenAnalyzerActiveAsync(
-            Document document, TextSpan span, TOptionValue option, CancellationToken cancellationToken);
+        protected abstract Task<
+            ImmutableArray<CodeAction>
+        > ComputeOpposingRefactoringsWhenAnalyzerActiveAsync(
+            Document document,
+            TextSpan span,
+            TOptionValue option,
+            CancellationToken cancellationToken
+        );
 
         #endregion
     }

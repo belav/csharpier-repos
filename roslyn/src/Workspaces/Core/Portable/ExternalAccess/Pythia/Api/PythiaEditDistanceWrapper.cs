@@ -11,13 +11,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
     {
         private readonly EditDistance _underlyingObject;
 
-        public PythiaEditDistanceWrapper(string str)
-            => _underlyingObject = new EditDistance(str);
+        public PythiaEditDistanceWrapper(string str) => _underlyingObject = new EditDistance(str);
 
-        public double GetEditDistance(string target)
-            => _underlyingObject.GetEditDistance(target);
+        public double GetEditDistance(string target) => _underlyingObject.GetEditDistance(target);
 
-        public void Dispose()
-            => _underlyingObject.Dispose();
+        public void Dispose() => _underlyingObject.Dispose();
     }
 }

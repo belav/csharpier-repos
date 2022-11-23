@@ -12,6 +12,7 @@ namespace System.Runtime.InteropServices.JavaScript
     public abstract class JSType
     {
         internal JSType() { }
+
         /// <summary>
         /// Asserts that a JavaScript function should have no return value.
         /// </summary>
@@ -132,7 +133,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// </summary>
         /// <typeparam name="T1">The type of marshaled parameter or result.</typeparam>
         /// <typeparam name="T2">Type of marshaled parameter.</typeparam>
-        public sealed class Function<T1, T2> : JSType where T1 : JSType where T2 : JSType
+        public sealed class Function<T1, T2> : JSType
+            where T1 : JSType
+            where T2 : JSType
         {
             internal Function() { }
         }
@@ -143,7 +146,10 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <typeparam name="T1">The type of marshaled parameter or result.</typeparam>
         /// <typeparam name="T2">Type of marshaled parameter.</typeparam>
         /// <typeparam name="T3">Type of marshaled parameter.</typeparam>
-        public sealed class Function<T1, T2, T3> : JSType where T1 : JSType where T2 : JSType where T3 : JSType
+        public sealed class Function<T1, T2, T3> : JSType
+            where T1 : JSType
+            where T2 : JSType
+            where T3 : JSType
         {
             internal Function() { }
         }
@@ -155,7 +161,11 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <typeparam name="T2">Type of marshaled parameter.</typeparam>
         /// <typeparam name="T3">Type of marshaled parameter.</typeparam>
         /// <typeparam name="T4">Type of marshaled parameter.</typeparam>
-        public sealed class Function<T1, T2, T3, T4> : JSType where T1 : JSType where T2 : JSType where T3 : JSType where T4 : JSType
+        public sealed class Function<T1, T2, T3, T4> : JSType
+            where T1 : JSType
+            where T2 : JSType
+            where T3 : JSType
+            where T4 : JSType
         {
             internal Function() { }
         }

@@ -3,9 +3,8 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
-public class NorthwindBulkUpdatesSqliteFixture<TModelCustomizer> : NorthwindBulkUpdatesFixture<TModelCustomizer>
-    where TModelCustomizer : IModelCustomizer, new()
+public class NorthwindBulkUpdatesSqliteFixture<TModelCustomizer>
+    : NorthwindBulkUpdatesFixture<TModelCustomizer> where TModelCustomizer : IModelCustomizer, new()
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqliteTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 }

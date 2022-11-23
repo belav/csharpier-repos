@@ -61,12 +61,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256DoubleExtractMostSignificantBitsTest()
         {
-            Vector256<double> vector = Vector256.Create(
-                +1.0,
-                -0.0,
-                +1.0,
-                -0.0
-            );
+            Vector256<double> vector = Vector256.Create(+1.0, -0.0, +1.0, -0.0);
 
             uint result = Vector256.ExtractMostSignificantBits(vector);
             Assert.Equal(0b1010u, result);
@@ -75,24 +70,26 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int16ExtractMostSignificantBitsTest()
         {
-            Vector256<short> vector = Vector256.Create(
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000
-            ).AsInt16();
+            Vector256<short> vector = Vector256
+                .Create(
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000
+                )
+                .AsInt16();
 
             uint result = Vector256.ExtractMostSignificantBits(vector);
             Assert.Equal(0b10101010_10101010u, result);
@@ -101,16 +98,18 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int32ExtractMostSignificantBitsTest()
         {
-            Vector256<int> vector = Vector256.Create(
-                0x00000001U,
-                0x80000000U,
-                0x00000001U,
-                0x80000000U,
-                0x00000001U,
-                0x80000000U,
-                0x00000001U,
-                0x80000000U
-            ).AsInt32();
+            Vector256<int> vector = Vector256
+                .Create(
+                    0x00000001U,
+                    0x80000000U,
+                    0x00000001U,
+                    0x80000000U,
+                    0x00000001U,
+                    0x80000000U,
+                    0x00000001U,
+                    0x80000000U
+                )
+                .AsInt32();
 
             uint result = Vector256.ExtractMostSignificantBits(vector);
             Assert.Equal(0b10101010u, result);
@@ -119,12 +118,14 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int64ExtractMostSignificantBitsTest()
         {
-            Vector256<long> vector = Vector256.Create(
-                0x0000000000000001UL,
-                0x8000000000000000UL,
-                0x0000000000000001UL,
-                0x8000000000000000UL
-            ).AsInt64();
+            Vector256<long> vector = Vector256
+                .Create(
+                    0x0000000000000001UL,
+                    0x8000000000000000UL,
+                    0x0000000000000001UL,
+                    0x8000000000000000UL
+                )
+                .AsInt64();
 
             uint result = Vector256.ExtractMostSignificantBits(vector);
             Assert.Equal(0b1010u, result);
@@ -135,28 +136,32 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                Vector256<nint> vector = Vector256.Create(
-                    0x0000000000000001UL,
-                    0x8000000000000000UL,
-                    0x0000000000000001UL,
-                    0x8000000000000000UL
-                ).AsNInt();
+                Vector256<nint> vector = Vector256
+                    .Create(
+                        0x0000000000000001UL,
+                        0x8000000000000000UL,
+                        0x0000000000000001UL,
+                        0x8000000000000000UL
+                    )
+                    .AsNInt();
 
                 uint result = Vector256.ExtractMostSignificantBits(vector);
                 Assert.Equal(0b1010u, result);
             }
             else
             {
-                Vector256<nint> vector = Vector256.Create(
-                    0x00000001U,
-                    0x80000000U,
-                    0x00000001U,
-                    0x80000000U,
-                    0x00000001U,
-                    0x80000000U,
-                    0x00000001U,
-                    0x80000000U
-                ).AsNInt();
+                Vector256<nint> vector = Vector256
+                    .Create(
+                        0x00000001U,
+                        0x80000000U,
+                        0x00000001U,
+                        0x80000000U,
+                        0x00000001U,
+                        0x80000000U,
+                        0x00000001U,
+                        0x80000000U
+                    )
+                    .AsNInt();
 
                 uint result = Vector256.ExtractMostSignificantBits(vector);
                 Assert.Equal(0b10101010u, result);
@@ -168,28 +173,32 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                Vector256<nuint> vector = Vector256.Create(
-                    0x0000000000000001UL,
-                    0x8000000000000000UL,
-                    0x0000000000000001UL,
-                    0x8000000000000000UL
-                ).AsNUInt();
+                Vector256<nuint> vector = Vector256
+                    .Create(
+                        0x0000000000000001UL,
+                        0x8000000000000000UL,
+                        0x0000000000000001UL,
+                        0x8000000000000000UL
+                    )
+                    .AsNUInt();
 
                 uint result = Vector256.ExtractMostSignificantBits(vector);
                 Assert.Equal(0b1010u, result);
             }
             else
             {
-                Vector256<nuint> vector = Vector256.Create(
-                    0x00000001U,
-                    0x80000000U,
-                    0x00000001U,
-                    0x80000000U,
-                    0x00000001U,
-                    0x80000000U,
-                    0x00000001U,
-                    0x80000000U
-                ).AsNUInt();
+                Vector256<nuint> vector = Vector256
+                    .Create(
+                        0x00000001U,
+                        0x80000000U,
+                        0x00000001U,
+                        0x80000000U,
+                        0x00000001U,
+                        0x80000000U,
+                        0x00000001U,
+                        0x80000000U
+                    )
+                    .AsNUInt();
 
                 uint result = Vector256.ExtractMostSignificantBits(vector);
                 Assert.Equal(0b10101010u, result);
@@ -199,40 +208,42 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256SByteExtractMostSignificantBitsTest()
         {
-            Vector256<sbyte> vector = Vector256.Create(
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80
-            ).AsSByte();
+            Vector256<sbyte> vector = Vector256
+                .Create(
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80
+                )
+                .AsSByte();
 
             uint result = Vector256.ExtractMostSignificantBits(vector);
             Assert.Equal(0b10101010_10101010_10101010_10101010u, result);
@@ -317,40 +328,41 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256ByteLoadTest()
         {
-            byte* value = stackalloc byte[32] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-                17,
-                18,
-                19,
-                20,
-                21,
-                22,
-                23,
-                24,
-                25,
-                26,
-                27,
-                28,
-                29,
-                30,
-                31,
-            };
+            byte* value =
+                stackalloc byte[32] {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                };
 
             Vector256<byte> vector = Vector256.Load(value);
 
@@ -363,12 +375,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256DoubleLoadTest()
         {
-            double* value = stackalloc double[4] {
-                0,
-                1,
-                2,
-                3,
-            };
+            double* value = stackalloc double[4] { 0, 1, 2, 3, };
 
             Vector256<double> vector = Vector256.Load(value);
 
@@ -381,24 +388,8 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int16LoadTest()
         {
-            short* value = stackalloc short[16] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-            };
+            short* value =
+                stackalloc short[16] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, };
 
             Vector256<short> vector = Vector256.Load(value);
 
@@ -411,16 +402,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int32LoadTest()
         {
-            int* value = stackalloc int[8] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-            };
+            int* value = stackalloc int[8] { 0, 1, 2, 3, 4, 5, 6, 7, };
 
             Vector256<int> vector = Vector256.Load(value);
 
@@ -433,12 +415,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int64LoadTest()
         {
-            long* value = stackalloc long[4] {
-                0,
-                1,
-                2,
-                3,
-            };
+            long* value = stackalloc long[4] { 0, 1, 2, 3, };
 
             Vector256<long> vector = Vector256.Load(value);
 
@@ -453,12 +430,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nint* value = stackalloc nint[4] {
-                    0,
-                    1,
-                    2,
-                    3,
-                };
+                nint* value = stackalloc nint[4] { 0, 1, 2, 3, };
 
                 Vector256<nint> vector = Vector256.Load(value);
 
@@ -469,16 +441,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nint* value = stackalloc nint[8] {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                };
+                nint* value = stackalloc nint[8] { 0, 1, 2, 3, 4, 5, 6, 7, };
 
                 Vector256<nint> vector = Vector256.Load(value);
 
@@ -494,12 +457,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nuint* value = stackalloc nuint[4] {
-                    0,
-                    1,
-                    2,
-                    3,
-                };
+                nuint* value = stackalloc nuint[4] { 0, 1, 2, 3, };
 
                 Vector256<nuint> vector = Vector256.Load(value);
 
@@ -510,16 +468,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nuint* value = stackalloc nuint[8] {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                };
+                nuint* value = stackalloc nuint[8] { 0, 1, 2, 3, 4, 5, 6, 7, };
 
                 Vector256<nuint> vector = Vector256.Load(value);
 
@@ -533,40 +482,41 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256SByteLoadTest()
         {
-            sbyte* value = stackalloc sbyte[32] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-                17,
-                18,
-                19,
-                20,
-                21,
-                22,
-                23,
-                24,
-                25,
-                26,
-                27,
-                28,
-                29,
-                30,
-                31,
-            };
+            sbyte* value =
+                stackalloc sbyte[32] {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                };
 
             Vector256<sbyte> vector = Vector256.Load(value);
 
@@ -579,16 +529,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256SingleLoadTest()
         {
-            float* value = stackalloc float[8] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-            };
+            float* value = stackalloc float[8] { 0, 1, 2, 3, 4, 5, 6, 7, };
 
             Vector256<float> vector = Vector256.Load(value);
 
@@ -601,24 +542,8 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256UInt16LoadTest()
         {
-            ushort* value = stackalloc ushort[16] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-            };
+            ushort* value =
+                stackalloc ushort[16] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, };
 
             Vector256<ushort> vector = Vector256.Load(value);
 
@@ -631,16 +556,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256UInt32LoadTest()
         {
-            uint* value = stackalloc uint[8] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-            };
+            uint* value = stackalloc uint[8] { 0, 1, 2, 3, 4, 5, 6, 7, };
 
             Vector256<uint> vector = Vector256.Load(value);
 
@@ -653,12 +569,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256UInt64LoadTest()
         {
-            ulong* value = stackalloc ulong[4] {
-                0,
-                1,
-                2,
-                3,
-            };
+            ulong* value = stackalloc ulong[4] { 0, 1, 2, 3, };
 
             Vector256<ulong> vector = Vector256.Load(value);
 
@@ -1559,40 +1470,41 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256ByteLoadUnsafeTest()
         {
-            byte* value = stackalloc byte[32] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-                17,
-                18,
-                19,
-                20,
-                21,
-                22,
-                23,
-                24,
-                25,
-                26,
-                27,
-                28,
-                29,
-                30,
-                31,
-            };
+            byte* value =
+                stackalloc byte[32] {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                };
 
             Vector256<byte> vector = Vector256.LoadUnsafe(ref value[0]);
 
@@ -1605,12 +1517,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256DoubleLoadUnsafeTest()
         {
-            double* value = stackalloc double[4] {
-                0,
-                1,
-                2,
-                3,
-            };
+            double* value = stackalloc double[4] { 0, 1, 2, 3, };
 
             Vector256<double> vector = Vector256.LoadUnsafe(ref value[0]);
 
@@ -1623,24 +1530,8 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int16LoadUnsafeTest()
         {
-            short* value = stackalloc short[16] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-            };
+            short* value =
+                stackalloc short[16] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, };
 
             Vector256<short> vector = Vector256.LoadUnsafe(ref value[0]);
 
@@ -1653,16 +1544,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int32LoadUnsafeTest()
         {
-            int* value = stackalloc int[8] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-            };
+            int* value = stackalloc int[8] { 0, 1, 2, 3, 4, 5, 6, 7, };
 
             Vector256<int> vector = Vector256.LoadUnsafe(ref value[0]);
 
@@ -1675,12 +1557,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int64LoadUnsafeTest()
         {
-            long* value = stackalloc long[4] {
-                0,
-                1,
-                2,
-                3,
-            };
+            long* value = stackalloc long[4] { 0, 1, 2, 3, };
 
             Vector256<long> vector = Vector256.LoadUnsafe(ref value[0]);
 
@@ -1695,12 +1572,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nint* value = stackalloc nint[4] {
-                    0,
-                    1,
-                    2,
-                    3,
-                };
+                nint* value = stackalloc nint[4] { 0, 1, 2, 3, };
 
                 Vector256<nint> vector = Vector256.LoadUnsafe(ref value[0]);
 
@@ -1711,16 +1583,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nint* value = stackalloc nint[8] {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                };
+                nint* value = stackalloc nint[8] { 0, 1, 2, 3, 4, 5, 6, 7, };
 
                 Vector256<nint> vector = Vector256.LoadUnsafe(ref value[0]);
 
@@ -1736,12 +1599,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nuint* value = stackalloc nuint[4] {
-                    0,
-                    1,
-                    2,
-                    3,
-                };
+                nuint* value = stackalloc nuint[4] { 0, 1, 2, 3, };
 
                 Vector256<nuint> vector = Vector256.LoadUnsafe(ref value[0]);
 
@@ -1752,16 +1610,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nuint* value = stackalloc nuint[8] {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                };
+                nuint* value = stackalloc nuint[8] { 0, 1, 2, 3, 4, 5, 6, 7, };
 
                 Vector256<nuint> vector = Vector256.LoadUnsafe(ref value[0]);
 
@@ -1775,40 +1624,41 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256SByteLoadUnsafeTest()
         {
-            sbyte* value = stackalloc sbyte[32] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-                17,
-                18,
-                19,
-                20,
-                21,
-                22,
-                23,
-                24,
-                25,
-                26,
-                27,
-                28,
-                29,
-                30,
-                31,
-            };
+            sbyte* value =
+                stackalloc sbyte[32] {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                };
 
             Vector256<sbyte> vector = Vector256.LoadUnsafe(ref value[0]);
 
@@ -1821,16 +1671,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256SingleLoadUnsafeTest()
         {
-            float* value = stackalloc float[8] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-            };
+            float* value = stackalloc float[8] { 0, 1, 2, 3, 4, 5, 6, 7, };
 
             Vector256<float> vector = Vector256.LoadUnsafe(ref value[0]);
 
@@ -1843,24 +1684,8 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256UInt16LoadUnsafeTest()
         {
-            ushort* value = stackalloc ushort[16] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-            };
+            ushort* value =
+                stackalloc ushort[16] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, };
 
             Vector256<ushort> vector = Vector256.LoadUnsafe(ref value[0]);
 
@@ -1873,16 +1698,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256UInt32LoadUnsafeTest()
         {
-            uint* value = stackalloc uint[8] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-            };
+            uint* value = stackalloc uint[8] { 0, 1, 2, 3, 4, 5, 6, 7, };
 
             Vector256<uint> vector = Vector256.LoadUnsafe(ref value[0]);
 
@@ -1895,12 +1711,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256UInt64LoadUnsafeTest()
         {
-            ulong* value = stackalloc ulong[4] {
-                0,
-                1,
-                2,
-                3,
-            };
+            ulong* value = stackalloc ulong[4] { 0, 1, 2, 3, };
 
             Vector256<ulong> vector = Vector256.LoadUnsafe(ref value[0]);
 
@@ -1913,41 +1724,42 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256ByteLoadUnsafeIndexTest()
         {
-            byte* value = stackalloc byte[32 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-                17,
-                18,
-                19,
-                20,
-                21,
-                22,
-                23,
-                24,
-                25,
-                26,
-                27,
-                28,
-                29,
-                30,
-                31,
-                32,
-            };
+            byte* value =
+                stackalloc byte[32 + 1] {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                };
 
             Vector256<byte> vector = Vector256.LoadUnsafe(ref value[0], 1);
 
@@ -1960,13 +1772,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256DoubleLoadUnsafeIndexTest()
         {
-            double* value = stackalloc double[4 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-            };
+            double* value = stackalloc double[4 + 1] { 0, 1, 2, 3, 4, };
 
             Vector256<double> vector = Vector256.LoadUnsafe(ref value[0], 1);
 
@@ -1979,25 +1785,26 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int16LoadUnsafeIndexTest()
         {
-            short* value = stackalloc short[16 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-            };
+            short* value =
+                stackalloc short[16 + 1] {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                };
 
             Vector256<short> vector = Vector256.LoadUnsafe(ref value[0], 1);
 
@@ -2010,17 +1817,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int32LoadUnsafeIndexTest()
         {
-            int* value = stackalloc int[8 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-            };
+            int* value = stackalloc int[8 + 1] { 0, 1, 2, 3, 4, 5, 6, 7, 8, };
 
             Vector256<int> vector = Vector256.LoadUnsafe(ref value[0], 1);
 
@@ -2033,13 +1830,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int64LoadUnsafeIndexTest()
         {
-            long* value = stackalloc long[4 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-            };
+            long* value = stackalloc long[4 + 1] { 0, 1, 2, 3, 4, };
 
             Vector256<long> vector = Vector256.LoadUnsafe(ref value[0], 1);
 
@@ -2054,13 +1845,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nint* value = stackalloc nint[4 + 1] {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                };
+                nint* value = stackalloc nint[4 + 1] { 0, 1, 2, 3, 4, };
 
                 Vector256<nint> vector = Vector256.LoadUnsafe(ref value[0], 1);
 
@@ -2071,17 +1856,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nint* value = stackalloc nint[8 + 1] {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                };
+                nint* value = stackalloc nint[8 + 1] { 0, 1, 2, 3, 4, 5, 6, 7, 8, };
 
                 Vector256<nint> vector = Vector256.LoadUnsafe(ref value[0], 1);
 
@@ -2097,13 +1872,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nuint* value = stackalloc nuint[4 + 1] {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                };
+                nuint* value = stackalloc nuint[4 + 1] { 0, 1, 2, 3, 4, };
 
                 Vector256<nuint> vector = Vector256.LoadUnsafe(ref value[0], 1);
 
@@ -2114,17 +1883,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nuint* value = stackalloc nuint[8 + 1] {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                };
+                nuint* value = stackalloc nuint[8 + 1] { 0, 1, 2, 3, 4, 5, 6, 7, 8, };
 
                 Vector256<nuint> vector = Vector256.LoadUnsafe(ref value[0], 1);
 
@@ -2138,41 +1897,42 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256SByteLoadUnsafeIndexTest()
         {
-            sbyte* value = stackalloc sbyte[32 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-                17,
-                18,
-                19,
-                20,
-                21,
-                22,
-                23,
-                24,
-                25,
-                26,
-                27,
-                28,
-                29,
-                30,
-                31,
-                32,
-            };
+            sbyte* value =
+                stackalloc sbyte[32 + 1] {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                };
 
             Vector256<sbyte> vector = Vector256.LoadUnsafe(ref value[0], 1);
 
@@ -2185,17 +1945,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256SingleLoadUnsafeIndexTest()
         {
-            float* value = stackalloc float[8 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-            };
+            float* value = stackalloc float[8 + 1] { 0, 1, 2, 3, 4, 5, 6, 7, 8, };
 
             Vector256<float> vector = Vector256.LoadUnsafe(ref value[0], 1);
 
@@ -2208,25 +1958,26 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256UInt16LoadUnsafeIndexTest()
         {
-            ushort* value = stackalloc ushort[16 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-            };
+            ushort* value =
+                stackalloc ushort[16 + 1] {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                };
 
             Vector256<ushort> vector = Vector256.LoadUnsafe(ref value[0], 1);
 
@@ -2239,17 +1990,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256UInt32LoadUnsafeIndexTest()
         {
-            uint* value = stackalloc uint[8 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-            };
+            uint* value = stackalloc uint[8 + 1] { 0, 1, 2, 3, 4, 5, 6, 7, 8, };
 
             Vector256<uint> vector = Vector256.LoadUnsafe(ref value[0], 1);
 
@@ -2262,13 +2003,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256UInt64LoadUnsafeIndexTest()
         {
-            ulong* value = stackalloc ulong[4 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-            };
+            ulong* value = stackalloc ulong[4 + 1] { 0, 1, 2, 3, 4, };
 
             Vector256<ulong> vector = Vector256.LoadUnsafe(ref value[0], 1);
 
@@ -2620,8 +2355,77 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256ByteShuffleOneInputTest()
         {
-            Vector256<byte> vector = Vector256.Create((byte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32);
-            Vector256<byte> result = Vector256.Shuffle(vector, Vector256.Create((byte)31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+            Vector256<byte> vector = Vector256.Create(
+                (byte)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32
+            );
+            Vector256<byte> result = Vector256.Shuffle(
+                vector,
+                Vector256.Create(
+                    (byte)31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16,
+                    15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0
+                )
+            );
 
             for (int index = 0; index < Vector256<byte>.Count; index++)
             {
@@ -2633,7 +2437,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector256DoubleShuffleOneInputTest()
         {
             Vector256<double> vector = Vector256.Create((double)1, 2, 3, 4);
-            Vector256<double> result = Vector256.Shuffle(vector, Vector256.Create((long)3, 2, 1, 0));
+            Vector256<double> result = Vector256.Shuffle(
+                vector,
+                Vector256.Create((long)3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector256<double>.Count; index++)
             {
@@ -2644,8 +2451,28 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256Int16ShuffleOneInputTest()
         {
-            Vector256<short> vector = Vector256.Create((short)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-            Vector256<short> result = Vector256.Shuffle(vector, Vector256.Create((short)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+            Vector256<short> vector = Vector256.Create(
+                (short)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            );
+            Vector256<short> result = Vector256.Shuffle(
+                vector,
+                Vector256.Create((short)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector256<short>.Count; index++)
             {
@@ -2657,7 +2484,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector256Int32ShuffleOneInputTest()
         {
             Vector256<int> vector = Vector256.Create((int)1, 2, 3, 4, 5, 6, 7, 8);
-            Vector256<int> result = Vector256.Shuffle(vector, Vector256.Create((int)7, 6, 5, 4, 3, 2, 1, 0));
+            Vector256<int> result = Vector256.Shuffle(
+                vector,
+                Vector256.Create((int)7, 6, 5, 4, 3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector256<int>.Count; index++)
             {
@@ -2680,8 +2510,77 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256SByteShuffleOneInputTest()
         {
-            Vector256<sbyte> vector = Vector256.Create((sbyte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32);
-            Vector256<sbyte> result = Vector256.Shuffle(vector, Vector256.Create((sbyte)31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+            Vector256<sbyte> vector = Vector256.Create(
+                (sbyte)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32
+            );
+            Vector256<sbyte> result = Vector256.Shuffle(
+                vector,
+                Vector256.Create(
+                    (sbyte)31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16,
+                    15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0
+                )
+            );
 
             for (int index = 0; index < Vector256<sbyte>.Count; index++)
             {
@@ -2693,7 +2592,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector256SingleShuffleOneInputTest()
         {
             Vector256<float> vector = Vector256.Create((float)1, 2, 3, 4, 5, 6, 7, 8);
-            Vector256<float> result = Vector256.Shuffle(vector, Vector256.Create((int)7, 6, 5, 4, 3, 2, 1, 0));
+            Vector256<float> result = Vector256.Shuffle(
+                vector,
+                Vector256.Create((int)7, 6, 5, 4, 3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector256<float>.Count; index++)
             {
@@ -2704,8 +2606,28 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256UInt16ShuffleOneInputTest()
         {
-            Vector256<ushort> vector = Vector256.Create((ushort)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-            Vector256<ushort> result = Vector256.Shuffle(vector, Vector256.Create((ushort)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+            Vector256<ushort> vector = Vector256.Create(
+                (ushort)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            );
+            Vector256<ushort> result = Vector256.Shuffle(
+                vector,
+                Vector256.Create((ushort)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector256<ushort>.Count; index++)
             {
@@ -2717,7 +2639,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector256UInt32ShuffleOneInputTest()
         {
             Vector256<uint> vector = Vector256.Create((uint)1, 2, 3, 4, 5, 6, 7, 8);
-            Vector256<uint> result = Vector256.Shuffle(vector, Vector256.Create((uint)7, 6, 5, 4, 3, 2, 1, 0));
+            Vector256<uint> result = Vector256.Shuffle(
+                vector,
+                Vector256.Create((uint)7, 6, 5, 4, 3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector256<uint>.Count; index++)
             {
@@ -2729,7 +2654,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector256UInt64ShuffleOneInputTest()
         {
             Vector256<ulong> vector = Vector256.Create((ulong)1, 2, 3, 4);
-            Vector256<ulong> result = Vector256.Shuffle(vector, Vector256.Create((ulong)3, 2, 1, 0));
+            Vector256<ulong> result = Vector256.Shuffle(
+                vector,
+                Vector256.Create((ulong)3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector256<ulong>.Count; index++)
             {
@@ -2740,7 +2668,76 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256ByteShuffleOneInputWithDirectVectorTest()
         {
-            Vector256<byte> result = Vector256.Shuffle(Vector256.Create((byte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32), Vector256.Create((byte)31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+            Vector256<byte> result = Vector256.Shuffle(
+                Vector256.Create(
+                    (byte)1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32
+                ),
+                Vector256.Create(
+                    (byte)31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16,
+                    15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0
+                )
+            );
 
             for (int index = 0; index < Vector256<byte>.Count; index++)
             {
@@ -2751,7 +2748,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256DoubleShuffleOneInputWithDirectVectorTest()
         {
-            Vector256<double> result = Vector256.Shuffle(Vector256.Create((double)1, 2, 3, 4), Vector256.Create((long)3, 2, 1, 0));
+            Vector256<double> result = Vector256.Shuffle(
+                Vector256.Create((double)1, 2, 3, 4),
+                Vector256.Create((long)3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector256<double>.Count; index++)
             {
@@ -2762,7 +2762,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256Int16ShuffleOneInputWithDirectVectorTest()
         {
-            Vector256<short> result = Vector256.Shuffle(Vector256.Create((short)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16), Vector256.Create((short)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+            Vector256<short> result = Vector256.Shuffle(
+                Vector256.Create((short)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16),
+                Vector256.Create((short)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector256<short>.Count; index++)
             {
@@ -2773,7 +2776,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256Int32ShuffleOneInputWithDirectVectorTest()
         {
-            Vector256<int> result = Vector256.Shuffle(Vector256.Create((int)1, 2, 3, 4, 5, 6, 7, 8), Vector256.Create((int)7, 6, 5, 4, 3, 2, 1, 0));
+            Vector256<int> result = Vector256.Shuffle(
+                Vector256.Create((int)1, 2, 3, 4, 5, 6, 7, 8),
+                Vector256.Create((int)7, 6, 5, 4, 3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector256<int>.Count; index++)
             {
@@ -2784,7 +2790,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256Int64ShuffleOneInputWithDirectVectorTest()
         {
-            Vector256<long> result = Vector256.Shuffle(Vector256.Create((long)1, 2, 3, 4), Vector256.Create((long)3, 2, 1, 0));
+            Vector256<long> result = Vector256.Shuffle(
+                Vector256.Create((long)1, 2, 3, 4),
+                Vector256.Create((long)3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector256<long>.Count; index++)
             {
@@ -2795,7 +2804,76 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256SByteShuffleOneInputWithDirectVectorTest()
         {
-            Vector256<sbyte> result = Vector256.Shuffle(Vector256.Create((sbyte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32), Vector256.Create((sbyte)31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+            Vector256<sbyte> result = Vector256.Shuffle(
+                Vector256.Create(
+                    (sbyte)1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32
+                ),
+                Vector256.Create(
+                    (sbyte)31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16,
+                    15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0
+                )
+            );
 
             for (int index = 0; index < Vector256<sbyte>.Count; index++)
             {
@@ -2806,7 +2884,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256SingleShuffleOneInputWithDirectVectorTest()
         {
-            Vector256<float> result = Vector256.Shuffle(Vector256.Create((float)1, 2, 3, 4, 5, 6, 7, 8), Vector256.Create((int)7, 6, 5, 4, 3, 2, 1, 0));
+            Vector256<float> result = Vector256.Shuffle(
+                Vector256.Create((float)1, 2, 3, 4, 5, 6, 7, 8),
+                Vector256.Create((int)7, 6, 5, 4, 3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector256<float>.Count; index++)
             {
@@ -2817,7 +2898,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256UInt16ShuffleOneInputWithDirectVectorTest()
         {
-            Vector256<ushort> result = Vector256.Shuffle(Vector256.Create((ushort)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16), Vector256.Create((ushort)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+            Vector256<ushort> result = Vector256.Shuffle(
+                Vector256.Create((ushort)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16),
+                Vector256.Create((ushort)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector256<ushort>.Count; index++)
             {
@@ -2828,7 +2912,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256UInt32ShuffleOneInputWithDirectVectorTest()
         {
-            Vector256<uint> result = Vector256.Shuffle(Vector256.Create((uint)1, 2, 3, 4, 5, 6, 7, 8), Vector256.Create((uint)7, 6, 5, 4, 3, 2, 1, 0));
+            Vector256<uint> result = Vector256.Shuffle(
+                Vector256.Create((uint)1, 2, 3, 4, 5, 6, 7, 8),
+                Vector256.Create((uint)7, 6, 5, 4, 3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector256<uint>.Count; index++)
             {
@@ -2839,7 +2926,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256UInt64ShuffleOneInputWithDirectVectorTest()
         {
-            Vector256<ulong> result = Vector256.Shuffle(Vector256.Create((ulong)1, 2, 3, 4), Vector256.Create((ulong)3, 2, 1, 0));
+            Vector256<ulong> result = Vector256.Shuffle(
+                Vector256.Create((ulong)1, 2, 3, 4),
+                Vector256.Create((ulong)3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector256<ulong>.Count; index++)
             {
@@ -2850,7 +2940,76 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256ByteShuffleOneInputWithDirectVectorAndNoCrossLaneTest()
         {
-            Vector256<byte> result = Vector256.Shuffle(Vector256.Create((byte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32), Vector256.Create((byte)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16));
+            Vector256<byte> result = Vector256.Shuffle(
+                Vector256.Create(
+                    (byte)1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32
+                ),
+                Vector256.Create(
+                    (byte)15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0,
+                    31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16
+                )
+            );
 
             for (int index = 0; index < Vector128<byte>.Count; index++)
             {
@@ -2859,14 +3018,20 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector128<byte>.Count; index < Vector256<byte>.Count; index++)
             {
-                Assert.Equal((byte)(Vector256<byte>.Count - (index - Vector128<byte>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (byte)(Vector256<byte>.Count - (index - Vector128<byte>.Count)),
+                    result.GetElement(index)
+                );
             }
         }
 
         [Fact]
         public void Vector256DoubleShuffleOneInputWithDirectVectorAndNoCrossLaneTest()
         {
-            Vector256<double> result = Vector256.Shuffle(Vector256.Create((double)1, 2, 3, 4), Vector256.Create((long)1, 0, 3, 2));
+            Vector256<double> result = Vector256.Shuffle(
+                Vector256.Create((double)1, 2, 3, 4),
+                Vector256.Create((long)1, 0, 3, 2)
+            );
 
             for (int index = 0; index < Vector128<double>.Count; index++)
             {
@@ -2875,14 +3040,20 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector128<double>.Count; index < Vector256<double>.Count; index++)
             {
-                Assert.Equal((double)(Vector256<double>.Count - (index - Vector128<double>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (double)(Vector256<double>.Count - (index - Vector128<double>.Count)),
+                    result.GetElement(index)
+                );
             }
         }
 
         [Fact]
         public void Vector256Int16ShuffleOneInputWithDirectVectorAndNoCrossLaneTest()
         {
-            Vector256<short> result = Vector256.Shuffle(Vector256.Create((short)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16), Vector256.Create((short)7, 6, 5, 4, 3, 2, 1, 0, 15, 14, 13, 12, 11, 10, 9, 8));
+            Vector256<short> result = Vector256.Shuffle(
+                Vector256.Create((short)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16),
+                Vector256.Create((short)7, 6, 5, 4, 3, 2, 1, 0, 15, 14, 13, 12, 11, 10, 9, 8)
+            );
 
             for (int index = 0; index < Vector128<short>.Count; index++)
             {
@@ -2891,14 +3062,20 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector128<short>.Count; index < Vector256<short>.Count; index++)
             {
-                Assert.Equal((short)(Vector256<short>.Count - (index - Vector128<short>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (short)(Vector256<short>.Count - (index - Vector128<short>.Count)),
+                    result.GetElement(index)
+                );
             }
         }
 
         [Fact]
         public void Vector256Int32ShuffleOneInputWithDirectVectorAndNoCrossLaneTest()
         {
-            Vector256<int> result = Vector256.Shuffle(Vector256.Create((int)1, 2, 3, 4, 5, 6, 7, 8), Vector256.Create((int)3, 2, 1, 0, 7, 6, 5, 4));
+            Vector256<int> result = Vector256.Shuffle(
+                Vector256.Create((int)1, 2, 3, 4, 5, 6, 7, 8),
+                Vector256.Create((int)3, 2, 1, 0, 7, 6, 5, 4)
+            );
 
             for (int index = 0; index < Vector128<int>.Count; index++)
             {
@@ -2907,14 +3084,20 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector128<int>.Count; index < Vector256<int>.Count; index++)
             {
-                Assert.Equal((int)(Vector256<int>.Count - (index - Vector128<int>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (int)(Vector256<int>.Count - (index - Vector128<int>.Count)),
+                    result.GetElement(index)
+                );
             }
         }
 
         [Fact]
         public void Vector256Int64ShuffleOneInputWithDirectVectorAndNoCrossLaneTest()
         {
-            Vector256<long> result = Vector256.Shuffle(Vector256.Create((long)1, 2, 3, 4), Vector256.Create((long)1, 0, 3, 2));
+            Vector256<long> result = Vector256.Shuffle(
+                Vector256.Create((long)1, 2, 3, 4),
+                Vector256.Create((long)1, 0, 3, 2)
+            );
 
             for (int index = 0; index < Vector128<long>.Count; index++)
             {
@@ -2923,14 +3106,86 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector128<long>.Count; index < Vector256<long>.Count; index++)
             {
-                Assert.Equal((long)(Vector256<long>.Count - (index - Vector128<long>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (long)(Vector256<long>.Count - (index - Vector128<long>.Count)),
+                    result.GetElement(index)
+                );
             }
         }
 
         [Fact]
         public void Vector256SByteShuffleOneInputWithDirectVectorAndNoCrossLaneTest()
         {
-            Vector256<sbyte> result = Vector256.Shuffle(Vector256.Create((sbyte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32), Vector256.Create((sbyte)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16));
+            Vector256<sbyte> result = Vector256.Shuffle(
+                Vector256.Create(
+                    (sbyte)1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32
+                ),
+                Vector256.Create(
+                    (sbyte)15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0,
+                    31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16
+                )
+            );
 
             for (int index = 0; index < Vector128<sbyte>.Count; index++)
             {
@@ -2939,14 +3194,20 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector128<sbyte>.Count; index < Vector256<sbyte>.Count; index++)
             {
-                Assert.Equal((sbyte)(Vector256<sbyte>.Count - (index - Vector128<sbyte>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (sbyte)(Vector256<sbyte>.Count - (index - Vector128<sbyte>.Count)),
+                    result.GetElement(index)
+                );
             }
         }
 
         [Fact]
         public void Vector256SingleShuffleOneInputWithDirectVectorAndNoCrossLaneTest()
         {
-            Vector256<float> result = Vector256.Shuffle(Vector256.Create((float)1, 2, 3, 4, 5, 6, 7, 8), Vector256.Create((int)3, 2, 1, 0, 7, 6, 5, 4));
+            Vector256<float> result = Vector256.Shuffle(
+                Vector256.Create((float)1, 2, 3, 4, 5, 6, 7, 8),
+                Vector256.Create((int)3, 2, 1, 0, 7, 6, 5, 4)
+            );
 
             for (int index = 0; index < Vector128<float>.Count; index++)
             {
@@ -2955,14 +3216,20 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector128<float>.Count; index < Vector256<float>.Count; index++)
             {
-                Assert.Equal((float)(Vector256<float>.Count - (index - Vector128<float>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (float)(Vector256<float>.Count - (index - Vector128<float>.Count)),
+                    result.GetElement(index)
+                );
             }
         }
 
         [Fact]
         public void Vector256UInt16ShuffleOneInputWithDirectVectorAndNoCrossLaneTest()
         {
-            Vector256<ushort> result = Vector256.Shuffle(Vector256.Create((ushort)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16), Vector256.Create((ushort)7, 6, 5, 4, 3, 2, 1, 0, 15, 14, 13, 12, 11, 10, 9, 8));
+            Vector256<ushort> result = Vector256.Shuffle(
+                Vector256.Create((ushort)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16),
+                Vector256.Create((ushort)7, 6, 5, 4, 3, 2, 1, 0, 15, 14, 13, 12, 11, 10, 9, 8)
+            );
 
             for (int index = 0; index < Vector128<ushort>.Count; index++)
             {
@@ -2971,14 +3238,20 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector128<ushort>.Count; index < Vector256<ushort>.Count; index++)
             {
-                Assert.Equal((ushort)(Vector256<ushort>.Count - (index - Vector128<ushort>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (ushort)(Vector256<ushort>.Count - (index - Vector128<ushort>.Count)),
+                    result.GetElement(index)
+                );
             }
         }
 
         [Fact]
         public void Vector256UInt32ShuffleOneInputWithDirectVectorAndNoCrossLaneTest()
         {
-            Vector256<uint> result = Vector256.Shuffle(Vector256.Create((uint)1, 2, 3, 4, 5, 6, 7, 8), Vector256.Create((uint)3, 2, 1, 0, 7, 6, 5, 4));
+            Vector256<uint> result = Vector256.Shuffle(
+                Vector256.Create((uint)1, 2, 3, 4, 5, 6, 7, 8),
+                Vector256.Create((uint)3, 2, 1, 0, 7, 6, 5, 4)
+            );
 
             for (int index = 0; index < Vector128<uint>.Count; index++)
             {
@@ -2987,14 +3260,20 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector128<uint>.Count; index < Vector256<uint>.Count; index++)
             {
-                Assert.Equal((uint)(Vector256<uint>.Count - (index - Vector128<uint>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (uint)(Vector256<uint>.Count - (index - Vector128<uint>.Count)),
+                    result.GetElement(index)
+                );
             }
         }
 
         [Fact]
         public void Vector256UInt64ShuffleOneInputWithDirectVectorAndNoCrossLaneTest()
         {
-            Vector256<ulong> result = Vector256.Shuffle(Vector256.Create((ulong)1, 2, 3, 4), Vector256.Create((ulong)1, 0, 3, 2));
+            Vector256<ulong> result = Vector256.Shuffle(
+                Vector256.Create((ulong)1, 2, 3, 4),
+                Vector256.Create((ulong)1, 0, 3, 2)
+            );
 
             for (int index = 0; index < Vector128<ulong>.Count; index++)
             {
@@ -3003,15 +3282,84 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector128<ulong>.Count; index < Vector256<ulong>.Count; index++)
             {
-                Assert.Equal((ulong)(Vector256<ulong>.Count - (index - Vector128<ulong>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (ulong)(Vector256<ulong>.Count - (index - Vector128<ulong>.Count)),
+                    result.GetElement(index)
+                );
             }
         }
 
         [Fact]
         public void Vector256ByteShuffleOneInputWithLocalIndicesTest()
         {
-            Vector256<byte> vector = Vector256.Create((byte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32);
-            Vector256<byte> indices = Vector256.Create((byte)31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+            Vector256<byte> vector = Vector256.Create(
+                (byte)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32
+            );
+            Vector256<byte> indices = Vector256.Create(
+                (byte)31,
+                30,
+                29,
+                28,
+                27,
+                26,
+                25,
+                24,
+                23,
+                22,
+                21,
+                20,
+                19,
+                18,
+                17,
+                16,
+                15,
+                14,
+                13,
+                12,
+                11,
+                10,
+                9,
+                8,
+                7,
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+            );
             Vector256<byte> result = Vector256.Shuffle(vector, indices);
 
             for (int index = 0; index < Vector256<byte>.Count; index++)
@@ -3036,8 +3384,42 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256Int16ShuffleOneInputWithLocalIndicesTest()
         {
-            Vector256<short> vector = Vector256.Create((short)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-            Vector256<short> indices = Vector256.Create((short)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+            Vector256<short> vector = Vector256.Create(
+                (short)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            );
+            Vector256<short> indices = Vector256.Create(
+                (short)15,
+                14,
+                13,
+                12,
+                11,
+                10,
+                9,
+                8,
+                7,
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+            );
             Vector256<short> result = Vector256.Shuffle(vector, indices);
 
             for (int index = 0; index < Vector256<short>.Count; index++)
@@ -3075,8 +3457,74 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256SByteShuffleOneInputWithLocalIndicesTest()
         {
-            Vector256<sbyte> vector = Vector256.Create((sbyte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32);
-            Vector256<sbyte> indices = Vector256.Create((sbyte)31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+            Vector256<sbyte> vector = Vector256.Create(
+                (sbyte)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32
+            );
+            Vector256<sbyte> indices = Vector256.Create(
+                (sbyte)31,
+                30,
+                29,
+                28,
+                27,
+                26,
+                25,
+                24,
+                23,
+                22,
+                21,
+                20,
+                19,
+                18,
+                17,
+                16,
+                15,
+                14,
+                13,
+                12,
+                11,
+                10,
+                9,
+                8,
+                7,
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+            );
             Vector256<sbyte> result = Vector256.Shuffle(vector, indices);
 
             for (int index = 0; index < Vector256<sbyte>.Count; index++)
@@ -3101,8 +3549,42 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256UInt16ShuffleOneInputWithLocalIndicesTest()
         {
-            Vector256<ushort> vector = Vector256.Create((ushort)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-            Vector256<ushort> indices = Vector256.Create((ushort)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+            Vector256<ushort> vector = Vector256.Create(
+                (ushort)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            );
+            Vector256<ushort> indices = Vector256.Create(
+                (ushort)15,
+                14,
+                13,
+                12,
+                11,
+                10,
+                9,
+                8,
+                7,
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+            );
             Vector256<ushort> result = Vector256.Shuffle(vector, indices);
 
             for (int index = 0; index < Vector256<ushort>.Count; index++)
@@ -3140,7 +3622,40 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256ByteShuffleOneInputWithAllBitsSetIndicesTest()
         {
-            Vector256<byte> vector = Vector256.Create((byte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32);
+            Vector256<byte> vector = Vector256.Create(
+                (byte)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32
+            );
             Vector256<byte> result = Vector256.Shuffle(vector, Vector256<byte>.AllBitsSet);
 
             for (int index = 0; index < Vector256<byte>.Count; index++)
@@ -3164,7 +3679,24 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256Int16ShuffleOneInputWithAllBitsSetIndicesTest()
         {
-            Vector256<short> vector = Vector256.Create((short)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+            Vector256<short> vector = Vector256.Create(
+                (short)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            );
             Vector256<short> result = Vector256.Shuffle(vector, Vector256<short>.AllBitsSet);
 
             for (int index = 0; index < Vector256<short>.Count; index++)
@@ -3200,7 +3732,40 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256SByteShuffleOneInputWithAllBitsSetIndicesTest()
         {
-            Vector256<sbyte> vector = Vector256.Create((sbyte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32);
+            Vector256<sbyte> vector = Vector256.Create(
+                (sbyte)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32
+            );
             Vector256<sbyte> result = Vector256.Shuffle(vector, Vector256<sbyte>.AllBitsSet);
 
             for (int index = 0; index < Vector256<sbyte>.Count; index++)
@@ -3224,7 +3789,24 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256UInt16ShuffleOneInputWithAllBitsSetIndicesTest()
         {
-            Vector256<ushort> vector = Vector256.Create((ushort)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+            Vector256<ushort> vector = Vector256.Create(
+                (ushort)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            );
             Vector256<ushort> result = Vector256.Shuffle(vector, Vector256<ushort>.AllBitsSet);
 
             for (int index = 0; index < Vector256<ushort>.Count; index++)
@@ -3260,7 +3842,40 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256ByteShuffleOneInputWithZeroIndicesTest()
         {
-            Vector256<byte> vector = Vector256.Create((byte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32);
+            Vector256<byte> vector = Vector256.Create(
+                (byte)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32
+            );
             Vector256<byte> result = Vector256.Shuffle(vector, Vector256<byte>.Zero);
 
             for (int index = 0; index < Vector256<byte>.Count; index++)
@@ -3284,7 +3899,24 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256Int16ShuffleOneInputWithZeroIndicesTest()
         {
-            Vector256<short> vector = Vector256.Create((short)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+            Vector256<short> vector = Vector256.Create(
+                (short)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            );
             Vector256<short> result = Vector256.Shuffle(vector, Vector256<short>.Zero);
 
             for (int index = 0; index < Vector256<short>.Count; index++)
@@ -3320,7 +3952,40 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256SByteShuffleOneInputWithZeroIndicesTest()
         {
-            Vector256<sbyte> vector = Vector256.Create((sbyte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32);
+            Vector256<sbyte> vector = Vector256.Create(
+                (sbyte)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32
+            );
             Vector256<sbyte> result = Vector256.Shuffle(vector, Vector256<sbyte>.Zero);
 
             for (int index = 0; index < Vector256<sbyte>.Count; index++)
@@ -3344,7 +4009,24 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector256UInt16ShuffleOneInputWithZeroIndicesTest()
         {
-            Vector256<ushort> vector = Vector256.Create((ushort)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+            Vector256<ushort> vector = Vector256.Create(
+                (ushort)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            );
             Vector256<ushort> result = Vector256.Shuffle(vector, Vector256<ushort>.Zero);
 
             for (int index = 0; index < Vector256<ushort>.Count; index++)
@@ -3380,40 +4062,41 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256ByteStoreTest()
         {
-            byte* value = stackalloc byte[32] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-                17,
-                18,
-                19,
-                20,
-                21,
-                22,
-                23,
-                24,
-                25,
-                26,
-                27,
-                28,
-                29,
-                30,
-                31,
-            };
+            byte* value =
+                stackalloc byte[32] {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                };
 
             Vector256.Create((byte)0x1).Store(value);
 
@@ -3426,12 +4109,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256DoubleStoreTest()
         {
-            double* value = stackalloc double[4] {
-                0,
-                1,
-                2,
-                3,
-            };
+            double* value = stackalloc double[4] { 0, 1, 2, 3, };
 
             Vector256.Create((double)0x1).Store(value);
 
@@ -3444,24 +4122,8 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int16StoreTest()
         {
-            short* value = stackalloc short[16] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-            };
+            short* value =
+                stackalloc short[16] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, };
 
             Vector256.Create((short)0x1).Store(value);
 
@@ -3474,16 +4136,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int32StoreTest()
         {
-            int* value = stackalloc int[8] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-            };
+            int* value = stackalloc int[8] { 0, 1, 2, 3, 4, 5, 6, 7, };
 
             Vector256.Create((int)0x1).Store(value);
 
@@ -3496,12 +4149,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int64StoreTest()
         {
-            long* value = stackalloc long[4] {
-                0,
-                1,
-                2,
-                3,
-            };
+            long* value = stackalloc long[4] { 0, 1, 2, 3, };
 
             Vector256.Create((long)0x1).Store(value);
 
@@ -3516,12 +4164,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nint* value = stackalloc nint[4] {
-                    0,
-                    1,
-                    2,
-                    3,
-                };
+                nint* value = stackalloc nint[4] { 0, 1, 2, 3, };
 
                 Vector256.Create((nint)0x1).Store(value);
 
@@ -3532,16 +4175,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nint* value = stackalloc nint[8] {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                };
+                nint* value = stackalloc nint[8] { 0, 1, 2, 3, 4, 5, 6, 7, };
 
                 Vector256.Create((nint)0x1).Store(value);
 
@@ -3557,12 +4191,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nuint* value = stackalloc nuint[4] {
-                    0,
-                    1,
-                    2,
-                    3,
-                };
+                nuint* value = stackalloc nuint[4] { 0, 1, 2, 3, };
 
                 Vector256.Create((nuint)0x1).Store(value);
 
@@ -3573,16 +4202,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nuint* value = stackalloc nuint[8] {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                };
+                nuint* value = stackalloc nuint[8] { 0, 1, 2, 3, 4, 5, 6, 7, };
 
                 Vector256.Create((nuint)0x1).Store(value);
 
@@ -3596,40 +4216,41 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256SByteStoreTest()
         {
-            sbyte* value = stackalloc sbyte[32] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-                17,
-                18,
-                19,
-                20,
-                21,
-                22,
-                23,
-                24,
-                25,
-                26,
-                27,
-                28,
-                29,
-                30,
-                31,
-            };
+            sbyte* value =
+                stackalloc sbyte[32] {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                };
 
             Vector256.Create((sbyte)0x1).Store(value);
 
@@ -3642,16 +4263,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256SingleStoreTest()
         {
-            float* value = stackalloc float[8] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-            };
+            float* value = stackalloc float[8] { 0, 1, 2, 3, 4, 5, 6, 7, };
 
             Vector256.Create((float)0x1).Store(value);
 
@@ -3664,24 +4276,8 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256UInt16StoreTest()
         {
-            ushort* value = stackalloc ushort[16] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-            };
+            ushort* value =
+                stackalloc ushort[16] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, };
 
             Vector256.Create((ushort)0x1).Store(value);
 
@@ -3694,16 +4290,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256UInt32StoreTest()
         {
-            uint* value = stackalloc uint[8] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-            };
+            uint* value = stackalloc uint[8] { 0, 1, 2, 3, 4, 5, 6, 7, };
 
             Vector256.Create((uint)0x1).Store(value);
 
@@ -3716,12 +4303,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256UInt64StoreTest()
         {
-            ulong* value = stackalloc ulong[4] {
-                0,
-                1,
-                2,
-                3,
-            };
+            ulong* value = stackalloc ulong[4] { 0, 1, 2, 3, };
 
             Vector256.Create((ulong)0x1).Store(value);
 
@@ -4622,40 +5204,41 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256ByteStoreUnsafeTest()
         {
-            byte* value = stackalloc byte[32] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-                17,
-                18,
-                19,
-                20,
-                21,
-                22,
-                23,
-                24,
-                25,
-                26,
-                27,
-                28,
-                29,
-                30,
-                31,
-            };
+            byte* value =
+                stackalloc byte[32] {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                };
 
             Vector256.Create((byte)0x1).StoreUnsafe(ref value[0]);
 
@@ -4668,12 +5251,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256DoubleStoreUnsafeTest()
         {
-            double* value = stackalloc double[4] {
-                0,
-                1,
-                2,
-                3,
-            };
+            double* value = stackalloc double[4] { 0, 1, 2, 3, };
 
             Vector256.Create((double)0x1).StoreUnsafe(ref value[0]);
 
@@ -4686,24 +5264,8 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int16StoreUnsafeTest()
         {
-            short* value = stackalloc short[16] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-            };
+            short* value =
+                stackalloc short[16] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, };
 
             Vector256.Create((short)0x1).StoreUnsafe(ref value[0]);
 
@@ -4716,16 +5278,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int32StoreUnsafeTest()
         {
-            int* value = stackalloc int[8] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-            };
+            int* value = stackalloc int[8] { 0, 1, 2, 3, 4, 5, 6, 7, };
 
             Vector256.Create((int)0x1).StoreUnsafe(ref value[0]);
 
@@ -4738,12 +5291,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int64StoreUnsafeTest()
         {
-            long* value = stackalloc long[4] {
-                0,
-                1,
-                2,
-                3,
-            };
+            long* value = stackalloc long[4] { 0, 1, 2, 3, };
 
             Vector256.Create((long)0x1).StoreUnsafe(ref value[0]);
 
@@ -4758,12 +5306,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nint* value = stackalloc nint[4] {
-                    0,
-                    1,
-                    2,
-                    3,
-                };
+                nint* value = stackalloc nint[4] { 0, 1, 2, 3, };
 
                 Vector256.Create((nint)0x1).StoreUnsafe(ref value[0]);
 
@@ -4774,16 +5317,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nint* value = stackalloc nint[8] {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                };
+                nint* value = stackalloc nint[8] { 0, 1, 2, 3, 4, 5, 6, 7, };
 
                 Vector256.Create((nint)0x1).StoreUnsafe(ref value[0]);
 
@@ -4799,12 +5333,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nuint* value = stackalloc nuint[4] {
-                    0,
-                    1,
-                    2,
-                    3,
-                };
+                nuint* value = stackalloc nuint[4] { 0, 1, 2, 3, };
 
                 Vector256.Create((nuint)0x1).StoreUnsafe(ref value[0]);
 
@@ -4815,16 +5344,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nuint* value = stackalloc nuint[8] {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                };
+                nuint* value = stackalloc nuint[8] { 0, 1, 2, 3, 4, 5, 6, 7, };
 
                 Vector256.Create((nuint)0x1).StoreUnsafe(ref value[0]);
 
@@ -4838,40 +5358,41 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256SByteStoreUnsafeTest()
         {
-            sbyte* value = stackalloc sbyte[32] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-                17,
-                18,
-                19,
-                20,
-                21,
-                22,
-                23,
-                24,
-                25,
-                26,
-                27,
-                28,
-                29,
-                30,
-                31,
-            };
+            sbyte* value =
+                stackalloc sbyte[32] {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                };
 
             Vector256.Create((sbyte)0x1).StoreUnsafe(ref value[0]);
 
@@ -4884,16 +5405,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256SingleStoreUnsafeTest()
         {
-            float* value = stackalloc float[8] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-            };
+            float* value = stackalloc float[8] { 0, 1, 2, 3, 4, 5, 6, 7, };
 
             Vector256.Create((float)0x1).StoreUnsafe(ref value[0]);
 
@@ -4906,24 +5418,8 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256UInt16StoreUnsafeTest()
         {
-            ushort* value = stackalloc ushort[16] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-            };
+            ushort* value =
+                stackalloc ushort[16] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, };
 
             Vector256.Create((ushort)0x1).StoreUnsafe(ref value[0]);
 
@@ -4936,16 +5432,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256UInt32StoreUnsafeTest()
         {
-            uint* value = stackalloc uint[8] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-            };
+            uint* value = stackalloc uint[8] { 0, 1, 2, 3, 4, 5, 6, 7, };
 
             Vector256.Create((uint)0x1).StoreUnsafe(ref value[0]);
 
@@ -4958,12 +5445,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256UInt64StoreUnsafeTest()
         {
-            ulong* value = stackalloc ulong[4] {
-                0,
-                1,
-                2,
-                3,
-            };
+            ulong* value = stackalloc ulong[4] { 0, 1, 2, 3, };
 
             Vector256.Create((ulong)0x1).StoreUnsafe(ref value[0]);
 
@@ -4976,41 +5458,42 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256ByteStoreUnsafeIndexTest()
         {
-            byte* value = stackalloc byte[32 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-                17,
-                18,
-                19,
-                20,
-                21,
-                22,
-                23,
-                24,
-                25,
-                26,
-                27,
-                28,
-                29,
-                30,
-                31,
-                32,
-            };
+            byte* value =
+                stackalloc byte[32 + 1] {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                };
 
             Vector256.Create((byte)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -5023,13 +5506,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256DoubleStoreUnsafeIndexTest()
         {
-            double* value = stackalloc double[4 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-            };
+            double* value = stackalloc double[4 + 1] { 0, 1, 2, 3, 4, };
 
             Vector256.Create((double)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -5042,25 +5519,26 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int16StoreUnsafeIndexTest()
         {
-            short* value = stackalloc short[16 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-            };
+            short* value =
+                stackalloc short[16 + 1] {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                };
 
             Vector256.Create((short)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -5073,17 +5551,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int32StoreUnsafeIndexTest()
         {
-            int* value = stackalloc int[8 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-            };
+            int* value = stackalloc int[8 + 1] { 0, 1, 2, 3, 4, 5, 6, 7, 8, };
 
             Vector256.Create((int)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -5096,13 +5564,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256Int64StoreUnsafeIndexTest()
         {
-            long* value = stackalloc long[4 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-            };
+            long* value = stackalloc long[4 + 1] { 0, 1, 2, 3, 4, };
 
             Vector256.Create((long)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -5117,13 +5579,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nint* value = stackalloc nint[4 + 1] {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                };
+                nint* value = stackalloc nint[4 + 1] { 0, 1, 2, 3, 4, };
 
                 Vector256.Create((nint)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -5134,17 +5590,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nint* value = stackalloc nint[8 + 1] {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                };
+                nint* value = stackalloc nint[8 + 1] { 0, 1, 2, 3, 4, 5, 6, 7, 8, };
 
                 Vector256.Create((nint)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -5160,13 +5606,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nuint* value = stackalloc nuint[4 + 1] {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                };
+                nuint* value = stackalloc nuint[4 + 1] { 0, 1, 2, 3, 4, };
 
                 Vector256.Create((nuint)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -5177,17 +5617,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nuint* value = stackalloc nuint[8 + 1] {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                };
+                nuint* value = stackalloc nuint[8 + 1] { 0, 1, 2, 3, 4, 5, 6, 7, 8, };
 
                 Vector256.Create((nuint)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -5201,41 +5631,42 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256SByteStoreUnsafeIndexTest()
         {
-            sbyte* value = stackalloc sbyte[32 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-                17,
-                18,
-                19,
-                20,
-                21,
-                22,
-                23,
-                24,
-                25,
-                26,
-                27,
-                28,
-                29,
-                30,
-                31,
-                32,
-            };
+            sbyte* value =
+                stackalloc sbyte[32 + 1] {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                };
 
             Vector256.Create((sbyte)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -5248,17 +5679,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256SingleStoreUnsafeIndexTest()
         {
-            float* value = stackalloc float[8 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-            };
+            float* value = stackalloc float[8 + 1] { 0, 1, 2, 3, 4, 5, 6, 7, 8, };
 
             Vector256.Create((float)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -5271,25 +5692,26 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256UInt16StoreUnsafeIndexTest()
         {
-            ushort* value = stackalloc ushort[16 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-            };
+            ushort* value =
+                stackalloc ushort[16 + 1] {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                };
 
             Vector256.Create((ushort)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -5302,17 +5724,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256UInt32StoreUnsafeIndexTest()
         {
-            uint* value = stackalloc uint[8 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-            };
+            uint* value = stackalloc uint[8 + 1] { 0, 1, 2, 3, 4, 5, 6, 7, 8, };
 
             Vector256.Create((uint)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -5325,13 +5737,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector256UInt64StoreUnsafeIndexTest()
         {
-            ulong* value = stackalloc ulong[4 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-            };
+            ulong* value = stackalloc ulong[4 + 1] { 0, 1, 2, 3, 4, };
 
             Vector256.Create((ulong)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -5499,14 +5905,14 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             {
                 double.CopySign(double.NaN, -0.0), // -qnan same as double.NaN
                 double.CopySign(double.NaN, +0.0), // +qnan
-                double.CopySign(snan, -0.0),       // -snan
-                double.CopySign(snan, +0.0),       // +snan
+                double.CopySign(snan, -0.0), // -snan
+                double.CopySign(snan, +0.0), // +snan
             };
 
             // all Vector<double> NaNs .Equals compare the same, but == compare as different
-            foreach(var i in nans)
+            foreach (var i in nans)
             {
-                foreach(var j in nans)
+                foreach (var j in nans)
                 {
                     Assert.True(Vector256.Create(i).Equals(Vector256.Create(j)));
                     Assert.False(Vector256.Create(i) == Vector256.Create(j));
@@ -5523,14 +5929,14 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             {
                 float.CopySign(float.NaN, -0.0f), // -qnan same as float.NaN
                 float.CopySign(float.NaN, +0.0f), // +qnan
-                float.CopySign(snan, -0.0f),      // -snan
-                float.CopySign(snan, +0.0f),      // +snan
+                float.CopySign(snan, -0.0f), // -snan
+                float.CopySign(snan, +0.0f), // +snan
             };
 
             // all Vector<float> NaNs .Equals compare the same, but == compare as different
-            foreach(var i in nans)
+            foreach (var i in nans)
             {
-                foreach(var j in nans)
+                foreach (var j in nans)
                 {
                     Assert.True(Vector256.Create(i).Equals(Vector256.Create(j)));
                     Assert.False(Vector256.Create(i) == Vector256.Create(j));
@@ -5574,12 +5980,13 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void IsSupportedUIntPtr() => TestIsSupported<nuint>();
 
-        private static void TestIsSupported<T>()
-            where T : struct
+        private static void TestIsSupported<T>() where T : struct
         {
             Assert.True(Vector256<T>.IsSupported);
 
-            MethodInfo methodInfo = typeof(Vector256<T>).GetProperty("IsSupported", BindingFlags.Public | BindingFlags.Static).GetMethod;
+            MethodInfo methodInfo = typeof(Vector256<T>)
+                .GetProperty("IsSupported", BindingFlags.Public | BindingFlags.Static)
+                .GetMethod;
             Assert.True((bool)methodInfo.Invoke(null, null));
         }
 
@@ -5598,12 +6005,13 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void IsNotSupportedUInt128() => TestIsNotSupported<UInt128>();
 
-        private static void TestIsNotSupported<T>()
-            where T : struct
+        private static void TestIsNotSupported<T>() where T : struct
         {
             Assert.False(Vector256<T>.IsSupported);
 
-            MethodInfo methodInfo = typeof(Vector256<T>).GetProperty("IsSupported", BindingFlags.Public | BindingFlags.Static).GetMethod;
+            MethodInfo methodInfo = typeof(Vector256<T>)
+                .GetProperty("IsSupported", BindingFlags.Public | BindingFlags.Static)
+                .GetMethod;
             Assert.False((bool)methodInfo.Invoke(null, null));
         }
     }

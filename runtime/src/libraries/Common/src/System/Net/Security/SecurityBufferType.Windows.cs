@@ -14,7 +14,7 @@ namespace System.Net.Security
         SECBUFFER_EXTRA = 5,
         SECBUFFER_STREAM_TRAILER = 6,
         SECBUFFER_STREAM_HEADER = 7,
-        SECBUFFER_PADDING = 9,    // non-data padding
+        SECBUFFER_PADDING = 9, // non-data padding
         SECBUFFER_STREAM = 10,
         SECBUFFER_CHANNEL_BINDINGS = 14,
         SECBUFFER_TARGET_HOST = 16,

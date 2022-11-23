@@ -21,25 +21,19 @@ namespace System.Diagnostics
         /// <see cref='System.IO.TextWriter'/>
         /// as the output recipient.</para>
         /// </devdoc>
-        public TextWriterTraceListener()
-        {
-        }
+        public TextWriterTraceListener() { }
 
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TextWriterTraceListener'/> class, using the
         ///    stream as the recipient of the debugging and tracing output.</para>
         /// </devdoc>
-        public TextWriterTraceListener(Stream stream)
-            : this(stream, string.Empty)
-        {
-        }
+        public TextWriterTraceListener(Stream stream) : this(stream, string.Empty) { }
 
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TextWriterTraceListener'/> class with the
         ///    specified name and using the stream as the recipient of the debugging and tracing output.</para>
         /// </devdoc>
-        public TextWriterTraceListener(Stream stream, string? name)
-            : base(name)
+        public TextWriterTraceListener(Stream stream, string? name) : base(name)
         {
             ArgumentNullException.ThrowIfNull(stream);
 
@@ -50,10 +44,7 @@ namespace System.Diagnostics
         /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TextWriterTraceListener'/> class using the
         ///    specified writer as recipient of the tracing or debugging output.</para>
         /// </devdoc>
-        public TextWriterTraceListener(TextWriter writer)
-            : this(writer, string.Empty)
-        {
-        }
+        public TextWriterTraceListener(TextWriter writer) : this(writer, string.Empty) { }
 
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TextWriterTraceListener'/> class with the
@@ -61,8 +52,7 @@ namespace System.Diagnostics
         ///    debugging
         ///    output.</para>
         /// </devdoc>
-        public TextWriterTraceListener(TextWriter writer, string? name)
-            : base(name)
+        public TextWriterTraceListener(TextWriter writer, string? name) : base(name)
         {
             ArgumentNullException.ThrowIfNull(writer);
 
@@ -82,8 +72,7 @@ namespace System.Diagnostics
         ///    <para>Initializes a new instance of the <see cref='System.Diagnostics.TextWriterTraceListener'/> class with the
         ///    specified name and the specified file name.</para>
         /// </devdoc>
-        public TextWriterTraceListener(string? fileName, string? name)
-            : base(name)
+        public TextWriterTraceListener(string? fileName, string? name) : base(name)
         {
             _fileName = fileName;
         }
@@ -99,11 +88,7 @@ namespace System.Diagnostics
                 EnsureWriter();
                 return _writer;
             }
-
-            set
-            {
-                _writer = value;
-            }
+            set { _writer = value; }
         }
 
         /// <devdoc>
@@ -167,7 +152,8 @@ namespace System.Diagnostics
             EnsureWriter();
             if (_writer != null)
             {
-                if (NeedIndent) WriteIndent();
+                if (NeedIndent)
+                    WriteIndent();
                 try
                 {
                     _writer.Write(message);
@@ -186,7 +172,8 @@ namespace System.Diagnostics
             EnsureWriter();
             if (_writer != null)
             {
-                if (NeedIndent) WriteIndent();
+                if (NeedIndent)
+                    WriteIndent();
                 try
                 {
                     _writer.WriteLine(message);

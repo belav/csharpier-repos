@@ -100,7 +100,9 @@ namespace System.IO.Tests
                     Assert.Equal("text"u8.ToArray(), File.ReadAllBytes(path));
                 }
                 else
-                    Assert.Throws<UnauthorizedAccessException>(() => File.WriteAllBytes(path, "text"u8.ToArray()));
+                    Assert.Throws<UnauthorizedAccessException>(
+                        () => File.WriteAllBytes(path, "text"u8.ToArray())
+                    );
             }
             finally
             {
@@ -144,7 +146,7 @@ namespace System.IO.Tests
         public void ReadAllBytes_ProcFs_Uptime_ContainsTwoNumbers()
         {
             string text = Encoding.UTF8.GetString(File.ReadAllBytes("/proc/uptime"));
-            string[] parts = text.Split(new [] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] parts = text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             Assert.Equal(2, parts.Length);
             Assert.True(double.TryParse(parts[0].Trim(), out _));
             Assert.True(double.TryParse(parts[1].Trim(), out _));
@@ -173,7 +175,11 @@ namespace System.IO.Tests
 
             using (var cts = new CancellationTokenSource())
             {
-                Task writingServerTask = WaitConnectionAndWritePipeStreamAsync(namedPipeWriterStream, contentBytes, cts.Token);
+                Task writingServerTask = WaitConnectionAndWritePipeStreamAsync(
+                    namedPipeWriterStream,
+                    contentBytes,
+                    cts.Token
+                );
                 Task<byte[]> readTask = Task.Run(() => File.ReadAllBytes(pipePath), cts.Token);
                 cts.CancelAfter(TimeSpan.FromSeconds(3));
 
@@ -182,7 +188,11 @@ namespace System.IO.Tests
                 Assert.Equal<byte>(contentBytes, readBytes);
             }
 
-            static async Task WaitConnectionAndWritePipeStreamAsync(NamedPipeServerStream namedPipeWriterStream, byte[] contentBytes, CancellationToken cancellationToken)
+            static async Task WaitConnectionAndWritePipeStreamAsync(
+                NamedPipeServerStream namedPipeWriterStream,
+                byte[] contentBytes,
+                CancellationToken cancellationToken
+            )
             {
                 await using (namedPipeWriterStream)
                 {
@@ -194,11 +204,20 @@ namespace System.IO.Tests
 
         [Fact]
         [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/67853", TestPlatforms.iOS | TestPlatforms.tvOS)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/67853",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
         public async Task ReadAllBytes_NonSeekableFileStream_InUnix()
         {
             string fifoPath = GetTestFilePath();
-            Assert.Equal(0, mkfifo(fifoPath, 438 /* 666 in octal */ ));
+            Assert.Equal(
+                0,
+                mkfifo(
+                    fifoPath,
+                    438 /* 666 in octal */
+                )
+            );
 
             var contentBytes = new byte[] { 1, 2, 3 };
 
@@ -210,12 +229,18 @@ namespace System.IO.Tests
                 }),
                 Task.Run(() =>
                 {
-                    using var fs = new FileStream(fifoPath, FileMode.Open, FileAccess.Write, FileShare.Read);
+                    using var fs = new FileStream(
+                        fifoPath,
+                        FileMode.Open,
+                        FileAccess.Write,
+                        FileShare.Read
+                    );
                     foreach (byte content in contentBytes)
                     {
                         fs.WriteByte(content);
                     }
-                }));
+                })
+            );
         }
     }
 }

@@ -13,7 +13,9 @@ using Microsoft.VisualStudio.Shell.TableManager;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
 {
-    internal abstract partial class SettingsViewModelBase<T, TSnapshotFactory, TEntriesSnapshot> : IWpfSettingsEditorViewModel, ITableDataSource
+    internal abstract partial class SettingsViewModelBase<T, TSnapshotFactory, TEntriesSnapshot>
+        : IWpfSettingsEditorViewModel,
+            ITableDataSource
         where TSnapshotFactory : SettingsSnapshotFactoryBase<T, TEntriesSnapshot>
         where TEntriesSnapshot : SettingsEntriesSnapshotBase<T>
     {
@@ -25,9 +27,11 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
 
         private List<ITableDataSink> TableSinks { get; } = new List<ITableDataSink>();
 
-        protected SettingsViewModelBase(ISettingsProvider<T> data,
-                                        IWpfTableControlProvider controlProvider,
-                                        ITableManagerProvider tableMangerProvider)
+        protected SettingsViewModelBase(
+            ISettingsProvider<T> data,
+            IWpfTableControlProvider controlProvider,
+            ITableManagerProvider tableMangerProvider
+        )
         {
             _data = data;
             _controlProvider = controlProvider;
@@ -73,15 +77,18 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
         {
             var initialColumnStates = GetInitialColumnStates();
             var fixedColumns = GetFixedColumns();
-            return (IWpfTableControl4)_controlProvider.CreateControl(
+            return (IWpfTableControl4)
+                _controlProvider.CreateControl(
                     _tableManager,
                     true,
                     initialColumnStates,
-                    fixedColumns);
+                    fixedColumns
+                );
         }
 
         public void ShutDown() => _ = _tableManager.RemoveSource(this);
 
-        public Task<SourceText> UpdateEditorConfigAsync(SourceText sourceText) => _data.GetChangedEditorConfigAsync(sourceText);
+        public Task<SourceText> UpdateEditorConfigAsync(SourceText sourceText) =>
+            _data.GetChangedEditorConfigAsync(sourceText);
     }
 }

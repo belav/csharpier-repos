@@ -21,19 +21,33 @@ namespace Microsoft.CodeAnalysis.Test.Utilities;
 
 internal static class VisualBasicCodeActionOptions
 {
-    public static CodeActionOptions Default = new(
-        new CodeCleanupOptions(
-            VisualBasicSyntaxFormattingOptions.Default,
-            VisualBasicSimplifierOptions.Default),
-        VisualBasicCodeGenerationOptions.Default,
-        VisualBasicIdeCodeStyleOptions.Default);
+    public static CodeActionOptions Default =
+        new(
+            new CodeCleanupOptions(
+                VisualBasicSyntaxFormattingOptions.Default,
+                VisualBasicSimplifierOptions.Default
+            ),
+            VisualBasicCodeGenerationOptions.Default,
+            VisualBasicIdeCodeStyleOptions.Default
+        );
 
-    public static CodeActionOptions WithWrappingColumn(this CodeActionOptions options, int value)
-        => options with { WrappingColumn = value };
+    public static CodeActionOptions WithWrappingColumn(this CodeActionOptions options, int value) =>
+        options with
+        {
+            WrappingColumn = value
+        };
 
-    public static CodeActionOptions With(this CodeActionOptions options, VisualBasicSyntaxFormattingOptions value)
-        => options with { CleanupOptions = options.CleanupOptions with { FormattingOptions = value } };
+    public static CodeActionOptions With(
+        this CodeActionOptions options,
+        VisualBasicSyntaxFormattingOptions value
+    ) =>
+        options with
+        {
+            CleanupOptions = options.CleanupOptions with { FormattingOptions = value }
+        };
 
-    public static CodeActionOptions With(this CodeActionOptions options, ImplementTypeOptions value)
-        => options with { ImplementTypeOptions = value };
+    public static CodeActionOptions With(
+        this CodeActionOptions options,
+        ImplementTypeOptions value
+    ) => options with { ImplementTypeOptions = value };
 }

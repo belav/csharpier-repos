@@ -20,10 +20,7 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeThreadHandle : SafeHandle
     {
-        public SafeThreadHandle()
-            : base(new IntPtr(0), true)
-        {
-        }
+        public SafeThreadHandle() : base(new IntPtr(0), true) { }
 
         public override bool IsInvalid
         {

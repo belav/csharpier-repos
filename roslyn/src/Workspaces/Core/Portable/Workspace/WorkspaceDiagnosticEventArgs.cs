@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis
     {
         public WorkspaceDiagnostic Diagnostic { get; }
 
-        public WorkspaceDiagnosticEventArgs(WorkspaceDiagnostic diagnostic)
-            => this.Diagnostic = diagnostic;
+        public WorkspaceDiagnosticEventArgs(WorkspaceDiagnostic diagnostic) =>
+            this.Diagnostic = diagnostic;
     }
 }

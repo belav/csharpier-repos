@@ -6,15 +6,18 @@ namespace Microsoft.CodeAnalysis
 {
     internal partial struct SymbolKey
     {
-        private abstract class AbstractSymbolKey<TSymbol>
-            where TSymbol : class, ISymbol
+        private abstract class AbstractSymbolKey<TSymbol> where TSymbol : class, ISymbol
         {
             public abstract void Create(TSymbol symbol, SymbolKeyWriter writer);
 
-            public SymbolKeyResolution Resolve(SymbolKeyReader reader, out string? failureReason)
-                => Resolve(reader, reader.CurrentContextualSymbol as TSymbol, out failureReason);
+            public SymbolKeyResolution Resolve(SymbolKeyReader reader, out string? failureReason) =>
+                Resolve(reader, reader.CurrentContextualSymbol as TSymbol, out failureReason);
 
-            protected abstract SymbolKeyResolution Resolve(SymbolKeyReader reader, TSymbol? contextualSymbol, out string? failureReason);
+            protected abstract SymbolKeyResolution Resolve(
+                SymbolKeyReader reader,
+                TSymbol? contextualSymbol,
+                out string? failureReason
+            );
         }
     }
 }

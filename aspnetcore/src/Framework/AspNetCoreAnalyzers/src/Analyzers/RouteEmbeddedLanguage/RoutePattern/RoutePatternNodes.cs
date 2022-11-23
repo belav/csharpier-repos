@@ -13,8 +13,10 @@ using RoutePatternToken = EmbeddedSyntaxToken<RoutePatternKind>;
 
 internal sealed class RoutePatternCompilationUnit : RoutePatternNode
 {
-    public RoutePatternCompilationUnit(ImmutableArray<RoutePatternRootPartNode> parts, RoutePatternToken endOfFileToken)
-        : base(RoutePatternKind.CompilationUnit)
+    public RoutePatternCompilationUnit(
+        ImmutableArray<RoutePatternRootPartNode> parts,
+        RoutePatternToken endOfFileToken
+    ) : base(RoutePatternKind.CompilationUnit)
     {
         Debug.Assert(parts != null);
         Debug.Assert(endOfFileToken.Kind == RoutePatternKind.EndOfFile);
@@ -37,8 +39,7 @@ internal sealed class RoutePatternCompilationUnit : RoutePatternNode
         return Parts[index];
     }
 
-    public override void Accept(IRoutePatternNodeVisitor visitor)
-        => visitor.Visit(this);
+    public override void Accept(IRoutePatternNodeVisitor visitor) => visitor.Visit(this);
 }
 
 internal sealed class RoutePatternSegmentNode : RoutePatternRootPartNode
@@ -53,11 +54,9 @@ internal sealed class RoutePatternSegmentNode : RoutePatternRootPartNode
         Children = children;
     }
 
-    internal override RoutePatternNodeOrToken ChildAt(int index)
-        => Children[index];
+    internal override RoutePatternNodeOrToken ChildAt(int index) => Children[index];
 
-    public override void Accept(IRoutePatternNodeVisitor visitor)
-        => visitor.Visit(this);
+    public override void Accept(IRoutePatternNodeVisitor visitor) => visitor.Visit(this);
 }
 
 /// <summary>
@@ -66,8 +65,10 @@ internal sealed class RoutePatternSegmentNode : RoutePatternRootPartNode
 internal sealed class RoutePatternReplacementNode : RoutePatternSegmentPartNode
 {
     public RoutePatternReplacementNode(
-        RoutePatternToken openBracketToken, RoutePatternToken textToken, RoutePatternToken closeBracketToken)
-        : base(RoutePatternKind.Replacement)
+        RoutePatternToken openBracketToken,
+        RoutePatternToken textToken,
+        RoutePatternToken closeBracketToken
+    ) : base(RoutePatternKind.Replacement)
     {
         Debug.Assert(openBracketToken.Kind == RoutePatternKind.OpenBracketToken);
         Debug.Assert(textToken.Kind == RoutePatternKind.ReplacementToken);
@@ -83,8 +84,8 @@ internal sealed class RoutePatternReplacementNode : RoutePatternSegmentPartNode
 
     internal override int ChildCount => 3;
 
-    internal override RoutePatternNodeOrToken ChildAt(int index)
-        => index switch
+    internal override RoutePatternNodeOrToken ChildAt(int index) =>
+        index switch
         {
             0 => OpenBracketToken,
             1 => TextToken,
@@ -92,8 +93,7 @@ internal sealed class RoutePatternReplacementNode : RoutePatternSegmentPartNode
             _ => throw new InvalidOperationException(),
         };
 
-    public override void Accept(IRoutePatternNodeVisitor visitor)
-        => visitor.Visit(this);
+    public override void Accept(IRoutePatternNodeVisitor visitor) => visitor.Visit(this);
 }
 
 /// <summary>
@@ -102,8 +102,10 @@ internal sealed class RoutePatternReplacementNode : RoutePatternSegmentPartNode
 internal sealed class RoutePatternParameterNode : RoutePatternSegmentPartNode
 {
     public RoutePatternParameterNode(
-        RoutePatternToken openBraceToken, ImmutableArray<RoutePatternParameterPartNode> parameterPartNodes, RoutePatternToken closeBraceToken)
-        : base(RoutePatternKind.Parameter)
+        RoutePatternToken openBraceToken,
+        ImmutableArray<RoutePatternParameterPartNode> parameterPartNodes,
+        RoutePatternToken closeBraceToken
+    ) : base(RoutePatternKind.Parameter)
     {
         Debug.Assert(openBraceToken.Kind == RoutePatternKind.OpenBraceToken);
         Debug.Assert(closeBraceToken.Kind == RoutePatternKind.CloseBraceToken);
@@ -134,14 +136,12 @@ internal sealed class RoutePatternParameterNode : RoutePatternSegmentPartNode
         }
     }
 
-    public override void Accept(IRoutePatternNodeVisitor visitor)
-        => visitor.Visit(this);
+    public override void Accept(IRoutePatternNodeVisitor visitor) => visitor.Visit(this);
 }
 
 internal sealed class RoutePatternLiteralNode : RoutePatternSegmentPartNode
 {
-    public RoutePatternLiteralNode(RoutePatternToken literalToken)
-        : base(RoutePatternKind.Literal)
+    public RoutePatternLiteralNode(RoutePatternToken literalToken) : base(RoutePatternKind.Literal)
     {
         Debug.Assert(literalToken.Kind == RoutePatternKind.Literal);
         LiteralToken = literalToken;
@@ -151,15 +151,14 @@ internal sealed class RoutePatternLiteralNode : RoutePatternSegmentPartNode
 
     internal override int ChildCount => 1;
 
-    internal override RoutePatternNodeOrToken ChildAt(int index)
-        => index switch
+    internal override RoutePatternNodeOrToken ChildAt(int index) =>
+        index switch
         {
             0 => LiteralToken,
             _ => throw new InvalidOperationException(),
         };
 
-    public override void Accept(IRoutePatternNodeVisitor visitor)
-        => visitor.Visit(this);
+    public override void Accept(IRoutePatternNodeVisitor visitor) => visitor.Visit(this);
 }
 
 internal sealed class RoutePatternOptionalSeperatorNode : RoutePatternSegmentPartNode
@@ -175,15 +174,14 @@ internal sealed class RoutePatternOptionalSeperatorNode : RoutePatternSegmentPar
 
     internal override int ChildCount => 1;
 
-    internal override RoutePatternNodeOrToken ChildAt(int index)
-        => index switch
+    internal override RoutePatternNodeOrToken ChildAt(int index) =>
+        index switch
         {
             0 => SeperatorToken,
             _ => throw new InvalidOperationException(),
         };
 
-    public override void Accept(IRoutePatternNodeVisitor visitor)
-        => visitor.Visit(this);
+    public override void Accept(IRoutePatternNodeVisitor visitor) => visitor.Visit(this);
 }
 
 internal sealed class RoutePatternSegmentSeperatorNode : RoutePatternRootPartNode
@@ -199,15 +197,14 @@ internal sealed class RoutePatternSegmentSeperatorNode : RoutePatternRootPartNod
 
     internal override int ChildCount => 1;
 
-    internal override RoutePatternNodeOrToken ChildAt(int index)
-        => index switch
+    internal override RoutePatternNodeOrToken ChildAt(int index) =>
+        index switch
         {
             0 => SeperatorToken,
             _ => throw new InvalidOperationException(),
         };
 
-    public override void Accept(IRoutePatternNodeVisitor visitor)
-        => visitor.Visit(this);
+    public override void Accept(IRoutePatternNodeVisitor visitor) => visitor.Visit(this);
 }
 
 internal sealed class RoutePatternCatchAllParameterPartNode : RoutePatternParameterPartNode
@@ -223,15 +220,14 @@ internal sealed class RoutePatternCatchAllParameterPartNode : RoutePatternParame
 
     internal override int ChildCount => 1;
 
-    internal override RoutePatternNodeOrToken ChildAt(int index)
-        => index switch
+    internal override RoutePatternNodeOrToken ChildAt(int index) =>
+        index switch
         {
             0 => AsteriskToken,
             _ => throw new InvalidOperationException(),
         };
 
-    public override void Accept(IRoutePatternNodeVisitor visitor)
-        => visitor.Visit(this);
+    public override void Accept(IRoutePatternNodeVisitor visitor) => visitor.Visit(this);
 }
 
 internal sealed class RoutePatternOptionalParameterPartNode : RoutePatternParameterPartNode
@@ -247,21 +243,22 @@ internal sealed class RoutePatternOptionalParameterPartNode : RoutePatternParame
 
     internal override int ChildCount => 1;
 
-    internal override RoutePatternNodeOrToken ChildAt(int index)
-        => index switch
+    internal override RoutePatternNodeOrToken ChildAt(int index) =>
+        index switch
         {
             0 => QuestionMarkToken,
             _ => throw new InvalidOperationException(),
         };
 
-    public override void Accept(IRoutePatternNodeVisitor visitor)
-        => visitor.Visit(this);
+    public override void Accept(IRoutePatternNodeVisitor visitor) => visitor.Visit(this);
 }
 
 internal sealed class RoutePatternDefaultValueParameterPartNode : RoutePatternParameterPartNode
 {
-    public RoutePatternDefaultValueParameterPartNode(RoutePatternToken equalsToken, RoutePatternToken defaultValueToken)
-        : base(RoutePatternKind.DefaultValue)
+    public RoutePatternDefaultValueParameterPartNode(
+        RoutePatternToken equalsToken,
+        RoutePatternToken defaultValueToken
+    ) : base(RoutePatternKind.DefaultValue)
     {
         Debug.Assert(equalsToken.Kind == RoutePatternKind.EqualsToken);
         Debug.Assert(defaultValueToken.Kind == RoutePatternKind.DefaultValueToken);
@@ -274,16 +271,15 @@ internal sealed class RoutePatternDefaultValueParameterPartNode : RoutePatternPa
 
     internal override int ChildCount => 2;
 
-    internal override RoutePatternNodeOrToken ChildAt(int index)
-        => index switch
+    internal override RoutePatternNodeOrToken ChildAt(int index) =>
+        index switch
         {
             0 => EqualsToken,
             1 => DefaultValueToken,
             _ => throw new InvalidOperationException(),
         };
 
-    public override void Accept(IRoutePatternNodeVisitor visitor)
-        => visitor.Visit(this);
+    public override void Accept(IRoutePatternNodeVisitor visitor) => visitor.Visit(this);
 }
 
 internal sealed class RoutePatternNameParameterPartNode : RoutePatternParameterPartNode
@@ -299,21 +295,22 @@ internal sealed class RoutePatternNameParameterPartNode : RoutePatternParameterP
 
     internal override int ChildCount => 1;
 
-    internal override RoutePatternNodeOrToken ChildAt(int index)
-        => index switch
+    internal override RoutePatternNodeOrToken ChildAt(int index) =>
+        index switch
         {
             0 => ParameterNameToken,
             _ => throw new InvalidOperationException(),
         };
 
-    public override void Accept(IRoutePatternNodeVisitor visitor)
-        => visitor.Visit(this);
+    public override void Accept(IRoutePatternNodeVisitor visitor) => visitor.Visit(this);
 }
 
 internal sealed class RoutePatternPolicyParameterPartNode : RoutePatternParameterPartNode
 {
-    public RoutePatternPolicyParameterPartNode(RoutePatternToken colonToken, ImmutableArray<RoutePatternNode> policyFragments)
-        : base(RoutePatternKind.ParameterPolicy)
+    public RoutePatternPolicyParameterPartNode(
+        RoutePatternToken colonToken,
+        ImmutableArray<RoutePatternNode> policyFragments
+    ) : base(RoutePatternKind.ParameterPolicy)
     {
         Debug.Assert(colonToken.Kind == RoutePatternKind.ColonToken);
         ColonToken = colonToken;
@@ -325,22 +322,23 @@ internal sealed class RoutePatternPolicyParameterPartNode : RoutePatternParamete
 
     internal override int ChildCount => PolicyFragments.Length + 1;
 
-    internal override RoutePatternNodeOrToken ChildAt(int index)
-        => index switch
+    internal override RoutePatternNodeOrToken ChildAt(int index) =>
+        index switch
         {
             0 => ColonToken,
             _ => PolicyFragments[index - 1],
         };
 
-    public override void Accept(IRoutePatternNodeVisitor visitor)
-        => visitor.Visit(this);
+    public override void Accept(IRoutePatternNodeVisitor visitor) => visitor.Visit(this);
 }
 
 internal sealed class RoutePatternPolicyFragmentEscapedNode : RoutePatternNode
 {
     public RoutePatternPolicyFragmentEscapedNode(
-        RoutePatternToken openParenToken, RoutePatternToken argumentToken, RoutePatternToken closeParenToken)
-        : base(RoutePatternKind.PolicyFragmentEscaped)
+        RoutePatternToken openParenToken,
+        RoutePatternToken argumentToken,
+        RoutePatternToken closeParenToken
+    ) : base(RoutePatternKind.PolicyFragmentEscaped)
     {
         Debug.Assert(openParenToken.Kind == RoutePatternKind.OpenParenToken);
         Debug.Assert(argumentToken.Kind == RoutePatternKind.PolicyFragmentToken);
@@ -356,8 +354,8 @@ internal sealed class RoutePatternPolicyFragmentEscapedNode : RoutePatternNode
 
     internal override int ChildCount => 3;
 
-    internal override RoutePatternNodeOrToken ChildAt(int index)
-        => index switch
+    internal override RoutePatternNodeOrToken ChildAt(int index) =>
+        index switch
         {
             0 => OpenParenToken,
             1 => ArgumentToken,
@@ -365,8 +363,7 @@ internal sealed class RoutePatternPolicyFragmentEscapedNode : RoutePatternNode
             _ => throw new InvalidOperationException(),
         };
 
-    public override void Accept(IRoutePatternNodeVisitor visitor)
-        => visitor.Visit(this);
+    public override void Accept(IRoutePatternNodeVisitor visitor) => visitor.Visit(this);
 }
 
 internal sealed class RoutePatternPolicyFragment : RoutePatternNode
@@ -382,37 +379,27 @@ internal sealed class RoutePatternPolicyFragment : RoutePatternNode
 
     internal override int ChildCount => 1;
 
-    internal override RoutePatternNodeOrToken ChildAt(int index)
-        => index switch
+    internal override RoutePatternNodeOrToken ChildAt(int index) =>
+        index switch
         {
             0 => ArgumentToken,
             _ => throw new InvalidOperationException(),
         };
 
-    public override void Accept(IRoutePatternNodeVisitor visitor)
-        => visitor.Visit(this);
+    public override void Accept(IRoutePatternNodeVisitor visitor) => visitor.Visit(this);
 }
 
 internal abstract class RoutePatternRootPartNode : RoutePatternNode
 {
-    protected RoutePatternRootPartNode(RoutePatternKind kind)
-        : base(kind)
-    {
-    }
+    protected RoutePatternRootPartNode(RoutePatternKind kind) : base(kind) { }
 }
 
 internal abstract class RoutePatternSegmentPartNode : RoutePatternNode
 {
-    protected RoutePatternSegmentPartNode(RoutePatternKind kind)
-        : base(kind)
-    {
-    }
+    protected RoutePatternSegmentPartNode(RoutePatternKind kind) : base(kind) { }
 }
 
 internal abstract class RoutePatternParameterPartNode : RoutePatternNode
 {
-    protected RoutePatternParameterPartNode(RoutePatternKind kind)
-        : base(kind)
-    {
-    }
+    protected RoutePatternParameterPartNode(RoutePatternKind kind) : base(kind) { }
 }

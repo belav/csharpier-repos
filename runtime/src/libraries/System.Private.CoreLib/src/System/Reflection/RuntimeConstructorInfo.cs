@@ -13,22 +13,28 @@ namespace System.Reflection
     internal sealed partial class RuntimeConstructorInfo : ConstructorInfo
     {
         [MethodImpl(MethodImplOptions.NoInlining)] // move lazy invocation flags population out of the hot path
-        private static InvocationFlags ComputeAndUpdateInvocationFlags(ConstructorInfo constructorInfo, ref InvocationFlags flagsToUpdate)
+        private static InvocationFlags ComputeAndUpdateInvocationFlags(
+            ConstructorInfo constructorInfo,
+            ref InvocationFlags flagsToUpdate
+        )
         {
             InvocationFlags invocationFlags = InvocationFlags.IsConstructor; // this is a given
 
             Type? declaringType = constructorInfo.DeclaringType;
 
-            if (declaringType == typeof(void)
-                || declaringType != null && declaringType.ContainsGenericParameters  // Enclosing type has unbound generics
-                || (constructorInfo.CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs // Managed varargs
-                )
+            if (
+                declaringType == typeof(void)
+                || declaringType != null && declaringType.ContainsGenericParameters // Enclosing type has unbound generics
+                || (constructorInfo.CallingConvention & CallingConventions.VarArgs)
+                    == CallingConventions.VarArgs // Managed varargs
+            )
             {
                 invocationFlags |= InvocationFlags.NoInvoke;
             }
             else if (constructorInfo.IsStatic)
             {
-                invocationFlags |= InvocationFlags.RunClassConstructor | InvocationFlags.NoConstructorInvoke;
+                invocationFlags |=
+                    InvocationFlags.RunClassConstructor | InvocationFlags.NoConstructorInvoke;
             }
             else if (declaringType != null && declaringType.IsAbstract)
             {
@@ -56,29 +62,21 @@ namespace System.Reflection
 
             // ctor is declared on interface class
             if (declaringType.IsInterface)
-                throw new MemberAccessException(
-                    SR.Format(SR.Acc_CreateInterfaceEx, declaringType));
-
+                throw new MemberAccessException(SR.Format(SR.Acc_CreateInterfaceEx, declaringType));
             // ctor is on an abstract class
             else if (declaringType.IsAbstract)
-                throw new MemberAccessException(
-                    SR.Format(SR.Acc_CreateAbstEx, declaringType));
-
+                throw new MemberAccessException(SR.Format(SR.Acc_CreateAbstEx, declaringType));
             // ctor is on a class that contains stack pointers
             else if (declaringType.GetRootElementType() == typeof(ArgIterator))
                 throw new NotSupportedException();
-
             // ctor is vararg
             else if (isVarArg)
                 throw new NotSupportedException();
-
             // ctor is generic or on a generic class
             else if (declaringType.ContainsGenericParameters)
             {
-                throw new MemberAccessException(
-                    SR.Format(SR.Acc_CreateGenericEx, declaringType));
+                throw new MemberAccessException(SR.Format(SR.Acc_CreateGenericEx, declaringType));
             }
-
             // ctor is declared on System.Void
             else if (declaringType == typeof(void))
                 throw new MemberAccessException(SR.Access_Void);
@@ -87,7 +85,10 @@ namespace System.Reflection
         [DoesNotReturn]
         internal void ThrowNoInvokeException()
         {
-            CheckCanCreateInstance(DeclaringType!, (CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs);
+            CheckCanCreateInstance(
+                DeclaringType!,
+                (CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs
+            );
 
             // ctor is .cctor
             if ((Attributes & MethodAttributes.Static) == MethodAttributes.Static)
@@ -103,7 +104,8 @@ namespace System.Reflection
             BindingFlags invokeAttr,
             Binder? binder,
             object?[]? parameters,
-            CultureInfo? culture)
+            CultureInfo? culture
+        )
         {
             if ((InvocationFlags & InvocationFlags.NoInvoke) != 0)
                 ThrowNoInvokeException();
@@ -126,7 +128,6 @@ namespace System.Reflection
             }
 
             Debug.Assert(obj != null);
-
             unsafe
             {
                 if (argCount == 0)
@@ -136,14 +137,23 @@ namespace System.Reflection
                 else if (argCount > MaxStackAllocArgCount)
                 {
                     Debug.Assert(parameters != null);
-                    InvokeWithManyArguments(this, argCount, obj, invokeAttr, binder, parameters, culture);
+                    InvokeWithManyArguments(
+                        this,
+                        argCount,
+                        obj,
+                        invokeAttr,
+                        binder,
+                        parameters,
+                        culture
+                    );
                 }
                 else
                 {
                     Debug.Assert(parameters != null);
                     StackAllocedArguments argStorage = default;
                     Span<object?> copyOfParameters = new(ref argStorage._arg0, argCount);
-                    Span<ParameterCopyBackAction> shouldCopyBackParameters = new(ref argStorage._copyBack0, argCount);
+                    Span<ParameterCopyBackAction> shouldCopyBackParameters =
+                        new(ref argStorage._copyBack0, argCount);
 
                     StackAllocatedByRefs byrefStorage = default;
                     IntPtr* pByRefStorage = (IntPtr*)&byrefStorage;
@@ -156,7 +166,8 @@ namespace System.Reflection
                         ArgumentTypes,
                         binder,
                         culture,
-                        invokeAttr);
+                        invokeAttr
+                    );
 
 #if MONO // Temporary until Mono is updated.
                     Invoker.InlinedInvoke(obj, copyOfParameters, invokeAttr);
@@ -178,8 +189,12 @@ namespace System.Reflection
                             {
                                 Debug.Assert(action == ParameterCopyBackAction.CopyNullable);
                                 Debug.Assert(copyOfParameters[i] != null);
-                                Debug.Assert(((RuntimeType)copyOfParameters[i]!.GetType()).IsNullableOfT);
-                                parameters[i] = RuntimeMethodHandle.ReboxFromNullable(copyOfParameters[i]);
+                                Debug.Assert(
+                                    ((RuntimeType)copyOfParameters[i]!.GetType()).IsNullableOfT
+                                );
+                                parameters[i] = RuntimeMethodHandle.ReboxFromNullable(
+                                    copyOfParameters[i]
+                                );
                             }
                         }
                     }
@@ -200,7 +215,8 @@ namespace System.Reflection
             BindingFlags invokeAttr,
             Binder? binder,
             object?[] parameters,
-            CultureInfo? culture)
+            CultureInfo? culture
+        )
         {
             object[] objHolder = new object[argCount];
             Span<object?> copyOfParameters = new(objHolder, 0, argCount);
@@ -226,7 +242,8 @@ namespace System.Reflection
                     ci.ArgumentTypes,
                     binder,
                     culture,
-                    invokeAttr);
+                    invokeAttr
+                );
 
 #if MONO // Temporary until Mono is updated.
                 ci.Invoker.InlinedInvoke(obj, copyOfParameters, invokeAttr);
@@ -262,9 +279,23 @@ namespace System.Reflection
 
         [DebuggerStepThrough]
         [DebuggerHidden]
-        public override object Invoke(BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object Invoke(
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
-            if ((InvocationFlags & (InvocationFlags.NoInvoke | InvocationFlags.ContainsStackPointers | InvocationFlags.NoConstructorInvoke)) != 0)
+            if (
+                (
+                    InvocationFlags
+                    & (
+                        InvocationFlags.NoInvoke
+                        | InvocationFlags.ContainsStackPointers
+                        | InvocationFlags.NoConstructorInvoke
+                    )
+                ) != 0
+            )
             {
                 ThrowNoInvokeException();
             }
@@ -280,7 +311,6 @@ namespace System.Reflection
             }
 
             object? retValue;
-
             unsafe
             {
                 if (argCount == 0)
@@ -289,14 +319,22 @@ namespace System.Reflection
                 }
                 else if (argCount > MaxStackAllocArgCount)
                 {
-                    retValue = InvokeWithManyArguments(this, argCount, invokeAttr, binder, parameters, culture);
+                    retValue = InvokeWithManyArguments(
+                        this,
+                        argCount,
+                        invokeAttr,
+                        binder,
+                        parameters,
+                        culture
+                    );
                 }
                 else
                 {
                     Debug.Assert(parameters != null);
                     StackAllocedArguments argStorage = default;
                     Span<object?> copyOfParameters = new(ref argStorage._arg0, argCount);
-                    Span<ParameterCopyBackAction> shouldCopyBackParameters = new(ref argStorage._copyBack0, argCount);
+                    Span<ParameterCopyBackAction> shouldCopyBackParameters =
+                        new(ref argStorage._copyBack0, argCount);
 
                     StackAllocatedByRefs byrefStorage = default;
                     IntPtr* pByRefStorage = (IntPtr*)&byrefStorage;
@@ -309,7 +347,8 @@ namespace System.Reflection
                         ArgumentTypes,
                         binder,
                         culture,
-                        invokeAttr);
+                        invokeAttr
+                    );
 
 #if MONO // Temporary until Mono is updated.
                     retValue = Invoker.InlinedInvoke(obj: null, copyOfParameters, invokeAttr);
@@ -331,8 +370,12 @@ namespace System.Reflection
                             {
                                 Debug.Assert(action == ParameterCopyBackAction.CopyNullable);
                                 Debug.Assert(copyOfParameters[i] != null);
-                                Debug.Assert(((RuntimeType)copyOfParameters[i]!.GetType()).IsNullableOfT);
-                                parameters[i] = RuntimeMethodHandle.ReboxFromNullable(copyOfParameters[i]);
+                                Debug.Assert(
+                                    ((RuntimeType)copyOfParameters[i]!.GetType()).IsNullableOfT
+                                );
+                                parameters[i] = RuntimeMethodHandle.ReboxFromNullable(
+                                    copyOfParameters[i]
+                                );
                             }
                         }
                     }
@@ -353,7 +396,8 @@ namespace System.Reflection
             BindingFlags invokeAttr,
             Binder? binder,
             object?[]? parameters,
-            CultureInfo? culture)
+            CultureInfo? culture
+        )
         {
             Debug.Assert(parameters != null);
 
@@ -382,7 +426,8 @@ namespace System.Reflection
                     ci.ArgumentTypes,
                     binder,
                     culture,
-                    invokeAttr);
+                    invokeAttr
+                );
 
 #if MONO // Temporary until Mono is updated.
                 retValue = ci.Invoker.InlinedInvoke(obj: null, copyOfParameters, invokeAttr);

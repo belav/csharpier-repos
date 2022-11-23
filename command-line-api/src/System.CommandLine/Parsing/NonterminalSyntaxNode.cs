@@ -9,9 +9,7 @@ namespace System.CommandLine.Parsing
     {
         private readonly List<SyntaxNode> _children = new();
 
-        protected NonterminalSyntaxNode(Token token, SyntaxNode? parent) : base(token, parent)
-        {
-        }
+        protected NonterminalSyntaxNode(Token token, SyntaxNode? parent) : base(token, parent) { }
 
         public IReadOnlyList<SyntaxNode> Children => _children;
 

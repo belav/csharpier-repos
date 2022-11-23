@@ -16,9 +16,7 @@ internal class ExitHandler : ILspServiceNotificationHandler
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public ExitHandler()
-    {
-    }
+    public ExitHandler() { }
 
     public bool MutatesSolutionState => true;
 

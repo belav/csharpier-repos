@@ -24,8 +24,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveToNamespace
         public string OK => ServicesVSResources.OK;
         public string Cancel => ServicesVSResources.Cancel;
 
-        internal MoveToNamespaceDialog(MoveToNamespaceDialogViewModel viewModel)
-            : base()
+        internal MoveToNamespaceDialog(MoveToNamespaceDialogViewModel viewModel) : base()
         {
             _viewModel = viewModel;
 
@@ -36,8 +35,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveToNamespace
             DataContext = viewModel;
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-            => DialogResult = false;
+        private void Cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;
 
         internal TestAccessor GetTestAccessor() => new(this);
 
@@ -52,13 +50,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveToNamespace
         internal readonly struct TestAccessor
         {
             private readonly MoveToNamespaceDialog _dialog;
-            public TestAccessor(MoveToNamespaceDialog dialog)
-                => _dialog = dialog;
+
+            public TestAccessor(MoveToNamespaceDialog dialog) => _dialog = dialog;
 
             public Button OKButton => _dialog.OKButton;
             public Button CancelButton => _dialog.CancelButton;
             public ComboBox NamespaceBox => _dialog.NamespaceBox;
-
         }
     }
 }

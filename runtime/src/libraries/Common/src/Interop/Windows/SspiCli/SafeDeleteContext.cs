@@ -34,10 +34,7 @@ namespace System.Net.Security
         public override bool IsInvalid
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return IsClosed || _handle.IsZero;
-            }
+            get { return IsClosed || _handle.IsZero; }
         }
 
         public override string ToString()

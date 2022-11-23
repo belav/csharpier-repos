@@ -29,5 +29,6 @@ internal class AssemblyWrapper
 
     public virtual string FullName => Assembly.FullName!;
 
-    public virtual Stream? GetManifestResourceStream(string name) => Assembly.GetManifestResourceStream(name);
+    public virtual Stream? GetManifestResourceStream(string name) =>
+        Assembly.GetManifestResourceStream(name);
 }

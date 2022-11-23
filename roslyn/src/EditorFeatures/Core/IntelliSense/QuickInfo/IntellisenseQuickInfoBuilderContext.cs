@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
             IThreadingContext? threadingContext,
             IUIThreadOperationExecutor? operationExecutor,
             IAsynchronousOperationListener? asynchronousOperationListener,
-            Lazy<IStreamingFindUsagesPresenter>? streamingPresenter)
+            Lazy<IStreamingFindUsagesPresenter>? streamingPresenter
+        )
         {
             Document = document;
             ClassificationOptions = classificationOptions;

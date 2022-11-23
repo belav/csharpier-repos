@@ -18,10 +18,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
         {
             public MetadataDefinitionItemEntry(
                 AbstractTableDataSourceFindUsagesContext context,
-                RoslynDefinitionBucket definitionBucket)
-                : base(definitionBucket, context.Presenter)
-            {
-            }
+                RoslynDefinitionBucket definitionBucket
+            ) : base(definitionBucket, context.Presenter) { }
 
             protected override object? GetValueWorker(string keyName)
             {
@@ -34,16 +32,21 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 return null;
             }
 
-            public bool CanNavigateTo()
-                => true;
+            public bool CanNavigateTo() => true;
 
-            public Task NavigateToAsync(bool isPreview, CancellationToken cancellationToken)
-                => DefinitionBucket.DefinitionItem.TryNavigateToAsync(
-                    Presenter._workspace, showInPreviewTab: isPreview, activateTab: !isPreview, cancellationToken); // Only activate the tab if not opening in preview
+            public Task NavigateToAsync(bool isPreview, CancellationToken cancellationToken) =>
+                DefinitionBucket.DefinitionItem.TryNavigateToAsync(
+                    Presenter._workspace,
+                    showInPreviewTab: isPreview,
+                    activateTab: !isPreview,
+                    cancellationToken
+                ); // Only activate the tab if not opening in preview
 
-            protected override IList<Inline> CreateLineTextInlines()
-                => DefinitionBucket.DefinitionItem.DisplayParts
-                    .ToInlines(Presenter.ClassificationFormatMap, Presenter.TypeMap);
+            protected override IList<Inline> CreateLineTextInlines() =>
+                DefinitionBucket.DefinitionItem.DisplayParts.ToInlines(
+                    Presenter.ClassificationFormatMap,
+                    Presenter.TypeMap
+                );
         }
     }
 }

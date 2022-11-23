@@ -9,7 +9,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class InternalTriggerBuilder : AnnotatableBuilder<Trigger, IConventionModelBuilder>, IConventionTriggerBuilder
+public class InternalTriggerBuilder
+    : AnnotatableBuilder<Trigger, IConventionModelBuilder>,
+        IConventionTriggerBuilder
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -18,9 +20,7 @@ public class InternalTriggerBuilder : AnnotatableBuilder<Trigger, IConventionMod
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public InternalTriggerBuilder(Trigger trigger, IConventionModelBuilder modelBuilder)
-        : base(trigger, modelBuilder)
-    {
-    }
+        : base(trigger, modelBuilder) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -28,7 +28,10 @@ public class InternalTriggerBuilder : AnnotatableBuilder<Trigger, IConventionMod
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IConventionTriggerBuilder? HasName(string? name, ConfigurationSource configurationSource)
+    public virtual IConventionTriggerBuilder? HasName(
+        string? name,
+        ConfigurationSource configurationSource
+    )
     {
         if (CanSetName(name, configurationSource))
         {
@@ -45,9 +48,9 @@ public class InternalTriggerBuilder : AnnotatableBuilder<Trigger, IConventionMod
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool CanSetName(string? name, ConfigurationSource configurationSource)
-        => configurationSource.Overrides(Metadata.GetNameConfigurationSource())
-            || Metadata.Name == name;
+    public virtual bool CanSetName(string? name, ConfigurationSource configurationSource) =>
+        configurationSource.Overrides(Metadata.GetNameConfigurationSource())
+        || Metadata.Name == name;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -60,7 +63,8 @@ public class InternalTriggerBuilder : AnnotatableBuilder<Trigger, IConventionMod
         string name,
         string? tableName,
         string? tableSchema,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         List<IConventionTrigger>? triggersToBeDetached = null;
         var trigger = entityType.FindTrigger(name);
@@ -84,15 +88,19 @@ public class InternalTriggerBuilder : AnnotatableBuilder<Trigger, IConventionMod
         {
             foreach (var derivedType in entityType.GetDerivedTypes())
             {
-                var derivedTrigger =
-                    (IConventionTrigger?)Trigger.FindDeclaredTrigger(derivedType, name);
+                var derivedTrigger = (IConventionTrigger?)
+                    Trigger.FindDeclaredTrigger(derivedType, name);
                 if (derivedTrigger == null)
                 {
                     continue;
                 }
 
-                if ((derivedTrigger.TableName != tableName || derivedTrigger.TableSchema != tableSchema)
-                    && !configurationSource.Overrides(derivedTrigger.GetConfigurationSource()))
+                if (
+                    (
+                        derivedTrigger.TableName != tableName
+                        || derivedTrigger.TableSchema != tableSchema
+                    ) && !configurationSource.Overrides(derivedTrigger.GetConfigurationSource())
+                )
                 {
                     return null;
                 }
@@ -110,11 +118,18 @@ public class InternalTriggerBuilder : AnnotatableBuilder<Trigger, IConventionMod
             foreach (var triggerToBeDetached in triggersToBeDetached)
             {
                 detachedTriggers.Add(
-                    triggerToBeDetached.EntityType.RemoveTrigger(triggerToBeDetached.ModelName)!);
+                    triggerToBeDetached.EntityType.RemoveTrigger(triggerToBeDetached.ModelName)!
+                );
             }
         }
 
-        trigger = new Trigger((IMutableEntityType)entityType, name, tableName, tableSchema, configurationSource);
+        trigger = new Trigger(
+            (IMutableEntityType)entityType,
+            name,
+            tableName,
+            tableSchema,
+            configurationSource
+        );
 
         if (detachedTriggers != null)
         {
@@ -138,26 +153,28 @@ public class InternalTriggerBuilder : AnnotatableBuilder<Trigger, IConventionMod
         string name,
         string? tableName,
         string? tableSchema,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         if (entityType.FindTrigger(name) is IConventionTrigger trigger)
         {
-            return (trigger.TableName == tableName
-                    && trigger.TableSchema == tableSchema)
+            return (trigger.TableName == tableName && trigger.TableSchema == tableSchema)
                 || configurationSource.Overrides(trigger.GetConfigurationSource());
         }
 
         foreach (var derivedType in entityType.GetDerivedTypes())
         {
-            var derivedTrigger = (IConventionTrigger?)Trigger.FindDeclaredTrigger(derivedType, name);
+            var derivedTrigger = (IConventionTrigger?)
+                Trigger.FindDeclaredTrigger(derivedType, name);
             if (derivedTrigger == null)
             {
                 continue;
             }
 
-            if ((derivedTrigger.TableName != tableName
-                || derivedTrigger.TableSchema != tableSchema)
-                && !configurationSource.Overrides(derivedTrigger.GetConfigurationSource()))
+            if (
+                (derivedTrigger.TableName != tableName || derivedTrigger.TableSchema != tableSchema)
+                && !configurationSource.Overrides(derivedTrigger.GetConfigurationSource())
+            )
             {
                 return false;
             }
@@ -174,11 +191,20 @@ public class InternalTriggerBuilder : AnnotatableBuilder<Trigger, IConventionMod
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IConventionTriggerBuilder? IConventionTriggerBuilder.HasName(string? name, bool fromDataAnnotation)
-        => HasName(name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IConventionTriggerBuilder? IConventionTriggerBuilder.HasName(
+        string? name,
+        bool fromDataAnnotation
+    ) =>
+        HasName(
+            name,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    bool IConventionTriggerBuilder.CanSetName(string? name, bool fromDataAnnotation)
-        => CanSetName(name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    bool IConventionTriggerBuilder.CanSetName(string? name, bool fromDataAnnotation) =>
+        CanSetName(
+            name,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 }

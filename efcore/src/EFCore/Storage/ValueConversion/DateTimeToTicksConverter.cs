@@ -17,10 +17,7 @@ public class DateTimeToTicksConverter : ValueConverter<DateTime, long>
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
-    public DateTimeToTicksConverter()
-        : this(null)
-    {
-    }
+    public DateTimeToTicksConverter() : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter.
@@ -33,10 +30,5 @@ public class DateTimeToTicksConverter : ValueConverter<DateTime, long>
     ///     facets for the converted data.
     /// </param>
     public DateTimeToTicksConverter(ConverterMappingHints? mappingHints)
-        : base(
-            v => v.Ticks,
-            v => new DateTime(v),
-            mappingHints)
-    {
-    }
+        : base(v => v.Ticks, v => new DateTime(v), mappingHints) { }
 }

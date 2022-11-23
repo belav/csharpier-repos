@@ -3,7 +3,8 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
-public class InheritanceBulkUpdatesSqlServerTest : InheritanceBulkUpdatesTestBase<InheritanceBulkUpdatesSqlServerFixture>
+public class InheritanceBulkUpdatesSqlServerTest
+    : InheritanceBulkUpdatesTestBase<InheritanceBulkUpdatesSqlServerFixture>
 {
     public InheritanceBulkUpdatesSqlServerTest(InheritanceBulkUpdatesSqlServerFixture fixture)
         : base(fixture)
@@ -12,8 +13,8 @@ public class InheritanceBulkUpdatesSqlServerTest : InheritanceBulkUpdatesTestBas
     }
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task Delete_where_hierarchy(bool async)
     {
@@ -22,7 +23,8 @@ public class InheritanceBulkUpdatesSqlServerTest : InheritanceBulkUpdatesTestBas
         AssertSql(
             @"DELETE FROM [a]
 FROM [Animals] AS [a]
-WHERE [a].[Name] = N'Great spotted kiwi'");
+WHERE [a].[Name] = N'Great spotted kiwi'"
+        );
     }
 
     public override async Task Delete_where_hierarchy_derived(bool async)
@@ -32,7 +34,8 @@ WHERE [a].[Name] = N'Great spotted kiwi'");
         AssertSql(
             @"DELETE FROM [a]
 FROM [Animals] AS [a]
-WHERE [a].[Discriminator] = N'Kiwi' AND [a].[Name] = N'Great spotted kiwi'");
+WHERE [a].[Discriminator] = N'Kiwi' AND [a].[Name] = N'Great spotted kiwi'"
+        );
     }
 
     public override async Task Delete_where_using_hierarchy(bool async)
@@ -45,7 +48,8 @@ FROM [Countries] AS [c]
 WHERE (
     SELECT COUNT(*)
     FROM [Animals] AS [a]
-    WHERE [c].[Id] = [a].[CountryId] AND [a].[CountryId] > 0) > 0");
+    WHERE [c].[Id] = [a].[CountryId] AND [a].[CountryId] > 0) > 0"
+        );
     }
 
     public override async Task Delete_where_using_hierarchy_derived(bool async)
@@ -58,7 +62,8 @@ FROM [Countries] AS [c]
 WHERE (
     SELECT COUNT(*)
     FROM [Animals] AS [a]
-    WHERE [c].[Id] = [a].[CountryId] AND [a].[Discriminator] = N'Kiwi' AND [a].[CountryId] > 0) > 0");
+    WHERE [c].[Id] = [a].[CountryId] AND [a].[Discriminator] = N'Kiwi' AND [a].[CountryId] > 0) > 0"
+        );
     }
 
     public override async Task Delete_GroupBy_Where_Select_First(bool async)
@@ -89,7 +94,8 @@ WHERE EXISTS (
     HAVING COUNT(*) < 3 AND (
         SELECT TOP(1) [a1].[Id]
         FROM [Animals] AS [a1]
-        WHERE [a0].[CountryId] = [a1].[CountryId]) = [a].[Id])");
+        WHERE [a0].[CountryId] = [a1].[CountryId]) = [a].[Id])"
+        );
     }
 
     public override async Task Delete_where_keyless_entity_mapped_to_sql_query(bool async)
@@ -118,7 +124,8 @@ WHERE EXISTS (
         ORDER BY [a0].[Name]
         OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
     ) AS [t]
-    WHERE [t].[Id] = [a].[Id])");
+    WHERE [t].[Id] = [a].[Id])"
+        );
     }
 
     public override async Task Update_where_hierarchy(bool async)
@@ -129,7 +136,8 @@ WHERE EXISTS (
             @"UPDATE [a]
 SET [a].[Name] = N'Animal'
 FROM [Animals] AS [a]
-WHERE [a].[Name] = N'Great spotted kiwi'");
+WHERE [a].[Name] = N'Great spotted kiwi'"
+        );
     }
 
     public override async Task Update_where_hierarchy_subquery(bool async)
@@ -147,7 +155,8 @@ WHERE [a].[Name] = N'Great spotted kiwi'");
             @"UPDATE [a]
 SET [a].[Name] = N'Kiwi'
 FROM [Animals] AS [a]
-WHERE [a].[Discriminator] = N'Kiwi' AND [a].[Name] = N'Great spotted kiwi'");
+WHERE [a].[Discriminator] = N'Kiwi' AND [a].[Name] = N'Great spotted kiwi'"
+        );
     }
 
     public override async Task Update_where_using_hierarchy(bool async)
@@ -161,7 +170,8 @@ FROM [Countries] AS [c]
 WHERE (
     SELECT COUNT(*)
     FROM [Animals] AS [a]
-    WHERE [c].[Id] = [a].[CountryId] AND [a].[CountryId] > 0) > 0");
+    WHERE [c].[Id] = [a].[CountryId] AND [a].[CountryId] > 0) > 0"
+        );
     }
 
     public override async Task Update_where_using_hierarchy_derived(bool async)
@@ -175,7 +185,8 @@ FROM [Countries] AS [c]
 WHERE (
     SELECT COUNT(*)
     FROM [Animals] AS [a]
-    WHERE [c].[Id] = [a].[CountryId] AND [a].[Discriminator] = N'Kiwi' AND [a].[CountryId] > 0) > 0");
+    WHERE [c].[Id] = [a].[CountryId] AND [a].[Discriminator] = N'Kiwi' AND [a].[CountryId] > 0) > 0"
+        );
     }
 
     public override async Task Update_where_keyless_entity_mapped_to_sql_query(bool async)
@@ -185,12 +196,11 @@ WHERE (
         AssertExecuteUpdateSql();
     }
 
-    protected override void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    private void AssertExecuteUpdateSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
+    private void AssertExecuteUpdateSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
 }

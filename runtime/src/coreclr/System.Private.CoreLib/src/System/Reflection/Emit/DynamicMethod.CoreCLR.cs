@@ -52,11 +52,16 @@ namespace System.Reflection.Emit
                 // Compile the method since accessibility checks are done as part of compilation.
                 GetMethodDescriptor();
                 IRuntimeMethodInfo? methodHandle = _methodHandle;
-                System.Runtime.CompilerServices.RuntimeHelpers.CompileMethod(methodHandle != null ? methodHandle.Value : RuntimeMethodHandleInternal.EmptyHandle);
+                System.Runtime.CompilerServices.RuntimeHelpers.CompileMethod(
+                    methodHandle != null
+                        ? methodHandle.Value
+                        : RuntimeMethodHandleInternal.EmptyHandle
+                );
                 GC.KeepAlive(methodHandle);
             }
 
-            MulticastDelegate d = (MulticastDelegate)Delegate.CreateDelegateNoSecurityCheck(delegateType, null, GetMethodDescriptor());
+            MulticastDelegate d = (MulticastDelegate)
+                Delegate.CreateDelegateNoSecurityCheck(delegateType, null, GetMethodDescriptor());
             // stash this MethodInfo by brute force.
             d.StoreDynamicMethod(GetMethodInfo());
             return d;
@@ -69,11 +74,16 @@ namespace System.Reflection.Emit
                 // Compile the method since accessibility checks are done as part of compilation
                 GetMethodDescriptor();
                 IRuntimeMethodInfo? methodHandle = _methodHandle;
-                System.Runtime.CompilerServices.RuntimeHelpers.CompileMethod(methodHandle != null ? methodHandle.Value : RuntimeMethodHandleInternal.EmptyHandle);
+                System.Runtime.CompilerServices.RuntimeHelpers.CompileMethod(
+                    methodHandle != null
+                        ? methodHandle.Value
+                        : RuntimeMethodHandleInternal.EmptyHandle
+                );
                 GC.KeepAlive(methodHandle);
             }
 
-            MulticastDelegate d = (MulticastDelegate)Delegate.CreateDelegateNoSecurityCheck(delegateType, target, GetMethodDescriptor());
+            MulticastDelegate d = (MulticastDelegate)
+                Delegate.CreateDelegateNoSecurityCheck(delegateType, target, GetMethodDescriptor());
             // stash this MethodInfo by brute force.
             d.StoreDynamicMethod(GetMethodInfo());
             return d;
@@ -93,7 +103,9 @@ namespace System.Reflection.Emit
                         else
                         {
                             if (_ilGenerator == null || _ilGenerator.ILOffset == 0)
-                                throw new InvalidOperationException(SR.Format(SR.InvalidOperation_BadEmptyMethodBody, Name));
+                                throw new InvalidOperationException(
+                                    SR.Format(SR.InvalidOperation_BadEmptyMethodBody, Name)
+                                );
 
                             _ilGenerator.GetCallableMethod((RuntimeModule)_module, this);
                         }
@@ -106,10 +118,7 @@ namespace System.Reflection.Emit
         private MethodInvoker Invoker
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return _invoker ??= new MethodInvoker(this, Signature);
-            }
+            get { return _invoker ??= new MethodInvoker(this, Signature); }
         }
 
         internal Signature Signature
@@ -123,7 +132,12 @@ namespace System.Reflection.Emit
                     Debug.Assert(_methodHandle != null);
                     Debug.Assert(_parameterTypes != null);
 
-                    Signature newSig = new Signature(_methodHandle, _parameterTypes, _returnType, CallingConvention);
+                    Signature newSig = new Signature(
+                        _methodHandle,
+                        _parameterTypes,
+                        _returnType,
+                        CallingConvention
+                    );
                     Volatile.Write(ref _signature, newSig);
                     return newSig;
                 }
@@ -132,7 +146,13 @@ namespace System.Reflection.Emit
             }
         }
 
-        public override object? Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object? Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             if ((CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs)
                 throw new NotSupportedException(SR.NotSupported_CallToVarArg);
@@ -152,7 +172,6 @@ namespace System.Reflection.Emit
                 throw new TargetParameterCountException(SR.Arg_ParmCnt);
 
             object? retValue;
-
             unsafe
             {
                 if (argCount == 0)
@@ -162,14 +181,23 @@ namespace System.Reflection.Emit
                 else if (argCount > MaxStackAllocArgCount)
                 {
                     Debug.Assert(parameters != null);
-                    retValue = InvokeWithManyArguments(this, argCount, obj, invokeAttr, binder, parameters, culture);
+                    retValue = InvokeWithManyArguments(
+                        this,
+                        argCount,
+                        obj,
+                        invokeAttr,
+                        binder,
+                        parameters,
+                        culture
+                    );
                 }
                 else
                 {
                     Debug.Assert(parameters != null);
                     StackAllocedArguments argStorage = default;
                     Span<object?> copyOfParameters = new(ref argStorage._arg0, argCount);
-                    Span<ParameterCopyBackAction> shouldCopyBackParameters = new(ref argStorage._copyBack0, argCount);
+                    Span<ParameterCopyBackAction> shouldCopyBackParameters =
+                        new(ref argStorage._copyBack0, argCount);
 
                     StackAllocatedByRefs byrefStorage = default;
                     IntPtr* pByRefStorage = (IntPtr*)&byrefStorage;
@@ -182,7 +210,8 @@ namespace System.Reflection.Emit
                         Signature.Arguments,
                         binder,
                         culture,
-                        invokeAttr);
+                        invokeAttr
+                    );
 
                     retValue = Invoker.InlinedInvoke(obj, pByRefStorage, invokeAttr);
 
@@ -200,8 +229,12 @@ namespace System.Reflection.Emit
                             {
                                 Debug.Assert(action == ParameterCopyBackAction.CopyNullable);
                                 Debug.Assert(copyOfParameters[i] != null);
-                                Debug.Assert(((RuntimeType)copyOfParameters[i]!.GetType()).IsNullableOfT);
-                                parameters[i] = RuntimeMethodHandle.ReboxFromNullable(copyOfParameters[i]);
+                                Debug.Assert(
+                                    ((RuntimeType)copyOfParameters[i]!.GetType()).IsNullableOfT
+                                );
+                                parameters[i] = RuntimeMethodHandle.ReboxFromNullable(
+                                    copyOfParameters[i]
+                                );
                             }
                         }
                     }
@@ -221,7 +254,8 @@ namespace System.Reflection.Emit
             BindingFlags invokeAttr,
             Binder? binder,
             object?[] parameters,
-            CultureInfo? culture)
+            CultureInfo? culture
+        )
         {
             object[] objHolder = new object[argCount];
             Span<object?> copyOfParameters = new(objHolder, 0, argCount);
@@ -248,7 +282,8 @@ namespace System.Reflection.Emit
                     mi.Signature.Arguments,
                     binder,
                     culture,
-                    invokeAttr);
+                    invokeAttr
+                );
 
                 retValue = mi.Invoker.InlinedInvoke(obj, pByRefStorage, invokeAttr);
             }
@@ -284,8 +319,18 @@ namespace System.Reflection.Emit
         {
             if (_dynamicILInfo == null)
             {
-                byte[] methodSignature = SignatureHelper.GetMethodSigHelper(
-                        null, CallingConvention, ReturnType, null, null, _parameterTypes, null, null).GetSignature(true);
+                byte[] methodSignature = SignatureHelper
+                    .GetMethodSigHelper(
+                        null,
+                        CallingConvention,
+                        ReturnType,
+                        null,
+                        null,
+                        _parameterTypes,
+                        null,
+                        null
+                    )
+                    .GetSignature(true);
                 _dynamicILInfo = new DynamicILInfo(this, methodSignature);
             }
             return _dynamicILInfo;
@@ -295,8 +340,18 @@ namespace System.Reflection.Emit
         {
             if (_ilGenerator == null)
             {
-                byte[] methodSignature = SignatureHelper.GetMethodSigHelper(
-                    null, CallingConvention, ReturnType, null, null, _parameterTypes, null, null).GetSignature(true);
+                byte[] methodSignature = SignatureHelper
+                    .GetMethodSigHelper(
+                        null,
+                        CallingConvention,
+                        ReturnType,
+                        null,
+                        null,
+                        _parameterTypes,
+                        null,
+                        null
+                    )
+                    .GetSignature(true);
                 _ilGenerator = new DynamicILGenerator(this, methodSignature, streamSize);
             }
             return _ilGenerator;

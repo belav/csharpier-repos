@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Http.Abstractions.Tests;
 
 public class ProblemDetailsJsonConverterTest
 {
-    private static JsonSerializerOptions JsonSerializerOptions => new JsonOptions().SerializerOptions;
+    private static JsonSerializerOptions JsonSerializerOptions =>
+        new JsonOptions().SerializerOptions;
 
     [Fact]
     public void Read_ThrowsIfJsonIsIncomplete()
@@ -38,13 +39,18 @@ public class ProblemDetailsJsonConverterTest
         var detail = "Product not found";
         var instance = "http://example.com/products/14";
         var traceId = "|37dd3dd5-4a9619f953c40a16.";
-        var json = $"{{\"type\":\"{type}\",\"title\":\"{title}\",\"status\":{status},\"detail\":\"{detail}\", \"instance\":\"{instance}\",\"traceId\":\"{traceId}\"}}";
+        var json =
+            $"{{\"type\":\"{type}\",\"title\":\"{title}\",\"status\":{status},\"detail\":\"{detail}\", \"instance\":\"{instance}\",\"traceId\":\"{traceId}\"}}";
         var converter = new ProblemDetailsJsonConverter();
         var reader = new Utf8JsonReader(Encoding.UTF8.GetBytes(json));
         reader.Read();
 
         // Act
-        var problemDetails = converter.Read(ref reader, typeof(ProblemDetails), JsonSerializerOptions);
+        var problemDetails = converter.Read(
+            ref reader,
+            typeof(ProblemDetails),
+            JsonSerializerOptions
+        );
 
         //Assert
         Assert.Equal(type, problemDetails.Type);
@@ -58,7 +64,8 @@ public class ProblemDetailsJsonConverterTest
             {
                 Assert.Equal("traceId", kvp.Key);
                 Assert.Equal(traceId, kvp.Value?.ToString());
-            });
+            }
+        );
     }
 
     [Fact]
@@ -71,10 +78,14 @@ public class ProblemDetailsJsonConverterTest
         var detail = "Product not found";
         var instance = "http://example.com/products/14";
         var traceId = "|37dd3dd5-4a9619f953c40a16.";
-        var json = $"{{\"type\":\"{type}\",\"title\":\"{title}\",\"status\":{status},\"detail\":\"{detail}\", \"instance\":\"{instance}\",\"traceId\":\"{traceId}\"}}";
+        var json =
+            $"{{\"type\":\"{type}\",\"title\":\"{title}\",\"status\":{status},\"detail\":\"{detail}\", \"instance\":\"{instance}\",\"traceId\":\"{traceId}\"}}";
 
         // Act
-        var problemDetails = JsonSerializer.Deserialize<ProblemDetails>(json, JsonSerializerOptions);
+        var problemDetails = JsonSerializer.Deserialize<ProblemDetails>(
+            json,
+            JsonSerializerOptions
+        );
 
         // Assert
         Assert.NotNull(problemDetails);
@@ -89,7 +100,8 @@ public class ProblemDetailsJsonConverterTest
             {
                 Assert.Equal("traceId", kvp.Key);
                 Assert.Equal(traceId, kvp.Value?.ToString());
-            });
+            }
+        );
     }
 
     [Fact]
@@ -100,13 +112,18 @@ public class ProblemDetailsJsonConverterTest
         var title = "Not found";
         var status = 404;
         var traceId = "|37dd3dd5-4a9619f953c40a16.";
-        var json = $"{{\"type\":\"{type}\",\"title\":\"{title}\",\"status\":{status},\"traceId\":\"{traceId}\"}}";
+        var json =
+            $"{{\"type\":\"{type}\",\"title\":\"{title}\",\"status\":{status},\"traceId\":\"{traceId}\"}}";
         var converter = new ProblemDetailsJsonConverter();
         var reader = new Utf8JsonReader(Encoding.UTF8.GetBytes(json));
         reader.Read();
 
         // Act
-        var problemDetails = converter.Read(ref reader, typeof(ProblemDetails), JsonSerializerOptions);
+        var problemDetails = converter.Read(
+            ref reader,
+            typeof(ProblemDetails),
+            JsonSerializerOptions
+        );
 
         // Assert
         Assert.Equal(type, problemDetails.Type);
@@ -118,7 +135,8 @@ public class ProblemDetailsJsonConverterTest
             {
                 Assert.Equal("traceId", kvp.Key);
                 Assert.Equal(traceId, kvp.Value?.ToString());
-            });
+            }
+        );
     }
 
     [Fact]
@@ -133,13 +151,10 @@ public class ProblemDetailsJsonConverterTest
             Status = 404,
             Detail = "Product not found",
             Instance = "http://example.com/products/14",
-            Extensions =
-                {
-                    { "traceId", traceId },
-                    { "some-data", new[] { "value1", "value2" } }
-                }
+            Extensions = { { "traceId", traceId }, { "some-data", new[] { "value1", "value2" } } }
         };
-        var expected = $"{{\"type\":\"{JsonEncodedText.Encode(value.Type)}\",\"title\":\"{value.Title}\",\"status\":{value.Status},\"detail\":\"{value.Detail}\",\"instance\":\"{JsonEncodedText.Encode(value.Instance)}\",\"traceId\":\"{traceId}\",\"some-data\":[\"value1\",\"value2\"]}}";
+        var expected =
+            $"{{\"type\":\"{JsonEncodedText.Encode(value.Type)}\",\"title\":\"{value.Title}\",\"status\":{value.Status},\"detail\":\"{value.Detail}\",\"instance\":\"{JsonEncodedText.Encode(value.Instance)}\",\"traceId\":\"{traceId}\",\"some-data\":[\"value1\",\"value2\"]}}";
         var converter = new ProblemDetailsJsonConverter();
         var stream = new MemoryStream();
 
@@ -164,7 +179,8 @@ public class ProblemDetailsJsonConverterTest
             Type = "https://tools.ietf.org/html/rfc9110#section-15.5.5",
             Status = 404,
         };
-        var expected = $"{{\"type\":\"{JsonEncodedText.Encode(value.Type)}\",\"title\":\"{value.Title}\",\"status\":{value.Status}}}";
+        var expected =
+            $"{{\"type\":\"{JsonEncodedText.Encode(value.Type)}\",\"title\":\"{value.Title}\",\"status\":{value.Status}}}";
         var converter = new ProblemDetailsJsonConverter();
         var stream = new MemoryStream();
 

@@ -18,16 +18,17 @@ namespace Sample
     {
         static bool JsonResults = false;
 
-        List<BenchTask> tasks = new()
-        {
-            new AppStartTask(),
-            new ExceptionsTask(),
-            new JsonTask(),
-            new SpanTask(),
-            new VectorTask(),
-            new JSInteropTask(),
-            new WebSocketTask(),
-        };
+        List<BenchTask> tasks =
+            new()
+            {
+                new AppStartTask(),
+                new ExceptionsTask(),
+                new JsonTask(),
+                new SpanTask(),
+                new VectorTask(),
+                new JSInteropTask(),
+                new WebSocketTask(),
+            };
         static Test instance = new Test();
         Formatter formatter = new HTMLFormatter();
 
@@ -123,7 +124,10 @@ namespace Sample
             {
                 measurementIdx++;
 
-                if (Task.pattern == null || Task.pattern.IsMatch(Task.Measurements[measurementIdx].Name))
+                if (
+                    Task.pattern == null
+                    || Task.pattern.IsMatch(Task.Measurements[measurementIdx].Name)
+                )
                     return true;
             }
 
@@ -146,7 +150,11 @@ namespace Sample
             if (measurementIdx == -1)
                 return ResultsSummary();
 
-            if (runIdx >= Task.Measurements[measurementIdx].NumberOfRuns && !NextMeasurement() && !NextTask())
+            if (
+                runIdx >= Task.Measurements[measurementIdx].NumberOfRuns
+                && !NextMeasurement()
+                && !NextTask()
+            )
                 return ResultsSummary();
 
             runIdx++;
@@ -166,7 +174,9 @@ namespace Sample
                 sb.Append($"{key}: {minTimes[key]}ms{formatter.NewLine}");
             }
 
-            sb.Append($"{formatter.NewLine}.md{formatter.NewLine}{formatter.CodeStart}| measurement | time |{formatter.NewLine}|-:|-:|{formatter.NewLine}");
+            sb.Append(
+                $"{formatter.NewLine}.md{formatter.NewLine}{formatter.CodeStart}| measurement | time |{formatter.NewLine}|-:|-:|{formatter.NewLine}"
+            );
             foreach (var key in minTimes.Keys)
             {
                 var time = minTimes[key];
@@ -176,7 +186,12 @@ namespace Sample
                     time *= 1000;
                     unit = "us";
                 }
-                sb.Append($"| {key.Replace('_', ' '),38} | {time,10:F4}{unit} |{formatter.NewLine}".Replace(" ", formatter.NonBreakingSpace));
+                sb.Append(
+                    $"| {key.Replace('_', ' '), 38} | {time, 10:F4}{unit} |{formatter.NewLine}".Replace(
+                        " ",
+                        formatter.NonBreakingSpace
+                    )
+                );
             }
             sb.Append($"{formatter.CodeEnd}");
 
@@ -211,7 +226,12 @@ namespace Sample
         string GetJsonResults()
         {
             var options = new JsonSerializerOptions { IncludeFields = true, WriteIndented = true };
-            var jsonObject = new JsonResultsData { results = results, minTimes = minTimes, timeStamp = DateTime.UtcNow };
+            var jsonObject = new JsonResultsData
+            {
+                results = results,
+                minTimes = minTimes,
+                timeStamp = DateTime.UtcNow
+            };
             return JsonSerializer.Serialize(jsonObject, options);
         }
 

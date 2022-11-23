@@ -12,16 +12,16 @@ public class FunctionalTestsBase : LoggedTest
 {
     private const string DebugEnvironmentVariable = "ASPNETCORE_MODULE_DEBUG";
 
-    public FunctionalTestsBase(ITestOutputHelper output = null) : base(output)
-    {
-    }
+    public FunctionalTestsBase(ITestOutputHelper output = null) : base(output) { }
 
     protected IISDeployerBase _deployer;
 
     protected ApplicationDeployer CreateDeployer(IISDeploymentParameters parameters)
     {
-        if (parameters.ServerType == ServerType.IISExpress &&
-            !parameters.EnvironmentVariables.ContainsKey(DebugEnvironmentVariable))
+        if (
+            parameters.ServerType == ServerType.IISExpress
+            && !parameters.EnvironmentVariables.ContainsKey(DebugEnvironmentVariable)
+        )
         {
             parameters.EnvironmentVariables[DebugEnvironmentVariable] = "console";
         }
@@ -29,7 +29,9 @@ public class FunctionalTestsBase : LoggedTest
         return IISApplicationDeployerFactory.Create(parameters, LoggerFactory);
     }
 
-    protected virtual async Task<IISDeploymentResult> DeployAsync(IISDeploymentParameters parameters)
+    protected virtual async Task<IISDeploymentResult> DeployAsync(
+        IISDeploymentParameters parameters
+    )
     {
         _deployer = (IISDeployerBase)CreateDeployer(parameters);
         return (IISDeploymentResult)await _deployer.DeployAsync();
@@ -42,7 +44,10 @@ public class FunctionalTestsBase : LoggedTest
         return result;
     }
 
-    protected virtual async Task<string> GetStringAsync(IISDeploymentParameters parameters, string path)
+    protected virtual async Task<string> GetStringAsync(
+        IISDeploymentParameters parameters,
+        string path
+    )
     {
         var result = await DeployAsync(parameters);
         return await result.HttpClient.GetStringAsync(path);

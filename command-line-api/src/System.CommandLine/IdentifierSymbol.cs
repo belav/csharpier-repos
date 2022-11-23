@@ -28,7 +28,7 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="name">The name of the symbol.</param>
         /// <param name="description">The description of the symbol, which is displayed in command line help.</param>
-        protected IdentifierSymbol(string name, string? description = null) 
+        protected IdentifierSymbol(string name, string? description = null)
         {
             Name = name;
             Description = description;
@@ -45,7 +45,10 @@ namespace System.CommandLine
             get => _specifiedName ??= DefaultName;
             set
             {
-                if (_specifiedName is null || !string.Equals(_specifiedName, value, StringComparison.Ordinal))
+                if (
+                    _specifiedName is null
+                    || !string.Equals(_specifiedName, value, StringComparison.Ordinal)
+                )
                 {
                     AddAlias(value);
 
@@ -87,14 +90,19 @@ namespace System.CommandLine
         {
             if (string.IsNullOrWhiteSpace(alias))
             {
-                throw new ArgumentException("An alias cannot be null, empty, or consist entirely of whitespace.");
+                throw new ArgumentException(
+                    "An alias cannot be null, empty, or consist entirely of whitespace."
+                );
             }
 
             for (var i = 0; i < alias.Length; i++)
             {
                 if (char.IsWhiteSpace(alias[i]))
                 {
-                    throw new ArgumentException($"Alias cannot contain whitespace: \"{alias}\"", nameof(alias));
+                    throw new ArgumentException(
+                        $"Alias cannot contain whitespace: \"{alias}\"",
+                        nameof(alias)
+                    );
                 }
             }
         }

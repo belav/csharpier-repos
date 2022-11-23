@@ -9,7 +9,10 @@ namespace Internal.TypeSystem.Ecma
         {
             get
             {
-                return (GetFieldFlags(FieldFlags.BasicMetadataCache | FieldFlags.NotSerialized) & FieldFlags.NotSerialized) != 0;
+                return (
+                        GetFieldFlags(FieldFlags.BasicMetadataCache | FieldFlags.NotSerialized)
+                        & FieldFlags.NotSerialized
+                    ) != 0;
             }
         }
     }

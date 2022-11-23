@@ -11,7 +11,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 /// <summary>
 /// A dictionary for HTML attributes.
 /// </summary>
-public class AttributeDictionary : IDictionary<string, string?>, IReadOnlyDictionary<string, string?>
+public class AttributeDictionary
+    : IDictionary<string, string?>,
+        IReadOnlyDictionary<string, string?>
 {
     private List<KeyValuePair<string, string?>>? _items;
 
@@ -35,7 +37,6 @@ public class AttributeDictionary : IDictionary<string, string?>, IReadOnlyDictio
                 return Get(index).Value;
             }
         }
-
         set
         {
             if (key == null)
@@ -168,8 +169,10 @@ public class AttributeDictionary : IDictionary<string, string?>, IReadOnlyDictio
             throw new ArgumentException(
                 Resources.FormatPropertyOfTypeCannotBeNull(
                     nameof(KeyValuePair<string, string?>.Key),
-                    nameof(KeyValuePair<string, string?>)),
-                nameof(item));
+                    nameof(KeyValuePair<string, string?>)
+                ),
+                nameof(item)
+            );
         }
 
         var index = Find(item.Key);
@@ -202,8 +205,10 @@ public class AttributeDictionary : IDictionary<string, string?>, IReadOnlyDictio
             throw new ArgumentException(
                 Resources.FormatPropertyOfTypeCannotBeNull(
                     nameof(KeyValuePair<string, string?>.Key),
-                    nameof(KeyValuePair<string, string?>)),
-                nameof(item));
+                    nameof(KeyValuePair<string, string?>)
+                ),
+                nameof(item)
+            );
         }
 
         var index = Find(item.Key);
@@ -266,8 +271,10 @@ public class AttributeDictionary : IDictionary<string, string?>, IReadOnlyDictio
             throw new ArgumentException(
                 Resources.FormatPropertyOfTypeCannotBeNull(
                     nameof(KeyValuePair<string, string?>.Key),
-                    nameof(KeyValuePair<string, string?>)),
-                nameof(item));
+                    nameof(KeyValuePair<string, string?>)
+                ),
+                nameof(item)
+            );
         }
 
         var index = Find(item.Key);
@@ -334,7 +341,9 @@ public class AttributeDictionary : IDictionary<string, string?>, IReadOnlyDictio
     }
 
     /// <inheritdoc />
-    IEnumerator<KeyValuePair<string, string?>> IEnumerable<KeyValuePair<string, string?>>.GetEnumerator()
+    IEnumerator<KeyValuePair<string, string?>> IEnumerable<
+        KeyValuePair<string, string?>
+    >.GetEnumerator()
     {
         return GetEnumerator();
     }
@@ -366,9 +375,7 @@ public class AttributeDictionary : IDictionary<string, string?>, IReadOnlyDictio
         object IEnumerator.Current => Current;
 
         /// <inheritdoc />
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         /// <inheritdoc />
         public bool MoveNext()
@@ -480,9 +487,7 @@ public class AttributeDictionary : IDictionary<string, string?>, IReadOnlyDictio
 
             object IEnumerator.Current => Current;
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public bool MoveNext()
             {
@@ -524,7 +529,13 @@ public class AttributeDictionary : IDictionary<string, string?>, IReadOnlyDictio
         {
             for (var i = 0; i < _attributes.Count; i++)
             {
-                if (string.Equals(item, _attributes.Get(i).Value, StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        item,
+                        _attributes.Get(i).Value,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return true;
                 }
@@ -588,9 +599,7 @@ public class AttributeDictionary : IDictionary<string, string?>, IReadOnlyDictio
 
             object? IEnumerator.Current => Current;
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public bool MoveNext()
             {

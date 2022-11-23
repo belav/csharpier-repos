@@ -131,11 +131,19 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(ArmBase.Arm64).GetMethod(nameof(ArmBase.Arm64.MultiplyHigh), new Type[] { typeof(UInt64), typeof(UInt64) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data1)),
-                                        Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data2))
-                                     });
+            var result = typeof(ArmBase.Arm64)
+                .GetMethod(
+                    nameof(ArmBase.Arm64.MultiplyHigh),
+                    new Type[] { typeof(UInt64), typeof(UInt64) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data1)),
+                        Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data2))
+                    }
+                );
 
             ValidateResult(_data1, _data2, (UInt64)result);
         }
@@ -144,10 +152,7 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = ArmBase.Arm64.MultiplyHigh(
-                _clsVar1,
-                _clsVar2
-            );
+            var result = ArmBase.Arm64.MultiplyHigh(_clsVar1, _clsVar2);
 
             ValidateResult(_clsVar1, _clsVar2, result);
         }
@@ -220,7 +225,12 @@ namespace JIT.HardwareIntrinsics.Arm
             }
         }
 
-        private void ValidateResult(UInt64 left, UInt64 right, UInt64 result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt64 left,
+            UInt64 right,
+            UInt64 result,
+            [CallerMemberName] string method = ""
+        )
         {
             var isUnexpectedResult = false;
 
@@ -228,7 +238,9 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(ArmBase.Arm64)}.{nameof(ArmBase.Arm64.MultiplyHigh)}<UInt64>(UInt64, UInt64): MultiplyHigh failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(ArmBase.Arm64)}.{nameof(ArmBase.Arm64.MultiplyHigh)}<UInt64>(UInt64, UInt64): MultiplyHigh failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    left: {left}");
                 TestLibrary.TestFramework.LogInformation($"   right: {right}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");

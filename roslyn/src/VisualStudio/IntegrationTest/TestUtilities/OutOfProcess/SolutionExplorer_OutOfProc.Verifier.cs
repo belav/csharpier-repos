@@ -18,20 +18,33 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                 _solutionExplorer = solutionExplorer;
             }
 
-            public void AssemblyReferencePresent(ProjectUtils.Project project, string assemblyName, string assemblyVersion, string assemblyPublicKeyToken)
+            public void AssemblyReferencePresent(
+                ProjectUtils.Project project,
+                string assemblyName,
+                string assemblyVersion,
+                string assemblyPublicKeyToken
+            )
             {
                 var assemblyReferences = _solutionExplorer.GetAssemblyReferences(project);
-                var expectedAssemblyReference = assemblyName + "," + assemblyVersion + "," + assemblyPublicKeyToken.ToUpper();
+                var expectedAssemblyReference =
+                    assemblyName + "," + assemblyVersion + "," + assemblyPublicKeyToken.ToUpper();
                 Assert.Contains(expectedAssemblyReference, assemblyReferences);
             }
 
-            public void ProjectReferencePresent(ProjectUtils.Project project, string referencedProjectName)
+            public void ProjectReferencePresent(
+                ProjectUtils.Project project,
+                string referencedProjectName
+            )
             {
                 var projectReferences = _solutionExplorer.GetProjectReferences(project);
                 Assert.Contains(referencedProjectName, projectReferences);
             }
 
-            public void FileContents(ProjectUtils.Project project, string fileName, string expectedContents)
+            public void FileContents(
+                ProjectUtils.Project project,
+                string fileName,
+                string expectedContents
+            )
             {
                 var actualContents = _solutionExplorer.GetFileContents(project, fileName);
                 Assert.Equal(expectedContents, actualContents);

@@ -40,12 +40,20 @@ public sealed class SocketConnectionContextFactory : IDisposable
 
         var maxReadBufferSize = _options.MaxReadBufferSize ?? 0;
         var maxWriteBufferSize = _options.MaxWriteBufferSize ?? 0;
-        var applicationScheduler = options.UnsafePreferInlineScheduling ? PipeScheduler.Inline : PipeScheduler.ThreadPool;
+        var applicationScheduler = options.UnsafePreferInlineScheduling
+            ? PipeScheduler.Inline
+            : PipeScheduler.ThreadPool;
 
         // Socket callbacks run on the threads polling for IO if we're using the old Windows thread pool
-        var dispatchSocketCallbacks = OperatingSystem.IsWindows() &&
-                                      (Environment.GetEnvironmentVariable("DOTNET_ThreadPool_UsePortableThreadPoolForIO") == "0" ||
-                                      Environment.GetEnvironmentVariable("COMPlus_ThreadPool_UsePortableThreadPoolForIO") == "0");
+        var dispatchSocketCallbacks =
+            OperatingSystem.IsWindows()
+            && (
+                Environment.GetEnvironmentVariable("DOTNET_ThreadPool_UsePortableThreadPoolForIO")
+                    == "0"
+                || Environment.GetEnvironmentVariable(
+                    "COMPlus_ThreadPool_UsePortableThreadPoolForIO"
+                ) == "0"
+            );
 
         PipeScheduler SelectSocketsScheduler(PipeScheduler dispatchingScheduler) =>
             dispatchSocketCallbacks ? dispatchingScheduler : PipeScheduler.Inline;
@@ -57,14 +65,30 @@ public sealed class SocketConnectionContextFactory : IDisposable
             for (var i = 0; i < _settingsCount; i++)
             {
                 var memoryPool = _options.MemoryPoolFactory();
-                var transportScheduler = options.UnsafePreferInlineScheduling ? PipeScheduler.Inline : new IOQueue();
+                var transportScheduler = options.UnsafePreferInlineScheduling
+                    ? PipeScheduler.Inline
+                    : new IOQueue();
                 var socketsScheduler = SelectSocketsScheduler(transportScheduler);
 
                 _settings[i] = new QueueSettings()
                 {
                     Scheduler = transportScheduler,
-                    InputOptions = new PipeOptions(memoryPool, applicationScheduler, transportScheduler, maxReadBufferSize, maxReadBufferSize / 2, useSynchronizationContext: false),
-                    OutputOptions = new PipeOptions(memoryPool, transportScheduler, applicationScheduler, maxWriteBufferSize, maxWriteBufferSize / 2, useSynchronizationContext: false),
+                    InputOptions = new PipeOptions(
+                        memoryPool,
+                        applicationScheduler,
+                        transportScheduler,
+                        maxReadBufferSize,
+                        maxReadBufferSize / 2,
+                        useSynchronizationContext: false
+                    ),
+                    OutputOptions = new PipeOptions(
+                        memoryPool,
+                        transportScheduler,
+                        applicationScheduler,
+                        maxWriteBufferSize,
+                        maxWriteBufferSize / 2,
+                        useSynchronizationContext: false
+                    ),
                     SocketSenderPool = new SocketSenderPool(socketsScheduler),
                     MemoryPool = memoryPool,
                 };
@@ -73,7 +97,9 @@ public sealed class SocketConnectionContextFactory : IDisposable
         else
         {
             var memoryPool = _options.MemoryPoolFactory();
-            var transportScheduler = options.UnsafePreferInlineScheduling ? PipeScheduler.Inline : PipeScheduler.ThreadPool;
+            var transportScheduler = options.UnsafePreferInlineScheduling
+                ? PipeScheduler.Inline
+                : PipeScheduler.ThreadPool;
             var socketsScheduler = SelectSocketsScheduler(transportScheduler);
 
             _settings = new QueueSettings[]
@@ -81,8 +107,22 @@ public sealed class SocketConnectionContextFactory : IDisposable
                 new QueueSettings()
                 {
                     Scheduler = transportScheduler,
-                    InputOptions = new PipeOptions(memoryPool, applicationScheduler, transportScheduler, maxReadBufferSize, maxReadBufferSize / 2, useSynchronizationContext: false),
-                    OutputOptions = new PipeOptions(memoryPool, transportScheduler, applicationScheduler, maxWriteBufferSize, maxWriteBufferSize / 2, useSynchronizationContext: false),
+                    InputOptions = new PipeOptions(
+                        memoryPool,
+                        applicationScheduler,
+                        transportScheduler,
+                        maxReadBufferSize,
+                        maxReadBufferSize / 2,
+                        useSynchronizationContext: false
+                    ),
+                    OutputOptions = new PipeOptions(
+                        memoryPool,
+                        transportScheduler,
+                        applicationScheduler,
+                        maxWriteBufferSize,
+                        maxWriteBufferSize / 2,
+                        useSynchronizationContext: false
+                    ),
                     SocketSenderPool = new SocketSenderPool(socketsScheduler),
                     MemoryPool = memoryPool,
                 }
@@ -100,14 +140,16 @@ public sealed class SocketConnectionContextFactory : IDisposable
     {
         var setting = _settings[Interlocked.Increment(ref _settingsIndex) % _settingsCount];
 
-        var connection = new SocketConnection(socket,
+        var connection = new SocketConnection(
+            socket,
             setting.MemoryPool,
             setting.SocketSenderPool.Scheduler,
             _logger,
             setting.SocketSenderPool,
             setting.InputOptions,
             setting.OutputOptions,
-            waitForData: _options.WaitForDataBeforeAllocatingBuffer);
+            waitForData: _options.WaitForDataBeforeAllocatingBuffer
+        );
 
         connection.Start();
         return connection;

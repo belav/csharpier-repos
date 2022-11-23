@@ -58,7 +58,8 @@ public class RuntimeDbFunction : AnnotatableBase, IRuntimeDbFunction
         bool nullable = false,
         bool builtIn = false,
         RelationalTypeMapping? typeMapping = null,
-        Func<IReadOnlyList<SqlExpression>, SqlExpression>? translation = null)
+        Func<IReadOnlyList<SqlExpression>, SqlExpression>? translation = null
+    )
     {
         ModelName = modelName;
         Model = model;
@@ -91,17 +92,27 @@ public class RuntimeDbFunction : AnnotatableBase, IRuntimeDbFunction
     /// <returns>The type mapping.</returns>
     public virtual RelationalTypeMapping? TypeMapping
     {
-        get => _isScalar
-            ? NonCapturingLazyInitializer.EnsureInitialized(
-                ref _typeMapping, this, static dbFunction =>
-                {
-                    var relationalTypeMappingSource =
-                        (IRelationalTypeMappingSource)((IModel)dbFunction.Model).GetModelDependencies().TypeMappingSource;
-                    return !string.IsNullOrEmpty(dbFunction._storeType)
-                        ? relationalTypeMappingSource.FindMapping(dbFunction._returnType, dbFunction._storeType)!
-                        : relationalTypeMappingSource.FindMapping(dbFunction._returnType, dbFunction.Model)!;
-                })
-            : _typeMapping;
+        get =>
+            _isScalar
+                ? NonCapturingLazyInitializer.EnsureInitialized(
+                    ref _typeMapping,
+                    this,
+                    static dbFunction =>
+                    {
+                        var relationalTypeMappingSource = (IRelationalTypeMappingSource)
+                            ((IModel)dbFunction.Model).GetModelDependencies().TypeMappingSource;
+                        return !string.IsNullOrEmpty(dbFunction._storeType)
+                            ? relationalTypeMappingSource.FindMapping(
+                                dbFunction._returnType,
+                                dbFunction._storeType
+                            )!
+                            : relationalTypeMappingSource.FindMapping(
+                                dbFunction._returnType,
+                                dbFunction.Model
+                            )!;
+                    }
+                )
+                : _typeMapping;
         set => _typeMapping = value;
     }
 
@@ -119,7 +130,8 @@ public class RuntimeDbFunction : AnnotatableBase, IRuntimeDbFunction
         Type clrType,
         bool propagatesNullability,
         string storeType,
-        RelationalTypeMapping? typeMapping = null)
+        RelationalTypeMapping? typeMapping = null
+    )
     {
         var runtimeFunctionParameter = new RuntimeDbFunctionParameter(
             this,
@@ -127,7 +139,8 @@ public class RuntimeDbFunction : AnnotatableBase, IRuntimeDbFunction
             clrType,
             propagatesNullability,
             storeType,
-            typeMapping);
+            typeMapping
+        );
 
         _parameters.Add(runtimeFunctionParameter);
         return runtimeFunctionParameter;
@@ -137,8 +150,8 @@ public class RuntimeDbFunction : AnnotatableBase, IRuntimeDbFunction
     ///     Returns a string that represents the current object.
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
-    public override string ToString()
-        => ((IDbFunction)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IDbFunction)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -147,10 +160,11 @@ public class RuntimeDbFunction : AnnotatableBase, IRuntimeDbFunction
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IDbFunction)this).ToDebugString(),
-            () => ((IDbFunction)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () => ((IDbFunction)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+        );
 
     /// <inheritdoc />
     IReadOnlyModel IReadOnlyDbFunction.Model

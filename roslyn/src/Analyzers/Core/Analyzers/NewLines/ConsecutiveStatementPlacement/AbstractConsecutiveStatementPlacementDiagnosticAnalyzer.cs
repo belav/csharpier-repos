@@ -12,17 +12,23 @@ using Microsoft.CodeAnalysis.LanguageService;
 namespace Microsoft.CodeAnalysis.NewLines.ConsecutiveStatementPlacement
 {
     internal abstract class AbstractConsecutiveStatementPlacementDiagnosticAnalyzer<TExecutableStatementSyntax>
-        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
-        where TExecutableStatementSyntax : SyntaxNode
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer where TExecutableStatementSyntax : SyntaxNode
     {
         private readonly ISyntaxFacts _syntaxFacts;
 
         protected AbstractConsecutiveStatementPlacementDiagnosticAnalyzer(ISyntaxFacts syntaxFacts)
-            : base(IDEDiagnosticIds.ConsecutiveStatementPlacementDiagnosticId,
-                   EnforceOnBuildValues.ConsecutiveStatementPlacement,
-                   CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
-                   new LocalizableResourceString(
-                       nameof(AnalyzersResources.Blank_line_required_between_block_and_subsequent_statement), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)))
+            : base(
+                IDEDiagnosticIds.ConsecutiveStatementPlacementDiagnosticId,
+                EnforceOnBuildValues.ConsecutiveStatementPlacement,
+                CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                new LocalizableResourceString(
+                    nameof(
+                        AnalyzersResources.Blank_line_required_between_block_and_subsequent_statement
+                    ),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
+            )
         {
             _syntaxFacts = syntaxFacts;
         }
@@ -30,11 +36,11 @@ namespace Microsoft.CodeAnalysis.NewLines.ConsecutiveStatementPlacement
         protected abstract bool IsBlockLikeStatement(SyntaxNode node);
         protected abstract Location GetDiagnosticLocation(SyntaxNode block);
 
-        public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
+        public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
 
-        protected sealed override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxTreeAction(AnalyzeSyntaxTree);
+        protected sealed override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxTreeAction(AnalyzeSyntaxTree);
 
         private void AnalyzeSyntaxTree(SyntaxTreeAnalysisContext context)
         {
@@ -48,9 +54,17 @@ namespace Microsoft.CodeAnalysis.NewLines.ConsecutiveStatementPlacement
             Recurse(context, option.Notification.Severity, root, cancellationToken);
         }
 
-        private void Recurse(SyntaxTreeAnalysisContext context, ReportDiagnostic severity, SyntaxNode node, CancellationToken cancellationToken)
+        private void Recurse(
+            SyntaxTreeAnalysisContext context,
+            ReportDiagnostic severity,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        )
         {
-            if (node.ContainsDiagnostics && node.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error))
+            if (
+                node.ContainsDiagnostics
+                && node.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error)
+            )
                 return;
 
             if (IsBlockLikeStatement(node))
@@ -63,7 +77,11 @@ namespace Microsoft.CodeAnalysis.NewLines.ConsecutiveStatementPlacement
             }
         }
 
-        private void ProcessBlockLikeStatement(SyntaxTreeAnalysisContext context, ReportDiagnostic severity, SyntaxNode block)
+        private void ProcessBlockLikeStatement(
+            SyntaxTreeAnalysisContext context,
+            ReportDiagnostic severity,
+            SyntaxNode block
+        )
         {
             // Don't examine broken blocks.
             var endToken = block.GetLastToken();
@@ -80,7 +98,8 @@ namespace Microsoft.CodeAnalysis.NewLines.ConsecutiveStatementPlacement
 
             // Grab whatever comes after the close brace.  If it's not the start of a statement, ignore it.
             var nextToken = endToken.GetNextToken();
-            var nextTokenContainingStatement = nextToken.Parent?.FirstAncestorOrSelf<TExecutableStatementSyntax>();
+            var nextTokenContainingStatement =
+                nextToken.Parent?.FirstAncestorOrSelf<TExecutableStatementSyntax>();
             if (nextTokenContainingStatement == null)
                 return;
 
@@ -102,12 +121,15 @@ namespace Microsoft.CodeAnalysis.NewLines.ConsecutiveStatementPlacement
                 return;
             }
 
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                this.Descriptor,
-                GetDiagnosticLocation(block),
-                severity,
-                additionalLocations: ImmutableArray.Create(nextToken.GetLocation()),
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    this.Descriptor,
+                    GetDiagnosticLocation(block),
+                    severity,
+                    additionalLocations: ImmutableArray.Create(nextToken.GetLocation()),
+                    properties: null
+                )
+            );
         }
     }
 }

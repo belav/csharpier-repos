@@ -12,11 +12,14 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixture<TStartup>> where TStartup : class
+public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixture<TStartup>>
+    where TStartup : class
 {
     protected ApiBehaviorTestBase(MvcTestFixture<TStartup> fixture)
     {
-        var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        var factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }
 
@@ -45,13 +48,17 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
 
             // Assert
             await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);
-            Assert.Equal("application/problem+json", response.Content.Headers.ContentType.MediaType);
+            Assert.Equal(
+                "application/problem+json",
+                response.Content.Headers.ContentType.MediaType
+            );
             var problemDetails = JsonConvert.DeserializeObject<ValidationProblemDetails>(
                 await response.Content.ReadAsStringAsync(),
                 new JsonSerializerSettings
                 {
                     Converters = { new ValidationProblemDetailsConverter() }
-                });
+                }
+            );
 
             Assert.Equal("One or more validation errors occurred.", problemDetails.Title);
             Assert.Equal("https://tools.ietf.org/html/rfc9110#section-15.5.1", problemDetails.Type);
@@ -62,13 +69,19 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
                 {
                     Assert.Equal("Name", kvp.Key);
                     var error = Assert.Single(kvp.Value);
-                    Assert.Equal("The field Name must be a string with a minimum length of 5 and a maximum length of 30.", error);
+                    Assert.Equal(
+                        "The field Name must be a string with a minimum length of 5 and a maximum length of 30.",
+                        error
+                    );
                 },
                 kvp =>
                 {
                     Assert.Equal("Zip", kvp.Key);
                     var error = Assert.Single(kvp.Value);
-                    Assert.Equal("The field Zip must match the regular expression '\\d{5}'.", error);
+                    Assert.Equal(
+                        "The field Zip must match the regular expression '\\d{5}'.",
+                        error
+                    );
                 }
             );
 
@@ -78,7 +91,8 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
                 {
                     Assert.Equal("traceId", kvp.Key);
                     Assert.NotNull(kvp.Value);
-                });
+                }
+            );
         }
     }
 
@@ -119,28 +133,28 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
     }
 
     [Fact]
-    public Task ActionsWithApiBehavior_InferFromBodyParameters()
-        => ActionsWithApiBehaviorInferFromBodyParameters("ActionWithInferredFromBodyParameter");
+    public Task ActionsWithApiBehavior_InferFromBodyParameters() =>
+        ActionsWithApiBehaviorInferFromBodyParameters("ActionWithInferredFromBodyParameter");
 
     [Fact]
-    public Task ActionsWithApiBehavior_InferFromBodyParameters_DoNotConsiderCancellationTokenSourceParameter()
-        => ActionsWithApiBehaviorInferFromBodyParameters("ActionWithInferredFromBodyParameterAndCancellationToken");
+    public Task ActionsWithApiBehavior_InferFromBodyParameters_DoNotConsiderCancellationTokenSourceParameter() =>
+        ActionsWithApiBehaviorInferFromBodyParameters(
+            "ActionWithInferredFromBodyParameterAndCancellationToken"
+        );
 
     private async Task ActionsWithApiBehaviorInferFromBodyParameters(string action)
     {
         // Arrange
-        var input = new Contact
-        {
-            ContactId = 13,
-            Name = "Test123",
-        };
+        var input = new Contact { ContactId = 13, Name = "Test123", };
 
         // Act
         var response = await Client.PostAsJsonAsync($"/contact/{action}", input);
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
-        var result = JsonConvert.DeserializeObject<Contact>(await response.Content.ReadAsStringAsync());
+        var result = JsonConvert.DeserializeObject<Contact>(
+            await response.Content.ReadAsStringAsync()
+        );
         Assert.Equal(input.ContactId, result.ContactId);
         Assert.Equal(input.Name, result.Name);
     }
@@ -155,7 +169,9 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
-        var result = JsonConvert.DeserializeObject<Contact>(await response.Content.ReadAsStringAsync());
+        var result = JsonConvert.DeserializeObject<Contact>(
+            await response.Content.ReadAsStringAsync()
+        );
         Assert.NotNull(result);
         Assert.Equal(id, result.ContactId);
     }
@@ -172,7 +188,9 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
-        var result = JsonConvert.DeserializeObject<Contact>(await response.Content.ReadAsStringAsync());
+        var result = JsonConvert.DeserializeObject<Contact>(
+            await response.Content.ReadAsStringAsync()
+        );
         Assert.Equal(id, result.ContactId);
         Assert.Equal(name, result.Name);
         Assert.Equal(email, result.Email);
@@ -185,7 +203,8 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
         var id = 31;
         var name = "test_user";
         var email = "email@test.com";
-        var url = $"/contact/ActionWithInferredEmptyPrefix?name={name}&contactid={id}&email={email}";
+        var url =
+            $"/contact/ActionWithInferredEmptyPrefix?name={name}&contactid={id}&email={email}";
 
         // Act
         var response = await Client.GetAsync(url);
@@ -206,7 +225,8 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
         var id = 31;
         var name = "test_user";
         var email = "email@test.com";
-        var url = $"/contact/ActionWithInferredEmptyPrefix?contact.name={name}&contact.contactid={id}&contact.email={email}";
+        var url =
+            $"/contact/ActionWithInferredEmptyPrefix?contact.name={name}&contact.contactid={id}&contact.email={email}";
 
         // Act
         var response = await Client.GetAsync(url);
@@ -227,7 +247,9 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
         var expected = "From TestModelBinder: Hello!";
 
         // Act
-        var response = await Client.GetAsync("/contact/ActionWithInferredModelBinderType?foo=Hello!");
+        var response = await Client.GetAsync(
+            "/contact/ActionWithInferredModelBinderType?foo=Hello!"
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
@@ -242,7 +264,9 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
         var expected = "From TestModelBinder: Hello!";
 
         // Act
-        var response = await Client.GetAsync("/contact/ActionWithInferredModelBinderTypeWithExplicitModelName?bar=Hello!");
+        var response = await Client.GetAsync(
+            "/contact/ActionWithInferredModelBinderTypeWithExplicitModelName?bar=Hello!"
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
@@ -263,10 +287,8 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
             var content = await response.Content.ReadAsStringAsync();
             var problemDetails = JsonConvert.DeserializeObject<ProblemDetails>(
                 content,
-                new JsonSerializerSettings
-                {
-                    Converters = { new ProblemDetailsConverter() }
-                });
+                new JsonSerializerSettings { Converters = { new ProblemDetailsConverter() } }
+            );
             Assert.Equal(404, problemDetails.Status);
             Assert.Collection(
                 problemDetails.Extensions,
@@ -274,7 +296,8 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
                 {
                     Assert.Equal("traceId", kvp.Key);
                     Assert.NotNull(kvp.Value);
-                });
+                }
+            );
         }
     }
 
@@ -323,10 +346,8 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
         var content = await response.Content.ReadAsStringAsync();
         var validationProblemDetails = JsonConvert.DeserializeObject<ValidationProblemDetails>(
             content,
-            new JsonSerializerSettings
-            {
-                Converters = { new ValidationProblemDetailsConverter() }
-            });
+            new JsonSerializerSettings { Converters = { new ValidationProblemDetailsConverter() } }
+        );
 
         Assert.Equal("Error", validationProblemDetails.Title);
         Assert.Equal(400, validationProblemDetails.Status);
@@ -336,7 +357,8 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
             {
                 Assert.Equal("tracking-id", kvp.Key);
                 Assert.Equal("27", kvp.Value);
-            });
+            }
+        );
 
         Assert.Collection(
             validationProblemDetails.Errors,
@@ -344,16 +366,15 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
             {
                 Assert.Equal("Error1", kvp.Key);
                 Assert.Equal(new[] { "Error Message" }, kvp.Value);
-            });
+            }
+        );
     }
 }
 
 public class ApiBehaviorTest : ApiBehaviorTestBase<BasicWebSite.StartupWithSystemTextJson>
 {
     public ApiBehaviorTest(MvcTestFixture<BasicWebSite.StartupWithSystemTextJson> fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [Fact]
     public override Task ActionsReturnBadRequest_WhenModelStateIsInvalid()
@@ -386,10 +407,12 @@ public class ApiBehaviorTest : ApiBehaviorTestBase<BasicWebSite.StartupWithSyste
     }
 }
 
-public class ApiBehaviorTestNewtonsoftJson : ApiBehaviorTestBase<BasicWebSite.StartupWithoutEndpointRouting>
+public class ApiBehaviorTestNewtonsoftJson
+    : ApiBehaviorTestBase<BasicWebSite.StartupWithoutEndpointRouting>
 {
-    public ApiBehaviorTestNewtonsoftJson(MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture)
-        : base(fixture)
+    public ApiBehaviorTestNewtonsoftJson(
+        MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture
+    ) : base(fixture)
     {
         var factory = fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         CustomInvalidModelStateClient = factory.CreateDefaultClient();
@@ -412,13 +435,22 @@ public class ApiBehaviorTestNewtonsoftJson : ApiBehaviorTestBase<BasicWebSite.St
             Zip = "Invalid",
         };
         var expected = new Dictionary<string, string[]>
+        {
             {
-                {"Name", new[] {"The field Name must be a string with a minimum length of 5 and a maximum length of 30."}},
-                {"Zip", new[] { @"The field Zip must match the regular expression '\d{5}'."}}
-            };
+                "Name",
+                new[]
+                {
+                    "The field Name must be a string with a minimum length of 5 and a maximum length of 30."
+                }
+            },
+            { "Zip", new[] { @"The field Zip must match the regular expression '\d{5}'." } }
+        };
 
         // Act
-        var response = await CustomInvalidModelStateClient.PostAsJsonAsync("/contact/PostWithVnd", contactModel);
+        var response = await CustomInvalidModelStateClient.PostAsJsonAsync(
+            "/contact/PostWithVnd",
+            contactModel
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);

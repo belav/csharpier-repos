@@ -16,8 +16,6 @@ public class SavingChangesEventArgs : SaveChangesEventArgs
     ///     Creates event arguments for the <see cref="O:DbContext.SavingChanges" /> event.
     /// </summary>
     /// <param name="acceptAllChangesOnSuccess">The value passed to SaveChanges.</param>
-    public SavingChangesEventArgs(bool acceptAllChangesOnSuccess)
-        : base(acceptAllChangesOnSuccess)
-    {
-    }
+    public SavingChangesEventArgs(bool acceptAllChangesOnSuccess) : base(acceptAllChangesOnSuccess)
+    { }
 }

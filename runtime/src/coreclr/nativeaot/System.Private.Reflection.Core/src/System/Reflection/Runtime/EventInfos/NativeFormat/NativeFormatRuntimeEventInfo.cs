@@ -44,8 +44,12 @@ namespace System.Reflection.Runtime.EventInfos.NativeFormat
         //
         //  We don't report any DeclaredMembers for arrays or generic parameters so those don't apply.
         //
-        private NativeFormatRuntimeEventInfo(EventHandle eventHandle, NativeFormatRuntimeNamedTypeInfo definingTypeInfo, RuntimeTypeInfo contextTypeInfo, RuntimeTypeInfo reflectedType) :
-            base(contextTypeInfo, reflectedType)
+        private NativeFormatRuntimeEventInfo(
+            EventHandle eventHandle,
+            NativeFormatRuntimeNamedTypeInfo definingTypeInfo,
+            RuntimeTypeInfo contextTypeInfo,
+            RuntimeTypeInfo reflectedType
+        ) : base(contextTypeInfo, reflectedType)
         {
             _eventHandle = eventHandle;
             _definingTypeInfo = definingTypeInfo;
@@ -79,7 +83,14 @@ namespace System.Reflection.Runtime.EventInfos.NativeFormat
                 MethodSemantics methodSemantics = methodSemanticsHandle.GetMethodSemantics(_reader);
                 if (methodSemantics.Attributes == localMethodSemantics)
                 {
-                    return RuntimeNamedMethodInfo<NativeFormatMethodCommon>.GetRuntimeNamedMethodInfo(new NativeFormatMethodCommon(methodSemantics.Method, _definingTypeInfo, ContextTypeInfo), ReflectedTypeInfo);
+                    return RuntimeNamedMethodInfo<NativeFormatMethodCommon>.GetRuntimeNamedMethodInfo(
+                        new NativeFormatMethodCommon(
+                            methodSemantics.Method,
+                            _definingTypeInfo,
+                            ContextTypeInfo
+                        ),
+                        ReflectedTypeInfo
+                    );
                 }
             }
 
@@ -88,10 +99,7 @@ namespace System.Reflection.Runtime.EventInfos.NativeFormat
 
         public sealed override EventAttributes Attributes
         {
-            get
-            {
-                return _event.Flags;
-            }
+            get { return _event.Flags; }
         }
 
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes
@@ -103,7 +111,10 @@ namespace System.Reflection.Runtime.EventInfos.NativeFormat
                     ReflectionTrace.EventInfo_CustomAttributes(this);
 #endif
 
-                return RuntimeCustomAttributeData.GetCustomAttributes(_reader, _event.CustomAttributes);
+                return RuntimeCustomAttributeData.GetCustomAttributes(
+                    _reader,
+                    _event.CustomAttributes
+                );
             }
         }
 
@@ -145,34 +156,22 @@ namespace System.Reflection.Runtime.EventInfos.NativeFormat
 
         public sealed override Type EventHandlerType
         {
-            get
-            {
-                return _event.Type.Resolve(_reader, ContextTypeInfo.TypeContext);
-            }
+            get { return _event.Type.Resolve(_reader, ContextTypeInfo.TypeContext); }
         }
 
         public sealed override int MetadataToken
         {
-            get
-            {
-                throw new InvalidOperationException(SR.NoMetadataTokenAvailable);
-            }
+            get { throw new InvalidOperationException(SR.NoMetadataTokenAvailable); }
         }
 
         protected sealed override string MetadataName
         {
-            get
-            {
-                return _event.Name.GetString(_reader);
-            }
+            get { return _event.Name.GetString(_reader); }
         }
 
         protected sealed override RuntimeTypeInfo DefiningTypeInfo
         {
-            get
-            {
-                return _definingTypeInfo;
-            }
+            get { return _definingTypeInfo; }
         }
 
         private readonly NativeFormatRuntimeNamedTypeInfo _definingTypeInfo;

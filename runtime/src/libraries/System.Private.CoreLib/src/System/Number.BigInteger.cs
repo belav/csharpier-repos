@@ -28,58 +28,56 @@ namespace System
             private const int BitsForLongestDigitSequence = 2552;
 
             // We require BitsPerBlock additional bits for shift space used during the pre-division preparation
-            private const int MaxBits = BitsForLongestBinaryMantissa + BitsForLongestDigitSequence + BitsPerBlock;
+            private const int MaxBits =
+                BitsForLongestBinaryMantissa + BitsForLongestDigitSequence + BitsPerBlock;
 
             private const int BitsPerBlock = sizeof(int) * 8;
             private const int MaxBlockCount = (MaxBits + (BitsPerBlock - 1)) / BitsPerBlock;
 
             private static readonly uint[] s_Pow10UInt32Table = new uint[]
             {
-                1,          // 10^0
-                10,         // 10^1
-                100,        // 10^2
-                1000,       // 10^3
-                10000,      // 10^4
-                100000,     // 10^5
-                1000000,    // 10^6
-                10000000,   // 10^7
+                1, // 10^0
+                10, // 10^1
+                100, // 10^2
+                1000, // 10^3
+                10000, // 10^4
+                100000, // 10^5
+                1000000, // 10^6
+                10000000, // 10^7
                 // These last two are accessed only by MultiplyPow10.
-                100000000,  // 10^8
-                1000000000  // 10^9
+                100000000, // 10^8
+                1000000000 // 10^9
             };
 
             private static readonly int[] s_Pow10BigNumTableIndices = new int[]
             {
-                0,          // 10^8
-                2,          // 10^16
-                5,          // 10^32
-                10,         // 10^64
-                18,         // 10^128
-                33,         // 10^256
-                61,         // 10^512
-                116,        // 10^1024
+                0, // 10^8
+                2, // 10^16
+                5, // 10^32
+                10, // 10^64
+                18, // 10^128
+                33, // 10^256
+                61, // 10^512
+                116, // 10^1024
             };
 
             private static readonly uint[] s_Pow10BigNumTable = new uint[]
             {
                 // 10^8
-                1,          // _length
-                100000000,  // _blocks
-
+                1, // _length
+                100000000, // _blocks
                 // 10^16
-                2,          // _length
+                2, // _length
                 0x6FC10000, // _blocks
                 0x002386F2,
-
                 // 10^32
-                4,          // _length
+                4, // _length
                 0x00000000, // _blocks
                 0x85ACEF81,
                 0x2D6D415B,
                 0x000004EE,
-
                 // 10^64
-                7,          // _length
+                7, // _length
                 0x00000000, // _blocks
                 0x00000000,
                 0xBF6A1F01,
@@ -87,9 +85,8 @@ namespace System
                 0xDAA797ED,
                 0xE93FF9F4,
                 0x00184F03,
-
                 // 10^128
-                14,         // _length
+                14, // _length
                 0x00000000, // _blocks
                 0x00000000,
                 0x00000000,
@@ -104,9 +101,8 @@ namespace System
                 0xA6337F19,
                 0xE91F2603,
                 0x0000024E,
-
                 // 10^256
-                27,         // _length
+                27, // _length
                 0x00000000, // _blocks
                 0x00000000,
                 0x00000000,
@@ -134,9 +130,8 @@ namespace System
                 0xF46EEDDC,
                 0x5FDCEFCE,
                 0x000553F7,
-
                 // 10^512
-                54,         // _length
+                54, // _length
                 0x00000000, // _blocks
                 0x00000000,
                 0x00000000,
@@ -191,9 +186,8 @@ namespace System
                 0xC1D238D9,
                 0x633415D4,
                 0x0000001C,
-
                 // 10^1024
-                107,        // _length
+                107, // _length
                 0x00000000, // _blocks
                 0x00000000,
                 0x00000000,
@@ -301,7 +295,6 @@ namespace System
                 0xD4305D94,
                 0xD9D61A05,
                 0x00000325,
-
                 // 9 Trailing blocks to ensure MaxBlockCount
                 0x00000000,
                 0x00000000,
@@ -427,7 +420,12 @@ namespace System
                 return (lastIndex * BitsPerBlock) + CountSignificantBits(value._blocks[lastIndex]);
             }
 
-            public static void DivRem(ref BigInteger lhs, ref BigInteger rhs, out BigInteger quo, out BigInteger rem)
+            public static void DivRem(
+                ref BigInteger lhs,
+                ref BigInteger rhs,
+                out BigInteger quo,
+                out BigInteger rem
+            )
             {
                 // This is modified from the libraries BigIntegerCalculator.DivRem.cs implementation:
                 // https://github.com/dotnet/runtime/blob/main/src/libraries/System.Runtime.Numerics/src/System/Numerics/BigIntegerCalculator.DivRem.cs
@@ -642,14 +640,14 @@ namespace System
                         ulong product = ((ulong)(divisor._blocks[index]) * quotient) + carry;
                         carry = product >> 32;
 
-                        ulong difference = (ulong)(dividend._blocks[index]) - (uint)(product) - borrow;
+                        ulong difference =
+                            (ulong)(dividend._blocks[index]) - (uint)(product) - borrow;
                         borrow = (difference >> 32) & 1;
 
                         dividend._blocks[index] = (uint)(difference);
 
                         index++;
-                    }
-                    while (index < divisorLength);
+                    } while (index < divisorLength);
 
                     // Remove all leading zero blocks from dividend
                     while ((divisorLength > 0) && (dividend._blocks[divisorLength - 1] == 0))
@@ -672,14 +670,14 @@ namespace System
 
                     do
                     {
-                        ulong difference = (ulong)(dividend._blocks[index]) - divisor._blocks[index] - borrow;
+                        ulong difference =
+                            (ulong)(dividend._blocks[index]) - divisor._blocks[index] - borrow;
                         borrow = (difference >> 32) & 1;
 
                         dividend._blocks[index] = (uint)(difference);
 
                         index++;
-                    }
-                    while (index < divisorLength);
+                    } while (index < divisorLength);
 
                     // Remove all leading zero blocks from dividend
                     while ((divisorLength > 0) && (dividend._blocks[divisorLength - 1] == 0))
@@ -739,7 +737,11 @@ namespace System
                 }
             }
 
-            public static void Multiply(ref BigInteger lhs, ref BigInteger rhs, out BigInteger result)
+            public static void Multiply(
+                ref BigInteger lhs,
+                ref BigInteger rhs,
+                out BigInteger result
+            )
             {
                 if (lhs._length <= 1)
                 {
@@ -790,14 +792,16 @@ namespace System
 
                         do
                         {
-                            ulong product = result._blocks[resultIndex] + ((ulong)(small._blocks[smallIndex]) * large._blocks[largeIndex]) + carry;
+                            ulong product =
+                                result._blocks[resultIndex]
+                                + ((ulong)(small._blocks[smallIndex]) * large._blocks[largeIndex])
+                                + carry;
                             carry = product >> 32;
                             result._blocks[resultIndex] = (uint)(product);
 
                             resultIndex++;
                             largeIndex++;
-                        }
-                        while (largeIndex < largeLength);
+                        } while (largeIndex < largeLength);
 
                         result._blocks[resultIndex] = (uint)(carry);
                     }
@@ -854,7 +858,9 @@ namespace System
 
                 // Validate that `s_Pow10BigNumTable` has exactly enough trailing elements to fill a BigInteger (which contains MaxBlockCount + 1 elements)
                 // We validate here, since this is the only current consumer of the array
-                Debug.Assert((s_Pow10BigNumTableIndices[^1] + MaxBlockCount + 2) == s_Pow10BigNumTable.Length);
+                Debug.Assert(
+                    (s_Pow10BigNumTableIndices[^1] + MaxBlockCount + 2) == s_Pow10BigNumTable.Length
+                );
 
                 SetUInt32(out BigInteger temp1, s_Pow10UInt32Table[exponent & 0x7]);
                 ref BigInteger lhs = ref temp1;
@@ -871,7 +877,11 @@ namespace System
                     if ((exponent & 1) != 0)
                     {
                         // Multiply into the next temporary
-                        fixed (uint* pBigNumEntry = &s_Pow10BigNumTable[s_Pow10BigNumTableIndices[index]])
+                        fixed (
+                            uint* pBigNumEntry = &s_Pow10BigNumTable[
+                                s_Pow10BigNumTableIndices[index]
+                            ]
+                        )
                         {
                             ref BigInteger rhs = ref *(BigInteger*)(pBigNumEntry);
                             Multiply(ref lhs, ref rhs, out product);
@@ -891,7 +901,11 @@ namespace System
                 SetValue(out result, ref lhs);
             }
 
-            private static uint AddDivisor(ref BigInteger lhs, int lhsStartIndex, ref BigInteger rhs)
+            private static uint AddDivisor(
+                ref BigInteger lhs,
+                int lhsStartIndex,
+                ref BigInteger rhs
+            )
             {
                 int lhsLength = lhs._length;
                 int rhsLength = rhs._length;
@@ -916,7 +930,13 @@ namespace System
                 return (uint)(carry);
             }
 
-            private static bool DivideGuessTooBig(ulong q, ulong valHi, uint valLo, uint divHi, uint divLo)
+            private static bool DivideGuessTooBig(
+                ulong q,
+                ulong valHi,
+                uint valLo,
+                uint divHi,
+                uint divLo
+            )
             {
                 Debug.Assert(q <= 0xFFFFFFFF);
 
@@ -946,7 +966,12 @@ namespace System
                 return false;
             }
 
-            private static uint SubtractDivisor(ref BigInteger lhs, int lhsStartIndex, ref BigInteger rhs, ulong q)
+            private static uint SubtractDivisor(
+                ref BigInteger lhs,
+                int lhsStartIndex,
+                ref BigInteger rhs,
+                ulong q
+            )
             {
                 int lhsLength = lhs._length - lhsStartIndex;
                 int rhsLength = rhs._length;
@@ -1229,7 +1254,8 @@ namespace System
             private void Clear(uint length) =>
                 NativeMemory.Clear(
                     (byte*)Unsafe.AsPointer(ref _blocks[0]), // This is safe to do since we are a ref struct
-                    length * sizeof(uint));
+                    length * sizeof(uint)
+                );
 
             private static uint DivRem32(uint value, out uint remainder)
             {

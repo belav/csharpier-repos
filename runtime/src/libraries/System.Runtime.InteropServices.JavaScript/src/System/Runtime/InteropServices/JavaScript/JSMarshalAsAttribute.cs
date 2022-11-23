@@ -17,7 +17,11 @@ namespace System.Runtime.InteropServices.JavaScript
     /// public static partial Func&lt;int, int, int&gt; createMath(int a, int b, string code);
     /// </code>
     /// </example>
-    [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.ReturnValue, Inherited = false, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Parameter | AttributeTargets.ReturnValue,
+        Inherited = false,
+        AllowMultiple = false
+    )]
     [SupportedOSPlatform("browser")]
     public sealed class JSMarshalAsAttribute<T> : Attribute where T : JSType
     {

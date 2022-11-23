@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared
     internal static class BrowserHelper
     {
         /// <summary>
-        /// Unique VS session id. 
+        /// Unique VS session id.
         /// Internal for testing.
         /// TODO: Revisit - static non-deterministic data https://github.com/dotnet/roslyn/issues/39415
         /// </summary>
@@ -23,7 +23,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared
         private static bool TryGetWellFormedHttpUri(string? link, [NotNullWhen(true)] out Uri? uri)
         {
             uri = null;
-            if (string.IsNullOrWhiteSpace(link) || !Uri.IsWellFormedUriString(link, UriKind.Absolute))
+            if (
+                string.IsNullOrWhiteSpace(link)
+                || !Uri.IsWellFormedUriString(link, UriKind.Absolute)
+            )
             {
                 return false;
             }
@@ -38,13 +41,23 @@ namespace Microsoft.CodeAnalysis.Editor.Shared
             return true;
         }
 
-        public static Uri? GetHelpLink(DiagnosticDescriptor descriptor, string language)
-            => GetHelpLink(descriptor.Id, descriptor.GetBingHelpMessage(), language, descriptor.HelpLinkUri);
+        public static Uri? GetHelpLink(DiagnosticDescriptor descriptor, string language) =>
+            GetHelpLink(
+                descriptor.Id,
+                descriptor.GetBingHelpMessage(),
+                language,
+                descriptor.HelpLinkUri
+            );
 
-        public static Uri? GetHelpLink(DiagnosticData data)
-            => GetHelpLink(data.Id, data.ENUMessageForBingSearch, data.Language, data.HelpLink);
+        public static Uri? GetHelpLink(DiagnosticData data) =>
+            GetHelpLink(data.Id, data.ENUMessageForBingSearch, data.Language, data.HelpLink);
 
-        private static Uri? GetHelpLink(string diagnosticId, string? title, string? language, string? rawHelpLink)
+        private static Uri? GetHelpLink(
+            string diagnosticId,
+            string? title,
+            string? language,
+            string? rawHelpLink
+        )
         {
             if (string.IsNullOrWhiteSpace(diagnosticId))
             {
@@ -56,11 +69,17 @@ namespace Microsoft.CodeAnalysis.Editor.Shared
                 return link;
             }
 
-            return new Uri(BingGetApiUrl +
-                "?selectedText=" + EscapeDataString(title) +
-                "&mainLanguage=" + EscapeDataString(language) +
-                "&requestId=" + EscapedRequestId +
-                "&errorCode=" + EscapeDataString(diagnosticId));
+            return new Uri(
+                BingGetApiUrl
+                    + "?selectedText="
+                    + EscapeDataString(title)
+                    + "&mainLanguage="
+                    + EscapeDataString(language)
+                    + "&requestId="
+                    + EscapedRequestId
+                    + "&errorCode="
+                    + EscapeDataString(diagnosticId)
+            );
         }
 
         private static string EscapeDataString(string? str)
@@ -73,7 +92,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared
             try
             {
                 // Uri has limit on string size (32766 characters).
-                return Uri.EscapeDataString(str.Substring(0, Math.Min(str.Length, BingQueryArgumentMaxLength)));
+                return Uri.EscapeDataString(
+                    str.Substring(0, Math.Min(str.Length, BingQueryArgumentMaxLength))
+                );
             }
             catch (UriFormatException)
             {
@@ -97,8 +118,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared
         {
             var strUri = uri.ToString();
 
-            var resourceName = strUri.StartsWith(BingGetApiUrl, StringComparison.Ordinal) ?
-                EditorFeaturesResources.Get_help_for_0_from_Bing : EditorFeaturesResources.Get_help_for_0;
+            var resourceName = strUri.StartsWith(BingGetApiUrl, StringComparison.Ordinal)
+                ? EditorFeaturesResources.Get_help_for_0_from_Bing
+                : EditorFeaturesResources.Get_help_for_0;
 
             // We make sure not to use Uri.AbsoluteUri for the url displayed in the tooltip so that the url displayed in the tooltip stays human readable.
             return string.Format(resourceName, diagnosticId) + "\r\n" + strUri;

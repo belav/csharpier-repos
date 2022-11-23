@@ -12,19 +12,11 @@ namespace ILCompiler.Dataflow
 {
     public class ValueNodeList : List<MultiValue>
     {
-        public ValueNodeList()
-        {
-        }
+        public ValueNodeList() { }
 
-        public ValueNodeList(int capacity)
-            : base(capacity)
-        {
-        }
+        public ValueNodeList(int capacity) : base(capacity) { }
 
-        public ValueNodeList(List<MultiValue> other)
-            : base(other)
-        {
-        }
+        public ValueNodeList(List<MultiValue> other) : base(other) { }
 
         public override int GetHashCode()
         {
@@ -62,10 +54,13 @@ namespace ILCompiler.Dataflow
         public MultiValue Value { get; }
         public int BasicBlockIndex { get; }
 
-        public bool Equals(ValueBasicBlockPair other) => Value.Equals(other.Value) && BasicBlockIndex.Equals(other.BasicBlockIndex);
+        public bool Equals(ValueBasicBlockPair other) =>
+            Value.Equals(other.Value) && BasicBlockIndex.Equals(other.BasicBlockIndex);
 
-        public override bool Equals(object? obj) => obj is ValueBasicBlockPair other && Equals(other);
+        public override bool Equals(object? obj) =>
+            obj is ValueBasicBlockPair other && Equals(other);
 
-        public override int GetHashCode() => HashUtils.Combine(Value.GetHashCode(), BasicBlockIndex);
+        public override int GetHashCode() =>
+            HashUtils.Combine(Value.GetHashCode(), BasicBlockIndex);
     }
 }

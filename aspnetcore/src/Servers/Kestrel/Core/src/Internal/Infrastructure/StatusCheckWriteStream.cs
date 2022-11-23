@@ -27,7 +27,9 @@ internal sealed class StatusCheckWriteStream : WriteOnlyStream
         Debug.Assert(_context != null);
         if (_context.StatusCode < 300)
         {
-            throw new InvalidOperationException(CoreStrings.FormatConnectResponseCanNotHaveBody(_context.StatusCode));
+            throw new InvalidOperationException(
+                CoreStrings.FormatConnectResponseCanNotHaveBody(_context.StatusCode)
+            );
         }
     }
 
@@ -79,13 +81,21 @@ internal sealed class StatusCheckWriteStream : WriteOnlyStream
         _inner.Write(buffer, offset, count);
     }
 
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         CheckStatus();
         return _inner.WriteAsync(buffer, offset, count, cancellationToken);
     }
 
-    public override ValueTask WriteAsync(ReadOnlyMemory<byte> source, CancellationToken cancellationToken = default)
+    public override ValueTask WriteAsync(
+        ReadOnlyMemory<byte> source,
+        CancellationToken cancellationToken = default
+    )
     {
         CheckStatus();
         return _inner.WriteAsync(source, cancellationToken);
@@ -97,14 +107,19 @@ internal sealed class StatusCheckWriteStream : WriteOnlyStream
         _inner.WriteByte(value);
     }
 
-    public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+    public override IAsyncResult BeginWrite(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback? callback,
+        object? state
+    )
     {
         CheckStatus();
         return _inner.BeginWrite(buffer, offset, count, callback, state);
     }
 
-    public override void EndWrite(IAsyncResult asyncResult)
-        => _inner.EndWrite(asyncResult);
+    public override void EndWrite(IAsyncResult asyncResult) => _inner.EndWrite(asyncResult);
 
     public override void Close()
     {

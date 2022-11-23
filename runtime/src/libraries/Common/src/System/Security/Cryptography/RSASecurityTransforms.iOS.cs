@@ -17,8 +17,10 @@ namespace System.Security.Cryptography
     {
         public sealed partial class RSASecurityTransforms
         {
-            private static RSAParameters ExportParametersFromLegacyKey(SecKeyPair keys, bool includePrivateParameters)
-                => throw new CryptographicException();
+            private static RSAParameters ExportParametersFromLegacyKey(
+                SecKeyPair keys,
+                bool includePrivateParameters
+            ) => throw new CryptographicException();
         }
     }
 }

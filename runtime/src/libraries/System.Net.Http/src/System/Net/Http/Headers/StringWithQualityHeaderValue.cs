@@ -54,7 +54,11 @@ namespace System.Net.Http.Headers
         {
             if (_quality.HasValue)
             {
-                return string.Create(CultureInfo.InvariantCulture, stackalloc char[128], $"{_value}; q={_quality.Value:0.0##}");
+                return string.Create(
+                    CultureInfo.InvariantCulture,
+                    stackalloc char[128],
+                    $"{_value}; q={_quality.Value:0.0##}"
+                );
             }
 
             return _value;
@@ -102,17 +106,30 @@ namespace System.Net.Http.Headers
         public static StringWithQualityHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (StringWithQualityHeaderValue)GenericHeaderParser.SingleValueStringWithQualityParser.ParseValue(
-                input, null, ref index);
+            return (StringWithQualityHeaderValue)
+                GenericHeaderParser.SingleValueStringWithQualityParser.ParseValue(
+                    input,
+                    null,
+                    ref index
+                );
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? input, [NotNullWhen(true)] out StringWithQualityHeaderValue? parsedValue)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? input,
+            [NotNullWhen(true)] out StringWithQualityHeaderValue? parsedValue
+        )
         {
             int index = 0;
             parsedValue = null;
 
-            if (GenericHeaderParser.SingleValueStringWithQualityParser.TryParseValue(
-                input, null, ref index, out object? output))
+            if (
+                GenericHeaderParser.SingleValueStringWithQualityParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
+            )
             {
                 parsedValue = (StringWithQualityHeaderValue)output!;
                 return true;
@@ -120,7 +137,11 @@ namespace System.Net.Http.Headers
             return false;
         }
 
-        internal static int GetStringWithQualityLength(string? input, int startIndex, out object? parsedValue)
+        internal static int GetStringWithQualityLength(
+            string? input,
+            int startIndex,
+            out object? parsedValue
+        )
         {
             Debug.Assert(startIndex >= 0);
 
@@ -197,8 +218,14 @@ namespace System.Net.Http.Headers
                 return false;
             }
 
-            if (!double.TryParse(input.AsSpan(current, qualityLength), NumberStyles.AllowDecimalPoint,
-                NumberFormatInfo.InvariantInfo, out quality))
+            if (
+                !double.TryParse(
+                    input.AsSpan(current, qualityLength),
+                    NumberStyles.AllowDecimalPoint,
+                    NumberFormatInfo.InvariantInfo,
+                    out quality
+                )
+            )
             {
                 return false;
             }

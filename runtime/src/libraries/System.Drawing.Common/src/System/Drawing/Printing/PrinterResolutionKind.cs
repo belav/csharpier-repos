@@ -12,18 +12,22 @@ namespace System.Drawing.Printing
         /// High resolution.
         /// </summary>
         High = SafeNativeMethods.DMRES_HIGH,
+
         /// <summary>
         /// Medium resolution.
         /// </summary>
         Medium = SafeNativeMethods.DMRES_MEDIUM,
+
         /// <summary>
         /// Low resolution.
         /// </summary>
         Low = SafeNativeMethods.DMRES_LOW,
+
         /// <summary>
         /// Draft-quality resolution.
         /// </summary>
         Draft = SafeNativeMethods.DMRES_DRAFT,
+
         /// <summary>
         /// Custom resolution.
         /// </summary>

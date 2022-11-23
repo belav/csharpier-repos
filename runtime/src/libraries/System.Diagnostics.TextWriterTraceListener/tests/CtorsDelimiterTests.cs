@@ -90,8 +90,14 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
         {
             var target = new DelimitedListTraceListener(FileStream.Null);
             Assert.Equal(DefaultDelimiter, target.Delimiter);
-            AssertExtensions.Throws<ArgumentNullException>("Delimiter", () => target.Delimiter = null);
-            AssertExtensions.Throws<ArgumentException>("Delimiter", () => target.Delimiter = string.Empty);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "Delimiter",
+                () => target.Delimiter = null
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "Delimiter",
+                () => target.Delimiter = string.Empty
+            );
         }
 
         [Fact]
@@ -114,7 +120,11 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
 
         [Theory]
         [MemberData(nameof(TestNames))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/73721", typeof(PlatformDetection), nameof(PlatformDetection.IsNodeJSOnWindows))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/73721",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNodeJSOnWindows)
+        )]
         public void TestConstructorWithFileNameAndName(string testName)
         {
             var target = new DelimitedListTraceListener(Path.GetTempFileName(), testName);

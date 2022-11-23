@@ -9,11 +9,12 @@ namespace System
     public partial class TypeLoadException : SystemException
     {
         // This is called from inside the EE.
-        private TypeLoadException(string? className,
+        private TypeLoadException(
+            string? className,
             string? assemblyName,
             string? messageArg,
-            int resourceId)
-            : base(null)
+            int resourceId
+        ) : base(null)
         {
             HResult = HResults.COR_E_TYPELOAD;
             _className = className;
@@ -47,6 +48,9 @@ namespace System
         }
 
         [LibraryImport(RuntimeHelpers.QCall)]
-        private static partial void GetTypeLoadExceptionMessage(int resourceId, StringHandleOnStack retString);
+        private static partial void GetTypeLoadExceptionMessage(
+            int resourceId,
+            StringHandleOnStack retString
+        );
     }
 }

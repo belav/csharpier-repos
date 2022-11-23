@@ -47,14 +47,26 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 _comparer = comparer;
             }
 
-            protected override bool ItemsEqual(IList<T> sequenceA, int indexA, IList<T> sequenceB, int indexB)
+            protected override bool ItemsEqual(
+                IList<T> sequenceA,
+                int indexA,
+                IList<T> sequenceB,
+                int indexB
+            )
             {
                 return _comparer.Equals(sequenceA[indexA], sequenceB[indexB]);
             }
 
-            public IEnumerable<string> CalculateDiff(IList<T> sequenceA, IList<T> sequenceB, Func<T, string> toString)
+            public IEnumerable<string> CalculateDiff(
+                IList<T> sequenceA,
+                IList<T> sequenceB,
+                Func<T, string> toString
+            )
             {
-                foreach (var edit in GetEdits(sequenceA, sequenceA.Count, sequenceB, sequenceB.Count).Reverse())
+                foreach (
+                    var edit in GetEdits(sequenceA, sequenceA.Count, sequenceB, sequenceB.Count)
+                        .Reverse()
+                )
                 {
                     switch (edit.Kind)
                     {
@@ -74,7 +86,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             }
         }
 
-        public static string DiffReport<T>(IEnumerable<T> expected, IEnumerable<T> actual, string separator, IEqualityComparer<T> comparer = null, Func<T, string> toString = null)
+        public static string DiffReport<T>(
+            IEnumerable<T> expected,
+            IEnumerable<T> actual,
+            string separator,
+            IEqualityComparer<T> comparer = null,
+            Func<T, string> toString = null
+        )
         {
             var lcs = (comparer != null) ? new LCS<T>(comparer) : LCS<T>.Default;
             toString = toString ?? new Func<T, string>(obj => obj.ToString());
@@ -122,9 +140,19 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             private const int InsertCost = 1;
             private const int UpdateCost = 2;
 
-            protected abstract bool ItemsEqual(TSequence sequenceA, int indexA, TSequence sequenceB, int indexB);
+            protected abstract bool ItemsEqual(
+                TSequence sequenceA,
+                int indexA,
+                TSequence sequenceB,
+                int indexB
+            );
 
-            protected IEnumerable<KeyValuePair<int, int>> GetMatchingPairs(TSequence sequenceA, int lengthA, TSequence sequenceB, int lengthB)
+            protected IEnumerable<KeyValuePair<int, int>> GetMatchingPairs(
+                TSequence sequenceA,
+                int lengthA,
+                TSequence sequenceB,
+                int lengthB
+            )
             {
                 int[,] d = ComputeCostMatrix(sequenceA, lengthA, sequenceB, lengthB);
                 int i = lengthA;
@@ -149,7 +177,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 }
             }
 
-            protected IEnumerable<Edit> GetEdits(TSequence sequenceA, int lengthA, TSequence sequenceB, int lengthB)
+            protected IEnumerable<Edit> GetEdits(
+                TSequence sequenceA,
+                int lengthA,
+                TSequence sequenceB,
+                int lengthB
+            )
             {
                 int[,] d = ComputeCostMatrix(sequenceA, lengthA, sequenceB, lengthB);
                 int i = lengthA;
@@ -196,7 +229,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             /// Returns a distance [0..1] of the specified sequences.
             /// The smaller distance the more of their elements match.
             /// </summary>
-            protected double ComputeDistance(TSequence sequenceA, int lengthA, TSequence sequenceB, int lengthB)
+            protected double ComputeDistance(
+                TSequence sequenceA,
+                int lengthA,
+                TSequence sequenceB,
+                int lengthB
+            )
             {
                 Debug.Assert(lengthA >= 0 && lengthB >= 0);
 
@@ -217,26 +255,31 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             }
 
             /// <summary>
-            /// Calculates costs of all paths in an edit graph starting from vertex (0,0) and ending in vertex (lengthA, lengthB). 
+            /// Calculates costs of all paths in an edit graph starting from vertex (0,0) and ending in vertex (lengthA, lengthB).
             /// </summary>
             /// <remarks>
             /// The edit graph for A and B has a vertex at each point in the grid (i,j), i in [0, lengthA] and j in [0, lengthB].
-            /// 
+            ///
             /// The vertices of the edit graph are connected by horizontal, vertical, and diagonal directed edges to form a directed acyclic graph.
-            /// Horizontal edges connect each vertex to its right neighbor. 
+            /// Horizontal edges connect each vertex to its right neighbor.
             /// Vertical edges connect each vertex to the neighbor below it.
             /// Diagonal edges connect vertex (i,j) to vertex (i-1,j-1) if <see cref="ItemsEqual"/>(sequenceA[i-1],sequenceB[j-1]) is true.
-            /// 
-            /// Editing starts with S = []. 
+            ///
+            /// Editing starts with S = [].
             /// Move along horizontal edge (i-1,j)-(i,j) represents the fact that sequenceA[i-1] is not added to S.
             /// Move along vertical edge (i,j-1)-(i,j) represents an insert of sequenceB[j-1] to S.
-            /// Move along diagonal edge (i-1,j-1)-(i,j) represents an addition of sequenceB[j-1] to S via an acceptable 
+            /// Move along diagonal edge (i-1,j-1)-(i,j) represents an addition of sequenceB[j-1] to S via an acceptable
             /// change of sequenceA[i-1] to sequenceB[j-1].
-            /// 
-            /// In every vertex the cheapest outgoing edge is selected. 
+            ///
+            /// In every vertex the cheapest outgoing edge is selected.
             /// The number of diagonal edges on the path from (0,0) to (lengthA, lengthB) is the length of the longest common subsequence.
             /// </remarks>
-            private int[,] ComputeCostMatrix(TSequence sequenceA, int lengthA, TSequence sequenceB, int lengthB)
+            private int[,] ComputeCostMatrix(
+                TSequence sequenceA,
+                int lengthA,
+                TSequence sequenceB,
+                int lengthB
+            )
             {
                 var la = lengthA + 1;
                 var lb = lengthB + 1;
@@ -260,7 +303,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 {
                     for (int j = 1; j <= lengthB; j++)
                     {
-                        int m1 = d[i - 1, j - 1] + (ItemsEqual(sequenceA, i - 1, sequenceB, j - 1) ? 0 : UpdateCost);
+                        int m1 =
+                            d[i - 1, j - 1]
+                            + (ItemsEqual(sequenceA, i - 1, sequenceB, j - 1) ? 0 : UpdateCost);
                         int m2 = d[i - 1, j] + DeleteCost;
                         int m3 = d[i, j - 1] + InsertCost;
                         d[i, j] = Math.Min(Math.Min(m1, m2), m3);

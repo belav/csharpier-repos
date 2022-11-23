@@ -16,17 +16,30 @@ namespace System.Formats.Tar.Tests
         protected readonly string ModifiedEntryName = "ModifiedEntryName.ext";
 
         // Default values are what a TarEntry created with its constructor will set
-        protected const UnixFileMode DefaultFileMode = UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.GroupRead | UnixFileMode.OtherRead; // 644 in octal, internally used as default
-        protected const UnixFileMode DefaultDirectoryMode = DefaultFileMode | UnixFileMode.UserExecute | UnixFileMode.GroupExecute | UnixFileMode.OtherExecute; // 755 in octal, internally used as default
+        protected const UnixFileMode DefaultFileMode =
+            UnixFileMode.UserRead
+            | UnixFileMode.UserWrite
+            | UnixFileMode.GroupRead
+            | UnixFileMode.OtherRead; // 644 in octal, internally used as default
+        protected const UnixFileMode DefaultDirectoryMode =
+            DefaultFileMode
+            | UnixFileMode.UserExecute
+            | UnixFileMode.GroupExecute
+            | UnixFileMode.OtherExecute; // 755 in octal, internally used as default
 
         protected readonly UnixFileMode CreateDirectoryDefaultMode; // Mode of directories created using Directory.CreateDirectory(string).
         protected readonly UnixFileMode UMask;
 
         // Mode assumed for files and directories on Windows.
-        protected const UnixFileMode DefaultWindowsMode = DefaultFileMode | UnixFileMode.UserExecute | UnixFileMode.GroupExecute | UnixFileMode.OtherExecute; // 755 in octal, internally used as default
+        protected const UnixFileMode DefaultWindowsMode =
+            DefaultFileMode
+            | UnixFileMode.UserExecute
+            | UnixFileMode.GroupExecute
+            | UnixFileMode.OtherExecute; // 755 in octal, internally used as default
 
         // Permissions used by tests. User has all permissions to avoid permission errors.
-        protected const UnixFileMode UserAll = UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute;
+        protected const UnixFileMode UserAll =
+            UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute;
         protected const UnixFileMode TestPermission1 = UserAll | UnixFileMode.GroupRead;
         protected const UnixFileMode TestPermission2 = UserAll | UnixFileMode.GroupExecute;
         protected const UnixFileMode TestPermission3 = UserAll | UnixFileMode.OtherRead;
@@ -49,12 +62,42 @@ namespace System.Formats.Tar.Tests
         protected const int TestCharacterDeviceMinor = 42;
 
         protected readonly DateTimeOffset MinimumTime = new(2022, 1, 1, 1, 1, 1, TimeSpan.Zero);
-        protected readonly DateTimeOffset TestModificationTime = new DateTimeOffset(2022, 2, 2, 2, 2, 2, TimeSpan.Zero);
-        protected readonly DateTimeOffset TestAccessTime = new DateTimeOffset(2022, 3, 3, 3, 3, 3, TimeSpan.Zero);
-        protected readonly DateTimeOffset TestChangeTime = new DateTimeOffset(2022, 4, 4, 4, 4, 4, TimeSpan.Zero);
+        protected readonly DateTimeOffset TestModificationTime = new DateTimeOffset(
+            2022,
+            2,
+            2,
+            2,
+            2,
+            2,
+            TimeSpan.Zero
+        );
+        protected readonly DateTimeOffset TestAccessTime = new DateTimeOffset(
+            2022,
+            3,
+            3,
+            3,
+            3,
+            3,
+            TimeSpan.Zero
+        );
+        protected readonly DateTimeOffset TestChangeTime = new DateTimeOffset(
+            2022,
+            4,
+            4,
+            4,
+            4,
+            4,
+            TimeSpan.Zero
+        );
 
         protected readonly string TestLinkName = "TestLinkName";
-        protected const UnixFileMode TestMode = UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.GroupRead | UnixFileMode.GroupWrite | UnixFileMode.OtherRead | UnixFileMode.OtherWrite;
+        protected const UnixFileMode TestMode =
+            UnixFileMode.UserRead
+            | UnixFileMode.UserWrite
+            | UnixFileMode.GroupRead
+            | UnixFileMode.GroupWrite
+            | UnixFileMode.OtherRead
+            | UnixFileMode.OtherWrite;
 
         protected const string TestGName = "group";
         protected const string TestUName = "user";
@@ -68,9 +111,27 @@ namespace System.Formats.Tar.Tests
         protected const int AssetBlockDeviceMinor = 53;
         protected const int AssetCharacterDeviceMajor = 49;
         protected const int AssetCharacterDeviceMinor = 86;
-        protected const UnixFileMode AssetMode = UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute | UnixFileMode.GroupRead | UnixFileMode.OtherRead;
-        protected const UnixFileMode AssetSpecialFileMode = UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.GroupRead | UnixFileMode.OtherRead;
-        protected const UnixFileMode AssetSymbolicLinkMode = UnixFileMode.OtherExecute | UnixFileMode.OtherWrite | UnixFileMode.OtherRead | UnixFileMode.GroupExecute | UnixFileMode.GroupWrite | UnixFileMode.GroupRead | UnixFileMode.UserExecute | UnixFileMode.UserWrite | UnixFileMode.UserRead;
+        protected const UnixFileMode AssetMode =
+            UnixFileMode.UserRead
+            | UnixFileMode.UserWrite
+            | UnixFileMode.UserExecute
+            | UnixFileMode.GroupRead
+            | UnixFileMode.OtherRead;
+        protected const UnixFileMode AssetSpecialFileMode =
+            UnixFileMode.UserRead
+            | UnixFileMode.UserWrite
+            | UnixFileMode.GroupRead
+            | UnixFileMode.OtherRead;
+        protected const UnixFileMode AssetSymbolicLinkMode =
+            UnixFileMode.OtherExecute
+            | UnixFileMode.OtherWrite
+            | UnixFileMode.OtherRead
+            | UnixFileMode.GroupExecute
+            | UnixFileMode.GroupWrite
+            | UnixFileMode.GroupRead
+            | UnixFileMode.UserExecute
+            | UnixFileMode.UserWrite
+            | UnixFileMode.UserRead;
         protected const string AssetGName = "devdiv";
         protected const string AssetUName = "dotnet";
         protected const string AssetPaxGeaKey = "globexthdr.MyGlobalExtendedAttribute";
@@ -110,7 +171,8 @@ namespace System.Formats.Tar.Tests
         private static readonly string[] UstarTestCaseNames = new[]
         {
             "longpath_splitable_under255",
-            "specialfiles" };
+            "specialfiles"
+        };
 
         private static readonly string[] PaxAndGnuTestCaseNames = new[]
         {
@@ -187,6 +249,7 @@ namespace System.Formats.Tar.Tests
         {
             // Archiving only, no compression
             Uncompressed,
+
             // Archive compressed with Gzip
             GZip,
         }
@@ -196,61 +259,85 @@ namespace System.Formats.Tar.Tests
         {
             // V7 formatted files.
             v7,
+
             // UStar formatted files.
             ustar,
+
             // PAX formatted files.
             pax,
+
             // PAX formatted files that include a single Global Extended Attributes entry in the first position.
             pax_gea,
+
             // Old GNU formatted files. Format used by GNU tar of versions prior to 1.12.
             oldgnu,
+
             // GNU formatted files. Format used by GNU tar versions up to 1.13.25.
             gnu
         }
-        protected static bool IsRemoteExecutorSupportedAndOnUnixAndSuperUser => RemoteExecutor.IsSupported && PlatformDetection.IsUnixAndSuperUser;
 
-        protected static bool IsUnixButNotSuperUser => !PlatformDetection.IsWindows && !PlatformDetection.IsSuperUser;
+        protected static bool IsRemoteExecutorSupportedAndOnUnixAndSuperUser =>
+            RemoteExecutor.IsSupported && PlatformDetection.IsUnixAndSuperUser;
+
+        protected static bool IsUnixButNotSuperUser =>
+            !PlatformDetection.IsWindows && !PlatformDetection.IsSuperUser;
 
         protected static bool IsNotLinuxBionic => !PlatformDetection.IsLinuxBionic;
 
         protected TarTestsBase()
         {
             CreateDirectoryDefaultMode = Directory.CreateDirectory(GetRandomDirPath()).UnixFileMode; // '0777 & ~umask'
-            UMask = ~CreateDirectoryDefaultMode & (UnixFileMode)Convert.ToInt32("777",
-            8);
+            UMask = ~CreateDirectoryDefaultMode & (UnixFileMode)Convert.ToInt32("777", 8);
         }
 
         protected static string GetTestCaseUnarchivedFolderPath(string testCaseName) =>
-            Path.Join(Directory.GetCurrentDirectory(), "unarchived",
-            testCaseName);
+            Path.Join(Directory.GetCurrentDirectory(), "unarchived", testCaseName);
 
-        protected static string GetTarFilePath(CompressionMethod compressionMethod, TestTarFormat format, string testCaseName)
-            => GetTarFilePath(compressionMethod, format.ToString(), testCaseName);
+        protected static string GetTarFilePath(
+            CompressionMethod compressionMethod,
+            TestTarFormat format,
+            string testCaseName
+        ) => GetTarFilePath(compressionMethod, format.ToString(), testCaseName);
 
-        protected static string GetTarFilePath(CompressionMethod compressionMethod, string testFolderName, string testCaseName)
+        protected static string GetTarFilePath(
+            CompressionMethod compressionMethod,
+            string testFolderName,
+            string testCaseName
+        )
         {
             (string compressionMethodFolder, string fileExtension) = compressionMethod switch
             {
-                CompressionMethod.Uncompressed => ("tar",
-            ".tar"),
-                CompressionMethod.GZip => ("targz",
-            ".tar.gz"),
-                _ => throw new InvalidOperationException($"Unexpected compression method: {compressionMethod}"),
+                CompressionMethod.Uncompressed => ("tar", ".tar"),
+                CompressionMethod.GZip => ("targz", ".tar.gz"),
+                _
+                    => throw new InvalidOperationException(
+                        $"Unexpected compression method: {compressionMethod}"
+                    ),
             };
 
-            return Path.Join(Directory.GetCurrentDirectory(), compressionMethodFolder, testFolderName, testCaseName + fileExtension);
+            return Path.Join(
+                Directory.GetCurrentDirectory(),
+                compressionMethodFolder,
+                testFolderName,
+                testCaseName + fileExtension
+            );
         }
 
         // MemoryStream containing the copied contents of the specified file. Meant for reading and writing.
-        protected static MemoryStream GetTarMemoryStream(CompressionMethod compressionMethod, TestTarFormat format, string testCaseName) =>
-            GetTarMemoryStream(compressionMethod, format.ToString(), testCaseName);
+        protected static MemoryStream GetTarMemoryStream(
+            CompressionMethod compressionMethod,
+            TestTarFormat format,
+            string testCaseName
+        ) => GetTarMemoryStream(compressionMethod, format.ToString(), testCaseName);
 
-        protected static MemoryStream GetTarMemoryStream(CompressionMethod compressionMethod, string testFolderName, string testCaseName) =>
-            GetMemoryStream(GetTarFilePath(compressionMethod, testFolderName, testCaseName));
+        protected static MemoryStream GetTarMemoryStream(
+            CompressionMethod compressionMethod,
+            string testFolderName,
+            string testCaseName
+        ) => GetMemoryStream(GetTarFilePath(compressionMethod, testFolderName, testCaseName));
 
         protected static string GetStrangeTarFilePath(string testCaseName) =>
-            Path.Join(Directory.GetCurrentDirectory(), "strange",
-            testCaseName + ".tar");
+            Path.Join(Directory.GetCurrentDirectory(), "strange", testCaseName + ".tar");
 
         protected static MemoryStream GetStrangeTarMemoryStream(string testCaseName) =>
             GetMemoryStream(GetStrangeTarFilePath(testCaseName));
@@ -269,7 +356,9 @@ namespace System.Formats.Tar.Tests
         protected void SetCommonRegularFile(TarEntry regularFile, bool isV7RegularFile = false)
         {
             Assert.NotNull(regularFile);
-            TarEntryType entryType = isV7RegularFile ? TarEntryType.V7RegularFile : TarEntryType.RegularFile;
+            TarEntryType entryType = isV7RegularFile
+                ? TarEntryType.V7RegularFile
+                : TarEntryType.RegularFile;
 
             Assert.Equal(entryType, regularFile.EntryType);
             SetCommonProperties(regularFile);
@@ -331,7 +420,9 @@ namespace System.Formats.Tar.Tests
             DateTimeOffset approxNow = DateTimeOffset.UtcNow.Subtract(TimeSpan.FromHours(6));
             Assert.True(entry.ModificationTime > approxNow);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => entry.ModificationTime = DateTime.MinValue); // Minimum allowed is UnixEpoch, not MinValue
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => entry.ModificationTime = DateTime.MinValue
+            ); // Minimum allowed is UnixEpoch, not MinValue
             entry.ModificationTime = TestModificationTime;
 
             // Name
@@ -343,10 +434,16 @@ namespace System.Formats.Tar.Tests
             entry.Uid = TestUid;
         }
 
-        protected void VerifyCommonRegularFile(TarEntry regularFile, bool isFromWriter, bool isV7RegularFile = false)
+        protected void VerifyCommonRegularFile(
+            TarEntry regularFile,
+            bool isFromWriter,
+            bool isV7RegularFile = false
+        )
         {
             Assert.NotNull(regularFile);
-            TarEntryType entryType = isV7RegularFile ? TarEntryType.V7RegularFile : TarEntryType.RegularFile;
+            TarEntryType entryType = isV7RegularFile
+                ? TarEntryType.V7RegularFile
+                : TarEntryType.RegularFile;
             Assert.Equal(entryType, regularFile.EntryType);
             VerifyCommonProperties(regularFile);
             VerifyUnsupportedLinkProperty(regularFile);
@@ -412,7 +509,14 @@ namespace System.Formats.Tar.Tests
                 Assert.Null(entry.DataStream);
 
                 using (MemoryStream ms = new MemoryStream())
-                using (WrappedStream ws = new WrappedStream(ms, canRead: false, canWrite: true, canSeek: true))
+                using (
+                    WrappedStream ws = new WrappedStream(
+                        ms,
+                        canRead: false,
+                        canWrite: true,
+                        canSeek: true
+                    )
+                )
                 {
                     Assert.Throws<ArgumentException>(() => entry.DataStream = ws);
                 }
@@ -462,7 +566,10 @@ namespace System.Formats.Tar.Tests
             Assert.Equal(expectedType, entry.GetType());
         }
 
-        protected TarEntryType GetTarEntryTypeForTarEntryFormat(TarEntryType entryType, TarEntryFormat format)
+        protected TarEntryType GetTarEntryTypeForTarEntryFormat(
+            TarEntryType entryType,
+            TarEntryFormat format
+        )
         {
             if (format is TarEntryFormat.V7)
             {
@@ -481,8 +588,12 @@ namespace System.Formats.Tar.Tests
             return entryType;
         }
 
-        protected TarEntry InvokeTarEntryCreationConstructor(TarEntryFormat targetFormat, TarEntryType entryType, string entryName)
-            => targetFormat switch
+        protected TarEntry InvokeTarEntryCreationConstructor(
+            TarEntryFormat targetFormat,
+            TarEntryType entryType,
+            string entryName
+        ) =>
+            targetFormat switch
             {
                 TarEntryFormat.V7 => new V7TarEntry(entryType, entryName),
                 TarEntryFormat.Ustar => new UstarTarEntry(entryType, entryName),
@@ -493,7 +604,15 @@ namespace System.Formats.Tar.Tests
 
         public static IEnumerable<object[]> GetFormatsAndLinks()
         {
-            foreach (TarEntryFormat format in new[] { TarEntryFormat.V7, TarEntryFormat.Ustar, TarEntryFormat.Pax, TarEntryFormat.Gnu })
+            foreach (
+                TarEntryFormat format in new[]
+                {
+                    TarEntryFormat.V7,
+                    TarEntryFormat.Ustar,
+                    TarEntryFormat.Pax,
+                    TarEntryFormat.Gnu
+                }
+            )
             {
                 yield return new object[] { format, TarEntryType.SymbolicLink };
                 yield return new object[] { format, TarEntryType.HardLink };
@@ -502,13 +621,32 @@ namespace System.Formats.Tar.Tests
 
         public static IEnumerable<object[]> GetFormatsAndFiles()
         {
-            foreach (TarEntryType entryType in new[] { TarEntryType.V7RegularFile, TarEntryType.Directory })
+            foreach (
+                TarEntryType entryType in new[]
+                {
+                    TarEntryType.V7RegularFile,
+                    TarEntryType.Directory
+                }
+            )
             {
                 yield return new object[] { TarEntryFormat.V7, entryType };
             }
-            foreach (TarEntryFormat format in new[] { TarEntryFormat.Ustar, TarEntryFormat.Pax, TarEntryFormat.Gnu })
+            foreach (
+                TarEntryFormat format in new[]
+                {
+                    TarEntryFormat.Ustar,
+                    TarEntryFormat.Pax,
+                    TarEntryFormat.Gnu
+                }
+            )
             {
-                foreach (TarEntryType entryType in new[] { TarEntryType.RegularFile, TarEntryType.Directory })
+                foreach (
+                    TarEntryType entryType in new[]
+                    {
+                        TarEntryType.RegularFile,
+                        TarEntryType.Directory
+                    }
+                )
                 {
                     yield return new object[] { format, entryType };
                 }
@@ -523,7 +661,10 @@ namespace System.Formats.Tar.Tests
             }
         }
 
-        protected static void AssertEntryModeFromFileSystemEquals(TarEntry entry, UnixFileMode fileMode)
+        protected static void AssertEntryModeFromFileSystemEquals(
+            TarEntry entry,
+            UnixFileMode fileMode
+        )
         {
             if (PlatformDetection.IsWindows)
             {
@@ -550,7 +691,11 @@ namespace System.Formats.Tar.Tests
             }
         }
 
-        protected (string, string, TarEntry) Prepare_Extract(TempDirectory root, TarEntryFormat format, TarEntryType entryType)
+        protected (string, string, TarEntry) Prepare_Extract(
+            TempDirectory root,
+            TarEntryFormat format,
+            TarEntryType entryType
+        )
         {
             string entryName = entryType.ToString();
             string destination = Path.Join(root.Path, entryName);
@@ -622,7 +767,11 @@ namespace System.Formats.Tar.Tests
 
         public static IEnumerable<object[]> GetPaxAndGnuTestCaseNames()
         {
-            foreach (string name in UstarTestCaseNames.Concat(V7TestCaseNames).Concat(PaxAndGnuTestCaseNames))
+            foreach (
+                string name in UstarTestCaseNames
+                    .Concat(V7TestCaseNames)
+                    .Concat(PaxAndGnuTestCaseNames)
+            )
             {
                 yield return new object[] { name };
             }
@@ -671,9 +820,20 @@ namespace System.Formats.Tar.Tests
             foreach (string prefix in prefixes)
             {
                 int directoryLength = 155 - prefix.Length;
-                yield return prefix + Repeat(OneByteCharacter, directoryLength) + Separator + Repeat(OneByteCharacter, 100);
-                yield return prefix + Repeat(OneByteCharacter, directoryLength - 2) + TwoBytesCharacter + Separator + Repeat(OneByteCharacter, 100);
-                yield return prefix + Repeat(OneByteCharacter, directoryLength - 4) + FourBytesCharacter + Separator + Repeat(OneByteCharacter, 100);
+                yield return prefix
+                    + Repeat(OneByteCharacter, directoryLength)
+                    + Separator
+                    + Repeat(OneByteCharacter, 100);
+                yield return prefix
+                    + Repeat(OneByteCharacter, directoryLength - 2)
+                    + TwoBytesCharacter
+                    + Separator
+                    + Repeat(OneByteCharacter, 100);
+                yield return prefix
+                    + Repeat(OneByteCharacter, directoryLength - 4)
+                    + FourBytesCharacter
+                    + Separator
+                    + Repeat(OneByteCharacter, 100);
             }
 
             if (max == NameCapabilities.NameAndPrefix)
@@ -682,9 +842,20 @@ namespace System.Formats.Tar.Tests
             foreach (string prefix in prefixes)
             {
                 int directoryLength = MaxPathComponent - prefix.Length;
-                yield return prefix + Repeat(OneByteCharacter, directoryLength) + Separator + Repeat(OneByteCharacter, MaxPathComponent);
-                yield return prefix + Repeat(OneByteCharacter, directoryLength - 2) + TwoBytesCharacter + Separator + Repeat(OneByteCharacter, MaxPathComponent);
-                yield return prefix + Repeat(OneByteCharacter, directoryLength - 4) + FourBytesCharacter + Separator + Repeat(OneByteCharacter, MaxPathComponent);
+                yield return prefix
+                    + Repeat(OneByteCharacter, directoryLength)
+                    + Separator
+                    + Repeat(OneByteCharacter, MaxPathComponent);
+                yield return prefix
+                    + Repeat(OneByteCharacter, directoryLength - 2)
+                    + TwoBytesCharacter
+                    + Separator
+                    + Repeat(OneByteCharacter, MaxPathComponent);
+                yield return prefix
+                    + Repeat(OneByteCharacter, directoryLength - 4)
+                    + FourBytesCharacter
+                    + Separator
+                    + Repeat(OneByteCharacter, MaxPathComponent);
             }
         }
 
@@ -706,17 +877,29 @@ namespace System.Formats.Tar.Tests
             // this is 256 but is supported because prefix is not required to end in separator.
             yield return Repeat(OneByteCharacter, 155) + Separator + Repeat(OneByteCharacter, 100);
 
-            // non-ascii prefix + name 
-            yield return Repeat(TwoBytesCharacter, 155 / 2) + Separator + Repeat(OneByteCharacter, 100);
-            yield return Repeat(FourBytesCharacter, 155 / 4) + Separator + Repeat(OneByteCharacter, 100);
+            // non-ascii prefix + name
+            yield return Repeat(TwoBytesCharacter, 155 / 2)
+                + Separator
+                + Repeat(OneByteCharacter, 100);
+            yield return Repeat(FourBytesCharacter, 155 / 4)
+                + Separator
+                + Repeat(OneByteCharacter, 100);
 
             // prefix + non-ascii name
-            yield return Repeat(OneByteCharacter, 155) + Separator + Repeat(TwoBytesCharacter, 100 / 2);
-            yield return Repeat(OneByteCharacter, 155) + Separator + Repeat(FourBytesCharacter, 100 / 4);
+            yield return Repeat(OneByteCharacter, 155)
+                + Separator
+                + Repeat(TwoBytesCharacter, 100 / 2);
+            yield return Repeat(OneByteCharacter, 155)
+                + Separator
+                + Repeat(FourBytesCharacter, 100 / 4);
 
             // non-ascii prefix + non-ascii name
-            yield return Repeat(TwoBytesCharacter, 155 / 2) + Separator + Repeat(TwoBytesCharacter, 100 / 2);
-            yield return Repeat(FourBytesCharacter, 155 / 4) + Separator + Repeat(FourBytesCharacter, 100 / 4);
+            yield return Repeat(TwoBytesCharacter, 155 / 2)
+                + Separator
+                + Repeat(TwoBytesCharacter, 100 / 2);
+            yield return Repeat(FourBytesCharacter, 155 / 4)
+                + Separator
+                + Repeat(FourBytesCharacter, 100 / 4);
 
             if (max == NameCapabilities.NameAndPrefix)
                 yield break;
@@ -726,9 +909,15 @@ namespace System.Formats.Tar.Tests
             yield return Repeat(TwoBytesCharacter, MaxPathComponent / 2);
             yield return Repeat(FourBytesCharacter, MaxPathComponent / 4);
 
-            yield return Repeat(OneByteCharacter, MaxPathComponent) + Separator + Repeat(OneByteCharacter, MaxPathComponent);
-            yield return Repeat(TwoBytesCharacter, MaxPathComponent / 2) + Separator + Repeat(TwoBytesCharacter, MaxPathComponent / 2);
-            yield return Repeat(FourBytesCharacter, MaxPathComponent / 4) + Separator + Repeat(FourBytesCharacter, MaxPathComponent / 4);
+            yield return Repeat(OneByteCharacter, MaxPathComponent)
+                + Separator
+                + Repeat(OneByteCharacter, MaxPathComponent);
+            yield return Repeat(TwoBytesCharacter, MaxPathComponent / 2)
+                + Separator
+                + Repeat(TwoBytesCharacter, MaxPathComponent / 2);
+            yield return Repeat(FourBytesCharacter, MaxPathComponent / 4)
+                + Separator
+                + Repeat(FourBytesCharacter, MaxPathComponent / 4);
         }
 
         internal static IEnumerable<string> GetTooLongNamesTestData(NameCapabilities max)
@@ -745,12 +934,20 @@ namespace System.Formats.Tar.Tests
             {
                 // 1.1. last character doesn't fit fully.
                 yield return prefix + Repeat(OneByteCharacter, 100 + 1);
-                yield return prefix + Repeat(OneByteCharacter, 100 - 2) + Repeat(TwoBytesCharacter, 2);
-                yield return prefix + Repeat(OneByteCharacter, 100 - 4) + Repeat(FourBytesCharacter, 2);
+                yield return prefix
+                    + Repeat(OneByteCharacter, 100 - 2)
+                    + Repeat(TwoBytesCharacter, 2);
+                yield return prefix
+                    + Repeat(OneByteCharacter, 100 - 4)
+                    + Repeat(FourBytesCharacter, 2);
 
                 // 1.2. last character doesn't fit by one byte.
-                yield return prefix + Repeat(OneByteCharacter, 100 - 2 + 1) + Repeat(TwoBytesCharacter, 1);
-                yield return prefix + Repeat(OneByteCharacter, 100 - 4 + 1) + Repeat(FourBytesCharacter, 1);
+                yield return prefix
+                    + Repeat(OneByteCharacter, 100 - 2 + 1)
+                    + Repeat(TwoBytesCharacter, 1);
+                yield return prefix
+                    + Repeat(OneByteCharacter, 100 - 4 + 1)
+                    + Repeat(FourBytesCharacter, 1);
             }
 
             // 2. non-ascii last character doesn't fit in prefix.
@@ -758,12 +955,24 @@ namespace System.Formats.Tar.Tests
 
             // 2.1. last char doesn't fit fully.
             yield return Repeat(OneByteCharacter, 155 + 1) + Separator + maxedOutName;
-            yield return Repeat(OneByteCharacter, 155 - 2) + Repeat(TwoBytesCharacter, 2) + Separator + maxedOutName;
-            yield return Repeat(OneByteCharacter, 155 - 4) + Repeat(FourBytesCharacter, 2) + Separator + maxedOutName;
+            yield return Repeat(OneByteCharacter, 155 - 2)
+                + Repeat(TwoBytesCharacter, 2)
+                + Separator
+                + maxedOutName;
+            yield return Repeat(OneByteCharacter, 155 - 4)
+                + Repeat(FourBytesCharacter, 2)
+                + Separator
+                + maxedOutName;
 
             // 2.2 last char doesn't fit by one byte.
-            yield return Repeat(OneByteCharacter, 155 - 2 + 1) + TwoBytesCharacter + Separator + maxedOutName;
-            yield return Repeat(OneByteCharacter, 155 - 4 + 1) + FourBytesCharacter + Separator + maxedOutName;
+            yield return Repeat(OneByteCharacter, 155 - 2 + 1)
+                + TwoBytesCharacter
+                + Separator
+                + maxedOutName;
+            yield return Repeat(OneByteCharacter, 155 - 4 + 1)
+                + FourBytesCharacter
+                + Separator
+                + maxedOutName;
 
             if (max is NameCapabilities.NameAndPrefix)
                 yield break;

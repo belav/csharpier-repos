@@ -18,7 +18,12 @@ namespace System.Xml
 {
     public interface IXmlBinaryWriterInitializer
     {
-        void SetOutput(Stream stream, IXmlDictionary? dictionary, XmlBinaryWriterSession? session, bool ownsStream);
+        void SetOutput(
+            Stream stream,
+            IXmlDictionary? dictionary,
+            XmlBinaryWriterSession? session,
+            bool ownsStream
+        );
     }
 
     internal sealed class XmlBinaryNodeWriter : XmlStreamNodeWriter
@@ -35,12 +40,20 @@ namespace System.Xml
         public XmlBinaryNodeWriter()
         {
             // Sanity check on node values
-            DiagnosticUtility.DebugAssert(XmlBinaryNodeType.MaxAttribute < XmlBinaryNodeType.MinElement &&
-                                          XmlBinaryNodeType.MaxElement < XmlBinaryNodeType.MinText &&
-                                          (int)XmlBinaryNodeType.MaxText < 256, "NodeTypes enumeration messed up");
+            DiagnosticUtility.DebugAssert(
+                XmlBinaryNodeType.MaxAttribute < XmlBinaryNodeType.MinElement
+                    && XmlBinaryNodeType.MaxElement < XmlBinaryNodeType.MinText
+                    && (int)XmlBinaryNodeType.MaxText < 256,
+                "NodeTypes enumeration messed up"
+            );
         }
 
-        public void SetOutput(Stream stream, IXmlDictionary? dictionary, XmlBinaryWriterSession? session, bool ownsStream)
+        public void SetOutput(
+            Stream stream,
+            IXmlDictionary? dictionary,
+            XmlBinaryWriterSession? session,
+            bool ownsStream
+        )
         {
             _dictionary = dictionary;
             _session = session;
@@ -60,7 +73,9 @@ namespace System.Xml
         private void WroteAttributeValue()
         {
             if (_wroteAttributeValue && !_inList)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.XmlOnlySingleValue));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.XmlOnlySingleValue)
+                );
             _wroteAttributeValue = true;
         }
 
@@ -68,7 +83,12 @@ namespace System.Xml
         {
             if (_inAttribute)
                 WroteAttributeValue();
-            DiagnosticUtility.DebugAssert(nodeType >= XmlBinaryNodeType.MinText && nodeType <= XmlBinaryNodeType.MaxText && ((byte)nodeType & 1) == 0, "Invalid nodeType");
+            DiagnosticUtility.DebugAssert(
+                nodeType >= XmlBinaryNodeType.MinText
+                    && nodeType <= XmlBinaryNodeType.MaxText
+                    && ((byte)nodeType & 1) == 0,
+                "Invalid nodeType"
+            );
             WriteByte((byte)nodeType);
             _textNodeOffset = this.BufferOffset - 1;
         }
@@ -84,7 +104,12 @@ namespace System.Xml
 
         private void WriteTextNodeWithLength(XmlBinaryNodeType nodeType, int length)
         {
-            DiagnosticUtility.DebugAssert(nodeType == XmlBinaryNodeType.Chars8Text || nodeType == XmlBinaryNodeType.Bytes8Text || nodeType == XmlBinaryNodeType.UnicodeChars8Text, "");
+            DiagnosticUtility.DebugAssert(
+                nodeType == XmlBinaryNodeType.Chars8Text
+                    || nodeType == XmlBinaryNodeType.Bytes8Text
+                    || nodeType == XmlBinaryNodeType.UnicodeChars8Text,
+                ""
+            );
             int offset;
             byte[] buffer = GetTextNodeBuffer(5, out offset);
             if (length < 256)
@@ -138,9 +163,7 @@ namespace System.Xml
             Advance(9);
         }
 
-        public override void WriteDeclaration()
-        {
-        }
+        public override void WriteDeclaration() { }
 
         public override void WriteStartElement(string? prefix, string localName)
         {
@@ -224,7 +247,12 @@ namespace System.Xml
             {
                 byte[] buffer = this.StreamBuffer;
                 XmlBinaryNodeType nodeType = (XmlBinaryNodeType)buffer[_textNodeOffset];
-                DiagnosticUtility.DebugAssert(nodeType >= XmlBinaryNodeType.MinText && nodeType <= XmlBinaryNodeType.MaxText && ((byte)nodeType & 1) == 0, "");
+                DiagnosticUtility.DebugAssert(
+                    nodeType >= XmlBinaryNodeType.MinText
+                        && nodeType <= XmlBinaryNodeType.MaxText
+                        && ((byte)nodeType & 1) == 0,
+                    ""
+                );
                 buffer[_textNodeOffset] = (byte)(nodeType + 1);
                 _textNodeOffset = -1;
             }
@@ -550,11 +578,23 @@ namespace System.Xml
             Advance(8);
         }
 
-        public override void WriteBase64Text(byte[]? trailBytes, int trailByteCount, byte[] base64Buffer, int base64Offset, int base64Count)
+        public override void WriteBase64Text(
+            byte[]? trailBytes,
+            int trailByteCount,
+            byte[] base64Buffer,
+            int base64Offset,
+            int base64Count
+        )
         {
             if (_inAttribute)
             {
-                _attributeValue.WriteBase64Text(trailBytes, trailByteCount, base64Buffer, base64Offset, base64Count);
+                _attributeValue.WriteBase64Text(
+                    trailBytes,
+                    trailByteCount,
+                    base64Buffer,
+                    base64Offset,
+                    base64Count
+                );
             }
             else
             {
@@ -759,7 +799,10 @@ namespace System.Xml
                 int offset;
                 byte[] buffer = GetTextNodeBuffer(1 + sizeof(float), out offset);
                 buffer[offset] = (byte)XmlBinaryNodeType.FloatText;
-                BinaryPrimitives.WriteSingleLittleEndian(buffer.AsSpan(offset + 1, sizeof(float)), f);
+                BinaryPrimitives.WriteSingleLittleEndian(
+                    buffer.AsSpan(offset + 1, sizeof(float)),
+                    f
+                );
                 Advance(1 + sizeof(float));
             }
         }
@@ -776,7 +819,10 @@ namespace System.Xml
                 int offset;
                 byte[] buffer = GetTextNodeBuffer(1 + sizeof(double), out offset);
                 buffer[offset] = (byte)XmlBinaryNodeType.DoubleText;
-                BinaryPrimitives.WriteDoubleLittleEndian(buffer.AsSpan(offset + 1, sizeof(double)), d);
+                BinaryPrimitives.WriteDoubleLittleEndian(
+                    buffer.AsSpan(offset + 1, sizeof(double)),
+                    d
+                );
                 Advance(1 + sizeof(double));
             }
         }
@@ -852,9 +898,7 @@ namespace System.Xml
             WriteNode(XmlBinaryNodeType.StartListText);
         }
 
-        public override void WriteListSeparator()
-        {
-        }
+        public override void WriteListSeparator() { }
 
         public override void WriteEndListText()
         {
@@ -898,7 +942,8 @@ namespace System.Xml
             {
                 for (int i = 0; i < count; i++)
                 {
-                    Span<byte> span = GetBuffer(sizeof(short), out int bufferOffset).AsSpan(bufferOffset, sizeof(short));
+                    Span<byte> span = GetBuffer(sizeof(short), out int bufferOffset)
+                        .AsSpan(bufferOffset, sizeof(short));
                     BinaryPrimitives.WriteInt16LittleEndian(span, array[offset + i]);
                     Advance(sizeof(short));
                 }
@@ -919,7 +964,8 @@ namespace System.Xml
             {
                 for (int i = 0; i < count; i++)
                 {
-                    Span<byte> span = GetBuffer(sizeof(int), out int bufferOffset).AsSpan(bufferOffset, sizeof(int));
+                    Span<byte> span = GetBuffer(sizeof(int), out int bufferOffset)
+                        .AsSpan(bufferOffset, sizeof(int));
                     BinaryPrimitives.WriteInt32LittleEndian(span, array[offset + i]);
                     Advance(sizeof(int));
                 }
@@ -940,7 +986,8 @@ namespace System.Xml
             {
                 for (int i = 0; i < count; i++)
                 {
-                    Span<byte> span = GetBuffer(sizeof(long), out int bufferOffset).AsSpan(bufferOffset, sizeof(long));
+                    Span<byte> span = GetBuffer(sizeof(long), out int bufferOffset)
+                        .AsSpan(bufferOffset, sizeof(long));
                     BinaryPrimitives.WriteInt64LittleEndian(span, array[offset + i]);
                     Advance(sizeof(long));
                 }
@@ -961,7 +1008,8 @@ namespace System.Xml
             {
                 for (int i = 0; i < count; i++)
                 {
-                    Span<byte> span = GetBuffer(sizeof(float), out int bufferOffset).AsSpan(bufferOffset, sizeof(float));
+                    Span<byte> span = GetBuffer(sizeof(float), out int bufferOffset)
+                        .AsSpan(bufferOffset, sizeof(float));
                     BinaryPrimitives.WriteSingleLittleEndian(span, array[offset + i]);
                     Advance(sizeof(float));
                 }
@@ -982,7 +1030,8 @@ namespace System.Xml
             {
                 for (int i = 0; i < count; i++)
                 {
-                    Span<byte> span = GetBuffer(sizeof(double), out int bufferOffset).AsSpan(bufferOffset, sizeof(double));
+                    Span<byte> span = GetBuffer(sizeof(double), out int bufferOffset)
+                        .AsSpan(bufferOffset, sizeof(double));
                     BinaryPrimitives.WriteDoubleLittleEndian(span, array[offset + i]);
                     Advance(sizeof(double));
                 }
@@ -1055,7 +1104,11 @@ namespace System.Xml
             {
                 char ch = prefix[0];
                 int key;
-                if (prefix.Length == 1 && char.IsAsciiLetterLower(ch) && TryGetKey(localName, out key))
+                if (
+                    prefix.Length == 1
+                    && char.IsAsciiLetterLower(ch)
+                    && TryGetKey(localName, out key)
+                )
                 {
                     WriteTextNode(XmlBinaryNodeType.QNameDictionaryText);
                     WriteByte((byte)(ch - 'a'));
@@ -1102,7 +1155,11 @@ namespace System.Xml
                     ArraySegment<byte> arraySegment;
                     bool result = _captureStream.TryGetBuffer(out arraySegment);
                     DiagnosticUtility.DebugAssert(result, "");
-                    _captureText = XmlConverter.Base64Encoding.GetString(arraySegment.Array!, arraySegment.Offset, arraySegment.Count);
+                    _captureText = XmlConverter.Base64Encoding.GetString(
+                        arraySegment.Array!,
+                        arraySegment.Offset,
+                        arraySegment.Count
+                    );
                     _captureStream = null;
                 }
 
@@ -1134,13 +1191,21 @@ namespace System.Xml
                 }
             }
 
-            public void WriteBase64Text(byte[]? trailBytes, int trailByteCount, byte[] buffer, int offset, int count)
+            public void WriteBase64Text(
+                byte[]? trailBytes,
+                int trailByteCount,
+                byte[] buffer,
+                int offset,
+                int count
+            )
             {
                 if (_captureText != null || _captureXText != null)
                 {
                     if (trailByteCount > 0)
                     {
-                        WriteText(XmlConverter.Base64Encoding.GetString(trailBytes!, 0, trailByteCount));
+                        WriteText(
+                            XmlConverter.Base64Encoding.GetString(trailBytes!, 0, trailByteCount)
+                        );
                     }
                     WriteText(XmlConverter.Base64Encoding.GetString(buffer, offset, count));
                 }
@@ -1172,7 +1237,13 @@ namespace System.Xml
                     ArraySegment<byte> arraySegment;
                     bool result = _captureStream.TryGetBuffer(out arraySegment);
                     DiagnosticUtility.DebugAssert(result, "");
-                    writer.WriteBase64Text(null, 0, arraySegment.Array!, arraySegment.Offset, arraySegment.Count);
+                    writer.WriteBase64Text(
+                        null,
+                        0,
+                        arraySegment.Array!,
+                        arraySegment.Offset,
+                        arraySegment.Count
+                    );
                     _captureStream = null;
                 }
                 else
@@ -1189,8 +1260,12 @@ namespace System.Xml
         private char[]? _chars;
         private byte[]? _bytes;
 
-
-        public void SetOutput(Stream stream, IXmlDictionary? dictionary, XmlBinaryWriterSession? session, bool ownsStream)
+        public void SetOutput(
+            Stream stream,
+            IXmlDictionary? dictionary,
+            XmlBinaryWriterSession? session,
+            bool ownsStream
+        )
         {
             ArgumentNullException.ThrowIfNull(stream);
 
@@ -1280,7 +1355,12 @@ namespace System.Xml
                 WriteValue(reader.ReadContentAsObject());
         }
 
-        private void WriteStartArray(string? prefix, string localName, string? namespaceUri, int count)
+        private void WriteStartArray(
+            string? prefix,
+            string localName,
+            string? namespaceUri,
+            int count
+        )
         {
             StartArray(count);
             _writer.WriteArrayNode();
@@ -1288,7 +1368,12 @@ namespace System.Xml
             WriteEndElement();
         }
 
-        private void WriteStartArray(string? prefix, XmlDictionaryString localName, XmlDictionaryString? namespaceUri, int count)
+        private void WriteStartArray(
+            string? prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString? namespaceUri,
+            int count
+        )
         {
             StartArray(count);
             _writer.WriteArrayNode();
@@ -1301,16 +1386,37 @@ namespace System.Xml
             ArgumentNullException.ThrowIfNull(array);
 
             if (offset < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative)
+                );
             if (offset > array.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(offset), SR.Format(SR.OffsetExceedsBufferSize, array.Length)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        nameof(offset),
+                        SR.Format(SR.OffsetExceedsBufferSize, array.Length)
+                    )
+                );
             if (count < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(count), SR.ValueMustBeNonNegative));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(nameof(count), SR.ValueMustBeNonNegative)
+                );
             if (count > array.Length - offset)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(count), SR.Format(SR.SizeExceedsRemainingBufferSpace, array.Length - offset)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        nameof(count),
+                        SR.Format(SR.SizeExceedsRemainingBufferSpace, array.Length - offset)
+                    )
+                );
         }
 
-        public override unsafe void WriteArray(string? prefix, string localName, string? namespaceUri, bool[] array, int offset, int count)
+        public override unsafe void WriteArray(
+            string? prefix,
+            string localName,
+            string? namespaceUri,
+            bool[] array,
+            int offset,
+            int count
+        )
         {
             if (Signing)
             {
@@ -1327,7 +1433,14 @@ namespace System.Xml
             }
         }
 
-        public override unsafe void WriteArray(string? prefix, XmlDictionaryString localName, XmlDictionaryString? namespaceUri, bool[] array, int offset, int count)
+        public override unsafe void WriteArray(
+            string? prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString? namespaceUri,
+            bool[] array,
+            int offset,
+            int count
+        )
         {
             if (Signing)
             {
@@ -1344,7 +1457,14 @@ namespace System.Xml
             }
         }
 
-        public override unsafe void WriteArray(string? prefix, string localName, string? namespaceUri, short[] array, int offset, int count)
+        public override unsafe void WriteArray(
+            string? prefix,
+            string localName,
+            string? namespaceUri,
+            short[] array,
+            int offset,
+            int count
+        )
         {
             if (Signing)
             {
@@ -1361,7 +1481,14 @@ namespace System.Xml
             }
         }
 
-        public override unsafe void WriteArray(string? prefix, XmlDictionaryString localName, XmlDictionaryString? namespaceUri, short[] array, int offset, int count)
+        public override unsafe void WriteArray(
+            string? prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString? namespaceUri,
+            short[] array,
+            int offset,
+            int count
+        )
         {
             if (Signing)
             {
@@ -1378,7 +1505,14 @@ namespace System.Xml
             }
         }
 
-        public override unsafe void WriteArray(string? prefix, string localName, string? namespaceUri, int[] array, int offset, int count)
+        public override unsafe void WriteArray(
+            string? prefix,
+            string localName,
+            string? namespaceUri,
+            int[] array,
+            int offset,
+            int count
+        )
         {
             if (Signing)
             {
@@ -1395,7 +1529,14 @@ namespace System.Xml
             }
         }
 
-        public override unsafe void WriteArray(string? prefix, XmlDictionaryString localName, XmlDictionaryString? namespaceUri, int[] array, int offset, int count)
+        public override unsafe void WriteArray(
+            string? prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString? namespaceUri,
+            int[] array,
+            int offset,
+            int count
+        )
         {
             if (Signing)
             {
@@ -1412,7 +1553,14 @@ namespace System.Xml
             }
         }
 
-        public override unsafe void WriteArray(string? prefix, string localName, string? namespaceUri, long[] array, int offset, int count)
+        public override unsafe void WriteArray(
+            string? prefix,
+            string localName,
+            string? namespaceUri,
+            long[] array,
+            int offset,
+            int count
+        )
         {
             if (Signing)
             {
@@ -1429,7 +1577,14 @@ namespace System.Xml
             }
         }
 
-        public override unsafe void WriteArray(string? prefix, XmlDictionaryString localName, XmlDictionaryString? namespaceUri, long[] array, int offset, int count)
+        public override unsafe void WriteArray(
+            string? prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString? namespaceUri,
+            long[] array,
+            int offset,
+            int count
+        )
         {
             if (Signing)
             {
@@ -1446,7 +1601,14 @@ namespace System.Xml
             }
         }
 
-        public override unsafe void WriteArray(string? prefix, string localName, string? namespaceUri, float[] array, int offset, int count)
+        public override unsafe void WriteArray(
+            string? prefix,
+            string localName,
+            string? namespaceUri,
+            float[] array,
+            int offset,
+            int count
+        )
         {
             if (Signing)
             {
@@ -1463,7 +1625,14 @@ namespace System.Xml
             }
         }
 
-        public override unsafe void WriteArray(string? prefix, XmlDictionaryString localName, XmlDictionaryString? namespaceUri, float[] array, int offset, int count)
+        public override unsafe void WriteArray(
+            string? prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString? namespaceUri,
+            float[] array,
+            int offset,
+            int count
+        )
         {
             if (Signing)
             {
@@ -1480,7 +1649,14 @@ namespace System.Xml
             }
         }
 
-        public override unsafe void WriteArray(string? prefix, string localName, string? namespaceUri, double[] array, int offset, int count)
+        public override unsafe void WriteArray(
+            string? prefix,
+            string localName,
+            string? namespaceUri,
+            double[] array,
+            int offset,
+            int count
+        )
         {
             if (Signing)
             {
@@ -1497,7 +1673,14 @@ namespace System.Xml
             }
         }
 
-        public override unsafe void WriteArray(string? prefix, XmlDictionaryString localName, XmlDictionaryString? namespaceUri, double[] array, int offset, int count)
+        public override unsafe void WriteArray(
+            string? prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString? namespaceUri,
+            double[] array,
+            int offset,
+            int count
+        )
         {
             if (Signing)
             {
@@ -1514,7 +1697,14 @@ namespace System.Xml
             }
         }
 
-        public override unsafe void WriteArray(string? prefix, string localName, string? namespaceUri, decimal[] array, int offset, int count)
+        public override unsafe void WriteArray(
+            string? prefix,
+            string localName,
+            string? namespaceUri,
+            decimal[] array,
+            int offset,
+            int count
+        )
         {
             if (Signing)
             {
@@ -1531,7 +1721,14 @@ namespace System.Xml
             }
         }
 
-        public override unsafe void WriteArray(string? prefix, XmlDictionaryString localName, XmlDictionaryString? namespaceUri, decimal[] array, int offset, int count)
+        public override unsafe void WriteArray(
+            string? prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString? namespaceUri,
+            decimal[] array,
+            int offset,
+            int count
+        )
         {
             if (Signing)
             {
@@ -1549,7 +1746,14 @@ namespace System.Xml
         }
 
         // DateTime
-        public override void WriteArray(string? prefix, string localName, string? namespaceUri, DateTime[] array, int offset, int count)
+        public override void WriteArray(
+            string? prefix,
+            string localName,
+            string? namespaceUri,
+            DateTime[] array,
+            int offset,
+            int count
+        )
         {
             if (Signing)
             {
@@ -1566,7 +1770,14 @@ namespace System.Xml
             }
         }
 
-        public override void WriteArray(string? prefix, XmlDictionaryString localName, XmlDictionaryString? namespaceUri, DateTime[] array, int offset, int count)
+        public override void WriteArray(
+            string? prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString? namespaceUri,
+            DateTime[] array,
+            int offset,
+            int count
+        )
         {
             if (Signing)
             {
@@ -1584,7 +1795,14 @@ namespace System.Xml
         }
 
         // Guid
-        public override void WriteArray(string? prefix, string localName, string? namespaceUri, Guid[] array, int offset, int count)
+        public override void WriteArray(
+            string? prefix,
+            string localName,
+            string? namespaceUri,
+            Guid[] array,
+            int offset,
+            int count
+        )
         {
             if (Signing)
             {
@@ -1601,7 +1819,14 @@ namespace System.Xml
             }
         }
 
-        public override void WriteArray(string? prefix, XmlDictionaryString localName, XmlDictionaryString? namespaceUri, Guid[] array, int offset, int count)
+        public override void WriteArray(
+            string? prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString? namespaceUri,
+            Guid[] array,
+            int offset,
+            int count
+        )
         {
             if (Signing)
             {
@@ -1619,7 +1844,14 @@ namespace System.Xml
         }
 
         // TimeSpan
-        public override void WriteArray(string? prefix, string localName, string? namespaceUri, TimeSpan[] array, int offset, int count)
+        public override void WriteArray(
+            string? prefix,
+            string localName,
+            string? namespaceUri,
+            TimeSpan[] array,
+            int offset,
+            int count
+        )
         {
             if (Signing)
             {
@@ -1636,7 +1868,14 @@ namespace System.Xml
             }
         }
 
-        public override void WriteArray(string? prefix, XmlDictionaryString localName, XmlDictionaryString? namespaceUri, TimeSpan[] array, int offset, int count)
+        public override void WriteArray(
+            string? prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString? namespaceUri,
+            TimeSpan[] array,
+            int offset,
+            int count
+        )
         {
             if (Signing)
             {

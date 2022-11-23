@@ -9,6 +9,11 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
 {
     internal interface IPdbFileLocatorService
     {
-        Task<DocumentDebugInfoReader?> GetDocumentDebugInfoReaderAsync(string dllPath, bool useDefaultSymbolServers, TelemetryMessage telemetry, CancellationToken cancellationToken);
+        Task<DocumentDebugInfoReader?> GetDocumentDebugInfoReaderAsync(
+            string dllPath,
+            bool useDefaultSymbolServers,
+            TelemetryMessage telemetry,
+            CancellationToken cancellationToken
+        );
     }
 }

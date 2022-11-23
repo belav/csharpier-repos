@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.Options
 {
     internal static class NavigationBarOptions
     {
-        public static readonly PerLanguageOption<bool> ShowNavigationBar = new(nameof(NavigationBarOptions), nameof(ShowNavigationBar), defaultValue: true);
+        public static readonly PerLanguageOption<bool> ShowNavigationBar =
+            new(nameof(NavigationBarOptions), nameof(ShowNavigationBar), defaultValue: true);
     }
 
     [ExportOptionProvider, Shared]
@@ -21,11 +22,9 @@ namespace Microsoft.CodeAnalysis.Editor.Options
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NavigationBarOptionsProvider()
-        {
-        }
+        public NavigationBarOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            NavigationBarOptions.ShowNavigationBar);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(NavigationBarOptions.ShowNavigationBar);
     }
 }

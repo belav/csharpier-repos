@@ -14,32 +14,50 @@ namespace LibraryImportGenerator.IntegrationTests
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "blittablestructs_return_instance")]
         public static partial IntFields DoubleIntFields(IntFields result);
 
-        [LibraryImport(NativeExportsNE_Binary, EntryPoint = "blittablestructs_double_intfields_byref")]
+        [LibraryImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "blittablestructs_double_intfields_byref"
+        )]
         public static partial void DoubleIntFieldsByRef(ref IntFields result);
 
-        [LibraryImport(NativeExportsNE_Binary, EntryPoint = "blittablestructs_double_intfields_byref")]
+        [LibraryImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "blittablestructs_double_intfields_byref"
+        )]
         public static partial void DoubleIntFieldsByRefIn(in IntFields result);
 
-        [LibraryImport(NativeExportsNE_Binary, EntryPoint = "blittablestructs_double_intfields_refreturn")]
-        public static partial void DoubleIntFieldsRefReturn(
-            IntFields input,
-            ref IntFields result);
+        [LibraryImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "blittablestructs_double_intfields_refreturn"
+        )]
+        public static partial void DoubleIntFieldsRefReturn(IntFields input, ref IntFields result);
 
-        [LibraryImport(NativeExportsNE_Binary, EntryPoint = "blittablestructs_double_intfields_refreturn")]
-        public static partial void DoubleIntFieldsOutReturn(
-            IntFields input,
-            out IntFields result);
+        [LibraryImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "blittablestructs_double_intfields_refreturn"
+        )]
+        public static partial void DoubleIntFieldsOutReturn(IntFields input, out IntFields result);
 
-        [LibraryImport(NativeExportsNE_Binary, EntryPoint = "blittablestructs_increment_invert_ptrfields_byref")]
+        [LibraryImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "blittablestructs_increment_invert_ptrfields_byref"
+        )]
         public static partial void IncrementInvertPointerFieldsByRef(ref PointerFields result);
 
-        [LibraryImport(NativeExportsNE_Binary, EntryPoint = "blittablestructs_increment_invert_ptrfields_byref")]
+        [LibraryImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "blittablestructs_increment_invert_ptrfields_byref"
+        )]
         public static partial void IncrementInvertPointerFieldsByRefIn(in PointerFields result);
 
-        [LibraryImport(NativeExportsNE_Binary, EntryPoint = "blittablestructs_increment_invert_ptrfields_refreturn")]
+        [LibraryImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "blittablestructs_increment_invert_ptrfields_refreturn"
+        )]
         public static partial void IncrementInvertPointerFieldsRefReturn(
             PointerFields input,
-            ref PointerFields result);
+            ref PointerFields result
+        );
     }
 
     public class BlittableStructTests
@@ -47,7 +65,9 @@ namespace LibraryImportGenerator.IntegrationTests
         [Fact]
         public void ValidateIntFields()
         {
-            const int A = 24, B = 37, C = 59;
+            const int A = 24,
+                B = 37,
+                C = 59;
             var initial = new IntFields()
             {
                 a = A,

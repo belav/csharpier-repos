@@ -26,13 +26,19 @@ public class DynamicGrpcServiceRegistry
     private readonly DynamicEndpointDataSource _endpointDataSource;
     private readonly IServiceProvider _serviceProvider;
 
-    public DynamicGrpcServiceRegistry(DynamicEndpointDataSource endpointDataSource, IServiceProvider serviceProvider)
+    public DynamicGrpcServiceRegistry(
+        DynamicEndpointDataSource endpointDataSource,
+        IServiceProvider serviceProvider
+    )
     {
         _endpointDataSource = endpointDataSource;
         _serviceProvider = serviceProvider;
     }
 
-    public Method<TRequest, TResponse> AddUnaryMethod<TRequest, TResponse>(UnaryServerMethod<TRequest, TResponse> callHandler, MethodDescriptor methodDescriptor)
+    public Method<TRequest, TResponse> AddUnaryMethod<TRequest, TResponse>(
+        UnaryServerMethod<TRequest, TResponse> callHandler,
+        MethodDescriptor methodDescriptor
+    )
         where TRequest : class, IMessage, new()
         where TResponse : class, IMessage, new()
     {
@@ -40,8 +46,14 @@ public class DynamicGrpcServiceRegistry
 
         AddServiceCore(c =>
         {
-            var unaryMethod = new UnaryServerMethod<DynamicService, TRequest, TResponse>((service, request, context) => callHandler(request, context));
-            var binder = CreateJsonTranscodingBinder<TRequest, TResponse>(methodDescriptor, c, new DynamicServiceInvokerResolver(unaryMethod));
+            var unaryMethod = new UnaryServerMethod<DynamicService, TRequest, TResponse>(
+                (service, request, context) => callHandler(request, context)
+            );
+            var binder = CreateJsonTranscodingBinder<TRequest, TResponse>(
+                methodDescriptor,
+                c,
+                new DynamicServiceInvokerResolver(unaryMethod)
+            );
 
             binder.AddMethod(method, callHandler);
         });
@@ -49,16 +61,30 @@ public class DynamicGrpcServiceRegistry
         return method;
     }
 
-    public Method<TRequest, TResponse> AddServerStreamingMethod<TRequest, TResponse>(ServerStreamingServerMethod<TRequest, TResponse> callHandler, MethodDescriptor methodDescriptor)
+    public Method<TRequest, TResponse> AddServerStreamingMethod<TRequest, TResponse>(
+        ServerStreamingServerMethod<TRequest, TResponse> callHandler,
+        MethodDescriptor methodDescriptor
+    )
         where TRequest : class, IMessage, new()
         where TResponse : class, IMessage, new()
     {
-        var method = CreateMethod<TRequest, TResponse>(MethodType.ServerStreaming, methodDescriptor.Name);
+        var method = CreateMethod<TRequest, TResponse>(
+            MethodType.ServerStreaming,
+            methodDescriptor.Name
+        );
 
         AddServiceCore(c =>
         {
-            var serverStreamingMethod = new ServerStreamingServerMethod<DynamicService, TRequest, TResponse>((service, request, stream, context) => callHandler(request, stream, context));
-            var binder = CreateJsonTranscodingBinder<TRequest, TResponse>(methodDescriptor, c, new DynamicServiceInvokerResolver(serverStreamingMethod));
+            var serverStreamingMethod = new ServerStreamingServerMethod<
+                DynamicService,
+                TRequest,
+                TResponse
+            >((service, request, stream, context) => callHandler(request, stream, context));
+            var binder = CreateJsonTranscodingBinder<TRequest, TResponse>(
+                methodDescriptor,
+                c,
+                new DynamicServiceInvokerResolver(serverStreamingMethod)
+            );
 
             binder.AddMethod(method, callHandler);
         });
@@ -69,8 +95,12 @@ public class DynamicGrpcServiceRegistry
     private void AddServiceCore(Action<ServiceMethodProviderContext<DynamicService>> action)
     {
         // Set action for adding dynamic method
-        var serviceMethodProviders = _serviceProvider.GetServices<IServiceMethodProvider<DynamicService>>().ToList();
-        var dynamicServiceModelProvider = serviceMethodProviders.OfType<DynamicServiceModelProvider>().Single();
+        var serviceMethodProviders = _serviceProvider
+            .GetServices<IServiceMethodProvider<DynamicService>>()
+            .ToList();
+        var dynamicServiceModelProvider = serviceMethodProviders
+            .OfType<DynamicServiceModelProvider>()
+            .Single();
         dynamicServiceModelProvider.CreateMethod = action;
 
         // Add to dynamic endpoint route builder
@@ -81,7 +111,10 @@ public class DynamicGrpcServiceRegistry
         _endpointDataSource.AddEndpoints(endpoints);
     }
 
-    private Method<TRequest, TResponse> CreateMethod<TRequest, TResponse>(MethodType methodType, string methodName)
+    private Method<TRequest, TResponse> CreateMethod<TRequest, TResponse>(
+        MethodType methodType,
+        string methodName
+    )
         where TRequest : class, IMessage, new()
         where TResponse : class, IMessage, new()
     {
@@ -90,11 +123,12 @@ public class DynamicGrpcServiceRegistry
             typeof(DynamicService).Name,
             methodName,
             CreateMarshaller<TRequest>(),
-            CreateMarshaller<TResponse>());
+            CreateMarshaller<TResponse>()
+        );
     }
 
     private Marshaller<TMessage> CreateMarshaller<TMessage>()
-          where TMessage : class, IMessage, new()
+        where TMessage : class, IMessage, new()
     {
         return new Marshaller<TMessage>(
             m => m.ToByteArray(),
@@ -103,7 +137,8 @@ public class DynamicGrpcServiceRegistry
                 var m = new TMessage();
                 m.MergeFrom(d);
                 return m;
-            });
+            }
+        );
     }
 
     private class DynamicEndpointRouteBuilder : IEndpointRouteBuilder
@@ -115,7 +150,8 @@ public class DynamicGrpcServiceRegistry
 
         public IServiceProvider ServiceProvider { get; }
 
-        public ICollection<EndpointDataSource> DataSources { get; } = new List<EndpointDataSource>();
+        public ICollection<EndpointDataSource> DataSources { get; } =
+            new List<EndpointDataSource>();
 
         public IApplicationBuilder CreateApplicationBuilder()
         {
@@ -123,23 +159,32 @@ public class DynamicGrpcServiceRegistry
         }
     }
 
-    private JsonTranscodingProviderServiceBinder<DynamicService> CreateJsonTranscodingBinder<TRequest, TResponse>(
+    private JsonTranscodingProviderServiceBinder<DynamicService> CreateJsonTranscodingBinder<
+        TRequest,
+        TResponse
+    >(
         MethodDescriptor methodDescriptor,
         ServiceMethodProviderContext<DynamicService> context,
-        DynamicServiceInvokerResolver invokerResolver)
+        DynamicServiceInvokerResolver invokerResolver
+    )
         where TRequest : class, IMessage, new()
         where TResponse : class, IMessage, new()
     {
-        var JsonTranscodingOptions = _serviceProvider.GetRequiredService<IOptions<GrpcJsonTranscodingOptions>>().Value;
+        var JsonTranscodingOptions = _serviceProvider
+            .GetRequiredService<IOptions<GrpcJsonTranscodingOptions>>()
+            .Value;
         var binder = new JsonTranscodingProviderServiceBinder<DynamicService>(
             context,
             invokerResolver,
             methodDescriptor.Service,
             _serviceProvider.GetRequiredService<IOptions<GrpcServiceOptions>>().Value,
-            _serviceProvider.GetRequiredService<IOptions<GrpcServiceOptions<DynamicService>>>().Value,
+            _serviceProvider
+                .GetRequiredService<IOptions<GrpcServiceOptions<DynamicService>>>()
+                .Value,
             _serviceProvider.GetRequiredService<ILoggerFactory>(),
             _serviceProvider.GetRequiredService<IGrpcServiceActivator<DynamicService>>(),
-            JsonTranscodingOptions);
+            JsonTranscodingOptions
+        );
 
         return binder;
     }
@@ -158,7 +203,8 @@ public class DynamicGrpcServiceRegistry
             Type[] methodParameters,
             string verb,
             HttpRule httpRule,
-            MethodDescriptor methodDescriptor) where TDelegate : Delegate
+            MethodDescriptor methodDescriptor
+        ) where TDelegate : Delegate
         {
             return ((TDelegate)_testDelegate, new List<object>());
         }

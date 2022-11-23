@@ -13,8 +13,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
 {
     internal static class FunctionIdOptions
     {
-        private static readonly ConcurrentDictionary<FunctionId, Option2<bool>> s_options =
-            new();
+        private static readonly ConcurrentDictionary<FunctionId, Option2<bool>> s_options = new();
 
         private static readonly Func<FunctionId, Option2<bool>> s_optionCreator = CreateOption;
 
@@ -33,22 +32,30 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             //     vsregedit delete local [hive name] HKCU Roslyn\Internal\Performance\FunctionId [function name]
             //
             // If you want to set it for the default hive, use "" as the hive name (i.e. an empty argument)
-            return new(nameof(FunctionIdOptions), name, defaultValue: false,
-                storageLocation: new LocalUserProfileStorageLocation(@"Roslyn\Internal\Performance\FunctionId\" + name));
+            return new(
+                nameof(FunctionIdOptions),
+                name,
+                defaultValue: false,
+                storageLocation: new LocalUserProfileStorageLocation(
+                    @"Roslyn\Internal\Performance\FunctionId\" + name
+                )
+            );
         }
 
-        private static IEnumerable<FunctionId> GetFunctionIds()
-            => Enum.GetValues(typeof(FunctionId)).Cast<FunctionId>();
+        private static IEnumerable<FunctionId> GetFunctionIds() =>
+            Enum.GetValues(typeof(FunctionId)).Cast<FunctionId>();
 
-        public static IEnumerable<IOption> GetOptions()
-            => GetFunctionIds().Select(GetOption);
+        public static IEnumerable<IOption> GetOptions() => GetFunctionIds().Select(GetOption);
 
-        public static Option2<bool> GetOption(FunctionId id)
-            => s_options.GetOrAdd(id, s_optionCreator);
+        public static Option2<bool> GetOption(FunctionId id) =>
+            s_options.GetOrAdd(id, s_optionCreator);
 
-        public static Func<FunctionId, bool> CreateFunctionIsEnabledPredicate(IGlobalOptionService globalOptions)
+        public static Func<FunctionId, bool> CreateFunctionIsEnabledPredicate(
+            IGlobalOptionService globalOptions
+        )
         {
-            var functionIdOptions = GetFunctionIds().ToDictionary(id => id, id => globalOptions.GetOption(GetOption(id)));
+            var functionIdOptions = GetFunctionIds()
+                .ToDictionary(id => id, id => globalOptions.GetOption(GetOption(id)));
             return functionId => functionIdOptions[functionId];
         }
     }

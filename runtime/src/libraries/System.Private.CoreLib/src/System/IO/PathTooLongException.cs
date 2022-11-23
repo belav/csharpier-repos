@@ -6,17 +6,17 @@ using System.Runtime.Serialization;
 namespace System.IO
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class PathTooLongException : IOException
     {
-        public PathTooLongException()
-            : base(SR.IO_PathTooLong)
+        public PathTooLongException() : base(SR.IO_PathTooLong)
         {
             HResult = HResults.COR_E_PATHTOOLONG;
         }
 
-        public PathTooLongException(string? message)
-            : base(message)
+        public PathTooLongException(string? message) : base(message)
         {
             HResult = HResults.COR_E_PATHTOOLONG;
         }
@@ -28,8 +28,6 @@ namespace System.IO
         }
 
         protected PathTooLongException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

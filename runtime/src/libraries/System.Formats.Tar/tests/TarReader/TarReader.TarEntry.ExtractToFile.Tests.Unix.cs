@@ -14,7 +14,11 @@ namespace System.Formats.Tar.Tests
         public void SpecialFile_Unelevated_Throws()
         {
             using TempDirectory root = new TempDirectory();
-            using MemoryStream ms = GetTarMemoryStream(CompressionMethod.Uncompressed, TestTarFormat.ustar, "specialfiles");
+            using MemoryStream ms = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                TestTarFormat.ustar,
+                "specialfiles"
+            );
 
             using (TarReader reader = new TarReader(ms))
             {
@@ -23,13 +27,17 @@ namespace System.Formats.Tar.Tests
                 // Block device requires elevation for writing
                 PosixTarEntry blockDevice = reader.GetNextEntry() as PosixTarEntry;
                 Assert.NotNull(blockDevice);
-                Assert.Throws<UnauthorizedAccessException>(() => blockDevice.ExtractToFile(path, overwrite: false));
+                Assert.Throws<UnauthorizedAccessException>(
+                    () => blockDevice.ExtractToFile(path, overwrite: false)
+                );
                 Assert.False(File.Exists(path));
 
                 // Character device requires elevation for writing
                 PosixTarEntry characterDevice = reader.GetNextEntry() as PosixTarEntry;
                 Assert.NotNull(characterDevice);
-                Assert.Throws<UnauthorizedAccessException>(() => characterDevice.ExtractToFile(path, overwrite: false));
+                Assert.Throws<UnauthorizedAccessException>(
+                    () => characterDevice.ExtractToFile(path, overwrite: false)
+                );
                 Assert.False(File.Exists(path));
 
                 // Fifo does not require elevation, should succeed

@@ -28,10 +28,7 @@ namespace System.Security.Cryptography
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("windows")]
-        public ECDiffieHellmanOpenSsl()
-            : this(521)
-        {
-        }
+        public ECDiffieHellmanOpenSsl() : this(521) { }
 
         [UnsupportedOSPlatform("android")]
         [UnsupportedOSPlatform("browser")]
@@ -60,10 +57,7 @@ namespace System.Security.Cryptography
 
         public override int KeySize
         {
-            get
-            {
-                return base.KeySize;
-            }
+            get { return base.KeySize; }
             set
             {
                 if (KeySize == value)
@@ -114,7 +108,8 @@ namespace System.Security.Cryptography
         public override void ImportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             ThrowIfDisposed();
             base.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
@@ -123,7 +118,8 @@ namespace System.Security.Cryptography
         public override void ImportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             ThrowIfDisposed();
             base.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);

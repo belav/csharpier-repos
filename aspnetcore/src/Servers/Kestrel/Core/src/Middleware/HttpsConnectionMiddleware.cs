@@ -24,9 +24,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal;
 
 internal sealed class HttpsConnectionMiddleware
 {
-    private const string EnableWindows81Http2 = "Microsoft.AspNetCore.Server.Kestrel.EnableWindows81Http2";
+    private const string EnableWindows81Http2 =
+        "Microsoft.AspNetCore.Server.Kestrel.EnableWindows81Http2";
 
-    private static readonly bool _isWindowsVersionIncompatibleWithHttp2 = IsWindowsVersionIncompatibleWithHttp2();
+    private static readonly bool _isWindowsVersionIncompatibleWithHttp2 =
+        IsWindowsVersionIncompatibleWithHttp2();
 
     private readonly ConnectionDelegate _next;
     private readonly TimeSpan _handshakeTimeout;
@@ -37,10 +39,17 @@ internal sealed class HttpsConnectionMiddleware
     private readonly HttpsConnectionAdapterOptions? _options;
     private readonly SslStreamCertificateContext? _serverCertificateContext;
     private readonly X509Certificate2? _serverCertificate;
-    private readonly Func<ConnectionContext, string?, X509Certificate2?>? _serverCertificateSelector;
+    private readonly Func<
+        ConnectionContext,
+        string?,
+        X509Certificate2?
+    >? _serverCertificateSelector;
 
     // The following fields are only set by TlsHandshakeCallbackOptions ctor.
-    private readonly Func<TlsHandshakeCallbackContext, ValueTask<SslServerAuthenticationOptions>>? _tlsCallbackOptions;
+    private readonly Func<
+        TlsHandshakeCallbackContext,
+        ValueTask<SslServerAuthenticationOptions>
+    >? _tlsCallbackOptions;
     private readonly object? _tlsCallbackOptionsState;
     private readonly HttpProtocols _httpProtocols;
 
@@ -48,11 +57,13 @@ internal sealed class HttpsConnectionMiddleware
     private readonly CancellationTokenSourcePool _ctsPool = new();
 
     public HttpsConnectionMiddleware(ConnectionDelegate next, HttpsConnectionAdapterOptions options)
-      : this(next, options, loggerFactory: NullLoggerFactory.Instance)
-    {
-    }
+        : this(next, options, loggerFactory: NullLoggerFactory.Instance) { }
 
-    public HttpsConnectionMiddleware(ConnectionDelegate next, HttpsConnectionAdapterOptions options, ILoggerFactory loggerFactory)
+    public HttpsConnectionMiddleware(
+        ConnectionDelegate next,
+        HttpsConnectionAdapterOptions options,
+        ILoggerFactory loggerFactory
+    )
     {
         ArgumentNullException.ThrowIfNull(options);
 
@@ -101,19 +112,30 @@ internal sealed class HttpsConnectionMiddleware
 
             // This might be do blocking IO but it'll resolve the certificate chain up front before any connections are
             // made to the server
-            _serverCertificateContext = SslStreamCertificateContext.Create(certificate, additionalCertificates: options.ServerCertificateChain);
+            _serverCertificateContext = SslStreamCertificateContext.Create(
+                certificate,
+                additionalCertificates: options.ServerCertificateChain
+            );
         }
 
-        var remoteCertificateValidationCallback = _options.ClientCertificateMode == ClientCertificateMode.NoCertificate ?
-            (RemoteCertificateValidationCallback?)null : RemoteCertificateValidationCallback;
+        var remoteCertificateValidationCallback =
+            _options.ClientCertificateMode == ClientCertificateMode.NoCertificate
+                ? (RemoteCertificateValidationCallback?)null
+                : RemoteCertificateValidationCallback;
 
-        _sslStreamFactory = s => new SslStream(s, leaveInnerStreamOpen: false, userCertificateValidationCallback: remoteCertificateValidationCallback);
+        _sslStreamFactory = s =>
+            new SslStream(
+                s,
+                leaveInnerStreamOpen: false,
+                userCertificateValidationCallback: remoteCertificateValidationCallback
+            );
     }
 
     internal HttpsConnectionMiddleware(
         ConnectionDelegate next,
         TlsHandshakeCallbackOptions tlsCallbackOptions,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         _next = next;
         _handshakeTimeout = tlsCallbackOptions.HandshakeTimeout;
@@ -121,7 +143,10 @@ internal sealed class HttpsConnectionMiddleware
 
         _tlsCallbackOptions = tlsCallbackOptions.OnConnection;
         _tlsCallbackOptionsState = tlsCallbackOptions.OnConnectionState;
-        _httpProtocols = ValidateAndNormalizeHttpProtocols(tlsCallbackOptions.HttpProtocols, _logger);
+        _httpProtocols = ValidateAndNormalizeHttpProtocols(
+            tlsCallbackOptions.HttpProtocols,
+            _logger
+        );
         _sslStreamFactory = s => new SslStream(s);
     }
 
@@ -135,7 +160,8 @@ internal sealed class HttpsConnectionMiddleware
 
         var sslDuplexPipe = CreateSslDuplexPipe(
             context.Transport,
-            context.Features.Get<IMemoryPoolFeature>()?.MemoryPool ?? MemoryPool<byte>.Shared);
+            context.Features.Get<IMemoryPoolFeature>()?.MemoryPool ?? MemoryPool<byte>.Shared
+        );
         var sslStream = sslDuplexPipe.Stream;
 
         var feature = new Core.Internal.TlsConnectionFeature(sslStream, context);
@@ -153,12 +179,21 @@ internal sealed class HttpsConnectionMiddleware
 
             if (_tlsCallbackOptions is null)
             {
-                await DoOptionsBasedHandshakeAsync(context, sslStream, feature, cancellationTokenSource.Token);
+                await DoOptionsBasedHandshakeAsync(
+                    context,
+                    sslStream,
+                    feature,
+                    cancellationTokenSource.Token
+                );
             }
             else
             {
                 var state = (this, context, feature);
-                await sslStream.AuthenticateAsServerAsync(ServerOptionsCallback, state, cancellationTokenSource.Token);
+                await sslStream.AuthenticateAsServerAsync(
+                    ServerOptionsCallback,
+                    state,
+                    cancellationTokenSource.Token
+                );
             }
         }
         catch (OperationCanceledException)
@@ -220,7 +255,10 @@ internal sealed class HttpsConnectionMiddleware
     // but with public APIs
     private X509Certificate2 LocateCertificateWithPrivateKey(X509Certificate2 certificate)
     {
-        Debug.Assert(!certificate.HasPrivateKey, "This should only be called with certificates that don't have a private key");
+        Debug.Assert(
+            !certificate.HasPrivateKey,
+            "This should only be called with certificates that don't have a private key"
+        );
 
         _logger.LocatingCertWithPrivateKey(certificate);
 
@@ -252,7 +290,11 @@ internal sealed class HttpsConnectionMiddleware
             {
                 using (store)
                 {
-                    var certs = store.Certificates.Find(X509FindType.FindByThumbprint, certificate.Thumbprint, validOnly: false);
+                    var certs = store.Certificates.Find(
+                        X509FindType.FindByThumbprint,
+                        certificate.Thumbprint,
+                        validOnly: false
+                    );
 
                     if (certs.Count > 0 && certs[0].HasPrivateKey)
                     {
@@ -268,7 +310,11 @@ internal sealed class HttpsConnectionMiddleware
             {
                 using (store)
                 {
-                    var certs = store.Certificates.Find(X509FindType.FindByThumbprint, certificate.Thumbprint, validOnly: false);
+                    var certs = store.Certificates.Find(
+                        X509FindType.FindByThumbprint,
+                        certificate.Thumbprint,
+                        validOnly: false
+                    );
 
                     if (certs.Count > 0 && certs[0].HasPrivateKey)
                     {
@@ -288,7 +334,12 @@ internal sealed class HttpsConnectionMiddleware
         return certificate;
     }
 
-    private Task DoOptionsBasedHandshakeAsync(ConnectionContext context, SslStream sslStream, Core.Internal.TlsConnectionFeature feature, CancellationToken cancellationToken)
+    private Task DoOptionsBasedHandshakeAsync(
+        ConnectionContext context,
+        SslStream sslStream,
+        Core.Internal.TlsConnectionFeature feature,
+        CancellationToken cancellationToken
+    )
     {
         Debug.Assert(_options != null, "Middleware must be created with options.");
 
@@ -314,10 +365,13 @@ internal sealed class HttpsConnectionMiddleware
             ServerCertificate = _serverCertificate,
             ServerCertificateContext = _serverCertificateContext,
             ServerCertificateSelectionCallback = selector,
-            ClientCertificateRequired = _options.ClientCertificateMode == ClientCertificateMode.AllowCertificate
+            ClientCertificateRequired =
+                _options.ClientCertificateMode == ClientCertificateMode.AllowCertificate
                 || _options.ClientCertificateMode == ClientCertificateMode.RequireCertificate,
             EnabledSslProtocols = _options.SslProtocols,
-            CertificateRevocationCheckMode = _options.CheckCertificateRevocation ? X509RevocationMode.Online : X509RevocationMode.NoCheck,
+            CertificateRevocationCheckMode = _options.CheckCertificateRevocation
+                ? X509RevocationMode.Online
+                : X509RevocationMode.NoCheck,
         };
 
         ConfigureAlpn(sslOptions, _options.HttpProtocols);
@@ -329,7 +383,10 @@ internal sealed class HttpsConnectionMiddleware
         return sslStream.AuthenticateAsServerAsync(sslOptions, cancellationToken);
     }
 
-    internal static void ConfigureAlpn(SslServerAuthenticationOptions serverOptions, HttpProtocols httpProtocols)
+    internal static void ConfigureAlpn(
+        SslServerAuthenticationOptions serverOptions,
+        HttpProtocols httpProtocols
+    )
     {
         serverOptions.ApplicationProtocols = new List<SslApplicationProtocol>();
 
@@ -352,7 +409,8 @@ internal sealed class HttpsConnectionMiddleware
         Func<X509Certificate2, X509Chain?, SslPolicyErrors, bool>? clientCertificateValidation,
         X509Certificate? certificate,
         X509Chain? chain,
-        SslPolicyErrors sslPolicyErrors)
+        SslPolicyErrors sslPolicyErrors
+    )
     {
         if (certificate == null)
         {
@@ -384,17 +442,27 @@ internal sealed class HttpsConnectionMiddleware
         return true;
     }
 
-    private bool RemoteCertificateValidationCallback(object sender, X509Certificate? certificate, X509Chain? chain, SslPolicyErrors sslPolicyErrors)
+    private bool RemoteCertificateValidationCallback(
+        object sender,
+        X509Certificate? certificate,
+        X509Chain? chain,
+        SslPolicyErrors sslPolicyErrors
+    )
     {
         Debug.Assert(_options != null, "Middleware must be created with options.");
 
-        return RemoteCertificateValidationCallback(_options.ClientCertificateMode, _options.ClientCertificateValidation, certificate, chain, sslPolicyErrors);
+        return RemoteCertificateValidationCallback(
+            _options.ClientCertificateMode,
+            _options.ClientCertificateValidation,
+            certificate,
+            chain,
+            sslPolicyErrors
+        );
     }
 
     private SslDuplexPipe CreateSslDuplexPipe(IDuplexPipe transport, MemoryPool<byte> memoryPool)
     {
-        StreamPipeReaderOptions inputPipeOptions = new StreamPipeReaderOptions
-        (
+        StreamPipeReaderOptions inputPipeOptions = new StreamPipeReaderOptions(
             pool: memoryPool,
             bufferSize: memoryPool.GetMinimumSegmentSize(),
             minimumReadSize: memoryPool.GetMinimumAllocSize(),
@@ -402,18 +470,25 @@ internal sealed class HttpsConnectionMiddleware
             useZeroByteReads: true
         );
 
-        var outputPipeOptions = new StreamPipeWriterOptions
-        (
-            pool: memoryPool,
-            leaveOpen: true
-        );
+        var outputPipeOptions = new StreamPipeWriterOptions(pool: memoryPool, leaveOpen: true);
 
         return new SslDuplexPipe(transport, inputPipeOptions, outputPipeOptions, _sslStreamFactory);
     }
 
-    private static async ValueTask<SslServerAuthenticationOptions> ServerOptionsCallback(SslStream sslStream, SslClientHelloInfo clientHelloInfo, object? state, CancellationToken cancellationToken)
+    private static async ValueTask<SslServerAuthenticationOptions> ServerOptionsCallback(
+        SslStream sslStream,
+        SslClientHelloInfo clientHelloInfo,
+        object? state,
+        CancellationToken cancellationToken
+    )
     {
-        var (middleware, context, feature) = (ValueTuple<HttpsConnectionMiddleware, ConnectionContext, Core.Internal.TlsConnectionFeature>)state!;
+        var (middleware, context, feature) =
+            (ValueTuple<
+                HttpsConnectionMiddleware,
+                ConnectionContext,
+                Core.Internal.TlsConnectionFeature
+            >)
+                state!;
 
         feature.HostName = clientHelloInfo.ServerName;
         context.Features.Set(sslStream);
@@ -426,7 +501,8 @@ internal sealed class HttpsConnectionMiddleware
             ClientHelloInfo = clientHelloInfo,
         };
         var sslOptions = await middleware._tlsCallbackOptions!(callbackContext);
-        feature.AllowDelayedClientCertificateNegotation = callbackContext.AllowDelayedClientCertificateNegotation;
+        feature.AllowDelayedClientCertificateNegotation =
+            callbackContext.AllowDelayedClientCertificateNegotation;
 
         // The callback didn't set ALPN so we will.
         if (sslOptions.ApplicationProtocols == null)
@@ -442,7 +518,9 @@ internal sealed class HttpsConnectionMiddleware
     {
         if (!CertificateLoader.IsCertificateAllowedForServerAuth(certificate))
         {
-            throw new InvalidOperationException(CoreStrings.FormatInvalidServerCertificateEku(certificate.Thumbprint));
+            throw new InvalidOperationException(
+                CoreStrings.FormatInvalidServerCertificateEku(certificate.Thumbprint)
+            );
         }
     }
 
@@ -461,7 +539,10 @@ internal sealed class HttpsConnectionMiddleware
         return new X509Certificate2(certificate);
     }
 
-    internal static HttpProtocols ValidateAndNormalizeHttpProtocols(HttpProtocols httpProtocols, ILogger<HttpsConnectionMiddleware> logger)
+    internal static HttpProtocols ValidateAndNormalizeHttpProtocols(
+        HttpProtocols httpProtocols,
+        ILogger<HttpsConnectionMiddleware> logger
+    )
     {
         // This configuration will always fail per-request, preemptively fail it here. See HttpConnection.SelectProtocol().
         if (httpProtocols == HttpProtocols.Http2)
@@ -475,7 +556,9 @@ internal sealed class HttpsConnectionMiddleware
                 throw new NotSupportedException(CoreStrings.Http2NoTlsWin81);
             }
         }
-        else if (httpProtocols == HttpProtocols.Http1AndHttp2 && _isWindowsVersionIncompatibleWithHttp2)
+        else if (
+            httpProtocols == HttpProtocols.Http1AndHttp2 && _isWindowsVersionIncompatibleWithHttp2
+        )
         {
             logger.Http2DefaultCiphersInsufficient();
             return HttpProtocols.Http1;
@@ -488,10 +571,13 @@ internal sealed class HttpsConnectionMiddleware
     {
         if (OperatingSystem.IsWindows())
         {
-            var enableHttp2OnWindows81 = AppContext.TryGetSwitch(EnableWindows81Http2, out var enabled) && enabled;
-            if (Environment.OSVersion.Version < new Version(6, 3) // Missing ALPN support
-                                                                  // Win8.1 and 2012 R2 don't support the right cipher configuration by default.
-                || (Environment.OSVersion.Version < new Version(10, 0) && !enableHttp2OnWindows81))
+            var enableHttp2OnWindows81 =
+                AppContext.TryGetSwitch(EnableWindows81Http2, out var enabled) && enabled;
+            if (
+                Environment.OSVersion.Version < new Version(6, 3) // Missing ALPN support
+                // Win8.1 and 2012 R2 don't support the right cipher configuration by default.
+                || (Environment.OSVersion.Version < new Version(10, 0) && !enableHttp2OnWindows81)
+            )
             {
                 return true;
             }
@@ -500,19 +586,28 @@ internal sealed class HttpsConnectionMiddleware
         return false;
     }
 
-    internal static SslServerAuthenticationOptions CreateHttp3Options(HttpsConnectionAdapterOptions httpsOptions)
+    internal static SslServerAuthenticationOptions CreateHttp3Options(
+        HttpsConnectionAdapterOptions httpsOptions
+    )
     {
         if (httpsOptions.OnAuthenticate != null)
         {
-            throw new NotSupportedException($"The {nameof(HttpsConnectionAdapterOptions.OnAuthenticate)} callback is not supported with HTTP/3.");
+            throw new NotSupportedException(
+                $"The {nameof(HttpsConnectionAdapterOptions.OnAuthenticate)} callback is not supported with HTTP/3."
+            );
         }
 
         // TODO Set other relevant values on options
         var sslServerAuthenticationOptions = new SslServerAuthenticationOptions
         {
             ServerCertificate = httpsOptions.ServerCertificate,
-            ApplicationProtocols = new List<SslApplicationProtocol>() { SslApplicationProtocol.Http3 },
-            CertificateRevocationCheckMode = httpsOptions.CheckCertificateRevocation ? X509RevocationMode.Online : X509RevocationMode.NoCheck,
+            ApplicationProtocols = new List<SslApplicationProtocol>()
+            {
+                SslApplicationProtocol.Http3
+            },
+            CertificateRevocationCheckMode = httpsOptions.CheckCertificateRevocation
+                ? X509RevocationMode.Online
+                : X509RevocationMode.NoCheck,
         };
 
         if (httpsOptions.ServerCertificateSelector != null)
@@ -532,15 +627,27 @@ internal sealed class HttpsConnectionMiddleware
         }
 
         // DelayCertificate is prohibited by the HTTP/2 and HTTP/3 protocols, ignore it here.
-        if (httpsOptions.ClientCertificateMode == ClientCertificateMode.AllowCertificate
-                || httpsOptions.ClientCertificateMode == ClientCertificateMode.RequireCertificate)
+        if (
+            httpsOptions.ClientCertificateMode == ClientCertificateMode.AllowCertificate
+            || httpsOptions.ClientCertificateMode == ClientCertificateMode.RequireCertificate
+        )
         {
             sslServerAuthenticationOptions.ClientCertificateRequired = true; // We have to set this to prompt the client for a cert.
-                                                                             // For AllowCertificate we override the missing cert error in RemoteCertificateValidationCallback,
-                                                                             // except QuicListener doesn't call the callback for missing certs https://github.com/dotnet/runtime/issues/57308.
-            sslServerAuthenticationOptions.RemoteCertificateValidationCallback
-                = (object sender, X509Certificate? certificate, X509Chain? chain, SslPolicyErrors sslPolicyErrors) =>
-                    RemoteCertificateValidationCallback(httpsOptions.ClientCertificateMode, httpsOptions.ClientCertificateValidation, certificate, chain, sslPolicyErrors);
+            // For AllowCertificate we override the missing cert error in RemoteCertificateValidationCallback,
+            // except QuicListener doesn't call the callback for missing certs https://github.com/dotnet/runtime/issues/57308.
+            sslServerAuthenticationOptions.RemoteCertificateValidationCallback = (
+                object sender,
+                X509Certificate? certificate,
+                X509Chain? chain,
+                SslPolicyErrors sslPolicyErrors
+            ) =>
+                RemoteCertificateValidationCallback(
+                    httpsOptions.ClientCertificateMode,
+                    httpsOptions.ClientCertificateValidation,
+                    certificate,
+                    chain,
+                    sslPolicyErrors
+                );
         }
 
         return sslServerAuthenticationOptions;
@@ -549,42 +656,123 @@ internal sealed class HttpsConnectionMiddleware
 
 internal static partial class HttpsConnectionMiddlewareLoggerExtensions
 {
-    [LoggerMessage(1, LogLevel.Debug, "Failed to authenticate HTTPS connection.", EventName = "AuthenticationFailed")]
-    public static partial void AuthenticationFailed(this ILogger<HttpsConnectionMiddleware> logger, Exception exception);
+    [LoggerMessage(
+        1,
+        LogLevel.Debug,
+        "Failed to authenticate HTTPS connection.",
+        EventName = "AuthenticationFailed"
+    )]
+    public static partial void AuthenticationFailed(
+        this ILogger<HttpsConnectionMiddleware> logger,
+        Exception exception
+    );
 
-    [LoggerMessage(2, LogLevel.Debug, "Authentication of the HTTPS connection timed out.", EventName = "AuthenticationTimedOut")]
-    public static partial void AuthenticationTimedOut(this ILogger<HttpsConnectionMiddleware> logger);
+    [LoggerMessage(
+        2,
+        LogLevel.Debug,
+        "Authentication of the HTTPS connection timed out.",
+        EventName = "AuthenticationTimedOut"
+    )]
+    public static partial void AuthenticationTimedOut(
+        this ILogger<HttpsConnectionMiddleware> logger
+    );
 
-    [LoggerMessage(3, LogLevel.Debug, "Connection {connectionId} established using the following protocol: {protocol}", EventName = "HttpsConnectionEstablished")]
-    public static partial void HttpsConnectionEstablished(this ILogger<HttpsConnectionMiddleware> logger, string connectionId, SslProtocols protocol);
+    [LoggerMessage(
+        3,
+        LogLevel.Debug,
+        "Connection {connectionId} established using the following protocol: {protocol}",
+        EventName = "HttpsConnectionEstablished"
+    )]
+    public static partial void HttpsConnectionEstablished(
+        this ILogger<HttpsConnectionMiddleware> logger,
+        string connectionId,
+        SslProtocols protocol
+    );
 
-    [LoggerMessage(4, LogLevel.Information, "HTTP/2 over TLS is not supported on Windows versions older than Windows 10 and Windows Server 2016 due to incompatible ciphers or missing ALPN support. Falling back to HTTP/1.1 instead.",
-        EventName = "Http2DefaultCiphersInsufficient")]
-    public static partial void Http2DefaultCiphersInsufficient(this ILogger<HttpsConnectionMiddleware> logger);
+    [LoggerMessage(
+        4,
+        LogLevel.Information,
+        "HTTP/2 over TLS is not supported on Windows versions older than Windows 10 and Windows Server 2016 due to incompatible ciphers or missing ALPN support. Falling back to HTTP/1.1 instead.",
+        EventName = "Http2DefaultCiphersInsufficient"
+    )]
+    public static partial void Http2DefaultCiphersInsufficient(
+        this ILogger<HttpsConnectionMiddleware> logger
+    );
 
-    [LoggerMessage(5, LogLevel.Debug, "Searching for certificate with private key and thumbprint {Thumbprint} in the certificate store.", EventName = "LocateCertWithPrivateKey")]
-    private static partial void LocatingCertWithPrivateKey(this ILogger<HttpsConnectionMiddleware> logger, string thumbPrint);
+    [LoggerMessage(
+        5,
+        LogLevel.Debug,
+        "Searching for certificate with private key and thumbprint {Thumbprint} in the certificate store.",
+        EventName = "LocateCertWithPrivateKey"
+    )]
+    private static partial void LocatingCertWithPrivateKey(
+        this ILogger<HttpsConnectionMiddleware> logger,
+        string thumbPrint
+    );
 
-    public static void LocatingCertWithPrivateKey(this ILogger<HttpsConnectionMiddleware> logger, X509Certificate2 certificate) => LocatingCertWithPrivateKey(logger, certificate.Thumbprint);
+    public static void LocatingCertWithPrivateKey(
+        this ILogger<HttpsConnectionMiddleware> logger,
+        X509Certificate2 certificate
+    ) => LocatingCertWithPrivateKey(logger, certificate.Thumbprint);
 
-    [LoggerMessage(6, LogLevel.Debug, "Found certificate with private key and thumbprint {Thumbprint} in certificate store {StoreName}.", EventName = "FoundCertWithPrivateKey")]
-    public static partial void FoundCertWithPrivateKey(this ILogger<HttpsConnectionMiddleware> logger, string thumbprint, string? storeName);
+    [LoggerMessage(
+        6,
+        LogLevel.Debug,
+        "Found certificate with private key and thumbprint {Thumbprint} in certificate store {StoreName}.",
+        EventName = "FoundCertWithPrivateKey"
+    )]
+    public static partial void FoundCertWithPrivateKey(
+        this ILogger<HttpsConnectionMiddleware> logger,
+        string thumbprint,
+        string? storeName
+    );
 
-    public static void FoundCertWithPrivateKey(this ILogger<HttpsConnectionMiddleware> logger, X509Certificate2 certificate, StoreLocation storeLocation)
+    public static void FoundCertWithPrivateKey(
+        this ILogger<HttpsConnectionMiddleware> logger,
+        X509Certificate2 certificate,
+        StoreLocation storeLocation
+    )
     {
-        var storeLocationString = storeLocation == StoreLocation.LocalMachine ? nameof(StoreLocation.LocalMachine) : nameof(StoreLocation.CurrentUser);
+        var storeLocationString =
+            storeLocation == StoreLocation.LocalMachine
+                ? nameof(StoreLocation.LocalMachine)
+                : nameof(StoreLocation.CurrentUser);
         FoundCertWithPrivateKey(logger, certificate.Thumbprint, storeLocationString);
     }
 
-    [LoggerMessage(7, LogLevel.Debug, "Failure to locate certificate from store.", EventName = "FailToLocateCertificate")]
-    public static partial void FailedToFindCertificateInStore(this ILogger<HttpsConnectionMiddleware> logger, Exception exception);
+    [LoggerMessage(
+        7,
+        LogLevel.Debug,
+        "Failure to locate certificate from store.",
+        EventName = "FailToLocateCertificate"
+    )]
+    public static partial void FailedToFindCertificateInStore(
+        this ILogger<HttpsConnectionMiddleware> logger,
+        Exception exception
+    );
 
-    [LoggerMessage(8, LogLevel.Debug, "Failed to open certificate store {StoreName}.", EventName = "FailToOpenStore")]
-    public static partial void FailedToOpenStore(this ILogger<HttpsConnectionMiddleware> logger, string? storeName, Exception exception);
+    [LoggerMessage(
+        8,
+        LogLevel.Debug,
+        "Failed to open certificate store {StoreName}.",
+        EventName = "FailToOpenStore"
+    )]
+    public static partial void FailedToOpenStore(
+        this ILogger<HttpsConnectionMiddleware> logger,
+        string? storeName,
+        Exception exception
+    );
 
-    public static void FailedToOpenStore(this ILogger<HttpsConnectionMiddleware> logger, StoreLocation storeLocation, Exception exception)
+    public static void FailedToOpenStore(
+        this ILogger<HttpsConnectionMiddleware> logger,
+        StoreLocation storeLocation,
+        Exception exception
+    )
     {
-        var storeLocationString = storeLocation == StoreLocation.LocalMachine ? nameof(StoreLocation.LocalMachine) : nameof(StoreLocation.CurrentUser);
+        var storeLocationString =
+            storeLocation == StoreLocation.LocalMachine
+                ? nameof(StoreLocation.LocalMachine)
+                : nameof(StoreLocation.CurrentUser);
         FailedToOpenStore(logger, storeLocationString, exception);
     }
 }

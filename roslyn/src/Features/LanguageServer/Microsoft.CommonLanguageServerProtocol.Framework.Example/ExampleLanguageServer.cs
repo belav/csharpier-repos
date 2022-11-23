@@ -23,8 +23,14 @@ public class ExampleLanguageServer : AbstractLanguageServer<ExampleRequestContex
 
         _ = AddHandlers(serviceCollection)
             .AddSingleton<ILspLogger>(_logger)
-            .AddSingleton<IRequestContextFactory<ExampleRequestContext>, ExampleRequestContextFactory>()
-            .AddSingleton<IInitializeManager<InitializeParams, InitializeResult>, CapabilitiesManager>()
+            .AddSingleton<
+                IRequestContextFactory<ExampleRequestContext>,
+                ExampleRequestContextFactory
+            >()
+            .AddSingleton<
+                IInitializeManager<InitializeParams, InitializeResult>,
+                CapabilitiesManager
+            >()
             .AddSingleton<ILifeCycleManager>(GetLifeCycleManager())
             .AddSingleton(this);
 
@@ -41,8 +47,14 @@ public class ExampleLanguageServer : AbstractLanguageServer<ExampleRequestContex
     private static IServiceCollection AddHandlers(IServiceCollection serviceCollection)
     {
         _ = serviceCollection
-            .AddSingleton<IMethodHandler, InitializeHandler<InitializeParams, InitializeResult, ExampleRequestContext>>()
-            .AddSingleton<IMethodHandler, InitializedHandler<InitializedParams, ExampleRequestContext>>()
+            .AddSingleton<
+                IMethodHandler,
+                InitializeHandler<InitializeParams, InitializeResult, ExampleRequestContext>
+            >()
+            .AddSingleton<
+                IMethodHandler,
+                InitializedHandler<InitializedParams, ExampleRequestContext>
+            >()
             .AddSingleton<IMethodHandler, ShutdownHandler<ExampleRequestContext>>()
             .AddSingleton<IMethodHandler, ExitHandler<ExampleRequestContext>>();
 

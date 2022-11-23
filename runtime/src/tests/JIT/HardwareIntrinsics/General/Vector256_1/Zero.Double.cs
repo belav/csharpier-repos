@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 32;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector256<Double>>() / sizeof(Double);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector256<Double>>() / sizeof(Double);
 
         public bool Succeeded { get; set; } = true;
 
@@ -56,9 +57,9 @@ namespace JIT.HardwareIntrinsics.General
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
             object result = typeof(Vector256<Double>)
-                                .GetProperty(nameof(Vector256<Double>.Zero), new Type[] { })
-                                .GetGetMethod()
-                                .Invoke(null, new object[] { });
+                .GetProperty(nameof(Vector256<Double>.Zero), new Type[] { })
+                .GetGetMethod()
+                .Invoke(null, new object[] { });
 
             ValidateResult((Vector256<Double>)(result));
         }
@@ -73,7 +74,7 @@ namespace JIT.HardwareIntrinsics.General
         private void ValidateResult(Double[] resultElements, [CallerMemberName] string method = "")
         {
             bool succeeded = true;
-        
+
             for (var i = 0; i < ElementCount; i++)
             {
                 if (resultElements[i] != 0)
@@ -85,8 +86,12 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector256.Zero(Double): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256.Zero(Double): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

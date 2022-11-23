@@ -21,8 +21,8 @@ namespace System
             }
         }
 
-        internal static void BulkMoveWithWriteBarrier(ref byte dmem, ref byte smem, nuint size)
-            => RuntimeImports.RhBulkMoveWithWriteBarrier(ref dmem, ref smem, size);
+        internal static void BulkMoveWithWriteBarrier(ref byte dmem, ref byte smem, nuint size) =>
+            RuntimeImports.RhBulkMoveWithWriteBarrier(ref dmem, ref smem, size);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static unsafe void __Memmove(byte* dest, byte* src, nuint len) =>
@@ -39,7 +39,8 @@ namespace System
                 Memmove(
                     ref Unsafe.As<T, byte>(ref destination),
                     ref Unsafe.As<T, byte>(ref source),
-                    elementCount * (nuint)Unsafe.SizeOf<T>());
+                    elementCount * (nuint)Unsafe.SizeOf<T>()
+                );
             }
             else
             {
@@ -47,7 +48,8 @@ namespace System
                 RuntimeImports.RhBulkMoveWithWriteBarrier(
                     ref Unsafe.As<T, byte>(ref destination),
                     ref Unsafe.As<T, byte>(ref source),
-                    elementCount * (nuint)Unsafe.SizeOf<T>());
+                    elementCount * (nuint)Unsafe.SizeOf<T>()
+                );
             }
         }
     }

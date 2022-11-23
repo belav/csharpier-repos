@@ -39,12 +39,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             {
                 // Workaround for deadlock loading ExtensionManagerPackage prior to
                 // https://devdiv.visualstudio.com/DevDiv/_git/VSExtensibility/pullrequest/381506
-                await AsyncServiceProvider.GlobalProvider.GetServiceAsync(typeof(SVsExtensionManager));
+                await AsyncServiceProvider.GlobalProvider.GetServiceAsync(
+                    typeof(SVsExtensionManager)
+                );
             });
         }
 
-        private static Dispatcher CurrentApplicationDispatcher
-            => Application.Current.Dispatcher;
+        private static Dispatcher CurrentApplicationDispatcher => Application.Current.Dispatcher;
 
         protected static JoinableTaskFactory JoinableTaskFactory
         {
@@ -53,7 +54,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 if (_joinableTaskFactory is null)
                 {
 #pragma warning disable RS0030 // Do not used banned APIs (this code only runs in integration tests)
-                    Interlocked.CompareExchange(ref _joinableTaskFactory, ThreadHelper.JoinableTaskFactory.WithPriority(CurrentApplicationDispatcher, DispatcherPriority.Background), null);
+                    Interlocked.CompareExchange(
+                        ref _joinableTaskFactory,
+                        ThreadHelper.JoinableTaskFactory.WithPriority(
+                            CurrentApplicationDispatcher,
+                            DispatcherPriority.Background
+                        ),
+                        null
+                    );
 #pragma warning restore RS0030 // Do not used banned APIs
                 }
 
@@ -63,7 +71,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         protected static void InvokeOnUIThread(Action<CancellationToken> action)
         {
-            using var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout);
+            using var cancellationTokenSource = new CancellationTokenSource(
+                Helper.HangMitigatingTimeout
+            );
             var operation = JoinableTaskFactory.RunAsync(async () =>
             {
                 await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationTokenSource.Token);
@@ -76,7 +86,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         protected static T InvokeOnUIThread<T>(Func<CancellationToken, T> action)
         {
-            using var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout);
+            using var cancellationTokenSource = new CancellationTokenSource(
+                Helper.HangMitigatingTimeout
+            );
             var operation = JoinableTaskFactory.RunAsync(async () =>
             {
                 await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationTokenSource.Token);
@@ -90,24 +102,29 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         protected static TInterface GetGlobalService<TService, TInterface>()
             where TService : class
-            where TInterface : class
-        => InvokeOnUIThread(cancellationToken => (TInterface)ServiceProvider.GlobalProvider.GetService(typeof(TService)));
+            where TInterface : class =>
+            InvokeOnUIThread(
+                cancellationToken =>
+                    (TInterface)ServiceProvider.GlobalProvider.GetService(typeof(TService))
+            );
 
-        protected static TService GetComponentModelService<TService>()
-            where TService : class
-         => InvokeOnUIThread(cancellationToken => GetComponentModel().GetService<TService>());
+        protected static TService GetComponentModelService<TService>() where TService : class =>
+            InvokeOnUIThread(cancellationToken => GetComponentModel().GetService<TService>());
 
-        protected static TestWaitingService GetWaitingService()
-            => new(GetComponentModel().DefaultExportProvider.GetExport<AsynchronousOperationListenerProvider>().Value);
+        protected static TestWaitingService GetWaitingService() =>
+            new(
+                GetComponentModel().DefaultExportProvider
+                    .GetExport<AsynchronousOperationListenerProvider>()
+                    .Value
+            );
 
-        protected static DTE GetDTE()
-            => GetGlobalService<SDTE, DTE>();
+        protected static DTE GetDTE() => GetGlobalService<SDTE, DTE>();
 
-        protected static IComponentModel GetComponentModel()
-            => GetGlobalService<SComponentModel, IComponentModel>();
+        protected static IComponentModel GetComponentModel() =>
+            GetGlobalService<SComponentModel, IComponentModel>();
 
-        protected static bool IsCommandAvailable(string commandName)
-            => GetDTE().Commands.Item(commandName).IsAvailable;
+        protected static bool IsCommandAvailable(string commandName) =>
+            GetDTE().Commands.Item(commandName).IsAvailable;
 
         protected static void ExecuteCommand(string commandName, string args = "")
         {
@@ -120,12 +137,16 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         /// </summary>
         protected static void WaitForApplicationIdle(TimeSpan timeout)
 #pragma warning disable VSTHRD001 // Avoid legacy thread switching APIs
-            => CurrentApplicationDispatcher.InvokeAsync(() => { }, DispatcherPriority.ApplicationIdle).Wait(timeout);
+            =>
+            CurrentApplicationDispatcher
+                .InvokeAsync(() => { }, DispatcherPriority.ApplicationIdle)
+                .Wait(timeout);
 #pragma warning restore VSTHRD001 // Avoid legacy thread switching APIs
 
         protected static void WaitForSystemIdle()
 #pragma warning disable VSTHRD001 // Avoid legacy thread switching APIs
-            => CurrentApplicationDispatcher.Invoke(() => { }, DispatcherPriority.SystemIdle);
+            =>
+            CurrentApplicationDispatcher.Invoke(() => { }, DispatcherPriority.SystemIdle);
 #pragma warning restore VSTHRD001 // Avoid legacy thread switching APIs
 
         // Ensure InProcComponents live forever

@@ -17,6 +17,7 @@ using Microsoft.VisualStudio.TestPlatform.ObjectModel.Client;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Logging;
 
 namespace PrepareTests;
+
 internal class TestDiscovery
 {
     public static void RunDiscovery(string repoRootDirectory, string dotnetPath, bool isUnix)
@@ -26,19 +27,33 @@ internal class TestDiscovery
 
         Console.WriteLine($"Found {assemblies.Count} test assemblies");
 
-        var vsTestConsole = Directory.EnumerateFiles(Path.Combine(Path.GetDirectoryName(dotnetPath)!, "sdk"), "vstest.console.dll", SearchOption.AllDirectories).OrderBy(s => s).Last();
+        var vsTestConsole = Directory
+            .EnumerateFiles(
+                Path.Combine(Path.GetDirectoryName(dotnetPath)!, "sdk"),
+                "vstest.console.dll",
+                SearchOption.AllDirectories
+            )
+            .OrderBy(s => s)
+            .Last();
 
-        var vstestConsoleWrapper = new VsTestConsoleWrapper(vsTestConsole, new ConsoleParameters
-        {
-            LogFilePath = Path.Combine(repoRootDirectory, "logs", "test_discovery_logs.txt"),
-            TraceLevel = TraceLevel.Error,
-        });
+        var vstestConsoleWrapper = new VsTestConsoleWrapper(
+            vsTestConsole,
+            new ConsoleParameters
+            {
+                LogFilePath = Path.Combine(repoRootDirectory, "logs", "test_discovery_logs.txt"),
+                TraceLevel = TraceLevel.Error,
+            }
+        );
 
         var discoveryHandler = new DiscoveryHandler();
 
         var stopwatch = new Stopwatch();
         stopwatch.Start();
-        vstestConsoleWrapper.DiscoverTests(assemblies, @"<RunSettings><RunConfiguration><MaxCpuCount>0</MaxCpuCount></RunConfiguration></RunSettings>", discoveryHandler);
+        vstestConsoleWrapper.DiscoverTests(
+            assemblies,
+            @"<RunSettings><RunConfiguration><MaxCpuCount>0</MaxCpuCount></RunConfiguration></RunSettings>",
+            discoveryHandler
+        );
         stopwatch.Stop();
 
         var tests = discoveryHandler.GetTests();
@@ -53,7 +68,10 @@ internal class TestDiscovery
 
             // Tests with combinatorial data are output multiple times with the same fully qualified test name.
             // We only need to include it once as run all combinations under the same filter.
-            var testToWrite = assemblyGroup.Select(test => test.FullyQualifiedName).Distinct().ToList();
+            var testToWrite = assemblyGroup
+                .Select(test => test.FullyQualifiedName)
+                .Distinct()
+                .ToList();
 
             using var fileStream = File.Create(Path.Combine(directory!, "testlist.json"));
             JsonSerializer.Serialize(fileStream, testToWrite);
@@ -78,7 +96,11 @@ internal class TestDiscovery
             }
         }
 
-        public void HandleDiscoveryComplete(long totalTests, IEnumerable<TestCase>? lastChunk, bool isAborted)
+        public void HandleDiscoveryComplete(
+            long totalTests,
+            IEnumerable<TestCase>? lastChunk,
+            bool isAborted
+        )
         {
             if (lastChunk != null)
             {
@@ -96,9 +118,7 @@ internal class TestDiscovery
             Console.WriteLine(message);
         }
 
-        public void HandleRawMessage(string rawMessage)
-        {
-        }
+        public void HandleRawMessage(string rawMessage) { }
 
         public ImmutableArray<TestCase> GetTests()
         {
@@ -109,7 +129,9 @@ internal class TestDiscovery
 
     private static List<string> GetAssemblies(string binDirectory, bool isUnix)
     {
-        var unitTestAssemblies = Directory.GetFiles(binDirectory, "*.UnitTests.dll", SearchOption.AllDirectories).Where(ShouldInclude);
+        var unitTestAssemblies = Directory
+            .GetFiles(binDirectory, "*.UnitTests.dll", SearchOption.AllDirectories)
+            .Where(ShouldInclude);
         return unitTestAssemblies.ToList();
 
         bool ShouldInclude(string path)

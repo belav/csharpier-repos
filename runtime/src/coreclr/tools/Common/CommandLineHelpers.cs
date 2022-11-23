@@ -24,7 +24,10 @@ namespace System.CommandLine
     {
         public const string DefaultSystemModule = "System.Private.CoreLib";
 
-        public static Dictionary<string, string> BuildPathDictionary(IReadOnlyList<Token> tokens, bool strict)
+        public static Dictionary<string, string> BuildPathDictionary(
+            IReadOnlyList<Token> tokens,
+            bool strict
+        )
         {
             Dictionary<string, string> dictionary = new(StringComparer.OrdinalIgnoreCase);
 
@@ -54,7 +57,7 @@ namespace System.CommandLine
 
         public static TargetOS GetTargetOS(string token)
         {
-            if(string.IsNullOrEmpty(token))
+            if (string.IsNullOrEmpty(token))
             {
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     return TargetOS.Windows;
@@ -80,7 +83,7 @@ namespace System.CommandLine
 
         public static TargetArchitecture GetTargetArchitecture(string token)
         {
-            if(string.IsNullOrEmpty(token))
+            if (string.IsNullOrEmpty(token))
             {
                 return RuntimeInformation.ProcessArchitecture switch
                 {
@@ -107,7 +110,13 @@ namespace System.CommandLine
             throw new CommandLineException($"Target architecture '{token}' is not supported");
         }
 
-        public static void MakeReproPackage(string makeReproPath, string outputFilePath, string[] args, ParseResult res, IEnumerable<string> inputOptions)
+        public static void MakeReproPackage(
+            string makeReproPath,
+            string outputFilePath,
+            string[] args,
+            ParseResult res,
+            IEnumerable<string> inputOptions
+        )
         {
             Directory.CreateDirectory(makeReproPath);
 
@@ -120,7 +129,11 @@ namespace System.CommandLine
             catch { }
             try
             {
-                details.Add(System.Diagnostics.FileVersionInfo.GetVersionInfo(Environment.GetCommandLineArgs()[0]).ToString());
+                details.Add(
+                    System.Diagnostics.FileVersionInfo
+                        .GetVersionInfo(Environment.GetCommandLineArgs()[0])
+                        .ToString()
+                );
             }
             catch { }
 
@@ -178,7 +191,10 @@ namespace System.CommandLine
 
                     IValueDescriptor descriptor = option;
                     object val = res.CommandResult.GetValueForOption(option);
-                    if (val is not null && !(descriptor.HasDefaultValue && descriptor.GetDefaultValue().Equals(val)))
+                    if (
+                        val is not null
+                        && !(descriptor.HasDefaultValue && descriptor.GetDefaultValue().Equals(val))
+                    )
                     {
                         if (val is IEnumerable<string> values)
                         {
@@ -191,7 +207,9 @@ namespace System.CommandLine
                                 }
                                 foreach (string inputFile in dictionary.Values)
                                 {
-                                    rspFile.Add($"--{option.Name}:{ConvertFromInputPathToReproPackagePath(inputFile)}");
+                                    rspFile.Add(
+                                        $"--{option.Name}:{ConvertFromInputPathToReproPackagePath(inputFile)}"
+                                    );
                                 }
                             }
                             else
@@ -216,7 +234,9 @@ namespace System.CommandLine
                     {
                         foreach (string optInList in values)
                         {
-                            rspFile.Add($"{ConvertFromInputPathToReproPackagePath((string)optInList)}");
+                            rspFile.Add(
+                                $"{ConvertFromInputPathToReproPackagePath((string)optInList)}"
+                            );
                         }
                     }
                     else
@@ -234,7 +254,12 @@ namespace System.CommandLine
 
                 string ConvertFromInputPathToReproPackagePath(string inputPath)
                 {
-                    if (inputToReproPackageFileName.TryGetValue(inputPath, out string reproPackagePath))
+                    if (
+                        inputToReproPackageFileName.TryGetValue(
+                            inputPath,
+                            out string reproPackagePath
+                        )
+                    )
                     {
                         return reproPackagePath;
                     }
@@ -257,7 +282,11 @@ namespace System.CommandLine
         }
 
         // Helper to create a collection of paths unique in their simple names.
-        internal static void AppendExpandedPaths(Dictionary<string, string> dictionary, string pattern, bool strict)
+        internal static void AppendExpandedPaths(
+            Dictionary<string, string> dictionary,
+            string pattern,
+            bool strict
+        )
         {
             bool empty = true;
             string directoryName = Path.GetDirectoryName(pattern);
@@ -278,8 +307,12 @@ namespace System.CommandLine
                     {
                         if (strict)
                         {
-                            throw new CommandLineException("Multiple input files matching same simple name " +
-                                fullFileName + " " + dictionary[simpleName]);
+                            throw new CommandLineException(
+                                "Multiple input files matching same simple name "
+                                    + fullFileName
+                                    + " "
+                                    + dictionary[simpleName]
+                            );
                         }
                     }
                     else
@@ -314,7 +347,11 @@ namespace System.CommandLine
         ///   * referencing another response file.
         ///   * inline `#` comments.
         /// </remarks>
-        public static bool TryReadResponseFile(string filePath, out IReadOnlyList<string> newTokens, out string error)
+        public static bool TryReadResponseFile(
+            string filePath,
+            out IReadOnlyList<string> newTokens,
+            out string error
+        )
         {
             try
             {
@@ -329,10 +366,17 @@ namespace System.CommandLine
                             int firstQuotePosition = token.IndexOf('"');
 
                             // strip leading and trailing quotes from value.
-                            if (firstQuotePosition >= 0 && firstQuotePosition < token.Length - 1 &&
-                                (firstQuotePosition == 0 || token[firstQuotePosition - 1] != '\\'))
+                            if (
+                                firstQuotePosition >= 0
+                                && firstQuotePosition < token.Length - 1
+                                && (
+                                    firstQuotePosition == 0 || token[firstQuotePosition - 1] != '\\'
+                                )
+                            )
                             {
-                                token = token[..firstQuotePosition] + token[(firstQuotePosition + 1)..^1];
+                                token =
+                                    token[..firstQuotePosition]
+                                    + token[(firstQuotePosition + 1)..^1];
                             }
                         }
 

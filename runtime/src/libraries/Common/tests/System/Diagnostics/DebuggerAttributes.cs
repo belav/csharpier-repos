@@ -36,12 +36,19 @@ namespace System.Diagnostics
             return ValidateDebuggerTypeProxyProperties(obj.GetType(), obj);
         }
 
-        internal static DebuggerAttributeInfo ValidateDebuggerTypeProxyProperties(Type type, object obj)
+        internal static DebuggerAttributeInfo ValidateDebuggerTypeProxyProperties(
+            Type type,
+            object obj
+        )
         {
             return ValidateDebuggerTypeProxyProperties(type, type.GenericTypeArguments, obj);
         }
 
-        internal static DebuggerAttributeInfo ValidateDebuggerTypeProxyProperties(Type type, Type[] genericTypeArguments, object obj)
+        internal static DebuggerAttributeInfo ValidateDebuggerTypeProxyProperties(
+            Type type,
+            Type[] genericTypeArguments,
+            object obj
+        )
         {
             Type proxyType = GetProxyType(type, genericTypeArguments);
 
@@ -49,38 +56,48 @@ namespace System.Diagnostics
             // on the type without exception
             object proxyInstance = Activator.CreateInstance(proxyType, obj);
             IEnumerable<PropertyInfo> properties = GetDebuggerVisibleProperties(proxyType);
-            return new DebuggerAttributeInfo
-            {
-                Instance = proxyInstance,
-                Properties = properties
-            };
+            return new DebuggerAttributeInfo { Instance = proxyInstance, Properties = properties };
         }
 
         public static DebuggerBrowsableState? GetDebuggerBrowsableState(MemberInfo info)
         {
-            CustomAttributeData debuggerBrowsableAttribute = info.CustomAttributes
-                .SingleOrDefault(a => a.AttributeType == typeof(DebuggerBrowsableAttribute));
+            CustomAttributeData debuggerBrowsableAttribute = info.CustomAttributes.SingleOrDefault(
+                a => a.AttributeType == typeof(DebuggerBrowsableAttribute)
+            );
             // Enums in attribute constructors are boxed as ints, so cast to int? first.
-            return (DebuggerBrowsableState?)(int?)debuggerBrowsableAttribute?.ConstructorArguments.Single().Value;
+            return (DebuggerBrowsableState?)
+                (int?)debuggerBrowsableAttribute?.ConstructorArguments.Single().Value;
         }
 
         public static IEnumerable<FieldInfo> GetDebuggerVisibleFields(Type debuggerAttributeType)
         {
             // The debugger doesn't evaluate non-public members of type proxies.
-            IEnumerable<FieldInfo> visibleFields = debuggerAttributeType.GetFields()
-                .Where(fi => fi.IsPublic && GetDebuggerBrowsableState(fi) != DebuggerBrowsableState.Never);
+            IEnumerable<FieldInfo> visibleFields = debuggerAttributeType
+                .GetFields()
+                .Where(
+                    fi =>
+                        fi.IsPublic && GetDebuggerBrowsableState(fi) != DebuggerBrowsableState.Never
+                );
             return visibleFields;
         }
 
-        public static IEnumerable<PropertyInfo> GetDebuggerVisibleProperties(Type debuggerAttributeType)
+        public static IEnumerable<PropertyInfo> GetDebuggerVisibleProperties(
+            Type debuggerAttributeType
+        )
         {
             // The debugger doesn't evaluate non-public members of type proxies. GetGetMethod returns null if the getter is non-public.
-            IEnumerable<PropertyInfo> visibleProperties = debuggerAttributeType.GetProperties()
-                .Where(pi => pi.GetGetMethod() != null && GetDebuggerBrowsableState(pi) != DebuggerBrowsableState.Never);
+            IEnumerable<PropertyInfo> visibleProperties = debuggerAttributeType
+                .GetProperties()
+                .Where(
+                    pi =>
+                        pi.GetGetMethod() != null
+                        && GetDebuggerBrowsableState(pi) != DebuggerBrowsableState.Never
+                );
             return visibleProperties;
         }
 
-        public static object GetProxyObject(object obj) => Activator.CreateInstance(GetProxyType(obj), obj);
+        public static object GetProxyObject(object obj) =>
+            Activator.CreateInstance(GetProxyType(obj), obj);
 
         public static Type GetProxyType(object obj) => GetProxyType(obj.GetType());
 
@@ -89,19 +106,21 @@ namespace System.Diagnostics
         private static Type GetProxyType(Type type, Type[] genericTypeArguments)
         {
             // Get the DebuggerTypeProxyAttribute for obj
-            var attrs =
-                type.GetTypeInfo().CustomAttributes
-                .Where(a => a.AttributeType == typeof(DebuggerTypeProxyAttribute))
+            var attrs = type.GetTypeInfo()
+                .CustomAttributes.Where(a => a.AttributeType == typeof(DebuggerTypeProxyAttribute))
                 .ToArray();
             if (attrs.Length != 1)
             {
-                throw new InvalidOperationException($"Expected one DebuggerTypeProxyAttribute on {type}.");
+                throw new InvalidOperationException(
+                    $"Expected one DebuggerTypeProxyAttribute on {type}."
+                );
             }
             CustomAttributeData cad = attrs[0];
 
-            Type proxyType = cad.ConstructorArguments[0].ArgumentType == typeof(Type) ?
-                (Type)cad.ConstructorArguments[0].Value :
-                Type.GetType((string)cad.ConstructorArguments[0].Value);
+            Type proxyType =
+                cad.ConstructorArguments[0].ArgumentType == typeof(Type)
+                    ? (Type)cad.ConstructorArguments[0].Value
+                    : Type.GetType((string)cad.ConstructorArguments[0].Value);
             if (genericTypeArguments.Length > 0)
             {
                 proxyType = proxyType.MakeGenericType(genericTypeArguments);
@@ -114,13 +133,15 @@ namespace System.Diagnostics
         {
             // Get the DebuggerDisplayAttribute for obj
             var objType = obj.GetType();
-            var attrs =
-                objType.GetTypeInfo().CustomAttributes
-                .Where(a => a.AttributeType == typeof(DebuggerDisplayAttribute))
+            var attrs = objType
+                .GetTypeInfo()
+                .CustomAttributes.Where(a => a.AttributeType == typeof(DebuggerDisplayAttribute))
                 .ToArray();
             if (attrs.Length != 1)
             {
-                throw new InvalidOperationException($"Expected one DebuggerDisplayAttribute on {objType}.");
+                throw new InvalidOperationException(
+                    $"Expected one DebuggerDisplayAttribute on {objType}."
+                );
             }
             var cad = attrs[0];
 
@@ -131,12 +152,16 @@ namespace System.Diagnostics
 
             if (segments.Length % 2 == 0)
             {
-                throw new InvalidOperationException($"The DebuggerDisplayAttribute for {objType} lacks a closing brace.");
+                throw new InvalidOperationException(
+                    $"The DebuggerDisplayAttribute for {objType} lacks a closing brace."
+                );
             }
 
             if (segments.Length == 1)
             {
-                throw new InvalidOperationException($"The DebuggerDisplayAttribute for {objType} doesn't reference any expressions.");
+                throw new InvalidOperationException(
+                    $"The DebuggerDisplayAttribute for {objType} doesn't reference any expressions."
+                );
             }
 
             var sb = new StringBuilder();
@@ -157,7 +182,9 @@ namespace System.Diagnostics
                     object member;
                     if (!TryEvaluateReference(obj, reference, out member))
                     {
-                        throw new InvalidOperationException($"The DebuggerDisplayAttribute for {objType} contains the expression \"{reference}\".");
+                        throw new InvalidOperationException(
+                            $"The DebuggerDisplayAttribute for {objType} contains the expression \"{reference}\"."
+                        );
                     }
 
                     string memberString = GetDebuggerMemberString(member, noQuotes);
@@ -192,11 +219,16 @@ namespace System.Diagnostics
         }
 
         private static bool IsPrimitiveType(object obj) =>
-            obj is byte || obj is sbyte ||
-            obj is short || obj is ushort ||
-            obj is int || obj is uint ||
-            obj is long || obj is ulong ||
-            obj is float || obj is double;
+            obj is byte
+            || obj is sbyte
+            || obj is short
+            || obj is ushort
+            || obj is int
+            || obj is uint
+            || obj is long
+            || obj is ulong
+            || obj is float
+            || obj is double;
 
         private static bool TryEvaluateReference(object obj, string reference, out object member)
         {

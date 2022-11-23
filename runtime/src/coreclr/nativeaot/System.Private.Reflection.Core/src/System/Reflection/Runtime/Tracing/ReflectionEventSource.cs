@@ -6,7 +6,10 @@ using System.Diagnostics.Tracing;
 
 namespace System.Reflection.Runtime.Tracing
 {
-    [EventSource(Guid = "55B578AE-32B0-48F8-822F-B3245E6FA59C", Name = "System.Reflection.Runtime.Tracing")]
+    [EventSource(
+        Guid = "55B578AE-32B0-48F8-822F-B3245E6FA59C",
+        Name = "System.Reflection.Runtime.Tracing"
+    )]
     internal sealed class ReflectionEventSource : EventSource
     {
         // Defines the singleton instance for the Resources ETW provider
@@ -14,14 +17,10 @@ namespace System.Reflection.Runtime.Tracing
 
         public static bool IsInitialized
         {
-            get
-            {
-                return Log != null;
-            }
+            get { return Log != null; }
         }
 
         private ReflectionEventSource() { }
-
 
         #region Reflection Event Handlers
         [Event(1)]
@@ -301,13 +300,21 @@ namespace System.Reflection.Runtime.Tracing
         }
 
         [Event(47)]
-        public void MethodInfo_MakeGenericMethod(string typeName, string methodName, string typeArguments)
+        public void MethodInfo_MakeGenericMethod(
+            string typeName,
+            string methodName,
+            string typeArguments
+        )
         {
             WriteEvent(47, typeName, methodName, typeArguments);
         }
 
         [Event(48)]
-        public void MethodInfo_CreateDelegate(string typeName, string methodName, string delegateTypeName)
+        public void MethodInfo_CreateDelegate(
+            string typeName,
+            string methodName,
+            string delegateTypeName
+        )
         {
             WriteEvent(48, typeName, methodName, delegateTypeName);
         }

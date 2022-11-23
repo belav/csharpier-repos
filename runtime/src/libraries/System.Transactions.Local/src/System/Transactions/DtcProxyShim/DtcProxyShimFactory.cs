@@ -36,22 +36,40 @@ internal sealed class DtcProxyShimFactory
 
     private ITransactionDispenser _transactionDispenser = null!; // Late-initialized in ConnectToProxy
 
-    internal DtcProxyShimFactory(EventWaitHandle notificationEventHandle)
-        => _eventHandle = notificationEventHandle;
+    internal DtcProxyShimFactory(EventWaitHandle notificationEventHandle) =>
+        _eventHandle = notificationEventHandle;
 
     // https://docs.microsoft.com/previous-versions/windows/desktop/ms678898(v=vs.85)
-    [DllImport(Interop.Libraries.Xolehlp, CharSet = CharSet.Unicode, ExactSpelling = true, PreserveSig = false)]
+    [DllImport(
+        Interop.Libraries.Xolehlp,
+        CharSet = CharSet.Unicode,
+        ExactSpelling = true,
+        PreserveSig = false
+    )]
     private static extern void DtcGetTransactionManagerExW(
         [MarshalAs(UnmanagedType.LPWStr)] string? pszHost,
         [MarshalAs(UnmanagedType.LPWStr)] string? pszTmName,
         in Guid riid,
         int grfOptions,
         object? pvConfigPararms,
-        [MarshalAs(UnmanagedType.Interface)] out ITransactionDispenser ppvObject);
+        [MarshalAs(UnmanagedType.Interface)] out ITransactionDispenser ppvObject
+    );
 
-    [RequiresUnreferencedCode("Distributed transactions support may not be compatible with trimming. If your program creates a distributed transaction via System.Transactions, the correctness of the application cannot be guaranteed after trimming.")]
-    private static void DtcGetTransactionManager(string? nodeName, out ITransactionDispenser localDispenser) =>
-        DtcGetTransactionManagerExW(nodeName, null, Guids.IID_ITransactionDispenser_Guid, 0, null, out localDispenser);
+    [RequiresUnreferencedCode(
+        "Distributed transactions support may not be compatible with trimming. If your program creates a distributed transaction via System.Transactions, the correctness of the application cannot be guaranteed after trimming."
+    )]
+    private static void DtcGetTransactionManager(
+        string? nodeName,
+        out ITransactionDispenser localDispenser
+    ) =>
+        DtcGetTransactionManagerExW(
+            nodeName,
+            null,
+            Guids.IID_ITransactionDispenser_Guid,
+            0,
+            null,
+            out localDispenser
+        );
 
     public void ConnectToProxy(
         string? nodeName,
@@ -59,7 +77,8 @@ internal sealed class DtcProxyShimFactory
         object managedIdentifier,
         out bool nodeNameMatches,
         out byte[] whereabouts,
-        out ResourceManagerShim resourceManagerShim)
+        out ResourceManagerShim resourceManagerShim
+    )
     {
         switch (RuntimeInformation.ProcessArchitecture)
         {
@@ -67,7 +86,14 @@ internal sealed class DtcProxyShimFactory
                 throw new PlatformNotSupportedException(SR.DistributedNotSupportedOn32Bits);
         }
 
-        ConnectToProxyCore(nodeName, resourceManagerIdentifier, managedIdentifier, out nodeNameMatches, out whereabouts, out resourceManagerShim);
+        ConnectToProxyCore(
+            nodeName,
+            resourceManagerIdentifier,
+            managedIdentifier,
+            out nodeNameMatches,
+            out whereabouts,
+            out resourceManagerShim
+        );
     }
 
     private void ConnectToProxyCore(
@@ -76,7 +102,8 @@ internal sealed class DtcProxyShimFactory
         object managedIdentifier,
         out bool nodeNameMatches,
         out byte[] whereabouts,
-        out ResourceManagerShim resourceManagerShim)
+        out ResourceManagerShim resourceManagerShim
+    )
     {
         lock (_proxyInitLock)
         {
@@ -111,7 +138,11 @@ internal sealed class DtcProxyShimFactory
             // which is single threaded and will return XACT_E_ALREADYINPROGRESS if another thread invokes the API.
             OletxHelper.Retry(() =>
             {
-                pImportWhereabouts.GetWhereabouts(whereaboutsSize, tmpWhereabouts, out uint pcbUsed);
+                pImportWhereabouts.GetWhereabouts(
+                    whereaboutsSize,
+                    tmpWhereabouts,
+                    out uint pcbUsed
+                );
                 Debug.Assert(pcbUsed == tmpWhereabouts.Length);
             });
 
@@ -128,7 +159,8 @@ internal sealed class DtcProxyShimFactory
                     "System.Transactions.InternalRM",
                     rmNotifyShim,
                     Guids.IID_IResourceManager_Guid,
-                    out object? rm);
+                    out object? rm
+                );
 
                 rmShim.ResourceManager = (IResourceManager)rm;
             });
@@ -149,15 +181,15 @@ internal sealed class DtcProxyShimFactory
         _eventHandle.Set();
     }
 
-    public void ReleaseNotificationLock()
-        => Monitor.Exit(_notificationLock);
+    public void ReleaseNotificationLock() => Monitor.Exit(_notificationLock);
 
     public void BeginTransaction(
         uint timeout,
         OletxTransactionIsolationLevel isolationLevel,
         object? managedIdentifier,
         out Guid transactionIdentifier,
-        out TransactionShim transactionShim)
+        out TransactionShim transactionShim
+    )
     {
         ITransactionOptions options = GetCachedOptions();
 
@@ -166,9 +198,21 @@ internal sealed class DtcProxyShimFactory
             var xactopt = new Xactopt(timeout, string.Empty);
             options.SetOptions(xactopt);
 
-            _transactionDispenser.BeginTransaction(IntPtr.Zero, isolationLevel, OletxTransactionIsoFlags.ISOFLAG_NONE, options, out ITransaction? pTx);
+            _transactionDispenser.BeginTransaction(
+                IntPtr.Zero,
+                isolationLevel,
+                OletxTransactionIsoFlags.ISOFLAG_NONE,
+                options,
+                out ITransaction? pTx
+            );
 
-            SetupTransaction(pTx, managedIdentifier, out transactionIdentifier, out OletxTransactionIsolationLevel localIsoLevel, out transactionShim);
+            SetupTransaction(
+                pTx,
+                managedIdentifier,
+                out transactionIdentifier,
+                out OletxTransactionIsolationLevel localIsoLevel,
+                out transactionShim
+            );
         }
         finally
         {
@@ -179,7 +223,8 @@ internal sealed class DtcProxyShimFactory
     public void CreateResourceManager(
         Guid resourceManagerIdentifier,
         OletxResourceManager managedIdentifier,
-        out ResourceManagerShim resourceManagerShim)
+        out ResourceManagerShim resourceManagerShim
+    )
     {
         var rmFactory = (IResourceManagerFactory2)_transactionDispenser;
 
@@ -193,7 +238,8 @@ internal sealed class DtcProxyShimFactory
                 "System.Transactions.ResourceManager",
                 rmNotifyShim,
                 Guids.IID_IResourceManager_Guid,
-                out object? rm);
+                out object? rm
+            );
 
             rmShim.ResourceManager = (IResourceManager)rm;
         });
@@ -206,12 +252,24 @@ internal sealed class DtcProxyShimFactory
         OutcomeEnlistment managedIdentifier,
         out Guid transactionIdentifier,
         out OletxTransactionIsolationLevel isolationLevel,
-        out TransactionShim transactionShim)
+        out TransactionShim transactionShim
+    )
     {
         var txImport = (ITransactionImport)_transactionDispenser;
-        txImport.Import(Convert.ToUInt32(cookie.Length), cookie, Guids.IID_ITransaction_Guid, out object? tx);
+        txImport.Import(
+            Convert.ToUInt32(cookie.Length),
+            cookie,
+            Guids.IID_ITransaction_Guid,
+            out object? tx
+        );
 
-        SetupTransaction((ITransaction)tx, managedIdentifier, out transactionIdentifier, out isolationLevel, out transactionShim);
+        SetupTransaction(
+            (ITransaction)tx,
+            managedIdentifier,
+            out transactionIdentifier,
+            out isolationLevel,
+            out transactionShim
+        );
     }
 
     public void ReceiveTransaction(
@@ -219,7 +277,8 @@ internal sealed class DtcProxyShimFactory
         OutcomeEnlistment managedIdentifier,
         out Guid transactionIdentifier,
         out OletxTransactionIsolationLevel isolationLevel,
-        out TransactionShim transactionShim)
+        out TransactionShim transactionShim
+    )
     {
         ITransactionReceiver receiver = GetCachedReceiver();
 
@@ -228,9 +287,16 @@ internal sealed class DtcProxyShimFactory
             receiver.UnmarshalPropagationToken(
                 Convert.ToUInt32(propagationToken.Length),
                 propagationToken,
-                out ITransaction? tx);
+                out ITransaction? tx
+            );
 
-            SetupTransaction(tx, managedIdentifier, out transactionIdentifier, out isolationLevel, out transactionShim);
+            SetupTransaction(
+                tx,
+                managedIdentifier,
+                out transactionIdentifier,
+                out isolationLevel,
+                out transactionShim
+            );
         }
         finally
         {
@@ -243,19 +309,26 @@ internal sealed class DtcProxyShimFactory
         OutcomeEnlistment managedIdentifier,
         out Guid transactionIdentifier,
         out OletxTransactionIsolationLevel isolationLevel,
-        out TransactionShim transactionShim)
+        out TransactionShim transactionShim
+    )
     {
         var cloner = (ITransactionCloner)transactionNative;
         cloner.CloneWithCommitDisabled(out ITransaction transaction);
 
-        SetupTransaction(transaction, managedIdentifier, out transactionIdentifier, out isolationLevel, out transactionShim);
+        SetupTransaction(
+            transaction,
+            managedIdentifier,
+            out transactionIdentifier,
+            out isolationLevel,
+            out transactionShim
+        );
     }
 
-    internal ITransactionExportFactory ExportFactory
-        => (ITransactionExportFactory)_transactionDispenser;
+    internal ITransactionExportFactory ExportFactory =>
+        (ITransactionExportFactory)_transactionDispenser;
 
-    internal ITransactionVoterFactory2 VoterFactory
-        => (ITransactionVoterFactory2)_transactionDispenser;
+    internal ITransactionVoterFactory2 VoterFactory =>
+        (ITransactionVoterFactory2)_transactionDispenser;
 
     public void GetNotification(
         out object? managedIdentifier,
@@ -263,7 +336,8 @@ internal sealed class DtcProxyShimFactory
         out bool isSinglePhase,
         out bool abortingHint,
         out bool releaseLock,
-        out byte[]? prepareInfo)
+        out byte[]? prepareInfo
+    )
     {
         managedIdentifier = null;
         shimNotificationType = ShimNotificationType.None;
@@ -290,7 +364,10 @@ internal sealed class DtcProxyShimFactory
         // other notifications from being processed while we are processing TMDown.  But we don't want
         // to force 3 roundtrips to this NotificationShimFactory for all notifications ( 1 to grab the lock,
         // one to get the notification, and one to release the lock).
-        if (!entryRemoved || shimNotificationType != ShimNotificationType.ResourceManagerTmDownNotify)
+        if (
+            !entryRemoved
+            || shimNotificationType != ShimNotificationType.ResourceManagerTmDownNotify
+        )
         {
             Monitor.Exit(_notificationLock);
         }
@@ -305,7 +382,8 @@ internal sealed class DtcProxyShimFactory
         object? managedIdentifier,
         out Guid pTransactionIdentifier,
         out OletxTransactionIsolationLevel pIsolationLevel,
-        out TransactionShim ppTransactionShim)
+        out TransactionShim ppTransactionShim
+    )
     {
         var transactionNotifyShim = new TransactionNotifyShim(this, managedIdentifier);
 
@@ -335,8 +413,8 @@ internal sealed class DtcProxyShimFactory
         return transactionOptions;
     }
 
-    internal void ReturnCachedOptions(ITransactionOptions options)
-        => _cachedOptions.Enqueue(options);
+    internal void ReturnCachedOptions(ITransactionOptions options) =>
+        _cachedOptions.Enqueue(options);
 
     internal ITransactionTransmitter GetCachedTransmitter(ITransaction transaction)
     {

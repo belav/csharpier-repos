@@ -16,17 +16,11 @@ namespace System.CommandLine
             switch (symbol)
             {
                 case Option option:
-                    return new[]
-                    {
-                        option.Argument
-                    };
+                    return new[] { option.Argument };
                 case Command command:
                     return command.Arguments;
                 case Argument argument:
-                    return new[]
-                    {
-                        argument
-                    };
+                    return new[] { argument };
                 default:
                     throw new NotSupportedException();
             }
@@ -44,7 +38,7 @@ namespace System.CommandLine
 
             return parser;
         }
-        
+
         internal static Parser GetOrCreateDefaultInvocationParser(this Symbol symbol)
         {
             var root = GetOrCreateRootCommand(symbol);
@@ -83,8 +77,8 @@ namespace System.CommandLine
 
             return Create(symbol);
 
-            static RootCommand Create(Symbol notCommand)
-                => notCommand is Option option
+            static RootCommand Create(Symbol notCommand) =>
+                notCommand is Option option
                     ? new RootCommand { option }
                     // we know it's not a Command and not an Option, so it can only be an Argument
                     : new RootCommand { (Argument)notCommand };

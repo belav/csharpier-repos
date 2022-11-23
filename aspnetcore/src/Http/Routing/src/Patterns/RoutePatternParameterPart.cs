@@ -17,18 +17,16 @@ public sealed class RoutePatternParameterPart : RoutePatternPart
         string parameterName,
         object? @default,
         RoutePatternParameterKind parameterKind,
-        RoutePatternParameterPolicyReference[] parameterPolicies)
-        : this(parameterName, @default, parameterKind, parameterPolicies, encodeSlashes: true)
-    {
-    }
+        RoutePatternParameterPolicyReference[] parameterPolicies
+    ) : this(parameterName, @default, parameterKind, parameterPolicies, encodeSlashes: true) { }
 
     internal RoutePatternParameterPart(
         string parameterName,
         object? @default,
         RoutePatternParameterKind parameterKind,
         RoutePatternParameterPolicyReference[] parameterPolicies,
-        bool encodeSlashes)
-        : base(RoutePatternPartKind.Parameter)
+        bool encodeSlashes
+    ) : base(RoutePatternPartKind.Parameter)
     {
         // See #475 - this code should have some asserts, but it can't because of the design of RouteParameterParser.
 

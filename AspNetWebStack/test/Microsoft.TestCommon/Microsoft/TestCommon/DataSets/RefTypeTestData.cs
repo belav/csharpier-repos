@@ -27,19 +27,27 @@ namespace Microsoft.TestCommon
         public RefTypeTestData(
             Func<IEnumerable<T>> testDataProvider,
             Func<IEnumerable<T>> derivedTypeTestDataProvider,
-            Func<IEnumerable<T>> knownTypeTestDataProvider)
-            : this(testDataProvider)
+            Func<IEnumerable<T>> knownTypeTestDataProvider
+        ) : this(testDataProvider)
         {
             this.derivedTypeTestDataProvider = derivedTypeTestDataProvider;
             if (this.derivedTypeTestDataProvider != null)
             {
-                this.RegisterTestDataVariation(TestDataVariations.AsDerivedType, this.Type, this.GetTestDataAsDerivedType);
+                this.RegisterTestDataVariation(
+                    TestDataVariations.AsDerivedType,
+                    this.Type,
+                    this.GetTestDataAsDerivedType
+                );
             }
 
             this.knownTypeTestDataProvider = knownTypeTestDataProvider;
             if (this.knownTypeTestDataProvider != null)
             {
-                this.RegisterTestDataVariation(TestDataVariations.AsKnownType, this.Type, this.GetTestDataAsDerivedKnownType);
+                this.RegisterTestDataVariation(
+                    TestDataVariations.AsKnownType,
+                    this.Type,
+                    this.GetTestDataAsDerivedKnownType
+                );
             }
         }
 

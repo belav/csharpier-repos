@@ -45,7 +45,5 @@ public sealed record ModelCustomizerDependencies
     ///     the constructor at any point in this process.
     /// </remarks>
     [EntityFrameworkInternal]
-    public ModelCustomizerDependencies()
-    {
-    }
+    public ModelCustomizerDependencies() { }
 }

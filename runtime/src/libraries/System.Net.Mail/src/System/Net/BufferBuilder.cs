@@ -22,7 +22,11 @@ namespace System.Net.Mail
         {
             if (count > _buffer.Length - _offset)
             {
-                byte[] newBuffer = new byte[((_buffer.Length * 2) > (_buffer.Length + count)) ? (_buffer.Length * 2) : (_buffer.Length + count)];
+                byte[] newBuffer = new byte[
+                    ((_buffer.Length * 2) > (_buffer.Length + count))
+                        ? (_buffer.Length * 2)
+                        : (_buffer.Length + count)
+                ];
                 Buffer.BlockCopy(_buffer, 0, newBuffer, 0, _offset);
                 _buffer = newBuffer;
             }
@@ -97,7 +101,12 @@ namespace System.Net.Mail
         }
 
         internal int Length => _offset;
+
         internal byte[] GetBuffer() => _buffer;
-        internal void Reset() { _offset = 0; }
+
+        internal void Reset()
+        {
+            _offset = 0;
+        }
     }
 }

@@ -30,8 +30,8 @@ public interface IStoreStoredProcedureResultColumn : IColumnBase
     /// </summary>
     /// <param name="entityType">An entity type.</param>
     /// <returns>The property mapping or <see langword="null" /> if not found.</returns>
-    new IStoredProcedureResultColumnMapping? FindColumnMapping(IReadOnlyEntityType entityType)
-        => (IStoredProcedureResultColumnMapping?)((IColumnBase)this).FindColumnMapping(entityType);
+    new IStoredProcedureResultColumnMapping? FindColumnMapping(IReadOnlyEntityType entityType) =>
+        (IStoredProcedureResultColumnMapping?)((IColumnBase)this).FindColumnMapping(entityType);
 
     /// <summary>
     ///     <para>
@@ -45,7 +45,10 @@ public interface IStoreStoredProcedureResultColumn : IColumnBase
     /// <param name="options">Options for generating the string.</param>
     /// <param name="indent">The number of indent spaces to use before each new line.</param>
     /// <returns>A human-readable representation.</returns>
-    string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
+    string ToDebugString(
+        MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+        int indent = 0
+    )
     {
         var builder = new StringBuilder();
         var indentString = new string(' ', indent);

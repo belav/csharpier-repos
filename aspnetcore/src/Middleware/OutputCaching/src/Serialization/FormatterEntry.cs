@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 namespace Microsoft.AspNetCore.OutputCaching.Serialization;
+
 internal sealed class FormatterEntry
 {
     public DateTimeOffset Created { get; set; }

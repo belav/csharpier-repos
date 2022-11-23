@@ -13,6 +13,7 @@ namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
             IAccessibilityFacts accessibilityFacts,
             SyntaxNode member,
             AccessibilityModifiersRequired option,
-            out SyntaxToken name);
+            out SyntaxToken name
+        );
     }
 }

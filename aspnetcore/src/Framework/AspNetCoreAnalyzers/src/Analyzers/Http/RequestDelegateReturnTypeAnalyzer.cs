@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Analyzers.Http;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public partial class RequestDelegateReturnTypeAnalyzer : DiagnosticAnalyzer
 {
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+        ImmutableArray.Create(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate);
 
     public override void Initialize(AnalysisContext context)
     {
@@ -26,57 +27,100 @@ public partial class RequestDelegateReturnTypeAnalyzer : DiagnosticAnalyzer
             {
                 return;
             }
-            context.RegisterOperationAction(context =>
-            {
-                var methodReference = (IMethodReferenceOperation)context.Operation;
-                if (methodReference.Parent is { } parent &&
-                    parent.Kind == OperationKind.DelegateCreation &&
-                    SymbolEqualityComparer.Default.Equals(parent.Type, wellKnownTypes.RequestDelegate))
+            context.RegisterOperationAction(
+                context =>
                 {
-                    // Inspect return type of method signature for Task<T>.
-                    var returnType = methodReference.Method.ReturnType;
+                    var methodReference = (IMethodReferenceOperation)context.Operation;
+                    if (
+                        methodReference.Parent is { } parent
+                        && parent.Kind == OperationKind.DelegateCreation
+                        && SymbolEqualityComparer.Default.Equals(
+                            parent.Type,
+                            wellKnownTypes.RequestDelegate
+                        )
+                    )
+                    {
+                        // Inspect return type of method signature for Task<T>.
+                        var returnType = methodReference.Method.ReturnType;
 
-                    if (SymbolEqualityComparer.Default.Equals(returnType.OriginalDefinition, wellKnownTypes.TaskOfT))
-                    {
-                        AddDiagnosticWarning(context, methodReference.Syntax.GetLocation(), returnType);
-                    }
-                }
-            }, OperationKind.MethodReference);
-            context.RegisterOperationAction(context =>
-            {
-                var anonymousFunction = (IAnonymousFunctionOperation)context.Operation;
-                if (anonymousFunction.Parent is { } parent &&
-                    parent.Kind == OperationKind.DelegateCreation &&
-                    SymbolEqualityComparer.Default.Equals(parent.Type, wellKnownTypes.RequestDelegate))
-                {
-                    // Inspect contents of anonymous function and search for return statements.
-                    // Return statement of Task<T> means a value was returned.
-                    foreach (var item in anonymousFunction.Body.Descendants())
-                    {
-                        if (item is IReturnOperation returnOperation &&
-                            returnOperation.ReturnedValue is { } returnedValue)
+                        if (
+                            SymbolEqualityComparer.Default.Equals(
+                                returnType.OriginalDefinition,
+                                wellKnownTypes.TaskOfT
+                            )
+                        )
                         {
-                            var resolvedOperation = WalkDownConversion(returnedValue);
-                            var returnType = resolvedOperation.Type;
-
-                            if (SymbolEqualityComparer.Default.Equals(returnType.OriginalDefinition, wellKnownTypes.TaskOfT))
+                            AddDiagnosticWarning(
+                                context,
+                                methodReference.Syntax.GetLocation(),
+                                returnType
+                            );
+                        }
+                    }
+                },
+                OperationKind.MethodReference
+            );
+            context.RegisterOperationAction(
+                context =>
+                {
+                    var anonymousFunction = (IAnonymousFunctionOperation)context.Operation;
+                    if (
+                        anonymousFunction.Parent is { } parent
+                        && parent.Kind == OperationKind.DelegateCreation
+                        && SymbolEqualityComparer.Default.Equals(
+                            parent.Type,
+                            wellKnownTypes.RequestDelegate
+                        )
+                    )
+                    {
+                        // Inspect contents of anonymous function and search for return statements.
+                        // Return statement of Task<T> means a value was returned.
+                        foreach (var item in anonymousFunction.Body.Descendants())
+                        {
+                            if (
+                                item is IReturnOperation returnOperation
+                                && returnOperation.ReturnedValue is { } returnedValue
+                            )
                             {
-                                AddDiagnosticWarning(context, anonymousFunction.Syntax.GetLocation(), returnType);
-                                return;
+                                var resolvedOperation = WalkDownConversion(returnedValue);
+                                var returnType = resolvedOperation.Type;
+
+                                if (
+                                    SymbolEqualityComparer.Default.Equals(
+                                        returnType.OriginalDefinition,
+                                        wellKnownTypes.TaskOfT
+                                    )
+                                )
+                                {
+                                    AddDiagnosticWarning(
+                                        context,
+                                        anonymousFunction.Syntax.GetLocation(),
+                                        returnType
+                                    );
+                                    return;
+                                }
                             }
                         }
                     }
-                }
-            }, OperationKind.AnonymousFunction);
+                },
+                OperationKind.AnonymousFunction
+            );
         });
     }
 
-    private static void AddDiagnosticWarning(OperationAnalysisContext context, Location location, ITypeSymbol returnType)
+    private static void AddDiagnosticWarning(
+        OperationAnalysisContext context,
+        Location location,
+        ITypeSymbol returnType
+    )
     {
-        context.ReportDiagnostic(Diagnostic.Create(
-            DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate,
-            location,
-            ((INamedTypeSymbol)returnType).TypeArguments[0].ToString()));
+        context.ReportDiagnostic(
+            Diagnostic.Create(
+                DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate,
+                location,
+                ((INamedTypeSymbol)returnType).TypeArguments[0].ToString()
+            )
+        );
     }
 
     private static IOperation WalkDownConversion(IOperation operation)
@@ -91,7 +135,10 @@ public partial class RequestDelegateReturnTypeAnalyzer : DiagnosticAnalyzer
 
     internal sealed class WellKnownTypes
     {
-        public static bool TryCreate(Compilation compilation, [NotNullWhen(returnValue: true)] out WellKnownTypes? wellKnownTypes)
+        public static bool TryCreate(
+            Compilation compilation,
+            [NotNullWhen(returnValue: true)] out WellKnownTypes? wellKnownTypes
+        )
         {
             wellKnownTypes = default;
 
@@ -107,11 +154,7 @@ public partial class RequestDelegateReturnTypeAnalyzer : DiagnosticAnalyzer
                 return false;
             }
 
-            wellKnownTypes = new()
-            {
-                RequestDelegate = requestDelegate,
-                TaskOfT = taskOfT
-            };
+            wellKnownTypes = new() { RequestDelegate = requestDelegate, TaskOfT = taskOfT };
 
             return true;
         }

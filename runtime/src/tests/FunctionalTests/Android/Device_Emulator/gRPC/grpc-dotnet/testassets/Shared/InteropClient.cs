@@ -43,7 +43,8 @@ namespace Grpc.Shared.TestAssets
 
     public class InteropClient
     {
-        internal const string CompressionRequestAlgorithmMetadataKey = "grpc-internal-encoding-request";
+        internal const string CompressionRequestAlgorithmMetadataKey =
+            "grpc-internal-encoding-request";
 
         private readonly ClientOptions options;
 
@@ -86,11 +87,14 @@ namespace Grpc.Shared.TestAssets
 #endif
             }
 
-            var channel = GrpcChannel.ForAddress($"{scheme}://{options.ServerHost}:{options.ServerPort}", new GrpcChannelOptions
-            {
-                Credentials = credentials,
-                HttpHandler = httpMessageHandler,
-            });
+            var channel = GrpcChannel.ForAddress(
+                $"{scheme}://{options.ServerHost}:{options.ServerPort}",
+                new GrpcChannelOptions
+                {
+                    Credentials = credentials,
+                    HttpHandler = httpMessageHandler,
+                }
+            );
 
             return new GrpcChannelWrapper(channel);
         }
@@ -105,7 +109,10 @@ namespace Grpc.Shared.TestAssets
                 InnerHandler = innerHandler;
             }
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 request.Version = Http3Version;
                 request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
@@ -118,23 +125,33 @@ namespace Grpc.Shared.TestAssets
         {
             return new HttpClientHandler
             {
-                ServerCertificateCustomValidationCallback = (request, cert, chain, sslPolicyErrors) => true
+                ServerCertificateCustomValidationCallback = (
+                    request,
+                    cert,
+                    chain,
+                    sslPolicyErrors
+                ) => true
             };
         }
 
-        private ChannelCredentials CreateCredentials(bool? useTestCaOverride = null)
-            => options.UseTls ? new SslCredentials() : ChannelCredentials.Insecure;
+        private ChannelCredentials CreateCredentials(bool? useTestCaOverride = null) =>
+            options.UseTls ? new SslCredentials() : ChannelCredentials.Insecure;
 
-        private bool IsHttpClient() => string.Equals(options.ClientType, "httpclient", StringComparison.OrdinalIgnoreCase);
+        private bool IsHttpClient() =>
+            string.Equals(options.ClientType, "httpclient", StringComparison.OrdinalIgnoreCase);
 
-        private static TClient CreateClient<TClient>(IChannelWrapper channel) where TClient : ClientBase
+        private static TClient CreateClient<TClient>(IChannelWrapper channel)
+            where TClient : ClientBase
         {
             return (TClient)Activator.CreateInstance(typeof(TClient), channel.Channel)!;
         }
 
         public static IEnumerable<string> TestNames => Tests.Keys;
 
-        private static readonly Dictionary<string, Func<IChannelWrapper, ClientOptions, Task>> Tests = new Dictionary<string, Func<IChannelWrapper, ClientOptions, Task>>
+        private static readonly Dictionary<
+            string,
+            Func<IChannelWrapper, ClientOptions, Task>
+        > Tests = new Dictionary<string, Func<IChannelWrapper, ClientOptions, Task>>
         {
             ["empty_unary"] = RunEmptyUnary,
             ["large_unary"] = RunLargeUnary,
@@ -189,11 +206,16 @@ namespace Grpc.Shared.TestAssets
             Assert.AreEqual(314159, response.Payload.Body.Length);
         }
 
-        public static async Task RunClientStreamingAsync(IChannelWrapper channel, ClientOptions options)
+        public static async Task RunClientStreamingAsync(
+            IChannelWrapper channel,
+            ClientOptions options
+        )
         {
             var client = CreateClient<TestService.TestServiceClient>(channel);
 
-            var bodySizes = new List<int> { 27182, 8, 1828, 45904 }.Select((size) => new StreamingInputCallRequest { Payload = CreateZerosPayload(size) });
+            var bodySizes = new List<int> { 27182, 8, 1828, 45904 }.Select(
+                (size) => new StreamingInputCallRequest { Payload = CreateZerosPayload(size) }
+            );
 
             using (var call = client.StreamingInputCall())
             {
@@ -204,7 +226,10 @@ namespace Grpc.Shared.TestAssets
             }
         }
 
-        public static async Task RunServerStreamingAsync(IChannelWrapper channel, ClientOptions options)
+        public static async Task RunServerStreamingAsync(
+            IChannelWrapper channel,
+            ClientOptions options
+        )
         {
             var client = CreateClient<TestService.TestServiceClient>(channel);
 
@@ -212,13 +237,19 @@ namespace Grpc.Shared.TestAssets
 
             var request = new StreamingOutputCallRequest
             {
-                ResponseParameters = { bodySizes.Select((size) => new ResponseParameters { Size = size }) }
+                ResponseParameters =
+                {
+                    bodySizes.Select((size) => new ResponseParameters { Size = size })
+                }
             };
 
             using (var call = client.StreamingOutputCall(request))
             {
                 var responseList = await call.ResponseStream.ToListAsync();
-                CollectionAssert.AreEqual(bodySizes, responseList.Select((item) => item.Payload.Body.Length).ToList());
+                CollectionAssert.AreEqual(
+                    bodySizes,
+                    responseList.Select((item) => item.Payload.Body.Length).ToList()
+                );
             }
         }
 
@@ -228,38 +259,46 @@ namespace Grpc.Shared.TestAssets
 
             using (var call = client.FullDuplexCall())
             {
-                await call.RequestStream.WriteAsync(new StreamingOutputCallRequest
-                {
-                    ResponseParameters = { new ResponseParameters { Size = 31415 } },
-                    Payload = CreateZerosPayload(27182)
-                });
+                await call.RequestStream.WriteAsync(
+                    new StreamingOutputCallRequest
+                    {
+                        ResponseParameters = { new ResponseParameters { Size = 31415 } },
+                        Payload = CreateZerosPayload(27182)
+                    }
+                );
 
                 Assert.IsTrue(await call.ResponseStream.MoveNext());
                 Assert.AreEqual(31415, call.ResponseStream.Current.Payload.Body.Length);
 
-                await call.RequestStream.WriteAsync(new StreamingOutputCallRequest
-                {
-                    ResponseParameters = { new ResponseParameters { Size = 9 } },
-                    Payload = CreateZerosPayload(8)
-                });
+                await call.RequestStream.WriteAsync(
+                    new StreamingOutputCallRequest
+                    {
+                        ResponseParameters = { new ResponseParameters { Size = 9 } },
+                        Payload = CreateZerosPayload(8)
+                    }
+                );
 
                 Assert.IsTrue(await call.ResponseStream.MoveNext());
                 Assert.AreEqual(9, call.ResponseStream.Current.Payload.Body.Length);
 
-                await call.RequestStream.WriteAsync(new StreamingOutputCallRequest
-                {
-                    ResponseParameters = { new ResponseParameters { Size = 2653 } },
-                    Payload = CreateZerosPayload(1828)
-                });
+                await call.RequestStream.WriteAsync(
+                    new StreamingOutputCallRequest
+                    {
+                        ResponseParameters = { new ResponseParameters { Size = 2653 } },
+                        Payload = CreateZerosPayload(1828)
+                    }
+                );
 
                 Assert.IsTrue(await call.ResponseStream.MoveNext());
                 Assert.AreEqual(2653, call.ResponseStream.Current.Payload.Body.Length);
 
-                await call.RequestStream.WriteAsync(new StreamingOutputCallRequest
-                {
-                    ResponseParameters = { new ResponseParameters { Size = 58979 } },
-                    Payload = CreateZerosPayload(45904)
-                });
+                await call.RequestStream.WriteAsync(
+                    new StreamingOutputCallRequest
+                    {
+                        ResponseParameters = { new ResponseParameters { Size = 58979 } },
+                        Payload = CreateZerosPayload(45904)
+                    }
+                );
 
                 Assert.IsTrue(await call.ResponseStream.MoveNext());
                 Assert.AreEqual(58979, call.ResponseStream.Current.Payload.Body.Length);
@@ -283,7 +322,10 @@ namespace Grpc.Shared.TestAssets
             }
         }
 
-        public static async Task RunComputeEngineCreds(IChannelWrapper channel, ClientOptions options)
+        public static async Task RunComputeEngineCreds(
+            IChannelWrapper channel,
+            ClientOptions options
+        )
         {
             var client = CreateClient<TestService.TestServiceClient>(channel);
             var defaultServiceAccount = options.DefaultServiceAccount!;
@@ -306,7 +348,10 @@ namespace Grpc.Shared.TestAssets
             Assert.AreEqual(defaultServiceAccount, response.Username);
         }
 
-        public static async Task RunCancelAfterBeginAsync(IChannelWrapper channel, ClientOptions options)
+        public static async Task RunCancelAfterBeginAsync(
+            IChannelWrapper channel,
+            ClientOptions options
+        )
         {
             var client = CreateClient<TestService.TestServiceClient>(channel);
 
@@ -322,18 +367,23 @@ namespace Grpc.Shared.TestAssets
             }
         }
 
-        public static async Task RunCancelAfterFirstResponseAsync(IChannelWrapper channel, ClientOptions options)
+        public static async Task RunCancelAfterFirstResponseAsync(
+            IChannelWrapper channel,
+            ClientOptions options
+        )
         {
             var client = CreateClient<TestService.TestServiceClient>(channel);
 
             var cts = new CancellationTokenSource();
             using (var call = client.FullDuplexCall(cancellationToken: cts.Token))
             {
-                await call.RequestStream.WriteAsync(new StreamingOutputCallRequest
-                {
-                    ResponseParameters = { new ResponseParameters { Size = 31415 } },
-                    Payload = CreateZerosPayload(27182)
-                });
+                await call.RequestStream.WriteAsync(
+                    new StreamingOutputCallRequest
+                    {
+                        ResponseParameters = { new ResponseParameters { Size = 31415 } },
+                        Payload = CreateZerosPayload(27182)
+                    }
+                );
 
                 Assert.IsTrue(await call.ResponseStream.MoveNext());
                 Assert.AreEqual(31415, call.ResponseStream.Current.Payload.Body.Length);
@@ -353,7 +403,10 @@ namespace Grpc.Shared.TestAssets
             }
         }
 
-        public static async Task RunTimeoutOnSleepingServerAsync(IChannelWrapper channel, ClientOptions options)
+        public static async Task RunTimeoutOnSleepingServerAsync(
+            IChannelWrapper channel,
+            ClientOptions options
+        )
         {
             var client = CreateClient<TestService.TestServiceClient>(channel);
 
@@ -362,7 +415,9 @@ namespace Grpc.Shared.TestAssets
             {
                 try
                 {
-                    await call.RequestStream.WriteAsync(new StreamingOutputCallRequest { Payload = CreateZerosPayload(27182) });
+                    await call.RequestStream.WriteAsync(
+                        new StreamingOutputCallRequest { Payload = CreateZerosPayload(27182) }
+                    );
                 }
                 catch (InvalidOperationException)
                 {
@@ -385,7 +440,10 @@ namespace Grpc.Shared.TestAssets
             }
         }
 
-        public static async Task RunCustomMetadataAsync(IChannelWrapper channel, ClientOptions options)
+        public static async Task RunCustomMetadataAsync(
+            IChannelWrapper channel,
+            ClientOptions options
+        )
         {
             var client = CreateClient<TestService.TestServiceClient>(channel);
 
@@ -403,8 +461,14 @@ namespace Grpc.Shared.TestAssets
                 var responseHeaders = await call.ResponseHeadersAsync;
                 var responseTrailers = call.GetTrailers();
 
-                Assert.AreEqual("test_initial_metadata_value", responseHeaders.GetValue("x-grpc-test-echo-initial")!);
-                CollectionAssert.AreEqual(new byte[] { 0xab, 0xab, 0xab }, responseTrailers.GetValueBytes("x-grpc-test-echo-trailing-bin")!);
+                Assert.AreEqual(
+                    "test_initial_metadata_value",
+                    responseHeaders.GetValue("x-grpc-test-echo-initial")!
+                );
+                CollectionAssert.AreEqual(
+                    new byte[] { 0xab, 0xab, 0xab },
+                    responseTrailers.GetValueBytes("x-grpc-test-echo-trailing-bin")!
+                );
             }
 
             {
@@ -424,32 +488,42 @@ namespace Grpc.Shared.TestAssets
                 var responseHeaders = await call.ResponseHeadersAsync;
                 var responseTrailers = call.GetTrailers();
 
-                Assert.AreEqual("test_initial_metadata_value", responseHeaders.GetValue("x-grpc-test-echo-initial")!);
-                CollectionAssert.AreEqual(new byte[] { 0xab, 0xab, 0xab }, responseTrailers.GetValueBytes("x-grpc-test-echo-trailing-bin")!);
+                Assert.AreEqual(
+                    "test_initial_metadata_value",
+                    responseHeaders.GetValue("x-grpc-test-echo-initial")!
+                );
+                CollectionAssert.AreEqual(
+                    new byte[] { 0xab, 0xab, 0xab },
+                    responseTrailers.GetValueBytes("x-grpc-test-echo-trailing-bin")!
+                );
             }
         }
 
-        public static async Task RunStatusCodeAndMessageAsync(IChannelWrapper channel, ClientOptions options)
+        public static async Task RunStatusCodeAndMessageAsync(
+            IChannelWrapper channel,
+            ClientOptions options
+        )
         {
             var client = CreateClient<TestService.TestServiceClient>(channel);
 
-            var echoStatus = new EchoStatus
-            {
-                Code = 2,
-                Message = "test status message"
-            };
+            var echoStatus = new EchoStatus { Code = 2, Message = "test status message" };
 
             {
                 // step 1: test unary call
                 var request = new SimpleRequest { ResponseStatus = echoStatus };
 
-                var e = await ExceptionAssert.ThrowsAsync<RpcException>(async () => await client.UnaryCallAsync(request));
+                var e = await ExceptionAssert.ThrowsAsync<RpcException>(
+                    async () => await client.UnaryCallAsync(request)
+                );
                 Assert.AreEqual(StatusCode.Unknown, e.Status.StatusCode);
                 Assert.AreEqual(echoStatus.Message, e.Status.Detail);
             }
         }
 
-        public static async Task RunSpecialStatusMessageAsync(IChannelWrapper channel, ClientOptions options)
+        public static async Task RunSpecialStatusMessageAsync(
+            IChannelWrapper channel,
+            ClientOptions options
+        )
         {
             var client = CreateClient<TestService.TestServiceClient>(channel);
 
@@ -461,10 +535,7 @@ namespace Grpc.Shared.TestAssets
 
             try
             {
-                await client.UnaryCallAsync(new SimpleRequest
-                {
-                    ResponseStatus = echoStatus
-                });
+                await client.UnaryCallAsync(new SimpleRequest { ResponseStatus = echoStatus });
                 Assert.Fail();
             }
             catch (RpcException e)
@@ -474,25 +545,38 @@ namespace Grpc.Shared.TestAssets
             }
         }
 
-        public static async Task RunUnimplementedService(IChannelWrapper channel, ClientOptions options)
+        public static async Task RunUnimplementedService(
+            IChannelWrapper channel,
+            ClientOptions options
+        )
         {
             var client = CreateClient<UnimplementedService.UnimplementedServiceClient>(channel);
 
-            var e = await ExceptionAssert.ThrowsAsync<RpcException>(async () => await client.UnimplementedCallAsync(new Empty()));
+            var e = await ExceptionAssert.ThrowsAsync<RpcException>(
+                async () => await client.UnimplementedCallAsync(new Empty())
+            );
 
             Assert.AreEqual(StatusCode.Unimplemented, e.Status.StatusCode);
         }
 
-        public static async Task RunUnimplementedMethod(IChannelWrapper channel, ClientOptions options)
+        public static async Task RunUnimplementedMethod(
+            IChannelWrapper channel,
+            ClientOptions options
+        )
         {
             var client = CreateClient<TestService.TestServiceClient>(channel);
 
-            var e = await ExceptionAssert.ThrowsAsync<RpcException>(async () => await client.UnimplementedCallAsync(new Empty()));
+            var e = await ExceptionAssert.ThrowsAsync<RpcException>(
+                async () => await client.UnimplementedCallAsync(new Empty())
+            );
 
             Assert.AreEqual(StatusCode.Unimplemented, e.Status.StatusCode);
         }
 
-        public static async Task RunClientCompressedUnary(IChannelWrapper channel, ClientOptions options)
+        public static async Task RunClientCompressedUnary(
+            IChannelWrapper channel,
+            ClientOptions options
+        )
         {
             var client = CreateClient<TestService.TestServiceClient>(channel);
 
@@ -500,54 +584,62 @@ namespace Grpc.Shared.TestAssets
             {
                 ExpectCompressed = new BoolValue
                 {
-                    Value = true  // lie about compression
+                    Value = true // lie about compression
                 },
                 ResponseSize = 314159,
                 Payload = CreateZerosPayload(271828)
             };
-            var e = await ExceptionAssert.ThrowsAsync<RpcException>(async () => await client.UnaryCallAsync(probeRequest, CreateClientCompressionMetadata(false)));
+            var e = await ExceptionAssert.ThrowsAsync<RpcException>(
+                async () =>
+                    await client.UnaryCallAsync(
+                        probeRequest,
+                        CreateClientCompressionMetadata(false)
+                    )
+            );
             Assert.AreEqual(StatusCode.InvalidArgument, e.Status.StatusCode);
 
             var compressedRequest = new SimpleRequest
             {
-                ExpectCompressed = new BoolValue
-                {
-                    Value = true
-                },
+                ExpectCompressed = new BoolValue { Value = true },
                 ResponseSize = 314159,
                 Payload = CreateZerosPayload(271828)
             };
-            var response1 = await client.UnaryCallAsync(compressedRequest, CreateClientCompressionMetadata(true));
+            var response1 = await client.UnaryCallAsync(
+                compressedRequest,
+                CreateClientCompressionMetadata(true)
+            );
             Assert.AreEqual(314159, response1.Payload.Body.Length);
 
             var uncompressedRequest = new SimpleRequest
             {
-                ExpectCompressed = new BoolValue
-                {
-                    Value = false
-                },
+                ExpectCompressed = new BoolValue { Value = false },
                 ResponseSize = 314159,
                 Payload = CreateZerosPayload(271828)
             };
-            var response2 = await client.UnaryCallAsync(uncompressedRequest, CreateClientCompressionMetadata(false));
+            var response2 = await client.UnaryCallAsync(
+                uncompressedRequest,
+                CreateClientCompressionMetadata(false)
+            );
             Assert.AreEqual(314159, response2.Payload.Body.Length);
         }
 
-        public static async Task RunClientCompressedStreamingAsync(IChannelWrapper channel, ClientOptions options)
+        public static async Task RunClientCompressedStreamingAsync(
+            IChannelWrapper channel,
+            ClientOptions options
+        )
         {
             var client = CreateClient<TestService.TestServiceClient>(channel);
 
             try
             {
                 var probeCall = client.StreamingInputCall(CreateClientCompressionMetadata(false));
-                await probeCall.RequestStream.WriteAsync(new StreamingInputCallRequest
-                {
-                    ExpectCompressed = new BoolValue
+                await probeCall.RequestStream.WriteAsync(
+                    new StreamingInputCallRequest
                     {
-                        Value = true
-                    },
-                    Payload = CreateZerosPayload(27182)
-                });
+                        ExpectCompressed = new BoolValue { Value = true },
+                        Payload = CreateZerosPayload(27182)
+                    }
+                );
 
                 // cannot use Assert.ThrowsAsync because it uses Task.Wait and would deadlock.
                 await probeCall;
@@ -559,31 +651,32 @@ namespace Grpc.Shared.TestAssets
             }
 
             var call = client.StreamingInputCall(CreateClientCompressionMetadata(true));
-            await call.RequestStream.WriteAsync(new StreamingInputCallRequest
-            {
-                ExpectCompressed = new BoolValue
+            await call.RequestStream.WriteAsync(
+                new StreamingInputCallRequest
                 {
-                    Value = true
-                },
-                Payload = CreateZerosPayload(27182)
-            });
+                    ExpectCompressed = new BoolValue { Value = true },
+                    Payload = CreateZerosPayload(27182)
+                }
+            );
 
             call.RequestStream.WriteOptions = new WriteOptions(WriteFlags.NoCompress);
-            await call.RequestStream.WriteAsync(new StreamingInputCallRequest
-            {
-                ExpectCompressed = new BoolValue
+            await call.RequestStream.WriteAsync(
+                new StreamingInputCallRequest
                 {
-                    Value = false
-                },
-                Payload = CreateZerosPayload(45904)
-            });
+                    ExpectCompressed = new BoolValue { Value = false },
+                    Payload = CreateZerosPayload(45904)
+                }
+            );
             await call.RequestStream.CompleteAsync();
 
             var response = await call.ResponseAsync;
             Assert.AreEqual(73086, response.AggregatedPayloadSize);
         }
 
-        public static async Task RunServerCompressedUnary(IChannelWrapper channel, ClientOptions options)
+        public static async Task RunServerCompressedUnary(
+            IChannelWrapper channel,
+            ClientOptions options
+        )
         {
             var client = CreateClient<TestService.TestServiceClient>(channel);
 
@@ -610,7 +703,10 @@ namespace Grpc.Shared.TestAssets
             Assert.AreEqual(314159, response.Payload.Body.Length);
         }
 
-        public static async Task RunServerCompressedStreamingAsync(IChannelWrapper channel, ClientOptions options)
+        public static async Task RunServerCompressedStreamingAsync(
+            IChannelWrapper channel,
+            ClientOptions options
+        )
         {
             var client = CreateClient<TestService.TestServiceClient>(channel);
 
@@ -618,14 +714,27 @@ namespace Grpc.Shared.TestAssets
 
             var request = new StreamingOutputCallRequest
             {
-                ResponseParameters = { bodySizes.Select((size) => new ResponseParameters { Size = size, Compressed = new BoolValue { Value = true } }) }
+                ResponseParameters =
+                {
+                    bodySizes.Select(
+                        (size) =>
+                            new ResponseParameters
+                            {
+                                Size = size,
+                                Compressed = new BoolValue { Value = true }
+                            }
+                    )
+                }
             };
 
             using (var call = client.StreamingOutputCall(request))
             {
                 // Compression of response message is not verified because there is no API available
                 var responseList = await call.ResponseStream.ToListAsync();
-                CollectionAssert.AreEqual(bodySizes, responseList.Select((item) => item.Payload.Body.Length).ToList());
+                CollectionAssert.AreEqual(
+                    bodySizes,
+                    responseList.Select((item) => item.Payload.Body.Length).ToList()
+                );
             }
         }
 
@@ -647,8 +756,8 @@ namespace Grpc.Shared.TestAssets
         {
             return new Metadata
             {
-                {"x-grpc-test-echo-initial", "test_initial_metadata_value"},
-                {"x-grpc-test-echo-trailing-bin", new byte[] {0xab, 0xab, 0xab}}
+                { "x-grpc-test-echo-initial", "test_initial_metadata_value" },
+                { "x-grpc-test-echo-trailing-bin", new byte[] { 0xab, 0xab, 0xab } }
             };
         }
     }

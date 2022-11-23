@@ -27,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 /// </remarks>
 /// <typeparam name="T">The type of elements in the collection.</typeparam>
 [RequiresUnreferencedCode(
-    "BindingList raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code.")]
+    "BindingList raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code."
+)]
 public class ObservableCollectionListSource<T> : ObservableCollection<T>, IListSource
     where T : class
 {
@@ -36,35 +37,26 @@ public class ObservableCollectionListSource<T> : ObservableCollection<T>, IListS
     /// <summary>
     ///     Initializes a new instance of the <see cref="ObservableCollectionListSource{T}" /> class.
     /// </summary>
-    public ObservableCollectionListSource()
-    {
-    }
+    public ObservableCollectionListSource() { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="ObservableCollectionListSource{T}" /> class that
     ///     contains elements copied from the specified collection.
     /// </summary>
     /// <param name="collection">The collection from which the elements are copied.</param>
-    public ObservableCollectionListSource(IEnumerable<T> collection)
-        : base(collection)
-    {
-    }
+    public ObservableCollectionListSource(IEnumerable<T> collection) : base(collection) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="ObservableCollectionListSource{T}" /> class that
     ///     contains elements copied from the specified list.
     /// </summary>
     /// <param name="list">The list from which the elements are copied.</param>
-    public ObservableCollectionListSource(List<T> list)
-        : base(list)
-    {
-    }
+    public ObservableCollectionListSource(List<T> list) : base(list) { }
 
     /// <summary>
     ///     Always false because there is never a contained collection.
     /// </summary>
-    bool IListSource.ContainsListCollection
-        => false;
+    bool IListSource.ContainsListCollection => false;
 
     /// <summary>
     ///     Returns an <see cref="IBindingList" /> implementation that stays in sync with
@@ -75,13 +67,13 @@ public class ObservableCollectionListSource<T> : ObservableCollection<T>, IListS
     ///     An <see cref="IBindingList" /> in sync with the ObservableCollection.
     /// </returns>
     [RequiresUnreferencedCode(
-        "BindingList raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code.")]
+        "BindingList raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code."
+    )]
     [UnconditionalSuppressMessage(
         "ReflectionAnalysis",
         "IL2046",
-        Justification =
-            "This method is an interface implementation, and the interface method isn't annotated with RequiresUnreferencedCode. " +
-            "The entire type is marked with RequiresUnreferencedCode.")]
-    IList IListSource.GetList()
-        => _bindingList ??= this.ToBindingList();
+        Justification = "This method is an interface implementation, and the interface method isn't annotated with RequiresUnreferencedCode. "
+            + "The entire type is marked with RequiresUnreferencedCode."
+    )]
+    IList IListSource.GetList() => _bindingList ??= this.ToBindingList();
 }

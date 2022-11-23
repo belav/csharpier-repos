@@ -5,8 +5,7 @@ namespace Microsoft.EntityFrameworkCore.Update;
 
 public class JsonUpdateSqlServerTest : JsonUpdateTestBase<JsonUpdateSqlServerFixture>
 {
-    public JsonUpdateSqlServerTest(JsonUpdateSqlServerFixture fixture)
-        : base(fixture)
+    public JsonUpdateSqlServerTest(JsonUpdateSqlServerFixture fixture) : base(fixture)
     {
         ClearLog();
     }
@@ -26,7 +25,8 @@ OUTPUT 1
 WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Add_element_to_json_collection_leaf()
@@ -44,7 +44,8 @@ OUTPUT 1
 WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Add_element_to_json_collection_on_derived()
@@ -63,7 +64,8 @@ WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[Discriminator], [j].[Name], [j].[Fraction], JSON_QUERY([j].[CollectionOnBase],'$'), JSON_QUERY([j].[ReferenceOnBase],'$'), JSON_QUERY([j].[CollectionOnDerived],'$'), JSON_QUERY([j].[ReferenceOnDerived],'$')
 FROM [JsonEntitiesInheritance] AS [j]
-WHERE [j].[Discriminator] = N'JsonEntityInheritanceDerived'");
+WHERE [j].[Discriminator] = N'JsonEntityInheritanceDerived'"
+        );
     }
 
     public override async Task Add_element_to_json_collection_root()
@@ -81,7 +83,8 @@ OUTPUT 1
 WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Add_entity_with_json()
@@ -100,7 +103,8 @@ INSERT INTO [JsonEntitiesBasic] ([OwnedReferenceRoot], [Id], [EntityBasicId], [N
 VALUES (@p0, @p1, @p2, @p3);",
             //
             @"SELECT [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Add_json_reference_leaf()
@@ -118,7 +122,8 @@ OUTPUT 1
 WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Add_json_reference_root()
@@ -136,7 +141,8 @@ OUTPUT 1
 WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Delete_entity_with_json()
@@ -153,7 +159,8 @@ OUTPUT 1
 WHERE [Id] = @p0;",
             //
             @"SELECT COUNT(*)
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Delete_json_collection_branch()
@@ -171,7 +178,8 @@ OUTPUT 1
 WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Delete_json_collection_root()
@@ -189,7 +197,8 @@ OUTPUT 1
 WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Delete_json_reference_leaf()
@@ -207,7 +216,8 @@ OUTPUT 1
 WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Delete_json_reference_root()
@@ -225,7 +235,8 @@ OUTPUT 1
 WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Edit_element_in_json_collection_branch()
@@ -243,7 +254,8 @@ OUTPUT 1
 WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Edit_element_in_json_collection_root1()
@@ -261,7 +273,8 @@ OUTPUT 1
 WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Edit_element_in_json_collection_root2()
@@ -279,7 +292,8 @@ OUTPUT 1
 WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Edit_element_in_json_multiple_levels_partial_update()
@@ -298,7 +312,8 @@ OUTPUT 1
 WHERE [Id] = @p2;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Edit_element_in_json_branch_collection_and_add_element_to_the_same_collection()
@@ -316,7 +331,8 @@ OUTPUT 1
 WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Edit_two_elements_in_the_same_json_collection()
@@ -334,7 +350,8 @@ OUTPUT 1
 WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Edit_two_elements_in_the_same_json_collection_at_the_root()
@@ -352,7 +369,8 @@ OUTPUT 1
 WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Edit_collection_element_and_reference_at_once()
@@ -370,7 +388,8 @@ OUTPUT 1
 WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Edit_single_enum_property()
@@ -389,7 +408,8 @@ OUTPUT 1
 WHERE [Id] = @p2;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Edit_single_numeric_property()
@@ -408,7 +428,8 @@ OUTPUT 1
 WHERE [Id] = @p2;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Edit_single_property_bool()
@@ -427,7 +448,8 @@ OUTPUT 1
 WHERE [Id] = @p2;",
             //
             @"SELECT TOP(2) [j].[Id], JSON_QUERY([j].[Collection],'$'), JSON_QUERY([j].[Reference],'$')
-FROM [JsonEntitiesAllTypes] AS [j]");
+FROM [JsonEntitiesAllTypes] AS [j]"
+        );
     }
 
     public override async Task Edit_single_property_byte()
@@ -446,7 +468,8 @@ OUTPUT 1
 WHERE [Id] = @p2;",
             //
             @"SELECT TOP(2) [j].[Id], JSON_QUERY([j].[Collection],'$'), JSON_QUERY([j].[Reference],'$')
-FROM [JsonEntitiesAllTypes] AS [j]");
+FROM [JsonEntitiesAllTypes] AS [j]"
+        );
     }
 
     public override async Task Edit_single_property_char()
@@ -464,7 +487,8 @@ OUTPUT 1
 WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], JSON_QUERY([j].[Collection],'$'), JSON_QUERY([j].[Reference],'$')
-FROM [JsonEntitiesAllTypes] AS [j]");
+FROM [JsonEntitiesAllTypes] AS [j]"
+        );
     }
 
     public override async Task Edit_single_property_datetime()
@@ -483,7 +507,8 @@ OUTPUT 1
 WHERE [Id] = @p2;",
             //
             @"SELECT TOP(2) [j].[Id], JSON_QUERY([j].[Collection],'$'), JSON_QUERY([j].[Reference],'$')
-FROM [JsonEntitiesAllTypes] AS [j]");
+FROM [JsonEntitiesAllTypes] AS [j]"
+        );
     }
 
     public override async Task Edit_single_property_datetimeoffset()
@@ -502,7 +527,8 @@ OUTPUT 1
 WHERE [Id] = @p2;",
             //
             @"SELECT TOP(2) [j].[Id], JSON_QUERY([j].[Collection],'$'), JSON_QUERY([j].[Reference],'$')
-FROM [JsonEntitiesAllTypes] AS [j]");
+FROM [JsonEntitiesAllTypes] AS [j]"
+        );
     }
 
     public override async Task Edit_single_property_decimal()
@@ -521,7 +547,8 @@ OUTPUT 1
 WHERE [Id] = @p2;",
             //
             @"SELECT TOP(2) [j].[Id], JSON_QUERY([j].[Collection],'$'), JSON_QUERY([j].[Reference],'$')
-FROM [JsonEntitiesAllTypes] AS [j]");
+FROM [JsonEntitiesAllTypes] AS [j]"
+        );
     }
 
     public override async Task Edit_single_property_double()
@@ -540,7 +567,8 @@ OUTPUT 1
 WHERE [Id] = @p2;",
             //
             @"SELECT TOP(2) [j].[Id], JSON_QUERY([j].[Collection],'$'), JSON_QUERY([j].[Reference],'$')
-FROM [JsonEntitiesAllTypes] AS [j]");
+FROM [JsonEntitiesAllTypes] AS [j]"
+        );
     }
 
     public override async Task Edit_single_property_guid()
@@ -559,7 +587,8 @@ OUTPUT 1
 WHERE [Id] = @p2;",
             //
             @"SELECT TOP(2) [j].[Id], JSON_QUERY([j].[Collection],'$'), JSON_QUERY([j].[Reference],'$')
-FROM [JsonEntitiesAllTypes] AS [j]");
+FROM [JsonEntitiesAllTypes] AS [j]"
+        );
     }
 
     public override async Task Edit_single_property_int16()
@@ -578,7 +607,8 @@ OUTPUT 1
 WHERE [Id] = @p2;",
             //
             @"SELECT TOP(2) [j].[Id], JSON_QUERY([j].[Collection],'$'), JSON_QUERY([j].[Reference],'$')
-FROM [JsonEntitiesAllTypes] AS [j]");
+FROM [JsonEntitiesAllTypes] AS [j]"
+        );
     }
 
     public override async Task Edit_single_property_int32()
@@ -597,7 +627,8 @@ OUTPUT 1
 WHERE [Id] = @p2;",
             //
             @"SELECT TOP(2) [j].[Id], JSON_QUERY([j].[Collection],'$'), JSON_QUERY([j].[Reference],'$')
-FROM [JsonEntitiesAllTypes] AS [j]");
+FROM [JsonEntitiesAllTypes] AS [j]"
+        );
     }
 
     public override async Task Edit_single_property_int64()
@@ -616,7 +647,8 @@ OUTPUT 1
 WHERE [Id] = @p2;",
             //
             @"SELECT TOP(2) [j].[Id], JSON_QUERY([j].[Collection],'$'), JSON_QUERY([j].[Reference],'$')
-FROM [JsonEntitiesAllTypes] AS [j]");
+FROM [JsonEntitiesAllTypes] AS [j]"
+        );
     }
 
     public override async Task Edit_single_property_signed_byte()
@@ -635,7 +667,8 @@ OUTPUT 1
 WHERE [Id] = @p2;",
             //
             @"SELECT TOP(2) [j].[Id], JSON_QUERY([j].[Collection],'$'), JSON_QUERY([j].[Reference],'$')
-FROM [JsonEntitiesAllTypes] AS [j]");
+FROM [JsonEntitiesAllTypes] AS [j]"
+        );
     }
 
     public override async Task Edit_single_property_single()
@@ -654,7 +687,8 @@ OUTPUT 1
 WHERE [Id] = @p2;",
             //
             @"SELECT TOP(2) [j].[Id], JSON_QUERY([j].[Collection],'$'), JSON_QUERY([j].[Reference],'$')
-FROM [JsonEntitiesAllTypes] AS [j]");
+FROM [JsonEntitiesAllTypes] AS [j]"
+        );
     }
 
     public override async Task Edit_single_property_timespan()
@@ -673,7 +707,8 @@ OUTPUT 1
 WHERE [Id] = @p2;",
             //
             @"SELECT TOP(2) [j].[Id], JSON_QUERY([j].[Collection],'$'), JSON_QUERY([j].[Reference],'$')
-FROM [JsonEntitiesAllTypes] AS [j]");
+FROM [JsonEntitiesAllTypes] AS [j]"
+        );
     }
 
     public override async Task Edit_single_property_uint16()
@@ -692,7 +727,8 @@ OUTPUT 1
 WHERE [Id] = @p2;",
             //
             @"SELECT TOP(2) [j].[Id], JSON_QUERY([j].[Collection],'$'), JSON_QUERY([j].[Reference],'$')
-FROM [JsonEntitiesAllTypes] AS [j]");
+FROM [JsonEntitiesAllTypes] AS [j]"
+        );
     }
 
     public override async Task Edit_single_property_uint32()
@@ -711,7 +747,8 @@ OUTPUT 1
 WHERE [Id] = @p2;",
             //
             @"SELECT TOP(2) [j].[Id], JSON_QUERY([j].[Collection],'$'), JSON_QUERY([j].[Reference],'$')
-FROM [JsonEntitiesAllTypes] AS [j]");
+FROM [JsonEntitiesAllTypes] AS [j]"
+        );
     }
 
     public override async Task Edit_single_property_uint64()
@@ -730,7 +767,8 @@ OUTPUT 1
 WHERE [Id] = @p2;",
             //
             @"SELECT TOP(2) [j].[Id], JSON_QUERY([j].[Collection],'$'), JSON_QUERY([j].[Reference],'$')
-FROM [JsonEntitiesAllTypes] AS [j]");
+FROM [JsonEntitiesAllTypes] AS [j]"
+        );
     }
 
     public override async Task Edit_two_properties_on_same_entity_updates_the_entire_entity()
@@ -749,7 +787,8 @@ OUTPUT 1
 WHERE [Id] = @p2;",
             //
             @"SELECT TOP(2) [j].[Id], JSON_QUERY([j].[Collection],'$'), JSON_QUERY([j].[Reference],'$')
-FROM [JsonEntitiesAllTypes] AS [j]");
+FROM [JsonEntitiesAllTypes] AS [j]"
+        );
     }
 
     public override async Task Edit_a_scalar_property_and_reference_navigation_on_the_same_entity()
@@ -767,7 +806,8 @@ OUTPUT 1
 WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Edit_a_scalar_property_and_collection_navigation_on_the_same_entity()
@@ -785,7 +825,8 @@ OUTPUT 1
 WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
     public override async Task Edit_a_scalar_property_and_another_property_behind_reference_navigation_on_the_same_entity()
@@ -803,12 +844,12 @@ OUTPUT 1
 WHERE [Id] = @p1;",
             //
             @"SELECT TOP(2) [j].[Id], [j].[EntityBasicId], [j].[Name], JSON_QUERY([j].[OwnedCollectionRoot],'$'), JSON_QUERY([j].[OwnedReferenceRoot],'$')
-FROM [JsonEntitiesBasic] AS [j]");
+FROM [JsonEntitiesBasic] AS [j]"
+        );
     }
 
-    protected override void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 }

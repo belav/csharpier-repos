@@ -19,8 +19,8 @@ public class CompositeRelationalParameter : RelationalParameterBase
     /// </summary>
     public CompositeRelationalParameter(
         string invariantName,
-        IReadOnlyList<IRelationalParameter> relationalParameters)
-        : base(invariantName)
+        IReadOnlyList<IRelationalParameter> relationalParameters
+    ) : base(invariantName)
     {
         RelationalParameters = relationalParameters;
     }
@@ -47,7 +47,9 @@ public class CompositeRelationalParameter : RelationalParameterBase
             {
                 throw new InvalidOperationException(
                     RelationalStrings.MissingParameterValue(
-                        RelationalParameters[innerValues.Length].InvariantName));
+                        RelationalParameters[innerValues.Length].InvariantName
+                    )
+                );
             }
 
             for (var i = 0; i < RelationalParameters.Count; i++)
@@ -57,7 +59,9 @@ public class CompositeRelationalParameter : RelationalParameterBase
         }
         else
         {
-            throw new InvalidOperationException(RelationalStrings.ParameterNotObjectArray(InvariantName));
+            throw new InvalidOperationException(
+                RelationalStrings.ParameterNotObjectArray(InvariantName)
+            );
         }
     }
 }

@@ -27,7 +27,10 @@ namespace ILCompiler.DependencyAnalysis
 
         private List<NativeLayoutVertexNode> _vertexNodesToWrite;
 
-        public NativeLayoutInfoNode(ExternalReferencesTableNode externalReferences, ExternalReferencesTableNode staticsReferences)
+        public NativeLayoutInfoNode(
+            ExternalReferencesTableNode externalReferences,
+            ExternalReferencesTableNode staticsReferences
+        )
         {
             _endSymbol = new ObjectAndOffsetSymbolNode(this, 0, "__nativelayoutinfo_End", true);
             _externalReferences = externalReferences;
@@ -45,12 +48,15 @@ namespace ILCompiler.DependencyAnalysis
         {
             sb.Append(nameMangler.CompilationUnitPrefix).Append("__nativelayoutinfo");
         }
+
         public ISymbolNode EndSymbol => _endSymbol;
         public int Offset => 0;
         public override bool IsShareable => false;
         public override ObjectNodeSection Section => _externalReferences.Section;
         public override bool StaticDependenciesAreComputed => true;
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public Section LdTokenInfoSection => _ldTokenInfoSection;
         public Section SignaturesSection => _signaturesSection;
@@ -83,13 +89,23 @@ namespace ILCompiler.DependencyAnalysis
         {
             // Dependencies of the NativeLayoutInfo node are tracked by the callers that emit data into the native layout writer
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             SaveNativeLayoutInfoWriter(factory);
 
             _endSymbol.SetSymbolOffset(_writerSavedBytes.Length);
 
-            return new ObjectData(_writerSavedBytes, Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this, _endSymbol });
+            return new ObjectData(
+                _writerSavedBytes,
+                Array.Empty<Relocation>(),
+                1,
+                new ISymbolDefinitionNode[] { this, _endSymbol }
+            );
         }
 
         protected internal override int Phase => (int)ObjectNodePhase.Ordered;

@@ -14,7 +14,12 @@ namespace ILCompiler.DependencyAnalysis
     {
         public StackTraceMethodMappingNode()
         {
-            _endSymbol = new ObjectAndOffsetSymbolNode(this, 0, "_stacktrace_methodRVA_to_token_mapping_End", true);
+            _endSymbol = new ObjectAndOffsetSymbolNode(
+                this,
+                0,
+                "_stacktrace_methodRVA_to_token_mapping_End",
+                true
+            );
         }
 
         private ObjectAndOffsetSymbolNode _endSymbol;
@@ -33,10 +38,12 @@ namespace ILCompiler.DependencyAnalysis
 
         public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
-            sb.Append(nameMangler.CompilationUnitPrefix).Append("_stacktrace_methodRVA_to_token_mapping");
+            sb.Append(nameMangler.CompilationUnitPrefix)
+                .Append("_stacktrace_methodRVA_to_token_mapping");
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
@@ -44,7 +51,12 @@ namespace ILCompiler.DependencyAnalysis
             // the set of compiled methods which has an incomplete state during dependency tracking.
             if (relocsOnly)
             {
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
             }
 
             ObjectDataBuilder objData = new ObjectDataBuilder(factory, relocsOnly);
@@ -54,7 +66,10 @@ namespace ILCompiler.DependencyAnalysis
 
             foreach (var mappingEntry in factory.MetadataManager.GetStackTraceMapping(factory))
             {
-                objData.EmitReloc(factory.MethodEntrypoint(mappingEntry.Entity), RelocType.IMAGE_REL_BASED_RELPTR32);
+                objData.EmitReloc(
+                    factory.MethodEntrypoint(mappingEntry.Entity),
+                    RelocType.IMAGE_REL_BASED_RELPTR32
+                );
                 objData.EmitInt(mappingEntry.MetadataHandle);
             }
 

@@ -8,12 +8,16 @@ namespace System.IO
 {
     public static partial class Directory
     {
-        private static DirectoryInfo CreateDirectoryCore(string path, UnixFileMode unixCreateMode)
-            => throw new PlatformNotSupportedException(SR.PlatformNotSupported_UnixFileMode);
+        private static DirectoryInfo CreateDirectoryCore(
+            string path,
+            UnixFileMode unixCreateMode
+        ) => throw new PlatformNotSupportedException(SR.PlatformNotSupported_UnixFileMode);
 
         private static unsafe string CreateTempSubdirectoryCore(string? prefix)
         {
-            ValueStringBuilder builder = new ValueStringBuilder(stackalloc char[PathInternal.MaxShortPath]);
+            ValueStringBuilder builder = new ValueStringBuilder(
+                stackalloc char[PathInternal.MaxShortPath]
+            );
             Path.GetTempPath(ref builder);
 
             // ensure the base TEMP directory exists
@@ -37,7 +41,11 @@ namespace System.IO
             {
                 // simulate a call to Path.GetRandomFileName() without allocating an intermediate string
                 Interop.GetRandomBytes(pKey, RandomKeyLength);
-                Path.Populate83FileNameFromRandomBytes(pKey, RandomKeyLength, builder.RawChars.Slice(builder.Length, RandomFileNameLength));
+                Path.Populate83FileNameFromRandomBytes(
+                    pKey,
+                    RandomKeyLength,
+                    builder.RawChars.Slice(builder.Length, RandomFileNameLength)
+                );
                 builder.Length += RandomFileNameLength;
 
                 string path = PathHelper.Normalize(ref builder);

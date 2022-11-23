@@ -28,51 +28,62 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        #if (IndividualLocalAuth)
-        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-        builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        #if (UseLocalDB)
+#if (IndividualLocalAuth)
+        var connectionString =
+            builder.Configuration.GetConnectionString("DefaultConnection")
+            ?? throw new InvalidOperationException(
+                "Connection string 'DefaultConnection' not found."
+            );
+        builder.Services.AddDbContext<ApplicationDbContext>(
+            options =>
+#if (UseLocalDB)
             options.UseSqlServer(connectionString));
-        #else
-            options.UseSqlite(connectionString));
-        #endif
+#else
+                options.UseSqlite(connectionString)
+        );
+#endif
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-        builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+        builder.Services
+            .AddDefaultIdentity<ApplicationUser>(
+                options => options.SignIn.RequireConfirmedAccount = true
+            )
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
-        builder.Services.AddIdentityServer()
+        builder.Services
+            .AddIdentityServer()
             .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
-        builder.Services.AddAuthentication()
-            .AddIdentityServerJwt();
-        #endif
-        #if (OrganizationalAuth)
-        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        #if (GenerateApiOrGraph)
+        builder.Services.AddAuthentication().AddIdentityServerJwt();
+#endif
+#if (OrganizationalAuth)
+        builder.Services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+#if (GenerateApiOrGraph)
             .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"))
                 .EnableTokenAcquisitionToCallDownstreamApi()
-        #if (GenerateApi)
+#if (GenerateApi)
                     .AddDownstreamWebApi("DownstreamApi", builder.Configuration.GetSection("DownstreamApi"))
-        #endif
-        #if (GenerateGraph)
+#endif
+#if (GenerateGraph)
                     .AddMicrosoftGraph(builder.Configuration.GetSection("DownstreamApi"))
-        #endif
+#endif
                     .AddInMemoryTokenCaches();
-        #else
+#else
             .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
-        #endif
-        #elif (IndividualB2CAuth)
-        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        #if (GenerateApi)
+#endif
+#elif (IndividualB2CAuth)
+        builder.Services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+#if (GenerateApi)
             .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAdB2C"))
                 .EnableTokenAcquisitionToCallDownstreamApi()
                     .AddDownstreamWebApi("DownstreamApi", builder.Configuration.GetSection("DownstreamApi"))
                     .AddInMemoryTokenCaches();
-        #else
+#else
             .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAdB2C"));
-        #endif
-        #endif
+#endif
+#endif
 
         builder.Services.AddControllersWithViews();
         builder.Services.AddRazorPages();
@@ -82,36 +93,36 @@ public class Program
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
-        #if (IndividualLocalAuth)
+#if (IndividualLocalAuth)
             app.UseMigrationsEndPoint();
-        #endif
+#endif
             app.UseWebAssemblyDebugging();
         }
         else
         {
             app.UseExceptionHandler("/Error");
-        #if (HasHttpsProfile)
+#if (HasHttpsProfile)
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
-        #endif
+#endif
         }
 
-        #if (HasHttpsProfile)
+#if (HasHttpsProfile)
         app.UseHttpsRedirection();
 
-        #endif
+#endif
         app.UseBlazorFrameworkFiles();
         app.UseStaticFiles();
 
         app.UseRouting();
 
-        #if (IndividualLocalAuth)
+#if (IndividualLocalAuth)
         app.UseIdentityServer();
-        #endif
-        #if (!NoAuth)
+#endif
+#if (!NoAuth)
         app.UseAuthorization();
 
-        #endif
+#endif
 
         app.MapRazorPages();
         app.MapControllers();

@@ -27,14 +27,19 @@ namespace ILLink.Shared.TrimAnalysis
             ReflectionMarker reflectionMarker,
             in DiagnosticContext diagnosticContext,
             MethodDesc callingMethod,
-            Origin memberWithRequirements)
+            Origin memberWithRequirements
+        )
         {
             _reflectionMarker = reflectionMarker;
             _diagnosticContext = diagnosticContext;
             _callingMethod = callingMethod;
             _annotations = annotations;
             _memberWithRequirements = memberWithRequirements;
-            _requireDynamicallyAccessedMembersAction = new(reflectionMarker, diagnosticContext, memberWithRequirements);
+            _requireDynamicallyAccessedMembersAction = new(
+                reflectionMarker,
+                diagnosticContext,
+                memberWithRequirements
+            );
         }
 
         private partial bool MethodIsTypeConstructor(MethodProxy method)
@@ -51,15 +56,27 @@ namespace ILLink.Shared.TrimAnalysis
             return false;
         }
 
-        private partial IEnumerable<SystemReflectionMethodBaseValue> GetMethodsOnTypeHierarchy(TypeProxy type, string name, BindingFlags? bindingFlags)
+        private partial IEnumerable<SystemReflectionMethodBaseValue> GetMethodsOnTypeHierarchy(
+            TypeProxy type,
+            string name,
+            BindingFlags? bindingFlags
+        )
         {
-            foreach (var method in type.Type.GetMethodsOnTypeHierarchy(m => m.Name == name, bindingFlags))
+            foreach (
+                var method in type.Type.GetMethodsOnTypeHierarchy(m => m.Name == name, bindingFlags)
+            )
                 yield return new SystemReflectionMethodBaseValue(new MethodProxy(method));
         }
 
-        private partial IEnumerable<SystemTypeValue> GetNestedTypesOnType(TypeProxy type, string name, BindingFlags? bindingFlags)
+        private partial IEnumerable<SystemTypeValue> GetNestedTypesOnType(
+            TypeProxy type,
+            string name,
+            BindingFlags? bindingFlags
+        )
         {
-            foreach (var nestedType in type.Type.GetNestedTypesOnType(t => t.Name == name, bindingFlags))
+            foreach (
+                var nestedType in type.Type.GetNestedTypesOnType(t => t.Name == name, bindingFlags)
+            )
                 yield return new SystemTypeValue(new TypeProxy(nestedType));
         }
 
@@ -75,39 +92,101 @@ namespace ILLink.Shared.TrimAnalysis
             return false;
         }
 
-        private partial bool TryResolveTypeNameForCreateInstanceAndMark(in MethodProxy calledMethod, string assemblyName, string typeName, out TypeProxy resolvedType)
+        private partial bool TryResolveTypeNameForCreateInstanceAndMark(
+            in MethodProxy calledMethod,
+            string assemblyName,
+            string typeName,
+            out TypeProxy resolvedType
+        )
         {
             // TODO: niche APIs that we probably shouldn't even have added
             // We have to issue a warning, otherwise we could break the app without a warning.
             // This is not the ideal warning, but it's good enough for now.
-            _diagnosticContext.AddDiagnostic(DiagnosticId.UnrecognizedParameterInMethodCreateInstance, calledMethod.GetParameterDisplayName(1), calledMethod.GetDisplayName());
+            _diagnosticContext.AddDiagnostic(
+                DiagnosticId.UnrecognizedParameterInMethodCreateInstance,
+                calledMethod.GetParameterDisplayName(1),
+                calledMethod.GetDisplayName()
+            );
             resolvedType = default;
             return false;
         }
 
-        private partial void MarkStaticConstructor(TypeProxy type)
-            => _reflectionMarker.MarkStaticConstructor(_diagnosticContext.Origin, type.Type);
+        private partial void MarkStaticConstructor(TypeProxy type) =>
+            _reflectionMarker.MarkStaticConstructor(_diagnosticContext.Origin, type.Type);
 
-        private partial void MarkEventsOnTypeHierarchy(TypeProxy type, string name, BindingFlags? bindingFlags)
-            => _reflectionMarker.MarkEventsOnTypeHierarchy(_diagnosticContext.Origin, type.Type, e => e.Name == name, _memberWithRequirements, bindingFlags);
+        private partial void MarkEventsOnTypeHierarchy(
+            TypeProxy type,
+            string name,
+            BindingFlags? bindingFlags
+        ) =>
+            _reflectionMarker.MarkEventsOnTypeHierarchy(
+                _diagnosticContext.Origin,
+                type.Type,
+                e => e.Name == name,
+                _memberWithRequirements,
+                bindingFlags
+            );
 
-        private partial void MarkFieldsOnTypeHierarchy(TypeProxy type, string name, BindingFlags? bindingFlags)
-            => _reflectionMarker.MarkFieldsOnTypeHierarchy(_diagnosticContext.Origin, type.Type, f => f.Name == name, _memberWithRequirements, bindingFlags);
+        private partial void MarkFieldsOnTypeHierarchy(
+            TypeProxy type,
+            string name,
+            BindingFlags? bindingFlags
+        ) =>
+            _reflectionMarker.MarkFieldsOnTypeHierarchy(
+                _diagnosticContext.Origin,
+                type.Type,
+                f => f.Name == name,
+                _memberWithRequirements,
+                bindingFlags
+            );
 
-        private partial void MarkPropertiesOnTypeHierarchy(TypeProxy type, string name, BindingFlags? bindingFlags)
-            => _reflectionMarker.MarkPropertiesOnTypeHierarchy(_diagnosticContext.Origin, type.Type, p => p.Name == name, _memberWithRequirements, bindingFlags);
+        private partial void MarkPropertiesOnTypeHierarchy(
+            TypeProxy type,
+            string name,
+            BindingFlags? bindingFlags
+        ) =>
+            _reflectionMarker.MarkPropertiesOnTypeHierarchy(
+                _diagnosticContext.Origin,
+                type.Type,
+                p => p.Name == name,
+                _memberWithRequirements,
+                bindingFlags
+            );
 
-        private partial void MarkPublicParameterlessConstructorOnType(TypeProxy type)
-            => _reflectionMarker.MarkConstructorsOnType(_diagnosticContext.Origin, type.Type, m => m.IsPublic() && m.Signature.Length == 0, _memberWithRequirements);
+        private partial void MarkPublicParameterlessConstructorOnType(TypeProxy type) =>
+            _reflectionMarker.MarkConstructorsOnType(
+                _diagnosticContext.Origin,
+                type.Type,
+                m => m.IsPublic() && m.Signature.Length == 0,
+                _memberWithRequirements
+            );
 
-        private partial void MarkConstructorsOnType(TypeProxy type, BindingFlags? bindingFlags, int? parameterCount)
-            => _reflectionMarker.MarkConstructorsOnType(_diagnosticContext.Origin, type.Type, parameterCount == null ? null : m => m.Signature.Length == parameterCount, _memberWithRequirements, bindingFlags);
+        private partial void MarkConstructorsOnType(
+            TypeProxy type,
+            BindingFlags? bindingFlags,
+            int? parameterCount
+        ) =>
+            _reflectionMarker.MarkConstructorsOnType(
+                _diagnosticContext.Origin,
+                type.Type,
+                parameterCount == null ? null : m => m.Signature.Length == parameterCount,
+                _memberWithRequirements,
+                bindingFlags
+            );
 
-        private partial void MarkMethod(MethodProxy method)
-            => _reflectionMarker.MarkMethod(_diagnosticContext.Origin, method.Method, _memberWithRequirements);
+        private partial void MarkMethod(MethodProxy method) =>
+            _reflectionMarker.MarkMethod(
+                _diagnosticContext.Origin,
+                method.Method,
+                _memberWithRequirements
+            );
 
-        private partial void MarkType(TypeProxy type)
-            => _reflectionMarker.MarkType(_diagnosticContext.Origin, type.Type, _memberWithRequirements);
+        private partial void MarkType(TypeProxy type) =>
+            _reflectionMarker.MarkType(
+                _diagnosticContext.Origin,
+                type.Type,
+                _memberWithRequirements
+            );
 
         private partial bool MarkAssociatedProperty(MethodProxy method)
         {
@@ -117,7 +196,11 @@ namespace ILLink.Shared.TrimAnalysis
                 return false;
             }
 
-            _reflectionMarker.MarkProperty(_diagnosticContext.Origin, propertyDefinition, _memberWithRequirements);
+            _reflectionMarker.MarkProperty(
+                _diagnosticContext.Origin,
+                propertyDefinition,
+                _memberWithRequirements
+            );
             return true;
         }
 

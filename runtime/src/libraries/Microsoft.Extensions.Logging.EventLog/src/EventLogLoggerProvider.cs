@@ -18,10 +18,7 @@ namespace Microsoft.Extensions.Logging.EventLog
         /// <summary>
         /// Initializes a new instance of the <see cref="EventLogLoggerProvider"/> class.
         /// </summary>
-        public EventLogLoggerProvider()
-            : this(settings: null)
-        {
-        }
+        public EventLogLoggerProvider() : this(settings: null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EventLogLoggerProvider"/> class.
@@ -36,10 +33,7 @@ namespace Microsoft.Extensions.Logging.EventLog
         /// Initializes a new instance of the <see cref="EventLogLoggerProvider"/> class.
         /// </summary>
         /// <param name="options">The <see cref="IOptions{EventLogSettings}"/>.</param>
-        public EventLogLoggerProvider(IOptions<EventLogSettings> options)
-            : this(options.Value)
-        {
-        }
+        public EventLogLoggerProvider(IOptions<EventLogSettings> options) : this(options.Value) { }
 
         /// <inheritdoc />
         public ILogger CreateLogger(string name)

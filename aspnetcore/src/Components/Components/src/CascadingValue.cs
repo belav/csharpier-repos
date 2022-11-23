@@ -17,12 +17,14 @@ public class CascadingValue<TValue> : ICascadingValueComponent, IComponent
     /// <summary>
     /// The content to which the value should be provided.
     /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
     /// The value to be provided.
     /// </summary>
-    [Parameter] public TValue? Value { get; set; }
+    [Parameter]
+    public TValue? Value { get; set; }
 
     /// <summary>
     /// Optionally gives a name to the provided value. Descendant components
@@ -31,7 +33,8 @@ public class CascadingValue<TValue> : ICascadingValueComponent, IComponent
     /// If no name is specified, then descendant components will receive the
     /// value based the type of value they are requesting.
     /// </summary>
-    [Parameter] public string? Name { get; set; }
+    [Parameter]
+    public string? Name { get; set; }
 
     /// <summary>
     /// If true, indicates that <see cref="Value"/> will not change. This is a
@@ -39,7 +42,8 @@ public class CascadingValue<TValue> : ICascadingValueComponent, IComponent
     /// change notifications. Set this flag only if you will not change
     /// <see cref="Value"/> during the component's lifetime.
     /// </summary>
-    [Parameter] public bool IsFixed { get; set; }
+    [Parameter]
+    public bool IsFixed { get; set; }
 
     object? ICascadingValueComponent.CurrentValue => Value;
 
@@ -73,7 +77,9 @@ public class CascadingValue<TValue> : ICascadingValueComponent, IComponent
                 Value = (TValue)parameter.Value;
                 hasSuppliedValue = true;
             }
-            else if (parameter.Name.Equals(nameof(ChildContent), StringComparison.OrdinalIgnoreCase))
+            else if (
+                parameter.Name.Equals(nameof(ChildContent), StringComparison.OrdinalIgnoreCase)
+            )
             {
                 ChildContent = (RenderFragment)parameter.Value;
             }
@@ -82,7 +88,9 @@ public class CascadingValue<TValue> : ICascadingValueComponent, IComponent
                 Name = (string)parameter.Value;
                 if (string.IsNullOrEmpty(Name))
                 {
-                    throw new ArgumentException($"The parameter '{nameof(Name)}' for component '{nameof(CascadingValue<TValue>)}' does not allow null or empty values.");
+                    throw new ArgumentException(
+                        $"The parameter '{nameof(Name)}' for component '{nameof(CascadingValue<TValue>)}' does not allow null or empty values."
+                    );
                 }
             }
             else if (parameter.Name.Equals(nameof(IsFixed), StringComparison.OrdinalIgnoreCase))
@@ -91,13 +99,17 @@ public class CascadingValue<TValue> : ICascadingValueComponent, IComponent
             }
             else
             {
-                throw new ArgumentException($"The component '{nameof(CascadingValue<TValue>)}' does not accept a parameter with the name '{parameter.Name}'.");
+                throw new ArgumentException(
+                    $"The component '{nameof(CascadingValue<TValue>)}' does not accept a parameter with the name '{parameter.Name}'."
+                );
             }
         }
 
         if (_hasSetParametersPreviously && IsFixed != previousFixed)
         {
-            throw new InvalidOperationException($"The value of {nameof(IsFixed)} cannot be changed dynamically.");
+            throw new InvalidOperationException(
+                $"The value of {nameof(IsFixed)} cannot be changed dynamically."
+            );
         }
 
         _hasSetParametersPreviously = true;
@@ -106,7 +118,9 @@ public class CascadingValue<TValue> : ICascadingValueComponent, IComponent
         // because it serves no useful purpose to have a <CascadingValue> otherwise.
         if (!hasSuppliedValue)
         {
-            throw new ArgumentException($"Missing required parameter '{nameof(Value)}' for component '{GetType().Name}'.");
+            throw new ArgumentException(
+                $"Missing required parameter '{nameof(Value)}' for component '{GetType().Name}'."
+            );
         }
 
         // Rendering is most efficient when things are queued from rootmost to leafmost.
@@ -148,7 +162,9 @@ public class CascadingValue<TValue> : ICascadingValueComponent, IComponent
         {
             // Should not be possible. User code cannot trigger this.
             // Checking only to catch possible future framework bugs.
-            throw new InvalidOperationException($"Cannot subscribe to a {typeof(CascadingValue<>).Name} when {nameof(IsFixed)} is true.");
+            throw new InvalidOperationException(
+                $"Cannot subscribe to a {typeof(CascadingValue<>).Name} when {nameof(IsFixed)} is true."
+            );
         }
 #endif
 

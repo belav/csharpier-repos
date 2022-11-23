@@ -16,7 +16,9 @@ public class AccessTokenResult
     /// <param name="status">The status of the result.</param>
     /// <param name="token">The <see cref="AccessToken"/> in case it was successful.</param>
     /// <param name="redirectUrl">The redirect uri to go to for provisioning the token.</param>
-    [Obsolete("Use the AccessTokenResult(AccessTokenResultStatus, AccessToken, string, InteractiveRequestOptions)")]
+    [Obsolete(
+        "Use the AccessTokenResult(AccessTokenResultStatus, AccessToken, string, InteractiveRequestOptions)"
+    )]
     public AccessTokenResult(AccessTokenResultStatus status, AccessToken token, string redirectUrl)
     {
         Status = status;
@@ -31,7 +33,12 @@ public class AccessTokenResult
     /// <param name="token">The <see cref="AccessToken"/> in case it was successful.</param>
     /// <param name="interactiveRequestUrl">The redirect uri to go to for provisioning the token with <see cref="NavigationManagerExtensions.NavigateToLogin(NavigationManager, string, InteractiveRequestOptions)"/>.</param>
     /// <param name="interactiveRequest">The <see cref="InteractiveRequestOptions"/> containing the parameters for the interactive authentication.</param>
-    public AccessTokenResult(AccessTokenResultStatus status, AccessToken token, string interactiveRequestUrl, InteractiveRequestOptions interactiveRequest)
+    public AccessTokenResult(
+        AccessTokenResultStatus status,
+        AccessToken token,
+        string interactiveRequestUrl,
+        InteractiveRequestOptions interactiveRequest
+    )
     {
         Status = status;
         _token = token;

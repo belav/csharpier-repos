@@ -24,16 +24,22 @@ namespace System.Threading
     {
         #region Object->Lock/Condition mapping
 
-        private static ConditionalWeakTable<object, Condition> s_conditionTable = new ConditionalWeakTable<object, Condition>();
-        private static ConditionalWeakTable<object, Condition>.CreateValueCallback s_createCondition = (o) => new Condition(GetLock(o));
+        private static ConditionalWeakTable<object, Condition> s_conditionTable =
+            new ConditionalWeakTable<object, Condition>();
+        private static ConditionalWeakTable<
+            object,
+            Condition
+        >.CreateValueCallback s_createCondition = (o) => new Condition(GetLock(o));
 
         internal static Lock GetLock(object obj)
         {
             if (obj == null)
                 throw new ArgumentNullException(nameof(obj));
 
-            Debug.Assert(!(obj is Lock),
-                "Do not use Monitor.Enter or TryEnter on a Lock instance; use Lock methods directly instead.");
+            Debug.Assert(
+                !(obj is Lock),
+                "Do not use Monitor.Enter or TryEnter on a Lock instance; use Lock methods directly instead."
+            );
 
             return ObjectHeader.GetLockObject(obj);
         }
@@ -42,7 +48,8 @@ namespace System.Threading
         {
             Debug.Assert(
                 !(obj is Condition || obj is Lock),
-                "Do not use Monitor.Pulse or Wait on a Lock or Condition instance; use the methods on Condition instead.");
+                "Do not use Monitor.Pulse or Wait on a Lock or Condition instance; use the methods on Condition instead."
+            );
             return s_conditionTable.GetValue(obj, s_createCondition);
         }
         #endregion
@@ -88,7 +95,10 @@ namespace System.Threading
         public static bool TryEnter(object obj, int millisecondsTimeout)
         {
             if (millisecondsTimeout < -1)
-                throw new ArgumentOutOfRangeException(nameof(millisecondsTimeout), SR.ArgumentOutOfRange_NeedNonNegOrNegative1);
+                throw new ArgumentOutOfRangeException(
+                    nameof(millisecondsTimeout),
+                    SR.ArgumentOutOfRange_NeedNonNegOrNegative1
+                );
 
             Lock lck = GetLock(obj);
             if (lck.TryAcquire(0))
@@ -101,7 +111,10 @@ namespace System.Threading
             if (lockTaken)
                 throw new ArgumentException(SR.Argument_MustBeFalse, nameof(lockTaken));
             if (millisecondsTimeout < -1)
-                throw new ArgumentOutOfRangeException(nameof(millisecondsTimeout), SR.ArgumentOutOfRange_NeedNonNegOrNegative1);
+                throw new ArgumentOutOfRangeException(
+                    nameof(millisecondsTimeout),
+                    SR.ArgumentOutOfRange_NeedNonNegOrNegative1
+                );
 
             Lock lck = GetLock(obj);
             if (lck.TryAcquire(0))
@@ -131,7 +144,14 @@ namespace System.Threading
         {
             Condition condition = GetCondition(obj);
 
-            using (new DebugBlockingScope(obj, DebugBlockingItemType.MonitorEvent, millisecondsTimeout, out _))
+            using (
+                new DebugBlockingScope(
+                    obj,
+                    DebugBlockingItemType.MonitorEvent,
+                    millisecondsTimeout,
+                    out _
+                )
+            )
             {
                 return condition.Wait(millisecondsTimeout);
             }
@@ -163,7 +183,14 @@ namespace System.Threading
 
         internal static bool TryAcquireContended(Lock lck, object obj, int millisecondsTimeout)
         {
-            using (new DebugBlockingScope(obj, DebugBlockingItemType.MonitorCriticalSection, millisecondsTimeout, out _))
+            using (
+                new DebugBlockingScope(
+                    obj,
+                    DebugBlockingItemType.MonitorCriticalSection,
+                    millisecondsTimeout,
+                    out _
+                )
+            )
             {
                 return lck.TryAcquire(millisecondsTimeout, trackContentions: true);
             }
@@ -210,7 +237,12 @@ namespace System.Threading
 
         private unsafe struct DebugBlockingScope : IDisposable
         {
-            public DebugBlockingScope(object obj, DebugBlockingItemType blockingType, int timeout, out DebugBlockingItem blockingItem)
+            public DebugBlockingScope(
+                object obj,
+                DebugBlockingItemType blockingType,
+                int timeout,
+                out DebugBlockingItem blockingItem
+            )
             {
                 blockingItem._object = obj;
                 blockingItem._blockingType = blockingType;
@@ -222,7 +254,9 @@ namespace System.Threading
 
             public void Dispose()
             {
-                t_firstBlockingItem = Unsafe.Read<DebugBlockingItem>((void*)t_firstBlockingItem)._next;
+                t_firstBlockingItem = Unsafe
+                    .Read<DebugBlockingItem>((void*)t_firstBlockingItem)
+                    ._next;
             }
         }
 
@@ -230,7 +264,8 @@ namespace System.Threading
 
         #region Metrics
 
-        private static readonly ThreadInt64PersistentCounter s_lockContentionCounter = new ThreadInt64PersistentCounter();
+        private static readonly ThreadInt64PersistentCounter s_lockContentionCounter =
+            new ThreadInt64PersistentCounter();
 
         [ThreadStatic]
         private static object t_ContentionCountObject;
@@ -240,13 +275,17 @@ namespace System.Threading
         {
             Debug.Assert(t_ContentionCountObject == null);
 
-            object threadLocalContentionCountObject = s_lockContentionCounter.CreateThreadLocalCountObject();
+            object threadLocalContentionCountObject =
+                s_lockContentionCounter.CreateThreadLocalCountObject();
             t_ContentionCountObject = threadLocalContentionCountObject;
             return threadLocalContentionCountObject;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static void IncrementLockContentionCount() => ThreadInt64PersistentCounter.Increment(t_ContentionCountObject ?? CreateThreadLocalContentionCountObject());
+        internal static void IncrementLockContentionCount() =>
+            ThreadInt64PersistentCounter.Increment(
+                t_ContentionCountObject ?? CreateThreadLocalContentionCountObject()
+            );
 
         /// <summary>
         /// Gets the number of times there was contention upon trying to take a <see cref="Monitor"/>'s lock so far.

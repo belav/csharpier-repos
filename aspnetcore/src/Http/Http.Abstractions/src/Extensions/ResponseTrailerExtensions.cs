@@ -41,7 +41,11 @@ public static class ResponseTrailerExtensions
     /// <param name="response"></param>
     /// <param name="trailerName"></param>
     /// <param name="trailerValues"></param>
-    public static void AppendTrailer(this HttpResponse response, string trailerName, StringValues trailerValues)
+    public static void AppendTrailer(
+        this HttpResponse response,
+        string trailerName,
+        StringValues trailerValues
+    )
     {
         var feature = response.HttpContext.Features.Get<IHttpResponseTrailersFeature>();
         if (feature?.Trailers == null || feature.Trailers.IsReadOnly)

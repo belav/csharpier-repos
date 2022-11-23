@@ -12,6 +12,7 @@ namespace Microsoft.Extensions.Logging.Console
         /// Blocks the logging threads once the queue limit is reached.
         /// </summary>
         Wait,
+
         /// <summary>
         /// Drops new log messages when the queue is full.
         /// </summary>

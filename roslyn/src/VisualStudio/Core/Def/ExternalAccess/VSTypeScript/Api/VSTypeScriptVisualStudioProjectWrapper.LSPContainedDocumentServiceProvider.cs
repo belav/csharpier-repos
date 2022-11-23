@@ -8,7 +8,9 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
 {
     internal sealed partial class VSTypeScriptVisualStudioProjectWrapper
     {
-        private sealed class LspContainedDocumentServiceProvider : IDocumentServiceProvider, IDocumentOperationService
+        private sealed class LspContainedDocumentServiceProvider
+            : IDocumentServiceProvider,
+                IDocumentOperationService
         {
             private readonly VirtualDocumentPropertiesService _documentPropertiesService;
 
@@ -17,7 +19,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
                 _documentPropertiesService = VirtualDocumentPropertiesService.Instance;
             }
 
-            public static LspContainedDocumentServiceProvider Instance = new LspContainedDocumentServiceProvider();
+            public static LspContainedDocumentServiceProvider Instance =
+                new LspContainedDocumentServiceProvider();
 
             bool IDocumentOperationService.CanApplyChange => true;
 
@@ -39,7 +42,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
 
                 private VirtualDocumentPropertiesService() { }
 
-                public static VirtualDocumentPropertiesService Instance = new VirtualDocumentPropertiesService();
+                public static VirtualDocumentPropertiesService Instance =
+                    new VirtualDocumentPropertiesService();
 
                 public override string? DiagnosticsLspClientName => _lspClientName;
             }

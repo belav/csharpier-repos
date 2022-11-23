@@ -13,12 +13,18 @@ namespace System.Text.Json.Reflection
     {
         private readonly IFieldSymbol _field;
         private readonly MetadataLoadContextInternal _metadataLoadContext;
-        public FieldInfoWrapper(IFieldSymbol parameter, MetadataLoadContextInternal metadataLoadContext)
+
+        public FieldInfoWrapper(
+            IFieldSymbol parameter,
+            MetadataLoadContextInternal metadataLoadContext
+        )
         {
             _field = parameter;
             _metadataLoadContext = metadataLoadContext;
 
-            NeedsAtSign = SyntaxFacts.GetKeywordKind(_field.Name) != SyntaxKind.None || SyntaxFacts.GetContextualKeywordKind(_field.Name) != SyntaxKind.None;
+            NeedsAtSign =
+                SyntaxFacts.GetKeywordKind(_field.Name) != SyntaxKind.None
+                || SyntaxFacts.GetContextualKeywordKind(_field.Name) != SyntaxKind.None;
         }
 
         private FieldAttributes? _attributes;
@@ -101,7 +107,13 @@ namespace System.Text.Json.Reflection
             throw new NotImplementedException();
         }
 
-        public override void SetValue(object obj, object value, BindingFlags invokeAttr, Binder binder, CultureInfo culture)
+        public override void SetValue(
+            object obj,
+            object value,
+            BindingFlags invokeAttr,
+            Binder binder,
+            CultureInfo culture
+        )
         {
             throw new NotImplementedException();
         }

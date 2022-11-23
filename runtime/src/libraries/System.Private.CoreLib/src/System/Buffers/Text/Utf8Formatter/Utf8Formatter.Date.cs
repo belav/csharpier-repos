@@ -94,7 +94,12 @@ namespace System.Buffers.Text
         /// </remarks>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryFormat(DateTimeOffset value, Span<byte> destination, out int bytesWritten, StandardFormat format = default)
+        public static bool TryFormat(
+            DateTimeOffset value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        )
         {
             TimeSpan offset = Utf8Constants.NullUtcOffset;
             char symbol = format.Symbol;
@@ -108,7 +113,13 @@ namespace System.Buffers.Text
             {
                 'R' => TryFormatDateTimeR(value.UtcDateTime, destination, out bytesWritten),
                 'l' => TryFormatDateTimeL(value.UtcDateTime, destination, out bytesWritten),
-                'O' => TryFormatDateTimeO(value.DateTime, value.Offset, destination, out bytesWritten),
+                'O'
+                    => TryFormatDateTimeO(
+                        value.DateTime,
+                        value.Offset,
+                        destination,
+                        out bytesWritten
+                    ),
                 'G' => TryFormatDateTimeG(value.DateTime, offset, destination, out bytesWritten),
                 _ => FormattingHelpers.TryFormatThrowFormatException(out bytesWritten),
             };
@@ -135,7 +146,12 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryFormat(DateTime value, Span<byte> destination, out int bytesWritten, StandardFormat format = default)
+        public static bool TryFormat(
+            DateTime value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        )
         {
             char symbol = FormattingHelpers.GetSymbolOrDefault(format, 'G');
 
@@ -143,8 +159,20 @@ namespace System.Buffers.Text
             {
                 'R' => TryFormatDateTimeR(value, destination, out bytesWritten),
                 'l' => TryFormatDateTimeL(value, destination, out bytesWritten),
-                'O' => TryFormatDateTimeO(value, Utf8Constants.NullUtcOffset, destination, out bytesWritten),
-                'G' => TryFormatDateTimeG(value, Utf8Constants.NullUtcOffset, destination, out bytesWritten),
+                'O'
+                    => TryFormatDateTimeO(
+                        value,
+                        Utf8Constants.NullUtcOffset,
+                        destination,
+                        out bytesWritten
+                    ),
+                'G'
+                    => TryFormatDateTimeG(
+                        value,
+                        Utf8Constants.NullUtcOffset,
+                        destination,
+                        out bytesWritten
+                    ),
                 _ => FormattingHelpers.TryFormatThrowFormatException(out bytesWritten),
             };
         }

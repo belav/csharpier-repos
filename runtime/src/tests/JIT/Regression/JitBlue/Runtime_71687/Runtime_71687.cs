@@ -40,8 +40,23 @@ class Runtime_71687
         return 100;
     }
 
-    private struct Struct1 { public byte Field; }
-    private struct Struct2 { public short Field; }
-    private struct Struct4 { public int Field; }
-    private struct Struct8 { public long Field; }
+    private struct Struct1
+    {
+        public byte Field;
+    }
+
+    private struct Struct2
+    {
+        public short Field;
+    }
+
+    private struct Struct4
+    {
+        public int Field;
+    }
+
+    private struct Struct8
+    {
+        public long Field;
+    }
 }

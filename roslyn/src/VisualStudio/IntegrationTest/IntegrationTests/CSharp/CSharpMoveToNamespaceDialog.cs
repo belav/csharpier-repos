@@ -17,61 +17,67 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     {
         protected override string LanguageName => LanguageNames.CSharp;
 
-        private MoveToNamespaceDialog_OutOfProc MoveToNamespaceDialog => VisualStudio.MoveToNamespaceDialog;
+        private MoveToNamespaceDialog_OutOfProc MoveToNamespaceDialog =>
+            VisualStudio.MoveToNamespaceDialog;
 
         public CSharpMoveToNamespaceDialog(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpMoveToNamespaceDialog))
-        {
-        }
+            : base(instanceFactory, nameof(CSharpMoveToNamespaceDialog)) { }
 
         [WpfFact]
         public void VerifyCancellation()
         {
             SetUpEditor(
-@"
+                @"
 namespace A
 {
     class C$$
     {
     }
 }
-");
+"
+            );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Move to namespace...",
+            VisualStudio.Editor.Verify.CodeAction(
+                "Move to namespace...",
                 applyFix: true,
-                blockUntilComplete: false);
+                blockUntilComplete: false
+            );
 
             MoveToNamespaceDialog.VerifyOpen();
             MoveToNamespaceDialog.ClickCancel();
             MoveToNamespaceDialog.VerifyClosed();
 
             VisualStudio.Editor.Verify.TextContains(
-@"
+                @"
 namespace A
 {
     class C
     {
     }
 }
-");
+"
+            );
         }
 
         [WpfFact]
         public void VerifyCancellationWithChange()
         {
             SetUpEditor(
-@"
+                @"
 namespace A
 {
     class C$$
     {
     }
 }
-");
+"
+            );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Move to namespace...",
+            VisualStudio.Editor.Verify.CodeAction(
+                "Move to namespace...",
                 applyFix: true,
-                blockUntilComplete: false);
+                blockUntilComplete: false
+            );
 
             MoveToNamespaceDialog.VerifyOpen();
             MoveToNamespaceDialog.SetNamespace("B");
@@ -79,63 +85,71 @@ namespace A
             MoveToNamespaceDialog.VerifyClosed();
 
             VisualStudio.Editor.Verify.TextContains(
-@"
+                @"
 namespace A
 {
     class C
     {
     }
 }
-");
+"
+            );
         }
 
         [WpfFact]
         public void VerifyOkNoChange()
         {
             SetUpEditor(
-@"
+                @"
 namespace A
 {
     class C$$
     {
     }
 }
-");
+"
+            );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Move to namespace...",
+            VisualStudio.Editor.Verify.CodeAction(
+                "Move to namespace...",
                 applyFix: true,
-                blockUntilComplete: false);
+                blockUntilComplete: false
+            );
 
             MoveToNamespaceDialog.VerifyOpen();
             MoveToNamespaceDialog.ClickOK();
             MoveToNamespaceDialog.VerifyClosed();
 
             VisualStudio.Editor.Verify.TextContains(
-@"
+                @"
 namespace A
 {
     class C
     {
     }
 }
-");
+"
+            );
         }
 
         [WpfFact]
         public void VerifyOkWithChange()
         {
             SetUpEditor(
-@"namespace A
+                @"namespace A
 {
     class C$$
     {
     }
 }
-");
+"
+            );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Move to namespace...",
+            VisualStudio.Editor.Verify.CodeAction(
+                "Move to namespace...",
                 applyFix: true,
-                blockUntilComplete: false);
+                blockUntilComplete: false
+            );
 
             MoveToNamespaceDialog.VerifyOpen();
             MoveToNamespaceDialog.SetNamespace("B");
@@ -143,13 +157,14 @@ namespace A
             MoveToNamespaceDialog.VerifyClosed();
 
             VisualStudio.Editor.Verify.TextContains(
-@"namespace B
+                @"namespace B
 {
     class C
     {
     }
 }
-");
+"
+            );
         }
     }
 }

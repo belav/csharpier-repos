@@ -7,7 +7,6 @@ using System.Globalization;
 
 namespace System.Data
 {
-
     /// <summary>
     /// This static class defines the DataTable extension methods.
     /// </summary>
@@ -34,8 +33,7 @@ namespace System.Data
         /// <returns>DataTable containing copies of the source DataRows. Properties for the DataTable table will be taken from first DataRow in the source.</returns>
         /// <exception cref="ArgumentNullException">if source is null</exception>
         /// <exception cref="InvalidOperationException">if source is empty</exception>
-        public static DataTable CopyToDataTable<T>(this IEnumerable<T> source)
-            where T : DataRow
+        public static DataTable CopyToDataTable<T>(this IEnumerable<T> source) where T : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, nameof(source));
             return LoadTableFromEnumerable(source, table: null, options: null, errorHandler: null);
@@ -44,14 +42,16 @@ namespace System.Data
         /// <summary>
         /// Delegates to other CopyToDataTable overload with a null FillErrorEventHandler.
         /// </summary>
-        public static void CopyToDataTable<T>(this IEnumerable<T> source, DataTable table, LoadOption options)
-            where T : DataRow
+        public static void CopyToDataTable<T>(
+            this IEnumerable<T> source,
+            DataTable table,
+            LoadOption options
+        ) where T : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, nameof(source));
             DataSetUtil.CheckArgumentNull(table, nameof(table));
             LoadTableFromEnumerable(source, table, options, errorHandler: null);
         }
-
 
         /// <summary>
         /// This method takes an input sequence of DataRows and produces a DataTable object
@@ -72,16 +72,24 @@ namespace System.Data
         /// <exception cref="ArgumentNullException">if source is null</exception>
         /// <exception cref="ArgumentNullException">if table is null</exception>
         /// <exception cref="InvalidOperationException">if source DataRow is in Deleted or Detached state</exception>
-        public static void CopyToDataTable<T>(this IEnumerable<T> source, DataTable table, LoadOption options, FillErrorEventHandler? errorHandler)
-            where T : DataRow
+        public static void CopyToDataTable<T>(
+            this IEnumerable<T> source,
+            DataTable table,
+            LoadOption options,
+            FillErrorEventHandler? errorHandler
+        ) where T : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, nameof(source));
             DataSetUtil.CheckArgumentNull(table, nameof(table));
             LoadTableFromEnumerable(source, table, options, errorHandler);
         }
 
-        private static DataTable LoadTableFromEnumerable<T>(IEnumerable<T> source, DataTable? table, LoadOption? options, FillErrorEventHandler? errorHandler)
-            where T : DataRow
+        private static DataTable LoadTableFromEnumerable<T>(
+            IEnumerable<T> source,
+            DataTable? table,
+            LoadOption? options,
+            FillErrorEventHandler? errorHandler
+        ) where T : DataRow
         {
             if (options.HasValue)
             {
@@ -96,13 +104,13 @@ namespace System.Data
                 }
             }
 
-
             using (IEnumerator<T> rows = source.GetEnumerator())
             {
                 // need to get first row to create table
                 if (!rows.MoveNext())
                 {
-                    return table ?? throw DataSetUtil.InvalidOperation(SR.DataSetLinq_EmptyDataRowSource);
+                    return table
+                        ?? throw DataSetUtil.InvalidOperation(SR.DataSetLinq_EmptyDataRowSource);
                 }
 
                 DataRow current;
@@ -114,10 +122,7 @@ namespace System.Data
                         throw DataSetUtil.InvalidOperation(SR.DataSetLinq_NullDataRow);
                     }
 
-                    table = new DataTable()
-                    {
-                        Locale = CultureInfo.CurrentCulture
-                    };
+                    table = new DataTable() { Locale = CultureInfo.CurrentCulture };
 
                     // We do not copy the same properties that DataView.ToTable does.
                     // If user needs that functionality, use other CopyToDataTable overloads.
@@ -150,7 +155,9 @@ namespace System.Data
                                 case DataRowState.Detached:
                                     if (!current.HasVersion(DataRowVersion.Proposed))
                                     {
-                                        throw DataSetUtil.InvalidOperation(SR.DataSetLinq_CannotLoadDetachedRow);
+                                        throw DataSetUtil.InvalidOperation(
+                                            SR.DataSetLinq_CannotLoadDetachedRow
+                                        );
                                     }
                                     goto case DataRowState.Added;
                                 case DataRowState.Unchanged:
@@ -167,7 +174,9 @@ namespace System.Data
                                     }
                                     break;
                                 case DataRowState.Deleted:
-                                    throw DataSetUtil.InvalidOperation(SR.DataSetLinq_CannotLoadDeletedRow);
+                                    throw DataSetUtil.InvalidOperation(
+                                        SR.DataSetLinq_CannotLoadDeletedRow
+                                    );
                                 default:
                                     throw DataSetUtil.InvalidDataRowState(current.RowState);
                             }
@@ -182,10 +191,7 @@ namespace System.Data
                             FillErrorEventArgs? fillError = null;
                             if (null != errorHandler)
                             {
-                                fillError = new FillErrorEventArgs(table, values)
-                                {
-                                    Errors = e
-                                };
+                                fillError = new FillErrorEventArgs(table, values) { Errors = e };
                                 errorHandler.Invoke(rows, fillError);
                             }
                             if (null == fillError)
@@ -236,7 +242,8 @@ namespace System.Data
         /// <typeparam name="T">Type of the row in the table. Must inherit from DataRow</typeparam>
         /// <param name="source">The enumerable-datatable over which view must be created.</param>
         /// <returns>Generated LinkDataView of type T</returns>
-        public static DataView AsDataView<T>(this EnumerableRowCollection<T> source) where T : DataRow
+        public static DataView AsDataView<T>(this EnumerableRowCollection<T> source)
+            where T : DataRow
         {
             DataSetUtil.CheckArgumentNull<EnumerableRowCollection<T>>(source, nameof(source));
             return source.GetLinqDataView();

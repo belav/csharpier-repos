@@ -39,10 +39,12 @@ namespace System.Linq.Expressions.Compiler
             {
                 return RuntimeHelpers.GetHashCode(Value) ^ Type.GetHashCode();
             }
+
             public bool Equals(TypedConstant other)
             {
                 return object.ReferenceEquals(Value, other.Value) && Type.Equals(other.Type);
             }
+
             public override bool Equals([NotNullWhen(true)] object? obj)
             {
                 return obj is TypedConstant typedConstant && Equals(typedConstant);
@@ -57,17 +59,21 @@ namespace System.Linq.Expressions.Compiler
         /// <summary>
         /// The index of each constant in the constant array
         /// </summary>
-        private readonly Dictionary<object, int> _indexes = new Dictionary<object, int>(ReferenceEqualityComparer.Instance);
+        private readonly Dictionary<object, int> _indexes = new Dictionary<object, int>(
+            ReferenceEqualityComparer.Instance
+        );
 
         /// <summary>
         /// Each constant referenced within this lambda, and how often it was referenced
         /// </summary>
-        private readonly Dictionary<TypedConstant, int> _references = new Dictionary<TypedConstant, int>();
+        private readonly Dictionary<TypedConstant, int> _references =
+            new Dictionary<TypedConstant, int>();
 
         /// <summary>
         /// IL locals for storing frequently used constants
         /// </summary>
-        private readonly Dictionary<TypedConstant, LocalBuilder> _cache = new Dictionary<TypedConstant, LocalBuilder>();
+        private readonly Dictionary<TypedConstant, LocalBuilder> _cache =
+            new Dictionary<TypedConstant, LocalBuilder>();
 
         internal int Count => _values.Count;
 

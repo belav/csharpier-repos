@@ -91,23 +91,27 @@ internal sealed class FieldStore
     // keep in sync with hot_reload-internals.h
     private object? _loc;
 
-    private FieldStore (object? loc)
+    private FieldStore(object? loc)
     {
         _loc = loc;
     }
 
     public object? Location => _loc;
 
-    public static FieldStore Create (RuntimeTypeHandle type)
+    public static FieldStore Create(RuntimeTypeHandle type)
     {
-        Type t = Type.GetTypeFromHandle(type) ?? throw new ArgumentException(nameof(type), "Type handle was null");
+        Type t =
+            Type.GetTypeFromHandle(type)
+            ?? throw new ArgumentException(nameof(type), "Type handle was null");
         object? loc;
         if (t.IsPrimitive || t.IsValueType)
             loc = RuntimeHelpers.GetUninitializedObject(t);
         else if (t.IsClass || t.IsInterface)
             loc = null;
         else
-            throw new ArgumentException("EnC: Expected a primitive, valuetype, class or interface field");
+            throw new ArgumentException(
+                "EnC: Expected a primitive, valuetype, class or interface field"
+            );
         /* FIXME: do we want FieldStore to be pinned? */
         return new FieldStore(loc);
     }

@@ -25,7 +25,12 @@ internal class HtmlNodeOptimizationPass : RazorEngineFeatureBase, IRazorSyntaxTr
         var whitespaceRewriter = new WhitespaceRewriter();
         var rewritten = whitespaceRewriter.Visit(syntaxTree.Root);
 
-        var rewrittenSyntaxTree = RazorSyntaxTree.Create(rewritten, syntaxTree.Source, syntaxTree.Diagnostics, syntaxTree.Options);
+        var rewrittenSyntaxTree = RazorSyntaxTree.Create(
+            rewritten,
+            syntaxTree.Source,
+            syntaxTree.Diagnostics,
+            syntaxTree.Options
+        );
         return rewrittenSyntaxTree;
     }
 }

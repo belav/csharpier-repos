@@ -54,7 +54,10 @@ public abstract class CompositeRowValueFactory
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateDependentKeyValue(object?[] keyValues, [NotNullWhen(true)] out object?[]? key)
+    public virtual bool TryCreateDependentKeyValue(
+        object?[] keyValues,
+        [NotNullWhen(true)] out object?[]? key
+    )
     {
         key = keyValues;
         return keyValues.All(k => k != null);
@@ -66,15 +69,17 @@ public abstract class CompositeRowValueFactory
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateDependentKeyValue(IDictionary<string, object?> keyValues, [NotNullWhen(true)] out object?[]? key)
+    public virtual bool TryCreateDependentKeyValue(
+        IDictionary<string, object?> keyValues,
+        [NotNullWhen(true)] out object?[]? key
+    )
     {
         key = new object[Columns.Count];
         var index = 0;
 
         foreach (var column in Columns)
         {
-            if (!keyValues.TryGetValue(column.Name, out var value)
-                || value == null)
+            if (!keyValues.TryGetValue(column.Name, out var value) || value == null)
             {
                 return false;
             }
@@ -94,7 +99,8 @@ public abstract class CompositeRowValueFactory
     public virtual bool TryCreateDependentKeyValue(
         IReadOnlyModificationCommand command,
         bool fromOriginalValues,
-        [NotNullWhen(true)] out object?[]? key)
+        [NotNullWhen(true)] out object?[]? key
+    )
     {
         var converters = ValueConverters;
         key = new object[Columns.Count];
@@ -117,7 +123,9 @@ public abstract class CompositeRowValueFactory
                     }
 
                     valueFound = true;
-                    value = fromOriginalValues ? entry.GetOriginalProviderValue(property) : entry.GetCurrentProviderValue(property);
+                    value = fromOriginalValues
+                        ? entry.GetOriginalProviderValue(property)
+                        : entry.GetCurrentProviderValue(property);
 
                     var converter = converters?[i];
                     if (converter != null)
@@ -125,15 +133,19 @@ public abstract class CompositeRowValueFactory
                         value = converter.ConvertFromProvider(value);
                     }
 
-                    if (!fromOriginalValues
-                        && (entry.EntityState == EntityState.Added
-                            || entry.EntityState == EntityState.Modified && entry.IsModified(property)))
+                    if (
+                        !fromOriginalValues
+                        && (
+                            entry.EntityState == EntityState.Added
+                            || entry.EntityState == EntityState.Modified
+                                && entry.IsModified(property)
+                        )
+                    )
                     {
                         break;
                     }
 
-                    if (fromOriginalValues
-                        && entry.EntityState != EntityState.Added)
+                    if (fromOriginalValues && entry.EntityState != EntityState.Added)
                     {
                         break;
                     }
@@ -148,7 +160,9 @@ public abstract class CompositeRowValueFactory
             }
             else
             {
-                var modification = command.ColumnModifications.FirstOrDefault(m => m.ColumnName == column.Name);
+                var modification = command.ColumnModifications.FirstOrDefault(
+                    m => m.ColumnName == column.Name
+                );
                 if (modification == null)
                 {
                     return false;
@@ -170,15 +184,22 @@ public abstract class CompositeRowValueFactory
     /// </summary>
     protected static IEqualityComparer<object?[]> CreateEqualityComparer(
         IReadOnlyList<IColumn> columns,
-        List<ValueConverter?>? valueConverters)
-        => new CompositeCustomComparer(columns.Select(c => c.ProviderValueComparer).ToList(), valueConverters);
+        List<ValueConverter?>? valueConverters
+    ) =>
+        new CompositeCustomComparer(
+            columns.Select(c => c.ProviderValueComparer).ToList(),
+            valueConverters
+        );
 
     private sealed class CompositeCustomComparer : IEqualityComparer<object?[]>
     {
         private readonly Func<object?, object?, bool>[] _equals;
         private readonly Func<object, int>[] _hashCodes;
 
-        public CompositeCustomComparer(List<ValueComparer> comparers, List<ValueConverter?>? valueConverters)
+        public CompositeCustomComparer(
+            List<ValueComparer> comparers,
+            List<ValueConverter?>? valueConverters
+        )
         {
             var columnCount = comparers.Count;
             _equals = new Func<object?, object?, bool>[columnCount];
@@ -190,7 +211,11 @@ public abstract class CompositeRowValueFactory
                 var comparer = comparers[i];
                 if (converter != null)
                 {
-                    _equals[i] = (v1, v2) => comparer.Equals(converter.ConvertToProvider(v1), converter.ConvertToProvider(v2));
+                    _equals[i] = (v1, v2) =>
+                        comparer.Equals(
+                            converter.ConvertToProvider(v1),
+                            converter.ConvertToProvider(v2)
+                        );
                     _hashCodes[i] = v => comparer.GetHashCode(converter.ConvertToProvider(v)!);
                 }
                 else

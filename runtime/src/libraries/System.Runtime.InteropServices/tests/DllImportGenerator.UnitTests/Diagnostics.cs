@@ -21,9 +21,12 @@ namespace DllImportGenerator.UnitTests
         [InlineData(TestTargetFramework.Core)]
         [InlineData(TestTargetFramework.Standard)]
         [InlineData(TestTargetFramework.Net5)]
-        public async Task TargetFrameworkNotSupported_NoDiagnostic(TestTargetFramework targetFramework)
+        public async Task TargetFrameworkNotSupported_NoDiagnostic(
+            TestTargetFramework targetFramework
+        )
         {
-            string source = $@"
+            string source =
+                $@"
 using System.Runtime.InteropServices;
 {CodeSnippets.GeneratedDllImportAttributeDeclaration}
 partial class Test
@@ -35,7 +38,11 @@ partial class Test
             Compilation comp = await TestUtils.CreateCompilation(source, targetFramework);
             TestUtils.AssertPreSourceGeneratorCompilation(comp);
 
-            var newComp = TestUtils.RunGenerators(comp, out var generatorDiags, new Microsoft.Interop.DllImportGenerator());
+            var newComp = TestUtils.RunGenerators(
+                comp,
+                out var generatorDiags,
+                new Microsoft.Interop.DllImportGenerator()
+            );
             Assert.Empty(generatorDiags);
 
             var newCompDiags = newComp.GetDiagnostics();
@@ -47,9 +54,12 @@ partial class Test
         [InlineData(TestTargetFramework.Core)]
         [InlineData(TestTargetFramework.Standard)]
         [InlineData(TestTargetFramework.Net5)]
-        public async Task TargetFrameworkNotSupported_NoGeneratedDllImport_NoDiagnostic(TestTargetFramework targetFramework)
+        public async Task TargetFrameworkNotSupported_NoGeneratedDllImport_NoDiagnostic(
+            TestTargetFramework targetFramework
+        )
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 partial class Test
 {
@@ -60,7 +70,11 @@ partial class Test
             Compilation comp = await TestUtils.CreateCompilation(source, targetFramework);
             TestUtils.AssertPreSourceGeneratorCompilation(comp);
 
-            var newComp = TestUtils.RunGenerators(comp, out var generatorDiags, new Microsoft.Interop.DllImportGenerator());
+            var newComp = TestUtils.RunGenerators(
+                comp,
+                out var generatorDiags,
+                new Microsoft.Interop.DllImportGenerator()
+            );
             Assert.Empty(generatorDiags);
 
             var newCompDiags = newComp.GetDiagnostics();
@@ -70,7 +84,8 @@ partial class Test
         [ConditionalFact]
         public async Task ParameterTypeNotSupported_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 namespace NS
@@ -89,7 +104,11 @@ partial class Test
             Compilation comp = await TestUtils.CreateCompilation(source);
             TestUtils.AssertPreSourceGeneratorCompilation(comp);
 
-            var newComp = TestUtils.RunGenerators(comp, out var generatorDiags, new Microsoft.Interop.DllImportGenerator());
+            var newComp = TestUtils.RunGenerators(
+                comp,
+                out var generatorDiags,
+                new Microsoft.Interop.DllImportGenerator()
+            );
             DiagnosticResult[] expectedDiags = new DiagnosticResult[]
             {
                 (new DiagnosticResult(GeneratorDiagnostics.ParameterTypeNotSupported))
@@ -108,7 +127,8 @@ partial class Test
         [ConditionalFact]
         public async Task ReturnTypeNotSupported_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 namespace NS
@@ -127,7 +147,11 @@ partial class Test
             Compilation comp = await TestUtils.CreateCompilation(source);
             TestUtils.AssertPreSourceGeneratorCompilation(comp);
 
-            var newComp = TestUtils.RunGenerators(comp, out var generatorDiags, new Microsoft.Interop.DllImportGenerator());
+            var newComp = TestUtils.RunGenerators(
+                comp,
+                out var generatorDiags,
+                new Microsoft.Interop.DllImportGenerator()
+            );
             DiagnosticResult[] expectedDiags = new DiagnosticResult[]
             {
                 (new DiagnosticResult(GeneratorDiagnostics.ReturnTypeNotSupported))
@@ -146,7 +170,8 @@ partial class Test
         [ConditionalFact]
         public async Task ParameterTypeNotSupportedWithDetails_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 partial class Test
 {
@@ -157,13 +182,19 @@ partial class Test
             Compilation comp = await TestUtils.CreateCompilation(source);
             TestUtils.AssertPreSourceGeneratorCompilation(comp);
 
-            var newComp = TestUtils.RunGenerators(comp, out var generatorDiags, new Microsoft.Interop.DllImportGenerator());
+            var newComp = TestUtils.RunGenerators(
+                comp,
+                out var generatorDiags,
+                new Microsoft.Interop.DllImportGenerator()
+            );
             DiagnosticResult[] expectedDiags = new DiagnosticResult[]
             {
-                (new DiagnosticResult(GeneratorDiagnostics.ParameterTypeNotSupportedWithDetails))
-                    .WithSpan(6, 44, 6, 45),
-                (new DiagnosticResult(GeneratorDiagnostics.ParameterTypeNotSupportedWithDetails))
-                    .WithSpan(6, 54, 6, 55),
+                (
+                    new DiagnosticResult(GeneratorDiagnostics.ParameterTypeNotSupportedWithDetails)
+                ).WithSpan(6, 44, 6, 45),
+                (
+                    new DiagnosticResult(GeneratorDiagnostics.ParameterTypeNotSupportedWithDetails)
+                ).WithSpan(6, 54, 6, 55),
             };
             VerifyDiagnostics(expectedDiags, GetSortedDiagnostics(generatorDiags));
 
@@ -174,7 +205,8 @@ partial class Test
         [ConditionalFact]
         public async Task ReturnTypeNotSupportedWithDetails_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 partial class Test
 {
@@ -188,13 +220,19 @@ partial class Test
             Compilation comp = await TestUtils.CreateCompilation(source);
             TestUtils.AssertPreSourceGeneratorCompilation(comp);
 
-            var newComp = TestUtils.RunGenerators(comp, out var generatorDiags, new Microsoft.Interop.DllImportGenerator());
+            var newComp = TestUtils.RunGenerators(
+                comp,
+                out var generatorDiags,
+                new Microsoft.Interop.DllImportGenerator()
+            );
             DiagnosticResult[] expectedDiags = new DiagnosticResult[]
             {
-                (new DiagnosticResult(GeneratorDiagnostics.ReturnTypeNotSupportedWithDetails))
-                    .WithSpan(6, 32, 6, 39),
-                (new DiagnosticResult(GeneratorDiagnostics.ReturnTypeNotSupportedWithDetails))
-                    .WithSpan(9, 34, 9, 41),
+                (
+                    new DiagnosticResult(GeneratorDiagnostics.ReturnTypeNotSupportedWithDetails)
+                ).WithSpan(6, 32, 6, 39),
+                (
+                    new DiagnosticResult(GeneratorDiagnostics.ReturnTypeNotSupportedWithDetails)
+                ).WithSpan(9, 34, 9, 41),
             };
             VerifyDiagnostics(expectedDiags, GetSortedDiagnostics(generatorDiags));
 
@@ -205,7 +243,8 @@ partial class Test
         [ConditionalFact]
         public async Task ParameterConfigurationNotSupported_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 partial class Test
 {
@@ -219,7 +258,11 @@ partial class Test
             Compilation comp = await TestUtils.CreateCompilation(source);
             TestUtils.AssertPreSourceGeneratorCompilation(comp);
 
-            var newComp = TestUtils.RunGenerators(comp, out var generatorDiags, new Microsoft.Interop.DllImportGenerator());
+            var newComp = TestUtils.RunGenerators(
+                comp,
+                out var generatorDiags,
+                new Microsoft.Interop.DllImportGenerator()
+            );
             DiagnosticResult[] expectedDiags = new DiagnosticResult[]
             {
                 (new DiagnosticResult(GeneratorDiagnostics.ParameterConfigurationNotSupported))
@@ -238,7 +281,8 @@ partial class Test
         [ConditionalFact]
         public async Task ReturnConfigurationNotSupported_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 partial class Test
 {
@@ -254,7 +298,11 @@ partial class Test
             Compilation comp = await TestUtils.CreateCompilation(source);
             TestUtils.AssertPreSourceGeneratorCompilation(comp);
 
-            var newComp = TestUtils.RunGenerators(comp, out var generatorDiags, new Microsoft.Interop.DllImportGenerator());
+            var newComp = TestUtils.RunGenerators(
+                comp,
+                out var generatorDiags,
+                new Microsoft.Interop.DllImportGenerator()
+            );
             DiagnosticResult[] expectedDiags = new DiagnosticResult[]
             {
                 (new DiagnosticResult(GeneratorDiagnostics.ReturnConfigurationNotSupported))
@@ -273,7 +321,8 @@ partial class Test
         [ConditionalFact]
         public async Task MarshalAsUnmanagedTypeNotSupported_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 partial class Test
 {
@@ -288,7 +337,11 @@ partial class Test
             Compilation comp = await TestUtils.CreateCompilation(source);
             TestUtils.AssertPreSourceGeneratorCompilation(comp);
 
-            var newComp = TestUtils.RunGenerators(comp, out var generatorDiags, new Microsoft.Interop.DllImportGenerator());
+            var newComp = TestUtils.RunGenerators(
+                comp,
+                out var generatorDiags,
+                new Microsoft.Interop.DllImportGenerator()
+            );
             DiagnosticResult[] expectedDiags = new DiagnosticResult[]
             {
                 (new DiagnosticResult(GeneratorDiagnostics.ConfigurationValueNotSupported))
@@ -313,7 +366,8 @@ partial class Test
         [ConditionalFact]
         public async Task MarshalAsFieldNotSupported_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 partial class Test
 {
@@ -328,22 +382,33 @@ partial class Test
             Compilation comp = await TestUtils.CreateCompilation(source);
             TestUtils.AssertPreSourceGeneratorCompilation(comp);
 
-            var newComp = TestUtils.RunGenerators(comp, out var generatorDiags, new Microsoft.Interop.DllImportGenerator());
+            var newComp = TestUtils.RunGenerators(
+                comp,
+                out var generatorDiags,
+                new Microsoft.Interop.DllImportGenerator()
+            );
             DiagnosticResult[] expectedDiags = new DiagnosticResult[]
             {
                 (new DiagnosticResult(GeneratorDiagnostics.ConfigurationNotSupported))
                     .WithSpan(6, 14, 6, 73)
-                    .WithArguments($"{nameof(MarshalAsAttribute)}{Type.Delimiter}{nameof(MarshalAsAttribute.SafeArraySubType)}"),
+                    .WithArguments(
+                        $"{nameof(MarshalAsAttribute)}{Type.Delimiter}{nameof(MarshalAsAttribute.SafeArraySubType)}"
+                    ),
                 (new DiagnosticResult(GeneratorDiagnostics.ConfigurationNotSupported))
                     .WithSpan(10, 41, 10, 91)
-                    .WithArguments($"{nameof(MarshalAsAttribute)}{Type.Delimiter}{nameof(MarshalAsAttribute.IidParameterIndex)}"),
+                    .WithArguments(
+                        $"{nameof(MarshalAsAttribute)}{Type.Delimiter}{nameof(MarshalAsAttribute.IidParameterIndex)}"
+                    ),
             };
             VerifyDiagnostics(expectedDiags, GetSortedDiagnostics(generatorDiags));
             var newCompDiags = newComp.GetDiagnostics();
             Assert.Empty(newCompDiags);
         }
 
-        private static void VerifyDiagnostics(DiagnosticResult[] expectedDiagnostics, Diagnostic[] actualDiagnostics)
+        private static void VerifyDiagnostics(
+            DiagnosticResult[] expectedDiagnostics,
+            Diagnostic[] actualDiagnostics
+        )
         {
             Assert.Equal(expectedDiagnostics.Length, actualDiagnostics.Length);
             for (var i = 0; i < expectedDiagnostics.Length; i++)

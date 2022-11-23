@@ -48,8 +48,7 @@ namespace System.Transactions.Oletx
         private TransactionTraceIdentifier _traceIdentifier = TransactionTraceIdentifier.Empty;
 
         // Property
-        internal RealOletxTransaction RealTransaction
-            => RealOletxTransaction;
+        internal RealOletxTransaction RealTransaction => RealOletxTransaction;
 
         internal Guid Identifier
         {
@@ -58,14 +57,22 @@ namespace System.Transactions.Oletx
                 TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxTransaction)}.{nameof(Identifier)}");
+                    etwLog.MethodEnter(
+                        TraceSourceType.TraceSourceOleTx,
+                        this,
+                        $"{nameof(OletxTransaction)}.{nameof(Identifier)}"
+                    );
                 }
 
                 Guid returnValue = RealOletxTransaction.Identifier;
 
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxTransaction)}.{nameof(Identifier)}");
+                    etwLog.MethodExit(
+                        TraceSourceType.TraceSourceOleTx,
+                        this,
+                        $"{nameof(OletxTransaction)}.{nameof(Identifier)}"
+                    );
                 }
 
                 return returnValue;
@@ -78,7 +85,9 @@ namespace System.Transactions.Oletx
             {
                 Guid returnValue = Guid.Empty;
 
-                if (RealOletxTransaction != null && RealOletxTransaction.InternalTransaction != null)
+                if (
+                    RealOletxTransaction != null && RealOletxTransaction.InternalTransaction != null
+                )
                 {
                     returnValue = RealOletxTransaction.InternalTransaction.DistributedTxId;
                 }
@@ -94,22 +103,29 @@ namespace System.Transactions.Oletx
                 TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxTransaction)}.{nameof(Status)}");
+                    etwLog.MethodEnter(
+                        TraceSourceType.TraceSourceOleTx,
+                        this,
+                        $"{nameof(OletxTransaction)}.{nameof(Status)}"
+                    );
                 }
 
                 TransactionStatus returnValue = RealOletxTransaction.Status;
 
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxTransaction)}.{nameof(Status)}");
+                    etwLog.MethodExit(
+                        TraceSourceType.TraceSourceOleTx,
+                        this,
+                        $"{nameof(OletxTransaction)}.{nameof(Status)}"
+                    );
                 }
 
                 return returnValue;
             }
         }
 
-        internal Exception? InnerException
-            => RealOletxTransaction.InnerException;
+        internal Exception? InnerException => RealOletxTransaction.InnerException;
 
         internal OletxTransaction(RealOletxTransaction realOletxTransaction)
         {
@@ -128,7 +144,8 @@ namespace System.Transactions.Oletx
 
             // Simply store the propagation token from the serialization info.  GetRealObject will
             // decide whether or not we will use it.
-            _propagationTokenForDeserialize = (byte[])serializationInfo.GetValue(PropagationTokenString, typeof(byte[]))!;
+            _propagationTokenForDeserialize = (byte[])
+                serializationInfo.GetValue(PropagationTokenString, typeof(byte[]))!;
 
             if (_propagationTokenForDeserialize.Length < 24)
             {
@@ -143,7 +160,11 @@ namespace System.Transactions.Oletx
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"{nameof(IObjectReference)}.{nameof(GetRealObject)}");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceOleTx,
+                    this,
+                    $"{nameof(IObjectReference)}.{nameof(GetRealObject)}"
+                );
             }
 
             if (_propagationTokenForDeserialize == null)
@@ -153,7 +174,10 @@ namespace System.Transactions.Oletx
                     etwLog.InternalError(SR.UnableToDeserializeTransaction);
                 }
 
-                throw TransactionException.Create(SR.UnableToDeserializeTransactionInternalError, null);
+                throw TransactionException.Create(
+                    SR.UnableToDeserializeTransactionInternalError,
+                    null
+                );
             }
 
             // This may be a second call.  If so, just return.
@@ -161,25 +185,41 @@ namespace System.Transactions.Oletx
             {
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"{nameof(IObjectReference)}.{nameof(GetRealObject)}");
+                    etwLog.MethodExit(
+                        TraceSourceType.TraceSourceOleTx,
+                        this,
+                        $"{nameof(IObjectReference)}.{nameof(GetRealObject)}"
+                    );
                 }
 
                 return SavedLtmPromotedTransaction;
             }
 
-            Transaction returnValue = TransactionInterop.GetTransactionFromTransmitterPropagationToken(_propagationTokenForDeserialize);
-            Debug.Assert(returnValue != null, "OletxTransaction.GetRealObject - GetTxFromPropToken returned null");
+            Transaction returnValue =
+                TransactionInterop.GetTransactionFromTransmitterPropagationToken(
+                    _propagationTokenForDeserialize
+                );
+            Debug.Assert(
+                returnValue != null,
+                "OletxTransaction.GetRealObject - GetTxFromPropToken returned null"
+            );
 
             SavedLtmPromotedTransaction = returnValue;
 
             if (etwLog.IsEnabled())
             {
-                etwLog.TransactionDeserialized(returnValue._internalTransaction.PromotedTransaction!.TransactionTraceId);
+                etwLog.TransactionDeserialized(
+                    returnValue._internalTransaction.PromotedTransaction!.TransactionTraceId
+                );
             }
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"{nameof(IObjectReference)}.{nameof(GetRealObject)}");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceOleTx,
+                    this,
+                    $"{nameof(IObjectReference)}.{nameof(GetRealObject)}"
+                );
             }
 
             return returnValue;
@@ -194,7 +234,11 @@ namespace System.Transactions.Oletx
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"{nameof(IDisposable)}.{nameof(Dispose)}");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceOleTx,
+                    this,
+                    $"{nameof(IDisposable)}.{nameof(Dispose)}"
+                );
             }
 
             int localDisposed = Interlocked.CompareExchange(ref Disposed, 1, 0);
@@ -206,7 +250,11 @@ namespace System.Transactions.Oletx
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"{nameof(IDisposable)}.{nameof(Dispose)}");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceOleTx,
+                    this,
+                    $"{nameof(IDisposable)}.{nameof(Dispose)}"
+                );
             }
         }
 
@@ -231,8 +279,16 @@ namespace System.Transactions.Oletx
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxTransaction)}.{nameof(Rollback)}");
-                etwLog.TransactionRollback(TraceSourceType.TraceSourceOleTx, TransactionTraceId, "Transaction");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceOleTx,
+                    this,
+                    $"{nameof(OletxTransaction)}.{nameof(Rollback)}"
+                );
+                etwLog.TransactionRollback(
+                    TraceSourceType.TraceSourceOleTx,
+                    TransactionTraceId,
+                    "Transaction"
+                );
             }
 
             Debug.Assert(Disposed == 0, "OletxTransction object is disposed");
@@ -241,18 +297,27 @@ namespace System.Transactions.Oletx
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxTransaction)}.{nameof(Rollback)}");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceOleTx,
+                    this,
+                    $"{nameof(OletxTransaction)}.{nameof(Rollback)}"
+                );
             }
         }
 
         internal IPromotedEnlistment EnlistVolatile(
             ISinglePhaseNotificationInternal singlePhaseNotification,
-            EnlistmentOptions enlistmentOptions)
+            EnlistmentOptions enlistmentOptions
+        )
         {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxEnlistment)}.{nameof(EnlistVolatile)}(({nameof(ISinglePhaseNotificationInternal)}");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceOleTx,
+                    this,
+                    $"{nameof(OletxEnlistment)}.{nameof(EnlistVolatile)}(({nameof(ISinglePhaseNotificationInternal)}"
+                );
             }
 
             Debug.Assert(singlePhaseNotification != null, "Argument is null");
@@ -266,11 +331,16 @@ namespace System.Transactions.Oletx
             IPromotedEnlistment enlistment = RealOletxTransaction.EnlistVolatile(
                 singlePhaseNotification,
                 enlistmentOptions,
-                this);
+                this
+            );
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxEnlistment)}.{nameof(EnlistVolatile)}(({nameof(ISinglePhaseNotificationInternal)}");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceOleTx,
+                    this,
+                    $"{nameof(OletxEnlistment)}.{nameof(EnlistVolatile)}(({nameof(ISinglePhaseNotificationInternal)}"
+                );
             }
 
             return enlistment;
@@ -278,18 +348,23 @@ namespace System.Transactions.Oletx
 
         internal IPromotedEnlistment EnlistVolatile(
             IEnlistmentNotificationInternal enlistmentNotification,
-            EnlistmentOptions enlistmentOptions)
+            EnlistmentOptions enlistmentOptions
+        )
         {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxTransaction)}.{nameof(EnlistVolatile)}({nameof(IEnlistmentNotificationInternal)}");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceOleTx,
+                    this,
+                    $"{nameof(OletxTransaction)}.{nameof(EnlistVolatile)}({nameof(IEnlistmentNotificationInternal)}"
+                );
             }
 
             Debug.Assert(enlistmentNotification != null, "Argument is null");
             Debug.Assert(Disposed == 0, "OletxTransction object is disposed");
 
-            if (RealOletxTransaction == null || RealOletxTransaction.TooLateForEnlistments )
+            if (RealOletxTransaction == null || RealOletxTransaction.TooLateForEnlistments)
             {
                 throw TransactionException.Create(SR.TooLate, null, DistributedTxId);
             }
@@ -297,11 +372,16 @@ namespace System.Transactions.Oletx
             IPromotedEnlistment enlistment = RealOletxTransaction.EnlistVolatile(
                 enlistmentNotification,
                 enlistmentOptions,
-                this);
+                this
+            );
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxTransaction)}.{nameof(EnlistVolatile)}({nameof(IEnlistmentNotificationInternal)}");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceOleTx,
+                    this,
+                    $"{nameof(OletxTransaction)}.{nameof(EnlistVolatile)}({nameof(IEnlistmentNotificationInternal)}"
+                );
             }
 
             return enlistment;
@@ -311,7 +391,8 @@ namespace System.Transactions.Oletx
             Guid resourceManagerIdentifier,
             ISinglePhaseNotificationInternal singlePhaseNotification,
             bool canDoSinglePhase,
-            EnlistmentOptions enlistmentOptions)
+            EnlistmentOptions enlistmentOptions
+        )
         {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
@@ -319,7 +400,8 @@ namespace System.Transactions.Oletx
                 etwLog.MethodEnter(
                     TraceSourceType.TraceSourceOleTx,
                     this,
-                    $"{nameof(OletxTransaction)}.{nameof(EnlistDurable)}({nameof(ISinglePhaseNotificationInternal)})");
+                    $"{nameof(OletxTransaction)}.{nameof(EnlistDurable)}({nameof(ISinglePhaseNotificationInternal)})"
+                );
             }
 
             Debug.Assert(Disposed == 0, "OletxTransction object is disposed");
@@ -333,26 +415,29 @@ namespace System.Transactions.Oletx
             OletxTransactionManager oletxTM = RealOletxTransaction.OletxTransactionManagerInstance;
 
             // get the resource manager from the Oletx TM
-            OletxResourceManager rm = oletxTM.FindOrRegisterResourceManager(resourceManagerIdentifier);
+            OletxResourceManager rm = oletxTM.FindOrRegisterResourceManager(
+                resourceManagerIdentifier
+            );
 
             // ask the rm to do the durable enlistment
             OletxEnlistment enlistment = rm.EnlistDurable(
                 this,
                 canDoSinglePhase,
                 singlePhaseNotification,
-                enlistmentOptions);
+                enlistmentOptions
+            );
 
             if (etwLog.IsEnabled())
             {
                 etwLog.MethodExit(
                     TraceSourceType.TraceSourceOleTx,
                     this,
-                    $"{nameof(OletxTransaction)}.{nameof(EnlistDurable)}({nameof(ISinglePhaseNotificationInternal)})");
+                    $"{nameof(OletxTransaction)}.{nameof(EnlistDurable)}({nameof(ISinglePhaseNotificationInternal)})"
+                );
             }
 
             return enlistment;
         }
-
 
         internal OletxDependentTransaction DependentClone(bool delayCommit)
         {
@@ -361,7 +446,11 @@ namespace System.Transactions.Oletx
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxTransaction)}.{nameof(DependentClone)}");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceOleTx,
+                    this,
+                    $"{nameof(OletxTransaction)}.{nameof(DependentClone)}"
+                );
             }
 
             Debug.Assert(Disposed == 0, "OletxTransction object is disposed");
@@ -369,12 +458,18 @@ namespace System.Transactions.Oletx
             if (TransactionStatus.Aborted == Status)
             {
                 throw TransactionAbortedException.Create(
-                    SR.TransactionAborted, RealOletxTransaction.InnerException, DistributedTxId);
+                    SR.TransactionAborted,
+                    RealOletxTransaction.InnerException,
+                    DistributedTxId
+                );
             }
             if (TransactionStatus.InDoubt == Status)
             {
                 throw TransactionInDoubtException.Create(
-                    SR.TransactionIndoubt, RealOletxTransaction.InnerException, DistributedTxId);
+                    SR.TransactionIndoubt,
+                    RealOletxTransaction.InnerException,
+                    DistributedTxId
+                );
             }
             if (TransactionStatus.Active != Status)
             {
@@ -385,11 +480,14 @@ namespace System.Transactions.Oletx
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxTransaction)}.{nameof(DependentClone)}");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceOleTx,
+                    this,
+                    $"{nameof(OletxTransaction)}.{nameof(DependentClone)}"
+                );
             }
 
             return dependentClone;
-
         }
 
         internal TransactionTraceIdentifier TransactionTraceId
@@ -404,7 +502,8 @@ namespace System.Transactions.Oletx
                         {
                             try
                             {
-                                TransactionTraceIdentifier temp = new(RealOletxTransaction.Identifier.ToString(), 0);
+                                TransactionTraceIdentifier temp =
+                                    new(RealOletxTransaction.Identifier.ToString(), 0);
                                 Thread.MemoryBarrier();
                                 _traceIdentifier = temp;
                             }
@@ -421,7 +520,6 @@ namespace System.Transactions.Oletx
                                     etwLog.ExceptionConsumed(TraceSourceType.TraceSourceOleTx, ex);
                                 }
                             }
-
                         }
                     }
                 }
@@ -441,7 +539,11 @@ namespace System.Transactions.Oletx
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxTransaction)}.{nameof(GetObjectData)}");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceOleTx,
+                    this,
+                    $"{nameof(OletxTransaction)}.{nameof(GetObjectData)}"
+                );
             }
 
             Debug.Assert(Disposed == 0, "OletxTransction object is disposed");
@@ -454,12 +556,16 @@ namespace System.Transactions.Oletx
             if (etwLog.IsEnabled())
             {
                 etwLog.TransactionSerialized(TransactionTraceId);
-                etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxTransaction)}.{nameof(GetObjectData)}");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceOleTx,
+                    this,
+                    $"{nameof(OletxTransaction)}.{nameof(GetObjectData)}"
+                );
             }
         }
 
-        public virtual IsolationLevel IsolationLevel
-            => RealOletxTransaction.TransactionIsolationLevel;
+        public virtual IsolationLevel IsolationLevel =>
+            RealOletxTransaction.TransactionIsolationLevel;
     }
 
     // Internal class used by OletxTransaction class which is public
@@ -551,7 +657,10 @@ namespace System.Transactions.Oletx
                 // for COM+ interop purposes, but we can't get the guid or the status of the transaction.
                 if (TxGuid.Equals(Guid.Empty))
                 {
-                    throw TransactionException.Create(SR.GetResourceString(SR.CannotGetTransactionIdentifier), null);
+                    throw TransactionException.Create(
+                        SR.GetResourceString(SR.CannotGetTransactionIdentifier),
+                        null
+                    );
                 }
 
                 return TxGuid;
@@ -595,8 +704,7 @@ namespace System.Transactions.Oletx
             Interlocked.Decrement(ref _undecidedEnlistmentCount);
         }
 
-        internal int UndecidedEnlistments
-            => _undecidedEnlistmentCount;
+        internal int UndecidedEnlistments => _undecidedEnlistmentCount;
 
         internal TransactionShim TransactionShim
         {
@@ -605,7 +713,11 @@ namespace System.Transactions.Oletx
                 TransactionShim? shim = _transactionShim;
                 if (shim == null)
                 {
-                    throw TransactionInDoubtException.Create(SR.TransactionIndoubt, null, DistributedTxId);
+                    throw TransactionInDoubtException.Create(
+                        SR.TransactionIndoubt,
+                        null,
+                        DistributedTxId
+                    );
                 }
 
                 return shim;
@@ -620,7 +732,8 @@ namespace System.Transactions.Oletx
             OutcomeEnlistment? outcomeEnlistment,
             Guid identifier,
             OletxTransactionIsolationLevel oletxIsoLevel,
-            bool isRoot)
+            bool isRoot
+        )
         {
             bool successful = false;
 
@@ -631,7 +744,8 @@ namespace System.Transactions.Oletx
                 _transactionShim = transactionShim;
                 _outcomeEnlistment = outcomeEnlistment;
                 TxGuid = identifier;
-                TransactionIsolationLevel = OletxTransactionManager.ConvertIsolationLevelFromProxyValue(oletxIsoLevel);
+                TransactionIsolationLevel =
+                    OletxTransactionManager.ConvertIsolationLevelFromProxyValue(oletxIsoLevel);
                 Status = TransactionStatus.Active;
                 _undisposedOletxTransactionCount = 0;
                 Phase0EnlistVolatilementContainerList = null;
@@ -643,7 +757,7 @@ namespace System.Transactions.Oletx
                 _lastStateChangeTime = _creationTime;
 
                 // Connect this object with the OutcomeEnlistment.
-                InternalClone = new OletxTransaction( this );
+                InternalClone = new OletxTransaction(this);
 
                 // We have have been created without an outcome enlistment if it was too late to create
                 // a clone from the ITransactionNative that we were created from.
@@ -701,25 +815,35 @@ namespace System.Transactions.Oletx
                         // allocated the list.  That is why we have this check here.
                         if (Phase0EnlistVolatilementContainerList.Count == 0)
                         {
-                            localPhase0VolatileContainer = new OletxPhase0VolatileEnlistmentContainer(this);
+                            localPhase0VolatileContainer =
+                                new OletxPhase0VolatileEnlistmentContainer(this);
                             needPhase0Enlistment = true;
                         }
                         else
                         {
-                            localPhase0VolatileContainer = Phase0EnlistVolatilementContainerList[^1] as OletxPhase0VolatileEnlistmentContainer;
+                            localPhase0VolatileContainer =
+                                Phase0EnlistVolatilementContainerList[^1]
+                                as OletxPhase0VolatileEnlistmentContainer;
 
                             if (localPhase0VolatileContainer != null)
                             {
-                                TakeContainerLock(localPhase0VolatileContainer, ref phase0ContainerLockAcquired);
+                                TakeContainerLock(
+                                    localPhase0VolatileContainer,
+                                    ref phase0ContainerLockAcquired
+                                );
                             }
 
                             if (!localPhase0VolatileContainer!.NewEnlistmentsAllowed)
                             {
                                 //It is OK to release the lock at this time because we are creating a new container that has not yet
                                 //been enlisted with DTC. So there is no race to worry about
-                                ReleaseContainerLock(localPhase0VolatileContainer, ref phase0ContainerLockAcquired);
+                                ReleaseContainerLock(
+                                    localPhase0VolatileContainer,
+                                    ref phase0ContainerLockAcquired
+                                );
 
-                                localPhase0VolatileContainer = new OletxPhase0VolatileEnlistmentContainer( this );
+                                localPhase0VolatileContainer =
+                                    new OletxPhase0VolatileEnlistmentContainer(this);
                                 needPhase0Enlistment = true;
                             }
                             else
@@ -732,7 +856,8 @@ namespace System.Transactions.Oletx
                     {
                         if (Phase1EnlistVolatilementContainer == null)
                         {
-                            localPhase1VolatileContainer = new OletxPhase1VolatileEnlistmentContainer(this);
+                            localPhase1VolatileContainer =
+                                new OletxPhase1VolatileEnlistmentContainer(this);
                             needVoterEnlistment = true;
                         }
                         else
@@ -748,23 +873,34 @@ namespace System.Transactions.Oletx
                         //corrupting state while we are in the middle of an AddDependentClone processing
                         if (localPhase0VolatileContainer != null)
                         {
-                            TakeContainerLock(localPhase0VolatileContainer, ref phase0ContainerLockAcquired);
+                            TakeContainerLock(
+                                localPhase0VolatileContainer,
+                                ref phase0ContainerLockAcquired
+                            );
                         }
 
                         // If enlistDuringPrepareRequired is true, we need to ask the proxy to create a Phase0 enlistment.
                         if (needPhase0Enlistment)
                         {
-                            _transactionShim!.Phase0Enlist(localPhase0VolatileContainer!, out phase0Shim);
+                            _transactionShim!.Phase0Enlist(
+                                localPhase0VolatileContainer!,
+                                out phase0Shim
+                            );
                             localPhase0VolatileContainer!.Phase0EnlistmentShim = phase0Shim;
                         }
 
                         if (needVoterEnlistment)
                         {
                             // We need to use shims if native threads are not allowed to enter managed code.
-                            OletxTransactionManagerInstance.DtcTransactionManagerLock.AcquireReaderLock(-1);
+                            OletxTransactionManagerInstance.DtcTransactionManagerLock.AcquireReaderLock(
+                                -1
+                            );
                             try
                             {
-                                _transactionShim!.CreateVoter(localPhase1VolatileContainer!, out voterShim);
+                                _transactionShim!.CreateVoter(
+                                    localPhase1VolatileContainer!,
+                                    out voterShim
+                                );
                             }
                             finally
                             {
@@ -780,7 +916,9 @@ namespace System.Transactions.Oletx
                             // list.
                             if (needPhase0Enlistment)
                             {
-                                Phase0EnlistVolatilementContainerList!.Add(localPhase0VolatileContainer);
+                                Phase0EnlistVolatilementContainerList!.Add(
+                                    localPhase0VolatileContainer
+                                );
                             }
                             localPhase0VolatileContainer!.AddDependentClone();
                             returnValue = localPhase0VolatileContainer;
@@ -791,14 +929,15 @@ namespace System.Transactions.Oletx
                             // phase1 container for this transaction.
                             if (needVoterEnlistment)
                             {
-                                Debug.Assert(Phase1EnlistVolatilementContainer == null,
-                                    "RealOletxTransaction.AddDependentClone - phase1VolContainer not null when expected" );
+                                Debug.Assert(
+                                    Phase1EnlistVolatilementContainer == null,
+                                    "RealOletxTransaction.AddDependentClone - phase1VolContainer not null when expected"
+                                );
                                 Phase1EnlistVolatilementContainer = localPhase1VolatileContainer;
                             }
                             localPhase1VolatileContainer!.AddDependentClone();
                             returnValue = localPhase1VolatileContainer;
                         }
-
                     }
                     catch (COMException comException)
                     {
@@ -813,13 +952,19 @@ namespace System.Transactions.Oletx
                 //that needs its state to be consistent while processing should do so before this statement is executed.
                 if (localPhase0VolatileContainer != null)
                 {
-                    ReleaseContainerLock(localPhase0VolatileContainer, ref phase0ContainerLockAcquired);
+                    ReleaseContainerLock(
+                        localPhase0VolatileContainer,
+                        ref phase0ContainerLockAcquired
+                    );
                 }
             }
             return returnValue;
         }
 
-        private static void ReleaseContainerLock(OletxPhase0VolatileEnlistmentContainer localPhase0VolatileContainer, ref bool phase0ContainerLockAcquired)
+        private static void ReleaseContainerLock(
+            OletxPhase0VolatileEnlistmentContainer localPhase0VolatileContainer,
+            ref bool phase0ContainerLockAcquired
+        )
         {
             if (phase0ContainerLockAcquired)
             {
@@ -828,7 +973,10 @@ namespace System.Transactions.Oletx
             }
         }
 
-        private static void TakeContainerLock(OletxPhase0VolatileEnlistmentContainer localPhase0VolatileContainer, ref bool phase0ContainerLockAcquired)
+        private static void TakeContainerLock(
+            OletxPhase0VolatileEnlistmentContainer localPhase0VolatileContainer,
+            ref bool phase0ContainerLockAcquired
+        )
         {
             if (!phase0ContainerLockAcquired)
             {
@@ -840,7 +988,8 @@ namespace System.Transactions.Oletx
         internal IPromotedEnlistment CommonEnlistVolatile(
             IEnlistmentNotificationInternal enlistmentNotification,
             EnlistmentOptions enlistmentOptions,
-            OletxTransaction oletxTransaction)
+            OletxTransaction oletxTransaction
+        )
         {
             OletxVolatileEnlistment? enlistment = null;
             bool needVoterEnlistment = false;
@@ -860,7 +1009,8 @@ namespace System.Transactions.Oletx
                 enlistment = new OletxVolatileEnlistment(
                     enlistmentNotification,
                     enlistmentOptions,
-                    oletxTransaction);
+                    oletxTransaction
+                );
 
                 if ((enlistmentOptions & EnlistmentOptions.EnlistDuringPrepareRequired) != 0)
                 {
@@ -871,15 +1021,20 @@ namespace System.Transactions.Oletx
                     // allocated the list.  That is why we have this check here.
                     if (Phase0EnlistVolatilementContainerList.Count == 0)
                     {
-                        localPhase0VolatileContainer = new OletxPhase0VolatileEnlistmentContainer(this);
+                        localPhase0VolatileContainer = new OletxPhase0VolatileEnlistmentContainer(
+                            this
+                        );
                         needPhase0Enlistment = true;
                     }
                     else
                     {
-                        localPhase0VolatileContainer = Phase0EnlistVolatilementContainerList[^1] as OletxPhase0VolatileEnlistmentContainer;
+                        localPhase0VolatileContainer =
+                            Phase0EnlistVolatilementContainerList[^1]
+                            as OletxPhase0VolatileEnlistmentContainer;
                         if (!localPhase0VolatileContainer!.NewEnlistmentsAllowed)
                         {
-                            localPhase0VolatileContainer = new OletxPhase0VolatileEnlistmentContainer(this);
+                            localPhase0VolatileContainer =
+                                new OletxPhase0VolatileEnlistmentContainer(this);
                             needPhase0Enlistment = true;
                         }
                         else
@@ -888,12 +1043,14 @@ namespace System.Transactions.Oletx
                         }
                     }
                 }
-                else  // not EDPR = TRUE - may need a voter...
+                else // not EDPR = TRUE - may need a voter...
                 {
                     if (Phase1EnlistVolatilementContainer == null)
                     {
                         needVoterEnlistment = true;
-                        localPhase1VolatileContainer = new OletxPhase1VolatileEnlistmentContainer(this);
+                        localPhase1VolatileContainer = new OletxPhase1VolatileEnlistmentContainer(
+                            this
+                        );
                     }
                     else
                     {
@@ -909,7 +1066,10 @@ namespace System.Transactions.Oletx
                     {
                         lock (localPhase0VolatileContainer!)
                         {
-                            _transactionShim!.Phase0Enlist(localPhase0VolatileContainer, out phase0Shim);
+                            _transactionShim!.Phase0Enlist(
+                                localPhase0VolatileContainer,
+                                out phase0Shim
+                            );
 
                             localPhase0VolatileContainer.Phase0EnlistmentShim = phase0Shim;
                         }
@@ -927,7 +1087,9 @@ namespace System.Transactions.Oletx
                         localPhase0VolatileContainer!.AddEnlistment(enlistment);
                         if (needPhase0Enlistment)
                         {
-                            Phase0EnlistVolatilementContainerList!.Add(localPhase0VolatileContainer);
+                            Phase0EnlistVolatilementContainerList!.Add(
+                                localPhase0VolatileContainer
+                            );
                         }
                     }
                     else
@@ -936,8 +1098,10 @@ namespace System.Transactions.Oletx
 
                         if (needVoterEnlistment)
                         {
-                            Debug.Assert(Phase1EnlistVolatilementContainer == null,
-                                "RealOletxTransaction.CommonEnlistVolatile - phase1VolContainer not null when expected.");
+                            Debug.Assert(
+                                Phase1EnlistVolatilementContainer == null,
+                                "RealOletxTransaction.CommonEnlistVolatile - phase1VolContainer not null when expected."
+                            );
                             Phase1EnlistVolatilementContainer = localPhase1VolatileContainer;
                         }
                     }
@@ -955,20 +1119,14 @@ namespace System.Transactions.Oletx
         internal IPromotedEnlistment EnlistVolatile(
             ISinglePhaseNotificationInternal enlistmentNotification,
             EnlistmentOptions enlistmentOptions,
-            OletxTransaction oletxTransaction)
-            => CommonEnlistVolatile(
-                enlistmentNotification,
-                enlistmentOptions,
-                oletxTransaction);
+            OletxTransaction oletxTransaction
+        ) => CommonEnlistVolatile(enlistmentNotification, enlistmentOptions, oletxTransaction);
 
         internal IPromotedEnlistment EnlistVolatile(
             IEnlistmentNotificationInternal enlistmentNotification,
             EnlistmentOptions enlistmentOptions,
-            OletxTransaction oletxTransaction)
-            => CommonEnlistVolatile(
-                enlistmentNotification,
-                enlistmentOptions,
-                oletxTransaction);
+            OletxTransaction oletxTransaction
+        ) => CommonEnlistVolatile(enlistmentNotification, enlistmentOptions, oletxTransaction);
 
         internal void Commit()
         {
@@ -978,8 +1136,10 @@ namespace System.Transactions.Oletx
             }
             catch (COMException comException)
             {
-                if (comException.ErrorCode == OletxHelper.XACT_E_ABORTED ||
-                    comException.ErrorCode == OletxHelper.XACT_E_INDOUBT)
+                if (
+                    comException.ErrorCode == OletxHelper.XACT_E_ABORTED
+                    || comException.ErrorCode == OletxHelper.XACT_E_INDOUBT
+                )
                 {
                     Interlocked.CompareExchange(ref InnerException, comException, null);
 
@@ -1008,10 +1168,13 @@ namespace System.Transactions.Oletx
             lock (this)
             {
                 // if status is not active and not aborted, then throw an exception
-                if (TransactionStatus.Aborted != Status &&
-                    TransactionStatus.Active != Status)
+                if (TransactionStatus.Aborted != Status && TransactionStatus.Active != Status)
                 {
-                    throw TransactionException.Create(SR.TransactionAlreadyOver, null, DistributedTxId);
+                    throw TransactionException.Create(
+                        SR.TransactionAlreadyOver,
+                        null,
+                        DistributedTxId
+                    );
                 }
 
                 // If the transaciton is already aborted, we can get out now.  Calling Rollback on an already aborted transaction
@@ -1029,17 +1192,23 @@ namespace System.Transactions.Oletx
                 {
                     Doomed = true;
                 }
-                else if (TooLateForEnlistments )
+                else if (TooLateForEnlistments)
                 {
                     // It's too late for rollback to be called here.
-                    throw TransactionException.Create(SR.TransactionAlreadyOver, null, DistributedTxId);
+                    throw TransactionException.Create(
+                        SR.TransactionAlreadyOver,
+                        null,
+                        DistributedTxId
+                    );
                 }
 
                 // Tell the volatile enlistment containers to vote no now if they have outstanding
                 // notifications.
                 if (Phase0EnlistVolatilementContainerList != null)
                 {
-                    foreach (OletxPhase0VolatileEnlistmentContainer phase0VolatileContainer in Phase0EnlistVolatilementContainerList)
+                    foreach (
+                        OletxPhase0VolatileEnlistmentContainer phase0VolatileContainer in Phase0EnlistVolatilementContainerList
+                    )
                     {
                         phase0VolatileContainer.RollbackFromTransaction();
                     }
@@ -1064,12 +1233,19 @@ namespace System.Transactions.Oletx
                         TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
                         if (etwLog.IsEnabled())
                         {
-                            etwLog.ExceptionConsumed(TraceSourceType.TraceSourceOleTx, comException);
+                            etwLog.ExceptionConsumed(
+                                TraceSourceType.TraceSourceOleTx,
+                                comException
+                            );
                         }
                     }
                     else
                     {
-                        throw TransactionException.Create(SR.TransactionAlreadyOver, comException, DistributedTxId);
+                        throw TransactionException.Create(
+                            SR.TransactionAlreadyOver,
+                            comException,
+                            DistributedTxId
+                        );
                     }
                 }
                 else
@@ -1082,8 +1258,8 @@ namespace System.Transactions.Oletx
             }
         }
 
-        internal void OletxTransactionCreated()
-            => Interlocked.Increment(ref _undisposedOletxTransactionCount);
+        internal void OletxTransactionCreated() =>
+            Interlocked.Increment(ref _undisposedOletxTransactionCount);
 
         internal void OletxTransactionDisposed()
         {
@@ -1100,7 +1276,10 @@ namespace System.Transactions.Oletx
                     TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
                     if (etwLog.IsEnabled())
                     {
-                        etwLog.TransactionCommitted(TraceSourceType.TraceSourceOleTx, TransactionTraceId);
+                        etwLog.TransactionCommitted(
+                            TraceSourceType.TraceSourceOleTx,
+                            TransactionTraceId
+                        );
                     }
 
                     Status = TransactionStatus.Committed;
@@ -1110,7 +1289,10 @@ namespace System.Transactions.Oletx
                     TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
                     if (etwLog.IsEnabled())
                     {
-                        etwLog.TransactionAborted(TraceSourceType.TraceSourceOleTx, TransactionTraceId);
+                        etwLog.TransactionAborted(
+                            TraceSourceType.TraceSourceOleTx,
+                            TransactionTraceId
+                        );
                     }
 
                     Status = TransactionStatus.Aborted;
@@ -1120,7 +1302,10 @@ namespace System.Transactions.Oletx
                     TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
                     if (etwLog.IsEnabled())
                     {
-                        etwLog.TransactionInDoubt(TraceSourceType.TraceSourceOleTx, TransactionTraceId);
+                        etwLog.TransactionInDoubt(
+                            TraceSourceType.TraceSourceOleTx,
+                            TransactionTraceId
+                        );
                     }
 
                     Status = TransactionStatus.InDoubt;
@@ -1173,7 +1358,9 @@ namespace System.Transactions.Oletx
                 // Tell the volatile enlistment containers that the TM went down.
                 if (Phase0EnlistVolatilementContainerList != null)
                 {
-                    foreach (OletxPhase0VolatileEnlistmentContainer phase0VolatileContainer in Phase0EnlistVolatilementContainerList)
+                    foreach (
+                        OletxPhase0VolatileEnlistmentContainer phase0VolatileContainer in Phase0EnlistVolatilementContainerList
+                    )
                     {
                         phase0VolatileContainer.TMDown();
                     }
@@ -1234,8 +1421,10 @@ namespace System.Transactions.Oletx
 
                 // We may be getting this notification while there are still volatile prepare notifications outstanding.  Tell the
                 // container to drive the aborted notification in that case.
-                if ( localStatus is TransactionStatus.Aborted or TransactionStatus.InDoubt &&
-                   realTx.Phase1EnlistVolatilementContainer != null)
+                if (
+                    localStatus is TransactionStatus.Aborted or TransactionStatus.InDoubt
+                    && realTx.Phase1EnlistVolatilementContainer != null
+                )
                 {
                     realTx.Phase1EnlistVolatilementContainer.OutcomeFromTransaction(localStatus);
                 }
@@ -1281,18 +1470,24 @@ namespace System.Transactions.Oletx
                     // because it is too late for these to be allocated anyway.
                     if (realOletxTransaction.Phase0EnlistVolatilementContainerList != null)
                     {
-                        foreach (OletxPhase0VolatileEnlistmentContainer phase0VolatileContainer in realOletxTransaction.Phase0EnlistVolatilementContainerList)
+                        foreach (
+                            OletxPhase0VolatileEnlistmentContainer phase0VolatileContainer in realOletxTransaction.Phase0EnlistVolatilementContainerList
+                        )
                         {
-                            phase0VolatileContainer.OutcomeFromTransaction( status );
+                            phase0VolatileContainer.OutcomeFromTransaction(status);
                         }
                     }
 
                     // We may be getting this notification while there are still volatile prepare notifications outstanding.  Tell the
                     // container to drive the aborted notification in that case.
-                    if ( status is TransactionStatus.Aborted or TransactionStatus.InDoubt &&
-                           realOletxTransaction.Phase1EnlistVolatilementContainer != null)
+                    if (
+                        status is TransactionStatus.Aborted or TransactionStatus.InDoubt
+                        && realOletxTransaction.Phase1EnlistVolatilementContainer != null
+                    )
                     {
-                        realOletxTransaction.Phase1EnlistVolatilementContainer.OutcomeFromTransaction(status);
+                        realOletxTransaction.Phase1EnlistVolatilementContainer.OutcomeFromTransaction(
+                            status
+                        );
                     }
                 }
 
@@ -1307,7 +1502,7 @@ namespace System.Transactions.Oletx
         //
         internal static bool TransactionIsInDoubt(RealOletxTransaction realTx)
         {
-            if (realTx.CommittableTransaction is { CommitCalled: false } )
+            if (realTx.CommittableTransaction is { CommitCalled: false })
             {
                 // If this is a committable transaction and commit has not been called
                 // then we know the outcome.
@@ -1354,14 +1549,11 @@ namespace System.Transactions.Oletx
 
         #region ITransactionOutcome Members
 
-        public void Committed()
-            => InvokeOutcomeFunction(TransactionStatus.Committed);
+        public void Committed() => InvokeOutcomeFunction(TransactionStatus.Committed);
 
-        public void Aborted()
-            => InvokeOutcomeFunction(TransactionStatus.Aborted);
+        public void Aborted() => InvokeOutcomeFunction(TransactionStatus.Aborted);
 
-        public void InDoubt()
-            => InvokeOutcomeFunction(TransactionStatus.InDoubt);
+        public void InDoubt() => InvokeOutcomeFunction(TransactionStatus.InDoubt);
 
         #endregion
     }

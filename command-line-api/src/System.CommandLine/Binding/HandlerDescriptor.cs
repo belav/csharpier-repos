@@ -22,7 +22,9 @@ namespace System.CommandLine.Binding
 
         /// <inheritdoc />
         public IReadOnlyList<ParameterDescriptor> ParameterDescriptors =>
-            _parameterDescriptors ??= new List<ParameterDescriptor>(InitializeParameterDescriptors());
+            _parameterDescriptors ??= new List<ParameterDescriptor>(
+                InitializeParameterDescriptors()
+            );
 
         private protected abstract IEnumerable<ParameterDescriptor> InitializeParameterDescriptors();
 
@@ -36,8 +38,10 @@ namespace System.CommandLine.Binding
         /// <param name="methodInfo">The method for which to create a handler descriptor.</param>
         /// <param name="target">An instance for the descriptor to target. In the case of <see langword="static"/> methods, <see langword="null"/> should be passed.</param>
         /// <returns>A handler descriptor for the method and instance.</returns>
-        public static HandlerDescriptor FromMethodInfo(MethodInfo methodInfo, object? target = null) =>
-            new MethodInfoHandlerDescriptor(methodInfo, target);
+        public static HandlerDescriptor FromMethodInfo(
+            MethodInfo methodInfo,
+            object? target = null
+        ) => new MethodInfoHandlerDescriptor(methodInfo, target);
 
         /// <summary>
         /// Creates a descriptor based on the specified method.

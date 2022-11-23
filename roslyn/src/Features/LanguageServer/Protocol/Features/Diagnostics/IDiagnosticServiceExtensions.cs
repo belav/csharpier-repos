@@ -12,20 +12,57 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     internal static class IDiagnosticServiceExtensions
     {
-        public static ValueTask<ImmutableArray<DiagnosticData>> GetPullDiagnosticsAsync(this IDiagnosticService service, DiagnosticBucket bucket, bool includeSuppressedDiagnostics, DiagnosticMode diagnosticMode, CancellationToken cancellationToken)
-            => service.GetPullDiagnosticsAsync(bucket.Workspace, bucket.ProjectId, bucket.DocumentId, bucket.Id, includeSuppressedDiagnostics, diagnosticMode, cancellationToken);
+        public static ValueTask<ImmutableArray<DiagnosticData>> GetPullDiagnosticsAsync(
+            this IDiagnosticService service,
+            DiagnosticBucket bucket,
+            bool includeSuppressedDiagnostics,
+            DiagnosticMode diagnosticMode,
+            CancellationToken cancellationToken
+        ) =>
+            service.GetPullDiagnosticsAsync(
+                bucket.Workspace,
+                bucket.ProjectId,
+                bucket.DocumentId,
+                bucket.Id,
+                includeSuppressedDiagnostics,
+                diagnosticMode,
+                cancellationToken
+            );
 
-        public static ValueTask<ImmutableArray<DiagnosticData>> GetPushDiagnosticsAsync(this IDiagnosticService service, DiagnosticBucket bucket, bool includeSuppressedDiagnostics, DiagnosticMode diagnosticMode, CancellationToken cancellationToken)
-            => service.GetPushDiagnosticsAsync(bucket.Workspace, bucket.ProjectId, bucket.DocumentId, bucket.Id, includeSuppressedDiagnostics, diagnosticMode, cancellationToken);
+        public static ValueTask<ImmutableArray<DiagnosticData>> GetPushDiagnosticsAsync(
+            this IDiagnosticService service,
+            DiagnosticBucket bucket,
+            bool includeSuppressedDiagnostics,
+            DiagnosticMode diagnosticMode,
+            CancellationToken cancellationToken
+        ) =>
+            service.GetPushDiagnosticsAsync(
+                bucket.Workspace,
+                bucket.ProjectId,
+                bucket.DocumentId,
+                bucket.Id,
+                includeSuppressedDiagnostics,
+                diagnosticMode,
+                cancellationToken
+            );
 
         public static ValueTask<ImmutableArray<DiagnosticData>> GetPushDiagnosticsAsync(
             this IDiagnosticService service,
             Document document,
             bool includeSuppressedDiagnostics,
             DiagnosticMode diagnosticMode,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return service.GetPushDiagnosticsAsync(document.Project.Solution.Workspace, document.Project.Id, document.Id, id: null, includeSuppressedDiagnostics, diagnosticMode, cancellationToken);
+            return service.GetPushDiagnosticsAsync(
+                document.Project.Solution.Workspace,
+                document.Project.Id,
+                document.Id,
+                id: null,
+                includeSuppressedDiagnostics,
+                diagnosticMode,
+                cancellationToken
+            );
         }
 
         public static ValueTask<ImmutableArray<DiagnosticData>> GetPullDiagnosticsAsync(
@@ -33,9 +70,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Document document,
             bool includeSuppressedDiagnostics,
             DiagnosticMode diagnosticMode,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return service.GetPullDiagnosticsAsync(document.Project.Solution.Workspace, document.Project.Id, document.Id, id: null, includeSuppressedDiagnostics, diagnosticMode, cancellationToken);
+            return service.GetPullDiagnosticsAsync(
+                document.Project.Solution.Workspace,
+                document.Project.Id,
+                document.Id,
+                id: null,
+                includeSuppressedDiagnostics,
+                diagnosticMode,
+                cancellationToken
+            );
         }
     }
 }

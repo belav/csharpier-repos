@@ -18,7 +18,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
     [Trait(Traits.Feature, Traits.Features.DocumentOutline)]
     public class DocumentOutlineTests : DocumentOutlineTestsBase
     {
-        private const string TestCode = @"
+        private const string TestCode =
+            @"
         private class MyClass
         {
             int _x;
@@ -44,13 +45,21 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
             private static int apple = 9, b = 4, c = 6;
 
             void r() {}
-        }"
-;
+        }";
 
-        private async Task<(DocumentOutlineTestMocks mocks, DocumentSymbolDataModel model, ImmutableArray<DocumentSymbolUIItem> uiItems)> InitializeMocksAndDataModelAndUIItems(string testCode)
+        private async Task<(
+            DocumentOutlineTestMocks mocks,
+            DocumentSymbolDataModel model,
+            ImmutableArray<DocumentSymbolUIItem> uiItems
+        )> InitializeMocksAndDataModelAndUIItems(string testCode)
         {
             await using var mocks = await CreateMocksAsync(testCode);
-            var response = await DocumentOutlineHelper.DocumentSymbolsRequestAsync(mocks.TextBuffer, mocks.LanguageServiceBroker, mocks.FilePath, CancellationToken.None);
+            var response = await DocumentOutlineHelper.DocumentSymbolsRequestAsync(
+                mocks.TextBuffer,
+                mocks.LanguageServiceBroker,
+                mocks.FilePath,
+                CancellationToken.None
+            );
             AssertEx.NotNull(response.Value);
 
             var responseBody = response.Value.response?.ToObject<DocumentSymbol[]>();
@@ -60,7 +69,10 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
             AssertEx.NotNull(snapshot);
 
             var model = DocumentOutlineHelper.CreateDocumentSymbolDataModel(responseBody, snapshot);
-            var uiItems = DocumentOutlineHelper.GetDocumentSymbolUIItems(model.DocumentSymbolData, mocks.ThreadingContext);
+            var uiItems = DocumentOutlineHelper.GetDocumentSymbolUIItems(
+                model.DocumentSymbolData,
+                mocks.ThreadingContext
+            );
             return (mocks, model, uiItems);
         }
 
@@ -85,7 +97,11 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
         private async Task CheckSorting(SortOption sortOption)
         {
             var (_, model, _) = await InitializeMocksAndDataModelAndUIItems(TestCode);
-            var sortedSymbols = DocumentOutlineHelper.SortDocumentSymbolData(model.DocumentSymbolData, sortOption, CancellationToken.None);
+            var sortedSymbols = DocumentOutlineHelper.SortDocumentSymbolData(
+                model.DocumentSymbolData,
+                sortOption,
+                CancellationToken.None
+            );
             CheckSortedSymbols(sortedSymbols);
 
             void CheckSortedSymbols(ImmutableArray<DocumentSymbolData> sortedSymbols)
@@ -95,16 +111,31 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
                     switch (sortOption)
                     {
                         case SortOption.Name:
-                            Assert.True(StringComparer.OrdinalIgnoreCase.Compare(sortedSymbols[i].Name, sortedSymbols[i + 1].Name) <= 0);
+                            Assert.True(
+                                StringComparer.OrdinalIgnoreCase.Compare(
+                                    sortedSymbols[i].Name,
+                                    sortedSymbols[i + 1].Name
+                                ) <= 0
+                            );
                             break;
                         case SortOption.Location:
-                            Assert.True(sortedSymbols[i].RangeSpan.Start < sortedSymbols[i + 1].RangeSpan.Start);
+                            Assert.True(
+                                sortedSymbols[i].RangeSpan.Start
+                                    < sortedSymbols[i + 1].RangeSpan.Start
+                            );
                             break;
                         case SortOption.Type:
                             if (sortedSymbols[i].SymbolKind != sortedSymbols[i + 1].SymbolKind)
-                                Assert.True(sortedSymbols[i].SymbolKind < sortedSymbols[i + 1].SymbolKind);
+                                Assert.True(
+                                    sortedSymbols[i].SymbolKind < sortedSymbols[i + 1].SymbolKind
+                                );
                             else
-                                Assert.True(StringComparer.OrdinalIgnoreCase.Compare(sortedSymbols[i].Name, sortedSymbols[i + 1].Name) <= 0);
+                                Assert.True(
+                                    StringComparer.OrdinalIgnoreCase.Compare(
+                                        sortedSymbols[i].Name,
+                                        sortedSymbols[i + 1].Name
+                                    ) <= 0
+                                );
                             break;
                     }
                 }
@@ -120,28 +151,63 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
             var (_, model, _) = await InitializeMocksAndDataModelAndUIItems(TestCode);
 
             // Empty search (added for completeness, SearchDocumentSymbolData is not called on an empty search string)
-            var searchedSymbols = DocumentOutlineHelper.SearchDocumentSymbolData(model.DocumentSymbolData, string.Empty, CancellationToken.None);
+            var searchedSymbols = DocumentOutlineHelper.SearchDocumentSymbolData(
+                model.DocumentSymbolData,
+                string.Empty,
+                CancellationToken.None
+            );
             Assert.Equal(0, searchedSymbols.Length);
 
             // Search for 1 parent only (no children should match)
-            searchedSymbols = DocumentOutlineHelper.SearchDocumentSymbolData(model.DocumentSymbolData, "foo", CancellationToken.None);
+            searchedSymbols = DocumentOutlineHelper.SearchDocumentSymbolData(
+                model.DocumentSymbolData,
+                "foo",
+                CancellationToken.None
+            );
             Assert.Equal(1, searchedSymbols.Length);
-            Assert.Equal(0, searchedSymbols.Single(symbol => symbol.Name.Equals("foo")).Children.Length);
+            Assert.Equal(
+                0,
+                searchedSymbols.Single(symbol => symbol.Name.Equals("foo")).Children.Length
+            );
 
             // Search for children only (across 2 parents)
-            searchedSymbols = DocumentOutlineHelper.SearchDocumentSymbolData(model.DocumentSymbolData, "Method", CancellationToken.None);
+            searchedSymbols = DocumentOutlineHelper.SearchDocumentSymbolData(
+                model.DocumentSymbolData,
+                "Method",
+                CancellationToken.None
+            );
             Assert.Equal(2, searchedSymbols.Length);
-            Assert.Equal(2, searchedSymbols.Single(symbol => symbol.Name.Equals("MyClass")).Children.Length);
-            Assert.Equal(1, searchedSymbols.Single(symbol => symbol.Name.Equals("App")).Children.Length);
+            Assert.Equal(
+                2,
+                searchedSymbols.Single(symbol => symbol.Name.Equals("MyClass")).Children.Length
+            );
+            Assert.Equal(
+                1,
+                searchedSymbols.Single(symbol => symbol.Name.Equals("App")).Children.Length
+            );
 
             // Search for a parent and a child (of aanother parent)
-            searchedSymbols = DocumentOutlineHelper.SearchDocumentSymbolData(model.DocumentSymbolData, "app", CancellationToken.None);
+            searchedSymbols = DocumentOutlineHelper.SearchDocumentSymbolData(
+                model.DocumentSymbolData,
+                "app",
+                CancellationToken.None
+            );
             Assert.Equal(2, searchedSymbols.Length);
-            Assert.Equal(0, searchedSymbols.Single(symbol => symbol.Name.Equals("App")).Children.Length);
-            Assert.Equal(1, searchedSymbols.Single(symbol => symbol.Name.Equals("foo")).Children.Length);
+            Assert.Equal(
+                0,
+                searchedSymbols.Single(symbol => symbol.Name.Equals("App")).Children.Length
+            );
+            Assert.Equal(
+                1,
+                searchedSymbols.Single(symbol => symbol.Name.Equals("foo")).Children.Length
+            );
 
             // No search results found
-            searchedSymbols = DocumentOutlineHelper.SearchDocumentSymbolData(model.DocumentSymbolData, "xyz", CancellationToken.None);
+            searchedSymbols = DocumentOutlineHelper.SearchDocumentSymbolData(
+                model.DocumentSymbolData,
+                "xyz",
+                CancellationToken.None
+            );
             Assert.Equal(0, searchedSymbols.Length);
         }
 
@@ -153,51 +219,93 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
 
             // Click between 2 parent nodes (no symbol is selected)
             var caretPosition = currentTextSnapshotLines.ElementAt(11).End;
-            var nodeToSelect = DocumentOutlineHelper.GetDocumentNodeToSelect(uiItems, model.OriginalSnapshot, caretPosition);
+            var nodeToSelect = DocumentOutlineHelper.GetDocumentNodeToSelect(
+                uiItems,
+                model.OriginalSnapshot,
+                caretPosition
+            );
             Assert.Null(nodeToSelect);
 
             // Click within range of a parent symbol
             caretPosition = currentTextSnapshotLines.ElementAt(1).End;
-            nodeToSelect = DocumentOutlineHelper.GetDocumentNodeToSelect(uiItems, model.OriginalSnapshot, caretPosition);
+            nodeToSelect = DocumentOutlineHelper.GetDocumentNodeToSelect(
+                uiItems,
+                model.OriginalSnapshot,
+                caretPosition
+            );
             Assert.Equal("MyClass", nodeToSelect?.Name);
 
             // Click within range of a child symbol
             caretPosition = currentTextSnapshotLines.ElementAt(5).End - 1;
-            nodeToSelect = DocumentOutlineHelper.GetDocumentNodeToSelect(uiItems, model.OriginalSnapshot, caretPosition);
+            nodeToSelect = DocumentOutlineHelper.GetDocumentNodeToSelect(
+                uiItems,
+                model.OriginalSnapshot,
+                caretPosition
+            );
             Assert.Equal("Method1", nodeToSelect?.Name);
 
             // Click between 2 child symbols (caret is in range of parent)
             caretPosition = currentTextSnapshotLines.ElementAt(15).End;
-            nodeToSelect = DocumentOutlineHelper.GetDocumentNodeToSelect(uiItems, model.OriginalSnapshot, caretPosition);
+            nodeToSelect = DocumentOutlineHelper.GetDocumentNodeToSelect(
+                uiItems,
+                model.OriginalSnapshot,
+                caretPosition
+            );
             Assert.Equal("App", nodeToSelect?.Name);
         }
 
         [WpfFact]
         public async Task TestSetIsExpanded()
         {
-            var (mocks, model, originalUIItems) = await InitializeMocksAndDataModelAndUIItems(TestCode);
-            var updatedUIItems = DocumentOutlineHelper.GetDocumentSymbolUIItems(model.DocumentSymbolData, mocks.ThreadingContext);
+            var (mocks, model, originalUIItems) = await InitializeMocksAndDataModelAndUIItems(
+                TestCode
+            );
+            var updatedUIItems = DocumentOutlineHelper.GetDocumentSymbolUIItems(
+                model.DocumentSymbolData,
+                mocks.ThreadingContext
+            );
 
             // Check that all updatedUIItems nodes are collapsed (originalUIItems parameter is unused)
-            DocumentOutlineHelper.SetIsExpanded(updatedUIItems, originalUIItems, ExpansionOption.Collapse);
+            DocumentOutlineHelper.SetIsExpanded(
+                updatedUIItems,
+                originalUIItems,
+                ExpansionOption.Collapse
+            );
             CheckNodeExpansion(updatedUIItems, false);
 
             // Check that all updatedUIItems nodes are expanded (originalUIItems parameter is unused)
-            DocumentOutlineHelper.SetIsExpanded(updatedUIItems, originalUIItems, ExpansionOption.Expand);
+            DocumentOutlineHelper.SetIsExpanded(
+                updatedUIItems,
+                originalUIItems,
+                ExpansionOption.Expand
+            );
             CheckNodeExpansion(updatedUIItems, true);
 
             // Collapse 3 nodes in originalUIItems
             originalUIItems.Single(parent => parent.Name.Equals("App")).IsExpanded = false;
-            originalUIItems.Single(parent => parent.Name.Equals("MyClass")).Children.Single(child => child.Name.Equals("Method2")).IsExpanded = false;
-            originalUIItems.Single(parent => parent.Name.Equals("foo")).Children.Single(child => child.Name.Equals("r")).IsExpanded = false;
+            originalUIItems
+                .Single(parent => parent.Name.Equals("MyClass"))
+                .Children.Single(child => child.Name.Equals("Method2"))
+                .IsExpanded = false;
+            originalUIItems
+                .Single(parent => parent.Name.Equals("foo"))
+                .Children.Single(child => child.Name.Equals("r"))
+                .IsExpanded = false;
 
             // Apply same expansion as originalUIItems to updatedUIItems
-            DocumentOutlineHelper.SetIsExpanded(updatedUIItems, originalUIItems, ExpansionOption.CurrentExpansion);
+            DocumentOutlineHelper.SetIsExpanded(
+                updatedUIItems,
+                originalUIItems,
+                ExpansionOption.CurrentExpansion
+            );
 
             // Confirm that matching expanded/collapsed node states have been applied
             CheckNodeExpansionMatches(updatedUIItems, originalUIItems);
 
-            static void CheckNodeExpansion(ImmutableArray<DocumentSymbolUIItem> documentSymbolItems, bool isExpanded)
+            static void CheckNodeExpansion(
+                ImmutableArray<DocumentSymbolUIItem> documentSymbolItems,
+                bool isExpanded
+            )
             {
                 foreach (var symbol in documentSymbolItems)
                 {
@@ -206,7 +314,10 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
                 }
             }
 
-            static void CheckNodeExpansionMatches(ImmutableArray<DocumentSymbolUIItem> newUIItems, ImmutableArray<DocumentSymbolUIItem> originalUIItems)
+            static void CheckNodeExpansionMatches(
+                ImmutableArray<DocumentSymbolUIItem> newUIItems,
+                ImmutableArray<DocumentSymbolUIItem> originalUIItems
+            )
             {
                 for (var i = 0; i < newUIItems.Length; i++)
                 {
@@ -225,17 +336,25 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
             DocumentOutlineHelper.SetIsExpanded(uiItems, uiItems, ExpansionOption.Collapse);
 
             // Call ExpandAncestors on a child node
-            var selectedNode = uiItems.Single(parent => parent.Name.Equals("MyClass")).Children.Single(child => child.Name.Equals("Method2"));
+            var selectedNode = uiItems
+                .Single(parent => parent.Name.Equals("MyClass"))
+                .Children.Single(child => child.Name.Equals("Method2"));
             DocumentOutlineHelper.ExpandAncestors(uiItems, selectedNode.RangeSpan);
 
             // Confirm that only the child node and its ancestors are expanded
             CheckAncestorNodeExpansion(uiItems);
 
-            static void CheckAncestorNodeExpansion(ImmutableArray<DocumentSymbolUIItem> documentSymbolItems)
+            static void CheckAncestorNodeExpansion(
+                ImmutableArray<DocumentSymbolUIItem> documentSymbolItems
+            )
             {
                 foreach (var symbol in documentSymbolItems)
                 {
-                    Assert.True(symbol.Name.Equals("MyClass") || symbol.Name.Equals("Method2") ? symbol.IsExpanded : !symbol.IsExpanded);
+                    Assert.True(
+                        symbol.Name.Equals("MyClass") || symbol.Name.Equals("Method2")
+                            ? symbol.IsExpanded
+                            : !symbol.IsExpanded
+                    );
                     CheckAncestorNodeExpansion(symbol.Children);
                 }
             }
@@ -248,7 +367,9 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
             DocumentOutlineHelper.UnselectAll(uiItems);
             CheckNodesUnselected(uiItems);
 
-            static void CheckNodesUnselected(ImmutableArray<DocumentSymbolUIItem> documentSymbolItems)
+            static void CheckNodesUnselected(
+                ImmutableArray<DocumentSymbolUIItem> documentSymbolItems
+            )
             {
                 foreach (var symbol in documentSymbolItems)
                 {

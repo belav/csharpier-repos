@@ -9,26 +9,45 @@ namespace TestLibrary
 {
     public class HostPolicyMock
     {
-        [DllImport("hostpolicy", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
+        [DllImport(
+            "hostpolicy",
+            CallingConvention = CallingConvention.Cdecl,
+            CharSet = CharSet.Auto
+        )]
         private static extern int Set_corehost_resolve_component_dependencies_Values(
             int returnValue,
             string assemblyPaths,
             string nativeSearchPaths,
-            string resourceSearchPaths);
+            string resourceSearchPaths
+        );
 
-        [DllImport("hostpolicy", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
+        [DllImport(
+            "hostpolicy",
+            CallingConvention = CallingConvention.Cdecl,
+            CharSet = CharSet.Auto
+        )]
         private static extern void Set_corehost_set_error_writer_returnValue(IntPtr error_writer);
 
-        [DllImport("hostpolicy", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
+        [DllImport(
+            "hostpolicy",
+            CallingConvention = CallingConvention.Cdecl,
+            CharSet = CharSet.Auto
+        )]
         private static extern IntPtr Get_corehost_set_error_writer_lastSet_error_writer();
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Auto)]
         internal delegate void Callback_corehost_resolve_component_dependencies(
-            string component_main_assembly_path);
+            string component_main_assembly_path
+        );
 
-        [DllImport("hostpolicy", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
+        [DllImport(
+            "hostpolicy",
+            CallingConvention = CallingConvention.Cdecl,
+            CharSet = CharSet.Auto
+        )]
         private static extern void Set_corehost_resolve_component_dependencies_Callback(
-            IntPtr callback);
+            IntPtr callback
+        );
 
         private static Type _corehost_error_writer_fnType;
 
@@ -40,20 +59,24 @@ namespace TestLibrary
             // This is needed for marshalling of function pointers to work - requires private access to the ADR unfortunately
             // Delegate marshalling doesn't support casting delegates to anything but the original type
             // so we need to use the original type.
-            _corehost_error_writer_fnType = typeof(object).Assembly.GetType("Interop+HostPolicy+corehost_error_writer_fn");
+            _corehost_error_writer_fnType = typeof(object).Assembly.GetType(
+                "Interop+HostPolicy+corehost_error_writer_fn"
+            );
         }
 
         public static MockValues_corehost_resolve_component_dependencies Mock_corehost_resolve_component_dependencies(
             int returnValue,
             string assemblyPaths,
             string nativeSearchPaths,
-            string resourceSearchPaths)
+            string resourceSearchPaths
+        )
         {
             Set_corehost_resolve_component_dependencies_Values(
                 returnValue,
                 assemblyPaths,
                 nativeSearchPaths,
-                resourceSearchPaths);
+                resourceSearchPaths
+            );
 
             return new MockValues_corehost_resolve_component_dependencies();
         }
@@ -70,7 +93,8 @@ namespace TestLibrary
                     if (callback != null)
                     {
                         Set_corehost_resolve_component_dependencies_Callback(
-                            Marshal.GetFunctionPointerForDelegate(callback));
+                            Marshal.GetFunctionPointerForDelegate(callback)
+                        );
                     }
                     else
                     {
@@ -85,7 +109,8 @@ namespace TestLibrary
                     -1,
                     string.Empty,
                     string.Empty,
-                    string.Empty);
+                    string.Empty
+                );
                 Set_corehost_resolve_component_dependencies_Callback(IntPtr.Zero);
                 GC.KeepAlive(callback);
                 callback = null;
@@ -97,7 +122,9 @@ namespace TestLibrary
             return Mock_corehost_set_error_writer(IntPtr.Zero);
         }
 
-        public static MockValues_corehost_set_error_writer Mock_corehost_set_error_writer(IntPtr existingErrorWriter)
+        public static MockValues_corehost_set_error_writer Mock_corehost_set_error_writer(
+            IntPtr existingErrorWriter
+        )
         {
             Set_corehost_set_error_writer_returnValue(existingErrorWriter);
 
@@ -108,10 +135,7 @@ namespace TestLibrary
         {
             public IntPtr LastSetErrorWriterPtr
             {
-                get
-                {
-                    return Get_corehost_set_error_writer_lastSet_error_writer();
-                }
+                get { return Get_corehost_set_error_writer_lastSet_error_writer(); }
             }
 
             public Action<string> LastSetErrorWriter
@@ -125,7 +149,10 @@ namespace TestLibrary
                     }
                     else
                     {
-                        Delegate d = Marshal.GetDelegateForFunctionPointer(errorWriterPtr, _corehost_error_writer_fnType);
+                        Delegate d = Marshal.GetDelegateForFunctionPointer(
+                            errorWriterPtr,
+                            _corehost_error_writer_fnType
+                        );
                         return (string message) =>
                         {
                             IntPtr messagePtr = Marshal.StringToCoTaskMemAuto(message);

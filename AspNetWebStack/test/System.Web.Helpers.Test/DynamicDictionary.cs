@@ -34,12 +34,11 @@ namespace System.Web.Helpers.Test
 
         private class DynamicDictionaryMetaObject : DynamicMetaObject
         {
-            private static readonly PropertyInfo ItemPropery = typeof(DynamicDictionary).GetProperty("Item");
+            private static readonly PropertyInfo ItemPropery =
+                typeof(DynamicDictionary).GetProperty("Item");
 
             public DynamicDictionaryMetaObject(Expression expression, object value)
-                : base(expression, BindingRestrictions.Empty, value)
-            {
-            }
+                : base(expression, BindingRestrictions.Empty, value) { }
 
             private IDictionary<string, object> WrappedDictionary
             {
@@ -56,43 +55,52 @@ namespace System.Web.Helpers.Test
                 return Expression.MakeIndex(
                     GetDynamicExpression(),
                     ItemPropery,
-                    new[]
-                    {
-                        Expression.Constant(key)
-                    }
-                    );
+                    new[] { Expression.Constant(key) }
+                );
             }
 
             private Expression GetSetValueExpression(string key, object value)
             {
                 return Expression.Assign(
                     GetIndexExpression(key),
-                    Expression.Convert(Expression.Constant(value),
-                                       typeof(object))
-                    );
+                    Expression.Convert(Expression.Constant(value), typeof(object))
+                );
             }
 
             public override DynamicMetaObject BindGetMember(GetMemberBinder binder)
             {
                 var binderDefault = binder.FallbackGetMember(this);
 
-                var expression = Expression.Convert(GetIndexExpression(binder.Name),
-                                                    typeof(object));
+                var expression = Expression.Convert(
+                    GetIndexExpression(binder.Name),
+                    typeof(object)
+                );
 
-                var dynamicSuggestion = new DynamicMetaObject(expression, BindingRestrictions.GetTypeRestriction(Expression, LimitType)
-                                                                              .Merge(binderDefault.Restrictions));
+                var dynamicSuggestion = new DynamicMetaObject(
+                    expression,
+                    BindingRestrictions
+                        .GetTypeRestriction(Expression, LimitType)
+                        .Merge(binderDefault.Restrictions)
+                );
 
                 return binder.FallbackGetMember(this, dynamicSuggestion);
             }
 
-            public override DynamicMetaObject BindSetMember(SetMemberBinder binder, DynamicMetaObject value)
+            public override DynamicMetaObject BindSetMember(
+                SetMemberBinder binder,
+                DynamicMetaObject value
+            )
             {
                 var binderDefault = binder.FallbackSetMember(this, value);
 
                 Expression expression = GetSetValueExpression(binder.Name, value.Value);
 
-                var dynamicSuggestion = new DynamicMetaObject(expression, BindingRestrictions.GetTypeRestriction(Expression, LimitType)
-                                                                              .Merge(binderDefault.Restrictions));
+                var dynamicSuggestion = new DynamicMetaObject(
+                    expression,
+                    BindingRestrictions
+                        .GetTypeRestriction(Expression, LimitType)
+                        .Merge(binderDefault.Restrictions)
+                );
 
                 return binder.FallbackSetMember(this, value, dynamicSuggestion);
             }

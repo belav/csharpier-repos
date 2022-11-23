@@ -15,6 +15,7 @@ internal static partial class Interop
         {
             [FieldOffset(0)]
             internal DataBuffer Data;
+
             [FieldOffset(0)]
             internal CloseBuffer CloseStatus;
         }
@@ -50,7 +51,11 @@ internal static partial class Interop
             internal string Value;
             internal uint ValueLength;
 
-            [CustomMarshaller(typeof(HttpHeader), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller))]
+            [CustomMarshaller(
+                typeof(HttpHeader),
+                MarshalMode.ManagedToUnmanagedIn,
+                typeof(Marshaller)
+            )]
             [CustomMarshaller(typeof(HttpHeader), MarshalMode.ElementIn, typeof(Marshaller))]
             public static class Marshaller
             {

@@ -9,6 +9,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
         /// <summary>
         /// Context id that indicates that primary workspace contains a project that supports Edit and Continue.
         /// </summary>
-        internal const string EncCapableProjectExistsInWorkspaceUIContextString = "0C89AE24-6D19-474C-A3AA-DC3B66FDBB5F";
+        internal const string EncCapableProjectExistsInWorkspaceUIContextString =
+            "0C89AE24-6D19-474C-A3AA-DC3B66FDBB5F";
     }
 }

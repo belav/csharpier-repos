@@ -21,20 +21,27 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             string baseDirectory,
             IEnumerable<CommandLineAnalyzerReference> analyzerReferences,
             IAnalyzerAssemblyLoader loader,
-            ICompilerServerLogger? logger = null) => Check(baseDirectory, analyzerReferences, loader, logger, out var _);
+            ICompilerServerLogger? logger = null
+        ) => Check(baseDirectory, analyzerReferences, loader, logger, out var _);
 
         public static bool Check(
             string baseDirectory,
             IEnumerable<CommandLineAnalyzerReference> analyzerReferences,
             IAnalyzerAssemblyLoader loader,
             ICompilerServerLogger? logger,
-            [NotNullWhen(false)]
-            out List<string>? errorMessages)
+            [NotNullWhen(false)] out List<string>? errorMessages
+        )
         {
             try
             {
                 logger?.Log("Begin Analyzer Consistency Check");
-                return CheckCore(baseDirectory, analyzerReferences, loader, logger, out errorMessages);
+                return CheckCore(
+                    baseDirectory,
+                    analyzerReferences,
+                    loader,
+                    logger,
+                    out errorMessages
+                );
             }
             catch (Exception e)
             {
@@ -54,15 +61,21 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             IEnumerable<CommandLineAnalyzerReference> analyzerReferences,
             IAnalyzerAssemblyLoader loader,
             ICompilerServerLogger? logger,
-            [NotNullWhen(false)]
-            out List<string>? errorMessages)
+            [NotNullWhen(false)] out List<string>? errorMessages
+        )
         {
             errorMessages = null;
             var resolvedPaths = new List<string>();
 
             foreach (var analyzerReference in analyzerReferences)
             {
-                string? resolvedPath = FileUtilities.ResolveRelativePath(analyzerReference.FilePath, basePath: null, baseDirectory: baseDirectory, searchPaths: SpecializedCollections.EmptyEnumerable<string>(), fileExists: File.Exists);
+                string? resolvedPath = FileUtilities.ResolveRelativePath(
+                    analyzerReference.FilePath,
+                    basePath: null,
+                    baseDirectory: baseDirectory,
+                    searchPaths: SpecializedCollections.EmptyEnumerable<string>(),
+                    fileExists: File.Exists
+                );
                 if (resolvedPath != null)
                 {
                     resolvedPath = FileUtilities.TryNormalizeAbsolutePath(resolvedPath);
@@ -75,7 +88,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                 // Don't worry about paths we can't resolve. The compiler will report an error for that later.
             }
 
-            // Register analyzers and their dependencies upfront, 
+            // Register analyzers and their dependencies upfront,
             // so that assembly references can be resolved:
             foreach (var resolvedPath in resolvedPaths)
             {
@@ -99,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
 
                 if (resolvedPathMvid != loadedAssemblyMvid)
                 {
-                    var message = $"analyzer assembly '{resolvedPath}' has MVID '{resolvedPathMvid}' but loaded assembly '{loadedAssembly.FullName}' has MVID '{loadedAssemblyMvid}'";
+                    var message =
+                        $"analyzer assembly '{resolvedPath}' has MVID '{resolvedPathMvid}' but loaded assembly '{loadedAssembly.FullName}' has MVID '{loadedAssemblyMvid}'";
                     errorMessages ??= new List<string>();
                     errorMessages.Add(message);
                 }

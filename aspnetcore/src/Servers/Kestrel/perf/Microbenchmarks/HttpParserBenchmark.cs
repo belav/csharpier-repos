@@ -72,17 +72,15 @@ public class HttpParserBenchmark : IHttpRequestLineHandler, IHttpHeadersHandler
         }
     }
 
-    public void OnStartLine(HttpVersionAndMethod versionAndMethod, TargetOffsetPathLength targetPath, Span<byte> startLine)
-    {
-    }
+    public void OnStartLine(
+        HttpVersionAndMethod versionAndMethod,
+        TargetOffsetPathLength targetPath,
+        Span<byte> startLine
+    ) { }
 
-    public void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
-    {
-    }
+    public void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value) { }
 
-    public void OnHeadersComplete(bool endStream)
-    {
-    }
+    public void OnHeadersComplete(bool endStream) { }
 
     public void OnStaticIndexedHeader(int index)
     {
@@ -103,14 +101,17 @@ public class HttpParserBenchmark : IHttpRequestLineHandler, IHttpHeadersHandler
             RequestHandler = requestHandler;
         }
 
-        public void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
-            => RequestHandler.OnHeader(name, value);
+        public void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value) =>
+            RequestHandler.OnHeader(name, value);
 
-        public void OnHeadersComplete(bool endStream)
-            => RequestHandler.OnHeadersComplete(endStream);
+        public void OnHeadersComplete(bool endStream) =>
+            RequestHandler.OnHeadersComplete(endStream);
 
-        public void OnStartLine(HttpVersionAndMethod versionAndMethod, TargetOffsetPathLength targetPath, Span<byte> startLine)
-            => RequestHandler.OnStartLine(versionAndMethod, targetPath, startLine);
+        public void OnStartLine(
+            HttpVersionAndMethod versionAndMethod,
+            TargetOffsetPathLength targetPath,
+            Span<byte> startLine
+        ) => RequestHandler.OnStartLine(versionAndMethod, targetPath, startLine);
 
         public void OnStaticIndexedHeader(int index)
         {

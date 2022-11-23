@@ -9,8 +9,11 @@ namespace System.ComponentModel.Composition
     /// <summary>
     ///     Specifies that a property, field, or parameter imports a particular set of exports.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
-                    AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
+        AllowMultiple = false,
+        Inherited = false
+    )]
     public class ImportManyAttribute : Attribute, IAttributedImport
     {
         /// <summary>
@@ -28,10 +31,7 @@ namespace System.ComponentModel.Composition
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
-        public ImportManyAttribute()
-            : this((string?)null)
-        {
-        }
+        public ImportManyAttribute() : this((string?)null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ImportManyAttribute"/> class, importing the
@@ -57,10 +57,7 @@ namespace System.ComponentModel.Composition
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
-        public ImportManyAttribute(Type? contractType)
-            : this((string?)null, contractType)
-        {
-        }
+        public ImportManyAttribute(Type? contractType) : this((string?)null, contractType) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ImportManyAttribute"/> class, importing the
@@ -81,10 +78,7 @@ namespace System.ComponentModel.Composition
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
-        public ImportManyAttribute(string? contractName)
-            : this(contractName, (Type?)null)
-        {
-        }
+        public ImportManyAttribute(string? contractName) : this(contractName, (Type?)null) { }
 
         public ImportManyAttribute(string? contractName, Type? contractType)
         {

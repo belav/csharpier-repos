@@ -56,13 +56,15 @@ public partial class RoutePatternParserTests
         string expected = null,
         bool runSubTreeTests = true,
         bool allowDiagnosticsMismatch = false,
-        bool runReplaceTokens = false)
+        bool runReplaceTokens = false
+    )
     {
         var (tree, sourceText) = TryParseTree(
             stringText,
             conversionFailureOk: false,
             allowDiagnosticsMismatch,
-            runReplaceTokens);
+            runReplaceTokens
+        );
 
         // Tests are allowed to not run the subtree tests.  This is because some
         // subtrees can cause the native regex parser to exhibit very bad behavior
@@ -80,7 +82,11 @@ public partial class RoutePatternParserTests
         _outputHelper.WriteLine(actual);
         if (expected != null)
         {
-            Assert.Equal(expected.Replace("\"", DoubleQuoteEscaping), actual, ignoreLineEndingDifferences: true);
+            Assert.Equal(
+                expected.Replace("\"", DoubleQuoteEscaping),
+                actual,
+                ignoreLineEndingDifferences: true
+            );
         }
 
         return tree;
@@ -89,14 +95,20 @@ public partial class RoutePatternParserTests
     private void TryParseSubTrees(
         string stringText,
         bool allowDiagnosticsMismatch,
-        bool runReplaceTokens = false)
+        bool runReplaceTokens = false
+    )
     {
         // Trim the input from the right and make sure tree invariants hold
         var current = stringText;
         while (current is not "@\"\"" and not "\"\"")
         {
             current = current.Substring(0, current.Length - 2) + "\"";
-            TryParseTree(current, conversionFailureOk: true, allowDiagnosticsMismatch, runReplaceTokens);
+            TryParseTree(
+                current,
+                conversionFailureOk: true,
+                allowDiagnosticsMismatch,
+                runReplaceTokens
+            );
         }
 
         // Trim the input from the left and make sure tree invariants hold
@@ -112,22 +124,31 @@ public partial class RoutePatternParserTests
                 current = "\"" + current.Substring(2);
             }
 
-            TryParseTree(current, conversionFailureOk: true, allowDiagnosticsMismatch, runReplaceTokens);
+            TryParseTree(
+                current,
+                conversionFailureOk: true,
+                allowDiagnosticsMismatch,
+                runReplaceTokens
+            );
         }
 
         for (var start = stringText[0] == '@' ? 2 : 1; start < stringText.Length - 1; start++)
         {
             TryParseTree(
-                stringText.Substring(0, start) +
-                stringText.Substring(start + 1, stringText.Length - (start + 1)),
+                stringText.Substring(0, start)
+                    + stringText.Substring(start + 1, stringText.Length - (start + 1)),
                 conversionFailureOk: true,
                 allowDiagnosticsMismatch,
-                runReplaceTokens);
+                runReplaceTokens
+            );
         }
     }
 
     private (SyntaxToken, RoutePatternTree, VirtualCharSequence) JustParseTree(
-        string stringText, bool conversionFailureOk, bool runReplaceTokens)
+        string stringText,
+        bool conversionFailureOk,
+        bool runReplaceTokens
+    )
     {
         var token = GetStringToken(stringText);
         var allChars = CSharpVirtualCharService.Instance.TryConvertToVirtualChars(token);
@@ -145,9 +166,14 @@ public partial class RoutePatternParserTests
         string stringText,
         bool conversionFailureOk,
         bool allowDiagnosticsMismatch = false,
-        bool runReplaceTokens = false)
+        bool runReplaceTokens = false
+    )
     {
-        var (token, tree, allChars) = JustParseTree(stringText, conversionFailureOk, runReplaceTokens);
+        var (token, tree, allChars) = JustParseTree(
+            stringText,
+            conversionFailureOk,
+            runReplaceTokens
+        );
         if (tree == null)
         {
             Assert.True(allChars.IsDefault);
@@ -167,34 +193,49 @@ public partial class RoutePatternParserTests
 
             if (runReplaceTokens)
             {
-                AttributeRouteModel.ReplaceTokens(token.ValueText, new Dictionary<string, string>
-                {
-                    ["controller"] = "TestController",
-                    ["action"] = "TestAction"
-                });
+                AttributeRouteModel.ReplaceTokens(
+                    token.ValueText,
+                    new Dictionary<string, string>
+                    {
+                        ["controller"] = "TestController",
+                        ["action"] = "TestAction"
+                    }
+                );
             }
         }
         catch (Exception ex)
         {
-            if (!allowDiagnosticsMismatch &&
-                !Regex.IsMatch(ex.Message, "^While processing template '(.*?)', a replacement value for the token '(.*?)' could not be found."))
+            if (
+                !allowDiagnosticsMismatch
+                && !Regex.IsMatch(
+                    ex.Message,
+                    "^While processing template '(.*?)', a replacement value for the token '(.*?)' could not be found."
+                )
+            )
             {
                 if (tree.Diagnostics.Length == 0)
                 {
-                    throw new Exception($"Parsing '{token.ValueText}' throws RoutePattern error '{ex.Message}'. No diagnostics.");
+                    throw new Exception(
+                        $"Parsing '{token.ValueText}' throws RoutePattern error '{ex.Message}'. No diagnostics."
+                    );
                 }
 
                 // Ensure the diagnostic we emit is the same as the .NET one. Note: we can only
                 // do this in en as that's the only culture where we control the text exactly
-                // and can ensure it exactly matches RoutePattern. We depend on localization to do a 
+                // and can ensure it exactly matches RoutePattern. We depend on localization to do a
                 // good enough job here for other languages.
                 if (Thread.CurrentThread.CurrentCulture.Parent.Name == "en")
                 {
                     if (!tree.Diagnostics.Any(d => ex.Message.Contains(d.Message)))
                     {
                         throw new Exception(
-                            $"Parsing '{token.ValueText}' throws RoutePattern error '{ex.Message}'. Error not found in diagnostics: " + Environment.NewLine +
-                            string.Join(Environment.NewLine, tree.Diagnostics.Select(d => d.Message)));
+                            $"Parsing '{token.ValueText}' throws RoutePattern error '{ex.Message}'. Error not found in diagnostics: "
+                                + Environment.NewLine
+                                + string.Join(
+                                    Environment.NewLine,
+                                    tree.Diagnostics.Select(d => d.Message)
+                                )
+                        );
                     }
                 }
             }
@@ -205,7 +246,11 @@ public partial class RoutePatternParserTests
         if (!tree.Diagnostics.IsEmpty && !allowDiagnosticsMismatch)
         {
             var expectedDiagnostics = CreateDiagnosticsElement(sourceText, tree);
-            Assert.False(true, $"Parsing '{token.ValueText}' didn't throw an error for expected diagnostics: \r\n" + expectedDiagnostics.ToString().Replace(@"""", @""""""));
+            Assert.False(
+                true,
+                $"Parsing '{token.ValueText}' didn't throw an error for expected diagnostics: \r\n"
+                    + expectedDiagnostics.ToString().Replace(@"""", @"""""")
+            );
         }
 
         if (parsedRoutePatterns != null)
@@ -214,35 +259,67 @@ public partial class RoutePatternParserTests
             {
                 try
                 {
-                    if (tree.RouteParameters.TryGetValue(parsedRoutePattern.Name, out var routeParameter))
+                    if (
+                        tree.RouteParameters.TryGetValue(
+                            parsedRoutePattern.Name,
+                            out var routeParameter
+                        )
+                    )
                     {
-                        Assert.True(routeParameter.IsOptional == parsedRoutePattern.IsOptional, "IsOptional");
-                        Assert.True(routeParameter.IsCatchAll == parsedRoutePattern.IsCatchAll, "IsCatchAll");
-                        Assert.True(routeParameter.EncodeSlashes == parsedRoutePattern.EncodeSlashes, "EncodeSlashes");
-                        Assert.True(Equals(routeParameter.DefaultValue, parsedRoutePattern.Default), "DefaultValue");
-                        Assert.True(routeParameter.Policies.Length == parsedRoutePattern.ParameterPolicies.Count, "ParameterPolicies");
+                        Assert.True(
+                            routeParameter.IsOptional == parsedRoutePattern.IsOptional,
+                            "IsOptional"
+                        );
+                        Assert.True(
+                            routeParameter.IsCatchAll == parsedRoutePattern.IsCatchAll,
+                            "IsCatchAll"
+                        );
+                        Assert.True(
+                            routeParameter.EncodeSlashes == parsedRoutePattern.EncodeSlashes,
+                            "EncodeSlashes"
+                        );
+                        Assert.True(
+                            Equals(routeParameter.DefaultValue, parsedRoutePattern.Default),
+                            "DefaultValue"
+                        );
+                        Assert.True(
+                            routeParameter.Policies.Length
+                                == parsedRoutePattern.ParameterPolicies.Count,
+                            "ParameterPolicies"
+                        );
                         for (var i = 0; i < parsedRoutePattern.ParameterPolicies.Count; i++)
                         {
                             var expected = parsedRoutePattern.ParameterPolicies[i].Content;
-                            var actual = routeParameter.Policies[i].Substring(1).Replace("{{", "{").Replace("}}", "}");
-                            Assert.True(expected == actual, $"Policy {i}. Expected: '{expected}', Actual: '{actual}'.");
+                            var actual = routeParameter.Policies[i]
+                                .Substring(1)
+                                .Replace("{{", "{")
+                                .Replace("}}", "}");
+                            Assert.True(
+                                expected == actual,
+                                $"Policy {i}. Expected: '{expected}', Actual: '{actual}'."
+                            );
                         }
                     }
                     else
                     {
-                        throw new Exception($"Couldn't find parameter '{parsedRoutePattern.Name}'.");
+                        throw new Exception(
+                            $"Couldn't find parameter '{parsedRoutePattern.Name}'."
+                        );
                     }
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception($"Parsing '{token.ValueText}' has route parameter '{parsedRoutePattern.Name}' mismatch.", ex);
+                    throw new Exception(
+                        $"Parsing '{token.ValueText}' has route parameter '{parsedRoutePattern.Name}' mismatch.",
+                        ex
+                    );
                 }
-
             }
 
             Assert.True(
                 parsedRoutePatterns.Count == tree.RouteParameters.Count,
-                $"Parsing '{token.ValueText}' has mismatched parameter counts.");
+                $"Parsing '{token.ValueText}' has mismatched parameter counts."
+            );
         }
 
         //Assert.True(regex.GetGroupNumbers().OrderBy(v => v).SequenceEqual(
@@ -256,27 +333,34 @@ public partial class RoutePatternParserTests
 
     private static string TreeToText(SourceText text, RoutePatternTree tree)
     {
-        var element = new XElement("Tree",
-            NodeToElement(tree.Root));
+        var element = new XElement("Tree", NodeToElement(tree.Root));
 
         if (tree.Diagnostics.Length > 0)
         {
             element.Add(CreateDiagnosticsElement(text, tree));
         }
 
-        element.Add(new XElement("Parameters",
-            tree.RouteParameters.OrderBy(kvp => kvp.Key).Select(kvp => CreateParameter(kvp.Value))));
+        element.Add(
+            new XElement(
+                "Parameters",
+                tree.RouteParameters
+                    .OrderBy(kvp => kvp.Key)
+                    .Select(kvp => CreateParameter(kvp.Value))
+            )
+        );
 
         return element.ToString();
     }
 
     private static XElement CreateParameter(RouteParameter parameter)
     {
-        var parameterElement = new XElement("Parameter",
+        var parameterElement = new XElement(
+            "Parameter",
             new XAttribute("Name", parameter.Name),
             new XAttribute("IsCatchAll", parameter.IsCatchAll),
             new XAttribute("IsOptional", parameter.IsOptional),
-            new XAttribute("EncodeSlashes", parameter.EncodeSlashes));
+            new XAttribute("EncodeSlashes", parameter.EncodeSlashes)
+        );
         if (parameter.DefaultValue != null)
         {
             parameterElement.Add(new XAttribute("DefaultValue", parameter.DefaultValue));
@@ -289,16 +373,22 @@ public partial class RoutePatternParserTests
         return parameterElement;
     }
 
-    private static XElement CreateDiagnosticsElement(SourceText text, RoutePatternTree tree)
-        => new XElement("Diagnostics",
-            tree.Diagnostics.Select(d =>
-                new XElement("Diagnostic",
-                    new XAttribute("Message", d.Message),
-                    new XAttribute("Span", d.Span),
-                    GetTextAttribute(text, d.Span))));
+    private static XElement CreateDiagnosticsElement(SourceText text, RoutePatternTree tree) =>
+        new XElement(
+            "Diagnostics",
+            tree.Diagnostics.Select(
+                d =>
+                    new XElement(
+                        "Diagnostic",
+                        new XAttribute("Message", d.Message),
+                        new XAttribute("Span", d.Span),
+                        GetTextAttribute(text, d.Span)
+                    )
+            )
+        );
 
-    private static XAttribute GetTextAttribute(SourceText text, TextSpan span)
-        => new("Text", text.ToString(span));
+    private static XAttribute GetTextAttribute(SourceText text, TextSpan span) =>
+        new("Text", text.ToString(span));
 
     private static XElement NodeToElement(RoutePatternNode node)
     {
@@ -336,7 +426,11 @@ public partial class RoutePatternParserTests
         Assert.Equal(allChars.Length, position);
     }
 
-    private static void CheckInvariants(RoutePatternNode node, ref int position, VirtualCharSequence allChars)
+    private static void CheckInvariants(
+        RoutePatternNode node,
+        ref int position,
+        VirtualCharSequence allChars
+    )
     {
         foreach (var child in node)
         {
@@ -351,12 +445,20 @@ public partial class RoutePatternParserTests
         }
     }
 
-    private static void CheckInvariants(RoutePatternToken token, ref int position, VirtualCharSequence allChars)
+    private static void CheckInvariants(
+        RoutePatternToken token,
+        ref int position,
+        VirtualCharSequence allChars
+    )
     {
         CheckCharacters(token.VirtualChars, ref position, allChars);
     }
 
-    private static void CheckCharacters(VirtualCharSequence virtualChars, ref int position, VirtualCharSequence allChars)
+    private static void CheckCharacters(
+        VirtualCharSequence virtualChars,
+        ref int position,
+        VirtualCharSequence allChars
+    )
     {
         for (var i = 0; i < virtualChars.Length; i++)
         {
@@ -368,10 +470,15 @@ public partial class RoutePatternParserTests
             }
             catch (Exception ex)
             {
-                var allCharsString = allChars.GetSubSequence(new TextSpan(position, virtualChars.Length)).CreateString();
+                var allCharsString = allChars
+                    .GetSubSequence(new TextSpan(position, virtualChars.Length))
+                    .CreateString();
                 var virtualCharsString = virtualChars.CreateString();
 
-                throw new Exception($"When checking '{allChars.CreateString()}' there was a mismatch between '{allCharsString}' and '{virtualCharsString}' at index {i}.", ex);
+                throw new Exception(
+                    $"When checking '{allChars.CreateString()}' there was a mismatch between '{allCharsString}' and '{virtualCharsString}' at index {i}.",
+                    ex
+                );
             }
         }
 
@@ -388,6 +495,5 @@ public partial class RoutePatternParserTests
         return conj;
     }
 
-    private static string Not(string regex)
-        => $"(?({regex})[0-[0]]|.*)";
+    private static string Not(string regex) => $"(?({regex})[0-[0]]|.*)";
 }

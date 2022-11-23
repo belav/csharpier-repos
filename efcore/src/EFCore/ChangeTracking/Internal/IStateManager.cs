@@ -84,7 +84,8 @@ public interface IStateManager : IResettableService
     InternalEntityEntry StartTrackingFromQuery(
         IEntityType baseEntityType,
         object entity,
-        in ValueBuffer valueBuffer);
+        in ValueBuffer valueBuffer
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -100,7 +101,12 @@ public interface IStateManager : IResettableService
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    InternalEntityEntry? TryGetEntry(IKey key, object?[] keyValues, bool throwOnNullKey, out bool hasNullKey);
+    InternalEntityEntry? TryGetEntry(
+        IKey key,
+        object?[] keyValues,
+        bool throwOnNullKey,
+        out bool hasNullKey
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -116,7 +122,11 @@ public interface IStateManager : IResettableService
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    InternalEntityEntry? TryGetEntry(object entity, IEntityType type, bool throwOnTypeMismatch = true);
+    InternalEntityEntry? TryGetEntry(
+        object entity,
+        IEntityType type,
+        bool throwOnTypeMismatch = true
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -137,7 +147,8 @@ public interface IStateManager : IResettableService
         bool modified = false,
         bool deleted = false,
         bool unchanged = false,
-        bool returnSharedIdentity = false);
+        bool returnSharedIdentity = false
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -150,7 +161,8 @@ public interface IStateManager : IResettableService
         bool modified = false,
         bool deleted = false,
         bool unchanged = false,
-        bool returnSharedIdentity = false);
+        bool returnSharedIdentity = false
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -166,8 +178,7 @@ public interface IStateManager : IResettableService
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    IEnumerable<TEntity> GetNonDeletedEntities<TEntity>()
-        where TEntity : class;
+    IEnumerable<TEntity> GetNonDeletedEntities<TEntity>() where TEntity : class;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -250,7 +261,8 @@ public interface IStateManager : IResettableService
     void RecordReferencedUntrackedEntity(
         object referencedEntity,
         INavigationBase navigation,
-        InternalEntityEntry referencedFromEntry);
+        InternalEntityEntry referencedFromEntry
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -262,7 +274,8 @@ public interface IStateManager : IResettableService
         object referencedEntity,
         object newReferencedEntity,
         INavigationBase navigation,
-        InternalEntityEntry referencedFromEntry);
+        InternalEntityEntry referencedFromEntry
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -273,7 +286,8 @@ public interface IStateManager : IResettableService
     bool ResolveToExistingEntry(
         InternalEntityEntry newEntry,
         INavigationBase? navigation,
-        InternalEntityEntry? referencedFromEntry);
+        InternalEntityEntry? referencedFromEntry
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -281,7 +295,10 @@ public interface IStateManager : IResettableService
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    IEnumerable<Tuple<INavigationBase, InternalEntityEntry>> GetRecordedReferrers(object referencedEntity, bool clear);
+    IEnumerable<Tuple<INavigationBase, InternalEntityEntry>> GetRecordedReferrers(
+        object referencedEntity,
+        bool clear
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -323,7 +340,8 @@ public interface IStateManager : IResettableService
     /// </summary>
     InternalEntityEntry? FindPrincipalUsingPreStoreGeneratedValues(
         InternalEntityEntry dependentEntry,
-        IForeignKey foreignKey);
+        IForeignKey foreignKey
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -333,7 +351,8 @@ public interface IStateManager : IResettableService
     /// </summary>
     InternalEntityEntry? FindPrincipalUsingRelationshipSnapshot(
         InternalEntityEntry dependentEntry,
-        IForeignKey foreignKey);
+        IForeignKey foreignKey
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -359,7 +378,8 @@ public interface IStateManager : IResettableService
     /// </summary>
     IEnumerable<IUpdateEntry>? GetDependentsFromNavigation(
         IUpdateEntry principalEntry,
-        IForeignKey foreignKey);
+        IForeignKey foreignKey
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -377,7 +397,8 @@ public interface IStateManager : IResettableService
     /// </summary>
     IEnumerable<IUpdateEntry> GetDependentsUsingRelationshipSnapshot(
         IUpdateEntry principalEntry,
-        IForeignKey foreignKey);
+        IForeignKey foreignKey
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -401,7 +422,10 @@ public interface IStateManager : IResettableService
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default);
+    Task<int> SaveChangesAsync(
+        bool acceptAllChangesOnSuccess,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -433,10 +457,12 @@ public interface IStateManager : IResettableService
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    (EventHandler<EntityTrackingEventArgs>? Tracking,
+    (
+        EventHandler<EntityTrackingEventArgs>? Tracking,
         EventHandler<EntityTrackedEventArgs>? Tracked,
         EventHandler<EntityStateChangingEventArgs>? StateChanging,
-        EventHandler<EntityStateChangedEventArgs>? StateChanged) CaptureEvents();
+        EventHandler<EntityStateChangedEventArgs>? StateChanged
+    ) CaptureEvents();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -448,7 +474,8 @@ public interface IStateManager : IResettableService
         EventHandler<EntityTrackingEventArgs>? tracking,
         EventHandler<EntityTrackedEventArgs>? tracked,
         EventHandler<EntityStateChangingEventArgs>? stateChanging,
-        EventHandler<EntityStateChangedEventArgs>? stateChanged);
+        EventHandler<EntityStateChangedEventArgs>? stateChanged
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -536,7 +563,11 @@ public interface IStateManager : IResettableService
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    void CascadeDelete(InternalEntityEntry entry, bool force, IEnumerable<IForeignKey>? foreignKeys = null);
+    void CascadeDelete(
+        InternalEntityEntry entry,
+        bool force,
+        IEnumerable<IForeignKey>? foreignKeys = null
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

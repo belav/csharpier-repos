@@ -17,7 +17,10 @@ namespace Microsoft.Interop
         private readonly IMarshallingGeneratorFactory _inner;
         private readonly bool _useBlittableMarshallerForUtf16;
 
-        public CharMarshallingGeneratorFactory(IMarshallingGeneratorFactory inner, bool useBlittableMarshallerForUtf16)
+        public CharMarshallingGeneratorFactory(
+            IMarshallingGeneratorFactory inner,
+            bool useBlittableMarshallerForUtf16
+        )
         {
             _inner = inner;
             _useBlittableMarshallerForUtf16 = useBlittableMarshallerForUtf16;
@@ -33,7 +36,10 @@ namespace Microsoft.Interop
             return _inner.Create(info, context);
         }
 
-        private IMarshallingGenerator CreateCharMarshaller(TypePositionInfo info, StubCodeContext context)
+        private IMarshallingGenerator CreateCharMarshaller(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             MarshallingInfo marshalInfo = info.MarshallingAttributeInfo;
             if (marshalInfo is NoMarshallingInfo)
@@ -64,12 +70,16 @@ namespace Microsoft.Interop
                     case CharEncoding.Utf8:
                         throw new MarshallingNotSupportedException(info, context) // [Compat] UTF-8 is not supported for char
                         {
-                            NotSupportedDetails = string.Format(SR.MarshallingCharAsSpecifiedStringMarshallingNotSupported, nameof(CharEncoding.Utf8))
+                            NotSupportedDetails = string.Format(
+                                SR.MarshallingCharAsSpecifiedStringMarshallingNotSupported,
+                                nameof(CharEncoding.Utf8)
+                            )
                         };
                     case CharEncoding.Custom:
                         throw new MarshallingNotSupportedException(info, context)
                         {
-                            NotSupportedDetails = SR.MarshallingCharAsStringMarshallingCustomNotSupported
+                            NotSupportedDetails =
+                                SR.MarshallingCharAsStringMarshallingCustomNotSupported
                         };
                 }
             }

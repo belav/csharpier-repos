@@ -100,16 +100,15 @@ namespace System.Security.Cryptography.RNG.Tests
                     taskArrays[iTask] = new byte[RandomSize];
                     byte[] taskLocal = taskArrays[iTask];
 
-                    tasks[iTask] = Task.Run(
-                        () =>
-                        {
-                            sync.WaitOne();
+                    tasks[iTask] = Task.Run(() =>
+                    {
+                        sync.WaitOne();
 
-                            for (int i = 0; i < PerTaskIterationCount; i++)
-                            {
-                                rng.GetBytes(taskLocal);
-                            }
-                        });
+                        for (int i = 0; i < PerTaskIterationCount; i++)
+                        {
+                            rng.GetBytes(taskLocal);
+                        }
+                    });
                 }
 
                 // Ready? Set() Go!
@@ -135,7 +134,10 @@ namespace System.Security.Cryptography.RNG.Tests
         {
             using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
             {
-                AssertExtensions.Throws<ArgumentNullException>("data", () => rng.GetNonZeroBytes(null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "data",
+                    () => rng.GetNonZeroBytes(null)
+                );
 
                 // Array should not have any zeros
                 byte[] rand = new byte[arraySize];
@@ -250,7 +252,10 @@ namespace System.Security.Cryptography.RNG.Tests
         {
             using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
             {
-                AssertExtensions.Throws<ArgumentNullException>("data", () => rng.GetNonZeroBytes(null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "data",
+                    () => rng.GetNonZeroBytes(null)
+                );
                 GetBytes_InvalidArgs_Helper(rng);
             }
         }
@@ -268,8 +273,10 @@ namespace System.Security.Cryptography.RNG.Tests
         [Fact]
         public static void GetBytes_Int_Negative()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
-                RandomNumberGenerator.GetBytes(-1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "count",
+                () => RandomNumberGenerator.GetBytes(-1)
+            );
         }
 
         [Fact]
@@ -397,7 +404,9 @@ namespace System.Security.Cryptography.RNG.Tests
         [InlineData(-10, -11)]
         public static void GetInt32_LowerAndUpper_InvalidRange(int fromInclusive, int toExclusive)
         {
-            Assert.Throws<ArgumentException>(() => RandomNumberGenerator.GetInt32(fromInclusive, toExclusive));
+            Assert.Throws<ArgumentException>(
+                () => RandomNumberGenerator.GetInt32(fromInclusive, toExclusive)
+            );
         }
 
         [Theory]
@@ -405,7 +414,9 @@ namespace System.Security.Cryptography.RNG.Tests
         [InlineData(-10)]
         public static void GetInt32_Upper_InvalidRange(int toExclusive)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => RandomNumberGenerator.GetInt32(toExclusive));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => RandomNumberGenerator.GetInt32(toExclusive)
+            );
         }
 
         [Theory]
@@ -451,7 +462,10 @@ namespace System.Security.Cryptography.RNG.Tests
             int result3 = RandomNumberGenerator.GetInt32(int.MinValue, int.MaxValue);
 
             // The changes of this happening are (2^32 - 1) * 3.
-            Assert.False(result1 == result2 && result2 == result3, "Generated the same number three times in a row.");
+            Assert.False(
+                result1 == result2 && result2 == result3,
+                "Generated the same number three times in a row."
+            );
         }
 
         [Fact]
@@ -484,7 +498,6 @@ namespace System.Security.Cryptography.RNG.Tests
             VerifyAllInRange(generated, 0, 2);
             VerifyDistribution(generated, 0.5);
         }
-
 
         [Fact]
         public static void GetInt32_CoinFlipOverByteBoundary()
@@ -533,7 +546,7 @@ namespace System.Security.Cryptography.RNG.Tests
         [InlineData(-257, -129)]
         [InlineData(-100, 5)]
         [InlineData(254, 512)]
-        [InlineData(-1_073_741_909, - 1_073_741_825)]
+        [InlineData(-1_073_741_909, -1_073_741_825)]
         [InlineData(65_534, 65_539)]
         [InlineData(16_777_214, 16_777_217)]
         public static void GetInt32_MaskRangeCorrect(int fromInclusive, int toExclusive)
@@ -551,7 +564,11 @@ namespace System.Security.Cryptography.RNG.Tests
             VerifyDistribution(generated, expectedDistribution);
         }
 
-        private static void VerifyAllInRange(ReadOnlySpan<int> numbers, int fromInclusive, int toExclusive)
+        private static void VerifyAllInRange(
+            ReadOnlySpan<int> numbers,
+            int fromInclusive,
+            int toExclusive
+        )
         {
             for (int i = 0; i < numbers.Length; i++)
             {
@@ -575,16 +592,28 @@ namespace System.Security.Cryptography.RNG.Tests
             {
                 double percentage = occurrences / (double)numbers.Length;
                 double actual = Math.Abs(expected - percentage);
-                Assert.True(actual < tolerance, $"Occurred number of times within threshold. Actual: {actual}");
+                Assert.True(
+                    actual < tolerance,
+                    $"Occurred number of times within threshold. Actual: {actual}"
+                );
             }
         }
 
         private static void GetBytes_InvalidArgs_Helper(RandomNumberGenerator rng)
         {
             AssertExtensions.Throws<ArgumentNullException>("data", () => rng.GetBytes(null, 0, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () => rng.GetBytes(Array.Empty<byte>(), -1, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => rng.GetBytes(Array.Empty<byte>(), 0, -1));
-            AssertExtensions.Throws<ArgumentException>(null, () => rng.GetBytes(Array.Empty<byte>(), 0, 1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "offset",
+                () => rng.GetBytes(Array.Empty<byte>(), -1, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "count",
+                () => rng.GetBytes(Array.Empty<byte>(), 0, -1)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => rng.GetBytes(Array.Empty<byte>(), 0, 1)
+            );
             // GetBytes(null) covered in test NullInput()
         }
 

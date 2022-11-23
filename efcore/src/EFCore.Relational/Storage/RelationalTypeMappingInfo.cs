@@ -19,10 +19,7 @@ public readonly record struct RelationalTypeMappingInfo
     ///     Creates a new instance of <see cref="RelationalTypeMappingInfo" />.
     /// </summary>
     /// <param name="property">The property for which mapping is needed.</param>
-    public RelationalTypeMappingInfo(IProperty property)
-        : this(property.GetPrincipals())
-    {
-    }
+    public RelationalTypeMappingInfo(IProperty property) : this(property.GetPrincipals()) { }
 
     /// <summary>
     ///     Creates a new instance of <see cref="RelationalTypeMappingInfo" />.
@@ -55,9 +52,16 @@ public readonly record struct RelationalTypeMappingInfo
         bool? fixedLength = null,
         int? fallbackSize = null,
         int? fallbackPrecision = null,
-        int? fallbackScale = null)
+        int? fallbackScale = null
+    )
     {
-        _coreTypeMappingInfo = new TypeMappingInfo(principals, fallbackUnicode, fallbackSize, fallbackPrecision, fallbackScale);
+        _coreTypeMappingInfo = new TypeMappingInfo(
+            principals,
+            fallbackUnicode,
+            fallbackSize,
+            fallbackPrecision,
+            fallbackScale
+        );
 
         IsFixedLength = fixedLength;
         StoreTypeName = storeTypeName;
@@ -79,10 +83,19 @@ public readonly record struct RelationalTypeMappingInfo
         bool? unicode,
         int? size,
         int? precision,
-        int? scale)
+        int? scale
+    )
     {
         // Note: Empty string is allowed for store type name because SQLite
-        _coreTypeMappingInfo = new TypeMappingInfo(null, false, unicode, size, null, precision, scale);
+        _coreTypeMappingInfo = new TypeMappingInfo(
+            null,
+            false,
+            unicode,
+            size,
+            null,
+            precision,
+            scale
+        );
         StoreTypeName = storeTypeName;
         StoreTypeNameBase = storeTypeNameBase;
         IsFixedLength = null;
@@ -105,7 +118,8 @@ public readonly record struct RelationalTypeMappingInfo
         bool? unicode = null,
         int? size = null,
         int? precision = null,
-        int? scale = null)
+        int? scale = null
+    )
     {
         _coreTypeMappingInfo = new TypeMappingInfo(member, unicode, size, precision, scale);
 
@@ -121,7 +135,8 @@ public readonly record struct RelationalTypeMappingInfo
     /// <param name="converter">The converter to apply.</param>
     public RelationalTypeMappingInfo(
         in RelationalTypeMappingInfo source,
-        in ValueConverterInfo converter)
+        in ValueConverterInfo converter
+    )
     {
         _coreTypeMappingInfo = new TypeMappingInfo(
             source._coreTypeMappingInfo,
@@ -129,13 +144,16 @@ public readonly record struct RelationalTypeMappingInfo
             source.IsUnicode,
             source.Size,
             source.Precision,
-            source.Scale);
+            source.Scale
+        );
 
         var mappingHints = converter.MappingHints;
 
         StoreTypeName = source.StoreTypeName;
         StoreTypeNameBase = source.StoreTypeNameBase;
-        IsFixedLength = source.IsFixedLength ?? (mappingHints as RelationalConverterMappingHints)?.IsFixedLength;
+        IsFixedLength =
+            source.IsFixedLength
+            ?? (mappingHints as RelationalConverterMappingHints)?.IsFixedLength;
     }
 
     /// <summary>
@@ -161,9 +179,18 @@ public readonly record struct RelationalTypeMappingInfo
         bool? rowVersion = null,
         bool? fixedLength = null,
         int? precision = null,
-        int? scale = null)
+        int? scale = null
+    )
     {
-        _coreTypeMappingInfo = new TypeMappingInfo(type, keyOrIndex, unicode, size, rowVersion, precision, scale);
+        _coreTypeMappingInfo = new TypeMappingInfo(
+            type,
+            keyOrIndex,
+            unicode,
+            size,
+            rowVersion,
+            precision,
+            scale
+        );
 
         IsFixedLength = fixedLength;
         StoreTypeName = storeTypeName;
@@ -253,6 +280,6 @@ public readonly record struct RelationalTypeMappingInfo
     /// </summary>
     /// <param name="converterInfo">The converter to apply.</param>
     /// <returns>The new mapping info.</returns>
-    public RelationalTypeMappingInfo WithConverter(in ValueConverterInfo converterInfo)
-        => new(this, converterInfo);
+    public RelationalTypeMappingInfo WithConverter(in ValueConverterInfo converterInfo) =>
+        new(this, converterInfo);
 }

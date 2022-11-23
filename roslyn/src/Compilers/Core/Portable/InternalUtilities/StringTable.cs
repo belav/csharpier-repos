@@ -31,7 +31,7 @@ namespace Roslyn.Utilities
         }
 
         // TODO: Need to tweak the size with more scenarios.
-        //       for now this is what works well enough with 
+        //       for now this is what works well enough with
         //       Roslyn C# compiler project
 
         // Size of local cache.
@@ -50,7 +50,7 @@ namespace Roslyn.Utilities
         private const int SharedBucketSizeMask = SharedBucketSize - 1;
 
         // local (L1) cache
-        // simple fast and not threadsafe cache 
+        // simple fast and not threadsafe cache
         // with limited size and "last add wins" expiration policy
         //
         // The main purpose of the local cache is to use in long lived
@@ -65,7 +65,7 @@ namespace Roslyn.Utilities
         // writes to local cache will update shared cache as well.
         private static readonly Entry[] s_sharedTable = new Entry[SharedSize];
 
-        // essentially a random number 
+        // essentially a random number
         // the usage pattern will randomly use and increment this
         // the counter is not static to avoid interlocked operations and cross-thread traffic
         private int _localRandom = Environment.TickCount;
@@ -73,10 +73,7 @@ namespace Roslyn.Utilities
         // same as above but for users that go directly with unbuffered shared cache.
         private static int s_sharedRandom = Environment.TickCount;
 
-        internal StringTable() :
-            this(null)
-        {
-        }
+        internal StringTable() : this(null) { }
 
         // implement Poolable object pattern
         #region "Poolable"
@@ -91,7 +88,10 @@ namespace Roslyn.Utilities
 
         private static ObjectPool<StringTable> CreatePool()
         {
-            var pool = new ObjectPool<StringTable>(pool => new StringTable(pool), Environment.ProcessorCount * 2);
+            var pool = new ObjectPool<StringTable>(
+                pool => new StringTable(pool),
+                Environment.ProcessorCount * 2
+            );
             return pool;
         }
 
@@ -282,7 +282,6 @@ namespace Roslyn.Utilities
             AddCore(chars, hashCode);
             return chars;
         }
-
 
         private static string? FindSharedEntry(char[] chars, int start, int len, int hashCode)
         {
@@ -493,7 +492,6 @@ namespace Roslyn.Utilities
             return e;
         }
 
-
         private string AddItem(char[] chars, int start, int len, int hashCode)
         {
             var text = new String(chars, start, len);
@@ -521,7 +519,6 @@ namespace Roslyn.Utilities
             AddCore(text, hashCode);
             return text;
         }
-
 
         private void AddCore(string chars, int hashCode)
         {
@@ -560,7 +557,7 @@ namespace Roslyn.Utilities
             var i1 = LocalNextRandom() & SharedBucketSizeMask;
             idx = (idx + ((i1 * i1 + i1) / 2)) & SharedSizeMask;
 
-foundIdx:
+            foundIdx:
             arr[idx].HashCode = hashCode;
             Volatile.Write(ref arr[idx].Text, text);
         }
@@ -601,10 +598,13 @@ foundIdx:
             return AddSharedSlow(hashCode, bytes, isAscii);
         }
 
-        private static string AddSharedSlow(int hashCode, ReadOnlySpan<byte> utf8Bytes, bool isAscii)
+        private static string AddSharedSlow(
+            int hashCode,
+            ReadOnlySpan<byte> utf8Bytes,
+            bool isAscii
+        )
         {
             string text;
-
             unsafe
             {
                 fixed (byte* bytes = &utf8Bytes.GetPinnableReference())
@@ -614,7 +614,7 @@ foundIdx:
             }
 
             // Don't add non-ascii strings to table. The hashCode we have here is not correct and we won't find them again.
-            // Non-ascii in UTF-8 encoded parts of metadata (the only use of this at the moment) is assumed to be rare in 
+            // Non-ascii in UTF-8 encoded parts of metadata (the only use of this at the moment) is assumed to be rare in
             // practice. If that turns out to be wrong, we could decode to pooled memory and rehash here.
             if (isAscii)
             {
@@ -649,7 +649,7 @@ foundIdx:
             var i1 = SharedNextRandom() & SharedBucketSizeMask;
             idx = (idx + ((i1 * i1 + i1) / 2)) & SharedSizeMask;
 
-foundIdx:
+            foundIdx:
             arr[idx].HashCode = hashCode;
             Volatile.Write(ref arr[idx].Text, text);
         }
@@ -719,7 +719,10 @@ foundIdx:
 #if DEBUG
             for (var i = 0; i < ascii.Length; i++)
             {
-                Debug.Assert((ascii[i] & 0x80) == 0, $"The {nameof(ascii)} input to this method must be valid ASCII.");
+                Debug.Assert(
+                    (ascii[i] & 0x80) == 0,
+                    $"The {nameof(ascii)} input to this method must be valid ASCII."
+                );
             }
 #endif
 
@@ -739,7 +742,7 @@ foundIdx:
             return true;
         }
 
-        internal static bool TextEquals(string array, ReadOnlySpan<char> text)
-            => text.Equals(array.AsSpan(), StringComparison.Ordinal);
+        internal static bool TextEquals(string array, ReadOnlySpan<char> text) =>
+            text.Equals(array.AsSpan(), StringComparison.Ordinal);
     }
 }

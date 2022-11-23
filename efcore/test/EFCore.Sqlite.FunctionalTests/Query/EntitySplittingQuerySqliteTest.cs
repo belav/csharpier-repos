@@ -5,13 +5,13 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class EntitySplittingQuerySqliteTest : EntitySplittingQueryTestBase
 {
-    public EntitySplittingQuerySqliteTest()
-    {
-    }
+    public EntitySplittingQuerySqliteTest() { }
 
     protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
-    public override async Task Normal_entity_owning_a_split_reference_with_main_fragment_not_sharing(bool async)
+    public override async Task Normal_entity_owning_a_split_reference_with_main_fragment_not_sharing(
+        bool async
+    )
     {
         await base.Normal_entity_owning_a_split_reference_with_main_fragment_not_sharing(async);
 
@@ -20,18 +20,24 @@ public class EntitySplittingQuerySqliteTest : EntitySplittingQueryTestBase
 FROM ""EntityOnes"" AS ""e""
 LEFT JOIN ""OwnedReferences"" AS ""o"" ON ""e"".""Id"" = ""o"".""EntityOneId""
 LEFT JOIN ""OwnedReferenceExtras2"" AS ""o0"" ON ""o"".""EntityOneId"" = ""o0"".""EntityOneId""
-LEFT JOIN ""OwnedReferenceExtras1"" AS ""o1"" ON ""o"".""EntityOneId"" = ""o1"".""EntityOneId""");
+LEFT JOIN ""OwnedReferenceExtras1"" AS ""o1"" ON ""o"".""EntityOneId"" = ""o1"".""EntityOneId"""
+        );
     }
 
-    public override async Task Normal_entity_owning_a_split_reference_with_main_fragment_not_sharing_custom_projection(bool async)
+    public override async Task Normal_entity_owning_a_split_reference_with_main_fragment_not_sharing_custom_projection(
+        bool async
+    )
     {
-        await base.Normal_entity_owning_a_split_reference_with_main_fragment_not_sharing_custom_projection(async);
+        await base.Normal_entity_owning_a_split_reference_with_main_fragment_not_sharing_custom_projection(
+            async
+        );
 
         AssertSql(
             @"SELECT ""e"".""Id"", ""o0"".""OwnedIntValue4"", ""o0"".""OwnedStringValue4""
 FROM ""EntityOnes"" AS ""e""
 LEFT JOIN ""OwnedReferences"" AS ""o"" ON ""e"".""Id"" = ""o"".""EntityOneId""
-LEFT JOIN ""OwnedReferenceExtras2"" AS ""o0"" ON ""o"".""EntityOneId"" = ""o0"".""EntityOneId""");
+LEFT JOIN ""OwnedReferenceExtras2"" AS ""o0"" ON ""o"".""EntityOneId"" = ""o0"".""EntityOneId"""
+        );
     }
 
     public override async Task Normal_entity_owning_a_split_collection(bool async)
@@ -47,10 +53,13 @@ LEFT JOIN (
     INNER JOIN ""OwnedCollectionExtras2"" AS ""o0"" ON ""o"".""EntityOneId"" = ""o0"".""EntityOneId"" AND ""o"".""Id"" = ""o0"".""Id""
     INNER JOIN ""OwnedCollectionExtras1"" AS ""o1"" ON ""o"".""EntityOneId"" = ""o1"".""EntityOneId"" AND ""o"".""Id"" = ""o1"".""Id""
 ) AS ""t"" ON ""e"".""Id"" = ""t"".""EntityOneId""
-ORDER BY ""e"".""Id"", ""t"".""EntityOneId""");
+ORDER BY ""e"".""Id"", ""t"".""EntityOneId"""
+        );
     }
 
-    public override async Task Split_entity_owning_a_split_reference_without_table_sharing(bool async)
+    public override async Task Split_entity_owning_a_split_reference_without_table_sharing(
+        bool async
+    )
     {
         await base.Split_entity_owning_a_split_reference_without_table_sharing(async);
 
@@ -61,7 +70,8 @@ INNER JOIN ""SplitEntityOnePart3"" AS ""s"" ON ""e"".""Id"" = ""s"".""Id""
 INNER JOIN ""SplitEntityOnePart2"" AS ""s0"" ON ""e"".""Id"" = ""s0"".""Id""
 LEFT JOIN ""OwnedReferences"" AS ""o"" ON ""e"".""Id"" = ""o"".""EntityOneId""
 LEFT JOIN ""OwnedReferenceExtras2"" AS ""o0"" ON ""o"".""EntityOneId"" = ""o0"".""EntityOneId""
-LEFT JOIN ""OwnedReferenceExtras1"" AS ""o1"" ON ""o"".""EntityOneId"" = ""o1"".""EntityOneId""");
+LEFT JOIN ""OwnedReferenceExtras1"" AS ""o1"" ON ""o"".""EntityOneId"" = ""o1"".""EntityOneId"""
+        );
     }
 
     public override async Task Split_entity_owning_a_split_collection(bool async)
@@ -79,9 +89,13 @@ LEFT JOIN (
     INNER JOIN ""OwnedCollectionExtras2"" AS ""o0"" ON ""o"".""EntityOneId"" = ""o0"".""EntityOneId"" AND ""o"".""Id"" = ""o0"".""Id""
     INNER JOIN ""OwnedCollectionExtras1"" AS ""o1"" ON ""o"".""EntityOneId"" = ""o1"".""EntityOneId"" AND ""o"".""Id"" = ""o1"".""Id""
 ) AS ""t"" ON ""e"".""Id"" = ""t"".""EntityOneId""
-ORDER BY ""e"".""Id"", ""t"".""EntityOneId""");
+ORDER BY ""e"".""Id"", ""t"".""EntityOneId"""
+        );
     }
-    public override async Task Split_entity_owning_a_split_reference_with_table_sharing_6(bool async)
+
+    public override async Task Split_entity_owning_a_split_reference_with_table_sharing_6(
+        bool async
+    )
     {
         await base.Split_entity_owning_a_split_reference_with_table_sharing_6(async);
 
@@ -90,10 +104,13 @@ ORDER BY ""e"".""Id"", ""t"".""EntityOneId""");
 FROM ""SplitEntityOnePart1"" AS ""s""
 INNER JOIN ""SplitEntityOnePart3"" AS ""s0"" ON ""s"".""Id"" = ""s0"".""Id""
 INNER JOIN ""SplitEntityOnePart2"" AS ""s1"" ON ""s"".""Id"" = ""s1"".""Id""
-LEFT JOIN ""OwnedReferencePart3"" AS ""o"" ON ""s1"".""Id"" = ""o"".""EntityOneId""");
+LEFT JOIN ""OwnedReferencePart3"" AS ""o"" ON ""s1"".""Id"" = ""o"".""EntityOneId"""
+        );
     }
 
-    public override async Task Tph_entity_owning_a_split_reference_on_base_without_table_sharing(bool async)
+    public override async Task Tph_entity_owning_a_split_reference_on_base_without_table_sharing(
+        bool async
+    )
     {
         await base.Tph_entity_owning_a_split_reference_on_base_without_table_sharing(async);
 
@@ -102,10 +119,13 @@ LEFT JOIN ""OwnedReferencePart3"" AS ""o"" ON ""s1"".""Id"" = ""o"".""EntityOneI
 FROM ""BaseEntity"" AS ""b""
 LEFT JOIN ""OwnedReferencePart1"" AS ""o"" ON ""b"".""Id"" = ""o"".""BaseEntityId""
 LEFT JOIN ""OwnedReferencePart4"" AS ""o0"" ON ""o"".""BaseEntityId"" = ""o0"".""BaseEntityId""
-LEFT JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""BaseEntityId"" = ""o1"".""BaseEntityId""");
+LEFT JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""BaseEntityId"" = ""o1"".""BaseEntityId"""
+        );
     }
 
-    public override async Task Tpt_entity_owning_a_split_reference_on_base_without_table_sharing(bool async)
+    public override async Task Tpt_entity_owning_a_split_reference_on_base_without_table_sharing(
+        bool async
+    )
     {
         await base.Tpt_entity_owning_a_split_reference_on_base_without_table_sharing(async);
 
@@ -121,10 +141,13 @@ LEFT JOIN ""SiblingEntity"" AS ""s"" ON ""b"".""Id"" = ""s"".""Id""
 LEFT JOIN ""LeafEntity"" AS ""l"" ON ""b"".""Id"" = ""l"".""Id""
 LEFT JOIN ""OwnedReferencePart1"" AS ""o"" ON ""b"".""Id"" = ""o"".""BaseEntityId""
 LEFT JOIN ""OwnedReferencePart4"" AS ""o0"" ON ""o"".""BaseEntityId"" = ""o0"".""BaseEntityId""
-LEFT JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""BaseEntityId"" = ""o1"".""BaseEntityId""");
+LEFT JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""BaseEntityId"" = ""o1"".""BaseEntityId"""
+        );
     }
 
-    public override async Task Tph_entity_owning_a_split_reference_on_middle_without_table_sharing(bool async)
+    public override async Task Tph_entity_owning_a_split_reference_on_middle_without_table_sharing(
+        bool async
+    )
     {
         await base.Tph_entity_owning_a_split_reference_on_middle_without_table_sharing(async);
 
@@ -133,10 +156,13 @@ LEFT JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""BaseEntityId"" = ""o1""."
 FROM ""BaseEntity"" AS ""b""
 LEFT JOIN ""OwnedReferencePart1"" AS ""o"" ON ""b"".""Id"" = ""o"".""MiddleEntityId""
 LEFT JOIN ""OwnedReferencePart4"" AS ""o0"" ON ""o"".""MiddleEntityId"" = ""o0"".""MiddleEntityId""
-LEFT JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""MiddleEntityId"" = ""o1"".""MiddleEntityId""");
+LEFT JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""MiddleEntityId"" = ""o1"".""MiddleEntityId"""
+        );
     }
 
-    public override async Task Tpt_entity_owning_a_split_reference_on_middle_without_table_sharing(bool async)
+    public override async Task Tpt_entity_owning_a_split_reference_on_middle_without_table_sharing(
+        bool async
+    )
     {
         await base.Tpt_entity_owning_a_split_reference_on_middle_without_table_sharing(async);
 
@@ -152,10 +178,13 @@ LEFT JOIN ""SiblingEntity"" AS ""s"" ON ""b"".""Id"" = ""s"".""Id""
 LEFT JOIN ""LeafEntity"" AS ""l"" ON ""b"".""Id"" = ""l"".""Id""
 LEFT JOIN ""OwnedReferencePart1"" AS ""o"" ON ""b"".""Id"" = ""o"".""MiddleEntityId""
 LEFT JOIN ""OwnedReferencePart4"" AS ""o0"" ON ""o"".""MiddleEntityId"" = ""o0"".""MiddleEntityId""
-LEFT JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""MiddleEntityId"" = ""o1"".""MiddleEntityId""");
+LEFT JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""MiddleEntityId"" = ""o1"".""MiddleEntityId"""
+        );
     }
 
-    public override async Task Tph_entity_owning_a_split_reference_on_leaf_without_table_sharing(bool async)
+    public override async Task Tph_entity_owning_a_split_reference_on_leaf_without_table_sharing(
+        bool async
+    )
     {
         await base.Tph_entity_owning_a_split_reference_on_leaf_without_table_sharing(async);
 
@@ -164,10 +193,13 @@ LEFT JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""MiddleEntityId"" = ""o1""
 FROM ""BaseEntity"" AS ""b""
 LEFT JOIN ""OwnedReferencePart1"" AS ""o"" ON ""b"".""Id"" = ""o"".""LeafEntityId""
 LEFT JOIN ""OwnedReferencePart4"" AS ""o0"" ON ""o"".""LeafEntityId"" = ""o0"".""LeafEntityId""
-LEFT JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""LeafEntityId"" = ""o1"".""LeafEntityId""");
+LEFT JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""LeafEntityId"" = ""o1"".""LeafEntityId"""
+        );
     }
 
-    public override async Task Tpt_entity_owning_a_split_reference_on_leaf_without_table_sharing(bool async)
+    public override async Task Tpt_entity_owning_a_split_reference_on_leaf_without_table_sharing(
+        bool async
+    )
     {
         await base.Tpt_entity_owning_a_split_reference_on_leaf_without_table_sharing(async);
 
@@ -183,10 +215,13 @@ LEFT JOIN ""SiblingEntity"" AS ""s"" ON ""b"".""Id"" = ""s"".""Id""
 LEFT JOIN ""LeafEntity"" AS ""l"" ON ""b"".""Id"" = ""l"".""Id""
 LEFT JOIN ""OwnedReferencePart1"" AS ""o"" ON ""b"".""Id"" = ""o"".""LeafEntityId""
 LEFT JOIN ""OwnedReferencePart4"" AS ""o0"" ON ""o"".""LeafEntityId"" = ""o0"".""LeafEntityId""
-LEFT JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""LeafEntityId"" = ""o1"".""LeafEntityId""");
+LEFT JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""LeafEntityId"" = ""o1"".""LeafEntityId"""
+        );
     }
 
-    public override async Task Tpc_entity_owning_a_split_reference_on_leaf_without_table_sharing(bool async)
+    public override async Task Tpc_entity_owning_a_split_reference_on_leaf_without_table_sharing(
+        bool async
+    )
     {
         await base.Tpc_entity_owning_a_split_reference_on_leaf_without_table_sharing(async);
 
@@ -207,7 +242,8 @@ FROM (
 ) AS ""t""
 LEFT JOIN ""OwnedReferencePart1"" AS ""o"" ON ""t"".""Id"" = ""o"".""LeafEntityId""
 LEFT JOIN ""OwnedReferencePart4"" AS ""o0"" ON ""o"".""LeafEntityId"" = ""o0"".""LeafEntityId""
-LEFT JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""LeafEntityId"" = ""o1"".""LeafEntityId""");
+LEFT JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""LeafEntityId"" = ""o1"".""LeafEntityId"""
+        );
     }
 
     public override async Task Tph_entity_owning_a_split_collection_on_base(bool async)
@@ -223,7 +259,8 @@ LEFT JOIN (
     INNER JOIN ""OwnedReferencePart4"" AS ""o0"" ON ""o"".""BaseEntityId"" = ""o0"".""BaseEntityId"" AND ""o"".""Id"" = ""o0"".""Id""
     INNER JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""BaseEntityId"" = ""o1"".""BaseEntityId"" AND ""o"".""Id"" = ""o1"".""Id""
 ) AS ""t"" ON ""b"".""Id"" = ""t"".""BaseEntityId""
-ORDER BY ""b"".""Id"", ""t"".""BaseEntityId""");
+ORDER BY ""b"".""Id"", ""t"".""BaseEntityId"""
+        );
     }
 
     public override async Task Tpt_entity_owning_a_split_collection_on_base(bool async)
@@ -246,7 +283,8 @@ LEFT JOIN (
     INNER JOIN ""OwnedReferencePart4"" AS ""o0"" ON ""o"".""BaseEntityId"" = ""o0"".""BaseEntityId"" AND ""o"".""Id"" = ""o0"".""Id""
     INNER JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""BaseEntityId"" = ""o1"".""BaseEntityId"" AND ""o"".""Id"" = ""o1"".""Id""
 ) AS ""t"" ON ""b"".""Id"" = ""t"".""BaseEntityId""
-ORDER BY ""b"".""Id"", ""t"".""BaseEntityId""");
+ORDER BY ""b"".""Id"", ""t"".""BaseEntityId"""
+        );
     }
 
     public override async Task Tph_entity_owning_a_split_collection_on_middle(bool async)
@@ -262,7 +300,8 @@ LEFT JOIN (
     INNER JOIN ""OwnedReferencePart4"" AS ""o0"" ON ""o"".""MiddleEntityId"" = ""o0"".""MiddleEntityId"" AND ""o"".""Id"" = ""o0"".""Id""
     INNER JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""MiddleEntityId"" = ""o1"".""MiddleEntityId"" AND ""o"".""Id"" = ""o1"".""Id""
 ) AS ""t"" ON ""b"".""Id"" = ""t"".""MiddleEntityId""
-ORDER BY ""b"".""Id"", ""t"".""MiddleEntityId""");
+ORDER BY ""b"".""Id"", ""t"".""MiddleEntityId"""
+        );
     }
 
     public override async Task Tpt_entity_owning_a_split_collection_on_middle(bool async)
@@ -285,7 +324,8 @@ LEFT JOIN (
     INNER JOIN ""OwnedReferencePart4"" AS ""o0"" ON ""o"".""MiddleEntityId"" = ""o0"".""MiddleEntityId"" AND ""o"".""Id"" = ""o0"".""Id""
     INNER JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""MiddleEntityId"" = ""o1"".""MiddleEntityId"" AND ""o"".""Id"" = ""o1"".""Id""
 ) AS ""t"" ON ""b"".""Id"" = ""t"".""MiddleEntityId""
-ORDER BY ""b"".""Id"", ""t"".""MiddleEntityId""");
+ORDER BY ""b"".""Id"", ""t"".""MiddleEntityId"""
+        );
     }
 
     public override async Task Tph_entity_owning_a_split_collection_on_leaf(bool async)
@@ -301,7 +341,8 @@ LEFT JOIN (
     INNER JOIN ""OwnedReferencePart4"" AS ""o0"" ON ""o"".""LeafEntityId"" = ""o0"".""LeafEntityId"" AND ""o"".""Id"" = ""o0"".""Id""
     INNER JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""LeafEntityId"" = ""o1"".""LeafEntityId"" AND ""o"".""Id"" = ""o1"".""Id""
 ) AS ""t"" ON ""b"".""Id"" = ""t"".""LeafEntityId""
-ORDER BY ""b"".""Id"", ""t"".""LeafEntityId""");
+ORDER BY ""b"".""Id"", ""t"".""LeafEntityId"""
+        );
     }
 
     public override async Task Tpt_entity_owning_a_split_collection_on_leaf(bool async)
@@ -324,7 +365,8 @@ LEFT JOIN (
     INNER JOIN ""OwnedReferencePart4"" AS ""o0"" ON ""o"".""LeafEntityId"" = ""o0"".""LeafEntityId"" AND ""o"".""Id"" = ""o0"".""Id""
     INNER JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""LeafEntityId"" = ""o1"".""LeafEntityId"" AND ""o"".""Id"" = ""o1"".""Id""
 ) AS ""t"" ON ""b"".""Id"" = ""t"".""LeafEntityId""
-ORDER BY ""b"".""Id"", ""t"".""LeafEntityId""");
+ORDER BY ""b"".""Id"", ""t"".""LeafEntityId"""
+        );
     }
 
     public override async Task Tpc_entity_owning_a_split_collection_on_leaf(bool async)
@@ -352,6 +394,7 @@ LEFT JOIN (
     INNER JOIN ""OwnedReferencePart4"" AS ""o0"" ON ""o"".""LeafEntityId"" = ""o0"".""LeafEntityId"" AND ""o"".""Id"" = ""o0"".""Id""
     INNER JOIN ""OwnedReferencePart3"" AS ""o1"" ON ""o"".""LeafEntityId"" = ""o1"".""LeafEntityId"" AND ""o"".""Id"" = ""o1"".""Id""
 ) AS ""t0"" ON ""t"".""Id"" = ""t0"".""LeafEntityId""
-ORDER BY ""t"".""Id"", ""t0"".""LeafEntityId""");
+ORDER BY ""t"".""Id"", ""t0"".""LeafEntityId"""
+        );
     }
 }

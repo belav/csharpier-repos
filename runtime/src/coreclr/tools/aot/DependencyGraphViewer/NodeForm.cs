@@ -30,13 +30,13 @@ namespace DependencyLogViewer
 
             lock (GraphCollection.Singleton)
             {
-                List<BoxDisplay> sourceNodes = new ();
+                List<BoxDisplay> sourceNodes = new();
                 foreach (var pair in _node.Sources)
                 {
                     sourceNodes.Add(new BoxDisplay(pair.Key, pair.Value));
                 }
 
-                List<BoxDisplay> targetNodes = new ();
+                List<BoxDisplay> targetNodes = new();
                 foreach (var pair in _node.Targets)
                 {
                     targetNodes.Add(new BoxDisplay(pair.Key, pair.Value));
@@ -70,10 +70,12 @@ namespace DependencyLogViewer
 
         private void infoButton_LinkClicked(object sender, EventArgs e)
         {
-            string dMessage = "Dependent nodes depend on the current node. The current node depends on the dependees.";
+            string dMessage =
+                "Dependent nodes depend on the current node. The current node depends on the dependees.";
             MessageBox.Show(dMessage);
         }
     }
+
     public class BoxDisplay
     {
         public Node node;

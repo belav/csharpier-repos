@@ -10,7 +10,11 @@ namespace System.Security
     //  This attribute used to indicate that the target method requires space for a security object
     //  to be allocated on the callers stack. It is not used for this purpose anymore because of security
     //  stackwalks are not ever done in CoreCLR.
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Method | AttributeTargets.Constructor,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     internal sealed class DynamicSecurityMethodAttribute : Attribute
     {
         public DynamicSecurityMethodAttribute() { }

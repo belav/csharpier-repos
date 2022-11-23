@@ -13,7 +13,11 @@ namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
 internal static class RouteStringSyntaxDetector
 {
-    public static bool IsRouteStringSyntaxToken(SyntaxToken token, SemanticModel semanticModel, CancellationToken cancellationToken)
+    public static bool IsRouteStringSyntaxToken(
+        SyntaxToken token,
+        SemanticModel semanticModel,
+        CancellationToken cancellationToken
+    )
     {
         if (!IsAnyStringLiteral(token.RawKind))
         {
@@ -35,15 +39,20 @@ internal static class RouteStringSyntaxDetector
 
     private static bool IsAnyStringLiteral(int rawKind)
     {
-        return rawKind == (int)SyntaxKind.StringLiteralToken ||
-               rawKind == (int)SyntaxKind.SingleLineRawStringLiteralToken ||
-               rawKind == (int)SyntaxKind.MultiLineRawStringLiteralToken ||
-               rawKind == (int)SyntaxKind.Utf8StringLiteralToken ||
-               rawKind == (int)SyntaxKind.Utf8SingleLineRawStringLiteralToken ||
-               rawKind == (int)SyntaxKind.Utf8MultiLineRawStringLiteralToken;
+        return rawKind == (int)SyntaxKind.StringLiteralToken
+            || rawKind == (int)SyntaxKind.SingleLineRawStringLiteralToken
+            || rawKind == (int)SyntaxKind.MultiLineRawStringLiteralToken
+            || rawKind == (int)SyntaxKind.Utf8StringLiteralToken
+            || rawKind == (int)SyntaxKind.Utf8SingleLineRawStringLiteralToken
+            || rawKind == (int)SyntaxKind.Utf8MultiLineRawStringLiteralToken;
     }
 
-    private static bool TryGetStringFormat(SyntaxToken token, SemanticModel semanticModel, CancellationToken cancellationToken, [NotNullWhen(true)] out string identifier)
+    private static bool TryGetStringFormat(
+        SyntaxToken token,
+        SemanticModel semanticModel,
+        CancellationToken cancellationToken,
+        [NotNullWhen(true)] out string identifier
+    )
     {
         if (token.Parent is not LiteralExpressionSyntax)
         {
@@ -60,14 +69,28 @@ internal static class RouteStringSyntaxDetector
 
         if (container.Parent.IsKind(SyntaxKind.Argument))
         {
-            if (IsArgumentWithMatchingStringSyntaxAttribute(semanticModel, container.Parent, cancellationToken, out identifier))
+            if (
+                IsArgumentWithMatchingStringSyntaxAttribute(
+                    semanticModel,
+                    container.Parent,
+                    cancellationToken,
+                    out identifier
+                )
+            )
             {
                 return true;
             }
         }
         else if (container.Parent.IsKind(SyntaxKind.AttributeArgument))
         {
-            if (IsArgumentToAttributeParameterWithMatchingStringSyntaxAttribute(semanticModel, container.Parent, cancellationToken, out identifier))
+            if (
+                IsArgumentToAttributeParameterWithMatchingStringSyntaxAttribute(
+                    semanticModel,
+                    container.Parent,
+                    cancellationToken,
+                    out identifier
+                )
+            )
             {
                 return true;
             }
@@ -78,9 +101,15 @@ internal static class RouteStringSyntaxDetector
             if (statement.IsSimpleAssignmentStatement())
             {
                 GetPartsOfAssignmentStatement(statement, out var left, out var right);
-                if (container == right &&
-                    IsFieldOrPropertyWithMatchingStringSyntaxAttribute(
-                        semanticModel, left, cancellationToken, out identifier))
+                if (
+                    container == right
+                    && IsFieldOrPropertyWithMatchingStringSyntaxAttribute(
+                        semanticModel,
+                        left,
+                        cancellationToken,
+                        out identifier
+                    )
+                )
                 {
                     return true;
                 }
@@ -92,8 +121,12 @@ internal static class RouteStringSyntaxDetector
                 {
                     var variableDeclarator = container.Parent.Parent;
                     var symbol =
-                        semanticModel.GetDeclaredSymbol(variableDeclarator, cancellationToken) ??
-                        semanticModel.GetDeclaredSymbol(GetIdentifierOfVariableDeclarator(variableDeclarator).GetRequiredParent(), cancellationToken);
+                        semanticModel.GetDeclaredSymbol(variableDeclarator, cancellationToken)
+                        ?? semanticModel.GetDeclaredSymbol(
+                            GetIdentifierOfVariableDeclarator(variableDeclarator)
+                                .GetRequiredParent(),
+                            cancellationToken
+                        );
 
                     if (IsFieldOrPropertyWithMatchingStringSyntaxAttribute(symbol, out identifier))
                     {
@@ -117,31 +150,44 @@ internal static class RouteStringSyntaxDetector
         return false;
     }
 
-    public static bool IsEqualsValueOfPropertyDeclaration(SyntaxNode? node)
-        => node?.Parent is PropertyDeclarationSyntax propertyDeclaration && propertyDeclaration.Initializer == node;
+    public static bool IsEqualsValueOfPropertyDeclaration(SyntaxNode? node) =>
+        node?.Parent is PropertyDeclarationSyntax propertyDeclaration
+        && propertyDeclaration.Initializer == node;
 
-    private static SyntaxToken GetIdentifierOfVariableDeclarator(SyntaxNode node)
-        => ((VariableDeclaratorSyntax)node).Identifier;
+    private static SyntaxToken GetIdentifierOfVariableDeclarator(SyntaxNode node) =>
+        ((VariableDeclaratorSyntax)node).Identifier;
 
     private static bool IsFieldOrPropertyWithMatchingStringSyntaxAttribute(
         SemanticModel semanticModel,
         SyntaxNode left,
         CancellationToken cancellationToken,
-        [NotNullWhen(true)] out string? identifier)
+        [NotNullWhen(true)] out string? identifier
+    )
     {
         var symbol = semanticModel.GetSymbolInfo(left, cancellationToken).Symbol;
         return IsFieldOrPropertyWithMatchingStringSyntaxAttribute(symbol, out identifier);
     }
 
     public static void GetPartsOfAssignmentStatement(
-        SyntaxNode statement, out SyntaxNode left, out SyntaxNode right)
+        SyntaxNode statement,
+        out SyntaxNode left,
+        out SyntaxNode right
+    )
     {
         GetPartsOfAssignmentExpressionOrStatement(
-            ((ExpressionStatementSyntax)statement).Expression, out left, out _, out right);
+            ((ExpressionStatementSyntax)statement).Expression,
+            out left,
+            out _,
+            out right
+        );
     }
 
     public static void GetPartsOfAssignmentExpressionOrStatement(
-        SyntaxNode statement, out SyntaxNode left, out SyntaxToken operatorToken, out SyntaxNode right)
+        SyntaxNode statement,
+        out SyntaxNode left,
+        out SyntaxToken operatorToken,
+        out SyntaxNode right
+    )
     {
         var expression = statement;
         if (statement is ExpressionStatementSyntax expressionStatement)
@@ -159,9 +205,15 @@ internal static class RouteStringSyntaxDetector
         SemanticModel semanticModel,
         SyntaxNode argument,
         CancellationToken cancellationToken,
-        [NotNullWhen(true)] out string? identifier)
+        [NotNullWhen(true)] out string? identifier
+    )
     {
-        var parameter = FindParameterForArgument(semanticModel, argument, allowUncertainCandidates: true, cancellationToken);
+        var parameter = FindParameterForArgument(
+            semanticModel,
+            argument,
+            allowUncertainCandidates: true,
+            cancellationToken
+        );
         return HasMatchingStringSyntaxAttribute(parameter, out identifier);
     }
 
@@ -169,31 +221,44 @@ internal static class RouteStringSyntaxDetector
         SemanticModel semanticModel,
         SyntaxNode argument,
         CancellationToken cancellationToken,
-        [NotNullWhen(true)] out string? identifier)
+        [NotNullWhen(true)] out string? identifier
+    )
     {
         // First, see if this is an `X = "..."` argument that is binding to a field/prop on the attribute.
-        var fieldOrProperty = FindFieldOrPropertyForAttributeArgument(semanticModel, argument, cancellationToken);
+        var fieldOrProperty = FindFieldOrPropertyForAttributeArgument(
+            semanticModel,
+            argument,
+            cancellationToken
+        );
         if (fieldOrProperty != null)
         {
             return HasMatchingStringSyntaxAttribute(fieldOrProperty, out identifier);
         }
 
         // Otherwise, see if it's a normal named/position argument to the attribute.
-        var parameter = FindParameterForAttributeArgument(semanticModel, argument, allowUncertainCandidates: true, cancellationToken);
+        var parameter = FindParameterForAttributeArgument(
+            semanticModel,
+            argument,
+            allowUncertainCandidates: true,
+            cancellationToken
+        );
         return HasMatchingStringSyntaxAttribute(parameter, out identifier);
     }
 
     public static bool IsFieldOrPropertyWithMatchingStringSyntaxAttribute(
-        ISymbol? symbol, [NotNullWhen(true)] out string? identifier)
+        ISymbol? symbol,
+        [NotNullWhen(true)] out string? identifier
+    )
     {
         identifier = null;
-        return symbol is IFieldSymbol or IPropertySymbol &&
-            HasMatchingStringSyntaxAttribute(symbol, out identifier);
+        return symbol is IFieldSymbol or IPropertySymbol
+            && HasMatchingStringSyntaxAttribute(symbol, out identifier);
     }
 
     public static bool HasMatchingStringSyntaxAttribute(
         [NotNullWhen(true)] ISymbol? symbol,
-        [NotNullWhen(true)] out string? identifier)
+        [NotNullWhen(true)] out string? identifier
+    )
     {
         if (symbol != null)
         {
@@ -212,7 +277,8 @@ internal static class RouteStringSyntaxDetector
 
     private static bool IsMatchingStringSyntaxAttribute(
         AttributeData attribute,
-        [NotNullWhen(true)] out string? identifier)
+        [NotNullWhen(true)] out string? identifier
+    )
     {
         identifier = null;
         if (attribute.ConstructorArguments.Length == 0)
@@ -220,8 +286,9 @@ internal static class RouteStringSyntaxDetector
             return false;
         }
 
-        if (attribute.AttributeClass is not
-            {
+        if (
+            attribute.AttributeClass
+            is not {
                 Name: "StringSyntaxAttribute",
                 ContainingNamespace:
                 {
@@ -230,13 +297,11 @@ internal static class RouteStringSyntaxDetector
                     {
                         Name: nameof(System.Diagnostics),
                         ContainingNamespace:
-                        {
-                            Name: nameof(System),
-                            ContainingNamespace.IsGlobalNamespace: true,
-                        }
+                        { Name: nameof(System), ContainingNamespace.IsGlobalNamespace: true, }
                     }
                 }
-            })
+            }
+        )
         {
             return false;
         }
@@ -251,16 +316,40 @@ internal static class RouteStringSyntaxDetector
         return true;
     }
 
-    private static ISymbol FindFieldOrPropertyForAttributeArgument(SemanticModel semanticModel, SyntaxNode argument, CancellationToken cancellationToken)
-        => argument is AttributeArgumentSyntax { NameEquals.Name: var name }
+    private static ISymbol FindFieldOrPropertyForAttributeArgument(
+        SemanticModel semanticModel,
+        SyntaxNode argument,
+        CancellationToken cancellationToken
+    ) =>
+        argument is AttributeArgumentSyntax { NameEquals.Name: var name }
             ? semanticModel.GetSymbolInfo(name, cancellationToken).GetAnySymbol()
             : null;
 
-    private static IParameterSymbol FindParameterForArgument(SemanticModel semanticModel, SyntaxNode argument, bool allowUncertainCandidates, CancellationToken cancellationToken)
-        => ((ArgumentSyntax)argument).DetermineParameter(semanticModel, allowUncertainCandidates, allowParams: false, cancellationToken);
+    private static IParameterSymbol FindParameterForArgument(
+        SemanticModel semanticModel,
+        SyntaxNode argument,
+        bool allowUncertainCandidates,
+        CancellationToken cancellationToken
+    ) =>
+        ((ArgumentSyntax)argument).DetermineParameter(
+            semanticModel,
+            allowUncertainCandidates,
+            allowParams: false,
+            cancellationToken
+        );
 
-    private static IParameterSymbol FindParameterForAttributeArgument(SemanticModel semanticModel, SyntaxNode argument, bool allowUncertainCandidates, CancellationToken cancellationToken)
-        => ((AttributeArgumentSyntax)argument).DetermineParameter(semanticModel, allowUncertainCandidates, allowParams: false, cancellationToken);
+    private static IParameterSymbol FindParameterForAttributeArgument(
+        SemanticModel semanticModel,
+        SyntaxNode argument,
+        bool allowUncertainCandidates,
+        CancellationToken cancellationToken
+    ) =>
+        ((AttributeArgumentSyntax)argument).DetermineParameter(
+            semanticModel,
+            allowUncertainCandidates,
+            allowParams: false,
+            cancellationToken
+        );
 
     /// <summary>
     /// Returns the parameter to which this argument is passed. If <paramref name="allowParams"/>
@@ -272,10 +361,13 @@ internal static class RouteStringSyntaxDetector
         SemanticModel semanticModel,
         bool allowUncertainCandidates = false,
         bool allowParams = false,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
-        if (argument.Parent is not BaseArgumentListSyntax argumentList ||
-            argumentList.Parent is null)
+        if (
+            argument.Parent is not BaseArgumentListSyntax argumentList
+            || argumentList.Parent is null
+        )
         {
             return null;
         }
@@ -349,7 +441,8 @@ internal static class RouteStringSyntaxDetector
         SemanticModel semanticModel,
         bool allowUncertainCandidates = false,
         bool allowParams = false,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         // if argument is a named argument it can't map to a parameter.
         if (argument.NameEquals != null)
@@ -364,7 +457,9 @@ internal static class RouteStringSyntaxDetector
         {
             return null;
         }
-        var symbols = GetBestOrAllSymbols(semanticModel.GetSymbolInfo(invocableExpression, cancellationToken));
+        var symbols = GetBestOrAllSymbols(
+            semanticModel.GetSymbolInfo(invocableExpression, cancellationToken)
+        );
         if (symbols.Length >= 2 && !allowUncertainCandidates)
         {
             return null;

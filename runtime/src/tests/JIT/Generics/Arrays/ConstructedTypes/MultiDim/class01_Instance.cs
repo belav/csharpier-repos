@@ -4,25 +4,25 @@
 
 using System;
 
-
 public struct ValX1<T>
 {
     public T t;
+
     public ValX1(T t)
     {
         this.t = t;
     }
-
 }
+
 public class RefX1<T>
 {
     public T t;
+
     public RefX1(T t)
     {
         this.t = t;
     }
 }
-
 
 public class Gen<T>
 {
@@ -32,19 +32,18 @@ public class Gen<T>
     {
         Fld1 = fld1;
     }
-
-
 }
 
 public class ArrayHolder
 {
-    public Gen<int>[, ,] GenArray = new Gen<int>[10, 10, 10];
+    public Gen<int>[,,] GenArray = new Gen<int>[10, 10, 10];
 }
 
 public class Test_class01_Instance
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -53,13 +52,14 @@ public class Test_class01_Instance
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
     {
         int size = 10;
-        int i, j, k;
+        int i,
+            j,
+            k;
         double sum = 0;
         int cLoc = 0;
 
@@ -89,9 +89,6 @@ public class Test_class01_Instance
             }
         }
 
-
-
-
         Eval(sum == 499500);
         sum = 0;
 
@@ -106,6 +103,4 @@ public class Test_class01_Instance
             return 1;
         }
     }
-
 }
-

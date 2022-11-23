@@ -12,13 +12,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 {
     [Shared]
     [Export(typeof(CSharpVisualBasicRequestDispatcherFactory))]
-    internal sealed class CSharpVisualBasicRequestDispatcherFactory : AbstractRequestDispatcherFactory
+    internal sealed class CSharpVisualBasicRequestDispatcherFactory
+        : AbstractRequestDispatcherFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpVisualBasicRequestDispatcherFactory([ImportMany] IEnumerable<Lazy<AbstractRequestHandlerProvider, RequestHandlerProviderMetadataView>> requestHandlerProviders)
-            : base(requestHandlerProviders)
-        {
-        }
+        public CSharpVisualBasicRequestDispatcherFactory(
+            [ImportMany]
+                IEnumerable<
+                Lazy<AbstractRequestHandlerProvider, RequestHandlerProviderMetadataView>
+            > requestHandlerProviders
+        ) : base(requestHandlerProviders) { }
     }
 }

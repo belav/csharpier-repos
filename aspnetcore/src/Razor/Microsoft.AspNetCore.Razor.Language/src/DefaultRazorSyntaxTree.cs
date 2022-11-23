@@ -17,7 +17,8 @@ internal class DefaultRazorSyntaxTree : RazorSyntaxTree
         SyntaxNode root,
         RazorSourceDocument source,
         IReadOnlyList<RazorDiagnostic> diagnostics,
-        RazorParserOptions options)
+        RazorParserOptions options
+    )
     {
         Root = root;
         Source = source;
@@ -43,7 +44,9 @@ internal class DefaultRazorSyntaxTree : RazorSyntaxTree
                     allDiagnostics.Add(rootDiagnostics[i]);
                 }
 
-                var allOrderedDiagnostics = allDiagnostics.OrderBy(diagnostic => diagnostic.Span.AbsoluteIndex);
+                var allOrderedDiagnostics = allDiagnostics.OrderBy(
+                    diagnostic => diagnostic.Span.AbsoluteIndex
+                );
                 _allDiagnostics = allOrderedDiagnostics.ToArray();
             }
 

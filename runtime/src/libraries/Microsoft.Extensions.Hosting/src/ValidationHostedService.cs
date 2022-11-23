@@ -17,7 +17,9 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public ValidationHostedService(IOptions<ValidatorOptions> validatorOptions)
         {
-            _validators = validatorOptions?.Value?.Validators ?? throw new ArgumentNullException(nameof(validatorOptions));
+            _validators =
+                validatorOptions?.Value?.Validators
+                ?? throw new ArgumentNullException(nameof(validatorOptions));
         }
 
         public Task StartAsync(CancellationToken cancellationToken)

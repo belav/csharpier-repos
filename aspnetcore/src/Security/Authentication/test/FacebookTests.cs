@@ -22,10 +22,19 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
 {
     protected override string DefaultScheme => FacebookDefaults.AuthenticationScheme;
     protected override Type HandlerType => typeof(FacebookHandler);
-    protected override bool SupportsSignIn { get => false; }
-    protected override bool SupportsSignOut { get => false; }
+    protected override bool SupportsSignIn
+    {
+        get => false;
+    }
+    protected override bool SupportsSignOut
+    {
+        get => false;
+    }
 
-    protected override void RegisterAuth(AuthenticationBuilder services, Action<FacebookOptions> configure)
+    protected override void RegisterAuth(
+        AuthenticationBuilder services,
+        Action<FacebookOptions> configure
+    )
     {
         services.AddFacebook(o =>
         {
@@ -46,12 +55,17 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
     {
         using var host = await CreateHost(
             app => { },
-            services => services.AddAuthentication().AddFacebook(o => o.SignInScheme = "PLACEHOLDER"),
+            services =>
+                services.AddAuthentication().AddFacebook(o => o.SignInScheme = "PLACEHOLDER"),
             async context =>
             {
-                await Assert.ThrowsAsync<ArgumentException>("AppId", () => context.ChallengeAsync("Facebook"));
+                await Assert.ThrowsAsync<ArgumentException>(
+                    "AppId",
+                    () => context.ChallengeAsync("Facebook")
+                );
                 return true;
-            });
+            }
+        );
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("http://example.com/challenge");
         Assert.Equal(HttpStatusCode.OK, transaction.Response.StatusCode);
@@ -65,9 +79,13 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
             services => services.AddAuthentication().AddFacebook(o => o.AppId = "Whatever"),
             async context =>
             {
-                await Assert.ThrowsAsync<ArgumentException>("AppSecret", () => context.ChallengeAsync("Facebook"));
+                await Assert.ThrowsAsync<ArgumentException>(
+                    "AppSecret",
+                    () => context.ChallengeAsync("Facebook")
+                );
                 return true;
-            });
+            }
+        );
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("http://example.com/challenge");
         Assert.Equal(HttpStatusCode.OK, transaction.Response.StatusCode);
@@ -83,27 +101,29 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
             },
             services =>
             {
-                services.AddAuthentication("External")
+                services
+                    .AddAuthentication("External")
                     .AddCookie("External", o => { })
                     .AddFacebook(o =>
-                {
-                    o.AppId = "Test App Id";
-                    o.AppSecret = "Test App Secret";
-                    o.Events = new OAuthEvents
                     {
-                        OnRedirectToAuthorizationEndpoint = context =>
+                        o.AppId = "Test App Id";
+                        o.AppSecret = "Test App Secret";
+                        o.Events = new OAuthEvents
                         {
-                            context.Response.Redirect(context.RedirectUri + "&custom=test");
-                            return Task.FromResult(0);
-                        }
-                    };
-                });
+                            OnRedirectToAuthorizationEndpoint = context =>
+                            {
+                                context.Response.Redirect(context.RedirectUri + "&custom=test");
+                                return Task.FromResult(0);
+                            }
+                        };
+                    });
             },
             async context =>
             {
                 await context.ChallengeAsync("Facebook");
                 return true;
-            });
+            }
+        );
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("http://example.com/challenge");
         Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
@@ -118,20 +138,23 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
             app => app.UseAuthentication(),
             services =>
             {
-                services.AddAuthentication(o => o.DisableAutoDefaultScheme = true).AddFacebook(o =>
-                {
-                    o.AppId = "Test App Id";
-                    o.AppSecret = "Test App Secret";
-                    o.Scope.Clear();
-                    o.Scope.Add("foo");
-                    o.Scope.Add("bar");
-                });
+                services
+                    .AddAuthentication(o => o.DisableAutoDefaultScheme = true)
+                    .AddFacebook(o =>
+                    {
+                        o.AppId = "Test App Id";
+                        o.AppSecret = "Test App Secret";
+                        o.Scope.Clear();
+                        o.Scope.Add("foo");
+                        o.Scope.Add("bar");
+                    });
             },
             async context =>
             {
                 await context.ChallengeAsync(FacebookDefaults.AuthenticationScheme);
                 return true;
-            });
+            }
+        );
 
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("http://example.com/challenge");
@@ -148,14 +171,16 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
             app => app.UseAuthentication(),
             services =>
             {
-                services.AddAuthentication(o => o.DisableAutoDefaultScheme = true).AddFacebook(o =>
-                {
-                    o.AppId = "Test App Id";
-                    o.AppSecret = "Test App Secret";
-                    o.Scope.Clear();
-                    o.Scope.Add("foo");
-                    o.Scope.Add("bar");
-                });
+                services
+                    .AddAuthentication(o => o.DisableAutoDefaultScheme = true)
+                    .AddFacebook(o =>
+                    {
+                        o.AppId = "Test App Id";
+                        o.AppSecret = "Test App Secret";
+                        o.Scope.Clear();
+                        o.Scope.Add("foo");
+                        o.Scope.Add("bar");
+                    });
             },
             async context =>
             {
@@ -163,7 +188,8 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
                 properties.SetScope("baz", "qux");
                 await context.ChallengeAsync(FacebookDefaults.AuthenticationScheme, properties);
                 return true;
-            });
+            }
+        );
 
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("http://example.com/challenge");
@@ -180,22 +206,28 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
             app => app.UseAuthentication(),
             services =>
             {
-                services.AddAuthentication(o => o.DisableAutoDefaultScheme = true).AddFacebook(o =>
-                {
-                    o.AppId = "Test App Id";
-                    o.AppSecret = "Test App Secret";
-                    o.Scope.Clear();
-                    o.Scope.Add("foo");
-                    o.Scope.Add("bar");
-                });
+                services
+                    .AddAuthentication(o => o.DisableAutoDefaultScheme = true)
+                    .AddFacebook(o =>
+                    {
+                        o.AppId = "Test App Id";
+                        o.AppSecret = "Test App Secret";
+                        o.Scope.Clear();
+                        o.Scope.Add("foo");
+                        o.Scope.Add("bar");
+                    });
             },
             async context =>
             {
                 var properties = new AuthenticationProperties();
-                properties.SetParameter(OAuthChallengeProperties.ScopeKey, new string[] { "baz", "qux" });
+                properties.SetParameter(
+                    OAuthChallengeProperties.ScopeKey,
+                    new string[] { "baz", "qux" }
+                );
                 await context.ChallengeAsync(FacebookDefaults.AuthenticationScheme, properties);
                 return true;
-            });
+            }
+        );
 
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("http://example.com/challenge");
@@ -208,22 +240,39 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
     [Fact]
     public async Task NestedMapWillNotAffectRedirect()
     {
-        using var host = await CreateHost(app => app.Map("/base", map =>
-        {
-            map.UseAuthentication();
-            map.Map("/login", signoutApp => signoutApp.Run(context => context.ChallengeAsync("Facebook", new AuthenticationProperties() { RedirectUri = "/" })));
-        }),
-        services =>
-        {
-            services.AddAuthentication()
-                .AddCookie("External", o => { })
-                .AddFacebook(o =>
+        using var host = await CreateHost(
+            app =>
+                app.Map(
+                    "/base",
+                    map =>
+                    {
+                        map.UseAuthentication();
+                        map.Map(
+                            "/login",
+                            signoutApp =>
+                                signoutApp.Run(
+                                    context =>
+                                        context.ChallengeAsync(
+                                            "Facebook",
+                                            new AuthenticationProperties() { RedirectUri = "/" }
+                                        )
+                                )
+                        );
+                    }
+                ),
+            services =>
             {
-                o.AppId = "Test App Id";
-                o.AppSecret = "Test App Secret";
-            });
-        },
-        handler: null);
+                services
+                    .AddAuthentication()
+                    .AddCookie("External", o => { })
+                    .AddFacebook(o =>
+                    {
+                        o.AppId = "Test App Id";
+                        o.AppSecret = "Test App Secret";
+                    });
+            },
+            handler: null
+        );
 
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("http://example.com/base/login");
@@ -232,7 +281,10 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
         Assert.Contains("https://www.facebook.com/v14.0/dialog/oauth", location);
         Assert.Contains("response_type=code", location);
         Assert.Contains("client_id=", location);
-        Assert.Contains("redirect_uri=" + UrlEncoder.Default.Encode("http://example.com/base/signin-facebook"), location);
+        Assert.Contains(
+            "redirect_uri=" + UrlEncoder.Default.Encode("http://example.com/base/signin-facebook"),
+            location
+        );
         Assert.Contains("scope=", location);
         Assert.Contains("state=", location);
     }
@@ -244,20 +296,32 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
             app =>
             {
                 app.UseAuthentication();
-                app.Map("/login", signoutApp => signoutApp.Run(context => context.ChallengeAsync("Facebook", new AuthenticationProperties() { RedirectUri = "/" })));
+                app.Map(
+                    "/login",
+                    signoutApp =>
+                        signoutApp.Run(
+                            context =>
+                                context.ChallengeAsync(
+                                    "Facebook",
+                                    new AuthenticationProperties() { RedirectUri = "/" }
+                                )
+                        )
+                );
             },
             services =>
             {
-                services.AddAuthentication()
+                services
+                    .AddAuthentication()
                     .AddCookie("External", o => { })
                     .AddFacebook(o =>
-                {
-                    o.AppId = "Test App Id";
-                    o.AppSecret = "Test App Secret";
-                    o.SignInScheme = "External";
-                });
+                    {
+                        o.AppId = "Test App Id";
+                        o.AppSecret = "Test App Secret";
+                        o.SignInScheme = "External";
+                    });
             },
-            handler: null);
+            handler: null
+        );
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("http://example.com/login");
         Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
@@ -265,7 +329,10 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
         Assert.Contains("https://www.facebook.com/v14.0/dialog/oauth", location);
         Assert.Contains("response_type=code", location);
         Assert.Contains("client_id=", location);
-        Assert.Contains("redirect_uri=" + UrlEncoder.Default.Encode("http://example.com/signin-facebook"), location);
+        Assert.Contains(
+            "redirect_uri=" + UrlEncoder.Default.Encode("http://example.com/signin-facebook"),
+            location
+        );
         Assert.Contains("scope=", location);
         Assert.Contains("state=", location);
     }
@@ -277,22 +344,24 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
             app => app.UseAuthentication(),
             services =>
             {
-                services.AddAuthentication(options =>
-                {
-                    options.DefaultSignInScheme = "External";
-                })
+                services
+                    .AddAuthentication(options =>
+                    {
+                        options.DefaultSignInScheme = "External";
+                    })
                     .AddCookie()
                     .AddFacebook(o =>
-                {
-                    o.AppId = "Test App Id";
-                    o.AppSecret = "Test App Secret";
-                });
+                    {
+                        o.AppId = "Test App Id";
+                        o.AppSecret = "Test App Secret";
+                    });
             },
             async context =>
             {
                 await context.ChallengeAsync("Facebook");
                 return true;
-            });
+            }
+        );
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("http://example.com/challenge");
         Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
@@ -310,45 +379,65 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
     {
         var customUserInfoEndpoint = "https://graph.facebook.com/me?fields=email,timezone,picture";
         var finalUserInfoEndpoint = string.Empty;
-        var stateFormat = new PropertiesDataFormat(new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector("FacebookTest"));
+        var stateFormat = new PropertiesDataFormat(
+            new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
+                "FacebookTest"
+            )
+        );
         using var host = await CreateHost(
             app => app.UseAuthentication(),
             services =>
             {
-                services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                services
+                    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie()
                     .AddFacebook(o =>
-                {
-                    o.AppId = "Test App Id";
-                    o.AppSecret = "Test App Secret";
-                    o.StateDataFormat = stateFormat;
-                    o.UserInformationEndpoint = customUserInfoEndpoint;
-                    o.BackchannelHttpHandler = new TestHttpMessageHandler
                     {
-                        Sender = req =>
+                        o.AppId = "Test App Id";
+                        o.AppSecret = "Test App Secret";
+                        o.StateDataFormat = stateFormat;
+                        o.UserInformationEndpoint = customUserInfoEndpoint;
+                        o.BackchannelHttpHandler = new TestHttpMessageHandler
                         {
-                            if (req.RequestUri.GetComponents(UriComponents.SchemeAndServer | UriComponents.Path, UriFormat.UriEscaped) == FacebookDefaults.TokenEndpoint)
+                            Sender = req =>
                             {
-                                var res = new HttpResponseMessage(HttpStatusCode.OK);
-                                var graphResponse = "{ \"access_token\": \"TestAuthToken\" }";
-                                res.Content = new StringContent(graphResponse, Encoding.UTF8);
-                                return res;
+                                if (
+                                    req.RequestUri.GetComponents(
+                                        UriComponents.SchemeAndServer | UriComponents.Path,
+                                        UriFormat.UriEscaped
+                                    ) == FacebookDefaults.TokenEndpoint
+                                )
+                                {
+                                    var res = new HttpResponseMessage(HttpStatusCode.OK);
+                                    var graphResponse = "{ \"access_token\": \"TestAuthToken\" }";
+                                    res.Content = new StringContent(graphResponse, Encoding.UTF8);
+                                    return res;
+                                }
+                                if (
+                                    req.RequestUri.GetComponents(
+                                        UriComponents.SchemeAndServer | UriComponents.Path,
+                                        UriFormat.UriEscaped
+                                    )
+                                    == new Uri(customUserInfoEndpoint).GetComponents(
+                                        UriComponents.SchemeAndServer | UriComponents.Path,
+                                        UriFormat.UriEscaped
+                                    )
+                                )
+                                {
+                                    finalUserInfoEndpoint = req.RequestUri.ToString();
+                                    var res = new HttpResponseMessage(HttpStatusCode.OK);
+                                    var graphResponse =
+                                        "{ \"id\": \"TestProfileId\", \"name\": \"TestName\" }";
+                                    res.Content = new StringContent(graphResponse, Encoding.UTF8);
+                                    return res;
+                                }
+                                return null;
                             }
-                            if (req.RequestUri.GetComponents(UriComponents.SchemeAndServer | UriComponents.Path, UriFormat.UriEscaped) ==
-                                new Uri(customUserInfoEndpoint).GetComponents(UriComponents.SchemeAndServer | UriComponents.Path, UriFormat.UriEscaped))
-                            {
-                                finalUserInfoEndpoint = req.RequestUri.ToString();
-                                var res = new HttpResponseMessage(HttpStatusCode.OK);
-                                var graphResponse = "{ \"id\": \"TestProfileId\", \"name\": \"TestName\" }";
-                                res.Content = new StringContent(graphResponse, Encoding.UTF8);
-                                return res;
-                            }
-                            return null;
-                        }
-                    };
-                });
+                        };
+                    });
             },
-            handler: null);
+            handler: null
+        );
 
         var properties = new AuthenticationProperties();
         var correlationKey = ".xsrf";
@@ -358,33 +447,47 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
         var state = stateFormat.Protect(properties);
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync(
-            "https://example.com/signin-facebook?code=TestCode&state=" + UrlEncoder.Default.Encode(state),
-            $".AspNetCore.Correlation.{correlationValue}=N");
+            "https://example.com/signin-facebook?code=TestCode&state="
+                + UrlEncoder.Default.Encode(state),
+            $".AspNetCore.Correlation.{correlationValue}=N"
+        );
         Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
         Assert.Equal("/me", transaction.Response.Headers.GetValues("Location").First());
         Assert.Equal(1, finalUserInfoEndpoint.Count(c => c == '?'));
         Assert.Contains("fields=email,timezone,picture", finalUserInfoEndpoint);
         Assert.Contains("&access_token=", finalUserInfoEndpoint);
-        Assert.Contains("&appsecret_proof=b7fb6d5a4510926b4af6fe080497827d791dc45fe6541d88ba77bdf6e8e208c6&", finalUserInfoEndpoint);
+        Assert.Contains(
+            "&appsecret_proof=b7fb6d5a4510926b4af6fe080497827d791dc45fe6541d88ba77bdf6e8e208c6&",
+            finalUserInfoEndpoint
+        );
     }
 
-    private static async Task<IHost> CreateHost(Action<IApplicationBuilder> configure, Action<IServiceCollection> configureServices, Func<HttpContext, Task<bool>> handler)
+    private static async Task<IHost> CreateHost(
+        Action<IApplicationBuilder> configure,
+        Action<IServiceCollection> configureServices,
+        Func<HttpContext, Task<bool>> handler
+    )
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(builder =>
-                builder.UseTestServer()
-                    .Configure(app =>
-                    {
-                        configure?.Invoke(app);
-                        app.Use(async (context, next) =>
+            .ConfigureWebHost(
+                builder =>
+                    builder
+                        .UseTestServer()
+                        .Configure(app =>
                         {
-                            if (handler == null || !await handler(context))
-                            {
-                                await next(context);
-                            }
-                        });
-                    })
-                    .ConfigureServices(configureServices))
+                            configure?.Invoke(app);
+                            app.Use(
+                                async (context, next) =>
+                                {
+                                    if (handler == null || !await handler(context))
+                                    {
+                                        await next(context);
+                                    }
+                                }
+                            );
+                        })
+                        .ConfigureServices(configureServices)
+            )
             .Build();
 
         await host.StartAsync();

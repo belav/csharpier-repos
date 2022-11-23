@@ -11,7 +11,9 @@ namespace System.Linq
     public static partial class Enumerable
     {
         public static IEnumerable<TResult> Select<TSource, TResult>(
-            this IEnumerable<TSource> source, Func<TSource, TResult> selector)
+            this IEnumerable<TSource> source,
+            Func<TSource, TResult> selector
+        )
         {
             if (source == null)
             {
@@ -32,9 +34,9 @@ namespace System.Linq
             {
                 if (source is TSource[] array)
                 {
-                    return array.Length == 0 ?
-                        Empty<TResult>() :
-                        new SelectArrayIterator<TSource, TResult>(array, selector);
+                    return array.Length == 0
+                        ? Empty<TResult>()
+                        : new SelectArrayIterator<TSource, TResult>(array, selector);
                 }
 
                 if (source is List<TSource> list)
@@ -59,9 +61,15 @@ namespace System.Linq
         }
 
         static partial void CreateSelectIPartitionIterator<TResult, TSource>(
-            Func<TSource, TResult> selector, IPartition<TSource> partition, [NotNull] ref IEnumerable<TResult>? result);
+            Func<TSource, TResult> selector,
+            IPartition<TSource> partition,
+            [NotNull] ref IEnumerable<TResult>? result
+        );
 
-        public static IEnumerable<TResult> Select<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, int, TResult> selector)
+        public static IEnumerable<TResult> Select<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int, TResult> selector
+        )
         {
             if (source == null)
             {
@@ -76,7 +84,10 @@ namespace System.Linq
             return SelectIterator(source, selector);
         }
 
-        private static IEnumerable<TResult> SelectIterator<TSource, TResult>(IEnumerable<TSource> source, Func<TSource, int, TResult> selector)
+        private static IEnumerable<TResult> SelectIterator<TSource, TResult>(
+            IEnumerable<TSource> source,
+            Func<TSource, int, TResult> selector
+        )
         {
             int index = -1;
             foreach (TSource element in source)
@@ -101,7 +112,10 @@ namespace System.Linq
             private readonly Func<TSource, TResult> _selector;
             private IEnumerator<TSource>? _enumerator;
 
-            public SelectEnumerableIterator(IEnumerable<TSource> source, Func<TSource, TResult> selector)
+            public SelectEnumerableIterator(
+                IEnumerable<TSource> source,
+                Func<TSource, TResult> selector
+            )
             {
                 Debug.Assert(source != null);
                 Debug.Assert(selector != null);
@@ -146,8 +160,13 @@ namespace System.Linq
                 return false;
             }
 
-            public override IEnumerable<TResult2> Select<TResult2>(Func<TResult, TResult2> selector) =>
-                new SelectEnumerableIterator<TSource, TResult2>(_source, CombineSelectors(_selector, selector));
+            public override IEnumerable<TResult2> Select<TResult2>(
+                Func<TResult, TResult2> selector
+            ) =>
+                new SelectEnumerableIterator<TSource, TResult2>(
+                    _source,
+                    CombineSelectors(_selector, selector)
+                );
         }
 
         /// <summary>
@@ -172,7 +191,8 @@ namespace System.Linq
 
             private int CountForDebugger => _source.Length;
 
-            public override Iterator<TResult> Clone() => new SelectArrayIterator<TSource, TResult>(_source, _selector);
+            public override Iterator<TResult> Clone() =>
+                new SelectArrayIterator<TSource, TResult>(_source, _selector);
 
             public override bool MoveNext()
             {
@@ -187,8 +207,13 @@ namespace System.Linq
                 return true;
             }
 
-            public override IEnumerable<TResult2> Select<TResult2>(Func<TResult, TResult2> selector) =>
-                new SelectArrayIterator<TSource, TResult2>(_source, CombineSelectors(_selector, selector));
+            public override IEnumerable<TResult2> Select<TResult2>(
+                Func<TResult, TResult2> selector
+            ) =>
+                new SelectArrayIterator<TSource, TResult2>(
+                    _source,
+                    CombineSelectors(_selector, selector)
+                );
         }
 
         /// <summary>
@@ -213,7 +238,8 @@ namespace System.Linq
 
             private int CountForDebugger => _source.Count;
 
-            public override Iterator<TResult> Clone() => new SelectListIterator<TSource, TResult>(_source, _selector);
+            public override Iterator<TResult> Clone() =>
+                new SelectListIterator<TSource, TResult>(_source, _selector);
 
             public override bool MoveNext()
             {
@@ -237,8 +263,13 @@ namespace System.Linq
                 return false;
             }
 
-            public override IEnumerable<TResult2> Select<TResult2>(Func<TResult, TResult2> selector) =>
-                new SelectListIterator<TSource, TResult2>(_source, CombineSelectors(_selector, selector));
+            public override IEnumerable<TResult2> Select<TResult2>(
+                Func<TResult, TResult2> selector
+            ) =>
+                new SelectListIterator<TSource, TResult2>(
+                    _source,
+                    CombineSelectors(_selector, selector)
+                );
         }
 
         /// <summary>
@@ -263,7 +294,8 @@ namespace System.Linq
 
             private int CountForDebugger => _source.Count;
 
-            public override Iterator<TResult> Clone() => new SelectIListIterator<TSource, TResult>(_source, _selector);
+            public override Iterator<TResult> Clone() =>
+                new SelectIListIterator<TSource, TResult>(_source, _selector);
 
             public override bool MoveNext()
             {
@@ -299,8 +331,13 @@ namespace System.Linq
                 base.Dispose();
             }
 
-            public override IEnumerable<TResult2> Select<TResult2>(Func<TResult, TResult2> selector) =>
-                new SelectIListIterator<TSource, TResult2>(_source, CombineSelectors(_selector, selector));
+            public override IEnumerable<TResult2> Select<TResult2>(
+                Func<TResult, TResult2> selector
+            ) =>
+                new SelectIListIterator<TSource, TResult2>(
+                    _source,
+                    CombineSelectors(_selector, selector)
+                );
         }
     }
 }

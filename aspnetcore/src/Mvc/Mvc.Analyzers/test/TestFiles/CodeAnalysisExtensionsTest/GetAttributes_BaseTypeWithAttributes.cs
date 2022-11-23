@@ -3,12 +3,9 @@
     [ApiConventionType(typeof(object))]
     [ApiController]
     [ApiConventionType(typeof(string))]
-    public class GetAttributes_BaseTypeWithAttributesBase
-    {
-    }
+    public class GetAttributes_BaseTypeWithAttributesBase { }
 
     [ApiConventionType(typeof(int))]
-    public class GetAttributes_BaseTypeWithAttributesDerived : GetAttributes_BaseTypeWithAttributesBase
-    {
-    }
+    public class GetAttributes_BaseTypeWithAttributesDerived
+        : GetAttributes_BaseTypeWithAttributesBase { }
 }

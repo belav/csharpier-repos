@@ -19,8 +19,7 @@ using Xunit.Sdk;
 // https://github.com/dotnet/runtime/issues/70432
 public class SingleFileTestRunner : XunitTestFramework
 {
-    private SingleFileTestRunner(IMessageSink messageSink)
-    : base(messageSink) { }
+    private SingleFileTestRunner(IMessageSink messageSink) : base(messageSink) { }
 
     public static int Main(string[] args)
     {
@@ -30,18 +29,33 @@ public class SingleFileTestRunner : XunitTestFramework
         var diagnosticSink = new ConsoleDiagnosticMessageSink();
         var testsFinished = new TaskCompletionSource();
         var testSink = new TestMessageSink();
-        var summarySink = new DelegatingExecutionSummarySink(testSink,
+        var summarySink = new DelegatingExecutionSummarySink(
+            testSink,
             () => false,
-            (completed, summary) => Console.WriteLine($"Tests run: {summary.Total}, Errors: {summary.Errors}, Failures: {summary.Failed}, Skipped: {summary.Skipped}. Time: {TimeSpan.FromSeconds((double)summary.Time).TotalSeconds}s"));
+            (completed, summary) =>
+                Console.WriteLine(
+                    $"Tests run: {summary.Total}, Errors: {summary.Errors}, Failures: {summary.Failed}, Skipped: {summary.Skipped}. Time: {TimeSpan.FromSeconds((double)summary.Time).TotalSeconds}s"
+                )
+        );
         var resultsXmlAssembly = new XElement("assembly");
         var resultsSink = new DelegatingXmlCreationSink(summarySink, resultsXmlAssembly);
 
-        testSink.Execution.TestSkippedEvent += args => { Console.WriteLine($"[SKIP] {args.Message.Test.DisplayName}"); };
-        testSink.Execution.TestFailedEvent += args => { Console.WriteLine($"[FAIL] {args.Message.Test.DisplayName}{Environment.NewLine}{Xunit.ExceptionUtility.CombineMessages(args.Message)}{Environment.NewLine}{Xunit.ExceptionUtility.CombineStackTraces(args.Message)}"); };
+        testSink.Execution.TestSkippedEvent += args =>
+        {
+            Console.WriteLine($"[SKIP] {args.Message.Test.DisplayName}");
+        };
+        testSink.Execution.TestFailedEvent += args =>
+        {
+            Console.WriteLine(
+                $"[FAIL] {args.Message.Test.DisplayName}{Environment.NewLine}{Xunit.ExceptionUtility.CombineMessages(args.Message)}{Environment.NewLine}{Xunit.ExceptionUtility.CombineStackTraces(args.Message)}"
+            );
+        };
 
         testSink.Execution.TestAssemblyFinishedEvent += args =>
         {
-            Console.WriteLine($"Finished {args.Message.TestAssembly.Assembly}{Environment.NewLine}");
+            Console.WriteLine(
+                $"Finished {args.Message.TestAssembly.Assembly}{Environment.NewLine}"
+            );
             testsFinished.SetResult();
         };
 
@@ -68,7 +82,7 @@ public class SingleFileTestRunner : XunitTestFramework
         {
             if (args[i].Equals("-notrait", StringComparison.OrdinalIgnoreCase))
             {
-                var traitKeyValue=args[i + 1].Split("=", StringSplitOptions.TrimEntries);
+                var traitKeyValue = args[i + 1].Split("=", StringSplitOptions.TrimEntries);
                 if (!noTraits.TryGetValue(traitKeyValue[0], out List<string> values))
                 {
                     noTraits.Add(traitKeyValue[0], values = new List<string>());
@@ -77,7 +91,7 @@ public class SingleFileTestRunner : XunitTestFramework
             }
             if (args[i].Equals("-xml", StringComparison.OrdinalIgnoreCase))
             {
-                xmlResultFileName=args[i + 1].Trim();
+                xmlResultFileName = args[i + 1].Trim();
             }
         }
 
@@ -88,17 +102,22 @@ public class SingleFileTestRunner : XunitTestFramework
 
         var filteredTestCases = discoverySink.TestCases.Where(filters.Filter).ToList();
         var executor = xunitTestFx.CreateExecutor(asmName);
-        executor.RunTests(filteredTestCases, resultsSink, TestFrameworkOptions.ForExecution(assemblyConfig));
+        executor.RunTests(
+            filteredTestCases,
+            resultsSink,
+            TestFrameworkOptions.ForExecution(assemblyConfig)
+        );
 
         resultsSink.Finished.WaitOne();
 
         // Helix need to see results file in the drive to detect if the test has failed or not
-        if(xmlResultFileName != null)
+        if (xmlResultFileName != null)
         {
             resultsXmlAssembly.Save(xmlResultFileName);
         }
 
-        var failed = resultsSink.ExecutionSummary.Failed > 0 || resultsSink.ExecutionSummary.Errors > 0;
+        var failed =
+            resultsSink.ExecutionSummary.Failed > 0 || resultsSink.ExecutionSummary.Errors > 0;
         return failed ? 1 : 0;
     }
 }

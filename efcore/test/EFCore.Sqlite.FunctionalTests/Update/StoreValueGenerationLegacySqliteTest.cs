@@ -8,10 +8,13 @@ namespace Microsoft.EntityFrameworkCore.Update;
 // Old Sqlite versions don't support the RETURNING clause, so we use the INSERT/UPDATE+SELECT behavior for fetching back database-
 // generated values and rows affected.
 [SqliteVersionCondition(Max = "3.34.999")]
-public class StoreValueGenerationLegacySqliteTest : StoreValueGenerationTestBase<StoreValueGenerationSqliteFixture>
+public class StoreValueGenerationLegacySqliteTest
+    : StoreValueGenerationTestBase<StoreValueGenerationSqliteFixture>
 {
-    public StoreValueGenerationLegacySqliteTest(StoreValueGenerationSqliteFixture fixture, ITestOutputHelper testOutputHelper)
-        : base(fixture)
+    public StoreValueGenerationLegacySqliteTest(
+        StoreValueGenerationSqliteFixture fixture,
+        ITestOutputHelper testOutputHelper
+    ) : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
         // fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
@@ -22,17 +25,20 @@ public class StoreValueGenerationLegacySqliteTest : StoreValueGenerationTestBase
         EntityState firstOperationType,
         EntityState? secondOperationType,
         GeneratedValues generatedValues,
-        bool withDatabaseGenerated)
-        => secondOperationType is null ? 1 : 2;
+        bool withDatabaseGenerated
+    ) => secondOperationType is null ? 1 : 2;
 
     protected override bool ShouldCreateImplicitTransaction(
         EntityState firstOperationType,
         EntityState? secondOperationType,
         GeneratedValues generatedValues,
-        bool withSameEntityType)
-        => secondOperationType is not null
-            || (generatedValues is GeneratedValues.Some or GeneratedValues.All
-                && firstOperationType is EntityState.Added or EntityState.Modified);
+        bool withSameEntityType
+    ) =>
+        secondOperationType is not null
+        || (
+            generatedValues is GeneratedValues.Some or GeneratedValues.All
+            && firstOperationType is EntityState.Added or EntityState.Modified
+        );
 
     #region Single operation
 
@@ -47,7 +53,8 @@ INSERT INTO ""WithSomeDatabaseGenerated"" (""Data2"")
 VALUES (@p0);
 SELECT ""Id"", ""Data1""
 FROM ""WithSomeDatabaseGenerated""
-WHERE changes() = 1 AND ""rowid"" = last_insert_rowid();");
+WHERE changes() = 1 AND ""rowid"" = last_insert_rowid();"
+        );
     }
 
     public override async Task Add_with_no_generated_values(bool async)
@@ -61,7 +68,8 @@ WHERE changes() = 1 AND ""rowid"" = last_insert_rowid();");
 
 INSERT INTO ""WithNoDatabaseGenerated"" (""Id"", ""Data1"", ""Data2"")
 VALUES (@p0, @p1, @p2);
-SELECT changes();");
+SELECT changes();"
+        );
     }
 
     public override async Task Add_with_all_generated_values(bool async)
@@ -73,7 +81,8 @@ SELECT changes();");
 DEFAULT VALUES;
 SELECT ""Id"", ""Data1"", ""Data2""
 FROM ""WithAllDatabaseGenerated""
-WHERE changes() = 1 AND ""rowid"" = last_insert_rowid();");
+WHERE changes() = 1 AND ""rowid"" = last_insert_rowid();"
+        );
     }
 
     public override async Task Modify_with_generated_values(bool async)
@@ -88,7 +97,8 @@ UPDATE ""WithSomeDatabaseGenerated"" SET ""Data2"" = @p0
 WHERE ""Id"" = @p1;
 SELECT ""Data1""
 FROM ""WithSomeDatabaseGenerated""
-WHERE changes() = 1 AND ""Id"" = @p1;");
+WHERE changes() = 1 AND ""Id"" = @p1;"
+        );
     }
 
     public override async Task Modify_with_no_generated_values(bool async)
@@ -102,7 +112,8 @@ WHERE changes() = 1 AND ""Id"" = @p1;");
 
 UPDATE ""WithNoDatabaseGenerated"" SET ""Data1"" = @p0, ""Data2"" = @p1
 WHERE ""Id"" = @p2;
-SELECT changes();");
+SELECT changes();"
+        );
     }
 
     public override async Task Delete(bool async)
@@ -114,7 +125,8 @@ SELECT changes();");
 
 DELETE FROM ""WithSomeDatabaseGenerated""
 WHERE ""Id"" = @p0;
-SELECT changes();");
+SELECT changes();"
+        );
     }
 
     #endregion Single operation
@@ -140,7 +152,8 @@ INSERT INTO ""WithSomeDatabaseGenerated"" (""Data2"")
 VALUES (@p0);
 SELECT ""Id"", ""Data1""
 FROM ""WithSomeDatabaseGenerated""
-WHERE changes() = 1 AND ""rowid"" = last_insert_rowid();");
+WHERE changes() = 1 AND ""rowid"" = last_insert_rowid();"
+        );
     }
 
     public override async Task Add_Add_with_same_entity_type_and_no_generated_values(bool async)
@@ -162,7 +175,8 @@ SELECT changes();",
 
 INSERT INTO ""WithNoDatabaseGenerated"" (""Id"", ""Data1"", ""Data2"")
 VALUES (@p0, @p1, @p2);
-SELECT changes();");
+SELECT changes();"
+        );
     }
 
     public override async Task Add_Add_with_same_entity_type_and_all_generated_values(bool async)
@@ -180,7 +194,8 @@ WHERE changes() = 1 AND ""rowid"" = last_insert_rowid();",
 DEFAULT VALUES;
 SELECT ""Id"", ""Data1"", ""Data2""
 FROM ""WithAllDatabaseGenerated""
-WHERE changes() = 1 AND ""rowid"" = last_insert_rowid();");
+WHERE changes() = 1 AND ""rowid"" = last_insert_rowid();"
+        );
     }
 
     public override async Task Modify_Modify_with_same_entity_type_and_generated_values(bool async)
@@ -204,10 +219,13 @@ UPDATE ""WithSomeDatabaseGenerated"" SET ""Data2"" = @p0
 WHERE ""Id"" = @p1;
 SELECT ""Data1""
 FROM ""WithSomeDatabaseGenerated""
-WHERE changes() = 1 AND ""Id"" = @p1;");
+WHERE changes() = 1 AND ""Id"" = @p1;"
+        );
     }
 
-    public override async Task Modify_Modify_with_same_entity_type_and_no_generated_values(bool async)
+    public override async Task Modify_Modify_with_same_entity_type_and_no_generated_values(
+        bool async
+    )
     {
         await base.Modify_Modify_with_same_entity_type_and_no_generated_values(async);
 
@@ -226,7 +244,8 @@ SELECT changes();",
 
 UPDATE ""WithNoDatabaseGenerated"" SET ""Data1"" = @p0, ""Data2"" = @p1
 WHERE ""Id"" = @p2;
-SELECT changes();");
+SELECT changes();"
+        );
     }
 
     public override async Task Delete_Delete_with_same_entity_type(bool async)
@@ -244,7 +263,8 @@ SELECT changes();",
 
 DELETE FROM ""WithSomeDatabaseGenerated""
 WHERE ""Id"" = @p0;
-SELECT changes();");
+SELECT changes();"
+        );
     }
 
     #endregion Same two operations with same entity type
@@ -270,10 +290,13 @@ INSERT INTO ""WithSomeDatabaseGenerated2"" (""Data2"")
 VALUES (@p0);
 SELECT ""Id"", ""Data1""
 FROM ""WithSomeDatabaseGenerated2""
-WHERE changes() = 1 AND ""rowid"" = last_insert_rowid();");
+WHERE changes() = 1 AND ""rowid"" = last_insert_rowid();"
+        );
     }
 
-    public override async Task Add_Add_with_different_entity_types_and_no_generated_values(bool async)
+    public override async Task Add_Add_with_different_entity_types_and_no_generated_values(
+        bool async
+    )
     {
         await base.Add_Add_with_different_entity_types_and_no_generated_values(async);
 
@@ -292,10 +315,13 @@ SELECT changes();",
 
 INSERT INTO ""WithNoDatabaseGenerated2"" (""Id"", ""Data1"", ""Data2"")
 VALUES (@p0, @p1, @p2);
-SELECT changes();");
+SELECT changes();"
+        );
     }
 
-    public override async Task Add_Add_with_different_entity_types_and_all_generated_values(bool async)
+    public override async Task Add_Add_with_different_entity_types_and_all_generated_values(
+        bool async
+    )
     {
         await base.Add_Add_with_different_entity_types_and_all_generated_values(async);
 
@@ -310,10 +336,13 @@ WHERE changes() = 1 AND ""rowid"" = last_insert_rowid();",
 DEFAULT VALUES;
 SELECT ""Id"", ""Data1"", ""Data2""
 FROM ""WithAllDatabaseGenerated2""
-WHERE changes() = 1 AND ""rowid"" = last_insert_rowid();");
+WHERE changes() = 1 AND ""rowid"" = last_insert_rowid();"
+        );
     }
 
-    public override async Task Modify_Modify_with_different_entity_types_and_generated_values(bool async)
+    public override async Task Modify_Modify_with_different_entity_types_and_generated_values(
+        bool async
+    )
     {
         await base.Modify_Modify_with_different_entity_types_and_generated_values(async);
 
@@ -334,10 +363,13 @@ UPDATE ""WithSomeDatabaseGenerated2"" SET ""Data2"" = @p0
 WHERE ""Id"" = @p1;
 SELECT ""Data1""
 FROM ""WithSomeDatabaseGenerated2""
-WHERE changes() = 1 AND ""Id"" = @p1;");
+WHERE changes() = 1 AND ""Id"" = @p1;"
+        );
     }
 
-    public override async Task Modify_Modify_with_different_entity_types_and_no_generated_values(bool async)
+    public override async Task Modify_Modify_with_different_entity_types_and_no_generated_values(
+        bool async
+    )
     {
         await base.Modify_Modify_with_different_entity_types_and_no_generated_values(async);
 
@@ -356,7 +388,8 @@ SELECT changes();",
 
 UPDATE ""WithNoDatabaseGenerated2"" SET ""Data1"" = @p0, ""Data2"" = @p1
 WHERE ""Id"" = @p2;
-SELECT changes();");
+SELECT changes();"
+        );
     }
 
     public override async Task Delete_Delete_with_different_entity_types(bool async)
@@ -374,7 +407,8 @@ SELECT changes();",
 
 DELETE FROM ""WithSomeDatabaseGenerated2""
 WHERE ""Id"" = @p0;
-SELECT changes();");
+SELECT changes();"
+        );
     }
 
     #endregion Same two operations with different entity types

@@ -7,10 +7,12 @@ namespace System.Runtime.CompilerServices
     {
 #pragma warning disable IDE0060
         [Intrinsic]
-        public static bool EnumEquals<T>(T x, T y) where T : struct, Enum => throw new NotImplementedException();
+        public static bool EnumEquals<T>(T x, T y) where T : struct, Enum =>
+            throw new NotImplementedException();
 
         [Intrinsic]
-        public static int EnumCompareTo<T>(T x, T y) where T : struct, Enum => throw new NotImplementedException();
+        public static int EnumCompareTo<T>(T x, T y) where T : struct, Enum =>
+            throw new NotImplementedException();
 #pragma warning restore IDE0060
     }
 }

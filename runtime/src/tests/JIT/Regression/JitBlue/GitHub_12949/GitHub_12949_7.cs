@@ -54,4 +54,3 @@ class M
         return result1 + result2 + 55;
     }
 }
-

@@ -12,8 +12,11 @@ public class CorsOptions
 
     // DefaultCorsPolicyProvider returns a Task<CorsPolicy>. We'll cache the value to be returned alongside
     // the actual policy instance to have a separate lookup.
-    internal IDictionary<string, (CorsPolicy policy, Task<CorsPolicy> policyTask)> PolicyMap { get; }
-        = new Dictionary<string, (CorsPolicy, Task<CorsPolicy>)>(StringComparer.Ordinal);
+    internal IDictionary<
+        string,
+        (CorsPolicy policy, Task<CorsPolicy> policyTask)
+    > PolicyMap { get; } =
+        new Dictionary<string, (CorsPolicy, Task<CorsPolicy>)>(StringComparer.Ordinal);
 
     /// <summary>
     /// Gets or sets the default policy name.
@@ -21,10 +24,7 @@ public class CorsOptions
     public string DefaultPolicyName
     {
         get => _defaultPolicyName;
-        set
-        {
-            _defaultPolicyName = value ?? throw new ArgumentNullException(nameof(value));
-        }
+        set { _defaultPolicyName = value ?? throw new ArgumentNullException(nameof(value)); }
     }
 
     /// <summary>

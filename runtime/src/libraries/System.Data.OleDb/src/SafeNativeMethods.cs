@@ -18,9 +18,7 @@ namespace System.Data.Common
             Marshal.Copy(zeroes, 0, ptr, length);
         }
 
-        internal static unsafe IntPtr InterlockedExchangePointer(
-                IntPtr lpAddress,
-                IntPtr lpValue)
+        internal static unsafe IntPtr InterlockedExchangePointer(IntPtr lpAddress, IntPtr lpValue)
         {
             IntPtr previousPtr;
             IntPtr actualPtr = *(IntPtr*)lpAddress.ToPointer();
@@ -28,21 +26,40 @@ namespace System.Data.Common
             do
             {
                 previousPtr = actualPtr;
-                actualPtr = Interlocked.CompareExchange(ref *(IntPtr*)lpAddress.ToPointer(), lpValue, previousPtr);
-            }
-            while (actualPtr != previousPtr);
+                actualPtr = Interlocked.CompareExchange(
+                    ref *(IntPtr*)lpAddress.ToPointer(),
+                    lpValue,
+                    previousPtr
+                );
+            } while (actualPtr != previousPtr);
 
             return actualPtr;
         }
 
         [LibraryImport(Interop.Libraries.Kernel32, SetLastError = true)]
-        internal static partial int ReleaseSemaphore(IntPtr handle, int releaseCount, IntPtr previousCount);
+        internal static partial int ReleaseSemaphore(
+            IntPtr handle,
+            int releaseCount,
+            IntPtr previousCount
+        );
 
         [LibraryImport(Interop.Libraries.Kernel32, SetLastError = true)]
-        internal static partial int WaitForMultipleObjectsEx(uint nCount, IntPtr lpHandles, [MarshalAs(UnmanagedType.Bool)] bool bWaitAll, uint dwMilliseconds, [MarshalAs(UnmanagedType.Bool)] bool bAlertable);
+        internal static partial int WaitForMultipleObjectsEx(
+            uint nCount,
+            IntPtr lpHandles,
+            [MarshalAs(UnmanagedType.Bool)] bool bWaitAll,
+            uint dwMilliseconds,
+            [MarshalAs(UnmanagedType.Bool)] bool bAlertable
+        );
 
-        [LibraryImport(Interop.Libraries.Kernel32/*, SetLastError=true*/)]
-        internal static partial int WaitForSingleObjectEx(IntPtr lpHandles, uint dwMilliseconds, [MarshalAs(UnmanagedType.Bool)] bool bAlertable);
+        [LibraryImport(
+            Interop.Libraries.Kernel32 /*, SetLastError=true*/
+        )]
+        internal static partial int WaitForSingleObjectEx(
+            IntPtr lpHandles,
+            uint dwMilliseconds,
+            [MarshalAs(UnmanagedType.Bool)] bool bAlertable
+        );
 
         internal sealed class Wrapper
         {

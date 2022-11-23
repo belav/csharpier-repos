@@ -31,7 +31,12 @@ namespace System.Reflection.Runtime.TypeParsing
     //
     internal sealed class GetTypeOptions
     {
-        public GetTypeOptions(CoreAssemblyResolver coreAssemblyResolver, CoreTypeResolver coreTypeResolver, bool throwOnError, bool ignoreCase)
+        public GetTypeOptions(
+            CoreAssemblyResolver coreAssemblyResolver,
+            CoreTypeResolver coreTypeResolver,
+            bool throwOnError,
+            bool ignoreCase
+        )
         {
             Debug.Assert(coreAssemblyResolver != null);
             Debug.Assert(coreTypeResolver != null);
@@ -46,7 +51,9 @@ namespace System.Reflection.Runtime.TypeParsing
         {
             Assembly assembly = _coreAssemblyResolver(name);
             if (assembly == null && ThrowOnError)
-                throw new FileNotFoundException(SR.Format(SR.FileNotFound_AssemblyNotFound, name.FullName));
+                throw new FileNotFoundException(
+                    SR.Format(SR.FileNotFound_AssemblyNotFound, name.FullName)
+                );
             return assembly;
         }
 
@@ -54,7 +61,10 @@ namespace System.Reflection.Runtime.TypeParsing
         {
             Type type = _coreTypeResolver(containingAssemblyIfAny, name);
             if (type == null && ThrowOnError)
-                throw Helpers.CreateTypeLoadException(name.EscapeTypeNameIdentifier(), containingAssemblyIfAny);
+                throw Helpers.CreateTypeLoadException(
+                    name.EscapeTypeNameIdentifier(),
+                    containingAssemblyIfAny
+                );
             return type;
         }
 

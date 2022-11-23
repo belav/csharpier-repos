@@ -5,8 +5,7 @@ namespace Microsoft.AspNetCore.Analyzers.Http;
 
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Testing;
-using VerifyCS = Microsoft.AspNetCore.Analyzers.Verifiers.CSharpAnalyzerVerifier<
-    Microsoft.AspNetCore.Analyzers.Http.RequestDelegateReturnTypeAnalyzer>;
+using VerifyCS = Microsoft.AspNetCore.Analyzers.Verifiers.CSharpAnalyzerVerifier<Microsoft.AspNetCore.Analyzers.Http.RequestDelegateReturnTypeAnalyzer>;
 
 public class RequestDelegateReturnTypeAnalyzerTests
 {
@@ -17,7 +16,8 @@ public class RequestDelegateReturnTypeAnalyzerTests
     public async Task AnonymousDelegate_RequestDelegate_ReturnType_EndpointCtor_ReportDiagnostics()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -29,16 +29,18 @@ webApp.Use(async (HttpContext context, Func<Task> next) =>
     await next();
 });
 ",
-        new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
-            .WithLocation(0)
-            .WithMessage(GetMessage("System.DateTime")));
+            new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
+                .WithLocation(0)
+                .WithMessage(GetMessage("System.DateTime"))
+        );
     }
 
     [Fact]
     public async Task AnonymousDelegate_RequestDelegate_ReturnType_AsTask_ReportDiagnostics()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
@@ -48,16 +50,18 @@ webApp.MapGet(""/"", {|#0:(HttpContext context) =>
     return context.Request.ReadFromJsonAsync<object>().AsTask();
 }|});
 ",
-        new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
-            .WithLocation(0)
-            .WithMessage(GetMessage("object?")));
+            new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
+                .WithLocation(0)
+                .WithMessage(GetMessage("object?"))
+        );
     }
 
     [Fact]
     public async Task AnonymousDelegate_RequestDelegate_ReturnType_DelegateCtor_ReportDiagnostics()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
@@ -71,32 +75,36 @@ webApp.Use(next =>
     }|});
 });
 ",
-        new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
-            .WithLocation(0)
-            .WithMessage(GetMessage("string")));
+            new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
+                .WithLocation(0)
+                .WithMessage(GetMessage("string"))
+        );
     }
 
     [Fact]
     public async Task AnonymousDelegate_RequestDelegate_ReturnTypeMethodCall_ReportDiagnostics()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 var webApp = WebApplication.Create();
 webApp.MapGet(""/"", {|#0:(HttpContext context) => Task.FromResult(""hello world"")|});
 ",
-        new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
-            .WithLocation(0)
-            .WithMessage(GetMessage("string")));
+            new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
+                .WithLocation(0)
+                .WithMessage(GetMessage("string"))
+        );
     }
 
     [Fact]
     public async Task AnonymousDelegate_RequestDelegate_ReturnTypeVariable_ReportDiagnostics()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
@@ -107,16 +115,18 @@ webApp.MapGet(""/"",{|#0:(HttpContext context) =>
     return t;
 }|});
 ",
-        new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
-            .WithLocation(0)
-            .WithMessage(GetMessage("string")));
+            new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
+                .WithLocation(0)
+                .WithMessage(GetMessage("string"))
+        );
     }
 
     [Fact]
     public async Task AnonymousDelegate_RequestDelegate_ReturnTypeTernary_ReportDiagnostics()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
@@ -128,16 +138,18 @@ webApp.MapGet(""/"", {|#0:(HttpContext context) =>
     return t1.IsCompleted ? t1 : t2;
 }|});
 ",
-        new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
-            .WithLocation(0)
-            .WithMessage(GetMessage("string")));
+            new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
+                .WithLocation(0)
+                .WithMessage(GetMessage("string"))
+        );
     }
 
     [Fact]
     public async Task AnonymousDelegate_RequestDelegate_ReturnTypeCoalesce_ReportDiagnostics()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
@@ -149,16 +161,18 @@ webApp.MapGet(""/"", {|#0:(HttpContext context) =>
     return t1 ?? t2;
 }|});
 ",
-        new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
-            .WithLocation(0)
-            .WithMessage(GetMessage("string")));
+            new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
+                .WithLocation(0)
+                .WithMessage(GetMessage("string"))
+        );
     }
 
     [Fact]
     public async Task AnonymousDelegate_RequestDelegate_MultipleReturns_ReportDiagnostics()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
@@ -177,16 +191,18 @@ webApp.MapGet(""/"", {|#0:(HttpContext context) =>
     }
 }|});
 ",
-        new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
-            .WithLocation(0)
-            .WithMessage(GetMessage("string")));
+            new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
+                .WithLocation(0)
+                .WithMessage(GetMessage("string"))
+        );
     }
 
     [Fact]
     public async Task AnonymousDelegate_RequestDelegate_MixReturnValues_ReportDiagnostics()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
@@ -205,29 +221,33 @@ webApp.MapGet(""/"", {|#0:(HttpContext context) =>
     }
 }|});
 ",
-        new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
-            .WithLocation(0)
-            .WithMessage(GetMessage("int")));
+            new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
+                .WithLocation(0)
+                .WithMessage(GetMessage("int"))
+        );
     }
 
     [Fact]
     public async Task AnonymousDelegate_NotRequestDelegate_Async_HasReturnType_NoDiagnostics()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 var webApp = WebApplication.Create();
 webApp.MapGet(""/"", async (HttpContext context) => ""hello world"");
-");
+"
+        );
     }
 
     [Fact]
     public async Task AnonymousDelegate_RequestDelegate_Async_HasReturns_NoReturnType_NoDiagnostics()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
@@ -245,27 +265,31 @@ webApp.MapGet(""/"", async (HttpContext context) =>
         return;
     }
 });
-");
+"
+        );
     }
 
     [Fact]
     public async Task AnonymousDelegate_RequestDelegate_NoReturnType_NoDiagnostics()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 var webApp = WebApplication.Create();
 webApp.MapGet(""/"", (HttpContext context) => Task.CompletedTask);
-");
+"
+        );
     }
 
     [Fact]
     public async Task AnonymousDelegate_RequestDelegate_MultipleReturns_NoReturnType_NoDiagnostics()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
@@ -281,14 +305,16 @@ webApp.MapGet(""/"", (HttpContext context) =>
         return Task.CompletedTask;
     }
 });
-");
+"
+        );
     }
 
     [Fact]
     public async Task MethodReference_RequestDelegate_HasReturnType_ReportDiagnostics()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
@@ -297,16 +323,18 @@ webApp.MapGet(""/"", {|#0:HttpMethod|});
 
 static Task<string> HttpMethod(HttpContext context) => Task.FromResult(""hello world"");
 ",
-        new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
-            .WithLocation(0)
-            .WithMessage(GetMessage("string")));
+            new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
+                .WithLocation(0)
+                .WithMessage(GetMessage("string"))
+        );
     }
 
     [Fact]
     public async Task MethodReference_RequestDelegate_NoReturnType_NoDiagnostics()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
@@ -314,6 +342,7 @@ var webApp = WebApplication.Create();
 webApp.MapGet(""/"", HttpMethod);
 
 static Task HttpMethod(HttpContext context) => Task.CompletedTask;
-");
+"
+        );
     }
 }

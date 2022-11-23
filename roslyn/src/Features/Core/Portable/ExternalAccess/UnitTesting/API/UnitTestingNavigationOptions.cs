@@ -6,11 +6,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
 {
     internal readonly record struct UnitTestingNavigationOptions(
         bool PreferProvisionalTab = false,
-        bool ActivateTab = true)
+        bool ActivateTab = true
+    )
     {
-        public UnitTestingNavigationOptions()
-            : this(PreferProvisionalTab: false)
-        {
-        }
+        public UnitTestingNavigationOptions() : this(PreferProvisionalTab: false) { }
     }
 }

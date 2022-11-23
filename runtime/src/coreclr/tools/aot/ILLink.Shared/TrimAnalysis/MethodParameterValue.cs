@@ -6,5 +6,5 @@
 
 namespace ILLink.Shared.TrimAnalysis
 {
-	internal sealed partial record MethodParameterValue : ValueWithDynamicallyAccessedMembers;
+    internal sealed partial record MethodParameterValue : ValueWithDynamicallyAccessedMembers;
 }

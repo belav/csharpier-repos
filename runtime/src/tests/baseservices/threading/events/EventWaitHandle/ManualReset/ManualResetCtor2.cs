@@ -25,8 +25,8 @@ class ManualResetCtor
 
         ewh.Set();
         // when doing another wait, it should return immediately
-        bool b = ewh.WaitOne(5000);//, false);
-        if(b)
+        bool b = ewh.WaitOne(5000); //, false);
+        if (b)
             iRet += 50;
         else
             Console.WriteLine("WaitOne() timed out");
@@ -34,12 +34,12 @@ class ManualResetCtor
         Console.WriteLine(100 == iRet ? "Test Passed" : "Test Failed");
         return iRet;
     }
-    
+
     private void ThreadWorker()
     {
         // This should NOT return immediately
-        bool b = ewh.WaitOne(5000);//, false);
-        if(b)
+        bool b = ewh.WaitOne(5000); //, false);
+        if (b)
             Console.WriteLine("WaitOne returned successful");
         else
             iRet = 50;

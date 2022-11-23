@@ -18,27 +18,31 @@ namespace ILCompiler
     {
         private readonly IBCProfileParser _ibcParser;
         private readonly List<ProfileData> _inputData = new List<ProfileData>();
-        private readonly Dictionary<MethodDesc, MethodProfileData> _mergedProfileData = new Dictionary<MethodDesc, MethodProfileData>();
-        private readonly Dictionary<ModuleDesc, HashSet<MethodDesc>> _placedProfileMethods = new Dictionary<ModuleDesc, HashSet<MethodDesc>>();
+        private readonly Dictionary<MethodDesc, MethodProfileData> _mergedProfileData =
+            new Dictionary<MethodDesc, MethodProfileData>();
+        private readonly Dictionary<ModuleDesc, HashSet<MethodDesc>> _placedProfileMethods =
+            new Dictionary<ModuleDesc, HashSet<MethodDesc>>();
         private readonly HashSet<MethodDesc> _placedProfileMethodsAll = new HashSet<MethodDesc>();
         private readonly bool _partialNGen;
         private readonly ReadyToRunCompilationModuleGroupBase _compilationGroup;
         private readonly CallChainProfile _callChainProfile;
 
-        public ProfileDataManager(Logger logger,
-                                  IEnumerable<ModuleDesc> possibleReferenceModules,
-                                  IEnumerable<ModuleDesc> inputModules,
-                                  IEnumerable<ModuleDesc> versionBubbleModules,
-                                  IEnumerable<ModuleDesc> crossModuleInlineModules,
-                                  ModuleDesc nonLocalGenericsHome,
-                                  IReadOnlyList<string> mibcFiles,
-                                  MIbcProfileParser.MibcGroupParseRules parseRule,
-                                  CallChainProfile callChainProfile,
-                                  CompilerTypeSystemContext context,
-                                  ReadyToRunCompilationModuleGroupBase compilationGroup,
-                                  bool embedPgoDataInR2RImage,
-                                  bool parseIbcData,
-                                  Func<MethodDesc, bool> canBeIncludedInCurrentCompilation)
+        public ProfileDataManager(
+            Logger logger,
+            IEnumerable<ModuleDesc> possibleReferenceModules,
+            IEnumerable<ModuleDesc> inputModules,
+            IEnumerable<ModuleDesc> versionBubbleModules,
+            IEnumerable<ModuleDesc> crossModuleInlineModules,
+            ModuleDesc nonLocalGenericsHome,
+            IReadOnlyList<string> mibcFiles,
+            MIbcProfileParser.MibcGroupParseRules parseRule,
+            CallChainProfile callChainProfile,
+            CompilerTypeSystemContext context,
+            ReadyToRunCompilationModuleGroupBase compilationGroup,
+            bool embedPgoDataInR2RImage,
+            bool parseIbcData,
+            Func<MethodDesc, bool> canBeIncludedInCurrentCompilation
+        )
         {
             EmbedPgoDataInR2RImage = embedPgoDataInR2RImage;
             _ibcParser = new IBCProfileParser(logger, possibleReferenceModules);
@@ -70,7 +74,16 @@ namespace ILCompiler
                 {
                     using (PEReader peReader = MIbcProfileParser.OpenMibcAsPEReader(file))
                     {
-                        _inputData.Add(MIbcProfileParser.ParseMIbcFile(context, peReader, versionBubbleModuleStrings, onlyParseItemsDefinedInAssembly, crossModuleInlineModules: crossModuleStrings, parseRule: parseRule));
+                        _inputData.Add(
+                            MIbcProfileParser.ParseMIbcFile(
+                                context,
+                                peReader,
+                                versionBubbleModuleStrings,
+                                onlyParseItemsDefinedInAssembly,
+                                crossModuleInlineModules: crossModuleStrings,
+                                parseRule: parseRule
+                            )
+                        );
                     }
                 }
             }
@@ -100,15 +113,24 @@ namespace ILCompiler
             foreach (var profileData in _mergedProfileData)
             {
                 // If the method is not excluded from processing
-                if (!profileData.Value.Flags.HasFlag(MethodProfilingDataFlags.ExcludeHotMethodCode) &&
-                    !profileData.Value.Flags.HasFlag(MethodProfilingDataFlags.ExcludeColdMethodCode))
+                if (
+                    !profileData.Value.Flags.HasFlag(MethodProfilingDataFlags.ExcludeHotMethodCode)
+                    && !profileData.Value.Flags.HasFlag(
+                        MethodProfilingDataFlags.ExcludeColdMethodCode
+                    )
+                )
                 {
                     // Check for methods which are defined within the version bubble, and only rely on other modules within the bubble
-                    if (!_compilationGroup.VersionsWithMethodBody(profileData.Key) && !_compilationGroup.CrossModuleCompileable(profileData.Key))
+                    if (
+                        !_compilationGroup.VersionsWithMethodBody(profileData.Key)
+                        && !_compilationGroup.CrossModuleCompileable(profileData.Key)
+                    )
                         continue; // Method not contained within version bubble and not cross module compileable
 
-                    if (_compilationGroup.ContainsType(profileData.Key.OwningType) &&
-                        (profileData.Key.OwningType is MetadataType declaringType))
+                    if (
+                        _compilationGroup.ContainsType(profileData.Key.OwningType)
+                        && (profileData.Key.OwningType is MetadataType declaringType)
+                    )
                     {
                         // In this case the method is placed in its natural home (which is the defining module of the method)
                         _placedProfileMethods[declaringType.Module].Add(profileData.Key);
@@ -117,7 +139,10 @@ namespace ILCompiler
                     else
                     {
                         // If the defining module is not within the input set, if the nonLocalGenericsHome is provided, place it there
-                        if ((nonLocalGenericsHome != null) && (profileData.Key.GetTypicalMethodDefinition() != profileData.Key))
+                        if (
+                            (nonLocalGenericsHome != null)
+                            && (profileData.Key.GetTypicalMethodDefinition() != profileData.Key)
+                        )
                         {
                             _placedProfileMethods[nonLocalGenericsHome].Add(profileData.Key);
                             _placedProfileMethodsAll.Add(profileData.Key);
@@ -131,9 +156,15 @@ namespace ILCompiler
         /// Get the defining module for a method which is entirely defined within the version bubble
         /// If a module is a generic which has interaction modules outside of the version bubble, return null.
         /// </summary>
-        private ModuleDesc GetDefiningModuleForMethodWithinVersionBubble(MethodDesc method, HashSet<ModuleDesc> versionBubble)
+        private ModuleDesc GetDefiningModuleForMethodWithinVersionBubble(
+            MethodDesc method,
+            HashSet<ModuleDesc> versionBubble
+        )
         {
-            if (_compilationGroup.VersionsWithMethodBody(method) && (method.OwningType is MetadataType metadataType))
+            if (
+                _compilationGroup.VersionsWithMethodBody(method)
+                && (method.OwningType is MetadataType metadataType)
+            )
             {
                 return metadataType.Module;
             }

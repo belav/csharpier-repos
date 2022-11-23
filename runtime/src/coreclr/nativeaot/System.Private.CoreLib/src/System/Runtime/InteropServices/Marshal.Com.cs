@@ -31,16 +31,17 @@ namespace System.Runtime.InteropServices
             throw new NotSupportedException(SR.PlatformNotSupported_ComInterop);
         }
 
-        [RequiresUnreferencedCode("Built-in COM support is not trim compatible", Url = "https://aka.ms/dotnet-illink/com")]
+        [RequiresUnreferencedCode(
+            "Built-in COM support is not trim compatible",
+            Url = "https://aka.ms/dotnet-illink/com"
+        )]
         [SupportedOSPlatform("windows")]
         public static object BindToMoniker(string monikerName)
         {
             throw new NotSupportedException(SR.PlatformNotSupported_ComInterop);
         }
 
-        public static void CleanupUnusedObjectsInCurrentContext()
-        {
-        }
+        public static void CleanupUnusedObjectsInCurrentContext() { }
 
         [SupportedOSPlatform("windows")]
         public static IntPtr CreateAggregatedObject<T>(IntPtr pOuter, T o) where T : notnull
@@ -92,7 +93,11 @@ namespace System.Runtime.InteropServices
 
         [SupportedOSPlatform("windows")]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static IntPtr GetComInterfaceForObject(object o, Type T, CustomQueryInterfaceMode mode)
+        public static IntPtr GetComInterfaceForObject(
+            object o,
+            Type T,
+            CustomQueryInterfaceMode mode
+        )
         {
             throw new NotSupportedException(SR.PlatformNotSupported_ComInterop);
         }
@@ -117,7 +122,22 @@ namespace System.Runtime.InteropServices
                 throw new ArgumentNullException(nameof(o));
             }
 
-            return ComWrappers.ComInterfaceForObject(o, new Guid(0x00020400, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46) /* IID_IDispatch */);
+            return ComWrappers.ComInterfaceForObject(
+                o,
+                new Guid(
+                    0x00020400,
+                    0x0000,
+                    0x0000,
+                    0xC0,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x46
+                ) /* IID_IDispatch */
+            );
         }
 
         [SupportedOSPlatform("windows")]
@@ -332,26 +352,46 @@ namespace System.Runtime.InteropServices
                 case VarEnum.VT_NULL:
                     return DBNull.Value;
 
-                case VarEnum.VT_I1: return data->AsI1;
-                case VarEnum.VT_I2: return data->AsI2;
-                case VarEnum.VT_I4: return data->AsI4;
-                case VarEnum.VT_I8: return data->AsI8;
-                case VarEnum.VT_UI1: return data->AsUi1;
-                case VarEnum.VT_UI2: return data->AsUi2;
-                case VarEnum.VT_UI4: return data->AsUi4;
-                case VarEnum.VT_UI8: return data->AsUi8;
-                case VarEnum.VT_INT: return data->AsInt;
-                case VarEnum.VT_UINT: return data->AsUint;
-                case VarEnum.VT_BOOL: return data->AsBool;
-                case VarEnum.VT_ERROR: return data->AsError;
-                case VarEnum.VT_R4: return data->AsR4;
-                case VarEnum.VT_R8: return data->AsR8;
-                case VarEnum.VT_DECIMAL: return data->AsDecimal;
-                case VarEnum.VT_CY: return data->AsCy;
-                case VarEnum.VT_DATE: return data->AsDate;
-                case VarEnum.VT_BSTR: return data->AsBstr;
-                case VarEnum.VT_UNKNOWN: return data->AsUnknown;
-                case VarEnum.VT_DISPATCH: return data->AsDispatch;
+                case VarEnum.VT_I1:
+                    return data->AsI1;
+                case VarEnum.VT_I2:
+                    return data->AsI2;
+                case VarEnum.VT_I4:
+                    return data->AsI4;
+                case VarEnum.VT_I8:
+                    return data->AsI8;
+                case VarEnum.VT_UI1:
+                    return data->AsUi1;
+                case VarEnum.VT_UI2:
+                    return data->AsUi2;
+                case VarEnum.VT_UI4:
+                    return data->AsUi4;
+                case VarEnum.VT_UI8:
+                    return data->AsUi8;
+                case VarEnum.VT_INT:
+                    return data->AsInt;
+                case VarEnum.VT_UINT:
+                    return data->AsUint;
+                case VarEnum.VT_BOOL:
+                    return data->AsBool;
+                case VarEnum.VT_ERROR:
+                    return data->AsError;
+                case VarEnum.VT_R4:
+                    return data->AsR4;
+                case VarEnum.VT_R8:
+                    return data->AsR8;
+                case VarEnum.VT_DECIMAL:
+                    return data->AsDecimal;
+                case VarEnum.VT_CY:
+                    return data->AsCy;
+                case VarEnum.VT_DATE:
+                    return data->AsDate;
+                case VarEnum.VT_BSTR:
+                    return data->AsBstr;
+                case VarEnum.VT_UNKNOWN:
+                    return data->AsUnknown;
+                case VarEnum.VT_DISPATCH:
+                    return data->AsDispatch;
 
                 default:
                     // Other VARIANT types not supported yet.
@@ -395,7 +435,11 @@ namespace System.Runtime.InteropServices
 
         internal static Type? GetTypeFromCLSID(Guid clsid, string? server, bool throwOnError)
         {
-            return ReflectionAugments.ReflectionCoreCallbacks.GetTypeFromCLSID(clsid, server, throwOnError);
+            return ReflectionAugments.ReflectionCoreCallbacks.GetTypeFromCLSID(
+                clsid,
+                server,
+                throwOnError
+            );
         }
 
         [SupportedOSPlatform("windows")]

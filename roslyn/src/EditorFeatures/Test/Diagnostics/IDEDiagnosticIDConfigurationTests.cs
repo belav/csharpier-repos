@@ -24,14 +24,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.ConfigureSeverityL
     [UseExportProvider]
     public class IDEDiagnosticIDConfigurationTests
     {
-        private static ImmutableArray<(string diagnosticId, ImmutableHashSet<IOption2> codeStyleOptions)> GetIDEDiagnosticIdsAndOptions(
-            string languageName)
+        private static ImmutableArray<(
+            string diagnosticId,
+            ImmutableHashSet<IOption2> codeStyleOptions
+        )> GetIDEDiagnosticIdsAndOptions(string languageName)
         {
-            var diagnosticIdAndOptions = new List<(string diagnosticId, ImmutableHashSet<IOption2> options)>();
+            var diagnosticIdAndOptions =
+                new List<(string diagnosticId, ImmutableHashSet<IOption2> options)>();
             var uniqueDiagnosticIds = new HashSet<string>();
             foreach (var assembly in MefHostServices.DefaultAssemblies)
             {
-                var analyzerReference = new AnalyzerFileReference(assembly.Location, TestAnalyzerAssemblyLoader.LoadFromFile);
+                var analyzerReference = new AnalyzerFileReference(
+                    assembly.Location,
+                    TestAnalyzerAssemblyLoader.LoadFromFile
+                );
                 foreach (var analyzer in analyzerReference.GetAnalyzers(languageName))
                 {
                     foreach (var descriptor in analyzer.SupportedDiagnostics)
@@ -39,15 +45,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.ConfigureSeverityL
                         var diagnosticId = descriptor.Id;
                         ValidateHelpLinkForDiagnostic(diagnosticId, descriptor.HelpLinkUri);
 
-                        if (diagnosticId.StartsWith("ENC") ||
-                            !char.IsDigit(diagnosticId[^1]))
+                        if (diagnosticId.StartsWith("ENC") || !char.IsDigit(diagnosticId[^1]))
                         {
                             // Ignore non-IDE diagnostic IDs (such as ENCxxxx diagnostics) and
                             // diagnostic IDs for suggestions, fading, etc. (such as IDExxxxWithSuggestion)
                             continue;
                         }
 
-                        if (!IDEDiagnosticIdToOptionMappingHelper.TryGetMappedOptions(diagnosticId, languageName, out var options))
+                        if (
+                            !IDEDiagnosticIdToOptionMappingHelper.TryGetMappedOptions(
+                                diagnosticId,
+                                languageName,
+                                out var options
+                            )
+                        )
                         {
                             options = ImmutableHashSet<IOption2>.Empty;
                         }
@@ -58,7 +69,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.ConfigureSeverityL
                         }
                         else
                         {
-                            Assert.True(diagnosticIdAndOptions.All(tuple => tuple.diagnosticId != diagnosticId || tuple.options.SetEquals(options)));
+                            Assert.True(
+                                diagnosticIdAndOptions.All(
+                                    tuple =>
+                                        tuple.diagnosticId != diagnosticId
+                                        || tuple.options.SetEquals(options)
+                                )
+                            );
                         }
                     }
                 }
@@ -70,27 +87,42 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.ConfigureSeverityL
 
         private static void ValidateHelpLinkForDiagnostic(string diagnosticId, string helpLinkUri)
         {
-            if (diagnosticId is "IDE0043" // Intentionally undocumented because it's being removed in favor of CA2241
+            if (
+                diagnosticId
+                is "IDE0043" // Intentionally undocumented because it's being removed in favor of CA2241
                     or "IDE1007"
                     or "RemoveUnnecessaryImportsFixable" // this diagnostic is hidden and not configurable.
                     or "IDE0005_gen" // this diagnostic is hidden and not configurable.
                     or "RE0001"
                     or "JSON001"
-                    or "JSON002") // Tracked by https://github.com/dotnet/roslyn/issues/48530
+                    or "JSON002"
+            ) // Tracked by https://github.com/dotnet/roslyn/issues/48530
             {
-                Assert.True(helpLinkUri == string.Empty, $"Expected empty help link for {diagnosticId}");
+                Assert.True(
+                    helpLinkUri == string.Empty,
+                    $"Expected empty help link for {diagnosticId}"
+                );
                 return;
             }
 
-            if (helpLinkUri != $"https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{diagnosticId.ToLowerInvariant()}")
+            if (
+                helpLinkUri
+                != $"https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{diagnosticId.ToLowerInvariant()}"
+            )
             {
                 Assert.True(false, $"Invalid help link for {diagnosticId}");
             }
         }
 
-        private static Dictionary<string, string> GetExpectedMap(string expected, out string[] expectedLines)
+        private static Dictionary<string, string> GetExpectedMap(
+            string expected,
+            out string[] expectedLines
+        )
         {
-            expectedLines = expected.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            expectedLines = expected.Split(
+                new[] { Environment.NewLine },
+                StringSplitOptions.RemoveEmptyEntries
+            );
             Assert.True(expectedLines.Length % 2 == 0);
             var expectedMap = new Dictionary<string, string>();
             for (var i = 0; i < expectedLines.Length; i += 2)
@@ -128,20 +160,26 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.ConfigureSeverityL
 
                 if (!expectedMap.TryGetValue(diagnosticIdString, out var expectedValue))
                 {
-                    Assert.False(true, $@"Missing entry:
+                    Assert.False(
+                        true,
+                        $@"Missing entry:
 
 {diagnosticIdString}
 {editorConfigString}
-");
+"
+                    );
                 }
 
                 // Verify entries match for diagnosticId
                 if (expectedValue != editorConfigString)
                 {
-                    Assert.False(true, $@"Mismatch for '{diagnosticId}'
+                    Assert.False(
+                        true,
+                        $@"Mismatch for '{diagnosticId}'
 Expected: {expectedValue}
 Actual: {editorConfigString}
-");
+"
+                    );
                 }
 
                 expectedMap.Remove(diagnosticIdString);
@@ -169,7 +207,8 @@ Actual: {editorConfigString}
         [Fact]
         public void CSharp_VerifyIDEDiagnosticSeveritiesAreConfigurable()
         {
-            var expected = @"
+            var expected =
+                @"
 # IDE0001
 dotnet_diagnostic.IDE0001.severity = %value%
 
@@ -483,7 +522,8 @@ dotnet_diagnostic.JSON002.severity = %value%
         [Fact]
         public void VisualBasic_VerifyIDEDiagnosticSeveritiesAreConfigurable()
         {
-            var expected = @"
+            var expected =
+                @"
 # IDE0001
 dotnet_diagnostic.IDE0001.severity = %value%
 
@@ -643,7 +683,10 @@ dotnet_diagnostic.JSON002.severity = %value%
             VerifyConfigureSeverityCore(expected, LanguageNames.VisualBasic);
         }
 
-        private static void VerifyConfigureCodeStyleOptionsCore(string expected, string languageName)
+        private static void VerifyConfigureCodeStyleOptionsCore(
+            string expected,
+            string languageName
+        )
         {
             using var workspace = new TestWorkspace();
             var optionSet = workspace.Options;
@@ -657,15 +700,23 @@ dotnet_diagnostic.JSON002.severity = %value%
                 var hasEditorConfigCodeStyleOptions = false;
                 foreach (var option in options.OrderBy(o => o.Name))
                 {
-                    var editorConfigLocation = option.StorageLocations.OfType<IEditorConfigStorageLocation2>().FirstOrDefault();
+                    var editorConfigLocation = option.StorageLocations
+                        .OfType<IEditorConfigStorageLocation2>()
+                        .FirstOrDefault();
                     if (editorConfigLocation == null)
                     {
                         continue;
                     }
 
-                    var optionKey = new OptionKey(option, option.IsPerLanguage ? languageName : null);
+                    var optionKey = new OptionKey(
+                        option,
+                        option.IsPerLanguage ? languageName : null
+                    );
                     var value = optionSet.GetOption(optionKey);
-                    var editorConfigString = editorConfigLocation.GetEditorConfigString(value, optionSet);
+                    var editorConfigString = editorConfigLocation.GetEditorConfigString(
+                        value,
+                        optionSet
+                    );
 
                     ProcessDiagnosticIdAndOption(diagnosticId, option, editorConfigString);
                     hasEditorConfigCodeStyleOptions = true;
@@ -673,7 +724,11 @@ dotnet_diagnostic.JSON002.severity = %value%
 
                 if (!hasEditorConfigCodeStyleOptions)
                 {
-                    ProcessDiagnosticIdAndOption(diagnosticId, optionOpt: null, editorConfigString: "No editorconfig based code style option");
+                    ProcessDiagnosticIdAndOption(
+                        diagnosticId,
+                        optionOpt: null,
+                        editorConfigString: "No editorconfig based code style option"
+                    );
                 }
             }
 
@@ -698,7 +753,11 @@ dotnet_diagnostic.JSON002.severity = %value%
             return;
 
             // Local functions
-            void ProcessDiagnosticIdAndOption(string diagnosticId, IOption optionOpt, string editorConfigString)
+            void ProcessDiagnosticIdAndOption(
+                string diagnosticId,
+                IOption optionOpt,
+                string editorConfigString
+            )
             {
                 // Verify we have an entry for { diagnosticId, optionName }
                 var diagnosticIdString = $"# {diagnosticId}";
@@ -718,20 +777,26 @@ dotnet_diagnostic.JSON002.severity = %value%
 
                 if (!expectedMap.TryGetValue(diagnosticIdString, out var expectedValue))
                 {
-                    Assert.False(true, $@"Missing entry:
+                    Assert.False(
+                        true,
+                        $@"Missing entry:
 
 {diagnosticIdString}
 {editorConfigString}
-");
+"
+                    );
                 }
 
                 // Verify entries match for diagnosticId
                 if (expectedValue != editorConfigString)
                 {
-                    Assert.False(true, $@"Mismatch for '{diagnosticId}'
+                    Assert.False(
+                        true,
+                        $@"Mismatch for '{diagnosticId}'
 Expected: {expectedValue}
 Actual: {editorConfigString}
-");
+"
+                    );
                 }
 
                 expectedMap.Remove(diagnosticIdString);
@@ -741,7 +806,8 @@ Actual: {editorConfigString}
         [Fact]
         public void CSharp_VerifyIDECodeStyleOptionsAreConfigurable()
         {
-            var expected = @"
+            var expected =
+                @"
 # IDE0001
 No editorconfig based code style option
 
@@ -1109,7 +1175,8 @@ No editorconfig based code style option
         [Fact]
         public void VisualBasic_VerifyIDECodeStyleOptionsAreConfigurable()
         {
-            var expected = @"
+            var expected =
+                @"
 # IDE0001
 No editorconfig based code style option
 

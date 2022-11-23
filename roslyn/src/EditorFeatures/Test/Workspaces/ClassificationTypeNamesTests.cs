@@ -23,14 +23,21 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         {
             get
             {
-                foreach (var field in typeof(ClassificationTypeNames).GetFields(BindingFlags.Static | BindingFlags.Public))
+                foreach (
+                    var field in typeof(ClassificationTypeNames).GetFields(
+                        BindingFlags.Static | BindingFlags.Public
+                    )
+                )
                 {
                     yield return new object[] { field.Name, field.GetRawConstantValue() };
                 }
             }
         }
-        public static IEnumerable<object[]> AllClassificationTypeNames => typeof(ClassificationTypeNames).GetAllFields().Where(
-            field => field.GetValue(null) is string value).Select(field => new object[] { (string)field.GetValue(null) });
+        public static IEnumerable<object[]> AllClassificationTypeNames =>
+            typeof(ClassificationTypeNames)
+                .GetAllFields()
+                .Where(field => field.GetValue(null) is string value)
+                .Select(field => new object[] { (string)field.GetValue(null) });
 
         [Theory]
         [MemberData(nameof(AllPublicClassificationTypeNames))]
@@ -38,18 +45,32 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         public void ClassificationTypeExported(string fieldName, object constantValue)
         {
             var classificationTypeName = Assert.IsType<string>(constantValue);
-            var exportProvider = EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
-            var classificationTypeRegistryService = exportProvider.GetExport<IClassificationTypeRegistryService>().Value;
-            var classificationType = classificationTypeRegistryService.GetClassificationType(classificationTypeName);
-            Assert.True(classificationType != null, $"{nameof(ClassificationTypeNames)}.{fieldName} has value \"{classificationTypeName}\", but no matching {nameof(ClassificationTypeDefinition)} was exported.");
+            var exportProvider =
+                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var classificationTypeRegistryService = exportProvider
+                .GetExport<IClassificationTypeRegistryService>()
+                .Value;
+            var classificationType = classificationTypeRegistryService.GetClassificationType(
+                classificationTypeName
+            );
+            Assert.True(
+                classificationType != null,
+                $"{nameof(ClassificationTypeNames)}.{fieldName} has value \"{classificationTypeName}\", but no matching {nameof(ClassificationTypeDefinition)} was exported."
+            );
         }
 
         [Theory, MemberData(nameof(AllClassificationTypeNames))]
-        public void AllTypeNamesContainsAllClassifications(string fieldName)
-            => Assert.True(ClassificationTypeNames.AllTypeNames.Contains(fieldName), $"Missing token type {fieldName}.");
+        public void AllTypeNamesContainsAllClassifications(string fieldName) =>
+            Assert.True(
+                ClassificationTypeNames.AllTypeNames.Contains(fieldName),
+                $"Missing token type {fieldName}."
+            );
 
         [Fact]
-        public void AllTypeNamesContainsNoDuplicates()
-            => Assert.Equal(ClassificationTypeNames.AllTypeNames.Distinct(), ClassificationTypeNames.AllTypeNames);
+        public void AllTypeNamesContainsNoDuplicates() =>
+            Assert.Equal(
+                ClassificationTypeNames.AllTypeNames.Distinct(),
+                ClassificationTypeNames.AllTypeNames
+            );
     }
 }

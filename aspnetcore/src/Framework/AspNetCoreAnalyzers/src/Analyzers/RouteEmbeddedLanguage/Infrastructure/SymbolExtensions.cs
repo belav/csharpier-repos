@@ -35,11 +35,18 @@ internal static class SymbolExtensions
         return false;
     }
 
-    public static bool IsType(this INamedTypeSymbol type, string typeName, SemanticModel semanticModel)
-        => SymbolEqualityComparer.Default.Equals(type, semanticModel.Compilation.GetTypeByMetadataName(typeName));
+    public static bool IsType(
+        this INamedTypeSymbol type,
+        string typeName,
+        SemanticModel semanticModel
+    ) =>
+        SymbolEqualityComparer.Default.Equals(
+            type,
+            semanticModel.Compilation.GetTypeByMetadataName(typeName)
+        );
 
-    public static bool IsType(this INamedTypeSymbol type, INamedTypeSymbol otherType)
-        => SymbolEqualityComparer.Default.Equals(type, otherType);
+    public static bool IsType(this INamedTypeSymbol type, INamedTypeSymbol otherType) =>
+        SymbolEqualityComparer.Default.Equals(type, otherType);
 
     public static ITypeSymbol GetParameterType(this ISymbol symbol)
     {
@@ -51,14 +58,14 @@ internal static class SymbolExtensions
         };
     }
 
-    public static ImmutableArray<IParameterSymbol> GetParameters(this ISymbol? symbol)
-        => symbol switch
+    public static ImmutableArray<IParameterSymbol> GetParameters(this ISymbol? symbol) =>
+        symbol switch
         {
             IMethodSymbol methodSymbol => methodSymbol.Parameters,
             IPropertySymbol parameterSymbol => parameterSymbol.Parameters,
             _ => ImmutableArray<IParameterSymbol>.Empty,
         };
 
-    public static ISymbol? GetAnySymbol(this SymbolInfo info)
-        => info.Symbol ?? info.CandidateSymbols.FirstOrDefault();
+    public static ISymbol? GetAnySymbol(this SymbolInfo info) =>
+        info.Symbol ?? info.CandidateSymbols.FirstOrDefault();
 }

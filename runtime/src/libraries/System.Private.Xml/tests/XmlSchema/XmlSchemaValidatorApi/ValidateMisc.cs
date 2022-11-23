@@ -11,6 +11,7 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     public class TCValidateAfterAdd : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
+
         public TCValidateAfterAdd(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -33,7 +34,14 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         [InlineData("simpleType", "stE064.xsd", 1, 1, 1, 0)]
         [InlineData("Wildcards", "wildG007.xsd", 1, 1, 2, 0)]
         [InlineData("Wildcards", "wildG010.xsd", 3, 1, 5, 0)]
-        public void v1(string testDir, string testFile, int expCount, int expCountGT, int expCountGE, int expCountGA)
+        public void v1(
+            string testDir,
+            string testFile,
+            int expCount,
+            int expCountGT,
+            int expCountGE,
+            int expCountGA
+        )
         {
             Initialize();
             string xsd = Path.Combine(path, testDir, testFile);
@@ -47,7 +55,15 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             ValidateWithSchemaInfo(ss);
 
             ss.Compile();
-            ValidateSchemaSet(ss, expCount, true, expCountGT, expCountGE, expCountGA, "Validation after add/comp");
+            ValidateSchemaSet(
+                ss,
+                expCount,
+                true,
+                expCountGT,
+                expCountGE,
+                expCountGA,
+                "Validation after add/comp"
+            );
             ValidateWithSchemaInfo(ss);
 
             foreach (XmlSchema schema in ss.Schemas())
@@ -57,7 +73,15 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             ValidateWithSchemaInfo(ss);
 
             ss.Compile();
-            ValidateSchemaSet(ss, expCount, true, expCountGT, expCountGE, expCountGA, "Validation after repr/comp");
+            ValidateSchemaSet(
+                ss,
+                expCount,
+                true,
+                expCountGT,
+                expCountGE,
+                expCountGA,
+                "Validation after repr/comp"
+            );
             ValidateWithSchemaInfo(ss);
 
             Assert.True(ss.RemoveRecursive(Schema));
@@ -86,7 +110,14 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         [InlineData("simpleType", "stE064", 1, 1, 1, 0)]
         [InlineData("Wildcards", "wildG007", 1, 1, 2, 0)]
         [InlineData("Wildcards", "wildG010", 3, 1, 5, 0)]
-        public void v2(string testDir, string testFile, int expCount, int expCountGT, int expCountGE, int expCountGA)
+        public void v2(
+            string testDir,
+            string testFile,
+            int expCount,
+            int expCountGT,
+            int expCountGE,
+            int expCountGA
+        )
         {
             Initialize();
             string xsd = Path.Combine(path, testDir, testFile + ".xsd");
@@ -101,7 +132,15 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             ValidateWithXmlReader(ss, xml, xsd);
 
             ss.Compile();
-            ValidateSchemaSet(ss, expCount, true, expCountGT, expCountGE, expCountGA, "Validation after add/comp");
+            ValidateSchemaSet(
+                ss,
+                expCount,
+                true,
+                expCountGT,
+                expCountGE,
+                expCountGA,
+                "Validation after add/comp"
+            );
             ValidateWithXmlReader(ss, xml, xsd);
 
             XmlSchema Schema2 = null;
@@ -111,7 +150,15 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             ValidateWithXmlReader(ss, xml, xsd);
 
             ss.Compile();
-            ValidateSchemaSet(ss, expCount, true, expCountGT, expCountGE, expCountGA, "Validation after repr/comp");
+            ValidateSchemaSet(
+                ss,
+                expCount,
+                true,
+                expCountGT,
+                expCountGE,
+                expCountGA,
+                "Validation after repr/comp"
+            );
             ValidateWithXmlReader(ss, xml, xsd);
 
             Assert.True(ss.RemoveRecursive(Schema));
@@ -129,6 +176,7 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     public class TCValidateAfterRemove : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
+
         public TCValidateAfterRemove(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -151,7 +199,16 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         [InlineData("simpleType", "stE064.xsd", 1, 1, 1, 0, 0, 0)]
         [InlineData("Wildcards", "wildG007.xsd", 1, 1, 2, 0, 0, 0)]
         [InlineData("Wildcards", "wildG010.xsd", 3, 1, 5, 0, 3, 1)]
-        public void v1(string testDir, string testFile, int expCount, int expCountGT, int expCountGE, int expCountGA, int expCountGER, int expCountGERC)
+        public void v1(
+            string testDir,
+            string testFile,
+            int expCount,
+            int expCountGT,
+            int expCountGE,
+            int expCountGA,
+            int expCountGER,
+            int expCountGERC
+        )
         {
             Initialize();
             string xsd = Path.Combine(path, testDir, testFile);
@@ -165,15 +222,39 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             ValidateWithSchemaInfo(ss);
 
             ss.Compile();
-            ValidateSchemaSet(ss, expCount, true, expCountGT, expCountGE, expCountGA, "Validation after  add/comp");
+            ValidateSchemaSet(
+                ss,
+                expCount,
+                true,
+                expCountGT,
+                expCountGE,
+                expCountGA,
+                "Validation after  add/comp"
+            );
             ValidateWithSchemaInfo(ss);
 
             ss.Remove(Schema);
-            ValidateSchemaSet(ss, expCount - 1, false, 1, expCountGER, 0, "Validation after remove");
+            ValidateSchemaSet(
+                ss,
+                expCount - 1,
+                false,
+                1,
+                expCountGER,
+                0,
+                "Validation after remove"
+            );
             ValidateWithSchemaInfo(ss);
 
             ss.Compile();
-            ValidateSchemaSet(ss, expCount - 1, true, expCountGERC, expCountGER, 0, "Validation after rem/comp");
+            ValidateSchemaSet(
+                ss,
+                expCount - 1,
+                true,
+                expCountGERC,
+                expCountGER,
+                0,
+                "Validation after rem/comp"
+            );
             ValidateWithSchemaInfo(ss);
 
             XmlSchema Schema2 = null;
@@ -186,15 +267,39 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             {
                 _output.WriteLine(e.Message);
             }
-            ValidateSchemaSet(ss, expCount - 1, true, expCountGERC, expCountGER, 0, "Validation after repr");
+            ValidateSchemaSet(
+                ss,
+                expCount - 1,
+                true,
+                expCountGERC,
+                expCountGER,
+                0,
+                "Validation after repr"
+            );
             ValidateWithSchemaInfo(ss);
 
             Assert.False(ss.RemoveRecursive(Schema));
-            ValidateSchemaSet(ss, expCount - 1, true, expCountGERC, expCountGER, 0, "Validation after add");
+            ValidateSchemaSet(
+                ss,
+                expCount - 1,
+                true,
+                expCountGERC,
+                expCountGER,
+                0,
+                "Validation after add"
+            );
             ValidateWithSchemaInfo(ss);
 
             ss.Compile();
-            ValidateSchemaSet(ss, expCount - 1, true, expCountGERC, expCountGER, 0, "Validation after remRec/comp");
+            ValidateSchemaSet(
+                ss,
+                expCount - 1,
+                true,
+                expCountGERC,
+                expCountGER,
+                0,
+                "Validation after remRec/comp"
+            );
             ValidateWithSchemaInfo(ss);
 
             return;
@@ -215,7 +320,16 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         [InlineData("simpleType", "stE064", 1, 1, 1, 0, 0, 0)]
         [InlineData("Wildcards", "wildG007", 1, 1, 2, 0, 0, 0)]
         [InlineData("Wildcards", "wildG010", 3, 1, 5, 0, 3, 1)]
-        public void v2(string testDir, string testFile, int expCount, int expCountGT, int expCountGE, int expCountGA, int expCountGER, int expCountGERC)
+        public void v2(
+            string testDir,
+            string testFile,
+            int expCount,
+            int expCountGT,
+            int expCountGE,
+            int expCountGA,
+            int expCountGER,
+            int expCountGERC
+        )
         {
             Initialize();
             string xsd = Path.Combine(path, testDir, testFile + ".xsd");
@@ -230,7 +344,15 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             ValidateWithXmlReader(ss, xml, xsd);
 
             ss.Compile();
-            ValidateSchemaSet(ss, expCount, true, expCountGT, expCountGE, expCountGA, "Validation after add/comp");
+            ValidateSchemaSet(
+                ss,
+                expCount,
+                true,
+                expCountGT,
+                expCountGE,
+                expCountGA,
+                "Validation after add/comp"
+            );
             ValidateWithXmlReader(ss, xml, xsd);
 
             ss.Remove(Schema);
@@ -238,7 +360,15 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             ValidateWithXmlReader(ss, xml, xsd);
 
             ss.Compile();
-            ValidateSchemaSet(ss, expCount - 1, true, expCountGERC, expCountGER, 0, "Validation after add");
+            ValidateSchemaSet(
+                ss,
+                expCount - 1,
+                true,
+                expCountGERC,
+                expCountGER,
+                0,
+                "Validation after add"
+            );
             ValidateWithXmlReader(ss, xml, xsd);
 
             try
@@ -250,15 +380,39 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             {
                 _output.WriteLine(e.Message);
             }
-            ValidateSchemaSet(ss, expCount - 1, true, expCountGERC, expCountGER, 0, "Validation after repr");
+            ValidateSchemaSet(
+                ss,
+                expCount - 1,
+                true,
+                expCountGERC,
+                expCountGER,
+                0,
+                "Validation after repr"
+            );
             ValidateWithXmlReader(ss, xml, xsd);
 
             Assert.False(ss.RemoveRecursive(Schema));
-            ValidateSchemaSet(ss, expCount - 1, true, expCountGERC, expCountGER, 0, "Validation after remRec");
+            ValidateSchemaSet(
+                ss,
+                expCount - 1,
+                true,
+                expCountGERC,
+                expCountGER,
+                0,
+                "Validation after remRec"
+            );
             ValidateWithXmlReader(ss, xml, xsd);
 
             ss.Compile();
-            ValidateSchemaSet(ss, expCount - 1, true, expCountGERC, expCountGER, 0, "Validation after remRec/comp");
+            ValidateSchemaSet(
+                ss,
+                expCount - 1,
+                true,
+                expCountGERC,
+                expCountGER,
+                0,
+                "Validation after remRec/comp"
+            );
             ValidateWithXmlReader(ss, xml, xsd);
 
             return;
@@ -268,6 +422,7 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     public class TCValidateAfterReprocess : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
+
         public TCValidateAfterReprocess(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -303,7 +458,10 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             XmlSchemaElement element = new XmlSchemaElement();
             schema.Items.Add(element);
             element.Name = "book";
-            element.SchemaTypeName = new XmlQualifiedName("string", "http://www.w3.org/2001/XMLSchema");
+            element.SchemaTypeName = new XmlQualifiedName(
+                "string",
+                "http://www.w3.org/2001/XMLSchema"
+            );
 
             foreach (XmlSchema sc in ss.Schemas())
                 ss.Reprocess(sc);
@@ -367,7 +525,10 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             XmlSchemaElement element = new XmlSchemaElement();
             schema.Items.Add(element);
             element.Name = "book";
-            element.SchemaTypeName = new XmlQualifiedName("string", "http://www.w3.org/2001/XMLSchema");
+            element.SchemaTypeName = new XmlQualifiedName(
+                "string",
+                "http://www.w3.org/2001/XMLSchema"
+            );
 
             foreach (XmlSchema sc in ss.Schemas())
                 ss.Reprocess(sc);
@@ -404,13 +565,17 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     public class TCValidateAfterAddInvalidSchema : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
+
         public TCValidateAfterAddInvalidSchema(ITestOutputHelper output) : base(output)
         {
             _output = output;
         }
 
         private static string path = Path.Combine(FilePathUtil.GetStandardPath(), "xsd10");
-        private static string testData = Path.Combine(FilePathUtil.GetTestDataPath(), "XmlSchemaCollection");
+        private static string testData = Path.Combine(
+            FilePathUtil.GetTestDataPath(),
+            "XmlSchemaCollection"
+        );
 
         [Theory]
         [InlineData("SCHEMA", "schE1_a.xsd", 2, 3, 3)]
@@ -420,7 +585,13 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         [InlineData("SCHEMA", "schM2_a.xsd", 1, 3, 3)]
         [InlineData("SCHEMA", "schH2_a.xsd", 1, 3, 3)]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/75132", TestPlatforms.Browser)]
-        public void AddValid_Import_Include_Redefine(string testDir, string testFile, int expCount, int expCountGT, int expCountGE)
+        public void AddValid_Import_Include_Redefine(
+            string testDir,
+            string testFile,
+            int expCount,
+            int expCountGT,
+            int expCountGE
+        )
         {
             string xsd = Path.Combine(path, testDir, testFile);
 
@@ -431,14 +602,30 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             ValidateSchemaSet(ss, expCount, false, 0, 0, 0, "Validation after add");
 
             ss.Compile();
-            ValidateSchemaSet(ss, expCount, true, expCountGT, expCountGE, 0, "Validation after add/comp");
+            ValidateSchemaSet(
+                ss,
+                expCount,
+                true,
+                expCountGT,
+                expCountGE,
+                0,
+                "Validation after add/comp"
+            );
 
             foreach (XmlSchema sc in ss.Schemas())
                 ss.Reprocess(sc);
             ValidateSchemaSet(ss, expCount, false, 1, 0, 0, "Validation after repr");
 
             ss.Compile();
-            ValidateSchemaSet(ss, expCount, true, expCountGT, expCountGE, 0, "Validation after repr/comp");
+            ValidateSchemaSet(
+                ss,
+                expCount,
+                true,
+                expCountGT,
+                expCountGE,
+                0,
+                "Validation after repr/comp"
+            );
 
             ValidateWithSchemaInfo(ss);
             return;
@@ -447,7 +634,12 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         [Theory]
         [InlineData("SCHEMA", "schE9.xsd", 1, 1)]
         [InlineData("SCHEMA", "schA7_a.xsd", 2, 2)]
-        public void AddEditInvalidImport(string testDir, string testFile, int expCountGT, int expCountGE)
+        public void AddEditInvalidImport(
+            string testDir,
+            string testFile,
+            int expCountGT,
+            int expCountGE
+        )
         {
             string xsd = Path.Combine(path, testDir, testFile);
 
@@ -603,6 +795,7 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     public class TCXmlSchemaValidatorMisc : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
+
         public TCXmlSchemaValidatorMisc(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -620,15 +813,30 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                 switch (param)
                 {
                     case 1:
-                        val = new XmlSchemaValidator(null, new XmlSchemaSet(), null, XmlSchemaValidationFlags.None);
+                        val = new XmlSchemaValidator(
+                            null,
+                            new XmlSchemaSet(),
+                            null,
+                            XmlSchemaValidationFlags.None
+                        );
                         break;
 
                     case 2:
-                        val = new XmlSchemaValidator(new NameTable(), null, null, XmlSchemaValidationFlags.None);
+                        val = new XmlSchemaValidator(
+                            new NameTable(),
+                            null,
+                            null,
+                            XmlSchemaValidationFlags.None
+                        );
                         break;
 
                     case 3:
-                        val = new XmlSchemaValidator(new NameTable(), new XmlSchemaSet(), null, XmlSchemaValidationFlags.None);
+                        val = new XmlSchemaValidator(
+                            new NameTable(),
+                            new XmlSchemaSet(),
+                            null,
+                            XmlSchemaValidationFlags.None
+                        );
                         break;
                 }
             }
@@ -644,7 +852,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         [Fact]
         public void XmlSchemaSetCompileAfterRemovingLastSchemaInTheSetIsNotClearingCachedCompiledInformationUsedForValidation_1()
         {
-            string schemaXml = @"
+            string schemaXml =
+                @"
                 <Schema:schema xmlns:Schema='http://www.w3.org/2001/XMLSchema'
                            targetNamespace='urn:test'
                            elementFormDefault='qualified'>
@@ -668,7 +877,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             {
                 try
                 {
-                    while (xmlReader.Read()) ;
+                    while (xmlReader.Read())
+                        ;
                     Assert.True(false);
                 }
                 catch (XmlSchemaValidationException e)
@@ -688,7 +898,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
             using (XmlReader xmlReader = XmlReader.Create(new StringReader(instanceXml), settings))
             {
-                while (xmlReader.Read()) ;
+                while (xmlReader.Read())
+                    ;
             }
             return;
         }
@@ -697,7 +908,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         [Fact]
         public void XmlSchemaSetCompileAfterRemovingLastSchemaInTheSetIsNotClearingCachedCompiledInformationUsedForValidation_2()
         {
-            string schemaXml = @"<Schema:schema xmlns:Schema='http://www.w3.org/2001/XMLSchema' targetNamespace='uri1'>
+            string schemaXml =
+                @"<Schema:schema xmlns:Schema='http://www.w3.org/2001/XMLSchema' targetNamespace='uri1'>
     <Schema:element name='doc' type='Schema:string'/>
 </Schema:schema>";
 
@@ -716,7 +928,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
             using (XmlReader xmlReader = XmlReader.Create(new StringReader(instanceXml), settings))
             {
-                while (xmlReader.Read()) ;
+                while (xmlReader.Read())
+                    ;
             }
 
             ss.Remove(schema);
@@ -730,12 +943,14 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
             using (XmlReader xmlReader = XmlReader.Create(new StringReader(instanceXml), settings))
             {
-                while (xmlReader.Read()) ;
+                while (xmlReader.Read())
+                    ;
             }
             return;
         }
 
-        private string xsd = @"<?xml version='1.0' encoding='utf-8'?>
+        private string xsd =
+            @"<?xml version='1.0' encoding='utf-8'?>
 <Schema:schema targetNamespace='mainschema'
     elementFormDefault='qualified'
     xmlns='mainschema'
@@ -754,7 +969,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
  </Schema:element>
 </Schema:schema>";
 
-        private string xml = @"<?xml version='1.0' encoding='utf-8'?>
+        private string xml =
+            @"<?xml version='1.0' encoding='utf-8'?>
 <root xmlns='mainschema'>
  <sub xmlns='sub2'>
   <node1>text1</node1>
@@ -768,7 +984,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
         private static void CreateSchema1(string testDirectory)
         {
-            string commonxsd = @"<?xml version='1.0' encoding='utf-8'?>
+            string commonxsd =
+                @"<?xml version='1.0' encoding='utf-8'?>
 <Schema:schema  elementFormDefault='qualified'
     xmlns:Schema='http://www.w3.org/2001/XMLSchema'>
  <Schema:complexType name='CommonType'>
@@ -778,7 +995,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
   </Schema:all>
  </Schema:complexType>
 </Schema:schema>";
-            string sub1 = @"<?xml version='1.0' encoding='utf-8'?>
+            string sub1 =
+                @"<?xml version='1.0' encoding='utf-8'?>
 <Schema:schema targetNamespace='sub1'
     elementFormDefault='qualified'
     xmlns='sub1'
@@ -786,7 +1004,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
  <Schema:include schemaLocation='commonstructure.xsd'/>
  <Schema:element name='sub' type='CommonType'/>
 </Schema:schema>";
-            string sub2 = @"<?xml version='1.0' encoding='utf-8'?>
+            string sub2 =
+                @"<?xml version='1.0' encoding='utf-8'?>
 <Schema:schema targetNamespace='sub2'
     elementFormDefault='qualified'
     xmlns='sub2'
@@ -795,7 +1014,9 @@ namespace System.Xml.XmlSchemaValidatorApiTests
  <Schema:element name='sub' type='CommonType'/>
 </Schema:schema>";
 
-            using (XmlWriter w = XmlWriter.Create(Path.Combine(testDirectory, "commonstructure.xsd")))
+            using (
+                XmlWriter w = XmlWriter.Create(Path.Combine(testDirectory, "commonstructure.xsd"))
+            )
             {
                 using (XmlReader r = XmlReader.Create(new StringReader(commonxsd)))
                 {
@@ -820,7 +1041,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
         private static void CreateSchema2(string testDirectory)
         {
-            string sub1 = @"<?xml version='1.0' encoding='utf-8'?>
+            string sub1 =
+                @"<?xml version='1.0' encoding='utf-8'?>
 <Schema:schema targetNamespace='sub1'
     elementFormDefault='qualified'
     xmlns='sub1'
@@ -828,7 +1050,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
  <Schema:include schemaLocation='commonstructure1.xsd'/>
  <Schema:element name='sub' type='CommonType'/>
 </Schema:schema>";
-            string sub2 = @"<?xml version='1.0' encoding='utf-8'?>
+            string sub2 =
+                @"<?xml version='1.0' encoding='utf-8'?>
 <Schema:schema targetNamespace='sub2'
     elementFormDefault='qualified'
     xmlns='sub2'
@@ -836,7 +1059,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
  <Schema:include schemaLocation='commonstructure2.xsd'/>
  <Schema:element name='sub' type='CommonType'/>
 </Schema:schema>";
-            string commonxsd1 = @"<?xml version='1.0' encoding='utf-8'?>
+            string commonxsd1 =
+                @"<?xml version='1.0' encoding='utf-8'?>
 <Schema:schema
     elementFormDefault='qualified'
     xmlns:Schema='http://www.w3.org/2001/XMLSchema'>
@@ -847,7 +1071,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
   </Schema:all>
  </Schema:complexType>
 </Schema:schema>";
-            string commonxsd2 = @"<?xml version='1.0' encoding='utf-8'?>
+            string commonxsd2 =
+                @"<?xml version='1.0' encoding='utf-8'?>
 <Schema:schema
     elementFormDefault='qualified'
     xmlns:Schema='http://www.w3.org/2001/XMLSchema'>
@@ -859,14 +1084,18 @@ namespace System.Xml.XmlSchemaValidatorApiTests
  </Schema:complexType>
 </Schema:schema>";
 
-            using (XmlWriter w = XmlWriter.Create(Path.Combine(testDirectory, "commonstructure1.xsd")))
+            using (
+                XmlWriter w = XmlWriter.Create(Path.Combine(testDirectory, "commonstructure1.xsd"))
+            )
             {
                 using (XmlReader r = XmlReader.Create(new StringReader(commonxsd1)))
                 {
                     w.WriteNode(r, true);
                 }
             }
-            using (XmlWriter w = XmlWriter.Create(Path.Combine(testDirectory, "commonstructure2.xsd")))
+            using (
+                XmlWriter w = XmlWriter.Create(Path.Combine(testDirectory, "commonstructure2.xsd"))
+            )
             {
                 using (XmlReader r = XmlReader.Create(new StringReader(commonxsd2)))
                 {
@@ -900,14 +1129,23 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                 settings.XmlResolver = new XmlUrlResolver();
                 settings.Schemas.XmlResolver = new XmlUrlResolver();
                 // TempDirectory path must end with a DirectorySeratorChar, otherwise it will throw in the Xml validation.
-                settings.Schemas.Add("mainschema", XmlReader.Create(new StringReader(xsd), null, EnsureTrailingSlash(tempDirectory.Path)));
+                settings.Schemas.Add(
+                    "mainschema",
+                    XmlReader.Create(
+                        new StringReader(xsd),
+                        null,
+                        EnsureTrailingSlash(tempDirectory.Path)
+                    )
+                );
                 settings.ValidationType = ValidationType.Schema;
                 XmlReader reader = XmlReader.Create(new StringReader(xml), settings);
                 XmlDocument doc = new XmlDocument();
 
                 doc.Load(reader);
 
-                ValidationEventHandler valEventHandler = new ValidationEventHandler(ValidationCallback);
+                ValidationEventHandler valEventHandler = new ValidationEventHandler(
+                    ValidationCallback
+                );
                 doc.Validate(valEventHandler);
                 Assert.Equal(0, warningCount);
                 Assert.Equal(0, errorCount);
@@ -925,14 +1163,23 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                 settings.XmlResolver = new XmlUrlResolver();
                 settings.Schemas.XmlResolver = new XmlUrlResolver();
                 // TempDirectory path must end with a DirectorySeratorChar, otherwise it will throw in the Xml validation.
-                settings.Schemas.Add("mainschema", XmlReader.Create(new StringReader(xsd), null, EnsureTrailingSlash(tempDirectory.Path)));
+                settings.Schemas.Add(
+                    "mainschema",
+                    XmlReader.Create(
+                        new StringReader(xsd),
+                        null,
+                        EnsureTrailingSlash(tempDirectory.Path)
+                    )
+                );
                 settings.ValidationType = ValidationType.Schema;
                 XmlReader reader = XmlReader.Create(new StringReader(xml), settings);
                 XmlDocument doc = new XmlDocument();
 
                 doc.Load(reader);
 
-                ValidationEventHandler valEventHandler = new ValidationEventHandler(ValidationCallback);
+                ValidationEventHandler valEventHandler = new ValidationEventHandler(
+                    ValidationCallback
+                );
                 doc.Validate(valEventHandler);
                 Assert.Equal(0, warningCount);
                 Assert.Equal(0, errorCount);
@@ -944,12 +1191,13 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentException();
 
-            return path[path.Length - 1] == Path.DirectorySeparatorChar ?
-                path :
-                path + Path.DirectorySeparatorChar;
+            return path[path.Length - 1] == Path.DirectorySeparatorChar
+                ? path
+                : path + Path.DirectorySeparatorChar;
         }
 
-        private static string xsd445844 = @"<?xml version='1.0' encoding='utf-8' ?>
+        private static string xsd445844 =
+            @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema xmlns:mstns='http://tempuri.org/XMLSchema.xsd' elementFormDefault='qualified' targetNamespace='http://tempuri.org/XMLSchema.xsd' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
   <xs:complexType name='a'>
     <xs:simpleContent>
@@ -970,7 +1218,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
   </xs:element>
 </xs:schema>";
 
-        private static string xml445844 = @"<?xml version='1.0' encoding='utf-8'?>
+        private static string xml445844 =
+            @"<?xml version='1.0' encoding='utf-8'?>
 <tns:c xmlns:tns='http://tempuri.org/XMLSchema.xsd' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://tempuri.org/XMLSchema.xsd'>
   <tns:d xsi:type='tns:b'>true</tns:d>
 </tns:c>";
@@ -982,18 +1231,25 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             Initialize();
 
             XmlSchemaSet ss = new XmlSchemaSet();
-            XmlSchema Schema = XmlSchema.Read(XmlReader.Create(new StringReader(xsd445844)), ValidationCallback);
+            XmlSchema Schema = XmlSchema.Read(
+                XmlReader.Create(new StringReader(xsd445844)),
+                ValidationCallback
+            );
             ss.Add(Schema);
             ss.Compile();
 
             XmlReaderSettings rs = new XmlReaderSettings();
             rs.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
             rs.ValidationType = ValidationType.Schema;
-            rs.Schemas.Add("http://tempuri.org/XMLSchema.xsd", XmlReader.Create(new StringReader(xsd445844)));
+            rs.Schemas.Add(
+                "http://tempuri.org/XMLSchema.xsd",
+                XmlReader.Create(new StringReader(xsd445844))
+            );
 
             using (XmlReader r = XmlReader.Create(new StringReader(xml445844), rs))
             {
-                while (r.Read()) ;
+                while (r.Read())
+                    ;
             }
 
             Assert.Equal(0, warningCount);
@@ -1001,7 +1257,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             return;
         }
 
-        private static string xsd696909 = @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>
+        private static string xsd696909 =
+            @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>
 <xs:element name='Foo' type='FooType' />
 <xs:element name='Bar' type='BarType' />
 <xs:complexType name='FooType'>
@@ -1031,7 +1288,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             return;
         }
 
-        private static string xsd661328 = @"<?xml version='1.0' encoding='utf-8' ?>
+        private static string xsd661328 =
+            @"<?xml version='1.0' encoding='utf-8' ?>
 <xs:schema elementFormDefault='qualified' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
 <xs:element name='NoContentPatternTest'>
 <xs:complexType>
@@ -1049,7 +1307,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 </xs:element>
 </xs:schema>";
 
-        private static string xml661328 = @"<?xml version='1.0' encoding='utf-8'?>
+        private static string xml661328 =
+            @"<?xml version='1.0' encoding='utf-8'?>
 <NoContentPatternTest xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='NoContentPattern.xsd'>
 <Collapse></Collapse>
 <Collapse> </Collapse>
@@ -1065,7 +1324,10 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             Initialize();
 
             XmlSchemaSet ss = new XmlSchemaSet();
-            XmlSchema Schema = XmlSchema.Read(XmlReader.Create(new StringReader(xsd661328)), ValidationCallback);
+            XmlSchema Schema = XmlSchema.Read(
+                XmlReader.Create(new StringReader(xsd661328)),
+                ValidationCallback
+            );
             ss.Add(Schema);
             ss.Compile();
 
@@ -1076,7 +1338,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
             using (XmlReader r = XmlReader.Create(new StringReader(xml661328), rs))
             {
-                while (r.Read()) ;
+                while (r.Read())
+                    ;
             }
 
             Assert.Equal(0, warningCount);
@@ -1090,7 +1353,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         {
             Initialize();
 
-            string schemaContent = @"<xs:schema elementFormDefault='qualified' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
+            string schemaContent =
+                @"<xs:schema elementFormDefault='qualified' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
 <xs:element name='validationTest'>
 <xs:simpleType>
 <xs:restriction base='xs:string'><xs:pattern value='^\w+$' /></xs:restriction>
@@ -1103,9 +1367,15 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             rs.ValidationType = ValidationType.Schema;
             rs.Schemas.Add(null, XmlReader.Create(new StringReader(schemaContent)));
 
-            using (XmlReader r = XmlReader.Create(new StringReader("<validationTest>test_test</validationTest>"), rs))
+            using (
+                XmlReader r = XmlReader.Create(
+                    new StringReader("<validationTest>test_test</validationTest>"),
+                    rs
+                )
+            )
             {
-                while (r.Read()) ;
+                while (r.Read())
+                    ;
             }
 
             Assert.Equal(0, warningCount);
@@ -1116,26 +1386,34 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         [Fact]
         public static void XmlSchemaReadNullStream()
         {
-            Assert.Throws<ArgumentNullException>(() => XmlSchema.Read(default(Stream), validationEventHandler: null));
+            Assert.Throws<ArgumentNullException>(
+                () => XmlSchema.Read(default(Stream), validationEventHandler: null)
+            );
         }
 
         [Fact]
         public static void XmlSchemaReadNullTextReader()
         {
-            Assert.Throws<ArgumentNullException>(() => XmlSchema.Read(default(TextReader), validationEventHandler: null));
+            Assert.Throws<ArgumentNullException>(
+                () => XmlSchema.Read(default(TextReader), validationEventHandler: null)
+            );
         }
 
         [Fact]
         public static void XmlSchemaReadNullReader()
         {
-            Assert.Throws<ArgumentNullException>(() => XmlSchema.Read(default(XmlReader), validationEventHandler: null));
+            Assert.Throws<ArgumentNullException>(
+                () => XmlSchema.Read(default(XmlReader), validationEventHandler: null)
+            );
         }
 
         [Fact]
         public static void XmlSchemaWriteNullStream()
         {
             XmlSchema schema = new XmlSchema();
-            Assert.Throws<ArgumentNullException>(() => schema.Write(default(Stream), namespaceManager: null));
+            Assert.Throws<ArgumentNullException>(
+                () => schema.Write(default(Stream), namespaceManager: null)
+            );
         }
 
         [Fact]
@@ -1143,7 +1421,9 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         {
             XmlSchema schema = new XmlSchema();
             Assert.Throws<ArgumentNullException>(() => schema.Write(default(TextWriter)));
-            Assert.Throws<ArgumentNullException>(() => schema.Write(default(TextWriter), namespaceManager: null));
+            Assert.Throws<ArgumentNullException>(
+                () => schema.Write(default(TextWriter), namespaceManager: null)
+            );
         }
 
         [Fact]
@@ -1151,7 +1431,9 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         {
             XmlSchema schema = new XmlSchema();
             Assert.Throws<ArgumentNullException>(() => schema.Write(default(XmlWriter)));
-            Assert.Throws<ArgumentNullException>(() => schema.Write(default(XmlWriter), namespaceManager: null));
+            Assert.Throws<ArgumentNullException>(
+                () => schema.Write(default(XmlWriter), namespaceManager: null)
+            );
         }
     }
 }

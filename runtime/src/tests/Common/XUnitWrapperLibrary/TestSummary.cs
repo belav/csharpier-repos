@@ -5,11 +5,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+
 namespace XUnitWrapperLibrary;
 
 public class TestSummary
 {
-    readonly record struct TestResult(string Name, string ContainingTypeName, string MethodName, TimeSpan Duration, Exception? Exception, string? SkipReason, string? Output);
+    readonly record struct TestResult(
+        string Name,
+        string ContainingTypeName,
+        string MethodName,
+        TimeSpan Duration,
+        Exception? Exception,
+        string? SkipReason,
+        string? Output
+    );
 
     public int PassedTests { get; private set; } = 0;
     public int FailedTests { get; private set; } = 0;
@@ -19,22 +28,47 @@ public class TestSummary
 
     private DateTime _testRunStart = DateTime.Now;
 
-    public void ReportPassedTest(string name, string containingTypeName, string methodName, TimeSpan duration, string output)
+    public void ReportPassedTest(
+        string name,
+        string containingTypeName,
+        string methodName,
+        TimeSpan duration,
+        string output
+    )
     {
         PassedTests++;
-        _testResults.Add(new TestResult(name, containingTypeName, methodName, duration, null, null, output));
+        _testResults.Add(
+            new TestResult(name, containingTypeName, methodName, duration, null, null, output)
+        );
     }
 
-    public void ReportFailedTest(string name, string containingTypeName, string methodName, TimeSpan duration, Exception ex, string output)
+    public void ReportFailedTest(
+        string name,
+        string containingTypeName,
+        string methodName,
+        TimeSpan duration,
+        Exception ex,
+        string output
+    )
     {
         FailedTests++;
-        _testResults.Add(new TestResult(name, containingTypeName, methodName, duration, ex, null, output));
+        _testResults.Add(
+            new TestResult(name, containingTypeName, methodName, duration, ex, null, output)
+        );
     }
 
-    public void ReportSkippedTest(string name, string containingTypeName, string methodName, TimeSpan duration, string reason)
+    public void ReportSkippedTest(
+        string name,
+        string containingTypeName,
+        string methodName,
+        TimeSpan duration,
+        string reason
+    )
     {
         SkippedTests++;
-        _testResults.Add(new TestResult(name, containingTypeName, methodName, duration, null, reason, null));
+        _testResults.Add(
+            new TestResult(name, containingTypeName, methodName, duration, null, reason, null)
+        );
     }
 
     public string GetTestResultOutput(string assemblyName)
@@ -43,7 +77,8 @@ public class TestSummary
         // using StringBuilder here for simplicity of loaded IL.
         StringBuilder resultsFile = new();
         resultsFile.AppendLine("<assemblies>");
-        resultsFile.AppendLine($@"
+        resultsFile.AppendLine(
+            $@"
 <assembly
     name=""{assemblyName}""
     test-framework=""XUnitWrapperGenerator-generated-runner""
@@ -54,9 +89,11 @@ public class TestSummary
     passed=""{PassedTests}""
     failed=""{FailedTests}""
     skipped=""{SkippedTests}""
-    errors=""0"">");
+    errors=""0"">"
+        );
 
-        resultsFile.AppendLine($@"
+        resultsFile.AppendLine(
+            $@"
 <collection
     name=""Collection""
     time=""{totalRunSeconds}""
@@ -65,19 +102,28 @@ public class TestSummary
     failed=""{FailedTests}""
     skipped=""{SkippedTests}""
     errors=""0""
->");
+>"
+        );
 
         foreach (var test in _testResults)
         {
-            resultsFile.Append($@"<test name=""{test.Name}"" type=""{test.ContainingTypeName}"" method=""{test.MethodName}"" time=""{test.Duration.TotalSeconds:F6}"" ");
-            string outputElement = !string.IsNullOrWhiteSpace(test.Output) ? $"<output><![CDATA[{test.Output}]]></output>" : string.Empty;
+            resultsFile.Append(
+                $@"<test name=""{test.Name}"" type=""{test.ContainingTypeName}"" method=""{test.MethodName}"" time=""{test.Duration.TotalSeconds:F6}"" "
+            );
+            string outputElement = !string.IsNullOrWhiteSpace(test.Output)
+                ? $"<output><![CDATA[{test.Output}]]></output>"
+                : string.Empty;
             if (test.Exception is not null)
             {
-                resultsFile.AppendLine($@"result=""Fail""><failure exception-type=""{test.Exception.GetType()}""><message><![CDATA[{test.Exception.Message}]]></message><stack-trace><![CDATA[{test.Exception.StackTrace}]]></stack-trace></failure>{outputElement}</test>");
+                resultsFile.AppendLine(
+                    $@"result=""Fail""><failure exception-type=""{test.Exception.GetType()}""><message><![CDATA[{test.Exception.Message}]]></message><stack-trace><![CDATA[{test.Exception.StackTrace}]]></stack-trace></failure>{outputElement}</test>"
+                );
             }
             else if (test.SkipReason is not null)
             {
-                resultsFile.AppendLine($@"result=""Skip""><reason><![CDATA[{test.SkipReason}]]></reason></test>");
+                resultsFile.AppendLine(
+                    $@"result=""Skip""><reason><![CDATA[{test.SkipReason}]]></reason></test>"
+                );
             }
             else
             {

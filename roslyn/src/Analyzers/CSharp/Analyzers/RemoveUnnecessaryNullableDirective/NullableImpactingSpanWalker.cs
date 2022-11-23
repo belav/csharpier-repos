@@ -25,14 +25,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.RemoveUnnecessaryNullableDirec
 
         public bool HasSpans => _spans?.Count > 0;
 
-        public ImmutableArray<TextSpan> Spans => _spans?.ToImmutable() ?? ImmutableArray<TextSpan>.Empty;
+        public ImmutableArray<TextSpan> Spans =>
+            _spans?.ToImmutable() ?? ImmutableArray<TextSpan>.Empty;
 
         public ImmutableArray<TextSpan>.Builder SpansBuilder
         {
             get
             {
                 if (_spans is null)
-                    Interlocked.CompareExchange(ref _spans, ImmutableArray.CreateBuilder<TextSpan>(), null);
+                    Interlocked.CompareExchange(
+                        ref _spans,
+                        ImmutableArray.CreateBuilder<TextSpan>(),
+                        null
+                    );
 
                 return _spans;
             }
@@ -42,8 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.RemoveUnnecessaryNullableDirec
             SemanticModel semanticModel,
             int positionOfFirstReducingNullableDirective,
             SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? ignoredSpans,
-            CancellationToken cancellationToken)
-            : base(SyntaxWalkerDepth.StructuredTrivia)
+            CancellationToken cancellationToken
+        ) : base(SyntaxWalkerDepth.StructuredTrivia)
         {
             _semanticModel = semanticModel;
             _positionOfFirstReducingNullableDirective = positionOfFirstReducingNullableDirective;
@@ -72,8 +77,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.RemoveUnnecessaryNullableDirec
             // Simplify syntax checks by walking up qualified names to an equivalent parent node.
             node = WalkUpCurrentQualifiedName(node);
 
-            if (node?.Parent is QualifiedNameSyntax qualifiedName
-                && qualifiedName.Left == node)
+            if (node?.Parent is QualifiedNameSyntax qualifiedName && qualifiedName.Left == node)
             {
                 // Cannot dot off a nullable reference type
                 return true;
@@ -97,7 +101,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.RemoveUnnecessaryNullableDirec
                 return true;
             }
 
-            if (node.IsParentKind(SyntaxKind.NameEquals) && node.Parent.IsParentKind(SyntaxKind.UsingDirective))
+            if (
+                node.IsParentKind(SyntaxKind.NameEquals)
+                && node.Parent.IsParentKind(SyntaxKind.UsingDirective)
+            )
             {
                 // This is the alias or the target type of a using alias directive, neither of which can be nullable
                 //
@@ -111,8 +118,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.RemoveUnnecessaryNullableDirec
             // If this is Y in X.Y, walk up to X.Y
             static TypeSyntax WalkUpCurrentQualifiedName(TypeSyntax node)
             {
-                while (node.Parent is QualifiedNameSyntax qualifiedName
-                    && qualifiedName.Right == node)
+                while (
+                    node.Parent is QualifiedNameSyntax qualifiedName && qualifiedName.Right == node
+                )
                 {
                     node = qualifiedName;
                 }
@@ -121,25 +129,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.RemoveUnnecessaryNullableDirec
             }
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public override void DefaultVisit(SyntaxNode node)
         {
             if (IsIgnored(node))
                 return;
 
-            if (node is TypeSyntax typeSyntax
-                && !IsLanguageRestrictedToNonNullForm(typeSyntax))
+            if (node is TypeSyntax typeSyntax && !IsLanguageRestrictedToNonNullForm(typeSyntax))
             {
                 if (typeSyntax.IsVar)
                     return;
 
-                if (typeSyntax is PredefinedTypeSyntax predefinedType
-                    && CSharpSyntaxFacts.Instance.TryGetPredefinedType(predefinedType.Keyword, out var type))
+                if (
+                    typeSyntax is PredefinedTypeSyntax predefinedType
+                    && CSharpSyntaxFacts.Instance.TryGetPredefinedType(
+                        predefinedType.Keyword,
+                        out var type
+                    )
+                )
                 {
-                    if (type is CodeAnalysis.LanguageService.PredefinedType.Object or CodeAnalysis.LanguageService.PredefinedType.String)
+                    if (
+                        type
+                        is CodeAnalysis.LanguageService.PredefinedType.Object
+                            or CodeAnalysis.LanguageService.PredefinedType.String
+                    )
                     {
                         SpansBuilder.Add(predefinedType.Span);
                     }
@@ -154,7 +168,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.RemoveUnnecessaryNullableDirec
                     // Namespaces cannot be nullable
                     return;
                 }
-                else if (symbolInfo.Symbol is INamedTypeSymbol { IsValueType: true, IsGenericType: false })
+                else if (
+                    symbolInfo.Symbol is INamedTypeSymbol
+                    {
+                        IsValueType: true,
+                        IsGenericType: false
+                    }
+                )
                 {
                     return;
                 }

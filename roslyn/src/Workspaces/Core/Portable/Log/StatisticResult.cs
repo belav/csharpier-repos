@@ -34,7 +34,11 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             var mean = (double)total / values.Count;
 
             var range = max - min;
-            var mode = values.GroupBy(i => i).OrderByDescending(g => g.Count()).FirstOrDefault().Key;
+            var mode = values
+                .GroupBy(i => i)
+                .OrderByDescending(g => g.Count())
+                .FirstOrDefault()
+                .Key;
 
             return new StatisticResult(max, min, mean, range, mode, values.Count);
         }
@@ -82,9 +86,12 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         /// <summary>
         /// Writes out these statistics to a property bag for sending to telemetry.
         /// </summary>
-        /// <param name="prefix">The prefix given to any properties written. A period is used to delimit between the 
+        /// <param name="prefix">The prefix given to any properties written. A period is used to delimit between the
         /// prefix and the value.</param>
-        public void WriteTelemetryPropertiesTo(Dictionary<string, object?> properties, string prefix)
+        public void WriteTelemetryPropertiesTo(
+            Dictionary<string, object?> properties,
+            string prefix
+        )
         {
             prefix += ".";
 

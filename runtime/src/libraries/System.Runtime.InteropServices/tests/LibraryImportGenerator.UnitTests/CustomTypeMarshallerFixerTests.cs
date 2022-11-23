@@ -10,7 +10,8 @@ using static Microsoft.Interop.Analyzers.CustomTypeMarshallerAnalyzer;
 
 using VerifyCS = LibraryImportGenerator.UnitTests.Verifiers.CSharpCodeFixVerifier<
     Microsoft.Interop.Analyzers.CustomTypeMarshallerAnalyzer,
-    Microsoft.Interop.Analyzers.CustomTypeMarshallerFixer>;
+    Microsoft.Interop.Analyzers.CustomTypeMarshallerFixer
+>;
 
 namespace LibraryImportGenerator.UnitTests
 {
@@ -20,7 +21,8 @@ namespace LibraryImportGenerator.UnitTests
         [Fact]
         public async Task NullNativeType_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
 
@@ -30,15 +32,21 @@ struct S
     public string s;
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(NativeTypeMustHaveCustomTypeMarshallerAttributeRule).WithLocation(0).WithArguments("S"),
-                source);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(NativeTypeMustHaveCustomTypeMarshallerAttributeRule)
+                    .WithLocation(0)
+                    .WithArguments("S"),
+                source
+            );
         }
 
         [Fact]
         public async Task NonNamedNativeType_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
 
@@ -48,15 +56,21 @@ struct S
     public string s;
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(NativeTypeMustHaveCustomTypeMarshallerAttributeRule).WithLocation(0).WithArguments("S"),
-                source);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(NativeTypeMustHaveCustomTypeMarshallerAttributeRule)
+                    .WithLocation(0)
+                    .WithArguments("S"),
+                source
+            );
         }
 
         [Fact]
         public async Task NonBlittableNativeType_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
 
@@ -78,15 +92,21 @@ struct {|#0:Native|}
 
     public S ToManaged() => new S { s = value };
 }";
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(NativeTypeMustBeBlittableRule).WithLocation(0).WithArguments("Native", "S"),
-                source);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(NativeTypeMustBeBlittableRule)
+                    .WithLocation(0)
+                    .WithArguments("Native", "S"),
+                source
+            );
         }
 
         [Fact]
         public async Task ClassNativeType_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -108,15 +128,21 @@ class {|#0:Native|}
 
     public S ToManaged() => new S();
 }";
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(NativeTypeMustBeBlittableRule).WithLocation(0).WithArguments("Native", "S"),
-                source);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(NativeTypeMustBeBlittableRule)
+                    .WithLocation(0)
+                    .WithArguments("Native", "S"),
+                source
+            );
         }
 
         [Fact]
         public async Task BlittableNativeType_DoesNotReportDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -146,7 +172,8 @@ struct Native
         [Fact]
         public async Task BlittableNativeWithNonBlittableToNativeValue_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -173,15 +200,21 @@ struct Native
     public void FromNativeValue(string value) => throw null;
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(NativeTypeMustBeBlittableRule).WithLocation(0).WithArguments("string", "S"),
-                source);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(NativeTypeMustBeBlittableRule)
+                    .WithLocation(0)
+                    .WithArguments("string", "S"),
+                source
+            );
         }
 
         [Fact]
         public async Task NonBlittableNativeTypeWithBlittableToNativeValue_DoesNotReportDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -214,7 +247,8 @@ struct Native
         [Fact]
         public async Task NonBlittableGetPinnableReferenceReturnType_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -243,15 +277,18 @@ unsafe struct Native
     public void FromNativeValue(IntPtr value) => throw null;
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
                 VerifyCS.Diagnostic(GetPinnableReferenceReturnTypeBlittableRule).WithLocation(0),
-                source);
+                source
+            );
         }
 
         [Fact]
         public async Task BlittableGetPinnableReferenceReturnType_DoesNotReportDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -286,7 +323,8 @@ unsafe struct Native
         [Fact]
         public async Task NonBlittableMarshallerGetPinnableReferenceReturnType_DoesNotReportDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -321,7 +359,8 @@ unsafe struct Native
         [Fact]
         public async Task BlittableMarshallerGetPinnableReferenceReturnType_DoesNotReportDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -356,7 +395,8 @@ unsafe struct Native
         [Fact]
         public async Task TypeWithGetPinnableReferenceNonPointerReturnType_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -385,15 +425,21 @@ unsafe struct Native
     public void FromNativeValue(int value) => throw null;
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(NativeTypeMustBePointerSizedRule).WithLocation(0).WithArguments("int", "S"),
-                source);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(NativeTypeMustBePointerSizedRule)
+                    .WithLocation(0)
+                    .WithArguments("int", "S"),
+                source
+            );
         }
 
         [Fact]
         public async Task TypeWithGetPinnableReferencePointerReturnType_DoesNotReportDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -428,7 +474,8 @@ unsafe struct Native
         [Fact]
         public async Task TypeWithGetPinnableReferenceByRefValuePropertyType_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -453,15 +500,21 @@ unsafe struct Native
     public ref byte {|#0:ToNativeValue|}() => throw null;
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(RefNativeValueUnsupportedRule).WithLocation(0).WithArguments("Native"),
-                source);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(RefNativeValueUnsupportedRule)
+                    .WithLocation(0)
+                    .WithArguments("Native"),
+                source
+            );
         }
 
         [Fact]
         public async Task NativeTypeWithGetPinnableReferenceByRefValuePropertyType_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -487,15 +540,21 @@ unsafe struct Native
     public ref byte {|#0:ToNativeValue|}() => throw null;
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(RefNativeValueUnsupportedRule).WithLocation(0).WithArguments("Native"),
-                source);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(RefNativeValueUnsupportedRule)
+                    .WithLocation(0)
+                    .WithArguments("Native"),
+                source
+            );
         }
 
         [Fact]
         public async Task NativeTypeWithGetPinnableReferenceNoValueProperty_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -519,15 +578,21 @@ unsafe struct Native
     public ref byte {|#0:GetPinnableReference|}() => ref System.Runtime.CompilerServices.Unsafe.NullRef<byte>();
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(MarshallerGetPinnableReferenceRequiresTwoStageMarshallingRule).WithLocation(0).WithArguments("Native"),
-                source);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(MarshallerGetPinnableReferenceRequiresTwoStageMarshallingRule)
+                    .WithLocation(0)
+                    .WithArguments("Native"),
+                source
+            );
         }
 
         [Fact]
         public async Task NativeTypeWithGetPinnableReferenceWithNonPointerValueProperty_DoesNotReportDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -559,7 +624,8 @@ unsafe struct Native
         [Fact]
         public async Task NativeTypeWithNoMarshallingMethods_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -575,15 +641,21 @@ struct {|#0:Native|}
 {
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(CustomMarshallerTypeMustSupportDirectionRule).WithLocation(0).WithArguments("Native", "S"),
-                source);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(CustomMarshallerTypeMustSupportDirectionRule)
+                    .WithLocation(0)
+                    .WithArguments("Native", "S"),
+                source
+            );
         }
 
         [Fact]
         public async Task CollectionNativeTypeWithNoMarshallingMethods_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -599,15 +671,21 @@ struct {|#0:Native|}
 {
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(CustomMarshallerTypeMustSupportDirectionRule).WithLocation(0).WithArguments("Native", "S"),
-                source);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(CustomMarshallerTypeMustSupportDirectionRule)
+                    .WithLocation(0)
+                    .WithArguments("Native", "S"),
+                source
+            );
         }
 
         [Fact]
         public async Task CollectionNativeTypeWithWrongConstructor_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -627,7 +705,8 @@ ref struct {|#0:Native|}
     public System.Span<byte> GetNativeValuesDestination() => throw null;
     public System.IntPtr ToNativeValue() => throw null;
 }";
-            string fixedSource = @"
+            string fixedSource =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -653,15 +732,21 @@ ref struct Native
     }
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(LinearCollectionInRequiresTwoParameterConstructorRule).WithLocation(0).WithArguments("Native", "S"),
-                fixedSource);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(LinearCollectionInRequiresTwoParameterConstructorRule)
+                    .WithLocation(0)
+                    .WithArguments("Native", "S"),
+                fixedSource
+            );
         }
 
         [Fact]
         public async Task CollectionNativeTypeWithCorrectConstructor_DoesNotReportDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -688,7 +773,8 @@ ref struct Native
         [Fact]
         public async Task CollectionNativeTypeWithIncorrectStackallocConstructor_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -708,7 +794,8 @@ ref struct {|#0:Native|}
     public System.Span<byte> GetNativeValuesDestination() => throw null;
     public System.IntPtr ToNativeValue() => throw null;
 }";
-            string fixedSource = @"
+            string fixedSource =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -739,16 +826,25 @@ ref struct Native
     }
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
                 fixedSource,
-                    VerifyCS.Diagnostic(LinearCollectionInRequiresTwoParameterConstructorRule).WithLocation(0).WithArguments("Native", "S"),
-                    VerifyCS.Diagnostic(LinearCollectionInCallerAllocatedBufferRequiresSpanConstructorRule).WithLocation(0).WithArguments("Native", "S"));
+                VerifyCS
+                    .Diagnostic(LinearCollectionInRequiresTwoParameterConstructorRule)
+                    .WithLocation(0)
+                    .WithArguments("Native", "S"),
+                VerifyCS
+                    .Diagnostic(LinearCollectionInCallerAllocatedBufferRequiresSpanConstructorRule)
+                    .WithLocation(0)
+                    .WithArguments("Native", "S")
+            );
         }
 
         [Fact]
         public async Task CollectionNativeTypeWithOnlyStackallocConstructor_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -768,7 +864,8 @@ ref struct {|#0:Native|}
     public System.Span<byte> GetNativeValuesDestination() => throw null;
     public System.IntPtr ToNativeValue() => throw null;
 }";
-            string fixedSource = @"
+            string fixedSource =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -794,16 +891,27 @@ ref struct Native
     }
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
                 fixedSource,
-                VerifyCS.Diagnostic(CallerAllocMarshallingShouldSupportAllocatingMarshallingFallbackRule).WithLocation(0).WithArguments("Native", "S"),
-                VerifyCS.Diagnostic(LinearCollectionInRequiresTwoParameterConstructorRule).WithLocation(0).WithArguments("Native", "S"));
+                VerifyCS
+                    .Diagnostic(
+                        CallerAllocMarshallingShouldSupportAllocatingMarshallingFallbackRule
+                    )
+                    .WithLocation(0)
+                    .WithArguments("Native", "S"),
+                VerifyCS
+                    .Diagnostic(LinearCollectionInRequiresTwoParameterConstructorRule)
+                    .WithLocation(0)
+                    .WithArguments("Native", "S")
+            );
         }
 
         [Fact]
         public async Task CollectionNativeTypeWithMissingManagedValuesSource_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -822,7 +930,8 @@ ref struct {|#0:Native|}
     public System.Span<byte> GetNativeValuesDestination() => throw null;
     public System.IntPtr ToNativeValue() => throw null;
 }";
-            string fixedSource = @"
+            string fixedSource =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -847,15 +956,21 @@ ref struct Native
     }
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(LinearCollectionInRequiresCollectionMethodsRule).WithLocation(0).WithArguments("Native", "S"),
-                fixedSource);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(LinearCollectionInRequiresCollectionMethodsRule)
+                    .WithLocation(0)
+                    .WithArguments("Native", "S"),
+                fixedSource
+            );
         }
 
         [Fact]
         public async Task CollectionNativeTypeWithMissingNativeValuesDestination_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -874,7 +989,8 @@ ref struct {|#0:Native|}
     public System.ReadOnlySpan<int> GetManagedValuesSource() => throw null;
     public System.IntPtr ToNativeValue() => throw null;
 }";
-            string fixedSource = @"
+            string fixedSource =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -899,15 +1015,21 @@ ref struct Native
     }
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(LinearCollectionInRequiresCollectionMethodsRule).WithLocation(0).WithArguments("Native", "S"),
-                fixedSource);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(LinearCollectionInRequiresCollectionMethodsRule)
+                    .WithLocation(0)
+                    .WithArguments("Native", "S"),
+                fixedSource
+            );
         }
 
         [Fact]
         public async Task CollectionNativeTypeWithCorrectRefShape_DoesNotReportDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -939,7 +1061,8 @@ ref struct Native
         [Fact]
         public async Task CollectionNativeTypeWithMismatched_Element_Type_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -965,16 +1088,18 @@ ref struct Native
     public S ToManaged() => throw null;
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
+            await VerifyCS.VerifyCodeFixAsync(
                 source,
-                VerifyCS.Diagnostic(LinearCollectionElementTypesMustMatchRule)
-                    .WithLocation(0));
+                source,
+                VerifyCS.Diagnostic(LinearCollectionElementTypesMustMatchRule).WithLocation(0)
+            );
         }
 
         [Fact]
         public async Task NativeTypeWithOnlyConstructor_DoesNotReportDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -997,7 +1122,8 @@ struct Native
         [Fact]
         public async Task NativeTypeWithOnlyToManagedMethod_DoesNotReportDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1020,7 +1146,8 @@ struct Native
         [Fact]
         public async Task NativeTypeWithIncorrectStackallocConstructor_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1038,7 +1165,8 @@ struct {|#0:Native|}
     public Native(S s, int i) {}
     public Native(S s, Span<object> buffer) {}
 }";
-            string fixedSource = @"
+            string fixedSource =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1061,15 +1189,21 @@ struct Native
         throw new NotImplementedException();
     }
 }";
-            await VerifyCS.VerifyCodeFixAsync(source,
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
                 fixedSource,
-                VerifyCS.Diagnostic(ValueInCallerAllocatedBufferRequiresSpanConstructorRule).WithLocation(0).WithArguments("Native", "S"));
+                VerifyCS
+                    .Diagnostic(ValueInCallerAllocatedBufferRequiresSpanConstructorRule)
+                    .WithLocation(0)
+                    .WithArguments("Native", "S")
+            );
         }
 
         [Fact]
         public async Task NativeTypeWithOnlyStackallocConstructor_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1085,7 +1219,8 @@ struct {|#0:Native|}
 {
     public Native(S s, Span<byte> buffer) {}
 }";
-            string fixedSource = @"
+            string fixedSource =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1107,16 +1242,27 @@ struct Native
     }
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
                 fixedSource,
-                VerifyCS.Diagnostic(CallerAllocMarshallingShouldSupportAllocatingMarshallingFallbackRule).WithLocation(0).WithArguments("Native", "S"),
-                VerifyCS.Diagnostic(ValueInRequiresOneParameterConstructorRule).WithLocation(0).WithArguments("Native", "S"));
+                VerifyCS
+                    .Diagnostic(
+                        CallerAllocMarshallingShouldSupportAllocatingMarshallingFallbackRule
+                    )
+                    .WithLocation(0)
+                    .WithArguments("Native", "S"),
+                VerifyCS
+                    .Diagnostic(ValueInRequiresOneParameterConstructorRule)
+                    .WithLocation(0)
+                    .WithArguments("Native", "S")
+            );
         }
 
         [Fact]
         public async Task TypeWithOnlyGetPinnableReference_AndInSupport_ReportsDiagnostics()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1134,15 +1280,21 @@ struct {|#1:Native|}
     public S ToManaged() => default;
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(GetPinnableReferenceShouldSupportAllocatingMarshallingFallbackRule).WithLocation(0).WithArguments("S", "Native"),
-                source);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(GetPinnableReferenceShouldSupportAllocatingMarshallingFallbackRule)
+                    .WithLocation(0)
+                    .WithArguments("S", "Native"),
+                source
+            );
         }
 
         [Fact]
         public async Task NativeTypeWithConstructorAndFromNativeValueMethod_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1163,7 +1315,8 @@ struct {|#0:Native|}
     public S ToManaged() => new S();
 }";
 
-            string fixedSource = @"
+            string fixedSource =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1189,15 +1342,21 @@ struct Native
     }
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(InTwoStageMarshallingRequiresToNativeValueRule).WithLocation(0).WithArguments("Native"),
-                fixedSource);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(InTwoStageMarshallingRequiresToNativeValueRule)
+                    .WithLocation(0)
+                    .WithArguments("Native"),
+                fixedSource
+            );
         }
 
         [Fact]
         public async Task NativeTypeWithToManagedAndToNativeValueMethod_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1217,7 +1376,8 @@ struct {|#0:Native|}
 
     public IntPtr ToNativeValue() => IntPtr.Zero;
 }";
-            string fixedSource = @"
+            string fixedSource =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1243,15 +1403,21 @@ struct Native
     }
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(OutTwoStageMarshallingRequiresFromNativeValueRule).WithLocation(0).WithArguments("Native"),
-                fixedSource);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(OutTwoStageMarshallingRequiresFromNativeValueRule)
+                    .WithLocation(0)
+                    .WithArguments("Native"),
+                fixedSource
+            );
         }
 
         [Fact]
         public async Task BlittableNativeTypeOnMarshalUsingParameter_DoesNotReportDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1287,7 +1453,8 @@ static class Test
         [Fact]
         public async Task NonBlittableNativeTypeOnMarshalUsingParameter_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1316,15 +1483,21 @@ static class Test
     {}
 }
 ";
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(NativeTypeMustBeBlittableRule).WithLocation(0).WithArguments("Native", "S"),
-                source);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(NativeTypeMustBeBlittableRule)
+                    .WithLocation(0)
+                    .WithArguments("Native", "S"),
+                source
+            );
         }
 
         [Fact]
         public async Task NonBlittableNativeTypeOnMarshalUsingReturn_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1353,16 +1526,21 @@ static class Test
     static S Foo() => new S();
 }
 ";
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(NativeTypeMustBeBlittableRule).WithLocation(0).WithArguments("Native", "S"),
-                source);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(NativeTypeMustBeBlittableRule)
+                    .WithLocation(0)
+                    .WithArguments("Native", "S"),
+                source
+            );
         }
 
         [Fact]
         public async Task GenericNativeTypeWithGenericMemberInstantiatedWithBlittable_DoesNotReportDiagnostic()
         {
-
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
 
@@ -1391,8 +1569,8 @@ struct Native<T>
         [Fact]
         public async Task UninstantiatedGenericNativeTypeOnNonGeneric_ReportsDiagnostic()
         {
-
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
 
@@ -1415,16 +1593,21 @@ struct Native<T>
     public T ToNativeValue() => throw null;
     public void FromNativeValue(T value) => throw null;
 }";
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(NativeGenericTypeMustBeClosedOrMatchArityRule).WithLocation(0).WithArguments("Native<>", "S"),
-                source);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(NativeGenericTypeMustBeClosedOrMatchArityRule)
+                    .WithLocation(0)
+                    .WithArguments("Native<>", "S"),
+                source
+            );
         }
 
         [Fact]
         public async Task MarshalUsingUninstantiatedGenericNativeType_ReportsDiagnostic()
         {
-
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
 
@@ -1452,15 +1635,21 @@ static class Test
     static void Foo([{|#0:MarshalUsing(typeof(Native<>))|}] S s)
     {}
 }";
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(NativeGenericTypeMustBeClosedOrMatchArityRule).WithLocation(0).WithArguments("Native<>", "S"),
-                source);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(NativeGenericTypeMustBeClosedOrMatchArityRule)
+                    .WithLocation(0)
+                    .WithArguments("Native<>", "S"),
+                source
+            );
         }
 
         [Fact]
         public async Task UninstantiatedGenericNativeTypeOnGenericWithArityMismatch_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
 
@@ -1483,16 +1672,25 @@ struct {|#1:Native|}<T, U>
     public T ToNativeValue() => throw null;
     public void FromNativeValue(T value) => throw null;
 }";
-            await VerifyCS.VerifyCodeFixAsync(source,
+            await VerifyCS.VerifyCodeFixAsync(
                 source,
-                VerifyCS.Diagnostic(NativeTypeMustHaveCustomTypeMarshallerAttributeRule).WithLocation(0).WithArguments("S<T>"),
-                VerifyCS.Diagnostic(NativeGenericTypeMustBeClosedOrMatchArityRule).WithLocation(1).WithArguments("Native<T, U>", "S<>"));
+                source,
+                VerifyCS
+                    .Diagnostic(NativeTypeMustHaveCustomTypeMarshallerAttributeRule)
+                    .WithLocation(0)
+                    .WithArguments("S<T>"),
+                VerifyCS
+                    .Diagnostic(NativeGenericTypeMustBeClosedOrMatchArityRule)
+                    .WithLocation(1)
+                    .WithArguments("Native<T, U>", "S<>")
+            );
         }
 
         [Fact]
         public async Task UninstantiatedGenericNativeTypeOnGenericWithArityMatch_DoesNotReportDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
 
@@ -1521,7 +1719,8 @@ struct Native<T>
         [Fact]
         public async Task NativeTypeWithStackallocConstructorWithoutBufferSize_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1539,15 +1738,21 @@ struct Native
     public {|#0:Native|}(S s, Span<byte> buffer) {}
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
-                VerifyCS.Diagnostic(CallerAllocConstructorMustHaveBufferSizeRule).WithLocation(0).WithArguments("Native"),
-                source);
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(CallerAllocConstructorMustHaveBufferSizeRule)
+                    .WithLocation(0)
+                    .WithArguments("Native"),
+                source
+            );
         }
 
         [Fact]
         public async Task CustomTypeMarshallerForTypeWithPlaceholder_DoesNotReportDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1564,7 +1769,8 @@ struct Native<T>
         [Fact]
         public async Task CustomTypeMarshallerForArrayTypeWithPlaceholder_DoesNotReportDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1581,7 +1787,8 @@ struct Native<T>
         [Fact]
         public async Task CustomTypeMarshallerForPointerTypeWithPlaceholder_DoesNotReportDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1598,7 +1805,8 @@ unsafe struct Native<T> where T : unmanaged
         [Fact]
         public async Task CustomTypeMarshallerForArrayOfPointerTypeWithPlaceholder_DoesNotReportDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1615,7 +1823,8 @@ unsafe struct Native<T> where T : unmanaged
         [Fact]
         public async Task CustomTypeMarshallerWithFreeNativeMethod_NoUnmanagedResourcesFeatures_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1629,7 +1838,8 @@ unsafe struct {|#0:Native|}
 
     public void FreeNative() { }
 }";
-            string fixedSource = @"
+            string fixedSource =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1643,16 +1853,21 @@ unsafe struct Native
 
     public void FreeNative() { }
 }";
-            await VerifyCS.VerifyCodeFixAsync(source,
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
                 fixedSource,
-                VerifyCS.Diagnostic(FreeNativeMethodProvidedShouldSpecifyUnmanagedResourcesFeatureRule)
+                VerifyCS
+                    .Diagnostic(FreeNativeMethodProvidedShouldSpecifyUnmanagedResourcesFeatureRule)
                     .WithArguments("Native")
-                    .WithLocation(0));
+                    .WithLocation(0)
+            );
         }
+
         [Fact]
         public async Task CustomTypeMarshallerWithCallerAllocatedBufferConstructor_NoFeature_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1666,7 +1881,8 @@ unsafe struct {|#0:Native|}
 
     public Native(S s, Span<byte> buffer) { }
 }";
-            string fixedSource = @"
+            string fixedSource =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1680,17 +1896,21 @@ unsafe struct Native
 
     public Native(S s, Span<byte> buffer) { }
 }";
-            await VerifyCS.VerifyCodeFixAsync(source,
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
                 fixedSource,
-                VerifyCS.Diagnostic(CallerAllocatedBufferConstructorProvidedShouldSpecifyFeatureRule)
+                VerifyCS
+                    .Diagnostic(CallerAllocatedBufferConstructorProvidedShouldSpecifyFeatureRule)
                     .WithArguments("Native")
-                    .WithLocation(0));
+                    .WithLocation(0)
+            );
         }
 
         [Fact]
         public async Task Add_Feature_Declaration_Preserves_Attribute_Argument_Location()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1704,7 +1924,8 @@ unsafe struct {|#0:Native|}
 
     public void FreeNative() { }
 }";
-            string fixedSource = @"
+            string fixedSource =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1718,17 +1939,21 @@ unsafe struct Native
 
     public void FreeNative() { }
 }";
-            await VerifyCS.VerifyCodeFixAsync(source,
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
                 fixedSource,
-                VerifyCS.Diagnostic(FreeNativeMethodProvidedShouldSpecifyUnmanagedResourcesFeatureRule)
+                VerifyCS
+                    .Diagnostic(FreeNativeMethodProvidedShouldSpecifyUnmanagedResourcesFeatureRule)
                     .WithArguments("Native")
-                    .WithLocation(0));
+                    .WithLocation(0)
+            );
         }
 
         [Fact]
         public async Task CustomTypeMarshallerWithTwoStageMarshallingMethod_NoFeature_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1754,7 +1979,8 @@ unsafe struct {|#1:Native2|}
 
     public S ToManaged() => throw null;
 }";
-            string fixedSource = @"
+            string fixedSource =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1790,13 +2016,20 @@ unsafe struct Native2
         throw new NotImplementedException();
     }
 }";
-            await VerifyCS.VerifyCodeFixAsync(source,
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
                 new[]
                 {
-                    VerifyCS.Diagnostic(ToNativeValueMethodProvidedShouldSpecifyTwoStageMarshallingFeatureRule)
+                    VerifyCS
+                        .Diagnostic(
+                            ToNativeValueMethodProvidedShouldSpecifyTwoStageMarshallingFeatureRule
+                        )
                         .WithArguments("Native")
                         .WithLocation(0),
-                    VerifyCS.Diagnostic(FromNativeValueMethodProvidedShouldSpecifyTwoStageMarshallingFeatureRule)
+                    VerifyCS
+                        .Diagnostic(
+                            FromNativeValueMethodProvidedShouldSpecifyTwoStageMarshallingFeatureRule
+                        )
                         .WithArguments("Native2")
                         .WithLocation(1)
                 },
@@ -1807,13 +2040,15 @@ unsafe struct Native2
                 // The second two code-fix runs are the fixes for those diagnostics.
                 numIncrementalIterations: 4,
                 // The first run adds the feature flag and the second adds the missing members for the feature.
-                numFixAllIterations: 2);
+                numFixAllIterations: 2
+            );
         }
 
         [Fact]
         public async Task Mismatched_NativeValue_Type_ReportsDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1835,16 +2070,18 @@ unsafe struct Native
     public void FromNativeValue(long value) => throw null;
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
+            await VerifyCS.VerifyCodeFixAsync(
                 source,
-                VerifyCS.Diagnostic(TwoStageMarshallingNativeTypesMustMatchRule)
-                    .WithLocation(0));
+                source,
+                VerifyCS.Diagnostic(TwoStageMarshallingNativeTypesMustMatchRule).WithLocation(0)
+            );
         }
 
         [Fact]
         public async Task Same_NativeValue_Type_DifferentName_DoesNotReportDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
@@ -1875,8 +2112,7 @@ unsafe struct Native
     public void FromNativeValue(Value2 value) => throw null;
 }";
 
-            await VerifyCS.VerifyCodeFixAsync(source,
-                source);
+            await VerifyCS.VerifyCodeFixAsync(source, source);
         }
     }
 }

@@ -10,7 +10,11 @@ using System.Runtime.InteropServices;
 
 unsafe class ThisCallNative
 {
-    [DllImport(nameof(ThisCallNative), CallingConvention = CallingConvention.ThisCall, EntryPoint = "GetWidthAsLongFromManaged")]
+    [DllImport(
+        nameof(ThisCallNative),
+        CallingConvention = CallingConvention.ThisCall,
+        EntryPoint = "GetWidthAsLongFromManaged"
+    )]
     public static extern int ThisCallWithEmptySignature();
 }
 
@@ -44,7 +48,7 @@ unsafe class EmptyThisCallTest
         return 100;
     }
 
-    [UnmanagedCallersOnly(CallConvs = new [] {typeof(CallConvThiscall)})]
+    [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvThiscall) })]
     private static int Foo(void* a)
     {
         return 0;

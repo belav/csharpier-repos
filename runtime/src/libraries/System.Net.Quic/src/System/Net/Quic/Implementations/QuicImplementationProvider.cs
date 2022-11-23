@@ -13,6 +13,8 @@ namespace System.Net.Quic.Implementations
 
         internal abstract QuicListenerProvider CreateListener(QuicListenerOptions options);
 
-        internal abstract QuicConnectionProvider CreateConnection(QuicClientConnectionOptions options);
+        internal abstract QuicConnectionProvider CreateConnection(
+            QuicClientConnectionOptions options
+        );
     }
 }

@@ -25,8 +25,7 @@ namespace System.Security.Cryptography.X509Certificates
         ///   Initializes a new instance of the <see cref="X509AuthorityKeyIdentifierExtension" />
         ///   class.
         /// </summary>
-        public X509AuthorityKeyIdentifierExtension()
-            : base(Oids.AuthorityKeyIdentifierOid)
+        public X509AuthorityKeyIdentifierExtension() : base(Oids.AuthorityKeyIdentifierOid)
         {
             _decoded = true;
         }
@@ -68,8 +67,10 @@ namespace System.Security.Cryptography.X509Certificates
         /// <exception cref="CryptographicException">
         ///   <paramref name="rawData" /> did not decode as an Authority Key Identifier extension.
         /// </exception>
-        public X509AuthorityKeyIdentifierExtension(ReadOnlySpan<byte> rawData, bool critical = false)
-            : base(Oids.AuthorityKeyIdentifierOid, rawData, critical)
+        public X509AuthorityKeyIdentifierExtension(
+            ReadOnlySpan<byte> rawData,
+            bool critical = false
+        ) : base(Oids.AuthorityKeyIdentifierOid, rawData, critical)
         {
             Decode(RawData);
         }
@@ -193,12 +194,14 @@ namespace System.Security.Cryptography.X509Certificates
         ///   <paramref name="subjectKeyIdentifier"/> is <see langword="null" />.
         /// </exception>
         public static X509AuthorityKeyIdentifierExtension CreateFromSubjectKeyIdentifier(
-            X509SubjectKeyIdentifierExtension subjectKeyIdentifier)
+            X509SubjectKeyIdentifierExtension subjectKeyIdentifier
+        )
         {
             ArgumentNullException.ThrowIfNull(subjectKeyIdentifier);
 
             return CreateFromSubjectKeyIdentifier(
-                subjectKeyIdentifier.SubjectKeyIdentifierBytes.Span);
+                subjectKeyIdentifier.SubjectKeyIdentifierBytes.Span
+            );
         }
 
         /// <summary>
@@ -216,7 +219,8 @@ namespace System.Security.Cryptography.X509Certificates
         ///   <paramref name="subjectKeyIdentifier"/> is <see langword="null" />.
         /// </exception>
         public static X509AuthorityKeyIdentifierExtension CreateFromSubjectKeyIdentifier(
-        byte[] subjectKeyIdentifier)
+            byte[] subjectKeyIdentifier
+        )
         {
             ArgumentNullException.ThrowIfNull(subjectKeyIdentifier);
 
@@ -236,13 +240,17 @@ namespace System.Security.Cryptography.X509Certificates
         /// </returns>
         /// <seealso cref="X509SubjectKeyIdentifierExtension.SubjectKeyIdentifierBytes"/>
         public static X509AuthorityKeyIdentifierExtension CreateFromSubjectKeyIdentifier(
-            ReadOnlySpan<byte> subjectKeyIdentifier)
+            ReadOnlySpan<byte> subjectKeyIdentifier
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
 
             using (writer.PushSequence())
             {
-                writer.WriteOctetString(subjectKeyIdentifier, new Asn1Tag(TagClass.ContextSpecific, 0));
+                writer.WriteOctetString(
+                    subjectKeyIdentifier,
+                    new Asn1Tag(TagClass.ContextSpecific, 0)
+                );
             }
 
             // Most KeyIdentifier values are computed from SHA-1 (20 bytes), which produces a 24-byte
@@ -287,12 +295,16 @@ namespace System.Security.Cryptography.X509Certificates
         /// </exception>
         public static X509AuthorityKeyIdentifierExtension CreateFromIssuerNameAndSerialNumber(
             X500DistinguishedName issuerName,
-            byte[] serialNumber)
+            byte[] serialNumber
+        )
         {
             ArgumentNullException.ThrowIfNull(issuerName);
             ArgumentNullException.ThrowIfNull(serialNumber);
 
-            return CreateFromIssuerNameAndSerialNumber(issuerName, new ReadOnlySpan<byte>(serialNumber));
+            return CreateFromIssuerNameAndSerialNumber(
+                issuerName,
+                new ReadOnlySpan<byte>(serialNumber)
+            );
         }
 
         /// <summary>
@@ -319,7 +331,8 @@ namespace System.Security.Cryptography.X509Certificates
         /// </exception>
         public static X509AuthorityKeyIdentifierExtension CreateFromIssuerNameAndSerialNumber(
             X500DistinguishedName issuerName,
-            ReadOnlySpan<byte> serialNumber)
+            ReadOnlySpan<byte> serialNumber
+        )
         {
             ArgumentNullException.ThrowIfNull(issuerName);
 
@@ -339,13 +352,15 @@ namespace System.Security.Cryptography.X509Certificates
                 }
                 catch (ArgumentException)
                 {
-                    throw new ArgumentException(SR.Argument_InvalidSerialNumberBytes, nameof(serialNumber));
+                    throw new ArgumentException(
+                        SR.Argument_InvalidSerialNumberBytes,
+                        nameof(serialNumber)
+                    );
                 }
             }
 
             return new X509AuthorityKeyIdentifierExtension(writer.Encode());
         }
-
 
         /// <summary>
         ///   Creates an <see cref="X509AuthorityKeyIdentifierExtension"/> that specifies
@@ -377,7 +392,8 @@ namespace System.Security.Cryptography.X509Certificates
         public static X509AuthorityKeyIdentifierExtension Create(
             byte[] keyIdentifier,
             X500DistinguishedName issuerName,
-            byte[] serialNumber)
+            byte[] serialNumber
+        )
         {
             ArgumentNullException.ThrowIfNull(keyIdentifier);
             ArgumentNullException.ThrowIfNull(issuerName);
@@ -386,7 +402,8 @@ namespace System.Security.Cryptography.X509Certificates
             return Create(
                 new ReadOnlySpan<byte>(keyIdentifier),
                 issuerName,
-                new ReadOnlySpan<byte>(serialNumber));
+                new ReadOnlySpan<byte>(serialNumber)
+            );
         }
 
         /// <summary>
@@ -418,7 +435,8 @@ namespace System.Security.Cryptography.X509Certificates
         public static X509AuthorityKeyIdentifierExtension Create(
             ReadOnlySpan<byte> keyIdentifier,
             X500DistinguishedName issuerName,
-            ReadOnlySpan<byte> serialNumber)
+            ReadOnlySpan<byte> serialNumber
+        )
         {
             ArgumentNullException.ThrowIfNull(issuerName);
 
@@ -440,7 +458,10 @@ namespace System.Security.Cryptography.X509Certificates
                 }
                 catch (ArgumentException)
                 {
-                    throw new ArgumentException(SR.Argument_InvalidSerialNumberBytes, nameof(serialNumber));
+                    throw new ArgumentException(
+                        SR.Argument_InvalidSerialNumberBytes,
+                        nameof(serialNumber)
+                    );
                 }
             }
 
@@ -475,14 +496,15 @@ namespace System.Security.Cryptography.X509Certificates
         public static X509AuthorityKeyIdentifierExtension CreateFromCertificate(
             X509Certificate2 certificate,
             bool includeKeyIdentifier,
-            bool includeIssuerAndSerial)
+            bool includeIssuerAndSerial
+        )
         {
             ArgumentNullException.ThrowIfNull(certificate);
 
             if (includeKeyIdentifier)
             {
-                X509SubjectKeyIdentifierExtension? skid =
-                    (X509SubjectKeyIdentifierExtension?)certificate.Extensions[Oids.SubjectKeyIdentifier];
+                X509SubjectKeyIdentifierExtension? skid = (X509SubjectKeyIdentifierExtension?)
+                    certificate.Extensions[Oids.SubjectKeyIdentifier];
 
                 if (skid is null)
                 {
@@ -496,7 +518,8 @@ namespace System.Security.Cryptography.X509Certificates
                     return Create(
                         skidBytes,
                         certificate.IssuerName,
-                        certificate.SerialNumberBytes.Span);
+                        certificate.SerialNumberBytes.Span
+                    );
                 }
 
                 return CreateFromSubjectKeyIdentifier(skidBytes);
@@ -505,7 +528,8 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 return CreateFromIssuerNameAndSerialNumber(
                     certificate.IssuerName,
-                    certificate.SerialNumberBytes.Span);
+                    certificate.SerialNumberBytes.Span
+                );
             }
 
             ReadOnlySpan<byte> emptyExtension = new byte[] { 0x30, 0x00 };
@@ -561,7 +585,11 @@ namespace System.Security.Cryptography.X509Certificates
                     // Walk all of the entities to make sure they decode legally, so no early abort.
                     while (generalNames.HasData)
                     {
-                        GeneralNameAsn.Decode(ref generalNames, rawIssuer, out GeneralNameAsn decoded);
+                        GeneralNameAsn.Decode(
+                            ref generalNames,
+                            rawIssuer,
+                            out GeneralNameAsn decoded
+                        );
 
                         if (decoded.DirectoryName.HasValue)
                         {
@@ -572,7 +600,8 @@ namespace System.Security.Cryptography.X509Certificates
                                 foundIssuer = true;
 
                                 _simpleIssuer = new X500DistinguishedName(
-                                    decoded.DirectoryName.GetValueOrDefault().Span);
+                                    decoded.DirectoryName.GetValueOrDefault().Span
+                                );
                             }
                             else
                             {

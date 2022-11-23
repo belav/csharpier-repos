@@ -10,12 +10,16 @@ namespace Microsoft.AspNetCore.Builder;
 /// </summary>
 public abstract class EndpointBuilder
 {
-    private List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>? _filterFactories;
+    private List<
+        Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>
+    >? _filterFactories;
 
     /// <summary>
     /// Gets the list of filters that apply to this endpoint.
     /// </summary>
-    public IList<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>> FilterFactories => _filterFactories ??= new();
+    public IList<
+        Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>
+    > FilterFactories => _filterFactories ??= new();
 
     /// <summary>
     /// Gets or sets the delegate used to process requests for the endpoint.
@@ -46,6 +50,7 @@ public abstract class EndpointBuilder
     private sealed class EmptyServiceProvider : IServiceProvider
     {
         public static EmptyServiceProvider Instance { get; } = new EmptyServiceProvider();
+
         public object? GetService(Type serviceType) => null;
     }
 }

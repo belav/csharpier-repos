@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class NorthwindDbFunctionsQuerySqliteTest : NorthwindDbFunctionsQueryRelationalTestBase<
-    NorthwindQuerySqliteFixture<NoopModelCustomizer>>
+public class NorthwindDbFunctionsQuerySqliteTest
+    : NorthwindDbFunctionsQueryRelationalTestBase<NorthwindQuerySqliteFixture<NoopModelCustomizer>>
 {
     public NorthwindDbFunctionsQuerySqliteTest(
         NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture,
-        ITestOutputHelper testOutputHelper)
-        : base(fixture)
+        ITestOutputHelper testOutputHelper
+    ) : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
     }
@@ -25,19 +25,19 @@ public class NorthwindDbFunctionsQuerySqliteTest : NorthwindDbFunctionsQueryRela
             ss => ss.Set<Customer>(),
             ss => ss.Set<Customer>(),
             c => EF.Functions.Glob(c.ContactName, "*M*"),
-            c => c.ContactName.Contains("M"));
+            c => c.ContactName.Contains("M")
+        );
 
         AssertSql(
             @"SELECT COUNT(*)
 FROM ""Customers"" AS ""c""
-WHERE glob('*M*', ""c"".""ContactName"")");
+WHERE glob('*M*', ""c"".""ContactName"")"
+        );
     }
 
-    protected override string CaseInsensitiveCollation
-        => "NOCASE";
+    protected override string CaseInsensitiveCollation => "NOCASE";
 
-    protected override string CaseSensitiveCollation
-        => "BINARY";
+    protected override string CaseSensitiveCollation => "BINARY";
 
     public override async Task Random_return_less_than_1(bool async)
     {
@@ -46,12 +46,14 @@ WHERE glob('*M*', ""c"".""ContactName"")");
             ss => ss.Set<Order>(),
             ss => ss.Set<Order>(),
             ss => EF.Functions.Random() <= 1,
-            c => true);
+            c => true
+        );
 
         AssertSql(
             @"SELECT COUNT(*)
 FROM ""Orders"" AS ""o""
-WHERE abs(random() / 9.2233720368547799E+18) <= 1.0");
+WHERE abs(random() / 9.2233720368547799E+18) <= 1.0"
+        );
     }
 
     public override async Task Random_return_greater_than_0(bool async)
@@ -61,9 +63,10 @@ WHERE abs(random() / 9.2233720368547799E+18) <= 1.0");
         AssertSql(
             @"SELECT COUNT(*)
 FROM ""Orders"" AS ""o""
-WHERE abs(random() / 9.2233720368547799E+18) >= 0.0");
+WHERE abs(random() / 9.2233720368547799E+18) >= 0.0"
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 }

@@ -17,7 +17,11 @@ public static class RateLimiterOptionsExtensions
     /// <param name="policyName">The name that will be associated with the limiter.</param>
     /// <param name="configureOptions">A callback to configure the <see cref="TokenBucketRateLimiterOptions"/> to be used for the limiter.</param>
     /// <returns>This <see cref="RateLimiterOptions"/>.</returns>
-    public static RateLimiterOptions AddTokenBucketLimiter(this RateLimiterOptions options, string policyName, Action<TokenBucketRateLimiterOptions> configureOptions)
+    public static RateLimiterOptions AddTokenBucketLimiter(
+        this RateLimiterOptions options,
+        string policyName,
+        Action<TokenBucketRateLimiterOptions> configureOptions
+    )
     {
         ArgumentNullException.ThrowIfNull(configureOptions);
 
@@ -26,11 +30,16 @@ public static class RateLimiterOptionsExtensions
         configureOptions.Invoke(tokenBucketRateLimiterOptions);
         // Saves an allocation in GetTokenBucketLimiter, which would have created a new set of options if this was true.
         tokenBucketRateLimiterOptions.AutoReplenishment = false;
-        return options.AddPolicy(policyName, context =>
-        {
-            return RateLimitPartition.GetTokenBucketLimiter(key,
-                _ => tokenBucketRateLimiterOptions);
-        });
+        return options.AddPolicy(
+            policyName,
+            context =>
+            {
+                return RateLimitPartition.GetTokenBucketLimiter(
+                    key,
+                    _ => tokenBucketRateLimiterOptions
+                );
+            }
+        );
     }
 
     /// <summary>
@@ -40,7 +49,11 @@ public static class RateLimiterOptionsExtensions
     /// <param name="policyName">The name that will be associated with the limiter.</param>
     /// <param name="configureOptions">A callback to configure the <see cref="FixedWindowRateLimiterOptions"/> to be used for the limiter.</param>
     /// <returns>This <see cref="RateLimiterOptions"/>.</returns>
-    public static RateLimiterOptions AddFixedWindowLimiter(this RateLimiterOptions options, string policyName, Action<FixedWindowRateLimiterOptions> configureOptions)
+    public static RateLimiterOptions AddFixedWindowLimiter(
+        this RateLimiterOptions options,
+        string policyName,
+        Action<FixedWindowRateLimiterOptions> configureOptions
+    )
     {
         ArgumentNullException.ThrowIfNull(configureOptions);
 
@@ -49,11 +62,16 @@ public static class RateLimiterOptionsExtensions
         configureOptions.Invoke(fixedWindowRateLimiterOptions);
         // Saves an allocation in GetFixedWindowLimiter, which would have created a new set of options if this was true.
         fixedWindowRateLimiterOptions.AutoReplenishment = false;
-        return options.AddPolicy(policyName, context =>
-        {
-            return RateLimitPartition.GetFixedWindowLimiter(key,
-                _ => fixedWindowRateLimiterOptions);
-        });
+        return options.AddPolicy(
+            policyName,
+            context =>
+            {
+                return RateLimitPartition.GetFixedWindowLimiter(
+                    key,
+                    _ => fixedWindowRateLimiterOptions
+                );
+            }
+        );
     }
 
     /// <summary>
@@ -63,7 +81,11 @@ public static class RateLimiterOptionsExtensions
     /// <param name="policyName">The name that will be associated with the limiter.</param>
     /// <param name="configureOptions">A callback to configure the <see cref="SlidingWindowRateLimiterOptions"/> to be used for the limiter.</param>
     /// <returns>This <see cref="RateLimiterOptions"/>.</returns>
-    public static RateLimiterOptions AddSlidingWindowLimiter(this RateLimiterOptions options, string policyName, Action<SlidingWindowRateLimiterOptions> configureOptions)
+    public static RateLimiterOptions AddSlidingWindowLimiter(
+        this RateLimiterOptions options,
+        string policyName,
+        Action<SlidingWindowRateLimiterOptions> configureOptions
+    )
     {
         ArgumentNullException.ThrowIfNull(configureOptions);
 
@@ -72,11 +94,16 @@ public static class RateLimiterOptionsExtensions
         configureOptions.Invoke(slidingWindowRateLimiterOptions);
         // Saves an allocation in GetSlidingWindowLimiter, which would have created a new set of options if this was true.
         slidingWindowRateLimiterOptions.AutoReplenishment = false;
-        return options.AddPolicy(policyName, context =>
-        {
-            return RateLimitPartition.GetSlidingWindowLimiter(key,
-                _ => slidingWindowRateLimiterOptions);
-        });
+        return options.AddPolicy(
+            policyName,
+            context =>
+            {
+                return RateLimitPartition.GetSlidingWindowLimiter(
+                    key,
+                    _ => slidingWindowRateLimiterOptions
+                );
+            }
+        );
     }
 
     /// <summary>
@@ -86,17 +113,26 @@ public static class RateLimiterOptionsExtensions
     /// <param name="policyName">The name that will be associated with the limiter.</param>
     /// <param name="configureOptions">A callback to configure the <see cref="ConcurrencyLimiterOptions"/> to be used for the limiter.</param>
     /// <returns>This <see cref="RateLimiterOptions"/>.</returns>
-    public static RateLimiterOptions AddConcurrencyLimiter(this RateLimiterOptions options, string policyName, Action<ConcurrencyLimiterOptions> configureOptions)
+    public static RateLimiterOptions AddConcurrencyLimiter(
+        this RateLimiterOptions options,
+        string policyName,
+        Action<ConcurrencyLimiterOptions> configureOptions
+    )
     {
         ArgumentNullException.ThrowIfNull(configureOptions);
 
         var key = new PolicyNameKey() { PolicyName = policyName };
         var concurrencyLimiterOptions = new ConcurrencyLimiterOptions();
         configureOptions.Invoke(concurrencyLimiterOptions);
-        return options.AddPolicy(policyName, context =>
-        {
-            return RateLimitPartition.GetConcurrencyLimiter(key,
-                _ => concurrencyLimiterOptions);
-        });
+        return options.AddPolicy(
+            policyName,
+            context =>
+            {
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    key,
+                    _ => concurrencyLimiterOptions
+                );
+            }
+        );
     }
 }

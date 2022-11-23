@@ -33,12 +33,20 @@ namespace ILCompiler.DependencyAnalysis
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory)
         {
             DependencyList dependencies = new DependencyList();
-            dependencies.Add(factory.TypeMetadata((MetadataType)_field.OwningType), "Owning type metadata");
+            dependencies.Add(
+                factory.TypeMetadata((MetadataType)_field.OwningType),
+                "Owning type metadata"
+            );
 
-            CustomAttributeBasedDependencyAlgorithm.AddDependenciesDueToCustomAttributes(ref dependencies, factory, ((EcmaField)_field));
+            CustomAttributeBasedDependencyAlgorithm.AddDependenciesDueToCustomAttributes(
+                ref dependencies,
+                factory,
+                ((EcmaField)_field)
+            );
 
             return dependencies;
         }
+
         protected override string GetName(NodeFactory factory)
         {
             return "Field metadata: " + _field.ToString();
@@ -54,7 +62,15 @@ namespace ILCompiler.DependencyAnalysis
         public override bool HasDynamicDependencies => false;
         public override bool HasConditionalStaticDependencies => false;
         public override bool StaticDependenciesAreComputed => true;
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory factory) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        ) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory factory
+        ) => null;
     }
 }

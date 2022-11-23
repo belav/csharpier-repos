@@ -27,7 +27,8 @@ namespace ILCompiler.DependencyAnalysis
             _target = target;
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectNodeSection Section
         {
@@ -67,7 +68,10 @@ namespace ILCompiler.DependencyAnalysis
             dataBuilder.AddSymbol(this);
 
             // +1 for SyncBlock (static size already includes MethodTable)
-            Debug.Assert(factory.Target.Abi == TargetAbi.NativeAot || factory.Target.Abi == TargetAbi.CppCodegen);
+            Debug.Assert(
+                factory.Target.Abi == TargetAbi.NativeAot
+                    || factory.Target.Abi == TargetAbi.CppCodegen
+            );
             int totalSize = (_gcMap.Size + 1) * _target.PointerSize;
 
             // We only need to check for containsPointers because ThreadStatics are always allocated
@@ -93,7 +97,11 @@ namespace ILCompiler.DependencyAnalysis
             dataBuilder.EmitInt(totalSize);
 
             // Related type: System.Object. This allows storing an instance of this type in an array of objects.
-            dataBuilder.EmitPointerReloc(factory.NecessaryTypeSymbol(factory.TypeSystemContext.GetWellKnownType(WellKnownType.Object)));
+            dataBuilder.EmitPointerReloc(
+                factory.NecessaryTypeSymbol(
+                    factory.TypeSystemContext.GetWellKnownType(WellKnownType.Object)
+                )
+            );
 
             return dataBuilder.ToObjectData();
         }

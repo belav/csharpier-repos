@@ -20,59 +20,69 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseDefaultLiteral)]
     public class UseDefaultLiteralTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseDefaultLiteralTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+        public UseDefaultLiteralTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUseDefaultLiteralDiagnosticAnalyzer(), new CSharpUseDefaultLiteralCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUseDefaultLiteralDiagnosticAnalyzer(),
+                new CSharpUseDefaultLiteralCodeFixProvider()
+            );
 
         private static readonly CSharpParseOptions s_parseOptions =
             CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_1);
 
-        private static readonly TestParameters s_testParameters =
-            new TestParameters(parseOptions: s_parseOptions);
+        private static readonly TestParameters s_testParameters = new TestParameters(
+            parseOptions: s_parseOptions
+        );
 
         [Fact]
         public async Task TestNotInCSharp7()
         {
             await TestMissingAsync(
-@"
-class C
-{
-    void Goo(string s = [||]default(string))
-    {
-    }
-}", parameters: new TestParameters(
-    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7)));
-        }
-
-        [Fact]
-        public async Task TestInParameterList()
-        {
-            await TestAsync(
-@"
+                @"
 class C
 {
     void Goo(string s = [||]default(string))
     {
     }
 }",
-@"
+                parameters: new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp7
+                    )
+                )
+            );
+        }
+
+        [Fact]
+        public async Task TestInParameterList()
+        {
+            await TestAsync(
+                @"
+class C
+{
+    void Goo(string s = [||]default(string))
+    {
+    }
+}",
+                @"
 class C
 {
     void Goo(string s = default)
     {
     }
-}", parseOptions: s_parseOptions);
+}",
+                parseOptions: s_parseOptions
+            );
         }
 
         [Fact]
         public async Task TestInIfCheck()
         {
             await TestAsync(
-@"
+                @"
 class C
 {
     void Goo(string s)
@@ -80,21 +90,23 @@ class C
         if (s == [||]default(string)) { }
     }
 }",
-@"
+                @"
 class C
 {
     void Goo(string s)
     {
         if (s == default) { }
     }
-}", parseOptions: s_parseOptions);
+}",
+                parseOptions: s_parseOptions
+            );
         }
 
         [Fact]
         public async Task TestInReturnStatement()
         {
             await TestAsync(
-@"
+                @"
 class C
 {
     string Goo()
@@ -102,35 +114,39 @@ class C
         return [||]default(string);
     }
 }",
-@"
+                @"
 class C
 {
     string Goo()
     {
         return default;
     }
-}", parseOptions: s_parseOptions);
+}",
+                parseOptions: s_parseOptions
+            );
         }
 
         [Fact]
         public async Task TestInReturnStatement2()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     string Goo()
     {
         return [||]default(int);
     }
-}", parameters: s_testParameters);
+}",
+                parameters: s_testParameters
+            );
         }
 
         [Fact]
         public async Task TestInLambda1()
         {
             await TestAsync(
-@"
+                @"
 using System;
 
 class C
@@ -140,7 +156,7 @@ class C
         Func<string> f = () => [||]default(string);
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -149,14 +165,16 @@ class C
     {
         Func<string> f = () => [||]default;
     }
-}", parseOptions: s_parseOptions);
+}",
+                parseOptions: s_parseOptions
+            );
         }
 
         [Fact]
         public async Task TestInLambda2()
         {
             await TestMissingAsync(
-@"
+                @"
 using System;
 
 class C
@@ -165,14 +183,16 @@ class C
     {
         Func<string> f = () => [||]default(int);
     }
-}", parameters: s_testParameters);
+}",
+                parameters: s_testParameters
+            );
         }
 
         [Fact]
         public async Task TestInLocalInitializer()
         {
             await TestAsync(
-@"
+                @"
 class C
 {
     void Goo()
@@ -180,49 +200,55 @@ class C
         string s = [||]default(string);
     }
 }",
-@"
+                @"
 class C
 {
     void Goo()
     {
         string s = default;
     }
-}", parseOptions: s_parseOptions);
+}",
+                parseOptions: s_parseOptions
+            );
         }
 
         [Fact]
         public async Task TestInLocalInitializer2()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     void Goo()
     {
         string s = [||]default(int);
     }
-}", parameters: s_testParameters);
+}",
+                parameters: s_testParameters
+            );
         }
 
         [Fact]
         public async Task TestNotForVar()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     void Goo()
     {
         var s = [||]default(string);
     }
-}", parameters: s_testParameters);
+}",
+                parameters: s_testParameters
+            );
         }
 
         [Fact]
         public async Task TestInInvocationExpression()
         {
             await TestAsync(
-@"
+                @"
 class C
 {
     void Goo()
@@ -232,7 +258,7 @@ class C
 
     void Bar(string s) { }
 }",
-@"
+                @"
 class C
 {
     void Goo()
@@ -241,14 +267,16 @@ class C
     }
 
     void Bar(string s) { }
-}", parseOptions: s_parseOptions);
+}",
+                parseOptions: s_parseOptions
+            );
         }
 
         [Fact]
         public async Task TestNotWithMultipleOverloads()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     void Goo()
@@ -258,14 +286,16 @@ class C
 
     void Bar(string s) { }
     void Bar(int i);
-}", parameters: s_testParameters);
+}",
+                parameters: s_testParameters
+            );
         }
 
         [Fact]
         public async Task TestLeftSideOfTernary()
         {
             await TestAsync(
-@"
+                @"
 class C
 {
     void Goo(bool b)
@@ -273,21 +303,23 @@ class C
         var v = b ? [||]default(string) : default(string);
     }
 }",
-@"
+                @"
 class C
 {
     void Goo(bool b)
     {
         var v = b ? default : default(string);
     }
-}", parseOptions: s_parseOptions);
+}",
+                parseOptions: s_parseOptions
+            );
         }
 
         [Fact]
         public async Task TestRightSideOfTernary()
         {
             await TestAsync(
-@"
+                @"
 class C
 {
     void Goo(bool b)
@@ -295,21 +327,23 @@ class C
         var v = b ? default(string) : [||]default(string);
     }
 }",
-@"
+                @"
 class C
 {
     void Goo(bool b)
     {
         var v = b ? default(string) : default;
     }
-}", parseOptions: s_parseOptions);
+}",
+                parseOptions: s_parseOptions
+            );
         }
 
         [Fact]
         public async Task TestFixAll1()
         {
             await TestAsync(
-@"
+                @"
 class C
 {
     void Goo()
@@ -318,7 +352,7 @@ class C
         string s2 = default(string);
     }
 }",
-@"
+                @"
 class C
 {
     void Goo()
@@ -326,14 +360,16 @@ class C
         string s1 = default;
         string s2 = default;
     }
-}", parseOptions: s_parseOptions);
+}",
+                parseOptions: s_parseOptions
+            );
         }
 
         [Fact]
         public async Task TestFixAll2()
         {
             await TestAsync(
-@"
+                @"
 class C
 {
     void Goo(bool b)
@@ -341,21 +377,23 @@ class C
         string s1 = b ? {|FixAllInDocument:default|}(string) : default(string);
     }
 }",
-@"
+                @"
 class C
 {
     void Goo(bool b)
     {
         string s1 = b ? default : default(string);
     }
-}", parseOptions: s_parseOptions);
+}",
+                parseOptions: s_parseOptions
+            );
         }
 
         [Fact]
         public async Task TestFixAll3()
         {
             await TestAsync(
-@"
+                @"
 class C
 {
     void Goo()
@@ -364,7 +402,7 @@ class C
         string s2 = default(int);
     }
 }",
-@"
+                @"
 class C
 {
     void Goo()
@@ -372,14 +410,16 @@ class C
         string s1 = default;
         string s2 = default(int);
     }
-}", parseOptions: s_parseOptions);
+}",
+                parseOptions: s_parseOptions
+            );
         }
 
         [Fact]
         public async Task TestDoNotOfferIfTypeWouldChange()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 struct S
 {
     void M()
@@ -392,14 +432,16 @@ struct S
     {
         return base.Equals(obj);
     }
-}", new TestParameters(parseOptions: s_parseOptions));
+}",
+                new TestParameters(parseOptions: s_parseOptions)
+            );
         }
 
         [Fact]
         public async Task TestDoNotOfferIfTypeWouldChange2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 struct S<T>
 {
     void M()
@@ -412,14 +454,16 @@ struct S<T>
     {
         return base.Equals(obj);
     }
-}", new TestParameters(parseOptions: s_parseOptions));
+}",
+                new TestParameters(parseOptions: s_parseOptions)
+            );
         }
 
         [Fact]
         public async Task TestOnShadowedMethod()
         {
             await TestAsync(
-@"
+                @"
 struct S
 {
     void M()
@@ -430,8 +474,7 @@ struct S
 
     public new bool Equals(S s) => true;
 }",
-
-@"
+                @"
 struct S
 {
     void M()
@@ -441,14 +484,16 @@ struct S
     }
 
     public new bool Equals(S s) => true;
-}", parseOptions: s_parseOptions);
+}",
+                parseOptions: s_parseOptions
+            );
         }
 
         [Fact, WorkItem(25456, "https://github.com/dotnet/roslyn/issues/25456")]
         public async Task TestNotInSwitchCase()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -458,14 +503,16 @@ class C
             case [||]default(bool):
         }
     }
-}", s_testParameters);
+}",
+                s_testParameters
+            );
         }
 
         [Fact]
         public async Task TestNotInSwitchCase_InsideParentheses()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -475,14 +522,16 @@ class C
             case ([||]default(bool)):
         }
     }
-}", s_testParameters);
+}",
+                s_testParameters
+            );
         }
 
         [Fact]
         public async Task TestInSwitchCase_InsideCast()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -493,7 +542,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -503,14 +552,16 @@ class C
             case (bool)[||]default:
         }
     }
-}", parameters: s_testParameters);
+}",
+                parameters: s_testParameters
+            );
         }
 
         [Fact]
         public async Task TestNotInPatternSwitchCase()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -520,14 +571,16 @@ class C
             case [||]default(bool) when true:
         }
     }
-}", s_testParameters);
+}",
+                s_testParameters
+            );
         }
 
         [Fact]
         public async Task TestNotInPatternSwitchCase_InsideParentheses()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -537,14 +590,16 @@ class C
             case ([||]default(bool)) when true:
         }
     }
-}", s_testParameters);
+}",
+                s_testParameters
+            );
         }
 
         [Fact]
         public async Task TestInPatternSwitchCase_InsideCast()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -555,7 +610,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -565,14 +620,16 @@ class C
             case (bool)[||]default when true:
         }
     }
-}", parameters: s_testParameters);
+}",
+                parameters: s_testParameters
+            );
         }
 
         [Fact]
         public async Task TestInPatternSwitchCase_InsideWhenClause()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -583,7 +640,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -593,42 +650,48 @@ class C
             case default(bool) when default:
         }
     }
-}", parameters: s_testParameters);
+}",
+                parameters: s_testParameters
+            );
         }
 
         [Fact]
         public async Task TestNotInPatternIs()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
     {
         if (true is [||]default(bool));
     }
-}", s_testParameters);
+}",
+                s_testParameters
+            );
         }
 
         [Fact]
         public async Task TestNotInPatternIs_InsideParentheses()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
     {
         if (true is ([||]default(bool)));
     }
-}", s_testParameters);
+}",
+                s_testParameters
+            );
         }
 
         [Fact]
         public async Task TestInPatternIs_InsideCast()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -636,14 +699,16 @@ class C
         if (true is (bool)[||]default(bool));
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         if (true is (bool)default);
     }
-}", parameters: s_testParameters);
+}",
+                parameters: s_testParameters
+            );
         }
     }
 }

@@ -7,12 +7,12 @@ namespace System.Web.Http.Tracing
     {
         public static bool IsDefined(TraceLevel traceLevel)
         {
-            return traceLevel == TraceLevel.Off ||
-                   traceLevel == TraceLevel.Debug ||
-                   traceLevel == TraceLevel.Info ||
-                   traceLevel == TraceLevel.Warn ||
-                   traceLevel == TraceLevel.Error ||
-                   traceLevel == TraceLevel.Fatal;
+            return traceLevel == TraceLevel.Off
+                || traceLevel == TraceLevel.Debug
+                || traceLevel == TraceLevel.Info
+                || traceLevel == TraceLevel.Warn
+                || traceLevel == TraceLevel.Error
+                || traceLevel == TraceLevel.Fatal;
         }
 
         public static void Validate(TraceLevel value, string parameterValue)

@@ -21,9 +21,7 @@ internal sealed partial class SignInResult : IResult
     /// </summary>
     /// <param name="principal">The claims principal containing the user claims.</param>
     public SignInResult(ClaimsPrincipal principal)
-        : this(authenticationScheme: null, principal, properties: null)
-    {
-    }
+        : this(authenticationScheme: null, principal, properties: null) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignInResult"/> with the
@@ -32,9 +30,7 @@ internal sealed partial class SignInResult : IResult
     /// <param name="authenticationScheme">The authentication scheme to use when signing in the user.</param>
     /// <param name="principal">The claims principal containing the user claims.</param>
     public SignInResult(string? authenticationScheme, ClaimsPrincipal principal)
-        : this(authenticationScheme, principal, properties: null)
-    {
-    }
+        : this(authenticationScheme, principal, properties: null) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignInResult"/> with the
@@ -43,9 +39,7 @@ internal sealed partial class SignInResult : IResult
     /// <param name="principal">The claims principal containing the user claims.</param>
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-in operation.</param>
     public SignInResult(ClaimsPrincipal principal, AuthenticationProperties? properties)
-        : this(authenticationScheme: null, principal, properties)
-    {
-    }
+        : this(authenticationScheme: null, principal, properties) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignInResult"/> with the
@@ -54,7 +48,11 @@ internal sealed partial class SignInResult : IResult
     /// <param name="authenticationScheme">The authentication schemes to use when signing in the user.</param>
     /// <param name="principal">The claims principal containing the user claims.</param>
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-in operation.</param>
-    public SignInResult(string? authenticationScheme, ClaimsPrincipal principal, AuthenticationProperties? properties)
+    public SignInResult(
+        string? authenticationScheme,
+        ClaimsPrincipal principal,
+        AuthenticationProperties? properties
+    )
     {
         Principal = principal ?? throw new ArgumentNullException(nameof(principal));
         AuthenticationScheme = authenticationScheme;
@@ -88,9 +86,16 @@ internal sealed partial class SignInResult : IResult
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information,
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
             "Executing SignInResult with authentication scheme ({Scheme}) and the following principal: {Principal}.",
-            EventName = "SignInResultExecuting")]
-        public static partial void SignInResultExecuting(ILogger logger, string? scheme, ClaimsPrincipal principal);
+            EventName = "SignInResultExecuting"
+        )]
+        public static partial void SignInResultExecuting(
+            ILogger logger,
+            string? scheme,
+            ClaimsPrincipal principal
+        );
     }
 }

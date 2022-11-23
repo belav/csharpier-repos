@@ -25,21 +25,18 @@ namespace System.CommandLine.Tests
             var subcommand = new Command("subcommand");
             command.AddCommand(subcommand);
 
-            var parser =
-                new CommandLineBuilder(new RootCommand
-                    {
-                        command
-                    })
-                    .UseHelp()
-                    .Build();
+            var parser = new CommandLineBuilder(new RootCommand { command }).UseHelp().Build();
 
             var result = parser.Parse("command subcommand --help");
 
             await result.InvokeAsync(_console);
 
-            _console.Out.ToString().Should().Contain($"{RootCommand.ExecutableName} command subcommand [options]");
+            _console.Out
+                .ToString()
+                .Should()
+                .Contain($"{RootCommand.ExecutableName} command subcommand [options]");
         }
-         
+
         [Fact]
         public async Task UseHelp_interrupts_execution_of_the_specified_command()
         {
@@ -49,13 +46,7 @@ namespace System.CommandLine.Tests
             subcommand.SetHandler(() => wasCalled = true);
             command.AddCommand(subcommand);
 
-            var parser =
-                new CommandLineBuilder(new RootCommand
-                    {
-                        command
-                    })
-                    .UseHelp()
-                    .Build();
+            var parser = new CommandLineBuilder(new RootCommand { command }).UseHelp().Build();
 
             await parser.InvokeAsync("command subcommand --help", _console);
 
@@ -69,13 +60,9 @@ namespace System.CommandLine.Tests
         [InlineData("/?")]
         public async Task UseHelp_accepts_default_values(string value)
         {
-            var parser =
-                new CommandLineBuilder(new RootCommand
-                    {
-                        new Command("command")
-                    })
-                    .UseHelp()
-                    .Build();
+            var parser = new CommandLineBuilder(new RootCommand { new Command("command") })
+                .UseHelp()
+                .Build();
 
             await parser.InvokeAsync($"command {value}", _console);
 
@@ -87,14 +74,8 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("command");
             command.AddOption(new Option<bool>("-h"));
-            
-            var parser =
-                new CommandLineBuilder(new RootCommand
-                    {
-                        command
-                    })
-                    .UseHelp()
-                    .Build();
+
+            var parser = new CommandLineBuilder(new RootCommand { command }).UseHelp().Build();
 
             var result = parser.Parse("command -h");
 
@@ -106,47 +87,31 @@ namespace System.CommandLine.Tests
         [Fact]
         public void There_are_no_parse_errors_when_help_is_invoked_on_root_command()
         {
-            var parser = new CommandLineBuilder()
-                .UseHelp()
-                .Build();
+            var parser = new CommandLineBuilder().UseHelp().Build();
 
             var result = parser.Parse("-h");
 
-            result.Errors
-                  .Should()
-                  .BeEmpty();
+            result.Errors.Should().BeEmpty();
         }
-        
+
         [Fact]
         public void There_are_no_parse_errors_when_help_is_invoked_on_subcommand()
         {
-            var root = new RootCommand
-            {
-                new Command("subcommand")
-            };
+            var root = new RootCommand { new Command("subcommand") };
 
-            var parser = new CommandLineBuilder(root)
-                         .UseHelp()
-                         .Build();
+            var parser = new CommandLineBuilder(root).UseHelp().Build();
 
             var result = parser.Parse("subcommand -h");
 
-            result.Errors
-                  .Should()
-                  .BeEmpty();
+            result.Errors.Should().BeEmpty();
         }
 
         [Fact]
         public void There_are_no_parse_errors_when_help_is_invoked_on_a_command_with_subcommands()
         {
-            var root = new RootCommand
-            {
-                new Command("subcommand")
-            };
+            var root = new RootCommand { new Command("subcommand") };
 
-            var parser = new CommandLineBuilder(root)
-                         .UseHelp()
-                         .Build();
+            var parser = new CommandLineBuilder(root).UseHelp().Build();
 
             var result = parser.Parse("-h");
 
@@ -156,18 +121,9 @@ namespace System.CommandLine.Tests
         [Fact]
         public void There_are_no_parse_errors_when_help_is_invoked_on_a_command_with_required_options()
         {
-            var command = new RootCommand
-            {
-                new Option<string>("-x")
-                {
-                    IsRequired = true
-                },
-            };
+            var command = new RootCommand { new Option<string>("-x") { IsRequired = true }, };
 
-            var result = new CommandLineBuilder(command)
-                         .UseHelp()
-                         .Build()
-                         .Parse("-h");
+            var result = new CommandLineBuilder(command).UseHelp().Build().Parse("-h");
 
             result.Errors.Should().BeEmpty();
         }
@@ -175,17 +131,13 @@ namespace System.CommandLine.Tests
         [Theory]
         [InlineData("-h")]
         [InlineData("inner -h")]
-        public void UseHelp_can_be_called_more_than_once_on_the_same_CommandLineBuilder(string commandline)
+        public void UseHelp_can_be_called_more_than_once_on_the_same_CommandLineBuilder(
+            string commandline
+        )
         {
-            var root = new RootCommand
-            {
-                new Command("inner")
-            };
+            var root = new RootCommand { new Command("inner") };
 
-            var parser = new CommandLineBuilder(root)
-                         .UseHelp()
-                         .UseHelp()
-                         .Build();
+            var parser = new CommandLineBuilder(root).UseHelp().UseHelp().Build();
 
             parser.Invoke(commandline, _console);
 
@@ -195,16 +147,13 @@ namespace System.CommandLine.Tests
         [Theory]
         [InlineData("-h")]
         [InlineData("inner -h")]
-        public void UseHelp_can_be_called_more_than_once_on_the_same_command_with_different_CommandLineBuilders(string commandline)
+        public void UseHelp_can_be_called_more_than_once_on_the_same_command_with_different_CommandLineBuilders(
+            string commandline
+        )
         {
-            var root = new RootCommand
-            {
-                new Command("inner")
-            };
+            var root = new RootCommand { new Command("inner") };
 
-            var parser = new CommandLineBuilder(root)
-                         .UseHelp()
-                         .Build();
+            var parser = new CommandLineBuilder(root).UseHelp().Build();
 
             var console1 = new TestConsole();
 
@@ -212,9 +161,7 @@ namespace System.CommandLine.Tests
 
             console1.Should().ShowHelp();
 
-            var parser2 = new CommandLineBuilder(root)
-                          .UseHelp()
-                          .Build();
+            var parser2 = new CommandLineBuilder(root).UseHelp().Build();
             var console2 = new TestConsole();
 
             parser2.Invoke(commandline, console2);
@@ -227,10 +174,7 @@ namespace System.CommandLine.Tests
         [InlineData("--confused")]
         public async Task UseHelp_with_custom_aliases_uses_aliases(string helpAlias)
         {
-            var parser =
-                new CommandLineBuilder()
-                    .UseHelp("/lost", "--confused")
-                    .Build();
+            var parser = new CommandLineBuilder().UseHelp("/lost", "--confused").Build();
 
             await parser.InvokeAsync(helpAlias, _console);
 
@@ -245,10 +189,7 @@ namespace System.CommandLine.Tests
         [InlineData("/?")]
         public async Task UseHelp_with_custom_aliases_default_aliases_replaced(string helpAlias)
         {
-            var parser =
-                new CommandLineBuilder()
-                    .UseHelp("--confused")
-                    .Build();
+            var parser = new CommandLineBuilder().UseHelp("--confused").Build();
 
             await parser.InvokeAsync(helpAlias, _console);
 
@@ -262,44 +203,53 @@ namespace System.CommandLine.Tests
             var option = new Option<int>("-x", "The default option description");
             var argument = new Argument<int>("int-value", "The default argument description");
 
-            var rootCommand = new RootCommand
-            {
-                subcommand,
-                option,
-                argument
-            };
+            var rootCommand = new RootCommand { subcommand, option, argument };
 
             var parser = new CommandLineBuilder(rootCommand)
-                         .UseHelp(ctx =>
-                         {
-                             ctx.HelpBuilder.CustomizeSymbol(subcommand, secondColumnText: "The custom command description");
-                             ctx.HelpBuilder.CustomizeSymbol(option, secondColumnText: "The custom option description");
-                             ctx.HelpBuilder.CustomizeSymbol(argument, secondColumnText: "The custom argument description");
-                         })
-                         .Build();
+                .UseHelp(ctx =>
+                {
+                    ctx.HelpBuilder.CustomizeSymbol(
+                        subcommand,
+                        secondColumnText: "The custom command description"
+                    );
+                    ctx.HelpBuilder.CustomizeSymbol(
+                        option,
+                        secondColumnText: "The custom option description"
+                    );
+                    ctx.HelpBuilder.CustomizeSymbol(
+                        argument,
+                        secondColumnText: "The custom argument description"
+                    );
+                })
+                .Build();
 
             var console = new TestConsole();
             parser.Invoke("-h", console);
 
             console.Out
-                   .ToString()
-                   .Should()
-                   .ContainAll("The custom command description",
-                               "The custom option description",
-                               "The custom argument description");
+                .ToString()
+                .Should()
+                .ContainAll(
+                    "The custom command description",
+                    "The custom option description",
+                    "The custom argument description"
+                );
         }
 
         [Fact]
         public void Help_sections_can_be_replaced()
         {
             var parser = new CommandLineBuilder()
-                         .UseHelp(ctx => ctx.HelpBuilder.CustomizeLayout(CustomLayout))
-                         .Build();
+                .UseHelp(ctx => ctx.HelpBuilder.CustomizeLayout(CustomLayout))
+                .Build();
 
             var console = new TestConsole();
             parser.Invoke("-h", console);
 
-            console.Out.ToString().Should().Be($"one{NewLine}{NewLine}two{NewLine}{NewLine}three{NewLine}{NewLine}{NewLine}");
+            console.Out
+                .ToString()
+                .Should()
+                .Be($"one{NewLine}{NewLine}two{NewLine}{NewLine}three{NewLine}{NewLine}{NewLine}");
 
             IEnumerable<HelpSectionDelegate> CustomLayout(HelpContext _)
             {
@@ -314,8 +264,8 @@ namespace System.CommandLine.Tests
         {
             var command = new RootCommand("hello");
             var parser = new CommandLineBuilder(command)
-                         .UseHelp(ctx => ctx.HelpBuilder.CustomizeLayout(CustomLayout))
-                         .Build();
+                .UseHelp(ctx => ctx.HelpBuilder.CustomizeLayout(CustomLayout))
+                .Build();
 
             var console = new TestConsole();
             parser.Invoke("-h", console);
@@ -345,25 +295,22 @@ namespace System.CommandLine.Tests
         {
             var commandWithTypicalHelp = new Command("typical");
             var commandWithCustomHelp = new Command("custom");
-            var command = new RootCommand
-            {
-                commandWithTypicalHelp,
-                commandWithCustomHelp
-            };
+            var command = new RootCommand { commandWithTypicalHelp, commandWithCustomHelp };
 
             var parser = new CommandLineBuilder(command)
-                         .UseHelp(
-                             ctx =>
-                                 ctx.HelpBuilder
-                                    .CustomizeLayout(c =>
-                                                         c.Command == commandWithTypicalHelp
-                                                             ? HelpBuilder.Default.GetLayout()
-                                                             : new HelpSectionDelegate[]
-                                                                 {
-                                                                     c => c.Output.WriteLine("Custom layout!")
-                                                                 }
-                                                                 .Concat(HelpBuilder.Default.GetLayout())))
-                         .Build();
+                .UseHelp(
+                    ctx =>
+                        ctx.HelpBuilder.CustomizeLayout(
+                            c =>
+                                c.Command == commandWithTypicalHelp
+                                    ? HelpBuilder.Default.GetLayout()
+                                    : new HelpSectionDelegate[]
+                                    {
+                                        c => c.Output.WriteLine("Custom layout!")
+                                    }.Concat(HelpBuilder.Default.GetLayout())
+                        )
+                )
+                .Build();
 
             var typicalOutput = new TestConsole();
             parser.Invoke("typical -h", typicalOutput);
@@ -372,54 +319,63 @@ namespace System.CommandLine.Tests
             parser.Invoke("custom -h", customOutput);
 
             typicalOutput.Out.ToString().Should().Be(GetDefaultHelp(commandWithTypicalHelp, false));
-            customOutput.Out.ToString().Should().Be($"Custom layout!{NewLine}{NewLine}{GetDefaultHelp(commandWithCustomHelp, false)}");
+            customOutput.Out
+                .ToString()
+                .Should()
+                .Be(
+                    $"Custom layout!{NewLine}{NewLine}{GetDefaultHelp(commandWithCustomHelp, false)}"
+                );
         }
 
         [Fact]
         public void Help_default_sections_can_be_wrapped()
         {
-            Command command = new("test")
-            {
-                new Option<string>("--option", "option description")
-            };
+            Command command = new("test") { new Option<string>("--option", "option description") };
 
-            var parser = new CommandLineBuilder(command)
-                         .UseHelp(maxWidth: 30)
-                         .Build();
+            var parser = new CommandLineBuilder(command).UseHelp(maxWidth: 30).Build();
 
             var console = new TestConsole();
             parser.Invoke("test -h", console);
 
             string result = console.Out.ToString();
-            result.Should().Be(
-        $"Description:{NewLine}{NewLine}" +
-        $"Usage:{NewLine}  test [options]{NewLine}{NewLine}" +
-        $"Options:{NewLine}" +
-        $"  --option   option {NewLine}" +
-        $"  <option>   description{NewLine}" +
-        $"  -?, -h,    Show help and {NewLine}" +
-        $"  --help     usage {NewLine}" +
-        $"             information{NewLine}{NewLine}{NewLine}");
+            result
+                .Should()
+                .Be(
+                    $"Description:{NewLine}{NewLine}"
+                        + $"Usage:{NewLine}  test [options]{NewLine}{NewLine}"
+                        + $"Options:{NewLine}"
+                        + $"  --option   option {NewLine}"
+                        + $"  <option>   description{NewLine}"
+                        + $"  -?, -h,    Show help and {NewLine}"
+                        + $"  --help     usage {NewLine}"
+                        + $"             information{NewLine}{NewLine}{NewLine}"
+                );
         }
-
-
 
         [Fact]
         public void Help_customized_sections_can_be_wrapped()
         {
             var parser = new CommandLineBuilder()
-                         .UseHelp(ctx => ctx.HelpBuilder.CustomizeLayout(CustomLayout), maxWidth: 10)
-                         .Build();
+                .UseHelp(ctx => ctx.HelpBuilder.CustomizeLayout(CustomLayout), maxWidth: 10)
+                .Build();
 
             var console = new TestConsole();
             parser.Invoke("-h", console);
 
             string result = console.Out.ToString();
-            result.Should().Be($"  123  123{NewLine}  456  456{NewLine}  78   789{NewLine}       0{NewLine}{NewLine}{NewLine}");
+            result
+                .Should()
+                .Be(
+                    $"  123  123{NewLine}  456  456{NewLine}  78   789{NewLine}       0{NewLine}{NewLine}{NewLine}"
+                );
 
             IEnumerable<HelpSectionDelegate> CustomLayout(HelpContext _)
             {
-                yield return ctx => ctx.HelpBuilder.WriteColumns(new[] { new TwoColumnHelpRow("12345678", "1234567890") }, ctx);
+                yield return ctx =>
+                    ctx.HelpBuilder.WriteColumns(
+                        new[] { new TwoColumnHelpRow("12345678", "1234567890") },
+                        ctx
+                    );
             }
         }
 
@@ -427,9 +383,7 @@ namespace System.CommandLine.Tests
         {
             var console = new TestConsole();
 
-            var parser = new CommandLineBuilder(command)
-                         .UseHelp()
-                         .Build();
+            var parser = new CommandLineBuilder(command).UseHelp().Build();
 
             parser.Invoke("-h", console);
 

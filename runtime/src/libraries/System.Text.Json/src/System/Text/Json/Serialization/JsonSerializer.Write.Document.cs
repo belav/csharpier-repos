@@ -23,7 +23,10 @@ namespace System.Text.Json
         /// </exception>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
-        public static JsonDocument SerializeToDocument<TValue>(TValue value, JsonSerializerOptions? options = null)
+        public static JsonDocument SerializeToDocument<TValue>(
+            TValue value,
+            JsonSerializerOptions? options = null
+        )
         {
             JsonTypeInfo<TValue> jsonTypeInfo = GetTypeInfo<TValue>(options);
             return WriteDocument(value, jsonTypeInfo);
@@ -48,7 +51,11 @@ namespace System.Text.Json
         /// </exception>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
-        public static JsonDocument SerializeToDocument(object? value, Type inputType, JsonSerializerOptions? options = null)
+        public static JsonDocument SerializeToDocument(
+            object? value,
+            Type inputType,
+            JsonSerializerOptions? options = null
+        )
         {
             ValidateInputType(value, inputType);
             JsonTypeInfo jsonTypeInfo = GetTypeInfo(options, inputType);
@@ -69,7 +76,10 @@ namespace System.Text.Json
         /// <exception cref="ArgumentNullException">
         /// <paramref name="jsonTypeInfo"/> is <see langword="null"/>.
         /// </exception>
-        public static JsonDocument SerializeToDocument<TValue>(TValue value, JsonTypeInfo<TValue> jsonTypeInfo)
+        public static JsonDocument SerializeToDocument<TValue>(
+            TValue value,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             if (jsonTypeInfo is null)
             {
@@ -98,7 +108,11 @@ namespace System.Text.Json
         /// <exception cref="ArgumentNullException">
         /// <paramref name="inputType"/> or <paramref name="context"/> is <see langword="null"/>.
         /// </exception>
-        public static JsonDocument SerializeToDocument(object? value, Type inputType, JsonSerializerContext context)
+        public static JsonDocument SerializeToDocument(
+            object? value,
+            Type inputType,
+            JsonSerializerContext context
+        )
         {
             if (context is null)
             {
@@ -109,7 +123,10 @@ namespace System.Text.Json
             return WriteDocumentAsObject(value, GetTypeInfo(context, inputType));
         }
 
-        private static JsonDocument WriteDocument<TValue>(in TValue value, JsonTypeInfo<TValue> jsonTypeInfo)
+        private static JsonDocument WriteDocument<TValue>(
+            in TValue value,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             Debug.Assert(jsonTypeInfo.IsConfigured);
             JsonSerializerOptions options = jsonTypeInfo.Options;

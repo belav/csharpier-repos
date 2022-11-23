@@ -84,7 +84,8 @@ namespace Microsoft.Interop
         /// <c>CustomTypeMarshallingDirection.In</c> means method import like <c>[LibraryImport]</c>.
         /// <c>CustomTypeMarshallingDirection.Out</c> means method export like in <c>[UnmanagedCallersOnly]</c> or in <c>[JSExport]</c>
         /// </summary>
-        public CustomTypeMarshallingDirection Direction { get; init; } = CustomTypeMarshallingDirection.In;
+        public CustomTypeMarshallingDirection Direction { get; init; } =
+            CustomTypeMarshallingDirection.In;
 
         /// <summary>
         /// Gets the currently targeted framework and version for stub code generation.
@@ -129,7 +130,10 @@ namespace Microsoft.Interop
         /// <returns>Managed and native identifiers</returns>
         public virtual (string managed, string native) GetIdentifiers(TypePositionInfo info)
         {
-            return (info.InstanceIdentifier, $"__{info.InstanceIdentifier.TrimStart('@')}{GeneratedNativeIdentifierSuffix}");
+            return (
+                info.InstanceIdentifier,
+                $"__{info.InstanceIdentifier.TrimStart('@')}{GeneratedNativeIdentifierSuffix}"
+            );
         }
 
         /// <summary>

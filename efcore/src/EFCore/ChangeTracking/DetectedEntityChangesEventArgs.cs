@@ -25,8 +25,8 @@ public class DetectedEntityChangesEventArgs : DetectedChangesEventArgs
     [EntityFrameworkInternal]
     public DetectedEntityChangesEventArgs(
         InternalEntityEntry internalEntityEntry,
-        bool changesFound)
-        : base(changesFound)
+        bool changesFound
+    ) : base(changesFound)
     {
         _internalEntityEntry = internalEntityEntry;
     }
@@ -34,6 +34,5 @@ public class DetectedEntityChangesEventArgs : DetectedChangesEventArgs
     /// <summary>
     ///     The <see cref="EntityEntry" /> for the entity.
     /// </summary>
-    public virtual EntityEntry Entry
-        => _entry ??= new EntityEntry(_internalEntityEntry);
+    public virtual EntityEntry Entry => _entry ??= new EntityEntry(_internalEntityEntry);
 }

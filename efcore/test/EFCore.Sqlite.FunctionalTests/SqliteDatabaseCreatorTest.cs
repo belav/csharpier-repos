@@ -12,13 +12,18 @@ public class SqliteDatabaseCreatorTest
     [InlineData(true, false)]
     [InlineData(false, true)]
     [InlineData(true, true)]
-    public async Task Exists_returns_false_when_database_doesnt_exist(bool async, bool useCanConnect)
+    public async Task Exists_returns_false_when_database_doesnt_exist(
+        bool async,
+        bool useCanConnect
+    )
     {
         var context = CreateContext("Data Source=doesnt-exist.db");
 
         if (useCanConnect)
         {
-            Assert.False(async ? await context.Database.CanConnectAsync() : context.Database.CanConnect());
+            Assert.False(
+                async ? await context.Database.CanConnectAsync() : context.Database.CanConnect()
+            );
         }
         else
         {
@@ -44,7 +49,9 @@ public class SqliteDatabaseCreatorTest
     [InlineData(true)]
     public async Task HasTables_returns_true_when_database_is_not_empty(bool async)
     {
-        using var testStore = SqliteTestStore.GetOrCreateInitialized($"HasATable{(async ? 'A' : 'S')}");
+        using var testStore = SqliteTestStore.GetOrCreateInitialized(
+            $"HasATable{(async ? 'A' : 'S')}"
+        );
         var context = CreateContext(testStore.ConnectionString);
         context.Database.ExecuteSqlRaw("CREATE TABLE Dummy (Foo INTEGER)");
 
@@ -64,7 +71,9 @@ public class SqliteDatabaseCreatorTest
 
         if (useCanConnect)
         {
-            Assert.True(async ? await context.Database.CanConnectAsync() : context.Database.CanConnect());
+            Assert.True(
+                async ? await context.Database.CanConnectAsync() : context.Database.CanConnect()
+            );
         }
         else
         {
@@ -141,8 +150,8 @@ public class SqliteDatabaseCreatorTest
             _connectionString = connectionString;
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseSqlite(_connectionString);
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseSqlite(_connectionString);
     }
 
     [ConditionalTheory]
@@ -156,12 +165,15 @@ public class SqliteDatabaseCreatorTest
         Assert.True(creator.Exists());
     }
 
-    private DbContext CreateContext(string connectionString)
-        => new(
+    private DbContext CreateContext(string connectionString) =>
+        new(
             new DbContextOptionsBuilder()
                 .UseSqlite(connectionString)
                 .UseInternalServiceProvider(
-                    SqliteTestStoreFactory.Instance.AddProviderServices(new ServiceCollection())
-                        .BuildServiceProvider(validateScopes: true))
-                .Options);
+                    SqliteTestStoreFactory.Instance
+                        .AddProviderServices(new ServiceCollection())
+                        .BuildServiceProvider(validateScopes: true)
+                )
+                .Options
+        );
 }

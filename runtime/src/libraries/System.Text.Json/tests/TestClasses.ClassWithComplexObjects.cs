@@ -12,28 +12,19 @@ namespace System.Text.Json.Serialization.Tests
         public object Object { get; set; }
 
         public static readonly string s_array =
-            @"[" +
-                @"1," +
-                @"""Hello""," +
-                @"true," +
-                @"false," +
-                @"{}," +
-                @"[2, ""Goodbye"", false, true, {}, [3]]" +
-            @"]";
+            @"["
+            + @"1,"
+            + @"""Hello"","
+            + @"true,"
+            + @"false,"
+            + @"{},"
+            + @"[2, ""Goodbye"", false, true, {}, [3]]"
+            + @"]";
 
-        public static readonly string s_object =
-            @"{" +
-                @"""NestedArray"" : " +
-                s_array +
-            @"}";
+        public static readonly string s_object = @"{" + @"""NestedArray"" : " + s_array + @"}";
 
         public static readonly string s_json =
-            @"{" +
-                @"""Array"" : " +
-                s_array + "," +
-                @"""Object"" : " +
-                s_object +
-            @"}";
+            @"{" + @"""Array"" : " + s_array + "," + @"""Object"" : " + s_object + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -70,7 +61,6 @@ namespace System.Text.Json.Serialization.Tests
                 Assert.Equal(JsonValueKind.False, elements[3].ValueKind);
                 Assert.False(elements[3].GetBoolean());
             }
-
         }
     }
 }

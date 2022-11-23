@@ -10,8 +10,7 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllers(ConfigureMvcOptions)
-            .AddNewtonsoftJson();
+        services.AddControllers(ConfigureMvcOptions).AddNewtonsoftJson();
 
         services.AddScoped<TestResponseGenerator>();
         services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
@@ -26,7 +25,5 @@ public class Startup
         });
     }
 
-    protected virtual void ConfigureMvcOptions(MvcOptions options)
-    {
-    }
+    protected virtual void ConfigureMvcOptions(MvcOptions options) { }
 }

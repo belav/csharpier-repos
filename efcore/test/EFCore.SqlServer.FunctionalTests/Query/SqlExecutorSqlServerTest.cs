@@ -5,11 +5,14 @@ using Microsoft.Data.SqlClient;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class SqlExecutorSqlServerTest : SqlExecutorTestBase<NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
+public class SqlExecutorSqlServerTest
+    : SqlExecutorTestBase<NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
 {
     // ReSharper disable once UnusedParameter.Local
-    public SqlExecutorSqlServerTest(NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture, ITestOutputHelper testOutputHelper)
-        : base(fixture)
+    public SqlExecutorSqlServerTest(
+        NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture,
+        ITestOutputHelper testOutputHelper
+    ) : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
@@ -29,7 +32,8 @@ public class SqlExecutorSqlServerTest : SqlExecutorTestBase<NorthwindQuerySqlSer
         AssertSql(
             @"@CustomerID='ALFKI' (Nullable = false) (Size = 5)
 
-[dbo].[CustOrderHist] @CustomerID");
+[dbo].[CustOrderHist] @CustomerID"
+        );
     }
 
     public override void Executes_stored_procedure_with_generated_parameter()
@@ -39,7 +43,8 @@ public class SqlExecutorSqlServerTest : SqlExecutorTestBase<NorthwindQuerySqlSer
         AssertSql(
             @"@p0='ALFKI' (Size = 4000)
 
-[dbo].[CustOrderHist] @CustomerID = @p0");
+[dbo].[CustOrderHist] @CustomerID = @p0"
+        );
     }
 
     public override void Query_with_parameters()
@@ -50,7 +55,8 @@ public class SqlExecutorSqlServerTest : SqlExecutorTestBase<NorthwindQuerySqlSer
             @"@p0='London' (Size = 4000)
 @p1='Sales Representative' (Size = 4000)
 
-SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @p0 AND ""ContactTitle"" = @p1");
+SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @p0 AND ""ContactTitle"" = @p1"
+        );
     }
 
     public override void Query_with_dbParameter_with_name()
@@ -60,7 +66,8 @@ SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @p0 AND ""ContactTitle"" = @
         AssertSql(
             @"@city='London' (Nullable = false) (Size = 6)
 
-SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @city");
+SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @city"
+        );
     }
 
     public override void Query_with_positional_dbParameter_with_name()
@@ -70,7 +77,8 @@ SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @city");
         AssertSql(
             @"@city='London' (Nullable = false) (Size = 6)
 
-SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @city");
+SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @city"
+        );
     }
 
     public override void Query_with_positional_dbParameter_without_name()
@@ -80,7 +88,8 @@ SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @city");
         AssertSql(
             @"@p0='London' (Nullable = false) (Size = 6)
 
-SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @p0");
+SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @p0"
+        );
     }
 
     public override void Query_with_dbParameters_mixed()
@@ -96,7 +105,8 @@ SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @p0 AND ""ContactTitle"" = @
             @"@city='London' (Nullable = false) (Size = 6)
 @p0='Sales Representative' (Size = 4000)
 
-SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @city AND ""ContactTitle"" = @p0");
+SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @city AND ""ContactTitle"" = @p0"
+        );
     }
 
     public override void Query_with_parameters_interpolated()
@@ -107,7 +117,8 @@ SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @city AND ""ContactTitle"" =
             @"@p0='London' (Size = 4000)
 @p1='Sales Representative' (Size = 4000)
 
-SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @p0 AND ""ContactTitle"" = @p1");
+SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @p0 AND ""ContactTitle"" = @p1"
+        );
     }
 
     public override void Query_with_DbParameters_interpolated()
@@ -118,7 +129,8 @@ SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @p0 AND ""ContactTitle"" = @
             @"city='London' (Nullable = false) (Size = 6)
 contactTitle='Sales Representative' (Nullable = false) (Size = 20)
 
-SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @city AND ""ContactTitle"" = @contactTitle");
+SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @city AND ""ContactTitle"" = @contactTitle"
+        );
     }
 
     public override async Task Query_with_parameters_async()
@@ -129,7 +141,8 @@ SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @city AND ""ContactTitle"" =
             @"@p0='London' (Size = 4000)
 @p1='Sales Representative' (Size = 4000)
 
-SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @p0 AND ""ContactTitle"" = @p1");
+SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @p0 AND ""ContactTitle"" = @p1"
+        );
     }
 
     public override async Task Query_with_parameters_interpolated_async()
@@ -140,21 +153,21 @@ SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @p0 AND ""ContactTitle"" = @
             @"@p0='London' (Size = 4000)
 @p1='Sales Representative' (Size = 4000)
 
-SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @p0 AND ""ContactTitle"" = @p1");
+SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @p0 AND ""ContactTitle"" = @p1"
+        );
     }
 
-    protected override DbParameter CreateDbParameter(string name, object value)
-        => new SqlParameter { ParameterName = name, Value = value };
+    protected override DbParameter CreateDbParameter(string name, object value) =>
+        new SqlParameter { ParameterName = name, Value = value };
 
-    protected override string TenMostExpensiveProductsSproc
-        => "[dbo].[Ten Most Expensive Products]";
+    protected override string TenMostExpensiveProductsSproc =>
+        "[dbo].[Ten Most Expensive Products]";
 
-    protected override string CustomerOrderHistorySproc
-        => "[dbo].[CustOrderHist] @CustomerID";
+    protected override string CustomerOrderHistorySproc => "[dbo].[CustOrderHist] @CustomerID";
 
-    protected override string CustomerOrderHistoryWithGeneratedParameterSproc
-        => "[dbo].[CustOrderHist] @CustomerID = {0}";
+    protected override string CustomerOrderHistoryWithGeneratedParameterSproc =>
+        "[dbo].[CustOrderHist] @CustomerID = {0}";
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 }

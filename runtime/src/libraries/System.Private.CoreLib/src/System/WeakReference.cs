@@ -8,7 +8,9 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public partial class WeakReference : ISerializable
     {
         // If you fix bugs here, please fix them in WeakReference<T> at the same time.
@@ -28,10 +30,7 @@ namespace System
         // Creates a new WeakReference that keeps track of target.
         // Assumes a Short Weak Reference (ie TrackResurrection is false.)
         //
-        public WeakReference(object? target)
-            : this(target, false)
-        {
-        }
+        public WeakReference(object? target) : this(target, false) { }
 
         public WeakReference(object? target, bool trackResurrection)
         {
@@ -63,10 +62,11 @@ namespace System
 #if !CORECLR
         private void Create(object? target, bool trackResurrection)
         {
-            IntPtr h = GCHandle.InternalAlloc(target, trackResurrection ? GCHandleType.WeakTrackResurrection : GCHandleType.Weak);
-            _handleAndKind = trackResurrection ?
-                h | TracksResurrectionBit :
-                h;
+            IntPtr h = GCHandle.InternalAlloc(
+                target,
+                trackResurrection ? GCHandleType.WeakTrackResurrection : GCHandleType.Weak
+            );
+            _handleAndKind = trackResurrection ? h | TracksResurrectionBit : h;
         }
 
         // Returns a boolean indicating whether or not we're tracking objects until they're collected (true)
@@ -124,7 +124,6 @@ namespace System
 
                 return target;
             }
-
             set
             {
                 IntPtr h = Handle;

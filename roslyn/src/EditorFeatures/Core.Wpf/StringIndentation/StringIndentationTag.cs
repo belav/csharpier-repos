@@ -20,15 +20,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.StringIndentation
 
         public StringIndentationTag(
             IEditorFormatMap editorFormatMap,
-            ImmutableArray<SnapshotSpan> orderedHoleSpans)
-            : base(editorFormatMap)
+            ImmutableArray<SnapshotSpan> orderedHoleSpans
+        ) : base(editorFormatMap)
         {
             OrderedHoleSpans = orderedHoleSpans;
         }
 
         protected override Color? GetColor(IWpfTextView view, IEditorFormatMap editorFormatMap)
         {
-            var brush = view.VisualElement.TryFindResource("outlining.verticalrule.foreground") as SolidColorBrush;
+            var brush =
+                view.VisualElement.TryFindResource("outlining.verticalrule.foreground")
+                as SolidColorBrush;
             return brush?.Color;
         }
     }

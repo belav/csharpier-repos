@@ -12,7 +12,8 @@ namespace Microsoft.Extensions.Internal;
 
 internal static class ActivatorUtilities
 {
-    private const DynamicallyAccessedMemberTypes ActivatorAccessibility = DynamicallyAccessedMemberTypes.PublicConstructors;
+    private const DynamicallyAccessedMemberTypes ActivatorAccessibility =
+        DynamicallyAccessedMemberTypes.PublicConstructors;
 
     /// <summary>
     /// Instantiate a type with constructor arguments provided directly and/or from an <see cref="IServiceProvider"/>.
@@ -24,7 +25,8 @@ internal static class ActivatorUtilities
     public static object CreateInstance(
         IServiceProvider provider,
         [DynamicallyAccessedMembers(ActivatorAccessibility)] Type instanceType,
-        params object[] parameters)
+        params object[] parameters
+    )
     {
         var bestLength = -1;
 
@@ -47,7 +49,8 @@ internal static class ActivatorUtilities
 
         if (bestLength == -1)
         {
-            var message = $"A suitable constructor for type '{instanceType}' could not be located. Ensure the type is concrete and services are registered for all parameters of a public constructor.";
+            var message =
+                $"A suitable constructor for type '{instanceType}' could not be located. Ensure the type is concrete and services are registered for all parameters of a public constructor.";
             throw new InvalidOperationException(message);
         }
 
@@ -61,9 +64,10 @@ internal static class ActivatorUtilities
     /// <param name="provider">The service provider used to resolve dependencies</param>
     /// <param name="parameters">Constructor arguments not provided by the <paramref name="provider"/>.</param>
     /// <returns>An activated object of type T</returns>
-    public static T CreateInstance<
-        [DynamicallyAccessedMembers(ActivatorAccessibility)] T
-        >(IServiceProvider provider, params object[] parameters)
+    public static T CreateInstance<[DynamicallyAccessedMembers(ActivatorAccessibility)] T>(
+        IServiceProvider provider,
+        params object[] parameters
+    )
     {
         return (T)CreateInstance(provider, typeof(T), parameters);
     }
@@ -76,7 +80,7 @@ internal static class ActivatorUtilities
     /// <returns>The resolved service or created instance</returns>
     public static T GetServiceOrCreateInstance<
         [DynamicallyAccessedMembers(ActivatorAccessibility)] T
-        >(IServiceProvider provider)
+    >(IServiceProvider provider)
     {
         return (T)GetServiceOrCreateInstance(provider, typeof(T));
     }
@@ -89,7 +93,8 @@ internal static class ActivatorUtilities
     /// <returns>The resolved service or created instance</returns>
     public static object GetServiceOrCreateInstance(
         IServiceProvider provider,
-        [DynamicallyAccessedMembers(ActivatorAccessibility)] Type type)
+        [DynamicallyAccessedMembers(ActivatorAccessibility)] Type type
+    )
     {
         return provider.GetService(type) ?? CreateInstance(provider, type);
     }
@@ -116,10 +121,16 @@ internal static class ActivatorUtilities
                 var givenType = givenParameters[givenIndex]?.GetType();
                 var givenMatched = false;
 
-                for (var applyIndex = applyIndexStart; givenMatched == false && applyIndex != _parameters.Length; ++applyIndex)
+                for (
+                    var applyIndex = applyIndexStart;
+                    givenMatched == false && applyIndex != _parameters.Length;
+                    ++applyIndex
+                )
                 {
-                    if (_parameterValues[applyIndex] == null &&
-                        _parameters[applyIndex].ParameterType.IsAssignableFrom(givenType))
+                    if (
+                        _parameterValues[applyIndex] == null
+                        && _parameters[applyIndex].ParameterType.IsAssignableFrom(givenType)
+                    )
                     {
                         givenMatched = true;
                         _parameterValues[applyIndex] = givenParameters[givenIndex];
@@ -153,9 +164,16 @@ internal static class ActivatorUtilities
                     var value = provider.GetService(parameter.ParameterType);
                     if (value is null)
                     {
-                        if (!ParameterDefaultValue.TryGetDefaultValue(parameter, out var defaultValue))
+                        if (
+                            !ParameterDefaultValue.TryGetDefaultValue(
+                                parameter,
+                                out var defaultValue
+                            )
+                        )
                         {
-                            throw new InvalidOperationException($"Unable to resolve service for type '{_parameters[index].ParameterType}' while attempting to activate '{_constructor.DeclaringType}'.");
+                            throw new InvalidOperationException(
+                                $"Unable to resolve service for type '{_parameters[index].ParameterType}' while attempting to activate '{_constructor.DeclaringType}'."
+                            );
                         }
 
                         value = defaultValue;
@@ -166,7 +184,12 @@ internal static class ActivatorUtilities
             }
 
 #if NETCOREAPP
-            return _constructor.Invoke(BindingFlags.DoNotWrapExceptions, binder: null, parameters: _parameterValues, culture: null);
+            return _constructor.Invoke(
+                BindingFlags.DoNotWrapExceptions,
+                binder: null,
+                parameters: _parameterValues,
+                culture: null
+            );
 #else
             try
             {
@@ -182,4 +205,3 @@ internal static class ActivatorUtilities
         }
     }
 }
-

@@ -22,10 +22,7 @@ namespace System.Net.Http.Headers
             get { return _version; }
         }
 
-        public ProductHeaderValue(string name)
-            : this(name, null)
-        {
-        }
+        public ProductHeaderValue(string name) : this(name, null) { }
 
         public ProductHeaderValue(string name, string? version)
         {
@@ -66,8 +63,8 @@ namespace System.Net.Http.Headers
                 return false;
             }
 
-            return string.Equals(_name, other._name, StringComparison.OrdinalIgnoreCase) &&
-                string.Equals(_version, other._version, StringComparison.OrdinalIgnoreCase);
+            return string.Equals(_name, other._name, StringComparison.OrdinalIgnoreCase)
+                && string.Equals(_version, other._version, StringComparison.OrdinalIgnoreCase);
         }
 
         public override int GetHashCode()
@@ -85,15 +82,26 @@ namespace System.Net.Http.Headers
         public static ProductHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (ProductHeaderValue)GenericHeaderParser.SingleValueProductParser.ParseValue(input, null, ref index);
+            return (ProductHeaderValue)
+                GenericHeaderParser.SingleValueProductParser.ParseValue(input, null, ref index);
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? input, [NotNullWhen(true)] out ProductHeaderValue? parsedValue)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? input,
+            [NotNullWhen(true)] out ProductHeaderValue? parsedValue
+        )
         {
             int index = 0;
             parsedValue = null;
 
-            if (GenericHeaderParser.SingleValueProductParser.TryParseValue(input, null, ref index, out object? output))
+            if (
+                GenericHeaderParser.SingleValueProductParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
+            )
             {
                 parsedValue = (ProductHeaderValue)output!;
                 return true;
@@ -101,7 +109,11 @@ namespace System.Net.Http.Headers
             return false;
         }
 
-        internal static int GetProductLength(string input, int startIndex, out ProductHeaderValue? parsedValue)
+        internal static int GetProductLength(
+            string input,
+            int startIndex,
+            out ProductHeaderValue? parsedValue
+        )
         {
             Debug.Assert(startIndex >= 0);
 

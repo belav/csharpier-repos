@@ -13,7 +13,10 @@ public class RazorProjectEngineBuilderExtensionsTest
     public void SetImportFeature_SetsTheImportFeature()
     {
         // Arrange
-        var builder = new DefaultRazorProjectEngineBuilder(RazorConfiguration.Default, Mock.Of<RazorProjectFileSystem>());
+        var builder = new DefaultRazorProjectEngineBuilder(
+            RazorConfiguration.Default,
+            Mock.Of<RazorProjectFileSystem>()
+        );
         var testFeature1 = Mock.Of<IImportProjectFeature>();
         var testFeature2 = Mock.Of<IImportProjectFeature>();
         builder.Features.Add(testFeature1);
@@ -32,7 +35,10 @@ public class RazorProjectEngineBuilderExtensionsTest
     public void AddTargetExtension_CreatesAndAddsToTargetExtensionFeatureIfItDoesNotExist()
     {
         // Arrange
-        var builder = new DefaultRazorProjectEngineBuilder(RazorConfiguration.Default, Mock.Of<RazorProjectFileSystem>());
+        var builder = new DefaultRazorProjectEngineBuilder(
+            RazorConfiguration.Default,
+            Mock.Of<RazorProjectFileSystem>()
+        );
         var expectedExtension = Mock.Of<ICodeTargetExtension>();
 
         // Act
@@ -40,7 +46,9 @@ public class RazorProjectEngineBuilderExtensionsTest
 
         // Assert
         var feature = Assert.Single(builder.Features);
-        var codeTargetExtensionFeature = Assert.IsAssignableFrom<IRazorTargetExtensionFeature>(feature);
+        var codeTargetExtensionFeature = Assert.IsAssignableFrom<IRazorTargetExtensionFeature>(
+            feature
+        );
         var extensions = Assert.Single(codeTargetExtensionFeature.TargetExtensions);
         Assert.Same(expectedExtension, extensions);
     }
@@ -49,7 +57,10 @@ public class RazorProjectEngineBuilderExtensionsTest
     public void AddTargetExtension_UsesExistingFeatureIfExistsAndAddsTo()
     {
         // Arrange
-        var builder = new DefaultRazorProjectEngineBuilder(RazorConfiguration.Default, Mock.Of<RazorProjectFileSystem>());
+        var builder = new DefaultRazorProjectEngineBuilder(
+            RazorConfiguration.Default,
+            Mock.Of<RazorProjectFileSystem>()
+        );
         var codeTargetExtensionFeature = new DefaultRazorTargetExtensionFeature();
         builder.Features.Add(codeTargetExtensionFeature);
         var expectedExtension = Mock.Of<ICodeTargetExtension>();
@@ -68,7 +79,10 @@ public class RazorProjectEngineBuilderExtensionsTest
     public void AddDirective_CreatesAndAddsToDirectiveFeatureIfItDoesNotExist()
     {
         // Arrange
-        var builder = new DefaultRazorProjectEngineBuilder(RazorConfiguration.Default, Mock.Of<RazorProjectFileSystem>());
+        var builder = new DefaultRazorProjectEngineBuilder(
+            RazorConfiguration.Default,
+            Mock.Of<RazorProjectFileSystem>()
+        );
         var expectedDirective = Mock.Of<DirectiveDescriptor>();
 
         // Act
@@ -85,7 +99,10 @@ public class RazorProjectEngineBuilderExtensionsTest
     public void AddDirective_UsesExistingFeatureIfExistsAndAddsTo()
     {
         // Arrange
-        var builder = new DefaultRazorProjectEngineBuilder(RazorConfiguration.Default, Mock.Of<RazorProjectFileSystem>());
+        var builder = new DefaultRazorProjectEngineBuilder(
+            RazorConfiguration.Default,
+            Mock.Of<RazorProjectFileSystem>()
+        );
         var directiveFeature = new DefaultRazorDirectiveFeature();
         builder.Features.Add(directiveFeature);
         var expecteDirective = Mock.Of<DirectiveDescriptor>();

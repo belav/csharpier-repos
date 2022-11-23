@@ -64,7 +64,6 @@ namespace StaticFieldLayout
         {
             int[] foo = new int[] { 0, 1, 2, 3, 4, 45, 5, 5 };
         }
-
     }
 
     struct StaticSelfRef

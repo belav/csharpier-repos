@@ -16,15 +16,15 @@ namespace Microsoft.CodeAnalysis.Remote.Services
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteExperimentationService()
-        {
-        }
+        public RemoteExperimentationService() { }
 
         public bool IsExperimentEnabled(string experimentName)
         {
             // may return null in tests
             var assetSource = RemoteWorkspaceManager.Default.TryGetAssetSource();
-            return assetSource?.IsExperimentEnabledAsync(experimentName, CancellationToken.None).Result ?? false;
+            return assetSource
+                    ?.IsExperimentEnabledAsync(experimentName, CancellationToken.None)
+                    .Result ?? false;
         }
     }
 }

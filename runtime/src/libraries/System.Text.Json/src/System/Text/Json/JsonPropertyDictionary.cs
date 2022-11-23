@@ -22,13 +22,17 @@ namespace System.Text.Json
 
         public JsonPropertyDictionary(bool caseInsensitive)
         {
-            _stringComparer = caseInsensitive ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal;
+            _stringComparer = caseInsensitive
+                ? StringComparer.OrdinalIgnoreCase
+                : StringComparer.Ordinal;
             _propertyList = new List<KeyValuePair<string, T>>();
         }
 
         public JsonPropertyDictionary(bool caseInsensitive, int capacity)
         {
-            _stringComparer = caseInsensitive ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal;
+            _stringComparer = caseInsensitive
+                ? StringComparer.OrdinalIgnoreCase
+                : StringComparer.Ordinal;
             _propertyList = new List<KeyValuePair<string, T>>(capacity);
         }
 
@@ -96,10 +100,7 @@ namespace System.Text.Json
 
         public int Count
         {
-            get
-            {
-                return _propertyList.Count;
-            }
+            get { return _propertyList.Count; }
         }
 
         public bool Remove(string propertyName)
@@ -121,7 +122,10 @@ namespace System.Text.Json
         {
             foreach (KeyValuePair<string, T> existing in this)
             {
-                if (ReferenceEquals(item.Value, existing.Value) && _stringComparer.Equals(item.Key, existing.Key))
+                if (
+                    ReferenceEquals(item.Value, existing.Value)
+                    && _stringComparer.Equals(item.Key, existing.Key)
+                )
                 {
                     return true;
                 }
@@ -202,11 +206,7 @@ namespace System.Text.Json
                 // Return null for missing properties.
                 return null;
             }
-
-            set
-            {
-                SetValue(propertyName, value);
-            }
+            set { SetValue(propertyName, value); }
         }
 
         public T? SetValue(string propertyName, T value, Action? assignParent = null)
@@ -317,7 +317,10 @@ namespace System.Text.Json
         {
             if (_propertyDictionary == null && _propertyList.Count > ListToDictionaryThreshold)
             {
-                _propertyDictionary = JsonHelpers.CreateDictionaryFromCollection(_propertyList, _stringComparer);
+                _propertyDictionary = JsonHelpers.CreateDictionaryFromCollection(
+                    _propertyList,
+                    _stringComparer
+                );
             }
         }
 
@@ -379,7 +382,8 @@ namespace System.Text.Json
             return -1;
         }
 
-        public bool TryGetPropertyValue(string propertyName, [MaybeNullWhen(false)] out T value) => TryGetValue(propertyName, out value);
+        public bool TryGetPropertyValue(string propertyName, [MaybeNullWhen(false)] out T value) =>
+            TryGetValue(propertyName, out value);
 
         public bool TryRemoveProperty(string propertyName, [MaybeNullWhen(false)] out T existing)
         {

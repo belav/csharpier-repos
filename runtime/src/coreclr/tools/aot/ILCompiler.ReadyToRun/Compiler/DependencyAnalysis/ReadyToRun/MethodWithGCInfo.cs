@@ -42,7 +42,14 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             // specially enabled for higher phases
             if (context.CompilationCurrentPhase > 1)
             {
-                SetCode(new ObjectNode.ObjectData(Array.Empty<byte>(), null, 1, Array.Empty<ISymbolDefinitionNode>()));
+                SetCode(
+                    new ObjectNode.ObjectData(
+                        Array.Empty<byte>(),
+                        null,
+                        1,
+                        Array.Empty<ISymbolDefinitionNode>()
+                    )
+                );
                 InitializeFrameInfos(Array.Empty<FrameInfo>());
             }
             _lateTriggeredCompilation = context.CompilationCurrentPhase != 0;
@@ -63,7 +70,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         continue;
                     }
 
-                    if (!factory.CompilationModuleGroup.VersionsWithMethodBody(inlinee) && !factory.CompilationModuleGroup.CrossModuleInlineable(inlinee))
+                    if (
+                        !factory.CompilationModuleGroup.VersionsWithMethodBody(inlinee)
+                        && !factory.CompilationModuleGroup.CrossModuleInlineable(inlinee)
+                    )
                     {
                         // We cannot record inlining info across version bubble as cross-bubble assemblies
                         // are not guaranteed to preserve token values unless CrossModule inlining is in place
@@ -72,12 +82,15 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         Debug.Assert(inlinee.IsNonVersionable());
                         continue;
                     }
-                    factory.ManifestMetadataTable.EnsureModuleIndexable(ecmaInlineeDefinition.Module);
+                    factory.ManifestMetadataTable.EnsureModuleIndexable(
+                        ecmaInlineeDefinition.Module
+                    );
                 }
             }
         }
 
-        public override int DependencyPhaseForDeferredStaticComputation => _lateTriggeredCompilation ? 2 : 0;
+        public override int DependencyPhaseForDeferredStaticComputation =>
+            _lateTriggeredCompilation ? 2 : 0;
 
         public void SetCode(ObjectData data)
         {
@@ -130,7 +143,6 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
         }
 
-
         public byte[] GetFixupBlob(NodeFactory factory)
         {
             Relocation[] relocations = GetData(factory, relocsOnly: true).Relocs;
@@ -150,7 +162,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     {
                         fixupCells = new List<FixupCell>();
                     }
-                    fixupCells.Add(new FixupCell(fixupCell.Table.IndexFromBeginningOfArray, fixupCell.OffsetFromBeginningOfArray));
+                    fixupCells.Add(
+                        new FixupCell(
+                            fixupCell.Table.IndexFromBeginningOfArray,
+                            fixupCell.OffsetFromBeginningOfArray
+                        )
+                    );
                 }
             }
 
@@ -162,7 +179,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 }
 
                 Import fixupCell = (Import)node;
-                fixupCells.Add(new FixupCell(fixupCell.Table.IndexFromBeginningOfArray, fixupCell.OffsetFromBeginningOfArray));
+                fixupCells.Add(
+                    new FixupCell(
+                        fixupCell.Table.IndexFromBeginningOfArray,
+                        fixupCell.OffsetFromBeginningOfArray
+                    )
+                );
             }
 
             if (fixupCells == null)
@@ -244,7 +266,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         protected override DependencyList ComputeNonRelocationBasedDependencies(NodeFactory factory)
         {
-            DependencyList dependencyList = new DependencyList(new DependencyListEntry[] { new DependencyListEntry(GCInfoNode, "Unwind & GC info") });
+            DependencyList dependencyList = new DependencyList(
+                new DependencyListEntry[]
+                {
+                    new DependencyListEntry(GCInfoNode, "Unwind & GC info")
+                }
+            );
 
             foreach (ISymbolNode node in _fixups)
             {
@@ -276,7 +303,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             get
             {
-                return _method.Context.Target.IsWindows ? ObjectNodeSection.ManagedCodeWindowsContentSection : ObjectNodeSection.ManagedCodeUnixContentSection;
+                return _method.Context.Target.IsWindows
+                    ? ObjectNodeSection.ManagedCodeWindowsContentSection
+                    : ObjectNodeSection.ManagedCodeUnixContentSection;
             }
         }
 
@@ -295,9 +324,14 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             else
             {
                 // On x86, fake a single frame info representing the entire method
-                _frameInfos = new FrameInfo[] 
+                _frameInfos = new FrameInfo[]
                 {
-                    new FrameInfo((FrameInfoFlags)0, startOffset: 0, endOffset: 0, blobData: Array.Empty<byte>())
+                    new FrameInfo(
+                        (FrameInfoFlags)0,
+                        startOffset: 0,
+                        endOffset: 0,
+                        blobData: Array.Empty<byte>()
+                    )
                 };
             }
         }
@@ -331,7 +365,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             Debug.Assert(_debugVarInfos == null);
             // Process the debug info from JIT format to R2R format immediately as it is large
             // and not used in the rest of the process except to emit.
-            _debugVarInfos = DebugInfoTableNode.CreateVarBlobForMethod(debugVarInfos, _method.Context.Target);
+            _debugVarInfos = DebugInfoTableNode.CreateVarBlobForMethod(
+                debugVarInfos,
+                _method.Context.Target
+            );
         }
 
         public void InitializeDebugEHClauseInfos(DebugEHClauseInfo[] debugEHClauseInfos)
@@ -356,6 +393,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public int Offset => 0;
         public override bool IsShareable => throw new NotImplementedException();
+
         public override bool ShouldSkipEmittingObjectNode(NodeFactory factory) => IsEmpty;
 
         public override string ToString() => _method.ToString();

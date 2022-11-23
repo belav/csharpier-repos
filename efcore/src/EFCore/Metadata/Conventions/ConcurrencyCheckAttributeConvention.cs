@@ -11,16 +11,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class ConcurrencyCheckAttributeConvention : PropertyAttributeConventionBase<ConcurrencyCheckAttribute>
+public class ConcurrencyCheckAttributeConvention
+    : PropertyAttributeConventionBase<ConcurrencyCheckAttribute>
 {
     /// <summary>
     ///     Creates a new instance of <see cref="ConcurrencyCheckAttributeConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    public ConcurrencyCheckAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+    public ConcurrencyCheckAttributeConvention(
+        ProviderConventionSetBuilderDependencies dependencies
+    ) : base(dependencies) { }
 
     /// <summary>
     ///     Called after a property is added to the entity type with an attribute on the associated CLR property or field.
@@ -33,6 +33,6 @@ public class ConcurrencyCheckAttributeConvention : PropertyAttributeConventionBa
         IConventionPropertyBuilder propertyBuilder,
         ConcurrencyCheckAttribute attribute,
         MemberInfo clrMember,
-        IConventionContext context)
-        => propertyBuilder.IsConcurrencyToken(true, fromDataAnnotation: true);
+        IConventionContext context
+    ) => propertyBuilder.IsConcurrencyToken(true, fromDataAnnotation: true);
 }

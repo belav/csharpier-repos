@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpVisualBasicLanguageServerFactory(
-            CSharpVisualBasicLspServiceProvider lspServiceProvider)
+            CSharpVisualBasicLspServiceProvider lspServiceProvider
+        )
         {
             _lspServiceProvider = lspServiceProvider;
         }
@@ -29,7 +30,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         public AbstractLanguageServer<RequestContext> Create(
             JsonRpc jsonRpc,
             ICapabilitiesProvider capabilitiesProvider,
-            ILspServiceLogger logger)
+            ILspServiceLogger logger
+        )
         {
             var server = new RoslynLanguageServer(
                 _lspServiceProvider,
@@ -37,12 +39,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 capabilitiesProvider,
                 logger,
                 ProtocolConstants.RoslynLspLanguages,
-                WellKnownLspServerKinds.CSharpVisualBasicLspServer);
+                WellKnownLspServerKinds.CSharpVisualBasicLspServer
+            );
 
             return server;
         }
 
-        public AbstractLanguageServer<RequestContext> Create(Stream input, Stream output, ICapabilitiesProvider capabilitiesProvider, ILspServiceLogger logger)
+        public AbstractLanguageServer<RequestContext> Create(
+            Stream input,
+            Stream output,
+            ICapabilitiesProvider capabilitiesProvider,
+            ILspServiceLogger logger
+        )
         {
             var jsonRpc = new JsonRpc(new HeaderDelimitedMessageHandler(output, input));
             return Create(jsonRpc, capabilitiesProvider, logger);

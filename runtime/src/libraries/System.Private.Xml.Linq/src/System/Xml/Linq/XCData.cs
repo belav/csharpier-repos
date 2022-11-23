@@ -33,10 +33,7 @@ namespace System.Xml.Linq
         /// </remarks>
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return XmlNodeType.CDATA;
-            }
+            get { return XmlNodeType.CDATA; }
         }
 
         /// <summary>

@@ -174,13 +174,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestDoubleAliasName()
         {
-            // In the original implementation of the parser this error case was parsed as 
+            // In the original implementation of the parser this error case was parsed as
             //
             // (goo :: bar ) :: baz
             //
             // However, we have decided that the left hand side of a :: should always be
-            // an identifier, not a name, even in error cases. Therefore instead we 
-            // parse this as though the error was that the user intended to make the 
+            // an identifier, not a name, even in error cases. Therefore instead we
+            // parse this as though the error was that the user intended to make the
             // second :: a dot; we parse this as
             //
             // (goo :: bar ) . baz

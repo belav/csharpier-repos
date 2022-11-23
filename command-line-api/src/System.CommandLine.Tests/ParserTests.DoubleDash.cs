@@ -17,21 +17,20 @@ namespace System.CommandLine.Tests
             {
                 var option = new Option<string[]>(new[] { "-o", "--one" });
                 var argument = new Argument<string[]>();
-                var rootCommand = new RootCommand
-                {
-                    option,
-                    argument
-                };
+                var rootCommand = new RootCommand { option, argument };
 
                 var result = new CommandLineBuilder(rootCommand)
-                             .Build()
-                             .Parse("-o \"some stuff\" -- -o --one -x -y -z -o:foo");
+                    .Build()
+                    .Parse("-o \"some stuff\" -- -o --one -x -y -z -o:foo");
 
                 result.HasOption(option).Should().BeTrue();
 
                 result.GetValueForOption(option).Should().BeEquivalentTo("some stuff");
 
-                result.GetValueForArgument(argument).Should().BeEquivalentSequenceTo("-o", "--one", "-x", "-y", "-z", "-o:foo");
+                result
+                    .GetValueForArgument(argument)
+                    .Should()
+                    .BeEquivalentSequenceTo("-o", "--one", "-x", "-y", "-z", "-o:foo");
 
                 result.UnmatchedTokens.Should().BeEmpty();
             }
@@ -41,15 +40,11 @@ namespace System.CommandLine.Tests
             {
                 var option = new Option<string[]>(new[] { "-o", "--one" });
                 var argument = new Argument<string[]>();
-                var rootCommand = new RootCommand
-                {
-                    option,
-                    argument
-                };
+                var rootCommand = new RootCommand { option, argument };
 
                 var result = new CommandLineBuilder(rootCommand)
-                             .Build()
-                             .Parse("-o \"some stuff\" -- --one -x -y -z -o:foo");
+                    .Build()
+                    .Parse("-o \"some stuff\" -- --one -x -y -z -o:foo");
 
                 result.UnmatchedTokens.Should().BeEmpty();
             }
@@ -59,15 +54,11 @@ namespace System.CommandLine.Tests
             {
                 var option = new Option<string[]>(new[] { "-o", "--one" });
                 var argument = new Argument<string[]>();
-                var rootCommand = new RootCommand
-                {
-                    option,
-                    argument
-                };
+                var rootCommand = new RootCommand { option, argument };
 
                 var result = new CommandLineBuilder(rootCommand)
-                             .Build()
-                             .Parse("-o \"some stuff\" -- -o --one -x -y -z -o:foo");
+                    .Build()
+                    .Parse("-o \"some stuff\" -- -o --one -x -y -z -o:foo");
 
                 result.Errors.Should().BeEmpty();
             }
@@ -76,14 +67,9 @@ namespace System.CommandLine.Tests
             public void A_second_double_dash_is_parsed_as_an_argument()
             {
                 var argument = new Argument<string[]>();
-                var rootCommand = new RootCommand
-                {
-                    argument
-                };
+                var rootCommand = new RootCommand { argument };
 
-                var result = new CommandLineBuilder(rootCommand)
-                             .Build()
-                             .Parse("a b c -- -- d");
+                var result = new CommandLineBuilder(rootCommand).Build().Parse("a b c -- -- d");
 
                 var strings = result.GetValueForArgument(argument);
 

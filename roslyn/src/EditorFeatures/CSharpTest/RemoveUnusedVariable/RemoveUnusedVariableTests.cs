@@ -18,40 +18,40 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
 {
-    public partial class RemoveUnusedVariableTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class RemoveUnusedVariableTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public RemoveUnusedVariableTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+        public RemoveUnusedVariableTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpRemoveUnusedVariableCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpRemoveUnusedVariableCodeFixProvider());
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
         public async Task RemoveUnusedVariable()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|int a = 3;|]
     }
 }",
-@"class Class
+                @"class Class
 {
     void Method()
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
         public async Task RemoveUnusedVariable1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -60,80 +60,84 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         var c = b;
     }
 }",
-@"class Class
+                @"class Class
 {
     void Method()
     {
         string b = "";
         var c = b;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
         public async Task RemoveUnusedVariable3()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|string a;|]
     }
 }",
-@"class Class
+                @"class Class
 {
     void Method()
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
         public async Task RemoveUnusedVariableMultipleOnLine()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|string a|], b;
     }
 }",
-@"class Class
+                @"class Class
 {
     void Method()
     {
         string b;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
         public async Task RemoveUnusedVariableMultipleOnLine1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         string a, [|b|];
     }
 }",
-@"class Class
+                @"class Class
 {
     void Method()
     {
         string a;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
         public async Task RemoveUnusedVariableFixAll()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -141,19 +145,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         string b;
     }
 }",
-@"class Class
+                @"class Class
 {
     void Method()
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
         public async Task RemoveUnusedVariableFixAll1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -161,31 +166,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         string b, c;
     }
 }",
-@"class Class
+                @"class Class
 {
     void Method()
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
         public async Task RemoveUnusedVariableFixAll2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         string a, {|FixAllInDocument:b|};
     }
 }",
-@"class Class
+                @"class Class
 {
     void Method()
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
@@ -193,7 +200,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         public async Task RemoveUnusedCatchVariable()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -205,7 +212,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -216,7 +223,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
@@ -224,7 +232,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedVariable
         public async Task LeadingDirectives()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 #define DIRECTIVE1
 
 using System;
@@ -246,7 +254,7 @@ namespace ClassLibrary
         }
     }
 }",
-@"
+                @"
 #define DIRECTIVE1
 
 using System;
@@ -266,7 +274,8 @@ namespace ClassLibrary
 #endif
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
@@ -274,7 +283,7 @@ namespace ClassLibrary
         public async Task TestWhitespaceBetweenStatements1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class Test
 {
     bool TrySomething()
@@ -285,7 +294,7 @@ class Test
         return used;
     }
 }",
-@"
+                @"
 class Test
 {
     bool TrySomething()
@@ -294,7 +303,8 @@ class Test
 
         return used;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
@@ -302,7 +312,7 @@ class Test
         public async Task TestWhitespaceBetweenStatements2()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class Test
 {
     bool TrySomething()
@@ -312,21 +322,22 @@ class Test
         return used;
     }
 }",
-@"
+                @"
 class Test
 {
     bool TrySomething()
     {
         return used;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
         public async Task TestWhitespaceBetweenStatementsInSwitchSection1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class Test
 {
     bool TrySomething()
@@ -341,7 +352,7 @@ class Test
         }
     }
 }",
-@"
+                @"
 class Test
 {
     bool TrySomething()
@@ -354,14 +365,15 @@ class Test
                 return used;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
         public async Task TestWhitespaceBetweenStatementsInSwitchSection2()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class Test
 {
     bool TrySomething()
@@ -375,7 +387,7 @@ class Test
         }
     }
 }",
-@"
+                @"
 class Test
 {
     bool TrySomething()
@@ -386,14 +398,15 @@ class Test
                 return used;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
         public async Task RemoveVariableAndComment()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -402,21 +415,22 @@ class C
     }
 }
 ",
-@"
+                @"
 class C
 {
     void M()
     {
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
         public async Task RemoveVariableAndAssgnment()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -426,21 +440,22 @@ class C
     }
 }
 ",
-@"
+                @"
 class C
 {
     void M()
     {
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
         public async Task JointDeclarationRemoveFirst()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     int M()
@@ -450,7 +465,7 @@ class C
     }
 }
 ",
-@"
+                @"
 class C
 {
     int M()
@@ -459,14 +474,15 @@ class C
         return used;
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
         public async Task JointDeclarationRemoveSecond()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     int M()
@@ -476,7 +492,7 @@ class C
     }
 }
 ",
-@"
+                @"
 class C
 {
     int M()
@@ -485,14 +501,18 @@ class C
         return used;
     }
 }
-");
+"
+            );
         }
 
-        [Fact(Skip = "https://github.com/dotnet/roslyn/issues/23322"), Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
+        [
+            Fact(Skip = "https://github.com/dotnet/roslyn/issues/23322"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)
+        ]
         public async Task JointAssignmentRemoveFirst()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     int M()
@@ -504,7 +524,7 @@ class C
     }
 }
 ",
-@"
+                @"
 class C
 {
     int M()
@@ -514,14 +534,15 @@ class C
         return used;
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
         public async Task JointAssignmentRemoveSecond()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     int M()
@@ -533,7 +554,7 @@ class C
     }
 }
 ",
-@"
+                @"
 class C
 {
     int M()
@@ -543,14 +564,18 @@ class C
         return used;
     }
 }
-");
+"
+            );
         }
 
-        [Fact(Skip = "https://github.com/dotnet/roslyn/issues/22921"), Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
+        [
+            Fact(Skip = "https://github.com/dotnet/roslyn/issues/22921"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)
+        ]
         public async Task RemoveUnusedLambda()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     int M()
@@ -563,7 +588,7 @@ class C
     }
 }
 ",
-@"
+                @"
 class C
 {
     int M()
@@ -571,7 +596,8 @@ class C
         return 1;
     }
 }
-");
+"
+            );
         }
 
         [Fact]
@@ -579,7 +605,8 @@ class C
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task JointDeclarationRemoveBoth()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -596,7 +623,8 @@ class C
 </Workspace>
 ";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -620,7 +648,8 @@ class C
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task JointAssignment()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -639,7 +668,8 @@ class C
 </Workspace>
 ";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -665,7 +695,7 @@ class C
         public async Task RemoveUnusedVariableDeclaredInForStatement()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -675,7 +705,7 @@ class C
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -684,7 +714,8 @@ class C
 
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
@@ -692,7 +723,7 @@ class C
         public async Task RemoveUnusedVariableJointDeclaredInForStatement()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -702,7 +733,7 @@ class C
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -711,18 +742,22 @@ class C
 
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
         [WorkItem(44273, "https://github.com/dotnet/roslyn/issues/44273")]
         public async Task TopLevelStatement()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 [|int i = 0|];
 ",
-@"
-", TestOptions.Regular);
+                @"
+",
+                TestOptions.Regular
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
@@ -730,7 +765,7 @@ class C
         public async Task RemoveUnusedVariableJointDeclaredInForStatementInsideIfStatement()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -741,7 +776,7 @@ class C
             }
     }
 }",
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -751,7 +786,8 @@ class C
 
             }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
@@ -759,7 +795,7 @@ class C
         public async Task DontCrashOnDeclarationInsideIfStatement()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(bool test)
     {
@@ -768,7 +804,8 @@ class C
 
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedVariable)]
@@ -776,7 +813,7 @@ class C
         public async Task RemoveUnusedVariableInCatchInsideBadLocalDeclaration()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(bool test)
     {
@@ -786,7 +823,7 @@ class C
         };
     }
 }",
-@"class Class
+                @"class Class
 {
     void Method(bool test)
     {
@@ -795,7 +832,8 @@ class C
             catch (Exception) { }
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
@@ -803,12 +841,14 @@ class C
         public async Task RemoveUnusedVariableTopLevel()
         {
             await TestAsync(
-@"
+                @"
 [|int i = 1|];
 i = 2;
 ",
-@"
-", CSharpParseOptions.Default);
+                @"
+",
+                CSharpParseOptions.Default
+            );
         }
     }
 }

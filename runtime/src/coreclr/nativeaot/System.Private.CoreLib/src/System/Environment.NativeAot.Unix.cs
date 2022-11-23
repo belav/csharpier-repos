@@ -85,7 +85,11 @@ namespace System
         {
             if (s_environment == null)
             {
-                Interlocked.CompareExchange(ref s_environment, GetSystemEnvironmentVariables(), null);
+                Interlocked.CompareExchange(
+                    ref s_environment,
+                    GetSystemEnvironmentVariables(),
+                    null
+                );
             }
         }
 

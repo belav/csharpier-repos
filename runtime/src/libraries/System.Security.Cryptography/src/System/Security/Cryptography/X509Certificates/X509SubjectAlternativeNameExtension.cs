@@ -24,8 +24,10 @@ namespace System.Security.Cryptography.X509Certificates
             _decoded = Decode(RawData);
         }
 
-        public X509SubjectAlternativeNameExtension(ReadOnlySpan<byte> rawData, bool critical = false)
-            : base(Oids.SubjectAltNameOid, rawData, critical)
+        public X509SubjectAlternativeNameExtension(
+            ReadOnlySpan<byte> rawData,
+            bool critical = false
+        ) : base(Oids.SubjectAltNameOid, rawData, critical)
         {
             _decoded = Decode(RawData);
         }
@@ -96,13 +98,14 @@ namespace System.Security.Cryptography.X509Certificates
                         switch (item.IPAddress.GetValueOrDefault().Length)
                         {
                             case 4:
-                                // IPv4
+                            // IPv4
                             case 16:
                                 // UPv6
                                 break;
                             default:
                                 throw new CryptographicException(
-                                    SR.Cryptography_X509_SAN_UnknownIPAddressSize);
+                                    SR.Cryptography_X509_SAN_UnknownIPAddressSize
+                                );
                         }
                     }
 

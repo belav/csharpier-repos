@@ -14,16 +14,21 @@ namespace System.Reflection
     internal sealed partial class RuntimeMethodInfo : MethodInfo
     {
         [MethodImpl(MethodImplOptions.NoInlining)] // move lazy invocation flags population out of the hot path
-        private static InvocationFlags ComputeAndUpdateInvocationFlags(MethodInfo methodInfo, ref InvocationFlags flagsToUpdate)
+        private static InvocationFlags ComputeAndUpdateInvocationFlags(
+            MethodInfo methodInfo,
+            ref InvocationFlags flagsToUpdate
+        )
         {
             InvocationFlags invocationFlags = InvocationFlags.Unknown;
 
             Type? declaringType = methodInfo.DeclaringType;
 
-            if (methodInfo.ContainsGenericParameters // Method has unbound generics
+            if (
+                methodInfo.ContainsGenericParameters // Method has unbound generics
                 || IsDisallowedByRefType(methodInfo.ReturnType) // Return type is an invalid by-ref (i.e., by-ref-like or void*)
-                || (methodInfo.CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs // Managed varargs
-                )
+                || (methodInfo.CallingConvention & CallingConventions.VarArgs)
+                    == CallingConventions.VarArgs // Managed varargs
+            )
             {
                 invocationFlags = InvocationFlags.NoInvoke;
             }
@@ -103,12 +108,18 @@ namespace System.Reflection
             BindingFlags invokeAttr,
             Binder? binder,
             object?[]? parameters,
-            CultureInfo? culture)
+            CultureInfo? culture
+        )
         {
             // ContainsStackPointers means that the struct (either the declaring type or the return type)
             // contains pointers that point to the stack. This is either a ByRef or a TypedReference. These structs cannot
             // be boxed and thus cannot be invoked through reflection which only deals with boxed value type objects.
-            if ((InvocationFlags & (InvocationFlags.NoInvoke | InvocationFlags.ContainsStackPointers)) != 0)
+            if (
+                (
+                    InvocationFlags
+                    & (InvocationFlags.NoInvoke | InvocationFlags.ContainsStackPointers)
+                ) != 0
+            )
             {
                 ThrowNoInvokeException();
             }
@@ -123,7 +134,6 @@ namespace System.Reflection
             }
 
             object? retValue;
-
             unsafe
             {
                 if (argCount == 0)
@@ -133,14 +143,23 @@ namespace System.Reflection
                 else if (argCount > MaxStackAllocArgCount)
                 {
                     Debug.Assert(parameters != null);
-                    retValue = InvokeWithManyArguments(this, argCount, obj, invokeAttr, binder, parameters, culture);
+                    retValue = InvokeWithManyArguments(
+                        this,
+                        argCount,
+                        obj,
+                        invokeAttr,
+                        binder,
+                        parameters,
+                        culture
+                    );
                 }
                 else
                 {
                     Debug.Assert(parameters != null);
                     StackAllocedArguments argStorage = default;
                     Span<object?> copyOfParameters = new(ref argStorage._arg0, argCount);
-                    Span<ParameterCopyBackAction> shouldCopyBackParameters = new(ref argStorage._copyBack0, argCount);
+                    Span<ParameterCopyBackAction> shouldCopyBackParameters =
+                        new(ref argStorage._copyBack0, argCount);
 
                     StackAllocatedByRefs byrefStorage = default;
                     IntPtr* pByRefStorage = (IntPtr*)&byrefStorage;
@@ -153,7 +172,8 @@ namespace System.Reflection
                         ArgumentTypes,
                         binder,
                         culture,
-                        invokeAttr);
+                        invokeAttr
+                    );
 
 #if MONO // Temporary until Mono is updated.
                     retValue = Invoker.InlinedInvoke(obj, copyOfParameters, invokeAttr);
@@ -175,8 +195,12 @@ namespace System.Reflection
                             {
                                 Debug.Assert(action == ParameterCopyBackAction.CopyNullable);
                                 Debug.Assert(copyOfParameters[i] != null);
-                                Debug.Assert(((RuntimeType)copyOfParameters[i]!.GetType()).IsNullableOfT);
-                                parameters[i] = RuntimeMethodHandle.ReboxFromNullable(copyOfParameters[i]);
+                                Debug.Assert(
+                                    ((RuntimeType)copyOfParameters[i]!.GetType()).IsNullableOfT
+                                );
+                                parameters[i] = RuntimeMethodHandle.ReboxFromNullable(
+                                    copyOfParameters[i]
+                                );
                             }
                         }
                     }
@@ -197,7 +221,8 @@ namespace System.Reflection
             BindingFlags invokeAttr,
             Binder? binder,
             object?[] parameters,
-            CultureInfo? culture)
+            CultureInfo? culture
+        )
         {
             object[] objHolder = new object[argCount];
             Span<object?> copyOfParameters = new(objHolder, 0, argCount);
@@ -224,7 +249,8 @@ namespace System.Reflection
                     mi.ArgumentTypes,
                     binder,
                     culture,
-                    invokeAttr);
+                    invokeAttr
+                );
 
 #if MONO // Temporary until Mono is updated.
                 retValue = mi.Invoker.InlinedInvoke(obj, copyOfParameters, invokeAttr);

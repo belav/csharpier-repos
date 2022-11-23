@@ -24,15 +24,11 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Option_GetCompletions_returns_argument_completions_if_configured()
         {
-            var option = new Option<string>("--hello")
-                .AddCompletions("one", "two", "three");
+            var option = new Option<string>("--hello").AddCompletions("one", "two", "three");
 
             var completions = option.GetCompletions();
 
-            completions
-                .Select(item => item.Label)
-                .Should()
-                .BeEquivalentTo("one", "two", "three");
+            completions.Select(item => item.Label).Should().BeEquivalentTo("one", "two", "three");
         }
 
         [Fact]
@@ -62,10 +58,7 @@ namespace System.CommandLine.Tests
                 new Option<string>("--two", "option two")
             };
 
-            var rootCommand = new RootCommand
-            {
-                subcommand
-            };
+            var rootCommand = new RootCommand { subcommand };
 
             rootCommand.AddGlobalOption(new Option<string>("--three", "option three"));
 
@@ -89,10 +82,7 @@ namespace System.CommandLine.Tests
 
             var completions = command.GetCompletions();
 
-            completions
-                .Select(item => item.Label)
-                .Should()
-                .BeEquivalentTo("one", "two", "three");
+            completions.Select(item => item.Label).Should().BeEquivalentTo("one", "two", "three");
         }
 
         [Fact]
@@ -106,9 +96,10 @@ namespace System.CommandLine.Tests
 
             var completions = command.GetCompletions();
 
-            completions.Select(item => item.Label)
-                       .Should()
-                       .BeEquivalentTo("subcommand", "--option");
+            completions
+                .Select(item => item.Label)
+                .Should()
+                .BeEquivalentTo("subcommand", "--option");
         }
 
         [Fact]
@@ -127,9 +118,10 @@ namespace System.CommandLine.Tests
 
             var completions = command.GetCompletions();
 
-            completions.Select(item => item.Label)
-                       .Should()
-                       .BeEquivalentTo("subcommand", "--option", "command-argument");
+            completions
+                .Select(item => item.Label)
+                .Should()
+                .BeEquivalentTo("subcommand", "--option", "command-argument");
         }
 
         [Fact]
@@ -147,23 +139,21 @@ namespace System.CommandLine.Tests
             completions
                 .Select(item => item.Label)
                 .Should()
-                .BeEquivalentSequenceTo("andmyothersubcommand", "andmythirdsubcommand", "mysubcommand");
+                .BeEquivalentSequenceTo(
+                    "andmyothersubcommand",
+                    "andmythirdsubcommand",
+                    "mysubcommand"
+                );
         }
 
         [Fact]
         public void Command_GetCompletions_does_not_return_argument_names()
         {
-            var command = new Command("command")
-            {
-                new Argument<string>("the-argument")
-            };
+            var command = new Command("command") { new Argument<string>("the-argument") };
 
             var completions = command.GetCompletions();
 
-            completions
-                .Select(item => item.Label)
-                .Should()
-                .NotContain("the-argument");
+            completions.Select(item => item.Label).Should().NotContain("the-argument");
         }
 
         [Fact]
@@ -181,7 +171,11 @@ namespace System.CommandLine.Tests
             completions
                 .Select(item => item.Label)
                 .Should()
-                .BeEquivalentSequenceTo("mysubcommand", "andmyothersubcommand", "andmythirdsubcommand");
+                .BeEquivalentSequenceTo(
+                    "mysubcommand",
+                    "andmyothersubcommand",
+                    "andmythirdsubcommand"
+                );
         }
 
         [Fact]
@@ -198,12 +192,11 @@ namespace System.CommandLine.Tests
 
             _output.WriteLine(result.ToString());
 
-            result.GetCompletions()
-                  .Select(item => item.Label)
-                  .Should()
-                  .BeEquivalentTo("--apple",
-                                  "--banana",
-                                  "--cherry");
+            result
+                .GetCompletions()
+                .Select(item => item.Label)
+                .Should()
+                .BeEquivalentTo("--apple", "--banana", "--cherry");
         }
 
         [Fact]
@@ -215,42 +208,41 @@ namespace System.CommandLine.Tests
                 new RootCommand
                 {
                     originOption,
-                    new Option<string>("--clone")
-                        .AddCompletions(ctx =>
-                        {
-                            var opt1Value = ctx.ParseResult.GetValueForOption(originOption);
-                            return !string.IsNullOrWhiteSpace(opt1Value) ? new[] { opt1Value } : Array.Empty<string>();
-                        })
-                });
+                    new Option<string>("--clone").AddCompletions(ctx =>
+                    {
+                        var opt1Value = ctx.ParseResult.GetValueForOption(originOption);
+                        return !string.IsNullOrWhiteSpace(opt1Value)
+                            ? new[] { opt1Value }
+                            : Array.Empty<string>();
+                    })
+                }
+            );
 
             var result = parser.Parse("--origin test --clone ");
 
             _output.WriteLine(result.ToString());
 
-            result.GetCompletions()
-                  .Select(item => item.Label)
-                  .Should()
-                  .BeEquivalentTo("test");
+            result.GetCompletions().Select(item => item.Label).Should().BeEquivalentTo("test");
         }
-        
+
         [Fact]
         public void When_one_option_has_been_specified_then_it_and_its_siblings_will_still_be_suggested()
         {
             var parser = new Command("command")
-                         {
-                             new Option<string>("--apple"),
-                             new Option<string>("--banana"),
-                             new Option<string>("--cherry")
-                         };
+            {
+                new Option<string>("--apple"),
+                new Option<string>("--banana"),
+                new Option<string>("--cherry")
+            };
 
             var commandLine = "--apple grannysmith";
             var result = parser.Parse(commandLine);
 
-            result.GetCompletions(commandLine.Length + 1)
-                  .Select(item => item.Label)
-                  .Should()
-                  .BeEquivalentTo("--banana",
-                                  "--cherry");
+            result
+                .GetCompletions(commandLine.Length + 1)
+                .Select(item => item.Label)
+                .Should()
+                .BeEquivalentTo("--banana", "--cherry");
         }
 
         [Fact]
@@ -258,54 +250,34 @@ namespace System.CommandLine.Tests
         {
             var rootCommand = new RootCommand
             {
-                new Command("apple")
-                {
-                    new Option<string>("--cortland")
-                },
-                new Command("banana")
-                {
-                    new Option<string>("--cavendish")
-                },
-                new Command("cherry")
-                {
-                    new Option<string>("--rainier")
-                }
+                new Command("apple") { new Option<string>("--cortland") },
+                new Command("banana") { new Option<string>("--cavendish") },
+                new Command("cherry") { new Option<string>("--rainier") }
             };
 
             var result = rootCommand.Parse("cherry ");
 
-            result.GetCompletions()
-                  .Should()
-                  .NotContain(new[]{"apple", "banana", "cherry"});
+            result.GetCompletions().Should().NotContain(new[] { "apple", "banana", "cherry" });
         }
 
         [Fact]
         public void When_a_subcommand_has_been_specified_then_its_sibling_commands_aliases_will_not_be_suggested()
         {
-            var apple = new Command("apple")
-            {
-                new Option<string>("--cortland")
-            };
+            var apple = new Command("apple") { new Option<string>("--cortland") };
             apple.AddAlias("apl");
 
-            var banana = new Command("banana")
-            {
-                new Option<string>("--cavendish")
-            };
+            var banana = new Command("banana") { new Option<string>("--cavendish") };
             banana.AddAlias("bnn");
 
-            var rootCommand = new RootCommand
-            {
-                apple,
-                banana
-            };
+            var rootCommand = new RootCommand { apple, banana };
 
             var result = rootCommand.Parse("banana ");
 
-            result.GetCompletions()
-                  .Select(item => item.Label)
-                  .Should()
-                  .NotContain(new[] { "apl", "bnn" });
+            result
+                .GetCompletions()
+                .Select(item => item.Label)
+                .Should()
+                .NotContain(new[] { "apl", "bnn" });
         }
 
         [Fact] // https://github.com/dotnet/command-line-api/issues/1494
@@ -313,7 +285,7 @@ namespace System.CommandLine.Tests
         {
             var command = new RootCommand("parent")
             {
-                new Command("child"), 
+                new Command("child"),
                 new Option<string>("--parent-option")
             };
 
@@ -352,10 +324,7 @@ namespace System.CommandLine.Tests
             var command = new RootCommand("parent")
             {
                 new Argument<string>(),
-                new Command("child")
-                {
-                    new Option<string>("--child-option")
-                }
+                new Command("child") { new Option<string>("--child-option") }
             };
 
             var commandLine = "child ";
@@ -373,27 +342,19 @@ namespace System.CommandLine.Tests
         {
             var rootCommand = new RootCommand
             {
-                new Command("apple")
-                {
-                    new Command("cortland")
-                },
-                new Command("banana")
-                {
-                    new Command("cavendish")
-                },
-                new Command("cherry")
-                {
-                    new Command("rainier")
-                }
+                new Command("apple") { new Command("cortland") },
+                new Command("banana") { new Command("cavendish") },
+                new Command("cherry") { new Command("rainier") }
             };
 
             var commandLine = "cherry";
             var result = rootCommand.Parse(commandLine);
 
-            result.GetCompletions(commandLine.Length + 1)
-                  .Select(item => item.Label)
-                  .Should()
-                  .BeEquivalentTo("rainier");
+            result
+                .GetCompletions(commandLine.Length + 1)
+                .Select(item => item.Label)
+                .Should()
+                .BeEquivalentTo("rainier");
         }
 
         [Fact]
@@ -409,11 +370,11 @@ namespace System.CommandLine.Tests
             var input = "a";
             var result = command.Parse(input);
 
-            result.GetCompletions(input.Length)
-                  .Select(item => item.Label)
-                  .Should()
-                  .BeEquivalentTo("--apple",
-                                  "--banana");
+            result
+                .GetCompletions(input.Length)
+                .Select(item => item.Label)
+                .Should()
+                .BeEquivalentTo("--apple", "--banana");
         }
 
         [Fact]
@@ -421,10 +382,7 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("the-command")
             {
-                new Option<string>("--hide-me")
-                {
-                    IsHidden = true
-                },
+                new Option<string>("--hide-me") { IsHidden = true },
                 new Option<string>("-n", "Not hidden")
             };
 
@@ -445,18 +403,20 @@ namespace System.CommandLine.Tests
             var commandLine = "--bread";
             var result = parser.Parse(commandLine);
 
-            result.GetCompletions(commandLine.Length + 1)
-                  .Select(item => item.Label)
-                  .Should()
-                  .BeEquivalentTo("rye", "sourdough", "wheat");
+            result
+                .GetCompletions(commandLine.Length + 1)
+                .Select(item => item.Label)
+                .Should()
+                .BeEquivalentTo("rye", "sourdough", "wheat");
 
             commandLine = "--bread wheat --cheese ";
             result = parser.Parse(commandLine);
 
-            result.GetCompletions(commandLine.Length + 1)
-                  .Select(item => item.Label)
-                  .Should()
-                  .BeEquivalentTo("cheddar", "cream cheese", "provolone");
+            result
+                .GetCompletions(commandLine.Length + 1)
+                .Select(item => item.Label)
+                .Should()
+                .BeEquivalentTo("cheddar", "cream cheese", "provolone");
         }
 
         [Fact]
@@ -470,11 +430,12 @@ namespace System.CommandLine.Tests
             };
 
             var commandLine = "test";
-            command.Parse(commandLine)
-                   .GetCompletions(commandLine.Length + 1)
-                   .Select(item => item.Label)
-                   .Should()
-                   .BeEquivalentTo("one", "two");
+            command
+                .Parse(commandLine)
+                .GetCompletions(commandLine.Length + 1)
+                .Select(item => item.Label)
+                .Should()
+                .BeEquivalentTo("one", "two");
         }
 
         [Fact]
@@ -489,11 +450,12 @@ namespace System.CommandLine.Tests
 
             var commandLine = "test";
 
-            command.Parse(commandLine)
-                   .GetCompletions(commandLine.Length + 1)
-                   .Select(item => item.Label)
-                   .Should()
-                   .BeEquivalentTo("one", "--one");
+            command
+                .Parse(commandLine)
+                .GetCompletions(commandLine.Length + 1)
+                .Select(item => item.Label)
+                .Should()
+                .BeEquivalentTo("one", "--one");
         }
 
         [Theory(Skip = "Needs discussion, Issue #19")]
@@ -511,10 +473,7 @@ namespace System.CommandLine.Tests
             var parser = new Parser(command);
 
             ParseResult result = parser.Parse(input);
-            result.GetCompletions()
-                  .Select(item => item.Label)
-                  .Should()
-                  .BeEmpty();
+            result.GetCompletions().Select(item => item.Label).Should().BeEmpty();
         }
 
         [Fact]
@@ -526,15 +485,17 @@ namespace System.CommandLine.Tests
                     new Option<string>("--one"),
                     new Option<string>("--two"),
                     new Option<string>("--three")
-                });
+                }
+            );
 
             var commandLine = "outer";
             ParseResult result = parser.Parse(commandLine);
 
-            result.GetCompletions(commandLine.Length + 1)
-                  .Select(item => item.Label)
-                  .Should()
-                  .BeEquivalentTo("--one", "--two", "--three");
+            result
+                .GetCompletions(commandLine.Length + 1)
+                .Select(item => item.Label)
+                .Should()
+                .BeEquivalentTo("--one", "--two", "--three");
         }
 
         [Fact]
@@ -545,15 +506,17 @@ namespace System.CommandLine.Tests
                 {
                     new Option<string>("--one").FromAmong("one-a", "one-b"),
                     new Option<string>("--two").FromAmong("two-a", "two-b")
-                });
+                }
+            );
 
             var commandLine = "outer --two";
             ParseResult result = parser.Parse(commandLine);
 
-            result.GetCompletions(commandLine.Length + 1)
-                  .Select(item => item.Label)
-                  .Should()
-                  .BeEquivalentTo("two-a", "two-b");
+            result
+                .GetCompletions(commandLine.Length + 1)
+                .Select(item => item.Label)
+                .Should()
+                .BeEquivalentTo("two-a", "two-b");
         }
 
         [Fact]
@@ -565,36 +528,34 @@ namespace System.CommandLine.Tests
                     new Command("one", "Command one"),
                     new Command("two", "Command two"),
                     new Command("three", "Command three")
-                });
+                }
+            );
 
             ParseResult result = parser.Parse("outer o");
 
-            result.GetCompletions()
-                  .Select(item => item.Label)
-                  .Should()
-                  .BeEquivalentTo("one", "two");
+            result
+                .GetCompletions()
+                .Select(item => item.Label)
+                .Should()
+                .BeEquivalentTo("one", "two");
         }
 
         [Fact]
         public void Completions_can_be_provided_in_the_absence_of_validation()
         {
             var command = new Command("the-command")
-                {
-                    new Option<string>("-t")
-                        .AddCompletions("vegetable", "mineral", "animal")
-                };
+            {
+                new Option<string>("-t").AddCompletions("vegetable", "mineral", "animal")
+            };
 
-            command.Parse("the-command -t m")
-                   .GetCompletions()
-                   .Select(item => item.Label)
-                   .Should()
-                   .BeEquivalentTo("animal",
-                                   "mineral");
+            command
+                .Parse("the-command -t m")
+                .GetCompletions()
+                .Select(item => item.Label)
+                .Should()
+                .BeEquivalentTo("animal", "mineral");
 
-            command.Parse("the-command -t something-else")
-                   .Errors
-                   .Should()
-                   .BeEmpty();
+            command.Parse("the-command -t something-else").Errors.Should().BeEmpty();
         }
 
         [Fact]
@@ -605,17 +566,18 @@ namespace System.CommandLine.Tests
                 new Command("one")
                 {
                     new Argument<string>
-                        {
-                            Completions = { _ => new[] { "vegetable", "mineral", "animal" } }
-                        }
+                    {
+                        Completions = { _ => new[] { "vegetable", "mineral", "animal" } }
+                    }
                 }
             };
 
-            command.Parse("the-command one m")
-                   .GetCompletions()
-                   .Select(item => item.Label)
-                   .Should()
-                   .BeEquivalentTo("animal", "mineral");
+            command
+                .Parse("the-command one m")
+                .GetCompletions()
+                .Select(item => item.Label)
+                .Should()
+                .BeEquivalentTo("animal", "mineral");
         }
 
         [Fact]
@@ -623,17 +585,18 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("the-command")
             {
-                new Option<string>("-x")
-                    .AddCompletions(_ => new [] { "vegetable", "mineral", "animal" })
+                new Option<string>("-x").AddCompletions(
+                    _ => new[] { "vegetable", "mineral", "animal" }
+                )
             };
 
             var parseResult = command.Parse("the-command -x m");
 
             parseResult
-                   .GetCompletions()
-                   .Select(item => item.Label)
-                   .Should()
-                   .BeEquivalentTo("animal", "mineral");
+                .GetCompletions()
+                .Select(item => item.Label)
+                .Should()
+                .BeEquivalentTo("animal", "mineral");
         }
 
         [Fact]
@@ -641,26 +604,16 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("outer")
             {
-                new Option<string>("one")
-                    .FromAmong("one-a", "one-b", "one-c"),
-                new Option<string>("two")
-                    .FromAmong("two-a", "two-b", "two-c"),
-                new Option<string>("three")
-                    .FromAmong("three-a", "three-b", "three-c")
+                new Option<string>("one").FromAmong("one-a", "one-b", "one-c"),
+                new Option<string>("two").FromAmong("two-a", "two-b", "two-c"),
+                new Option<string>("three").FromAmong("three-a", "three-b", "three-c")
             };
 
-            var parser = new CommandLineBuilder(new RootCommand
-                         {
-                             command
-                         })
-                         .Build();
+            var parser = new CommandLineBuilder(new RootCommand { command }).Build();
 
-            var result = parser.Parse("outer two b" );
+            var result = parser.Parse("outer two b");
 
-            result.GetCompletions()
-                  .Select(item => item.Label)
-                  .Should()
-                  .BeEquivalentTo("two-b");
+            result.GetCompletions().Select(item => item.Label).Should().BeEquivalentTo("two-b");
         }
 
         [Fact]
@@ -668,20 +621,14 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("outer")
             {
-                new Option<string>("one")
-                    .FromAmong("one-a", "one-b", "one-c"),
-                new Option<string>("two")
-                    .FromAmong("two-a", "two-b", "two-c"),
-                new Option<string>("three")
-                    .FromAmong("three-a", "three-b", "three-c")
+                new Option<string>("one").FromAmong("one-a", "one-b", "one-c"),
+                new Option<string>("two").FromAmong("two-a", "two-b", "two-c"),
+                new Option<string>("three").FromAmong("three-a", "three-b", "three-c")
             };
 
             var result = command.Parse("outer two b");
 
-            result.GetCompletions()
-                  .Select(item => item.Label)
-                  .Should()
-                  .BeEquivalentTo("two-b");
+            result.GetCompletions().Select(item => item.Label).Should().BeEquivalentTo("two-b");
         }
 
         [Fact]
@@ -689,14 +636,8 @@ namespace System.CommandLine.Tests
         {
             var outer = new Command("outer")
             {
-                new Command("one")
-                {
-                    new Argument<string>().FromAmong("one-a", "one-b", "one-c")
-                },
-                new Command("two")
-                {
-                    new Argument<string>().FromAmong("two-a", "two-b", "two-c")
-                },
+                new Command("one") { new Argument<string>().FromAmong("one-a", "one-b", "one-c") },
+                new Command("two") { new Argument<string>().FromAmong("two-a", "two-b", "two-c") },
                 new Command("three")
                 {
                     new Argument<string>().FromAmong("three-a", "three-b", "three-c")
@@ -705,10 +646,7 @@ namespace System.CommandLine.Tests
 
             var result = outer.Parse("outer two b");
 
-            result.GetCompletions()
-                  .Select(item => item.Label)
-                  .Should()
-                  .BeEquivalentTo("two-b");
+            result.GetCompletions().Select(item => item.Label).Should().BeEquivalentTo("two-b");
         }
 
         [Fact]
@@ -716,14 +654,8 @@ namespace System.CommandLine.Tests
         {
             var outer = new Command("outer")
             {
-                new Command("one")
-                {
-                    new Argument<string>().FromAmong("one-a", "one-b", "one-c")
-                },
-                new Command("two")
-                {
-                    new Argument<string>().FromAmong("two-a", "two-b", "two-c")
-                },
+                new Command("one") { new Argument<string>().FromAmong("one-a", "one-b", "one-c") },
+                new Command("two") { new Argument<string>().FromAmong("two-a", "two-b", "two-c") },
                 new Command("three")
                 {
                     new Argument<string>().FromAmong("three-a", "three-b", "three-c")
@@ -732,10 +664,7 @@ namespace System.CommandLine.Tests
 
             ParseResult result = outer.Parse("outer two b");
 
-            result.GetCompletions()
-                  .Select(item => item.Label)
-                  .Should()
-                  .BeEquivalentTo("two-b");
+            result.GetCompletions().Select(item => item.Label).Should().BeEquivalentTo("two-b");
         }
 
         [Fact] // https://github.com/dotnet/command-line-api/issues/1518
@@ -750,12 +679,13 @@ namespace System.CommandLine.Tests
             var parser = new CommandLineBuilder(command).Build();
             var completions = parser.Parse("--framework net7.0 --l").GetCompletions();
 
-            completions.Select(item => item.Label)
-                       .Should()
-                       .BeEquivalentTo("--language", "--langVersion");
+            completions
+                .Select(item => item.Label)
+                .Should()
+                .BeEquivalentTo("--language", "--langVersion");
         }
 
-        [Fact] 
+        [Fact]
         public void When_parsing_from_array_if_the_proximate_option_is_completed_then_completions_consider_other_option_tokens()
         {
             var command = new RootCommand
@@ -765,23 +695,22 @@ namespace System.CommandLine.Tests
                 new Option<string>("--langVersion")
             };
             var parser = new CommandLineBuilder(command).Build();
-            var completions = parser.Parse(new[]{"--framework","net7.0","--l"}).GetCompletions();
+            var completions = parser
+                .Parse(new[] { "--framework", "net7.0", "--l" })
+                .GetCompletions();
 
-            completions.Select(item => item.Label)
-                       .Should()
-                       .BeEquivalentTo("--language", "--langVersion");
+            completions
+                .Select(item => item.Label)
+                .Should()
+                .BeEquivalentTo("--language", "--langVersion");
         }
 
         [Fact]
         public void Arguments_of_type_enum_provide_enum_values_as_suggestions()
         {
-            var command = new Command("the-command")
-            {
-                new Argument<FileMode>()
-            };
+            var command = new Command("the-command") { new Argument<FileMode>() };
 
-            var completions = command.Parse("the-command create")
-                                     .GetCompletions();
+            var completions = command.Parse("the-command create").GetCompletions();
 
             completions
                 .Select(item => item.Label)
@@ -801,21 +730,21 @@ namespace System.CommandLine.Tests
             var commandLine = "--allows-one x";
             var completions = command.Parse(commandLine).GetCompletions(commandLine.Length + 1);
 
-            completions.Select(item => item.Label)
-                       .Should()
-                       .BeEquivalentTo("--allows-many");
+            completions.Select(item => item.Label).Should().BeEquivalentTo("--allows-many");
         }
 
         [Fact]
         public void When_current_symbol_is_an_option_that_requires_arguments_then_parent_symbol_completions_are_omitted()
         {
-            var parser = new CommandLineBuilder(new RootCommand
-                         {
-                             new Option<string>("--allows-one"),
-                             new Option<string[]>("--allows-many")
-                         })
-                         .UseSuggestDirective()
-                         .Build();
+            var parser = new CommandLineBuilder(
+                new RootCommand
+                {
+                    new Option<string>("--allows-one"),
+                    new Option<string[]>("--allows-many")
+                }
+            )
+                .UseSuggestDirective()
+                .Build();
 
             var completions = parser.Parse("--allows-one ").GetCompletions();
 
@@ -833,9 +762,7 @@ namespace System.CommandLine.Tests
 
             var completions = command.Parse("m").GetCompletions();
 
-            completions.Select(item => item.Label)
-                       .Should()
-                       .BeEquivalentTo("--implicit");
+            completions.Select(item => item.Label).Should().BeEquivalentTo("--implicit");
         }
 
         [Theory(Skip = "work in progress")]
@@ -850,20 +777,13 @@ namespace System.CommandLine.Tests
                 "\"nuget:Microsoft.DotNet.Interactive\""
             };
 
-            var argument = new Argument<string>()
-                .AddCompletions(expectedSuggestions);
+            var argument = new Argument<string>().AddCompletions(expectedSuggestions);
 
-            var r = new Command("#r")
-            {
-                argument
-            };
+            var r = new Command("#r") { argument };
 
             var completions = r.Parse(commandLine).GetCompletions(position);
 
-            completions
-                .Select(item => item.Label)
-                .Should()
-                .BeEquivalentTo(expectedSuggestions);
+            completions.Select(item => item.Label).Should().BeEquivalentTo(expectedSuggestions);
 
             throw new NotImplementedException();
         }
@@ -874,17 +794,11 @@ namespace System.CommandLine.Tests
             var argument = new Argument<DayOfWeek>();
             argument.Completions.Clear();
             argument.Completions.Add(new[] { "mon", "tues", "wed", "thur", "fri", "sat", "sun" });
-            var command = new Command("the-command")
-            {
-                argument
-            };
+            var command = new Command("the-command") { argument };
 
-            var completions = command.Parse("the-command s")
-                                     .GetCompletions();
+            var completions = command.Parse("the-command s").GetCompletions();
 
-            completions.Select(item => item.Label)
-                       .Should()
-                       .BeEquivalentTo("sat", "sun", "tues");
+            completions.Select(item => item.Label).Should().BeEquivalentTo("sat", "sun", "tues");
         }
 
         [Fact]
@@ -898,8 +812,7 @@ namespace System.CommandLine.Tests
                 }
             };
 
-            var completions = command.Parse("the-command s")
-                                     .GetCompletions();
+            var completions = command.Parse("the-command s").GetCompletions();
 
             completions
                 .Select(item => item.Label)
@@ -907,12 +820,13 @@ namespace System.CommandLine.Tests
                 .BeEquivalentTo(
                     "sat",
                     nameof(DayOfWeek.Saturday),
-                    "sun", 
+                    "sun",
                     nameof(DayOfWeek.Sunday),
                     "tues",
                     nameof(DayOfWeek.Tuesday),
                     nameof(DayOfWeek.Thursday),
-                    nameof(DayOfWeek.Wednesday));
+                    nameof(DayOfWeek.Wednesday)
+                );
         }
 
         [Fact]
@@ -923,13 +837,9 @@ namespace System.CommandLine.Tests
 
             var completions = new RootCommand { option }.GetCompletions();
 
-            completions.Should().ContainSingle()
-                       .Which
-                       .Detail
-                       .Should()
-                       .Be(description);
+            completions.Should().ContainSingle().Which.Detail.Should().Be(description);
         }
-        
+
         [Fact]
         public void Completions_for_subcommands_provide_a_description()
         {
@@ -938,11 +848,7 @@ namespace System.CommandLine.Tests
 
             var completions = new RootCommand { subcommand }.GetCompletions();
 
-            completions.Should().ContainSingle()
-                       .Which
-                       .Detail
-                       .Should()
-                       .Be(description);
+            completions.Should().ContainSingle().Which.Detail.Should().Be(description);
         }
 
         [Fact] // https://github.com/dotnet/command-line-api/issues/1629
@@ -953,13 +859,12 @@ namespace System.CommandLine.Tests
             var result = option.Parse("--day SleepyDay");
 
             result.Errors
-                  .Should()
-                  .ContainSingle()
-                  .Which
-                  .Message
-                  .Should()
-                  .Be(
-                      $"Cannot parse argument 'SleepyDay' for option '--day' as expected type 'System.DayOfWeek'. Did you mean one of the following?{NewLine}Friday{NewLine}Monday{NewLine}Saturday{NewLine}Sunday{NewLine}Thursday{NewLine}Tuesday{NewLine}Wednesday");
+                .Should()
+                .ContainSingle()
+                .Which.Message.Should()
+                .Be(
+                    $"Cannot parse argument 'SleepyDay' for option '--day' as expected type 'System.DayOfWeek'. Did you mean one of the following?{NewLine}Friday{NewLine}Monday{NewLine}Saturday{NewLine}Sunday{NewLine}Thursday{NewLine}Tuesday{NewLine}Wednesday"
+                );
         }
     }
 }

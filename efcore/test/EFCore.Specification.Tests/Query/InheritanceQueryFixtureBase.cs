@@ -5,32 +5,26 @@ using Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<InheritanceContext>, IFilteredQueryFixtureBase
+public abstract class InheritanceQueryFixtureBase
+    : SharedStoreFixtureBase<InheritanceContext>,
+        IFilteredQueryFixtureBase
 {
     private readonly Dictionary<bool, ISetSource> _expectedDataCache = new();
 
-    protected override string StoreName
-        => "InheritanceTest";
+    protected override string StoreName => "InheritanceTest";
 
-    protected virtual bool EnableFilters
-        => false;
+    protected virtual bool EnableFilters => false;
 
-    protected virtual bool IsDiscriminatorMappingComplete
-        => true;
+    protected virtual bool IsDiscriminatorMappingComplete => true;
 
-    protected virtual bool HasDiscriminator
-        => true;
+    protected virtual bool HasDiscriminator => true;
 
-    protected virtual bool UseGeneratedKeys
-        => true;
+    protected virtual bool UseGeneratedKeys => true;
 
-    public Func<DbContext> GetContextCreator()
-        => () => CreateContext();
+    public Func<DbContext> GetContextCreator() => () => CreateContext();
 
-    public virtual ISetSource GetExpectedData()
-        => UseGeneratedKeys
-            ? InheritanceData.GeneratedKeysInstance
-            : InheritanceData.Instance;
+    public virtual ISetSource GetExpectedData() =>
+        UseGeneratedKeys ? InheritanceData.GeneratedKeysInstance : InheritanceData.Instance;
 
     public virtual ISetSource GetFilteredExpectedData(DbContext context)
     {
@@ -45,7 +39,12 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
             var animals = expectedData.Animals.Where(a => a.CountryId == 1).ToList();
             var animalQueries = expectedData.AnimalQueries.Where(a => a.CountryId == 1).ToList();
             expectedData = new InheritanceData(
-                animals, animalQueries, expectedData.Countries, expectedData.Drinks, expectedData.Plants);
+                animals,
+                animalQueries,
+                expectedData.Countries,
+                expectedData.Drinks,
+                expectedData.Plants
+            );
         }
 
         _expectedDataCache[EnableFilters] = expectedData;
@@ -53,310 +52,329 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
         return expectedData;
     }
 
-    public IReadOnlyDictionary<Type, object> EntitySorters { get; } = new Dictionary<Type, Func<object, object>>
-    {
-        { typeof(Animal), e => ((Animal)e)?.Species },
-        { typeof(Bird), e => ((Bird)e)?.Species },
-        { typeof(Kiwi), e => ((Kiwi)e)?.Species },
-        { typeof(Eagle), e => ((Eagle)e)?.Species },
-        { typeof(AnimalQuery), e => ((AnimalQuery)e)?.Name },
-        { typeof(BirdQuery), e => ((BirdQuery)e)?.Name },
-        { typeof(KiwiQuery), e => ((KiwiQuery)e)?.Name },
-        { typeof(EagleQuery), e => ((EagleQuery)e)?.Name },
-        { typeof(Plant), e => ((Plant)e)?.Species },
-        { typeof(Flower), e => ((Flower)e)?.Species },
-        { typeof(Daisy), e => ((Daisy)e)?.Species },
-        { typeof(Rose), e => ((Rose)e)?.Species },
-        { typeof(Country), e => ((Country)e)?.Id },
-        { typeof(Drink), e => ((Drink)e)?.SortIndex },
-        { typeof(Coke), e => ((Coke)e)?.SortIndex },
-        { typeof(Lilt), e => ((Lilt)e)?.SortIndex },
-        { typeof(Tea), e => ((Tea)e)?.SortIndex },
-    }.ToDictionary(e => e.Key, e => (object)e.Value);
-
-    public IReadOnlyDictionary<Type, object> EntityAsserters { get; } = new Dictionary<Type, Action<object, object>>
-    {
+    public IReadOnlyDictionary<Type, object> EntitySorters { get; } =
+        new Dictionary<Type, Func<object, object>>
         {
-            typeof(Animal), (e, a) =>
-            {
-                Assert.Equal(e == null, a == null);
+            { typeof(Animal), e => ((Animal)e)?.Species },
+            { typeof(Bird), e => ((Bird)e)?.Species },
+            { typeof(Kiwi), e => ((Kiwi)e)?.Species },
+            { typeof(Eagle), e => ((Eagle)e)?.Species },
+            { typeof(AnimalQuery), e => ((AnimalQuery)e)?.Name },
+            { typeof(BirdQuery), e => ((BirdQuery)e)?.Name },
+            { typeof(KiwiQuery), e => ((KiwiQuery)e)?.Name },
+            { typeof(EagleQuery), e => ((EagleQuery)e)?.Name },
+            { typeof(Plant), e => ((Plant)e)?.Species },
+            { typeof(Flower), e => ((Flower)e)?.Species },
+            { typeof(Daisy), e => ((Daisy)e)?.Species },
+            { typeof(Rose), e => ((Rose)e)?.Species },
+            { typeof(Country), e => ((Country)e)?.Id },
+            { typeof(Drink), e => ((Drink)e)?.SortIndex },
+            { typeof(Coke), e => ((Coke)e)?.SortIndex },
+            { typeof(Lilt), e => ((Lilt)e)?.SortIndex },
+            { typeof(Tea), e => ((Tea)e)?.SortIndex },
+        }.ToDictionary(e => e.Key, e => (object)e.Value);
 
-                if (a != null)
-                {
-                    var ee = (Animal)e;
-                    var aa = (Animal)a;
-
-                    Assert.Equal(ee.Species, aa.Species);
-                    Assert.Equal(ee.Name, aa.Name);
-                    Assert.Equal(ee.CountryId, aa.CountryId);
-                }
-            }
-        },
+    public IReadOnlyDictionary<Type, object> EntityAsserters { get; } =
+        new Dictionary<Type, Action<object, object>>
         {
-            typeof(Bird), (e, a) =>
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(Animal),
+                (e, a) =>
                 {
-                    var ee = (Bird)e;
-                    var aa = (Bird)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.Species, aa.Species);
-                    Assert.Equal(ee.Name, aa.Name);
-                    Assert.Equal(ee.CountryId, aa.CountryId);
-                    Assert.Equal(ee.IsFlightless, aa.IsFlightless);
+                    if (a != null)
+                    {
+                        var ee = (Animal)e;
+                        var aa = (Animal)a;
+
+                        Assert.Equal(ee.Species, aa.Species);
+                        Assert.Equal(ee.Name, aa.Name);
+                        Assert.Equal(ee.CountryId, aa.CountryId);
+                    }
                 }
-            }
-        },
-        {
-            typeof(Eagle), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(Bird),
+                (e, a) =>
                 {
-                    var ee = (Eagle)e;
-                    var aa = (Eagle)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.Species, aa.Species);
-                    Assert.Equal(ee.Name, aa.Name);
-                    Assert.Equal(ee.CountryId, aa.CountryId);
-                    Assert.Equal(ee.IsFlightless, aa.IsFlightless);
-                    Assert.Equal(ee.Group, aa.Group);
+                    if (a != null)
+                    {
+                        var ee = (Bird)e;
+                        var aa = (Bird)a;
+
+                        Assert.Equal(ee.Species, aa.Species);
+                        Assert.Equal(ee.Name, aa.Name);
+                        Assert.Equal(ee.CountryId, aa.CountryId);
+                        Assert.Equal(ee.IsFlightless, aa.IsFlightless);
+                    }
                 }
-            }
-        },
-        {
-            typeof(Kiwi), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(Eagle),
+                (e, a) =>
                 {
-                    var ee = (Kiwi)e;
-                    var aa = (Kiwi)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.Species, aa.Species);
-                    Assert.Equal(ee.Name, aa.Name);
-                    Assert.Equal(ee.CountryId, aa.CountryId);
-                    Assert.Equal(ee.IsFlightless, aa.IsFlightless);
-                    Assert.Equal(ee.FoundOn, aa.FoundOn);
+                    if (a != null)
+                    {
+                        var ee = (Eagle)e;
+                        var aa = (Eagle)a;
+
+                        Assert.Equal(ee.Species, aa.Species);
+                        Assert.Equal(ee.Name, aa.Name);
+                        Assert.Equal(ee.CountryId, aa.CountryId);
+                        Assert.Equal(ee.IsFlightless, aa.IsFlightless);
+                        Assert.Equal(ee.Group, aa.Group);
+                    }
                 }
-            }
-        },
-        {
-            typeof(AnimalQuery), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(Kiwi),
+                (e, a) =>
                 {
-                    var ee = (AnimalQuery)e;
-                    var aa = (AnimalQuery)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.Name, aa.Name);
-                    Assert.Equal(ee.CountryId, aa.CountryId);
+                    if (a != null)
+                    {
+                        var ee = (Kiwi)e;
+                        var aa = (Kiwi)a;
+
+                        Assert.Equal(ee.Species, aa.Species);
+                        Assert.Equal(ee.Name, aa.Name);
+                        Assert.Equal(ee.CountryId, aa.CountryId);
+                        Assert.Equal(ee.IsFlightless, aa.IsFlightless);
+                        Assert.Equal(ee.FoundOn, aa.FoundOn);
+                    }
                 }
-            }
-        },
-        {
-            typeof(BirdQuery), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(AnimalQuery),
+                (e, a) =>
                 {
-                    var ee = (BirdQuery)e;
-                    var aa = (BirdQuery)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.Name, aa.Name);
-                    Assert.Equal(ee.CountryId, aa.CountryId);
-                    Assert.Equal(ee.IsFlightless, aa.IsFlightless);
-                    Assert.Equal(ee.EagleId, aa.EagleId);
+                    if (a != null)
+                    {
+                        var ee = (AnimalQuery)e;
+                        var aa = (AnimalQuery)a;
+
+                        Assert.Equal(ee.Name, aa.Name);
+                        Assert.Equal(ee.CountryId, aa.CountryId);
+                    }
                 }
-            }
-        },
-        {
-            typeof(EagleQuery), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(BirdQuery),
+                (e, a) =>
                 {
-                    var ee = (EagleQuery)e;
-                    var aa = (EagleQuery)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.Name, aa.Name);
-                    Assert.Equal(ee.CountryId, aa.CountryId);
-                    Assert.Equal(ee.IsFlightless, aa.IsFlightless);
-                    Assert.Equal(ee.EagleId, aa.EagleId);
-                    Assert.Equal(ee.Group, aa.Group);
+                    if (a != null)
+                    {
+                        var ee = (BirdQuery)e;
+                        var aa = (BirdQuery)a;
+
+                        Assert.Equal(ee.Name, aa.Name);
+                        Assert.Equal(ee.CountryId, aa.CountryId);
+                        Assert.Equal(ee.IsFlightless, aa.IsFlightless);
+                        Assert.Equal(ee.EagleId, aa.EagleId);
+                    }
                 }
-            }
-        },
-        {
-            typeof(KiwiQuery), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(EagleQuery),
+                (e, a) =>
                 {
-                    var ee = (KiwiQuery)e;
-                    var aa = (KiwiQuery)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.Name, aa.Name);
-                    Assert.Equal(ee.CountryId, aa.CountryId);
-                    Assert.Equal(ee.IsFlightless, aa.IsFlightless);
-                    Assert.Equal(ee.EagleId, aa.EagleId);
-                    Assert.Equal(ee.FoundOn, aa.FoundOn);
+                    if (a != null)
+                    {
+                        var ee = (EagleQuery)e;
+                        var aa = (EagleQuery)a;
+
+                        Assert.Equal(ee.Name, aa.Name);
+                        Assert.Equal(ee.CountryId, aa.CountryId);
+                        Assert.Equal(ee.IsFlightless, aa.IsFlightless);
+                        Assert.Equal(ee.EagleId, aa.EagleId);
+                        Assert.Equal(ee.Group, aa.Group);
+                    }
                 }
-            }
-        },
-        {
-            typeof(Plant), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(KiwiQuery),
+                (e, a) =>
                 {
-                    var ee = (Plant)e;
-                    var aa = (Plant)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.Species, aa.Species);
-                    Assert.Equal(ee.Name, aa.Name);
-                    Assert.Equal(ee.Genus, aa.Genus);
+                    if (a != null)
+                    {
+                        var ee = (KiwiQuery)e;
+                        var aa = (KiwiQuery)a;
+
+                        Assert.Equal(ee.Name, aa.Name);
+                        Assert.Equal(ee.CountryId, aa.CountryId);
+                        Assert.Equal(ee.IsFlightless, aa.IsFlightless);
+                        Assert.Equal(ee.EagleId, aa.EagleId);
+                        Assert.Equal(ee.FoundOn, aa.FoundOn);
+                    }
                 }
-            }
-        },
-        {
-            typeof(Flower), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(Plant),
+                (e, a) =>
                 {
-                    var ee = (Flower)e;
-                    var aa = (Flower)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.Species, aa.Species);
-                    Assert.Equal(ee.Name, aa.Name);
-                    Assert.Equal(ee.Genus, aa.Genus);
+                    if (a != null)
+                    {
+                        var ee = (Plant)e;
+                        var aa = (Plant)a;
+
+                        Assert.Equal(ee.Species, aa.Species);
+                        Assert.Equal(ee.Name, aa.Name);
+                        Assert.Equal(ee.Genus, aa.Genus);
+                    }
                 }
-            }
-        },
-        {
-            typeof(Daisy), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(Flower),
+                (e, a) =>
                 {
-                    var ee = (Daisy)e;
-                    var aa = (Daisy)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.Species, aa.Species);
-                    Assert.Equal(ee.Name, aa.Name);
-                    Assert.Equal(ee.Genus, aa.Genus);
+                    if (a != null)
+                    {
+                        var ee = (Flower)e;
+                        var aa = (Flower)a;
+
+                        Assert.Equal(ee.Species, aa.Species);
+                        Assert.Equal(ee.Name, aa.Name);
+                        Assert.Equal(ee.Genus, aa.Genus);
+                    }
                 }
-            }
-        },
-        {
-            typeof(Rose), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(Daisy),
+                (e, a) =>
                 {
-                    var ee = (Rose)e;
-                    var aa = (Rose)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.Species, aa.Species);
-                    Assert.Equal(ee.Name, aa.Name);
-                    Assert.Equal(ee.Genus, aa.Genus);
-                    Assert.Equal(ee.HasThorns, aa.HasThorns);
+                    if (a != null)
+                    {
+                        var ee = (Daisy)e;
+                        var aa = (Daisy)a;
+
+                        Assert.Equal(ee.Species, aa.Species);
+                        Assert.Equal(ee.Name, aa.Name);
+                        Assert.Equal(ee.Genus, aa.Genus);
+                    }
                 }
-            }
-        },
-        {
-            typeof(Country), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(Rose),
+                (e, a) =>
                 {
-                    var ee = (Country)e;
-                    var aa = (Country)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.Id, aa.Id);
-                    Assert.Equal(ee.Name, aa.Name);
+                    if (a != null)
+                    {
+                        var ee = (Rose)e;
+                        var aa = (Rose)a;
+
+                        Assert.Equal(ee.Species, aa.Species);
+                        Assert.Equal(ee.Name, aa.Name);
+                        Assert.Equal(ee.Genus, aa.Genus);
+                        Assert.Equal(ee.HasThorns, aa.HasThorns);
+                    }
                 }
-            }
-        },
-        {
-            typeof(Drink), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(Country),
+                (e, a) =>
                 {
-                    var ee = (Drink)e;
-                    var aa = (Drink)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.SortIndex, aa.SortIndex);
+                    if (a != null)
+                    {
+                        var ee = (Country)e;
+                        var aa = (Country)a;
+
+                        Assert.Equal(ee.Id, aa.Id);
+                        Assert.Equal(ee.Name, aa.Name);
+                    }
                 }
-            }
-        },
-        {
-            typeof(Coke), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(Drink),
+                (e, a) =>
                 {
-                    var ee = (Coke)e;
-                    var aa = (Coke)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.SortIndex, aa.SortIndex);
-                    Assert.Equal(ee.SugarGrams, aa.SugarGrams);
-                    Assert.Equal(ee.CaffeineGrams, aa.CaffeineGrams);
-                    Assert.Equal(ee.Carbonation, aa.Carbonation);
+                    if (a != null)
+                    {
+                        var ee = (Drink)e;
+                        var aa = (Drink)a;
+
+                        Assert.Equal(ee.SortIndex, aa.SortIndex);
+                    }
                 }
-            }
-        },
-        {
-            typeof(Lilt), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(Coke),
+                (e, a) =>
                 {
-                    var ee = (Lilt)e;
-                    var aa = (Lilt)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.SortIndex, aa.SortIndex);
-                    Assert.Equal(ee.SugarGrams, aa.SugarGrams);
-                    Assert.Equal(ee.Carbonation, aa.Carbonation);
+                    if (a != null)
+                    {
+                        var ee = (Coke)e;
+                        var aa = (Coke)a;
+
+                        Assert.Equal(ee.SortIndex, aa.SortIndex);
+                        Assert.Equal(ee.SugarGrams, aa.SugarGrams);
+                        Assert.Equal(ee.CaffeineGrams, aa.CaffeineGrams);
+                        Assert.Equal(ee.Carbonation, aa.Carbonation);
+                    }
                 }
-            }
-        },
-        {
-            typeof(Tea), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(Lilt),
+                (e, a) =>
                 {
-                    var ee = (Tea)e;
-                    var aa = (Tea)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.SortIndex, aa.SortIndex);
-                    Assert.Equal(ee.HasMilk, aa.HasMilk);
-                    Assert.Equal(ee.CaffeineGrams, aa.CaffeineGrams);
+                    if (a != null)
+                    {
+                        var ee = (Lilt)e;
+                        var aa = (Lilt)a;
+
+                        Assert.Equal(ee.SortIndex, aa.SortIndex);
+                        Assert.Equal(ee.SugarGrams, aa.SugarGrams);
+                        Assert.Equal(ee.Carbonation, aa.Carbonation);
+                    }
                 }
-            }
-        },
-    }.ToDictionary(e => e.Key, e => (object)e.Value);
+            },
+            {
+                typeof(Tea),
+                (e, a) =>
+                {
+                    Assert.Equal(e == null, a == null);
+
+                    if (a != null)
+                    {
+                        var ee = (Tea)e;
+                        var aa = (Tea)a;
+
+                        Assert.Equal(ee.SortIndex, aa.SortIndex);
+                        Assert.Equal(ee.HasMilk, aa.HasMilk);
+                        Assert.Equal(ee.CaffeineGrams, aa.CaffeineGrams);
+                    }
+                }
+            },
+        }.ToDictionary(e => e.Key, e => (object)e.Value);
 
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
     {
@@ -376,11 +394,20 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
 
         if (HasDiscriminator)
         {
-            modelBuilder.Entity<Bird>().HasDiscriminator<string>("Discriminator").IsComplete(IsDiscriminatorMappingComplete);
-            modelBuilder.Entity<Drink>().HasDiscriminator().IsComplete(IsDiscriminatorMappingComplete);
+            modelBuilder
+                .Entity<Bird>()
+                .HasDiscriminator<string>("Discriminator")
+                .IsComplete(IsDiscriminatorMappingComplete);
+            modelBuilder
+                .Entity<Drink>()
+                .HasDiscriminator()
+                .IsComplete(IsDiscriminatorMappingComplete);
         }
 
-        modelBuilder.Entity<KiwiQuery>().HasDiscriminator().IsComplete(IsDiscriminatorMappingComplete);
+        modelBuilder
+            .Entity<KiwiQuery>()
+            .HasDiscriminator()
+            .IsComplete(IsDiscriminatorMappingComplete);
 
         if (EnableFilters)
         {
@@ -392,6 +419,6 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
         modelBuilder.Entity<KiwiQuery>();
     }
 
-    protected override void Seed(InheritanceContext context)
-        => InheritanceContext.Seed(context, UseGeneratedKeys);
+    protected override void Seed(InheritanceContext context) =>
+        InheritanceContext.Seed(context, UseGeneratedKeys);
 }

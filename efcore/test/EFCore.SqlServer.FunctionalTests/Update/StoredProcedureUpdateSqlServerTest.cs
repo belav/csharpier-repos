@@ -8,8 +8,10 @@ namespace Microsoft.EntityFrameworkCore.Update;
 public class StoredProcedureUpdateSqlServerTest
     : StoredProcedureUpdateTestBase<StoredProcedureUpdateSqlServerTest.StoredProcedureUpdateSqlServerFixture>
 {
-    public StoredProcedureUpdateSqlServerTest(StoredProcedureUpdateSqlServerFixture fixture, ITestOutputHelper testOutputHelper)
-        : base(fixture)
+    public StoredProcedureUpdateSqlServerTest(
+        StoredProcedureUpdateSqlServerFixture fixture,
+        ITestOutputHelper testOutputHelper
+    ) : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
         // Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
@@ -24,7 +26,8 @@ public class StoredProcedureUpdateSqlServerTest
 @p1='1' (Direction = Output)
 
 SET NOCOUNT ON;
-EXEC [WithOutputParameter_Insert] @p0, @p1 OUTPUT;");
+EXEC [WithOutputParameter_Insert] @p0, @p1 OUTPUT;"
+        );
     }
 
     public override async Task Insert_twice_with_output_parameter(bool async)
@@ -39,7 +42,8 @@ EXEC [WithOutputParameter_Insert] @p0, @p1 OUTPUT;");
 
 SET NOCOUNT ON;
 EXEC [WithOutputParameter_Insert] @p0, @p1 OUTPUT;
-EXEC [WithOutputParameter_Insert] @p2, @p3 OUTPUT;");
+EXEC [WithOutputParameter_Insert] @p2, @p3 OUTPUT;"
+        );
     }
 
     public override async Task Insert_with_result_column(bool async)
@@ -50,7 +54,8 @@ EXEC [WithOutputParameter_Insert] @p2, @p3 OUTPUT;");
             @"@p0='Foo' (Size = 4000)
 
 SET NOCOUNT ON;
-EXEC [WithResultColumn_Insert] @p0;");
+EXEC [WithResultColumn_Insert] @p0;"
+        );
     }
 
     public override async Task Insert_with_two_result_columns(bool async)
@@ -61,7 +66,8 @@ EXEC [WithResultColumn_Insert] @p0;");
             @"@p0='Foo' (Size = 4000)
 
 SET NOCOUNT ON;
-EXEC [WithTwoResultColumns_Insert] @p0;");
+EXEC [WithTwoResultColumns_Insert] @p0;"
+        );
     }
 
     public override async Task Insert_with_output_parameter_and_result_column(bool async)
@@ -73,7 +79,8 @@ EXEC [WithTwoResultColumns_Insert] @p0;");
 @p1='Foo' (Size = 4000)
 
 SET NOCOUNT ON;
-EXEC [WithOutputParameterAndResultColumn_Insert] @p0 OUTPUT, @p1;");
+EXEC [WithOutputParameterAndResultColumn_Insert] @p0 OUTPUT, @p1;"
+        );
     }
 
     public override async Task Update(bool async)
@@ -85,7 +92,8 @@ EXEC [WithOutputParameterAndResultColumn_Insert] @p0 OUTPUT, @p1;");
 @p1='Updated' (Size = 4000)
 
 SET NOCOUNT ON;
-EXEC [WithOutputParameter_Update] @p0, @p1;");
+EXEC [WithOutputParameter_Update] @p0, @p1;"
+        );
     }
 
     public override async Task Update_partial(bool async)
@@ -98,10 +106,13 @@ EXEC [WithOutputParameter_Update] @p0, @p1;");
 @p2='8'
 
 SET NOCOUNT ON;
-EXEC [WithTwoInputParameters_Update] @p0, @p1, @p2;");
+EXEC [WithTwoInputParameters_Update] @p0, @p1, @p2;"
+        );
     }
 
-    public override async Task Update_with_output_parameter_and_rows_affected_result_column(bool async)
+    public override async Task Update_with_output_parameter_and_rows_affected_result_column(
+        bool async
+    )
     {
         await base.Update_with_output_parameter_and_rows_affected_result_column(async);
 
@@ -111,12 +122,17 @@ EXEC [WithTwoInputParameters_Update] @p0, @p1, @p2;");
 @p2=NULL (Nullable = false) (Direction = Output) (DbType = Int32)
 
 SET NOCOUNT ON;
-EXEC [WithOutputParameterAndRowsAffectedResultColumn_Update] @p0, @p1, @p2 OUTPUT;");
+EXEC [WithOutputParameterAndRowsAffectedResultColumn_Update] @p0, @p1, @p2 OUTPUT;"
+        );
     }
 
-    public override async Task Update_with_output_parameter_and_rows_affected_result_column_concurrency_failure(bool async)
+    public override async Task Update_with_output_parameter_and_rows_affected_result_column_concurrency_failure(
+        bool async
+    )
     {
-        await base.Update_with_output_parameter_and_rows_affected_result_column_concurrency_failure(async);
+        await base.Update_with_output_parameter_and_rows_affected_result_column_concurrency_failure(
+            async
+        );
 
         AssertSql(
             @"@p0='1'
@@ -124,7 +140,8 @@ EXEC [WithOutputParameterAndRowsAffectedResultColumn_Update] @p0, @p1, @p2 OUTPU
 @p2=NULL (Nullable = false) (Direction = Output) (DbType = Int32)
 
 SET NOCOUNT ON;
-EXEC [WithOutputParameterAndRowsAffectedResultColumn_Update] @p0, @p1, @p2 OUTPUT;");
+EXEC [WithOutputParameterAndRowsAffectedResultColumn_Update] @p0, @p1, @p2 OUTPUT;"
+        );
     }
 
     public override async Task Delete(bool async)
@@ -135,7 +152,8 @@ EXEC [WithOutputParameterAndRowsAffectedResultColumn_Update] @p0, @p1, @p2 OUTPU
             @"@p0='1'
 
 SET NOCOUNT ON;
-EXEC [WithOutputParameter_Delete] @p0;");
+EXEC [WithOutputParameter_Delete] @p0;"
+        );
     }
 
     public override async Task Delete_and_insert(bool async)
@@ -149,7 +167,8 @@ EXEC [WithOutputParameter_Delete] @p0;");
 
 SET NOCOUNT ON;
 EXEC [WithOutputParameter_Delete] @p0;
-EXEC [WithOutputParameter_Insert] @p1, @p2 OUTPUT;");
+EXEC [WithOutputParameter_Insert] @p1, @p2 OUTPUT;"
+        );
     }
 
     public override async Task Rows_affected_parameter(bool async)
@@ -162,7 +181,8 @@ EXEC [WithOutputParameter_Insert] @p1, @p2 OUTPUT;");
 @p2='1' (Direction = Output)
 
 SET NOCOUNT ON;
-EXEC [WithRowsAffectedParameter_Update] @p0, @p1, @p2 OUTPUT;");
+EXEC [WithRowsAffectedParameter_Update] @p0, @p1, @p2 OUTPUT;"
+        );
     }
 
     public override async Task Rows_affected_parameter_and_concurrency_failure(bool async)
@@ -175,7 +195,8 @@ EXEC [WithRowsAffectedParameter_Update] @p0, @p1, @p2 OUTPUT;");
 @p2='0' (Direction = Output)
 
 SET NOCOUNT ON;
-EXEC [WithRowsAffectedParameter_Update] @p0, @p1, @p2 OUTPUT;");
+EXEC [WithRowsAffectedParameter_Update] @p0, @p1, @p2 OUTPUT;"
+        );
     }
 
     public override async Task Rows_affected_result_column(bool async)
@@ -187,7 +208,8 @@ EXEC [WithRowsAffectedParameter_Update] @p0, @p1, @p2 OUTPUT;");
 @p1='Updated' (Size = 4000)
 
 SET NOCOUNT ON;
-EXEC [WithRowsAffectedResultColumn_Update] @p0, @p1;");
+EXEC [WithRowsAffectedResultColumn_Update] @p0, @p1;"
+        );
     }
 
     public override async Task Rows_affected_result_column_and_concurrency_failure(bool async)
@@ -199,7 +221,8 @@ EXEC [WithRowsAffectedResultColumn_Update] @p0, @p1;");
 @p1='Updated' (Size = 4000)
 
 SET NOCOUNT ON;
-EXEC [WithRowsAffectedResultColumn_Update] @p0, @p1;");
+EXEC [WithRowsAffectedResultColumn_Update] @p0, @p1;"
+        );
     }
 
     public override async Task Rows_affected_return_value(bool async)
@@ -212,7 +235,8 @@ EXEC [WithRowsAffectedResultColumn_Update] @p0, @p1;");
 @p2='Updated' (Size = 4000)
 
 SET NOCOUNT ON;
-EXEC @p0 = [WithRowsAffectedReturnValue_Update] @p1, @p2;");
+EXEC @p0 = [WithRowsAffectedReturnValue_Update] @p1, @p2;"
+        );
     }
 
     public override async Task Rows_affected_return_value_and_concurrency_failure(bool async)
@@ -225,7 +249,8 @@ EXEC @p0 = [WithRowsAffectedReturnValue_Update] @p1, @p2;");
 @p2='Updated' (Size = 4000)
 
 SET NOCOUNT ON;
-EXEC @p0 = [WithRowsAffectedReturnValue_Update] @p1, @p2;");
+EXEC @p0 = [WithRowsAffectedReturnValue_Update] @p1, @p2;"
+        );
     }
 
     public override async Task Store_generated_concurrency_token_as_in_out_parameter(bool async)
@@ -241,8 +266,11 @@ EXEC @p0 = [WithRowsAffectedReturnValue_Update] @p1, @p2;");
 
 SET NOCOUNT ON;
 EXEC [WithStoreGeneratedConcurrencyTokenAsInOutParameter_Update] @p0, @p1 OUTPUT, @p2, @p3 OUTPUT;",
-            Fixture.TestSqlLoggerFactory.Sql.Substring(Fixture.TestSqlLoggerFactory.Sql.IndexOf("@p2", StringComparison.Ordinal)),
-            ignoreLineEndingDifferences: true);
+            Fixture.TestSqlLoggerFactory.Sql.Substring(
+                Fixture.TestSqlLoggerFactory.Sql.IndexOf("@p2", StringComparison.Ordinal)
+            ),
+            ignoreLineEndingDifferences: true
+        );
 
         Assert.Equal(
             @"@p2='Updated' (Size = 4000)
@@ -250,8 +278,11 @@ EXEC [WithStoreGeneratedConcurrencyTokenAsInOutParameter_Update] @p0, @p1 OUTPUT
 
 SET NOCOUNT ON;
 EXEC [WithStoreGeneratedConcurrencyTokenAsInOutParameter_Update] @p0, @p1 OUTPUT, @p2, @p3 OUTPUT;",
-            Fixture.TestSqlLoggerFactory.Sql.Substring(Fixture.TestSqlLoggerFactory.Sql.IndexOf("@p2", StringComparison.Ordinal)),
-            ignoreLineEndingDifferences: true);
+            Fixture.TestSqlLoggerFactory.Sql.Substring(
+                Fixture.TestSqlLoggerFactory.Sql.IndexOf("@p2", StringComparison.Ordinal)
+            ),
+            ignoreLineEndingDifferences: true
+        );
     }
 
     public override async Task Store_generated_concurrency_token_as_two_parameters(bool async)
@@ -264,8 +295,11 @@ EXEC [WithStoreGeneratedConcurrencyTokenAsInOutParameter_Update] @p0, @p1 OUTPUT
 
 SET NOCOUNT ON;
 EXEC [WithStoreGeneratedConcurrencyTokenAsTwoParameters_Update] @p0, @p1, @p2, @p3 OUTPUT, @p4 OUTPUT;",
-            Fixture.TestSqlLoggerFactory.Sql.Substring(Fixture.TestSqlLoggerFactory.Sql.IndexOf("@p4", StringComparison.Ordinal)),
-            ignoreLineEndingDifferences: true);
+            Fixture.TestSqlLoggerFactory.Sql.Substring(
+                Fixture.TestSqlLoggerFactory.Sql.IndexOf("@p4", StringComparison.Ordinal)
+            ),
+            ignoreLineEndingDifferences: true
+        );
     }
 
     public override async Task User_managed_concurrency_token(bool async)
@@ -280,7 +314,8 @@ EXEC [WithStoreGeneratedConcurrencyTokenAsTwoParameters_Update] @p0, @p1, @p2, @
 @p4='0' (Direction = Output)
 
 SET NOCOUNT ON;
-EXEC [WithUserManagedConcurrencyToken_Update] @p0, @p1, @p2, @p3, @p4 OUTPUT;");
+EXEC [WithUserManagedConcurrencyToken_Update] @p0, @p1, @p2, @p3, @p4 OUTPUT;"
+        );
     }
 
     public override async Task Original_and_current_value_on_non_concurrency_token(bool async)
@@ -293,7 +328,8 @@ EXEC [WithUserManagedConcurrencyToken_Update] @p0, @p1, @p2, @p3, @p4 OUTPUT;");
 @p2='Initial' (Size = 4000)
 
 SET NOCOUNT ON;
-EXEC [WithOriginalAndCurrentValueOnNonConcurrencyToken_Update] @p0, @p1, @p2;");
+EXEC [WithOriginalAndCurrentValueOnNonConcurrencyToken_Update] @p0, @p1, @p2;"
+        );
     }
 
     public override async Task Tph(bool async)
@@ -309,7 +345,8 @@ EXEC [WithOriginalAndCurrentValueOnNonConcurrencyToken_Update] @p0, @p1, @p2;");
 @p5='8' (Nullable = true)
 
 SET NOCOUNT ON;
-EXEC [Tph_Insert] @p0 OUTPUT, @p1, @p2, @p3, @p4 OUTPUT, @p5;");
+EXEC [Tph_Insert] @p0 OUTPUT, @p1, @p2, @p3, @p4 OUTPUT, @p5;"
+        );
     }
 
     public override async Task Tpt(bool async)
@@ -327,7 +364,8 @@ EXEC [TptParent_Insert] @p0 OUTPUT, @p1;",
 @p3='8'
 
 SET NOCOUNT ON;
-EXEC [TptChild_Insert] @p2, @p3;");
+EXEC [TptChild_Insert] @p2, @p3;"
+        );
     }
 
     public override async Task Tpt_mixed_sproc_and_non_sproc(bool async)
@@ -347,7 +385,8 @@ EXEC [TptMixedParent_Insert] @p0 OUTPUT, @p1;",
 SET IMPLICIT_TRANSACTIONS OFF;
 SET NOCOUNT ON;
 INSERT INTO [TptMixedChild] ([Id], [ChildProperty])
-VALUES (@p2, @p3);");
+VALUES (@p2, @p3);"
+        );
     }
 
     public override async Task Tpc(bool async)
@@ -360,7 +399,8 @@ VALUES (@p2, @p3);");
 @p2='8'
 
 SET NOCOUNT ON;
-EXEC [TpcChild_Insert] @p0 OUTPUT, @p1, @p2;");
+EXEC [TpcChild_Insert] @p0 OUTPUT, @p1, @p2;"
+        );
     }
 
     public override async Task Input_or_output_parameter_with_input(bool async)
@@ -372,7 +412,8 @@ EXEC [TpcChild_Insert] @p0 OUTPUT, @p1, @p2;");
 @p1=NULL (Nullable = false) (Size = 4000) (Direction = InputOutput)
 
 SET NOCOUNT ON;
-EXEC [WithInputOrOutputParameter_Insert] @p0 OUTPUT, @p1 OUTPUT;");
+EXEC [WithInputOrOutputParameter_Insert] @p0 OUTPUT, @p1 OUTPUT;"
+        );
     }
 
     public override async Task Input_or_output_parameter_with_output(bool async)
@@ -384,20 +425,23 @@ EXEC [WithInputOrOutputParameter_Insert] @p0 OUTPUT, @p1 OUTPUT;");
 @p1='Some default value' (Nullable = false) (Size = 4000) (Direction = InputOutput)
 
 SET NOCOUNT ON;
-EXEC [WithInputOrOutputParameter_Insert] @p0 OUTPUT, @p1 OUTPUT;");
+EXEC [WithInputOrOutputParameter_Insert] @p0 OUTPUT, @p1 OUTPUT;"
+        );
     }
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public class StoredProcedureUpdateSqlServerFixture : StoredProcedureUpdateFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => StoredProcedureTestStoryFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory =>
+            StoredProcedureTestStoryFactory.Instance;
 
-        protected override void ConfigureStoreGeneratedConcurrencyToken(EntityTypeBuilder entityTypeBuilder, string propertyName)
-            => entityTypeBuilder.Property<byte[]>(propertyName).IsRowVersion();
+        protected override void ConfigureStoreGeneratedConcurrencyToken(
+            EntityTypeBuilder entityTypeBuilder,
+            string propertyName
+        ) => entityTypeBuilder.Property<byte[]>(propertyName).IsRowVersion();
 
         public override void CleanData()
         {
@@ -405,7 +449,8 @@ EXEC [WithInputOrOutputParameter_Insert] @p0 OUTPUT, @p1 OUTPUT;");
             context.Database.ExecuteSqlRaw(CleanDataSql);
         }
 
-        private const string CleanDataSql = @"
+        private const string CleanDataSql =
+            @"
 -- Regular tables without foreign keys
 TRUNCATE TABLE [WithInputOrOutputParameter];
 TRUNCATE TABLE [WithOriginalAndCurrentValueOnNonConcurrencyToken];
@@ -444,10 +489,11 @@ DBCC CHECKIDENT ('[TptParent]', RESEED, 0);";
         {
             public static new StoredProcedureTestStoryFactory Instance { get; } = new();
 
-            public override TestStore GetOrCreate(string storeName)
-                => SqlServerTestStore.GetOrCreateWithInitScript(storeName, InitScript);
+            public override TestStore GetOrCreate(string storeName) =>
+                SqlServerTestStore.GetOrCreateWithInitScript(storeName, InitScript);
 
-            private const string InitScript = @"
+            private const string InitScript =
+                @"
 CREATE PROCEDURE WithOutputParameter_Insert(@Name varchar(max), @Id int OUT)
 AS BEGIN
     INSERT INTO [WithOutputParameter] ([Name]) VALUES (@Name);

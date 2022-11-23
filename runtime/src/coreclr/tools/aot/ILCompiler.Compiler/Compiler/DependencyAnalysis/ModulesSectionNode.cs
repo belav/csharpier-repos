@@ -33,7 +33,8 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override bool StaticDependenciesAreComputed => true;
 
@@ -41,6 +42,7 @@ namespace ILCompiler.DependencyAnalysis
         {
             sb.Append(nameMangler.CompilationUnitPrefix).Append("__Module");
         }
+
         public int Offset => 0;
         public override bool IsShareable => false;
 

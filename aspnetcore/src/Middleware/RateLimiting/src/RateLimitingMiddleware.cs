@@ -20,7 +20,10 @@ internal sealed partial class RateLimitingMiddleware
     private readonly PartitionedRateLimiter<HttpContext> _endpointLimiter;
     private readonly int _rejectionStatusCode;
     private readonly Dictionary<string, DefaultRateLimiterPolicy> _policyMap;
-    private readonly DefaultKeyType _defaultPolicyKey = new DefaultKeyType("__defaultPolicy", new PolicyNameKey { PolicyName = "__defaultPolicyKey" });
+    private readonly DefaultKeyType _defaultPolicyKey = new DefaultKeyType(
+        "__defaultPolicy",
+        new PolicyNameKey { PolicyName = "__defaultPolicyKey" }
+    );
 
     /// <summary>
     /// Creates a new <see cref="RateLimitingMiddleware"/>.
@@ -29,7 +32,12 @@ internal sealed partial class RateLimitingMiddleware
     /// <param name="logger">The <see cref="ILogger"/> used for logging.</param>
     /// <param name="options">The options for the middleware.</param>
     /// <param name="serviceProvider">The service provider.</param>
-    public RateLimitingMiddleware(RequestDelegate next, ILogger<RateLimitingMiddleware> logger, IOptions<RateLimiterOptions> options, IServiceProvider serviceProvider)
+    public RateLimitingMiddleware(
+        RequestDelegate next,
+        ILogger<RateLimitingMiddleware> logger,
+        IOptions<RateLimiterOptions> options,
+        IServiceProvider serviceProvider
+    )
     {
         ArgumentNullException.ThrowIfNull(next);
         ArgumentNullException.ThrowIfNull(logger);
@@ -49,7 +57,6 @@ internal sealed partial class RateLimitingMiddleware
 
         _globalLimiter = options.Value.GlobalLimiter;
         _endpointLimiter = CreateEndpointLimiter();
-
     }
 
     // TODO - EventSource?
@@ -66,7 +73,8 @@ internal sealed partial class RateLimitingMiddleware
         {
             return _next(context);
         }
-        var enableRateLimitingAttribute = endpoint?.Metadata.GetMetadata<EnableRateLimitingAttribute>();
+        var enableRateLimitingAttribute =
+            endpoint?.Metadata.GetMetadata<EnableRateLimitingAttribute>();
         // If this endpoint has no EnableRateLimitingAttribute & there's no global limiter, don't apply any rate limits.
         if (enableRateLimitingAttribute is null && _globalLimiter is null)
         {
@@ -75,7 +83,10 @@ internal sealed partial class RateLimitingMiddleware
         return InvokeInternal(context, enableRateLimitingAttribute);
     }
 
-    private async Task InvokeInternal(HttpContext context, EnableRateLimitingAttribute? enableRateLimitingAttribute)
+    private async Task InvokeInternal(
+        HttpContext context,
+        EnableRateLimitingAttribute? enableRateLimitingAttribute
+    )
     {
         using var leaseContext = await TryAcquireAsync(context);
         if (leaseContext.Lease?.IsAcquired == true)
@@ -108,7 +119,11 @@ internal sealed partial class RateLimitingMiddleware
                 else
                 {
                     var policyName = enableRateLimitingAttribute?.PolicyName;
-                    if (policyName is not null && _policyMap.TryGetValue(policyName, out policy) && policy.OnRejected is not null)
+                    if (
+                        policyName is not null
+                        && _policyMap.TryGetValue(policyName, out policy)
+                        && policy.OnRejected is not null
+                    )
                     {
                         thisRequestOnRejected = policy.OnRejected;
                     }
@@ -117,7 +132,10 @@ internal sealed partial class RateLimitingMiddleware
             if (thisRequestOnRejected is not null)
             {
                 // leaseContext.Lease will only be null when the request was canceled.
-                await thisRequestOnRejected(new OnRejectedContext() { HttpContext = context, Lease = leaseContext.Lease! }, context.RequestAborted);
+                await thisRequestOnRejected(
+                    new OnRejectedContext() { HttpContext = context, Lease = leaseContext.Lease! },
+                    context.RequestAborted
+                );
             }
         }
     }
@@ -145,14 +163,22 @@ internal sealed partial class RateLimitingMiddleware
                 globalLease = _globalLimiter.AttemptAcquire(context);
                 if (!globalLease.IsAcquired)
                 {
-                    return new LeaseContext() { RequestRejectionReason = RequestRejectionReason.GlobalLimiter, Lease = globalLease };
+                    return new LeaseContext()
+                    {
+                        RequestRejectionReason = RequestRejectionReason.GlobalLimiter,
+                        Lease = globalLease
+                    };
                 }
             }
             endpointLease = _endpointLimiter.AttemptAcquire(context);
             if (!endpointLease.IsAcquired)
             {
                 globalLease?.Dispose();
-                return new LeaseContext() { RequestRejectionReason = RequestRejectionReason.EndpointLimiter, Lease = endpointLease };
+                return new LeaseContext()
+                {
+                    RequestRejectionReason = RequestRejectionReason.EndpointLimiter,
+                    Lease = endpointLease
+                };
             }
         }
         catch (Exception)
@@ -161,10 +187,15 @@ internal sealed partial class RateLimitingMiddleware
             globalLease?.Dispose();
             throw;
         }
-        return globalLease is null ? new LeaseContext() { Lease = endpointLease } : new LeaseContext() { Lease = new DefaultCombinedLease(globalLease, endpointLease) };
+        return globalLease is null
+            ? new LeaseContext() { Lease = endpointLease }
+            : new LeaseContext() { Lease = new DefaultCombinedLease(globalLease, endpointLease) };
     }
 
-    private async ValueTask<LeaseContext> CombinedWaitAsync(HttpContext context, CancellationToken cancellationToken)
+    private async ValueTask<LeaseContext> CombinedWaitAsync(
+        HttpContext context,
+        CancellationToken cancellationToken
+    )
     {
         RateLimitLease? globalLease = null;
         RateLimitLease? endpointLease = null;
@@ -173,28 +204,45 @@ internal sealed partial class RateLimitingMiddleware
         {
             if (_globalLimiter is not null)
             {
-                globalLease = await _globalLimiter.AcquireAsync(context, cancellationToken: cancellationToken);
+                globalLease = await _globalLimiter.AcquireAsync(
+                    context,
+                    cancellationToken: cancellationToken
+                );
                 if (!globalLease.IsAcquired)
                 {
-                    return new LeaseContext() { RequestRejectionReason = RequestRejectionReason.GlobalLimiter, Lease = globalLease };
+                    return new LeaseContext()
+                    {
+                        RequestRejectionReason = RequestRejectionReason.GlobalLimiter,
+                        Lease = globalLease
+                    };
                 }
             }
-            endpointLease = await _endpointLimiter.AcquireAsync(context, cancellationToken: cancellationToken);
+            endpointLease = await _endpointLimiter.AcquireAsync(
+                context,
+                cancellationToken: cancellationToken
+            );
             if (!endpointLease.IsAcquired)
             {
                 globalLease?.Dispose();
-                return new LeaseContext() { RequestRejectionReason = RequestRejectionReason.EndpointLimiter, Lease = endpointLease };
+                return new LeaseContext()
+                {
+                    RequestRejectionReason = RequestRejectionReason.EndpointLimiter,
+                    Lease = endpointLease
+                };
             }
         }
         catch (Exception ex)
         {
             endpointLease?.Dispose();
             globalLease?.Dispose();
-            // Don't throw if the request was canceled - instead log. 
+            // Don't throw if the request was canceled - instead log.
             if (ex is OperationCanceledException && context.RequestAborted.IsCancellationRequested)
             {
                 RateLimiterLog.RequestCanceled(_logger);
-                return new LeaseContext() { RequestRejectionReason = RequestRejectionReason.RequestCanceled };
+                return new LeaseContext()
+                {
+                    RequestRejectionReason = RequestRejectionReason.RequestCanceled
+                };
             }
             else
             {
@@ -202,55 +250,81 @@ internal sealed partial class RateLimitingMiddleware
             }
         }
 
-        return globalLease is null ? new LeaseContext() { Lease = endpointLease } : new LeaseContext() { Lease = new DefaultCombinedLease(globalLease, endpointLease) };
+        return globalLease is null
+            ? new LeaseContext() { Lease = endpointLease }
+            : new LeaseContext() { Lease = new DefaultCombinedLease(globalLease, endpointLease) };
     }
 
     // Create the endpoint-specific PartitionedRateLimiter
     private PartitionedRateLimiter<HttpContext> CreateEndpointLimiter()
     {
         // If we have a policy for this endpoint, use its partitioner. Else use a NoLimiter.
-        return PartitionedRateLimiter.Create<HttpContext, DefaultKeyType>(context =>
-        {
-            DefaultRateLimiterPolicy? policy;
-            var enableRateLimitingAttribute = context.GetEndpoint()?.Metadata.GetMetadata<EnableRateLimitingAttribute>();
-            if (enableRateLimitingAttribute is null)
+        return PartitionedRateLimiter.Create<HttpContext, DefaultKeyType>(
+            context =>
             {
-                return RateLimitPartition.GetNoLimiter<DefaultKeyType>(_defaultPolicyKey);
-            }
-            policy = enableRateLimitingAttribute.Policy;
-            if (policy is not null)
-            {
-                return policy.GetPartition(context);
-            }
-            var name = enableRateLimitingAttribute.PolicyName;
-            if (name is not null)
-            {
-                if (_policyMap.TryGetValue(name, out policy))
+                DefaultRateLimiterPolicy? policy;
+                var enableRateLimitingAttribute = context
+                    .GetEndpoint()
+                    ?.Metadata.GetMetadata<EnableRateLimitingAttribute>();
+                if (enableRateLimitingAttribute is null)
+                {
+                    return RateLimitPartition.GetNoLimiter<DefaultKeyType>(_defaultPolicyKey);
+                }
+                policy = enableRateLimitingAttribute.Policy;
+                if (policy is not null)
                 {
                     return policy.GetPartition(context);
                 }
+                var name = enableRateLimitingAttribute.PolicyName;
+                if (name is not null)
+                {
+                    if (_policyMap.TryGetValue(name, out policy))
+                    {
+                        return policy.GetPartition(context);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException(
+                            $"This endpoint requires a rate limiting policy with name {name}, but no such policy exists."
+                        );
+                    }
+                }
+                // Should be impossible for both name & policy to be null, but throw in that scenario just in case.
                 else
                 {
-                    throw new InvalidOperationException($"This endpoint requires a rate limiting policy with name {name}, but no such policy exists.");
+                    throw new InvalidOperationException(
+                        "This endpoint requested a rate limiting policy with a null name."
+                    );
                 }
-            }
-            // Should be impossible for both name & policy to be null, but throw in that scenario just in case.
-            else
-            {
-                throw new InvalidOperationException("This endpoint requested a rate limiting policy with a null name.");
-            }
-        }, new DefaultKeyTypeEqualityComparer());
+            },
+            new DefaultKeyTypeEqualityComparer()
+        );
     }
 
     private static partial class RateLimiterLog
     {
-        [LoggerMessage(1, LogLevel.Debug, "Rate limits exceeded, rejecting this request.", EventName = "RequestRejectedLimitsExceeded")]
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Rate limits exceeded, rejecting this request.",
+            EventName = "RequestRejectedLimitsExceeded"
+        )]
         internal static partial void RequestRejectedLimitsExceeded(ILogger logger);
 
-        [LoggerMessage(2, LogLevel.Debug, "This endpoint requires a rate limiting policy with name {PolicyName}, but no such policy exists.", EventName = "WarnMissingPolicy")]
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "This endpoint requires a rate limiting policy with name {PolicyName}, but no such policy exists.",
+            EventName = "WarnMissingPolicy"
+        )]
         internal static partial void WarnMissingPolicy(ILogger logger, string policyName);
 
-        [LoggerMessage(3, LogLevel.Debug, "The request was canceled.", EventName = "RequestCanceled")]
+        [LoggerMessage(
+            3,
+            LogLevel.Debug,
+            "The request was canceled.",
+            EventName = "RequestCanceled"
+        )]
         internal static partial void RequestCanceled(ILogger logger);
     }
 }

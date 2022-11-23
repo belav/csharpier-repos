@@ -22,7 +22,11 @@ public sealed class PageTitle : ComponentBase
     {
         builder.OpenComponent<SectionContent>(0);
         builder.AddAttribute(1, nameof(SectionContent.Name), HeadOutlet.TitleSectionOutletName);
-        builder.AddAttribute(2, nameof(SectionContent.ChildContent), (RenderFragment)BuildTitleRenderTree);
+        builder.AddAttribute(
+            2,
+            nameof(SectionContent.ChildContent),
+            (RenderFragment)BuildTitleRenderTree
+        );
         builder.CloseComponent();
     }
 

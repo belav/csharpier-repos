@@ -13,9 +13,16 @@ public class DefaultBoundAttributeDescriptorBuilderTest
         // Arrange
         var expectedDisplayName = "ExpectedDisplayName";
 
-        var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+        var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+            TagHelperConventions.DefaultKind,
+            "TestTagHelper",
+            "Test"
+        );
 
-        var builder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
+        var builder = new DefaultBoundAttributeDescriptorBuilder(
+            tagHelperBuilder,
+            TagHelperConventions.DefaultKind
+        );
         builder.DisplayName(expectedDisplayName);
 
         // Act
@@ -29,13 +36,18 @@ public class DefaultBoundAttributeDescriptorBuilderTest
     public void DisplayName_DefaultsToPropertyLookingDisplayName()
     {
         // Arrange
-        var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+        var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+            TagHelperConventions.DefaultKind,
+            "TestTagHelper",
+            "Test"
+        );
         tagHelperBuilder.TypeName("TestTagHelper");
 
-        var builder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
-        builder
-            .TypeName(typeof(int).FullName)
-            .PropertyName("SomeProperty");
+        var builder = new DefaultBoundAttributeDescriptorBuilder(
+            tagHelperBuilder,
+            TagHelperConventions.DefaultKind
+        );
+        builder.TypeName(typeof(int).FullName).PropertyName("SomeProperty");
 
         // Act
         var descriptor = builder.Build();
