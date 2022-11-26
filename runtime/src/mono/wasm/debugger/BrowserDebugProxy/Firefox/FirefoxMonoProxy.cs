@@ -830,7 +830,13 @@ internal sealed class FirefoxMonoProxy : MonoProxy
     private static JObject GetPrototype(DotnetObjectId objectId, JObject args)
     {
         var o = JObject.FromObject(
-            new { type = "object", @class = "Object", actor = args?["to"], from = args?["to"] }
+            new
+            {
+                type = "object",
+                @class = "Object",
+                actor = args?["to"],
+                from = args?["to"]
+            }
         );
         return o;
     }
@@ -978,7 +984,12 @@ internal sealed class FirefoxMonoProxy : MonoProxy
         else
         {
             sourcesJObj = JObject.FromObject(
-                new { type = "newSource", source = obj, from = ctx.ThreadName }
+                new
+                {
+                    type = "newSource",
+                    source = obj,
+                    from = ctx.ThreadName
+                }
             );
         }
         await SendEvent(sessionId, "", sourcesJObj, token);

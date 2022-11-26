@@ -689,7 +689,12 @@ namespace System.Web.WebPages.Test
                     p.Write(
                         p.RenderPage(
                             "subpage2.cshtml",
-                            new { bar = "world", x = "good", y = "bye" }
+                            new
+                            {
+                                bar = "world",
+                                x = "good",
+                                y = "bye"
+                            }
                         )
                     );
                 },

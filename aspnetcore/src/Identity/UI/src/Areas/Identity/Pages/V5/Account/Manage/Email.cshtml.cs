@@ -187,7 +187,12 @@ internal sealed class EmailModel<TUser> : EmailModel where TUser : class
         var callbackUrl = Url.Page(
             "/Account/ConfirmEmail",
             pageHandler: null,
-            values: new { area = "Identity", userId = userId, code = code },
+            values: new
+            {
+                area = "Identity",
+                userId = userId,
+                code = code
+            },
             protocol: Request.Scheme
         )!;
         await _emailSender.SendEmailAsync(

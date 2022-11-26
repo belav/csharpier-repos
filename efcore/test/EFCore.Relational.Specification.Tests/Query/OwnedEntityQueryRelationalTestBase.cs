@@ -161,7 +161,14 @@ public abstract class OwnedEntityQueryRelationalTestBase : OwnedEntityQueryTestB
                     {
                         b.WithOwner(e => e.Location).HasForeignKey(e => e.LocationId);
                         b.HasKey(
-                            e => new { e.LocationId, e.ExternalId, e.VisualNumber, e.TokenGroupId }
+                            e =>
+                                new
+                                {
+                                    e.LocationId,
+                                    e.ExternalId,
+                                    e.VisualNumber,
+                                    e.TokenGroupId
+                                }
                         );
                     }
                 );

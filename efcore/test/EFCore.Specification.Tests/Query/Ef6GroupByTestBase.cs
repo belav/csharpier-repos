@@ -176,7 +176,14 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<ArubaOwner>()
                     .GroupBy(
-                        o => new { o.Id, o.FirstName, o.LastName, o.Alias },
+                        o =>
+                            new
+                            {
+                                o.Id,
+                                o.FirstName,
+                                o.LastName,
+                                o.Alias
+                            },
                         c => new { c.LastName, c.FirstName },
                         (k, g) => g.Count()
                     )
@@ -225,7 +232,17 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<ArubaOwner>()
-                    .GroupBy(o => o, c => c, (k, g) => new { k.Id, k.Alias, Count = g.Count() })
+                    .GroupBy(
+                        o => o,
+                        c => c,
+                        (k, g) =>
+                            new
+                            {
+                                k.Id,
+                                k.Alias,
+                                Count = g.Count()
+                            }
+                    )
         );
 
     [ConditionalTheory]
@@ -255,7 +272,12 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 from o in ss.Set<ArubaOwner>()
                 group o by o into g
-                select new { g.Key.Id, g.Key.Alias, Count = g.Count() }
+                select new
+                {
+                    g.Key.Id,
+                    g.Key.Alias,
+                    Count = g.Count()
+                }
         );
 
     [ConditionalTheory]
@@ -266,7 +288,12 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 from o in ss.Set<ArubaOwner>()
                 group o by o into g
-                select new { g.Key.Id, Sum = g.Sum(x => x.Id), Count = g.Count() }
+                select new
+                {
+                    g.Key.Id,
+                    Sum = g.Sum(x => x.Id),
+                    Count = g.Count()
+                }
         );
 
     [ConditionalTheory]
@@ -665,7 +692,15 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                 ss.Set<Person>()
                     .Where(p => p.Feet.Size == size && p.MiddleInitial != null && p.Feet.Id != 1)
                     .GroupBy(p => new { p.Feet.Size, p.Feet.Person.LastName })
-                    .Select(g => new { g.Key.LastName, g.Key.Size, Min = g.Min(p => p.Feet.Size), })
+                    .Select(
+                        g =>
+                            new
+                            {
+                                g.Key.LastName,
+                                g.Key.Size,
+                                Min = g.Min(p => p.Feet.Size),
+                            }
+                    )
         );
     }
 
@@ -712,7 +747,12 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                 from Person person1 in from Person person2 in ss.Set<Person>()
                 select person2
                 join Shoes shoes in ss.Set<Shoes>() on person1.Age equals shoes.Age
-                group shoes by new { person1.Id, shoes.Style, shoes.Age } into temp
+                group shoes by new
+                {
+                    person1.Id,
+                    shoes.Style,
+                    shoes.Age
+                } into temp
                 orderby temp.Key.Id, temp.Key.Style, temp.Key.Age
                 select new
                 {
@@ -720,7 +760,12 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                     temp.Key.Age,
                     temp.Key.Style,
                     Values = from t in temp
-                    select new { t.Id, t.Style, t.Age }
+                    select new
+                    {
+                        t.Id,
+                        t.Style,
+                        t.Age
+                    }
                 },
             r => r.Id,
             (l, r) =>

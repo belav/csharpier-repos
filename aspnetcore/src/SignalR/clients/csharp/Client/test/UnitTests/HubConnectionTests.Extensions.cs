@@ -294,7 +294,13 @@ public partial class HubConnectionTests
 
                 await connection
                     .ReceiveJsonMessage(
-                        new { invocationId = "1", type = 1, target = "Foo", arguments = args }
+                        new
+                        {
+                            invocationId = "1",
+                            type = 1,
+                            target = "Foo",
+                            arguments = args
+                        }
                     )
                     .DefaultTimeout();
 
@@ -878,7 +884,13 @@ public partial class HubConnectionTests
 
                 await connection
                     .ReceiveJsonMessage(
-                        new { invocationId = "1", type = 1, target = "Foo", arguments = args }
+                        new
+                        {
+                            invocationId = "1",
+                            type = 1,
+                            target = "Foo",
+                            arguments = args
+                        }
                     )
                     .DefaultTimeout();
 

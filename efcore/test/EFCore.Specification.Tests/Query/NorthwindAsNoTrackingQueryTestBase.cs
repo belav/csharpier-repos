@@ -62,7 +62,13 @@ public abstract class NorthwindAsNoTrackingQueryTestBase<TFixture> : QueryTestBa
                 from c in ss.Set<Customer>()
                 join o in ss.Set<Order>().AsNoTracking() on c.CustomerID equals o.CustomerID
                 where c.CustomerID == "ALFKI"
-                select new { c.CustomerID, c, ocid = o.CustomerID, o },
+                select new
+                {
+                    c.CustomerID,
+                    c,
+                    ocid = o.CustomerID,
+                    o
+                },
             elementSorter: e => (e.CustomerID, e.o.OrderID),
             entryCount: 0
         );

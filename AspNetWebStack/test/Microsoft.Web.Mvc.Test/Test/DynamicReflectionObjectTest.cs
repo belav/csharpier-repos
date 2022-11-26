@@ -25,7 +25,14 @@ namespace Microsoft.Web.Mvc.Test
         public void UnknownPropertyThrows()
         {
             // Arrange
-            dynamic dro = DynamicReflectionObject.Wrap(new { foo = 3.4, biff = "Two", bar = 1 });
+            dynamic dro = DynamicReflectionObject.Wrap(
+                new
+                {
+                    foo = 3.4,
+                    biff = "Two",
+                    bar = 1
+                }
+            );
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(

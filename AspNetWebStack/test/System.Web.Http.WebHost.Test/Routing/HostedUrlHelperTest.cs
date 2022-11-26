@@ -24,7 +24,12 @@ namespace System.Web.Http.WebHost.Routing
 
             string generatedUrl = url.Route(
                 "apiroute2",
-                new { controller = "something", action = "someaction", id = 789 }
+                new
+                {
+                    controller = "something",
+                    action = "someaction",
+                    id = 789
+                }
             );
 
             Assert.Equal("$APP$/SOMEAPP/api/something/someaction", generatedUrl);
@@ -41,7 +46,12 @@ namespace System.Web.Http.WebHost.Routing
 
             string generatedUrl = url.Route(
                 "webroute1",
-                new { controller = "something", action = "someaction", id = 789 }
+                new
+                {
+                    controller = "something",
+                    action = "someaction",
+                    id = 789
+                }
             );
 
             Assert.Equal("$APP$/SOMEAPP/something/someaction/789", generatedUrl);
@@ -78,7 +88,12 @@ namespace System.Web.Http.WebHost.Routing
             VirtualPathData virtualPathData = routes.GetVirtualPath(
                 requestContext,
                 new RouteValueDictionary(
-                    new { controller = "something", action = "someaction", id = 789 }
+                    new
+                    {
+                        controller = "something",
+                        action = "someaction",
+                        id = 789
+                    }
                 )
             );
 

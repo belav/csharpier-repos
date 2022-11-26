@@ -1459,7 +1459,14 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                         x.Property<int>("Id");
                         x.Property<string>("MouseId");
                         x.Property<string>("BoneId");
-                        x.HasData(new { Id = 42, MouseId = "1", BoneId = "2" });
+                        x.HasData(
+                            new
+                            {
+                                Id = 42,
+                                MouseId = "1",
+                                BoneId = "2"
+                            }
+                        );
                     }
                 );
             },
@@ -1505,7 +1512,14 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                         x.Property<int>("Id");
                         x.Property<string>("MouseId");
                         x.Property<string>("BoneId");
-                        x.HasData(new { Id = 42, MouseId = "1", BoneId = "2" });
+                        x.HasData(
+                            new
+                            {
+                                Id = 42,
+                                MouseId = "1",
+                                BoneId = "2"
+                            }
+                        );
                         x.SplitToTable(
                             "AnimalDetails",
                             t =>
@@ -1612,7 +1626,12 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                                 s.Property<string>("Street");
                                 s.Property<string>("City");
                                 s.HasData(
-                                    new { OrderId = 42, Street = "Lombard", City = "San Francisco" }
+                                    new
+                                    {
+                                        OrderId = 42,
+                                        Street = "Lombard",
+                                        City = "San Francisco"
+                                    }
                                 );
                             }
                         );
@@ -1624,7 +1643,12 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                                 s.Property<string>("Street");
                                 s.Property<string>("City");
                                 s.HasData(
-                                    new { OrderId = 42, Street = "Abbey Road", City = "London" }
+                                    new
+                                    {
+                                        OrderId = 42,
+                                        Street = "Abbey Road",
+                                        City = "London"
+                                    }
                                 );
                             }
                         );
@@ -2294,8 +2318,18 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                         x.Property<int>("Value1");
                         x.Property<string>("Value2");
                         x.HasData(
-                            new { IdBeforeRename = 42, Value1 = 32, Value2 = "equal" },
-                            new { IdBeforeRename = 24, Value1 = 72, Value2 = "not equal1" }
+                            new
+                            {
+                                IdBeforeRename = 42,
+                                Value1 = 32,
+                                Value2 = "equal"
+                            },
+                            new
+                            {
+                                IdBeforeRename = 24,
+                                Value1 = 72,
+                                Value2 = "not equal1"
+                            }
                         );
                     }
                 ),
@@ -2308,8 +2342,18 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                         x.Property<int>("Value1");
                         x.Property<string>("Value2");
                         x.HasData(
-                            new { Id = 42, Value1 = 27, Value2 = "equal" }, // modified
-                            new { Id = 24, Value1 = 99, Value2 = "not equal2" }
+                            new
+                            {
+                                Id = 42,
+                                Value1 = 27,
+                                Value2 = "equal"
+                            }, // modified
+                            new
+                            {
+                                Id = 24,
+                                Value1 = 99,
+                                Value2 = "not equal2"
+                            }
                         ); // modified
                     }
                 ),
@@ -2613,7 +2657,12 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                             .WithOne()
                             .HasForeignKey("OrderDetails", "Id");
                         x.HasData(
-                            new { Id = 42, Description = "Order 1", OrderDate = DateTime.MinValue }
+                            new
+                            {
+                                Id = 42,
+                                Description = "Order 1",
+                                OrderDate = DateTime.MinValue
+                            }
                         );
                     }
                 );
@@ -10925,8 +10974,18 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                         x.Property<int>("Value1");
                         x.Property<string>("Value2");
                         x.HasData(
-                            new { Id = 42, Value1 = 32, Value2 = "equal" }, // modified
-                            new { Id = 24, Value1 = 72, Value2 = "not equal1" }
+                            new
+                            {
+                                Id = 42,
+                                Value1 = 32,
+                                Value2 = "equal"
+                            }, // modified
+                            new
+                            {
+                                Id = 24,
+                                Value1 = 72,
+                                Value2 = "not equal1"
+                            }
                         ); // modified
                     }
                 ),
@@ -10941,8 +11000,18 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                         x.Property<int>("Value1");
                         x.Property<string>("Value2");
                         x.HasData(
-                            new { Id = 42, Value1 = 27, Value2 = "equal" }, // modified
-                            new { Id = 24, Value1 = 99, Value2 = "not equal2" }
+                            new
+                            {
+                                Id = 42,
+                                Value1 = 27,
+                                Value2 = "equal"
+                            }, // modified
+                            new
+                            {
+                                Id = 24,
+                                Value1 = 99,
+                                Value2 = "not equal2"
+                            }
                         ); // modified
                     }
                 ),
@@ -11338,7 +11407,12 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                         x.Property<int>("Value1");
                         x.Property<string>("Value2");
                         x.HasData(
-                            new { Id = 99999, Value1 = 0, Value2 = "" }, // deleted
+                            new
+                            {
+                                Id = 99999,
+                                Value1 = 0,
+                                Value2 = ""
+                            }, // deleted
                             new
                             {
                                 Id = 42,
@@ -11346,8 +11420,18 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                                 Value2 = "equal",
                                 InvalidProperty = "is ignored"
                             }, // modified
-                            new { Id = 8, Value1 = 100, Value2 = "equal" }, // unchanged
-                            new { Id = 24, Value1 = 72, Value2 = "not equal1" }
+                            new
+                            {
+                                Id = 8,
+                                Value1 = 100,
+                                Value2 = "equal"
+                            }, // unchanged
+                            new
+                            {
+                                Id = 24,
+                                Value1 = 72,
+                                Value2 = "not equal1"
+                            }
                         ); // modified
                     }
                 ),
@@ -11360,8 +11444,18 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                         x.Property<int>("Value1");
                         x.Property<string>("Value2");
                         x.HasData(
-                            new { Id = 11111, Value1 = 0, Value2 = "" }, // added
-                            new { Id = 11112, Value1 = 1, Value2 = "new" }, // added
+                            new
+                            {
+                                Id = 11111,
+                                Value1 = 0,
+                                Value2 = ""
+                            }, // added
+                            new
+                            {
+                                Id = 11112,
+                                Value1 = 1,
+                                Value2 = "new"
+                            }, // added
                             new
                             {
                                 Id = 42,
@@ -11369,8 +11463,18 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                                 Value2 = "equal",
                                 InvalidProperty = "is ignored here too"
                             }, // modified
-                            new { Id = 8, Value1 = 100, Value2 = "equal" }, // unchanged
-                            new { Id = 24, Value1 = 99, Value2 = "not equal2" }
+                            new
+                            {
+                                Id = 8,
+                                Value1 = 100,
+                                Value2 = "equal"
+                            }, // unchanged
+                            new
+                            {
+                                Id = 24,
+                                Value1 = 99,
+                                Value2 = "not equal2"
+                            }
                         ); // modified
                     }
                 ),
@@ -11648,9 +11752,24 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                         .HasForeignKey("BlogId")
                         .OnDelete(DeleteBehavior.Cascade);
                     x.HasData(
-                        new { PostId = 416, Title = "Post To Non-existent BlogId", BlogId = 316 },
-                        new { PostId = 545, Title = "Updated Title", BlogId = 38 },
-                        new { PostId = 546, Title = "New Post", BlogId = 32 }
+                        new
+                        {
+                            PostId = 416,
+                            Title = "Post To Non-existent BlogId",
+                            BlogId = 316
+                        },
+                        new
+                        {
+                            PostId = 545,
+                            Title = "Updated Title",
+                            BlogId = 38
+                        },
+                        new
+                        {
+                            PostId = 546,
+                            Title = "New Post",
+                            BlogId = 32
+                        }
                     );
                 }
             );
@@ -11679,9 +11798,24 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     .HasForeignKey("BlogId")
                     .OnDelete(DeleteBehavior.Cascade);
                 x.HasData(
-                    new { PostId = 416, Title = "Post To Non-existent BlogId", BlogId = 316 },
-                    new { PostId = 545, Title = "Updated Title", BlogId = 38 },
-                    new { PostId = 546, Title = "New Post", BlogId = 32 }
+                    new
+                    {
+                        PostId = 416,
+                        Title = "Post To Non-existent BlogId",
+                        BlogId = 316
+                    },
+                    new
+                    {
+                        PostId = 545,
+                        Title = "Updated Title",
+                        BlogId = 38
+                    },
+                    new
+                    {
+                        PostId = 546,
+                        Title = "New Post",
+                        BlogId = 32
+                    }
                 );
             });
         });
@@ -11711,14 +11845,24 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                             .HasForeignKey("BlogId")
                             .OnDelete(DeleteBehavior.Cascade);
                         x.HasData(
-                            new { PostId = 545, Title = "Original Title", BlogId = 32 },
+                            new
+                            {
+                                PostId = 545,
+                                Title = "Original Title",
+                                BlogId = 32
+                            },
                             new
                             {
                                 PostId = 416,
                                 Title = "Post To Non-existent BlogId",
                                 BlogId = 316
                             },
-                            new { PostId = 390, Title = "Post To Be Removed", BlogId = 32 }
+                            new
+                            {
+                                PostId = 390,
+                                Title = "Post To Be Removed",
+                                BlogId = 32
+                            }
                         );
                     }
                 );
@@ -12718,7 +12862,14 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                             b.HasBaseType("BaseType");
                             b.Property<int>("LevelId");
                             b.HasDiscriminator().HasValue("DerivedType");
-                            b.HasData(new { Id = 1, UserId = 1, LevelId = 1 });
+                            b.HasData(
+                                new
+                                {
+                                    Id = 1,
+                                    UserId = 1,
+                                    LevelId = 1
+                                }
+                            );
                         }
                     )
                     .Entity("BaseType")
@@ -12754,7 +12905,14 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                             b.HasBaseType("BaseType");
                             b.Property<int>("LevelId");
                             b.HasDiscriminator().HasValue("DerivedType");
-                            b.HasData(new { Id = 1, UserId = 1, LevelId = 1 });
+                            b.HasData(
+                                new
+                                {
+                                    Id = 1,
+                                    UserId = 1,
+                                    LevelId = 1
+                                }
+                            );
                         }
                     )
                     .Entity("BaseType")
@@ -12797,7 +12955,15 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                             b.Property<int>("Level1Id");
                             b.Property<double>("Level2Id");
                             b.HasDiscriminator().HasValue("DerivedType");
-                            b.HasData(new { Id = 1, UserId = 1, Level1Id = 1, Level2Id = 1.0 });
+                            b.HasData(
+                                new
+                                {
+                                    Id = 1,
+                                    UserId = 1,
+                                    Level1Id = 1,
+                                    Level2Id = 1.0
+                                }
+                            );
                         }
                     )
                     .Entity("BaseType")
@@ -12834,7 +13000,15 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                             b.Property<int>("Level1Id");
                             b.Property<double>("Level2Id");
                             b.HasDiscriminator().HasValue("DerivedType");
-                            b.HasData(new { Id = 1, UserId = 1, Level1Id = 1, Level2Id = 1.0 });
+                            b.HasData(
+                                new
+                                {
+                                    Id = 1,
+                                    UserId = 1,
+                                    Level1Id = 1,
+                                    Level2Id = 1.0
+                                }
+                            );
                         }
                     )
                     .Entity("BaseType")

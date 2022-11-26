@@ -627,7 +627,12 @@ namespace System.Web.Mvc.Test
             // Act
             string url = urlHelper.RouteUrl(
                 new RouteValueDictionary(
-                    new { Action = "newaction", Controller = "home2", id = "someid" }
+                    new
+                    {
+                        Action = "newaction",
+                        Controller = "home2",
+                        id = "someid"
+                    }
                 )
             );
 
@@ -645,7 +650,12 @@ namespace System.Web.Mvc.Test
             string url = urlHelper.RouteUrl(
                 "namedroute",
                 new RouteValueDictionary(
-                    new { Action = "newaction", Controller = "home2", id = "someid" }
+                    new
+                    {
+                        Action = "newaction",
+                        Controller = "home2",
+                        id = "someid"
+                    }
                 ),
                 "http",
                 String.Empty /* hostName */
@@ -670,7 +680,12 @@ namespace System.Web.Mvc.Test
             string url = urlHelper.RouteUrl(
                 "namedroute",
                 new RouteValueDictionary(
-                    new { Action = "newaction", Controller = "home2", id = "someid" }
+                    new
+                    {
+                        Action = "newaction",
+                        Controller = "home2",
+                        id = "someid"
+                    }
                 ),
                 String.Empty /* protocol */
                 ,
@@ -696,7 +711,12 @@ namespace System.Web.Mvc.Test
             string url = urlHelper.RouteUrl(
                 "namedroute",
                 new RouteValueDictionary(
-                    new { Action = "newaction", Controller = "home2", id = "someid" }
+                    new
+                    {
+                        Action = "newaction",
+                        Controller = "home2",
+                        id = "someid"
+                    }
                 ),
                 null /* protocol */
                 ,
@@ -722,7 +742,12 @@ namespace System.Web.Mvc.Test
             string url = urlHelper.RouteUrl(
                 "namedroute",
                 new RouteValueDictionary(
-                    new { Action = "newaction", Controller = "home2", id = "someid" }
+                    new
+                    {
+                        Action = "newaction",
+                        Controller = "home2",
+                        id = "someid"
+                    }
                 ),
                 null /* protocol */
                 ,
@@ -741,7 +766,12 @@ namespace System.Web.Mvc.Test
 
             // Act
             string url = urlHelper.RouteUrl(
-                new { Action = "newaction", Controller = "home2", id = "someid" }
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                }
             );
 
             // Assert
@@ -757,7 +787,12 @@ namespace System.Web.Mvc.Test
             // Act
             string url = urlHelper.RouteUrl(
                 "namedroute",
-                new { Action = "newaction", Controller = "home2", id = "someid" },
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                },
                 "https"
             );
 
@@ -793,7 +828,12 @@ namespace System.Web.Mvc.Test
             string url = urlHelper.RouteUrl(
                 "namedroute",
                 new RouteValueDictionary(
-                    new { Action = "newaction", Controller = "home2", id = "someid" }
+                    new
+                    {
+                        Action = "newaction",
+                        Controller = "home2",
+                        id = "someid"
+                    }
                 )
             );
 
@@ -810,7 +850,12 @@ namespace System.Web.Mvc.Test
             // Act
             string url = urlHelper.RouteUrl(
                 "namedroute",
-                new { Action = "newaction", Controller = "home2", id = "someid" }
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                }
             );
 
             // Assert
@@ -826,7 +871,12 @@ namespace System.Web.Mvc.Test
             // Act
             string url = urlHelper.HttpRouteUrl(
                 "httproute",
-                new { Action = "newaction", Controller = "home2", id = "someid" }
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                }
             );
 
             // Assert

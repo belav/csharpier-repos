@@ -59,8 +59,18 @@ namespace Microsoft.Web.Mvc.Test
                     TestString = "SomeString",
                     Reason = "This was an exact match."
                 },
-                new { Prefix = "Foo", TestString = "foo.bar", Reason = "Prefix 'foo' matched." },
-                new { Prefix = "Foo", TestString = "foo[bar]", Reason = "Prefix 'foo' matched." },
+                new
+                {
+                    Prefix = "Foo",
+                    TestString = "foo.bar",
+                    Reason = "Prefix 'foo' matched."
+                },
+                new
+                {
+                    Prefix = "Foo",
+                    TestString = "foo[bar]",
+                    Reason = "Prefix 'foo' matched."
+                },
             };
 
             // Act & assert

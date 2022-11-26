@@ -1924,7 +1924,13 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 from c in context.Customers
                 from r in context.GetCustomerOrderCountByYear(c.Id)
                 orderby c.Id, r.Year
-                select new { c.Id, c.LastName, r.Year, r.Count }
+                select new
+                {
+                    c.Id,
+                    c.LastName,
+                    r.Year,
+                    r.Count
+                }
             ).ToList();
 
             Assert.Equal(4, orders.Count);
@@ -2275,7 +2281,13 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 from r in context.GetCustomerOrderCountByYear(2)
                 where c.Id == 2
                 orderby r.Count
-                select new { c.Id, c.LastName, r.Year, r.Count }
+                select new
+                {
+                    c.Id,
+                    c.LastName,
+                    r.Year,
+                    r.Count
+                }
             ).ToList();
 
             Assert.Single(orders);
@@ -2297,7 +2309,13 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 from r in context.GetCustomerOrderCountByYear(custId)
                 where c.Id == custId
                 orderby r.Count
-                select new { c.Id, c.LastName, r.Year, r.Count }
+                select new
+                {
+                    c.Id,
+                    c.LastName,
+                    r.Year,
+                    r.Count
+                }
             ).ToList();
 
             Assert.Single(orders);
@@ -2315,10 +2333,13 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
             var products = (
                 from p in context.Products
                 join r in context.GetTopTwoSellingProducts() on p.Id equals r.ProductId
-                select new { p.Id, p.Name, r.AmountSold }
-            )
-                .OrderBy(p => p.Id)
-                .ToList();
+                select new
+                {
+                    p.Id,
+                    p.Name,
+                    r.AmountSold
+                }
+            ).OrderBy(p => p.Id).ToList();
 
             Assert.Equal(2, products.Count);
             Assert.Equal(3, products[0].Id);
@@ -2342,7 +2363,12 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                     into joinTable
                 from j in joinTable.DefaultIfEmpty()
                 orderby p.Id descending
-                select new { p.Id, p.Name, j.AmountSold }
+                select new
+                {
+                    p.Id,
+                    p.Name,
+                    j.AmountSold
+                }
             ).ToList();
 
             Assert.Equal(5, products.Count);
@@ -2457,7 +2483,13 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 from c in context.Customers
                 from r in context.GetCustomerOrderCountByYear(c.Id).DefaultIfEmpty()
                 orderby c.Id, r.Year
-                select new { c.Id, c.LastName, r.Year, r.Count }
+                select new
+                {
+                    c.Id,
+                    c.LastName,
+                    r.Year,
+                    r.Count
+                }
             ).ToList();
 
             Assert.Equal(5, orders.Count);
@@ -2496,7 +2528,13 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 from r in context.GetCustomerOrderCountByYear(context.AddValues(1, 1))
                 where c.Id == custId
                 orderby r.Year
-                select new { c.Id, c.LastName, r.Year, r.Count }
+                select new
+                {
+                    c.Id,
+                    c.LastName,
+                    r.Year,
+                    r.Count
+                }
             ).ToList();
 
             Assert.Single(orders);
@@ -2517,7 +2555,12 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 from c in context.Customers
                 from r in context.GetCustomerOrderCountByYear(context.AddValues(c.Id, 1))
                 where c.Id == custId
-                select new { c.Id, r.Count, r.Year }
+                select new
+                {
+                    c.Id,
+                    r.Count,
+                    r.Year
+                }
             ).ToList();
 
             Assert.Single(orders);

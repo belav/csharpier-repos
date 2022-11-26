@@ -2646,7 +2646,12 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
     private static class DtoFactory
     {
         public static object CreateDto(Parent parent) =>
-            new { parent.Id, parent.Single, parent.Single.ParentId };
+            new
+            {
+                parent.Id,
+                parent.Single,
+                parent.Single.ParentId
+            };
     }
 
     public class Address

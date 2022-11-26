@@ -393,7 +393,12 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                     on eVersion.RootEntityId equals eRoot.Id
                     into RootEntities
                 from eRootJoined in RootEntities.DefaultIfEmpty()
-                select new { eRootJoined, eVersion, foo = eRootJoined ?? eVersion };
+                select new
+                {
+                    eRootJoined,
+                    eVersion,
+                    foo = eRootJoined ?? eVersion
+                };
 
             Assert.Equal(3, query.ToList().Count);
 

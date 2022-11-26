@@ -63,7 +63,6 @@ namespace System.Security.Cryptography
             SafeBCryptKeyHandle keyHandle;
             int hashBlockSizeBytes = GetHashBlockSize(hashAlgorithmName);
 
-            // stackalloc 0 to let compiler know this cannot escape.
             scoped Span<byte> clearSpan;
             scoped ReadOnlySpan<byte> symmetricKeyMaterial;
             int symmetricKeyMaterialLength;

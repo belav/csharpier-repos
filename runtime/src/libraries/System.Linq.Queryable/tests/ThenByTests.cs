@@ -14,19 +14,69 @@ namespace System.Linq.Tests.LegacyTests
         {
             var source = new[]
             {
-                new { Name = "Jim", City = "Minneapolis", Country = "USA" },
-                new { Name = "Tim", City = "Seattle", Country = "USA" },
-                new { Name = "Philip", City = "Orlando", Country = "USA" },
-                new { Name = "Chris", City = "London", Country = "UK" },
-                new { Name = "Rob", City = "Kent", Country = "UK" }
+                new
+                {
+                    Name = "Jim",
+                    City = "Minneapolis",
+                    Country = "USA"
+                },
+                new
+                {
+                    Name = "Tim",
+                    City = "Seattle",
+                    Country = "USA"
+                },
+                new
+                {
+                    Name = "Philip",
+                    City = "Orlando",
+                    Country = "USA"
+                },
+                new
+                {
+                    Name = "Chris",
+                    City = "London",
+                    Country = "UK"
+                },
+                new
+                {
+                    Name = "Rob",
+                    City = "Kent",
+                    Country = "UK"
+                }
             };
             var expected = new[]
             {
-                new { Name = "Rob", City = "Kent", Country = "UK" },
-                new { Name = "Chris", City = "London", Country = "UK" },
-                new { Name = "Jim", City = "Minneapolis", Country = "USA" },
-                new { Name = "Philip", City = "Orlando", Country = "USA" },
-                new { Name = "Tim", City = "Seattle", Country = "USA" }
+                new
+                {
+                    Name = "Rob",
+                    City = "Kent",
+                    Country = "UK"
+                },
+                new
+                {
+                    Name = "Chris",
+                    City = "London",
+                    Country = "UK"
+                },
+                new
+                {
+                    Name = "Jim",
+                    City = "Minneapolis",
+                    Country = "USA"
+                },
+                new
+                {
+                    Name = "Philip",
+                    City = "Orlando",
+                    Country = "USA"
+                },
+                new
+                {
+                    Name = "Tim",
+                    City = "Seattle",
+                    Country = "USA"
+                }
             };
 
             Assert.Equal(

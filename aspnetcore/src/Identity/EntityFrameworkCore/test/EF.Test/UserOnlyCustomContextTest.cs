@@ -62,7 +62,15 @@ public class UserOnlyCustomContextTest : IClassFixture<ScratchDatabaseFixture>
 
             builder.Entity<IdentityUserToken<string>>(b =>
             {
-                b.HasKey(l => new { l.UserId, l.LoginProvider, l.Name });
+                b.HasKey(
+                    l =>
+                        new
+                        {
+                            l.UserId,
+                            l.LoginProvider,
+                            l.Name
+                        }
+                );
                 b.ToTable("AspNetUserTokens");
             });
         }

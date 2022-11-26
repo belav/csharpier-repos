@@ -5989,13 +5989,59 @@ namespace RootNamespace
             {
                 builder.Entity<EntityWithThreeProperties>(e =>
                 {
-                    e.HasIndex(t => new { t.X, t.Y, t.Z }, "IX_unspecified");
-                    e.HasIndex(t => new { t.X, t.Y, t.Z }, "IX_empty").IsDescending();
-                    e.HasIndex(t => new { t.X, t.Y, t.Z }, "IX_all_ascending")
+                    e.HasIndex(
+                        t =>
+                            new
+                            {
+                                t.X,
+                                t.Y,
+                                t.Z
+                            },
+                        "IX_unspecified"
+                    );
+                    e.HasIndex(
+                            t =>
+                                new
+                                {
+                                    t.X,
+                                    t.Y,
+                                    t.Z
+                                },
+                            "IX_empty"
+                        )
+                        .IsDescending();
+                    e.HasIndex(
+                            t =>
+                                new
+                                {
+                                    t.X,
+                                    t.Y,
+                                    t.Z
+                                },
+                            "IX_all_ascending"
+                        )
                         .IsDescending(false, false, false);
-                    e.HasIndex(t => new { t.X, t.Y, t.Z }, "IX_all_descending")
+                    e.HasIndex(
+                            t =>
+                                new
+                                {
+                                    t.X,
+                                    t.Y,
+                                    t.Z
+                                },
+                            "IX_all_descending"
+                        )
                         .IsDescending(true, true, true);
-                    e.HasIndex(t => new { t.X, t.Y, t.Z }, "IX_mixed")
+                    e.HasIndex(
+                            t =>
+                                new
+                                {
+                                    t.X,
+                                    t.Y,
+                                    t.Z
+                                },
+                            "IX_mixed"
+                        )
                         .IsDescending(false, true, false);
                 });
             },

@@ -88,7 +88,12 @@ class FirefoxInspectorClient : InspectorClient
             var res = await SendCommand(
                 "getWatcher",
                 JObject.FromObject(
-                    new { type = "getWatcher", isServerTargetSwitchingEnabled = true, to = toCmd }
+                    new
+                    {
+                        type = "getWatcher",
+                        isServerTargetSwitchingEnabled = true,
+                        to = toCmd
+                    }
                 ),
                 token
             );
@@ -108,7 +113,12 @@ class FirefoxInspectorClient : InspectorClient
             res = await SendCommand(
                 "watchTargets",
                 JObject.FromObject(
-                    new { type = "watchTargets", targetType = "frame", to = watcherId }
+                    new
+                    {
+                        type = "watchTargets",
+                        targetType = "frame",
+                        to = watcherId
+                    }
                 ),
                 token
             );

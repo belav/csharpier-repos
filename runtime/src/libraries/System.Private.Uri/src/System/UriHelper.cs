@@ -178,7 +178,6 @@ namespace System
             char forceEscape2 = '\0'
         )
         {
-            // Get the table of characters that do not need to be escaped.
             scoped ReadOnlySpan<bool> noEscape;
             if ((forceEscape1 | forceEscape2) == 0)
             {

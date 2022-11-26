@@ -784,7 +784,12 @@ namespace DebuggerTests
             await CompareObjectPropertiesFor(
                 frame_locals,
                 "ts",
-                new { Days = TNumber(3530), Minutes = TNumber(2), Seconds = TNumber(4), },
+                new
+                {
+                    Days = TNumber(3530),
+                    Minutes = TNumber(2),
+                    Seconds = TNumber(4),
+                },
                 "ts_props",
                 skip_num_fields_check: true
             );
@@ -1315,7 +1320,12 @@ namespace DebuggerTests
                     var a_props = await GetObjectOnFrame(pause_location["callFrames"][0], "a");
                     await CheckProps(
                         a_props,
-                        new { a = TNumber(10), b = TNumber(20), c = TNumber(30) },
+                        new
+                        {
+                            a = TNumber(10),
+                            b = TNumber(20),
+                            c = TNumber(30)
+                        },
                         "a"
                     );
                 }

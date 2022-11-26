@@ -283,7 +283,17 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
     public virtual Task Select_anonymous_three(bool async) =>
         AssertQuery(
             async,
-            ss => ss.Set<Customer>().Select(c => new { c.City, c.Phone, c.Country }),
+            ss =>
+                ss.Set<Customer>()
+                    .Select(
+                        c =>
+                            new
+                            {
+                                c.City,
+                                c.Phone,
+                                c.Country
+                            }
+                    ),
             e => e.Phone
         );
 
@@ -2279,7 +2289,15 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                                 Orders = c.Orders
                                     .Where(x => filteredOrderIds.Contains(x.OrderID))
                                     .OrderBy(x => x.OrderID)
-                                    .Select(x => new { c.CustomerID, x.OrderID, x.OrderDate })
+                                    .Select(
+                                        x =>
+                                            new
+                                            {
+                                                c.CustomerID,
+                                                x.OrderID,
+                                                x.OrderDate
+                                            }
+                                    )
                             }
                     ),
             elementSorter: e => e.CustomerID,
@@ -2316,7 +2334,12 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                                     where
                                         x.OrderID == c.OrderID
                                         && filteredOrderIds.Contains(x.OrderID)
-                                    select new { Outer = c.OrderID, Inner = x.OrderID, x.OrderDate }
+                                    select new
+                                    {
+                                        Outer = c.OrderID,
+                                        Inner = x.OrderID,
+                                        x.OrderDate
+                                    }
                                 ).ToList()
                             }
                     ),
@@ -2392,7 +2415,13 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
             ss =>
                 ss.Set<Order>()
                     .Select(
-                        o => new { o.OrderDate, o.CustomerID, Complex = o.OrderDate.Value.Month }
+                        o =>
+                            new
+                            {
+                                o.OrderDate,
+                                o.CustomerID,
+                                Complex = o.OrderDate.Value.Month
+                            }
                     )
                     .Distinct()
                     .Select(
@@ -2587,7 +2616,15 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
             ss =>
                 ss.Set<Customer>()
                     .OrderBy(c => c.CustomerID)
-                    .Select(c => new { c.CustomerID, c.City, c.CompanyName })
+                    .Select(
+                        c =>
+                            new
+                            {
+                                c.CustomerID,
+                                c.City,
+                                c.CompanyName
+                            }
+                    )
                     .Take(10)
                     .Select(x => new { Aggregate = x.CustomerID + " " + x.City }),
             assertOrder: true
@@ -2646,7 +2683,15 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
             ss =>
                 ss.Set<Customer>()
                     .OrderBy(c => c.CustomerID)
-                    .Select(c => new { c.CustomerID, c.City, c.CompanyName })
+                    .Select(
+                        c =>
+                            new
+                            {
+                                c.CustomerID,
+                                c.City,
+                                c.CompanyName
+                            }
+                    )
                     .Skip(7)
                     .Select(x => new { Aggregate = x.CustomerID + " " + x.City }),
             assertOrder: true
@@ -2684,7 +2729,15 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
             ss =>
                 ss.Set<Customer>()
                     .OrderBy(c => c.CustomerID)
-                    .Select(c => new { c.CustomerID, c.City, c.CompanyName })
+                    .Select(
+                        c =>
+                            new
+                            {
+                                c.CustomerID,
+                                c.City,
+                                c.CompanyName
+                            }
+                    )
                     .Take(10)
                     .Where(x => x.CustomerID.StartsWith("A"))
                     .Select(x => new { Aggregate = x.CustomerID + " " + x.City }),

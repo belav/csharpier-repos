@@ -171,7 +171,21 @@ namespace System.Web.Helpers.Test
         public void GetHtmlDefaults()
         {
             var grid = new WebGrid(GetContext(), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             var html = grid.GetHtml();
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
@@ -194,7 +208,21 @@ namespace System.Web.Helpers.Test
         public void WebGridProducesValidHtmlWhenSummaryIsSpecified()
         {
             var grid = new WebGrid(GetContext(), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             var caption = "WebGrid With Caption";
             var html = grid.GetHtml(caption: caption);
@@ -222,7 +250,21 @@ namespace System.Web.Helpers.Test
         public void WebGridEncodesCaptionText()
         {
             var grid = new WebGrid(GetContext(), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             var caption = "WebGrid <> With Caption";
             var html = grid.GetHtml(caption: caption);
@@ -247,7 +289,17 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void GetHtmlWhenPageCountIsOne()
         {
-            var grid = new WebGrid(GetContext()).Bind(new[] { new { P1 = 1, P2 = '2', P3 = "3" } });
+            var grid = new WebGrid(GetContext()).Bind(
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    }
+                }
+            );
             var html = grid.GetHtml();
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
                 "<table><thead><tr>"
@@ -271,7 +323,21 @@ namespace System.Web.Helpers.Test
                 canPage: false,
                 canSort: false
             ).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             var html = grid.GetHtml();
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
@@ -296,7 +362,21 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "2";
             var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.Equal(1, grid.PageIndex);
             grid.PageIndex = 0;
@@ -311,7 +391,21 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "2";
             var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             grid.PageIndex = 0;
             Assert.Equal(0, grid.PageIndex);
@@ -321,7 +415,21 @@ namespace System.Web.Helpers.Test
         public void PageIndexDefaultsToZero()
         {
             var grid = new WebGrid(GetContext(), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.Equal(0, grid.PageIndex);
             Assert.Equal(1, grid.Rows.Count);
@@ -332,7 +440,21 @@ namespace System.Web.Helpers.Test
         public void SetPageIndexThrowsExceptionWhenValueIsNegative()
         {
             var grid = new WebGrid(GetContext(), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.ThrowsArgumentOutOfRange(
                 () =>
@@ -348,7 +470,21 @@ namespace System.Web.Helpers.Test
         public void SetPageIndexThrowsExceptionWhenValueIsEqualToPageCount()
         {
             var grid = new WebGrid(GetContext(), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.ThrowsArgumentOutOfRange(
                 () =>
@@ -364,7 +500,21 @@ namespace System.Web.Helpers.Test
         public void SetPageIndexThrowsExceptionWhenValueIsGreaterToPageCount()
         {
             var grid = new WebGrid(GetContext(), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.ThrowsArgumentOutOfRange(
                 () =>
@@ -380,7 +530,21 @@ namespace System.Web.Helpers.Test
         public void SetPageIndexThrowsExceptionWhenPagingIsDisabled()
         {
             var grid = new WebGrid(GetContext(), canPage: false).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.Throws<NotSupportedException>(
                 () =>
@@ -397,7 +561,21 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "3";
             var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.Equal(1, grid.PageIndex);
             Assert.Equal(1, grid.Rows.Count);
@@ -410,7 +588,21 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "NotAnInt";
             var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.Equal(0, grid.PageIndex);
             Assert.Equal(1, grid.Rows.Count);
@@ -423,7 +615,21 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "0";
             var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.Equal(0, grid.PageIndex);
             Assert.Equal(1, grid.Rows.Count);
@@ -441,7 +647,21 @@ namespace System.Web.Helpers.Test
                 fieldNamePrefix: "g_",
                 pageFieldName: "pg"
             ).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.Equal(1, grid.PageIndex);
             Assert.Equal(1, grid.Rows.Count);
@@ -454,7 +674,21 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "2";
             var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.Equal(1, grid.PageIndex);
             Assert.Equal(1, grid.Rows.Count);
@@ -465,7 +699,21 @@ namespace System.Web.Helpers.Test
         public void GetPageCountWhenPagingIsTurnedOn()
         {
             var grid = new WebGrid(GetContext(), canPage: true, rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.Equal(2, grid.PageCount);
         }
@@ -476,9 +724,24 @@ namespace System.Web.Helpers.Test
             var grid = new WebGrid(GetContext(), canPage: true, rowsPerPage: 1).Bind(
                 new[]
                 {
-                    new { P1 = 1, P2 = '2', P3 = "3" },
-                    new { P1 = 4, P2 = '5', P3 = "6" },
-                    new { P1 = 4, P2 = '5', P3 = "6" },
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    },
                 }
             );
             grid.PageIndex = 1;
@@ -492,7 +755,21 @@ namespace System.Web.Helpers.Test
         public void GetPageCountWhenPagingIsTurnedOff()
         {
             var grid = new WebGrid(GetContext(), canPage: false, rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.Equal(1, grid.PageCount);
         }
@@ -503,9 +780,24 @@ namespace System.Web.Helpers.Test
             var grid = new WebGrid(GetContext(), canPage: false, rowsPerPage: 1).Bind(
                 new[]
                 {
-                    new { P1 = 1, P2 = '2', P3 = "3" },
-                    new { P1 = 4, P2 = '5', P3 = "6" },
-                    new { P1 = 4, P2 = '5', P3 = "6" },
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    },
                 }
             );
             Assert.Equal(0, grid.PageIndex);
@@ -521,7 +813,21 @@ namespace System.Web.Helpers.Test
             queryString["sort"] = "P1";
             queryString["sortdir"] = "DESC";
             var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             string url = grid.GetPageUrl(1);
             Assert.Equal("?page=2&sort=P1&sortdir=DESC", url);
@@ -544,7 +850,21 @@ namespace System.Web.Helpers.Test
                 rowsPerPage: 1,
                 ajaxUpdateContainerId: "grid-container"
             ).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             string html = grid.GetContainerUpdateScript(grid.GetPageUrl(1)).ToString();
 
@@ -570,7 +890,21 @@ namespace System.Web.Helpers.Test
                 ajaxUpdateContainerId: "grid",
                 ajaxUpdateCallback: "myCallback"
             ).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             string html = grid.GetContainerUpdateScript(grid.GetPageUrl(1)).ToString();
 
@@ -884,7 +1218,21 @@ namespace System.Web.Helpers.Test
                 rowsPerPage: 1,
                 ajaxUpdateContainerId: "grid"
             ).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             string html = grid.Pager().ToString();
             Assert.Contains("<script", html);
@@ -899,7 +1247,21 @@ namespace System.Web.Helpers.Test
                 ajaxUpdateContainerId: "grid",
                 ajaxUpdateCallback: "myCallback"
             ).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             string html = grid.Pager().ToString();
             Assert.Contains("<script", html);
@@ -996,7 +1358,16 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void RowColumnsAreDynamicMembersForDynamics()
         {
-            var grid = new WebGrid(GetContext()).Bind(Dynamics(new { P1 = 1, P2 = '2', P3 = "3" }));
+            var grid = new WebGrid(GetContext()).Bind(
+                Dynamics(
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    }
+                )
+            );
             dynamic row = grid.Rows.First();
             Assert.Equal(1, row.P1);
             Assert.Equal('2', row.P2);
@@ -1006,7 +1377,17 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void RowColumnsAreDynamicMembersForNonDynamics()
         {
-            var grid = new WebGrid(GetContext()).Bind(new[] { new { P1 = 1, P2 = '2', P3 = "3" } });
+            var grid = new WebGrid(GetContext()).Bind(
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    }
+                }
+            );
             dynamic row = grid.Rows.First();
             Assert.Equal(1, row.P1);
             Assert.Equal('2', row.P2);
@@ -1079,7 +1460,17 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void RowIndexerThrowsWhenGreaterThanColumnCount()
         {
-            var grid = new WebGrid(GetContext()).Bind(new[] { new { P1 = 1, P2 = '2', P3 = "3" } });
+            var grid = new WebGrid(GetContext()).Bind(
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    }
+                }
+            );
             var row = grid.Rows.First();
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
@@ -1101,7 +1492,16 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void RowIsEnumerableForDynamics()
         {
-            var grid = new WebGrid(GetContext()).Bind(Dynamics(new { P1 = 1, P2 = '2', P3 = "3" }));
+            var grid = new WebGrid(GetContext()).Bind(
+                Dynamics(
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    }
+                )
+            );
             int i = 0;
             foreach (var col in (IEnumerable)grid.Rows.First())
             {
@@ -1113,7 +1513,17 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void RowIsEnumerableForNonDynamics()
         {
-            var grid = new WebGrid(GetContext()).Bind(new[] { new { P1 = 1, P2 = '2', P3 = "3" } });
+            var grid = new WebGrid(GetContext()).Bind(
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    }
+                }
+            );
             int i = 0;
             foreach (var col in grid.Rows.First())
             {
@@ -1125,7 +1535,16 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void RowIsIndexableByColumnForDynamics()
         {
-            var grid = new WebGrid(GetContext()).Bind(Dynamics(new { P1 = 1, P2 = '2', P3 = "3" }));
+            var grid = new WebGrid(GetContext()).Bind(
+                Dynamics(
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    }
+                )
+            );
             var row = grid.Rows.First();
             Assert.Equal(1, row["P1"]);
             Assert.Equal('2', row["P2"]);
@@ -1135,7 +1554,17 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void RowIsIndexableByColumnForNonDynamics()
         {
-            var grid = new WebGrid(GetContext()).Bind(new[] { new { P1 = 1, P2 = '2', P3 = "3" } });
+            var grid = new WebGrid(GetContext()).Bind(
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    }
+                }
+            );
             var row = grid.Rows.First();
             Assert.Equal(1, row["P1"]);
             Assert.Equal('2', row["P2"]);
@@ -1145,7 +1574,16 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void RowIsIndexableByIndexForDynamics()
         {
-            var grid = new WebGrid(GetContext()).Bind(Dynamics(new { P1 = 1, P2 = '2', P3 = "3" }));
+            var grid = new WebGrid(GetContext()).Bind(
+                Dynamics(
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    }
+                )
+            );
             var row = grid.Rows.First();
             Assert.Equal(1, row[0]);
             Assert.Equal('2', row[1]);
@@ -1155,7 +1593,17 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void RowIsIndexableByIndexForNonDynamics()
         {
-            var grid = new WebGrid(GetContext()).Bind(new[] { new { P1 = 1, P2 = '2', P3 = "3" } });
+            var grid = new WebGrid(GetContext()).Bind(
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    }
+                }
+            );
             var row = grid.Rows.First();
             Assert.Equal(1, row[0]);
             Assert.Equal('2', row[1]);
@@ -1168,7 +1616,21 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["page"] = "2";
             var grid = new WebGrid(GetContext(queryString), rowsPerPage: 1, canPage: false).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             // review: should we reset PageIndex or Sort when operation disabled?
             Assert.Equal(0, grid.PageIndex);
@@ -1192,7 +1654,21 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["row"] = "2";
             var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.Equal(1, grid.SelectedIndex);
             grid.SelectedIndex = 0;
@@ -1205,7 +1681,21 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["row"] = "2";
             var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             grid.SelectedIndex = -1;
             Assert.Equal(-1, grid.SelectedIndex);
@@ -1215,7 +1705,21 @@ namespace System.Web.Helpers.Test
         public void SelectedIndexDefaultsToNegative()
         {
             var grid = new WebGrid(GetContext()).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.False(grid.HasSelection);
             Assert.Equal(-1, grid.SelectedIndex);
@@ -1228,7 +1732,21 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["row"] = "3";
             var grid = new WebGrid(GetContext(queryString), rowsPerPage: 2).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.False(grid.HasSelection);
             Assert.Equal(-1, grid.SelectedIndex);
@@ -1253,7 +1771,21 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["row"] = "NotAnInt";
             var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.False(grid.HasSelection);
             Assert.Equal(-1, grid.SelectedIndex);
@@ -1266,7 +1798,21 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["row"] = "0";
             var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.False(grid.HasSelection);
             Assert.Equal(-1, grid.SelectedIndex);
@@ -1283,7 +1829,21 @@ namespace System.Web.Helpers.Test
                 fieldNamePrefix: "g_",
                 selectionFieldName: "sel"
             ).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.True(grid.HasSelection);
             Assert.Equal(1, grid.SelectedIndex);
@@ -1297,7 +1857,21 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["row"] = "2";
             var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.True(grid.HasSelection);
             Assert.Equal(1, grid.SelectedIndex);
@@ -1314,7 +1888,21 @@ namespace System.Web.Helpers.Test
             queryString["sort"] = "P1";
             queryString["sortdir"] = "DESC";
             var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             string html = grid.Rows[1].GetSelectLink().ToString();
             Assert.Equal(
@@ -1329,7 +1917,21 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["sort"] = "P1";
             var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.Equal("P1", grid.SortColumn);
             grid.SortColumn = "P2";
@@ -1345,7 +1947,21 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["sort"] = "P1";
             var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.Equal("P1", grid.SortColumn);
             grid.SortColumn = null;
@@ -1361,7 +1977,21 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["sort"] = "P1";
             var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             grid.SortColumn = String.Empty;
             Assert.Equal(String.Empty, grid.SortColumn);
@@ -1370,7 +2000,17 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void SortColumnDefaultsToEmpty()
         {
-            var grid = new WebGrid(GetContext()).Bind(new[] { new { P1 = 1, P2 = '2', P3 = "3" } });
+            var grid = new WebGrid(GetContext()).Bind(
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    }
+                }
+            );
             Assert.Equal(String.Empty, grid.SortColumn);
         }
 
@@ -1380,7 +2020,15 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["sort"] = "P4";
             var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    }
+                }
             );
             Assert.Equal("", grid.SortColumn);
         }
@@ -1394,7 +2042,17 @@ namespace System.Web.Helpers.Test
                 GetContext(queryString),
                 fieldNamePrefix: "g_",
                 sortFieldName: "st"
-            ).Bind(new[] { new { P1 = 1, P2 = '2', P3 = "3" } });
+            ).Bind(
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    }
+                }
+            );
             Assert.Equal("P2", grid.SortColumn);
         }
 
@@ -1404,7 +2062,15 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["sort"] = "P2";
             var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    }
+                }
             );
             Assert.Equal("P2", grid.SortColumn);
         }
@@ -1415,7 +2081,21 @@ namespace System.Web.Helpers.Test
             NameValueCollection queryString = new NameValueCollection();
             queryString["sortdir"] = "DESC";
             var grid = new WebGrid(GetContext(queryString)).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
             Assert.Equal(SortDirection.Descending, grid.SortDirection);
             grid.SortDirection = SortDirection.Ascending;
@@ -1844,7 +2524,15 @@ namespace System.Web.Helpers.Test
         public void TableRenderingWithColumnTemplates()
         {
             var grid = new WebGrid(GetContext(), rowsPerPage: 3).Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    }
+                }
             );
             var html = grid.Table(
                 displayHeader: false,
@@ -1948,7 +2636,17 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void TableRenderingWithExclusions()
         {
-            var grid = new WebGrid(GetContext()).Bind(new[] { new { P1 = 1, P2 = '2', P3 = "3" } });
+            var grid = new WebGrid(GetContext()).Bind(
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    }
+                }
+            );
             var html = grid.Table(exclusions: new string[] { "P2" });
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
                 "<table><thead><tr>"
@@ -2744,7 +3442,21 @@ namespace System.Web.Helpers.Test
             var attributes = new { data_name = "value" };
 
             var grid = new WebGrid(GetContext(), ajaxUpdateContainerId: "grid").Bind(
-                new[] { new { P1 = 1, P2 = '2', P3 = "3" }, new { P1 = 4, P2 = '5', P3 = "6" } }
+                new[]
+                {
+                    new
+                    {
+                        P1 = 1,
+                        P2 = '2',
+                        P3 = "3"
+                    },
+                    new
+                    {
+                        P1 = 4,
+                        P2 = '5',
+                        P3 = "6"
+                    }
+                }
             );
 
             // Act

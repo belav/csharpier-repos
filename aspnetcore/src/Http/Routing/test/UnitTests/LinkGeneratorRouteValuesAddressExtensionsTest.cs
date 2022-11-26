@@ -69,7 +69,12 @@ public class LinkGeneratorRouteValuesAddressExtensionsTest : LinkGeneratorTestBa
         var path = linkGenerator.GetPathByRouteValues(
             routeName: null,
             values: new RouteValueDictionary(
-                new { controller = "Home", action = "Index", query = "some?query" }
+                new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    query = "some?query"
+                }
             ),
             new PathString("/Foo/Bar?encodeme?"),
             new FragmentString("#Fragment?"),
@@ -105,7 +110,12 @@ public class LinkGeneratorRouteValuesAddressExtensionsTest : LinkGeneratorTestBa
             httpContext,
             routeName: null,
             values: new RouteValueDictionary(
-                new { controller = "Home", action = "Index", query = "some?query" }
+                new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    query = "some?query"
+                }
             ),
             fragment: new FragmentString("#Fragment?"),
             options: new LinkOptions() { AppendTrailingSlash = true, }
@@ -136,7 +146,12 @@ public class LinkGeneratorRouteValuesAddressExtensionsTest : LinkGeneratorTestBa
         var path = linkGenerator.GetUriByRouteValues(
             routeName: null,
             values: new RouteValueDictionary(
-                new { controller = "Home", action = "Index", query = "some?query" }
+                new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    query = "some?query"
+                }
             ),
             "http",
             new HostString("example.com"),
@@ -179,7 +194,12 @@ public class LinkGeneratorRouteValuesAddressExtensionsTest : LinkGeneratorTestBa
             httpContext,
             routeName: null,
             values: new RouteValueDictionary(
-                new { controller = "Home", action = "Index", query = "some?query" }
+                new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    query = "some?query"
+                }
             ),
             fragment: new FragmentString("#Fragment?"),
             options: new LinkOptions() { AppendTrailingSlash = true, }

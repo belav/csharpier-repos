@@ -410,7 +410,12 @@ public class ActionSelectionTableTest
         // Example: In conventional route, one could set non-inline defaults
         // new { area = "", controller = "Home", action = "Index" }
         var values = new RouteValueDictionary(
-            new { area = "", controller = "Home", action = "Index", }
+            new
+            {
+                area = "",
+                controller = "Home",
+                action = "Index",
+            }
         );
 
         // Act
@@ -443,7 +448,12 @@ public class ActionSelectionTableTest
         // Example: In conventional route, one could set non-inline defaults
         // new { area = "", controller = "Home", action = "Index" }
         var values = new RouteValueDictionary(
-            new { area = "", controller = "HoMe", action = "InDeX", }
+            new
+            {
+                area = "",
+                controller = "HoMe",
+                action = "InDeX",
+            }
         );
 
         // Act
@@ -476,7 +486,12 @@ public class ActionSelectionTableTest
         // Example: In conventional route, one could set non-inline defaults
         // new { area = (string)null, controller = "Foo", action = "Index" }
         var values = new RouteValueDictionary(
-            new { area = (string)null, controller = "Home", action = "Index", }
+            new
+            {
+                area = (string)null,
+                controller = "Home",
+                action = "Index",
+            }
         );
 
         // Act
@@ -507,7 +522,12 @@ public class ActionSelectionTableTest
         var table = CreateTableWithActionDescriptors(actions);
 
         var values = new RouteValueDictionary(
-            new { foo = "", controller = "Home", action = "Index", }
+            new
+            {
+                foo = "",
+                controller = "Home",
+                action = "Index",
+            }
         );
 
         // Act
@@ -538,7 +558,12 @@ public class ActionSelectionTableTest
         var table = CreateTableWithActionDescriptors(actions);
 
         var values = new RouteValueDictionary(
-            new { foo = (string)null, controller = "Home", action = "Index", }
+            new
+            {
+                foo = (string)null,
+                controller = "Home",
+                action = "Index",
+            }
         );
 
         // Act

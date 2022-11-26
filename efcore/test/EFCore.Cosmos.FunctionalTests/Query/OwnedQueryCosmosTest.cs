@@ -536,7 +536,14 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
             modelBuilder.Entity<OwnedPerson>(eb =>
             {
                 eb.IndexerProperty<string>("Name");
-                eb.HasData(new { Id = 1, id = Guid.NewGuid().ToString(), Name = "Mona Cy" });
+                eb.HasData(
+                    new
+                    {
+                        Id = 1,
+                        id = Guid.NewGuid().ToString(),
+                        Name = "Mona Cy"
+                    }
+                );
 
                 eb.OwnsOne(
                     p => p.PersonAddress,
@@ -697,7 +704,12 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
             modelBuilder.Entity<Branch>(eb =>
             {
                 eb.HasData(
-                    new { Id = 2, id = Guid.NewGuid().ToString(), Name = "Antigonus Mitul" }
+                    new
+                    {
+                        Id = 2,
+                        id = Guid.NewGuid().ToString(),
+                        Name = "Antigonus Mitul"
+                    }
                 );
 
                 eb.OwnsOne(
@@ -706,8 +718,18 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
                     {
                         ab.IndexerProperty<string>("BranchName").IsRequired();
                         ab.HasData(
-                            new { BranchId = 2, PlaceType = "Land", BranchName = "BranchA" },
-                            new { BranchId = 3, PlaceType = "Land", BranchName = "BranchB" }
+                            new
+                            {
+                                BranchId = 2,
+                                PlaceType = "Land",
+                                BranchName = "BranchA"
+                            },
+                            new
+                            {
+                                BranchId = 3,
+                                PlaceType = "Land",
+                                BranchName = "BranchB"
+                            }
                         );
 
                         ab.OwnsOne(
@@ -715,8 +737,18 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
                             cb =>
                             {
                                 cb.HasData(
-                                    new { OwnedAddressBranchId = 2, PlanetId = 1, Name = "Canada" },
-                                    new { OwnedAddressBranchId = 3, PlanetId = 1, Name = "Canada" }
+                                    new
+                                    {
+                                        OwnedAddressBranchId = 2,
+                                        PlanetId = 1,
+                                        Name = "Canada"
+                                    },
+                                    new
+                                    {
+                                        OwnedAddressBranchId = 3,
+                                        PlanetId = 1,
+                                        Name = "Canada"
+                                    }
                                 );
                             }
                         );
@@ -727,7 +759,12 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
             modelBuilder.Entity<LeafA>(eb =>
             {
                 eb.HasData(
-                    new { Id = 3, id = Guid.NewGuid().ToString(), Name = "Madalena Morana" }
+                    new
+                    {
+                        Id = 3,
+                        id = Guid.NewGuid().ToString(),
+                        Name = "Madalena Morana"
+                    }
                 );
 
                 eb.OwnsOne(
@@ -735,14 +772,26 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
                     ab =>
                     {
                         ab.IndexerProperty<int>("LeafType");
-                        ab.HasData(new { LeafAId = 3, PlaceType = "Land", LeafType = 1 });
+                        ab.HasData(
+                            new
+                            {
+                                LeafAId = 3,
+                                PlaceType = "Land",
+                                LeafType = 1
+                            }
+                        );
 
                         ab.OwnsOne(
                             a => a.Country,
                             cb =>
                             {
                                 cb.HasData(
-                                    new { OwnedAddressLeafAId = 3, PlanetId = 1, Name = "Mexico" }
+                                    new
+                                    {
+                                        OwnedAddressLeafAId = 3,
+                                        PlanetId = 1,
+                                        Name = "Mexico"
+                                    }
                                 );
                             }
                         );
@@ -752,21 +801,40 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
 
             modelBuilder.Entity<LeafB>(eb =>
             {
-                eb.HasData(new { Id = 4, id = Guid.NewGuid().ToString(), Name = "Vanda Waldemar" });
+                eb.HasData(
+                    new
+                    {
+                        Id = 4,
+                        id = Guid.NewGuid().ToString(),
+                        Name = "Vanda Waldemar"
+                    }
+                );
 
                 eb.OwnsOne(
                     p => p.LeafBAddress,
                     ab =>
                     {
                         ab.IndexerProperty<string>("LeafBType").IsRequired();
-                        ab.HasData(new { LeafBId = 4, PlaceType = "Land", LeafBType = "Green" });
+                        ab.HasData(
+                            new
+                            {
+                                LeafBId = 4,
+                                PlaceType = "Land",
+                                LeafBType = "Green"
+                            }
+                        );
 
                         ab.OwnsOne(
                             a => a.Country,
                             cb =>
                             {
                                 cb.HasData(
-                                    new { OwnedAddressLeafBId = 4, PlanetId = 1, Name = "Panama" }
+                                    new
+                                    {
+                                        OwnedAddressLeafBId = 4,
+                                        PlanetId = 1,
+                                        Name = "Panama"
+                                    }
                                 );
                             }
                         );
@@ -776,19 +844,39 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
 
             modelBuilder.Entity<Planet>(pb =>
             {
-                pb.HasData(new { Id = 1, id = Guid.NewGuid().ToString(), StarId = 1 });
+                pb.HasData(
+                    new
+                    {
+                        Id = 1,
+                        id = Guid.NewGuid().ToString(),
+                        StarId = 1
+                    }
+                );
             });
 
             modelBuilder.Entity<Moon>(mb =>
             {
                 mb.HasData(
-                    new { Id = 1, id = Guid.NewGuid().ToString(), PlanetId = 1, Diameter = 3474 }
+                    new
+                    {
+                        Id = 1,
+                        id = Guid.NewGuid().ToString(),
+                        PlanetId = 1,
+                        Diameter = 3474
+                    }
                 );
             });
 
             modelBuilder.Entity<Star>(sb =>
             {
-                sb.HasData(new { Id = 1, id = Guid.NewGuid().ToString(), Name = "Sol" });
+                sb.HasData(
+                    new
+                    {
+                        Id = 1,
+                        id = Guid.NewGuid().ToString(),
+                        Name = "Sol"
+                    }
+                );
 
                 sb.OwnsMany(
                     s => s.Composition,
@@ -796,8 +884,18 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
                     {
                         ob.HasKey(o => o.Id);
                         ob.HasData(
-                            new { Id = "H", Name = "Hydrogen", StarId = 1 },
-                            new { Id = "He", Name = "Helium", StarId = 1 }
+                            new
+                            {
+                                Id = "H",
+                                Name = "Hydrogen",
+                                StarId = 1
+                            },
+                            new
+                            {
+                                Id = "He",
+                                Name = "Helium",
+                                StarId = 1
+                            }
                         );
                     }
                 );
@@ -807,7 +905,15 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
             {
                 b.OwnsOne(
                     e => e.Throned,
-                    b => b.HasData(new { BartonId = 1, Property = "Property", Value = 42 })
+                    b =>
+                        b.HasData(
+                            new
+                            {
+                                BartonId = 1,
+                                Property = "Property",
+                                Value = 42
+                            }
+                        )
                 );
                 b.HasData(
                     new Barton { Id = 1, Simple = "Simple" },

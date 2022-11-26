@@ -22,69 +22,286 @@ public class ActionSelectorBenchmark
     // GET and one that handles POST.
     private static readonly ActionDescriptor[] _actions = new ActionDescriptor[]
     {
-        CreateActionDescriptor(new { area = "Admin", controller = "Account", action = "AddUser" }),
-        CreateActionDescriptor(new { area = "Admin", controller = "Account", action = "AddUser" }),
         CreateActionDescriptor(
-            new { area = "Admin", controller = "Account", action = "DeleteUser" }
+            new
+            {
+                area = "Admin",
+                controller = "Account",
+                action = "AddUser"
+            }
         ),
         CreateActionDescriptor(
-            new { area = "Admin", controller = "Account", action = "DeleteUser" }
-        ),
-        CreateActionDescriptor(new { area = "Admin", controller = "Account", action = "Details" }),
-        CreateActionDescriptor(new { area = "Admin", controller = "Account", action = "List" }),
-        CreateActionDescriptor(
-            new { area = "Admin", controller = "Diagnostics", action = "Stats" }
-        ),
-        CreateActionDescriptor(
-            new { area = "Admin", controller = "Diagnostics", action = "Performance" }
+            new
+            {
+                area = "Admin",
+                controller = "Account",
+                action = "AddUser"
+            }
         ),
         CreateActionDescriptor(
-            new { area = "Admin", controller = "Products", action = "CreateProduct" }
+            new
+            {
+                area = "Admin",
+                controller = "Account",
+                action = "DeleteUser"
+            }
         ),
         CreateActionDescriptor(
-            new { area = "Admin", controller = "Products", action = "CreateProduct" }
+            new
+            {
+                area = "Admin",
+                controller = "Account",
+                action = "DeleteUser"
+            }
         ),
         CreateActionDescriptor(
-            new { area = "Admin", controller = "Products", action = "DeleteProduct" }
+            new
+            {
+                area = "Admin",
+                controller = "Account",
+                action = "Details"
+            }
         ),
         CreateActionDescriptor(
-            new { area = "Admin", controller = "Products", action = "DeleteProduct" }
+            new
+            {
+                area = "Admin",
+                controller = "Account",
+                action = "List"
+            }
         ),
         CreateActionDescriptor(
-            new { area = "Admin", controller = "Products", action = "EditProduct" }
+            new
+            {
+                area = "Admin",
+                controller = "Diagnostics",
+                action = "Stats"
+            }
         ),
         CreateActionDescriptor(
-            new { area = "Admin", controller = "Products", action = "EditProduct" }
-        ),
-        CreateActionDescriptor(new { area = "Admin", controller = "Products", action = "Index" }),
-        CreateActionDescriptor(
-            new { area = "Admin", controller = "Products", action = "Inventory" }
-        ),
-        CreateActionDescriptor(
-            new { area = "Store", controller = "Search", action = "FindProduct" }
+            new
+            {
+                area = "Admin",
+                controller = "Diagnostics",
+                action = "Performance"
+            }
         ),
         CreateActionDescriptor(
-            new { area = "Store", controller = "Search", action = "ShowCategory" }
+            new
+            {
+                area = "Admin",
+                controller = "Products",
+                action = "CreateProduct"
+            }
         ),
-        CreateActionDescriptor(new { area = "Store", controller = "Search", action = "HotItems" }),
-        CreateActionDescriptor(new { area = "Store", controller = "Product", action = "Index" }),
-        CreateActionDescriptor(new { area = "Store", controller = "Product", action = "Details" }),
-        CreateActionDescriptor(new { area = "Store", controller = "Product", action = "Buy" }),
         CreateActionDescriptor(
-            new { area = "Store", controller = "Checkout", action = "ViewCart" }
+            new
+            {
+                area = "Admin",
+                controller = "Products",
+                action = "CreateProduct"
+            }
         ),
-        CreateActionDescriptor(new { area = "Store", controller = "Checkout", action = "Billing" }),
-        CreateActionDescriptor(new { area = "Store", controller = "Checkout", action = "Confim" }),
-        CreateActionDescriptor(new { area = "Store", controller = "Checkout", action = "Confim" }),
-        CreateActionDescriptor(new { area = "", controller = "Blog", action = "Index" }),
-        CreateActionDescriptor(new { area = "", controller = "Blog", action = "Search" }),
-        CreateActionDescriptor(new { area = "", controller = "Blog", action = "ViewPost" }),
-        CreateActionDescriptor(new { area = "", controller = "Blog", action = "PostComment" }),
-        CreateActionDescriptor(new { area = "", controller = "Home", action = "Index" }),
-        CreateActionDescriptor(new { area = "", controller = "Home", action = "Search" }),
-        CreateActionDescriptor(new { area = "", controller = "Home", action = "About" }),
-        CreateActionDescriptor(new { area = "", controller = "Home", action = "Contact" }),
-        CreateActionDescriptor(new { area = "", controller = "Home", action = "Support" }),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Products",
+                action = "DeleteProduct"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Products",
+                action = "DeleteProduct"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Products",
+                action = "EditProduct"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Products",
+                action = "EditProduct"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Products",
+                action = "Index"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Products",
+                action = "Inventory"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Store",
+                controller = "Search",
+                action = "FindProduct"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Store",
+                controller = "Search",
+                action = "ShowCategory"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Store",
+                controller = "Search",
+                action = "HotItems"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Store",
+                controller = "Product",
+                action = "Index"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Store",
+                controller = "Product",
+                action = "Details"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Store",
+                controller = "Product",
+                action = "Buy"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Store",
+                controller = "Checkout",
+                action = "ViewCart"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Store",
+                controller = "Checkout",
+                action = "Billing"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Store",
+                controller = "Checkout",
+                action = "Confim"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Store",
+                controller = "Checkout",
+                action = "Confim"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "",
+                controller = "Blog",
+                action = "Index"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "",
+                controller = "Blog",
+                action = "Search"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "",
+                controller = "Blog",
+                action = "ViewPost"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "",
+                controller = "Blog",
+                action = "PostComment"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "",
+                controller = "Home",
+                action = "Index"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "",
+                controller = "Home",
+                action = "Search"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "",
+                controller = "Home",
+                action = "About"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "",
+                controller = "Home",
+                action = "Contact"
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "",
+                controller = "Home",
+                action = "Support"
+            }
+        ),
     };
 
     private static readonly KeyValuePair<

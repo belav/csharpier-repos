@@ -345,7 +345,12 @@ namespace System.Web.Http.Cors
                 new HttpRouteData(
                     route,
                     new HttpRouteValueDictionary(
-                        new { action = "Options", controller = "sample", id = 2 }
+                        new
+                        {
+                            action = "Options",
+                            controller = "sample",
+                            id = 2
+                        }
                     )
                 )
             );

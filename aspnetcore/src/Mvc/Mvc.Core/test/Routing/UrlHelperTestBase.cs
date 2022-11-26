@@ -334,7 +334,12 @@ public abstract class UrlHelperTestBase
         // Act
         var url = urlHelper.RouteUrl(
             values: new RouteValueDictionary(
-                new { Action = "newaction", Controller = "home2", id = "someid" }
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                }
             )
         );
 
@@ -352,7 +357,12 @@ public abstract class UrlHelperTestBase
         var url = urlHelper.RouteUrl(
             routeName: "namedroute",
             values: new RouteValueDictionary(
-                new { Action = "newaction", Controller = "home2", id = "someid" }
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                }
             ),
             protocol: "http",
             host: string.Empty
@@ -372,7 +382,12 @@ public abstract class UrlHelperTestBase
         var url = urlHelper.RouteUrl(
             routeName: "namedroute",
             values: new RouteValueDictionary(
-                new { Action = "newaction", Controller = "home2", id = "someid" }
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                }
             ),
             protocol: string.Empty,
             host: "foo.bar.com"
@@ -392,7 +407,12 @@ public abstract class UrlHelperTestBase
         var url = urlHelper.RouteUrl(
             routeName: "namedroute",
             values: new RouteValueDictionary(
-                new { Action = "newaction", Controller = "home2", id = "someid" }
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                }
             ),
             protocol: null,
             host: "foo.bar.com"
@@ -412,7 +432,12 @@ public abstract class UrlHelperTestBase
         var url = urlHelper.RouteUrl(
             routeName: "namedroute",
             values: new RouteValueDictionary(
-                new { Action = "newaction", Controller = "home2", id = "someid" }
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                }
             ),
             protocol: null,
             host: null
@@ -430,7 +455,12 @@ public abstract class UrlHelperTestBase
 
         // Act
         var url = urlHelper.RouteUrl(
-            new { Action = "newaction", Controller = "home2", id = "someid" }
+            new
+            {
+                Action = "newaction",
+                Controller = "home2",
+                id = "someid"
+            }
         );
 
         // Assert
@@ -446,7 +476,12 @@ public abstract class UrlHelperTestBase
         // Act
         var url = urlHelper.RouteUrl(
             routeName: "namedroute",
-            values: new { Action = "newaction", Controller = "home2", id = "someid" },
+            values: new
+            {
+                Action = "newaction",
+                Controller = "home2",
+                id = "someid"
+            },
             protocol: "https"
         );
 
@@ -463,7 +498,12 @@ public abstract class UrlHelperTestBase
         // Act
         var url = urlHelper.RouteUrl(
             routeName: "namedroute",
-            values: new { Action = "newaction", Controller = "home2", id = "someid" },
+            values: new
+            {
+                Action = "newaction",
+                Controller = "home2",
+                id = "someid"
+            },
             protocol: "https",
             host: "pingüino"
         );
@@ -508,7 +548,12 @@ public abstract class UrlHelperTestBase
         var url = urlHelper.RouteUrl(
             routeName: "namedroute",
             values: new RouteValueDictionary(
-                new { Action = "newaction", Controller = "home2", id = "someid" }
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                }
             )
         );
 
@@ -525,7 +570,12 @@ public abstract class UrlHelperTestBase
         // Act
         var url = urlHelper.RouteUrl(
             routeName: "namedroute",
-            values: new { Action = "newaction", Controller = "home2", id = "someid" }
+            values: new
+            {
+                Action = "newaction",
+                Controller = "home2",
+                id = "someid"
+            }
         );
 
         // Assert
@@ -541,7 +591,12 @@ public abstract class UrlHelperTestBase
         var routeContext = new UrlRouteContext()
         {
             RouteName = "namedroute",
-            Values = new { Action = "newaction", Controller = "home2", id = "someid" },
+            Values = new
+            {
+                Action = "newaction",
+                Controller = "home2",
+                id = "someid"
+            },
             Fragment = "somefragment",
             Host = "remotetown",
             Protocol = "ftp"
@@ -563,7 +618,12 @@ public abstract class UrlHelperTestBase
         // Act
         var url = urlHelper.RouteUrl(
             routeName: "namedroute",
-            values: new { Action = "newaction", Controller = "home2", id = "someid" },
+            values: new
+            {
+                Action = "newaction",
+                Controller = "home2",
+                id = "someid"
+            },
             fragment: "somefragment",
             host: "remotetown",
             protocol: "https"
@@ -696,7 +756,12 @@ public abstract class UrlHelperTestBase
         // Act
         var url = urlHelper.Link(
             "namedroute",
-            new { Action = "newaction", Controller = "home", id = "someid" }
+            new
+            {
+                Action = "newaction",
+                Controller = "home",
+                id = "someid"
+            }
         );
 
         // Assert
@@ -712,7 +777,12 @@ public abstract class UrlHelperTestBase
         // Act
         var url = urlHelper.Link(
             null,
-            new { Action = "newaction", Controller = "home", id = "someid" }
+            new
+            {
+                Action = "newaction",
+                Controller = "home",
+                id = "someid"
+            }
         );
 
         // Assert
@@ -734,7 +804,12 @@ public abstract class UrlHelperTestBase
         // Act
         var url = urlHelper.Link(
             null,
-            new { Action = "newaction", Controller = "home", id = "someid" }
+            new
+            {
+                Action = "newaction",
+                Controller = "home",
+                id = "someid"
+            }
         );
 
         // Assert
@@ -757,7 +832,12 @@ public abstract class UrlHelperTestBase
         // Act
         var url = urlHelper.Link(
             null,
-            new { Action = "newaction", Controller = "home", id = "someid" }
+            new
+            {
+                Action = "newaction",
+                Controller = "home",
+                id = "someid"
+            }
         );
 
         // Assert
@@ -817,7 +897,12 @@ public abstract class UrlHelperTestBase
         // Act
         var url = urlHelper.Link(
             "namedroute",
-            new { Action = "newaction", Controller = "home", id = "someid" }
+            new
+            {
+                Action = "newaction",
+                Controller = "home",
+                id = "someid"
+            }
         );
 
         // Assert
@@ -897,7 +982,12 @@ public abstract class UrlHelperTestBase
             protocol: null,
             routeName: "default",
             template: "{first}/{controller}/{action}",
-            defaults: new { second = "default", controller = "default", action = "default" },
+            defaults: new
+            {
+                second = "default",
+                controller = "default",
+                action = "default"
+            },
             // Emulate ActionEndpointFactory.AddConventionalLinkGenerationRoute().
             // The "controller" and "action" keys are defined automatically by ControllerActionDescriptorBuilder.AddRouteValues().
             requiredValues: new
@@ -939,7 +1029,12 @@ public abstract class UrlHelperTestBase
             protocol: null,
             routeName: "default",
             template: "{first}/{second}/{controller}/{action}",
-            defaults: new { second = "default", controller = "default", action = "default" },
+            defaults: new
+            {
+                second = "default",
+                controller = "default",
+                action = "default"
+            },
             // Emulate ActionEndpointFactory.AddConventionalLinkGenerationRoute().
             // The "controller" and "action" keys are defined automatically by ControllerActionDescriptorBuilder.AddRouteValues().
             requiredValues: new
@@ -984,7 +1079,12 @@ public abstract class UrlHelperTestBase
             protocol: null,
             routeName: "default",
             template: "{first}/{controller}/{action}",
-            defaults: new { second = "default", controller = "default", action = "default" },
+            defaults: new
+            {
+                second = "default",
+                controller = "default",
+                action = "default"
+            },
             // Emulate ActionEndpointFactory.AddConventionalLinkGenerationRoute().
             // The "controller" and "action" keys are defined automatically by ControllerActionDescriptorBuilder.AddRouteValues().
             requiredValues: new

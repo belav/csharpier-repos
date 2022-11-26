@@ -200,7 +200,12 @@ namespace System.Web.WebPages.Test
             var html = helper.RadioButton(
                 "foo",
                 "foo-value",
-                new { value = "bazValue", type = "fooType", name = "bar" }
+                new
+                {
+                    value = "bazValue",
+                    type = "fooType",
+                    name = "bar"
+                }
             );
 
             // Assert

@@ -682,7 +682,12 @@ namespace System.Diagnostics
             {
                 this.Write(
                     RequestStopExName,
-                    new { Request = request, StatusCode = statusCode, Headers = headers }
+                    new
+                    {
+                        Request = request,
+                        StatusCode = statusCode,
+                        Headers = headers
+                    }
                 );
             }
         }

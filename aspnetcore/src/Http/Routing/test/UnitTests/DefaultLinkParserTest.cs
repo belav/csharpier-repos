@@ -124,7 +124,12 @@ public class DefaultLinkParserTest : LinkParserTestBase
 
         // Assert
         MatcherAssert.AssertRouteValuesEqual(
-            new { controller = "Home", action = "Index", id = "17" },
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                id = "17"
+            },
             values
         );
 
@@ -180,7 +185,12 @@ public class DefaultLinkParserTest : LinkParserTestBase
 
         // Assert
         MatcherAssert.AssertRouteValuesEqual(
-            new { controller = "Home", action = "Index", id2 = "abc" },
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                id2 = "abc"
+            },
             values
         );
     }

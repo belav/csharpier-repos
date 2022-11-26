@@ -725,7 +725,15 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ss.Set<JsonEntityInheritanceBase>()
-                    .Select(x => new { x.Id, x.ReferenceOnBase, x.CollectionOnBase })
+                    .Select(
+                        x =>
+                            new
+                            {
+                                x.Id,
+                                x.ReferenceOnBase,
+                                x.CollectionOnBase
+                            }
+                    )
                     .AsNoTracking(),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>

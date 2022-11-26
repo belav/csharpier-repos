@@ -43,7 +43,15 @@ public abstract class OwnedQueryRelationalTestBase<TFixture> : OwnedQueryTestBas
                 ss.Set<OwnedPerson>()
                     .OrderBy(p => p.Id)
                     .AsSplitQuery()
-                    .Select(p => new { p.Orders, p.PersonAddress, p.PersonAddress.Country.Planet }),
+                    .Select(
+                        p =>
+                            new
+                            {
+                                p.Orders,
+                                p.PersonAddress,
+                                p.PersonAddress.Country.Planet
+                            }
+                    ),
             assertOrder: true,
             elementAsserter: (e, a) =>
             {

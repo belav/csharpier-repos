@@ -357,7 +357,12 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { controller = "Pets", action = "GetById", id = "17", };
+        var values = new
+        {
+            controller = "Pets",
+            action = "GetById",
+            id = "17",
+        };
         var ambientValues = new { };
         var address = CreateAddress(values: values, ambientValues: ambientValues);
 
@@ -401,7 +406,12 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { area = "Admin", controller = "Users", action = "Add", };
+        var values = new
+        {
+            area = "Admin",
+            controller = "Users",
+            action = "Add",
+        };
         var ambientValues = new { };
         var address = CreateAddress(values: values, ambientValues: ambientValues);
 
@@ -493,7 +503,12 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { controller = "Home", action = "Fake", id = "17", };
+        var values = new
+        {
+            controller = "Home",
+            action = "Fake",
+            id = "17",
+        };
         var ambientValues = new { };
         var address = CreateAddress(values: values, ambientValues: ambientValues);
 
@@ -520,7 +535,12 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         var httpContext = CreateHttpContext();
 
         var values = new { controller = "Pets", action = "GetById", };
-        var ambientValues = new { controller = "Pets", action = "GetById", id = "17", };
+        var ambientValues = new
+        {
+            controller = "Pets",
+            action = "GetById",
+            id = "17",
+        };
         var address = CreateAddress(values: values, ambientValues: ambientValues);
 
         // Act
@@ -542,7 +562,12 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         var httpContext = CreateHttpContext();
 
         var values = new { controller = "Pets", action = "GetById", };
-        var ambientValues = new { controller = "Pets", action = "Update", id = "17", };
+        var ambientValues = new
+        {
+            controller = "Pets",
+            action = "Update",
+            id = "17",
+        };
         var address = CreateAddress(values: values, ambientValues: ambientValues);
 
         // Act
@@ -586,7 +611,12 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         var httpContext = CreateHttpContext();
 
         var values = new { controller = "Home", action = "Index", };
-        var ambientValues = new { controller = "Home", action = "Index", id = "17", };
+        var ambientValues = new
+        {
+            controller = "Home",
+            action = "Index",
+            id = "17",
+        };
         var address = CreateAddress(values: values, ambientValues: ambientValues);
 
         // Act
@@ -608,7 +638,12 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         var httpContext = CreateHttpContext();
 
         var values = new { controller = "Home", action = "Index", };
-        var ambientValues = new { controller = "Pets", action = "Update", id = "17", };
+        var ambientValues = new
+        {
+            controller = "Pets",
+            action = "Update",
+            id = "17",
+        };
         var address = CreateAddress(values: values, ambientValues: ambientValues);
 
         // Act
@@ -652,7 +687,12 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         var httpContext = CreateHttpContext();
 
         var values = new { controller = "Home", action = "Index11", };
-        var ambientValues = new { controller = "Pets", action = "Update", id = "17", };
+        var ambientValues = new
+        {
+            controller = "Pets",
+            action = "Update",
+            id = "17",
+        };
         var address = CreateAddress(values: values, ambientValues: ambientValues);
 
         // Act
@@ -673,8 +713,18 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { area = "Admin", controller = "Home", action = "Index11", };
-        var ambientValues = new { controller = "Pets", action = "Update", id = "17", };
+        var values = new
+        {
+            area = "Admin",
+            controller = "Home",
+            action = "Index11",
+        };
+        var ambientValues = new
+        {
+            controller = "Pets",
+            action = "Update",
+            id = "17",
+        };
         var address = CreateAddress(values: values, ambientValues: ambientValues);
 
         // Act
@@ -696,7 +746,12 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         var httpContext = CreateHttpContext();
 
         var values = new { controller = "Store", };
-        var ambientValues = new { controller = "Home", action = "Index", id = "17", };
+        var ambientValues = new
+        {
+            controller = "Home",
+            action = "Index",
+            id = "17",
+        };
         var address = CreateAddress(
             routeName: "custom",
             values: values,
@@ -796,7 +851,12 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         var httpContext = CreateHttpContext();
 
         var values = new { page = "/Pages/Help", };
-        var ambientValues = new { controller = "Pets", action = "Update", id = "17", };
+        var ambientValues = new
+        {
+            controller = "Pets",
+            action = "Update",
+            id = "17",
+        };
         var address = CreateAddress(values: values, ambientValues: ambientValues);
 
         // Act
@@ -840,7 +900,12 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         var httpContext = CreateHttpContext();
 
         var values = new { page = "/Pages/Help2", };
-        var ambientValues = new { controller = "Pets", action = "Update", id = "17", };
+        var ambientValues = new
+        {
+            controller = "Pets",
+            action = "Update",
+            id = "17",
+        };
         var address = CreateAddress(values: values, ambientValues: ambientValues);
 
         // Act
@@ -862,7 +927,12 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         var httpContext = CreateHttpContext();
 
         var values = new { page = "/Pages/Index", };
-        var ambientValues = new { area = "Admin", controller = "Users", action = "Add", };
+        var ambientValues = new
+        {
+            area = "Admin",
+            controller = "Users",
+            action = "Add",
+        };
         var address = CreateAddress(values: values, ambientValues: ambientValues);
 
         // Act

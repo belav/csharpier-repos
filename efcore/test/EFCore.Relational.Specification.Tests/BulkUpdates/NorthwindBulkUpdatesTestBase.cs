@@ -1210,7 +1210,12 @@ WHERE [OrderID] < 10300"
                     on c.CustomerID equals o.CustomerID
                     into grouping
                 from o in grouping.DefaultIfEmpty()
-                select new { c, c2, o },
+                select new
+                {
+                    c,
+                    c2,
+                    o
+                },
             e => e.c,
             s => s.SetProperty(c => c.c.ContactName, "Updated"),
             rowsAffectedCount: 8,
@@ -1245,7 +1250,12 @@ WHERE [OrderID] < 10300"
                 from o in ss.Set<Order>()
                     .Where(o => o.OrderID < 10300 && o.OrderDate.Value.Year < c.ContactName.Length)
                     .DefaultIfEmpty()
-                select new { c, c2, o },
+                select new
+                {
+                    c,
+                    c2,
+                    o
+                },
             e => e.c,
             s => s.SetProperty(c => c.c.ContactName, "Updated"),
             rowsAffectedCount: 8,

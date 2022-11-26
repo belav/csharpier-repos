@@ -548,9 +548,24 @@ namespace System.Web.Mvc.Test
         {
             return new[]
             {
-                new { Letter = 'A', FullWord = "Alpha", Group = "AB" },
-                new { Letter = 'B', FullWord = "Bravo", Group = "AB" },
-                new { Letter = 'C', FullWord = "Charlie", Group = "C" },
+                new
+                {
+                    Letter = 'A',
+                    FullWord = "Alpha",
+                    Group = "AB"
+                },
+                new
+                {
+                    Letter = 'B',
+                    FullWord = "Bravo",
+                    Group = "AB"
+                },
+                new
+                {
+                    Letter = 'C',
+                    FullWord = "Charlie",
+                    Group = "C"
+                },
             };
         }
 

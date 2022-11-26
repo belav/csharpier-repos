@@ -168,7 +168,13 @@ namespace BlazorServerWeb_CSharp.Data.Migrations
                 {
                     table.PrimaryKey(
                         "PK_AspNetUserTokens",
-                        x => new { x.UserId, x.LoginProvider, x.Name }
+                        x =>
+                            new
+                            {
+                                x.UserId,
+                                x.LoginProvider,
+                                x.Name
+                            }
                     );
                     table.ForeignKey(
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",

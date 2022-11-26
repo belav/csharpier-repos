@@ -874,7 +874,13 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
             ss =>
                 from e1 in ss.Set<NullSemanticsEntity1>()
                 join e2 in ss.Set<NullSemanticsEntity2>() on e1.NullableIntA equals e2.NullableIntB
-                select new { Id1 = e1.Id, Id2 = e2.Id, e1.NullableIntA, e2.NullableIntB },
+                select new
+                {
+                    Id1 = e1.Id,
+                    Id2 = e2.Id,
+                    e1.NullableIntA,
+                    e2.NullableIntB
+                },
             elementSorter: e => (e.Id1, e.Id2)
         );
 

@@ -35,13 +35,48 @@ namespace System.Web.Mvc.Html.Test
         private static readonly SelectList _selectList = new SelectList(
             new[]
             {
-                new { Text = "UFO", Value = "ufo", Category = "" }, /* Empty Group */
-                new { Text = "Volvo", Value = "volvo", Category = "Swedish Cars" },
-                new { Text = "Mercedes-Benz", Value = "mercedes-benz", Category = "German Cars" },
-                new { Text = "Saab", Value = "saab", Category = "Swedish Cars" },
-                new { Text = "Audi", Value = "audi", Category = "German Cars" },
-                new { Text = "Other", Value = "other", Category = (string)null }, /* Another Empty Group */
-                new { Text = "Unknown", Value = "unknown", Category = " " } /* Unnamed Group */
+                new
+                {
+                    Text = "UFO",
+                    Value = "ufo",
+                    Category = ""
+                }, /* Empty Group */
+                new
+                {
+                    Text = "Volvo",
+                    Value = "volvo",
+                    Category = "Swedish Cars"
+                },
+                new
+                {
+                    Text = "Mercedes-Benz",
+                    Value = "mercedes-benz",
+                    Category = "German Cars"
+                },
+                new
+                {
+                    Text = "Saab",
+                    Value = "saab",
+                    Category = "Swedish Cars"
+                },
+                new
+                {
+                    Text = "Audi",
+                    Value = "audi",
+                    Category = "German Cars"
+                },
+                new
+                {
+                    Text = "Other",
+                    Value = "other",
+                    Category = (string)null
+                }, /* Another Empty Group */
+                new
+                {
+                    Text = "Unknown",
+                    Value = "unknown",
+                    Category = " "
+                } /* Unnamed Group */
             },
             "Value",
             "Text",
@@ -51,13 +86,48 @@ namespace System.Web.Mvc.Html.Test
         private static readonly MultiSelectList _multiSelectList = new MultiSelectList(
             new[]
             {
-                new { Text = "UFO", Value = "ufo", Category = "" }, /* Empty Group */
-                new { Text = "Volvo", Value = "volvo", Category = "Swedish Cars" },
-                new { Text = "Mercedes-Benz", Value = "mercedes-benz", Category = "German Cars" },
-                new { Text = "Saab", Value = "saab", Category = "Swedish Cars" },
-                new { Text = "Audi", Value = "audi", Category = "German Cars" },
-                new { Text = "Other", Value = "other", Category = (string)null }, /* Another Empty Group */
-                new { Text = "Unknown", Value = "unknown", Category = " " } /* Unnamed Group */
+                new
+                {
+                    Text = "UFO",
+                    Value = "ufo",
+                    Category = ""
+                }, /* Empty Group */
+                new
+                {
+                    Text = "Volvo",
+                    Value = "volvo",
+                    Category = "Swedish Cars"
+                },
+                new
+                {
+                    Text = "Mercedes-Benz",
+                    Value = "mercedes-benz",
+                    Category = "German Cars"
+                },
+                new
+                {
+                    Text = "Saab",
+                    Value = "saab",
+                    Category = "Swedish Cars"
+                },
+                new
+                {
+                    Text = "Audi",
+                    Value = "audi",
+                    Category = "German Cars"
+                },
+                new
+                {
+                    Text = "Other",
+                    Value = "other",
+                    Category = (string)null
+                }, /* Another Empty Group */
+                new
+                {
+                    Text = "Unknown",
+                    Value = "unknown",
+                    Category = " "
+                } /* Unnamed Group */
             },
             "Value",
             "Text",

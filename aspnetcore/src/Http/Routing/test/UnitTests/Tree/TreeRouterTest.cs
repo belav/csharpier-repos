@@ -1450,7 +1450,12 @@ public class TreeRouterTest
         MapOutboundEntry(
             builder,
             "api/{area}/dosomething/{controller}/{action}",
-            new { action = "Index", controller = "Store", area = "AwesomeCo" }
+            new
+            {
+                action = "Index",
+                controller = "Store",
+                area = "AwesomeCo"
+            }
         );
 
         var route = builder.Build();
@@ -1508,7 +1513,12 @@ public class TreeRouterTest
         var route = builder.Build();
 
         var context = CreateVirtualPathContext(
-            new { action = "Index", controller = "Store", id = 5 }
+            new
+            {
+                action = "Index",
+                controller = "Store",
+                id = 5
+            }
         );
 
         // Act
@@ -1535,7 +1545,12 @@ public class TreeRouterTest
 
         var next = new StubRouter();
         var context = CreateVirtualPathContext(
-            new { action = "Index", controller = "Store", id = "heyyyy" }
+            new
+            {
+                action = "Index",
+                controller = "Store",
+                id = "heyyyy"
+            }
         );
 
         // Act
@@ -1625,21 +1640,36 @@ public class TreeRouterTest
         var entry1 = MapOutboundEntry(
             builder,
             "Help/Store",
-            new { area = "Help", action = "Edit", controller = "Store" }
+            new
+            {
+                area = "Help",
+                action = "Edit",
+                controller = "Store"
+            }
         );
         entry1.Precedence = 2;
 
         var entry2 = MapOutboundEntry(
             builder,
             "Store",
-            new { area = (string)null, action = "Edit", controller = "Store" }
+            new
+            {
+                area = (string)null,
+                action = "Edit",
+                controller = "Store"
+            }
         );
         entry2.Precedence = 1;
 
         var route = builder.Build();
 
         var context = CreateVirtualPathContext(
-            new { area = "Help", action = "Edit", controller = "Store" }
+            new
+            {
+                area = "Help",
+                action = "Edit",
+                controller = "Store"
+            }
         );
 
         // Act
@@ -1660,21 +1690,36 @@ public class TreeRouterTest
         var entry1 = MapOutboundEntry(
             builder,
             "Help/Store",
-            new { area = "Help", action = "Edit", controller = "Store" }
+            new
+            {
+                area = "Help",
+                action = "Edit",
+                controller = "Store"
+            }
         );
         entry1.Precedence = 1;
 
         var entry2 = MapOutboundEntry(
             builder,
             "Store",
-            new { area = (string)null, action = "Edit", controller = "Store" }
+            new
+            {
+                area = (string)null,
+                action = "Edit",
+                controller = "Store"
+            }
         );
         entry2.Precedence = 2;
 
         var route = builder.Build();
 
         var context = CreateVirtualPathContext(
-            new { area = "Help", action = "Edit", controller = "Store" }
+            new
+            {
+                area = "Help",
+                action = "Edit",
+                controller = "Store"
+            }
         );
 
         // Act
@@ -1695,14 +1740,24 @@ public class TreeRouterTest
         var entry1 = MapOutboundEntry(
             builder,
             "Help/Store",
-            new { area = "Help", action = "Edit", controller = "Store" }
+            new
+            {
+                area = "Help",
+                action = "Edit",
+                controller = "Store"
+            }
         );
         entry1.Precedence = 2;
 
         var entry2 = MapOutboundEntry(
             builder,
             "Store",
-            new { area = (string)null, action = "Edit", controller = "Store" }
+            new
+            {
+                area = (string)null,
+                action = "Edit",
+                controller = "Store"
+            }
         );
         entry2.Precedence = 1;
 
@@ -1731,14 +1786,24 @@ public class TreeRouterTest
         var entry1 = MapOutboundEntry(
             builder,
             "Help/Store",
-            new { area = "Help", action = "Edit", controller = "Store" }
+            new
+            {
+                area = "Help",
+                action = "Edit",
+                controller = "Store"
+            }
         );
         entry1.Precedence = 2;
 
         var entry2 = MapOutboundEntry(
             builder,
             "Store",
-            new { area = (string)null, action = "Edit", controller = "Store" }
+            new
+            {
+                area = (string)null,
+                action = "Edit",
+                controller = "Store"
+            }
         );
         entry2.Precedence = 1;
 
@@ -1771,7 +1836,12 @@ public class TreeRouterTest
                 new object[]
                 {
                     "Test/{val1}/{val2}.{val3?}",
-                    new { val1 = "someval1", val2 = "someval2", val3 = "someval3a" },
+                    new
+                    {
+                        val1 = "someval1",
+                        val2 = "someval2",
+                        val3 = "someval3a"
+                    },
                     new { val3 = "someval3v" },
                     "/Test/someval1/someval2.someval3v",
                 },
@@ -1779,7 +1849,12 @@ public class TreeRouterTest
                 {
                     "Test/{val1}/{val2}.{val3?}",
                     new { val3 = "someval3a" },
-                    new { val1 = "someval1", val2 = "someval2", val3 = "someval3v" },
+                    new
+                    {
+                        val1 = "someval1",
+                        val2 = "someval2",
+                        val3 = "someval3v"
+                    },
                     "/Test/someval1/someval2.someval3v",
                 },
                 new object[]
@@ -2053,11 +2128,21 @@ public class TreeRouterTest
         var entry = MapOutboundEntry(
             builder,
             "Help/Store",
-            requiredValues: new { area = (string)null, action = "Edit", controller = "Store" }
+            requiredValues: new
+            {
+                area = (string)null,
+                action = "Edit",
+                controller = "Store"
+            }
         );
         var route = builder.Build();
         var context = CreateVirtualPathContext(
-            new { area = (string)null, action = "Edit", controller = "Store" }
+            new
+            {
+                area = (string)null,
+                action = "Edit",
+                controller = "Store"
+            }
         );
 
         // Act
@@ -2078,11 +2163,21 @@ public class TreeRouterTest
         var entry = MapOutboundEntry(
             builder,
             "Help/Store",
-            requiredValues: new { area = (string)null, action = "Edit", controller = "Store" }
+            requiredValues: new
+            {
+                area = (string)null,
+                action = "Edit",
+                controller = "Store"
+            }
         );
         var route = builder.Build();
         var context = CreateVirtualPathContext(
-            new { area = "", action = "Edit", controller = "Store" }
+            new
+            {
+                area = "",
+                action = "Edit",
+                controller = "Store"
+            }
         );
 
         // Act
@@ -2103,11 +2198,21 @@ public class TreeRouterTest
         var entry = MapOutboundEntry(
             builder,
             "Help/Store",
-            requiredValues: new { foo = "", action = "Edit", controller = "Store" }
+            requiredValues: new
+            {
+                foo = "",
+                action = "Edit",
+                controller = "Store"
+            }
         );
         var route = builder.Build();
         var context = CreateVirtualPathContext(
-            new { foo = (string)null, action = "Edit", controller = "Store" }
+            new
+            {
+                foo = (string)null,
+                action = "Edit",
+                controller = "Store"
+            }
         );
 
         // Act
@@ -2128,11 +2233,21 @@ public class TreeRouterTest
         var entry = MapOutboundEntry(
             builder,
             "Help/Store",
-            requiredValues: new { foo = "", action = "Edit", controller = "Store" }
+            requiredValues: new
+            {
+                foo = "",
+                action = "Edit",
+                controller = "Store"
+            }
         );
         var route = builder.Build();
         var context = CreateVirtualPathContext(
-            new { foo = "", action = "Edit", controller = "Store" }
+            new
+            {
+                foo = "",
+                action = "Edit",
+                controller = "Store"
+            }
         );
 
         // Act

@@ -446,7 +446,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             httpContext: httpContext,
             endpoint: endpoint,
             values: new RouteValueDictionary(
-                new { action = "Index", ShowStatus = "True", INFO = "DETAILED" }
+                new
+                {
+                    action = "Index",
+                    ShowStatus = "True",
+                    INFO = "DETAILED"
+                }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
             options: null,
@@ -511,7 +516,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             httpContext: httpContext,
             endpoint: endpoint,
             values: new RouteValueDictionary(
-                new { action = "Index", ShowStatus = "True", INFO = "DETAILED" }
+                new
+                {
+                    action = "Index",
+                    ShowStatus = "True",
+                    INFO = "DETAILED"
+                }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
             options: null,
@@ -604,7 +614,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             httpContext: httpContext,
             endpoint: endpoint,
             values: new RouteValueDictionary(
-                new { action = "Index", ShowStatus = "True", INFO = "DETAILED" }
+                new
+                {
+                    action = "Index",
+                    ShowStatus = "True",
+                    INFO = "DETAILED"
+                }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
             options: new LinkOptions { LowercaseUrls = false, LowercaseQueryStrings = false },
@@ -639,7 +654,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             httpContext: httpContext,
             endpoint: endpoint,
             values: new RouteValueDictionary(
-                new { action = "Index", ShowStatus = "True", INFO = "DETAILED" }
+                new
+                {
+                    action = "Index",
+                    ShowStatus = "True",
+                    INFO = "DETAILED"
+                }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
             options: new LinkOptions() { LowercaseUrls = true, LowercaseQueryStrings = true, },
@@ -847,10 +867,20 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
         );
         var linkGenerator = CreateLinkGenerator(endpoint);
         var httpContext = CreateHttpContext(
-            ambientValues: new { controller = "Home", action = "Blog", extra = "42" }
+            ambientValues: new
+            {
+                controller = "Home",
+                action = "Blog",
+                extra = "42"
+            }
         );
         var expectedValues = new RouteValueDictionary(
-            new { controller = "Home", action = "Store", extra = "42" }
+            new
+            {
+                controller = "Home",
+                action = "Store",
+                extra = "42"
+            }
         );
 
         // Act
@@ -883,7 +913,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
         var constraint = new CapturingConstraint();
         var endpoint = EndpointFactory.CreateRouteEndpoint(
             template: "slug/Home/Store",
-            defaults: new { controller = "Home", action = "Store", otherthing = "17" },
+            defaults: new
+            {
+                controller = "Home",
+                action = "Store",
+                otherthing = "17"
+            },
             policies: new { c = constraint }
         );
         var linkGenerator = CreateLinkGenerator(endpoint);
@@ -971,11 +1006,22 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
         );
         var linkGenerator = CreateLinkGenerator(endpoint);
         var httpContext = CreateHttpContext(
-            ambientValues: new { controller = "Home", action = "Blog", otherthing = "17" }
+            ambientValues: new
+            {
+                controller = "Home",
+                action = "Blog",
+                otherthing = "17"
+            }
         );
 
         var expectedValues = new RouteValueDictionary(
-            new { controller = "Home", action = "Store", otherthing = "17", thirdthing = "13" }
+            new
+            {
+                controller = "Home",
+                action = "Store",
+                otherthing = "17",
+                thirdthing = "13"
+            }
         );
 
         // Act
@@ -1017,7 +1063,14 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
         var success = linkGenerator.TryProcessTemplate(
             httpContext: httpContext,
             endpoint: endpoint,
-            values: new RouteValueDictionary(new { action = "Index", controller = "Home", id = 4 }),
+            values: new RouteValueDictionary(
+                new
+                {
+                    action = "Index",
+                    controller = "Home",
+                    id = 4
+                }
+            ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
             options: null,
             result: out var result
@@ -1046,7 +1099,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             httpContext: httpContext,
             endpoint: endpoint,
             values: new RouteValueDictionary(
-                new { action = "Index", controller = "Home", id = "not-an-integer" }
+                new
+                {
+                    action = "Index",
+                    controller = "Home",
+                    id = "not-an-integer"
+                }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
             options: null,
@@ -1078,7 +1136,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             httpContext: httpContext,
             endpoint: endpoint,
             values: new RouteValueDictionary(
-                new { action = "Index", controller = "Home", id = 98 }
+                new
+                {
+                    action = "Index",
+                    controller = "Home",
+                    id = 98
+                }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
             options: null,
@@ -1136,7 +1199,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             httpContext: httpContext,
             endpoint: endpoint,
             values: new RouteValueDictionary(
-                new { action = "Index", controller = "Home", id = "not-an-integer" }
+                new
+                {
+                    action = "Index",
+                    controller = "Home",
+                    id = "not-an-integer"
+                }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
             options: null,
@@ -1166,7 +1234,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             httpContext: httpContext,
             endpoint: endpoint,
             values: new RouteValueDictionary(
-                new { action = "Index", controller = "Home", id = 14 }
+                new
+                {
+                    action = "Index",
+                    controller = "Home",
+                    id = 14
+                }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
             options: null,
@@ -1200,7 +1273,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             httpContext: httpContext,
             endpoint: endpoint,
             values: new RouteValueDictionary(
-                new { action = "Index", controller = "Home", id = 50 }
+                new
+                {
+                    action = "Index",
+                    controller = "Home",
+                    id = 50
+                }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
             options: null,
@@ -1229,7 +1307,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             httpContext: httpContext,
             endpoint: endpoint,
             values: new RouteValueDictionary(
-                new { action = "Index", controller = "Home", name = "products" }
+                new
+                {
+                    action = "Index",
+                    controller = "Home",
+                    name = "products"
+                }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
             options: null,
@@ -1255,7 +1338,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             httpContext: httpContext,
             endpoint: endpoint,
             values: new RouteValueDictionary(
-                new { action = "Index", controller = "Home", name = "products" }
+                new
+                {
+                    action = "Index",
+                    controller = "Home",
+                    name = "products"
+                }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
             options: null,
@@ -1308,7 +1396,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             httpContext: httpContext,
             endpoint: endpoint,
             values: new RouteValueDictionary(
-                new { action = "Index", controller = "Home", name = "products" }
+                new
+                {
+                    action = "Index",
+                    controller = "Home",
+                    name = "products"
+                }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
             options: null,
@@ -1361,7 +1454,13 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             httpContext: httpContext,
             endpoint: endpoint,
             values: new RouteValueDictionary(
-                new { action = "Index", controller = "Home", name = "products", format = "json" }
+                new
+                {
+                    action = "Index",
+                    controller = "Home",
+                    name = "products",
+                    format = "json"
+                }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
             options: null,
@@ -1389,7 +1488,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             httpContext: httpContext,
             endpoint: endpoint,
             values: new RouteValueDictionary(
-                new { action = "Index", controller = "Home", name = "products" }
+                new
+                {
+                    action = "Index",
+                    controller = "Home",
+                    name = "products"
+                }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
             options: null,
@@ -1533,7 +1637,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             {
                 // link to same action on same controller
                 {
-                    new { controller = "Products", action = "Edit", id = 10 },
+                    new
+                    {
+                        controller = "Products",
+                        action = "Edit",
+                        id = 10
+                    },
                     new { controller = "Products", action = "Edit" },
                     new
                     {
@@ -1552,7 +1661,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 },
                 // link to same action on same controller - ignoring case
                 {
-                    new { controller = "ProDUcts", action = "EDit", id = 10 },
+                    new
+                    {
+                        controller = "ProDUcts",
+                        action = "EDit",
+                        id = 10
+                    },
                     new { controller = "ProDUcts", action = "EDit" },
                     new
                     {
@@ -1571,8 +1685,19 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 },
                 // link to same action and same controller on same area
                 {
-                    new { area = "Admin", controller = "Products", action = "Edit", id = 10 },
-                    new { area = "Admin", controller = "Products", action = "Edit" },
+                    new
+                    {
+                        area = "Admin",
+                        controller = "Products",
+                        action = "Edit",
+                        id = 10
+                    },
+                    new
+                    {
+                        area = "Admin",
+                        controller = "Products",
+                        action = "Edit"
+                    },
                     new
                     {
                         area = "Admin",
@@ -1590,7 +1715,13 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 },
                 // link to same action and same controller on same area
                 {
-                    new { area = "Admin", controller = "Products", action = "Edit", id = 10 },
+                    new
+                    {
+                        area = "Admin",
+                        controller = "Products",
+                        action = "Edit",
+                        id = 10
+                    },
                     new { controller = "Products", action = "Edit" },
                     new
                     {
@@ -1609,7 +1740,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 },
                 // link to same action and same controller
                 {
-                    new { controller = "Products", action = "Edit", id = 10 },
+                    new
+                    {
+                        controller = "Products",
+                        action = "Edit",
+                        id = 10
+                    },
                     new { controller = "Products", action = "Edit" },
                     new
                     {
@@ -1627,7 +1763,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                     }
                 },
                 {
-                    new { controller = "Products", action = "Edit", id = 10 },
+                    new
+                    {
+                        controller = "Products",
+                        action = "Edit",
+                        id = 10
+                    },
                     new { controller = "Products", action = "Edit" },
                     new
                     {
@@ -1645,10 +1786,27 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                     }
                 },
                 {
-                    new { controller = "Products", action = "Edit", id = 10 },
+                    new
+                    {
+                        controller = "Products",
+                        action = "Edit",
+                        id = 10
+                    },
                     new { controller = "Products", action = "Edit" },
-                    new { area = "", controller = "Products", action = "Edit", page = "" },
-                    new { area = "", controller = "Products", action = "Edit", page = "" }
+                    new
+                    {
+                        area = "",
+                        controller = "Products",
+                        action = "Edit",
+                        page = ""
+                    },
+                    new
+                    {
+                        area = "",
+                        controller = "Products",
+                        action = "Edit",
+                        page = ""
+                    }
                 },
                 // link to same page
                 {
@@ -1720,7 +1878,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
         );
         var linkGenerator = CreateLinkGenerator(endpoint);
         var httpContext = CreateHttpContext(
-            ambientValues: new { c = "Products", a = "Edit", id = 10 }
+            ambientValues: new
+            {
+                c = "Products",
+                a = "Edit",
+                id = 10
+            }
         );
 
         // Act
@@ -1752,7 +1915,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
         );
         var linkGenerator = CreateLinkGenerator(endpoint);
         var httpContext = CreateHttpContext(
-            ambientValues: new { c = "Products", a = "Edit", id = 10 }
+            ambientValues: new
+            {
+                c = "Products",
+                a = "Edit",
+                id = 10
+            }
         );
 
         // Act
@@ -1781,7 +1949,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             {
                 // link to different action on same controller
                 {
-                    new { controller = "Products", action = "Edit", id = 10 },
+                    new
+                    {
+                        controller = "Products",
+                        action = "Edit",
+                        id = 10
+                    },
                     new { controller = "Products", action = "List" },
                     new
                     {
@@ -1800,8 +1973,19 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 },
                 // link to different action on same controller and same area
                 {
-                    new { area = "Customer", controller = "Products", action = "Edit", id = 10 },
-                    new { area = "Customer", controller = "Products", action = "List" },
+                    new
+                    {
+                        area = "Customer",
+                        controller = "Products",
+                        action = "Edit",
+                        id = 10
+                    },
+                    new
+                    {
+                        area = "Customer",
+                        controller = "Products",
+                        action = "List"
+                    },
                     new
                     {
                         area = "Customer",
@@ -1819,8 +2003,19 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 },
                 // link from one area to a different one
                 {
-                    new { area = "Admin", controller = "Products", action = "Edit", id = 10 },
-                    new { area = "Consumer", controller = "Products", action = "Edit" },
+                    new
+                    {
+                        area = "Admin",
+                        controller = "Products",
+                        action = "Edit",
+                        id = 10
+                    },
+                    new
+                    {
+                        area = "Consumer",
+                        controller = "Products",
+                        action = "Edit"
+                    },
                     new
                     {
                         area = "Consumer",
@@ -1838,8 +2033,18 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 },
                 // link from non-area to a area one
                 {
-                    new { controller = "Products", action = "Edit", id = 10 },
-                    new { area = "Consumer", controller = "Products", action = "Edit" },
+                    new
+                    {
+                        controller = "Products",
+                        action = "Edit",
+                        id = 10
+                    },
+                    new
+                    {
+                        area = "Consumer",
+                        controller = "Products",
+                        action = "Edit"
+                    },
                     new
                     {
                         area = "Consumer",
@@ -1857,8 +2062,19 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 },
                 // link from area to a non-area based action
                 {
-                    new { area = "Admin", controller = "Products", action = "Edit", id = 10 },
-                    new { area = "", controller = "Products", action = "Edit" },
+                    new
+                    {
+                        area = "Admin",
+                        controller = "Products",
+                        action = "Edit",
+                        id = 10
+                    },
+                    new
+                    {
+                        area = "",
+                        controller = "Products",
+                        action = "Edit"
+                    },
                     new
                     {
                         area = "",
@@ -1866,11 +2082,22 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                         action = "Edit",
                         page = (string)null
                     },
-                    new { area = "", controller = "Products", action = "Edit", page = (string)null }
+                    new
+                    {
+                        area = "",
+                        controller = "Products",
+                        action = "Edit",
+                        page = (string)null
+                    }
                 },
                 // link from controller-action to a page
                 {
-                    new { controller = "Products", action = "Edit", id = 10 },
+                    new
+                    {
+                        controller = "Products",
+                        action = "Edit",
+                        id = 10
+                    },
                     new { page = "Products/Edit" },
                     new
                     {

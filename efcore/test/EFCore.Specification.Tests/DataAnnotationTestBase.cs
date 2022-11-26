@@ -977,7 +977,15 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
 
         modelBuilder
             .Entity<GeneratedEntityNonInteger>()
-            .HasAlternateKey(e => new { e.String, e.DateTime, e.Guid });
+            .HasAlternateKey(
+                e =>
+                    new
+                    {
+                        e.String,
+                        e.DateTime,
+                        e.Guid
+                    }
+            );
 
         var entity = modelBuilder.Model.FindEntityType(typeof(GeneratedEntityNonInteger));
 

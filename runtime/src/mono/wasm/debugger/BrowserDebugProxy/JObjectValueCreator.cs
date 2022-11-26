@@ -37,7 +37,18 @@ internal sealed class JObjectValueCreator
         bool isEnum = false
     )
     {
-        var ret = JObject.FromObject(new { value = new { type, value, description }, writable });
+        var ret = JObject.FromObject(
+            new
+            {
+                value = new
+                {
+                    type,
+                    value,
+                    description
+                },
+                writable
+            }
+        );
         if (className != null)
             ret["value"]["className"] = className;
         if (objectId != null)

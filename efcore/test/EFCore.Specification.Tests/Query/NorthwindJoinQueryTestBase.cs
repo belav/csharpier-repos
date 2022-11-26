@@ -62,7 +62,12 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                 from c in ss.Set<Customer>().Where(c => c.CustomerID.StartsWith("F"))
                 join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID
                 from e in ss.Set<Employee>()
-                select new { c, o, e },
+                select new
+                {
+                    c,
+                    o,
+                    e
+                },
             e => (e.c.CustomerID, e.o.OrderID, e.e.EmployeeID),
             entryCount: 79
         );
@@ -81,7 +86,12 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                         join e2 in ss.Set<Employee>().OrderBy(e => e.EmployeeID).Take(2)
                             on e1.EmployeeID equals GetEmployeeID(e2)
                         from e3 in ss.Set<Employee>().OrderBy(e => e.EmployeeID).Skip(6).Take(2)
-                        select new { e1, e2, e3 },
+                        select new
+                        {
+                            e1,
+                            e2,
+                            e3
+                        },
                     e => (e.e1.EmployeeID, e.e2.EmployeeID, e.e3.EmployeeID),
                     entryCount: 4
                 )
@@ -140,7 +150,12 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                 join o1 in (from o2 in ss.Set<Order>() orderby o2.OrderID select new { o2 })
                     on c.CustomerID equals o1.o2.CustomerID
                 where EF.Property<string>(o1.o2, "CustomerID") == "ALFKI"
-                select new { o1, o1.o2, Shadow = EF.Property<DateTime?>(o1.o2, "OrderDate") },
+                select new
+                {
+                    o1,
+                    o1.o2,
+                    Shadow = EF.Property<DateTime?>(o1.o2, "OrderDate")
+                },
             e => e.o1.o2.OrderID,
             entryCount: 6
         );
@@ -157,7 +172,12 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                 join o1 in (from o2 in ss.Set<Order>() orderby o2.OrderID select new { o2 }).Take(5)
                     on c.CustomerID equals o1.o2.CustomerID
                 where EF.Property<string>(o1.o2, "CustomerID") == "ALFKI"
-                select new { o1, o1.o2, Shadow = EF.Property<DateTime?>(o1.o2, "OrderDate") },
+                select new
+                {
+                    o1,
+                    o1.o2,
+                    Shadow = EF.Property<DateTime?>(o1.o2, "OrderDate")
+                },
             e => e.o1.o2.OrderID
         );
 
@@ -513,7 +533,12 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                 from o0 in ss.Set<Order>().OrderBy(o => o.OrderID).Take(1)
                 join o1 in ss.Set<Order>() on c.CustomerID equals o1.CustomerID into orders
                 from o2 in orders
-                select new { A = c.CustomerID, B = o0.CustomerID, C = o2.CustomerID },
+                select new
+                {
+                    A = c.CustomerID,
+                    B = o0.CustomerID,
+                    C = o2.CustomerID
+                },
             e => (e.A, e.B, e.C)
         );
 
@@ -606,7 +631,12 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                 from o1 in orders1.DefaultIfEmpty()
                 join o2 in ss.Set<Order>() on c.CustomerID equals o2.CustomerID into orders2
                 from o2 in orders2.DefaultIfEmpty()
-                select new { c, o1, o2 },
+                select new
+                {
+                    c,
+                    o1,
+                    o2
+                },
             e => (e.c.CustomerID, e.o1?.OrderID, e.o2?.OrderID),
             entryCount: 71
         );

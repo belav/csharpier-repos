@@ -211,7 +211,12 @@ public class EndpointRoutingUrlHelperTest : UrlHelperTestBase
         endpoints.Add(
             CreateEndpoint(
                 "home/newaction/{id}",
-                defaults: new { id = "defaultid", controller = "home", action = "newaction" },
+                defaults: new
+                {
+                    id = "defaultid",
+                    controller = "home",
+                    action = "newaction"
+                },
                 requiredValues: new { controller = "home", action = "newaction" },
                 order: 1
             )
@@ -219,7 +224,12 @@ public class EndpointRoutingUrlHelperTest : UrlHelperTestBase
         endpoints.Add(
             CreateEndpoint(
                 "home/contact/{id}",
-                defaults: new { id = "defaultid", controller = "home", action = "contact" },
+                defaults: new
+                {
+                    id = "defaultid",
+                    controller = "home",
+                    action = "contact"
+                },
                 requiredValues: new { controller = "home", action = "contact" },
                 order: 2
             )
@@ -227,7 +237,12 @@ public class EndpointRoutingUrlHelperTest : UrlHelperTestBase
         endpoints.Add(
             CreateEndpoint(
                 "home2/newaction/{id}",
-                defaults: new { id = "defaultid", controller = "home2", action = "newaction" },
+                defaults: new
+                {
+                    id = "defaultid",
+                    controller = "home2",
+                    action = "newaction"
+                },
                 requiredValues: new { controller = "home2", action = "newaction" },
                 order: 3
             )
@@ -235,7 +250,12 @@ public class EndpointRoutingUrlHelperTest : UrlHelperTestBase
         endpoints.Add(
             CreateEndpoint(
                 "home2/contact/{id}",
-                defaults: new { id = "defaultid", controller = "home2", action = "contact" },
+                defaults: new
+                {
+                    id = "defaultid",
+                    controller = "home2",
+                    action = "contact"
+                },
                 requiredValues: new { controller = "home2", action = "contact" },
                 order: 4
             )
@@ -243,7 +263,12 @@ public class EndpointRoutingUrlHelperTest : UrlHelperTestBase
         endpoints.Add(
             CreateEndpoint(
                 "home3/contact/{id}",
-                defaults: new { id = "defaultid", controller = "home3", action = "contact" },
+                defaults: new
+                {
+                    id = "defaultid",
+                    controller = "home3",
+                    action = "contact"
+                },
                 requiredValues: new { controller = "home3", action = "contact" },
                 order: 5
             )
@@ -251,7 +276,12 @@ public class EndpointRoutingUrlHelperTest : UrlHelperTestBase
         endpoints.Add(
             CreateEndpoint(
                 "named/home/newaction/{id}",
-                defaults: new { id = "defaultid", controller = "home", action = "newaction" },
+                defaults: new
+                {
+                    id = "defaultid",
+                    controller = "home",
+                    action = "newaction"
+                },
                 requiredValues: new { controller = "home", action = "newaction" },
                 order: 6,
                 routeName: "namedroute"
@@ -260,7 +290,12 @@ public class EndpointRoutingUrlHelperTest : UrlHelperTestBase
         endpoints.Add(
             CreateEndpoint(
                 "named/home2/newaction/{id}",
-                defaults: new { id = "defaultid", controller = "home2", action = "newaction" },
+                defaults: new
+                {
+                    id = "defaultid",
+                    controller = "home2",
+                    action = "newaction"
+                },
                 requiredValues: new { controller = "home2", action = "newaction" },
                 order: 7,
                 routeName: "namedroute"
@@ -269,7 +304,12 @@ public class EndpointRoutingUrlHelperTest : UrlHelperTestBase
         endpoints.Add(
             CreateEndpoint(
                 "named/home/contact/{id}",
-                defaults: new { id = "defaultid", controller = "home", action = "contact" },
+                defaults: new
+                {
+                    id = "defaultid",
+                    controller = "home",
+                    action = "contact"
+                },
                 requiredValues: new { controller = "home", action = "contact" },
                 order: 8,
                 routeName: "namedroute"

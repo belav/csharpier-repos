@@ -672,7 +672,12 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
                         x.Property<int>("Value1");
                         x.Property<string>("Value2");
                         x.HasData(
-                            new { Id = 99999, Value1 = 0, Value2 = "" }, // deleted
+                            new
+                            {
+                                Id = 99999,
+                                Value1 = 0,
+                                Value2 = ""
+                            }, // deleted
                             new
                             {
                                 Id = 42,
@@ -680,8 +685,18 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
                                 Value2 = "equal",
                                 InvalidProperty = "is ignored"
                             }, // modified
-                            new { Id = 8, Value1 = 100, Value2 = "equal" }, // unchanged
-                            new { Id = 24, Value1 = 72, Value2 = "not equal1" }
+                            new
+                            {
+                                Id = 8,
+                                Value1 = 100,
+                                Value2 = "equal"
+                            }, // unchanged
+                            new
+                            {
+                                Id = 24,
+                                Value1 = 72,
+                                Value2 = "not equal1"
+                            }
                         ); // modified
                     }
                 ),
@@ -694,8 +709,18 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
                         x.Property<int>("Value1");
                         x.Property<string>("Value2");
                         x.HasData(
-                            new { Id = 11111, Value1 = 0, Value2 = "" }, // added
-                            new { Id = 11112, Value1 = 1, Value2 = "new" }, // added
+                            new
+                            {
+                                Id = 11111,
+                                Value1 = 0,
+                                Value2 = ""
+                            }, // added
+                            new
+                            {
+                                Id = 11112,
+                                Value1 = 1,
+                                Value2 = "new"
+                            }, // added
                             new
                             {
                                 Id = 42,
@@ -703,8 +728,18 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
                                 Value2 = "equal",
                                 InvalidProperty = "is ignored here too"
                             }, // modified
-                            new { Id = 8, Value1 = 100, Value2 = "equal" }, // unchanged
-                            new { Id = 24, Value1 = 99, Value2 = "not equal2" }
+                            new
+                            {
+                                Id = 8,
+                                Value1 = 100,
+                                Value2 = "equal"
+                            }, // unchanged
+                            new
+                            {
+                                Id = 24,
+                                Value1 = 99,
+                                Value2 = "not equal2"
+                            }
                         ); // modified
                     }
                 ),

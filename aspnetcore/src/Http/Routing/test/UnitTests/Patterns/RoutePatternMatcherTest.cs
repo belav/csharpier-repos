@@ -407,7 +407,13 @@ public class RoutePatternMatcherTest
         // Arrange
         var matcher = CreateMatcher(
             "date/{y}/{m}/{d}",
-            new { controller = "blog", action = "showpost", m = (string)null, d = (string)null }
+            new
+            {
+                controller = "blog",
+                action = "showpost",
+                m = (string)null,
+                d = (string)null
+            }
         );
 
         var values = new RouteValueDictionary();
@@ -545,7 +551,12 @@ public class RoutePatternMatcherTest
             "/home.mvc/index",
             new RouteValueDictionary(new { action = "Index", id = (string)null }),
             new RouteValueDictionary(
-                new { controller = "home", action = "index", id = (string)null }
+                new
+                {
+                    controller = "home",
+                    action = "index",
+                    id = (string)null
+                }
             )
         );
     }
@@ -568,7 +579,14 @@ public class RoutePatternMatcherTest
             "{Controller}..mvc/{id}/{Param1}",
             "/Home..mvc/123/p1",
             null,
-            new RouteValueDictionary(new { Controller = "Home", id = "123", Param1 = "p1" })
+            new RouteValueDictionary(
+                new
+                {
+                    Controller = "Home",
+                    id = "123",
+                    Param1 = "p1"
+                }
+            )
         );
     }
 
@@ -645,7 +663,14 @@ public class RoutePatternMatcherTest
             @"{Controller}.mvc\{id}\{Param1}",
             @"/Home.mvc\123\p1",
             null,
-            new RouteValueDictionary(new { Controller = "Home", id = "123", Param1 = "p1" })
+            new RouteValueDictionary(
+                new
+                {
+                    Controller = "Home",
+                    id = "123",
+                    Param1 = "p1"
+                }
+            )
         );
     }
 

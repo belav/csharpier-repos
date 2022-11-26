@@ -486,9 +486,29 @@ public class MismatchedKeyTypesSqlServerTest
                 .HasColumnType("smallint")
                 .HasValueGenerator<TemporaryByteValueGenerator>();
 
-            modelBuilder.Entity<PrincipalComposite>().HasKey(e => new { e.Id1, e.Id2, e.Id3 });
+            modelBuilder
+                .Entity<PrincipalComposite>()
+                .HasKey(
+                    e =>
+                        new
+                        {
+                            e.Id1,
+                            e.Id2,
+                            e.Id3
+                        }
+                );
 
-            modelBuilder.Entity<PrincipalBadComposite>().HasKey(e => new { e.Id1, e.Id2, e.Id3 });
+            modelBuilder
+                .Entity<PrincipalBadComposite>()
+                .HasKey(
+                    e =>
+                        new
+                        {
+                            e.Id1,
+                            e.Id2,
+                            e.Id3
+                        }
+                );
 
             modelBuilder.Entity<PrincipalBad>().Property(e => e.Id).ValueGeneratedNever();
 

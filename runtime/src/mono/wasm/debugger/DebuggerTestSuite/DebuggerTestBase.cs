@@ -722,7 +722,12 @@ namespace DebuggerTests
         )
         {
             var setNextIPArgs = JObject.FromObject(
-                new { scriptId = script_id, lineNumber = line, columnNumber = column }
+                new
+                {
+                    scriptId = script_id,
+                    lineNumber = line,
+                    columnNumber = column
+                }
             );
 
             if (!expected_error)
@@ -1502,7 +1507,13 @@ namespace DebuggerTests
                     }
                 )
                 : JObject.FromObject(
-                    new { lineNumber = line, columnNumber = column, urlRegex = url_key, condition }
+                    new
+                    {
+                        lineNumber = line,
+                        columnNumber = column,
+                        urlRegex = url_key,
+                        condition
+                    }
                 );
 
             var bp1_res = await cli.SendCommand("Debugger.setBreakpointByUrl", bp1_req, token);
@@ -1548,7 +1559,13 @@ namespace DebuggerTests
             var m_line = res.Value["result"]["line"].Value<int>();
 
             var bp1_req = JObject.FromObject(
-                new { lineNumber = m_line + lineOffset, columnNumber = col, url = m_url, condition }
+                new
+                {
+                    lineNumber = m_line + lineOffset,
+                    columnNumber = col,
+                    url = m_url,
+                    condition
+                }
             );
 
             res = await cli.SendCommand("Debugger.setBreakpointByUrl", bp1_req, token);
@@ -1616,18 +1633,33 @@ namespace DebuggerTests
         internal static JObject TString(string value) =>
             value == null
                 ? JObject.FromObject(
-                    new { type = "object", className = "string", subtype = "null" }
+                    new
+                    {
+                        type = "object",
+                        className = "string",
+                        subtype = "null"
+                    }
                 )
                 : JObject.FromObject(new { type = "string", value = @value });
 
         internal static JObject TNumber(int value) =>
             JObject.FromObject(
-                new { type = "number", value = @value.ToString(), description = value.ToString() }
+                new
+                {
+                    type = "number",
+                    value = @value.ToString(),
+                    description = value.ToString()
+                }
             );
 
         internal static JObject TNumber(uint value) =>
             JObject.FromObject(
-                new { type = "number", value = @value.ToString(), description = value.ToString() }
+                new
+                {
+                    type = "number",
+                    value = @value.ToString(),
+                    description = value.ToString()
+                }
             );
 
         // If is decimal, skip description due to culture-specific separators.
@@ -1665,7 +1697,13 @@ namespace DebuggerTests
 
         internal static JObject TEnum(string className, string descr, object members = null) =>
             JObject.FromObject(
-                new { type = "object", isEnum = true, className = className, description = descr }
+                new
+                {
+                    type = "object",
+                    isEnum = true,
+                    className = className,
+                    description = descr
+                }
             );
 
         internal static JObject TObject(
@@ -1693,19 +1731,44 @@ namespace DebuggerTests
                 );
 
         internal static JObject TArray(string className, string description) =>
-            JObject.FromObject(new { type = "object", className, description, subtype = "array" });
+            JObject.FromObject(
+                new
+                {
+                    type = "object",
+                    className,
+                    description,
+                    subtype = "array"
+                }
+            );
 
         internal static JObject TBool(bool value) =>
             JObject.FromObject(
-                new { type = "boolean", value = @value, description = @value ? "true" : "false" }
+                new
+                {
+                    type = "boolean",
+                    value = @value,
+                    description = @value ? "true" : "false"
+                }
             );
 
         internal static JObject TSymbol(string value) =>
-            JObject.FromObject(new { type = "symbol", value = @value, description = @value });
+            JObject.FromObject(
+                new
+                {
+                    type = "symbol",
+                    value = @value,
+                    description = @value
+                }
+            );
 
         internal static JObject TChar(char value) =>
             JObject.FromObject(
-                new { type = "symbol", value = @value, description = $"{(int)value} '{@value}'" }
+                new
+                {
+                    type = "symbol",
+                    value = @value,
+                    description = $"{(int)value} '{@value}'"
+                }
             );
 
         /*
@@ -1716,7 +1779,12 @@ namespace DebuggerTests
         */
         internal static JObject TDelegate(string className, string target) =>
             JObject.FromObject(
-                new { __custom_type = "delegate", className = className, target = target }
+                new
+                {
+                    __custom_type = "delegate",
+                    className = className,
+                    target = target
+                }
             );
 
         internal static JObject TPointer(string type_name, bool is_null = false) =>
@@ -1734,7 +1802,14 @@ namespace DebuggerTests
             JObject.FromObject(new { __custom_type = "ignore_me" });
 
         internal static JObject TGetter(string type, JObject value = null) =>
-            JObject.FromObject(new { __custom_type = "getter", type_name = type, value = value });
+            JObject.FromObject(
+                new
+                {
+                    __custom_type = "getter",
+                    type_name = type,
+                    value = value
+                }
+            );
 
         internal static JObject TDateTime(DateTime dt) =>
             JObject.FromObject(new { __custom_type = "datetime", binary = dt.ToBinary() });
@@ -1888,7 +1963,13 @@ namespace DebuggerTests
             var moduleGUID = moduleGUID_res.Value["result"]["value"];
 
             var applyUpdates = JObject.FromObject(
-                new { moduleGUID, dmeta = dmeta1, dil = dil1, dpdb = dpdb1 }
+                new
+                {
+                    moduleGUID,
+                    dmeta = dmeta1,
+                    dil = dil1,
+                    dpdb = dpdb1
+                }
             );
 
             if (rebindBreakpoint != null && rebindBeforeUpdates)

@@ -88,7 +88,12 @@ namespace Castle.Core.Tests
         public void EnumeratorIteration()
         {
             var dict = new ReflectionBasedDictionaryAdapter(
-                new { foo = 1, name = "jonh", age = 25 }
+                new
+                {
+                    foo = 1,
+                    name = "jonh",
+                    age = 25
+                }
             );
 
             Assert.AreEqual(3, dict.Count);
@@ -105,7 +110,12 @@ namespace Castle.Core.Tests
         [Test]
         public void Using_anonymous_types_works_without_exception()
         {
-            var target = new { foo = 1, name = "john", age = 25 };
+            var target = new
+            {
+                foo = 1,
+                name = "john",
+                age = 25
+            };
             Assert.IsFalse(target.GetType().IsPublic);
             var dict = new ReflectionBasedDictionaryAdapter(target);
 

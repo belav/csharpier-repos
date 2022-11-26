@@ -356,7 +356,12 @@ public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startu
                 "http://localhost/ConventionalTransformerRoute/conventional-transformer/Index"
             )
             .To(
-                new { action = "Param", controller = "ConventionalTransformer", param = "MyValue" }
+                new
+                {
+                    action = "Param",
+                    controller = "ConventionalTransformer",
+                    param = "MyValue"
+                }
             );
 
         // Act

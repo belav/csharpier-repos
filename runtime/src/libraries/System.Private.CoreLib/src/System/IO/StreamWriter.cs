@@ -310,8 +310,6 @@ namespace System.IO
                 }
             }
 
-            // For sufficiently small char data being flushed, try to encode to the stack.
-            // For anything else, fall back to allocating the byte[] buffer.
             scoped Span<byte> byteBuffer;
             if (_byteBuffer is not null)
             {

@@ -21,7 +21,12 @@ namespace System.Web.Mvc.Test
             routes.MapRoute(
                 "Default",
                 "no-area/{controller}/{action}/{id}",
-                new { controller = "Home", action = "Index", id = "" }
+                new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    id = ""
+                }
             );
 
             RequestContext requestContext = GetRequestContext(null);
@@ -522,26 +527,46 @@ namespace System.Web.Mvc.Test
             routes.MapRoute(
                 "Default",
                 "no-area/{controller}/{action}/{id}",
-                new { controller = "Home", action = "Index", id = "" }
+                new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    id = ""
+                }
             );
 
             AreaRegistrationContext blogContext = new AreaRegistrationContext("blog", routes);
             blogContext.MapRoute(
                 "Blog_WhatsNew",
                 "whats-new/{tag}",
-                new { controller = "Home", action = "TenMostRecent", tag = "" }
+                new
+                {
+                    controller = "Home",
+                    action = "TenMostRecent",
+                    tag = ""
+                }
             );
             blogContext.MapRoute(
                 "Blog_Default",
                 "blog-area/{controller}/{action}/{id}",
-                new { controller = "Home", action = "Index", id = "" }
+                new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    id = ""
+                }
             );
 
             AreaRegistrationContext adminContext = new AreaRegistrationContext("admin", routes);
             adminContext.MapRoute(
                 "Admin_Default",
                 "admin-area/{controller}/{action}/{id}",
-                new { controller = "Home", action = "Index", id = "" }
+                new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    id = ""
+                }
             );
 
             return routes;

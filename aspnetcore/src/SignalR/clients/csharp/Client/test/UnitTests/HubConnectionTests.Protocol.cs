@@ -309,7 +309,14 @@ public partial class HubConnectionTests
                 var invokeTask = hubConnection.InvokeAsync<int>("Foo");
 
                 await connection
-                    .ReceiveJsonMessage(new { invocationId = "1", type = 3, result = 42 })
+                    .ReceiveJsonMessage(
+                        new
+                        {
+                            invocationId = "1",
+                            type = 3,
+                            result = 42
+                        }
+                    )
                     .DefaultTimeout();
 
                 Assert.Equal(42, await invokeTask.DefaultTimeout());
@@ -334,7 +341,12 @@ public partial class HubConnectionTests
 
                 await connection
                     .ReceiveJsonMessage(
-                        new { invocationId = "1", type = 3, error = "An error occurred" }
+                        new
+                        {
+                            invocationId = "1",
+                            type = 3,
+                            error = "An error occurred"
+                        }
                     )
                     .DefaultTimeout();
 
@@ -362,7 +374,14 @@ public partial class HubConnectionTests
                     .DefaultTimeout();
 
                 await connection
-                    .ReceiveJsonMessage(new { invocationId = "1", type = 3, result = "Oops" })
+                    .ReceiveJsonMessage(
+                        new
+                        {
+                            invocationId = "1",
+                            type = 3,
+                            result = "Oops"
+                        }
+                    )
                     .DefaultTimeout();
 
                 var ex = await Assert
@@ -393,7 +412,12 @@ public partial class HubConnectionTests
 
                 await connection
                     .ReceiveJsonMessage(
-                        new { invocationId = "1", type = 3, error = "An error occurred" }
+                        new
+                        {
+                            invocationId = "1",
+                            type = 3,
+                            error = "An error occurred"
+                        }
                     )
                     .DefaultTimeout();
 
@@ -421,7 +445,14 @@ public partial class HubConnectionTests
                 var invokeTask = hubConnection.InvokeAsync<int>("Foo");
 
                 await connection
-                    .ReceiveJsonMessage(new { invocationId = "1", type = 2, item = 42 })
+                    .ReceiveJsonMessage(
+                        new
+                        {
+                            invocationId = "1",
+                            type = 2,
+                            item = 42
+                        }
+                    )
                     .DefaultTimeout();
 
                 var ex = await Assert
@@ -453,13 +484,34 @@ public partial class HubConnectionTests
                     .DefaultTimeout();
 
                 await connection
-                    .ReceiveJsonMessage(new { invocationId = "1", type = 2, item = "1" })
+                    .ReceiveJsonMessage(
+                        new
+                        {
+                            invocationId = "1",
+                            type = 2,
+                            item = "1"
+                        }
+                    )
                     .DefaultTimeout();
                 await connection
-                    .ReceiveJsonMessage(new { invocationId = "1", type = 2, item = "2" })
+                    .ReceiveJsonMessage(
+                        new
+                        {
+                            invocationId = "1",
+                            type = 2,
+                            item = "2"
+                        }
+                    )
                     .DefaultTimeout();
                 await connection
-                    .ReceiveJsonMessage(new { invocationId = "1", type = 2, item = "3" })
+                    .ReceiveJsonMessage(
+                        new
+                        {
+                            invocationId = "1",
+                            type = 2,
+                            item = "3"
+                        }
+                    )
                     .DefaultTimeout();
                 await connection
                     .ReceiveJsonMessage(new { invocationId = "1", type = 3 })
@@ -494,7 +546,13 @@ public partial class HubConnectionTests
                 var args = new object[] { 1, "Foo", 2.0f };
                 await connection
                     .ReceiveJsonMessage(
-                        new { invocationId = "1", type = 1, target = "Foo", arguments = args }
+                        new
+                        {
+                            invocationId = "1",
+                            type = 1,
+                            target = "Foo",
+                            arguments = args
+                        }
                     )
                     .DefaultTimeout();
 
@@ -528,7 +586,13 @@ public partial class HubConnectionTests
                 hubConnection.Remove("Foo");
                 await connection
                     .ReceiveJsonMessage(
-                        new { invocationId = "1", type = 1, target = "Foo", arguments = 1 }
+                        new
+                        {
+                            invocationId = "1",
+                            type = 1,
+                            target = "Foo",
+                            arguments = 1
+                        }
                     )
                     .DefaultTimeout();
                 var handlerTask = handlerCalled.Task;
@@ -569,7 +633,13 @@ public partial class HubConnectionTests
                 hubConnection.Remove("Foo");
                 await connection
                     .ReceiveJsonMessage(
-                        new { invocationId = "1", type = 1, target = "Foo", arguments = 1 }
+                        new
+                        {
+                            invocationId = "1",
+                            type = 1,
+                            target = "Foo",
+                            arguments = 1
+                        }
                     )
                     .DefaultTimeout();
                 var handlerTask = handlerCalled.Task;

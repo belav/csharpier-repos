@@ -90,7 +90,12 @@ public class ActionEndpointFactoryTest
     public void AddEndpoints_ConventionalRouted_NonReservedRequiredValue_WithNoCorresponding_TemplateParameter_DoesNotProduceEndpoint()
     {
         // Arrange
-        var values = new { controller = "home", action = "index", locale = "en-NZ" };
+        var values = new
+        {
+            controller = "home",
+            action = "index",
+            locale = "en-NZ"
+        };
         var action = CreateActionDescriptor(values);
         var route = CreateRoute(routeName: "test", pattern: "{controller}/{action}");
 
@@ -105,7 +110,12 @@ public class ActionEndpointFactoryTest
     public void AddEndpoints_ConventionalRouted_NonReservedRequiredValue_WithCorresponding_TemplateParameter_ProducesEndpoint()
     {
         // Arrange
-        var values = new { controller = "home", action = "index", locale = "en-NZ" };
+        var values = new
+        {
+            controller = "home",
+            action = "index",
+            locale = "en-NZ"
+        };
         var action = CreateActionDescriptor(values);
         var route = CreateRoute(routeName: "test", pattern: "{locale}/{controller}/{action}");
 
@@ -239,7 +249,12 @@ public class ActionEndpointFactoryTest
     public void AddEndpoints_ConventionalRouted_RequiredValueWithNoCorrespondingParameter_DoesNotProduceEndpoint()
     {
         // Arrange
-        var values = new { area = "admin", controller = "home", action = "index" };
+        var values = new
+        {
+            area = "admin",
+            controller = "home",
+            action = "index"
+        };
         var action = CreateActionDescriptor(values);
         var route = CreateRoute(routeName: "test", pattern: "{controller}/{action}");
 
@@ -417,7 +432,12 @@ public class ActionEndpointFactoryTest
     public void AddEndpoints_ConventionalRouted_StaticallyDefinedOrder_IsMaintained()
     {
         // Arrange
-        var values = new { controller = "Home", action = "Index", page = (string)null };
+        var values = new
+        {
+            controller = "Home",
+            action = "Index",
+            page = (string)null
+        };
         var action = CreateActionDescriptor(values);
         var routes = new[]
         {

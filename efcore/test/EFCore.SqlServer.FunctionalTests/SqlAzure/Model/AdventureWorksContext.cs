@@ -144,7 +144,15 @@ public class AdventureWorksContext : PoolableDbContext
         modelBuilder.Entity<ProductModelProductDescription>(entity =>
         {
             entity
-                .HasKey(e => new { e.ProductModelID, e.ProductDescriptionID, e.Culture })
+                .HasKey(
+                    e =>
+                        new
+                        {
+                            e.ProductModelID,
+                            e.ProductDescriptionID,
+                            e.Culture
+                        }
+                )
                 .HasName(
                     "PK_ProductModelProductDescription_ProductModelID_ProductDescriptionID_Culture"
                 );

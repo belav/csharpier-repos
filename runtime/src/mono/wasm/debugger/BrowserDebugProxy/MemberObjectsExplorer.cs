@@ -777,7 +777,12 @@ namespace BrowserDebugProxy
                 var objValues = JObject.FromObject(
                     new
                     {
-                        value = new { type = "symbol", value = description, description },
+                        value = new
+                        {
+                            type = "symbol",
+                            value = description,
+                            description
+                        },
                         name = "Target"
                     }
                 );

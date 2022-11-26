@@ -92,7 +92,15 @@ public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, T
 
         builder.Entity<TUserToken>(b =>
         {
-            b.HasKey(t => new { t.UserId, t.LoginProvider, t.Name });
+            b.HasKey(
+                t =>
+                    new
+                    {
+                        t.UserId,
+                        t.LoginProvider,
+                        t.Name
+                    }
+            );
 
             if (maxKeyLength > 0)
             {

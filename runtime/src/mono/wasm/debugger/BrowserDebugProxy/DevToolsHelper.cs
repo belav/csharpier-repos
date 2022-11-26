@@ -257,11 +257,25 @@ namespace Microsoft.WebAssembly.Diagnostics
         {
             if (IsOk)
             {
-                return JObject.FromObject(new { target.id, target.sessionId, result = Value });
+                return JObject.FromObject(
+                    new
+                    {
+                        target.id,
+                        target.sessionId,
+                        result = Value
+                    }
+                );
             }
             else
             {
-                return JObject.FromObject(new { target.id, target.sessionId, error = Error });
+                return JObject.FromObject(
+                    new
+                    {
+                        target.id,
+                        target.sessionId,
+                        error = Error
+                    }
+                );
             }
         }
 

@@ -276,7 +276,12 @@ namespace Microsoft.WebAssembly.Diagnostics
         }
 
         internal object AsLocation() =>
-            new { scriptId = id.ToString(), lineNumber = line, columnNumber = column };
+            new
+            {
+                scriptId = id.ToString(),
+                lineNumber = line,
+                columnNumber = column
+            };
     }
 
     internal sealed class SourceId

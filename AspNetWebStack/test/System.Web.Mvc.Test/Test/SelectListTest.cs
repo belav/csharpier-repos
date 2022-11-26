@@ -150,9 +150,24 @@ namespace System.Web.Mvc.Test
             // Arrange
             IEnumerable items = new[]
             {
-                new { Value = "A", Text = "Alice", Group = "AB" },
-                new { Value = "B", Text = "Bravo", Group = "AB" },
-                new { Value = "C", Text = "Charlie", Group = "C" },
+                new
+                {
+                    Value = "A",
+                    Text = "Alice",
+                    Group = "AB"
+                },
+                new
+                {
+                    Value = "B",
+                    Text = "Bravo",
+                    Group = "AB"
+                },
+                new
+                {
+                    Value = "C",
+                    Text = "Charlie",
+                    Group = "C"
+                },
             };
             object selectedValue = "A";
 
@@ -176,9 +191,24 @@ namespace System.Web.Mvc.Test
             // Arrange
             IEnumerable items = new[]
             {
-                new { Value = "A", Text = "Alice", Group = "AB" },
-                new { Value = "B", Text = "Bravo", Group = "AB" },
-                new { Value = "C", Text = "Charlie", Group = "C" },
+                new
+                {
+                    Value = "A",
+                    Text = "Alice",
+                    Group = "AB"
+                },
+                new
+                {
+                    Value = "B",
+                    Text = "Bravo",
+                    Group = "AB"
+                },
+                new
+                {
+                    Value = "C",
+                    Text = "Charlie",
+                    Group = "C"
+                },
             };
             object selectedValue = "A";
             IEnumerable disabledGroups = new[] { "AB" };
@@ -212,9 +242,24 @@ namespace System.Web.Mvc.Test
             // Arrange
             IEnumerable items = new[]
             {
-                new { Value = "A", Text = "Alice", Group = "AB" },
-                new { Value = "B", Text = "Bravo", Group = "AB" },
-                new { Value = "C", Text = "Charlie", Group = "C" },
+                new
+                {
+                    Value = "A",
+                    Text = "Alice",
+                    Group = "AB"
+                },
+                new
+                {
+                    Value = "B",
+                    Text = "Bravo",
+                    Group = "AB"
+                },
+                new
+                {
+                    Value = "C",
+                    Text = "Charlie",
+                    Group = "C"
+                },
             };
             object selectedValue = "A";
             IEnumerable disabledValues = new[] { "A", "C" };

@@ -44,7 +44,13 @@ public partial class CreateIdentitySchema : Migration
             {
                 table.PrimaryKey(
                     "PK_AspNetUserTokens",
-                    x => new { x.UserId, x.LoginProvider, x.Name }
+                    x =>
+                        new
+                        {
+                            x.UserId,
+                            x.LoginProvider,
+                            x.Name
+                        }
                 );
             }
         );

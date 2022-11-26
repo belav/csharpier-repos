@@ -986,7 +986,12 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = htmlHelper.RouteLink(
                 "linktext",
                 new RouteValueDictionary(
-                    new { Action = "newaction", Controller = "home2", id = "someid" }
+                    new
+                    {
+                        Action = "newaction",
+                        Controller = "home2",
+                        id = "someid"
+                    }
                 ),
                 new RouteValueDictionary(new { baz = "baz" })
             );
@@ -1013,7 +1018,12 @@ namespace System.Web.Mvc.Html.Test
                 "http",
                 "foo.bar.com",
                 "foo",
-                new { Action = "newaction", Controller = "home2", id = "someid" },
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                },
                 new { baz = "baz" }
             );
 
@@ -1039,7 +1049,12 @@ namespace System.Web.Mvc.Html.Test
                 "http",
                 "foo.bar.com",
                 "foo",
-                new { Action = "newaction", Controller = "home2", id = "someid" },
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                },
                 new { foo_baz = "baz" }
             );
 
@@ -1082,7 +1097,12 @@ namespace System.Web.Mvc.Html.Test
             // Act
             MvcHtmlString html = htmlHelper.RouteLink(
                 "linktext",
-                new { Action = "newaction", Controller = "home2", id = "someid" },
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                },
                 new { baz = "baz" }
             );
 
@@ -1132,7 +1152,12 @@ namespace System.Web.Mvc.Html.Test
             // Act
             MvcHtmlString html = htmlHelper.RouteLink(
                 "linktext",
-                new { Action = "newaction", Controller = "home2", id = "someid" },
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                },
                 new { foo_baz = "baz" }
             );
 
@@ -1159,7 +1184,12 @@ namespace System.Web.Mvc.Html.Test
                 "foo.bar.com",
                 null /* fragment */
                 ,
-                new { Action = "newaction", Controller = "home2", id = "someid" },
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                },
                 new { baz = "baz" }
             );
 
@@ -1185,7 +1215,12 @@ namespace System.Web.Mvc.Html.Test
                 "https",
                 "foo.bar.com",
                 "foo",
-                new { Action = "newaction", Controller = "home2", id = "someid" },
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                },
                 new { baz = "baz" }
             );
 
@@ -1229,7 +1264,12 @@ namespace System.Web.Mvc.Html.Test
                 "linktext",
                 "namedroute",
                 new RouteValueDictionary(
-                    new { Action = "newaction", Controller = "home2", id = "someid" }
+                    new
+                    {
+                        Action = "newaction",
+                        Controller = "home2",
+                        id = "someid"
+                    }
                 ),
                 new RouteValueDictionary()
             );
@@ -1253,7 +1293,12 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = htmlHelper.RouteLink(
                 "linktext",
                 "namedroute",
-                new { Action = "newaction", Controller = "home2", id = "someid" },
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                },
                 new { baz = "baz" }
             );
 
@@ -1276,7 +1321,12 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = htmlHelper.RouteLink(
                 "linktext",
                 "namedroute",
-                new { Action = "newaction", Controller = "home2", id = "someid" },
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                },
                 new { foo_baz = "baz" }
             );
 

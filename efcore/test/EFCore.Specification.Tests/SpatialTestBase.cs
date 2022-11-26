@@ -109,7 +109,14 @@ public abstract class SpatialTestBase<TFixture> : IClassFixture<TFixture>
         (
             from e in db.Set<PointEntity>()
             orderby e.Id
-            select new { e.Id, e.Point, Point.Empty, DateTime.UtcNow, Guid = Guid.NewGuid() }
+            select new
+            {
+                e.Id,
+                e.Point,
+                Point.Empty,
+                DateTime.UtcNow,
+                Guid = Guid.NewGuid()
+            }
         ).FirstOrDefault();
     }
 

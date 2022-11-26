@@ -1359,7 +1359,15 @@ namespace Microsoft.WebAssembly.Diagnostics
                     callFrames.Add(frame);
                 }
             }
-            var o = JObject.FromObject(new { callFrames, reason, data, hitBreakpoints = bp_list, });
+            var o = JObject.FromObject(
+                new
+                {
+                    callFrames,
+                    reason,
+                    data,
+                    hitBreakpoints = bp_list,
+                }
+            );
             if (!await EvaluateCondition(sessionId, context, context.CallStack.First(), bp, token))
             {
                 context.ClearState();

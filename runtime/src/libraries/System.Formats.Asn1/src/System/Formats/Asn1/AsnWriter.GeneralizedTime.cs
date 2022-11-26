@@ -67,9 +67,6 @@ namespace System.Formats.Asn1
             DateTimeOffset normalized = value.ToUniversalTime();
             Debug.Assert(normalized.Year <= 9999, "DateTimeOffset guards against this internally");
 
-            // We're only loading in sub-second ticks.
-            // Ticks are defined as 1e-7 seconds, so their printed form
-            // is at the longest "0.1234567", or 9 bytes.
             scoped Span<byte> fraction = default;
 
             if (!omitFractionalSeconds)

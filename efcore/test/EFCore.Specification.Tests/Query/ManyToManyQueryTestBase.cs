@@ -386,7 +386,12 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 from r in ss.Set<EntityTwo>()
                 orderby r.Id
-                select new { r.ThreeSkipFull, r.SelfSkipSharedLeft, r.CompositeKeySkipShared },
+                select new
+                {
+                    r.ThreeSkipFull,
+                    r.SelfSkipSharedLeft,
+                    r.CompositeKeySkipShared
+                },
             assertOrder: true,
             elementAsserter: (e, a) =>
             {

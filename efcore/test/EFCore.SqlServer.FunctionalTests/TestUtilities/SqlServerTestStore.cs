@@ -406,7 +406,14 @@ public class SqlServerTestStore : RelationalTestStore
         object[] parameters = null
     ) =>
         new TestSqlServerRetryingExecutionStrategy().Execute(
-            new { connection, execute, sql, useTransaction, parameters },
+            new
+            {
+                connection,
+                execute,
+                sql,
+                useTransaction,
+                parameters
+            },
             state =>
                 ExecuteCommand(
                     state.connection,
@@ -462,7 +469,14 @@ public class SqlServerTestStore : RelationalTestStore
         IReadOnlyList<object> parameters = null
     ) =>
         new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
-            new { connection, executeAsync, sql, useTransaction, parameters },
+            new
+            {
+                connection,
+                executeAsync,
+                sql,
+                useTransaction,
+                parameters
+            },
             state =>
                 ExecuteCommandAsync(
                     state.connection,

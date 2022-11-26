@@ -527,7 +527,12 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                 from e2 in ss.Set<Level2>()
                 join e1 in ss.Set<Level1>() on e2.Id equals e1.OneToOne_Optional_FK1.Id
                 join e3 in ss.Set<Level3>() on e2.Id equals e3.OneToOne_Optional_FK_Inverse3.Id
-                select new { Id2 = e2.Id, Id1 = e1.Id, Id3 = e3.Id },
+                select new
+                {
+                    Id2 = e2.Id,
+                    Id1 = e1.Id,
+                    Id3 = e3.Id
+                },
             e => (e.Id2, e.Id1, e.Id3)
         );
 
@@ -539,7 +544,13 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 from e2 in ss.Set<Level2>()
                 join e1 in ss.Set<Level1>() on e2.Name equals e1.OneToOne_Optional_FK1.Name
-                select new { Id2 = e2.Id, Name2 = e2.Name, Id1 = e1.Id, Name1 = e1.Name },
+                select new
+                {
+                    Id2 = e2.Id,
+                    Name2 = e2.Name,
+                    Id1 = e1.Id,
+                    Name1 = e1.Name
+                },
             e => (e.Id2, e.Name2, e.Id1, e.Name1)
         );
 
@@ -552,7 +563,13 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                 from e2 in ss.Set<Level2>()
                 join e1 in ss.Set<Level1>().OrderBy(l1 => l1.Id)
                     on e2.Name equals e1.OneToOne_Optional_FK1.Name
-                select new { Id2 = e2.Id, Name2 = e2.Name, Id1 = e1.Id, Name1 = e1.Name },
+                select new
+                {
+                    Id2 = e2.Id,
+                    Name2 = e2.Name,
+                    Id1 = e1.Id,
+                    Name1 = e1.Name
+                },
             e => (e.Id2, e.Name2, e.Id1, e.Name1)
         );
 
@@ -606,7 +623,13 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                         .OneToOne_Optional_FK2
                         .OneToOne_Required_PK3
                         .Name
-                select new { Id4 = e4.Id, Name4 = e4.Name, Id1 = e1.Id, Name1 = e1.Name },
+                select new
+                {
+                    Id4 = e4.Id,
+                    Name4 = e4.Name,
+                    Id1 = e1.Id,
+                    Name1 = e1.Name
+                },
             e => (e.Id4, e.Name4, e.Id1, e.Name1)
         );
 
@@ -622,7 +645,13 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                         .OneToOne_Required_FK_Inverse3
                         .OneToOne_Required_PK_Inverse2
                         .Name
-                select new { Id4 = e4.Id, Name4 = e4.Name, Id1 = e1.Id, Name1 = e1.Name },
+                select new
+                {
+                    Id4 = e4.Id,
+                    Name4 = e4.Name,
+                    Id1 = e1.Id,
+                    Name1 = e1.Name
+                },
             e => (e.Id4, e.Name4, e.Id1, e.Name1)
         );
 
@@ -4870,7 +4899,12 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     into grouping2
                 from x in grouping2.DefaultIfEmpty()
                 where l2.Name != null || x.Count > 0
-                select new { l1.Id, l1.Name, Foo = l2 == null ? "Foo" : "Bar" },
+                select new
+                {
+                    l1.Id,
+                    l1.Name,
+                    Foo = l2 == null ? "Foo" : "Bar"
+                },
             elementSorter: e => (e.Id, e.Name, e.Foo)
         );
 
@@ -4998,7 +5032,15 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     }
                 )
                     .Distinct()
-                    .Select(x => new { Foo = x.Id1, Bar = x.Id2, Baz = x.Id3 })
+                    .Select(
+                        x =>
+                            new
+                            {
+                                Foo = x.Id1,
+                                Bar = x.Id2,
+                                Baz = x.Id3
+                            }
+                    )
                     .Take(10),
             elementSorter: e => (e.Foo, e.Bar, e.Baz)
         );

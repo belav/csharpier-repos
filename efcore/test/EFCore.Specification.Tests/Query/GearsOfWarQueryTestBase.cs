@@ -1404,8 +1404,18 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 from g in ss.Set<Gear>()
                 from o in ss.Set<Gear>().OfType<Officer>()
                 where
-                    new { Name = g.LeaderNickname, Squad = g.LeaderSquadId, Five = 5 }
-                    == new { Name = o.Nickname, Squad = o.SquadId, Five = 5 }
+                    new
+                    {
+                        Name = g.LeaderNickname,
+                        Squad = g.LeaderSquadId,
+                        Five = 5
+                    }
+                    == new
+                    {
+                        Name = o.Nickname,
+                        Squad = o.SquadId,
+                        Five = 5
+                    }
                 select g.Nickname
         );
 
@@ -2181,7 +2191,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     on g1.LeaderNickname equals g2.Nickname
                     into grouping
                 from g2 in grouping.DefaultIfEmpty()
-                select new { g1, g2, coalesce = g2 ?? g1 },
+                select new
+                {
+                    g1,
+                    g2,
+                    coalesce = g2 ?? g1
+                },
             elementAsserter: (e, a) =>
             {
                 AssertInclude(e.g1, a.g1, expectedIncludes);
@@ -2261,7 +2276,13 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     into grouping
                 from g2 in grouping.DefaultIfEmpty()
 #pragma warning disable IDE0029 // Use coalesce expression
-                select new { g1, g2, coalesce = g2 ?? g1, conditional = g2 != null ? g2 : g1 },
+                select new
+                {
+                    g1,
+                    g2,
+                    coalesce = g2 ?? g1,
+                    conditional = g2 != null ? g2 : g1
+                },
 #pragma warning restore IDE0029 // Use coalesce expression
             elementAsserter: (e, a) =>
             {
@@ -3409,7 +3430,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 from f in ss.Set<Faction>()
                 where f is LocustHorde
                 orderby f.Name
-                select new { f, f.Name, Threat = ((LocustHorde)f).Commander.ThreatLevel },
+                select new
+                {
+                    f,
+                    f.Name,
+                    Threat = ((LocustHorde)f).Commander.ThreatLevel
+                },
             assertOrder: true,
             elementAsserter: (e, a) =>
             {
@@ -5724,7 +5750,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                         oo => oo.o.Members.FirstOrDefault(v => v.Tag == oo.i),
                         ii => ii,
                         (k, g) =>
-                            new { k.o, k.i, value = g.OrderBy(gg => gg.FullName).FirstOrDefault() }
+                            new
+                            {
+                                k.o,
+                                k.i,
+                                value = g.OrderBy(gg => gg.FullName).FirstOrDefault()
+                            }
                     )
                     .Select(r => new { r.o.Id, TagId = r.i.Id }),
             elementSorter: e => (e.Id, e.TagId)
@@ -7361,7 +7392,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 from g in ss.Set<Gear>()
                 from w in g.Weapons.Where(ww => ww.IsAutomatic == isAutomatic).DefaultIfEmpty()
-                select new { g.Nickname, g.FullName, Collection = w != null }
+                select new
+                {
+                    g.Nickname,
+                    g.FullName,
+                    Collection = w != null
+                }
         );
     }
 
@@ -7378,7 +7414,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 from g in ss.Set<Gear>()
                 from w in g.Weapons.Where(ww => ww.IsAutomatic != isAutomatic).DefaultIfEmpty()
-                select new { g.Nickname, g.FullName, Collection = w != null }
+                select new
+                {
+                    g.Nickname,
+                    g.FullName,
+                    Collection = w != null
+                }
         );
     }
 
@@ -7395,7 +7436,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 from g in ss.Set<Gear>()
                 from w in g.Weapons.Where(ww => ww.Id > prm).DefaultIfEmpty()
-                select new { g.Nickname, g.FullName, Collection = w != null }
+                select new
+                {
+                    g.Nickname,
+                    g.FullName,
+                    Collection = w != null
+                }
         );
     }
 
@@ -7575,7 +7621,13 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             new
                             {
                                 Weapons = g.Weapons.Select(
-                                    w => new { w.Id, w.IsAutomatic, w.SynergyWith.Name }
+                                    w =>
+                                        new
+                                        {
+                                            w.Id,
+                                            w.IsAutomatic,
+                                            w.SynergyWith.Name
+                                        }
                                 )
                             }
                     ),
@@ -7842,7 +7894,15 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                         select new { g.CityOfBirth.Name, Count = g.Weapons.Count() }
                     )
                     .GroupBy(x => new { x.Name, x.Count })
-                    .Select(g => new { g.Key.Name, g.Key.Count, Sum = g.Sum(xx => xx.Count) }),
+                    .Select(
+                        g =>
+                            new
+                            {
+                                g.Key.Name,
+                                g.Key.Count,
+                                Sum = g.Sum(xx => xx.Count)
+                            }
+                    ),
             elementSorter: e => (e.Name, e.Count, e.Sum)
         );
 
@@ -7862,7 +7922,13 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     )
                     .GroupBy(
                         x => new { x.Name, x.Count },
-                        (k, g) => new { k.Name, k.Count, Sum = g.Sum(xx => xx.Count) }
+                        (k, g) =>
+                            new
+                            {
+                                k.Name,
+                                k.Count,
+                                Sum = g.Sum(xx => xx.Count)
+                            }
                     ),
             elementSorter: e => (e.Name, e.Count, e.Sum)
         );
@@ -7899,7 +7965,15 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                                 IsMarcus = g.Nickname == "Marcus"
                             }
                     )
-                    .GroupBy(g => new { g.CityOfBirthName, g.HasSoulPatch, g.IsMarcus })
+                    .GroupBy(
+                        g =>
+                            new
+                            {
+                                g.CityOfBirthName,
+                                g.HasSoulPatch,
+                                g.IsMarcus
+                            }
+                    )
                     .Select(
                         x =>
                             new
@@ -8875,7 +8949,15 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<Weapon>()
                     .GroupBy(w => new { w.Owner.CityOfBirth.Name, w.Owner.CityOfBirth.Location })
-                    .Select(x => new { x.Key.Name, x.Key.Location, Count = x.Count() })
+                    .Select(
+                        x =>
+                            new
+                            {
+                                x.Key.Name,
+                                x.Key.Location,
+                                Count = x.Count()
+                            }
+                    )
                     .OrderBy(x => x.Location),
             assertOrder: true
         );
@@ -9150,7 +9232,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 ss.Set<Gear>()
                     .Select(
                         g =>
-                            new { g.Nickname, Weapons = g.Weapons.Take(10).ToList(), g.CityOfBirth }
+                            new
+                            {
+                                g.Nickname,
+                                Weapons = g.Weapons.Take(10).ToList(),
+                                g.CityOfBirth
+                            }
                     ),
             elementSorter: e => e.Nickname,
             elementAsserter: (e, a) =>
@@ -9287,7 +9374,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             {
                                 x.Note,
                                 Nullable = x.GearNickName != null
-                                    ? new { x.Gear.Nickname, x.Gear.SquadId, x.Gear.HasSoulPatch }
+                                    ? new
+                                    {
+                                        x.Gear.Nickname,
+                                        x.Gear.SquadId,
+                                        x.Gear.HasSoulPatch
+                                    }
                                     : null
                             }
                     )
@@ -9307,7 +9399,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             {
                                 x.Note,
                                 Nullable = x.GearNickName != null
-                                    ? new { x.Gear.Nickname, x.Gear.SquadId, x.Gear.HasSoulPatch }
+                                    ? new
+                                    {
+                                        x.Gear.Nickname,
+                                        x.Gear.SquadId,
+                                        x.Gear.HasSoulPatch
+                                    }
                                     : null
                             }
                     )
@@ -9320,7 +9417,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             {
                                 x.Note,
                                 Nullable = x.GearNickName != null
-                                    ? new { x.Gear.Nickname, x.Gear.SquadId, x.Gear.HasSoulPatch }
+                                    ? new
+                                    {
+                                        x.Gear.Nickname,
+                                        x.Gear.SquadId,
+                                        x.Gear.HasSoulPatch
+                                    }
                                     : null
                             }
                     )
@@ -9342,7 +9444,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             {
                                 x.Note,
                                 Nullable = x.GearNickName != null
-                                    ? new { x.Gear.Nickname, x.Gear.SquadId, x.Gear.HasSoulPatch }
+                                    ? new
+                                    {
+                                        x.Gear.Nickname,
+                                        x.Gear.SquadId,
+                                        x.Gear.HasSoulPatch
+                                    }
                                     : null
                             }
                     )
@@ -9363,7 +9470,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             {
                                 x.Note,
                                 Nullable = x.GearNickName != null
-                                    ? new { x.Gear.Nickname, x.Gear.SquadId, x.Gear.HasSoulPatch }
+                                    ? new
+                                    {
+                                        x.Gear.Nickname,
+                                        x.Gear.SquadId,
+                                        x.Gear.HasSoulPatch
+                                    }
                                     : null
                             }
                     )
@@ -9383,7 +9495,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             {
                                 x.Note,
                                 Nullable = x.GearNickName != null
-                                    ? new { x.Gear.Nickname, x.Gear.SquadId, x.Gear.HasSoulPatch }
+                                    ? new
+                                    {
+                                        x.Gear.Nickname,
+                                        x.Gear.SquadId,
+                                        x.Gear.HasSoulPatch
+                                    }
                                     : null
                             }
                     )
@@ -9406,7 +9523,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             {
                                 x.Note,
                                 Nullable = x.GearNickName != null
-                                    ? new { x.Gear.Nickname, x.Gear.SquadId, x.Gear.HasSoulPatch }
+                                    ? new
+                                    {
+                                        x.Gear.Nickname,
+                                        x.Gear.SquadId,
+                                        x.Gear.HasSoulPatch
+                                    }
                                     : null
                             }
                     )
@@ -9422,7 +9544,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             {
                                 x.Note,
                                 Nullable = x.GearNickName != null
-                                    ? new { x.Gear.Nickname, x.Gear.SquadId, x.Gear.HasSoulPatch }
+                                    ? new
+                                    {
+                                        x.Gear.Nickname,
+                                        x.Gear.SquadId,
+                                        x.Gear.HasSoulPatch
+                                    }
                                     : null
                             }
                     )
@@ -9452,7 +9579,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             {
                                 x.Note,
                                 Nullable = x.GearNickName != null
-                                    ? new { x.Gear.Nickname, x.Gear.SquadId, x.Gear.HasSoulPatch }
+                                    ? new
+                                    {
+                                        x.Gear.Nickname,
+                                        x.Gear.SquadId,
+                                        x.Gear.HasSoulPatch
+                                    }
                                     : null
                             }
                     )
@@ -9486,7 +9618,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             {
                                 x.Note,
                                 Nullable = x.GearNickName != null
-                                    ? new { x.Gear.Nickname, x.Gear.SquadId, x.Gear.HasSoulPatch }
+                                    ? new
+                                    {
+                                        x.Gear.Nickname,
+                                        x.Gear.SquadId,
+                                        x.Gear.HasSoulPatch
+                                    }
                                     : null
                             }
                     )
@@ -9509,7 +9646,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             {
                                 x.Note,
                                 Nullable = x.GearNickName != null
-                                    ? new { x.Gear.Nickname, x.Gear.SquadId, x.Gear.HasSoulPatch }
+                                    ? new
+                                    {
+                                        x.Gear.Nickname,
+                                        x.Gear.SquadId,
+                                        x.Gear.HasSoulPatch
+                                    }
                                     : null
                             }
                     )
@@ -9541,7 +9683,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             {
                                 x.Note,
                                 Nullable = x.GearNickName != null
-                                    ? new { x.Gear.Nickname, x.Gear.SquadId, x.Gear.HasSoulPatch }
+                                    ? new
+                                    {
+                                        x.Gear.Nickname,
+                                        x.Gear.SquadId,
+                                        x.Gear.HasSoulPatch
+                                    }
                                     : null
                             }
                     )
@@ -9592,7 +9739,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             {
                                 x.Note,
                                 Nullable = x.GearNickName != null
-                                    ? new { x.Gear.Nickname, x.Gear.SquadId, x.Gear.HasSoulPatch }
+                                    ? new
+                                    {
+                                        x.Gear.Nickname,
+                                        x.Gear.SquadId,
+                                        x.Gear.HasSoulPatch
+                                    }
                                     : null
                             }
                     )
@@ -9654,7 +9806,15 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             {
                                 Key = g.Nickname,
                                 Subquery = g.Weapons
-                                    .Select(w => new { w.Id, w.Name, w.OwnerFullName })
+                                    .Select(
+                                        w =>
+                                            new
+                                            {
+                                                w.Id,
+                                                w.Name,
+                                                w.OwnerFullName
+                                            }
+                                    )
                                     .Distinct()
                                     .ToList()
                             }
@@ -9692,7 +9852,15 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             {
                                 Key = s.Id,
                                 Subquery = s.Members
-                                    .Select(m => new { m.Nickname, m.SquadId, m.HasSoulPatch })
+                                    .Select(
+                                        m =>
+                                            new
+                                            {
+                                                m.Nickname,
+                                                m.SquadId,
+                                                m.HasSoulPatch
+                                            }
+                                    )
                                     .Distinct()
                                     .ToList()
                             }
@@ -9768,7 +9936,13 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                                 Key = g.Nickname,
                                 Subquery = g.Weapons
                                     .Select(
-                                        w => new { w.Name, w.IsAutomatic, w.OwnerFullName.Length }
+                                        w =>
+                                            new
+                                            {
+                                                w.Name,
+                                                w.IsAutomatic,
+                                                w.OwnerFullName.Length
+                                            }
                                     )
                                     .Distinct()
                                     .ToList()
@@ -10000,7 +10174,15 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             async,
             ss =>
                 ss.Set<Gear>()
-                    .Select(g => new { g.FullName, g.HasSoulPatch, g.Weapons })
+                    .Select(
+                        g =>
+                            new
+                            {
+                                g.FullName,
+                                g.HasSoulPatch,
+                                g.Weapons
+                            }
+                    )
                     .Distinct(),
             elementSorter: e => e.FullName,
             elementAsserter: (e, a) =>
@@ -10115,7 +10297,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                                 Subquery1 = (
                                     from g in ss.Set<Gear>()
                                     where g.SquadId == x.Id
-                                    select new { g.Nickname, g.FullName, g.HasSoulPatch }
+                                    select new
+                                    {
+                                        g.Nickname,
+                                        g.FullName,
+                                        g.HasSoulPatch
+                                    }
                                 )
                                     .Distinct()
                                     .Select(
@@ -10204,7 +10391,12 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                                                 Subquery2 = (
                                                     from w in ss.Set<Weapon>()
                                                     where w.OwnerFullName == xx.CityOfBirthName
-                                                    select new { w.Id, x.Length, xx.HasSoulPatch }
+                                                    select new
+                                                    {
+                                                        w.Id,
+                                                        x.Length,
+                                                        xx.HasSoulPatch
+                                                    }
                                                 ).ToList()
                                             }
                                     )

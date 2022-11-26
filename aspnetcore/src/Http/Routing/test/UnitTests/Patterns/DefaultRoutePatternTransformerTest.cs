@@ -191,7 +191,12 @@ public class DefaultRoutePatternTransformerTest
 
         var original = RoutePatternFactory.Parse(template, defaults, policies);
 
-        var requiredValues = new { area = "Admin", controller = "Home", action = "Index", };
+        var requiredValues = new
+        {
+            area = "Admin",
+            controller = "Home",
+            action = "Index",
+        };
 
         // Act
         var actual = Transformer.SubstituteRequiredValues(original, requiredValues);
@@ -378,7 +383,12 @@ public class DefaultRoutePatternTransformerTest
     {
         // Arrange
         var template = "Home/Index/{id?}";
-        var defaults = new { area = "Admin", controller = "Home", action = "Index", };
+        var defaults = new
+        {
+            area = "Admin",
+            controller = "Home",
+            action = "Index",
+        };
         var policies = new { };
 
         var original = RoutePatternFactory.Parse(

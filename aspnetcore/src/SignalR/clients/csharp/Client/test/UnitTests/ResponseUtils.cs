@@ -121,7 +121,13 @@ internal static class ResponseUtils
         }
 
         return JsonConvert.SerializeObject(
-            new { connectionId, availableTransports, connectionToken, negotiateVersion }
+            new
+            {
+                connectionId,
+                availableTransports,
+                connectionToken,
+                negotiateVersion
+            }
         );
     }
 }

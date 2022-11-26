@@ -98,7 +98,17 @@ public abstract class EntitySplittingQueryTestBase : NonSharedModelTestBase
 
         await AssertQuery(
             async,
-            ss => ss.Set<EntityOne>().Select(e => new { e.Id, e.IntValue1, e.StringValue1 }),
+            ss =>
+                ss.Set<EntityOne>()
+                    .Select(
+                        e =>
+                            new
+                            {
+                                e.Id,
+                                e.IntValue1,
+                                e.StringValue1
+                            }
+                    ),
             elementSorter: e => e.Id
         );
     }
@@ -135,7 +145,17 @@ public abstract class EntitySplittingQueryTestBase : NonSharedModelTestBase
 
         await AssertQuery(
             async,
-            ss => ss.Set<EntityOne>().Select(e => new { e.Id, e.IntValue3, e.StringValue3 }),
+            ss =>
+                ss.Set<EntityOne>()
+                    .Select(
+                        e =>
+                            new
+                            {
+                                e.Id,
+                                e.IntValue3,
+                                e.StringValue3
+                            }
+                    ),
             elementSorter: e => e.Id
         );
     }
@@ -172,7 +192,17 @@ public abstract class EntitySplittingQueryTestBase : NonSharedModelTestBase
 
         await AssertQuery(
             async,
-            ss => ss.Set<EntityOne>().Select(e => new { e.Id, e.IntValue4, e.StringValue4 }),
+            ss =>
+                ss.Set<EntityOne>()
+                    .Select(
+                        e =>
+                            new
+                            {
+                                e.Id,
+                                e.IntValue4,
+                                e.StringValue4
+                            }
+                    ),
             elementSorter: e => e.Id
         );
     }
@@ -438,7 +468,17 @@ public abstract class EntitySplittingQueryTestBase : NonSharedModelTestBase
 
         await AssertQuery(
             async,
-            ss => ss.Set<EntityOne>().Select(e => new { e.IntValue1, e.IntValue3, e.EntityThree }),
+            ss =>
+                ss.Set<EntityOne>()
+                    .Select(
+                        e =>
+                            new
+                            {
+                                e.IntValue1,
+                                e.IntValue3,
+                                e.EntityThree
+                            }
+                    ),
             elementSorter: e => e.IntValue1,
             elementAsserter: (e, a) =>
             {

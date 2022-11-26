@@ -382,7 +382,12 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper helper = GetAjaxHelper(unobtrusiveJavaScript: false);
-            object htmlAttributes = new { foo = "bar", baz = "quux", foo_bar = "baz_quux" };
+            object htmlAttributes = new
+            {
+                foo = "bar",
+                baz = "quux",
+                foo_bar = "baz_quux"
+            };
             object values = new { controller = "Controller" };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
@@ -409,7 +414,12 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper helper = GetAjaxHelper(unobtrusiveJavaScript: true);
-            object htmlAttributes = new { foo = "bar", baz = "quux", foo_bar = "baz_quux" };
+            object htmlAttributes = new
+            {
+                foo = "bar",
+                baz = "quux",
+                foo_bar = "baz_quux"
+            };
             object values = new { controller = "Controller" };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
@@ -652,7 +662,12 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper helper = GetAjaxHelper(unobtrusiveJavaScript: false);
-            object htmlAttributes = new { foo = "bar", baz = "quux", foo_bar = "baz_quux" };
+            object htmlAttributes = new
+            {
+                foo = "bar",
+                baz = "quux",
+                foo_bar = "baz_quux"
+            };
             object values = new { id = 5 };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
@@ -680,7 +695,12 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper helper = GetAjaxHelper(unobtrusiveJavaScript: true);
-            object htmlAttributes = new { foo = "bar", baz = "quux", foo_bar = "baz_quux" };
+            object htmlAttributes = new
+            {
+                foo = "bar",
+                baz = "quux",
+                foo_bar = "baz_quux"
+            };
             object values = new { id = 5 };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
@@ -1071,7 +1091,12 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper helper = GetAjaxHelper(unobtrusiveJavaScript: false);
-            object htmlAttributes = new { foo = "bar", baz = "quux", foo_bar = "baz_quux" };
+            object htmlAttributes = new
+            {
+                foo = "bar",
+                baz = "quux",
+                foo_bar = "baz_quux"
+            };
             object values = new { action = "Action", controller = "Controller" };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
@@ -1097,7 +1122,12 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper helper = GetAjaxHelper(unobtrusiveJavaScript: true);
-            object htmlAttributes = new { foo = "bar", baz = "quux", foo_bar = "baz_quux" };
+            object htmlAttributes = new
+            {
+                foo = "bar",
+                baz = "quux",
+                foo_bar = "baz_quux"
+            };
             object values = new { action = "Action", controller = "Controller" };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
@@ -1287,7 +1317,12 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: false);
-            object htmlAttributes = new { foo = "bar", baz = "quux", foo_bar = "baz_quux" };
+            object htmlAttributes = new
+            {
+                foo = "bar",
+                baz = "quux",
+                foo_bar = "baz_quux"
+            };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
@@ -1312,7 +1347,12 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: true);
-            object htmlAttributes = new { foo = "bar", baz = "quux", foo_bar = "baz_quux" };
+            object htmlAttributes = new
+            {
+                foo = "bar",
+                baz = "quux",
+                foo_bar = "baz_quux"
+            };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
@@ -1447,7 +1487,12 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: false);
             object values = new { action = "Action", controller = "Controller" };
 
-            object htmlAttributes = new { foo = "bar", baz = "quux", foo_bar = "baz_quux" };
+            object htmlAttributes = new
+            {
+                foo = "bar",
+                baz = "quux",
+                foo_bar = "baz_quux"
+            };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
@@ -1475,7 +1520,12 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: true);
             object values = new { action = "Action", controller = "Controller" };
 
-            object htmlAttributes = new { foo = "bar", baz = "quux", foo_bar = "baz_quux" };
+            object htmlAttributes = new
+            {
+                foo = "bar",
+                baz = "quux",
+                foo_bar = "baz_quux"
+            };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act

@@ -602,7 +602,12 @@ namespace System.Diagnostics.Tests
                         if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                             diagnosticSourceListener.Write(
                                 "TestEvent1",
-                                new { propStr = "hi", propInt = 4, cls = val }
+                                new
+                                {
+                                    propStr = "hi",
+                                    propInt = 4,
+                                    cls = val
+                                }
                             );
 
                         Assert.Equal(1, eventSourceListener.EventCount); // Exactly one more event has been emitted.
@@ -627,7 +632,12 @@ namespace System.Diagnostics.Tests
                         if (diagnosticSourceListener.IsEnabled("TestEvent2"))
                             diagnosticSourceListener.Write(
                                 "TestEvent2",
-                                new { prop2Str = "hello", prop2Int = 8, cls = val }
+                                new
+                                {
+                                    prop2Str = "hello",
+                                    prop2Int = 8,
+                                    cls = val
+                                }
                             );
 
                         Assert.Equal(1, eventSourceListener.EventCount); // Exactly one more event has been emitted.
@@ -666,7 +676,12 @@ namespace System.Diagnostics.Tests
                             if (diagnosticSourceListener2.IsEnabled("TestEvent1"))
                                 diagnosticSourceListener2.Write(
                                     "TestEvent1",
-                                    new { propStr = "hi", propInt = 4, cls = val }
+                                    new
+                                    {
+                                        propStr = "hi",
+                                        propInt = 4,
+                                        cls = val
+                                    }
                                 );
                         }
                         Assert.Equal(0, eventSourceListener.EventCount); // No Event should be fired.
@@ -831,7 +846,12 @@ namespace System.Diagnostics.Tests
                         if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                             diagnosticSourceListener.Write(
                                 "TestEvent1",
-                                new { propStr = "hi", propInt = 4, cls = val }
+                                new
+                                {
+                                    propStr = "hi",
+                                    propInt = 4,
+                                    cls = val
+                                }
                             );
 
                         Assert.Equal(1, eventSourceListener.EventCount); // Exactly one more event has been emitted.
@@ -849,7 +869,12 @@ namespace System.Diagnostics.Tests
                         if (diagnosticSourceListener.IsEnabled("TestEvent2"))
                             diagnosticSourceListener.Write(
                                 "TestEvent2",
-                                new { prop2Str = "hello", prop2Int = 8, cls = val }
+                                new
+                                {
+                                    prop2Str = "hello",
+                                    prop2Int = 8,
+                                    cls = val
+                                }
                             );
 
                         Assert.Equal(1, eventSourceListener.EventCount); // Exactly one more event has been emitted.
@@ -1026,7 +1051,12 @@ namespace System.Diagnostics.Tests
                         if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                             diagnosticSourceListener.Write(
                                 "TestEvent1",
-                                new { propStr = "hi", propInt = 4, cls = val }
+                                new
+                                {
+                                    propStr = "hi",
+                                    propInt = 4,
+                                    cls = val
+                                }
                             );
 
                         Assert.Equal(1, eventSourceListener.EventCount); // Exactly one more event has been emitted.
@@ -1072,7 +1102,12 @@ namespace System.Diagnostics.Tests
                         if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                             diagnosticSourceListener.Write(
                                 "TestEvent1",
-                                new { propStr = "hiThere", propInt = 5, cls = val }
+                                new
+                                {
+                                    propStr = "hiThere",
+                                    propInt = 5,
+                                    cls = val
+                                }
                             );
 
                         Assert.Equal(1, eventSourceListener.EventCount); // Exactly one more event has been emitted.
@@ -1124,7 +1159,12 @@ namespace System.Diagnostics.Tests
                             if (diagnosticSourceListener2.IsEnabled("TestEvent1"))
                                 diagnosticSourceListener2.Write(
                                     "TestEvent1",
-                                    new { propStr = "hi", propInt = 4, cls = val }
+                                    new
+                                    {
+                                        propStr = "hi",
+                                        propInt = 4,
+                                        cls = val
+                                    }
                                 );
                         }
                         Assert.Equal(0, eventSourceListener.EventCount); // No Event should be fired.
@@ -1213,7 +1253,12 @@ namespace System.Diagnostics.Tests
                         if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                             diagnosticSourceListener.Write(
                                 "TestEvent1",
-                                new { cls = val, propStr = "propVal1", propStrNull = strVal }
+                                new
+                                {
+                                    cls = val,
+                                    propStr = "propVal1",
+                                    propStrNull = strVal
+                                }
                             );
 
                         Assert.Equal(1, eventSourceListener.EventCount); // Exactly one more event has been emitted.
@@ -1329,7 +1374,13 @@ namespace System.Diagnostics.Tests
                         if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                             diagnosticSourceListener.Write(
                                 "TestEvent1",
-                                new { propStr = "hi", propInt = 4, cls = val, propStr2 = "there" }
+                                new
+                                {
+                                    propStr = "hi",
+                                    propInt = 4,
+                                    cls = val,
+                                    propStr2 = "there"
+                                }
                             );
 
                         Assert.Equal(1, eventSourceListener.EventCount); // Exactly one more event has been emitted.
@@ -1378,7 +1429,12 @@ namespace System.Diagnostics.Tests
                         if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                             diagnosticSourceListener.Write(
                                 "TestEvent1",
-                                new { propStr = "hi", propInt = 4, cls = val }
+                                new
+                                {
+                                    propStr = "hi",
+                                    propInt = 4,
+                                    cls = val
+                                }
                             );
 
                         Assert.Equal(1, eventSourceListener.EventCount); // Exactly one more event has been emitted.

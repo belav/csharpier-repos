@@ -61,19 +61,69 @@ namespace System.Linq.Tests
         {
             var source = new[]
             {
-                new { Name = "Jim", City = "Minneapolis", Country = "USA" },
-                new { Name = "Tim", City = "Seattle", Country = "USA" },
-                new { Name = "Philip", City = "Orlando", Country = "USA" },
-                new { Name = "Chris", City = "London", Country = "UK" },
-                new { Name = "Rob", City = "Kent", Country = "UK" }
+                new
+                {
+                    Name = "Jim",
+                    City = "Minneapolis",
+                    Country = "USA"
+                },
+                new
+                {
+                    Name = "Tim",
+                    City = "Seattle",
+                    Country = "USA"
+                },
+                new
+                {
+                    Name = "Philip",
+                    City = "Orlando",
+                    Country = "USA"
+                },
+                new
+                {
+                    Name = "Chris",
+                    City = "London",
+                    Country = "UK"
+                },
+                new
+                {
+                    Name = "Rob",
+                    City = "Kent",
+                    Country = "UK"
+                }
             };
             var expected = new[]
             {
-                new { Name = "Rob", City = "Kent", Country = "UK" },
-                new { Name = "Chris", City = "London", Country = "UK" },
-                new { Name = "Jim", City = "Minneapolis", Country = "USA" },
-                new { Name = "Philip", City = "Orlando", Country = "USA" },
-                new { Name = "Tim", City = "Seattle", Country = "USA" }
+                new
+                {
+                    Name = "Rob",
+                    City = "Kent",
+                    Country = "UK"
+                },
+                new
+                {
+                    Name = "Chris",
+                    City = "London",
+                    Country = "UK"
+                },
+                new
+                {
+                    Name = "Jim",
+                    City = "Minneapolis",
+                    Country = "USA"
+                },
+                new
+                {
+                    Name = "Philip",
+                    City = "Orlando",
+                    Country = "USA"
+                },
+                new
+                {
+                    Name = "Tim",
+                    City = "Seattle",
+                    Country = "USA"
+                }
             };
 
             Assert.Equal(expected, source.OrderBy(e => e.Country).ThenBy(e => e.City));
@@ -84,15 +134,45 @@ namespace System.Linq.Tests
         {
             var source = new[]
             {
-                new { Name = "Jim", City = "Minneapolis", Country = "USA" },
-                new { Name = "Prakash", City = "Chennai", Country = "India" },
-                new { Name = "Rob", City = "Kent", Country = "UK" }
+                new
+                {
+                    Name = "Jim",
+                    City = "Minneapolis",
+                    Country = "USA"
+                },
+                new
+                {
+                    Name = "Prakash",
+                    City = "Chennai",
+                    Country = "India"
+                },
+                new
+                {
+                    Name = "Rob",
+                    City = "Kent",
+                    Country = "UK"
+                }
             };
             var expected = new[]
             {
-                new { Name = "Prakash", City = "Chennai", Country = "India" },
-                new { Name = "Rob", City = "Kent", Country = "UK" },
-                new { Name = "Jim", City = "Minneapolis", Country = "USA" }
+                new
+                {
+                    Name = "Prakash",
+                    City = "Chennai",
+                    Country = "India"
+                },
+                new
+                {
+                    Name = "Rob",
+                    City = "Kent",
+                    Country = "UK"
+                },
+                new
+                {
+                    Name = "Jim",
+                    City = "Minneapolis",
+                    Country = "USA"
+                }
             };
 
             Assert.Equal(expected, source.OrderBy(e => e.Country).ThenBy(e => e.Country, null));
@@ -103,19 +183,69 @@ namespace System.Linq.Tests
         {
             var source = new[]
             {
-                new { Name = "Jim", City = "Minneapolis", Country = "USA" },
-                new { Name = "Tim", City = "Seattle", Country = "USA" },
-                new { Name = "Philip", City = "Orlando", Country = "USA" },
-                new { Name = "Chris", City = "Minneapolis", Country = "USA" },
-                new { Name = "Rob", City = "Seattle", Country = "USA" }
+                new
+                {
+                    Name = "Jim",
+                    City = "Minneapolis",
+                    Country = "USA"
+                },
+                new
+                {
+                    Name = "Tim",
+                    City = "Seattle",
+                    Country = "USA"
+                },
+                new
+                {
+                    Name = "Philip",
+                    City = "Orlando",
+                    Country = "USA"
+                },
+                new
+                {
+                    Name = "Chris",
+                    City = "Minneapolis",
+                    Country = "USA"
+                },
+                new
+                {
+                    Name = "Rob",
+                    City = "Seattle",
+                    Country = "USA"
+                }
             };
             var expected = new[]
             {
-                new { Name = "Chris", City = "Minneapolis", Country = "USA" },
-                new { Name = "Jim", City = "Minneapolis", Country = "USA" },
-                new { Name = "Philip", City = "Orlando", Country = "USA" },
-                new { Name = "Rob", City = "Seattle", Country = "USA" },
-                new { Name = "Tim", City = "Seattle", Country = "USA" }
+                new
+                {
+                    Name = "Chris",
+                    City = "Minneapolis",
+                    Country = "USA"
+                },
+                new
+                {
+                    Name = "Jim",
+                    City = "Minneapolis",
+                    Country = "USA"
+                },
+                new
+                {
+                    Name = "Philip",
+                    City = "Orlando",
+                    Country = "USA"
+                },
+                new
+                {
+                    Name = "Rob",
+                    City = "Seattle",
+                    Country = "USA"
+                },
+                new
+                {
+                    Name = "Tim",
+                    City = "Seattle",
+                    Country = "USA"
+                }
             };
 
             Assert.Equal(expected, source.OrderBy(e => e.Name).ThenBy(e => e.City, null));

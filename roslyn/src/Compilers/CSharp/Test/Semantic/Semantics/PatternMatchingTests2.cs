@@ -2320,24 +2320,84 @@ class Point
                     Type = "System.Object",
                     ConvertedType = "Point"
                 },
-                new { Source = "3", Type = "System.Object", ConvertedType = "System.Int32" },
+                new
+                {
+                    Source = "3",
+                    Type = "System.Object",
+                    ConvertedType = "System.Int32"
+                },
                 new
                 {
                     Source = "string { Length: 2 }",
                     Type = "System.Object",
                     ConvertedType = "System.String"
                 },
-                new { Source = "2", Type = "System.Int32", ConvertedType = "System.Int32" },
-                new { Source = "(_, { })", Type = "Point", ConvertedType = "Point" },
-                new { Source = "_", Type = "System.Object", ConvertedType = "System.Object" },
-                new { Source = "{ }", Type = "System.Object", ConvertedType = "System.Object" },
-                new { Source = "Point({ }, { }, { })", Type = "Point", ConvertedType = "Point" },
-                new { Source = "{ }", Type = "?", ConvertedType = "?" },
-                new { Source = "{ }", Type = "?", ConvertedType = "?" },
-                new { Source = "{ }", Type = "?", ConvertedType = "?" },
-                new { Source = "Point(, { })", Type = "Point", ConvertedType = "Point" },
-                new { Source = "", Type = "System.Object", ConvertedType = "System.Object" },
-                new { Source = "{ }", Type = "System.Object", ConvertedType = "System.Object" },
+                new
+                {
+                    Source = "2",
+                    Type = "System.Int32",
+                    ConvertedType = "System.Int32"
+                },
+                new
+                {
+                    Source = "(_, { })",
+                    Type = "Point",
+                    ConvertedType = "Point"
+                },
+                new
+                {
+                    Source = "_",
+                    Type = "System.Object",
+                    ConvertedType = "System.Object"
+                },
+                new
+                {
+                    Source = "{ }",
+                    Type = "System.Object",
+                    ConvertedType = "System.Object"
+                },
+                new
+                {
+                    Source = "Point({ }, { }, { })",
+                    Type = "Point",
+                    ConvertedType = "Point"
+                },
+                new
+                {
+                    Source = "{ }",
+                    Type = "?",
+                    ConvertedType = "?"
+                },
+                new
+                {
+                    Source = "{ }",
+                    Type = "?",
+                    ConvertedType = "?"
+                },
+                new
+                {
+                    Source = "{ }",
+                    Type = "?",
+                    ConvertedType = "?"
+                },
+                new
+                {
+                    Source = "Point(, { })",
+                    Type = "Point",
+                    ConvertedType = "Point"
+                },
+                new
+                {
+                    Source = "",
+                    Type = "System.Object",
+                    ConvertedType = "System.Object"
+                },
+                new
+                {
+                    Source = "{ }",
+                    Type = "System.Object",
+                    ConvertedType = "System.Object"
+                },
             };
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics(

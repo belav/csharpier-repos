@@ -56,7 +56,15 @@ public abstract class FullFeaturedMatcherConformanceTest : MatcherConformanceTes
     public virtual async Task Match_ExtraDefaultValues()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/a/{b}/{c}", new { b = "17", c = "18", d = "19" });
+        var endpoint = CreateEndpoint(
+            "/a/{b}/{c}",
+            new
+            {
+                b = "17",
+                c = "18",
+                d = "19"
+            }
+        );
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/a");
 
@@ -64,7 +72,16 @@ public abstract class FullFeaturedMatcherConformanceTest : MatcherConformanceTes
         await matcher.MatchAsync(httpContext);
 
         // Assert
-        MatcherAssert.AssertMatch(httpContext, endpoint, new { b = "17", c = "18", d = "19" });
+        MatcherAssert.AssertMatch(
+            httpContext,
+            endpoint,
+            new
+            {
+                b = "17",
+                c = "18",
+                d = "19"
+            }
+        );
     }
 
     [Theory]

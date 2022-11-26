@@ -171,7 +171,12 @@ namespace System.Net.Http.Formatting
                     },
 #endif
                     {
-                        new { field1 = "x", field2 = (string)null, field3 = "y" },
+                        new
+                        {
+                            field1 = "x",
+                            field2 = (string)null,
+                            field3 = "y"
+                        },
                         "{\"field1\":\"x\",\"field2\":null,\"field3\":\"y\"}"
                     },
                     // Generics

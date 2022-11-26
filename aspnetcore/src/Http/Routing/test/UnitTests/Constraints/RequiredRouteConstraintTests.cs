@@ -44,7 +44,12 @@ public class RequiredRouteConstraintTests
             Mock.Of<IRouter>(),
             "area",
             new RouteValueDictionary(
-                new { controller = "Home", action = "Index", area = (string)null }
+                new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    area = (string)null
+                }
             ),
             direction
         );
@@ -67,7 +72,12 @@ public class RequiredRouteConstraintTests
             Mock.Of<IRouter>(),
             "area",
             new RouteValueDictionary(
-                new { controller = "Home", action = "Index", area = string.Empty }
+                new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    area = string.Empty
+                }
             ),
             direction
         );
@@ -89,7 +99,14 @@ public class RequiredRouteConstraintTests
             new DefaultHttpContext(),
             Mock.Of<IRouter>(),
             "area",
-            new RouteValueDictionary(new { controller = "Home", action = "Index", area = "Store" }),
+            new RouteValueDictionary(
+                new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    area = "Store"
+                }
+            ),
             direction
         );
 

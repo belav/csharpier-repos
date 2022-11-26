@@ -669,7 +669,12 @@ public class RoutePatternFactoryTest
         var template = "{controller=Home}/{action=Index}/{id?}";
         var defaults = new { area = "Admin", };
         var policies = new { };
-        var requiredValues = new { area = "Admin", controller = "Store", action = "Index", };
+        var requiredValues = new
+        {
+            area = "Admin",
+            controller = "Store",
+            action = "Index",
+        };
 
         // Act
         var action = RoutePatternFactory.Parse(template, defaults, policies, requiredValues);
@@ -702,7 +707,12 @@ public class RoutePatternFactoryTest
         var template = "{controller=Home}/{action=Index}/{id?}";
         var defaults = new { };
         var policies = new { };
-        var requiredValues = new { area = (string)null, controller = "Store", action = "Index", };
+        var requiredValues = new
+        {
+            area = (string)null,
+            controller = "Store",
+            action = "Index",
+        };
 
         // Act
         var action = RoutePatternFactory.Parse(template, defaults, policies, requiredValues);
@@ -735,7 +745,12 @@ public class RoutePatternFactoryTest
         var template = "{controller=Home}/{action=Index}/{id?}";
         var defaults = new { };
         var policies = new { };
-        var requiredValues = new { area = "", controller = "Store", action = "Index", };
+        var requiredValues = new
+        {
+            area = "",
+            controller = "Store",
+            action = "Index",
+        };
 
         // Act
         var action = RoutePatternFactory.Parse(template, defaults, policies, requiredValues);
@@ -768,7 +783,12 @@ public class RoutePatternFactoryTest
         var template = "{controller=Home}/{action=Index}/{id?}";
         var defaults = new { };
         var policies = new { };
-        var requiredValues = new { area = "Admin", controller = "Store", action = "Index", };
+        var requiredValues = new
+        {
+            area = "Admin",
+            controller = "Store",
+            action = "Index",
+        };
 
         // Act
         var exception = Assert.Throws<InvalidOperationException>(() =>

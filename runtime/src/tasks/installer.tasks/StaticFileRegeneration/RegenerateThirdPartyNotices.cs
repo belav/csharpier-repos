@@ -99,7 +99,14 @@ namespace Microsoft.DotNet.Build.Tasks
                             Log.LogMessage($"Checked for content, but does not exist: {c.Url}");
                         }
 
-                        return new { c.Repo, c.Branch, c.PotentialPath, c.Url, Content = content };
+                        return new
+                        {
+                            c.Repo,
+                            c.Branch,
+                            c.PotentialPath,
+                            c.Url,
+                            Content = content
+                        };
                     })
             );
 

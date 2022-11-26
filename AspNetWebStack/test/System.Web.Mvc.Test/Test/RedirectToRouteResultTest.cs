@@ -94,7 +94,12 @@ namespace System.Web.Mvc.Test
                 .Verifiable();
             mockControllerContext.Setup(c => c.Controller).Returns(mockController.Object);
 
-            var values = new { Controller = "c", Action = "a", Id = "i" };
+            var values = new
+            {
+                Controller = "c",
+                Action = "a",
+                Id = "i"
+            };
             RedirectToRouteResult result = new RedirectToRouteResult(
                 new RouteValueDictionary(values)
             )
@@ -126,7 +131,12 @@ namespace System.Web.Mvc.Test
                 .Verifiable();
             mockControllerContext.Setup(c => c.Controller).Returns(mockController.Object);
 
-            var values = new { Controller = "c", Action = "a", Id = "i" };
+            var values = new
+            {
+                Controller = "c",
+                Action = "a",
+                Id = "i"
+            };
             RedirectToRouteResult result = new RedirectToRouteResult(
                 null,
                 new RouteValueDictionary(values),
@@ -164,7 +174,12 @@ namespace System.Web.Mvc.Test
                 .Verifiable();
             mockControllerContext.Setup(c => c.Controller).Returns(mockController.Object);
 
-            var values = new { Controller = "c", Action = "a", Id = "i" };
+            var values = new
+            {
+                Controller = "c",
+                Action = "a",
+                Id = "i"
+            };
             RedirectToRouteResult result = new RedirectToRouteResult(
                 new RouteValueDictionary(values)
             )

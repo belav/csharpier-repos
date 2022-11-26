@@ -188,7 +188,14 @@ namespace Microsoft.WebAssembly.Diagnostics
         {
             int id = GetNewCmdId();
 
-            var o = JObject.FromObject(new { id, method, @params = args });
+            var o = JObject.FromObject(
+                new
+                {
+                    id,
+                    method,
+                    @params = args
+                }
+            );
             if (sessionId.sessionId != null)
                 o["sessionId"] = sessionId.sessionId;
             var tcs = new TaskCompletionSource<Result>();

@@ -238,7 +238,15 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<OwnedPerson>()
                     .OrderBy(p => p.Id)
-                    .Select(p => new { p.Orders, p.PersonAddress, p.PersonAddress.Country.Planet }),
+                    .Select(
+                        p =>
+                            new
+                            {
+                                p.Orders,
+                                p.PersonAddress,
+                                p.PersonAddress.Country.Planet
+                            }
+                    ),
             assertOrder: true,
             elementAsserter: (e, a) =>
             {
@@ -1027,7 +1035,14 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 from c1 in ss.Set<Planet>()
                 join c2 in ss.Set<OwnedPerson>() on c1.Id equals c2.Id into grouping
                 from c2 in grouping.DefaultIfEmpty()
-                select new { c1, c2.Id, c2, c2.Orders, c2.PersonAddress },
+                select new
+                {
+                    c1,
+                    c2.Id,
+                    c2,
+                    c2.Orders,
+                    c2.PersonAddress
+                },
             elementSorter: e => (e.c1.Id, e.c2.Id),
             elementAsserter: (e, a) =>
             {
@@ -1050,7 +1065,12 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     from c1 in ss.Set<Planet>()
                     join c2 in ss.Set<OwnedPerson>() on c1.Id equals c2.Id into grouping
                     from c2 in grouping.DefaultIfEmpty()
-                    select new { c1, c2.Id, c2 }
+                    select new
+                    {
+                        c1,
+                        c2.Id,
+                        c2
+                    }
                 ).Distinct()
                     on o.Id equals sub.Id
                     into grouping2
@@ -1580,8 +1600,18 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     {
                         ab.IndexerProperty<string>("BranchName").IsRequired();
                         ab.HasData(
-                            new { BranchId = 2, PlaceType = "Land", BranchName = "BranchA" },
-                            new { BranchId = 3, PlaceType = "Land", BranchName = "BranchB" }
+                            new
+                            {
+                                BranchId = 2,
+                                PlaceType = "Land",
+                                BranchName = "BranchA"
+                            },
+                            new
+                            {
+                                BranchId = 3,
+                                PlaceType = "Land",
+                                BranchName = "BranchB"
+                            }
                         );
 
                         ab.OwnsOne(
@@ -1589,8 +1619,18 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                             cb =>
                             {
                                 cb.HasData(
-                                    new { OwnedAddressBranchId = 2, PlanetId = 1, Name = "Canada" },
-                                    new { OwnedAddressBranchId = 3, PlanetId = 1, Name = "Canada" }
+                                    new
+                                    {
+                                        OwnedAddressBranchId = 2,
+                                        PlanetId = 1,
+                                        Name = "Canada"
+                                    },
+                                    new
+                                    {
+                                        OwnedAddressBranchId = 3,
+                                        PlanetId = 1,
+                                        Name = "Canada"
+                                    }
                                 );
                             }
                         );
@@ -1610,7 +1650,14 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     {
                         ab.IndexerProperty<int>("LeafType");
 
-                        ab.HasData(new { LeafAId = 3, PlaceType = "Land", LeafType = 1 });
+                        ab.HasData(
+                            new
+                            {
+                                LeafAId = 3,
+                                PlaceType = "Land",
+                                LeafType = 1
+                            }
+                        );
 
                         ab.OwnsOne(
                             a => a.Country,
@@ -1622,7 +1669,12 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                                     .OnDelete(DeleteBehavior.Restrict);
 
                                 cb.HasData(
-                                    new { OwnedAddressLeafAId = 3, PlanetId = 1, Name = "Mexico" }
+                                    new
+                                    {
+                                        OwnedAddressLeafAId = 3,
+                                        PlanetId = 1,
+                                        Name = "Mexico"
+                                    }
                                 );
                             }
                         );
@@ -1641,7 +1693,14 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     ab =>
                     {
                         ab.IndexerProperty<string>("LeafBType").IsRequired();
-                        ab.HasData(new { LeafBId = 4, PlaceType = "Land", LeafBType = "Green" });
+                        ab.HasData(
+                            new
+                            {
+                                LeafBId = 4,
+                                PlaceType = "Land",
+                                LeafBType = "Green"
+                            }
+                        );
 
                         ab.OwnsOne(
                             a => a.Country,
@@ -1653,7 +1712,12 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                                     .OnDelete(DeleteBehavior.Restrict);
 
                                 cb.HasData(
-                                    new { OwnedAddressLeafBId = 4, PlanetId = 1, Name = "Panama" }
+                                    new
+                                    {
+                                        OwnedAddressLeafBId = 4,
+                                        PlanetId = 1,
+                                        Name = "Panama"
+                                    }
                                 );
                             }
                         );
@@ -1694,8 +1758,18 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     {
                         ob.HasKey(e => e.Id);
                         ob.HasData(
-                            new { Id = "H", Name = "Hydrogen", StarId = 1 },
-                            new { Id = "He", Name = "Helium", StarId = 1 }
+                            new
+                            {
+                                Id = "H",
+                                Name = "Hydrogen",
+                                StarId = 1
+                            },
+                            new
+                            {
+                                Id = "He",
+                                Name = "Helium",
+                                StarId = 1
+                            }
                         );
                     }
                 );
@@ -1705,7 +1779,15 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
             {
                 b.OwnsOne(
                     e => e.Throned,
-                    b => b.HasData(new { BartonId = 1, Property = "Property", Value = 42 })
+                    b =>
+                        b.HasData(
+                            new
+                            {
+                                BartonId = 1,
+                                Property = "Property",
+                                Value = 42
+                            }
+                        )
                 );
                 b.HasData(
                     new Barton { Id = 1, Simple = "Simple" },

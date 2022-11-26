@@ -240,7 +240,14 @@ public class DynamicControllerEndpointMatcherPolicyTest
         Transform = (c, values, state) =>
         {
             return new ValueTask<RouteValueDictionary>(
-                new RouteValueDictionary(new { controller = "Home", action = "Index", state })
+                new RouteValueDictionary(
+                    new
+                    {
+                        controller = "Home",
+                        action = "Index",
+                        state
+                    }
+                )
             );
         };
 
@@ -275,7 +282,14 @@ public class DynamicControllerEndpointMatcherPolicyTest
         Transform = (c, values, state) =>
         {
             return new ValueTask<RouteValueDictionary>(
-                new RouteValueDictionary(new { controller = "Home", action = "Index", state })
+                new RouteValueDictionary(
+                    new
+                    {
+                        controller = "Home",
+                        action = "Index",
+                        state
+                    }
+                )
             );
         };
 
@@ -330,7 +344,14 @@ public class DynamicControllerEndpointMatcherPolicyTest
         Transform = (c, values, state) =>
         {
             return new ValueTask<RouteValueDictionary>(
-                new RouteValueDictionary(new { controller = "Home", action = "Index", state })
+                new RouteValueDictionary(
+                    new
+                    {
+                        controller = "Home",
+                        action = "Index",
+                        state
+                    }
+                )
             );
         };
 
@@ -366,7 +387,14 @@ public class DynamicControllerEndpointMatcherPolicyTest
         Transform = (c, values, state) =>
         {
             return new ValueTask<RouteValueDictionary>(
-                new RouteValueDictionary(new { controller = "Home", action = "Index", state })
+                new RouteValueDictionary(
+                    new
+                    {
+                        controller = "Home",
+                        action = "Index",
+                        state
+                    }
+                )
             );
         };
 
@@ -433,7 +461,14 @@ public class DynamicControllerEndpointMatcherPolicyTest
         Transform = (c, values, state) =>
         {
             return new ValueTask<RouteValueDictionary>(
-                new RouteValueDictionary(new { controller = "Home", action = "Index", state })
+                new RouteValueDictionary(
+                    new
+                    {
+                        controller = "Home",
+                        action = "Index",
+                        state
+                    }
+                )
             );
         };
 

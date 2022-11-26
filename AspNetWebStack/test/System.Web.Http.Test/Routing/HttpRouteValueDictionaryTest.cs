@@ -48,7 +48,15 @@ namespace System.Web.Http.Routing
                     { data1, data1 },
                     { new { }, data1 },
                     { data2, data2 },
-                    { new { key1 = "value1", key2 = 2, key3 = TimeSpan.FromDays(1) }, data2 },
+                    {
+                        new
+                        {
+                            key1 = "value1",
+                            key2 = 2,
+                            key3 = TimeSpan.FromDays(1)
+                        },
+                        data2
+                    },
                 };
             }
         }

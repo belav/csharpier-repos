@@ -440,7 +440,13 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
             .Set<Blog>()
             .Where(b => b.BlogId == 2)
             .Select(
-                x => new { x.BlogId, x.Url, RssUrl = x is RssBlog ? ((RssBlog)x).RssUrl : null }
+                x =>
+                    new
+                    {
+                        x.BlogId,
+                        x.Url,
+                        RssUrl = x is RssBlog ? ((RssBlog)x).RssUrl : null
+                    }
             )
             .ToList();
 
@@ -456,7 +462,12 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
         var query = (
             from b in context.Set<Blog>()
             join p in context.Set<Post>()
-                on new { BlogId = (int?)b.BlogId, b.IsVisible, AnotherId = b.BlogId } equals new
+                on new
+                {
+                    BlogId = (int?)b.BlogId,
+                    b.IsVisible,
+                    AnotherId = b.BlogId
+                } equals new
                 {
                     p.BlogId,
                     IsVisible = true,
@@ -478,7 +489,12 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
         var query = (
             from b in context.Set<Blog>()
             join p in context.Set<Post>()
-                on new { BlogId = (int?)b.BlogId, b.IsVisible, AnotherId = b.BlogId } equals new
+                on new
+                {
+                    BlogId = (int?)b.BlogId,
+                    b.IsVisible,
+                    AnotherId = b.BlogId
+                } equals new
                 {
                     p.BlogId,
                     IsVisible = true,

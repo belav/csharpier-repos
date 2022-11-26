@@ -1618,8 +1618,18 @@ ORDER BY [p].[Id], [t].[Id], [t].[Id0], [t0].[ClientId], [t0].[Id], [t0].[OrderC
                         );
                         ab.IndexerProperty<string>("BranchName").IsRequired();
                         ab.HasData(
-                            new { BranchId = 2, PlaceType = "Land", BranchName = "BranchA" },
-                            new { BranchId = 3, PlaceType = "Land", BranchName = "BranchB" }
+                            new
+                            {
+                                BranchId = 2,
+                                PlaceType = "Land",
+                                BranchName = "BranchA"
+                            },
+                            new
+                            {
+                                BranchId = 3,
+                                PlaceType = "Land",
+                                BranchName = "BranchB"
+                            }
                         );
 
                         ab.OwnsOne(
@@ -1637,8 +1647,18 @@ ORDER BY [p].[Id], [t].[Id], [t].[Id0], [t0].[ClientId], [t0].[Id], [t0].[OrderC
                                         })
                                 );
                                 cb.HasData(
-                                    new { OwnedAddressBranchId = 2, PlanetId = 1, Name = "Canada" },
-                                    new { OwnedAddressBranchId = 3, PlanetId = 1, Name = "Canada" }
+                                    new
+                                    {
+                                        OwnedAddressBranchId = 2,
+                                        PlanetId = 1,
+                                        Name = "Canada"
+                                    },
+                                    new
+                                    {
+                                        OwnedAddressBranchId = 3,
+                                        PlanetId = 1,
+                                        Name = "Canada"
+                                    }
                                 );
                             }
                         );
@@ -1666,7 +1686,14 @@ ORDER BY [p].[Id], [t].[Id], [t].[Id0], [t0].[ClientId], [t0].[Id], [t0].[OrderC
                         );
                         ab.IndexerProperty<int>("LeafType");
 
-                        ab.HasData(new { LeafAId = 3, PlaceType = "Land", LeafType = 1 });
+                        ab.HasData(
+                            new
+                            {
+                                LeafAId = 3,
+                                PlaceType = "Land",
+                                LeafType = 1
+                            }
+                        );
 
                         ab.OwnsOne(
                             a => a.Country,
@@ -1688,7 +1715,12 @@ ORDER BY [p].[Id], [t].[Id], [t].[Id0], [t0].[ClientId], [t0].[Id], [t0].[OrderC
                                     .OnDelete(DeleteBehavior.Restrict);
 
                                 cb.HasData(
-                                    new { OwnedAddressLeafAId = 3, PlanetId = 1, Name = "Mexico" }
+                                    new
+                                    {
+                                        OwnedAddressLeafAId = 3,
+                                        PlanetId = 1,
+                                        Name = "Mexico"
+                                    }
                                 );
                             }
                         );
@@ -1715,7 +1747,14 @@ ORDER BY [p].[Id], [t].[Id], [t].[Id0], [t0].[ClientId], [t0].[Id], [t0].[OrderC
                                 })
                         );
                         ab.IndexerProperty<string>("LeafBType").IsRequired();
-                        ab.HasData(new { LeafBId = 4, PlaceType = "Land", LeafBType = "Green" });
+                        ab.HasData(
+                            new
+                            {
+                                LeafBId = 4,
+                                PlaceType = "Land",
+                                LeafBType = "Green"
+                            }
+                        );
 
                         ab.OwnsOne(
                             a => a.Country,
@@ -1737,7 +1776,12 @@ ORDER BY [p].[Id], [t].[Id], [t].[Id0], [t0].[ClientId], [t0].[Id], [t0].[OrderC
                                     .OnDelete(DeleteBehavior.Restrict);
 
                                 cb.HasData(
-                                    new { OwnedAddressLeafBId = 4, PlanetId = 1, Name = "Panama" }
+                                    new
+                                    {
+                                        OwnedAddressLeafBId = 4,
+                                        PlanetId = 1,
+                                        Name = "Panama"
+                                    }
                                 );
                             }
                         );
@@ -1796,8 +1840,18 @@ ORDER BY [p].[Id], [t].[Id], [t].[Id0], [t0].[ClientId], [t0].[Id], [t0].[OrderC
                         );
                         ob.HasKey(e => e.Id);
                         ob.HasData(
-                            new { Id = "H", Name = "Hydrogen", StarId = 1 },
-                            new { Id = "He", Name = "Helium", StarId = 1 }
+                            new
+                            {
+                                Id = "H",
+                                Name = "Hydrogen",
+                                StarId = 1
+                            },
+                            new
+                            {
+                                Id = "He",
+                                Name = "Helium",
+                                StarId = 1
+                            }
                         );
                     }
                 );
@@ -1825,7 +1879,14 @@ ORDER BY [p].[Id], [t].[Id], [t].[Id0], [t0].[ClientId], [t0].[Id], [t0].[OrderC
                                     ttb.HasPeriodEnd("PeriodEnd").HasColumnName("PeriodEnd");
                                 })
                         );
-                        b.HasData(new { BartonId = 1, Property = "Property", Value = 42 });
+                        b.HasData(
+                            new
+                            {
+                                BartonId = 1,
+                                Property = "Property",
+                                Value = 42
+                            }
+                        );
                     }
                 );
                 b.HasData(

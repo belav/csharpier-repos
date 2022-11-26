@@ -3619,7 +3619,12 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 from l2 in ss.Set<Level2>()
                     .Where(x => x.Level1_Required_Id == l1.Id * 2 || x.Name.Length == x.Id)
                     .DefaultIfEmpty()
-                select new { Root = l1, Element = l2, Collection = l1.OneToMany_Optional1 },
+                select new
+                {
+                    Root = l1,
+                    Element = l2,
+                    Collection = l1.OneToMany_Optional1
+                },
             elementSorter: e => (e.Root.Id, e.Element.Id),
             elementAsserter: (e, a) =>
             {

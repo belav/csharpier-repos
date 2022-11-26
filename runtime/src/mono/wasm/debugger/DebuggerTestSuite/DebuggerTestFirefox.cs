@@ -133,7 +133,12 @@ public class DebuggerTestFirefox : DebuggerTestBase
             {
                 type = "setBreakpoint",
                 location = JObject.FromObject(
-                    new { line = line + 1, column, sourceUrl = dicFileToUrl[url_key] }
+                    new
+                    {
+                        line = line + 1,
+                        column,
+                        sourceUrl = dicFileToUrl[url_key]
+                    }
                 ),
                 to = _client.BreakpointActorId
             }
@@ -411,7 +416,12 @@ public class DebuggerTestFirefox : DebuggerTestBase
             if (value["type"].Value<string>() == "boolean")
                 description = description.ToLower();
             variableValue = JObject.FromObject(
-                new { type = value["type"], value = value["value"], description }
+                new
+                {
+                    type = value["type"],
+                    value = value["value"],
+                    description
+                }
             );
         }
         var ret = JObject.FromObject(
@@ -506,7 +516,12 @@ public class DebuggerTestFirefox : DebuggerTestBase
             );
         }
         var o = JObject.FromObject(
-            new { to = _client.ThreadActorId, type = "resume", resumeLimit }
+            new
+            {
+                to = _client.ThreadActorId,
+                type = "resume",
+                resumeLimit
+            }
         );
 
         for (int i = 0; i < times - 1; i++)
@@ -560,7 +575,12 @@ public class DebuggerTestFirefox : DebuggerTestBase
             {
                 type = "setBreakpoint",
                 location = JObject.FromObject(
-                    new { line = m_line + lineOffset + 1, column = col, sourceUrl = m_url }
+                    new
+                    {
+                        line = m_line + lineOffset + 1,
+                        column = col,
+                        sourceUrl = m_url
+                    }
                 ),
                 to = _client.BreakpointActorId
             }

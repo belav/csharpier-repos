@@ -1049,11 +1049,21 @@ public class RouteTest
 
         var context = CreateVirtualPathContext(
             values: new { action = "Store" },
-            ambientValues: new { Controller = "Home", action = "Blog", extra = "42" }
+            ambientValues: new
+            {
+                Controller = "Home",
+                action = "Blog",
+                extra = "42"
+            }
         );
 
         var expectedValues = new RouteValueDictionary(
-            new { controller = "Home", action = "Store", extra = "42" }
+            new
+            {
+                controller = "Home",
+                action = "Store",
+                extra = "42"
+            }
         );
 
         // Act
@@ -1150,11 +1160,22 @@ public class RouteTest
 
         var context = CreateVirtualPathContext(
             values: new { action = "Store", thirdthing = "13" },
-            ambientValues: new { Controller = "Home", action = "Blog", otherthing = "17" }
+            ambientValues: new
+            {
+                Controller = "Home",
+                action = "Blog",
+                otherthing = "17"
+            }
         );
 
         var expectedValues = new RouteValueDictionary(
-            new { controller = "Home", action = "Store", otherthing = "17", thirdthing = "13" }
+            new
+            {
+                controller = "Home",
+                action = "Store",
+                otherthing = "17",
+                thirdthing = "13"
+            }
         );
 
         // Act
@@ -1177,7 +1198,12 @@ public class RouteTest
         // Arrange
         var route = CreateRoute("{controller}/{action}/{id:int}");
         var context = CreateVirtualPathContext(
-            values: new { action = "Index", controller = "Home", id = 4 }
+            values: new
+            {
+                action = "Index",
+                controller = "Home",
+                id = 4
+            }
         );
 
         // Act
@@ -1195,7 +1221,12 @@ public class RouteTest
         // Arrange
         var route = CreateRoute("{controller}/{action}/{id:int}");
         var context = CreateVirtualPathContext(
-            values: new { action = "Index", controller = "Home", id = "asf" }
+            values: new
+            {
+                action = "Index",
+                controller = "Home",
+                id = "asf"
+            }
         );
 
         // Act
@@ -1211,7 +1242,12 @@ public class RouteTest
         // Arrange
         var route = CreateRoute("{controller}/{action}/{id:int?}");
         var context = CreateVirtualPathContext(
-            values: new { action = "Index", controller = "Home", id = 98 }
+            values: new
+            {
+                action = "Index",
+                controller = "Home",
+                id = 98
+            }
         );
 
         // Act
@@ -1247,7 +1283,12 @@ public class RouteTest
         // Arrange
         var route = CreateRoute("{controller}/{action}/{id:int?}");
         var context = CreateVirtualPathContext(
-            values: new { action = "Index", controller = "Home", id = "sdfd" }
+            values: new
+            {
+                action = "Index",
+                controller = "Home",
+                id = "sdfd"
+            }
         );
 
         // Act
@@ -1263,7 +1304,12 @@ public class RouteTest
         // Arrange
         var route = CreateRoute("{controller}/{action}/{id:int:range(1,20)}");
         var context = CreateVirtualPathContext(
-            values: new { action = "Index", controller = "Home", id = 14 }
+            values: new
+            {
+                action = "Index",
+                controller = "Home",
+                id = 14
+            }
         );
 
         // Act
@@ -1288,7 +1334,12 @@ public class RouteTest
         );
 
         var context = CreateVirtualPathContext(
-            values: new { action = "Index", controller = "Home", name = "products" }
+            values: new
+            {
+                action = "Index",
+                controller = "Home",
+                name = "products"
+            }
         );
 
         // Act
@@ -1312,7 +1363,13 @@ public class RouteTest
         );
 
         var context = CreateVirtualPathContext(
-            values: new { action = "Index", controller = "Home", name = "products", format = "xml" }
+            values: new
+            {
+                action = "Index",
+                controller = "Home",
+                name = "products",
+                format = "xml"
+            }
         );
 
         // Act
@@ -1336,7 +1393,12 @@ public class RouteTest
         );
 
         var context = CreateVirtualPathContext(
-            values: new { action = "Index", controller = "Home", name = "products" }
+            values: new
+            {
+                action = "Index",
+                controller = "Home",
+                name = "products"
+            }
         );
 
         // Act
@@ -1360,7 +1422,13 @@ public class RouteTest
         );
 
         var context = CreateVirtualPathContext(
-            values: new { action = "Index", controller = "Home", name = "products", format = "xml" }
+            values: new
+            {
+                action = "Index",
+                controller = "Home",
+                name = "products",
+                format = "xml"
+            }
         );
 
         // Act
@@ -1384,7 +1452,12 @@ public class RouteTest
         );
 
         var context = CreateVirtualPathContext(
-            values: new { action = "Index", controller = "Home", name = "products" }
+            values: new
+            {
+                action = "Index",
+                controller = "Home",
+                name = "products"
+            }
         );
 
         // Act
@@ -1438,7 +1511,12 @@ public class RouteTest
         );
 
         var context = CreateVirtualPathContext(
-            values: new { action = "Index", controller = "Home", name = "products" }
+            values: new
+            {
+                action = "Index",
+                controller = "Home",
+                name = "products"
+            }
         );
 
         // Act

@@ -402,7 +402,12 @@ public class DefaultLinkGeneratorTest : LinkGeneratorTestBase
         var path = linkGenerator.GetPathByAddress(
             1,
             values: new RouteValueDictionary(
-                new { controller = "Home", action = "In?dex", query = "some?query" }
+                new
+                {
+                    controller = "Home",
+                    action = "In?dex",
+                    query = "some?query"
+                }
             ),
             new PathString("/Foo/Bar?encodeme?"),
             new FragmentString("#Fragment?")
@@ -464,7 +469,12 @@ public class DefaultLinkGeneratorTest : LinkGeneratorTestBase
         // Act
         var link = linkGenerator.GetPathByRouteValues(
             routeName: null,
-            new { controller = "Home", name = "Test", c = "hithere", }
+            new
+            {
+                controller = "Home",
+                name = "Test",
+                c = "hithere",
+            }
         );
 
         // Assert
@@ -495,7 +505,12 @@ public class DefaultLinkGeneratorTest : LinkGeneratorTestBase
             httpContext,
             1,
             values: new RouteValueDictionary(
-                new { controller = "Home", action = "In?dex", query = "some?query" }
+                new
+                {
+                    controller = "Home",
+                    action = "In?dex",
+                    query = "some?query"
+                }
             ),
             fragment: new FragmentString("#Fragment?")
         );
@@ -524,7 +539,12 @@ public class DefaultLinkGeneratorTest : LinkGeneratorTestBase
         var path = linkGenerator.GetUriByAddress(
             1,
             values: new RouteValueDictionary(
-                new { controller = "Home", action = "In?dex", query = "some?query" }
+                new
+                {
+                    controller = "Home",
+                    action = "In?dex",
+                    query = "some?query"
+                }
             ),
             "http",
             new HostString("example.com"),
@@ -565,7 +585,12 @@ public class DefaultLinkGeneratorTest : LinkGeneratorTestBase
             httpContext,
             1,
             values: new RouteValueDictionary(
-                new { controller = "Home", action = "In?dex", query = "some?query" }
+                new
+                {
+                    controller = "Home",
+                    action = "In?dex",
+                    query = "some?query"
+                }
             ),
             fragment: new FragmentString("#Fragment?")
         );

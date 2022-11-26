@@ -154,7 +154,6 @@ namespace System.Security.Cryptography
                         theirKey = otherKey.DuplicateKeyHandle();
                     }
 
-                    // Indicate that secret can hold stackallocs from nested scopes
                     scoped Span<byte> secret;
 
                     // Arbitrary limit. But it covers secp521r1, which is the biggest common case.

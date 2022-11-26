@@ -156,7 +156,12 @@ namespace Microsoft.Web.Helpers.Test
             string render = Gravatar
                 .GetHtml(
                     "foo@bar.com",
-                    attributes: new { id = "gravatar", alT = "<b>foo@bar.com</b>", srC = "ignored" }
+                    attributes: new
+                    {
+                        id = "gravatar",
+                        alT = "<b>foo@bar.com</b>",
+                        srC = "ignored"
+                    }
                 )
                 .ToString();
             // beware of attributes ordering in tests

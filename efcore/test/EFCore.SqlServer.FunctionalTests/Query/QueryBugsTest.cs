@@ -1351,7 +1351,12 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                     on eVersion.RootEntityId equals eRoot.Id
                     into RootEntities
                 from eRootJoined in RootEntities.DefaultIfEmpty()
-                select new { eRootJoined, eVersion, foo = eRootJoined ?? eVersion };
+                select new
+                {
+                    eRootJoined,
+                    eVersion,
+                    foo = eRootJoined ?? eVersion
+                };
 
             query.ToList();
 
@@ -9979,12 +9984,30 @@ OUTPUT INSERTED.[Id], i._Position;"
                         x.Bio,
                         x.AvatarUrl,
                         Images = x.Images
-                            .Select(i => new { i.Id, i.ImageUrl, i.Height, i.Width })
+                            .Select(
+                                i =>
+                                    new
+                                    {
+                                        i.Id,
+                                        i.ImageUrl,
+                                        i.Height,
+                                        i.Width
+                                    }
+                            )
                             .ToList(),
                         KnownByFilms = x.Actor.Movies
                             .Select(m => m.Movie)
                             .Union(x.Director.Movies.Select(m => m.Movie))
-                            .Select(m => new { m.Id, m.Name, m.PosterUrl, m.Rating })
+                            .Select(
+                                m =>
+                                    new
+                                    {
+                                        m.Id,
+                                        m.Name,
+                                        m.PosterUrl,
+                                        m.Rating
+                                    }
+                            )
                             .ToList()
                     }
             )

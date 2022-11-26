@@ -63,7 +63,12 @@ public class LinkParserEndpointNameExtensionsTest : LinkParserTestBase
 
         // Assert
         MatcherAssert.AssertRouteValuesEqual(
-            new { controller = "Home", action = "Index", id = "17" },
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                id = "17"
+            },
             values
         );
     }

@@ -191,7 +191,12 @@ namespace Microsoft.Interop
                 .Combine(stubEnvironment)
                 .Select(
                     static (data, ct) =>
-                        new { data.Left.Syntax, data.Left.Symbol, Environment = data.Right }
+                        new
+                        {
+                            data.Left.Syntax,
+                            data.Left.Symbol,
+                            Environment = data.Right
+                        }
                 )
                 .Select(
                     (data, ct) =>

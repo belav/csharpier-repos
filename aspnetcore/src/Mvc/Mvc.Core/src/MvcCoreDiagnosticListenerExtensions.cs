@@ -910,7 +910,12 @@ internal static class MvcCoreDiagnosticListenerExtensions
         {
             diagnosticListener.Write(
                 "Microsoft.AspNetCore.Mvc.BeforeActionMethod",
-                new { actionContext, actionArguments, controller }
+                new
+                {
+                    actionContext,
+                    actionArguments,
+                    controller
+                }
             );
         }
 
@@ -985,7 +990,13 @@ internal static class MvcCoreDiagnosticListenerExtensions
         {
             diagnosticListener.Write(
                 "Microsoft.AspNetCore.Mvc.AfterActionMethod",
-                new { actionContext, actionArguments, controller, result }
+                new
+                {
+                    actionContext,
+                    actionArguments,
+                    controller,
+                    result
+                }
             );
         }
     }

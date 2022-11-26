@@ -40,58 +40,134 @@ public class TemplateBinderTests
             },
             {
                 "Test/{val1}/{val2}/{val3}",
-                new RouteValueDictionary(new { val1 = "", val2 = "", val3 = "" }),
-                new RouteValueDictionary(new { val1 = "a", val2 = "b", val3 = "c" }),
+                new RouteValueDictionary(
+                    new
+                    {
+                        val1 = "",
+                        val2 = "",
+                        val3 = ""
+                    }
+                ),
+                new RouteValueDictionary(
+                    new
+                    {
+                        val1 = "a",
+                        val2 = "b",
+                        val3 = "c"
+                    }
+                ),
                 "/Test/a/b/c"
             },
             {
                 "Test/{val1}/{val2}/{val3}",
-                new RouteValueDictionary(new { val1 = "", val2 = "", val3 = "" }),
+                new RouteValueDictionary(
+                    new
+                    {
+                        val1 = "",
+                        val2 = "",
+                        val3 = ""
+                    }
+                ),
                 new RouteValueDictionary(new { val1 = "a", val2 = "b" }),
                 "/Test/a/b"
             },
             {
                 "Test/{val1}/{val2}/{val3}",
-                new RouteValueDictionary(new { val1 = "", val2 = "", val3 = "" }),
+                new RouteValueDictionary(
+                    new
+                    {
+                        val1 = "",
+                        val2 = "",
+                        val3 = ""
+                    }
+                ),
                 new RouteValueDictionary(new { val1 = "a" }),
                 "/Test/a"
             },
             {
                 "Test/{val1}",
-                new RouteValueDictionary(new { val1 = "42", val2 = "", val3 = "" }),
+                new RouteValueDictionary(
+                    new
+                    {
+                        val1 = "42",
+                        val2 = "",
+                        val3 = ""
+                    }
+                ),
                 new RouteValueDictionary(),
                 "/Test"
             },
             {
                 "Test/{val1}/{val2}/{val3}",
                 new RouteValueDictionary(
-                    new { val1 = "42", val2 = (string)null, val3 = (string)null }
+                    new
+                    {
+                        val1 = "42",
+                        val2 = (string)null,
+                        val3 = (string)null
+                    }
                 ),
                 new RouteValueDictionary(),
                 "/Test"
             },
             {
                 "Test/{val1}/{val2}/{val3}/{val4}",
-                new RouteValueDictionary(new { val1 = "21", val2 = "", val3 = "", val4 = "" }),
-                new RouteValueDictionary(new { val1 = "42", val2 = "11", val3 = "", val4 = "" }),
+                new RouteValueDictionary(
+                    new
+                    {
+                        val1 = "21",
+                        val2 = "",
+                        val3 = "",
+                        val4 = ""
+                    }
+                ),
+                new RouteValueDictionary(
+                    new
+                    {
+                        val1 = "42",
+                        val2 = "11",
+                        val3 = "",
+                        val4 = ""
+                    }
+                ),
                 "/Test/42/11"
             },
             {
                 "Test/{val1}/{val2}/{val3}",
-                new RouteValueDictionary(new { val1 = "21", val2 = "", val3 = "" }),
+                new RouteValueDictionary(
+                    new
+                    {
+                        val1 = "21",
+                        val2 = "",
+                        val3 = ""
+                    }
+                ),
                 new RouteValueDictionary(new { val1 = "42" }),
                 "/Test/42"
             },
             {
                 "Test/{val1}/{val2}/{val3}/{val4}",
-                new RouteValueDictionary(new { val1 = "21", val2 = "", val3 = "", val4 = "" }),
+                new RouteValueDictionary(
+                    new
+                    {
+                        val1 = "21",
+                        val2 = "",
+                        val3 = "",
+                        val4 = ""
+                    }
+                ),
                 new RouteValueDictionary(new { val1 = "42", val2 = "11" }),
                 "/Test/42/11"
             },
             {
                 "Test/{val1}/{val2}/{val3}",
                 new RouteValueDictionary(
-                    new { val1 = "21", val2 = (string)null, val3 = (string)null }
+                    new
+                    {
+                        val1 = "21",
+                        val2 = (string)null,
+                        val3 = (string)null
+                    }
                 ),
                 new RouteValueDictionary(new { val1 = "42" }),
                 "/Test/42"
@@ -403,7 +479,12 @@ public class TemplateBinderTests
             "{controller}.mvc/{action}/{id}",
             new RouteValueDictionary(new { action = "Index", id = (string)null }),
             new RouteValueDictionary(
-                new { controller = "home", action = "list", id = (string)null }
+                new
+                {
+                    controller = "home",
+                    action = "list",
+                    id = (string)null
+                }
             ),
             new RouteValueDictionary(new { controller = "products" }),
             "/products.mvc"
@@ -479,7 +560,12 @@ public class TemplateBinderTests
             "{controller}/{action}/{id}",
             new RouteValueDictionary(new { id = (string)null }),
             new RouteValueDictionary(
-                new { controller = "home", action = "oldaction", id = (string)null }
+                new
+                {
+                    controller = "home",
+                    action = "oldaction",
+                    id = (string)null
+                }
             ),
             new RouteValueDictionary(new { action = "newaction" }),
             "/home/newaction"
@@ -504,9 +590,22 @@ public class TemplateBinderTests
         RunTest(
             "{controller}.mvc/{action}/{id}",
             new RouteValueDictionary(new { action = "Index", id = "" }),
-            new RouteValueDictionary(new { controller = "Home", action = "Index", id = "" }),
             new RouteValueDictionary(
-                new { controller = "Home", action = "TestAction", id = "1", format = (string)null }
+                new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    id = ""
+                }
+            ),
+            new RouteValueDictionary(
+                new
+                {
+                    controller = "Home",
+                    action = "TestAction",
+                    id = "1",
+                    format = (string)null
+                }
             ),
             "/Home.mvc/TestAction/1"
         );
@@ -548,7 +647,12 @@ public class TemplateBinderTests
         RunTest(
             "{controller}/{action}/{id}",
             new { action = "Index", id = (string)null },
-            new { controller = "orig", action = "init", id = "123" },
+            new
+            {
+                controller = "orig",
+                action = "init",
+                id = "123"
+            },
             new { action = "new", },
             "/orig/new"
         );
@@ -649,7 +753,12 @@ public class TemplateBinderTests
             "{controller}.mvc/{action}/{id}",
             new RouteValueDictionary(new { controller = "Home" }),
             new RouteValueDictionary(
-                new { controller = "home", action = "Index", id = (string)null }
+                new
+                {
+                    controller = "home",
+                    action = "Index",
+                    id = (string)null
+                }
             ),
             values,
             "/%23;%3F%3A@%26%3D%2B$,.mvc/showcategory/123?so%3Frt=de%3Fsc&maxPrice=100"
@@ -660,7 +769,13 @@ public class TemplateBinderTests
     public void GetUrlGeneratesQueryStringForNewValuesAndEscapesQueryString()
     {
         var values = new RouteValueDictionary(
-            new { controller = "products", action = "showcategory", id = 123, maxPrice = 100 }
+            new
+            {
+                controller = "products",
+                action = "showcategory",
+                id = 123,
+                maxPrice = 100
+            }
         );
         values.Add("so?rt", "de?sc");
 
@@ -668,7 +783,12 @@ public class TemplateBinderTests
             "{controller}.mvc/{action}/{id}",
             new RouteValueDictionary(new { controller = "Home" }),
             new RouteValueDictionary(
-                new { controller = "home", action = "Index", id = (string)null }
+                new
+                {
+                    controller = "home",
+                    action = "Index",
+                    id = (string)null
+                }
             ),
             values,
             "/products.mvc/showcategory/123" + "?so%3Frt=de%3Fsc&maxPrice=100"
@@ -682,7 +802,12 @@ public class TemplateBinderTests
             "{controller}.mvc/{action}/{id}",
             new RouteValueDictionary(new { controller = "Home", Custom = "customValue" }),
             new RouteValueDictionary(
-                new { controller = "Home", action = "Index", id = (string)null }
+                new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    id = (string)null
+                }
             ),
             new RouteValueDictionary(
                 new
@@ -917,7 +1042,12 @@ public class TemplateBinderTests
             CreateRoute(
                 "PrettyFooUrl",
                 new RouteValueDictionary(
-                    new { controller = "Foo", action = "aaa", id = (string)null }
+                    new
+                    {
+                        controller = "Foo",
+                        action = "aaa",
+                        id = (string)null
+                    }
                 )
             )
         );
@@ -926,7 +1056,12 @@ public class TemplateBinderTests
             CreateRoute(
                 "PrettyBarUrl",
                 new RouteValueDictionary(
-                    new { controller = "Bar", action = "bbb", id = (string)null }
+                    new
+                    {
+                        controller = "Bar",
+                        action = "bbb",
+                        id = (string)null
+                    }
                 )
             )
         );
@@ -1234,7 +1369,13 @@ public class TemplateBinderTests
             new RouteValueDictionary(new { foo = CreateHttpMethodConstraint("GET") }),
             new RouteValueDictionary(),
             new RouteValueDictionary(
-                new { controller = "Orders", action = "Index", end = "end", foo = "GET" }
+                new
+                {
+                    controller = "Orders",
+                    action = "Index",
+                    end = "end",
+                    foo = "GET"
+                }
             ),
             "Orders.mvc/Index/end"
         );
@@ -1407,13 +1548,28 @@ public class TemplateBinderTests
         var expected = "/Home/Index";
         var template = "Home/Index";
         var defaults = new RouteValueDictionary(
-            new { controller = "Home", action = "Index", area = (string)null }
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                area = (string)null
+            }
         );
         var ambientValues = new RouteValueDictionary(
-            new { controller = "Rail", action = "Schedule", area = "Travel" }
+            new
+            {
+                controller = "Rail",
+                action = "Schedule",
+                area = "Travel"
+            }
         );
         var explicitValues = new RouteValueDictionary(
-            new { controller = "Home", action = "Index", area = "" }
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                area = ""
+            }
         );
         var binder = new TemplateBinder(
             UrlEncoder.Default,
@@ -1443,13 +1599,28 @@ public class TemplateBinderTests
         var expected = "/Home/Index";
         var template = "Home/Index";
         var defaults = new RouteValueDictionary(
-            new { controller = "Home", action = "Index", area = "" }
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                area = ""
+            }
         );
         var ambientValues = new RouteValueDictionary(
-            new { controller = "Rail", action = "Schedule", area = "Travel" }
+            new
+            {
+                controller = "Rail",
+                action = "Schedule",
+                area = "Travel"
+            }
         );
         var explicitValues = new RouteValueDictionary(
-            new { controller = "Home", action = "Index", area = (string)null }
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                area = (string)null
+            }
         );
         var binder = new TemplateBinder(
             UrlEncoder.Default,
@@ -1487,7 +1658,12 @@ public class TemplateBinderTests
             new { controller = "ConventionalTransformer", action = "Param" }
         );
         var explicitValues = new RouteValueDictionary(
-            new { controller = "ConventionalTransformer", action = "Param", param = "MyValue" }
+            new
+            {
+                controller = "ConventionalTransformer",
+                action = "Param",
+                param = "MyValue"
+            }
         );
         var binder = new TemplateBinder(
             UrlEncoder.Default,
@@ -1530,7 +1706,12 @@ public class TemplateBinderTests
         var template = "{area}/{controller}/{action}";
         var defaults = new RouteValueDictionary(new { action = "Index" });
         var ambientValues = new RouteValueDictionary(
-            new { area = "Travel", controller = "Rail", action = "Index" }
+            new
+            {
+                area = "Travel",
+                controller = "Rail",
+                action = "Index"
+            }
         );
         var explicitValues = new RouteValueDictionary(
             new { controller = "Flight", action = "Index" }
@@ -1616,7 +1797,12 @@ public class TemplateBinderTests
         var template = "{area}/{controller=Home}/{action=Index}/{id?}";
         var defaults = new RouteValueDictionary();
         var ambientValues = new RouteValueDictionary(
-            new { area = "Admin", page = "/LGAnotherPage", id = "17" }
+            new
+            {
+                area = "Admin",
+                page = "/LGAnotherPage",
+                id = "17"
+            }
         );
         var explicitValues = new RouteValueDictionary(
             new { controller = "LG2", action = "SomeAction" }
@@ -1657,13 +1843,29 @@ public class TemplateBinderTests
 
         var template = "Admin/LG3/SomeAction/{id?}";
         var defaults = new RouteValueDictionary(
-            new { controller = "LG3", action = "SomeAction", area = "Admin" }
+            new
+            {
+                controller = "LG3",
+                action = "SomeAction",
+                area = "Admin"
+            }
         );
         var ambientValues = new RouteValueDictionary(
-            new { controller = "LG1", action = "LinkToAnArea", id = "17" }
+            new
+            {
+                controller = "LG1",
+                action = "LinkToAnArea",
+                id = "17"
+            }
         );
         var explicitValues = new RouteValueDictionary(
-            new { controller = "LG3", area = "Admin", action = "SomeAction", anothervalue = "5" }
+            new
+            {
+                controller = "LG3",
+                area = "Admin",
+                action = "SomeAction",
+                anothervalue = "5"
+            }
         );
         var binder = new TemplateBinder(
             UrlEncoder.Default,

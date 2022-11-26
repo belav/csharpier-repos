@@ -94,7 +94,14 @@ namespace DebuggerTests
             if (args == null)
                 args = new JObject();
 
-            var o = JObject.FromObject(new { id = id, method = method, @params = args });
+            var o = JObject.FromObject(
+                new
+                {
+                    id = id,
+                    method = method,
+                    @params = args
+                }
+            );
 
             var tcs = new TaskCompletionSource<Result>();
             pending_cmds[new MessageId(sessionId.sessionId, id)] = tcs;

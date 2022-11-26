@@ -702,7 +702,12 @@ namespace BasicEventSourceTests
                         // log an array
                         logger.Write(
                             "EnumEvent" + subTestName,
-                            new { b = "start", v = c, s = "end" }
+                            new
+                            {
+                                b = "start",
+                                v = c,
+                                s = "end"
+                            }
                         );
                     },
                     delegate(Event evt)

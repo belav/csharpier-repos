@@ -779,7 +779,12 @@ namespace DebuggerTests
             await CompareObjectPropertiesFor(
                 frame_locals,
                 "ts",
-                new { Days = TNumber(3530), Minutes = TNumber(2), Seconds = TNumber(4), },
+                new
+                {
+                    Days = TNumber(3530),
+                    Minutes = TNumber(2),
+                    Seconds = TNumber(4),
+                },
                 "ts_props",
                 num_fields: 12
             );

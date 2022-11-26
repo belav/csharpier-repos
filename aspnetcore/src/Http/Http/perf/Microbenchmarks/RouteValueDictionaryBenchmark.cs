@@ -23,7 +23,12 @@ public class RouteValueDictionaryBenchmark
         };
         _arrayValuesEmpty = new RouteValueDictionary();
         _propertyValues = new RouteValueDictionary(
-            new { action = "Index", controller = "Home", id = "17" }
+            new
+            {
+                action = "Index",
+                controller = "Home",
+                id = "17"
+            }
         );
     }
 
@@ -86,7 +91,13 @@ public class RouteValueDictionaryBenchmark
     public void TryAdd_Properties_AtCapacity_KeyExists()
     {
         var propertyValues = new RouteValueDictionary(
-            new { action = "Index", controller = "Home", id = "17", area = "root" }
+            new
+            {
+                action = "Index",
+                controller = "Home",
+                id = "17",
+                area = "root"
+            }
         );
         propertyValues.TryAdd("id", "15");
     }
@@ -95,7 +106,13 @@ public class RouteValueDictionaryBenchmark
     public void TryAdd_Properties_AtCapacity_KeyDoesNotExist()
     {
         var propertyValues = new RouteValueDictionary(
-            new { action = "Index", controller = "Home", id = "17", area = "root" }
+            new
+            {
+                action = "Index",
+                controller = "Home",
+                id = "17",
+                area = "root"
+            }
         );
         _propertyValues.TryAdd("name", "Service");
     }
@@ -104,7 +121,12 @@ public class RouteValueDictionaryBenchmark
     public void TryAdd_Properties_NotAtCapacity_KeyExists()
     {
         var propertyValues = new RouteValueDictionary(
-            new { action = "Index", controller = "Home", id = "17" }
+            new
+            {
+                action = "Index",
+                controller = "Home",
+                id = "17"
+            }
         );
         propertyValues.TryAdd("id", "15");
     }
@@ -113,7 +135,12 @@ public class RouteValueDictionaryBenchmark
     public void TryAdd_Properties_NotAtCapacity_KeyDoesNotExist()
     {
         var propertyValues = new RouteValueDictionary(
-            new { action = "Index", controller = "Home", id = "17" }
+            new
+            {
+                action = "Index",
+                controller = "Home",
+                id = "17"
+            }
         );
         _propertyValues.TryAdd("name", "Service");
     }
@@ -188,7 +215,12 @@ public class RouteValueDictionaryBenchmark
     public void ConditionalAdd_Properties()
     {
         var propertyValues = new RouteValueDictionary(
-            new { action = "Index", controller = "Home", id = "17" }
+            new
+            {
+                action = "Index",
+                controller = "Home",
+                id = "17"
+            }
         );
 
         if (!propertyValues.ContainsKey("name"))
