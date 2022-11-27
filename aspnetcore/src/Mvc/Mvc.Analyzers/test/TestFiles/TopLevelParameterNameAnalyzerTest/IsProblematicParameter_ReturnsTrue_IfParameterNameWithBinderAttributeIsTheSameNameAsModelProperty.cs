@@ -7,6 +7,8 @@
         public void ActionMethod(
             [Bind(Prefix = "model")]
                 IsProblematicParameter_ReturnsTrue_IfParameterNameWithBinderAttributeIsTheSameNameAsModelProperty different
-        ) { }
+        )
+        {
+        }
     }
 }

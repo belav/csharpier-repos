@@ -2169,7 +2169,9 @@ public class PageModelTest
         }
     }
 
-    private class TestPageModel : PageModel { }
+    private class TestPageModel : PageModel
+    {
+    }
 
     private class TestPage : Page
     {

@@ -23,7 +23,9 @@ public class ModelAsFilter : PageModel, IResultFilter
         context.HandlerArguments["message"] = "Hello from OnPageHandlerExecuting";
     }
 
-    public void OnResultExecuted(ResultExecutedContext context) { }
+    public void OnResultExecuted(ResultExecutedContext context)
+    {
+    }
 
     public void OnResultExecuting(ResultExecutingContext context)
     {

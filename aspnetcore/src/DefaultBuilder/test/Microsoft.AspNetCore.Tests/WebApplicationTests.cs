@@ -205,7 +205,9 @@ public class WebApplicationTests
 
         public IFeatureCollection Features { get; } = new FeatureCollection();
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public Task StartAsync<TContext>(
             IHttpApplication<TContext> application,
@@ -1355,7 +1357,12 @@ public class WebApplicationTests
 
         app.MapGet("/1", () => "1");
 
-        var ex = Assert.Throws<InvalidOperationException>(() => app.UseEndpoints(endpoints => { }));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                app.UseEndpoints(endpoints =>
+                {
+                })
+        );
         Assert.Contains("UseRouting", ex.Message);
     }
 
@@ -1408,7 +1415,11 @@ public class WebApplicationTests
         builder.Services.AddSingleton<IStartupFilter, TerminalMiddlewareStartupFilter>();
         await using var app = builder.Build();
 
-        app.MapGet("/defined", () => { });
+        app.MapGet(
+            "/defined",
+            () => {
+            }
+        );
 
         await app.StartAsync();
 
@@ -1481,7 +1492,9 @@ public class WebApplicationTests
             )
             .WithDisplayName("One");
 
-        app.UseEndpoints(e => { });
+        app.UseEndpoints(e =>
+        {
+        });
 
         await app.StartAsync();
 
@@ -1582,9 +1595,18 @@ public class WebApplicationTests
     {
         var builder = WebApplication.CreateBuilder();
 
-        var ex = Assert.Throws<NotSupportedException>(() => builder.WebHost.Configure(app => { }));
+        var ex = Assert.Throws<NotSupportedException>(
+            () =>
+                builder.WebHost.Configure(app =>
+                {
+                })
+        );
         var ex1 = Assert.Throws<NotSupportedException>(
-            () => builder.WebHost.Configure((context, app) => { })
+            () =>
+                builder.WebHost.Configure(
+                    (context, app) => {
+                    }
+                )
         );
         var ex2 = Assert.Throws<NotSupportedException>(
             () => builder.WebHost.UseStartup<MyStartup>()
@@ -1618,13 +1640,27 @@ public class WebApplicationTests
         );
 
         var ex5 = Assert.Throws<NotSupportedException>(
-            () => builder.Host.ConfigureWebHost(webHostBuilder => { })
+            () =>
+                builder.Host.ConfigureWebHost(webHostBuilder =>
+                {
+                })
         );
         var ex6 = Assert.Throws<NotSupportedException>(
-            () => builder.Host.ConfigureWebHost(webHostBuilder => { }, options => { })
+            () =>
+                builder.Host.ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                    },
+                    options =>
+                    {
+                    }
+                )
         );
         var ex7 = Assert.Throws<NotSupportedException>(
-            () => builder.Host.ConfigureWebHostDefaults(webHostBuilder => { })
+            () =>
+                builder.Host.ConfigureWebHostDefaults(webHostBuilder =>
+                {
+                })
         );
 
         Assert.Equal(
@@ -1693,7 +1729,9 @@ public class WebApplicationTests
         });
 
         app.UseRouting();
-        app.UseEndpoints(_ => { });
+        app.UseEndpoints(_ =>
+        {
+        });
 
         await app.StartAsync();
 
@@ -1936,7 +1974,11 @@ public class WebApplicationTests
         builder.WebHost.UseTestServer();
         await using var app = builder.Build();
 
-        app.MapGet("/{parameterName}", (int parameterName) => { });
+        app.MapGet(
+            "/{parameterName}",
+            (int parameterName) => {
+            }
+        );
 
         await app.StartAsync();
 
@@ -1962,7 +2004,11 @@ public class WebApplicationTests
         builder.WebHost.UseTestServer();
         await using var app = builder.Build();
 
-        app.MapGet("/{parameterName}", (int parameterName) => { });
+        app.MapGet(
+            "/{parameterName}",
+            (int parameterName) => {
+            }
+        );
 
         await app.StartAsync();
 
@@ -2030,7 +2076,10 @@ public class WebApplicationTests
         {
             var builder = WebApplication.CreateBuilder();
 
-            builder.WebHost.ConfigureAppConfiguration((ctx, config) => { });
+            builder.WebHost.ConfigureAppConfiguration(
+                (ctx, config) => {
+                }
+            );
 
             using var app = builder.Build();
             var hostEnv = app.Services.GetRequiredService<Hosting.IWebHostEnvironment>();
@@ -2249,7 +2298,9 @@ public class WebApplicationTests
             .AddScheme<AuthenticationSchemeOptions, UberHandler>(
                 "testSchemeName",
                 "testDisplayName",
-                _ => { }
+                _ =>
+                {
+                }
             );
         builder.WebHost.UseTestServer();
         await using var app = builder.Build();
@@ -2297,7 +2348,9 @@ public class WebApplicationTests
             .AddScheme<AuthenticationSchemeOptions, UberHandler>(
                 "testSchemeName",
                 "testDisplayName",
-                _ => { }
+                _ =>
+                {
+                }
             );
         builder.WebHost.UseTestServer();
         await using var app = builder.Build();
@@ -2318,7 +2371,12 @@ public class WebApplicationTests
 
         app.Properties["__AuthenticationMiddlewareSet"] = true;
 
-        app.MapGet("/hello", (ClaimsPrincipal user) => { }).AllowAnonymous();
+        app.MapGet(
+                "/hello",
+                (ClaimsPrincipal user) => {
+                }
+            )
+            .AllowAnonymous();
 
         Assert.True(app.Properties.ContainsKey("__AuthenticationMiddlewareSet"));
         Assert.False(app.Properties.ContainsKey("__AuthorizationMiddlewareSet"));
@@ -2336,7 +2394,9 @@ public class WebApplicationTests
             ILoggerFactory logger,
             UrlEncoder encoder,
             ISystemClock clock
-        ) : base(options, logger, encoder, clock) { }
+        ) : base(options, logger, encoder, clock)
+        {
+        }
 
         protected override Task HandleChallengeAsync(AuthenticationProperties properties) =>
             Task.CompletedTask;
@@ -2439,13 +2499,19 @@ public class WebApplicationTests
         }
     }
 
-    private class Service : IService { }
+    private class Service : IService
+    {
+    }
 
-    private interface IService { }
+    private interface IService
+    {
+    }
 
     private class Service2
     {
-        public Service2(Service service) { }
+        public Service2(Service service)
+        {
+        }
     }
 
     private class MyStartup : IStartup
@@ -2480,9 +2546,13 @@ public class WebApplicationTests
             _currentListener.Value = this;
         }
 
-        public void OnCompleted() { }
+        public void OnCompleted()
+        {
+        }
 
-        public void OnError(Exception error) { }
+        public void OnError(Exception error)
+        {
+        }
 
         public void OnNext(DiagnosticListener value)
         {
@@ -2619,7 +2689,9 @@ public class WebApplicationTests
             return Task.CompletedTask;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         private class MockServerAddressesFeature : IServerAddressesFeature
         {

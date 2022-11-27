@@ -81,7 +81,9 @@ public class UserSecretsTestFixture : IDisposable
                 var secretsDir = Path.GetDirectoryName(PathHelper.GetSecretsPathFromSecretsId(id));
                 TryDelete(secretsDir);
             }
-            catch { }
+            catch
+            {
+            }
         });
         _disposables.Push(() => TryDelete(projectPath.FullName));
 

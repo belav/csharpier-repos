@@ -918,7 +918,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
     public void RequestAbortedTokenIsFullyUsableAfterCancellation()
     {
         var originalToken = _http1Connection.RequestAborted;
-        var originalRegistration = originalToken.Register(() => { });
+        var originalRegistration = originalToken.Register(() => {
+        });
 
         _http1Connection.Abort(new ConnectionAbortedException());
 
@@ -934,7 +935,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
     public void RequestAbortedTokenIsUsableAfterCancellation()
     {
         var originalToken = _http1Connection.RequestAborted;
-        var originalRegistration = originalToken.Register(() => { });
+        var originalRegistration = originalToken.Register(() => {
+        });
 
         _http1Connection.Abort(new ConnectionAbortedException());
 

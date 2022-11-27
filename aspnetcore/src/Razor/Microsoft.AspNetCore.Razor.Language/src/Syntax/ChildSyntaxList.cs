@@ -515,7 +515,9 @@ internal readonly struct ChildSyntaxList : IEquatable<ChildSyntaxList>, IReadOnl
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 
     public readonly partial struct Reversed : IEnumerable<SyntaxNode>, IEquatable<Reversed>
@@ -661,7 +663,9 @@ internal readonly struct ChildSyntaxList : IEquatable<ChildSyntaxList>, IReadOnl
             /// <summary>
             /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
             /// </summary>
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 
@@ -669,13 +673,17 @@ internal readonly struct ChildSyntaxList : IEquatable<ChildSyntaxList>, IReadOnl
     {
         public static readonly IEnumerator<T> Instance = new EmptyEnumerator<T>();
 
-        protected EmptyEnumerator() { }
+        protected EmptyEnumerator()
+        {
+        }
 
         public T Current => throw new InvalidOperationException();
 
         object IEnumerator.Current => throw new NotImplementedException();
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public bool MoveNext()
         {

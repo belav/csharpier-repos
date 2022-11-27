@@ -24,7 +24,8 @@ public class UserStoreTest
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        { }
+        {
+        }
     }
 
     [ConditionalFact]
@@ -653,4 +654,6 @@ public class UserStoreTest
 #pragma warning restore CA1310 // Specify StringComparison for correctness
 }
 
-public class ApplicationUser : IdentityUser { }
+public class ApplicationUser : IdentityUser
+{
+}

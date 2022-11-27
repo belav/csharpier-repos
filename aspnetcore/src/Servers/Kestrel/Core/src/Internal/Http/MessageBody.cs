@@ -178,7 +178,9 @@ internal abstract class MessageBody
         }
     }
 
-    protected virtual void OnReadStarting() { }
+    protected virtual void OnReadStarting()
+    {
+    }
 
     protected virtual Task OnReadStartedAsync()
     {

@@ -536,7 +536,9 @@ public class HttpClientHttp2InteropTests : LoggedTest
         private Func<string, Task> _sendContent;
         private TaskCompletionSource _sendComplete;
 
-        public StreamingContent() { }
+        public StreamingContent()
+        {
+        }
 
         public Task SendStarted => _sendStarted.Task;
 

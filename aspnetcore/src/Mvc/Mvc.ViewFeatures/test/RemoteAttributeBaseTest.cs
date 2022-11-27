@@ -631,7 +631,9 @@ public class RemoteAttributeBaseTest
     {
         private readonly string _dummyGetUrlReturnValue;
 
-        public TestableRemoteAttributeBase() { }
+        public TestableRemoteAttributeBase()
+        {
+        }
 
         public TestableRemoteAttributeBase(string dummyGetUrlReturnValue)
         {

@@ -10,7 +10,9 @@ public class RequestBuilderTests
     [Fact]
     public void AddRequestHeader()
     {
-        var builder = new WebHostBuilder().Configure(app => { });
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+        });
         var server = new TestServer(builder);
         server
             .CreateRequest("/")
@@ -24,7 +26,9 @@ public class RequestBuilderTests
     [Fact]
     public void AddContentHeaders()
     {
-        var builder = new WebHostBuilder().Configure(app => { });
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+        });
         var server = new TestServer(builder);
         server
             .CreateRequest("/")
@@ -40,7 +44,9 @@ public class RequestBuilderTests
     public void TestServer_PropertyShouldHoldTestServerInstance()
     {
         // Arrange
-        var builder = new WebHostBuilder().Configure(app => { });
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+        });
         var server = new TestServer(builder);
 
         // Act

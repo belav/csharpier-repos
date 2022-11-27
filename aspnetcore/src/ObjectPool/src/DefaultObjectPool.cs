@@ -28,7 +28,9 @@ public class DefaultObjectPool<T> : ObjectPool<T> where T : class
     /// </summary>
     /// <param name="policy">The pooling policy to use.</param>
     public DefaultObjectPool(IPooledObjectPolicy<T> policy)
-        : this(policy, Environment.ProcessorCount * 2) { }
+        : this(policy, Environment.ProcessorCount * 2)
+    {
+    }
 
     /// <summary>
     /// Creates an instance of <see cref="DefaultObjectPool{T}"/>.
@@ -97,7 +99,9 @@ public class DefaultObjectPool<T> : ObjectPool<T> where T : class
                     i < items.Length
                         && Interlocked.CompareExchange(ref items[i].Element, obj, null) != null;
                     ++i
-                ) { }
+                )
+                {
+                }
             }
         }
     }

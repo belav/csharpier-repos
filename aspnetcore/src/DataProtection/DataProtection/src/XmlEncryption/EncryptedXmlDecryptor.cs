@@ -22,7 +22,9 @@ public sealed class EncryptedXmlDecryptor : IInternalEncryptedXmlDecryptor, IXml
     /// <summary>
     /// Creates a new instance of an <see cref="EncryptedXmlDecryptor"/>.
     /// </summary>
-    public EncryptedXmlDecryptor() : this(services: null) { }
+    public EncryptedXmlDecryptor() : this(services: null)
+    {
+    }
 
     /// <summary>
     /// Creates a new instance of an <see cref="EncryptedXmlDecryptor"/>.

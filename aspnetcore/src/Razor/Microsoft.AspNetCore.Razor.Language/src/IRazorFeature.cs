@@ -3,4 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-public interface IRazorFeature { }
+public interface IRazorFeature
+{
+}

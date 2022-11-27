@@ -8,7 +8,9 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands;
 
 internal class HelpCommandBase : CommandBase
 {
-    public HelpCommandBase(IConsole console) : base(console) { }
+    public HelpCommandBase(IConsole console) : base(console)
+    {
+    }
 
     public override void Configure(CommandLineApplication command)
     {

@@ -205,7 +205,9 @@ public class DefaultPageModelActivatorProviderTest
         Assert.False(model.SyncDisposed);
     }
 
-    private class SimpleModel { }
+    private class SimpleModel
+    {
+    }
 
     private class ModelWithServices
     {

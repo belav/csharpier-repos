@@ -987,9 +987,15 @@ public class RenderTreeDiffBuilderTest : IDisposable
     public void RecognizesAttributeEventHandlerValuesChanged()
     {
         // Arrange
-        Action<EventArgs> retainedHandler = _ => { };
-        Action<EventArgs> removedHandler = _ => { };
-        Action<EventArgs> addedHandler = _ => { };
+        Action<EventArgs> retainedHandler = _ =>
+        {
+        };
+        Action<EventArgs> removedHandler = _ =>
+        {
+        };
+        Action<EventArgs> addedHandler = _ =>
+        {
+        };
         oldTree.OpenElement(0, "My element");
         oldTree.AddAttribute(1, "onfoo", retainedHandler);
         oldTree.AddAttribute(2, "onbar", removedHandler);
@@ -1771,7 +1777,9 @@ public class RenderTreeDiffBuilderTest : IDisposable
     public void PreservesEventHandlerIdsForRetainedEventHandlers()
     {
         // Arrange
-        Action<EventArgs> retainedHandler = _ => { };
+        Action<EventArgs> retainedHandler = _ =>
+        {
+        };
         oldTree.OpenElement(0, "My element");
         oldTree.AddAttribute(1, "ontest", retainedHandler);
         oldTree.CloseElement();
@@ -1802,7 +1810,9 @@ public class RenderTreeDiffBuilderTest : IDisposable
     public void PreservesEventHandlerIdsForRetainedEventHandlers_SlowPath()
     {
         // Arrange
-        Action<EventArgs> retainedHandler = _ => { };
+        Action<EventArgs> retainedHandler = _ =>
+        {
+        };
         oldTree.OpenElement(0, "My element");
         oldTree.AddAttribute(0, "ontest", retainedHandler);
         oldTree.CloseElement();
@@ -2513,7 +2523,9 @@ public class RenderTreeDiffBuilderTest : IDisposable
 
     private class FakeRenderer : Renderer
     {
-        public FakeRenderer() : base(new TestServiceProvider(), NullLoggerFactory.Instance) { }
+        public FakeRenderer() : base(new TestServiceProvider(), NullLoggerFactory.Instance)
+        {
+        }
 
         public override Dispatcher Dispatcher { get; } = Dispatcher.CreateDefault();
 
@@ -2543,7 +2555,9 @@ public class RenderTreeDiffBuilderTest : IDisposable
 
         public string NonParameterProperty { get; set; }
 
-        public void Attach(RenderHandle renderHandle) { }
+        public void Attach(RenderHandle renderHandle)
+        {
+        }
 
         public Task SetParametersAsync(ParameterView parameters)
         {
@@ -2554,7 +2568,9 @@ public class RenderTreeDiffBuilderTest : IDisposable
 
     private class FakeComponent2 : IComponent
     {
-        public void Attach(RenderHandle renderHandle) { }
+        public void Attach(RenderHandle renderHandle)
+        {
+        }
 
         public Task SetParametersAsync(ParameterView parameters) => Task.CompletedTask;
     }
@@ -2563,7 +2579,9 @@ public class RenderTreeDiffBuilderTest : IDisposable
     {
         public int SetParametersCallCount { get; private set; }
 
-        public void Attach(RenderHandle renderHandle) { }
+        public void Attach(RenderHandle renderHandle)
+        {
+        }
 
         public Task SetParametersAsync(ParameterView parameters)
         {
@@ -2578,14 +2596,18 @@ public class RenderTreeDiffBuilderTest : IDisposable
 
         public void Dispose() => DisposalCount++;
 
-        public void Attach(RenderHandle renderHandle) { }
+        public void Attach(RenderHandle renderHandle)
+        {
+        }
 
         public Task SetParametersAsync(ParameterView parameters) => Task.CompletedTask;
     }
 
     private class NonDisposableComponent : IComponent
     {
-        public void Attach(RenderHandle renderHandle) { }
+        public void Attach(RenderHandle renderHandle)
+        {
+        }
 
         public Task SetParametersAsync(ParameterView parameters) => Task.CompletedTask;
     }

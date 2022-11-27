@@ -50,5 +50,7 @@ public static class CustomConventions
 {
     [ProducesResponseType(302)]
     [ProducesResponseType(409)]
-    public static void CustomConventionMethod() { }
+    public static void CustomConventionMethod()
+    {
+    }
 }

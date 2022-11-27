@@ -19,7 +19,9 @@ public sealed class CodeWriter
     private int _currentLineIndex;
     private int _currentLineCharacterIndex;
 
-    public CodeWriter() : this(Environment.NewLine, RazorCodeGenerationOptions.CreateDefault()) { }
+    public CodeWriter() : this(Environment.NewLine, RazorCodeGenerationOptions.CreateDefault())
+    {
+    }
 
     public CodeWriter(string newLine, RazorCodeGenerationOptions options)
     {

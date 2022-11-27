@@ -223,7 +223,13 @@ public class TryValidateModelIntegrationTest
         IModelMetadataProvider metadataProvider
     )
     {
-        return CreateController(actionContext, metadataProvider, _ => { });
+        return CreateController(
+            actionContext,
+            metadataProvider,
+            _ =>
+            {
+            }
+        );
     }
 
     private TestController CreateController(
@@ -270,5 +276,7 @@ public class TryValidateModelIntegrationTest
         return result;
     }
 
-    private class TestController : Controller { }
+    private class TestController : Controller
+    {
+    }
 }

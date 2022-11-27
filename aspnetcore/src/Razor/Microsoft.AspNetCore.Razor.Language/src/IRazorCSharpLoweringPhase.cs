@@ -11,4 +11,6 @@ namespace Microsoft.AspNetCore.Razor.Language;
 /// generated C# code. At this time any directives or other constructs that cannot be understood by code generation
 /// will result in an error.
 /// </remarks>
-public interface IRazorCSharpLoweringPhase : IRazorEnginePhase { }
+public interface IRazorCSharpLoweringPhase : IRazorEnginePhase
+{
+}

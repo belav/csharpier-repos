@@ -5,9 +5,13 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
 public class DefaultUIContext : HtmlPageContext
 {
-    public DefaultUIContext() { }
+    public DefaultUIContext()
+    {
+    }
 
-    public DefaultUIContext(DefaultUIContext currentContext) : base(currentContext) { }
+    public DefaultUIContext(DefaultUIContext currentContext) : base(currentContext)
+    {
+    }
 
     public DefaultUIContext WithAuthenticatedUser() =>
         new DefaultUIContext(this) { UserAuthenticated = true };

@@ -88,7 +88,12 @@ public static class AzureADB2CAuthenticationBuilderExtensions
         );
 
         builder.Services.Configure(scheme, configureOptions);
-        builder.AddJwtBearer(jwtBearerScheme, o => { });
+        builder.AddJwtBearer(
+            jwtBearerScheme,
+            o =>
+            {
+            }
+        );
 
         return builder;
     }
@@ -178,8 +183,20 @@ public static class AzureADB2CAuthenticationBuilderExtensions
 
         builder.Services.Configure(scheme, configureOptions);
 
-        builder.AddOpenIdConnect(openIdConnectScheme, null, o => { });
-        builder.AddCookie(cookieScheme, null, o => { });
+        builder.AddOpenIdConnect(
+            openIdConnectScheme,
+            null,
+            o =>
+            {
+            }
+        );
+        builder.AddCookie(
+            cookieScheme,
+            null,
+            o =>
+            {
+            }
+        );
 
         return builder;
     }

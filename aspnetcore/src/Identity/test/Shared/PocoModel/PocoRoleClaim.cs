@@ -6,7 +6,9 @@ namespace Microsoft.AspNetCore.Identity.Test;
 /// <summary>
 ///     EntityType that represents one specific role claim
 /// </summary>
-public class PocoRoleClaim : PocoRoleClaim<string> { }
+public class PocoRoleClaim : PocoRoleClaim<string>
+{
+}
 
 /// <summary>
 ///     EntityType that represents one specific role claim

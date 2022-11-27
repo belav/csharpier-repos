@@ -402,7 +402,9 @@ namespace System.Net.Http.Unit.Tests.QPack
             );
         }
 
-        void IHttpStreamHeadersHandler.OnHeadersComplete(bool endStream) { }
+        void IHttpStreamHeadersHandler.OnHeadersComplete(bool endStream)
+        {
+        }
 
         public void OnDynamicIndexedHeader(
             int? index,

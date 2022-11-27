@@ -18,7 +18,9 @@ public class ResourceNamesCache : IResourceNamesCache
     /// <summary>
     /// Creates a new <see cref="ResourceNamesCache" />
     /// </summary>
-    public ResourceNamesCache() { }
+    public ResourceNamesCache()
+    {
+    }
 
     /// <inheritdoc />
     public IList<string>? GetOrAdd(string name, Func<string, IList<string>?> valueFactory)

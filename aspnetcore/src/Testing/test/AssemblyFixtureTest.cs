@@ -47,4 +47,6 @@ public class AssemblyFixtureTest
 }
 
 [CollectionDefinition("MyCollection", DisableParallelization = true)]
-public class MyCollection : ICollectionFixture<TestCollectionFixture> { }
+public class MyCollection : ICollectionFixture<TestCollectionFixture>
+{
+}

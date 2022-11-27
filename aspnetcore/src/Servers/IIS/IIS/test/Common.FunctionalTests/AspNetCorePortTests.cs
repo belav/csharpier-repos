@@ -39,7 +39,9 @@ public class AspNetCorePortTests : IISFunctionalTestBase
     private const int _minPort = 1025;
     private const int _maxPort = 48000;
 
-    public AspNetCorePortTests(PublishedSitesFixture fixture) : base(fixture) { }
+    public AspNetCorePortTests(PublishedSitesFixture fixture) : base(fixture)
+    {
+    }
 
     public static TestMatrix TestVariants =>
         TestMatrix

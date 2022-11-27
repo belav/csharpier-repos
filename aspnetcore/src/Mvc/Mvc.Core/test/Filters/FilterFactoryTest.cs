@@ -30,7 +30,9 @@ public class FilterFactoryTest
         // Arrange
         var filterProvider = new TestFilterProvider(
             context => context.Results.Clear(),
-            content => { }
+            content =>
+            {
+            }
         );
         var filter = new FilterDescriptor(
             new TypeFilterAttribute(typeof(object)),
@@ -306,7 +308,9 @@ public class FilterFactoryTest
 
     private class TestFilter : IFilterMetadata
     {
-        public TestFilter() { }
+        public TestFilter()
+        {
+        }
 
         public TestFilter(string data)
         {

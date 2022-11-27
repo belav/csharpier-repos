@@ -348,7 +348,9 @@ public class InMemoryUserStore<TUser>
         return Task.FromResult<TUser>(null);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 
     public Task<TUser> FindByNameAsync(
         string userName,

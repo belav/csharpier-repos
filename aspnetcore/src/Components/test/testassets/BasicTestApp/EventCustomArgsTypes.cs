@@ -11,7 +11,9 @@ namespace BasicTestApp.CustomEventTypesNamespace;
 [EventHandler("onkeydown.yetanother", typeof(YetAnotherCustomKeyboardEventArgs), true, true)]
 [EventHandler("oncustommouseover", typeof(EventArgs), true, true)]
 [EventHandler("onsendjsobject", typeof(EventWithCustomSerializedDataEventArgs), true, true)]
-public static class EventHandlers { }
+public static class EventHandlers
+{
+}
 
 class TestEventArgs : EventArgs
 {

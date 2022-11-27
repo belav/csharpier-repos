@@ -13,7 +13,9 @@ public class AuthenticationSchemeOptions
     /// <summary>
     /// Check that the options are valid. Should throw an exception if things are not ok.
     /// </summary>
-    public virtual void Validate() { }
+    public virtual void Validate()
+    {
+    }
 
     /// <summary>
     /// Checks that the options are valid for a specific scheme

@@ -40,7 +40,8 @@ public class HttpRequestStreamReader : TextReader
     /// <param name="encoding">The character encoding to use.</param>
     public HttpRequestStreamReader(Stream stream, Encoding encoding)
         : this(stream, encoding, DefaultBufferSize, ArrayPool<byte>.Shared, ArrayPool<char>.Shared)
-    { }
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="HttpRequestStreamReader"/>.
@@ -49,7 +50,9 @@ public class HttpRequestStreamReader : TextReader
     /// <param name="encoding">The character encoding to use.</param>
     /// <param name="bufferSize">The minimum buffer size.</param>
     public HttpRequestStreamReader(Stream stream, Encoding encoding, int bufferSize)
-        : this(stream, encoding, bufferSize, ArrayPool<byte>.Shared, ArrayPool<char>.Shared) { }
+        : this(stream, encoding, bufferSize, ArrayPool<byte>.Shared, ArrayPool<char>.Shared)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="HttpRequestStreamReader"/>.

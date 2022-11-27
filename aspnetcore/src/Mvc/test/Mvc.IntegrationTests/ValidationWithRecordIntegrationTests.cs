@@ -21,7 +21,9 @@ public class ValidationWithRecordIntegrationTests
 {
     private record TransferInfo([Range(25, 50)] int AccountId, double Amount);
 
-    private class TestController { }
+    private class TestController
+    {
+    }
 
     public static TheoryData<List<ParameterDescriptor>> MultipleActionParametersAndValidationData
     {
@@ -1883,9 +1885,9 @@ public class ValidationWithRecordIntegrationTests
         Assert.Equal(ModelValidationState.Valid, entry.ValidationState);
     }
 
-    private static void Validation_ListOfType_NoValidatorOnParameterTestMethod(
-        List<int> parameter
-    ) { }
+    private static void Validation_ListOfType_NoValidatorOnParameterTestMethod(List<int> parameter)
+    {
+    }
 
     [Fact]
     public async Task Validation_ListOfType_ValidatorOnParameter()
@@ -1951,7 +1953,9 @@ public class ValidationWithRecordIntegrationTests
 
     private static void Validation_ListOfType_ValidatorOnParameterTestMethod(
         [ConsistentMinLength(3)] List<int> parameter
-    ) { }
+    )
+    {
+    }
 
     private class ConsistentMinLength : ValidationAttribute
     {
@@ -2033,7 +2037,9 @@ public class ValidationWithRecordIntegrationTests
 
     private static void Validation_CollectionOfType_ValidatorOnElementTestMethod(
         Collection<InvalidEvenIds> p
-    ) { }
+    )
+    {
+    }
 
     public class InvalidEvenIds : IValidatableObject
     {
@@ -2381,7 +2387,9 @@ public class ValidationWithRecordIntegrationTests
 
     private static void Validation_InifnitelyRecursiveModel_ValidationOnTopLevelParameterMethod(
         [Required] RecursiveModel model
-    ) { }
+    )
+    {
+    }
 
 #pragma warning disable CS8907 // Parameter is unread. Did you forget to use it to initialize the property with that name?
     private record RecordTypeWithValidatorsOnProperties(string Property1)

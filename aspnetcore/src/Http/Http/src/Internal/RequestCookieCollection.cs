@@ -234,7 +234,9 @@ internal sealed class RequestCookieCollection : IRequestCookieCollection
             get { return Current; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public void Reset()
         {

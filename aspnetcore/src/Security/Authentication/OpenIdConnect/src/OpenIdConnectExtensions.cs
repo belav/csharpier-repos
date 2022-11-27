@@ -24,7 +24,12 @@ public static class OpenIdConnectExtensions
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
     public static AuthenticationBuilder AddOpenIdConnect(this AuthenticationBuilder builder) =>
-        builder.AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, _ => { });
+        builder.AddOpenIdConnect(
+            OpenIdConnectDefaults.AuthenticationScheme,
+            _ =>
+            {
+            }
+        );
 
     /// <summary>
     /// Adds OpenId Connect authentication to <see cref="AuthenticationBuilder"/> using the default scheme.

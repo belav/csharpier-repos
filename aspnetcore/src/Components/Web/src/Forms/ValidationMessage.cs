@@ -88,7 +88,9 @@ public class ValidationMessage<TValue> : ComponentBase, IDisposable
     /// Called to dispose this instance.
     /// </summary>
     /// <param name="disposing"><see langword="true"/> if called within <see cref="IDisposable.Dispose"/>.</param>
-    protected virtual void Dispose(bool disposing) { }
+    protected virtual void Dispose(bool disposing)
+    {
+    }
 
     void IDisposable.Dispose()
     {

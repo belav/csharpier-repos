@@ -37,7 +37,9 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task NormalRequestPassesThrough()
     {
-        using var host = await CreateHost(s => { });
+        using var host = await CreateHost(s =>
+        {
+        });
         using var server = host.GetTestServer();
         var response = await server.CreateClient().GetAsync("http://example.com/normal");
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -91,7 +93,9 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task AjaxChallengeRedirectTurnsInto200WithLocationHeader()
     {
-        using var host = await CreateHost(s => { });
+        using var host = await CreateHost(s =>
+        {
+        });
         using var server = host.GetTestServer();
         var transaction = await SendAsync(
             server,
@@ -106,7 +110,9 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task ProtectedCustomRequestShouldRedirectToCustomRedirectUri()
     {
-        using var host = await CreateHost(s => { });
+        using var host = await CreateHost(s =>
+        {
+        });
         using var server = host.GetTestServer();
 
         var transaction = await SendAsync(server, "http://example.com/protected/CustomRedirect");
@@ -499,7 +505,12 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieContainsIdentity()
     {
-        using var host = await CreateHost(o => { }, SignInAsAlice);
+        using var host = await CreateHost(
+            o =>
+            {
+            },
+            SignInAsAlice
+        );
         using var server = host.GetTestServer();
 
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
@@ -517,7 +528,9 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     public async Task CookieAppliesClaimsTransform()
     {
         using var host = await CreateHost(
-            o => { },
+            o =>
+            {
+            },
             SignInAsAlice,
             baseAddress: null,
             claimsTransform: true
@@ -1546,7 +1559,9 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     public async Task CookieUsesPathBaseByDefault()
     {
         using var host = await CreateHost(
-            o => { },
+            o =>
+            {
+            },
             context =>
             {
                 Assert.Equal(new PathString("/base"), context.Request.PathBase);
@@ -1566,7 +1581,12 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieChallengeRedirectsToLoginWithoutCookie()
     {
-        using var host = await CreateHost(o => { }, SignInAsAlice);
+        using var host = await CreateHost(
+            o =>
+            {
+            },
+            SignInAsAlice
+        );
 
         var url = "http://example.com/challenge";
         using var server = host.GetTestServer();
@@ -1580,7 +1600,12 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieForbidRedirectsWithoutCookie()
     {
-        using var host = await CreateHost(o => { }, SignInAsAlice);
+        using var host = await CreateHost(
+            o =>
+            {
+            },
+            SignInAsAlice
+        );
 
         var url = "http://example.com/forbid";
         using var server = host.GetTestServer();

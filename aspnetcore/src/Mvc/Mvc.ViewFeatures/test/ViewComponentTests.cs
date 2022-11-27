@@ -256,7 +256,9 @@ public class ViewComponentTests
         Assert.Same(viewComponent.TempData, viewComponent.ViewContext.TempData);
     }
 
-    private class TestViewComponent : ViewComponent { }
+    private class TestViewComponent : ViewComponent
+    {
+    }
 
     private class SessionFeature : ISessionFeature
     {

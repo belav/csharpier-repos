@@ -26,16 +26,22 @@ public class GuidRole : IdentityRole<Guid>
 
 public class UserStoreGuidTest : SqlStoreTestBase<GuidUser, GuidRole, Guid>
 {
-    public UserStoreGuidTest(ScratchDatabaseFixture fixture) : base(fixture) { }
+    public UserStoreGuidTest(ScratchDatabaseFixture fixture) : base(fixture)
+    {
+    }
 
     public class ApplicationUserStore : UserStore<GuidUser, GuidRole, TestDbContext, Guid>
     {
-        public ApplicationUserStore(TestDbContext context) : base(context) { }
+        public ApplicationUserStore(TestDbContext context) : base(context)
+        {
+        }
     }
 
     public class ApplicationRoleStore : RoleStore<GuidRole, TestDbContext, Guid>
     {
-        public ApplicationRoleStore(TestDbContext context) : base(context) { }
+        public ApplicationRoleStore(TestDbContext context) : base(context)
+        {
+        }
     }
 
     protected override void AddUserStore(IServiceCollection services, object context = null)

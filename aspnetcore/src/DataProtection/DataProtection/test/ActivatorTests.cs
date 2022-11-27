@@ -103,7 +103,9 @@ public class ActivatorTests
         Assert.Same(expectedActivator, actualActivator);
     }
 
-    private class ClassWithParameterlessCtor { }
+    private class ClassWithParameterlessCtor
+    {
+    }
 
     private class ClassWithServiceProviderCtor
     {

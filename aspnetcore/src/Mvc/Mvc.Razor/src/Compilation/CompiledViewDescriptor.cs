@@ -14,7 +14,9 @@ public class CompiledViewDescriptor
     /// <summary>
     /// Creates a new <see cref="CompiledViewDescriptor"/>.
     /// </summary>
-    public CompiledViewDescriptor() { }
+    public CompiledViewDescriptor()
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="CompiledViewDescriptor"/>.

@@ -104,7 +104,9 @@ internal sealed partial class ResponseCacheFilter : IActionFilter, IResponseCach
     }
 
     /// <inheritdoc />
-    public void OnActionExecuted(ActionExecutedContext context) { }
+    public void OnActionExecuted(ActionExecutedContext context)
+    {
+    }
 
     private static partial class Log
     {

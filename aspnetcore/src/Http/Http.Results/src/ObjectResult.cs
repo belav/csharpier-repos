@@ -74,9 +74,13 @@ internal partial class ObjectResult : IResult
         );
     }
 
-    protected virtual void OnFormatting(HttpContext httpContext) { }
+    protected virtual void OnFormatting(HttpContext httpContext)
+    {
+    }
 
-    protected virtual void ConfigureResponseHeaders(HttpContext httpContext) { }
+    protected virtual void ConfigureResponseHeaders(HttpContext httpContext)
+    {
+    }
 
     private void ApplyProblemDetailsDefaults(ProblemDetails problemDetails)
     {

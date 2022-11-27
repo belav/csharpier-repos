@@ -47,7 +47,9 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         });
     }
 
-    private void ConfigureDefaults(JwtBearerOptions o) { }
+    private void ConfigureDefaults(JwtBearerOptions o)
+    {
+    }
 
     [Fact]
     public async Task BearerTokenValidation()
@@ -1008,7 +1010,12 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
             o.AddScheme<TestHandler>("Bearer", "Bearer");
         });
         builder.AddJwtBearer("Bearer");
-        RegisterAuth(builder, _ => { });
+        RegisterAuth(
+            builder,
+            _ =>
+            {
+            }
+        );
         var sp = services.BuildServiceProvider();
 
         // Assert
@@ -1081,7 +1088,12 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
             o.AddScheme<TestHandler>("Bearer", "Bearer");
         });
         builder.AddJwtBearer("Bearer");
-        RegisterAuth(builder, _ => { });
+        RegisterAuth(
+            builder,
+            _ =>
+            {
+            }
+        );
         var sp = services.BuildServiceProvider();
 
         // Assert

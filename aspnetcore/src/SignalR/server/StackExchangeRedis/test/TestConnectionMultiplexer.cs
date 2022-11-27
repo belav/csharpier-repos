@@ -47,44 +47,72 @@ public class TestConnectionMultiplexer : IConnectionMultiplexer
 
     public event EventHandler<RedisErrorEventArgs> ErrorMessage
     {
-        add { }
-        remove { }
+        add
+        {
+        }
+        remove
+        {
+        }
     }
 
     public event EventHandler<ConnectionFailedEventArgs> ConnectionFailed
     {
-        add { }
-        remove { }
+        add
+        {
+        }
+        remove
+        {
+        }
     }
 
     public event EventHandler<InternalErrorEventArgs> InternalError
     {
-        add { }
-        remove { }
+        add
+        {
+        }
+        remove
+        {
+        }
     }
 
     public event EventHandler<ConnectionFailedEventArgs> ConnectionRestored
     {
-        add { }
-        remove { }
+        add
+        {
+        }
+        remove
+        {
+        }
     }
 
     public event EventHandler<EndPointEventArgs> ConfigurationChanged
     {
-        add { }
-        remove { }
+        add
+        {
+        }
+        remove
+        {
+        }
     }
 
     public event EventHandler<EndPointEventArgs> ConfigurationChangedBroadcast
     {
-        add { }
-        remove { }
+        add
+        {
+        }
+        remove
+        {
+        }
     }
 
     public event EventHandler<HashSlotMovedEventArgs> HashSlotMoved
     {
-        add { }
-        remove { }
+        add
+        {
+        }
+        remove
+        {
+        }
     }
 
     private readonly TestRedisServer _server;

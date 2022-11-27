@@ -80,5 +80,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.InspectReturnExpressi
         }
     }
 
-    public class TestModel { }
+    public class TestModel
+    {
+    }
 }

@@ -192,10 +192,13 @@ public abstract class BatchingLoggerProvider : ILoggerProvider, ISupportExternal
         {
             _outputTask.Wait(_interval);
         }
-        catch (TaskCanceledException) { }
+        catch (TaskCanceledException)
+        {
+        }
         catch (AggregateException ex)
             when (ex.InnerExceptions.Count == 1 && ex.InnerExceptions[0] is TaskCanceledException)
-        { }
+        {
+        }
     }
 
     /// <inheritdoc/>

@@ -128,7 +128,9 @@ public abstract class IntegrationTestBase
 
     public string FileExtension { get; set; } = ".cshtml";
 
-    protected virtual void ConfigureProjectEngine(RazorProjectEngineBuilder builder) { }
+    protected virtual void ConfigureProjectEngine(RazorProjectEngineBuilder builder)
+    {
+    }
 
     protected CSharpSyntaxTree AddCSharpSyntaxTree(string text, string? filePath = null)
     {

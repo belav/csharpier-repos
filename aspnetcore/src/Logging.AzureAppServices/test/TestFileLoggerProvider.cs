@@ -28,7 +28,9 @@ internal class TestFileLoggerProvider : FileLoggerProvider
                     IsEnabled = true
                 }
             )
-        ) { }
+        )
+    {
+    }
 
     protected override Task IntervalAsync(TimeSpan interval, CancellationToken cancellationToken)
     {

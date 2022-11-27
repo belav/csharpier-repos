@@ -432,9 +432,13 @@ public class RequestDelegateEndpointRouteBuilderExtensionsTest
         }
     }
 
-    private class Attribute1 : Attribute { }
+    private class Attribute1 : Attribute
+    {
+    }
 
-    private class Attribute2 : Attribute { }
+    private class Attribute2 : Attribute
+    {
+    }
 
     private class AddsCustomEndpointMetadataResult : IEndpointMetadataProvider, IResult
     {

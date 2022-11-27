@@ -403,7 +403,9 @@ public class DefaultHttpContextTests
             CompletedCallbacks.Add((callback, state));
         }
 
-        public void OnStarting(Func<object, Task> callback, object state) { }
+        public void OnStarting(Func<object, Task> callback, object state)
+        {
+        }
     }
 
     private class TestSession : ISession

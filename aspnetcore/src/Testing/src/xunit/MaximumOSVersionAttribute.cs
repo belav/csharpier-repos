@@ -24,7 +24,8 @@ public class MaximumOSVersionAttribute : Attribute, ITestCondition
 
     public MaximumOSVersionAttribute(OperatingSystems operatingSystem, string maxVersion)
         : this(operatingSystem, Version.Parse(maxVersion), GetCurrentOS(), GetCurrentOSVersion())
-    { }
+    {
+    }
 
     // to enable unit testing
     internal MaximumOSVersionAttribute(

@@ -285,7 +285,9 @@ internal sealed class MemoryBufferWriter : Stream, IBufferWriter<byte>
         Debug.Assert(_bytesWritten == totalWritten + _position);
     }
 
-    public override void Flush() { }
+    public override void Flush()
+    {
+    }
 
     public override Task FlushAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 

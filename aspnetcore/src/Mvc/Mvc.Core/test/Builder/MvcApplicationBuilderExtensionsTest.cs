@@ -22,7 +22,10 @@ public class MvcApplicationBuilderExtensionsTest
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(
-            () => applicationBuilderMock.Object.UseMvc(rb => { })
+            () =>
+                applicationBuilderMock.Object.UseMvc(rb =>
+                {
+                })
         );
 
         Assert.Equal(

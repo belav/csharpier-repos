@@ -188,7 +188,9 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
             value.GetAsciiOrUTF8StringNonNullCharacters(HeaderValueEncoding);
     }
 
-    void IHttpStreamHeadersHandler.OnHeadersComplete(bool endStream) { }
+    void IHttpStreamHeadersHandler.OnHeadersComplete(bool endStream)
+    {
+    }
 
     public async Task InitializeConnectionAsync(int expectedSettingsCount = 3)
     {
@@ -1196,7 +1198,9 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
 
     internal sealed class Http2FrameWithPayload : Http2Frame
     {
-        public Http2FrameWithPayload() : base() { }
+        public Http2FrameWithPayload() : base()
+        {
+        }
 
         // This does not contain extended headers
         public Memory<byte> Payload { get; set; }

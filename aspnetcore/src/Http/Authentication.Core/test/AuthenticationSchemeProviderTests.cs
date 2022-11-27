@@ -188,7 +188,9 @@ public class AuthenticationSchemeProviderTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(o => { })
+            .AddAuthenticationCore(o =>
+            {
+            })
             .BuildServiceProvider();
 
         var o = services.GetRequiredService<IAuthenticationSchemeProvider>();
@@ -238,7 +240,9 @@ public class AuthenticationSchemeProviderTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(o => { })
+            .AddAuthenticationCore(o =>
+            {
+            })
             .BuildServiceProvider();
 
         var provider = services.GetRequiredService<IAuthenticationSchemeProvider>();
@@ -349,6 +353,8 @@ public class AuthenticationSchemeProviderTests
             : base(
                 options,
                 new Dictionary<string, AuthenticationScheme>(StringComparer.OrdinalIgnoreCase)
-            ) { }
+            )
+        {
+        }
     }
 }

@@ -12,7 +12,9 @@ public sealed class ValueProviderException : Exception
     /// Initializes a new instance of <see cref="ValueProviderException"/> with the specified <paramref name="message"/>.
     /// </summary>
     /// <param name="message">The exception message.</param>
-    public ValueProviderException(string message) : base(message) { }
+    public ValueProviderException(string message) : base(message)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ValueProviderException"/> with the specified <paramref name="message"/> and
@@ -21,5 +23,7 @@ public sealed class ValueProviderException : Exception
     /// <param name="message">The exception message.</param>
     /// <param name="innerException">The exception that is the cause of the current exception.</param>
     public ValueProviderException(string message, Exception innerException)
-        : base(message, innerException) { }
+        : base(message, innerException)
+    {
+    }
 }

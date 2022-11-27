@@ -11,8 +11,12 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.SymbolApiResponseMeta
 {
     public class GetErrorResponseType_ReturnsTypeDefinedAtAssemblyController
     {
-        public void Action() { }
+        public void Action()
+        {
+        }
     }
 
-    public class GetErrorResponseType_ReturnsTypeDefinedAtAssemblyModel { }
+    public class GetErrorResponseType_ReturnsTypeDefinedAtAssemblyModel
+    {
+    }
 }

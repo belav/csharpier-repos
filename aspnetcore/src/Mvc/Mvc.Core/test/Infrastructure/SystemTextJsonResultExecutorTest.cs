@@ -44,7 +44,9 @@ public class SystemTextJsonResultExecutorTest : JsonResultExecutorTestBase
     }
 
     [JsonConverter(typeof(ThrowingFormatterPersonConverter))]
-    private class ThrowingFormatterModel { }
+    private class ThrowingFormatterModel
+    {
+    }
 
     private class ThrowingFormatterPersonConverter : JsonConverter<ThrowingFormatterModel>
     {

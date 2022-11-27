@@ -6,6 +6,8 @@
 
         public void ActionMethod(
             IsProblematicParameter_ReturnsTrue_IfParameterNameIsTheSameAsModelProperty model
-        ) { }
+        )
+        {
+        }
     }
 }

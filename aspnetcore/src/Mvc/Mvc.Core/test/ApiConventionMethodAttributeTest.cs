@@ -35,7 +35,9 @@ public class ApiConventionMethodAttributeTest
     public static class ConventionWithProducesAttribute
     {
         [Produces(typeof(void))]
-        public static void Get() { }
+        public static void Get()
+        {
+        }
     }
 
     [Fact]
@@ -128,11 +130,17 @@ public class ApiConventionMethodAttributeTest
 
     private static class TestConventions
     {
-        internal static void NotPublic() { }
+        internal static void NotPublic()
+        {
+        }
 
-        public static void Method(int value) { }
+        public static void Method(int value)
+        {
+        }
 
-        public static void Method(string value) { }
+        public static void Method(string value)
+        {
+        }
     }
 
     private static string GetErrorMessage(string methodName, params Type[] attributes)

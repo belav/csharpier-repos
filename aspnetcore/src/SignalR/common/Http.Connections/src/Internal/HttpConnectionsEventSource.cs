@@ -21,11 +21,15 @@ internal sealed class HttpConnectionsEventSource : EventSource
     private long _connectionsTimedOut;
     private long _currentConnections;
 
-    internal HttpConnectionsEventSource() : base("Microsoft.AspNetCore.Http.Connections") { }
+    internal HttpConnectionsEventSource() : base("Microsoft.AspNetCore.Http.Connections")
+    {
+    }
 
     // Used for testing
     internal HttpConnectionsEventSource(string eventSourceName)
-        : base(eventSourceName, EventSourceSettings.EtwManifestEventFormat) { }
+        : base(eventSourceName, EventSourceSettings.EtwManifestEventFormat)
+    {
+    }
 
     // This has to go through NonEvent because only Primitive types are allowed
     // in function parameters for Events

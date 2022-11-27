@@ -21,7 +21,9 @@ public class PageApplicationModel
         PageActionDescriptor actionDescriptor,
         TypeInfo handlerType,
         IReadOnlyList<object> handlerAttributes
-    ) : this(actionDescriptor, handlerType, handlerType, handlerAttributes) { }
+    ) : this(actionDescriptor, handlerType, handlerType, handlerAttributes)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="PageApplicationModel"/>.

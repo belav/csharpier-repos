@@ -18,7 +18,9 @@ internal sealed partial class LongPollingServerTransport : IHttpTransport
         CancellationToken timeoutToken,
         PipeReader application,
         ILoggerFactory loggerFactory
-    ) : this(timeoutToken, application, loggerFactory, connection: null) { }
+    ) : this(timeoutToken, application, loggerFactory, connection: null)
+    {
+    }
 
     public LongPollingServerTransport(
         CancellationToken timeoutToken,

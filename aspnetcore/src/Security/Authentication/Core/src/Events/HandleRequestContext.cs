@@ -22,7 +22,9 @@ public class HandleRequestContext<TOptions> : BaseContext<TOptions>
         HttpContext context,
         AuthenticationScheme scheme,
         TOptions options
-    ) : base(context, scheme, options) { }
+    ) : base(context, scheme, options)
+    {
+    }
 
     /// <summary>
     /// The <see cref="HandleRequestResult"/> which is used by the handler.

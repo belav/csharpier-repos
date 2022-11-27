@@ -60,7 +60,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         }
 
         // Second ctor that doesn't set any fields only to be used by MockLibuv
-        public LibuvFunctions(bool onlyForTesting) { }
+        public LibuvFunctions(bool onlyForTesting)
+        {
+        }
 
         public readonly bool IsWindows;
 

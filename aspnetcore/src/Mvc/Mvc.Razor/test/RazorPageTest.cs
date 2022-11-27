@@ -691,7 +691,9 @@ public class RazorPageTest
     {
         // Arrange
         var path = "page-path";
-        var page = CreatePage(v => { });
+        var page = CreatePage(v =>
+        {
+        });
         page.Path = path;
         page.BodyContent = new HtmlString("some content");
         await page.ExecuteAsync();
@@ -711,7 +713,9 @@ public class RazorPageTest
     {
         // Arrange
         var path = "page-path";
-        var page = CreatePage(v => { });
+        var page = CreatePage(v =>
+        {
+        });
         page.Path = path;
         page.BodyContent = new HtmlString("some content");
         page.IgnoreBody();
@@ -727,7 +731,9 @@ public class RazorPageTest
         // Arrange
         var path = "page-path";
         var sectionName = "sectionA";
-        var page = CreatePage(v => { });
+        var page = CreatePage(v =>
+        {
+        });
         page.Path = path;
         page.BodyContent = new HtmlString("some content");
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
@@ -753,7 +759,9 @@ public class RazorPageTest
         // Arrange
         var path = "page-path";
         var sectionName = "sectionA";
-        var page = CreatePage(v => { });
+        var page = CreatePage(v =>
+        {
+        });
         page.Path = path;
         page.BodyContent = new HtmlString("some content");
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
@@ -1008,7 +1016,9 @@ public class RazorPageTest
     )
     {
         // Arrange
-        var page = CreatePage(p => { });
+        var page = CreatePage(p =>
+        {
+        });
         page.HtmlEncoder = new HtmlTestEncoder();
         var executionContext = new TagHelperExecutionContext(
             "p",
@@ -1016,7 +1026,9 @@ public class RazorPageTest
             items: new Dictionary<object, object>(),
             uniqueId: string.Empty,
             executeChildContentAsync: () => Task.FromResult(result: true),
-            startTagHelperWritingScope: _ => { },
+            startTagHelperWritingScope: _ =>
+            {
+            },
             endTagHelperWritingScope: () => new DefaultTagHelperContent()
         );
 
@@ -1064,7 +1076,9 @@ public class RazorPageTest
             Tuple.Create("  ", 9, (object)true, 11, false),
             Tuple.Create("  ", 9, (object)"abcd", 17, true)
         };
-        var page = CreatePage(p => { });
+        var page = CreatePage(p =>
+        {
+        });
         page.HtmlEncoder = new HtmlTestEncoder();
         var executionContext = new TagHelperExecutionContext(
             "p",
@@ -1072,7 +1086,9 @@ public class RazorPageTest
             items: new Dictionary<object, object>(),
             uniqueId: string.Empty,
             executeChildContentAsync: () => Task.FromResult(result: true),
-            startTagHelperWritingScope: _ => { },
+            startTagHelperWritingScope: _ =>
+            {
+            },
             endTagHelperWritingScope: () => new DefaultTagHelperContent()
         );
 
@@ -1131,7 +1147,9 @@ public class RazorPageTest
             Tuple.Create("  ", 15, (object)null, 17, false),
             Tuple.Create(" ", 21, (object)"suffix", 22, false),
         };
-        var page = CreatePage(p => { });
+        var page = CreatePage(p =>
+        {
+        });
         page.HtmlEncoder = new HtmlTestEncoder();
         var executionContext = new TagHelperExecutionContext(
             "p",
@@ -1139,7 +1157,9 @@ public class RazorPageTest
             items: new Dictionary<object, object>(),
             uniqueId: string.Empty,
             executeChildContentAsync: () => Task.FromResult(result: true),
-            startTagHelperWritingScope: _ => { },
+            startTagHelperWritingScope: _ =>
+            {
+            },
             endTagHelperWritingScope: () => new DefaultTagHelperContent()
         );
 
@@ -1196,7 +1216,9 @@ public class RazorPageTest
     )
     {
         // Arrange
-        var page = CreatePage(p => { });
+        var page = CreatePage(p =>
+        {
+        });
         page.HtmlEncoder = new HtmlTestEncoder();
         var executionContext = new TagHelperExecutionContext(
             "p",
@@ -1204,7 +1226,9 @@ public class RazorPageTest
             items: new Dictionary<object, object>(),
             uniqueId: string.Empty,
             executeChildContentAsync: () => Task.FromResult(result: true),
-            startTagHelperWritingScope: _ => { },
+            startTagHelperWritingScope: _ =>
+            {
+            },
             endTagHelperWritingScope: () => new DefaultTagHelperContent()
         );
 
@@ -1239,7 +1263,9 @@ public class RazorPageTest
     public void AddHtmlAttributeValues_AddsAttributeNameAsValueWhenValueIsUnprefixedTrue()
     {
         // Arrange
-        var page = CreatePage(p => { });
+        var page = CreatePage(p =>
+        {
+        });
         page.HtmlEncoder = new HtmlTestEncoder();
         var executionContext = new TagHelperExecutionContext(
             "p",
@@ -1247,7 +1273,9 @@ public class RazorPageTest
             items: new Dictionary<object, object>(),
             uniqueId: string.Empty,
             executeChildContentAsync: () => Task.FromResult(result: true),
-            startTagHelperWritingScope: _ => { },
+            startTagHelperWritingScope: _ =>
+            {
+            },
             endTagHelperWritingScope: () => new DefaultTagHelperContent()
         );
 
@@ -1302,7 +1330,9 @@ public class RazorPageTest
     )
     {
         // Arrange
-        var page = CreatePage(p => { });
+        var page = CreatePage(p =>
+        {
+        });
         page.HtmlEncoder = new HtmlTestEncoder();
         var writer = new StringWriter();
         var suffix = string.Empty;
@@ -1336,7 +1366,9 @@ public class RazorPageTest
         };
         var expectedOutput = "someattr=  HtmlEncode[[True]]  abcd";
 
-        var page = CreatePage(p => { });
+        var page = CreatePage(p =>
+        {
+        });
         page.HtmlEncoder = new HtmlTestEncoder();
         var writer = new StringWriter();
         var prefix = "someattr=";
@@ -1367,7 +1399,9 @@ public class RazorPageTest
     public void PushWriter_SetsUnderlyingWriter()
     {
         // Arrange
-        var page = CreatePage(p => { });
+        var page = CreatePage(p =>
+        {
+        });
         var writer = new StringWriter();
 
         // Act
@@ -1381,7 +1415,9 @@ public class RazorPageTest
     public void PopWriter_ResetsUnderlyingWriter()
     {
         // Arrange
-        var page = CreatePage(p => { });
+        var page = CreatePage(p =>
+        {
+        });
         var defaultWriter = new StringWriter();
         page.ViewContext.Writer = defaultWriter;
 
@@ -1405,7 +1441,9 @@ public class RazorPageTest
     public void WriteLiteral_NullValue_DoesNothing()
     {
         // Arrange
-        var page = CreatePage(p => { });
+        var page = CreatePage(p =>
+        {
+        });
         var defaultWriter = new StringWriter();
         page.ViewContext.Writer = defaultWriter;
 
@@ -1420,7 +1458,9 @@ public class RazorPageTest
     public void WriteLiteral_BuffersResultToPushedWriter()
     {
         // Arrange
-        var page = CreatePage(p => { });
+        var page = CreatePage(p =>
+        {
+        });
         var defaultWriter = new StringWriter();
         page.ViewContext.Writer = defaultWriter;
 
@@ -1442,7 +1482,9 @@ public class RazorPageTest
     public void Write_StringValue_UsesSpecifiedWriter_EncodesValue()
     {
         // Arrange
-        var page = CreatePage(p => { });
+        var page = CreatePage(p =>
+        {
+        });
         var bufferWriter = new StringWriter();
 
         // Act

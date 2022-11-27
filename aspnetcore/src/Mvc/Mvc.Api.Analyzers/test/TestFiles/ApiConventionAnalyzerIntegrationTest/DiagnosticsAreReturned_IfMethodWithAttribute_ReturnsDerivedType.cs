@@ -23,8 +23,12 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         }
     }
 
-    public class DiagnosticsAreReturned_IfMethodWithAttribute_ReturnsDerivedTypeBaseModel { }
+    public class DiagnosticsAreReturned_IfMethodWithAttribute_ReturnsDerivedTypeBaseModel
+    {
+    }
 
     public class DiagnosticsAreReturned_IfMethodWithAttribute_ReturnsDerivedTypeDerived
-        : DiagnosticsAreReturned_IfMethodWithAttribute_ReturnsDerivedTypeBaseModel { }
+        : DiagnosticsAreReturned_IfMethodWithAttribute_ReturnsDerivedTypeBaseModel
+    {
+    }
 }

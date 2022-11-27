@@ -89,7 +89,8 @@ public class DefaultPageModelFactoryProviderTest
         };
         var pageContext = new PageContext();
         var modelActivatorProvider = new Mock<IPageModelActivatorProvider>();
-        Action<PageContext, object> disposer = (_, __) => { };
+        Action<PageContext, object> disposer = (_, __) => {
+        };
         modelActivatorProvider.Setup(p => p.CreateReleaser(descriptor)).Returns(disposer);
         var factoryProvider = CreateModelFactoryProvider(modelActivatorProvider.Object);
 
@@ -144,7 +145,9 @@ public class DefaultPageModelFactoryProviderTest
         return new DefaultPageModelFactoryProvider(modelActivator);
     }
 
-    private class SimpleModel { }
+    private class SimpleModel
+    {
+    }
 
     private class ModelWithPageContext
     {

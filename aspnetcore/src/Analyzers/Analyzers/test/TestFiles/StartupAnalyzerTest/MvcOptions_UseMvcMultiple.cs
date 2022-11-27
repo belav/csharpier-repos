@@ -24,7 +24,9 @@ namespace Microsoft.AspNetCore.Analyzers.TestFiles.StartupAnalyzerTest
             /*MM2*/app.UseMvc();
 
             app.UseRouting();
-            app.UseEndpoints(endpoints => { });
+            app.UseEndpoints(endpoints =>
+            {
+            });
 
             /*MM3*/app.UseMvc();
         }

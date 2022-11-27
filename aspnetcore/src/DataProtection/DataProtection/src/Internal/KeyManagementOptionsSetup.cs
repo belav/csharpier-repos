@@ -17,13 +17,19 @@ internal sealed class KeyManagementOptionsSetup : IConfigureOptions<KeyManagemen
     private readonly ILoggerFactory _loggerFactory;
 
     public KeyManagementOptionsSetup()
-        : this(NullLoggerFactory.Instance, registryPolicyResolver: null) { }
+        : this(NullLoggerFactory.Instance, registryPolicyResolver: null)
+    {
+    }
 
     public KeyManagementOptionsSetup(ILoggerFactory loggerFactory)
-        : this(loggerFactory, registryPolicyResolver: null) { }
+        : this(loggerFactory, registryPolicyResolver: null)
+    {
+    }
 
     public KeyManagementOptionsSetup(IRegistryPolicyResolver registryPolicyResolver)
-        : this(NullLoggerFactory.Instance, registryPolicyResolver) { }
+        : this(NullLoggerFactory.Instance, registryPolicyResolver)
+    {
+    }
 
     public KeyManagementOptionsSetup(
         ILoggerFactory loggerFactory,

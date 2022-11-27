@@ -55,7 +55,9 @@ internal sealed class DefaultCollectionValidationStrategy : IValidationStrategy
         Func<object, IEnumerator>
     > _genericGetEnumeratorCache = new ConcurrentDictionary<Type, Func<object, IEnumerator>>();
 
-    private DefaultCollectionValidationStrategy() { }
+    private DefaultCollectionValidationStrategy()
+    {
+    }
 
     /// <inheritdoc />
     public IEnumerator<ValidationEntry> GetChildren(
@@ -131,7 +133,9 @@ internal sealed class DefaultCollectionValidationStrategy : IValidationStrategy
             return true;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public void Reset()
         {

@@ -79,7 +79,9 @@ internal sealed class PageResponseCacheFilter : IPageFilter, IResponseCacheFilte
         set => _executor.VaryByQueryKeys = value;
     }
 
-    public void OnPageHandlerSelected(PageHandlerSelectedContext context) { }
+    public void OnPageHandlerSelected(PageHandlerSelectedContext context)
+    {
+    }
 
     public void OnPageHandlerExecuting(PageHandlerExecutingContext context)
     {
@@ -97,5 +99,7 @@ internal sealed class PageResponseCacheFilter : IPageFilter, IResponseCacheFilte
         _executor.Execute(context);
     }
 
-    public void OnPageHandlerExecuted(PageHandlerExecutedContext context) { }
+    public void OnPageHandlerExecuted(PageHandlerExecutedContext context)
+    {
+    }
 }

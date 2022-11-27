@@ -50,7 +50,9 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
         ILogger<RedisHubLifetimeManager<THub>> logger,
         IOptions<RedisOptions> options,
         IHubProtocolResolver hubProtocolResolver
-    ) : this(logger, options, hubProtocolResolver, globalHubOptions: null, hubOptions: null) { }
+    ) : this(logger, options, hubProtocolResolver, globalHubOptions: null, hubOptions: null)
+    {
+    }
 
     /// <summary>
     /// Constructs the <see cref="RedisHubLifetimeManager{THub}"/> with types from Dependency Injection.
@@ -910,7 +912,9 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
     {
         public static readonly FakeInvocationBinder Instance = new FakeInvocationBinder();
 
-        private FakeInvocationBinder() { }
+        private FakeInvocationBinder()
+        {
+        }
 
         public IReadOnlyList<Type> GetParameterTypes(string methodName)
         {
@@ -1034,7 +1038,9 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
 
         public override Encoding Encoding => Encoding.UTF8;
 
-        public override void Write(char value) { }
+        public override void Write(char value)
+        {
+        }
 
         public override void WriteLine(string? value)
         {

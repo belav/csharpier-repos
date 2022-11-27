@@ -10,7 +10,9 @@ public abstract class IntermediateNodeVisitor
         node.Accept(this);
     }
 
-    public virtual void VisitDefault(IntermediateNode node) { }
+    public virtual void VisitDefault(IntermediateNode node)
+    {
+    }
 
     public virtual void VisitToken(IntermediateToken node)
     {

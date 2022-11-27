@@ -179,7 +179,9 @@ public class PropertyActivatorTest
     }
 
     [AttributeUsage(AttributeTargets.Property)]
-    private class TestActivateAttribute : Attribute { }
+    private class TestActivateAttribute : Attribute
+    {
+    }
 
     private class ActivationInfo
     {

@@ -2246,12 +2246,18 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
 
         public class TaskDerivedType : Task
         {
-            public TaskDerivedType() : base(() => { }) { }
+            public TaskDerivedType()
+                : base(() => {
+                })
+            {
+            }
         }
 
         public class TaskOfTDerivedType<T> : Task<T>
         {
-            public TaskOfTDerivedType(T input) : base(() => input) { }
+            public TaskOfTDerivedType(T input) : base(() => input)
+            {
+            }
         }
     }
 

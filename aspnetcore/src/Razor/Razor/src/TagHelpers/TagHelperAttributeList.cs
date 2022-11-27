@@ -11,7 +11,9 @@ public class TagHelperAttributeList : ReadOnlyTagHelperAttributeList, IList<TagH
     /// <summary>
     /// Instantiates a new instance of <see cref="TagHelperAttributeList"/> with an empty collection.
     /// </summary>
-    public TagHelperAttributeList() : base() { }
+    public TagHelperAttributeList() : base()
+    {
+    }
 
     /// <summary>
     /// Instantiates a new instance of <see cref="TagHelperAttributeList"/> with the specified

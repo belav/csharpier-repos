@@ -35,7 +35,9 @@ public class HttpSysOptions
     /// <summary>
     /// Initializes a new <see cref="HttpSysOptions"/>.
     /// </summary>
-    public HttpSysOptions() { }
+    public HttpSysOptions()
+    {
+    }
 
     /// <summary>
     /// The name of the Http.Sys request queue

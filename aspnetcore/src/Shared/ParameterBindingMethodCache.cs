@@ -87,7 +87,9 @@ internal sealed class ParameterBindingMethodCache
         : this(
             preferNonGenericEnumParseOverload: !RuntimeFeature.IsDynamicCodeSupported,
             throwOnInvalidMethod
-        ) { }
+        )
+    {
+    }
 
     // This is for testing
     public ParameterBindingMethodCache(

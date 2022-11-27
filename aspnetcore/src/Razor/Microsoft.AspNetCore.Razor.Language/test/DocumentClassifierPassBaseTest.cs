@@ -284,7 +284,11 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
         }
     }
 
-    private class MyExtension1 : ICodeTargetExtension { }
+    private class MyExtension1 : ICodeTargetExtension
+    {
+    }
 
-    private class MyExtension2 : ICodeTargetExtension { }
+    private class MyExtension2 : ICodeTargetExtension
+    {
+    }
 }

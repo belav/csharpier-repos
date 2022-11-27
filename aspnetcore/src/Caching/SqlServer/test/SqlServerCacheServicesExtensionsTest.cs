@@ -59,6 +59,11 @@ public class SqlServerCacheServicesExtensionsTest
     {
         var services = new ServiceCollection();
 
-        Assert.Same(services, services.AddDistributedSqlServerCache(_ => { }));
+        Assert.Same(
+            services,
+            services.AddDistributedSqlServerCache(_ =>
+            {
+            })
+        );
     }
 }

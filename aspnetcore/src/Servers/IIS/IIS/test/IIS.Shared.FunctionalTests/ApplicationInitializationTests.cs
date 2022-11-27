@@ -34,7 +34,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 [Collection(PublishedSitesCollection.Name)]
 public class ApplicationInitializationTests : IISFunctionalTestBase
 {
-    public ApplicationInitializationTests(PublishedSitesFixture fixture) : base(fixture) { }
+    public ApplicationInitializationTests(PublishedSitesFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalTheory]
     [RequiresIIS(IISCapability.ApplicationInitialization)]

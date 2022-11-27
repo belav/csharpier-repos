@@ -23,7 +23,9 @@ public class RedirectToActionResult : ActionResult, IKeepTempDataResult
     /// <param name="controllerName">The name of the controller to use for generating the URL.</param>
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     public RedirectToActionResult(string? actionName, string? controllerName, object? routeValues)
-        : this(actionName, controllerName, routeValues, permanent: false) { }
+        : this(actionName, controllerName, routeValues, permanent: false)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToActionResult"/> with the values
@@ -38,7 +40,9 @@ public class RedirectToActionResult : ActionResult, IKeepTempDataResult
         string? controllerName,
         object? routeValues,
         string? fragment
-    ) : this(actionName, controllerName, routeValues, permanent: false, fragment: fragment) { }
+    ) : this(actionName, controllerName, routeValues, permanent: false, fragment: fragment)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToActionResult"/> with the values
@@ -53,7 +57,9 @@ public class RedirectToActionResult : ActionResult, IKeepTempDataResult
         string? controllerName,
         object? routeValues,
         bool permanent
-    ) : this(actionName, controllerName, routeValues, permanent, fragment: null) { }
+    ) : this(actionName, controllerName, routeValues, permanent, fragment: null)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToActionResult"/> with the values
@@ -70,7 +76,9 @@ public class RedirectToActionResult : ActionResult, IKeepTempDataResult
         object? routeValues,
         bool permanent,
         bool preserveMethod
-    ) : this(actionName, controllerName, routeValues, permanent, preserveMethod, fragment: null) { }
+    ) : this(actionName, controllerName, routeValues, permanent, preserveMethod, fragment: null)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToActionResult"/> with the values
@@ -95,7 +103,9 @@ public class RedirectToActionResult : ActionResult, IKeepTempDataResult
             permanent,
             preserveMethod: false,
             fragment: fragment
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToActionResult"/> with the values

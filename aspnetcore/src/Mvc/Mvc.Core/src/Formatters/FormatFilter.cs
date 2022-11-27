@@ -138,7 +138,9 @@ public partial class FormatFilter : IFormatFilter, IResourceFilter, IResultFilte
     }
 
     /// <inheritdoc />
-    public void OnResourceExecuted(ResourceExecutedContext context) { }
+    public void OnResourceExecuted(ResourceExecutedContext context)
+    {
+    }
 
     /// <summary>
     /// Sets a Content Type on an  <see cref="ObjectResult" />  using a format value from the request.
@@ -183,7 +185,9 @@ public partial class FormatFilter : IFormatFilter, IResourceFilter, IResultFilte
     }
 
     /// <inheritdoc />
-    public void OnResultExecuted(ResultExecutedContext context) { }
+    public void OnResultExecuted(ResultExecutedContext context)
+    {
+    }
 
     private static partial class Log
     {

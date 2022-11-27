@@ -178,7 +178,9 @@ internal sealed partial class HttpResponseHeaders : HttpHeaders
 
         readonly object IEnumerator.Current => _current;
 
-        public readonly void Dispose() { }
+        public readonly void Dispose()
+        {
+        }
 
         public void Reset()
         {

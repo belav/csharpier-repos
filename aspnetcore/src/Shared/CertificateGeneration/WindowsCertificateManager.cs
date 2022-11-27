@@ -15,10 +15,14 @@ internal sealed class WindowsCertificateManager : CertificateManager
 {
     private const int UserCancelledErrorCode = 1223;
 
-    public WindowsCertificateManager() { }
+    public WindowsCertificateManager()
+    {
+    }
 
     // For testing purposes only
-    internal WindowsCertificateManager(string subject, int version) : base(subject, version) { }
+    internal WindowsCertificateManager(string subject, int version) : base(subject, version)
+    {
+    }
 
     protected override bool IsExportable(X509Certificate2 c)
     {

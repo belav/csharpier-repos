@@ -117,7 +117,9 @@ public class MiddlewareFilterConfigurationProviderTest
 
     private class ValidConfigure_WithNoEnvironment
     {
-        public void Configure(IApplicationBuilder appBuilder) { }
+        public void Configure(IApplicationBuilder appBuilder)
+        {
+        }
     }
 
     private class ValidConfigure_WithNoEnvironment_AdditionalServices
@@ -141,7 +143,9 @@ public class MiddlewareFilterConfigurationProviderTest
 
     private class ValidConfigure_WithEnvironment
     {
-        public void ConfigureProduction(IApplicationBuilder appBuilder) { }
+        public void ConfigureProduction(IApplicationBuilder appBuilder)
+        {
+        }
     }
 
     private class ValidConfigure_WithEnvironment_AdditionalServices
@@ -165,30 +169,44 @@ public class MiddlewareFilterConfigurationProviderTest
 
     private class MultipleConfigureWithEnvironments
     {
-        public void ConfigureDevelopment(IApplicationBuilder appBuilder) { }
+        public void ConfigureDevelopment(IApplicationBuilder appBuilder)
+        {
+        }
 
-        public void ConfigureProduction(IApplicationBuilder appBuilder) { }
+        public void ConfigureProduction(IApplicationBuilder appBuilder)
+        {
+        }
     }
 
     private class InvalidConfigure_NoParameters
     {
-        public void Configure() { }
+        public void Configure()
+        {
+        }
     }
 
     private class InvalidType_NoConfigure
     {
-        public void Foo(IApplicationBuilder appBuilder) { }
+        public void Foo(IApplicationBuilder appBuilder)
+        {
+        }
     }
 
     private class InvalidType_NoPublic_Configure
     {
-        private void Configure(IApplicationBuilder appBuilder) { }
+        private void Configure(IApplicationBuilder appBuilder)
+        {
+        }
     }
 
-    private abstract class AbstractType { }
+    private abstract class AbstractType
+    {
+    }
 
     private class NoParameterlessConstructor
     {
-        public NoParameterlessConstructor(object a) { }
+        public NoParameterlessConstructor(object a)
+        {
+        }
     }
 }

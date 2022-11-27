@@ -96,7 +96,9 @@ internal sealed class SaveTempDataFilter : IResourceFilter, IResultFilter
     }
 
     /// <inheritdoc />
-    public void OnResultExecuting(ResultExecutingContext context) { }
+    public void OnResultExecuting(ResultExecutingContext context)
+    {
+    }
 
     /// <inheritdoc />
     public void OnResultExecuted(ResultExecutedContext context)

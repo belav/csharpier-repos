@@ -64,7 +64,9 @@ public class HstsMiddleware
     /// <param name="next"></param>
     /// <param name="options"></param>
     public HstsMiddleware(RequestDelegate next, IOptions<HstsOptions> options)
-        : this(next, options, NullLoggerFactory.Instance) { }
+        : this(next, options, NullLoggerFactory.Instance)
+    {
+    }
 
     /// <summary>
     /// Invoke the middleware.

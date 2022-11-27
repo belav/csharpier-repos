@@ -22,7 +22,9 @@ public class ApplicationBuilder : IApplicationBuilder
     /// </summary>
     /// <param name="serviceProvider">The <see cref="IServiceProvider"/> for application services.</param>
     public ApplicationBuilder(IServiceProvider serviceProvider)
-        : this(serviceProvider, new FeatureCollection()) { }
+        : this(serviceProvider, new FeatureCollection())
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ApplicationBuilder"/>.

@@ -26,7 +26,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             var pipe = new UvPipeHandle(_logger);
 
             loop.Init(_uv);
-            pipe.Init(loop, (a, b) => { }, true);
+            pipe.Init(
+                loop,
+                (a, b) => {
+                },
+                true
+            );
             pipe.Bind(@"\\.\pipe\InitAndCloseServerPipe");
             pipe.Dispose();
 
@@ -45,14 +50,24 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             var serverListenPipe = new UvPipeHandle(_logger);
 
             loop.Init(_uv);
-            serverListenPipe.Init(loop, (a, b) => { }, false);
+            serverListenPipe.Init(
+                loop,
+                (a, b) => {
+                },
+                false
+            );
             serverListenPipe.Bind(pipeName);
             serverListenPipe.Listen(
                 128,
                 async (backlog, status, error, state) =>
                 {
                     var serverConnectionPipe = new UvPipeHandle(_logger);
-                    serverConnectionPipe.Init(loop, (a, b) => { }, true);
+                    serverConnectionPipe.Init(
+                        loop,
+                        (a, b) => {
+                        },
+                        true
+                    );
 
                     try
                     {
@@ -86,7 +101,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                 var connect = new UvConnectRequest(_logger);
 
                 loop2.Init(_uv);
-                clientConnectionPipe.Init(loop2, (a, b) => { }, true);
+                clientConnectionPipe.Init(
+                    loop2,
+                    (a, b) => {
+                    },
+                    true
+                );
                 connect.DangerousInit(loop2);
                 connect.Connect(
                     clientConnectionPipe,
@@ -132,14 +152,24 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             var serverConnectionTcpDisposedEvent = new ManualResetEvent(false);
 
             var serverListenPipe = new UvPipeHandle(_logger);
-            serverListenPipe.Init(loop, (a, b) => { }, false);
+            serverListenPipe.Init(
+                loop,
+                (a, b) => {
+                },
+                false
+            );
             serverListenPipe.Bind(pipeName);
             serverListenPipe.Listen(
                 128,
                 (handle, status, error, state) =>
                 {
                     serverConnectionPipe = new UvPipeHandle(_logger);
-                    serverConnectionPipe.Init(loop, (a, b) => { }, true);
+                    serverConnectionPipe.Init(
+                        loop,
+                        (a, b) => {
+                        },
+                        true
+                    );
 
                     try
                     {
@@ -157,7 +187,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             );
 
             var serverListenTcp = new UvTcpHandle(_logger);
-            serverListenTcp.Init(loop, (a, b) => { });
+            serverListenTcp.Init(
+                loop,
+                (a, b) => {
+                }
+            );
             var endPoint = new IPEndPoint(IPAddress.Loopback, 0);
             serverListenTcp.Bind(endPoint);
             var port = serverListenTcp.GetSockIPEndPoint().Port;
@@ -166,7 +200,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                 (handle, status, error, state) =>
                 {
                     var serverConnectionTcp = new UvTcpHandle(_logger);
-                    serverConnectionTcp.Init(loop, (a, b) => { });
+                    serverConnectionTcp.Init(
+                        loop,
+                        (a, b) => {
+                        }
+                    );
                     serverListenTcp.Accept(serverConnectionTcp);
 
                     serverConnectionPipeAcceptedEvent.WaitOne();
@@ -204,7 +242,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                 var connect = new UvConnectRequest(_logger);
 
                 loop2.Init(_uv);
-                clientConnectionPipe.Init(loop2, (a, b) => { }, true);
+                clientConnectionPipe.Init(
+                    loop2,
+                    (a, b) => {
+                    },
+                    true
+                );
                 connect.DangerousInit(loop2);
                 connect.Connect(
                     clientConnectionPipe,
@@ -228,7 +271,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                                 }
 
                                 var clientConnectionTcp = new UvTcpHandle(_logger);
-                                clientConnectionTcp.Init(loop2, (a, b) => { });
+                                clientConnectionTcp.Init(
+                                    loop2,
+                                    (a, b) => {
+                                    }
+                                );
                                 clientConnectionPipe.Accept(clientConnectionTcp);
                                 var buf2 = loop2.Libuv.buf_init(Marshal.AllocHGlobal(64), 64);
                                 clientConnectionTcp.ReadStart(

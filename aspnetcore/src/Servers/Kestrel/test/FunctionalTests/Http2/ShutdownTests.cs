@@ -168,7 +168,9 @@ public class ShutdownTests : TestApplicationErrorLoggerLoggedTest
                         }
                     );
                 },
-                _ => { }
+                _ =>
+                {
+                }
             )
         )
         {

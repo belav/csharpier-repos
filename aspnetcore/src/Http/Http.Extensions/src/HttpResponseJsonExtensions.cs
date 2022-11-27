@@ -159,7 +159,9 @@ public static partial class HttpResponseJsonExtensions
                     response.HttpContext.RequestAborted
                 );
             }
-            catch (OperationCanceledException) { }
+            catch (OperationCanceledException)
+            {
+            }
         }
     }
 
@@ -175,7 +177,9 @@ public static partial class HttpResponseJsonExtensions
         {
             await JsonSerializer.SerializeAsync(body, value, options, cancellationToken);
         }
-        catch (OperationCanceledException) { }
+        catch (OperationCanceledException)
+        {
+        }
     }
 
     /// <summary>
@@ -300,7 +304,9 @@ public static partial class HttpResponseJsonExtensions
         {
             await JsonSerializer.SerializeAsync(body, value, type, options, cancellationToken);
         }
-        catch (OperationCanceledException) { }
+        catch (OperationCanceledException)
+        {
+        }
     }
 
     /// <summary>
@@ -368,7 +374,9 @@ public static partial class HttpResponseJsonExtensions
                     cancellationToken
                 );
             }
-            catch (OperationCanceledException) { }
+            catch (OperationCanceledException)
+            {
+            }
         }
     }
 

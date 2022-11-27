@@ -24,7 +24,9 @@ internal class DuplexPipeStreamAdapter<TStream> : DuplexPipeStream, IDuplexPipe
             new StreamPipeReaderOptions(leaveOpen: true),
             new StreamPipeWriterOptions(leaveOpen: true),
             createStream
-        ) { }
+        )
+    {
+    }
 
     public DuplexPipeStreamAdapter(
         IDuplexPipe duplexPipe,

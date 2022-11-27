@@ -424,7 +424,9 @@ public class HeaderModelBinderTests
         public string[] ArrayProperty { get; }
     }
 
-    private class StringList : List<string> { }
+    private class StringList : List<string>
+    {
+    }
 
     private enum CarType
     {

@@ -21,7 +21,9 @@ public class UserStore : UserStore<IdentityUser<string>>
     /// <param name="context">The <see cref="DbContext"/>.</param>
     /// <param name="describer">The <see cref="IdentityErrorDescriber"/>.</param>
     public UserStore(DbContext context, IdentityErrorDescriber? describer = null)
-        : base(context, describer) { }
+        : base(context, describer)
+    {
+    }
 }
 
 /// <summary>
@@ -37,7 +39,9 @@ public class UserStore<TUser> : UserStore<TUser, IdentityRole, DbContext, string
     /// <param name="context">The <see cref="DbContext"/>.</param>
     /// <param name="describer">The <see cref="IdentityErrorDescriber"/>.</param>
     public UserStore(DbContext context, IdentityErrorDescriber? describer = null)
-        : base(context, describer) { }
+        : base(context, describer)
+    {
+    }
 }
 
 /// <summary>
@@ -57,7 +61,9 @@ public class UserStore<TUser, TRole, TContext> : UserStore<TUser, TRole, TContex
     /// <param name="context">The <see cref="DbContext"/>.</param>
     /// <param name="describer">The <see cref="IdentityErrorDescriber"/>.</param>
     public UserStore(TContext context, IdentityErrorDescriber? describer = null)
-        : base(context, describer) { }
+        : base(context, describer)
+    {
+    }
 }
 
 /// <summary>
@@ -90,7 +96,9 @@ public class UserStore<TUser, TRole, TContext, TKey>
     /// <param name="context">The <see cref="DbContext"/>.</param>
     /// <param name="describer">The <see cref="IdentityErrorDescriber"/>.</param>
     public UserStore(TContext context, IdentityErrorDescriber? describer = null)
-        : base(context, describer) { }
+        : base(context, describer)
+    {
+    }
 }
 
 /// <summary>

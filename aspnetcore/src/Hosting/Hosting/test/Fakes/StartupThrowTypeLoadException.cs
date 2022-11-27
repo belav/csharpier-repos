@@ -20,5 +20,7 @@ public class StartupThrowTypeLoadException
         );
     }
 
-    public void Configure() { }
+    public void Configure()
+    {
+    }
 }

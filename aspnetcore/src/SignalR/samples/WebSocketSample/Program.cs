@@ -72,7 +72,9 @@ public class Program
             {
                 Console.WriteLine(Encoding.UTF8.GetString(buffer, 0, result.Count));
             }
-            else if (result.MessageType == WebSocketMessageType.Binary) { }
+            else if (result.MessageType == WebSocketMessageType.Binary)
+            {
+            }
             else if (result.MessageType == WebSocketMessageType.Close)
             {
                 await ws.CloseOutputAsync(

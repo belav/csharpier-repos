@@ -42,7 +42,9 @@ public class InputFormatterContext
             metadata,
             readerFactory,
             treatEmptyInputAsDefaultValue: false
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Creates a new instance of <see cref="InputFormatterContext"/>.

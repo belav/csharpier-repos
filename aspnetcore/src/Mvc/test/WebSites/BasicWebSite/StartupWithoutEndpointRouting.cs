@@ -21,7 +21,12 @@ public class StartupWithoutEndpointRouting
 
         services
             .AddAuthentication()
-            .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("Api", _ => { });
+            .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(
+                "Api",
+                _ =>
+                {
+                }
+            );
         services.AddTransient<IAuthorizationHandler, ManagerHandler>();
 
         services

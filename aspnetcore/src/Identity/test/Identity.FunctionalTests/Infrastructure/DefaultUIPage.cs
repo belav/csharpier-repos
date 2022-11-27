@@ -9,5 +9,7 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 public class DefaultUIPage : HtmlPage<DefaultUIContext>
 {
     public DefaultUIPage(HttpClient client, IHtmlDocument document, DefaultUIContext context)
-        : base(client, document, context) { }
+        : base(client, document, context)
+    {
+    }
 }

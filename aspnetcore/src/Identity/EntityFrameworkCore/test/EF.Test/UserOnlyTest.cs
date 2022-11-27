@@ -17,7 +17,9 @@ public class UserOnlyTest : IClassFixture<ScratchDatabaseFixture>
 
     public class TestUserDbContext : IdentityUserContext<IdentityUser>
     {
-        public TestUserDbContext(DbContextOptions options) : base(options) { }
+        public TestUserDbContext(DbContextOptions options) : base(options)
+        {
+        }
     }
 
     public UserOnlyTest(ScratchDatabaseFixture fixture)
@@ -33,7 +35,9 @@ public class UserOnlyTest : IClassFixture<ScratchDatabaseFixture>
                             b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
                         )
             )
-            .AddIdentityCore<IdentityUser>(o => { })
+            .AddIdentityCore<IdentityUser>(o =>
+            {
+            })
             .AddEntityFrameworkStores<TestUserDbContext>();
 
         services.AddLogging();

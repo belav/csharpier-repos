@@ -298,8 +298,14 @@ public class AuthorizeViewTest
         var authorizationService = new TestAuthorizationService();
         var renderer = CreateTestRenderer(authorizationService);
         var rootComponent = WrapInAuthorizeView(
-            authorized: context => builder => { },
-            childContent: context => builder => { }
+            authorized: context =>
+                builder =>
+                {
+                },
+            childContent: context =>
+                builder =>
+                {
+                }
         );
 
         // Act/Assert
@@ -367,7 +373,8 @@ public class AuthorizeViewTest
         var authorizationService = new TestAsyncAuthorizationService();
         authorizationService.NextResult = AuthorizationResult.Success();
         var renderer = CreateTestRenderer(authorizationService);
-        renderer.OnUpdateDisplayComplete = () => { };
+        renderer.OnUpdateDisplayComplete = () => {
+        };
         var rootComponent = WrapInAuthorizeView(
             authorizing: builder => builder.AddContent(0, "Auth pending..."),
             authorized: context =>

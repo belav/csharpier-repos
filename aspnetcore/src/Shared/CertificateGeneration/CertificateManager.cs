@@ -56,7 +56,9 @@ internal abstract class CertificateManager
     public string Subject { get; }
 
     public CertificateManager()
-        : this(LocalhostHttpsDistinguishedName, CurrentAspNetCoreCertificateVersion) { }
+        : this(LocalhostHttpsDistinguishedName, CurrentAspNetCoreCertificateVersion)
+    {
+    }
 
     // For testing purposes only
     internal CertificateManager(string subject, int version)
@@ -850,7 +852,9 @@ internal abstract class CertificateManager
             {
                 disposable.Dispose();
             }
-            catch { }
+            catch
+            {
+            }
         }
     }
 
@@ -1321,7 +1325,9 @@ internal abstract class CertificateManager
         internal void MacOSDiskStoreDoesNotExist() => WriteEvent(71);
     }
 
-    internal sealed class UserCancelledTrustException : Exception { }
+    internal sealed class UserCancelledTrustException : Exception
+    {
+    }
 
     internal readonly struct CheckCertificateStateResult
     {

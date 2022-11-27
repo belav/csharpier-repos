@@ -1012,7 +1012,9 @@ this should fail";
         public TestCSharpCompiler(
             RazorReferenceManager manager,
             IWebHostEnvironment hostingEnvironment
-        ) : base(manager, hostingEnvironment) { }
+        ) : base(manager, hostingEnvironment)
+        {
+        }
 
         public EmitOptions EmitOptionsSettable { get; set; }
 

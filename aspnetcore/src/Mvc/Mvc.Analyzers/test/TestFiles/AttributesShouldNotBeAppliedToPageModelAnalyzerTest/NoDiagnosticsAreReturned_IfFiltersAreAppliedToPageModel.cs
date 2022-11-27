@@ -6,6 +6,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     [ServiceFilter(typeof(object))]
     public class NoDiagnosticsAreReturned_IfFiltersAreAppliedToPageModel : PageModel
     {
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
     }
 }

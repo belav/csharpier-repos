@@ -20,7 +20,10 @@ public static class IdentityServiceCollectionExtensions
     /// <param name="services">The services available in the application.</param>
     /// <returns>An <see cref="IdentityBuilder"/> for creating and configuring the identity system.</returns>
     public static IdentityBuilder AddIdentityCore<TUser>(this IServiceCollection services)
-        where TUser : class => services.AddIdentityCore<TUser>(o => { });
+        where TUser : class =>
+        services.AddIdentityCore<TUser>(o =>
+        {
+        });
 
     /// <summary>
     /// Adds and configures the identity system for the specified User type. Role services are not added by default

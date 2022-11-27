@@ -25,7 +25,12 @@ public static class NegotiateExtensions
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <returns>The original builder.</returns>
     public static AuthenticationBuilder AddNegotiate(this AuthenticationBuilder builder) =>
-        builder.AddNegotiate(NegotiateDefaults.AuthenticationScheme, _ => { });
+        builder.AddNegotiate(
+            NegotiateDefaults.AuthenticationScheme,
+            _ =>
+            {
+            }
+        );
 
     /// <summary>
     /// Configures the <see cref="AuthenticationBuilder"/> to use Negotiate (also known as Windows, Kerberos, or NTLM) authentication

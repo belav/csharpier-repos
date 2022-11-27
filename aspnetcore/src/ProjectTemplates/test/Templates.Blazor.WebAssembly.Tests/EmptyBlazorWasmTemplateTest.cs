@@ -20,7 +20,8 @@ namespace Templates.Blazor.Test;
 public class EmptyBlazorWasmTemplateTest : BlazorTemplateTest
 {
     public EmptyBlazorWasmTemplateTest(ProjectFactoryFixture projectFactory) : base(projectFactory)
-    { }
+    {
+    }
 
     public override string ProjectType { get; } = "blazorwasm-empty";
 

@@ -308,7 +308,9 @@ public class HostingApplicationDiagnosticsTests
         );
 
         diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(pair => { }),
+            new CallbackDiagnosticListener(pair =>
+            {
+            }),
             s =>
             {
                 if (
@@ -340,7 +342,9 @@ public class HostingApplicationDiagnosticsTests
         );
 
         diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(pair => { }),
+            new CallbackDiagnosticListener(pair =>
+            {
+            }),
             s =>
             {
                 if (
@@ -389,7 +393,9 @@ public class HostingApplicationDiagnosticsTests
         );
 
         diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(pair => { }),
+            new CallbackDiagnosticListener(pair =>
+            {
+            }),
             s =>
             {
                 if (
@@ -437,7 +443,9 @@ public class HostingApplicationDiagnosticsTests
         );
 
         diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(pair => { }),
+            new CallbackDiagnosticListener(pair =>
+            {
+            }),
             s =>
             {
                 if (
@@ -486,7 +494,9 @@ public class HostingApplicationDiagnosticsTests
         );
 
         diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(pair => { }),
+            new CallbackDiagnosticListener(pair =>
+            {
+            }),
             s =>
             {
                 if (
@@ -535,7 +545,9 @@ public class HostingApplicationDiagnosticsTests
         );
 
         diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(pair => { }),
+            new CallbackDiagnosticListener(pair =>
+            {
+            }),
             s =>
             {
                 if (
@@ -579,7 +591,9 @@ public class HostingApplicationDiagnosticsTests
         );
 
         diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(pair => { }),
+            new CallbackDiagnosticListener(pair =>
+            {
+            }),
             s =>
             {
                 if (
@@ -683,7 +697,9 @@ public class HostingApplicationDiagnosticsTests
 
         bool onActivityImportCalled = false;
         diagnosticListener.Subscribe(
-            observer: new CallbackDiagnosticListener(pair => { }),
+            observer: new CallbackDiagnosticListener(pair =>
+            {
+            }),
             isEnabled: (s, o, _) => true,
             onActivityImport: (activity, context) =>
             {
@@ -799,7 +815,9 @@ public class HostingApplicationDiagnosticsTests
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) { }
+        )
+        {
+        }
     }
 
     private class LoggerWithScopes : ILogger
@@ -827,11 +845,15 @@ public class HostingApplicationDiagnosticsTests
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) { }
+        )
+        {
+        }
 
         private class Scope : IDisposable
         {
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 
@@ -846,7 +868,9 @@ public class HostingApplicationDiagnosticsTests
 
         public override bool IsEnabled(string name) => _isEnabled;
 
-        public override void Write(string name, object value) { }
+        public override void Write(string name, object value)
+        {
+        }
     }
 
     private class CallbackDiagnosticListener : IObserver<KeyValuePair<string, object>>
@@ -863,8 +887,12 @@ public class HostingApplicationDiagnosticsTests
             _callback(value);
         }
 
-        public void OnError(Exception error) { }
+        public void OnError(Exception error)
+        {
+        }
 
-        public void OnCompleted() { }
+        public void OnCompleted()
+        {
+        }
     }
 }

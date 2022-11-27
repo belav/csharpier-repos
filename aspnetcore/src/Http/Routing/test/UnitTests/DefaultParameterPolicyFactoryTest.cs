@@ -495,7 +495,9 @@ public class DefaultParameterPolicyFactoryTest
 
     private class TestRouteConstraint : IRouteConstraint
     {
-        private TestRouteConstraint() { }
+        private TestRouteConstraint()
+        {
+        }
 
         public HttpContext HttpContext { get; private set; }
         public IRouter Route { get; private set; }
@@ -526,7 +528,9 @@ public class DefaultParameterPolicyFactoryTest
     }
 }
 
-public class CustomParameterPolicy : IParameterPolicy { }
+public class CustomParameterPolicy : IParameterPolicy
+{
+}
 
 public class CustomParameterPolicyWithArguments : IParameterPolicy
 {
@@ -548,7 +552,9 @@ public class CustomParameterPolicyWithMultpleCtors : IParameterPolicy
         Count = count;
     }
 
-    public CustomParameterPolicyWithMultpleCtors(int count) : this(testService: null, count) { }
+    public CustomParameterPolicyWithMultpleCtors(int count) : this(testService: null, count)
+    {
+    }
 
     public ITestService TestService { get; }
     public int Count { get; }
@@ -563,10 +569,14 @@ public class CustomParameterPolicyWithAmbigiousMultpleCtors : IParameterPolicy
     }
 
     public CustomParameterPolicyWithAmbigiousMultpleCtors(object testService, int count)
-        : this(testService: null, count) { }
+        : this(testService: null, count)
+    {
+    }
 
     public CustomParameterPolicyWithAmbigiousMultpleCtors(int count)
-        : this(testService: null, count) { }
+        : this(testService: null, count)
+    {
+    }
 
     public ITestService TestService { get; }
     public int Count { get; }
@@ -608,9 +618,13 @@ public class CustomParameterPolicyWithOnlyServiceArguments : IParameterPolicy
     public ITestService TestService2 { get; }
 }
 
-public interface ITestService { }
+public interface ITestService
+{
+}
 
-public class TestService : ITestService { }
+public class TestService : ITestService
+{
+}
 
 public class RegexInlineRouteConstraintWithService : RegexRouteConstraint
 {

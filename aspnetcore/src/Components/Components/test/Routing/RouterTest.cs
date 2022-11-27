@@ -200,7 +200,14 @@ public class RouterTest
         var parameters = new Dictionary<string, object>
         {
             { nameof(Router.AppAssembly), typeof(RouterTest).Assembly },
-            { nameof(Router.NotFound), (RenderFragment)(builder => { }) },
+            {
+                nameof(Router.NotFound),
+                (RenderFragment)(
+                    builder =>
+                    {
+                    }
+                )
+            },
         };
 
         // Act
@@ -241,14 +248,22 @@ public class RouterTest
     }
 
     [Route("feb")]
-    public class FebComponent : ComponentBase { }
+    public class FebComponent : ComponentBase
+    {
+    }
 
     [Route("jan")]
-    public class JanComponent : ComponentBase { }
+    public class JanComponent : ComponentBase
+    {
+    }
 
     [Route("{*matchAnything}")]
-    public class MatchAnythingComponent : ComponentBase { }
+    public class MatchAnythingComponent : ComponentBase
+    {
+    }
 
     [Route("a/b")]
-    public class MultiSegmentRouteComponent : ComponentBase { }
+    public class MultiSegmentRouteComponent : ComponentBase
+    {
+    }
 }

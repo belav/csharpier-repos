@@ -867,7 +867,9 @@ public class TestClientTests
 
         class NoopDispoasble : IDisposable
         {
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 

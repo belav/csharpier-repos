@@ -22,7 +22,9 @@ internal sealed class ZeroContentLengthMessageBody : MessageBody
 
     public override ValueTask StopAsync() => default;
 
-    public override void AdvanceTo(SequencePosition consumed, SequencePosition examined) { }
+    public override void AdvanceTo(SequencePosition consumed, SequencePosition examined)
+    {
+    }
 
     public override bool TryRead(out ReadResult result)
     {
@@ -30,7 +32,11 @@ internal sealed class ZeroContentLengthMessageBody : MessageBody
         return true;
     }
 
-    public override void Complete(Exception? ex) { }
+    public override void Complete(Exception? ex)
+    {
+    }
 
-    public override void CancelPendingRead() { }
+    public override void CancelPendingRead()
+    {
+    }
 }

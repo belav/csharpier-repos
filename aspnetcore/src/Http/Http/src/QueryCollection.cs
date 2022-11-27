@@ -27,7 +27,9 @@ public class QueryCollection : IQueryCollection
     /// <summary>
     /// Initializes a new instance of <see cref="QueryCollection"/>.
     /// </summary>
-    public QueryCollection() { }
+    public QueryCollection()
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="QueryCollection"/>.
@@ -228,7 +230,9 @@ public class QueryCollection : IQueryCollection
         }
 
         /// <inheritdoc />
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         object IEnumerator.Current
         {

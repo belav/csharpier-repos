@@ -25,7 +25,9 @@ public sealed class AuthenticationManager
     private AuthenticationSchemes _authSchemes;
     private bool _allowAnonymous = true;
 
-    internal AuthenticationManager() { }
+    internal AuthenticationManager()
+    {
+    }
 
     /// <summary>
     /// When attaching to an existing queue this setting must match the one used to create the queue.

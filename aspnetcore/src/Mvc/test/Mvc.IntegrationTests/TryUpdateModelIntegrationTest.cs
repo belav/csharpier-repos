@@ -1267,7 +1267,9 @@ public class TryUpdateModelIntegrationTest
     {
         private readonly ICollection<T> _original;
 
-        public CustomReadOnlyCollection() : this(new List<T>()) { }
+        public CustomReadOnlyCollection() : this(new List<T>())
+        {
+        }
 
         public CustomReadOnlyCollection(ICollection<T> original)
         {

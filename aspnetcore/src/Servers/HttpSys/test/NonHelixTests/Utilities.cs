@@ -31,7 +31,9 @@ internal static class Utilities
             string.Empty,
             out root,
             out baseAddress,
-            options => { },
+            options =>
+            {
+            },
             app
         );
     }

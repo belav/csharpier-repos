@@ -224,7 +224,9 @@ public class TagHelperScopeManagerTest
     private static TagHelperScopeManager CreateDefaultScopeManager()
     {
         return new TagHelperScopeManager(
-            startTagHelperWritingScope: _ => { },
+            startTagHelperWritingScope: _ =>
+            {
+            },
             endTagHelperWritingScope: () => new DefaultTagHelperContent()
         );
     }

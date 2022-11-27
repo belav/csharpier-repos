@@ -11,7 +11,9 @@ internal sealed class EnableCachePolicy : IOutputCachePolicy
     public static readonly EnableCachePolicy Enabled = new();
     public static readonly EnableCachePolicy Disabled = new();
 
-    private EnableCachePolicy() { }
+    private EnableCachePolicy()
+    {
+    }
 
     /// <inheritdoc />
     ValueTask IOutputCachePolicy.CacheRequestAsync(

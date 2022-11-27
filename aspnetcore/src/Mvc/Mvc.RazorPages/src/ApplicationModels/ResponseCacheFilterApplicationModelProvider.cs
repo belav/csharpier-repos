@@ -49,5 +49,7 @@ internal sealed class ResponseCacheFilterApplicationModelProvider : IPageApplica
         }
     }
 
-    public void OnProvidersExecuted(PageApplicationModelProviderContext context) { }
+    public void OnProvidersExecuted(PageApplicationModelProviderContext context)
+    {
+    }
 }

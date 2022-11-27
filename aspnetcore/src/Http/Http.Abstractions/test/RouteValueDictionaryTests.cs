@@ -2249,7 +2249,9 @@ public class RouteValueDictionaryTests
         public bool this[string key]
         {
             get { return false; }
-            set { }
+            set
+            {
+            }
         }
     }
 

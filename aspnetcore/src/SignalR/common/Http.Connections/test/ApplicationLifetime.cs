@@ -38,5 +38,7 @@ public class EmptyApplicationLifetime : IHostApplicationLifetime
 
     public CancellationToken ApplicationStopped => CancellationToken.None;
 
-    public void StopApplication() { }
+    public void StopApplication()
+    {
+    }
 }

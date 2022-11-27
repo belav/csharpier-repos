@@ -34,5 +34,7 @@ public abstract class BoundAttributeDescriptorBuilder
 
     public virtual void BindAttributeParameter(
         Action<BoundAttributeParameterDescriptorBuilder> configure
-    ) { }
+    )
+    {
+    }
 }

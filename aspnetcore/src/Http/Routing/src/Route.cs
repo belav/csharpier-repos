@@ -30,7 +30,9 @@ public class Route : RouteBase
             constraints: null,
             dataTokens: null,
             inlineConstraintResolver: inlineConstraintResolver
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Constructs a new <see cref="Route"/> instance.
@@ -57,7 +59,9 @@ public class Route : RouteBase
             constraints,
             dataTokens,
             inlineConstraintResolver
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Constructs a new <see cref="Route"/> instance.

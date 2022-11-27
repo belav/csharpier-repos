@@ -23,7 +23,9 @@ public sealed partial class PhysicalFileHttpResult
     /// <param name="fileName">The path to the file. The path must be an absolute path.</param>
     /// <param name="contentType">The Content-Type header of the response.</param>
     internal PhysicalFileHttpResult(string fileName, string? contentType)
-        : this(fileName, contentType, fileDownloadName: null) { }
+        : this(fileName, contentType, fileDownloadName: null)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="PhysicalFileHttpResult"/> instance with
@@ -34,7 +36,9 @@ public sealed partial class PhysicalFileHttpResult
     /// <param name="contentType">The Content-Type header of the response.</param>
     /// <param name="fileDownloadName">The suggested file name.</param>
     internal PhysicalFileHttpResult(string fileName, string? contentType, string? fileDownloadName)
-        : this(fileName, contentType, fileDownloadName, enableRangeProcessing: false) { }
+        : this(fileName, contentType, fileDownloadName, enableRangeProcessing: false)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="PhysicalFileHttpResult"/> instance with the provided values.

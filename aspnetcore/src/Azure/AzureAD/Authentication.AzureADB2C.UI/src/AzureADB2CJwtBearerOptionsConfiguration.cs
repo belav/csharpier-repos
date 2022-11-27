@@ -40,7 +40,9 @@ internal sealed class AzureADB2CJwtBearerOptionsConfiguration
         );
     }
 
-    public void Configure(JwtBearerOptions options) { }
+    public void Configure(JwtBearerOptions options)
+    {
+    }
 
     private string GetAzureADB2CScheme(string name)
     {

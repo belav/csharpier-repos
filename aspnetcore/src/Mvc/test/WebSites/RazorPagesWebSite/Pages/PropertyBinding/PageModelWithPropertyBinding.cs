@@ -18,5 +18,7 @@ public class PageModelWithPropertyBinding : PageModel
     [FromQuery]
     public string PropertyWithSupportGetsTrue { get; set; }
 
-    public void OnGet() { }
+    public void OnGet()
+    {
+    }
 }

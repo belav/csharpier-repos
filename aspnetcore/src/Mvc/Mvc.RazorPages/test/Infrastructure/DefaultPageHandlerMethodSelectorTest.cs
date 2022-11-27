@@ -489,9 +489,13 @@ public class DefaultPageHandlerMethodSelectorTest
         Assert.Equal(message, ex.Message);
     }
 
-    protected void Post() { }
+    protected void Post()
+    {
+    }
 
-    protected void PostAsync() { }
+    protected void PostAsync()
+    {
+    }
 
     private static DefaultPageHandlerMethodSelector CreateSelector()
     {

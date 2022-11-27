@@ -196,7 +196,9 @@ public class BatchingLoggerProviderTests
                         IncludeScopes = includeScopes
                     }
                 )
-            ) { }
+            )
+        {
+        }
 
         internal override Task WriteMessagesAsync(
             IEnumerable<LogMessage> messages,

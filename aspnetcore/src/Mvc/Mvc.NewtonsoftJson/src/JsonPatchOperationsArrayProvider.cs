@@ -60,5 +60,7 @@ internal sealed class JsonPatchOperationsArrayProvider : IApiDescriptionProvider
     }
 
     /// <inheritdoc />
-    public void OnProvidersExecuted(ApiDescriptionProviderContext context) { }
+    public void OnProvidersExecuted(ApiDescriptionProviderContext context)
+    {
+    }
 }

@@ -1749,7 +1749,9 @@ internal abstract partial class ResourceInvoker
             IList<IFilterMetadata> filters,
             IActionResult result,
             object controller
-        ) : base(actionContext, filters, result, controller) { }
+        ) : base(actionContext, filters, result, controller)
+        {
+        }
     }
 
     private sealed class ResultExecutingContextSealed : ResultExecutingContext
@@ -1759,13 +1761,17 @@ internal abstract partial class ResourceInvoker
             IList<IFilterMetadata> filters,
             IActionResult result,
             object controller
-        ) : base(actionContext, filters, result, controller) { }
+        ) : base(actionContext, filters, result, controller)
+        {
+        }
     }
 
     private sealed class ExceptionContextSealed : ExceptionContext
     {
         public ExceptionContextSealed(ActionContext actionContext, IList<IFilterMetadata> filters)
-            : base(actionContext, filters) { }
+            : base(actionContext, filters)
+        {
+        }
     }
 
     private sealed class ResourceExecutedContextSealed : ResourceExecutedContext
@@ -1773,7 +1779,9 @@ internal abstract partial class ResourceInvoker
         public ResourceExecutedContextSealed(
             ActionContext actionContext,
             IList<IFilterMetadata> filters
-        ) : base(actionContext, filters) { }
+        ) : base(actionContext, filters)
+        {
+        }
     }
 
     private sealed class ResourceExecutingContextSealed : ResourceExecutingContext
@@ -1782,7 +1790,9 @@ internal abstract partial class ResourceInvoker
             ActionContext actionContext,
             IList<IFilterMetadata> filters,
             IList<IValueProviderFactory> valueProviderFactories
-        ) : base(actionContext, filters, valueProviderFactories) { }
+        ) : base(actionContext, filters, valueProviderFactories)
+        {
+        }
     }
 
     private sealed class AuthorizationFilterContextSealed : AuthorizationFilterContext
@@ -1790,6 +1800,8 @@ internal abstract partial class ResourceInvoker
         public AuthorizationFilterContextSealed(
             ActionContext actionContext,
             IList<IFilterMetadata> filters
-        ) : base(actionContext, filters) { }
+        ) : base(actionContext, filters)
+        {
+        }
     }
 }

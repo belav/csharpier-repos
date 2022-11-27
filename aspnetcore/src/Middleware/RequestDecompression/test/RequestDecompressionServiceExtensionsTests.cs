@@ -12,7 +12,8 @@ public class RequestDecompressionServiceExtensionsTests
     {
         // Arrange
         IServiceCollection serviceCollection = null;
-        var configureOptions = (RequestDecompressionOptions options) => { };
+        var configureOptions = (RequestDecompressionOptions options) => {
+        };
 
         // Act + Assert
         Assert.Throws<ArgumentNullException>(() =>

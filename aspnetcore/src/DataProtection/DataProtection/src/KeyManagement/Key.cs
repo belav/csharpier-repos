@@ -29,5 +29,7 @@ internal sealed class Key : KeyBase
             expirationDate,
             new Lazy<IAuthenticatedEncryptorDescriptor>(() => descriptor),
             encryptorFactories
-        ) { }
+        )
+    {
+    }
 }

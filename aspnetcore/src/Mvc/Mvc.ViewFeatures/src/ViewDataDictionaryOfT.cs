@@ -24,7 +24,9 @@ public class ViewDataDictionary<TModel> : ViewDataDictionary
     public ViewDataDictionary(
         IModelMetadataProvider metadataProvider,
         ModelStateDictionary modelState
-    ) : base(metadataProvider, modelState, declaredModelType: typeof(TModel)) { }
+    ) : base(metadataProvider, modelState, declaredModelType: typeof(TModel))
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ViewDataDictionary{TModel}"/> class based in part on an
@@ -45,7 +47,9 @@ public class ViewDataDictionary<TModel> : ViewDataDictionary
     /// <inheritdoc />
     // References may not show up due to Type.GetConstructor() use in RazorPageActivator.
     public ViewDataDictionary(ViewDataDictionary source)
-        : base(source, declaredModelType: typeof(TModel)) { }
+        : base(source, declaredModelType: typeof(TModel))
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ViewDataDictionary{TModel}"/> class based in part on an
@@ -67,7 +71,9 @@ public class ViewDataDictionary<TModel> : ViewDataDictionary
     // parameter would likely require IEquatable<TModel> type restrictions to pass expected null value to the base
     // constructor.
     public ViewDataDictionary(ViewDataDictionary source, object? model)
-        : base(source, model, declaredModelType: typeof(TModel)) { }
+        : base(source, model, declaredModelType: typeof(TModel))
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ViewDataDictionary{TModel}"/> class.
@@ -75,7 +81,9 @@ public class ViewDataDictionary<TModel> : ViewDataDictionary
     /// <remarks>Internal for testing.</remarks>
     /// <inheritdoc />
     internal ViewDataDictionary(IModelMetadataProvider metadataProvider)
-        : base(metadataProvider, declaredModelType: typeof(TModel)) { }
+        : base(metadataProvider, declaredModelType: typeof(TModel))
+    {
+    }
 
     /// <inheritdoc />
     public new TModel Model

@@ -644,9 +644,13 @@ public class ApiConventionMatcherTest
         Assert.Equal(expected, result);
     }
 
-    public class Base { }
+    public class Base
+    {
+    }
 
-    public class Derived : Base { }
+    public class Derived : Base
+    {
+    }
 
     public class TestController
     {
@@ -660,29 +664,43 @@ public class ApiConventionMatcherTest
     public static class TestConvention
     {
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Prefix)]
-        public static void Get(int id) { }
+        public static void Get(int id)
+        {
+        }
 
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Any)]
-        public static void GetNoArgs() { }
+        public static void GetNoArgs()
+        {
+        }
 
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Any)]
-        public static void GetTwoArgs(int id, string name) { }
+        public static void GetTwoArgs(int id, string name)
+        {
+        }
 
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Prefix)]
-        public static void Post(Derived model) { }
+        public static void Post(Derived model)
+        {
+        }
 
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Prefix)]
         public static void GetParameterNotMatching(
             [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.AssignableFrom)] Derived model
-        ) { }
+        )
+        {
+        }
 
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Any)]
         public static void Search(
             [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Exact)] string searchTerm,
             params object[] others
-        ) { }
+        )
+        {
+        }
 
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Any)]
-        public static void SearchWithParams(params object[] others) { }
+        public static void SearchWithParams(params object[] others)
+        {
+        }
     }
 }

@@ -82,5 +82,7 @@ internal sealed class AzureADB2COpenIdConnectOptionsConfiguration
         return null;
     }
 
-    public void Configure(OpenIdConnectOptions options) { }
+    public void Configure(OpenIdConnectOptions options)
+    {
+    }
 }

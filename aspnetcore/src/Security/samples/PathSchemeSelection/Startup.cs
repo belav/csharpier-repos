@@ -35,7 +35,12 @@ public class Startup
 
         services
             .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddScheme<AuthenticationSchemeOptions, ApiAuthHandler>("Api", o => { })
+            .AddScheme<AuthenticationSchemeOptions, ApiAuthHandler>(
+                "Api",
+                o =>
+                {
+                }
+            )
             .AddCookie(options =>
             {
                 // Foward any requests that start with /api to that scheme

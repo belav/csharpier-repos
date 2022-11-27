@@ -13,7 +13,9 @@ internal sealed class VaryByQueryPolicy : IOutputCachePolicy
 {
     private readonly StringValues _queryKeys;
 
-    private VaryByQueryPolicy() { }
+    private VaryByQueryPolicy()
+    {
+    }
 
     public VaryByQueryPolicy(string queryKey, params string[] queryKeys)
     {

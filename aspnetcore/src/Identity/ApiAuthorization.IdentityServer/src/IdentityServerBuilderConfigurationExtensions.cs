@@ -36,7 +36,9 @@ public static class IdentityServerBuilderConfigurationExtensions
         where TUser : class
         where TContext : DbContext, IPersistedGrantDbContext
     {
-        builder.AddApiAuthorization<TUser, TContext>(o => { });
+        builder.AddApiAuthorization<TUser, TContext>(o =>
+        {
+        });
         return builder;
     }
 

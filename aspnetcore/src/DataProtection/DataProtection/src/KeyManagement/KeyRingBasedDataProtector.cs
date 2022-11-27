@@ -443,7 +443,9 @@ internal sealed unsafe class KeyRingBasedDataProtector : IDataProtector, IPersis
         private sealed class PurposeBinaryWriter : BinaryWriter
         {
             public PurposeBinaryWriter(MemoryStream stream)
-                : base(stream, EncodingUtil.SecureUtf8Encoding, leaveOpen: true) { }
+                : base(stream, EncodingUtil.SecureUtf8Encoding, leaveOpen: true)
+            {
+            }
 
             // Writes a big-endian 32-bit integer to the underlying stream.
             public void WriteBigEndian(uint value)

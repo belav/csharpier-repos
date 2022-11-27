@@ -32,7 +32,9 @@ public class WebHostTests
     {
         var host = WebHost
             .CreateDefaultBuilder()
-            .Configure(app => { })
+            .Configure(app =>
+            {
+            })
             .ConfigureAppConfiguration(configBuilder =>
             {
                 configBuilder.Add(new ReloadableMemorySource());
@@ -93,7 +95,12 @@ public class WebHostTests
     [Fact]
     public void CreateDefaultBuilder_RegistersRouting()
     {
-        var host = WebHost.CreateDefaultBuilder().Configure(_ => { }).Build();
+        var host = WebHost
+            .CreateDefaultBuilder()
+            .Configure(_ =>
+            {
+            })
+            .Build();
 
         var linkGenerator = host.Services.GetService(typeof(LinkGenerator));
         Assert.NotNull(linkGenerator);
@@ -103,7 +110,12 @@ public class WebHostTests
     public void CreateDefaultBuilder_RegistersEventSourceLogger()
     {
         var listener = new TestEventListener();
-        var host = WebHost.CreateDefaultBuilder().Configure(_ => { }).Build();
+        var host = WebHost
+            .CreateDefaultBuilder()
+            .Configure(_ =>
+            {
+            })
+            .Build();
 
         var logger = host.Services.GetRequiredService<ILogger<WebHostTests>>();
         logger.LogInformation("Request starting");

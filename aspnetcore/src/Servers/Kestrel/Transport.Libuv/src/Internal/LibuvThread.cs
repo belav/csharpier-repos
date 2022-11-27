@@ -53,7 +53,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                 libuvTransportContext.Options.MemoryPoolFactory(),
                 libuvTransportContext.Log,
                 maxLoops
-            ) { }
+            )
+        {
+        }
 
         public LibuvThread(
             LibuvFunctions libuv,

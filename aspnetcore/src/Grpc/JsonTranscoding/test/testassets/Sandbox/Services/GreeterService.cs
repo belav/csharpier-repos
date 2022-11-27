@@ -7,7 +7,9 @@ using Grpc.Core;
 namespace Server;
 
 public class JsonTranscodingGreeterService
-    : Transcoding.JsonTranscodingGreeter.JsonTranscodingGreeterBase { }
+    : Transcoding.JsonTranscodingGreeter.JsonTranscodingGreeterBase
+{
+}
 
 public class GreeterService : Greeter.GreeterBase
 {

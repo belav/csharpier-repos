@@ -6,4 +6,6 @@ using Transcoding;
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests.TestObjects;
 
 public class JsonTranscodingInvalidBodyGreeterService
-    : JsonTranscodingInvalidBodyGreeter.JsonTranscodingInvalidBodyGreeterBase { }
+    : JsonTranscodingInvalidBodyGreeter.JsonTranscodingInvalidBodyGreeterBase
+{
+}

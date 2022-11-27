@@ -17,7 +17,9 @@ internal class BoundAttributeParameterDescriptorComparer
     public static readonly BoundAttributeParameterDescriptorComparer Default =
         new BoundAttributeParameterDescriptorComparer();
 
-    private BoundAttributeParameterDescriptorComparer() { }
+    private BoundAttributeParameterDescriptorComparer()
+    {
+    }
 
     public virtual bool Equals(
         BoundAttributeParameterDescriptor descriptorX,

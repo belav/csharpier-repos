@@ -86,7 +86,9 @@ public class StaticFileMiddlewareTests : LoggedTest
 
                         app.UseStaticFiles();
 
-                        app.UseEndpoints(endpoints => { });
+                        app.UseEndpoints(endpoints =>
+                        {
+                        });
                     });
             })
             .Build();

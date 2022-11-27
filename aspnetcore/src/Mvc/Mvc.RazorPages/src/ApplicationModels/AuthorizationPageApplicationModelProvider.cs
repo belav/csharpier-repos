@@ -53,5 +53,7 @@ internal sealed class AuthorizationPageApplicationModelProvider : IPageApplicati
         }
     }
 
-    public void OnProvidersExecuted(PageApplicationModelProviderContext context) { }
+    public void OnProvidersExecuted(PageApplicationModelProviderContext context)
+    {
+    }
 }

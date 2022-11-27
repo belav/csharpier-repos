@@ -22,7 +22,9 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture, output) { }
+    ) : base(browserFixture, serverFixture, output)
+    {
+    }
 
     protected override void InitializeAsyncCore()
     {

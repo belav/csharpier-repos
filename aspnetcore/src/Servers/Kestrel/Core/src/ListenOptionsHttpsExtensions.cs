@@ -25,7 +25,9 @@ public static class ListenOptionsHttpsExtensions
     /// <param name="listenOptions">The <see cref="ListenOptions"/> to configure.</param>
     /// <returns>The <see cref="ListenOptions"/>.</returns>
     public static ListenOptions UseHttps(this ListenOptions listenOptions) =>
-        listenOptions.UseHttps(_ => { });
+        listenOptions.UseHttps(_ =>
+        {
+        });
 
     /// <summary>
     /// Configure Kestrel to use HTTPS.
@@ -133,7 +135,9 @@ public static class ListenOptionsHttpsExtensions
             subject,
             allowInvalid,
             location,
-            configureOptions: _ => { }
+            configureOptions: _ =>
+            {
+            }
         );
 
     /// <summary>

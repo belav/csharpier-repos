@@ -144,7 +144,9 @@ internal sealed class ResponseFeature : IHttpResponseFeature, IHttpResponseBodyF
         }
     }
 
-    public void DisableBuffering() { }
+    public void DisableBuffering()
+    {
+    }
 
     public Task SendFileAsync(string path, long offset, long? count, CancellationToken cancellation)
     {

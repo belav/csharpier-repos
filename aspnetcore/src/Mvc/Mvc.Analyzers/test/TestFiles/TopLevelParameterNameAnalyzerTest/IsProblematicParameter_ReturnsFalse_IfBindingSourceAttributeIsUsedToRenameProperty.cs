@@ -7,6 +7,8 @@
 
         public void ActionMethod(
             IsProblematicParameter_ReturnsFalse_IfBindingSourceAttributeIsUsedToRenameProperty model
-        ) { }
+        )
+        {
+        }
     }
 }

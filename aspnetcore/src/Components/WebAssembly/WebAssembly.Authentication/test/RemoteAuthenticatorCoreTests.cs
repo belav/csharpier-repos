@@ -1072,7 +1072,9 @@ public class RemoteAuthenticatorCoreTests
     private class TestSignOutSessionStateManager : SignOutSessionStateManager
 #pragma warning restore CS0618 // Type or member is obsolete, we keep it for now for backwards compatibility
     {
-        public TestSignOutSessionStateManager() : base(null) { }
+        public TestSignOutSessionStateManager() : base(null)
+        {
+        }
 
         public bool SignOutState { get; set; } = true;
 
@@ -1117,7 +1119,9 @@ public class RemoteAuthenticatorCoreTests
                     RemoteRegisterPath = "Identity/Account/Register",
                 },
                 null
-            ) { }
+            )
+        {
+        }
 
         public TestRemoteAuthenticatorView(NavigationManager manager)
             : this(
@@ -1127,7 +1131,9 @@ public class RemoteAuthenticatorCoreTests
                     RemoteRegisterPath = "Identity/Account/Register",
                 },
                 manager
-            ) { }
+            )
+        {
+        }
 
         public TestRemoteAuthenticatorView(
             RemoteAuthenticationApplicationPathsOptions applicationPaths,
@@ -1169,7 +1175,9 @@ public class RemoteAuthenticatorCoreTests
                     Mock.Of<IAccessTokenProviderAccessor>()
                 ),
                 null
-            ) { }
+            )
+        {
+        }
 
         public Func<
             RemoteAuthenticationContext<RemoteAuthenticationState>,
@@ -1217,7 +1225,8 @@ public class RemoteAuthenticatorCoreTests
     private class TestRenderer : Renderer
     {
         public TestRenderer(IServiceProvider services) : base(services, NullLoggerFactory.Instance)
-        { }
+        {
+        }
 
         public int Attach(IComponent component) => AssignRootComponentId(component);
 

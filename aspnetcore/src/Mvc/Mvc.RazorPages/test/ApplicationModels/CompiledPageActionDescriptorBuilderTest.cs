@@ -215,7 +215,9 @@ public class CompiledPageActionDescriptorBuilderTest
         [BindProperty]
         public string Property { get; set; }
 
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
     }
 
     private class TestModel
@@ -223,7 +225,9 @@ public class CompiledPageActionDescriptorBuilderTest
         [BindProperty]
         public string Property { get; set; }
 
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
     }
 
     [Fact]
@@ -268,7 +272,9 @@ public class CompiledPageActionDescriptorBuilderTest
 
     private class ModelWithHandler
     {
-        public void OnGetCustomerAsync() { }
+        public void OnGetCustomerAsync()
+        {
+        }
     }
 
     [Fact]
@@ -325,7 +331,9 @@ public class CompiledPageActionDescriptorBuilderTest
 
     private class HandlerWithParameters
     {
-        public void OnPost(string param1, [FromRoute(Name = "id")] int param2) { }
+        public void OnPost(string param1, [FromRoute(Name = "id")] int param2)
+        {
+        }
     }
 
     [Fact]

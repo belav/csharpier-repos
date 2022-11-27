@@ -80,7 +80,9 @@ public sealed class NavigationLock : IComponent, IHandleAfterRender, IAsyncDispo
             || _confirmExternalNavigation != ConfirmExternalNavigation
         )
         {
-            _renderHandle.Render(static builder => { });
+            _renderHandle.Render(static builder =>
+            {
+            });
         }
 
         return Task.CompletedTask;

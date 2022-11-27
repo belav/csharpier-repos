@@ -25,7 +25,9 @@ public class IISExtensionTests
                     .UseSetting("APPL_PATH", "/")
                     .UseIISIntegration()
                     .UseIISIntegration()
-                    .Configure(app => { })
+                    .Configure(app =>
+                    {
+                    })
                     .UseTestServer();
             })
             .Build();

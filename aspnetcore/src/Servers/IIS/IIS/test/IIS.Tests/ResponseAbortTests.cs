@@ -172,7 +172,8 @@ public class ResponseAbortTests : StrictTestServerTests
                 async ctx =>
                 {
                     var token = ctx.RequestAborted;
-                    var originalRegistration = token.Register(() => { });
+                    var originalRegistration = token.Register(() => {
+                    });
 
                     ctx.Abort();
 

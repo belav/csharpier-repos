@@ -7,10 +7,14 @@ namespace VersioningWebSite;
 
 public class VersionDeleteAttribute : VersionRouteAttribute, IActionHttpMethodProvider
 {
-    public VersionDeleteAttribute(string template) : base(template) { }
+    public VersionDeleteAttribute(string template) : base(template)
+    {
+    }
 
     public VersionDeleteAttribute(string template, string versionRange)
-        : base(template, versionRange) { }
+        : base(template, versionRange)
+    {
+    }
 
     private readonly IEnumerable<string> _httpMethods = new[] { "DELETE" };
 

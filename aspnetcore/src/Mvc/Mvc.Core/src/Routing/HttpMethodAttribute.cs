@@ -24,7 +24,9 @@ public abstract class HttpMethodAttribute
     /// set of HTTP methods.
     /// <param name="httpMethods">The set of supported HTTP methods. May not be null.</param>
     /// </summary>
-    public HttpMethodAttribute(IEnumerable<string> httpMethods) : this(httpMethods, null) { }
+    public HttpMethodAttribute(IEnumerable<string> httpMethods) : this(httpMethods, null)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="HttpMethodAttribute"/> with the given

@@ -38,5 +38,7 @@ public class ErrorPageMiddlewareController : Controller
         );
     }
 
-    private class SomeType { }
+    private class SomeType
+    {
+    }
 }

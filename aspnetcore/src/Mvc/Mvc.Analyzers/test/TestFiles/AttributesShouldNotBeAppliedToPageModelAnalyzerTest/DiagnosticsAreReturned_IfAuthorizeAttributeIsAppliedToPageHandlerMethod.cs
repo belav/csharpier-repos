@@ -7,6 +7,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     {
         [ /*MM*/
         Authorize]
-        public void OnPost() { }
+        public void OnPost()
+        {
+        }
     }
 }

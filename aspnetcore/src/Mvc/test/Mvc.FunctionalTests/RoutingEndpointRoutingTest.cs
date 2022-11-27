@@ -10,7 +10,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startup>
 {
     public RoutingEndpointRoutingTest(MvcTestFixture<RoutingWebSite.Startup> fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     [Fact]
     public async Task AttributeRoutedAction_ContainsPage_RouteMatched()

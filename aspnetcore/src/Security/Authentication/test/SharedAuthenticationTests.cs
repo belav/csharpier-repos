@@ -584,7 +584,12 @@ public abstract class SharedAuthenticationTests<TOptions>
     {
         var services = new ServiceCollection().ConfigureAuthTestServices();
         var builder = services.AddAuthentication();
-        RegisterAuth(builder, o => { });
+        RegisterAuth(
+            builder,
+            o =>
+            {
+            }
+        );
         var sp = services.BuildServiceProvider();
         var schemeProvider = sp.GetRequiredService<IAuthenticationSchemeProvider>();
         var scheme = await schemeProvider.GetSchemeAsync(DefaultScheme);

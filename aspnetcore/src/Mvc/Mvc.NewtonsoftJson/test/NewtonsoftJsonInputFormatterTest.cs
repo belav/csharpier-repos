@@ -587,7 +587,9 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
                 objectPoolProvider,
                 new MvcOptions(),
                 new MvcNewtonsoftJsonOptions()
-            ) { }
+            )
+        {
+        }
 
         public new JsonSerializerSettings SerializerSettings => base.SerializerSettings;
 

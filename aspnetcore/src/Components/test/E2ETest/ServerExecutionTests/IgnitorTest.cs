@@ -119,7 +119,9 @@ public abstract class IgnitorTest<TStartup>
             // variable anyway.
             Output.WriteLine(log.ToString());
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
     }
 
     protected async Task ConnectAutomaticallyAndWait(Uri baseUri)

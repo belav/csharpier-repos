@@ -31,7 +31,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 [Collection(PublishedSitesCollection.Name)]
 public class StdOutRedirectionTests : IISFunctionalTestBase
 {
-    public StdOutRedirectionTests(PublishedSitesFixture fixture) : base(fixture) { }
+    public StdOutRedirectionTests(PublishedSitesFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalFact]
     [RequiresNewShim]

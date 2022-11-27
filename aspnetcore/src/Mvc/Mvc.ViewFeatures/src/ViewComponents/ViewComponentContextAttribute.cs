@@ -9,4 +9,6 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 /// set method.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-public class ViewComponentContextAttribute : Attribute { }
+public class ViewComponentContextAttribute : Attribute
+{
+}

@@ -133,5 +133,7 @@ public class XmlDocumentationIntegrationTests
         Assert.Equal("Message field!", helloReplyMessage.Properties["message"].Description);
     }
 
-    private class GreeterService : Greeter.GreeterBase { }
+    private class GreeterService : Greeter.GreeterBase
+    {
+    }
 }

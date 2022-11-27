@@ -9,7 +9,9 @@ namespace Microsoft.AspNetCore.Components.Test.Helpers;
 
 public class TestRenderer : Renderer
 {
-    public TestRenderer() : this(new TestServiceProvider()) { }
+    public TestRenderer() : this(new TestServiceProvider())
+    {
+    }
 
     public TestRenderer(Dispatcher dispatcher)
         : base(new TestServiceProvider(), NullLoggerFactory.Instance)

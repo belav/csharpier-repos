@@ -25,7 +25,9 @@ public class CorsAuthorizationFilter : ICorsAuthorizationFilter
     /// <param name="corsService">The <see cref="ICorsService"/>.</param>
     /// <param name="policyProvider">The <see cref="ICorsPolicyProvider"/>.</param>
     public CorsAuthorizationFilter(ICorsService corsService, ICorsPolicyProvider policyProvider)
-        : this(corsService, policyProvider, NullLoggerFactory.Instance) { }
+        : this(corsService, policyProvider, NullLoggerFactory.Instance)
+    {
+    }
 
     /// <summary>
     /// Creates a new instance of <see cref="CorsAuthorizationFilter"/>.

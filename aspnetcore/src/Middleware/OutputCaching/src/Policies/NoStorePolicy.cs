@@ -10,7 +10,9 @@ internal sealed class NoStorePolicy : IOutputCachePolicy
 {
     public static NoStorePolicy Instance = new();
 
-    private NoStorePolicy() { }
+    private NoStorePolicy()
+    {
+    }
 
     /// <inheritdoc />
     ValueTask IOutputCachePolicy.ServeResponseAsync(

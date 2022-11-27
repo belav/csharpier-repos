@@ -29,7 +29,9 @@ public class TwoFactorSecurityStampValidator<TUser>
         SignInManager<TUser> signInManager,
         ISystemClock clock,
         ILoggerFactory logger
-    ) : base(options, signInManager, clock, logger) { }
+    ) : base(options, signInManager, clock, logger)
+    {
+    }
 
     /// <summary>
     /// Verifies the principal's security stamp, returns the matching user if successful

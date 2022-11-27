@@ -6,4 +6,6 @@ namespace Microsoft.AspNetCore.Builder;
 /// <summary>
 /// Abstraction that builds conventions that will be used for customization of Hub <see cref="EndpointBuilder"/> instances.
 /// </summary>
-public interface IHubEndpointConventionBuilder : IEndpointConventionBuilder { }
+public interface IHubEndpointConventionBuilder : IEndpointConventionBuilder
+{
+}

@@ -2063,5 +2063,7 @@ public class RouteTest
         options.ConstraintMap["test-policy"] = typeof(TestPolicy);
     }
 
-    private class TestPolicy : IParameterPolicy { }
+    private class TestPolicy : IParameterPolicy
+    {
+    }
 }

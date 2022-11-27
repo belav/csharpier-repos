@@ -374,7 +374,9 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
 public class ApiBehaviorTest : ApiBehaviorTestBase<BasicWebSite.StartupWithSystemTextJson>
 {
     public ApiBehaviorTest(MvcTestFixture<BasicWebSite.StartupWithSystemTextJson> fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     [Fact]
     public override Task ActionsReturnBadRequest_WhenModelStateIsInvalid()

@@ -56,7 +56,9 @@ public class TemplateBinder
             defaults,
             requiredKeys: null,
             parameterPolicies: null
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Creates a new instance of <see cref="TemplateBinder"/>.
@@ -821,7 +823,9 @@ public class TemplateBinder
     {
         public static object Instance = new SentinullValue();
 
-        private SentinullValue() { }
+        private SentinullValue()
+        {
+        }
 
         public override string ToString() => string.Empty;
     }

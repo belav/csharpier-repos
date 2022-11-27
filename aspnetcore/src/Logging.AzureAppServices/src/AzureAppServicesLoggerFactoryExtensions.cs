@@ -27,7 +27,13 @@ public static class AzureAppServicesLoggerFactoryExtensions
         var context = WebAppContext.Default;
 
         // Only add the provider if we're in Azure WebApp. That cannot change once the apps started
-        return AddAzureWebAppDiagnostics(builder, context, _ => { });
+        return AddAzureWebAppDiagnostics(
+            builder,
+            context,
+            _ =>
+            {
+            }
+        );
     }
 
     /// <summary>

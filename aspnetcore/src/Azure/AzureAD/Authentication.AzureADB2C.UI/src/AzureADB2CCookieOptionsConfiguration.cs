@@ -40,7 +40,9 @@ internal sealed class AzureADB2CCookieOptionsConfiguration
         options.Cookie.SameSite = SameSiteMode.None;
     }
 
-    public void Configure(CookieAuthenticationOptions options) { }
+    public void Configure(CookieAuthenticationOptions options)
+    {
+    }
 
     private string GetAzureADB2CScheme(string name)
     {

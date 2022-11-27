@@ -47,7 +47,9 @@ public class HstsMiddlewareTests
             {
                 webHostBuilder
                     .UseTestServer()
-                    .ConfigureServices(services => { })
+                    .ConfigureServices(services =>
+                    {
+                    })
                     .Configure(app =>
                     {
                         app.UseHsts();

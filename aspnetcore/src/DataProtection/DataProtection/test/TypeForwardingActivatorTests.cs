@@ -149,14 +149,22 @@ public class TypeForwardingActivatorTests : MarshalByRefObject
 
     private class MockTypeForwardingActivator : TypeForwardingActivator
     {
-        public MockTypeForwardingActivator() : base(null) { }
+        public MockTypeForwardingActivator() : base(null)
+        {
+        }
 
         public string Parse(string typeName) => RemoveVersionFromAssemblyName(typeName);
     }
 
-    private class ClassWithParameterlessCtor { }
+    private class ClassWithParameterlessCtor
+    {
+    }
 
-    private class GenericType<T> { }
+    private class GenericType<T>
+    {
+    }
 
-    private class GenericType<T1, T2> { }
+    private class GenericType<T1, T2>
+    {
+    }
 }

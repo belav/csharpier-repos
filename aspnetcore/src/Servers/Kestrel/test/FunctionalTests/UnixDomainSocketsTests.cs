@@ -103,7 +103,9 @@ public class UnixDomainSocketsTest : TestApplicationErrorLoggerLoggedTest
                                 }
                             );
                         })
-                        .Configure(c => { });
+                        .Configure(c =>
+                        {
+                        });
                 })
                 .ConfigureServices(AddTestLogging);
 
@@ -250,6 +252,8 @@ public class UnixDomainSocketsTest : TestApplicationErrorLoggerLoggedTest
         {
             File.Delete(path);
         }
-        catch (FileNotFoundException) { }
+        catch (FileNotFoundException)
+        {
+        }
     }
 }

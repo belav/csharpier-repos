@@ -18,7 +18,9 @@ internal sealed partial class ServerSentEventsServerTransport : IHttpTransport
         PipeReader application,
         string connectionId,
         ILoggerFactory loggerFactory
-    ) : this(application, connectionId, connection: null, loggerFactory) { }
+    ) : this(application, connectionId, connection: null, loggerFactory)
+    {
+    }
 
     public ServerSentEventsServerTransport(
         PipeReader application,

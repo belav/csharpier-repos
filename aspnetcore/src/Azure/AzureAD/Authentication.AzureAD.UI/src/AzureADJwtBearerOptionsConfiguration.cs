@@ -46,7 +46,9 @@ internal sealed class AzureADJwtBearerOptionsConfiguration
         ).ToString();
     }
 
-    public void Configure(JwtBearerOptions options) { }
+    public void Configure(JwtBearerOptions options)
+    {
+    }
 
     private string GetAzureADScheme(string name)
     {

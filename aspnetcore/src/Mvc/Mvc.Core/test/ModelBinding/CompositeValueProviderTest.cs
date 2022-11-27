@@ -306,7 +306,9 @@ public class CompositeValueProviderTest : EnumerableValueProviderTest
         }
     }
 
-    private class DerivedValueProviderMetadata : TestValueProviderMetadata { }
+    private class DerivedValueProviderMetadata : TestValueProviderMetadata
+    {
+    }
 
     private class UnrelatedValueBinderMetadata : IBindingSourceMetadata
     {

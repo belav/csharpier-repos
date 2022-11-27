@@ -22,7 +22,9 @@ public abstract class AttributeAdapterBase<TAttribute>
     /// <param name="attribute">The <see cref="ValidationAttribute"/> being wrapped.</param>
     /// <param name="stringLocalizer">The <see cref="IStringLocalizer"/> to be used in error generation.</param>
     public AttributeAdapterBase(TAttribute attribute, IStringLocalizer? stringLocalizer)
-        : base(attribute, stringLocalizer) { }
+        : base(attribute, stringLocalizer)
+    {
+    }
 
     /// <inheritdoc/>
     public abstract string GetErrorMessage(ModelValidationContextBase validationContext);

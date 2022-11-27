@@ -37,7 +37,9 @@ internal class PhotinoSynchronizationContext : SynchronizationContext
     private readonly int _uiThreadId;
     private readonly MethodInfo _invokeMethodInfo;
 
-    public PhotinoSynchronizationContext(PhotinoWindow window) : this(window, new State()) { }
+    public PhotinoSynchronizationContext(PhotinoWindow window) : this(window, new State())
+    {
+    }
 
     private PhotinoSynchronizationContext(PhotinoWindow window, State state)
     {

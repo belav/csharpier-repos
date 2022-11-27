@@ -16,7 +16,9 @@ internal sealed class BoundAttributeDescriptorComparer : IEqualityComparer<Bound
     public static readonly BoundAttributeDescriptorComparer Default =
         new BoundAttributeDescriptorComparer();
 
-    private BoundAttributeDescriptorComparer() { }
+    private BoundAttributeDescriptorComparer()
+    {
+    }
 
     public bool Equals(BoundAttributeDescriptor descriptorX, BoundAttributeDescriptor descriptorY)
     {

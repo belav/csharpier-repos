@@ -9,7 +9,9 @@ namespace HealthChecksSample;
 public abstract class DbConnectionHealthCheck : IHealthCheck
 {
     protected DbConnectionHealthCheck(string connectionString)
-        : this(connectionString, testQuery: null) { }
+        : this(connectionString, testQuery: null)
+    {
+    }
 
     protected DbConnectionHealthCheck(string connectionString, string testQuery)
     {

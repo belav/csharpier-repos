@@ -109,7 +109,9 @@ internal sealed class ExplicitIndexCollectionValidationStrategy : IValidationStr
             return true;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public void Reset()
         {

@@ -59,7 +59,12 @@ public class RoutingBuilderExtensionsTest
         var app = new ApplicationBuilder(Mock.Of<IServiceProvider>());
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() => app.UseRouter(b => { }));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                app.UseRouter(b =>
+                {
+                })
+        );
 
         // Assert
         Assert.Equal(

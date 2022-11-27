@@ -863,7 +863,9 @@ namespace System.Net.Http.Unit.Tests.HPack
             );
         }
 
-        void IHttpStreamHeadersHandler.OnHeadersComplete(bool endStream) { }
+        void IHttpStreamHeadersHandler.OnHeadersComplete(bool endStream)
+        {
+        }
 
         void IHttpStreamHeadersHandler.OnDynamicIndexedHeader(
             int? index,

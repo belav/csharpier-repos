@@ -110,7 +110,9 @@ internal sealed class ShortFormDictionaryValidationStrategy<TKey, TValue> : IVal
             return true;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public void Reset()
         {

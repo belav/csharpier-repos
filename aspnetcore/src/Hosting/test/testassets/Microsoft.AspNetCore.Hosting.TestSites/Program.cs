@@ -59,7 +59,9 @@ public static class Program
 
 public class NoopServer : IServer
 {
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 
     public IFeatureCollection Features { get; } = new FeatureCollection();
 

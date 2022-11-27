@@ -9,8 +9,12 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.SymbolApiResponseMeta
     public class GetErrorResponseType_ReturnsTypeDefinedAtActionController
     {
         [ProducesErrorResponseType(typeof(GetErrorResponseType_ReturnsTypeDefinedAtActionModel))]
-        public void Action() { }
+        public void Action()
+        {
+        }
     }
 
-    public class GetErrorResponseType_ReturnsTypeDefinedAtActionModel { }
+    public class GetErrorResponseType_ReturnsTypeDefinedAtActionModel
+    {
+    }
 }

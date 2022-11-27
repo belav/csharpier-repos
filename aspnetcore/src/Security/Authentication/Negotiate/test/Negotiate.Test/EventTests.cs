@@ -531,7 +531,9 @@ public class EventTests
     {
         public IDictionary<object, object> Items { get; set; } = new ConnectionItems();
 
-        public void OnCompleted(Func<object, Task> callback, object state) { }
+        public void OnCompleted(Func<object, Task> callback, object state)
+        {
+        }
     }
 
     private class TestNegotiateStateFactory : INegotiateStateFactory

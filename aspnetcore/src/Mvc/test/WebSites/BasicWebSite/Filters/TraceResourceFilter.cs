@@ -7,7 +7,9 @@ namespace BasicWebSite;
 
 public class TraceResourceFilter : IResourceFilter
 {
-    public void OnResourceExecuted(ResourceExecutedContext context) { }
+    public void OnResourceExecuted(ResourceExecutedContext context)
+    {
+    }
 
     public void OnResourceExecuting(ResourceExecutingContext context)
     {

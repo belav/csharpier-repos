@@ -29,7 +29,9 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
     /// </summary>
     /// <param name="detailsProvider">The <see cref="ICompositeMetadataDetailsProvider"/>.</param>
     public DefaultModelMetadataProvider(ICompositeMetadataDetailsProvider detailsProvider)
-        : this(detailsProvider, new DefaultModelBindingMessageProvider()) { }
+        : this(detailsProvider, new DefaultModelBindingMessageProvider())
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="DefaultModelMetadataProvider"/>.
@@ -39,7 +41,9 @@ public class DefaultModelMetadataProvider : ModelMetadataProvider
     public DefaultModelMetadataProvider(
         ICompositeMetadataDetailsProvider detailsProvider,
         IOptions<MvcOptions> optionsAccessor
-    ) : this(detailsProvider, GetMessageProvider(optionsAccessor)) { }
+    ) : this(detailsProvider, GetMessageProvider(optionsAccessor))
+    {
+    }
 
     private DefaultModelMetadataProvider(
         ICompositeMetadataDetailsProvider detailsProvider,

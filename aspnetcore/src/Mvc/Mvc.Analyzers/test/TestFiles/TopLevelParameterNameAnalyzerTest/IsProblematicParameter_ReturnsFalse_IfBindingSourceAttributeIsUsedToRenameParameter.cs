@@ -7,6 +7,8 @@
         public void ActionMethod(
             [FromRoute(Name = "id")]
                 IsProblematicParameter_ReturnsFalse_IfBindingSourceAttributeIsUsedToRenameParameter model
-        ) { }
+        )
+        {
+        }
     }
 }

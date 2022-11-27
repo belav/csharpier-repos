@@ -24,7 +24,9 @@ public class VirtualFileResult : FileResult
     /// <param name="fileName">The path to the file. The path must be relative/virtual.</param>
     /// <param name="contentType">The Content-Type header of the response.</param>
     public VirtualFileResult(string fileName, string contentType)
-        : this(fileName, MediaTypeHeaderValue.Parse(contentType)) { }
+        : this(fileName, MediaTypeHeaderValue.Parse(contentType))
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="VirtualFileResult"/> instance with

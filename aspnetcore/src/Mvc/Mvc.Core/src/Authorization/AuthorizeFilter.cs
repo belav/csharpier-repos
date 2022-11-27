@@ -23,7 +23,9 @@ public class AuthorizeFilter : IAsyncAuthorizationFilter, IFilterFactory
     /// <summary>
     /// Initializes a new <see cref="AuthorizeFilter"/> instance.
     /// </summary>
-    public AuthorizeFilter() : this(authorizeData: new[] { new AuthorizeAttribute() }) { }
+    public AuthorizeFilter() : this(authorizeData: new[] { new AuthorizeAttribute() })
+    {
+    }
 
     /// <summary>
     /// Initialize a new <see cref="AuthorizeFilter"/> instance.
@@ -75,7 +77,9 @@ public class AuthorizeFilter : IAsyncAuthorizationFilter, IFilterFactory
     /// Initializes a new instance of <see cref="AuthorizeFilter"/>.
     /// </summary>
     /// <param name="policy">The name of the policy to require for authorization.</param>
-    public AuthorizeFilter(string policy) : this(new[] { new AuthorizeAttribute(policy) }) { }
+    public AuthorizeFilter(string policy) : this(new[] { new AuthorizeAttribute(policy) })
+    {
+    }
 
     /// <summary>
     /// The <see cref="IAuthorizationPolicyProvider"/> to use to resolve policy names.

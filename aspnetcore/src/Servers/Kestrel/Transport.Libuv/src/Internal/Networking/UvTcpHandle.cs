@@ -9,7 +9,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
 {
     internal class UvTcpHandle : UvStreamHandle
     {
-        public UvTcpHandle(ILibuvTrace logger) : base(logger) { }
+        public UvTcpHandle(ILibuvTrace logger) : base(logger)
+        {
+        }
 
         public void Init(UvLoopHandle loop, Action<Action<IntPtr>, IntPtr> queueCloseHandle)
         {

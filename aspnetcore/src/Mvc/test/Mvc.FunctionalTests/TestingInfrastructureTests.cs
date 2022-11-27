@@ -270,9 +270,13 @@ public class TestingInfrastructureTests
 
     private class TestHandler : DelegatingHandler
     {
-        public TestHandler() { }
+        public TestHandler()
+        {
+        }
 
-        public TestHandler(HttpMessageHandler innerHandler) : base(innerHandler) { }
+        public TestHandler(HttpMessageHandler innerHandler) : base(innerHandler)
+        {
+        }
 
         public bool HeaderAdded { get; set; }
 

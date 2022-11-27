@@ -26,4 +26,6 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 /// </code>
 /// </example>
 [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
-public sealed class ActionResultStatusCodeAttribute : Attribute { }
+public sealed class ActionResultStatusCodeAttribute : Attribute
+{
+}

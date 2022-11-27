@@ -53,7 +53,9 @@ public class CustomModelTypeModel : PageModel
     }
 }
 
-public class User { }
+public class User
+{
+}
 
 internal class CustomModelTypeModel<TUser> : CustomModelTypeModel where TUser : User
 {

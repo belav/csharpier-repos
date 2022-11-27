@@ -77,7 +77,14 @@ public class SchedulerBenchmark
 
     private void Schedule(PipeScheduler[] schedulers)
     {
-        Parallel.For(0, OuterLoopCount, () => schedulers, _parallelAction, (s) => { });
+        Parallel.For(
+            0,
+            OuterLoopCount,
+            () => schedulers,
+            _parallelAction,
+            (s) => {
+            }
+        );
 
         while (_totalToReport > 0)
         {

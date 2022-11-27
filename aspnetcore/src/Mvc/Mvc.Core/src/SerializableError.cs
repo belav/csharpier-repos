@@ -16,7 +16,9 @@ public sealed class SerializableError : Dictionary<string, object>
     /// <summary>
     /// Initializes a new instance of the <see cref="SerializableError"/> class.
     /// </summary>
-    public SerializableError() : base(StringComparer.OrdinalIgnoreCase) { }
+    public SerializableError() : base(StringComparer.OrdinalIgnoreCase)
+    {
+    }
 
     /// <summary>
     /// Creates a new instance of <see cref="SerializableError"/>.

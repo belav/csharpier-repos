@@ -1732,41 +1732,57 @@ public class ControllerActionDescriptorProviderTests
     private class HttpMethodController
     {
         [HttpPost]
-        public void OnlyPost() { }
+        public void OnlyPost()
+        {
+        }
     }
 
     [Route("Items")]
     private class AttributeRoutedHttpMethodController
     {
         [CustomHttpMethodConstraint("PUT", "PATCH")]
-        public void PutOrPatch() { }
+        public void PutOrPatch()
+        {
+        }
     }
 
     private class PersonController
     {
-        public void GetPerson() { }
+        public void GetPerson()
+        {
+        }
 
         [ActionName("ShowPeople")]
-        public void ListPeople() { }
+        public void ListPeople()
+        {
+        }
 
         [NonAction]
-        public void NotAnAction() { }
+        public void NotAnAction()
+        {
+        }
     }
 
     private class MyRouteValueAttribute : RouteValueAttribute
     {
-        public MyRouteValueAttribute() : base("key", "value") { }
+        public MyRouteValueAttribute() : base("key", "value")
+        {
+        }
     }
 
     private class MySecondRouteValueAttribute : RouteValueAttribute
     {
-        public MySecondRouteValueAttribute() : base("second", "value") { }
+        public MySecondRouteValueAttribute() : base("second", "value")
+        {
+        }
     }
 
     [MyRouteValue]
     private class RouteValueController
     {
-        public void Edit() { }
+        public void Edit()
+        {
+        }
     }
 
     private class MyFilterAttribute : Attribute, IFilterMetadata
@@ -1783,7 +1799,9 @@ public class ControllerActionDescriptorProviderTests
     private class FiltersController
     {
         [MyFilter(3)]
-        public void FilterAction() { }
+        public void FilterAction()
+        {
+        }
     }
 
     [Route("api/Token/[key]/[controller]")]
@@ -1791,95 +1809,141 @@ public class ControllerActionDescriptorProviderTests
     private class TokenReplacementController
     {
         [HttpGet("stub/[action]")]
-        public void ThisIsAnAction() { }
+        public void ThisIsAnAction()
+        {
+        }
     }
 
     private class CaseInsensitiveController
     {
         [HttpGet("stub/[ActIon]")]
-        public void ThisIsAnAction() { }
+        public void ThisIsAnAction()
+        {
+        }
     }
 
     private class MultipleErrorsController
     {
         [HttpGet("stub/[action]/[unknown]")]
-        public void Unknown() { }
+        public void Unknown()
+        {
+        }
 
         [HttpGet("[invalid/syntax")]
-        public void Invalid() { }
+        public void Invalid()
+        {
+        }
     }
 
     private class InvalidParametersController
     {
         [HttpGet("stub/{controller}/{action}")]
-        public void Action1() { }
+        public void Action1()
+        {
+        }
     }
 
     private class SameGroupIdController
     {
         [HttpGet("stub/[action]")]
-        public void Action1() { }
+        public void Action1()
+        {
+        }
 
         [HttpGet("stub/Action1")]
-        public void Action2() { }
+        public void Action2()
+        {
+        }
     }
 
     [Area("Home")]
     private class ConventionalAndAttributeRoutedActionsWithAreaController
     {
         [HttpGet("Index")]
-        public void Index() { }
+        public void Index()
+        {
+        }
 
         [HttpGet("Edit")]
-        public void Edit() { }
+        public void Edit()
+        {
+        }
 
-        public void AnotherNonAttributedAction() { }
+        public void AnotherNonAttributedAction()
+        {
+        }
     }
 
     [Route("Products", Name = "Products")]
     private class SameNameDifferentTemplatesController
     {
         [HttpGet]
-        public void Get() { }
+        public void Get()
+        {
+        }
 
         [HttpGet("{id}", Name = "Products")]
-        public void Get(int id) { }
+        public void Get(int id)
+        {
+        }
 
         [HttpPut("{id}", Name = "Products")]
-        public void Put(int id) { }
+        public void Put(int id)
+        {
+        }
 
         [HttpPost]
-        public void Post() { }
+        public void Post()
+        {
+        }
 
         [HttpDelete("{id}", Name = "Products")]
-        public void Delete(int id) { }
+        public void Delete(int id)
+        {
+        }
 
         [HttpGet("/Items/{id}", Name = "Items")]
-        public void GetItems(int id) { }
+        public void GetItems(int id)
+        {
+        }
 
         [HttpPost("/Items", Name = "Items")]
-        public void PostItems() { }
+        public void PostItems()
+        {
+        }
 
         [HttpPut("/Items/{id}", Name = "Items")]
-        public void PutItems(int id) { }
+        public void PutItems(int id)
+        {
+        }
 
         [HttpDelete("/Items/{id}", Name = "Items")]
-        public void DeleteItems(int id) { }
+        public void DeleteItems(int id)
+        {
+        }
 
         [HttpPatch("/Items", Name = "Items")]
-        public void PatchItems() { }
+        public void PatchItems()
+        {
+        }
     }
 
     [Route("Products/[action]", Name = "Products_[action]")]
     private class ActionRouteNameTemplatesController
     {
         [HttpGet]
-        public void Get() { }
+        public void Get()
+        {
+        }
 
         [HttpPost]
-        public void Get(int id) { }
+        public void Get(int id)
+        {
+        }
 
-        public void Edit() { }
+        public void Edit()
+        {
+        }
     }
 
     [Area("Products")]
@@ -1887,33 +1951,49 @@ public class ControllerActionDescriptorProviderTests
     private class ControllerActionRouteNameTemplatesController
     {
         [HttpGet]
-        public void Get() { }
+        public void Get()
+        {
+        }
 
         [HttpPost]
-        public void Get(int id) { }
+        public void Get(int id)
+        {
+        }
 
-        public void Edit() { }
+        public void Edit()
+        {
+        }
     }
 
     [Route("Products/[action]", Name = "Products_[unknown]")]
     private class RouteNameIncorrectTokenController
     {
-        public void Get() { }
+        public void Get()
+        {
+        }
     }
 
     private class DifferentCasingsAttributeRouteNamesController
     {
         [HttpGet("{id}", Name = "Products")]
-        public void Get() { }
+        public void Get()
+        {
+        }
 
         [HttpGet("{ID}", Name = "Products")]
-        public void Get(int id) { }
+        public void Get(int id)
+        {
+        }
 
         [HttpPut("{id}", Name = "PRODUCTS")]
-        public void Put(int id) { }
+        public void Put(int id)
+        {
+        }
 
         [HttpDelete("{ID}", Order = 1, Name = "PRODUCTS")]
-        public void Delete(int id) { }
+        public void Delete(int id)
+        {
+        }
     }
 
     [Route("v1")]
@@ -1922,30 +2002,42 @@ public class ControllerActionDescriptorProviderTests
     {
         [HttpGet("List")]
         [HttpGet("All")]
-        public void MultipleHttpGet() { }
+        public void MultipleHttpGet()
+        {
+        }
 
         [AcceptVerbs("POST", Route = "List")]
-        public void AcceptVerbs() { }
+        public void AcceptVerbs()
+        {
+        }
 
         [AcceptVerbs("PUT", Route = "/Override")]
-        public void AcceptVerbsOverride() { }
+        public void AcceptVerbsOverride()
+        {
+        }
 
         [AcceptVerbs("POST")]
         [Route("List")]
         [HttpPut("All")]
-        public void AcceptVerbsRouteAttributeAndHttpPut() { }
+        public void AcceptVerbsRouteAttributeAndHttpPut()
+        {
+        }
 
         [AcceptVerbs("POST", Route = "")]
         [Route("List")]
         [HttpPut("All")]
-        public void AcceptVerbsRouteAttributeWithTemplateAndHttpPut() { }
+        public void AcceptVerbsRouteAttributeWithTemplateAndHttpPut()
+        {
+        }
     }
 
     [Route("Products")]
     public class OnlyRouteController
     {
         [Route("Index")]
-        public void Action() { }
+        public void Action()
+        {
+        }
     }
 
     public class AttributeAndNonAttributeRoutedActionsOnSameMethodController
@@ -1954,7 +2046,9 @@ public class ControllerActionDescriptorProviderTests
         [HttpPost]
         [AcceptVerbs("PUT", "PATCH")]
         [CustomHttpMethodConstraint("DELETE")]
-        public void Method() { }
+        public void Method()
+        {
+        }
     }
 
     [Route("Product")]
@@ -1964,80 +2058,116 @@ public class ControllerActionDescriptorProviderTests
     {
         [HttpGet("/List")]
         [HttpGet("/List")]
-        public void Action() { }
+        public void Action()
+        {
+        }
 
-        public void Controller() { }
+        public void Controller()
+        {
+        }
 
         [HttpPut("list")]
         [PutOrPatch("list")]
-        public void CommonHttpMethod() { }
+        public void CommonHttpMethod()
+        {
+        }
     }
 
     [Route("Products")]
     public class NonDuplicatedAttributeRouteController
     {
         [HttpGet("list")]
-        public void ControllerAndAction() { }
+        public void ControllerAndAction()
+        {
+        }
 
         [HttpGet("/PRODUCTS/LIST")]
-        public void OverrideOnAction() { }
+        public void OverrideOnAction()
+        {
+        }
 
         [HttpGet("list")]
         [HttpPost("list")]
         [HttpPut("list")]
         [HttpPatch("list")]
         [HttpDelete("list")]
-        public void DifferentHttpMethods() { }
+        public void DifferentHttpMethods()
+        {
+        }
     }
 
     [MyRouteValue]
     [MySecondRouteValue]
     private class ConstrainedController
     {
-        public void ConstrainedNonAttributedAction() { }
+        public void ConstrainedNonAttributedAction()
+        {
+        }
     }
 
     private class ActionParametersController
     {
-        public void RequiredInt(int id) { }
+        public void RequiredInt(int id)
+        {
+        }
 
-        public void FromBodyParameter([FromBody] TestActionParameter entity) { }
+        public void FromBodyParameter([FromBody] TestActionParameter entity)
+        {
+        }
 
-        public void NotFromBodyParameter(TestActionParameter entity) { }
+        public void NotFromBodyParameter(TestActionParameter entity)
+        {
+        }
 
-        public void MultipleParameters(int id, [FromBody] TestActionParameter entity) { }
+        public void MultipleParameters(int id, [FromBody] TestActionParameter entity)
+        {
+        }
 
-        public void DifferentCasing(int id, int ID, int Id) { }
+        public void DifferentCasing(int id, int ID, int Id)
+        {
+        }
     }
 
     private class ConventionallyRoutedController
     {
-        public void ConventionalAction() { }
+        public void ConventionalAction()
+        {
+        }
     }
 
     [Route("api")]
     private class AttributeRoutedController
     {
         [HttpGet("AttributeRoute")]
-        public void AttributeRoutedAction() { }
+        public void AttributeRoutedAction()
+        {
+        }
     }
 
     [Authorize("ControllerPolicy")]
     private class AuthorizeController
     {
         [AllowAnonymous]
-        public void AllowAnonymousAction() { }
+        public void AllowAnonymousAction()
+        {
+        }
 
         [Authorize("ActionPolicy")]
-        public void AuthorizeAction() { }
+        public void AuthorizeAction()
+        {
+        }
     }
 
-    private class EmptyController { }
+    private class EmptyController
+    {
+    }
 
     private class NonActionAttributeController
     {
         [NonAction]
-        public void Action() { }
+        public void Action()
+        {
+        }
     }
 
     private class CustomHttpMethodConstraintAttribute : Attribute, IActionHttpMethodProvider
@@ -2059,7 +2189,9 @@ public class ControllerActionDescriptorProviderTests
     {
         private static readonly string[] _httpMethods = new string[] { "PUT", "PATCH" };
 
-        public PutOrPatchAttribute(string template) : base(_httpMethods, template) { }
+        public PutOrPatchAttribute(string template) : base(_httpMethods, template)
+        {
+        }
     }
 
     private class TestActionParameter
@@ -2071,28 +2203,36 @@ public class ControllerActionDescriptorProviderTests
     [Route("AttributeRouting/IsRequired/ForApiExplorer")]
     private class ApiExplorerNotVisibleController
     {
-        public void Edit() { }
+        public void Edit()
+        {
+        }
     }
 
     [Route("AttributeRouting/IsRequired/ForApiExplorer")]
     [ApiExplorerSettings()]
     private class ApiExplorerVisibleController
     {
-        public void Edit() { }
+        public void Edit()
+        {
+        }
     }
 
     [Route("AttributeRouting/IsRequired/ForApiExplorer")]
     [ApiExplorerSettings(IgnoreApi = true)]
     private class ApiExplorerExplicitlyNotVisibleController
     {
-        public void Edit() { }
+        public void Edit()
+        {
+        }
     }
 
     [Route("AttributeRouting/IsRequired/ForApiExplorer")]
     private class ApiExplorerExplicitlyNotVisibleOnActionController
     {
         [ApiExplorerSettings(IgnoreApi = true)]
-        public void Edit() { }
+        public void Edit()
+        {
+        }
     }
 
     [Route("AttributeRouting/IsRequired/ForApiExplorer")]
@@ -2100,30 +2240,40 @@ public class ControllerActionDescriptorProviderTests
     private class ApiExplorerVisibilityOverrideController
     {
         [ApiExplorerSettings(IgnoreApi = false)]
-        public void Edit() { }
+        public void Edit()
+        {
+        }
 
-        public void Create() { }
+        public void Create()
+        {
+        }
     }
 
     [Route("AttributeRouting/IsRequired/ForApiExplorer")]
     [ApiExplorerSettings(GroupName = "Store")]
     private class ApiExplorerNameOnControllerController
     {
-        public void Edit() { }
+        public void Edit()
+        {
+        }
     }
 
     [Route("AttributeRouting/IsRequired/ForApiExplorer")]
     private class ApiExplorerNameOnActionController
     {
         [ApiExplorerSettings(GroupName = "Blog")]
-        public void Edit() { }
+        public void Edit()
+        {
+        }
     }
 
     [Route("AttributeRouting/IsRequired/ForApiExplorer")]
     [ApiExplorerSettings()]
     private class ApiExplorerNoNameController
     {
-        public void Edit() { }
+        public void Edit()
+        {
+        }
     }
 
     [Route("AttributeRouting/IsRequired/ForApiExplorer")]
@@ -2131,14 +2281,20 @@ public class ControllerActionDescriptorProviderTests
     private class ApiExplorerNameOverrideController
     {
         [ApiExplorerSettings(GroupName = "Blog")]
-        public void Edit() { }
+        public void Edit()
+        {
+        }
 
-        public void Create() { }
+        public void Create()
+        {
+        }
     }
 
     private class ConventionsController
     {
-        public void Create(int productId) { }
+        public void Create(int productId)
+        {
+        }
     }
 
     private class MultipleRouteProviderOnActionController
@@ -2146,7 +2302,9 @@ public class ControllerActionDescriptorProviderTests
         [Constraint]
         [RouteAndConstraint("R1")]
         [RouteAndConstraint("R2")]
-        public void Edit() { }
+        public void Edit()
+        {
+        }
     }
 
     [Constraint]
@@ -2155,14 +2313,20 @@ public class ControllerActionDescriptorProviderTests
     private class MultipleRouteProviderOnActionAndControllerController
     {
         [RouteAndConstraint("A1")]
-        public void Edit() { }
+        public void Edit()
+        {
+        }
 
         [RouteAndConstraint("~/A2")]
-        public void Create() { }
+        public void Create()
+        {
+        }
 
         [RouteAndConstraint("A3")]
         [RouteAndConstraint("A4")]
-        public void Delete() { }
+        public void Delete()
+        {
+        }
     }
 
     [AttributeUsage(
@@ -2192,19 +2356,25 @@ public class ControllerActionDescriptorProviderTests
         Inherited = true,
         AllowMultiple = true
     )]
-    private class ConstraintAttribute : Attribute, IActionConstraintMetadata { }
+    private class ConstraintAttribute : Attribute, IActionConstraintMetadata
+    {
+    }
 
     [ApiExplorerSettings(GroupName = "Default")]
     private class ApiExplorerEnabledConventionalRoutedController
     {
-        public void A() { }
+        public void A()
+        {
+        }
     }
 
     [ApiExplorerSettings(IgnoreApi = true)]
     private class ApiExplorerEnabledActionConventionalRoutedController
     {
         [ApiExplorerSettings(GroupName = "Default")]
-        public void A() { }
+        public void A()
+        {
+        }
     }
 
     private class ApiExplorerIsVisibleConvention : IApplicationModelConvention

@@ -288,7 +288,9 @@ internal sealed class SniOptionsSelector
         public static LongestStringFirstComparer Instance { get; } =
             new LongestStringFirstComparer();
 
-        private LongestStringFirstComparer() { }
+        private LongestStringFirstComparer()
+        {
+        }
 
         public int Compare(string? x, string? y)
         {

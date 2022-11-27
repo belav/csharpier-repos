@@ -3,4 +3,6 @@
 
 namespace FormatterWebSite.Models;
 
-public interface IModel { }
+public interface IModel
+{
+}

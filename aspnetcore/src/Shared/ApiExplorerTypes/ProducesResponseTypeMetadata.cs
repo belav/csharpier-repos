@@ -19,7 +19,9 @@ internal sealed class ProducesResponseTypeMetadata : IProducesResponseTypeMetada
     /// </summary>
     /// <param name="statusCode">The HTTP response status code.</param>
     public ProducesResponseTypeMetadata(int statusCode)
-        : this(typeof(void), statusCode, Enumerable.Empty<string>()) { }
+        : this(typeof(void), statusCode, Enumerable.Empty<string>())
+    {
+    }
 
     // Only for internal use where validation is unnecessary.
     /// <summary>

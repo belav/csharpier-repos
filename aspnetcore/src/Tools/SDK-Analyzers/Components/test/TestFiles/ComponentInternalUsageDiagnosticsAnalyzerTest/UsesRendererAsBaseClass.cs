@@ -8,7 +8,9 @@ namespace Microsoft.AspNetCore.Components.Analyzers.Tests.TestFiles.ComponentInt
     /*MM*/
     class UsesRendererAsBaseClass : Renderer
     {
-        public UsesRendererAsBaseClass() : base(null, null) { }
+        public UsesRendererAsBaseClass() : base(null, null)
+        {
+        }
 
         public override Dispatcher Dispatcher => throw new NotImplementedException();
 

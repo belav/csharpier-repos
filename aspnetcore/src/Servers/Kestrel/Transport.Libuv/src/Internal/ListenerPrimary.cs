@@ -35,7 +35,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             ArraySegment<byte>
         >(new[] { new ArraySegment<byte>(new byte[] { 1, 2, 3, 4 }) });
 
-        public ListenerPrimary(LibuvTransportContext transportContext) : base(transportContext) { }
+        public ListenerPrimary(LibuvTransportContext transportContext) : base(transportContext)
+        {
+        }
 
         /// <summary>
         /// For testing purposes.

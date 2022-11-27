@@ -15,7 +15,9 @@ internal class AllowedChildTagDescriptorComparer : IEqualityComparer<AllowedChil
     public static readonly AllowedChildTagDescriptorComparer Default =
         new AllowedChildTagDescriptorComparer();
 
-    private AllowedChildTagDescriptorComparer() { }
+    private AllowedChildTagDescriptorComparer()
+    {
+    }
 
     /// <inheritdoc />
     public virtual bool Equals(

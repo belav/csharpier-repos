@@ -79,4 +79,6 @@ namespace Microsoft.AspNetCore.Components.Web;
 )]
 [BindElement("select", null, "value", "onchange")]
 [BindElement("textarea", null, "value", "onchange")]
-public static class BindAttributes { }
+public static class BindAttributes
+{
+}

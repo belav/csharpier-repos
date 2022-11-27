@@ -23,7 +23,9 @@ internal sealed class LogSinkProvider : ILoggerProvider
         return new LogSinkLogger(categoryName, this);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 
     public IList<LogRecord> GetLogs() => _logs.ToList();
 

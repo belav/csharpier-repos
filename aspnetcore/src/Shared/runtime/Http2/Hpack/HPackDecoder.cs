@@ -104,7 +104,9 @@ namespace System.Net.Http.HPack
         public HPackDecoder(
             int maxDynamicTableSize = DefaultHeaderTableSize,
             int maxHeadersLength = DefaultMaxHeadersLength
-        ) : this(maxDynamicTableSize, maxHeadersLength, new DynamicTable(maxDynamicTableSize)) { }
+        ) : this(maxDynamicTableSize, maxHeadersLength, new DynamicTable(maxDynamicTableSize))
+        {
+        }
 
         // For testing.
         internal HPackDecoder(

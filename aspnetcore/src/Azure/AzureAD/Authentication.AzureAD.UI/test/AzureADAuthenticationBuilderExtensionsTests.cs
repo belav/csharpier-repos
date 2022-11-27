@@ -23,7 +23,11 @@ public class AzureADAuthenticationBuilderExtensionsTests
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
         // Act
-        services.AddAuthentication().AddAzureAD(o => { });
+        services
+            .AddAuthentication()
+            .AddAzureAD(o =>
+            {
+            });
         var provider = services.BuildServiceProvider();
 
         // Assert
@@ -208,7 +212,14 @@ public class AzureADAuthenticationBuilderExtensionsTests
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
-        services.AddAuthentication().AddAzureAD(o => { }).AddAzureAD(o => { });
+        services
+            .AddAuthentication()
+            .AddAzureAD(o =>
+            {
+            })
+            .AddAzureAD(o =>
+            {
+            });
 
         var provider = services.BuildServiceProvider();
         var azureADOptionsMonitor = provider.GetService<IOptionsMonitor<AzureADOptions>>();
@@ -230,8 +241,18 @@ public class AzureADAuthenticationBuilderExtensionsTests
 
         services
             .AddAuthentication()
-            .AddAzureAD(o => { })
-            .AddAzureAD("Custom", AzureADDefaults.OpenIdScheme, "Cookie", null, o => { });
+            .AddAzureAD(o =>
+            {
+            })
+            .AddAzureAD(
+                "Custom",
+                AzureADDefaults.OpenIdScheme,
+                "Cookie",
+                null,
+                o =>
+                {
+                }
+            );
 
         var provider = services.BuildServiceProvider();
         var azureADOptionsMonitor = provider.GetService<IOptionsMonitor<AzureADOptions>>();
@@ -257,8 +278,18 @@ public class AzureADAuthenticationBuilderExtensionsTests
 
         services
             .AddAuthentication()
-            .AddAzureAD(o => { })
-            .AddAzureAD("Custom", "OpenID", AzureADDefaults.CookieScheme, null, o => { });
+            .AddAzureAD(o =>
+            {
+            })
+            .AddAzureAD(
+                "Custom",
+                "OpenID",
+                AzureADDefaults.CookieScheme,
+                null,
+                o =>
+                {
+                }
+            );
 
         var provider = services.BuildServiceProvider();
         var azureADOptionsMonitor = provider.GetService<IOptionsMonitor<AzureADOptions>>();
@@ -282,7 +313,11 @@ public class AzureADAuthenticationBuilderExtensionsTests
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
-        services.AddAuthentication().AddAzureAD(o => { });
+        services
+            .AddAuthentication()
+            .AddAzureAD(o =>
+            {
+            });
 
         var provider = services.BuildServiceProvider();
         var azureADOptionsMonitor = provider.GetService<IOptionsMonitor<AzureADOptions>>();
@@ -303,7 +338,12 @@ public class AzureADAuthenticationBuilderExtensionsTests
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
-        services.AddAuthentication().AddAzureAD(o => { }).AddCookie("other");
+        services
+            .AddAuthentication()
+            .AddAzureAD(o =>
+            {
+            })
+            .AddCookie("other");
 
         var provider = services.BuildServiceProvider();
         var cookieAuthOptions = provider.GetService<IOptionsMonitor<CookieAuthenticationOptions>>();
@@ -319,7 +359,11 @@ public class AzureADAuthenticationBuilderExtensionsTests
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
         // Act
-        services.AddAuthentication().AddAzureADBearer(o => { });
+        services
+            .AddAuthentication()
+            .AddAzureADBearer(o =>
+            {
+            });
         var provider = services.BuildServiceProvider();
 
         // Assert
@@ -445,7 +489,14 @@ public class AzureADAuthenticationBuilderExtensionsTests
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
-        services.AddAuthentication().AddAzureADBearer(o => { }).AddAzureADBearer(o => { });
+        services
+            .AddAuthentication()
+            .AddAzureADBearer(o =>
+            {
+            })
+            .AddAzureADBearer(o =>
+            {
+            });
 
         var provider = services.BuildServiceProvider();
         var azureADOptionsMonitor = provider.GetService<IOptionsMonitor<AzureADOptions>>();
@@ -470,8 +521,16 @@ public class AzureADAuthenticationBuilderExtensionsTests
 
         services
             .AddAuthentication()
-            .AddAzureADBearer(o => { })
-            .AddAzureADBearer("Custom", AzureADDefaults.JwtBearerAuthenticationScheme, o => { });
+            .AddAzureADBearer(o =>
+            {
+            })
+            .AddAzureADBearer(
+                "Custom",
+                AzureADDefaults.JwtBearerAuthenticationScheme,
+                o =>
+                {
+                }
+            );
 
         var provider = services.BuildServiceProvider();
         var azureADOptionsMonitor = provider.GetService<IOptionsMonitor<AzureADOptions>>();
@@ -495,7 +554,11 @@ public class AzureADAuthenticationBuilderExtensionsTests
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
-        services.AddAuthentication().AddAzureADBearer(o => { });
+        services
+            .AddAuthentication()
+            .AddAzureADBearer(o =>
+            {
+            });
 
         var provider = services.BuildServiceProvider();
         var azureADOptionsMonitor = provider.GetService<IOptionsMonitor<AzureADOptions>>();
@@ -516,7 +579,17 @@ public class AzureADAuthenticationBuilderExtensionsTests
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
-        services.AddAuthentication().AddAzureADBearer(o => { }).AddJwtBearer("other", o => { });
+        services
+            .AddAuthentication()
+            .AddAzureADBearer(o =>
+            {
+            })
+            .AddJwtBearer(
+                "other",
+                o =>
+                {
+                }
+            );
 
         var provider = services.BuildServiceProvider();
         var jwtOptions = provider.GetService<IOptionsMonitor<JwtBearerOptions>>();
@@ -532,7 +605,9 @@ public class AzureADAuthenticationBuilderExtensionsTests
 
         services
             .AddAuthentication()
-            .AddAzureAD(o => { })
+            .AddAzureAD(o =>
+            {
+            })
             .AddOpenIdConnect(
                 "other",
                 null,

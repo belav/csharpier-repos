@@ -379,14 +379,18 @@ internal class DefaultRazorProjectEngine : RazorProjectEngine
         return feature;
     }
 
-    private void ConfigureParserOptions(RazorParserOptionsBuilder builder) { }
+    private void ConfigureParserOptions(RazorParserOptionsBuilder builder)
+    {
+    }
 
     private void ConfigureDesignTimeParserOptions(RazorParserOptionsBuilder builder)
     {
         builder.SetDesignTime(true);
     }
 
-    private void ConfigureCodeGenerationOptions(RazorCodeGenerationOptionsBuilder builder) { }
+    private void ConfigureCodeGenerationOptions(RazorCodeGenerationOptionsBuilder builder)
+    {
+    }
 
     private void ConfigureDesignTimeCodeGenerationOptions(RazorCodeGenerationOptionsBuilder builder)
     {

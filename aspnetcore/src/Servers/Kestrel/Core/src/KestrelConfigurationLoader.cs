@@ -102,7 +102,13 @@ public class KestrelConfigurationLoader
     /// Bind to given IP address and port.
     /// </summary>
     public KestrelConfigurationLoader Endpoint(IPAddress address, int port) =>
-        Endpoint(address, port, _ => { });
+        Endpoint(
+            address,
+            port,
+            _ =>
+            {
+            }
+        );
 
     /// <summary>
     /// Bind to given IP address and port.
@@ -121,7 +127,13 @@ public class KestrelConfigurationLoader
     /// <summary>
     /// Bind to given IP endpoint.
     /// </summary>
-    public KestrelConfigurationLoader Endpoint(IPEndPoint endPoint) => Endpoint(endPoint, _ => { });
+    public KestrelConfigurationLoader Endpoint(IPEndPoint endPoint) =>
+        Endpoint(
+            endPoint,
+            _ =>
+            {
+            }
+        );
 
     /// <summary>
     /// Bind to given IP address and port.
@@ -144,7 +156,12 @@ public class KestrelConfigurationLoader
     /// for this type of endpoint.
     /// </summary>
     public KestrelConfigurationLoader LocalhostEndpoint(int port) =>
-        LocalhostEndpoint(port, options => { });
+        LocalhostEndpoint(
+            port,
+            options =>
+            {
+            }
+        );
 
     /// <summary>
     /// Listens on ::1 and 127.0.0.1 with the given port. Requesting a dynamic port by specifying 0 is not supported
@@ -166,7 +183,12 @@ public class KestrelConfigurationLoader
     /// Listens on all IPs using IPv6 [::], or IPv4 0.0.0.0 if IPv6 is not supported.
     /// </summary>
     public KestrelConfigurationLoader AnyIPEndpoint(int port) =>
-        AnyIPEndpoint(port, options => { });
+        AnyIPEndpoint(
+            port,
+            options =>
+            {
+            }
+        );
 
     /// <summary>
     /// Listens on all IPs using IPv6 [::], or IPv4 0.0.0.0 if IPv6 is not supported.
@@ -187,7 +209,12 @@ public class KestrelConfigurationLoader
     /// Bind to given Unix domain socket path.
     /// </summary>
     public KestrelConfigurationLoader UnixSocketEndpoint(string socketPath) =>
-        UnixSocketEndpoint(socketPath, _ => { });
+        UnixSocketEndpoint(
+            socketPath,
+            _ =>
+            {
+            }
+        );
 
     /// <summary>
     /// Bind to given Unix domain socket path.
@@ -219,7 +246,12 @@ public class KestrelConfigurationLoader
     /// Open a socket file descriptor.
     /// </summary>
     public KestrelConfigurationLoader HandleEndpoint(ulong handle) =>
-        HandleEndpoint(handle, _ => { });
+        HandleEndpoint(
+            handle,
+            _ =>
+            {
+            }
+        );
 
     /// <summary>
     /// Open a socket file descriptor.

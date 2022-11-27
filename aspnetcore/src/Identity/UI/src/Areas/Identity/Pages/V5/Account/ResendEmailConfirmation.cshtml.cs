@@ -67,7 +67,9 @@ internal sealed class ResendEmailConfirmationModel<TUser> : ResendEmailConfirmat
         _emailSender = emailSender;
     }
 
-    public override void OnGet() { }
+    public override void OnGet()
+    {
+    }
 
     public override async Task<IActionResult> OnPostAsync()
     {

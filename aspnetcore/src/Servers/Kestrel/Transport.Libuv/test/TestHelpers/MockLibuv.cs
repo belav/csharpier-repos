@@ -96,7 +96,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests.TestHelpers
                 return 0;
             };
 
-            _uv_ref = handle => { };
+            _uv_ref = handle =>
+            {
+            };
             _uv_unref = handle =>
             {
                 _stopLoop = true;

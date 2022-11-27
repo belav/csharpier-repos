@@ -3,4 +3,6 @@
 
 namespace ApiExplorerWebSite;
 
-public class Customer { }
+public class Customer
+{
+}

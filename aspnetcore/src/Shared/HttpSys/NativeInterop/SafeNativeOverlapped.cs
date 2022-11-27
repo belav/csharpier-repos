@@ -13,7 +13,9 @@ internal sealed class SafeNativeOverlapped : SafeHandle
     internal static readonly SafeNativeOverlapped Zero = new SafeNativeOverlapped();
     private readonly ThreadPoolBoundHandle? _boundHandle;
 
-    internal SafeNativeOverlapped() : base(IntPtr.Zero, true) { }
+    internal SafeNativeOverlapped() : base(IntPtr.Zero, true)
+    {
+    }
 
     internal unsafe SafeNativeOverlapped(
         ThreadPoolBoundHandle boundHandle,

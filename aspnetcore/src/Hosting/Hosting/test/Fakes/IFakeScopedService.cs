@@ -3,4 +3,6 @@
 
 namespace Microsoft.AspNetCore.Hosting.Fakes;
 
-public interface IFakeScopedService : IFakeService { }
+public interface IFakeScopedService : IFakeService
+{
+}

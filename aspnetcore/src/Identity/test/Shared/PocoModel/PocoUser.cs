@@ -35,7 +35,9 @@ public class PocoUser<TKey> where TKey : IEquatable<TKey>
     /// <summary>
     /// ctor
     /// </summary>
-    public PocoUser() { }
+    public PocoUser()
+    {
+    }
 
     /// <summary>
     /// ctor

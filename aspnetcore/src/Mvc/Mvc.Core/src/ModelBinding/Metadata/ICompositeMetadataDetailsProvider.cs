@@ -11,4 +11,6 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 public interface ICompositeMetadataDetailsProvider
     : IBindingMetadataProvider,
         IDisplayMetadataProvider,
-        IValidationMetadataProvider { }
+        IValidationMetadataProvider
+{
+}

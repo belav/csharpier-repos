@@ -493,7 +493,9 @@ public class CompiledPageActionDescriptorFactoryTest
         propertyModelConvention.Verify();
     }
 
-    private void OnGet(string parameter) { }
+    private void OnGet(string parameter)
+    {
+    }
 
     private string TestProperty { get; set; }
 }

@@ -8,7 +8,9 @@ namespace BasicWebSite;
 
 public class UnprocessableResultFilter : Attribute, IAlwaysRunResultFilter
 {
-    public void OnResultExecuted(ResultExecutedContext context) { }
+    public void OnResultExecuted(ResultExecutedContext context)
+    {
+    }
 
     public void OnResultExecuting(ResultExecutingContext context)
     {

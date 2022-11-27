@@ -939,7 +939,9 @@ public class HttpParserTests : LoggedTest
                 value.GetAsciiStringNonNullCharacters();
         }
 
-        void IHttpHeadersHandler.OnHeadersComplete(bool endStream) { }
+        void IHttpHeadersHandler.OnHeadersComplete(bool endStream)
+        {
+        }
 
         public void OnStartLine(
             HttpMethod method,

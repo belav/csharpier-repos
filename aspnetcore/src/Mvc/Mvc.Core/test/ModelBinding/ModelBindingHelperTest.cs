@@ -1684,13 +1684,21 @@ public class ModelBindingHelperTest
         public int ScalarPropertyWithValue { get; } = 23;
     }
 
-    private class MyClassWithoutConverter { }
+    private class MyClassWithoutConverter
+    {
+    }
 
-    private class MySubClassWithoutConverter : MyClassWithoutConverter { }
+    private class MySubClassWithoutConverter : MyClassWithoutConverter
+    {
+    }
 
-    private abstract class AbstractIntList : List<int> { }
+    private abstract class AbstractIntList : List<int>
+    {
+    }
 
-    private class IntList : List<int> { }
+    private class IntList : List<int>
+    {
+    }
 
     private enum IntEnum
     {

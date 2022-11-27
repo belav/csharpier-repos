@@ -19,7 +19,9 @@ public sealed partial class SignInHttpResult : IResult
     /// </summary>
     /// <param name="principal">The claims principal containing the user claims.</param>
     internal SignInHttpResult(ClaimsPrincipal principal)
-        : this(principal, authenticationScheme: null, properties: null) { }
+        : this(principal, authenticationScheme: null, properties: null)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignInHttpResult"/> with the

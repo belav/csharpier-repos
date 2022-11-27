@@ -32,7 +32,9 @@ public class ViewDataDictionary : IDictionary<string, object?>
     public ViewDataDictionary(
         IModelMetadataProvider metadataProvider,
         ModelStateDictionary modelState
-    ) : this(metadataProvider, modelState, declaredModelType: typeof(object)) { }
+    ) : this(metadataProvider, modelState, declaredModelType: typeof(object))
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ViewDataDictionary"/> class based entirely on an existing
@@ -51,7 +53,9 @@ public class ViewDataDictionary : IDictionary<string, object?>
     /// </para>
     /// </remarks>
     public ViewDataDictionary(ViewDataDictionary source)
-        : this(source, source.Model, source._declaredModelType) { }
+        : this(source, source.Model, source._declaredModelType)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ViewDataDictionary"/> class.
@@ -62,7 +66,9 @@ public class ViewDataDictionary : IDictionary<string, object?>
     /// </param>
     /// <remarks>Internal for testing.</remarks>
     internal ViewDataDictionary(IModelMetadataProvider metadataProvider)
-        : this(metadataProvider, new ModelStateDictionary()) { }
+        : this(metadataProvider, new ModelStateDictionary())
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ViewDataDictionary"/> class.
@@ -78,7 +84,9 @@ public class ViewDataDictionary : IDictionary<string, object?>
     /// For use when creating a derived <see cref="ViewDataDictionary"/> for a new top-level scope.
     /// </remarks>
     protected ViewDataDictionary(IModelMetadataProvider metadataProvider, Type declaredModelType)
-        : this(metadataProvider, new ModelStateDictionary(), declaredModelType) { }
+        : this(metadataProvider, new ModelStateDictionary(), declaredModelType)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ViewDataDictionary"/> class.
@@ -149,7 +157,9 @@ public class ViewDataDictionary : IDictionary<string, object?>
     /// </para>
     /// </remarks>
     protected ViewDataDictionary(ViewDataDictionary source, Type declaredModelType)
-        : this(source, model: source.Model, declaredModelType: declaredModelType) { }
+        : this(source, model: source.Model, declaredModelType: declaredModelType)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ViewDataDictionary"/> class based in part on an existing

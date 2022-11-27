@@ -38,7 +38,9 @@ public class AuthenticationTicket
     /// <param name="principal">the <see cref="ClaimsPrincipal"/> that represents the authenticated user.</param>
     /// <param name="authenticationScheme">the authentication scheme that was responsible for this ticket.</param>
     public AuthenticationTicket(ClaimsPrincipal principal, string authenticationScheme)
-        : this(principal, properties: null, authenticationScheme: authenticationScheme) { }
+        : this(principal, properties: null, authenticationScheme: authenticationScheme)
+    {
+    }
 
     /// <summary>
     /// Gets the authentication scheme that was responsible for this ticket.

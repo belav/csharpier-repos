@@ -440,7 +440,8 @@ Section3:
 
         return (
             new MemoryConfigurationProvider(new MemoryConfigurationSource { InitialData = values }),
-            () => { }
+            () => {
+            }
         );
     }
 

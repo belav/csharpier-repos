@@ -51,7 +51,8 @@ public class RangeConditionHeaderValue
     /// </summary>
     /// <param name="entityTag">An entity tag uniquely representing the requested resource.</param>
     public RangeConditionHeaderValue(string? entityTag) : this(new EntityTagHeaderValue(entityTag))
-    { }
+    {
+    }
 
     /// <summary>
     /// Gets the LastModified date from header.

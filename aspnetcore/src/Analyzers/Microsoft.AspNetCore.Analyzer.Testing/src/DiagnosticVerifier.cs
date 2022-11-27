@@ -27,7 +27,9 @@ public abstract class DiagnosticVerifier
     private readonly ITestOutputHelper _testOutputHelper;
 
     /// <inheritdoc />
-    protected DiagnosticVerifier() : this(null) { }
+    protected DiagnosticVerifier() : this(null)
+    {
+    }
 
     /// <inheritdoc />
     protected DiagnosticVerifier(ITestOutputHelper testOutputHelper)

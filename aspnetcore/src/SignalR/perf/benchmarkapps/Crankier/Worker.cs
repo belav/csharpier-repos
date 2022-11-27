@@ -174,7 +174,9 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
                 {
                     await Task.Delay(5000, cancellationToken);
                 }
-                catch (TaskCanceledException) { }
+                catch (TaskCanceledException)
+                {
+                }
             }
         }
     }

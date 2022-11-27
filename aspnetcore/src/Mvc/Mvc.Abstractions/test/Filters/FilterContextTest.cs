@@ -108,9 +108,13 @@ public class FilterContextTest
         Assert.Null(result);
     }
 
-    internal class ITestFilterPolicy : IFilterMetadata { }
+    internal class ITestFilterPolicy : IFilterMetadata
+    {
+    }
 
-    internal class IAnotherTestFilterPolicy : IFilterMetadata { }
+    internal class IAnotherTestFilterPolicy : IFilterMetadata
+    {
+    }
 
     private class TestFilterContext : FilterContext
     {
@@ -122,6 +126,8 @@ public class FilterContextTest
                     new ActionDescriptor()
                 ),
                 filters
-            ) { }
+            )
+        {
+        }
     }
 }

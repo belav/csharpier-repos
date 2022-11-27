@@ -24,7 +24,9 @@ public class HeaderDictionary : IHeaderDictionary
     /// <summary>
     /// Initializes a new instance of <see cref="HeaderDictionary"/>.
     /// </summary>
-    public HeaderDictionary() { }
+    public HeaderDictionary()
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="HeaderDictionary"/>.
@@ -428,7 +430,9 @@ public class HeaderDictionary : IHeaderDictionary
         }
 
         /// <inheritdoc />
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         object IEnumerator.Current
         {

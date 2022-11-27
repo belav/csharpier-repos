@@ -13,7 +13,12 @@ public class StartupWithCustomInvalidModelStateFactory
     {
         services
             .AddAuthentication()
-            .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("Api", _ => { });
+            .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(
+                "Api",
+                _ =>
+                {
+                }
+            );
 
         services.AddMvc().AddNewtonsoftJson();
 

@@ -19,7 +19,9 @@ internal sealed class TempDataFilterPageApplicationModelProvider : IPageApplicat
     // The order is set to execute after the DefaultPageApplicationModelProvider.
     public int Order => -1000 + 10;
 
-    public void OnProvidersExecuted(PageApplicationModelProviderContext context) { }
+    public void OnProvidersExecuted(PageApplicationModelProviderContext context)
+    {
+    }
 
     public void OnProvidersExecuting(PageApplicationModelProviderContext context)
     {

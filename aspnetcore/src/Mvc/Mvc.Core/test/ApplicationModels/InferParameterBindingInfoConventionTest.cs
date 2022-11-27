@@ -1175,10 +1175,14 @@ public class InferParameterBindingInfoConventionTest
         public IActionResult ParameterInMultipleRoutes(int id) => null;
     }
 
-    private class TestModel { }
+    private class TestModel
+    {
+    }
 
     [TypeConverter(typeof(ConvertibleFromStringConverter))]
-    private class ConvertibleFromString { }
+    private class ConvertibleFromString
+    {
+    }
 
     private class ConvertibleFromStringConverter : TypeConverter
     {
@@ -1232,7 +1236,9 @@ public class InferParameterBindingInfoConventionTest
         public IActionResult SomeAction([FromQuery] List<int> test) => null;
     }
 
-    private class Car { }
+    private class Car
+    {
+    }
 
     private class MultipleFromBodyController
     {

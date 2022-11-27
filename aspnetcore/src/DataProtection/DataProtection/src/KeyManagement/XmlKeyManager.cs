@@ -67,7 +67,9 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
 #pragma warning disable PUB0001 // Pubternal type IActivator in public API
     public XmlKeyManager(IOptions<KeyManagementOptions> keyManagementOptions, IActivator activator)
 #pragma warning restore PUB0001 // Pubternal type IActivator in public API
-        : this(keyManagementOptions, activator, NullLoggerFactory.Instance) { }
+        : this(keyManagementOptions, activator, NullLoggerFactory.Instance)
+    {
+    }
 
     /// <summary>
     /// Creates an <see cref="XmlKeyManager"/>.
@@ -87,7 +89,9 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
             activator,
             loggerFactory,
             DefaultKeyStorageDirectories.Instance
-        ) { }
+        )
+    {
+    }
 
     internal XmlKeyManager(
         IOptions<KeyManagementOptions> keyManagementOptions,

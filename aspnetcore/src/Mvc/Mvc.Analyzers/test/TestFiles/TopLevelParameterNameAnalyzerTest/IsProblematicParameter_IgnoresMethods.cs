@@ -4,6 +4,8 @@
     {
         public string Item() => null;
 
-        public void ActionMethod(IsProblematicParameter_IgnoresMethods item) { }
+        public void ActionMethod(IsProblematicParameter_IgnoresMethods item)
+        {
+        }
     }
 }

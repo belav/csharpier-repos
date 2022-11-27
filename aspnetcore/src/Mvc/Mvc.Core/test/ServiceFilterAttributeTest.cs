@@ -41,7 +41,9 @@ public class ServiceFilterAttributeTest
         Assert.IsType<TestFilter>(filter);
     }
 
-    public class TestFilter : IFilterMetadata { }
+    public class TestFilter : IFilterMetadata
+    {
+    }
 
     public class TestFilterFactory : IFilterFactory
     {

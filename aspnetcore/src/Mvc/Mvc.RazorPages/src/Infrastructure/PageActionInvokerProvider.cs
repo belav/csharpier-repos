@@ -109,5 +109,7 @@ internal sealed class PageActionInvokerProvider : IActionInvokerProvider
         );
     }
 
-    public void OnProvidersExecuted(ActionInvokerProviderContext context) { }
+    public void OnProvidersExecuted(ActionInvokerProviderContext context)
+    {
+    }
 }

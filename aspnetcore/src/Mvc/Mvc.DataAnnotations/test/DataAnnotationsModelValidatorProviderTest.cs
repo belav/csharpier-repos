@@ -96,10 +96,14 @@ public class DataAnnotationsModelValidatorProviderTest
         Assert.IsType<DataAnnotationsModelValidator>(validatorItem.Validator);
     }
 
-    private class DummyValidationAttribute : ValidationAttribute { }
+    private class DummyValidationAttribute : ValidationAttribute
+    {
+    }
 
     [DummyValidation]
-    private class DummyClassWithDummyValidationAttribute { }
+    private class DummyClassWithDummyValidationAttribute
+    {
+    }
 
     // Default IValidatableObject adapter factory
 
@@ -240,11 +244,19 @@ public class DataAnnotationsModelValidatorProviderTest
         public string PropertyWithMultipleValidationAttributes { get; set; }
     }
 
-    public class CustomRequiredAttribute1 : RequiredAttribute { }
+    public class CustomRequiredAttribute1 : RequiredAttribute
+    {
+    }
 
-    public class CustomRequiredAttribute2 : RequiredAttribute { }
+    public class CustomRequiredAttribute2 : RequiredAttribute
+    {
+    }
 
-    public class CustomNonRequiredAttribute1 : ValidationAttribute { }
+    public class CustomNonRequiredAttribute1 : ValidationAttribute
+    {
+    }
 
-    public class CustomNonRequiredAttribute2 : ValidationAttribute { }
+    public class CustomNonRequiredAttribute2 : ValidationAttribute
+    {
+    }
 }

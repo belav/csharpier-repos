@@ -21,7 +21,8 @@ public class RazorViewTest
     private const string LayoutPath = "~/Shared/_Layout.cshtml";
 
 #pragma warning disable 1998
-    private readonly RenderAsyncDelegate _nullRenderAsyncDelegate = async () => { };
+    private readonly RenderAsyncDelegate _nullRenderAsyncDelegate = async () => {
+    };
 #pragma warning restore 1998
 
     [Fact]
@@ -218,7 +219,9 @@ public class RazorViewTest
     public async Task RenderAsync_AsPartial_ActivatesViews()
     {
         // Arrange
-        var page = new TestableRazorPage(v => { });
+        var page = new TestableRazorPage(v =>
+        {
+        });
         var activator = new Mock<IRazorPageActivator>();
         activator.Setup(a => a.Activate(page, It.IsAny<ViewContext>())).Verifiable();
         var view = new RazorView(
@@ -446,7 +449,9 @@ public class RazorViewTest
         // Arrange
         var path = "/Views/Home/Index.cshtml";
         var layoutPath = "/Views/_Shared/_Layout.cshtml";
-        var page = new TestableRazorPage(p => { })
+        var page = new TestableRazorPage(p =>
+        {
+        })
         {
             Path = path,
             // Initialize Layout property when instantiated.
@@ -492,8 +497,15 @@ public class RazorViewTest
         var layoutPath = "/Views/_Shared/_Layout.cshtml";
         var viewStartPath = "/Views/_ViewStart.cshtml";
 
-        var viewStart = new TestableRazorPage(p => { }) { Path = viewStartPath, };
-        var page = new TestableRazorPage(p => { })
+        var viewStart = new TestableRazorPage(p =>
+        {
+        })
+        {
+            Path = viewStartPath,
+        };
+        var page = new TestableRazorPage(p =>
+        {
+        })
         {
             Path = path,
             // Initialize Layout property when instantiated.
@@ -1163,7 +1175,12 @@ public class RazorViewTest
         {
             v.Layout = LayoutPath;
         });
-        var layout = new TestableRazorPage(v => { }) { Path = LayoutPath };
+        var layout = new TestableRazorPage(v =>
+        {
+        })
+        {
+            Path = LayoutPath
+        };
         var viewEngine = new Mock<IRazorViewEngine>(MockBehavior.Strict);
         viewEngine
             .Setup(
@@ -1988,7 +2005,9 @@ public class RazorViewTest
     public async Task RenderAsync_InvokesOnAfterPageActivated()
     {
         // Arrange
-        var viewStart = new TestableRazorPage(_ => { });
+        var viewStart = new TestableRazorPage(_ =>
+        {
+        });
         var page = new TestableRazorPage(p =>
         {
             p.Layout = LayoutPath;

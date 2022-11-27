@@ -21,7 +21,9 @@ internal sealed class WORKAROUND_SkippedDataRowTestCase : XunitTestCase
     [Obsolete(
         "Called by the de-serializer; should only be called by deriving classes for de-serialization purposes"
     )]
-    public WORKAROUND_SkippedDataRowTestCase() { }
+    public WORKAROUND_SkippedDataRowTestCase()
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="XunitSkippedDataRowTestCase"/> class.
@@ -46,7 +48,9 @@ internal sealed class WORKAROUND_SkippedDataRowTestCase : XunitTestCase
             testMethod,
             skipReason,
             testMethodArguments
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="XunitSkippedDataRowTestCase"/> class.

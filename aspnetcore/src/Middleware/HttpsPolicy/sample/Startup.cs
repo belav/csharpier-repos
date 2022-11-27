@@ -57,7 +57,9 @@ public class Startup
                         );
                         options.Listen(
                             new IPEndPoint(IPAddress.Loopback, 5000),
-                            listenOptions => { }
+                            listenOptions =>
+                            {
+                            }
                         );
                     })
                     .UseContentRoot(Directory.GetCurrentDirectory()) // for the cert file

@@ -162,8 +162,12 @@ public class SauceConnectServer : IDisposable
                     return;
                 }
             }
-            catch (OperationCanceledException) { }
-            catch (HttpRequestException) { }
+            catch (OperationCanceledException)
+            {
+            }
+            catch (HttpRequestException)
+            {
+            }
 
             retries++;
         } while (retries < 30);

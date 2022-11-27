@@ -12,7 +12,9 @@ public class TestPipeWriter : PipeWriter
 
     public bool ForceAsync { get; set; }
 
-    public override void Advance(int bytes) { }
+    public override void Advance(int bytes)
+    {
+    }
 
     public override Memory<byte> GetMemory(int sizeHint = 0)
     {

@@ -118,7 +118,11 @@ public class PageConventionCollectionTest
         Assert.Collection(collection, convention => Assert.IsType<BarPageConvention>(convention));
     }
 
-    private class FooPageConvention : IPageConvention { }
+    private class FooPageConvention : IPageConvention
+    {
+    }
 
-    private class BarPageConvention : IPageConvention { }
+    private class BarPageConvention : IPageConvention
+    {
+    }
 }

@@ -9,7 +9,9 @@ internal sealed class NullRouteConstraint : IRouteConstraint
 {
     public static readonly NullRouteConstraint Instance = new NullRouteConstraint();
 
-    private NullRouteConstraint() { }
+    private NullRouteConstraint()
+    {
+    }
 
     public bool Match(
         HttpContext? httpContext,

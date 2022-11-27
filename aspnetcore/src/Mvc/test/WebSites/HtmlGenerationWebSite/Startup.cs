@@ -67,5 +67,7 @@ public class Startup
             .UseKestrel()
             .UseIISIntegration();
 
-    protected virtual void ConfigureMvcOptions(MvcOptions options) { }
+    protected virtual void ConfigureMvcOptions(MvcOptions options)
+    {
+    }
 }

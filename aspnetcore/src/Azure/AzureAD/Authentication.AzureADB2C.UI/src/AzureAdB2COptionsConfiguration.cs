@@ -34,5 +34,7 @@ internal sealed class AzureADB2COptionsConfiguration : IConfigureNamedOptions<Az
         }
     }
 
-    public void Configure(AzureADB2COptions options) { }
+    public void Configure(AzureADB2COptions options)
+    {
+    }
 }

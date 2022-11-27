@@ -71,6 +71,8 @@ public class Http2HttpProtocolFeatureCollectionTests
             Initialize(context);
         }
 
-        public override void Execute() { }
+        public override void Execute()
+        {
+        }
     }
 }

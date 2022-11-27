@@ -27,14 +27,26 @@ public class LoggerBuilderExtensionsTests
     {
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddLogging(
-            builder => builder.AddAzureWebAppDiagnostics(_appContext, _ => { })
+            builder =>
+                builder.AddAzureWebAppDiagnostics(
+                    _appContext,
+                    _ =>
+                    {
+                    }
+                )
         );
         var count = serviceCollection.Count;
 
         Assert.NotEqual(0, count);
 
         serviceCollection.AddLogging(
-            builder => builder.AddAzureWebAppDiagnostics(_appContext, _ => { })
+            builder =>
+                builder.AddAzureWebAppDiagnostics(
+                    _appContext,
+                    _ =>
+                    {
+                    }
+                )
         );
 
         Assert.Equal(count, serviceCollection.Count);
@@ -57,7 +69,13 @@ public class LoggerBuilderExtensionsTests
         );
 
         serviceCollection.AddLogging(
-            builder => builder.AddAzureWebAppDiagnostics(_appContext, _ => { })
+            builder =>
+                builder.AddAzureWebAppDiagnostics(
+                    _appContext,
+                    _ =>
+                    {
+                    }
+                )
         );
 
         // Make sure we add another config change token for azure diagnostic configuration
@@ -86,7 +104,13 @@ public class LoggerBuilderExtensionsTests
         );
 
         serviceCollection.AddLogging(
-            builder => builder.AddAzureWebAppDiagnostics(_appContext, _ => { })
+            builder =>
+                builder.AddAzureWebAppDiagnostics(
+                    _appContext,
+                    _ =>
+                    {
+                    }
+                )
         );
 
         Assert.Equal(
@@ -102,7 +126,13 @@ public class LoggerBuilderExtensionsTests
     {
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddLogging(
-            builder => builder.AddAzureWebAppDiagnostics(_appContext, _ => { })
+            builder =>
+                builder.AddAzureWebAppDiagnostics(
+                    _appContext,
+                    _ =>
+                    {
+                    }
+                )
         );
 
         var serviceProvider = serviceCollection.BuildServiceProvider();

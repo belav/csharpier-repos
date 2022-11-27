@@ -35,7 +35,9 @@ internal sealed class RazorProjectPageRouteModelProvider : IPageRouteModelProvid
     /// </remarks>
     public int Order => -1000 + 10;
 
-    public void OnProvidersExecuted(PageRouteModelProviderContext context) { }
+    public void OnProvidersExecuted(PageRouteModelProviderContext context)
+    {
+    }
 
     public void OnProvidersExecuting(PageRouteModelProviderContext context)
     {

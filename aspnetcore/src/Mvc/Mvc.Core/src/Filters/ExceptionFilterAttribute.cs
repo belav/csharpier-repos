@@ -34,5 +34,7 @@ public abstract class ExceptionFilterAttribute
     }
 
     /// <inheritdoc />
-    public virtual void OnException(ExceptionContext context) { }
+    public virtual void OnException(ExceptionContext context)
+    {
+    }
 }

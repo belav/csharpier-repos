@@ -102,7 +102,9 @@ public class DefaultViewComponentDescriptorProviderTest
         public IViewComponentResult Invoke(int a) => null;
     }
 
-    private class NoMethodsViewComponent { }
+    private class NoMethodsViewComponent
+    {
+    }
 
     private class NonPublicInvokeViewComponent
     {
@@ -137,7 +139,9 @@ public class DefaultViewComponentDescriptorProviderTest
 
     private class VoidReturningInvokeAsyncViewComponent
     {
-        public void InvokeAsync() { }
+        public void InvokeAsync()
+        {
+        }
     }
 
     public class NonTaskReturningInvokeAsyncViewComponent
@@ -157,7 +161,9 @@ public class DefaultViewComponentDescriptorProviderTest
 
     public class VoidReturningInvokeViewComponent
     {
-        public void Invoke(int x) { }
+        public void Invoke(int x)
+        {
+        }
     }
 
     private DefaultViewComponentDescriptorProvider CreateProvider(Type componentType)
@@ -169,7 +175,9 @@ public class DefaultViewComponentDescriptorProviderTest
     private class FilteredViewComponentDescriptorProvider : DefaultViewComponentDescriptorProvider
     {
         public FilteredViewComponentDescriptorProvider(params Type[] allowedTypes)
-            : base(GetApplicationPartManager(allowedTypes.Select(t => t.GetTypeInfo()))) { }
+            : base(GetApplicationPartManager(allowedTypes.Select(t => t.GetTypeInfo())))
+        {
+        }
 
         private static ApplicationPartManager GetApplicationPartManager(IEnumerable<TypeInfo> types)
         {

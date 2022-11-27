@@ -743,7 +743,9 @@ public class DefaultHealthCheckServiceTest
                 .GetRequiredService<HealthCheckService>();
     }
 
-    private class AnotherService { }
+    private class AnotherService
+    {
+    }
 
     private class CantBeMultiThreadedService
     {
@@ -765,7 +767,9 @@ public class DefaultHealthCheckServiceTest
 
     private class CheckWithServiceDependency : IHealthCheck
     {
-        public CheckWithServiceDependency(AnotherService _) { }
+        public CheckWithServiceDependency(AnotherService _)
+        {
+        }
 
         public Task<HealthCheckResult> CheckHealthAsync(
             HealthCheckContext context,

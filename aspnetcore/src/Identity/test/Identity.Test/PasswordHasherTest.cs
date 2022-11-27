@@ -189,7 +189,9 @@ public class PasswordHasherTest
         public PasswordHasher(
             PasswordHasherCompatibilityMode? compatMode = null,
             int? iterCount = null
-        ) : base(BuildOptions(compatMode, iterCount)) { }
+        ) : base(BuildOptions(compatMode, iterCount))
+        {
+        }
 
         private static IOptions<PasswordHasherOptions> BuildOptions(
             PasswordHasherCompatibilityMode? compatMode,

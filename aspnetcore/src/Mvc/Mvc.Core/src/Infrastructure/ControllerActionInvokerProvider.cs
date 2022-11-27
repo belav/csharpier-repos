@@ -39,7 +39,9 @@ internal sealed class ControllerActionInvokerProvider : IActionInvokerProvider
             diagnosticListener,
             mapper,
             null
-        ) { }
+        )
+    {
+    }
 
     public ControllerActionInvokerProvider(
         ControllerActionInvokerCache controllerActionInvokerCache,
@@ -103,5 +105,7 @@ internal sealed class ControllerActionInvokerProvider : IActionInvokerProvider
     }
 
     /// <inheritdoc />
-    public void OnProvidersExecuted(ActionInvokerProviderContext context) { }
+    public void OnProvidersExecuted(ActionInvokerProviderContext context)
+    {
+    }
 }

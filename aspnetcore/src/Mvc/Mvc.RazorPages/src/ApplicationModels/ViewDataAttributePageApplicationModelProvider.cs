@@ -13,7 +13,9 @@ internal sealed class ViewDataAttributePageApplicationModelProvider : IPageAppli
     public int Order => -1000 + 10;
 
     /// <inheritdoc />
-    public void OnProvidersExecuted(PageApplicationModelProviderContext context) { }
+    public void OnProvidersExecuted(PageApplicationModelProviderContext context)
+    {
+    }
 
     /// <inheritdoc />
     public void OnProvidersExecuting(PageApplicationModelProviderContext context)

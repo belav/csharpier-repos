@@ -228,7 +228,9 @@ public class ExecutorFactoryTest
 
     private class TestPage : Page
     {
-        public TestPage() { }
+        public TestPage()
+        {
+        }
 
         public bool SideEffects { get; private set; }
 
@@ -317,7 +319,9 @@ public class ExecutorFactoryTest
 
     private class EmptyPage : Page
     {
-        public EmptyPage() { }
+        public EmptyPage()
+        {
+        }
 
         public override Task ExecuteAsync()
         {

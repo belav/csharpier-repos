@@ -16,5 +16,6 @@ public class TicketDataFormat : SecureDataFormat<AuthenticationTicket>
     /// </summary>
     /// <param name="protector">The <see cref="IDataProtector"/>.</param>
     public TicketDataFormat(IDataProtector protector) : base(TicketSerializer.Default, protector)
-    { }
+    {
+    }
 }

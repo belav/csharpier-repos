@@ -133,7 +133,9 @@ internal sealed class NonDisposableStream : Stream
     }
 
     /// <inheritdoc />
-    public override void Close() { }
+    public override void Close()
+    {
+    }
 
     /// <inheritdoc />
     public override int ReadByte()

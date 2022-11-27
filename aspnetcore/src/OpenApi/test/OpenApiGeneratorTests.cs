@@ -24,7 +24,12 @@ public class OpenApiOperationGeneratorTests
     [Fact]
     public void OperationNotCreatedIfNoHttpMethods()
     {
-        var operation = GetOpenApiOperation(() => { }, "/", Array.Empty<string>());
+        var operation = GetOpenApiOperation(
+            () => {
+            },
+            "/",
+            Array.Empty<string>()
+        );
 
         Assert.Null(operation);
     }
@@ -43,7 +48,8 @@ public class OpenApiOperationGeneratorTests
     [Fact]
     public void UsesApplicationNameAsOperationTagsIfNoDeclaringType()
     {
-        var operation = GetOpenApiOperation(() => { });
+        var operation = GetOpenApiOperation(() => {
+        });
 
         var declaringTypeName = nameof(OpenApiOperationGeneratorTests);
         var tag = Assert.Single(operation.Tags);
@@ -60,7 +66,8 @@ public class OpenApiOperationGeneratorTests
         routeHandlerBuilder.WithTags("A").WithTags("B");
 
         var operation = GetOpenApiOperation(
-            () => { },
+            () => {
+            },
             additionalMetadata: testBuilder.Metadata.ToArray()
         );
 
@@ -98,12 +105,17 @@ public class OpenApiOperationGeneratorTests
         AssertCustomRequestFormat(
             GetOpenApiOperation(
                 [Consumes("application/custom")]
-                (InferredJsonClass fromBody) => { }
+                (InferredJsonClass fromBody) => {
+                }
             )
         );
 
         AssertCustomRequestFormat(
-            GetOpenApiOperation([Consumes("application/custom")] ([FromBody] int fromBody) => { })
+            GetOpenApiOperation(
+                [Consumes("application/custom")]
+                ([FromBody] int fromBody) => {
+                }
+            )
         );
     }
 
@@ -112,7 +124,8 @@ public class OpenApiOperationGeneratorTests
     {
         var operation = GetOpenApiOperation(
             [Consumes("application/custom0", "application/custom1")]
-            (InferredJsonClass fromBody) => { }
+            (InferredJsonClass fromBody) => {
+            }
         );
 
         Assert.Empty(operation.Parameters);
@@ -131,7 +144,8 @@ public class OpenApiOperationGeneratorTests
             "application/custom1",
             IsOptional = true
         )]
-        () => { });
+        () => {
+        });
         var request = operation.RequestBody;
         Assert.NotNull(request);
         Assert.Equal(2, request.Content.Count);
@@ -154,7 +168,8 @@ public class OpenApiOperationGeneratorTests
                 "application/custom1",
                 IsOptional = false
             )]
-            (InferredJsonClass fromBody) => { }
+            (InferredJsonClass fromBody) => {
+            }
         );
 
         var request = operation.RequestBody;
@@ -205,7 +220,10 @@ public class OpenApiOperationGeneratorTests
             Assert.Empty(response.Value.Content);
         }
 
-        AssertVoid(GetOpenApiOperation(() => { }));
+        AssertVoid(
+            GetOpenApiOperation(() => {
+            })
+        );
         AssertVoid(GetOpenApiOperation(() => Task.CompletedTask));
         AssertVoid(GetOpenApiOperation(() => new ValueTask()));
     }
@@ -356,8 +374,19 @@ public class OpenApiOperationGeneratorTests
             Assert.Equal(ParameterLocation.Path, param.In);
         }
 
-        AssertPathParameter(GetOpenApiOperation((int foo) => { }, "/{foo}"));
-        AssertPathParameter(GetOpenApiOperation(([FromRoute] int foo) => { }));
+        AssertPathParameter(
+            GetOpenApiOperation(
+                (int foo) => {
+                },
+                "/{foo}"
+            )
+        );
+        AssertPathParameter(
+            GetOpenApiOperation(
+                ([FromRoute] int foo) => {
+                }
+            )
+        );
     }
 
     [Fact]
@@ -369,7 +398,11 @@ public class OpenApiOperationGeneratorTests
             Assert.Equal(ParameterLocation.Path, param.In);
         }
         AssertPathParameter(
-            GetOpenApiOperation((TryParseStringRecord foo) => { }, pattern: "/{foo}")
+            GetOpenApiOperation(
+                (TryParseStringRecord foo) => {
+                },
+                pattern: "/{foo}"
+            )
         );
     }
 
@@ -382,8 +415,19 @@ public class OpenApiOperationGeneratorTests
             Assert.Equal(ParameterLocation.Path, param.In);
         }
 
-        AssertPathParameter(GetOpenApiOperation((int? foo) => { }, "/{foo}"));
-        AssertPathParameter(GetOpenApiOperation(([FromRoute] int? foo) => { }));
+        AssertPathParameter(
+            GetOpenApiOperation(
+                (int? foo) => {
+                },
+                "/{foo}"
+            )
+        );
+        AssertPathParameter(
+            GetOpenApiOperation(
+                ([FromRoute] int? foo) => {
+                }
+            )
+        );
     }
 
     [Fact]
@@ -395,7 +439,11 @@ public class OpenApiOperationGeneratorTests
             Assert.Equal(ParameterLocation.Path, param.In);
         }
         AssertPathParameter(
-            GetOpenApiOperation((TryParseStringRecordStruct foo) => { }, pattern: "/{foo}")
+            GetOpenApiOperation(
+                (TryParseStringRecordStruct foo) => {
+                },
+                pattern: "/{foo}"
+            )
         );
     }
 
@@ -409,17 +457,58 @@ public class OpenApiOperationGeneratorTests
             Assert.Equal(ParameterLocation.Query, param.In);
         }
 
-        AssertQueryParameter(GetOpenApiOperation((int foo) => { }, "/"), "integer");
-        AssertQueryParameter(GetOpenApiOperation(([FromQuery] int foo) => { }), "integer");
         AssertQueryParameter(
-            GetOpenApiOperation(([FromQuery] TryParseStringRecordStruct foo) => { }),
+            GetOpenApiOperation(
+                (int foo) => {
+                },
+                "/"
+            ),
+            "integer"
+        );
+        AssertQueryParameter(
+            GetOpenApiOperation(
+                ([FromQuery] int foo) => {
+                }
+            ),
+            "integer"
+        );
+        AssertQueryParameter(
+            GetOpenApiOperation(
+                ([FromQuery] TryParseStringRecordStruct foo) => {
+                }
+            ),
             "object"
         );
-        AssertQueryParameter(GetOpenApiOperation((int[] foo) => { }, "/"), "array");
-        AssertQueryParameter(GetOpenApiOperation((string[] foo) => { }, "/"), "array");
-        AssertQueryParameter(GetOpenApiOperation((StringValues foo) => { }, "/"), "array");
         AssertQueryParameter(
-            GetOpenApiOperation((TryParseStringRecordStruct[] foo) => { }, "/"),
+            GetOpenApiOperation(
+                (int[] foo) => {
+                },
+                "/"
+            ),
+            "array"
+        );
+        AssertQueryParameter(
+            GetOpenApiOperation(
+                (string[] foo) => {
+                },
+                "/"
+            ),
+            "array"
+        );
+        AssertQueryParameter(
+            GetOpenApiOperation(
+                (StringValues foo) => {
+                },
+                "/"
+            ),
+            "array"
+        );
+        AssertQueryParameter(
+            GetOpenApiOperation(
+                (TryParseStringRecordStruct[] foo) => {
+                },
+                "/"
+            ),
             "array"
         );
     }
@@ -427,7 +516,10 @@ public class OpenApiOperationGeneratorTests
     [Fact]
     public void AddsFromHeaderParameterAsHeader()
     {
-        var operation = GetOpenApiOperation(([FromHeader] int foo) => { });
+        var operation = GetOpenApiOperation(
+            ([FromHeader] int foo) => {
+            }
+        );
         var param = Assert.Single(operation.Parameters);
 
         Assert.Equal(ParameterLocation.Header, param.In);
@@ -436,14 +528,54 @@ public class OpenApiOperationGeneratorTests
     [Fact]
     public void DoesNotAddFromServiceParameterAsService()
     {
-        Assert.Empty(GetOpenApiOperation((IInferredServiceInterface foo) => { }).Parameters);
-        Assert.Empty(GetOpenApiOperation(([FromServices] int foo) => { }).Parameters);
-        Assert.Empty(GetOpenApiOperation((HttpContext context) => { }).Parameters);
-        Assert.Empty(GetOpenApiOperation((HttpRequest request) => { }).Parameters);
-        Assert.Empty(GetOpenApiOperation((HttpResponse response) => { }).Parameters);
-        Assert.Empty(GetOpenApiOperation((ClaimsPrincipal user) => { }).Parameters);
-        Assert.Empty(GetOpenApiOperation((CancellationToken token) => { }).Parameters);
-        Assert.Empty(GetOpenApiOperation((BindAsyncRecord context) => { }).Parameters);
+        Assert.Empty(
+            GetOpenApiOperation(
+                (IInferredServiceInterface foo) => {
+                }
+            ).Parameters
+        );
+        Assert.Empty(
+            GetOpenApiOperation(
+                ([FromServices] int foo) => {
+                }
+            ).Parameters
+        );
+        Assert.Empty(
+            GetOpenApiOperation(
+                (HttpContext context) => {
+                }
+            ).Parameters
+        );
+        Assert.Empty(
+            GetOpenApiOperation(
+                (HttpRequest request) => {
+                }
+            ).Parameters
+        );
+        Assert.Empty(
+            GetOpenApiOperation(
+                (HttpResponse response) => {
+                }
+            ).Parameters
+        );
+        Assert.Empty(
+            GetOpenApiOperation(
+                (ClaimsPrincipal user) => {
+                }
+            ).Parameters
+        );
+        Assert.Empty(
+            GetOpenApiOperation(
+                (CancellationToken token) => {
+                }
+            ).Parameters
+        );
+        Assert.Empty(
+            GetOpenApiOperation(
+                (BindAsyncRecord context) => {
+                }
+            ).Parameters
+        );
     }
 
     [Fact]
@@ -461,8 +593,22 @@ public class OpenApiOperationGeneratorTests
             Assert.Empty(operation.Parameters);
         }
 
-        AssertBodyParameter(GetOpenApiOperation((InferredJsonClass foo) => { }), "foo", "object");
-        AssertBodyParameter(GetOpenApiOperation(([FromBody] int bar) => { }), "bar", "integer");
+        AssertBodyParameter(
+            GetOpenApiOperation(
+                (InferredJsonClass foo) => {
+                }
+            ),
+            "foo",
+            "object"
+        );
+        AssertBodyParameter(
+            GetOpenApiOperation(
+                ([FromBody] int bar) => {
+                }
+            ),
+            "bar",
+            "integer"
+        );
     }
 
 #nullable enable
@@ -471,7 +617,8 @@ public class OpenApiOperationGeneratorTests
     public void AddsMultipleParameters()
     {
         var operation = GetOpenApiOperation(
-            ([FromRoute] int foo, int bar, InferredJsonClass fromBody) => { }
+            ([FromRoute] int foo, int bar, InferredJsonClass fromBody) => {
+            }
         );
         Assert.Equal(2, operation.Parameters.Count);
 
@@ -515,28 +662,54 @@ public class OpenApiOperationGeneratorTests
             );
         }
 
-        AssertParameters(GetOpenApiOperation(([AsParameters] ArgumentListClass req) => { }));
-        AssertParameters(
-            GetOpenApiOperation(([AsParameters] ArgumentListClassWithReadOnlyProperties req) => { })
-        );
-        AssertParameters(GetOpenApiOperation(([AsParameters] ArgumentListStruct req) => { }));
-        AssertParameters(GetOpenApiOperation(([AsParameters] ArgumentListRecord req) => { }));
-        AssertParameters(GetOpenApiOperation(([AsParameters] ArgumentListRecordStruct req) => { }));
         AssertParameters(
             GetOpenApiOperation(
-                ([AsParameters] ArgumentListRecordWithoutPositionalParameters req) => { }
+                ([AsParameters] ArgumentListClass req) => {
+                }
             )
         );
         AssertParameters(
             GetOpenApiOperation(
-                ([AsParameters] ArgumentListRecordWithoutAttributes req) => { },
+                ([AsParameters] ArgumentListClassWithReadOnlyProperties req) => {
+                }
+            )
+        );
+        AssertParameters(
+            GetOpenApiOperation(
+                ([AsParameters] ArgumentListStruct req) => {
+                }
+            )
+        );
+        AssertParameters(
+            GetOpenApiOperation(
+                ([AsParameters] ArgumentListRecord req) => {
+                }
+            )
+        );
+        AssertParameters(
+            GetOpenApiOperation(
+                ([AsParameters] ArgumentListRecordStruct req) => {
+                }
+            )
+        );
+        AssertParameters(
+            GetOpenApiOperation(
+                ([AsParameters] ArgumentListRecordWithoutPositionalParameters req) => {
+                }
+            )
+        );
+        AssertParameters(
+            GetOpenApiOperation(
+                ([AsParameters] ArgumentListRecordWithoutAttributes req) => {
+                },
                 "/{foo}"
             ),
             "foo"
         );
         AssertParameters(
             GetOpenApiOperation(
-                ([AsParameters] ArgumentListRecordWithoutAttributes req) => { },
+                ([AsParameters] ArgumentListRecordWithoutAttributes req) => {
+                },
                 "/{Foo}"
             )
         );
@@ -545,7 +718,10 @@ public class OpenApiOperationGeneratorTests
     [Fact]
     public void TestParameterIsRequired()
     {
-        var operation = GetOpenApiOperation(([FromRoute] int foo, int? bar) => { });
+        var operation = GetOpenApiOperation(
+            ([FromRoute] int foo, int? bar) => {
+            }
+        );
         Assert.Equal(2, operation.Parameters.Count);
 
         var fooParam = operation.Parameters[0];
@@ -564,7 +740,10 @@ public class OpenApiOperationGeneratorTests
     {
         // In an oblivious nullability context, reference type parameters without
         // annotations are optional. Value type parameters are always required.
-        var operation = GetOpenApiOperation((string foo, int bar) => { });
+        var operation = GetOpenApiOperation(
+            (string foo, int bar) => {
+            }
+        );
         Assert.Equal(2, operation.Parameters.Count);
 
         var fooParam = operation.Parameters[0];
@@ -914,8 +1093,14 @@ public class OpenApiOperationGeneratorTests
     [Fact]
     public void TestIsRequiredFromFormFile()
     {
-        var operation0 = GetOpenApiOperation((IFormFile fromFile) => { });
-        var operation1 = GetOpenApiOperation((IFormFile? fromFile) => { });
+        var operation0 = GetOpenApiOperation(
+            (IFormFile fromFile) => {
+            }
+        );
+        var operation1 = GetOpenApiOperation(
+            (IFormFile? fromFile) => {
+            }
+        );
         Assert.NotNull(operation0.RequestBody);
         Assert.NotNull(operation1.RequestBody);
 
@@ -945,9 +1130,19 @@ public class OpenApiOperationGeneratorTests
             Assert.Empty(operation.Parameters);
         }
 
-        AssertFormFileParameter(GetOpenApiOperation((IFormFile file) => { }), "object", "file");
         AssertFormFileParameter(
-            GetOpenApiOperation(([FromForm(Name = "file_name")] IFormFile file) => { }),
+            GetOpenApiOperation(
+                (IFormFile file) => {
+                }
+            ),
+            "object",
+            "file"
+        );
+        AssertFormFileParameter(
+            GetOpenApiOperation(
+                ([FromForm(Name = "file_name")] IFormFile file) => {
+                }
+            ),
             "object",
             "file_name"
         );
@@ -1025,7 +1220,8 @@ public class OpenApiOperationGeneratorTests
                 [FromBody] int fromBody,
                 [FromRoute] int fromRoute,
                 [FromServices] int fromServices
-            ) => { }
+            ) => {
+            }
         );
 
         Assert.Single(operation.Parameters);
@@ -1091,7 +1287,9 @@ public class OpenApiOperationGeneratorTests
         return generator.GetOpenApiOperation(methodInfo, endpointMetadata, routePattern);
     }
 
-    private static void TestAction() { }
+    private static void TestAction()
+    {
+    }
 
     // Shared with OpenApiRouteHandlerExtensionsTests
     internal class ServiceProviderIsService : IServiceProviderIsService
@@ -1107,9 +1305,13 @@ public class OpenApiOperationGeneratorTests
         public IFileProvider ContentRootFileProvider { get; set; }
     }
 
-    private class InferredJsonClass { }
+    private class InferredJsonClass
+    {
+    }
 
-    private interface IInferredJsonInterface { }
+    private interface IInferredJsonInterface
+    {
+    }
 
     private record TryParseStringRecord(int Value)
     {
@@ -1123,7 +1325,9 @@ public class OpenApiOperationGeneratorTests
             throw new NotImplementedException();
     }
 
-    private interface IInferredServiceInterface { }
+    private interface IInferredServiceInterface
+    {
+    }
 
     private record BindAsyncRecord(int Value)
     {

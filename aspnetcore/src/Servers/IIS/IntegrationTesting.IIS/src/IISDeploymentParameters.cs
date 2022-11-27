@@ -7,16 +7,22 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
 
 public class IISDeploymentParameters : DeploymentParameters
 {
-    public IISDeploymentParameters() : base() { }
+    public IISDeploymentParameters() : base()
+    {
+    }
 
-    public IISDeploymentParameters(TestVariant variant) : base(variant) { }
+    public IISDeploymentParameters(TestVariant variant) : base(variant)
+    {
+    }
 
     public IISDeploymentParameters(
         string applicationPath,
         ServerType serverType,
         RuntimeFlavor runtimeFlavor,
         RuntimeArchitecture runtimeArchitecture
-    ) : base(applicationPath, serverType, runtimeFlavor, runtimeArchitecture) { }
+    ) : base(applicationPath, serverType, runtimeFlavor, runtimeArchitecture)
+    {
+    }
 
     public IISDeploymentParameters(DeploymentParameters parameters) : base(parameters)
     {

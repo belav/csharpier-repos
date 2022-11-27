@@ -779,7 +779,9 @@ public class ViewDataDictionaryTest
         return new ViewDataDictionary(new EmptyModelMetadataProvider()) { Model = model };
     }
 
-    private class TestModel { }
+    private class TestModel
+    {
+    }
 
     private class Person
     {
@@ -789,12 +791,16 @@ public class ViewDataDictionaryTest
     private class TestViewDataDictionary : ViewDataDictionary
     {
         public TestViewDataDictionary(IModelMetadataProvider metadataProvider)
-            : base(metadataProvider) { }
+            : base(metadataProvider)
+        {
+        }
 
         public TestViewDataDictionary(
             IModelMetadataProvider metadataProvider,
             Type declaredModelType
-        ) : base(metadataProvider, declaredModelType) { }
+        ) : base(metadataProvider, declaredModelType)
+        {
+        }
 
         public void SetModelPublic(object value)
         {

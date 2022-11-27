@@ -15,14 +15,18 @@ internal readonly struct ReadOnlyMediaTypeHeaderValue
     /// Initializes a <see cref="ReadOnlyMediaTypeHeaderValue"/> instance.
     /// </summary>
     /// <param name="mediaType">The <see cref="string"/> with the media type.</param>
-    public ReadOnlyMediaTypeHeaderValue(string mediaType) : this(mediaType, 0, mediaType.Length) { }
+    public ReadOnlyMediaTypeHeaderValue(string mediaType) : this(mediaType, 0, mediaType.Length)
+    {
+    }
 
     /// <summary>
     /// Initializes a <see cref="ReadOnlyMediaTypeHeaderValue"/> instance.
     /// </summary>
     /// <param name="mediaType">The <see cref="StringSegment"/> with the media type.</param>
     public ReadOnlyMediaTypeHeaderValue(StringSegment mediaType)
-        : this(mediaType.Buffer ?? string.Empty, mediaType.Offset, mediaType.Length) { }
+        : this(mediaType.Buffer ?? string.Empty, mediaType.Offset, mediaType.Length)
+    {
+    }
 
     /// <summary>
     /// Initializes a <see cref="MediaTypeParameterParser"/> instance.

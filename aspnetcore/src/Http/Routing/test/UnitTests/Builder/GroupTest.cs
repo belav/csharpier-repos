@@ -141,7 +141,14 @@ public class GroupTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(EmptyServiceProvider.Instance)
         );
-        builder.MapGroup("/{ID}").MapGroup("/{id}").MapGet("/", () => { });
+        builder
+            .MapGroup("/{ID}")
+            .MapGroup("/{id}")
+            .MapGet(
+                "/",
+                () => {
+                }
+            );
 
         var ex = Assert.Throws<RoutePatternException>(() => builder.DataSources.Single().Endpoints);
 
@@ -446,7 +453,9 @@ public class GroupTest
 
     private sealed class TestCustomEndpoint : Endpoint
     {
-        public TestCustomEndpoint() : base(null, null, null) { }
+        public TestCustomEndpoint() : base(null, null, null)
+        {
+        }
     }
 
     private sealed class TestCustomEndpintDataSource : EndpointDataSource

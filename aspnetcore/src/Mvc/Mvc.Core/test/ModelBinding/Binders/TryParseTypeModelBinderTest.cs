@@ -504,7 +504,9 @@ public class TryParseTypeModelBinderTest
     private static IModelBinder CreateBinder(Type modelType, ILoggerFactory loggerFactory = null) =>
         new TryParseModelBinder(modelType, loggerFactory ?? NullLoggerFactory.Instance);
 
-    private sealed class TestClass { }
+    private sealed class TestClass
+    {
+    }
 
     private sealed class TestTryParseClass
     {

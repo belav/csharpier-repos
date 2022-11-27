@@ -45,7 +45,9 @@ internal sealed class AzureADCookieOptionsConfiguration
         options.Cookie.SameSite = SameSiteMode.None;
     }
 
-    public void Configure(CookieAuthenticationOptions options) { }
+    public void Configure(CookieAuthenticationOptions options)
+    {
+    }
 
     private string GetAzureADScheme(string name)
     {

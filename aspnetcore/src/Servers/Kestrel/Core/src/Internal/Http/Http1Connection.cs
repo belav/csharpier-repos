@@ -724,7 +724,9 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
         _currentIPersistentStateFeature = this;
     }
 
-    protected override void OnRequestProcessingEnding() { }
+    protected override void OnRequestProcessingEnding()
+    {
+    }
 
     protected override string CreateRequestId() =>
         StringUtilities.ConcatAsHexSuffix(ConnectionId, ':', _requestCount);
@@ -869,5 +871,7 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
         return base.TryProduceInvalidRequestResponse();
     }
 
-    void IRequestProcessor.Tick(DateTimeOffset now) { }
+    void IRequestProcessor.Tick(DateTimeOffset now)
+    {
+    }
 }

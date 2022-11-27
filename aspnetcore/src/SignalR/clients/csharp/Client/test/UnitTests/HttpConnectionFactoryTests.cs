@@ -100,7 +100,9 @@ public class HttpConnectionFactoryTests
         Func<Task<string>> tokenProvider = () => Task.FromResult("");
         Func<WebSocketConnectionContext, CancellationToken, ValueTask<WebSocket>> webSocketFactory =
             (context, token) => ValueTask.FromResult<WebSocket>(null);
-        Action<ClientWebSocketOptions> webSocketConfig = options => { };
+        Action<ClientWebSocketOptions> webSocketConfig = options =>
+        {
+        };
 
         var testValues = new Dictionary<string, object>
         {

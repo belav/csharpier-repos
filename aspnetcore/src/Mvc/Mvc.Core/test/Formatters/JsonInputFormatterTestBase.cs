@@ -753,7 +753,9 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
         public bool Disposed { get; private set; }
 
         public VerifyDisposeFileBufferingReadStream(Stream inner, int memoryThreshold)
-            : base(inner, memoryThreshold) { }
+            : base(inner, memoryThreshold)
+        {
+        }
 
         protected override void Dispose(bool disposing)
         {

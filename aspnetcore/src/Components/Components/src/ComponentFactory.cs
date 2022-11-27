@@ -91,7 +91,8 @@ internal sealed class ComponentFactory
 
         if (injectables is null)
         {
-            return static (_, _) => { };
+            return static (_, _) => {
+            };
         }
 
         return Initialize;

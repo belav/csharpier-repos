@@ -42,7 +42,12 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
         var app = new ApplicationBuilder(Mock.Of<IServiceProvider>());
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() => app.UseEndpoints(endpoints => { }));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                app.UseEndpoints(endpoints =>
+                {
+                })
+        );
 
         // Assert
         Assert.Equal(
@@ -117,7 +122,12 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
         var app = new ApplicationBuilder(services);
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() => app.UseEndpoints(endpoints => { }));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                app.UseEndpoints(endpoints =>
+                {
+                })
+        );
 
         // Assert
         Assert.Equal(
@@ -141,7 +151,14 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(
-            () => app.Map("/Test", b => b.UseEndpoints(endpoints => { }))
+            () =>
+                app.Map(
+                    "/Test",
+                    b =>
+                        b.UseEndpoints(endpoints =>
+                        {
+                        })
+                )
         );
 
         // Assert
@@ -162,7 +179,9 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
         var app = new ApplicationBuilder(services);
 
         app.UseRouting();
-        app.UseEndpoints(endpoints => { });
+        app.UseEndpoints(endpoints =>
+        {
+        });
 
         var appFunc = app.Build();
         var httpContext = new DefaultHttpContext();

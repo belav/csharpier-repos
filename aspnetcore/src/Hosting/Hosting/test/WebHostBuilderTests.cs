@@ -117,7 +117,9 @@ public class WebHostBuilderTests
     [MemberData(nameof(DefaultWebHostBuildersWithConfig))]
     public async Task UseStartupFactoryWorks(IWebHostBuilder builder)
     {
-        void ConfigureServices(IServiceCollection services) { }
+        void ConfigureServices(IServiceCollection services)
+        {
+        }
         void Configure(IApplicationBuilder app)
         {
             app.Run(context => context.Response.WriteAsync("UseStartupFactoryWorks"));
@@ -359,7 +361,9 @@ public class WebHostBuilderTests
             .UseServer(new TestServer())
             .UseStartup<StartupNoServices>();
 
-        using (hostBuilder.Build()) { }
+        using (hostBuilder.Build())
+        {
+        }
     }
 
     [Fact]
@@ -384,7 +388,9 @@ public class WebHostBuilderTests
             .UseServer(new TestServer())
             .UseStartup<StartupNoServices>();
 
-        using (hostBuilder.Build()) { }
+        using (hostBuilder.Build())
+        {
+        }
     }
 
     [Theory]
@@ -415,7 +421,9 @@ public class WebHostBuilderTests
             .UseServer(new TestServer())
             .UseStartup<StartupNoServices>();
 
-        using (hostBuilder.Build()) { }
+        using (hostBuilder.Build())
+        {
+        }
     }
 
     [Theory]
@@ -510,7 +518,9 @@ public class WebHostBuilderTests
                 Assert.Equal(1, callCount++);
                 services.AddTransient<ServiceB>();
             })
-            .Configure(app => { });
+            .Configure(app =>
+            {
+            });
 
         using (var host = hostBuilder.Build())
         {
@@ -669,7 +679,9 @@ public class WebHostBuilderTests
                 .UseServer(new TestServer())
                 .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                 .Build()
-        ) { }
+        )
+        {
+        }
     }
 
     [Theory]
@@ -834,7 +846,14 @@ public class WebHostBuilderTests
     [MemberData(nameof(DefaultWebHostBuilders))]
     public void DefaultApplicationNameWithConfigure(IWebHostBuilder builder)
     {
-        using (var host = builder.UseServer(new TestServer()).Configure(app => { }).Build())
+        using (
+            var host = builder
+                .UseServer(new TestServer())
+                .Configure(app =>
+                {
+                })
+                .Build()
+        )
         {
             var hostingEnv = host.Services.GetService<IHostEnvironment>();
 
@@ -853,7 +872,17 @@ public class WebHostBuilderTests
         using (
             var host = builder
                 .UseServer(new TestServer())
-                .UseStartup(context => new DelegatingStartup(s => { }, app => { }))
+                .UseStartup(
+                    context =>
+                        new DelegatingStartup(
+                            s =>
+                            {
+                            },
+                            app =>
+                            {
+                            }
+                        )
+                )
                 .Build()
         )
         {
@@ -871,7 +900,14 @@ public class WebHostBuilderTests
     [MemberData(nameof(DefaultWebHostBuilders))]
     public void Configure_SupportsNonStaticMethodDelegate(IWebHostBuilder builder)
     {
-        using (var host = builder.UseServer(new TestServer()).Configure(app => { }).Build())
+        using (
+            var host = builder
+                .UseServer(new TestServer())
+                .Configure(app =>
+                {
+                })
+                .Build()
+        )
         {
             var hostingEnv = host.Services.GetService<IHostEnvironment>();
             Assert.Equal("Microsoft.AspNetCore.Hosting.Tests", hostingEnv.ApplicationName);
@@ -963,7 +999,9 @@ public class WebHostBuilderTests
                 WebHostDefaults.HostingStartupAssembliesKey,
                 typeof(TestStartupAssembly1.TestHostingStartup1).GetTypeInfo().Assembly.FullName
             )
-            .Configure(app => { })
+            .Configure(app =>
+            {
+            })
             .UseServer(new TestServer());
 
         using (var host = builder.Build())
@@ -983,7 +1021,9 @@ public class WebHostBuilderTests
         builder = builder
             .CaptureStartupErrors(false)
             .UseSetting(WebHostDefaults.HostingStartupAssembliesKey, fullName + ";" + name)
-            .Configure(app => { })
+            .Configure(app =>
+            {
+            })
             .UseServer(new TestServer());
 
         using (var host = builder.Build())
@@ -1003,7 +1043,9 @@ public class WebHostBuilderTests
                 WebHostDefaults.HostingStartupAssembliesKey,
                 typeof(TestStartupAssembly1.TestHostingStartup1).GetTypeInfo().Assembly.FullName
             )
-            .Configure(app => { })
+            .Configure(app =>
+            {
+            })
             .UseServer(new TestServer());
 
         using (var host = builder.Build())
@@ -1140,7 +1182,9 @@ public class WebHostBuilderTests
                 WebHostDefaults.HostingStartupExcludeAssembliesKey,
                 typeof(TestStartupAssembly1.TestHostingStartup1).GetTypeInfo().Assembly.FullName
             )
-            .Configure(app => { })
+            .Configure(app =>
+            {
+            })
             .UseServer(new TestServer());
 
         using (var host = builder.Build())
@@ -1178,7 +1222,9 @@ public class WebHostBuilderTests
     {
         builder = builder
             .CaptureStartupErrors(false)
-            .Configure(app => { })
+            .Configure(app =>
+            {
+            })
             .UseServer(new TestServer());
 
         using (var host = builder.Build())
@@ -1237,7 +1283,9 @@ public class WebHostBuilderTests
             Assert.Equal("value", config["testhostingstartup:config"]);
         }
 
-        public void Configure(IApplicationBuilder app) { }
+        public void Configure(IApplicationBuilder app)
+        {
+        }
     }
 
     [Theory]
@@ -1246,7 +1294,11 @@ public class WebHostBuilderTests
         IWebHostBuilder builder
     )
     {
-        builder = builder.Configure(app => { }).UseServer(new TestServer());
+        builder = builder
+            .Configure(app =>
+            {
+            })
+            .UseServer(new TestServer());
 
         using (builder.Build())
         {
@@ -1260,7 +1312,9 @@ public class WebHostBuilderTests
     {
         builder = builder
             .UseSetting(WebHostDefaults.PreventHostingStartupKey, "true")
-            .Configure(app => { })
+            .Configure(app =>
+            {
+            })
             .UseServer(new TestServer());
 
         using (builder.Build())
@@ -1278,7 +1332,9 @@ public class WebHostBuilderTests
         builder = builder
             .CaptureStartupErrors(false)
             .UseSetting(WebHostDefaults.HostingStartupAssembliesKey, "SomeBogusName")
-            .Configure(app => { })
+            .Configure(app =>
+            {
+            })
             .UseServer(new TestServer());
 
         using (builder.Build())
@@ -1303,7 +1359,9 @@ public class WebHostBuilderTests
             )
             .CaptureStartupErrors(true)
             .UseSetting(WebHostDefaults.HostingStartupAssembliesKey, "SomeBogusName")
-            .Configure(app => { })
+            .Configure(app =>
+            {
+            })
             .UseServer(new TestServer());
 
         using (var host = builder.Build())
@@ -1378,7 +1436,9 @@ public class WebHostBuilderTests
         builder = builder
             .CaptureStartupErrors(false)
             .UseShutdownTimeout(TimeSpan.FromSeconds(102))
-            .Configure(app => { })
+            .Configure(app =>
+            {
+            })
             .UseServer(new TestServer());
 
         using (var host = builder.Build())
@@ -1438,7 +1498,9 @@ public class WebHostBuilderTests
 
         builder = builder
             .CaptureStartupErrors(false)
-            .Configure(app => { })
+            .Configure(app =>
+            {
+            })
             .UseConfiguration(section)
             .UseServer(new TestServer());
 
@@ -1454,7 +1516,9 @@ public class WebHostBuilderTests
     public async Task ThrowingFromHostedServiceFailsStartAsync(IWebHostBuilder builder)
     {
         builder
-            .Configure(app => { })
+            .Configure(app =>
+            {
+            })
             .ConfigureServices(services =>
             {
                 services.AddHostedService<ThrowingHostedService>();
@@ -1480,7 +1544,9 @@ public class WebHostBuilderTests
     )
     {
         builder
-            .Configure(app => { })
+            .Configure(app =>
+            {
+            })
             .ConfigureServices(services =>
             {
                 services.AddHostedService<ThrowingHostedService>();
@@ -1510,7 +1576,9 @@ public class WebHostBuilderTests
     public async Task HostedServicesStartedBeforeServer(IWebHostBuilder builder)
     {
         builder
-            .Configure(app => { })
+            .Configure(app =>
+            {
+            })
             .ConfigureServices(services =>
             {
                 services.AddSingleton<StartOrder>();
@@ -1583,10 +1651,14 @@ public class WebHostBuilderTests
             return Task.CompletedTask;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 
-    private static void StaticConfigureMethod(IApplicationBuilder app) { }
+    private static void StaticConfigureMethod(IApplicationBuilder app)
+    {
+    }
 
     private IWebHostBuilder CreateWebHostBuilder()
     {
@@ -1686,7 +1758,9 @@ public class WebHostBuilderTests
         IFeatureCollection IServer.Features { get; } = new FeatureCollection();
         public RequestDelegate RequestDelegate { get; private set; }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public Task StartAsync<TContext>(
             IHttpApplication<TContext> application,
@@ -1751,7 +1825,9 @@ public class WebHostBuilderTests
             DisposableServiceCtor = disposable;
         }
 
-        public void ConfigureServices(IServiceCollection services) { }
+        public void ConfigureServices(IServiceCollection services)
+        {
+        }
 
         public void Configure(IApplicationBuilder app, DisposableService disposable)
         {
@@ -1878,14 +1954,18 @@ public class WebHostBuilderTests
 
     public class StartupWithResolvedDisposableThatThrows
     {
-        public StartupWithResolvedDisposableThatThrows(DisposableService service) { }
+        public StartupWithResolvedDisposableThatThrows(DisposableService service)
+        {
+        }
 
         public void ConfigureServices(IServiceCollection services)
         {
             throw new InvalidOperationException();
         }
 
-        public void Configure(IApplicationBuilder app) { }
+        public void Configure(IApplicationBuilder app)
+        {
+        }
     }
 
     public class TestLoggerProvider : ILoggerProvider
@@ -1895,19 +1975,29 @@ public class WebHostBuilderTests
         public ILogger CreateLogger(string categoryName) =>
             new TestLogger(categoryName, Sink, enabled: true);
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 
     private class ServiceC
     {
-        public ServiceC(ServiceD serviceD) { }
+        public ServiceC(ServiceD serviceD)
+        {
+        }
     }
 
-    internal class ServiceD { }
+    internal class ServiceD
+    {
+    }
 
-    internal class ServiceA { }
+    internal class ServiceA
+    {
+    }
 
-    internal class ServiceB { }
+    internal class ServiceB
+    {
+    }
 
     private class DisposableLoggerFactory : ILoggerFactory
     {
@@ -1920,6 +2010,8 @@ public class WebHostBuilderTests
 
         public ILogger CreateLogger(string categoryName) => NullLogger.Instance;
 
-        public void AddProvider(ILoggerProvider provider) { }
+        public void AddProvider(ILoggerProvider provider)
+        {
+        }
     }
 }

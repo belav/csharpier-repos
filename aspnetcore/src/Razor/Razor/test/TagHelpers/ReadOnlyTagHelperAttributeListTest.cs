@@ -814,7 +814,9 @@ public class ReadOnlyTagHelperAttributeListTest
     private class TestableReadOnlyTagHelperAttributes : ReadOnlyTagHelperAttributeList
     {
         public TestableReadOnlyTagHelperAttributes(IEnumerable<TagHelperAttribute> attributes)
-            : base(new List<TagHelperAttribute>(attributes)) { }
+            : base(new List<TagHelperAttribute>(attributes))
+        {
+        }
 
         public List<TagHelperAttribute> PublicAttributes
         {

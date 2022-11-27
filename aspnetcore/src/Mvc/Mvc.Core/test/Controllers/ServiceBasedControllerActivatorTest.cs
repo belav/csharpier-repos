@@ -68,7 +68,11 @@ public class ServiceBasedControllerActivatorTest
         Assert.Equal(expected, ex.Message);
     }
 
-    private class Controller { }
+    private class Controller
+    {
+    }
 
-    private class DIController : Controller { }
+    private class DIController : Controller
+    {
+    }
 }

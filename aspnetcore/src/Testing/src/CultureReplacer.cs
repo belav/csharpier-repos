@@ -29,7 +29,9 @@ public class CultureReplacer : IDisposable
     public CultureReplacer(
         string culture = _defaultCultureName,
         string uiCulture = _defaultUICultureName
-    ) : this(new CultureInfo(culture), new CultureInfo(uiCulture)) { }
+    ) : this(new CultureInfo(culture), new CultureInfo(uiCulture))
+    {
+    }
 
     public CultureReplacer(CultureInfo culture, CultureInfo uiCulture)
     {

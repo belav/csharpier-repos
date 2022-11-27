@@ -14,7 +14,9 @@ namespace Microsoft.AspNetCore.Components;
 /// </summary>
 public class LayoutView : IComponent
 {
-    private static readonly RenderFragment EmptyRenderFragment = builder => { };
+    private static readonly RenderFragment EmptyRenderFragment = builder =>
+    {
+    };
 
     private RenderHandle _renderHandle;
 

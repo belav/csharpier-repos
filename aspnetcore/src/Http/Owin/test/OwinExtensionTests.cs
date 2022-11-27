@@ -158,5 +158,7 @@ public class OwinExtensionTests
         Assert.False(environment.ContainsKey("websocket.AcceptAlt"));
     }
 
-    private class FakeService { }
+    private class FakeService
+    {
+    }
 }

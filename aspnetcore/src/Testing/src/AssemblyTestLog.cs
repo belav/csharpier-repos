@@ -400,7 +400,9 @@ public class AssemblyTestLog : IAcceptFailureReports, IDisposable
                     {
                         Directory.Delete(assemblyBaseDirectory, recursive: true);
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
 
                 log = Create(assembly, baseDirectory);

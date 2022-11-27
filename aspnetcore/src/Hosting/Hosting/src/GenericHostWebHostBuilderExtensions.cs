@@ -28,7 +28,12 @@ public static class GenericHostWebHostBuilderExtensions
             throw new ArgumentNullException(nameof(configure));
         }
 
-        return builder.ConfigureWebHost(configure, _ => { });
+        return builder.ConfigureWebHost(
+            configure,
+            _ =>
+            {
+            }
+        );
     }
 
     /// <summary>

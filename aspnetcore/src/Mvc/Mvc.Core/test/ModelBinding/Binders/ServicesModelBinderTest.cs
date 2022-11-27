@@ -62,7 +62,11 @@ public class ServicesModelBinderTest
         return bindingContext;
     }
 
-    private interface IService { }
+    private interface IService
+    {
+    }
 
-    private class Service : IService { }
+    private class Service : IService
+    {
+    }
 }

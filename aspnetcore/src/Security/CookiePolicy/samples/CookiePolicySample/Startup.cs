@@ -18,7 +18,9 @@ public class Startup
             options.CheckConsentNeeded = context =>
                 context.Request.PathBase.Equals("/NeedsConsent");
 
-            options.OnAppendCookie = context => { };
+            options.OnAppendCookie = context =>
+            {
+            };
         });
     }
 

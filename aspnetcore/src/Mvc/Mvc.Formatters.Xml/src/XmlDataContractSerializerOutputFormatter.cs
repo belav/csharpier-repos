@@ -34,7 +34,9 @@ public partial class XmlDataContractSerializerOutputFormatter : TextOutputFormat
     /// with default <see cref="XmlWriterSettings"/>.
     /// </summary>
     public XmlDataContractSerializerOutputFormatter()
-        : this(FormattingUtilities.GetDefaultXmlWriterSettings()) { }
+        : this(FormattingUtilities.GetDefaultXmlWriterSettings())
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="XmlDataContractSerializerOutputFormatter"/>
@@ -42,14 +44,18 @@ public partial class XmlDataContractSerializerOutputFormatter : TextOutputFormat
     /// </summary>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
     public XmlDataContractSerializerOutputFormatter(ILoggerFactory loggerFactory)
-        : this(FormattingUtilities.GetDefaultXmlWriterSettings(), loggerFactory) { }
+        : this(FormattingUtilities.GetDefaultXmlWriterSettings(), loggerFactory)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="XmlDataContractSerializerOutputFormatter"/>.
     /// </summary>
     /// <param name="writerSettings">The settings to be used by the <see cref="DataContractSerializer"/>.</param>
     public XmlDataContractSerializerOutputFormatter(XmlWriterSettings writerSettings)
-        : this(writerSettings, loggerFactory: NullLoggerFactory.Instance) { }
+        : this(writerSettings, loggerFactory: NullLoggerFactory.Instance)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="XmlDataContractSerializerOutputFormatter"/>.

@@ -281,7 +281,9 @@ public class PageActionEndpointDataSourceTest : ActionEndpointDataSourceBaseTest
         );
     }
 
-    private class GroupMetadata { }
+    private class GroupMetadata
+    {
+    }
 
     private protected override ActionEndpointDataSourceBase CreateDataSource(
         IActionDescriptorCollectionProvider actions,

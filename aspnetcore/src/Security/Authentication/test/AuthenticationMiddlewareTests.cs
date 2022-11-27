@@ -310,17 +310,23 @@ public class AuthenticationMiddlewareTests
 
     private class ThreeOhFiveHandler : StatusCodeHandler
     {
-        public ThreeOhFiveHandler() : base(305) { }
+        public ThreeOhFiveHandler() : base(305)
+        {
+        }
     }
 
     private class SixOhSevenHandler : StatusCodeHandler
     {
-        public SixOhSevenHandler() : base(607) { }
+        public SixOhSevenHandler() : base(607)
+        {
+        }
     }
 
     private class SevenOhSevenHandler : StatusCodeHandler
     {
-        public SevenOhSevenHandler() : base(707) { }
+        public SevenOhSevenHandler() : base(707)
+        {
+        }
     }
 
     private class StatusCodeHandler : IAuthenticationRequestHandler

@@ -68,5 +68,7 @@ public class ProblemDetailsWrapperProviderFactoryTest
         Assert.Null(provider);
     }
 
-    private class CustomProblemDetails : ProblemDetails { }
+    private class CustomProblemDetails : ProblemDetails
+    {
+    }
 }

@@ -16,7 +16,9 @@ public class TemplatePart
     /// <summary>
     /// Constructs a new <see cref="TemplatePart"/> instance.
     /// </summary>
-    public TemplatePart() { }
+    public TemplatePart()
+    {
+    }
 
     /// <summary>
     /// Constructs a new <see cref="TemplatePart"/> instance given a <paramref name="other"/>.

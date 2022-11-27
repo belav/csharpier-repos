@@ -187,7 +187,9 @@ public class SeleniumStandaloneServer : IDisposable
             {
                 logOutput.TryAdd(e.Data);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             // We avoid logging on the output here because it is unreliable. We can only log in the diagnostics sink.
             lock (_diagnosticsMessageSink)
@@ -212,8 +214,12 @@ public class SeleniumStandaloneServer : IDisposable
                     return;
                 }
             }
-            catch (OperationCanceledException) { }
-            catch (HttpRequestException) { }
+            catch (OperationCanceledException)
+            {
+            }
+            catch (HttpRequestException)
+            {
+            }
 
             retries++;
         } while (retries < 30);

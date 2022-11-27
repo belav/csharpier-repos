@@ -280,7 +280,9 @@ public class ClosedGenericMatcherTest
         }
     }
 
-    private class DerivedClass : BaseClass { }
+    private class DerivedClass : BaseClass
+    {
+    }
 
     private class DerivedClassWithComparable : DerivedClass, IComparable<DerivedClassWithComparable>
     {
@@ -290,5 +292,7 @@ public class ClosedGenericMatcherTest
         }
     }
 
-    private class DerivedClassFromSystemImplementation : Collection<BaseClass> { }
+    private class DerivedClassFromSystemImplementation : Collection<BaseClass>
+    {
+    }
 }

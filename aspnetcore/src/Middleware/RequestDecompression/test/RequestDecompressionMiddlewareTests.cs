@@ -941,7 +941,14 @@ public class RequestDecompressionMiddlewareTests
                     .UseTestServer()
                     .ConfigureServices(services =>
                     {
-                        services.AddRequestDecompression(configure ?? (_ => { }));
+                        services.AddRequestDecompression(
+                            configure
+                                ?? (
+                                    _ =>
+                                    {
+                                    }
+                                )
+                        );
                         services.AddSingleton<ILoggerFactory>(loggerFactory);
                     })
                     .Configure(app =>

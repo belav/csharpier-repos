@@ -29,11 +29,17 @@ public class TestBinder : IInvocationBinder
         }
     }
 
-    public TestBinder() : this(null, null) { }
+    public TestBinder() : this(null, null)
+    {
+    }
 
-    public TestBinder(Type[] paramTypes) : this(paramTypes, null) { }
+    public TestBinder(Type[] paramTypes) : this(paramTypes, null)
+    {
+    }
 
-    public TestBinder(Type returnType) : this(null, returnType) { }
+    public TestBinder(Type returnType) : this(null, returnType)
+    {
+    }
 
     public TestBinder(Type[] paramTypes, Type returnType)
     {

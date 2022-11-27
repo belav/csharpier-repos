@@ -24,7 +24,8 @@ internal sealed class WebAssemblyConsoleLogger<T> : ILogger<T>, ILogger
 
     public WebAssemblyConsoleLogger(IJSRuntime jsRuntime)
         : this(string.Empty, (WebAssemblyJSRuntime)jsRuntime) // Cast for DI
-    { }
+    {
+    }
 
     public WebAssemblyConsoleLogger(string name, WebAssemblyJSRuntime jsRuntime)
     {
@@ -198,7 +199,9 @@ internal sealed class WebAssemblyConsoleLogger<T> : ILogger<T>, ILogger
     {
         public static NoOpDisposable Instance = new NoOpDisposable();
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }
 

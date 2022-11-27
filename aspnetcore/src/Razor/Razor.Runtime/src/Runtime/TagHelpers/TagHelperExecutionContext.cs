@@ -30,9 +30,13 @@ public class TagHelperExecutionContext
             items: new Dictionary<object, object>(),
             uniqueId: string.Empty,
             executeChildContentAsync: () => Task.CompletedTask,
-            startTagHelperWritingScope: _ => { },
+            startTagHelperWritingScope: _ =>
+            {
+            },
             endTagHelperWritingScope: () => new DefaultTagHelperContent()
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Instantiates a new <see cref="TagHelperExecutionContext"/>.

@@ -9,7 +9,9 @@ public abstract class RazorProjectEngineTestBase
 {
     protected abstract RazorLanguageVersion Version { get; }
 
-    protected virtual void ConfigureProjectEngine(RazorProjectEngineBuilder builder) { }
+    protected virtual void ConfigureProjectEngine(RazorProjectEngineBuilder builder)
+    {
+    }
 
     protected RazorEngine CreateEngine() => CreateProjectEngine().Engine;
 

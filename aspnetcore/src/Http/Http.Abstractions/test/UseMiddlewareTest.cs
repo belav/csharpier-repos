@@ -299,7 +299,9 @@ public class UseMiddlewareTest
     {
         public IMiddleware? Create(Type middlewareType) => null;
 
-        public void Release(IMiddleware middleware) { }
+        public void Release(IMiddleware middleware)
+        {
+        }
     }
 
     private class DummyServiceProvider : IServiceProvider
@@ -325,7 +327,9 @@ public class UseMiddlewareTest
 
     public class MiddlewareInjectWithOutAndRefParams
     {
-        public MiddlewareInjectWithOutAndRefParams(RequestDelegate next) { }
+        public MiddlewareInjectWithOutAndRefParams(RequestDelegate next)
+        {
+        }
 
         public Task Invoke(
             HttpContext context,
@@ -341,54 +345,70 @@ public class UseMiddlewareTest
 
     private class MiddlewareInjectInvokeNoService
     {
-        public MiddlewareInjectInvokeNoService(RequestDelegate next) { }
+        public MiddlewareInjectInvokeNoService(RequestDelegate next)
+        {
+        }
 
         public Task Invoke(HttpContext context, object value) => Task.CompletedTask;
     }
 
     private class MiddlewareInjectInvoke
     {
-        public MiddlewareInjectInvoke(RequestDelegate next) { }
+        public MiddlewareInjectInvoke(RequestDelegate next)
+        {
+        }
 
         public Task Invoke(HttpContext context, IServiceProvider provider) => Task.CompletedTask;
     }
 
     private class MiddlewareNoParametersStub
     {
-        public MiddlewareNoParametersStub(RequestDelegate next) { }
+        public MiddlewareNoParametersStub(RequestDelegate next)
+        {
+        }
 
         public Task Invoke() => Task.CompletedTask;
     }
 
     private class MiddlewareAsyncNoParametersStub
     {
-        public MiddlewareAsyncNoParametersStub(RequestDelegate next) { }
+        public MiddlewareAsyncNoParametersStub(RequestDelegate next)
+        {
+        }
 
         public Task InvokeAsync() => Task.CompletedTask;
     }
 
     private class MiddlewareNonTaskReturnStub
     {
-        public MiddlewareNonTaskReturnStub(RequestDelegate next) { }
+        public MiddlewareNonTaskReturnStub(RequestDelegate next)
+        {
+        }
 
         public int Invoke() => 0;
     }
 
     private class MiddlewareAsyncNonTaskReturnStub
     {
-        public MiddlewareAsyncNonTaskReturnStub(RequestDelegate next) { }
+        public MiddlewareAsyncNonTaskReturnStub(RequestDelegate next)
+        {
+        }
 
         public int InvokeAsync() => 0;
     }
 
     private class MiddlewareNoInvokeStub
     {
-        public MiddlewareNoInvokeStub(RequestDelegate next) { }
+        public MiddlewareNoInvokeStub(RequestDelegate next)
+        {
+        }
     }
 
     private class MiddlewareMultipleInvokesStub
     {
-        public MiddlewareMultipleInvokesStub(RequestDelegate next) { }
+        public MiddlewareMultipleInvokesStub(RequestDelegate next)
+        {
+        }
 
         public Task Invoke(HttpContext context) => Task.CompletedTask;
 
@@ -397,7 +417,9 @@ public class UseMiddlewareTest
 
     private class MiddlewareMultipleInvokeAsyncStub
     {
-        public MiddlewareMultipleInvokeAsyncStub(RequestDelegate next) { }
+        public MiddlewareMultipleInvokeAsyncStub(RequestDelegate next)
+        {
+        }
 
         public Task InvokeAsync(HttpContext context) => Task.CompletedTask;
 
@@ -406,7 +428,9 @@ public class UseMiddlewareTest
 
     private class MiddlewareMultipleInvokeAndInvokeAsyncStub
     {
-        public MiddlewareMultipleInvokeAndInvokeAsyncStub(RequestDelegate next) { }
+        public MiddlewareMultipleInvokeAndInvokeAsyncStub(RequestDelegate next)
+        {
+        }
 
         public Task Invoke(HttpContext context) => Task.CompletedTask;
 

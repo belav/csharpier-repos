@@ -17,7 +17,14 @@ public class RenderTreeUpdaterTest
         var renderer = new TestRenderer();
         var builder = new RenderTreeBuilder();
         builder.OpenElement(0, "elem");
-        builder.AddAttribute(1, "eventname", (Action)(() => { }));
+        builder.AddAttribute(
+            1,
+            "eventname",
+            (Action)(
+                () => {
+                }
+            )
+        );
         builder.SetUpdatesAttributeName(valuePropName);
         builder.AddAttribute(2, valuePropName, "initial value");
         builder.CloseElement();
@@ -47,7 +54,14 @@ public class RenderTreeUpdaterTest
         var renderer = new TestRenderer();
         var builder = new RenderTreeBuilder();
         builder.OpenElement(0, "elem");
-        builder.AddAttribute(1, "eventname", (Action)(() => { }));
+        builder.AddAttribute(
+            1,
+            "eventname",
+            (Action)(
+                () => {
+                }
+            )
+        );
         builder.SetUpdatesAttributeName(valuePropName);
         builder.AddAttribute(2, valuePropName, "initial value");
         builder.CloseElement();
@@ -74,12 +88,26 @@ public class RenderTreeUpdaterTest
         var renderer = new TestRenderer();
         var builder = new RenderTreeBuilder();
         builder.OpenElement(0, "elem");
-        builder.AddAttribute(1, "eventname", (Action)(() => { }));
+        builder.AddAttribute(
+            1,
+            "eventname",
+            (Action)(
+                () => {
+                }
+            )
+        );
         builder.SetUpdatesAttributeName(valuePropName);
         builder.AddAttribute(2, valuePropName, "unchanged 1");
         builder.CloseElement();
         builder.OpenElement(3, "elem");
-        builder.AddAttribute(4, "eventname", (Action)(() => { }));
+        builder.AddAttribute(
+            4,
+            "eventname",
+            (Action)(
+                () => {
+                }
+            )
+        );
         builder.SetUpdatesAttributeName(valuePropName);
         builder.AddAttribute(5, "unrelated prop before", "unchanged 2");
         builder.AddAttribute(6, valuePropName, "initial value");
@@ -114,7 +142,14 @@ public class RenderTreeUpdaterTest
         var renderer = new TestRenderer();
         var builder = new RenderTreeBuilder();
         builder.OpenElement(0, "elem");
-        builder.AddAttribute(1, "eventname", (Action)(() => { }));
+        builder.AddAttribute(
+            1,
+            "eventname",
+            (Action)(
+                () => {
+                }
+            )
+        );
         builder.SetUpdatesAttributeName(valuePropName);
         builder.CloseElement();
         var frames = builder.GetFrames();
@@ -147,7 +182,14 @@ public class RenderTreeUpdaterTest
         var renderer = new TestRenderer();
         var builder = new RenderTreeBuilder();
         builder.OpenElement(0, "elem");
-        builder.AddAttribute(1, "eventname", (Action)(() => { }));
+        builder.AddAttribute(
+            1,
+            "eventname",
+            (Action)(
+                () => {
+                }
+            )
+        );
         builder.SetUpdatesAttributeName(valuePropName);
         builder.CloseElement();
         var frames = builder.GetFrames();
@@ -177,7 +219,14 @@ public class RenderTreeUpdaterTest
         builder.OpenElement(2, "sibling before"); // To show that non-ancestors aren't expanded
         builder.CloseElement();
         builder.OpenElement(3, "elem with handler");
-        builder.AddAttribute(4, "eventname", (Action)(() => { }));
+        builder.AddAttribute(
+            4,
+            "eventname",
+            (Action)(
+                () => {
+                }
+            )
+        );
         builder.SetUpdatesAttributeName(valuePropName);
         builder.CloseElement(); // elem with handler
         builder.CloseRegion();

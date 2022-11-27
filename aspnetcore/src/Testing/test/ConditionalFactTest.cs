@@ -61,6 +61,8 @@ public class ConditionalFactTest : IClassFixture<ConditionalFactTest.Conditional
     {
         public bool TestRan { get; set; }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

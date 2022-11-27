@@ -33,7 +33,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 [Collection(PublishedSitesCollection.Name)]
 public class Latin1Tests : IISFunctionalTestBase
 {
-    public Latin1Tests(PublishedSitesFixture fixture) : base(fixture) { }
+    public Latin1Tests(PublishedSitesFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalFact]
     [RequiresNewHandler]

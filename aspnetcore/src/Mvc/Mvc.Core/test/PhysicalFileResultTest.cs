@@ -38,7 +38,8 @@ public class PhysicalFileResultTest : PhysicalFileResultTestBase
     private class TestPhysicalFileResultExecutor : PhysicalFileResultExecutor
     {
         public TestPhysicalFileResultExecutor(ILoggerFactory loggerFactory) : base(loggerFactory)
-        { }
+        {
+        }
 
         protected override FileMetadata GetFileInfo(string path)
         {

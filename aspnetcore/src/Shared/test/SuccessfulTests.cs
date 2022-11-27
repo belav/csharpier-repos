@@ -16,7 +16,9 @@ public class SuccessfulTests
     /// </summary>
     [Fact]
     [QuarantinedTest("No issue")]
-    public void GuaranteedQuarantinedTest() { }
+    public void GuaranteedQuarantinedTest()
+    {
+    }
 
     /// <summary>
     /// Test that executes in unquarantined runs and always succeeds.
@@ -30,5 +32,7 @@ public class SuccessfulTests
     /// </remarks>
     [Fact]
     [Trait("Quarantined", "false")]
-    public void GuaranteedUnquarantinedTest() { }
+    public void GuaranteedUnquarantinedTest()
+    {
+    }
 }

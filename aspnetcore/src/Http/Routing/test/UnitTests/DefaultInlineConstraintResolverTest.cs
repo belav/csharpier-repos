@@ -393,9 +393,13 @@ public class DefaultInlineConstraintResolverTest
 
     private class MultiConstructorRouteConstraint : IRouteConstraint
     {
-        public MultiConstructorRouteConstraint(string pattern, int intArg) { }
+        public MultiConstructorRouteConstraint(string pattern, int intArg)
+        {
+        }
 
-        public MultiConstructorRouteConstraint(int intArg, string pattern) { }
+        public MultiConstructorRouteConstraint(int intArg, string pattern)
+        {
+        }
 
         public bool Match(
             HttpContext httpContext,

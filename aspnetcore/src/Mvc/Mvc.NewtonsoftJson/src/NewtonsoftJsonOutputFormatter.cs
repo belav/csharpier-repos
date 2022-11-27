@@ -38,7 +38,9 @@ public partial class NewtonsoftJsonOutputFormatter : TextOutputFormatter
         JsonSerializerSettings serializerSettings,
         ArrayPool<char> charPool,
         MvcOptions mvcOptions
-    ) : this(serializerSettings, charPool, mvcOptions, jsonOptions: null) { }
+    ) : this(serializerSettings, charPool, mvcOptions, jsonOptions: null)
+    {
+    }
 
     /// <summary>
     /// Initializes a new <see cref="NewtonsoftJsonOutputFormatter"/> instance.
@@ -188,7 +190,9 @@ public partial class NewtonsoftJsonOutputFormatter : TextOutputFormatter
                 value = await reader(value, context.HttpContext.RequestAborted);
             }
             catch (OperationCanceledException)
-                when (context.HttpContext.RequestAborted.IsCancellationRequested) { }
+                when (context.HttpContext.RequestAborted.IsCancellationRequested)
+            {
+            }
 
             if (context.HttpContext.RequestAborted.IsCancellationRequested)
             {

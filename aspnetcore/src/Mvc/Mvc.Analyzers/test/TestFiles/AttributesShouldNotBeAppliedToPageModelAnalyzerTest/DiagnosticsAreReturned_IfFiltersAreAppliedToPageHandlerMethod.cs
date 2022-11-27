@@ -7,6 +7,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     {
         [ /*MM*/
         ServiceFilter(typeof(object))]
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
     }
 }

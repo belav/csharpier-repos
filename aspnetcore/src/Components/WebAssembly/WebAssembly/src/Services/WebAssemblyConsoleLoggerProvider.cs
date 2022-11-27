@@ -34,5 +34,7 @@ internal sealed class WebAssemblyConsoleLoggerProvider : ILoggerProvider
     }
 
     /// <inheritdoc />
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }

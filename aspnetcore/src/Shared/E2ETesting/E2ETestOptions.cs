@@ -50,7 +50,9 @@ public class E2ETestOptions
             Configuration.Bind(instance);
             Instance = instance;
         }
-        catch { }
+        catch
+        {
+        }
     }
 
     public int DefaultWaitTimeoutInSeconds { get; set; } = 15;

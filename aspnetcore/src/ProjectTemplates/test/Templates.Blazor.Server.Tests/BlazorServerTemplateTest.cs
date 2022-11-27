@@ -16,7 +16,9 @@ namespace Templates.Blazor.Test;
 
 public class BlazorServerTemplateTest : BlazorTemplateTest
 {
-    public BlazorServerTemplateTest(ProjectFactoryFixture projectFactory) : base(projectFactory) { }
+    public BlazorServerTemplateTest(ProjectFactoryFixture projectFactory) : base(projectFactory)
+    {
+    }
 
     public override string ProjectType { get; } = "blazorserver";
 

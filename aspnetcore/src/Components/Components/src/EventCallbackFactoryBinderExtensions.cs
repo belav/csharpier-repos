@@ -1896,7 +1896,9 @@ public static class EventCallbackFactoryBinderExtensions
             {
                 converted = converter(e.Value, culture, out value);
             }
-            catch { }
+            catch
+            {
+            }
 
             // We only invoke the setter if the conversion didn't throw, or if the newly-entered value is empty.
             // If the user entered some non-empty value we couldn't parse, we leave the state of the .NET field
@@ -1938,7 +1940,9 @@ public static class EventCallbackFactoryBinderExtensions
             {
                 converted = converter(e.Value, culture, out value);
             }
-            catch { }
+            catch
+            {
+            }
 
             // We only invoke the setter if the conversion didn't throw, or if the newly-entered value is empty.
             // If the user entered some non-empty value we couldn't parse, we leave the state of the .NET field
@@ -1981,7 +1985,9 @@ public static class EventCallbackFactoryBinderExtensions
             {
                 converted = converter(e.Value, culture, format, out value);
             }
-            catch { }
+            catch
+            {
+            }
 
             // We only invoke the setter if the conversion didn't throw, or if the newly-entered value is empty.
             // If the user entered some non-empty value we couldn't parse, we leave the state of the .NET field
@@ -2024,7 +2030,9 @@ public static class EventCallbackFactoryBinderExtensions
             {
                 converted = converter(e.Value, culture, format, out value);
             }
-            catch { }
+            catch
+            {
+            }
 
             // We only invoke the setter if the conversion didn't throw, or if the newly-entered value is empty.
             // If the user entered some non-empty value we couldn't parse, we leave the state of the .NET field

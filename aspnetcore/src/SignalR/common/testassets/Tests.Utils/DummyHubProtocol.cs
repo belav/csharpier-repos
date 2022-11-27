@@ -22,7 +22,12 @@ public class DummyHubProtocol : IHubProtocol
 
     public DummyHubProtocol(string name, Action onWrite = null)
     {
-        _onWrite = onWrite ?? (() => { });
+        _onWrite =
+            onWrite
+            ?? (
+                () => {
+                }
+            );
         Name = name;
     }
 

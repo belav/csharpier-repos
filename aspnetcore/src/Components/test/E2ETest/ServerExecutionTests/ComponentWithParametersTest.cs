@@ -17,7 +17,9 @@ public class ComponentWithParametersTest
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<PrerenderedStartup> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture, output) { }
+    ) : base(browserFixture, serverFixture, output)
+    {
+    }
 
     [Fact]
     public void PassingParametersToComponentsFromThePageWorks()

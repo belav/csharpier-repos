@@ -12,4 +12,6 @@ namespace Microsoft.AspNetCore.Mvc;
 /// </summary>
 public class AntiforgeryValidationFailedResult
     : BadRequestResult,
-        IAntiforgeryValidationFailedResult { }
+        IAntiforgeryValidationFailedResult
+{
+}

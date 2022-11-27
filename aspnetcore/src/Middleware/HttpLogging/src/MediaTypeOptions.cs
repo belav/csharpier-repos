@@ -13,7 +13,9 @@ public sealed class MediaTypeOptions
 {
     private readonly List<MediaTypeState> _mediaTypeStates = new();
 
-    internal MediaTypeOptions() { }
+    internal MediaTypeOptions()
+    {
+    }
 
     internal List<MediaTypeState> MediaTypeStates => _mediaTypeStates;
 

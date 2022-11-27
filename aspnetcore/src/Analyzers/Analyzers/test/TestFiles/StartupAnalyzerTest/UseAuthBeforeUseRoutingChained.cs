@@ -9,7 +9,12 @@ namespace Microsoft.AspNetCore.Analyzers.TestFiles.StartupAnalyzerTest
     {
         public void Configure(IApplicationBuilder app)
         {
-            app.UseFileServer().UseAuthorization().UseRouting().UseEndpoints(r => { });
+            app.UseFileServer()
+                .UseAuthorization()
+                .UseRouting()
+                .UseEndpoints(r =>
+                {
+                });
         }
     }
 }

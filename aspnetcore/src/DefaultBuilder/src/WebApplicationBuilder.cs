@@ -238,7 +238,9 @@ public sealed class WebApplicationBuilder
         if (_builtApplication.DataSources.Count > 0)
         {
             // We don't know if user code called UseEndpoints(), so we will call it just in case, UseEndpoints() will ignore duplicate DataSources
-            app.UseEndpoints(_ => { });
+            app.UseEndpoints(_ =>
+            {
+            });
         }
 
         // Copy the properties to the destination app builder

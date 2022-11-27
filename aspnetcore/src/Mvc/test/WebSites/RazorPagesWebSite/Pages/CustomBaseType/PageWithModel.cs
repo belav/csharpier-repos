@@ -4,4 +4,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesWebSite;
 
-public class PageWithModel : PageModel { }
+public class PageWithModel : PageModel
+{
+}

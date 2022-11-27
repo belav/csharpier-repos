@@ -923,7 +923,9 @@ public class ResponseCachingMiddlewareTests
 
     private class FakeResponseFeature : HttpResponseFeature
     {
-        public override void OnStarting(Func<object, Task> callback, object state) { }
+        public override void OnStarting(Func<object, Task> callback, object state)
+        {
+        }
     }
 
     [Theory]

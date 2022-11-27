@@ -32,7 +32,11 @@ public class HandlerChangingPageFilterAttribute : Attribute, IPageFilter
         );
     }
 
-    public void OnPageHandlerExecuting(PageHandlerExecutingContext context) { }
+    public void OnPageHandlerExecuting(PageHandlerExecutingContext context)
+    {
+    }
 
-    public void OnPageHandlerExecuted(PageHandlerExecutedContext context) { }
+    public void OnPageHandlerExecuted(PageHandlerExecutedContext context)
+    {
+    }
 }

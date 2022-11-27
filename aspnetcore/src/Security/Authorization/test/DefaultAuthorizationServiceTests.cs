@@ -536,7 +536,15 @@ public class DefaultAuthorizationServiceTests
         Assert.Throws<InvalidOperationException>(
             () =>
                 BuildAuthorizationService(
-                    services => services.AddAuthorizationBuilder().AddPolicy("Basic", policy => { })
+                    services =>
+                        services
+                            .AddAuthorizationBuilder()
+                            .AddPolicy(
+                                "Basic",
+                                policy =>
+                                {
+                                }
+                            )
                 )
         );
     }
@@ -671,7 +679,9 @@ public class DefaultAuthorizationServiceTests
         Assert.False(allowed.Succeeded);
     }
 
-    public class CustomRequirement : IAuthorizationRequirement { }
+    public class CustomRequirement : IAuthorizationRequirement
+    {
+    }
 
     public class CustomHandler : AuthorizationHandler<CustomRequirement>
     {
@@ -871,7 +881,9 @@ public class DefaultAuthorizationServiceTests
         Assert.False(allowed.Succeeded);
     }
 
-    public class ExpenseReport { }
+    public class ExpenseReport
+    {
+    }
 
     public static class Operations
     {
@@ -1202,7 +1214,9 @@ public class DefaultAuthorizationServiceTests
         {
             // This will ignore the policy options
             services.AddSingleton<IAuthorizationPolicyProvider, DynamicPolicyProvider>();
-            services.AddAuthorization(options => { });
+            services.AddAuthorization(options =>
+            {
+            });
         });
         var id = new ClaimsIdentity();
         id.AddClaim(new Claim("1", "1"));
@@ -1251,7 +1265,9 @@ public class DefaultAuthorizationServiceTests
 
     public class BadContext : AuthorizationHandlerContext
     {
-        public BadContext() : base(new List<IAuthorizationRequirement>(), null, null) { }
+        public BadContext() : base(new List<IAuthorizationRequirement>(), null, null)
+        {
+        }
 
         public override bool HasFailed
         {

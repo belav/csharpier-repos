@@ -3,4 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
-public interface IProxyHttpContext { }
+public interface IProxyHttpContext
+{
+}

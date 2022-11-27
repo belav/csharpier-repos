@@ -924,12 +924,18 @@ public class ParameterBinderTest
 
     public abstract class FakeModelMetadata : ModelMetadata
     {
-        public FakeModelMetadata() : base(ModelMetadataIdentity.ForType(typeof(string))) { }
+        public FakeModelMetadata() : base(ModelMetadataIdentity.ForType(typeof(string)))
+        {
+        }
     }
 
-    private void TestMethodWithoutAttributes(Person person) { }
+    private void TestMethodWithoutAttributes(Person person)
+    {
+    }
 
-    private void TestMethodWithAttributes([Required] [AlwaysInvalid] Person person) { }
+    private void TestMethodWithAttributes([Required] [AlwaysInvalid] Person person)
+    {
+    }
 
     private class TestController
     {
@@ -943,7 +949,9 @@ public class ParameterBinderTest
         public BaseModel Model { get; set; }
     }
 
-    private class BaseModel { }
+    private class BaseModel
+    {
+    }
 
     private class DerivedModel
     {

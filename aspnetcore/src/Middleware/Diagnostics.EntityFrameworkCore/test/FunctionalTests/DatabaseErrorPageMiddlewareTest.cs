@@ -50,7 +50,9 @@ public class DatabaseErrorPageMiddlewareTest
 
     class SuccessMiddleware
     {
-        public SuccessMiddleware(RequestDelegate next) { }
+        public SuccessMiddleware(RequestDelegate next)
+        {
+        }
 
         public virtual async Task Invoke(HttpContext context)
         {
@@ -90,7 +92,9 @@ public class DatabaseErrorPageMiddlewareTest
 
     class ExceptionMiddleware
     {
-        public ExceptionMiddleware(RequestDelegate next) { }
+        public ExceptionMiddleware(RequestDelegate next)
+        {
+        }
 
         public virtual Task Invoke(HttpContext context)
         {
@@ -120,7 +124,9 @@ public class DatabaseErrorPageMiddlewareTest
 
     class DatabaseErrorButNoMigrationsMiddleware
     {
-        public DatabaseErrorButNoMigrationsMiddleware(RequestDelegate next) { }
+        public DatabaseErrorButNoMigrationsMiddleware(RequestDelegate next)
+        {
+        }
 
         public virtual Task Invoke(HttpContext context)
         {
@@ -175,7 +181,9 @@ public class DatabaseErrorPageMiddlewareTest
 
     class NoMigrationsMiddleware
     {
-        public NoMigrationsMiddleware(RequestDelegate next) { }
+        public NoMigrationsMiddleware(RequestDelegate next)
+        {
+        }
 
         public virtual Task Invoke(HttpContext context)
         {
@@ -262,7 +270,9 @@ public class DatabaseErrorPageMiddlewareTest
 
     class PendingMigrationsMiddleware
     {
-        public PendingMigrationsMiddleware(RequestDelegate next) { }
+        public PendingMigrationsMiddleware(RequestDelegate next)
+        {
+        }
 
         public virtual Task Invoke(HttpContext context)
         {
@@ -330,7 +340,9 @@ public class DatabaseErrorPageMiddlewareTest
 
     class PendingModelChangesMiddleware
     {
-        public PendingModelChangesMiddleware(RequestDelegate next) { }
+        public PendingModelChangesMiddleware(RequestDelegate next)
+        {
+        }
 
         public virtual Task Invoke(HttpContext context)
         {
@@ -403,7 +415,9 @@ public class DatabaseErrorPageMiddlewareTest
 
     class ApplyMigrationsMiddleware
     {
-        public ApplyMigrationsMiddleware(RequestDelegate next) { }
+        public ApplyMigrationsMiddleware(RequestDelegate next)
+        {
+        }
 
         public virtual async Task Invoke(HttpContext context)
         {
@@ -526,7 +540,9 @@ public class DatabaseErrorPageMiddlewareTest
 
     class ContextNotRegisteredInServicesMiddleware
     {
-        public ContextNotRegisteredInServicesMiddleware(RequestDelegate next) { }
+        public ContextNotRegisteredInServicesMiddleware(RequestDelegate next)
+        {
+        }
 
         public virtual Task Invoke(HttpContext context)
         {
@@ -584,7 +600,9 @@ public class DatabaseErrorPageMiddlewareTest
 
     class ExceptionInLogicMiddleware
     {
-        public ExceptionInLogicMiddleware(RequestDelegate next) { }
+        public ExceptionInLogicMiddleware(RequestDelegate next)
+        {
+        }
 
         public virtual Task Invoke(HttpContext context)
         {
@@ -627,7 +645,9 @@ public class DatabaseErrorPageMiddlewareTest
 
     class WrappedExceptionMiddleware
     {
-        public WrappedExceptionMiddleware(RequestDelegate next) { }
+        public WrappedExceptionMiddleware(RequestDelegate next)
+        {
+        }
 
         public virtual Task Invoke(HttpContext context)
         {

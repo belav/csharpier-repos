@@ -40,7 +40,9 @@ public class FormPipeReader
     /// Initializes a new instance of <see cref="FormPipeReader"/>.
     /// </summary>
     /// <param name="pipeReader">The <see cref="PipeReader"/> to read from.</param>
-    public FormPipeReader(PipeReader pipeReader) : this(pipeReader, Encoding.UTF8) { }
+    public FormPipeReader(PipeReader pipeReader) : this(pipeReader, Encoding.UTF8)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="FormPipeReader"/>.

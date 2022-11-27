@@ -27,7 +27,9 @@ public class FileProviderRazorProjectItem : RazorProjectItem
         string basePath,
         string filePath,
         string root
-    ) : this(fileInfo, basePath, filePath, root, fileKind: null) { }
+    ) : this(fileInfo, basePath, filePath, root, fileKind: null)
+    {
+    }
 
     /// <summary>
     /// Intializes a new instance of a <see cref="FileProviderRazorProjectItem"/>.

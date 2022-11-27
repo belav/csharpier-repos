@@ -10,9 +10,13 @@ namespace ApiExplorerWebSite;
 public class ApiExplorerNameSetExplicitlyController : Controller
 {
     [HttpGet("SetOnController")]
-    public void SetOnController() { }
+    public void SetOnController()
+    {
+    }
 
     [ApiExplorerSettings(GroupName = "SetOnAction")]
     [HttpGet("SetOnAction")]
-    public void SetOnAction() { }
+    public void SetOnAction()
+    {
+    }
 }

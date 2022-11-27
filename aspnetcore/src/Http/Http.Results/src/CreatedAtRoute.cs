@@ -23,7 +23,8 @@ public sealed class CreatedAtRoute : IResult, IEndpointMetadataProvider, IStatus
     /// </summary>
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     internal CreatedAtRoute(object? routeValues) : this(routeName: null, routeValues: routeValues)
-    { }
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CreatedAtRoute"/> class with the values

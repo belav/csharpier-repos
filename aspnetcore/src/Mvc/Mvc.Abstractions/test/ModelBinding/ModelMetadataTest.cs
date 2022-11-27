@@ -12,7 +12,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 public class ModelMetadataTest
 {
     // IsComplexType
-    private readonly struct IsComplexTypeModel { }
+    private readonly struct IsComplexTypeModel
+    {
+    }
 
     [Theory]
     [InlineData(typeof(string))]
@@ -43,9 +45,13 @@ public class ModelMetadataTest
 
     // IsCollectionType / IsEnumerableType
 
-    private class NonCollectionType { }
+    private class NonCollectionType
+    {
+    }
 
-    private class DerivedList : List<int> { }
+    private class DerivedList : List<int>
+    {
+    }
 
     private class JustEnumerable : IEnumerable
     {
@@ -415,13 +421,18 @@ public class ModelMetadataTest
         private string _displayName;
 
         public TestModelMetadata(Type modelType) : base(ModelMetadataIdentity.ForType(modelType))
-        { }
+        {
+        }
 
         public TestModelMetadata(ParameterInfo parameter)
-            : base(ModelMetadataIdentity.ForParameter(parameter)) { }
+            : base(ModelMetadataIdentity.ForParameter(parameter))
+        {
+        }
 
         public TestModelMetadata(PropertyInfo propertyInfo, Type modelType, Type containerType)
-            : base(ModelMetadataIdentity.ForProperty(propertyInfo, modelType, containerType)) { }
+            : base(ModelMetadataIdentity.ForProperty(propertyInfo, modelType, containerType))
+        {
+        }
 
         public override IReadOnlyDictionary<object, object> AdditionalValues
         {
@@ -672,5 +683,7 @@ public class ModelMetadataTest
         }
     }
 
-    private class DerivedDictionary : Dictionary<string, int> { }
+    private class DerivedDictionary : Dictionary<string, int>
+    {
+    }
 }

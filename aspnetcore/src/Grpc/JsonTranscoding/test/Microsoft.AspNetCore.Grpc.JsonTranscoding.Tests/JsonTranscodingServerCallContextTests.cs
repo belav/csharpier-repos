@@ -86,7 +86,9 @@ public class JsonTranscodingServerCallContextTests
 
         public CancellationToken RequestAborted { get; set; }
 
-        public void Abort() { }
+        public void Abort()
+        {
+        }
     }
 
     private static JsonTranscodingServerCallContext CreateServerCallContext(

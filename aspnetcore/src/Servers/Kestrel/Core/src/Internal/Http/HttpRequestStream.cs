@@ -93,7 +93,9 @@ internal sealed class HttpRequestStream : Stream
         throw new NotSupportedException();
     }
 
-    public override void Flush() { }
+    public override void Flush()
+    {
+    }
 
     public override Task FlushAsync(CancellationToken cancellationToken)
     {

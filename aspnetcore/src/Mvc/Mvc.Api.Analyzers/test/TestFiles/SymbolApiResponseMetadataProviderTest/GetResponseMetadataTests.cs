@@ -58,7 +58,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             null;
     }
 
-    public class Person { }
+    public class Person
+    {
+    }
 
     public class CustomResponseTypeAttribute : Attribute, IApiResponseMetadataProvider
     {
@@ -66,21 +68,29 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
         public int StatusCode { get; set; }
 
-        public void SetContentTypes(MediaTypeCollection contentTypes) { }
+        public void SetContentTypes(MediaTypeCollection contentTypes)
+        {
+        }
     }
 
     public class Produces201ResponseTypeAttribute : ProducesResponseTypeAttribute
     {
-        public Produces201ResponseTypeAttribute() : base(201) { }
+        public Produces201ResponseTypeAttribute() : base(201)
+        {
+        }
 
-        public Produces201ResponseTypeAttribute(int statusCode) : base(statusCode) { }
+        public Produces201ResponseTypeAttribute(int statusCode) : base(statusCode)
+        {
+        }
     }
 
     public class CustomInvalidProducesResponseTypeAttribute : ProducesResponseTypeAttribute
     {
         private string _statusCode;
 
-        public CustomInvalidProducesResponseTypeAttribute() : base(0) { }
+        public CustomInvalidProducesResponseTypeAttribute() : base(0)
+        {
+        }
 
         public new string StatusCode
         {
@@ -100,7 +110,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     }
 
     [ApiConventionType(typeof(DefaultApiConventions))]
-    public class GetDeclaredResponseMetadata_ApiConventionTypeAttributeOnBaseTypeBase { }
+    public class GetDeclaredResponseMetadata_ApiConventionTypeAttributeOnBaseTypeBase
+    {
+    }
 
     public class GetDeclaredResponseMetadata_ApiConventionTypeAttributeOnBaseType
         : GetDeclaredResponseMetadata_ApiConventionTypeAttributeOnBaseTypeBase

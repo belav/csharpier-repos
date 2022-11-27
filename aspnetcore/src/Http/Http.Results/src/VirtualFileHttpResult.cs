@@ -25,7 +25,9 @@ public sealed class VirtualFileHttpResult : IResult, IFileHttpResult, IContentTy
     /// <param name="fileName">The path to the file. The path must be an absolute path.</param>
     /// <param name="contentType">The Content-Type header of the response.</param>
     internal VirtualFileHttpResult(string fileName, string? contentType)
-        : this(fileName, contentType, fileDownloadName: null) { }
+        : this(fileName, contentType, fileDownloadName: null)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="VirtualFileHttpResult"/> instance with
@@ -36,7 +38,9 @@ public sealed class VirtualFileHttpResult : IResult, IFileHttpResult, IContentTy
     /// <param name="contentType">The Content-Type header of the response.</param>
     /// <param name="fileDownloadName">The suggested file name.</param>
     internal VirtualFileHttpResult(string fileName, string? contentType, string? fileDownloadName)
-        : this(fileName, contentType, fileDownloadName, enableRangeProcessing: false) { }
+        : this(fileName, contentType, fileDownloadName, enableRangeProcessing: false)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="VirtualFileHttpResult"/> instance with the provided values.

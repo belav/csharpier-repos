@@ -35,6 +35,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     {
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public static void Get(int id) { }
+        public static void Get(int id)
+        {
+        }
     }
 }

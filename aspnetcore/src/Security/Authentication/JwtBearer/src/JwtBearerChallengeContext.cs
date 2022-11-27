@@ -19,7 +19,9 @@ public class JwtBearerChallengeContext : PropertiesContext<JwtBearerOptions>
         AuthenticationScheme scheme,
         JwtBearerOptions options,
         AuthenticationProperties properties
-    ) : base(context, scheme, options, properties) { }
+    ) : base(context, scheme, options, properties)
+    {
+    }
 
     /// <summary>
     /// Any failures encountered during the authentication process.

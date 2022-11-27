@@ -154,7 +154,9 @@ public class Http3RequestTests : LoggedTest
             _scopeProvider = scopeProvider;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         private class MockScopeLogger : ILogger
         {
@@ -1585,7 +1587,9 @@ public class Http3RequestTests : LoggedTest
                 Logger.LogInformation("Client sending request 1");
                 await client.SendAsync(request1, CancellationToken.None);
             }
-            catch (HttpRequestException) { }
+            catch (HttpRequestException)
+            {
+            }
 
             // Delay to ensure the stream has enough time to return to pool
             await Task.Delay(100);

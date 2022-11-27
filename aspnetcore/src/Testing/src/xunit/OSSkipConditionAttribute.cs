@@ -16,11 +16,15 @@ public class OSSkipConditionAttribute : Attribute, ITestCondition
     private readonly OperatingSystems _osPlatform;
 
     public OSSkipConditionAttribute(OperatingSystems operatingSystem)
-        : this(operatingSystem, GetCurrentOS()) { }
+        : this(operatingSystem, GetCurrentOS())
+    {
+    }
 
     [Obsolete("Use the Minimum/MaximumOSVersionAttribute for version checks.", error: true)]
     public OSSkipConditionAttribute(OperatingSystems operatingSystem, params string[] versions)
-        : this(operatingSystem, GetCurrentOS()) { }
+        : this(operatingSystem, GetCurrentOS())
+    {
+    }
 
     // to enable unit testing
     internal OSSkipConditionAttribute(OperatingSystems operatingSystem, OperatingSystems osPlatform)

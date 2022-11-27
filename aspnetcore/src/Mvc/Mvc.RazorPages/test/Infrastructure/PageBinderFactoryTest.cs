@@ -911,9 +911,13 @@ public class PageBinderFactoryTest
         }
     }
 
-    private interface ITestService { }
+    private interface ITestService
+    {
+    }
 
-    private class PageModelWithNoBoundProperties : PageModel { }
+    private class PageModelWithNoBoundProperties : PageModel
+    {
+    }
 
     private class PageWithNoBoundProperties : Page
     {
@@ -1026,10 +1030,16 @@ public class PageBinderFactoryTest
 
     private class PageModelWithExecutors
     {
-        public void OnGetWithBindNever([BindNever] string id) { }
+        public void OnGetWithBindNever([BindNever] string id)
+        {
+        }
 
-        public void OnGet(string id) { }
+        public void OnGet(string id)
+        {
+        }
 
-        public void OnPostWithValidation([Required] string name) { }
+        public void OnPostWithValidation([Required] string name)
+        {
+        }
     }
 }

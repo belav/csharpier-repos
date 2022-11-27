@@ -24,7 +24,9 @@ internal sealed class SeekableTextReader : TextReader, ITextDocument
                 Encoding.UTF8,
                 new RazorSourceDocumentProperties(filePath, relativePath: null)
             )
-        ) { }
+        )
+    {
+    }
 
     public SeekableTextReader(RazorSourceDocument source)
     {

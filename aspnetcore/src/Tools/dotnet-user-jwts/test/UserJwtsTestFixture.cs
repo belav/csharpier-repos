@@ -102,7 +102,9 @@ public class UserJwtsTestFixture : IDisposable
                     );
                     TryDelete(TestSecretsId);
                 }
-                catch { }
+                catch
+                {
+                }
             });
         }
 

@@ -73,7 +73,10 @@ public class HostingApplicationTests
         factory
             .Setup(m => m.Create(It.IsAny<IFeatureCollection>()))
             .Returns<IFeatureCollection>(f => new DefaultHttpContext(f));
-        factory.Setup(m => m.Dispose(It.IsAny<HttpContext>())).Callback(() => { });
+        factory
+            .Setup(m => m.Dispose(It.IsAny<HttpContext>()))
+            .Callback(() => {
+            });
 
         var hostingApplication = CreateApplication(factory.Object);
         var features = new FeaturesWithContext<Context>(new DefaultHttpContext().Features);

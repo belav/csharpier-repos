@@ -3,4 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authorization.Policy;
 
-internal sealed class AuthorizationPolicyMarkerService { }
+internal sealed class AuthorizationPolicyMarkerService
+{
+}

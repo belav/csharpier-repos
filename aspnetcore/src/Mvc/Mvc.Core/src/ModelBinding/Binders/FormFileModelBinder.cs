@@ -184,7 +184,9 @@ public partial class FormFileModelBinder : IModelBinder
 
     private sealed class FileCollection : ReadOnlyCollection<IFormFile>, IFormFileCollection
     {
-        public FileCollection(List<IFormFile> list) : base(list) { }
+        public FileCollection(List<IFormFile> list) : base(list)
+        {
+        }
 
         public IFormFile? this[string name] => GetFile(name);
 

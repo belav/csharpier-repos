@@ -20,7 +20,9 @@ public static class IdentityCookieAuthenticationBuilderExtensions
     /// <param name="builder">The current <see cref="AuthenticationBuilder"/> instance.</param>
     /// <returns>The <see cref="IdentityCookiesBuilder"/> which can be used to configure the identity cookies.</returns>
     public static IdentityCookiesBuilder AddIdentityCookies(this AuthenticationBuilder builder) =>
-        builder.AddIdentityCookies(o => { });
+        builder.AddIdentityCookies(o =>
+        {
+        });
 
     /// <summary>
     /// Adds the cookie authentication needed for sign in manager.

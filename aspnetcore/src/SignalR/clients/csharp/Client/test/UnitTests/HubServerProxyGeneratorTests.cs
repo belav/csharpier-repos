@@ -13,7 +13,9 @@ using Xunit;
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
 [AttributeUsage(AttributeTargets.Method)]
-internal class HubServerProxyAttribute : Attribute { }
+internal class HubServerProxyAttribute : Attribute
+{
+}
 
 internal static partial class HubServerProxyExtensions
 {

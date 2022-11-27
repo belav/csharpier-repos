@@ -39,7 +39,9 @@ namespace Microsoft.AspNetCore.Builder
             var builder = new DefaultEndpointRouteBuilder(Mock.Of<IApplicationBuilder>());
 
             [HttpMethod("ATTRIBUTE")]
-            void TestAction() { }
+            void TestAction()
+            {
+            }
 
             var endpointBuilder = builder.MapMethods("/", new[] { "METHOD" }, (Action)TestAction);
             endpointBuilder.WithMetadata(new HttpMethodMetadata(new[] { "BUILDER" }));
@@ -72,7 +74,13 @@ namespace Microsoft.AspNetCore.Builder
         public void MapGet_BuildsEndpointWithCorrectMethod()
         {
             var builder = new DefaultEndpointRouteBuilder(Mock.Of<IApplicationBuilder>());
-            _ = builder.MapGet("/", (Action)(() => { }));
+            _ = builder.MapGet(
+                "/",
+                (Action)(
+                    () => {
+                    }
+                )
+            );
 
             var dataSource = GetBuilderEndpointDataSource(builder);
             // Trigger Endpoint build by calling getter.
@@ -92,7 +100,13 @@ namespace Microsoft.AspNetCore.Builder
         public void MapPost_BuildsEndpointWithCorrectMethod()
         {
             var builder = new DefaultEndpointRouteBuilder(Mock.Of<IApplicationBuilder>());
-            _ = builder.MapPost("/", (Action)(() => { }));
+            _ = builder.MapPost(
+                "/",
+                (Action)(
+                    () => {
+                    }
+                )
+            );
 
             var dataSource = GetBuilderEndpointDataSource(builder);
             // Trigger Endpoint build by calling getter.
@@ -112,7 +126,13 @@ namespace Microsoft.AspNetCore.Builder
         public void MapPut_BuildsEndpointWithCorrectMethod()
         {
             var builder = new DefaultEndpointRouteBuilder(Mock.Of<IApplicationBuilder>());
-            _ = builder.MapPut("/", (Action)(() => { }));
+            _ = builder.MapPut(
+                "/",
+                (Action)(
+                    () => {
+                    }
+                )
+            );
 
             var dataSource = GetBuilderEndpointDataSource(builder);
             // Trigger Endpoint build by calling getter.
@@ -132,7 +152,13 @@ namespace Microsoft.AspNetCore.Builder
         public void MapDelete_BuildsEndpointWithCorrectMethod()
         {
             var builder = new DefaultEndpointRouteBuilder(Mock.Of<IApplicationBuilder>());
-            _ = builder.MapDelete("/", (Action)(() => { }));
+            _ = builder.MapDelete(
+                "/",
+                (Action)(
+                    () => {
+                    }
+                )
+            );
 
             var dataSource = GetBuilderEndpointDataSource(builder);
             // Trigger Endpoint build by calling getter.

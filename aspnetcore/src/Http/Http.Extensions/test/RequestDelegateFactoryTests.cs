@@ -383,7 +383,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var ex = Assert.Throws<InvalidOperationException>(
             () =>
                 RequestDelegateFactory.Create(
-                    ([FromRoute] int id) => { },
+                    ([FromRoute] int id) => {
+                    },
                     new() { RouteParameterNames = Array.Empty<string>() }
                 )
         );
@@ -1065,7 +1066,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     }
 
     private record MyBindAsyncFromInterfaceRecord(Uri uri)
-        : IBindAsync<MyBindAsyncFromInterfaceRecord> { }
+        : IBindAsync<MyBindAsyncFromInterfaceRecord>
+    {
+    }
 
     [Theory]
     [MemberData(nameof(TryParsableParameters))]
@@ -1498,10 +1501,12 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public async Task RequestDelegateUsesTryParseOverBindAsyncGivenExplicitAttribute()
     {
         var fromRouteFactoryResult = RequestDelegateFactory.Create(
-            (HttpContext httpContext, [FromRoute] MyBindAsyncRecord myBindAsyncRecord) => { }
+            (HttpContext httpContext, [FromRoute] MyBindAsyncRecord myBindAsyncRecord) => {
+            }
         );
         var fromQueryFactoryResult = RequestDelegateFactory.Create(
-            (HttpContext httpContext, [FromQuery] MyBindAsyncRecord myBindAsyncRecord) => { }
+            (HttpContext httpContext, [FromQuery] MyBindAsyncRecord myBindAsyncRecord) => {
+            }
         );
 
         var httpContext = CreateHttpContext();
@@ -1581,9 +1586,15 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         get
         {
-            void InvalidFromRoute([FromRoute] object notTryParsable) { }
-            void InvalidFromQuery([FromQuery] object notTryParsable) { }
-            void InvalidFromHeader([FromHeader] object notTryParsable) { }
+            void InvalidFromRoute([FromRoute] object notTryParsable)
+            {
+            }
+            void InvalidFromQuery([FromQuery] object notTryParsable)
+            {
+            }
+            void InvalidFromHeader([FromHeader] object notTryParsable)
+            {
+            }
 
             return new[]
             {
@@ -1956,7 +1967,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         var httpContext = CreateHttpContext();
 
-        var factoryResult = RequestDelegateFactory.Create((MyBindAsyncTypeThatThrows arg1) => { });
+        var factoryResult = RequestDelegateFactory.Create(
+            (MyBindAsyncTypeThatThrows arg1) => {
+            }
+        );
 
         var requestDelegate = factoryResult.RequestDelegate;
 
@@ -2935,9 +2949,15 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     [Fact]
     public void BuildRequestDelegateThrowsInvalidOperationExceptionGivenFromBodyOnMultipleParameters()
     {
-        void TestAttributedInvalidAction([FromBody] int value1, [FromBody] int value2) { }
-        void TestInferredInvalidAction(Todo value1, Todo value2) { }
-        void TestBothInvalidAction(Todo value1, [FromBody] int value2) { }
+        void TestAttributedInvalidAction([FromBody] int value1, [FromBody] int value2)
+        {
+        }
+        void TestInferredInvalidAction(Todo value1, Todo value2)
+        {
+        }
+        void TestBothInvalidAction(Todo value1, [FromBody] int value2)
+        {
+        }
 
         Assert.Throws<InvalidOperationException>(
             () => RequestDelegateFactory.Create(TestAttributedInvalidAction)
@@ -2953,8 +2973,12 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     [Fact]
     public void BuildRequestDelegateThrowsInvalidOperationExceptionForInvalidTryParse()
     {
-        void TestTryParseStruct(BadTryParseStruct value1) { }
-        void TestTryParseClass(BadTryParseClass value1) { }
+        void TestTryParseStruct(BadTryParseStruct value1)
+        {
+        }
+        void TestTryParseClass(BadTryParseClass value1)
+        {
+        }
 
         Assert.Throws<InvalidOperationException>(
             () => RequestDelegateFactory.Create(TestTryParseStruct)
@@ -2966,7 +2990,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     private struct BadTryParseStruct
     {
-        public static void TryParse(string? value, out BadTryParseStruct result) { }
+        public static void TryParse(string? value, out BadTryParseStruct result)
+        {
+        }
     }
 
     private class BadTryParseClass
@@ -2980,8 +3006,12 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     [Fact]
     public void BuildRequestDelegateThrowsInvalidOperationExceptionForInvalidBindAsync()
     {
-        void TestBindAsyncStruct(BadBindAsyncStruct value1) { }
-        void TestBindAsyncClass(BadBindAsyncClass value1) { }
+        void TestBindAsyncStruct(BadBindAsyncStruct value1)
+        {
+        }
+        void TestBindAsyncClass(BadBindAsyncClass value1)
+        {
+        }
 
         var ex = Assert.Throws<InvalidOperationException>(
             () => RequestDelegateFactory.Create(TestBindAsyncStruct)
@@ -3011,15 +3041,25 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         get
         {
-            void TestParameterListRecord([AsParameters] BadArgumentListRecord req) { }
-            void TestParameterListClass([AsParameters] BadArgumentListClass req) { }
+            void TestParameterListRecord([AsParameters] BadArgumentListRecord req)
+            {
+            }
+            void TestParameterListClass([AsParameters] BadArgumentListClass req)
+            {
+            }
             void TestParameterListClassWithMutipleConstructors(
                 [AsParameters] BadArgumentListClassMultipleCtors req
-            ) { }
-            void TestParameterListAbstractClass([AsParameters] BadAbstractArgumentListClass req) { }
+            )
+            {
+            }
+            void TestParameterListAbstractClass([AsParameters] BadAbstractArgumentListClass req)
+            {
+            }
             void TestParameterListNoPulicConstructorClass(
                 [AsParameters] BadNoPublicConstructorArgumentListClass req
-            ) { }
+            )
+            {
+            }
 
             static string GetMultipleContructorsError(Type type) =>
                 $"Only a single public parameterized constructor is allowed for type '{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}'.";
@@ -3081,14 +3121,18 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     private record BadArgumentListRecord(int Foo)
     {
-        public BadArgumentListRecord(int foo, int bar) : this(foo) { }
+        public BadArgumentListRecord(int foo, int bar) : this(foo)
+        {
+        }
 
         public int Bar { get; set; }
     }
 
     private class BadNoPublicConstructorArgumentListClass
     {
-        private BadNoPublicConstructorArgumentListClass() { }
+        private BadNoPublicConstructorArgumentListClass()
+        {
+        }
 
         public int Foo { get; set; }
     }
@@ -3100,7 +3144,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     private class BadArgumentListClass
     {
-        public BadArgumentListClass(int foo, string name) { }
+        public BadArgumentListClass(int foo, string name)
+        {
+        }
 
         public int Foo { get; set; }
         public int Bar { get; set; }
@@ -3108,9 +3154,13 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     private class BadArgumentListClassMultipleCtors
     {
-        public BadArgumentListClassMultipleCtors(int foo) { }
+        public BadArgumentListClassMultipleCtors(int foo)
+        {
+        }
 
-        public BadArgumentListClassMultipleCtors(int foo, int bar) { }
+        public BadArgumentListClassMultipleCtors(int foo, int bar)
+        {
+        }
 
         public int Foo { get; set; }
         public int Bar { get; set; }
@@ -3131,10 +3181,14 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     [Fact]
     public void BuildRequestDelegateThrowsNotSupportedExceptionForNestedParametersList()
     {
-        void TestNestedParameterListRecordOnType([AsParameters] NestedArgumentListRecord req) { }
+        void TestNestedParameterListRecordOnType([AsParameters] NestedArgumentListRecord req)
+        {
+        }
         void TestNestedParameterListRecordOnArgument(
             [AsParameters] ClassWithParametersConstructor req
-        ) { }
+        )
+        {
+        }
 
         Assert.Throws<NotSupportedException>(
             () => RequestDelegateFactory.Create(TestNestedParameterListRecordOnType)
@@ -3269,8 +3323,12 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         {
             foo = "";
         }
-        void InMethod(in string foo) { }
-        void RefMethod(ref string foo) { }
+        void InMethod(in string foo)
+        {
+        }
+        void RefMethod(ref string foo)
+        {
+        }
 
         var outParamException = Assert.Throws<NotSupportedException>(
             () => RequestDelegateFactory.Create(OutMethod)
@@ -3686,7 +3744,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     [JsonSerializable(typeof(Todo))]
     [JsonSerializable(typeof(TodoChild))]
-    private partial class TestJsonContext : JsonSerializerContext { }
+    private partial class TestJsonContext : JsonSerializerContext
+    {
+    }
 
     [Theory]
     [MemberData(nameof(JsonContextActions))]
@@ -4980,7 +5040,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.RequestServices = serviceCollection.BuildServiceProvider();
 
         var factoryResult = RequestDelegateFactory.Create(
-            (HttpContext context, Todo todo) => { },
+            (HttpContext context, Todo todo) => {
+            },
             new RequestDelegateFactoryOptions() { ThrowOnBadRequest = shouldThrow }
         );
         var requestDelegate = factoryResult.RequestDelegate;
@@ -5036,7 +5097,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.RequestServices = serviceCollection.BuildServiceProvider();
 
         var factoryResult = RequestDelegateFactory.Create(
-            (HttpContext context, JsonTodo customTodo, Todo todo) => { },
+            (HttpContext context, JsonTodo customTodo, Todo todo) => {
+            },
             new RequestDelegateFactoryOptions() { ThrowOnBadRequest = shouldThrow }
         );
         var requestDelegate = factoryResult.RequestDelegate;
@@ -5515,14 +5577,30 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     [Fact]
     public void BuildRequestDelegateThrowsInvalidOperationExceptionBodyAndFormFileParameters()
     {
-        void TestFormFileAndJson(IFormFile value1, Todo value2) { }
-        void TestFormFilesAndJson(IFormFile value1, IFormFile value2, Todo value3) { }
-        void TestFormFileCollectionAndJson(IFormFileCollection value1, Todo value2) { }
-        void TestFormFileAndJsonWithAttribute(IFormFile value1, [FromBody] int value2) { }
-        void TestJsonAndFormFile(Todo value1, IFormFile value2) { }
-        void TestJsonAndFormFiles(Todo value1, IFormFile value2, IFormFile value3) { }
-        void TestJsonAndFormFileCollection(Todo value1, IFormFileCollection value2) { }
-        void TestJsonAndFormFileWithAttribute(Todo value1, [FromForm] IFormFile value2) { }
+        void TestFormFileAndJson(IFormFile value1, Todo value2)
+        {
+        }
+        void TestFormFilesAndJson(IFormFile value1, IFormFile value2, Todo value3)
+        {
+        }
+        void TestFormFileCollectionAndJson(IFormFileCollection value1, Todo value2)
+        {
+        }
+        void TestFormFileAndJsonWithAttribute(IFormFile value1, [FromBody] int value2)
+        {
+        }
+        void TestJsonAndFormFile(Todo value1, IFormFile value2)
+        {
+        }
+        void TestJsonAndFormFiles(Todo value1, IFormFile value2, IFormFile value3)
+        {
+        }
+        void TestJsonAndFormFileCollection(Todo value1, IFormFileCollection value2)
+        {
+        }
+        void TestJsonAndFormFileWithAttribute(Todo value1, [FromForm] IFormFile value2)
+        {
+        }
 
         Assert.Throws<InvalidOperationException>(
             () => RequestDelegateFactory.Create(TestFormFileAndJson)
@@ -5654,21 +5732,37 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     [Fact]
     public void CreateThrowsNotSupportedExceptionIfFromFormParameterIsNotIFormFileCollectionOrIFormFile()
     {
-        void TestActionBool([FromForm] bool value) { }
+        void TestActionBool([FromForm] bool value)
+        {
+        }
         ;
-        void TestActionInt([FromForm] int value) { }
+        void TestActionInt([FromForm] int value)
+        {
+        }
         ;
-        void TestActionObject([FromForm] object value) { }
+        void TestActionObject([FromForm] object value)
+        {
+        }
         ;
-        void TestActionString([FromForm] string value) { }
+        void TestActionString([FromForm] string value)
+        {
+        }
         ;
-        void TestActionCancellationToken([FromForm] CancellationToken value) { }
+        void TestActionCancellationToken([FromForm] CancellationToken value)
+        {
+        }
         ;
-        void TestActionClaimsPrincipal([FromForm] ClaimsPrincipal value) { }
+        void TestActionClaimsPrincipal([FromForm] ClaimsPrincipal value)
+        {
+        }
         ;
-        void TestActionHttpContext([FromForm] HttpContext value) { }
+        void TestActionHttpContext([FromForm] HttpContext value)
+        {
+        }
         ;
-        void TestActionIFormCollection([FromForm] IFormCollection value) { }
+        void TestActionIFormCollection([FromForm] IFormCollection value)
+        {
+        }
         ;
 
         AssertNotSupportedExceptionThrown(TestActionBool);
@@ -5965,7 +6059,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.RequestServices = serviceCollection.BuildServiceProvider();
 
         var factoryResult = RequestDelegateFactory.Create(
-            (HttpContext context, IFormFile file) => { },
+            (HttpContext context, IFormFile file) => {
+            },
             new RequestDelegateFactoryOptions() { ThrowOnBadRequest = shouldThrow }
         );
         var requestDelegate = factoryResult.RequestDelegate;
@@ -6377,13 +6472,21 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         get
         {
-            void TestParameterListRecordStruct([AsParameters] ParameterListRecordStruct? args) { }
+            void TestParameterListRecordStruct([AsParameters] ParameterListRecordStruct? args)
+            {
+            }
 
-            void TestParameterListRecordClass([AsParameters] ParameterListRecordClass? args) { }
+            void TestParameterListRecordClass([AsParameters] ParameterListRecordClass? args)
+            {
+            }
 
-            void TestParameterListStruct([AsParameters] ParameterListStruct? args) { }
+            void TestParameterListStruct([AsParameters] ParameterListStruct? args)
+            {
+            }
 
-            void TestParameterListClass([AsParameters] ParameterListClass? args) { }
+            void TestParameterListClass([AsParameters] ParameterListClass? args)
+            {
+            }
 
             return new[]
             {
@@ -7364,7 +7467,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         get
         {
-            void VoidMethod() { }
+            void VoidMethod()
+            {
+            }
 
             ValueTask ValueTaskMethod()
             {
@@ -7670,7 +7775,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public void Create_DoesNotAddDelegateMethodInfo_AsMetadata()
     {
         // Arrange
-        var @delegate = () => { };
+        var @delegate = () => {
+        };
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate);
@@ -7712,7 +7818,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public void Create_DoesNotAddAnythingBefore_ThePassedInEndpointMetadata()
     {
         // Arrange
-        var @delegate = (AddsCustomParameterMetadataBindable param1) => { };
+        var @delegate = (AddsCustomParameterMetadataBindable param1) => {
+        };
         var customMetadata = new CustomEndpointMetadata();
         var options = new RequestDelegateFactoryOptions
         {
@@ -7738,7 +7845,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         // Arrange
         var @delegate = [Attribute1, Attribute2]
-        () => { };
+        () => {
+        };
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate);
@@ -7755,7 +7863,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var @delegate = (
             AddsCustomParameterMetadataBindable param1,
             AddsCustomParameterMetadata param2
-        ) => { };
+        ) => {
+        };
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate);
@@ -7775,7 +7884,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public void Create_DiscoversMetadata_FromParametersImplementingIEndpointMetadataProvider()
     {
         // Arrange
-        var @delegate = (AddsCustomParameterMetadata param1) => { };
+        var @delegate = (AddsCustomParameterMetadata param1) => {
+        };
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate);
@@ -8041,7 +8151,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public void Create_FlowsRoutePattern_ToMetadataProvider()
     {
         // Arrange
-        var @delegate = (AddsRoutePatternMetadata param1) => { };
+        var @delegate = (AddsRoutePatternMetadata param1) => {
+        };
         var builder = new RouteEndpointBuilder(
             requestDelegate: null,
             RoutePatternFactory.Parse("/test/pattern"),
@@ -8396,9 +8507,13 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         }
     }
 
-    private class Attribute1 : Attribute { }
+    private class Attribute1 : Attribute
+    {
+    }
 
-    private class Attribute2 : Attribute { }
+    private class Attribute2 : Attribute
+    {
+    }
 
     private class AddsCustomEndpointMetadataResult : IEndpointMetadataProvider, IResult
     {
@@ -8412,7 +8527,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     private class AddsNoEndpointMetadataResult : IEndpointMetadataProvider, IResult
     {
-        public static void PopulateMetadata(MethodInfo method, EndpointBuilder builder) { }
+        public static void PopulateMetadata(MethodInfo method, EndpointBuilder builder)
+        {
+        }
 
         public Task ExecuteAsync(HttpContext httpContext) => throw new NotImplementedException();
     }
@@ -8740,7 +8857,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         public string? Name { get; set; }
     }
 
-    private class FromServiceAttribute : Attribute, IFromServiceMetadata { }
+    private class FromServiceAttribute : Attribute, IFromServiceMetadata
+    {
+    }
 
     class HttpHandler
     {
@@ -8753,9 +8872,13 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         }
     }
 
-    private interface IMyService { }
+    private interface IMyService
+    {
+    }
 
-    private class MyService : IMyService { }
+    private class MyService : IMyService
+    {
+    }
 
     private class CustomResult : IResult
     {
@@ -8845,7 +8968,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             return new EmptyServiceProvider();
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public object? GetService(Type serviceType)
         {
@@ -8889,7 +9014,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 HasStarted = true;
                 return Stream.Null;
             }
-            set { }
+            set
+            {
+            }
         }
 
         public Stream Stream
@@ -8933,11 +9060,17 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             return Task.CompletedTask;
         }
 
-        public void DisableBuffering() { }
+        public void DisableBuffering()
+        {
+        }
 
-        public void OnStarting(Func<object, Task> callback, object state) { }
+        public void OnStarting(Func<object, Task> callback, object state)
+        {
+        }
 
-        public void OnCompleted(Func<object, Task> callback, object state) { }
+        public void OnCompleted(Func<object, Task> callback, object state)
+        {
+        }
     }
 
     private class RequestBodyDetectionFeature : IHttpRequestBodyDetectionFeature

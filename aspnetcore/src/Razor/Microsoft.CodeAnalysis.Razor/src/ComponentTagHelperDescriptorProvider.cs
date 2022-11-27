@@ -716,7 +716,9 @@ internal class ComponentTagHelperDescriptorProvider
             return symbols;
         }
 
-        private ComponentSymbols() { }
+        private ComponentSymbols()
+        {
+        }
 
         public INamedTypeSymbol ComponentBase { get; private set; }
 

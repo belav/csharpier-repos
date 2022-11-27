@@ -28,11 +28,15 @@ public class RuntimePerformanceBenchmarkBase
 {
     private sealed class NullLoggerFactory : ILoggerFactory, ILogger
     {
-        void ILoggerFactory.AddProvider(ILoggerProvider provider) { }
+        void ILoggerFactory.AddProvider(ILoggerProvider provider)
+        {
+        }
 
         ILogger ILoggerFactory.CreateLogger(string categoryName) => this;
 
-        void IDisposable.Dispose() { }
+        void IDisposable.Dispose()
+        {
+        }
 
         IDisposable ILogger.BeginScope<TState>(TState state) => null;
 
@@ -44,7 +48,9 @@ public class RuntimePerformanceBenchmarkBase
             TState state,
             Exception exception,
             Func<TState, Exception, string> formatter
-        ) { }
+        )
+        {
+        }
     }
 
     private sealed class BenchmarkViewExecutor : ViewExecutor
@@ -64,7 +70,9 @@ public class RuntimePerformanceBenchmarkBase
                 tempDataFactory,
                 diagnosticListener,
                 modelMetadataProvider
-            ) { }
+            )
+        {
+        }
 
         public StringBuilder StringBuilder { get; } = new StringBuilder();
 

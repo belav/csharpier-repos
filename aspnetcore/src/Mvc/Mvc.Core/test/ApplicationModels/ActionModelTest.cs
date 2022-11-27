@@ -145,10 +145,14 @@ public class ActionModelTest
 
     private class TestController
     {
-        public void Edit(int id) { }
+        public void Edit(int id)
+        {
+        }
     }
 
-    private class MyFilterAttribute : Attribute, IFilterMetadata { }
+    private class MyFilterAttribute : Attribute, IFilterMetadata
+    {
+    }
 
     private class MyRouteValueAttribute : Attribute, IRouteValueProvider
     {

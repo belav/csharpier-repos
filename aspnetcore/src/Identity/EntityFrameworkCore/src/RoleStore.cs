@@ -21,7 +21,9 @@ public class RoleStore<TRole> : RoleStore<TRole, DbContext, string>
     /// <param name="context">The <see cref="DbContext"/>.</param>
     /// <param name="describer">The <see cref="IdentityErrorDescriber"/>.</param>
     public RoleStore(DbContext context, IdentityErrorDescriber? describer = null)
-        : base(context, describer) { }
+        : base(context, describer)
+    {
+    }
 }
 
 /// <summary>
@@ -39,7 +41,9 @@ public class RoleStore<TRole, TContext> : RoleStore<TRole, TContext, string>
     /// <param name="context">The <see cref="DbContext"/>.</param>
     /// <param name="describer">The <see cref="IdentityErrorDescriber"/>.</param>
     public RoleStore(TContext context, IdentityErrorDescriber? describer = null)
-        : base(context, describer) { }
+        : base(context, describer)
+    {
+    }
 }
 
 /// <summary>
@@ -62,7 +66,9 @@ public class RoleStore<TRole, TContext, TKey>
     /// <param name="context">The <see cref="DbContext"/>.</param>
     /// <param name="describer">The <see cref="IdentityErrorDescriber"/>.</param>
     public RoleStore(TContext context, IdentityErrorDescriber? describer = null)
-        : base(context, describer) { }
+        : base(context, describer)
+    {
+    }
 }
 
 /// <summary>

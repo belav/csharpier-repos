@@ -210,7 +210,9 @@ public class DefaultPageApplicationModelProviderTest
         public override Task ExecuteAsync() => throw new NotImplementedException();
     }
 
-    private class ModelWithoutPageModelAttribute { }
+    private class ModelWithoutPageModelAttribute
+    {
+    }
 
     [Fact]
     public void OnProvidersExecuting_DiscoversPropertiesFromPageModel_IfModelHasAttribute()
@@ -594,7 +596,9 @@ public class DefaultPageApplicationModelProviderTest
         }
     }
 
-    private class EmptyPageModel : PageModel { }
+    private class EmptyPageModel : PageModel
+    {
+    }
 
     [Fact]
     public void OnProvidersExecuting_CombinesFilters_OnPageAndPageModel()
@@ -627,10 +631,14 @@ public class DefaultPageApplicationModelProviderTest
     }
 
     [TypeFilter(typeof(string))]
-    private class PageWithFilterModel : PageModel { }
+    private class PageWithFilterModel : PageModel
+    {
+    }
 
     [ServiceFilter(typeof(IServiceProvider))]
-    private class FiltersOnPageAndPageModel : PageModel { }
+    private class FiltersOnPageAndPageModel : PageModel
+    {
+    }
 
     [Fact] // If the model has handler methods, we prefer those.
     public void CreateDescriptor_FindsHandlerMethod_OnModel()
@@ -666,7 +674,9 @@ public class DefaultPageApplicationModelProviderTest
         [ModelBinder]
         public int BindMe { get; set; }
 
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
     }
 
     private class PageWithHandlerThatGetsIgnored : Page
@@ -676,7 +686,9 @@ public class DefaultPageApplicationModelProviderTest
         [ModelBinder]
         public int IgnoreMe { get; set; }
 
-        public void OnPost() { }
+        public void OnPost()
+        {
+        }
 
         public override Task ExecuteAsync() => throw new NotImplementedException();
     }
@@ -720,7 +732,9 @@ public class DefaultPageApplicationModelProviderTest
         [ModelBinder]
         public int BindMe { get; set; }
 
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
 
         public override Task ExecuteAsync() => throw new NotImplementedException();
     }
@@ -732,7 +746,9 @@ public class DefaultPageApplicationModelProviderTest
         [ModelBinder]
         public int IgnoreMe { get; set; }
 
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
     }
 
     [Fact]
@@ -777,14 +793,20 @@ public class DefaultPageApplicationModelProviderTest
 
     private class TestSetPageModel
     {
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
 
-        public void OnPost() { }
+        public void OnPost()
+        {
+        }
     }
 
     private class InheritsMethods : TestSetPageModel
     {
-        public new void OnGet() { }
+        public new void OnGet()
+        {
+        }
     }
 
     [Fact]
@@ -810,9 +832,13 @@ public class DefaultPageApplicationModelProviderTest
 
     private class ProtectedModel
     {
-        protected void OnGet() { }
+        protected void OnGet()
+        {
+        }
 
-        private void OnPost() { }
+        private void OnPost()
+        {
+        }
     }
 
     [Fact]
@@ -837,7 +863,9 @@ public class DefaultPageApplicationModelProviderTest
 
     private class GenericClassModel
     {
-        public void OnGet<T>() { }
+        public void OnGet<T>()
+        {
+        }
     }
 
     [Fact]
@@ -866,9 +894,13 @@ public class DefaultPageApplicationModelProviderTest
 
     private class PageModelWithStaticHandler
     {
-        public static void OnGet(string name) { }
+        public static void OnGet(string name)
+        {
+        }
 
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
     }
 
     [Fact]
@@ -899,7 +931,9 @@ public class DefaultPageApplicationModelProviderTest
     {
         public abstract void OnPost(string name);
 
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
     }
 
     [Fact]
@@ -929,9 +963,13 @@ public class DefaultPageApplicationModelProviderTest
     private class PageWithNonHandlerMethod
     {
         [NonHandler]
-        public void OnPost(string name) { }
+        public void OnPost(string name)
+        {
+        }
 
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
     }
 
     // There are more tests for the parsing elsewhere, this is just testing that it's wired
@@ -969,10 +1007,13 @@ public class DefaultPageApplicationModelProviderTest
 
     private class PageModelWithHandlerNames
     {
-        public void OnPutDeleteAsync() { }
+        public void OnPutDeleteAsync()
+        {
+        }
 
         public void Foo() // This isn't a valid handler name.
-        { }
+        {
+        }
     }
 
     [Fact]
@@ -1015,7 +1056,9 @@ public class DefaultPageApplicationModelProviderTest
 
     private class PageWithHandlerParameters
     {
-        public void OnPost(string name, [ModelBinder(Name = "personId")] int id) { }
+        public void OnPost(string name, [ModelBinder(Name = "personId")] int id)
+        {
+        }
     }
 
     // We're using PropertyHelper from Common to find the properties here, which implements
@@ -1165,13 +1208,21 @@ public class DefaultPageApplicationModelProviderTest
 
         public override Task ExecuteAsync() => throw new NotImplementedException();
 
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
 
-        public void OnPostAsync() { }
+        public void OnPostAsync()
+        {
+        }
 
-        public void OnPostDeleteCustomerAsync() { }
+        public void OnPostDeleteCustomerAsync()
+        {
+        }
 
-        public class ModelWithoutHandler { }
+        public class ModelWithoutHandler
+        {
+        }
     }
 
     private class PageWithModel : Page
@@ -1181,7 +1232,9 @@ public class DefaultPageApplicationModelProviderTest
         public override Task ExecuteAsync() => throw new NotImplementedException();
     }
 
-    public interface ITestService { }
+    public interface ITestService
+    {
+    }
 
     [PageModel]
     private class TestPageModel
@@ -1194,7 +1247,9 @@ public class DefaultPageApplicationModelProviderTest
         [FromServices]
         public ITestService TestService { get; set; }
 
-        public void OnGetUser() { }
+        public void OnGetUser()
+        {
+        }
     }
 
     [Fact]
@@ -1245,7 +1300,9 @@ public class DefaultPageApplicationModelProviderTest
     [PageModel]
     [Serializable]
     [TypeFilter(typeof(object))]
-    private class FilterModel { }
+    private class FilterModel
+    {
+    }
 
     [Fact]
     public void PopulateFilters_AddsPageHandlerPageFilter_IfPageImplementsIAsyncPageFilter()
@@ -1352,7 +1409,9 @@ public class DefaultPageApplicationModelProviderTest
     }
 
     [ServiceFilter(typeof(IServiceProvider))]
-    private class DerivedFromPageModel : PageModel { }
+    private class DerivedFromPageModel : PageModel
+    {
+    }
 
     private static DefaultPageApplicationModelProvider CreateProvider()
     {

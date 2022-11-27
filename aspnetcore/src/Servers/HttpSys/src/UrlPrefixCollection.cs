@@ -25,7 +25,9 @@ public class UrlPrefixCollection : ICollection<UrlPrefix>
     private const int MaxRetries = 1000;
     private static int NextPortIndex;
 
-    internal UrlPrefixCollection() { }
+    internal UrlPrefixCollection()
+    {
+    }
 
     /// <inheritdoc />
     public int Count

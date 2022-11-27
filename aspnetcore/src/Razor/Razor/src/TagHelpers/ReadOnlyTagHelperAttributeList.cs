@@ -14,7 +14,9 @@ public abstract class ReadOnlyTagHelperAttributeList : ReadOnlyCollection<TagHel
     /// Instantiates a new instance of <see cref="ReadOnlyTagHelperAttributeList"/> with an empty
     /// collection.
     /// </summary>
-    protected ReadOnlyTagHelperAttributeList() : base(new List<TagHelperAttribute>()) { }
+    protected ReadOnlyTagHelperAttributeList() : base(new List<TagHelperAttribute>())
+    {
+    }
 
     /// <summary>
     /// Instantiates a new instance of <see cref="ReadOnlyTagHelperAttributeList"/> with the specified
@@ -22,7 +24,8 @@ public abstract class ReadOnlyTagHelperAttributeList : ReadOnlyCollection<TagHel
     /// </summary>
     /// <param name="attributes">The collection to wrap.</param>
     public ReadOnlyTagHelperAttributeList(IList<TagHelperAttribute> attributes) : base(attributes)
-    { }
+    {
+    }
 
     /// <summary>
     /// Gets the first <see cref="TagHelperAttribute"/> with <see cref="TagHelperAttribute.Name"/>

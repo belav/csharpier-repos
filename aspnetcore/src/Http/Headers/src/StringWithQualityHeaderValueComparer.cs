@@ -14,7 +14,9 @@ namespace Microsoft.Net.Http.Headers;
 /// </summary>
 public class StringWithQualityHeaderValueComparer : IComparer<StringWithQualityHeaderValue>
 {
-    private StringWithQualityHeaderValueComparer() { }
+    private StringWithQualityHeaderValueComparer()
+    {
+    }
 
     /// <summary>
     /// Gets the default instance of <see cref="StringWithQualityHeaderValueComparer"/>.

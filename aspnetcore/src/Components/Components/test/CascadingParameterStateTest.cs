@@ -471,7 +471,9 @@ public class CascadingParameterStateTest
         return supplier;
     }
 
-    class ComponentWithNoParams : TestComponentBase { }
+    class ComponentWithNoParams : TestComponentBase
+    {
+    }
 
     class ComponentWithNoCascadingParams : TestComponentBase
     {
@@ -517,17 +519,29 @@ public class CascadingParameterStateTest
             throw new NotImplementedException();
     }
 
-    class ValueType1 { }
+    class ValueType1
+    {
+    }
 
-    class ValueType2 { }
+    class ValueType2
+    {
+    }
 
-    class ValueType3 { }
+    class ValueType3
+    {
+    }
 
-    class CascadingValueTypeBaseClass { }
+    class CascadingValueTypeBaseClass
+    {
+    }
 
     class CascadingValueTypeDerivedClass
         : CascadingValueTypeBaseClass,
-            ICascadingValueTypeDerivedClassInterface { }
+            ICascadingValueTypeDerivedClassInterface
+    {
+    }
 
-    interface ICascadingValueTypeDerivedClassInterface { }
+    interface ICascadingValueTypeDerivedClassInterface
+    {
+    }
 }

@@ -2124,7 +2124,9 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
     {
         private readonly Func<PageContext, Task> _executeAction;
 
-        public TestPageResultExecutor() : this(null) { }
+        public TestPageResultExecutor() : this(null)
+        {
+        }
 
         public TestPageResultExecutor(Func<PageContext, Task> executeAction)
             : base(
@@ -2145,13 +2147,19 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         }
     }
 
-    private class PocoModel { }
+    private class PocoModel
+    {
+    }
 
     private class TestPage : Page
     {
-        public void OnGetHandler1() { }
+        public void OnGetHandler1()
+        {
+        }
 
-        public void OnGetHandler2() { }
+        public void OnGetHandler2()
+        {
+        }
 
         public override Task ExecuteAsync()
         {
@@ -2161,8 +2169,12 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
     private class TestPageModel : PageModel
     {
-        public void OnGetHandler1() { }
+        public void OnGetHandler1()
+        {
+        }
 
-        public void OnGetHandler2() { }
+        public void OnGetHandler2()
+        {
+        }
     }
 }

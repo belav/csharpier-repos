@@ -22,7 +22,9 @@ internal class TestSettings
     private readonly Action<OpenIdConnectOptions> _configureOptions;
     private OpenIdConnectOptions _options;
 
-    public TestSettings() : this(configure: null) { }
+    public TestSettings() : this(configure: null)
+    {
+    }
 
     public TestSettings(Action<OpenIdConnectOptions> configure)
     {

@@ -1886,19 +1886,25 @@ public abstract class PageModel : IAsyncPageFilter, IPageFilter
     /// Called after a handler method has been selected, but before model binding occurs.
     /// </summary>
     /// <param name="context">The <see cref="PageHandlerSelectedContext"/>.</param>
-    public virtual void OnPageHandlerSelected(PageHandlerSelectedContext context) { }
+    public virtual void OnPageHandlerSelected(PageHandlerSelectedContext context)
+    {
+    }
 
     /// <summary>
     /// Called before the handler method executes, after model binding is complete.
     /// </summary>
     /// <param name="context">The <see cref="PageHandlerExecutingContext"/>.</param>
-    public virtual void OnPageHandlerExecuting(PageHandlerExecutingContext context) { }
+    public virtual void OnPageHandlerExecuting(PageHandlerExecutingContext context)
+    {
+    }
 
     /// <summary>
     /// Called after the handler method executes, before the action result executes.
     /// </summary>
     /// <param name="context">The <see cref="PageHandlerExecutedContext"/>.</param>
-    public virtual void OnPageHandlerExecuted(PageHandlerExecutedContext context) { }
+    public virtual void OnPageHandlerExecuted(PageHandlerExecutedContext context)
+    {
+    }
 
     /// <summary>
     /// Called asynchronously after the handler method has been selected, but before model binding occurs.

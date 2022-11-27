@@ -37,7 +37,9 @@ public abstract class Http3ConnectionBenchmarkBase
 
     private sealed class DefaultTimeoutHandler : ITimeoutHandler
     {
-        public void OnTimeout(TimeoutReason reason) { }
+        public void OnTimeout(TimeoutReason reason)
+        {
+        }
     }
 
     public virtual void GlobalSetup()
@@ -104,5 +106,7 @@ public abstract class Http3ConnectionBenchmarkBase
     }
 
     [GlobalCleanup]
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }

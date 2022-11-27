@@ -48,7 +48,9 @@ public class CertificateForwardingTests
                     .UseTestServer()
                     .ConfigureServices(services =>
                     {
-                        services.AddCertificateForwarding(options => { });
+                        services.AddCertificateForwarding(options =>
+                        {
+                        });
                     })
                     .Configure(app =>
                     {
@@ -96,7 +98,9 @@ public class CertificateForwardingTests
                     .UseTestServer()
                     .ConfigureServices(services =>
                     {
-                        services.AddCertificateForwarding(options => { });
+                        services.AddCertificateForwarding(options =>
+                        {
+                        });
                     })
                     .Configure(app =>
                     {
@@ -243,7 +247,9 @@ public class CertificateForwardingTests
                     .UseTestServer()
                     .ConfigureServices(services =>
                     {
-                        services.AddCertificateForwarding(options => { });
+                        services.AddCertificateForwarding(options =>
+                        {
+                        });
                     })
                     .Configure(app =>
                     {

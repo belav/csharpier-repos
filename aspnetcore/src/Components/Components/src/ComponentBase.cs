@@ -58,7 +58,9 @@ public abstract class ComponentBase : IComponent, IHandleEvent, IHandleAfterRend
     /// Method invoked when the component is ready to start, having received its
     /// initial parameters from its parent in the render tree.
     /// </summary>
-    protected virtual void OnInitialized() { }
+    protected virtual void OnInitialized()
+    {
+    }
 
     /// <summary>
     /// Method invoked when the component is ready to start, having received its
@@ -74,7 +76,9 @@ public abstract class ComponentBase : IComponent, IHandleEvent, IHandleAfterRend
     /// Method invoked when the component has received parameters from its parent in
     /// the render tree, and the incoming values have been assigned to properties.
     /// </summary>
-    protected virtual void OnParametersSet() { }
+    protected virtual void OnParametersSet()
+    {
+    }
 
     /// <summary>
     /// Method invoked when the component has received parameters from its parent in
@@ -129,7 +133,9 @@ public abstract class ComponentBase : IComponent, IHandleEvent, IHandleAfterRend
     /// Use the <paramref name="firstRender"/> parameter to ensure that initialization work is only performed
     /// once.
     /// </remarks>
-    protected virtual void OnAfterRender(bool firstRender) { }
+    protected virtual void OnAfterRender(bool firstRender)
+    {
+    }
 
     /// <summary>
     /// Method invoked after each time the component has been rendered. Note that the component does

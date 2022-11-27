@@ -23,7 +23,9 @@ public class ObjectVisitor
     /// <param name="path">The path of the JsonPatch operation</param>
     /// <param name="contractResolver">The <see cref="IContractResolver"/>.</param>
     public ObjectVisitor(ParsedPath path, IContractResolver contractResolver)
-        : this(path, contractResolver, AdapterFactory.Default) { }
+        : this(path, contractResolver, AdapterFactory.Default)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ObjectVisitor"/>.

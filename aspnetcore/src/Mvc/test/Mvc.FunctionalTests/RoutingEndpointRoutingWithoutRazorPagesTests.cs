@@ -8,5 +8,7 @@ public class RoutingEndpointRoutingWithoutRazorPagesTests
 {
     public RoutingEndpointRoutingWithoutRazorPagesTests(
         MvcTestFixture<BasicWebSite.Startup> fixture
-    ) : base(fixture) { }
+    ) : base(fixture)
+    {
+    }
 }

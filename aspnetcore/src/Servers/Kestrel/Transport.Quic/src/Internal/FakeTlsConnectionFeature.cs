@@ -11,7 +11,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic.Intern
 {
     internal class FakeTlsConnectionFeature : ITlsConnectionFeature
     {
-        public FakeTlsConnectionFeature() { }
+        public FakeTlsConnectionFeature()
+        {
+        }
 
         public X509Certificate2? ClientCertificate
         {

@@ -9,7 +9,9 @@ public class NonSeekableReadStream : Stream
     private readonly bool _allowSyncReads;
 
     public NonSeekableReadStream(byte[] data, bool allowSyncReads = true)
-        : this(new MemoryStream(data), allowSyncReads) { }
+        : this(new MemoryStream(data), allowSyncReads)
+    {
+    }
 
     public NonSeekableReadStream(Stream inner, bool allowSyncReads)
     {

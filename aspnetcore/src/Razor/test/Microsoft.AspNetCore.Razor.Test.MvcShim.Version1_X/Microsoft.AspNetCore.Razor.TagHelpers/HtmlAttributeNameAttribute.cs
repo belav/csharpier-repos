@@ -22,7 +22,9 @@ public sealed class HtmlAttributeNameAttribute : Attribute
     /// <see cref="System.Collections.Generic.IDictionary{TKey, TValue}"/> where <c>TKey</c> is
     /// <see cref="string"/>.
     /// </remarks>
-    public HtmlAttributeNameAttribute() { }
+    public HtmlAttributeNameAttribute()
+    {
+    }
 
     /// <summary>
     /// Instantiates a new instance of the <see cref="HtmlAttributeNameAttribute"/> class.

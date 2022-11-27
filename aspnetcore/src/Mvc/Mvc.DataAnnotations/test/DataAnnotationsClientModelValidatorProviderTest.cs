@@ -164,10 +164,14 @@ public class DataAnnotationsClientModelValidatorProviderTest
         return metadata.ValidatorMetadata.Select(v => new ClientValidatorItem(v)).ToList();
     }
 
-    private class DummyValidationAttribute : ValidationAttribute { }
+    private class DummyValidationAttribute : ValidationAttribute
+    {
+    }
 
     [DummyValidation]
-    private class DummyClassWithDummyValidationAttribute { }
+    private class DummyClassWithDummyValidationAttribute
+    {
+    }
 
     private class DummyRequiredAttributeHelperClass
     {

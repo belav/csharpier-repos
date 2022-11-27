@@ -256,5 +256,7 @@ public class HttpProtocolFeatureCollection
         _collection = http1Connection;
     }
 
-    public interface IHttpNotFoundFeature { }
+    public interface IHttpNotFoundFeature
+    {
+    }
 }

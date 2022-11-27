@@ -13,7 +13,9 @@ public class DefaultFilesOptions : SharedOptionsBase
     /// <summary>
     /// Configuration for the DefaultFilesMiddleware.
     /// </summary>
-    public DefaultFilesOptions() : this(new SharedOptions()) { }
+    public DefaultFilesOptions() : this(new SharedOptions())
+    {
+    }
 
     /// <summary>
     /// Configuration for the DefaultFilesMiddleware.

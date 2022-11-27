@@ -14,7 +14,9 @@ public class ConsoleReporter : IReporter
 {
     private readonly object _writeLock = new object();
 
-    public ConsoleReporter(IConsole console) : this(console, verbose: false, quiet: false) { }
+    public ConsoleReporter(IConsole console) : this(console, verbose: false, quiet: false)
+    {
+    }
 
     public ConsoleReporter(IConsole console, bool verbose, bool quiet)
     {

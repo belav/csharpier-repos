@@ -29,7 +29,9 @@ public class MicrosoftAccountHandler : OAuthHandler<MicrosoftAccountOptions>
         ILoggerFactory logger,
         UrlEncoder encoder,
         ISystemClock clock
-    ) : base(options, logger, encoder, clock) { }
+    ) : base(options, logger, encoder, clock)
+    {
+    }
 
     /// <inheritdoc />
     protected override async Task<AuthenticationTicket> CreateTicketAsync(

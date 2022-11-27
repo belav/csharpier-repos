@@ -13,4 +13,6 @@ namespace Microsoft.AspNetCore.Authorization;
     AllowMultiple = false,
     Inherited = true
 )]
-public class AllowAnonymousAttribute : Attribute, IAllowAnonymous { }
+public class AllowAnonymousAttribute : Attribute, IAllowAnonymous
+{
+}

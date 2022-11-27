@@ -890,7 +890,11 @@ public class RendererTest
 
         var component = new EventComponent
         {
-            OnArbitraryDelegateEvent = (Action<EventArgs, string>)((x, y) => { }),
+            OnArbitraryDelegateEvent =
+                (Action<EventArgs, string>)(
+                    (x, y) => {
+                    }
+                ),
         };
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
@@ -915,7 +919,12 @@ public class RendererTest
 
         var component = new EventComponent
         {
-            OnArbitraryDelegateEvent = (Action<DateTime>)(arg => { }),
+            OnArbitraryDelegateEvent =
+                (Action<DateTime>)(
+                    arg =>
+                    {
+                    }
+                ),
         };
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
@@ -3415,7 +3424,9 @@ public class RendererTest
     public void ComponentCannotTriggerRenderBeforeRenderHandleAssigned()
     {
         // Arrange
-        var component = new TestComponent(builder => { });
+        var component = new TestComponent(builder =>
+        {
+        });
 
         // Act/Assert
         var ex = Assert.Throws<InvalidOperationException>(() => component.TriggerRender());
@@ -3846,7 +3857,13 @@ public class RendererTest
                         async __value =>
                         {
                             value = __value;
-                            await EventCallback.Factory.Create(component, () => { }).InvokeAsync();
+                            await EventCallback.Factory
+                                .Create(
+                                    component,
+                                    () => {
+                                    }
+                                )
+                                .InvokeAsync();
                         },
                         value
                     ),
@@ -3888,9 +3905,19 @@ public class RendererTest
         {
             builder.OpenElement(0, "parent elem");
             builder.AddAttribute(1, "parent elem attr", attrValue);
-            builder.AddElementReferenceCapture(2, _ => { });
+            builder.AddElementReferenceCapture(
+                2,
+                _ =>
+                {
+                }
+            );
             builder.OpenElement(3, "child elem");
-            builder.AddElementReferenceCapture(4, _ => { });
+            builder.AddElementReferenceCapture(
+                4,
+                _ =>
+                {
+                }
+            );
             builder.AddContent(5, "child text");
             builder.CloseElement();
             builder.CloseElement();
@@ -5971,7 +5998,9 @@ public class RendererTest
 
     private class NoOpRenderer : Renderer
     {
-        public NoOpRenderer() : base(new TestServiceProvider(), NullLoggerFactory.Instance) { }
+        public NoOpRenderer() : base(new TestServiceProvider(), NullLoggerFactory.Instance)
+        {
+        }
 
         public override Dispatcher Dispatcher { get; } = Dispatcher.CreateDefault();
 
@@ -6343,7 +6372,9 @@ public class RendererTest
             return Task.CompletedTask;
         }
 
-        protected override void BuildRenderTree(RenderTreeBuilder builder) { }
+        protected override void BuildRenderTree(RenderTreeBuilder builder)
+        {
+        }
     }
 
     private class DisposableComponent : AutoRenderComponent, IDisposable
@@ -6359,7 +6390,9 @@ public class RendererTest
             DisposeAction?.Invoke();
         }
 
-        protected override void BuildRenderTree(RenderTreeBuilder builder) { }
+        protected override void BuildRenderTree(RenderTreeBuilder builder)
+        {
+        }
     }
 
     private class AsyncDisposableComponent : AutoRenderComponent, IAsyncDisposable
@@ -6375,7 +6408,9 @@ public class RendererTest
             return AsyncDisposeAction == null ? default : AsyncDisposeAction.Invoke();
         }
 
-        protected override void BuildRenderTree(RenderTreeBuilder builder) { }
+        protected override void BuildRenderTree(RenderTreeBuilder builder)
+        {
+        }
     }
 
     class TestAsyncRenderer : TestRenderer
@@ -6763,7 +6798,9 @@ public class RendererTest
         }
     }
 
-    private class DerivedEventArgs : EventArgs { }
+    private class DerivedEventArgs : EventArgs
+    {
+    }
 
     class CallbackOnRenderComponent : AutoRenderComponent
     {
@@ -6789,7 +6826,9 @@ public class RendererTest
         [Parameter]
         public int SomeParam { get; set; }
 
-        public void Attach(RenderHandle renderHandle) { }
+        public void Attach(RenderHandle renderHandle)
+        {
+        }
 
         public Task SetParametersAsync(ParameterView parameters)
         {
@@ -6887,7 +6926,15 @@ public class RendererTest
             }
 
             builder.OpenElement(0, "someelem");
-            builder.AddAttribute(1, "onmakeerror", EventCallback.Factory.Create(this, () => { }));
+            builder.AddAttribute(
+                1,
+                "onmakeerror",
+                EventCallback.Factory.Create(
+                    this,
+                    () => {
+                    }
+                )
+            );
             builder.AddContent(1, "Hello");
             builder.CloseElement();
         }

@@ -8,11 +8,17 @@ namespace Microsoft.AspNetCore.Mvc.Razor;
 
 public abstract class RazorPage : RazorPageBase
 {
-    public override void EndContext() { }
+    public override void EndContext()
+    {
+    }
 
-    public override void BeginContext(int position, int length, bool isLiteral) { }
+    public override void BeginContext(int position, int length, bool isLiteral)
+    {
+    }
 
-    public override void EnsureRenderedBodyOrSections() { }
+    public override void EnsureRenderedBodyOrSections()
+    {
+    }
 
     protected virtual IHtmlContent RenderBody()
     {

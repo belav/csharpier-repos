@@ -9,7 +9,9 @@ namespace XmlFormattersWebSite;
 
 public class PersonWrapper : IUnwrappable
 {
-    public PersonWrapper() { }
+    public PersonWrapper()
+    {
+    }
 
     public PersonWrapper(Person person)
     {

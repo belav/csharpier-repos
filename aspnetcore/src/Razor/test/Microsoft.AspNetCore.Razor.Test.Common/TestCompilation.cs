@@ -49,7 +49,9 @@ public static class TestCompilation
         {
             return library.ResolveReferencePaths();
         }
-        catch (InvalidOperationException) { }
+        catch (InvalidOperationException)
+        {
+        }
 
         return Array.Empty<string>();
     }

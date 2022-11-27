@@ -14,14 +14,18 @@ public class IdentityResourceCollection : Collection<IdentityResource>
     /// <summary>
     /// Initializes a new instance of <see cref="IdentityResourceCollection"/>.
     /// </summary>
-    public IdentityResourceCollection() { }
+    public IdentityResourceCollection()
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="IdentityResourceCollection"/> with the given
     /// identity resources in <paramref name="list"/>.
     /// </summary>
     /// <param name="list">The initial list of <see cref="IdentityResource"/>.</param>
-    public IdentityResourceCollection(IList<IdentityResource> list) : base(list) { }
+    public IdentityResourceCollection(IList<IdentityResource> list) : base(list)
+    {
+    }
 
     /// <summary>
     /// Gets an identity resource given its name.

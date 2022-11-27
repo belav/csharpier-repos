@@ -127,24 +127,38 @@ public class OutputCacheAttributeTests
         }
 
         [OutputCache()]
-        public static void Default() { }
+        public static void Default()
+        {
+        }
 
         [OutputCache(Duration = 42)]
-        public static void Duration() { }
+        public static void Duration()
+        {
+        }
 
         [OutputCache(NoStore = true)]
-        public static void NoStore() { }
+        public static void NoStore()
+        {
+        }
 
         [OutputCache(PolicyName = "MyPolicy")]
-        public static void PolicyName() { }
+        public static void PolicyName()
+        {
+        }
 
         [OutputCache(VaryByHeaderNames = new[] { "HeaderA", "HeaderC" })]
-        public static void VaryByHeaderNames() { }
+        public static void VaryByHeaderNames()
+        {
+        }
 
         [OutputCache(VaryByQueryKeys = new[] { "QueryA", "QueryC" })]
-        public static void VaryByQueryKeys() { }
+        public static void VaryByQueryKeys()
+        {
+        }
 
         [OutputCache(VaryByRouteValueNames = new[] { "RouteA", "RouteC" })]
-        public static void VaryByRouteValueNames() { }
+        public static void VaryByRouteValueNames()
+        {
+        }
     }
 }

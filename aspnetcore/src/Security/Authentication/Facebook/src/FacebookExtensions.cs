@@ -21,7 +21,12 @@ public static class FacebookAuthenticationOptionsExtensions
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
     public static AuthenticationBuilder AddFacebook(this AuthenticationBuilder builder) =>
-        builder.AddFacebook(FacebookDefaults.AuthenticationScheme, _ => { });
+        builder.AddFacebook(
+            FacebookDefaults.AuthenticationScheme,
+            _ =>
+            {
+            }
+        );
 
     /// <summary>
     /// Adds Facebook OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default scheme.

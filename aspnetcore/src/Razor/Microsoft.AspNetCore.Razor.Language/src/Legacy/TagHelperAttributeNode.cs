@@ -20,7 +20,9 @@ internal class TagHelperAttributeNode
 
     // Internal for testing
     internal TagHelperAttributeNode(string name, SyntaxNode value)
-        : this(name, value, AttributeStructure.DoubleQuotes) { }
+        : this(name, value, AttributeStructure.DoubleQuotes)
+    {
+    }
 
     public string Name { get; }
 

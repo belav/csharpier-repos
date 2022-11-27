@@ -27,7 +27,9 @@ public abstract class SignInAuthenticationHandler<TOptions>
         ILoggerFactory logger,
         UrlEncoder encoder,
         ISystemClock clock
-    ) : base(options, logger, encoder, clock) { }
+    ) : base(options, logger, encoder, clock)
+    {
+    }
 
     /// <inheritdoc/>
     public virtual Task SignInAsync(ClaimsPrincipal user, AuthenticationProperties? properties)

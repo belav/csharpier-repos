@@ -59,7 +59,9 @@ public sealed class ValidationProblemDetailsConverter : JsonConverter
         /// <remarks>
         /// Required for JSON.NET deserialization.
         /// </remarks>
-        public AnnotatedValidationProblemDetails() { }
+        public AnnotatedValidationProblemDetails()
+        {
+        }
 
         public AnnotatedValidationProblemDetails(ValidationProblemDetails problemDetails)
             : base(problemDetails)

@@ -49,7 +49,9 @@ public class ShortCircuitAtPageFilterPageModel : PageModel
 
     private class SyncTestPageFilterAttribute : Attribute, IPageFilter
     {
-        public void OnPageHandlerSelected(PageHandlerSelectedContext context) { }
+        public void OnPageHandlerSelected(PageHandlerSelectedContext context)
+        {
+        }
 
         public void OnPageHandlerExecuting(PageHandlerExecutingContext context)
         {
@@ -59,6 +61,8 @@ public class ShortCircuitAtPageFilterPageModel : PageModel
             }
         }
 
-        public void OnPageHandlerExecuted(PageHandlerExecutedContext context) { }
+        public void OnPageHandlerExecuted(PageHandlerExecutedContext context)
+        {
+        }
     }
 }

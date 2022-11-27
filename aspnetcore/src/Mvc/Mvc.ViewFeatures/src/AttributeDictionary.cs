@@ -375,7 +375,9 @@ public class AttributeDictionary
         object IEnumerator.Current => Current;
 
         /// <inheritdoc />
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         /// <inheritdoc />
         public bool MoveNext()
@@ -487,7 +489,9 @@ public class AttributeDictionary
 
             object IEnumerator.Current => Current;
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {
@@ -599,7 +603,9 @@ public class AttributeDictionary
 
             object? IEnumerator.Current => Current;
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {

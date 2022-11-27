@@ -225,9 +225,13 @@ internal static class TestContextFactory
 
     private class TestHttp2StreamLifetimeHandler : IHttp2StreamLifetimeHandler
     {
-        public void DecrementActiveClientStreamCount() { }
+        public void DecrementActiveClientStreamCount()
+        {
+        }
 
-        public void OnStreamCompleted(Http2Stream stream) { }
+        public void OnStreamCompleted(Http2Stream stream)
+        {
+        }
     }
 
     private class TestMultiplexedConnectionContext : MultiplexedConnectionContext
@@ -236,9 +240,13 @@ internal static class TestContextFactory
         public override IFeatureCollection Features { get; }
         public override IDictionary<object, object> Items { get; set; }
 
-        public override void Abort() { }
+        public override void Abort()
+        {
+        }
 
-        public override void Abort(ConnectionAbortedException abortReason) { }
+        public override void Abort(ConnectionAbortedException abortReason)
+        {
+        }
 
         public override ValueTask<ConnectionContext> AcceptAsync(
             CancellationToken cancellationToken = default

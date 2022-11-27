@@ -33,18 +33,26 @@ internal class TestServer : IAsyncDisposable, IStartup
     private ListenOptions _listenOptions;
     private readonly RequestDelegate _app;
 
-    public TestServer(RequestDelegate app) : this(app, new TestServiceContext()) { }
+    public TestServer(RequestDelegate app) : this(app, new TestServiceContext())
+    {
+    }
 
     public TestServer(RequestDelegate app, TestServiceContext context)
-        : this(app, context, new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))) { }
+        : this(app, context, new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)))
+    {
+    }
 
     public TestServer(RequestDelegate app, TestServiceContext context, ListenOptions listenOptions)
         : this(
             app,
             context,
             options => options.CodeBackedListenOptions.Add(listenOptions),
-            _ => { }
-        ) { }
+            _ =>
+            {
+            }
+        )
+    {
+    }
 
     public TestServer(
         RequestDelegate app,
@@ -63,14 +71,28 @@ internal class TestServer : IAsyncDisposable, IStartup
                 configureListenOptions(listenOptions);
                 options.CodeBackedListenOptions.Add(listenOptions);
             },
-            _ => { }
-        ) { }
+            _ =>
+            {
+            }
+        )
+    {
+    }
 
     public TestServer(
         RequestDelegate app,
         TestServiceContext context,
         Action<KestrelServerOptions> configureKestrel
-    ) : this(app, context, configureKestrel, _ => { }) { }
+    )
+        : this(
+            app,
+            context,
+            configureKestrel,
+            _ =>
+            {
+            }
+        )
+    {
+    }
 
     public TestServer(
         RequestDelegate app,

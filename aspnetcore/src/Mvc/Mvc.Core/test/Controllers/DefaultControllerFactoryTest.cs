@@ -295,5 +295,7 @@ public class DefaultControllerFactoryTest
         public TestService Service { get; }
     }
 
-    private class TestService { }
+    private class TestService
+    {
+    }
 }

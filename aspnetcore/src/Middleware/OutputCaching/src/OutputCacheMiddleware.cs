@@ -56,7 +56,9 @@ internal sealed class OutputCacheMiddleware
             loggerFactory,
             outputCache,
             new OutputCacheKeyProvider(poolProvider, options)
-        ) { }
+        )
+    {
+    }
 
     // for testing
     internal OutputCacheMiddleware(

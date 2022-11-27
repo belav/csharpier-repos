@@ -118,7 +118,9 @@ public class H2SpecTests : LoggedTest
     public class H2SpecTestCase : IXunitSerializable
     {
         // For the serializer
-        public H2SpecTestCase() { }
+        public H2SpecTestCase()
+        {
+        }
 
         public string Id { get; set; }
         public string Description { get; set; }

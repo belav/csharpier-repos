@@ -23,7 +23,11 @@ public class AzureADB2CAuthenticationBuilderExtensionsTests
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
         // Act
-        services.AddAuthentication().AddAzureADB2C(o => { });
+        services
+            .AddAuthentication()
+            .AddAzureADB2C(o =>
+            {
+            });
         var provider = services.BuildServiceProvider();
 
         // Assert
@@ -240,7 +244,14 @@ public class AzureADB2CAuthenticationBuilderExtensionsTests
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
-        services.AddAuthentication().AddAzureADB2C(o => { }).AddAzureADB2C(o => { });
+        services
+            .AddAuthentication()
+            .AddAzureADB2C(o =>
+            {
+            })
+            .AddAzureADB2C(o =>
+            {
+            });
 
         var provider = services.BuildServiceProvider();
         var azureADB2COptionsMonitor = provider.GetService<IOptionsMonitor<AzureADB2COptions>>();
@@ -262,8 +273,18 @@ public class AzureADB2CAuthenticationBuilderExtensionsTests
 
         services
             .AddAuthentication()
-            .AddAzureADB2C(o => { })
-            .AddAzureADB2C("Custom", AzureADB2CDefaults.OpenIdScheme, "Cookie", null, o => { });
+            .AddAzureADB2C(o =>
+            {
+            })
+            .AddAzureADB2C(
+                "Custom",
+                AzureADB2CDefaults.OpenIdScheme,
+                "Cookie",
+                null,
+                o =>
+                {
+                }
+            );
 
         var provider = services.BuildServiceProvider();
         var azureADB2COptionsMonitor = provider.GetService<IOptionsMonitor<AzureADB2COptions>>();
@@ -289,8 +310,18 @@ public class AzureADB2CAuthenticationBuilderExtensionsTests
 
         services
             .AddAuthentication()
-            .AddAzureADB2C(o => { })
-            .AddAzureADB2C("Custom", "OpenID", AzureADB2CDefaults.CookieScheme, null, o => { });
+            .AddAzureADB2C(o =>
+            {
+            })
+            .AddAzureADB2C(
+                "Custom",
+                "OpenID",
+                AzureADB2CDefaults.CookieScheme,
+                null,
+                o =>
+                {
+                }
+            );
 
         var provider = services.BuildServiceProvider();
         var azureADB2COptionsMonitor = provider.GetService<IOptionsMonitor<AzureADB2COptions>>();
@@ -315,7 +346,11 @@ public class AzureADB2CAuthenticationBuilderExtensionsTests
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
         // Act
-        services.AddAuthentication().AddAzureADB2CBearer(o => { });
+        services
+            .AddAuthentication()
+            .AddAzureADB2CBearer(o =>
+            {
+            });
         var provider = services.BuildServiceProvider();
 
         // Assert
@@ -457,7 +492,14 @@ public class AzureADB2CAuthenticationBuilderExtensionsTests
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
-        services.AddAuthentication().AddAzureADB2CBearer(o => { }).AddAzureADB2CBearer(o => { });
+        services
+            .AddAuthentication()
+            .AddAzureADB2CBearer(o =>
+            {
+            })
+            .AddAzureADB2CBearer(o =>
+            {
+            });
 
         var provider = services.BuildServiceProvider();
         var azureADB2COptionsMonitor = provider.GetService<IOptionsMonitor<AzureADB2COptions>>();
@@ -482,11 +524,15 @@ public class AzureADB2CAuthenticationBuilderExtensionsTests
 
         services
             .AddAuthentication()
-            .AddAzureADB2CBearer(o => { })
+            .AddAzureADB2CBearer(o =>
+            {
+            })
             .AddAzureADB2CBearer(
                 "Custom",
                 AzureADB2CDefaults.JwtBearerAuthenticationScheme,
-                o => { }
+                o =>
+                {
+                }
             );
 
         var provider = services.BuildServiceProvider();

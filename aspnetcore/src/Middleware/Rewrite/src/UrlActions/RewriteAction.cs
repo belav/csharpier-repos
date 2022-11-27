@@ -37,7 +37,9 @@ internal sealed class RewriteAction : UrlAction
             queryStringAppend,
             queryStringDelete: false,
             escapeBackReferences: false
-        ) { }
+        )
+    {
+    }
 
     public override void ApplyAction(
         RewriteContext context,

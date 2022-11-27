@@ -22,7 +22,9 @@ public sealed class PushStreamHttpResult : IResult, IFileHttpResult, IContentTyp
     /// <param name="streamWriterCallback">The stream writer callback.</param>
     /// <param name="contentType">The Content-Type header of the response.</param>
     internal PushStreamHttpResult(Func<Stream, Task> streamWriterCallback, string? contentType)
-        : this(streamWriterCallback, contentType, fileDownloadName: null) { }
+        : this(streamWriterCallback, contentType, fileDownloadName: null)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="PushStreamHttpResult"/> instance with
@@ -36,7 +38,9 @@ public sealed class PushStreamHttpResult : IResult, IFileHttpResult, IContentTyp
         Func<Stream, Task> streamWriterCallback,
         string? contentType,
         string? fileDownloadName
-    ) : this(streamWriterCallback, contentType, fileDownloadName, enableRangeProcessing: false) { }
+    ) : this(streamWriterCallback, contentType, fileDownloadName, enableRangeProcessing: false)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="PushStreamHttpResult"/> instance with the provided values.

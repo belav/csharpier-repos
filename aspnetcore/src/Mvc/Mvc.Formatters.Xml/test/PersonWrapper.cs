@@ -7,7 +7,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
 public class PersonWrapper : IUnwrappable
 {
-    public PersonWrapper() { }
+    public PersonWrapper()
+    {
+    }
 
     public PersonWrapper(Person person)
     {

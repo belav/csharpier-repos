@@ -7,6 +7,8 @@
         public void ActionMethod(
             [ModelBinder(Name = "model")]
                 IsProblematicParameter_ReturnsTrue_IfModelBinderAttributeIsUsedToRenameParameter different
-        ) { }
+        )
+        {
+        }
     }
 }

@@ -193,7 +193,9 @@ public class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTestBase
     }
 
     [JsonConverter(typeof(ThrowingFormatterPersonConverter))]
-    private class ThrowingFormatterModel { }
+    private class ThrowingFormatterModel
+    {
+    }
 
     private class ThrowingFormatterPersonConverter : JsonConverter<ThrowingFormatterModel>
     {

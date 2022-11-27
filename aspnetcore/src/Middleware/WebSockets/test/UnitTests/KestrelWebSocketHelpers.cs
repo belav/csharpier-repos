@@ -23,7 +23,13 @@ public class KestrelWebSocketHelpers
     )
     {
         Exception exceptionFromApp = null;
-        configure = configure ?? (o => { });
+        configure =
+            configure
+            ?? (
+                o =>
+                {
+                }
+            );
         Action<IApplicationBuilder> startup = builder =>
         {
             builder.Use(

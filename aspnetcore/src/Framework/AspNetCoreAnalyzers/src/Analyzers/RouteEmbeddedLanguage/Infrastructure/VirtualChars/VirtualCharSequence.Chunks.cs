@@ -21,7 +21,9 @@ internal partial struct VirtualCharSequence
     /// </summary>
     private abstract partial class Chunk
     {
-        protected Chunk() { }
+        protected Chunk()
+        {
+        }
 
         public abstract int Length { get; }
         public abstract VirtualChar this[int index] { get; }

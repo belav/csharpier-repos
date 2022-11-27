@@ -246,10 +246,14 @@ public class DefaultViewComponentSelectorTest
             public string Invoke() => "Hello";
         }
 
-        public class DerivedAmbiguous : AmbiguousBase { }
+        public class DerivedAmbiguous : AmbiguousBase
+        {
+        }
 
         [ViewComponent(Name = "NonAmbiguousName")]
-        public class DerivedAmbiguousWithOverriddenName : AmbiguousBase { }
+        public class DerivedAmbiguousWithOverriddenName : AmbiguousBase
+        {
+        }
     }
 
     // This will only consider types nested inside this class as ViewComponent classes
@@ -257,7 +261,8 @@ public class DefaultViewComponentSelectorTest
     {
         public FilteredViewComponentDescriptorProvider()
             : this(typeof(ViewComponentContainer).GetNestedTypes(bindingAttr: BindingFlags.Public))
-        { }
+        {
+        }
 
         // For error messages in tests above, ensure the TestApplicationPart returns types in a consistent order.
         public FilteredViewComponentDescriptorProvider(params Type[] allowedTypes)
@@ -265,7 +270,9 @@ public class DefaultViewComponentSelectorTest
                 GetApplicationPartManager(
                     allowedTypes.OrderBy(type => type.Name, StringComparer.Ordinal)
                 )
-            ) { }
+            )
+        {
+        }
 
         private static ApplicationPartManager GetApplicationPartManager(IEnumerable<Type> types)
         {

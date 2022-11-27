@@ -1936,7 +1936,9 @@ public class HtmlHelperSelectTest
                 new TestViewBufferScope(),
                 new Mock<HtmlEncoder>(MockBehavior.Strict).Object,
                 new Mock<UrlEncoder>(MockBehavior.Strict).Object
-            ) { }
+            )
+        {
+        }
 
         public ModelMetadata Metadata { get; private set; }
 
@@ -2001,7 +2003,9 @@ public class HtmlHelperSelectTest
         public const int One = 1;
     }
 
-    private enum EmptyEnum { }
+    private enum EmptyEnum
+    {
+    }
 
     private enum EnumWithDisplayNames
     {

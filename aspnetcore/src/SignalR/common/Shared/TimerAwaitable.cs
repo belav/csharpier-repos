@@ -13,7 +13,8 @@ internal sealed class TimerAwaitable : IDisposable, ICriticalNotifyCompletion
 {
     private Timer? _timer;
     private Action? _callback;
-    private static readonly Action _callbackCompleted = () => { };
+    private static readonly Action _callbackCompleted = () => {
+    };
 
     private readonly TimeSpan _period;
 

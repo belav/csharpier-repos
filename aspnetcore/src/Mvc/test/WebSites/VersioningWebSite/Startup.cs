@@ -25,5 +25,7 @@ public class Startup
         });
     }
 
-    protected virtual void ConfigureMvcOptions(MvcOptions options) { }
+    protected virtual void ConfigureMvcOptions(MvcOptions options)
+    {
+    }
 }

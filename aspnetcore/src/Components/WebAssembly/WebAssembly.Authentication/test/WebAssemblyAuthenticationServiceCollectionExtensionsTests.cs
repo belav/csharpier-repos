@@ -311,7 +311,9 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
         builder.Services.Replace(
             ServiceDescriptor.Singleton<NavigationManager, TestNavigationManager>()
         );
-        builder.Services.AddOidcAuthentication(options => { });
+        builder.Services.AddOidcAuthentication(options =>
+        {
+        });
         var host = builder.Build();
 
         var options = host.Services.GetRequiredService<
@@ -520,7 +522,8 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
         var calls = 0;
 
         builder.Services.AddOidcAuthentication<TestAuthenticationState, TestAccount>(options =>
-        { });
+        {
+        });
         builder.Services.Replace(
             ServiceDescriptor.Scoped(
                 typeof(NavigationManager),
@@ -561,7 +564,11 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
             throw new System.NotImplementedException();
     }
 
-    private class TestAuthenticationState : RemoteAuthenticationState { }
+    private class TestAuthenticationState : RemoteAuthenticationState
+    {
+    }
 
-    private class TestAccount : RemoteUserAccount { }
+    private class TestAccount : RemoteUserAccount
+    {
+    }
 }

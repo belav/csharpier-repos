@@ -20,7 +20,12 @@ public class IISTestSiteFixture : IDisposable
     private IISDeploymentResult _deploymentResult;
     private readonly Action<IISDeploymentParameters> _configure;
 
-    public IISTestSiteFixture() : this(_ => { }) { }
+    public IISTestSiteFixture()
+        : this(_ =>
+        {
+        })
+    {
+    }
 
     public IISDeploymentParameters DeploymentParameters { get; }
 

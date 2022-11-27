@@ -10,7 +10,9 @@ public class CachingApplicationPublisher : ApplicationPublisher, IDisposable
     private readonly Dictionary<DotnetPublishParameters, PublishedApplication> _publishCache =
         new Dictionary<DotnetPublishParameters, PublishedApplication>();
 
-    public CachingApplicationPublisher(string applicationPath) : base(applicationPath) { }
+    public CachingApplicationPublisher(string applicationPath) : base(applicationPath)
+    {
+    }
 
     public override async Task<PublishedApplication> Publish(
         DeploymentParameters deploymentParameters,

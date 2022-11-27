@@ -65,13 +65,17 @@ public class UserManagerTest
                 null,
                 null,
                 null
-            ) { }
+            )
+        {
+        }
     }
 
     public class CustomRoleManager : RoleManager<PocoRole>
     {
         public CustomRoleManager()
-            : base(new Mock<IRoleStore<PocoRole>>().Object, null, null, null, null) { }
+            : base(new Mock<IRoleStore<PocoRole>>().Object, null, null, null, null)
+        {
+        }
     }
 
     [Fact]
@@ -2024,7 +2028,9 @@ public class UserManagerTest
             return Task.FromResult<PocoUser>(null);
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public Task SetUserNameAsync(
             PocoUser user,

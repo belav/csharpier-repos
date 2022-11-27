@@ -48,7 +48,9 @@ public partial class ResourceManagerStringLocalizer : IStringLocalizer
             baseName,
             resourceNamesCache,
             logger
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Intended for testing purposes only.
@@ -71,7 +73,9 @@ public partial class ResourceManagerStringLocalizer : IStringLocalizer
             baseName,
             resourceNamesCache,
             logger
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Intended for testing purposes only.

@@ -2341,7 +2341,9 @@ public class DefaultApiDescriptionProviderTest
         return null;
     }
 
-    private void ReturnsVoid() { }
+    private void ReturnsVoid()
+    {
+    }
 
     private IActionResult ReturnsActionResult()
     {
@@ -2423,69 +2425,129 @@ public class DefaultApiDescriptionProviderTest
         ActionResult<IEnumerable<Product>>
     > ReturnsTaskOfActionResultOfSequenceOfProducts() => null;
 
-    private void AcceptsProduct(Product product) { }
+    private void AcceptsProduct(Product product)
+    {
+    }
 
-    private void RequiredParameter([BindRequired, Required] string name) { }
+    private void RequiredParameter([BindRequired, Required] string name)
+    {
+    }
 
-    private void AcceptsProduct_Body([FromBody] Product product) { }
+    private void AcceptsProduct_Body([FromBody] Product product)
+    {
+    }
 
-    private void AcceptsProduct_Form([FromForm] Product product) { }
+    private void AcceptsProduct_Form([FromForm] Product product)
+    {
+    }
 
-    private void AcceptsFormFile([FromFormFile] IFormFile formFile) { }
+    private void AcceptsFormFile([FromFormFile] IFormFile formFile)
+    {
+    }
 
     // This will show up as source = model binding
-    private void AcceptsProduct_Default([ModelBinder] Product product) { }
+    private void AcceptsProduct_Default([ModelBinder] Product product)
+    {
+    }
 
     // This will show up as source = unknown
     private void AcceptsProduct_Custom(
         [ModelBinder(BinderType = typeof(BodyModelBinder))] Product product
-    ) { }
+    )
+    {
+    }
 
-    private void AcceptsId_Route([FromRoute] int id) { }
+    private void AcceptsId_Route([FromRoute] int id)
+    {
+    }
 
-    private void AcceptsId_Query([FromQuery] int id) { }
+    private void AcceptsId_Query([FromQuery] int id)
+    {
+    }
 
-    private void AcceptsId_Header([FromHeader] int id) { }
+    private void AcceptsId_Header([FromHeader] int id)
+    {
+    }
 
-    private void AcceptsFormatters_Services([FromServices] ITestService tempDataProvider) { }
+    private void AcceptsFormatters_Services([FromServices] ITestService tempDataProvider)
+    {
+    }
 
-    private void AcceptsProductChangeDTO(ProductChangeDTO dto) { }
+    private void AcceptsProductChangeDTO(ProductChangeDTO dto)
+    {
+    }
 
-    private void AcceptsProductChangeDTO_Query([FromQuery] ProductChangeDTO dto) { }
+    private void AcceptsProductChangeDTO_Query([FromQuery] ProductChangeDTO dto)
+    {
+    }
 
-    private void AcceptsManager([ModelBinder] Manager dto) { }
+    private void AcceptsManager([ModelBinder] Manager dto)
+    {
+    }
 
-    private void AcceptsEmployee([FromQuery(Name = "employee")] Employee dto) { }
+    private void AcceptsEmployee([FromQuery(Name = "employee")] Employee dto)
+    {
+    }
 
-    private void AcceptsOrderDTO(OrderDTO dto) { }
+    private void AcceptsOrderDTO(OrderDTO dto)
+    {
+    }
 
-    private void AcceptsOrderDTO_Query([FromQuery] OrderDTO dto) { }
+    private void AcceptsOrderDTO_Query([FromQuery] OrderDTO dto)
+    {
+    }
 
-    private void AcceptsCycle(Cycle1 c) { }
+    private void AcceptsCycle(Cycle1 c)
+    {
+    }
 
-    private void AcceptsHasCollection(HasCollection c) { }
+    private void AcceptsHasCollection(HasCollection c)
+    {
+    }
 
-    private void AcceptsHasCollection_Complex(HasCollection_Complex c) { }
+    private void AcceptsHasCollection_Complex(HasCollection_Complex c)
+    {
+    }
 
-    private void AcceptsRedundantMetadata([FromQuery] RedundantMetadata r) { }
+    private void AcceptsRedundantMetadata([FromQuery] RedundantMetadata r)
+    {
+    }
 
-    private void AcceptsPerson([FromForm] Person person) { }
+    private void AcceptsPerson([FromForm] Person person)
+    {
+    }
 
-    private void FromRouting([FromRoute] int id) { }
+    private void FromRouting([FromRoute] int id)
+    {
+    }
 
-    private void FromModelBinding(int id) { }
+    private void FromModelBinding(int id)
+    {
+    }
 
-    private void FromCustom([ModelBinder(typeof(BodyModelBinder))] int id) { }
+    private void FromCustom([ModelBinder(typeof(BodyModelBinder))] int id)
+    {
+    }
 
-    private void FromHeader([FromHeader] int id) { }
+    private void FromHeader([FromHeader] int id)
+    {
+    }
 
-    private void FromBody([FromBody] int id) { }
+    private void FromBody([FromBody] int id)
+    {
+    }
 
-    private void AcceptsMultipleProperties([FromQuery] MultipleProperties model) { }
+    private void AcceptsMultipleProperties([FromQuery] MultipleProperties model)
+    {
+    }
 
-    private void AcceptsMultiplePropertiesNested([FromQuery] MultiplePropertiesContainer model) { }
+    private void AcceptsMultiplePropertiesNested([FromQuery] MultiplePropertiesContainer model)
+    {
+    }
 
-    private void ParameterDefaultValue(int value = 10) { }
+    private void ParameterDefaultValue(int value = 10)
+    {
+    }
 
     private class TestController
     {
@@ -2506,14 +2568,22 @@ public class DefaultApiDescriptionProviderTest
 
         public string NotBound { get; set; }
 
-        public void FromQueryName([FromQuery] string name) { }
+        public void FromQueryName([FromQuery] string name)
+        {
+        }
     }
 
-    public class Customer { }
+    public class Customer
+    {
+    }
 
-    public class BadData { }
+    public class BadData
+    {
+    }
 
-    public class ErrorDetails { }
+    public class ErrorDetails
+    {
+    }
 
     public class BaseProducesController : ControllerBase
     {
@@ -2532,10 +2602,14 @@ public class DefaultApiDescriptionProviderTest
             return default;
         }
 
-        public void ReturnsVoid() { }
+        public void ReturnsVoid()
+        {
+        }
     }
 
-    public class DerivedProducesController : BaseProducesController { }
+    public class DerivedProducesController : BaseProducesController
+    {
+    }
 
     private class Employee
     {
@@ -2754,7 +2828,9 @@ public class DefaultApiDescriptionProviderTest
         }
     }
 
-    private interface ITestService { }
+    private interface ITestService
+    {
+    }
 
     private class FromFormFileAttribute : Attribute, IBindingSourceMetadata
     {

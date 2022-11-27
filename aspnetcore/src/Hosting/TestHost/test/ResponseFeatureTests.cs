@@ -84,6 +84,8 @@ public class ResponseFeatureTests
 
     private ResponseFeature CreateResponseFeature()
     {
-        return new ResponseFeature(ex => { });
+        return new ResponseFeature(ex =>
+        {
+        });
     }
 }

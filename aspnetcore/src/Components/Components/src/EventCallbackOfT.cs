@@ -13,7 +13,10 @@ public readonly struct EventCallback<TValue> : IEventCallback
     /// </summary>
     public static readonly EventCallback<TValue> Empty = new EventCallback<TValue>(
         null,
-        (Action)(() => { })
+        (Action)(
+            () => {
+            }
+        )
     );
 
     internal readonly MulticastDelegate? Delegate;

@@ -13,7 +13,9 @@ internal sealed class RegularExpressionAttributeAdapter
     public RegularExpressionAttributeAdapter(
         RegularExpressionAttribute attribute,
         IStringLocalizer? stringLocalizer
-    ) : base(attribute, stringLocalizer) { }
+    ) : base(attribute, stringLocalizer)
+    {
+    }
 
     public override void AddValidation(ClientModelValidationContext context)
     {

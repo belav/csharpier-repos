@@ -10,7 +10,9 @@ public class ModelValidationResultComparer : IEqualityComparer<ModelValidationRe
     public static readonly ModelValidationResultComparer Instance =
         new ModelValidationResultComparer();
 
-    private ModelValidationResultComparer() { }
+    private ModelValidationResultComparer()
+    {
+    }
 
     public bool Equals(ModelValidationResult x, ModelValidationResult y)
     {

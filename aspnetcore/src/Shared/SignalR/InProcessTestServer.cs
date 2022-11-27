@@ -68,7 +68,9 @@ public class InProcessTestServer<TStartup> : InProcessTestServer where TStartup 
         return server;
     }
 
-    private InProcessTestServer() : this(loggerFactory: null, null, null) { }
+    private InProcessTestServer() : this(loggerFactory: null, null, null)
+    {
+    }
 
     private InProcessTestServer(
         ILoggerFactory loggerFactory,
@@ -205,7 +207,9 @@ public class InProcessTestServer<TStartup> : InProcessTestServer where TStartup 
             _loggerFactory = loggerFactory;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public ILogger CreateLogger(string categoryName)
         {

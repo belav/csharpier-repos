@@ -164,7 +164,8 @@ public class ControllerFactoryProviderTest
             Mock.Of<IControllerActivator>(),
             Enumerable.Empty<IControllerPropertyActivator>()
         );
-        Action<ControllerContext, object> expected = (_, __) => { };
+        Action<ControllerContext, object> expected = (_, __) => {
+        };
         var activatorProvider = new Mock<IControllerActivatorProvider>();
         activatorProvider
             .Setup(p => p.CreateReleaser(It.IsAny<ControllerActionDescriptor>()))

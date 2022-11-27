@@ -2247,7 +2247,9 @@ public class RazorViewEngineTest
                 optionsAccessor,
                 NullLoggerFactory.Instance,
                 new DiagnosticListener("Microsoft.AspNetCore.Mvc.Razor")
-            ) { }
+            )
+        {
+        }
 
         public IMemoryCache ViewLookupCachePublic => ViewLookupCache;
     }

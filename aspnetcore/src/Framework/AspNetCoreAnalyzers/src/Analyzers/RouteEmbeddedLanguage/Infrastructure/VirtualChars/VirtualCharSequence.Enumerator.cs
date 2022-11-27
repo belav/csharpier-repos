@@ -28,6 +28,8 @@ internal partial struct VirtualCharSequence
 
         object? IEnumerator.Current => this.Current;
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

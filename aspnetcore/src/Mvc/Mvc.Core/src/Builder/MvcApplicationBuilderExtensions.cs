@@ -29,7 +29,9 @@ public static class MvcApplicationBuilderExtensions
             throw new ArgumentNullException(nameof(app));
         }
 
-        return app.UseMvc(routes => { });
+        return app.UseMvc(routes =>
+        {
+        });
     }
 
     /// <summary>

@@ -17,7 +17,9 @@ public class UserOnlyCustomContextTest : IClassFixture<ScratchDatabaseFixture>
 
     public class CustomContext : DbContext
     {
-        public CustomContext(DbContextOptions options) : base(options) { }
+        public CustomContext(DbContextOptions options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -89,7 +91,9 @@ public class UserOnlyCustomContextTest : IClassFixture<ScratchDatabaseFixture>
                             b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
                         )
             )
-            .AddIdentityCore<IdentityUser>(o => { })
+            .AddIdentityCore<IdentityUser>(o =>
+            {
+            })
             .AddEntityFrameworkStores<CustomContext>();
 
         services.AddLogging();

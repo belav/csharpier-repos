@@ -9,7 +9,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 public class VersioningTests : VersioningTestsBase<VersioningWebSite.StartupWithoutEndpointRouting>
 {
     public VersioningTests(MvcTestFixture<VersioningWebSite.StartupWithoutEndpointRouting> fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     [Fact]
     public override async Task HasEndpointMatch()

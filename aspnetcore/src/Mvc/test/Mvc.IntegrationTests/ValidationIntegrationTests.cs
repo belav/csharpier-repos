@@ -29,7 +29,9 @@ public class ValidationIntegrationTests
         public double Amount { get; set; }
     }
 
-    private class TestController { }
+    private class TestController
+    {
+    }
 
     public static TheoryData<List<ParameterDescriptor>> MultipleActionParametersAndValidationData
     {
@@ -599,7 +601,9 @@ public class ValidationIntegrationTests
 #nullable enable
     private class ParameterInfos
     {
-        public void Method(string param1, string param2 = "sample_data") { }
+        public void Method(string param1, string param2 = "sample_data")
+        {
+        }
 
         public static ParameterInfo NonNullableParameterInfo = typeof(ParameterInfos)!
             .GetMethod(nameof(ParameterInfos.Method))!
@@ -1342,7 +1346,9 @@ public class ValidationIntegrationTests
     }
 
     [ValidateNever]
-    private class ValidateNoProperties : ValidateSomeProperties { }
+    private class ValidateNoProperties : ValidateSomeProperties
+    {
+    }
 
     [Fact]
     public async Task IValidatableObject_IsValidated()
@@ -2100,9 +2106,9 @@ public class ValidationIntegrationTests
         Assert.Equal(ModelValidationState.Valid, entry.ValidationState);
     }
 
-    private static void Validation_ListOfType_NoValidatorOnParameterTestMethod(
-        List<int> parameter
-    ) { }
+    private static void Validation_ListOfType_NoValidatorOnParameterTestMethod(List<int> parameter)
+    {
+    }
 
     [Fact]
     public async Task Validation_ListOfType_ValidatorOnParameter()
@@ -2168,7 +2174,9 @@ public class ValidationIntegrationTests
 
     private static void Validation_ListOfType_ValidatorOnParameterTestMethod(
         [ConsistentMinLength(3)] List<int> parameter
-    ) { }
+    )
+    {
+    }
 
     private class ConsistentMinLength : ValidationAttribute
     {
@@ -2250,7 +2258,9 @@ public class ValidationIntegrationTests
 
     private static void Validation_CollectionOfType_ValidatorOnElementTestMethod(
         Collection<InvalidEvenIds> p
-    ) { }
+    )
+    {
+    }
 
     public class InvalidEvenIds : IValidatableObject
     {
@@ -2603,7 +2613,9 @@ public class ValidationIntegrationTests
 
     private static void Validation_InifnitelyRecursiveModel_ValidationOnTopLevelParameterMethod(
         [Required] RecursiveModel model
-    ) { }
+    )
+    {
+    }
 
     [Fact]
     public async Task Validation_ModelWithNonNullableReferenceTypes_DoesNotValidateNonNullablePropertiesOnFrameworkTypes()
@@ -2677,7 +2689,9 @@ public class ValidationIntegrationTests
 #nullable enable
     private static void Validation_ModelWithNonNullableReferenceTypes_DoesNotValidateNonNullablePropertiesOnFrameworkTypesAction(
         ModelWithNonNullableReferenceTypeProperties model
-    ) { }
+    )
+    {
+    }
 
     public class ModelWithNonNullableReferenceTypeProperties
     {
@@ -2688,7 +2702,9 @@ public class ValidationIntegrationTests
                 .GetMethod(nameof(SomeMethod))!
                 .CreateDelegate<Action>();
 
-        public static void SomeMethod() { }
+        public static void SomeMethod()
+        {
+        }
     }
 
 #nullable restore
@@ -2705,7 +2721,9 @@ public class ValidationIntegrationTests
             IModelMetadataProvider modelMetadataProvider,
             IList<IModelValidatorProvider> validatorProviders,
             MvcOptions mvcOptions
-        ) : base(modelMetadataProvider, validatorProviders, mvcOptions) { }
+        ) : base(modelMetadataProvider, validatorProviders, mvcOptions)
+        {
+        }
 
         public RecordingValidationVisitor ValidationVisitor { get; private set; }
 
@@ -2743,7 +2761,9 @@ public class ValidationIntegrationTests
                 validatorCache,
                 metadataProvider,
                 validationState
-            ) { }
+            )
+        {
+        }
 
         public List<ModelMetadata> Visited = new();
 

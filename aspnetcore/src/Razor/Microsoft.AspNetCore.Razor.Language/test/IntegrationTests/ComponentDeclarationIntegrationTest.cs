@@ -177,9 +177,13 @@ namespace Test
 
     public class BaseClass : IComponent
     {
-        public void Attach(RenderHandle renderHandle) { }
+        public void Attach(RenderHandle renderHandle)
+        {
+        }
 
-        protected virtual void BuildRenderTree(RenderTreeBuilder builder) { }
+        protected virtual void BuildRenderTree(RenderTreeBuilder builder)
+        {
+        }
 
         public Task SetParametersAsync(ParameterView parameters)
         {
@@ -187,5 +191,7 @@ namespace Test
         }
     }
 
-    public interface IDoCoolThings { }
+    public interface IDoCoolThings
+    {
+    }
 }

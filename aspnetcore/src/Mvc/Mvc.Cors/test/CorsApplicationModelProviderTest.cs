@@ -271,7 +271,9 @@ public class CorsApplicationModelProviderTest
     {
         [DisableCors]
         [HttpGet]
-        public void Action() { }
+        public void Action()
+        {
+        }
     }
 
     [EnableCors("policy")]

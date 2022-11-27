@@ -17,5 +17,7 @@ public class RedirectAntiforgeryValidationFailedResultFilter : IAlwaysRunResultF
         }
     }
 
-    public void OnResultExecuted(ResultExecutedContext context) { }
+    public void OnResultExecuted(ResultExecutedContext context)
+    {
+    }
 }

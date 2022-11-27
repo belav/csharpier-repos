@@ -60,7 +60,9 @@ public class SetCookieHeaderValue
     /// Initializes a new instance of <see cref="SetCookieHeaderValue"/>.
     /// </summary>
     /// <param name="name">The cookie name.</param>
-    public SetCookieHeaderValue(StringSegment name) : this(name, StringSegment.Empty) { }
+    public SetCookieHeaderValue(StringSegment name) : this(name, StringSegment.Empty)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SetCookieHeaderValue"/>.

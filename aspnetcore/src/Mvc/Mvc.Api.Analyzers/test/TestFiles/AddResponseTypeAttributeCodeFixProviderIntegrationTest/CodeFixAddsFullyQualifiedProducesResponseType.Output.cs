@@ -10,7 +10,9 @@ namespace TestApp._OUTPUT_
 
     [ApiController]
     [Route("[controller]/[action]")]
-    public class BaseController : ControllerBase { }
+    public class BaseController : ControllerBase
+    {
+    }
 }
 
 namespace TestApp._OUTPUT_

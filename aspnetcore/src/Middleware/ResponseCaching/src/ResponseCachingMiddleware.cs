@@ -58,7 +58,9 @@ public class ResponseCachingMiddleware
                 new MemoryCache(new MemoryCacheOptions { SizeLimit = options.Value.SizeLimit })
             ),
             new ResponseCachingKeyProvider(poolProvider, options)
-        ) { }
+        )
+    {
+    }
 
     // for testing
     internal ResponseCachingMiddleware(

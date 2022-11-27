@@ -29,7 +29,9 @@ internal sealed class MvcCoreMvcOptionsSetup
     private readonly IOptions<JsonOptions> _jsonOptions;
 
     public MvcCoreMvcOptionsSetup(IHttpRequestStreamReaderFactory readerFactory)
-        : this(readerFactory, NullLoggerFactory.Instance, Options.Create(new JsonOptions())) { }
+        : this(readerFactory, NullLoggerFactory.Instance, Options.Create(new JsonOptions()))
+    {
+    }
 
     public MvcCoreMvcOptionsSetup(
         IHttpRequestStreamReaderFactory readerFactory,

@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
 internal sealed class StreamCloseAwaitable : ICriticalNotifyCompletion
 {
-    private static readonly Action _callbackCompleted = () => { };
+    private static readonly Action _callbackCompleted = () => {
+    };
 
     // Initialize to completed so UpdateCompletedStreams runs at least once during connection teardown
     // if there are still active streams.
