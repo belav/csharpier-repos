@@ -89,7 +89,8 @@ public class SetCommandTest
     private class TestSecretsStore : SecretsStore
     {
         public TestSecretsStore(ITestOutputHelper output) : base("xyz", new TestReporter(output))
-        { }
+        {
+        }
 
         protected override IDictionary<string, string> Load(string userSecretsId)
         {

@@ -18,7 +18,9 @@ namespace Microsoft.AspNetCore.Mvc;
 public class SkipStatusCodePagesAttribute : Attribute, IResourceFilter, ISkipStatusCodePagesMetadata
 {
     /// <inheritdoc />
-    public void OnResourceExecuted(ResourceExecutedContext context) { }
+    public void OnResourceExecuted(ResourceExecutedContext context)
+    {
+    }
 
     /// <inheritdoc />
     public void OnResourceExecuting(ResourceExecutingContext context)

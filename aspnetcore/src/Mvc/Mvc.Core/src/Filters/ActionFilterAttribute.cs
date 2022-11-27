@@ -27,10 +27,14 @@ public abstract class ActionFilterAttribute
     public int Order { get; set; }
 
     /// <inheritdoc />
-    public virtual void OnActionExecuting(ActionExecutingContext context) { }
+    public virtual void OnActionExecuting(ActionExecutingContext context)
+    {
+    }
 
     /// <inheritdoc />
-    public virtual void OnActionExecuted(ActionExecutedContext context) { }
+    public virtual void OnActionExecuted(ActionExecutedContext context)
+    {
+    }
 
     /// <inheritdoc />
     public virtual async Task OnActionExecutionAsync(
@@ -56,10 +60,14 @@ public abstract class ActionFilterAttribute
     }
 
     /// <inheritdoc />
-    public virtual void OnResultExecuting(ResultExecutingContext context) { }
+    public virtual void OnResultExecuting(ResultExecutingContext context)
+    {
+    }
 
     /// <inheritdoc />
-    public virtual void OnResultExecuted(ResultExecutedContext context) { }
+    public virtual void OnResultExecuted(ResultExecutedContext context)
+    {
+    }
 
     /// <inheritdoc />
     public virtual async Task OnResultExecutionAsync(

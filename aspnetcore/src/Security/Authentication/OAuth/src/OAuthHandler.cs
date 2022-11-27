@@ -47,7 +47,9 @@ public class OAuthHandler<TOptions> : RemoteAuthenticationHandler<TOptions>
         ILoggerFactory logger,
         UrlEncoder encoder,
         ISystemClock clock
-    ) : base(options, logger, encoder, clock) { }
+    ) : base(options, logger, encoder, clock)
+    {
+    }
 
     /// <summary>
     /// Creates a new instance of the events instance.

@@ -66,7 +66,9 @@ public class RouteTokenTransformerConventionTest
     {
         public CustomRouteTokenTransformerConvention(
             IOutboundParameterTransformer parameterTransformer
-        ) : base(parameterTransformer) { }
+        ) : base(parameterTransformer)
+        {
+        }
 
         protected override bool ShouldApply(ActionModel action)
         {

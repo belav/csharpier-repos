@@ -22,7 +22,9 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
 {
     public static readonly IVirtualCharService Instance = new CSharpVirtualCharService();
 
-    protected CSharpVirtualCharService() { }
+    protected CSharpVirtualCharService()
+    {
+    }
 
     protected override bool IsMultiLineRawStringToken(SyntaxToken token)
     {

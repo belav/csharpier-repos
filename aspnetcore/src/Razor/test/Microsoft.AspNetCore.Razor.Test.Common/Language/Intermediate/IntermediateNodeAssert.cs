@@ -506,7 +506,9 @@ public static class IntermediateNodeAssert
             IEnumerable<IntermediateNode> nodes,
             string userMessage,
             Exception innerException
-        ) : base(Format(node, null, nodes, userMessage), innerException) { }
+        ) : base(Format(node, null, nodes, userMessage), innerException)
+        {
+        }
 
         public IntermediateNodeAssertException(
             IntermediateNode node,
@@ -514,7 +516,9 @@ public static class IntermediateNodeAssert
             IEnumerable<IntermediateNode> nodes,
             string userMessage,
             Exception innerException
-        ) : base(Format(node, ancestors, nodes, userMessage), innerException) { }
+        ) : base(Format(node, ancestors, nodes, userMessage), innerException)
+        {
+        }
 
         public IntermediateNode Node { get; }
 

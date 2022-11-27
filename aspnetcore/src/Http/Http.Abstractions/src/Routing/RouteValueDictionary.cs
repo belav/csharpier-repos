@@ -790,7 +790,9 @@ public class RouteValueDictionary
         /// <summary>
         /// Releases resources used by the <see cref="Enumerator"/>.
         /// </summary>
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         // Similar to the design of List<T>.Enumerator - Split into fast path and slow path for inlining friendliness
         /// <inheritdoc />

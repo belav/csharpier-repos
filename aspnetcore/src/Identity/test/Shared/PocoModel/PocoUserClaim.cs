@@ -6,7 +6,9 @@ namespace Microsoft.AspNetCore.Identity.Test;
 /// <summary>
 ///     EntityType that represents one specific user claim
 /// </summary>
-public class PocoUserClaim : PocoUserClaim<string> { }
+public class PocoUserClaim : PocoUserClaim<string>
+{
+}
 
 /// <summary>
 ///     EntityType that represents one specific user claim

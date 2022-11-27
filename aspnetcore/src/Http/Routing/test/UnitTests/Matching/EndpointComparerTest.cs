@@ -280,14 +280,18 @@ public class RouteEndpointComparerTest
         return new EndpointComparer(policies);
     }
 
-    private class TestMetadata1 { }
+    private class TestMetadata1
+    {
+    }
 
     private class TestMetadata1Policy : IEndpointComparerPolicy
     {
         public IComparer<Endpoint> Comparer => EndpointMetadataComparer<TestMetadata1>.Default;
     }
 
-    private class TestMetadata2 { }
+    private class TestMetadata2
+    {
+    }
 
     private class TestMetadata2Policy : IEndpointComparerPolicy
     {

@@ -26,7 +26,9 @@ public class TagHelperOutput : IHtmlContentContainer
             new TagHelperAttributeList(),
             (useCachedResult, encoder) =>
                 Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Instantiates a new instance of <see cref="TagHelperOutput"/>.

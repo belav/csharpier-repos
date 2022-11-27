@@ -17,7 +17,9 @@ internal class ComponentHtmlContent : IHtmlContent
     private readonly IEnumerable<string> _epilogue;
 
     public ComponentHtmlContent(IEnumerable<string> componentResult)
-        : this(Array.Empty<string>(), componentResult, Array.Empty<string>()) { }
+        : this(Array.Empty<string>(), componentResult, Array.Empty<string>())
+    {
+    }
 
     public ComponentHtmlContent(
         IEnumerable<string> preamble,

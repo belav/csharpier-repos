@@ -98,7 +98,9 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
     >(StringComparer.Ordinal);
 
     public CSharpCodeParser(ParserContext context)
-        : this(directives: Enumerable.Empty<DirectiveDescriptor>(), context: context) { }
+        : this(directives: Enumerable.Empty<DirectiveDescriptor>(), context: context)
+    {
+    }
 
     public CSharpCodeParser(IEnumerable<DirectiveDescriptor> directives, ParserContext context)
         : base(
@@ -3233,7 +3235,9 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
             Start = start;
         }
 
-        public Block(SyntaxToken token, SourceLocation start) : this(GetName(token), start) { }
+        public Block(SyntaxToken token, SourceLocation start) : this(GetName(token), start)
+        {
+        }
 
         public string Name { get; set; }
         public SourceLocation Start { get; set; }

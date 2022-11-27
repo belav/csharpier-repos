@@ -22,14 +22,18 @@ public readonly struct MediaType
     /// Initializes a <see cref="MediaType"/> instance.
     /// </summary>
     /// <param name="mediaType">The <see cref="string"/> with the media type.</param>
-    public MediaType(string mediaType) : this(mediaType, 0, mediaType.Length) { }
+    public MediaType(string mediaType) : this(mediaType, 0, mediaType.Length)
+    {
+    }
 
     /// <summary>
     /// Initializes a <see cref="MediaType"/> instance.
     /// </summary>
     /// <param name="mediaType">The <see cref="StringSegment"/> with the media type.</param>
     public MediaType(StringSegment mediaType)
-        : this(mediaType.Buffer ?? string.Empty, mediaType.Offset, mediaType.Length) { }
+        : this(mediaType.Buffer ?? string.Empty, mediaType.Offset, mediaType.Length)
+    {
+    }
 
     /// <summary>
     /// Initializes a <see cref="MediaTypeParameterParser"/> instance.

@@ -14,7 +14,9 @@ internal class SpanEditHandler
     private static readonly int TypeHashCode = typeof(SpanEditHandler).GetHashCode();
 
     public SpanEditHandler(Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer)
-        : this(tokenizer, AcceptedCharactersInternal.Any) { }
+        : this(tokenizer, AcceptedCharactersInternal.Any)
+    {
+    }
 
     public SpanEditHandler(
         Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer,

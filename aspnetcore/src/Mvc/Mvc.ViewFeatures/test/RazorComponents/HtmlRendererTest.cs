@@ -994,7 +994,9 @@ public class HtmlRendererTest
 
     private class AsyncComponent : ComponentBase
     {
-        public AsyncComponent() { }
+        public AsyncComponent()
+        {
+        }
 
         [Parameter]
         public int Value { get; set; }

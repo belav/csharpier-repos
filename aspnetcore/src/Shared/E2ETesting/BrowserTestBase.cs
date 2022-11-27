@@ -68,7 +68,9 @@ public class BrowserTestBase : IClassFixture<BrowserFixture>, IAsyncLifetime
         InitializeAsyncCore();
     }
 
-    protected virtual void InitializeAsyncCore() { }
+    protected virtual void InitializeAsyncCore()
+    {
+    }
 
     protected async Task InitializeBrowser(string isolationContext)
     {

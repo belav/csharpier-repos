@@ -1508,15 +1508,21 @@ public class OpenIdConnectEventTests
     {
         public override void ValidateAuthenticationResponse(
             OpenIdConnectProtocolValidationContext validationContext
-        ) { }
+        )
+        {
+        }
 
         public override void ValidateTokenResponse(
             OpenIdConnectProtocolValidationContext validationContext
-        ) { }
+        )
+        {
+        }
 
         public override void ValidateUserInfoResponse(
             OpenIdConnectProtocolValidationContext validationContext
-        ) { }
+        )
+        {
+        }
     }
 
     private class TestBackchannel : HttpMessageHandler

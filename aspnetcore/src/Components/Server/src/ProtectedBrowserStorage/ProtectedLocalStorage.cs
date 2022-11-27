@@ -25,5 +25,7 @@ public sealed class ProtectedLocalStorage : ProtectedBrowserStorage
     public ProtectedLocalStorage(
         IJSRuntime jsRuntime,
         IDataProtectionProvider dataProtectionProvider
-    ) : base("localStorage", jsRuntime, dataProtectionProvider) { }
+    ) : base("localStorage", jsRuntime, dataProtectionProvider)
+    {
+    }
 }

@@ -13,7 +13,9 @@ namespace Wasm.Performance.ConsoleHost;
 internal sealed class ConsoleHostRenderer : Renderer
 {
     public ConsoleHostRenderer(IServiceProvider serviceProvider, ILoggerFactory loggerFactory)
-        : base(serviceProvider, loggerFactory) { }
+        : base(serviceProvider, loggerFactory)
+    {
+    }
 
     public override Dispatcher Dispatcher { get; } = new NullDispatcher();
 

@@ -57,7 +57,9 @@ public class ValidationAttributeAdapterOfTAttributeTest
         public TestValidationAttributeAdapter(
             TestValidationAttribute attribute,
             IStringLocalizer stringLocalizer
-        ) : base(attribute, stringLocalizer) { }
+        ) : base(attribute, stringLocalizer)
+        {
+        }
 
         public override void AddValidation(ClientModelValidationContext context)
         {

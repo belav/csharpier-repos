@@ -11,7 +11,9 @@ namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public class DefaultHubActivatorTests
 {
-    public class CreatableHub : Hub { }
+    public class CreatableHub : Hub
+    {
+    }
 
     [Fact]
     public void HubCreatedIfNotResolvedFromServiceProvider()

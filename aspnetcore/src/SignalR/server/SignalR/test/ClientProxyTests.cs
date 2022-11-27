@@ -14,7 +14,9 @@ namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public class ClientHubProxyTests
 {
-    public class FakeHub : Hub { }
+    public class FakeHub : Hub
+    {
+    }
 
     [Fact]
     public async Task UserProxy_SendAsync_ArrayArgumentNotExpanded()

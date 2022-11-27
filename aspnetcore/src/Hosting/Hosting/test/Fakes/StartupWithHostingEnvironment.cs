@@ -13,5 +13,7 @@ public class StartupWithHostingEnvironment
         env.EnvironmentName = "Changed";
     }
 
-    public void Configure(IApplicationBuilder app) { }
+    public void Configure(IApplicationBuilder app)
+    {
+    }
 }

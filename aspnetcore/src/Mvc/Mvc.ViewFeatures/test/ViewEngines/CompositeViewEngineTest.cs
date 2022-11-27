@@ -569,5 +569,7 @@ public class CompositeViewEngineTest
         }
     }
 
-    public interface ITestService { }
+    public interface ITestService
+    {
+    }
 }

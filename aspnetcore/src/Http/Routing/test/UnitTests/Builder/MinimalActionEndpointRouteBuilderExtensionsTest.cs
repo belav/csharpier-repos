@@ -39,7 +39,9 @@ namespace Microsoft.AspNetCore.Builder
             var builder = new DefaultEndpointRouteBuilder(Mock.Of<IApplicationBuilder>());
 
             [HttpMethod("ATTRIBUTE")]
-            void TestAction() { }
+            void TestAction()
+            {
+            }
 
             var endpointBuilder = builder.MapMethods("/", new[] { "METHOD" }, (Action)TestAction);
             endpointBuilder.WithMetadata(new HttpMethodMetadata(new[] { "BUILDER" }));

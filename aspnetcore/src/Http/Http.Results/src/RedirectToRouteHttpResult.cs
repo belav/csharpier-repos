@@ -20,7 +20,9 @@ public sealed partial class RedirectToRouteHttpResult : IResult
     /// </summary>
     /// <param name="routeValues">The parameters for the route.</param>
     internal RedirectToRouteHttpResult(object? routeValues)
-        : this(routeName: null, routeValues: routeValues) { }
+        : this(routeName: null, routeValues: routeValues)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteHttpResult"/> with the values
@@ -29,7 +31,9 @@ public sealed partial class RedirectToRouteHttpResult : IResult
     /// <param name="routeName">The name of the route.</param>
     /// <param name="routeValues">The parameters for the route.</param>
     internal RedirectToRouteHttpResult(string? routeName, object? routeValues)
-        : this(routeName, routeValues, permanent: false) { }
+        : this(routeName, routeValues, permanent: false)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteHttpResult"/> with the values
@@ -40,7 +44,9 @@ public sealed partial class RedirectToRouteHttpResult : IResult
     /// <param name="permanent">If set to true, makes the redirect permanent (301).
     /// Otherwise a temporary redirect is used (302).</param>
     internal RedirectToRouteHttpResult(string? routeName, object? routeValues, bool permanent)
-        : this(routeName, routeValues, permanent, fragment: null) { }
+        : this(routeName, routeValues, permanent, fragment: null)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteHttpResult"/> with the values
@@ -56,7 +62,9 @@ public sealed partial class RedirectToRouteHttpResult : IResult
         object? routeValues,
         bool permanent,
         string? fragment
-    ) : this(routeName, routeValues, permanent, preserveMethod: false, fragment: fragment) { }
+    ) : this(routeName, routeValues, permanent, preserveMethod: false, fragment: fragment)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteHttpResult"/> with the values

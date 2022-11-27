@@ -8,8 +8,12 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 {
     [DefaultStatusCode(StatusCodes.Status412PreconditionFailed)]
-    public class TestActionResultUsingStatusCodesConstants { }
+    public class TestActionResultUsingStatusCodesConstants
+    {
+    }
 
     [DefaultStatusCode((int)HttpStatusCode.Redirect)]
-    public class TestActionResultUsingHttpStatusCodeCast { }
+    public class TestActionResultUsingHttpStatusCodeCast
+    {
+    }
 }

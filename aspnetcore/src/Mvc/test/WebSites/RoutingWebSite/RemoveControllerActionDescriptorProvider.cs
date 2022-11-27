@@ -17,7 +17,9 @@ public class RemoveControllerActionDescriptorProvider : IActionDescriptorProvide
 
     public int Order => int.MaxValue;
 
-    public void OnProvidersExecuted(ActionDescriptorProviderContext context) { }
+    public void OnProvidersExecuted(ActionDescriptorProviderContext context)
+    {
+    }
 
     public void OnProvidersExecuting(ActionDescriptorProviderContext context)
     {

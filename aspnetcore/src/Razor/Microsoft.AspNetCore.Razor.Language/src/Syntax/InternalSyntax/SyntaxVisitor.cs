@@ -53,5 +53,7 @@ internal abstract partial class SyntaxVisitor
         DefaultVisit(trivia);
     }
 
-    protected virtual void DefaultVisit(GreenNode node) { }
+    protected virtual void DefaultVisit(GreenNode node)
+    {
+    }
 }

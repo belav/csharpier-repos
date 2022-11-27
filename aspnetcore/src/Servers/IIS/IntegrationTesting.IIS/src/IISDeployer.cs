@@ -35,10 +35,14 @@ public class IISDeployer : IISDeployerBase
     protected override string ApplicationHostConfigPath => _applicationHostConfig;
 
     public IISDeployer(DeploymentParameters deploymentParameters, ILoggerFactory loggerFactory)
-        : base(new IISDeploymentParameters(deploymentParameters), loggerFactory) { }
+        : base(new IISDeploymentParameters(deploymentParameters), loggerFactory)
+    {
+    }
 
     public IISDeployer(IISDeploymentParameters deploymentParameters, ILoggerFactory loggerFactory)
-        : base(deploymentParameters, loggerFactory) { }
+        : base(deploymentParameters, loggerFactory)
+    {
+    }
 
     public override void Dispose()
     {

@@ -148,7 +148,9 @@ internal struct PathTokenizer : IReadOnlyList<StringSegment>
             get { return Current; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public bool MoveNext()
         {

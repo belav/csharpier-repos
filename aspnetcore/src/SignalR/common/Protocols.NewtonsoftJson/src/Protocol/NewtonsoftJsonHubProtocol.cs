@@ -47,7 +47,9 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
     /// Initializes a new instance of the <see cref="NewtonsoftJsonHubProtocol"/> class.
     /// </summary>
     public NewtonsoftJsonHubProtocol()
-        : this(Options.Create(new NewtonsoftJsonHubProtocolOptions())) { }
+        : this(Options.Create(new NewtonsoftJsonHubProtocolOptions()))
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="NewtonsoftJsonHubProtocol"/> class.

@@ -1488,15 +1488,25 @@ public class EndpointMetadataApiDescriptionProviderTest
             GetApiDescriptions(action, pattern, displayName: displayName, httpMethods: httpMethods)
         );
 
-    private static void TestAction() { }
+    private static void TestAction()
+    {
+    }
 
-    private static void TestActionWithDefaultValue(int foo = 42) { }
+    private static void TestActionWithDefaultValue(int foo = 42)
+    {
+    }
 
-    private class InferredJsonClass { }
+    private class InferredJsonClass
+    {
+    }
 
-    private interface IInferredServiceInterface { }
+    private interface IInferredServiceInterface
+    {
+    }
 
-    private interface IInferredJsonInterface { }
+    private interface IInferredJsonInterface
+    {
+    }
 
     private class ServiceProviderIsService : IServiceProviderIsService
     {

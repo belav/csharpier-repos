@@ -199,7 +199,9 @@ internal partial class RequestContext : NativeRequestContext, IThreadPoolWorkIte
             {
                 _requestAbortSource.Cancel();
             }
-            catch (ObjectDisposedException) { }
+            catch (ObjectDisposedException)
+            {
+            }
             catch (Exception ex)
             {
                 Log.AbortError(Logger, ex);

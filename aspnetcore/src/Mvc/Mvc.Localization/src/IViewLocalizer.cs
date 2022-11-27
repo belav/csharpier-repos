@@ -6,4 +6,6 @@ namespace Microsoft.AspNetCore.Mvc.Localization;
 /// <summary>
 /// Represents a type that provides HTML-aware localization for views.
 /// </summary>
-public interface IViewLocalizer : IHtmlLocalizer { }
+public interface IViewLocalizer : IHtmlLocalizer
+{
+}

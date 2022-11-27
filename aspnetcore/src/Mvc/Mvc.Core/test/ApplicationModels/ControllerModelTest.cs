@@ -158,10 +158,14 @@ public class ControllerModelTest
     {
         public string TestProperty { get; set; }
 
-        public void Edit() { }
+        public void Edit()
+        {
+        }
     }
 
-    private class MyFilterAttribute : Attribute, IFilterMetadata { }
+    private class MyFilterAttribute : Attribute, IFilterMetadata
+    {
+    }
 
     private class MyRouteValueAttribute : Attribute, IRouteValueProvider
     {

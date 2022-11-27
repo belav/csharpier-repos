@@ -514,6 +514,8 @@ public class OpaqueUpgradeTests
         }
 
         // Scan to the end of the headers
-        while (!string.IsNullOrEmpty(reader.ReadLine())) { }
+        while (!string.IsNullOrEmpty(reader.ReadLine()))
+        {
+        }
     }
 }

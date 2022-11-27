@@ -17,7 +17,9 @@ public class ObjectAdapter : IObjectAdapterWithTest
     /// <param name="contractResolver">The <see cref="IContractResolver"/>.</param>
     /// <param name="logErrorAction">The <see cref="Action"/> for logging <see cref="JsonPatchError"/>.</param>
     public ObjectAdapter(IContractResolver contractResolver, Action<JsonPatchError> logErrorAction)
-        : this(contractResolver, logErrorAction, Adapters.AdapterFactory.Default) { }
+        : this(contractResolver, logErrorAction, Adapters.AdapterFactory.Default)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ObjectAdapter"/>.

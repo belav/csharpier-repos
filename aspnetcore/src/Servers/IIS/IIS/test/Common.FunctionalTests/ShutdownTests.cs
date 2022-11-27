@@ -40,7 +40,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 [SkipNonHelix("https://github.com/dotnet/aspnetcore/issues/25107")]
 public class ShutdownTests : IISFunctionalTestBase
 {
-    public ShutdownTests(PublishedSitesFixture fixture) : base(fixture) { }
+    public ShutdownTests(PublishedSitesFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalFact]
     public async Task ShutdownTimeoutIsApplied()

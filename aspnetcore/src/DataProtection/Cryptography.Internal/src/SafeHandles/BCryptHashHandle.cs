@@ -10,7 +10,9 @@ internal sealed unsafe class BCryptHashHandle : BCryptHandle
     private BCryptAlgorithmHandle? _algProviderHandle;
 
     // Called by P/Invoke when returning SafeHandles
-    private BCryptHashHandle() { }
+    private BCryptHashHandle()
+    {
+    }
 
     /// <summary>
     /// Duplicates this hash handle, including any existing hashed state.

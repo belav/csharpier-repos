@@ -144,7 +144,9 @@ public class DefaultPageModelFactoryProviderTest
         return new DefaultPageModelFactoryProvider(modelActivator);
     }
 
-    private class SimpleModel { }
+    private class SimpleModel
+    {
+    }
 
     private class ModelWithPageContext
     {

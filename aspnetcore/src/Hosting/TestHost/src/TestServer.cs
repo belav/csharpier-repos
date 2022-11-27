@@ -33,7 +33,9 @@ public class TestServer : IServer
     /// <param name="services"></param>
     /// <param name="optionsAccessor"></param>
     public TestServer(IServiceProvider services, IOptions<TestServerOptions> optionsAccessor)
-        : this(services, CreateTestFeatureCollection(), optionsAccessor) { }
+        : this(services, CreateTestFeatureCollection(), optionsAccessor)
+    {
+    }
 
     /// <summary>
     /// For use with IHostBuilder.
@@ -60,7 +62,9 @@ public class TestServer : IServer
     /// For use with IHostBuilder.
     /// </summary>
     /// <param name="services"></param>
-    public TestServer(IServiceProvider services) : this(services, CreateTestFeatureCollection()) { }
+    public TestServer(IServiceProvider services) : this(services, CreateTestFeatureCollection())
+    {
+    }
 
     /// <summary>
     /// For use with IHostBuilder.
@@ -78,7 +82,9 @@ public class TestServer : IServer
     /// For use with IWebHostBuilder.
     /// </summary>
     /// <param name="builder"></param>
-    public TestServer(IWebHostBuilder builder) : this(builder, CreateTestFeatureCollection()) { }
+    public TestServer(IWebHostBuilder builder) : this(builder, CreateTestFeatureCollection())
+    {
+    }
 
     /// <summary>
     /// For use with IWebHostBuilder.

@@ -28,7 +28,9 @@ public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler>
     /// This API supports framework infrastructure and is not intended to be used
     /// directly from application code.
     /// </summary>
-    public HttpParser() : this(showErrorDetails: true) { }
+    public HttpParser() : this(showErrorDetails: true)
+    {
+    }
 
     /// <summary>
     /// This API supports framework infrastructure and is not intended to be used
@@ -41,7 +43,9 @@ public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler>
                 KestrelServerOptions.DisableHttp1LineFeedTerminatorsSwitchKey,
                 out var disabled
             ) && disabled
-        ) { }
+        )
+    {
+    }
 
     internal HttpParser(bool showErrorDetails, bool disableHttp1LineFeedTerminators)
     {

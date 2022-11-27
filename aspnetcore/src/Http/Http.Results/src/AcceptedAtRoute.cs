@@ -23,7 +23,8 @@ public sealed class AcceptedAtRoute : IResult, IEndpointMetadataProvider, IStatu
     /// </summary>
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     internal AcceptedAtRoute(object? routeValues) : this(routeName: null, routeValues: routeValues)
-    { }
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AcceptedAtRoute"/> class with the values

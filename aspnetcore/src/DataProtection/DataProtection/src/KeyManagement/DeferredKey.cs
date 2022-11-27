@@ -36,7 +36,9 @@ internal sealed class DeferredKey : KeyBase
                 GetLazyDescriptorDelegate(keyManager, keyElement)
             ),
             encryptorFactories
-        ) { }
+        )
+    {
+    }
 
     private static Func<IAuthenticatedEncryptorDescriptor> GetLazyDescriptorDelegate(
         IInternalXmlKeyManager keyManager,

@@ -21,7 +21,9 @@ internal sealed class UriMatchCondition : Condition
         : base(
             CreatePattern(inputParser, input, uriMatchPart),
             CreateRegexMatch(pattern, ignoreCase, negate)
-        ) { }
+        )
+    {
+    }
 
     private static Pattern CreatePattern(
         InputParser inputParser,

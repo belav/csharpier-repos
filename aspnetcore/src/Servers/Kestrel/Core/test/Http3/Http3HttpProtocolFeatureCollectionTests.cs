@@ -67,7 +67,9 @@ public class Http3HttpProtocolFeatureCollectionTests
 
     private class TestHttp3Stream : Http3Stream
     {
-        public override void Execute() { }
+        public override void Execute()
+        {
+        }
     }
 
     private class TestConnectionFeatures

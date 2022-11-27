@@ -190,9 +190,13 @@ public class DefaultPageActivatorProviderTest
 
     private class PageWithMultipleConstructors : Page
     {
-        public PageWithMultipleConstructors(int x) { }
+        public PageWithMultipleConstructors(int x)
+        {
+        }
 
-        public PageWithMultipleConstructors() { }
+        public PageWithMultipleConstructors()
+        {
+        }
 
         public override Task ExecuteAsync()
         {
@@ -202,7 +206,9 @@ public class DefaultPageActivatorProviderTest
 
     private class PageWithoutParameterlessConstructor : Page
     {
-        public PageWithoutParameterlessConstructor(ILogger logger) { }
+        public PageWithoutParameterlessConstructor(ILogger logger)
+        {
+        }
 
         public override Task ExecuteAsync()
         {

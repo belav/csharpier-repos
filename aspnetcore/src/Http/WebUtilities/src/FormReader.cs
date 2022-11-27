@@ -47,7 +47,9 @@ public class FormReader : IDisposable
     /// Initializes a new instance of <see cref="FormReader"/>.
     /// </summary>
     /// <param name="data">The data to read.</param>
-    public FormReader(string data) : this(data, ArrayPool<char>.Shared) { }
+    public FormReader(string data) : this(data, ArrayPool<char>.Shared)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="FormReader"/>.
@@ -70,7 +72,9 @@ public class FormReader : IDisposable
     /// Initializes a new instance of <see cref="FormReader"/>.
     /// </summary>
     /// <param name="stream">The <see cref="Stream"/> to read. Assumes a utf-8 encoded stream.</param>
-    public FormReader(Stream stream) : this(stream, Encoding.UTF8, ArrayPool<char>.Shared) { }
+    public FormReader(Stream stream) : this(stream, Encoding.UTF8, ArrayPool<char>.Shared)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="FormReader"/>.
@@ -78,7 +82,9 @@ public class FormReader : IDisposable
     /// <param name="stream">The <see cref="Stream"/> to read.</param>
     /// <param name="encoding">The character encoding to use.</param>
     public FormReader(Stream stream, Encoding encoding)
-        : this(stream, encoding, ArrayPool<char>.Shared) { }
+        : this(stream, encoding, ArrayPool<char>.Shared)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="FormReader"/>.

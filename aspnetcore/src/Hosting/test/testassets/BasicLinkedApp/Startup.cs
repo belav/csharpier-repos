@@ -18,7 +18,9 @@ public class Startup
 
 public class HelloWorldMiddleware
 {
-    public HelloWorldMiddleware(RequestDelegate next) { }
+    public HelloWorldMiddleware(RequestDelegate next)
+    {
+    }
 
     public Task InvokeAsync(HttpContext context)
     {

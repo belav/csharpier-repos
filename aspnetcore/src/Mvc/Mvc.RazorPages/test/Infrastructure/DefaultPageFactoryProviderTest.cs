@@ -447,9 +447,13 @@ public class DefaultPageFactoryProviderTest
         }
     }
 
-    private class ViewDataTestPageModel { }
+    private class ViewDataTestPageModel
+    {
+    }
 
-    private class DerivedViewDataTestPageModel : ViewDataTestPageModel { }
+    private class DerivedViewDataTestPageModel : ViewDataTestPageModel
+    {
+    }
 
     private class DisposablePage : Page, IDisposable
     {

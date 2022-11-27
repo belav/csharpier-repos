@@ -68,7 +68,9 @@ public class BinderTypeBasedModelBinderIntegrationTest
         Assert.Empty(modelState);
     }
 
-    private class Person2 { }
+    private class Person2
+    {
+    }
 
     // Ensures that prefix is part of the result returned back.
     [Fact]
@@ -408,6 +410,8 @@ public class BinderTypeBasedModelBinderIntegrationTest
 
     private class TestController
     {
-        public void Action(Address address) { }
+        public void Action(Address address)
+        {
+        }
     }
 }

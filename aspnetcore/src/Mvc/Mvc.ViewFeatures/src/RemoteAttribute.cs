@@ -24,7 +24,9 @@ public class RemoteAttribute : RemoteAttributeBase
     /// <remarks>
     /// Intended for subclasses that support URL generation with no route, action, or controller names.
     /// </remarks>
-    protected RemoteAttribute() { }
+    protected RemoteAttribute()
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RemoteAttribute"/> class.

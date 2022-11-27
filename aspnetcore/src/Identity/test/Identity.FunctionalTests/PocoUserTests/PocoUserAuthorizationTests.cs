@@ -10,5 +10,7 @@ public class PocoUserAuthorizationTests : AuthorizationTests<PocoUserStartup, Id
 {
     public PocoUserAuthorizationTests(
         ServerFactory<PocoUserStartup, IdentityDbContext> serverFactory
-    ) : base(serverFactory) { }
+    ) : base(serverFactory)
+    {
+    }
 }

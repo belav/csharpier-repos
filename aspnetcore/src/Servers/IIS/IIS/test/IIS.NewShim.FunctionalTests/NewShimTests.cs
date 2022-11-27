@@ -12,7 +12,9 @@ namespace Microsoft.AspNetCore.Server.IIS.NewShim.FunctionalTests;
 [Collection(PublishedSitesCollection.Name)]
 public class NewShimTests : IISFunctionalTestBase
 {
-    public NewShimTests(PublishedSitesFixture fixture) : base(fixture) { }
+    public NewShimTests(PublishedSitesFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalFact]
     public async Task CheckNewShimIsUsed()

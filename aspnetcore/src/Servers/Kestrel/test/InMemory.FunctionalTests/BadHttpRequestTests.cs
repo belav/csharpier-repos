@@ -299,9 +299,13 @@ public class BadHttpRequestTests : LoggedTest
             _callback(pair);
         }
 
-        public void OnError(Exception error) { }
+        public void OnError(Exception error)
+        {
+        }
 
-        public void OnCompleted() { }
+        public void OnCompleted()
+        {
+        }
 
         public virtual void Dispose() => _subscription.Dispose();
     }

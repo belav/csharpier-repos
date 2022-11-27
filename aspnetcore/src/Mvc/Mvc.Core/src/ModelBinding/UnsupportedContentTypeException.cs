@@ -16,5 +16,7 @@ public class UnsupportedContentTypeException : Exception
     /// exception <paramref name="message"/>.
     /// </summary>
     /// <param name="message">The message that describes the error.</param>
-    public UnsupportedContentTypeException(string? message) : base(message) { }
+    public UnsupportedContentTypeException(string? message) : base(message)
+    {
+    }
 }

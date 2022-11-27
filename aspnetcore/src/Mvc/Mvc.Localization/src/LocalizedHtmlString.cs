@@ -19,7 +19,9 @@ public class LocalizedHtmlString : IHtmlContent
     /// <param name="name">The name of the string resource.</param>
     /// <param name="value">The string resource.</param>
     public LocalizedHtmlString(string name, string value)
-        : this(name, value, isResourceNotFound: false, arguments: Array.Empty<object>()) { }
+        : this(name, value, isResourceNotFound: false, arguments: Array.Empty<object>())
+    {
+    }
 
     /// <summary>
     /// Creates an instance of <see cref="LocalizedHtmlString"/>.
@@ -28,7 +30,9 @@ public class LocalizedHtmlString : IHtmlContent
     /// <param name="value">The string resource.</param>
     /// <param name="isResourceNotFound">A flag that indicates if the resource is not found.</param>
     public LocalizedHtmlString(string name, string value, bool isResourceNotFound)
-        : this(name, value, isResourceNotFound, arguments: Array.Empty<object>()) { }
+        : this(name, value, isResourceNotFound, arguments: Array.Empty<object>())
+    {
+    }
 
     /// <summary>
     /// Creates an instance of <see cref="LocalizedHtmlString"/>.

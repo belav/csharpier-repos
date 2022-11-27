@@ -158,7 +158,9 @@ internal sealed class Http2HeadersEnumerator : IEnumerator<KeyValuePair<string, 
         _knownHeaderType = default;
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 
     internal static int GetResponseHeaderStaticTableId(KnownHeaderType responseHeaderType)
     {

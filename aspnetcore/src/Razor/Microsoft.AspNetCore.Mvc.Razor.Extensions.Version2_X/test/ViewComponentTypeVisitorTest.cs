@@ -181,26 +181,46 @@ public class ViewComponentTypeVisitorTest
         Assert.False(isViewComponent);
     }
 
-    public abstract class Invalid_AbstractViewComponent { }
+    public abstract class Invalid_AbstractViewComponent
+    {
+    }
 
-    public class Invalid_GenericViewComponent<T> { }
+    public class Invalid_GenericViewComponent<T>
+    {
+    }
 
-    internal class Invalid_InternalViewComponent { }
+    internal class Invalid_InternalViewComponent
+    {
+    }
 
-    public class Valid_PlainViewComponent { }
+    public class Valid_PlainViewComponent
+    {
+    }
 
     [TestViewComponent]
-    public class Valid_DecoratedVC { }
+    public class Valid_DecoratedVC
+    {
+    }
 
-    public class Valid_InheritedVC : Valid_DecoratedVC { }
+    public class Valid_InheritedVC : Valid_DecoratedVC
+    {
+    }
 
     [TestNonViewComponent]
-    public class Invalid_DecoratedViewComponent { }
+    public class Invalid_DecoratedViewComponent
+    {
+    }
 
     [TestViewComponent]
-    public class Invalid_InheritedViewComponent : Invalid_DecoratedViewComponent { }
+    public class Invalid_InheritedViewComponent : Invalid_DecoratedViewComponent
+    {
+    }
 
-    public class TestViewComponentAttribute : Attribute { }
+    public class TestViewComponentAttribute : Attribute
+    {
+    }
 
-    public class TestNonViewComponentAttribute : Attribute { }
+    public class TestNonViewComponentAttribute : Attribute
+    {
+    }
 }

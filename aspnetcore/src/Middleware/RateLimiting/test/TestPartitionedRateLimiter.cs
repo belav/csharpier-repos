@@ -14,7 +14,9 @@ internal class TestPartitionedRateLimiter<TResource> : PartitionedRateLimiter<TR
 {
     private List<RateLimiter> limiters = new List<RateLimiter>();
 
-    public TestPartitionedRateLimiter() { }
+    public TestPartitionedRateLimiter()
+    {
+    }
 
     public TestPartitionedRateLimiter(RateLimiter limiter)
     {

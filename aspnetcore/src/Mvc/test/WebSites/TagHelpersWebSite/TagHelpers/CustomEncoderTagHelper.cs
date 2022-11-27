@@ -28,7 +28,9 @@ public class CustomEncoderTagHelper : TagHelper
     // Simple encoder that just wraps "string" as "Custom[[string]]". Note: Lacks all parameter checks.
     private class CustomEncoder : HtmlEncoder
     {
-        public CustomEncoder() { }
+        public CustomEncoder()
+        {
+        }
 
         public override int MaxOutputCharactersPerInputCharacter => 1;
 

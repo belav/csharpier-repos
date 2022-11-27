@@ -18,7 +18,9 @@ public class MessageReceivedContext : ResultContext<JwtBearerOptions>
         HttpContext context,
         AuthenticationScheme scheme,
         JwtBearerOptions options
-    ) : base(context, scheme, options) { }
+    ) : base(context, scheme, options)
+    {
+    }
 
     /// <summary>
     /// Bearer Token. This will give the application an opportunity to retrieve a token from an alternative location.

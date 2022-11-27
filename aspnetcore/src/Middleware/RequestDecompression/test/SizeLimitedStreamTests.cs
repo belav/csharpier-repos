@@ -35,7 +35,9 @@ public class SizeLimitedStreamTests
         // Act
         var exception = await Record.ExceptionAsync(async () =>
         {
-            while (await sizeLimitedStream.ReadAsync(buffer) > 0) { }
+            while (await sizeLimitedStream.ReadAsync(buffer) > 0)
+            {
+            }
         });
 
         // Assert
@@ -59,7 +61,9 @@ public class SizeLimitedStreamTests
         // Act
         var exception = Record.Exception(() =>
         {
-            while (sizeLimitedStream.Read(buffer, 0, buffer.Length) > 0) { }
+            while (sizeLimitedStream.Read(buffer, 0, buffer.Length) > 0)
+            {
+            }
         });
 
         // Assert

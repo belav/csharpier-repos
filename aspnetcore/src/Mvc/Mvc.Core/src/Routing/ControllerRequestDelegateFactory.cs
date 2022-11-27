@@ -41,7 +41,9 @@ internal sealed class ControllerRequestDelegateFactory : IRequestDelegateFactory
             diagnosticListener,
             mapper,
             null
-        ) { }
+        )
+    {
+    }
 
     public ControllerRequestDelegateFactory(
         ControllerActionInvokerCache controllerActionInvokerCache,

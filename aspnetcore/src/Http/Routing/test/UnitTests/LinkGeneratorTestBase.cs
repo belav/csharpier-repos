@@ -27,7 +27,9 @@ public abstract class LinkGeneratorTestBase
         return services;
     }
 
-    protected virtual void AddAdditionalServices(IServiceCollection services) { }
+    protected virtual void AddAdditionalServices(IServiceCollection services)
+    {
+    }
 
     private protected DefaultLinkGenerator CreateLinkGenerator(params Endpoint[] endpoints)
     {

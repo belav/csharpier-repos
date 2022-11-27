@@ -43,14 +43,18 @@ internal readonly struct SyntaxTriviaList
     /// Creates a list of trivia.
     /// </summary>
     /// <param name="trivias">An array of trivia.</param>
-    public SyntaxTriviaList(params SyntaxTrivia[] trivias) : this(CreateNode(trivias), 0, 0) { }
+    public SyntaxTriviaList(params SyntaxTrivia[] trivias) : this(CreateNode(trivias), 0, 0)
+    {
+    }
 
     /// <summary>
     /// Creates a list of trivia.
     /// </summary>
     /// <param name="trivias">A sequence of trivia.</param>
     public SyntaxTriviaList(IEnumerable<SyntaxTrivia> trivias)
-        : this(SyntaxTriviaListBuilder.Create(trivias).Node, 0, 0) { }
+        : this(SyntaxTriviaListBuilder.Create(trivias).Node, 0, 0)
+    {
+    }
 
     private static SyntaxNode CreateNode(SyntaxTrivia[] trivias)
     {
@@ -636,7 +640,9 @@ internal readonly struct SyntaxTriviaList
                 throw new NotSupportedException();
             }
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 
@@ -774,6 +780,8 @@ internal readonly struct SyntaxTriviaList
             throw new NotSupportedException();
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

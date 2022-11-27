@@ -2,6 +2,8 @@
 {
     public class GetAttributes_OnMethodWithoutAttributesClass
     {
-        public void Method() { }
+        public void Method()
+        {
+        }
     }
 }

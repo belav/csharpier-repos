@@ -306,7 +306,9 @@ public class FilterFactoryTest
 
     private class TestFilter : IFilterMetadata
     {
-        public TestFilter() { }
+        public TestFilter()
+        {
+        }
 
         public TestFilter(string data)
         {

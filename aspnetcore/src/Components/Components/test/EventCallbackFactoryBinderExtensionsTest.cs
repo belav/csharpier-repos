@@ -712,7 +712,9 @@ public class EventCallbackFactoryBinderExtensionsTest
         }
     }
 
-    private class ClassWithoutTypeConverter { }
+    private class ClassWithoutTypeConverter
+    {
+    }
 
     [TypeConverter(typeof(SecretMessageTypeConverter))]
     private class SecretMessage

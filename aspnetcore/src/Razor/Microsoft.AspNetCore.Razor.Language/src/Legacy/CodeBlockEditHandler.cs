@@ -12,7 +12,9 @@ internal class CodeBlockEditHandler : SpanEditHandler
 {
     public CodeBlockEditHandler(
         Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer
-    ) : base(tokenizer) { }
+    ) : base(tokenizer)
+    {
+    }
 
     protected override PartialParseResultInternal CanAcceptChange(
         SyntaxNode target,

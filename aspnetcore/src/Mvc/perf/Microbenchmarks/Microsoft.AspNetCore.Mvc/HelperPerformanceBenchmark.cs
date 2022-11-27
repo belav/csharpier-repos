@@ -15,7 +15,9 @@ public class HelperPerformanceBenchmark : RuntimePerformanceBenchmarkBase
             "~/Views/HelperPartialAsync.cshtml",
             "~/Views/HelperExtensions.cshtml",
             "~/Views/HelperPartialTagHelper.cshtml"
-        ) { }
+        )
+    {
+    }
 
     protected override object Model => Random.Shared.Next().ToString(CultureInfo.InvariantCulture);
 }

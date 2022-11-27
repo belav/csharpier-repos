@@ -3,45 +3,83 @@
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 {
-    public interface ITestController { }
+    public interface ITestController
+    {
+    }
 
-    public abstract class AbstractController : Controller { }
+    public abstract class AbstractController : Controller
+    {
+    }
 
-    public class DerivedAbstractController : AbstractController { }
+    public class DerivedAbstractController : AbstractController
+    {
+    }
 
-    public struct ValueTypeController { }
+    public struct ValueTypeController
+    {
+    }
 
-    public class OpenGenericController<T> : Controller { }
+    public class OpenGenericController<T> : Controller
+    {
+    }
 
-    public class PocoType { }
+    public class PocoType
+    {
+    }
 
-    public class DerivedPocoType : PocoType { }
+    public class DerivedPocoType : PocoType
+    {
+    }
 
-    public class TypeDerivingFromController : Controller { }
+    public class TypeDerivingFromController : Controller
+    {
+    }
 
-    public class TypeDerivingFromControllerBase : ControllerBase { }
+    public class TypeDerivingFromControllerBase : ControllerBase
+    {
+    }
 
-    public abstract class NoControllerAttributeBaseController { }
+    public abstract class NoControllerAttributeBaseController
+    {
+    }
 
-    public class NoSuffixNoControllerAttribute : NoControllerAttributeBaseController { }
+    public class NoSuffixNoControllerAttribute : NoControllerAttributeBaseController
+    {
+    }
 
-    public class DerivedGenericController : OpenGenericController<string> { }
+    public class DerivedGenericController : OpenGenericController<string>
+    {
+    }
 
-    public class NoSuffix : Controller { }
+    public class NoSuffix : Controller
+    {
+    }
 
-    public class PocoController { }
+    public class PocoController
+    {
+    }
 
     [Controller]
-    public class CustomBase { }
+    public class CustomBase
+    {
+    }
 
     [Controller]
-    public class ChildOfCustomBase : CustomBase { }
+    public class ChildOfCustomBase : CustomBase
+    {
+    }
 
     [NonController]
-    public class BaseNonController { }
+    public class BaseNonController
+    {
+    }
 
     [Controller]
-    public class ControllerAttributeDerivingFromNonController : BaseNonController { }
+    public class ControllerAttributeDerivingFromNonController : BaseNonController
+    {
+    }
 
-    public class BasePocoNonControllerChildController : BaseNonController { }
+    public class BasePocoNonControllerChildController : BaseNonController
+    {
+    }
 }

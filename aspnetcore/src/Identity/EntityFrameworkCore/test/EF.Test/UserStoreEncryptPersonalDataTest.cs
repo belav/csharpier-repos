@@ -11,7 +11,9 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
 public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRole, string>
 {
-    public ProtectedUserStoreTest(ScratchDatabaseFixture fixture) : base(fixture) { }
+    public ProtectedUserStoreTest(ScratchDatabaseFixture fixture) : base(fixture)
+    {
+    }
 
     protected override void SetupAddIdentity(IServiceCollection services)
     {
@@ -95,7 +97,9 @@ public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRol
 
     private class InkProtector : ILookupProtector
     {
-        public InkProtector() { }
+        public InkProtector()
+        {
+        }
 
         public string Unprotect(string keyId, string data) => data?.Substring(4);
 
@@ -256,13 +260,17 @@ public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRol
     private class ProtectedIdentityDbContext : IdentityDbContext<CustomUser>
     {
         public ProtectedIdentityDbContext(DbContextOptions<ProtectedIdentityDbContext> options)
-            : base(options) { }
+            : base(options)
+        {
+        }
     }
 
     private class UnprotectedIdentityDbContext : IdentityDbContext<CustomUser>
     {
         public UnprotectedIdentityDbContext(DbContextOptions<UnprotectedIdentityDbContext> options)
-            : base(options) { }
+            : base(options)
+        {
+        }
     }
 
     private class InvalidUser : IdentityUser

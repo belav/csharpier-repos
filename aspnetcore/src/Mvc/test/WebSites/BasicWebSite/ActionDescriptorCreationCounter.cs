@@ -24,7 +24,9 @@ public class ActionDescriptorCreationCounter : IActionDescriptorProvider
         get { return -1000 - 100; }
     }
 
-    public void OnProvidersExecuting(ActionDescriptorProviderContext context) { }
+    public void OnProvidersExecuting(ActionDescriptorProviderContext context)
+    {
+    }
 
     public void OnProvidersExecuted(ActionDescriptorProviderContext context)
     {

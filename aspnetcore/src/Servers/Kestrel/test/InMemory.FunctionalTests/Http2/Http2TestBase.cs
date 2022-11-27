@@ -498,7 +498,9 @@ public class Http2TestBase
         ((IHttpStreamHeadersHandler)this).OnHeader(H2StaticTable.Get(index - 1).Name, value);
     }
 
-    void IHttpStreamHeadersHandler.OnHeadersComplete(bool endStream) { }
+    void IHttpStreamHeadersHandler.OnHeadersComplete(bool endStream)
+    {
+    }
 
     void IHttpStreamHeadersHandler.OnDynamicIndexedHeader(
         int? index,
@@ -1685,7 +1687,9 @@ public class Http2TestBase
 
     internal class Http2FrameWithPayload : Http2Frame
     {
-        public Http2FrameWithPayload() : base() { }
+        public Http2FrameWithPayload() : base()
+        {
+        }
 
         // This does not contain extended headers
         public Memory<byte> Payload { get; set; }

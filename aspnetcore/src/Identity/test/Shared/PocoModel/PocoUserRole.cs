@@ -6,7 +6,9 @@ namespace Microsoft.AspNetCore.Identity.Test;
 /// <summary>
 ///     EntityType that represents a user belonging to a role
 /// </summary>
-public class PocoUserRole : PocoUserRole<string> { }
+public class PocoUserRole : PocoUserRole<string>
+{
+}
 
 /// <summary>
 ///     EntityType that represents a user belonging to a role

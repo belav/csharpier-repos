@@ -35,7 +35,9 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     /// <summary>
     /// Initializes a new instance of the <see cref="ModelStateDictionary"/> class.
     /// </summary>
-    public ModelStateDictionary() : this(DefaultMaxAllowedErrors) { }
+    public ModelStateDictionary() : this(DefaultMaxAllowedErrors)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ModelStateDictionary"/> class.
@@ -45,7 +47,9 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
             maxAllowedErrors,
             maxValidationDepth: DefaultMaxRecursionDepth,
             maxStateDepth: DefaultMaxRecursionDepth
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ModelStateDictionary"/> class.
@@ -1143,7 +1147,9 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
         object IEnumerator.Current => Current;
 
         /// <inheritdoc />
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         /// <inheritdoc />
         public bool MoveNext()

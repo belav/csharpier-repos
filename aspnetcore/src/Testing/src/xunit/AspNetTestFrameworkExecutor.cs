@@ -14,7 +14,9 @@ public class AspNetTestFrameworkExecutor : XunitTestFrameworkExecutor
         AssemblyName assemblyName,
         ISourceInformationProvider sourceInformationProvider,
         IMessageSink diagnosticMessageSink
-    ) : base(assemblyName, sourceInformationProvider, diagnosticMessageSink) { }
+    ) : base(assemblyName, sourceInformationProvider, diagnosticMessageSink)
+    {
+    }
 
     protected override async void RunTestCases(
         IEnumerable<IXunitTestCase> testCases,

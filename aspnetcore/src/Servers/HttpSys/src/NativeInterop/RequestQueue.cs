@@ -15,10 +15,14 @@ internal sealed partial class RequestQueue
     private bool _disposed;
 
     internal RequestQueue(string requestQueueName, ILogger logger)
-        : this(requestQueueName, RequestQueueMode.Attach, logger, receiver: true) { }
+        : this(requestQueueName, RequestQueueMode.Attach, logger, receiver: true)
+    {
+    }
 
     internal RequestQueue(string? requestQueueName, RequestQueueMode mode, ILogger logger)
-        : this(requestQueueName, mode, logger, false) { }
+        : this(requestQueueName, mode, logger, false)
+    {
+    }
 
     private RequestQueue(
         string? requestQueueName,

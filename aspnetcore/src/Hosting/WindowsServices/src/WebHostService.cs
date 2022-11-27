@@ -75,20 +75,28 @@ public class WebHostService : ServiceBase
     /// Executes before ASP.NET Core starts.
     /// </summary>
     /// <param name="args">The command line arguments passed to the service.</param>
-    protected virtual void OnStarting(string[] args) { }
+    protected virtual void OnStarting(string[] args)
+    {
+    }
 
     /// <summary>
     /// Executes after ASP.NET Core starts.
     /// </summary>
-    protected virtual void OnStarted() { }
+    protected virtual void OnStarted()
+    {
+    }
 
     /// <summary>
     /// Executes before ASP.NET Core shuts down.
     /// </summary>
-    protected virtual void OnStopping() { }
+    protected virtual void OnStopping()
+    {
+    }
 
     /// <summary>
     /// Executes after ASP.NET Core shuts down.
     /// </summary>
-    protected virtual void OnStopped() { }
+    protected virtual void OnStopped()
+    {
+    }
 }

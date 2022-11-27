@@ -5,14 +5,20 @@ namespace Microsoft.AspNetCore.Components.Forms;
 
 public partial class DataAnnotationsValidator : Microsoft.AspNetCore.Components.ComponentBase
 {
-    public DataAnnotationsValidator() { }
+    public DataAnnotationsValidator()
+    {
+    }
 
-    protected override void OnInitialized() { }
+    protected override void OnInitialized()
+    {
+    }
 }
 
 public sealed partial class EditContext
 {
-    public EditContext(object model) { }
+    public EditContext(object model)
+    {
+    }
 
     public object Model
     {
@@ -74,17 +80,25 @@ public sealed partial class EditContext
         throw null;
     }
 
-    public void MarkAsUnmodified() { }
+    public void MarkAsUnmodified()
+    {
+    }
 
     public void MarkAsUnmodified(
         in Microsoft.AspNetCore.Components.Forms.FieldIdentifier fieldIdentifier
-    ) { }
+    )
+    {
+    }
 
     public void NotifyFieldChanged(
         in Microsoft.AspNetCore.Components.Forms.FieldIdentifier fieldIdentifier
-    ) { }
+    )
+    {
+    }
 
-    public void NotifyValidationStateChanged() { }
+    public void NotifyValidationStateChanged()
+    {
+    }
 
     public bool Validate()
     {
@@ -106,7 +120,9 @@ public sealed partial class FieldChangedEventArgs : System.EventArgs
 {
     public FieldChangedEventArgs(
         in Microsoft.AspNetCore.Components.Forms.FieldIdentifier fieldIdentifier
-    ) { }
+    )
+    {
+    }
 
     public Microsoft.AspNetCore.Components.Forms.FieldIdentifier FieldIdentifier
     {
@@ -164,7 +180,9 @@ public readonly partial struct FieldIdentifier
 
 public sealed partial class ValidationMessageStore
 {
-    public ValidationMessageStore(Microsoft.AspNetCore.Components.Forms.EditContext editContext) { }
+    public ValidationMessageStore(Microsoft.AspNetCore.Components.Forms.EditContext editContext)
+    {
+    }
 
     public System.Collections.Generic.IEnumerable<string> this[Microsoft.AspNetCore.Components.Forms.FieldIdentifier fieldIdentifier]
     {
@@ -178,40 +196,58 @@ public sealed partial class ValidationMessageStore
     public void Add(
         in Microsoft.AspNetCore.Components.Forms.FieldIdentifier fieldIdentifier,
         System.Collections.Generic.IEnumerable<string> messages
-    ) { }
+    )
+    {
+    }
 
     public void Add(
         in Microsoft.AspNetCore.Components.Forms.FieldIdentifier fieldIdentifier,
         string message
-    ) { }
+    )
+    {
+    }
 
     public void Add(
         System.Linq.Expressions.Expression<System.Func<object>> accessor,
         System.Collections.Generic.IEnumerable<string> messages
-    ) { }
+    )
+    {
+    }
 
     public void Add(
         System.Linq.Expressions.Expression<System.Func<object>> accessor,
         string message
-    ) { }
+    )
+    {
+    }
 
-    public void Clear() { }
+    public void Clear()
+    {
+    }
 
-    public void Clear(in Microsoft.AspNetCore.Components.Forms.FieldIdentifier fieldIdentifier) { }
+    public void Clear(in Microsoft.AspNetCore.Components.Forms.FieldIdentifier fieldIdentifier)
+    {
+    }
 
-    public void Clear(System.Linq.Expressions.Expression<System.Func<object>> accessor) { }
+    public void Clear(System.Linq.Expressions.Expression<System.Func<object>> accessor)
+    {
+    }
 }
 
 public sealed partial class ValidationRequestedEventArgs : System.EventArgs
 {
     public static new readonly Microsoft.AspNetCore.Components.Forms.ValidationRequestedEventArgs Empty;
 
-    public ValidationRequestedEventArgs() { }
+    public ValidationRequestedEventArgs()
+    {
+    }
 }
 
 public sealed partial class ValidationStateChangedEventArgs : System.EventArgs
 {
     public static new readonly Microsoft.AspNetCore.Components.Forms.ValidationStateChangedEventArgs Empty;
 
-    public ValidationStateChangedEventArgs() { }
+    public ValidationStateChangedEventArgs()
+    {
+    }
 }

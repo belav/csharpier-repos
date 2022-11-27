@@ -172,7 +172,9 @@ public class ResponseCompressionBodyTest
             _bufferedStream = new BufferedStream(outputStream);
         }
 
-        public override void Flush() { }
+        public override void Flush()
+        {
+        }
 
         public override int Read(byte[] buffer, int offset, int count) =>
             _bufferedStream.Read(buffer, offset, count);

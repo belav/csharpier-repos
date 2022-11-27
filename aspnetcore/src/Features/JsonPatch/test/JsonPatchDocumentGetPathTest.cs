@@ -109,7 +109,9 @@ public class JsonPatchDocumentGetPathTest
 
 internal class DerivedClass : BaseClass
 {
-    public DerivedClass() { }
+    public DerivedClass()
+    {
+    }
 }
 
 internal class NestedObjectWithDerivedClass
@@ -117,4 +119,6 @@ internal class NestedObjectWithDerivedClass
     public DerivedClass DerivedObject { get; set; }
 }
 
-internal class BaseClass { }
+internal class BaseClass
+{
+}

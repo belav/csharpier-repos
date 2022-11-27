@@ -26,7 +26,9 @@ public class StringRole : IdentityRole<string>
 
 public class UserStoreStringKeyTest : SqlStoreTestBase<StringUser, StringRole, string>
 {
-    public UserStoreStringKeyTest(ScratchDatabaseFixture fixture) : base(fixture) { }
+    public UserStoreStringKeyTest(ScratchDatabaseFixture fixture) : base(fixture)
+    {
+    }
 
     [Fact]
     public void AddEntityFrameworkStoresCanInferKey()

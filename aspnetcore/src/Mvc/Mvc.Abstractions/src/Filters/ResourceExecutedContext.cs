@@ -19,7 +19,9 @@ public class ResourceExecutedContext : FilterContext
     /// <param name="actionContext">The <see cref="ActionContext"/>.</param>
     /// <param name="filters">The list of <see cref="IFilterMetadata"/> instances.</param>
     public ResourceExecutedContext(ActionContext actionContext, IList<IFilterMetadata> filters)
-        : base(actionContext, filters) { }
+        : base(actionContext, filters)
+    {
+    }
 
     /// <summary>
     /// Gets or sets a value which indicates whether or not execution was canceled by a resource filter.

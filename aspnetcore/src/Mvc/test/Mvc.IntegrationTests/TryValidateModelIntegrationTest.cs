@@ -270,5 +270,7 @@ public class TryValidateModelIntegrationTest
         return result;
     }
 
-    private class TestController : Controller { }
+    private class TestController : Controller
+    {
+    }
 }

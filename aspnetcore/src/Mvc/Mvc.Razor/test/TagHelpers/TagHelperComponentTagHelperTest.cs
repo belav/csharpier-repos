@@ -416,7 +416,9 @@ public class TagHelperComponentTagHelperTest
 
         public int Order => _order;
 
-        public void Init(TagHelperContext context) { }
+        public void Init(TagHelperContext context)
+        {
+        }
 
         public Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {

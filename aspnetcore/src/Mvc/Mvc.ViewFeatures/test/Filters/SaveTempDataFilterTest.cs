@@ -379,7 +379,9 @@ public class SaveTempDataFilterTest
         return new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
     }
 
-    private class TestController : Controller { }
+    private class TestController : Controller
+    {
+    }
 
     private class TestActionResult : IActionResult
     {

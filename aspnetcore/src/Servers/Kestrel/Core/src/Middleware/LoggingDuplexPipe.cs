@@ -18,5 +18,7 @@ internal sealed class LoggingDuplexPipe : DuplexPipeStreamAdapter<LoggingStream>
             _defaultReaderOptions,
             _defaultWriterOptions,
             stream => new LoggingStream(stream, logger)
-        ) { }
+        )
+    {
+    }
 }

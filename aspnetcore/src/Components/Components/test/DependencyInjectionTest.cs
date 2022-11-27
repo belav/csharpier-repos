@@ -171,7 +171,9 @@ public class DependencyInjectionTest
         public IMyService PrivateMyService => MyService;
     }
 
-    class HasInheritedPrivateInjectableProperty : HasPrivateInjectableProperty { }
+    class HasInheritedPrivateInjectableProperty : HasPrivateInjectableProperty
+    {
+    }
 
     class HasManyInjectableProperties : TestComponent
     {
@@ -193,17 +195,29 @@ public class DependencyInjectionTest
         public IMyService PrivateValue => Private;
     }
 
-    class HasInheritedInjectedProperty : HasInjectableProperty { }
+    class HasInheritedInjectedProperty : HasInjectableProperty
+    {
+    }
 
-    interface IMyService { }
+    interface IMyService
+    {
+    }
 
-    interface IMyOtherService { }
+    interface IMyOtherService
+    {
+    }
 
-    class MyServiceImplementation : IMyService { }
+    class MyServiceImplementation : IMyService
+    {
+    }
 
-    class MyOtherServiceImplementation : IMyOtherService { }
+    class MyOtherServiceImplementation : IMyOtherService
+    {
+    }
 
-    class MyConcreteService { }
+    class MyConcreteService
+    {
+    }
 
     class TestComponent : IComponent
     {

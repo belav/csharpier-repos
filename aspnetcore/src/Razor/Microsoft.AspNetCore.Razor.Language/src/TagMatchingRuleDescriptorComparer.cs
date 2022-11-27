@@ -16,7 +16,9 @@ internal class TagMatchingRuleDescriptorComparer : IEqualityComparer<TagMatching
     public static readonly TagMatchingRuleDescriptorComparer Default =
         new TagMatchingRuleDescriptorComparer();
 
-    private TagMatchingRuleDescriptorComparer() { }
+    private TagMatchingRuleDescriptorComparer()
+    {
+    }
 
     public virtual bool Equals(TagMatchingRuleDescriptor ruleX, TagMatchingRuleDescriptor ruleY)
     {

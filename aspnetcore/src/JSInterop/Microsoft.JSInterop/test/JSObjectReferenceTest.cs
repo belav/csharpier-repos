@@ -90,7 +90,9 @@ public class JSObjectReferenceTest
         protected internal override void EndInvokeDotNet(
             DotNetInvocationInfo invocationInfo,
             in DotNetInvocationResult invocationResult
-        ) { }
+        )
+        {
+        }
     }
 
     class TestJSInProcessRuntime : JSInProcessRuntime
@@ -103,7 +105,9 @@ public class JSObjectReferenceTest
             string? argsJson,
             JSCallResultType resultType,
             long targetInstanceId
-        ) { }
+        )
+        {
+        }
 
         protected override string? InvokeJS(
             string identifier,
@@ -120,6 +124,8 @@ public class JSObjectReferenceTest
         protected internal override void EndInvokeDotNet(
             DotNetInvocationInfo invocationInfo,
             in DotNetInvocationResult invocationResult
-        ) { }
+        )
+        {
+        }
     }
 }

@@ -15,12 +15,16 @@ namespace Microsoft.AspNetCore.Testing;
 public class AssemblyTestLogTests : LoggedTest
 {
     [Fact]
-    public void FunctionalLogs_LogsPreservedFromNonQuarantinedTest() { }
+    public void FunctionalLogs_LogsPreservedFromNonQuarantinedTest()
+    {
+    }
 
     [Fact]
     // Keep this test in quarantine, it verifies that quarantined test logs are preserved
     [QuarantinedTest("No issue")]
-    public void FunctionalLogs_LogsPreservedFromQuarantinedTest() { }
+    public void FunctionalLogs_LogsPreservedFromQuarantinedTest()
+    {
+    }
 
     [Fact]
     public void ForAssembly_ReturnsSameInstanceForSameAssembly()

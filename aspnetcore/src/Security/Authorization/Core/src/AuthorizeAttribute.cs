@@ -18,7 +18,9 @@ public class AuthorizeAttribute : Attribute, IAuthorizeData
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthorizeAttribute"/> class.
     /// </summary>
-    public AuthorizeAttribute() { }
+    public AuthorizeAttribute()
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthorizeAttribute"/> class with the specified policy.

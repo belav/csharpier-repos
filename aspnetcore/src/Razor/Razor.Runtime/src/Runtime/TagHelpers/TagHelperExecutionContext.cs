@@ -32,7 +32,9 @@ public class TagHelperExecutionContext
             executeChildContentAsync: () => Task.CompletedTask,
             startTagHelperWritingScope: _ => { },
             endTagHelperWritingScope: () => new DefaultTagHelperContent()
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Instantiates a new <see cref="TagHelperExecutionContext"/>.

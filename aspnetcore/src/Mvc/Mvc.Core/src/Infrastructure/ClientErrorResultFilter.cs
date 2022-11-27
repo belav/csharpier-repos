@@ -27,7 +27,9 @@ internal sealed partial class ClientErrorResultFilter : IAlwaysRunResultFilter, 
     /// </summary>
     public int Order => FilterOrder;
 
-    public void OnResultExecuted(ResultExecutedContext context) { }
+    public void OnResultExecuted(ResultExecutedContext context)
+    {
+    }
 
     public void OnResultExecuting(ResultExecutingContext context)
     {

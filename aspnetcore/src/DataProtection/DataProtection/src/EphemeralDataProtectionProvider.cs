@@ -30,7 +30,9 @@ public sealed class EphemeralDataProtectionProvider : IDataProtectionProvider
     /// <summary>
     /// Creates an ephemeral <see cref="IDataProtectionProvider"/>.
     /// </summary>
-    public EphemeralDataProtectionProvider() : this(NullLoggerFactory.Instance) { }
+    public EphemeralDataProtectionProvider() : this(NullLoggerFactory.Instance)
+    {
+    }
 
     /// <summary>
     /// Creates an ephemeral <see cref="IDataProtectionProvider"/> with logging.

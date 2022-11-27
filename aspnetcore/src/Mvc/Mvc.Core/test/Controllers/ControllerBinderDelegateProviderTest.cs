@@ -1498,7 +1498,9 @@ public class ControllerBinderDelegateProviderTest
             object param1,
             [BindNever] object param2,
             [CustomValidation("some message")] string param3
-        ) { }
+        )
+        {
+        }
 
         public static ParameterInfo NoAttributesParameterInfo = typeof(ParameterInfos)
             .GetMethod(nameof(ParameterInfos.Method))
@@ -1515,7 +1517,9 @@ public class ControllerBinderDelegateProviderTest
 
     public abstract class FakeModelMetadata : ModelMetadata
     {
-        public FakeModelMetadata() : base(ModelMetadataIdentity.ForType(typeof(string))) { }
+        public FakeModelMetadata() : base(ModelMetadataIdentity.ForType(typeof(string)))
+        {
+        }
     }
 
     private class TestObjectModelValidator : IObjectModelValidator

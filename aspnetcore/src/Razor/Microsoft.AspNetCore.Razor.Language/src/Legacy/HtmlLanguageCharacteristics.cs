@@ -12,7 +12,9 @@ internal class HtmlLanguageCharacteristics : LanguageCharacteristics<HtmlTokeniz
     private static readonly HtmlLanguageCharacteristics _instance =
         new HtmlLanguageCharacteristics();
 
-    protected HtmlLanguageCharacteristics() { }
+    protected HtmlLanguageCharacteristics()
+    {
+    }
 
     public static HtmlLanguageCharacteristics Instance
     {

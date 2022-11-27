@@ -230,7 +230,9 @@ public class MiddlewareTests
             return new ValueTask<bool>(Source, 0);
         }
 
-        public void OnExit() { }
+        public void OnExit()
+        {
+        }
     }
 
     private class TestValueResult : IValueTaskSource<bool>

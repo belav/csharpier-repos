@@ -105,7 +105,9 @@ public unsafe class CngAuthenticatedEncryptorBaseTests
 
     internal abstract class MockableEncryptor : CngAuthenticatedEncryptorBase
     {
-        public override void Dispose() { }
+        public override void Dispose()
+        {
+        }
 
         public abstract byte[] DecryptHook(
             IntPtr pbCiphertext,

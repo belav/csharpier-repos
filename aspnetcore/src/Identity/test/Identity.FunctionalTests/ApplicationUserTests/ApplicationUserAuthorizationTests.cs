@@ -11,5 +11,7 @@ public class ApplicationUserAuthorizationTests
 {
     public ApplicationUserAuthorizationTests(
         ServerFactory<ApplicationUserStartup, ApplicationDbContext> serverFactory
-    ) : base(serverFactory) { }
+    ) : base(serverFactory)
+    {
+    }
 }

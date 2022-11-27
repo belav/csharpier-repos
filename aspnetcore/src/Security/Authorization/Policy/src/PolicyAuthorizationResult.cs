@@ -13,7 +13,9 @@ public class PolicyAuthorizationResult
     private static readonly PolicyAuthorizationResult _forbiddenResult = new() { Forbidden = true };
     private static readonly PolicyAuthorizationResult _succeededResult = new() { Succeeded = true };
 
-    private PolicyAuthorizationResult() { }
+    private PolicyAuthorizationResult()
+    {
+    }
 
     /// <summary>
     /// If true, means the callee should challenge and try again.

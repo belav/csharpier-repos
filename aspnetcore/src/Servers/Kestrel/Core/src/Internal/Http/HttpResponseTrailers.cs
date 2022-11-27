@@ -77,7 +77,9 @@ internal partial class HttpResponseTrailers : HttpHeaders
 
         readonly object IEnumerator.Current => _current;
 
-        public readonly void Dispose() { }
+        public readonly void Dispose()
+        {
+        }
 
         public void Reset()
         {

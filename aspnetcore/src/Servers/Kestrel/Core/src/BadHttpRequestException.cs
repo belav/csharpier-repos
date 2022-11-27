@@ -16,7 +16,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core;
 public sealed class BadHttpRequestException : Microsoft.AspNetCore.Http.BadHttpRequestException
 {
     internal BadHttpRequestException(string message, int statusCode, RequestRejectionReason reason)
-        : this(message, statusCode, reason, null) { }
+        : this(message, statusCode, reason, null)
+    {
+    }
 
     internal BadHttpRequestException(
         string message,

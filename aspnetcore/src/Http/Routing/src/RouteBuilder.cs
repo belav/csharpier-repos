@@ -18,7 +18,9 @@ public class RouteBuilder : IRouteBuilder
     /// </summary>
     /// <param name="applicationBuilder">An <see cref="IApplicationBuilder"/> instance.</param>
     public RouteBuilder(IApplicationBuilder applicationBuilder)
-        : this(applicationBuilder, defaultHandler: null) { }
+        : this(applicationBuilder, defaultHandler: null)
+    {
+    }
 
     /// <summary>
     /// Constructs a new <see cref="RouteBuilder"/> instance given an <paramref name="applicationBuilder"/>

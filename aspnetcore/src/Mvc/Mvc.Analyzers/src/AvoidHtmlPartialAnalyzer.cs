@@ -12,7 +12,9 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers;
 public class AvoidHtmlPartialAnalyzer : ViewFeatureAnalyzerBase
 {
     public AvoidHtmlPartialAnalyzer()
-        : base(DiagnosticDescriptors.MVC1000_HtmlHelperPartialShouldBeAvoided) { }
+        : base(DiagnosticDescriptors.MVC1000_HtmlHelperPartialShouldBeAvoided)
+    {
+    }
 
     protected override void InitializeWorker(ViewFeaturesAnalyzerContext analyzerContext)
     {

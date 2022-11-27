@@ -1178,9 +1178,13 @@ public class CacheTagHelperTest
             return Entry;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        public void Remove(object key) { }
+        public void Remove(object key)
+        {
+        }
 
         public bool TryGetValue(object key, out object value)
         {

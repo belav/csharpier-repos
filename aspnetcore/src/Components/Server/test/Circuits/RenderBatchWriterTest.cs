@@ -515,7 +515,9 @@ public class RenderBatchWriterTest
     class FakeRenderer : Renderer
     {
         public FakeRenderer()
-            : base(new ServiceCollection().BuildServiceProvider(), NullLoggerFactory.Instance) { }
+            : base(new ServiceCollection().BuildServiceProvider(), NullLoggerFactory.Instance)
+        {
+        }
 
         public override Dispatcher Dispatcher { get; } = Dispatcher.CreateDefault();
 

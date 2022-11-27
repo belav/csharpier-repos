@@ -17,6 +17,8 @@ namespace Microsoft.AspNetCore.Analyzers.TestFiles.CompilationFeatureDetectorTes
             });
         }
 
-        public class App : Microsoft.AspNetCore.Components.ComponentBase { }
+        public class App : Microsoft.AspNetCore.Components.ComponentBase
+        {
+        }
     }
 }

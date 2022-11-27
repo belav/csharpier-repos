@@ -11,7 +11,9 @@ namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
 internal sealed class EnumConverter<TEnum> : SettingsConverterBase<TEnum> where TEnum : Enum
 {
-    public EnumConverter(JsonContext context) : base(context) { }
+    public EnumConverter(JsonContext context) : base(context)
+    {
+    }
 
     public override TEnum? Read(
         ref Utf8JsonReader reader,

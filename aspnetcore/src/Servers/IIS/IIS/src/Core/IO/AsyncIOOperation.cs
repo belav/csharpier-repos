@@ -139,7 +139,9 @@ internal abstract class AsyncIOOperation : IValueTaskSource<int>, IValueTaskSour
 
     protected virtual bool IsSuccessfulResult(int hr) => false;
 
-    public virtual void FreeOperationResources(int hr, int bytes) { }
+    public virtual void FreeOperationResources(int hr, int bytes)
+    {
+    }
 
     protected virtual void ResetOperation()
     {

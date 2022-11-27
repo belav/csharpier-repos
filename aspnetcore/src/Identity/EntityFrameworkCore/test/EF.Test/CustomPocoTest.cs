@@ -16,7 +16,9 @@ public class CustomPocoTest
 
     public class CustomDbContext<TKey> : DbContext where TKey : IEquatable<TKey>
     {
-        public CustomDbContext(DbContextOptions options) : base(options) { }
+        public CustomDbContext(DbContextOptions options) : base(options)
+        {
+        }
 
         public DbSet<User<TKey>> Users { get; set; }
     }

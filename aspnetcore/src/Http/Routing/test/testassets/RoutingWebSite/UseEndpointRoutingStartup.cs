@@ -162,7 +162,9 @@ public class UseEndpointRoutingStartup
         });
     }
 
-    private class CustomMetadata { }
+    private class CustomMetadata
+    {
+    }
 
     private IEndpointConventionBuilder MapHostEndpoint(
         IEndpointRouteBuilder endpoints,

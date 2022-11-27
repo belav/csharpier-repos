@@ -349,6 +349,8 @@ public class AuthenticationSchemeProviderTests
             : base(
                 options,
                 new Dictionary<string, AuthenticationScheme>(StringComparer.OrdinalIgnoreCase)
-            ) { }
+            )
+        {
+        }
     }
 }

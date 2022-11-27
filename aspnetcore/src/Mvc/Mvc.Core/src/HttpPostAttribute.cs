@@ -16,7 +16,9 @@ public class HttpPostAttribute : HttpMethodAttribute
     /// <summary>
     /// Creates a new <see cref="HttpPostAttribute"/>.
     /// </summary>
-    public HttpPostAttribute() : base(_supportedMethods) { }
+    public HttpPostAttribute() : base(_supportedMethods)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="HttpPostAttribute"/> with the given route template.

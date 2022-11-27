@@ -261,6 +261,8 @@ public class AuthorizeFilterIntegrationTest
     public class AuthorizeController
     {
         [Authorize(Policy = "Base")]
-        public virtual void Authorize() { }
+        public virtual void Authorize()
+        {
+        }
     }
 }

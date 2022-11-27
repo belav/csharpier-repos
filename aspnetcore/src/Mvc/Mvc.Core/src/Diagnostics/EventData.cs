@@ -74,7 +74,9 @@ public abstract class EventData : IReadOnlyList<KeyValuePair<string, object>>
         }
 
         /// <inheritdoc/>
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         object IEnumerator.Current => Current;
 

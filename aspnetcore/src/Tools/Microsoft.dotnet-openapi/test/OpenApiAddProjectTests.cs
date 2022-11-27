@@ -13,7 +13,9 @@ namespace Microsoft.DotNet.OpenApi.Add.Tests;
 
 public class OpenApiAddProjectTests : OpenApiTestBase
 {
-    public OpenApiAddProjectTests(ITestOutputHelper output) : base(output) { }
+    public OpenApiAddProjectTests(ITestOutputHelper output) : base(output)
+    {
+    }
 
     [Fact(Skip = "https://github.com/dotnet/aspnetcore/issues/12738")]
     public async Task OpenApi_Add_GlobbingOpenApi()

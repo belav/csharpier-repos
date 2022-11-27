@@ -13,7 +13,9 @@ namespace Microsoft.AspNetCore.Components.Analyzers.Tests.TestFiles.ComponentInt
         _field = null;
 
         public UsesRendererTypesInDeclarations()
-            /*MMInvocation*/: base(null, null) { }
+            /*MMInvocation*/: base(null, null)
+        {
+        }
 
         public override Dispatcher Dispatcher => throw new NotImplementedException();
 
@@ -31,6 +33,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers.Tests.TestFiles.ComponentInt
 
         /*MMReturnType*/private Renderer GetRenderer() => _field;
 
-        public interface ITestInterface { }
+        public interface ITestInterface
+        {
+        }
     }
 }

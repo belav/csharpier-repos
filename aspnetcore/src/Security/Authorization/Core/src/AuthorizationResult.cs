@@ -15,7 +15,9 @@ public class AuthorizationResult
     private static readonly AuthorizationResult _failedResult =
         new() { Failure = AuthorizationFailure.ExplicitFail() };
 
-    private AuthorizationResult() { }
+    private AuthorizationResult()
+    {
+    }
 
     /// <summary>
     /// True if authorization was successful.

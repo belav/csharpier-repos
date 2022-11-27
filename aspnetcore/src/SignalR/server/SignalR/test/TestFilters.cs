@@ -148,7 +148,9 @@ public class NoExceptionFilter : IHubFilter
         {
             await next(context);
         }
-        catch { }
+        catch
+        {
+        }
     }
 
     public async Task OnDisconnectedAsync(
@@ -161,7 +163,9 @@ public class NoExceptionFilter : IHubFilter
         {
             await next(context, exception);
         }
-        catch { }
+        catch
+        {
+        }
     }
 
     public async ValueTask<object> InvokeMethodAsync(
@@ -173,7 +177,9 @@ public class NoExceptionFilter : IHubFilter
         {
             return await next(invocationContext);
         }
-        catch { }
+        catch
+        {
+        }
 
         return null;
     }

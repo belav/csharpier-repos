@@ -90,5 +90,7 @@ public class RazorEngineBuilderExtensionsTest
         Assert.Same(extension, Assert.Single(actual.TargetExtensions));
     }
 
-    private class MyTargetExtension : ICodeTargetExtension { }
+    private class MyTargetExtension : ICodeTargetExtension
+    {
+    }
 }

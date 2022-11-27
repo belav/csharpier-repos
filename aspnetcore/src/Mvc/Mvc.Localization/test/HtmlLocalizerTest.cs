@@ -274,4 +274,6 @@ public class HtmlLocalizerTest
     }
 }
 
-public class TestClass { }
+public class TestClass
+{
+}

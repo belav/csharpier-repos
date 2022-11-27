@@ -285,11 +285,17 @@ public class DefaultModelMetadataTest
         Assert.Equal(elementType, elementMetadata.ModelType);
     }
 
-    private class NonCollectionType { }
+    private class NonCollectionType
+    {
+    }
 
-    private class DerivedList : List<int> { }
+    private class DerivedList : List<int>
+    {
+    }
 
-    private class DerivedDictionary : Dictionary<string, int> { }
+    private class DerivedDictionary : Dictionary<string, int>
+    {
+    }
 
     [Theory]
     [InlineData(typeof(string))]
@@ -1034,7 +1040,9 @@ public class DefaultModelMetadataTest
 
     private static void CalculateHasValidators_ParameterMetadata_TypeHasNoValidatorsMethod(
         string model
-    ) { }
+    )
+    {
+    }
 
     [Fact]
     public void CalculateHasValidators_PropertyMetadata_TypeHasNoValidators()
@@ -2102,7 +2110,9 @@ public class DefaultModelMetadataTest
         );
     }
 
-    private void ActionMethod(string input) { }
+    private void ActionMethod(string input)
+    {
+    }
 
     private class TypeWithProperties
     {
@@ -2166,9 +2176,13 @@ public class DefaultModelMetadataTest
     {
         public bool? HasValidators { get; set; }
 
-        public void CreateBindingMetadata(BindingMetadataProviderContext context) { }
+        public void CreateBindingMetadata(BindingMetadataProviderContext context)
+        {
+        }
 
-        public void CreateDisplayMetadata(DisplayMetadataProviderContext context) { }
+        public void CreateDisplayMetadata(DisplayMetadataProviderContext context)
+        {
+        }
 
         public void CreateValidationMetadata(ValidationMetadataProviderContext context)
         {

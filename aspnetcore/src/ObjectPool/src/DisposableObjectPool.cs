@@ -10,10 +10,14 @@ internal sealed class DisposableObjectPool<T> : DefaultObjectPool<T>, IDisposabl
 {
     private volatile bool _isDisposed;
 
-    public DisposableObjectPool(IPooledObjectPolicy<T> policy) : base(policy) { }
+    public DisposableObjectPool(IPooledObjectPolicy<T> policy) : base(policy)
+    {
+    }
 
     public DisposableObjectPool(IPooledObjectPolicy<T> policy, int maximumRetained)
-        : base(policy, maximumRetained) { }
+        : base(policy, maximumRetained)
+    {
+    }
 
     public override T Get()
     {
@@ -62,7 +66,9 @@ internal sealed class DisposableObjectPool<T> : DefaultObjectPool<T>, IDisposabl
                                 Interlocked.CompareExchange(ref items[i].Element, obj, null) == null
                         );
                     i++
-                ) { }
+                )
+                {
+                }
             }
         }
 

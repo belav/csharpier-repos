@@ -219,6 +219,8 @@ internal static class DecisionTreeBuilder<TItem>
     // Subclass just to give a logical name to a mess of generics
     private sealed class Criterion : Dictionary<DecisionCriterionValue, List<ItemDescriptor<TItem>>>
     {
-        public Criterion(DecisionCriterionValueEqualityComparer comparer) : base(comparer) { }
+        public Criterion(DecisionCriterionValueEqualityComparer comparer) : base(comparer)
+        {
+        }
     }
 }

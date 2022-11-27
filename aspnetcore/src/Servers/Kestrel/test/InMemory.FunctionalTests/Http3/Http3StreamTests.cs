@@ -3084,7 +3084,9 @@ public class Http3StreamTests : Http3TestBase
 #pragma warning restore CS0618 // Type or member is obsolete
                 {
                     var buffer = new byte[100];
-                    while (await context.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0) { }
+                    while (await context.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0)
+                    {
+                    }
                 });
                 ExceptionDispatchInfo.Capture(exception).Throw();
             },
@@ -3173,7 +3175,9 @@ public class Http3StreamTests : Http3TestBase
 #pragma warning restore CS0618 // Type or member is obsolete
                 {
                     var buffer = new byte[100];
-                    while (await context.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0) { }
+                    while (await context.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0)
+                    {
+                    }
                 });
                 ExceptionDispatchInfo.Capture(exception).Throw();
             },
@@ -3235,7 +3239,9 @@ public class Http3StreamTests : Http3TestBase
 #pragma warning restore CS0618 // Type or member is obsolete
                 {
                     var buffer = new byte[100];
-                    while (await context.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0) { }
+                    while (await context.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0)
+                    {
+                    }
                 });
                 Assert.True(context.Features.Get<IHttpMaxRequestBodySizeFeature>().IsReadOnly);
                 ExceptionDispatchInfo.Capture(exception).Throw();

@@ -364,7 +364,9 @@ public class HttpContextBuilderTests
 
         class NoopDispoasble : IDisposable
         {
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
     }
 }

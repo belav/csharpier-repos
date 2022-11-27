@@ -44,7 +44,9 @@ public class QueryBuilder : IEnumerable<KeyValuePair<string, string>>
                 kvp => kvp.Value,
                 (kvp, v) => KeyValuePair.Create(kvp.Key, v ?? string.Empty)
             )
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Adds a query string token to the instance.

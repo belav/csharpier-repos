@@ -14,7 +14,9 @@ public class FormattedClassification
     public string ClassificationName { get; }
     public string Text { get; }
 
-    private FormattedClassification() { }
+    private FormattedClassification()
+    {
+    }
 
     public FormattedClassification(string text, string classificationName)
     {

@@ -20,7 +20,9 @@ internal sealed class TempDataApplicationModelProvider : IApplicationModelProvid
     public int Order => -1000 + 10;
 
     /// <inheritdoc />
-    public void OnProvidersExecuted(ApplicationModelProviderContext context) { }
+    public void OnProvidersExecuted(ApplicationModelProviderContext context)
+    {
+    }
 
     /// <inheritdoc />
     public void OnProvidersExecuting(ApplicationModelProviderContext context)

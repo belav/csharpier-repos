@@ -32,7 +32,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests.InProcess;
 [Collection(PublishedSitesCollection.Name)]
 public class MaxRequestBodySizeTests : IISFunctionalTestBase
 {
-    public MaxRequestBodySizeTests(PublishedSitesFixture fixture) : base(fixture) { }
+    public MaxRequestBodySizeTests(PublishedSitesFixture fixture) : base(fixture)
+    {
+    }
 
     [ConditionalFact]
     [RequiresNewHandler]

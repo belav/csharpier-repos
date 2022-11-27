@@ -321,7 +321,9 @@ public class MaxRequestBufferSizeTests : LoggedTest
                     await host.StopAsync();
                 }
                 // Remove when https://github.com/dotnet/runtime/issues/40290 is fixed
-                catch (OperationCanceledException) { }
+                catch (OperationCanceledException)
+                {
+                }
                 host.Dispose();
             }
         }

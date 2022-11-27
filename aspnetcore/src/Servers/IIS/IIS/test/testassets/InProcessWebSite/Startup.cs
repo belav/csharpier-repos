@@ -912,7 +912,9 @@ public partial class Startup
         {
             File.Delete(tempFile);
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
     }
 
     private async Task BasePath(HttpContext ctx)

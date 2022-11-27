@@ -14,7 +14,9 @@ internal sealed class DefaultKeyStorageDirectories : IDefaultKeyStorageDirectori
         GetKeyStorageDirectoryImpl
     );
 
-    private DefaultKeyStorageDirectories() { }
+    private DefaultKeyStorageDirectories()
+    {
+    }
 
     public static IDefaultKeyStorageDirectories Instance { get; } =
         new DefaultKeyStorageDirectories();

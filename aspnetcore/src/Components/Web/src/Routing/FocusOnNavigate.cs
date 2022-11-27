@@ -69,5 +69,7 @@ public class FocusOnNavigate : ComponentBase
 
     // On the first render, we always want to consider the page type changed, even if it's null.
     // So we need some other non-null type to compare with it.
-    private sealed class NonMatchingType { }
+    private sealed class NonMatchingType
+    {
+    }
 }

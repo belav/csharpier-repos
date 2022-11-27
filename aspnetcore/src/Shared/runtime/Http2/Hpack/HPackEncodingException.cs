@@ -5,11 +5,17 @@ namespace System.Net.Http.HPack
 {
     internal sealed class HPackEncodingException : Exception
     {
-        public HPackEncodingException() { }
+        public HPackEncodingException()
+        {
+        }
 
-        public HPackEncodingException(string message) : base(message) { }
+        public HPackEncodingException(string message) : base(message)
+        {
+        }
 
         public HPackEncodingException(string message, Exception innerException)
-            : base(message, innerException) { }
+            : base(message, innerException)
+        {
+        }
     }
 }

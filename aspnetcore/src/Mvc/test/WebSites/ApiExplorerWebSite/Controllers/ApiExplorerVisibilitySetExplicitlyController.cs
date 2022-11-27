@@ -11,8 +11,12 @@ public class ApiExplorerVisibilitySetExplicitlyController : Controller
 {
     [ApiExplorerSettings(IgnoreApi = false)]
     [HttpGet("Enabled")]
-    public void Enabled() { }
+    public void Enabled()
+    {
+    }
 
     [HttpGet("Disabled")]
-    public void Disabled() { }
+    public void Disabled()
+    {
+    }
 }

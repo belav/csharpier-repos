@@ -24,7 +24,8 @@ public class AspNetTestAssemblyRunner : XunitTestAssemblyRunner
         IMessageSink executionMessageSink,
         ITestFrameworkExecutionOptions executionOptions
     ) : base(testAssembly, testCases, diagnosticMessageSink, executionMessageSink, executionOptions)
-    { }
+    {
+    }
 
     // internal for testing
     internal IEnumerable<object> Fixtures => _assemblyFixtureMappings.Values;

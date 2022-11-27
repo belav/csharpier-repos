@@ -15,7 +15,9 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests;
 
 internal class TestWebSocketConnectionFeature : IHttpWebSocketFeature, IDisposable
 {
-    public TestWebSocketConnectionFeature() { }
+    public TestWebSocketConnectionFeature()
+    {
+    }
 
     public TestWebSocketConnectionFeature(SyncPoint sync)
     {
@@ -58,7 +60,9 @@ internal class TestWebSocketConnectionFeature : IHttpWebSocketFeature, IDisposab
         return Task.FromResult<WebSocket>(serverSocket);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 
     public class WebSocketChannel : WebSocket
     {

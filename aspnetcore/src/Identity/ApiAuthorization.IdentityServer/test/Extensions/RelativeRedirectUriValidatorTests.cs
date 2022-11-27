@@ -213,7 +213,9 @@ public class RelativeRedirectUriValidatorTests
         private readonly string _path;
         private readonly string _result;
 
-        public TestUrlFactory() { }
+        public TestUrlFactory()
+        {
+        }
 
         public TestUrlFactory(string path, string result)
         {

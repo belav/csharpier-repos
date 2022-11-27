@@ -768,7 +768,9 @@ public class PropertyHelperTest
         public int Prop5 { get; set; }
     }
 
-    private readonly ref struct MyRefStruct { }
+    private readonly ref struct MyRefStruct
+    {
+    }
 #elif NETFRAMEWORK
 #else
 #error Unknown TFM - update the set of TFMs where we test for ref structs

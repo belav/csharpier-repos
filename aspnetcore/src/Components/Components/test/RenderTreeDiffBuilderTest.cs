@@ -2513,7 +2513,9 @@ public class RenderTreeDiffBuilderTest : IDisposable
 
     private class FakeRenderer : Renderer
     {
-        public FakeRenderer() : base(new TestServiceProvider(), NullLoggerFactory.Instance) { }
+        public FakeRenderer() : base(new TestServiceProvider(), NullLoggerFactory.Instance)
+        {
+        }
 
         public override Dispatcher Dispatcher { get; } = Dispatcher.CreateDefault();
 
@@ -2543,7 +2545,9 @@ public class RenderTreeDiffBuilderTest : IDisposable
 
         public string NonParameterProperty { get; set; }
 
-        public void Attach(RenderHandle renderHandle) { }
+        public void Attach(RenderHandle renderHandle)
+        {
+        }
 
         public Task SetParametersAsync(ParameterView parameters)
         {
@@ -2554,7 +2558,9 @@ public class RenderTreeDiffBuilderTest : IDisposable
 
     private class FakeComponent2 : IComponent
     {
-        public void Attach(RenderHandle renderHandle) { }
+        public void Attach(RenderHandle renderHandle)
+        {
+        }
 
         public Task SetParametersAsync(ParameterView parameters) => Task.CompletedTask;
     }
@@ -2563,7 +2569,9 @@ public class RenderTreeDiffBuilderTest : IDisposable
     {
         public int SetParametersCallCount { get; private set; }
 
-        public void Attach(RenderHandle renderHandle) { }
+        public void Attach(RenderHandle renderHandle)
+        {
+        }
 
         public Task SetParametersAsync(ParameterView parameters)
         {
@@ -2578,14 +2586,18 @@ public class RenderTreeDiffBuilderTest : IDisposable
 
         public void Dispose() => DisposalCount++;
 
-        public void Attach(RenderHandle renderHandle) { }
+        public void Attach(RenderHandle renderHandle)
+        {
+        }
 
         public Task SetParametersAsync(ParameterView parameters) => Task.CompletedTask;
     }
 
     private class NonDisposableComponent : IComponent
     {
-        public void Attach(RenderHandle renderHandle) { }
+        public void Attach(RenderHandle renderHandle)
+        {
+        }
 
         public Task SetParametersAsync(ParameterView parameters) => Task.CompletedTask;
     }

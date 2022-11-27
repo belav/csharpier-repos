@@ -40,7 +40,9 @@ namespace Microsoft.Web.Management.PInvoke.MLang
             CoClass(typeof(CMLangConvertCharsetClass)),
             Guid("D66D6F98-CDAA-11D0-B822-00C04FC9B31F")
         ]
-        public interface CMLangConvertCharset : IMLangConvertCharset { }
+        public interface CMLangConvertCharset : IMLangConvertCharset
+        {
+        }
 
         [
             ComImport,
@@ -97,7 +99,9 @@ namespace Microsoft.Web.Management.PInvoke.MLang
             Guid("C04D65CE-B70D-11D0-B188-00AA0038C969"),
             CoClass(typeof(CMLangStringClass))
         ]
-        public interface CMLangString : IMLangString { }
+        public interface CMLangString : IMLangString
+        {
+        }
 
         [
             ComImport,
@@ -350,7 +354,9 @@ namespace Microsoft.Web.Management.PInvoke.MLang
             Guid("275C23E1-3747-11D0-9FEA-00AA003F8646"),
             CoClass(typeof(CMultiLanguageClass))
         ]
-        public interface CMultiLanguage : IMultiLanguage { }
+        public interface CMultiLanguage : IMultiLanguage
+        {
+        }
 
         [
             ComImport,

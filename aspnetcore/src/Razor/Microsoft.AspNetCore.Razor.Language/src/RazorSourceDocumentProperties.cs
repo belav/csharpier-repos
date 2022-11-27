@@ -17,7 +17,9 @@ public sealed class RazorSourceDocumentProperties
     /// <summary>
     /// Creates a new <see cref="RazorSourceDocumentProperties"/>.
     /// </summary>
-    public RazorSourceDocumentProperties() { }
+    public RazorSourceDocumentProperties()
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="RazorSourceDocumentProperties"/>.

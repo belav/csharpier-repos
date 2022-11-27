@@ -19,7 +19,9 @@ namespace Microsoft.AspNetCore.Identity.Test;
 public abstract class IdentitySpecificationTestBase<TUser, TRole>
     : IdentitySpecificationTestBase<TUser, TRole, string>
     where TUser : class
-    where TRole : class { }
+    where TRole : class
+{
+}
 
 /// <summary>
 /// Base class for tests that exercise basic identity functionality that all stores should support.

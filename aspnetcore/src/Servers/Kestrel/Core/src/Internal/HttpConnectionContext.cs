@@ -33,7 +33,9 @@ internal class HttpConnectionContext : BaseHttpConnectionContext
             memoryPool,
             localEndPoint,
             remoteEndPoint
-        ) { }
+        )
+    {
+    }
 
     public IDuplexPipe Transport { get; set; } = default!;
 }

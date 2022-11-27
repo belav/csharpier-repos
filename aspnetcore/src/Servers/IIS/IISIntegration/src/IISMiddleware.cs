@@ -61,7 +61,9 @@ public class IISMiddleware
             isWebsocketsSupported: true,
             authentication,
             applicationLifetime
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// The middleware that enables IIS Out-Of-Process to work.

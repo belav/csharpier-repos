@@ -11,7 +11,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor;
 
 public class HelperResult : IHtmlContent
 {
-    public HelperResult(Func<TextWriter, Task> asyncAction) { }
+    public HelperResult(Func<TextWriter, Task> asyncAction)
+    {
+    }
 
-    public void WriteTo(TextWriter writer, HtmlEncoder encoder) { }
+    public void WriteTo(TextWriter writer, HtmlEncoder encoder)
+    {
+    }
 }

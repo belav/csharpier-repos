@@ -18,7 +18,9 @@ internal class MonoDatabaseOperations : DatabaseOperations
         string schemaName,
         string tableName,
         ISystemClock systemClock
-    ) : base(connectionString, schemaName, tableName, systemClock) { }
+    ) : base(connectionString, schemaName, tableName, systemClock)
+    {
+    }
 
     protected override byte[] GetCacheItem(string key, bool includeValue)
     {

@@ -10,7 +10,9 @@ namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
 internal sealed class UInt64Converter : SettingsConverterBase<ulong>
 {
-    public UInt64Converter(JsonContext context) : base(context) { }
+    public UInt64Converter(JsonContext context) : base(context)
+    {
+    }
 
     public override ulong Read(
         ref Utf8JsonReader reader,

@@ -613,9 +613,13 @@ public class EventCallbackFactoryTest
 
     private class EventComponent : IComponent, IHandleEvent
     {
-        public void SomeAction() { }
+        public void SomeAction()
+        {
+        }
 
-        public void SomeActionOfT(string e) { }
+        public void SomeActionOfT(string e)
+        {
+        }
 
         public Task SomeFuncTask()
         {

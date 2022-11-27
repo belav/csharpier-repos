@@ -41,7 +41,9 @@ public sealed class HealthCheckRegistration
         IHealthCheck instance,
         HealthStatus? failureStatus,
         IEnumerable<string>? tags
-    ) : this(name, instance, failureStatus, tags, default) { }
+    ) : this(name, instance, failureStatus, tags, default)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="HealthCheckRegistration"/> for an existing <see cref="IHealthCheck"/> instance.
@@ -99,7 +101,9 @@ public sealed class HealthCheckRegistration
         Func<IServiceProvider, IHealthCheck> factory,
         HealthStatus? failureStatus,
         IEnumerable<string>? tags
-    ) : this(name, factory, failureStatus, tags, default) { }
+    ) : this(name, factory, failureStatus, tags, default)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="HealthCheckRegistration"/> for an existing <see cref="IHealthCheck"/> instance.

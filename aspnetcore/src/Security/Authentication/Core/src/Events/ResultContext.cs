@@ -21,7 +21,9 @@ public abstract class ResultContext<TOptions> : BaseContext<TOptions>
     /// <param name="scheme">The authentication scheme.</param>
     /// <param name="options">The authentication options associated with the scheme.</param>
     protected ResultContext(HttpContext context, AuthenticationScheme scheme, TOptions options)
-        : base(context, scheme, options) { }
+        : base(context, scheme, options)
+    {
+    }
 
     /// <summary>
     /// Gets or sets the <see cref="ClaimsPrincipal"/> containing the user claims.

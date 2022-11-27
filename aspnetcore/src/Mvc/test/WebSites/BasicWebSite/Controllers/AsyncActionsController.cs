@@ -242,7 +242,9 @@ public class AsyncActionsController : Controller
             }
         }
 
-        public void GetResult() { }
+        public void GetResult()
+        {
+        }
     }
 
     public class CustomAwaiter<T> : CustomAwaiter
@@ -260,6 +262,8 @@ public class AsyncActionsController : Controller
 
     public class CustomException : Exception
     {
-        public CustomException() : base("This is a custom exception.") { }
+        public CustomException() : base("This is a custom exception.")
+        {
+        }
     }
 }

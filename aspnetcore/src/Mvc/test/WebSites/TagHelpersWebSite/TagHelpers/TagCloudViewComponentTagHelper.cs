@@ -38,7 +38,9 @@ public class TagCloudViewComponentTagHelper : ITagHelper
 
     public int Order { get; } = 0;
 
-    public void Init(TagHelperContext context) { }
+    public void Init(TagHelperContext context)
+    {
+    }
 
     public async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
     {

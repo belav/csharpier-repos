@@ -162,5 +162,7 @@ public class FilterCollectionTest
         public int Order { get; set; }
     }
 
-    private class NonFilter { }
+    private class NonFilter
+    {
+    }
 }

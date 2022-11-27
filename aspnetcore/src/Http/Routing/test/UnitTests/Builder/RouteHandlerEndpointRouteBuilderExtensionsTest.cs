@@ -120,7 +120,9 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         );
 
         [HttpMethod("ATTRIBUTE")]
-        void TestAction() { }
+        void TestAction()
+        {
+        }
 
         var endpointBuilder = builder.MapMethods("/", new[] { "METHOD" }, (Action)TestAction);
         endpointBuilder.WithMetadata(new HttpMethodMetadata(new[] { "BUILDER" }));
@@ -421,7 +423,9 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
     }
 
     [AttributeUsage(AttributeTargets.Parameter)]
-    private class TestFromServiceAttribute : Attribute, IFromServiceMetadata { }
+    private class TestFromServiceAttribute : Attribute, IFromServiceMetadata
+    {
+    }
 
     [Fact]
     public void MapGet_ExplicitFromService()
@@ -496,7 +500,9 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
     }
 
     [AttributeUsage(AttributeTargets.Parameter)]
-    private class TestFromBodyAttribute : Attribute, IFromBodyMetadata { }
+    private class TestFromBodyAttribute : Attribute, IFromBodyMetadata
+    {
+    }
 
     [Fact]
     public void MapGet_ExplicitFromBody_BuildsEndpointWithCorrectMethod()
@@ -1327,7 +1333,9 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         );
     }
 
-    class MyService { }
+    class MyService
+    {
+    }
 
     class ServiceAccessingEndpointFilter : IEndpointFilter
     {
@@ -1408,11 +1416,15 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         List<string> _contentTypes = new();
     }
 
-    class Todo { }
+    class Todo
+    {
+    }
 
     // Here to more easily disambiguate when ToDo is
     // intended to be validated as an implicit service in tests
-    class TodoService { }
+    class TodoService
+    {
+    }
 
     private class HttpMethodAttribute : Attribute, IHttpMethodMetadata
     {
@@ -1437,7 +1449,9 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
             return this;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public object? GetService(Type serviceType)
         {

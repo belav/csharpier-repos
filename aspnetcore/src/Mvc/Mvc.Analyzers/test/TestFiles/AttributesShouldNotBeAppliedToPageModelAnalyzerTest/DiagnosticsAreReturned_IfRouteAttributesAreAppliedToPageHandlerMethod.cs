@@ -6,6 +6,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     {
         [ /*MM*/
         HttpHead]
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
     }
 }

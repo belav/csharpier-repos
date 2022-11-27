@@ -20,7 +20,8 @@ namespace Templates.Blazor.Test;
 public class BlazorWasmTemplateAuthTest : BlazorTemplateTest
 {
     public BlazorWasmTemplateAuthTest(ProjectFactoryFixture projectFactory) : base(projectFactory)
-    { }
+    {
+    }
 
     public override string ProjectType { get; } = "blazorwasm";
 

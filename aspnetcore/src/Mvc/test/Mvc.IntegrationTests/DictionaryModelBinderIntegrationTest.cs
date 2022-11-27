@@ -1540,9 +1540,13 @@ public class DictionaryModelBinderIntegrationTest
         Assert.False(modelState.IsValid);
     }
 
-    private class ClosedGenericDictionary : Dictionary<string, string> { }
+    private class ClosedGenericDictionary : Dictionary<string, string>
+    {
+    }
 
-    private class ClosedGenericKeyDictionary<TValue> : Dictionary<string, TValue> { }
+    private class ClosedGenericKeyDictionary<TValue> : Dictionary<string, TValue>
+    {
+    }
 
     private class ExplicitClosedGenericDictionary : IDictionary<string, string>
     {

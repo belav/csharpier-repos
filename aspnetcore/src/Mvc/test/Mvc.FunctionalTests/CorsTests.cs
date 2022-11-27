@@ -10,7 +10,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 public class CorsTests : CorsTestsBase<CorsWebSite.StartupWithoutEndpointRouting>
 {
     public CorsTests(MvcTestFixture<CorsWebSite.StartupWithoutEndpointRouting> fixture)
-        : base(fixture) { }
+        : base(fixture)
+    {
+    }
 
     [Fact]
     public override async Task PreflightRequestOnNonCorsEnabledController_DoesNotMatchTheAction()

@@ -15,7 +15,9 @@ public class CompiledPageActionDescriptor : PageActionDescriptor
     /// <summary>
     /// Initializes an empty <see cref="CompiledPageActionDescriptor"/>.
     /// </summary>
-    public CompiledPageActionDescriptor() { }
+    public CompiledPageActionDescriptor()
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="CompiledPageActionDescriptor"/>
@@ -23,7 +25,9 @@ public class CompiledPageActionDescriptor : PageActionDescriptor
     /// </summary>
     /// <param name="actionDescriptor">The <see cref="PageActionDescriptor"/>.</param>
     public CompiledPageActionDescriptor(PageActionDescriptor actionDescriptor)
-        : base(actionDescriptor) { }
+        : base(actionDescriptor)
+    {
+    }
 
     /// <summary>
     /// Gets the list of handler methods for the page.

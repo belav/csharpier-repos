@@ -99,7 +99,9 @@ public class HttpConnectionManagerTests : LoggedTest
 
         public ILogger CreateLogger(string categoryName) => new CallbackLogger(_logAction);
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         private class CallbackLogger : ILogger
         {

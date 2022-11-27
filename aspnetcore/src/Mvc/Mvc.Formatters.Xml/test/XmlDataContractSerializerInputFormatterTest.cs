@@ -860,7 +860,9 @@ public class XmlDataContractSerializerInputFormatterTest
     {
         public int createSerializerCalledCount = 0;
 
-        public TestXmlDataContractSerializerInputFormatter() : base(new MvcOptions()) { }
+        public TestXmlDataContractSerializerInputFormatter() : base(new MvcOptions())
+        {
+        }
 
         protected override DataContractSerializer CreateSerializer(Type type)
         {
@@ -882,7 +884,9 @@ public class XmlDataContractSerializerInputFormatterTest
         public bool Disposed { get; private set; }
 
         public VerifyDisposeFileBufferingReadStream(Stream inner, int memoryThreshold)
-            : base(inner, memoryThreshold) { }
+            : base(inner, memoryThreshold)
+        {
+        }
 
         protected override void Dispose(bool disposing)
         {

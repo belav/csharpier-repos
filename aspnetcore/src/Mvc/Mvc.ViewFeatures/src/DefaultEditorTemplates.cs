@@ -553,7 +553,9 @@ internal static class DefaultEditorTemplates
     // Copied from Microsoft.AspNetCore.Razor.TagHelpers.NullHtmlEncoder.
     private sealed class PassThroughHtmlEncoder : HtmlEncoder
     {
-        private PassThroughHtmlEncoder() { }
+        private PassThroughHtmlEncoder()
+        {
+        }
 
         public static new PassThroughHtmlEncoder Default { get; } = new PassThroughHtmlEncoder();
 

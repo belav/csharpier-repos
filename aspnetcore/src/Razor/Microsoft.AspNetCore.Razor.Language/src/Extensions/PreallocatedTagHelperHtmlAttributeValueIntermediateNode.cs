@@ -10,7 +10,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 internal sealed class PreallocatedTagHelperHtmlAttributeValueIntermediateNode
     : ExtensionIntermediateNode
 {
-    public PreallocatedTagHelperHtmlAttributeValueIntermediateNode() { }
+    public PreallocatedTagHelperHtmlAttributeValueIntermediateNode()
+    {
+    }
 
     public PreallocatedTagHelperHtmlAttributeValueIntermediateNode(
         DefaultTagHelperHtmlAttributeIntermediateNode htmlAttributeNode

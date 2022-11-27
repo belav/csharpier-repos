@@ -8,7 +8,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 public sealed class ComponentAttributeIntermediateNode : IntermediateNode
 {
-    public ComponentAttributeIntermediateNode() { }
+    public ComponentAttributeIntermediateNode()
+    {
+    }
 
     public ComponentAttributeIntermediateNode(TagHelperHtmlAttributeIntermediateNode attributeNode)
     {

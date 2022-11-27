@@ -14,7 +14,9 @@ public sealed class RequiresIISAttribute : Attribute, ITestCondition
 
     public string SkipReason => IISExpressAncmSchema.SkipReason;
 
-    public RequiresIISAttribute() { }
+    public RequiresIISAttribute()
+    {
+    }
 
     public RequiresIISAttribute(IISCapability capabilities)
     {

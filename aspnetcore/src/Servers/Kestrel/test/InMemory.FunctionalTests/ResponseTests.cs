@@ -379,7 +379,9 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 {
                     await context.Request.Body.ReadAsync(new byte[1], 0, 1);
                 }
-                catch (Microsoft.AspNetCore.Http.BadHttpRequestException) { }
+                catch (Microsoft.AspNetCore.Http.BadHttpRequestException)
+                {
+                }
             },
             expectedClientStatusCode: HttpStatusCode.OK,
             expectedServerStatusCode: HttpStatusCode.OK,

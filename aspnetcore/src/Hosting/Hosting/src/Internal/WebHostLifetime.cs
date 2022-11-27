@@ -77,7 +77,9 @@ internal sealed class WebHostLifetime : IDisposable
         // When hosting with IIS in-process, we detach the Console handle on main thread exit.
         // Console.WriteLine may throw here as we are logging to console on ProcessExit.
         // We catch and ignore all exceptions here. Do not log to Console in this exception handler.
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
         // Wait on the given reset event
         _resetEvent.Wait();
     }

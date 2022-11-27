@@ -15,7 +15,9 @@ public sealed class NullHtmlEncoder : HtmlEncoder
     /// <summary>
     /// Initializes a <see cref="NullHtmlEncoder"/> instance.
     /// </summary>
-    private NullHtmlEncoder() { }
+    private NullHtmlEncoder()
+    {
+    }
 
     /// <summary>
     /// A <see cref="HtmlEncoder"/> instance that does not encode. Should not be used when writing directly to a

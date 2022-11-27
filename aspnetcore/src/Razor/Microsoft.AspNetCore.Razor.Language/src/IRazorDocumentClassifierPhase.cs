@@ -22,4 +22,6 @@ namespace Microsoft.AspNetCore.Razor.Language;
 /// <see cref="IRazorDocumentClassifierPass.Order"/> property.
 /// </para>
 /// </remarks>
-public interface IRazorDocumentClassifierPhase : IRazorEnginePhase { }
+public interface IRazorDocumentClassifierPhase : IRazorEnginePhase
+{
+}

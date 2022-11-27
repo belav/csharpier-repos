@@ -16,7 +16,9 @@ namespace Microsoft.AspNetCore.Cryptography.SafeHandles;
 internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInvalid
 {
     // Called by P/Invoke when returning SafeHandles
-    private SafeLibraryHandle() : base(ownsHandle: true) { }
+    private SafeLibraryHandle() : base(ownsHandle: true)
+    {
+    }
 
     /// <summary>
     /// Returns a value stating whether the library exports a given proc.

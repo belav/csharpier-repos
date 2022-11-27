@@ -19,14 +19,18 @@ public class CompositeValueProvider
     /// <summary>
     /// Initializes a new instance of <see cref="CompositeValueProvider"/>.
     /// </summary>
-    public CompositeValueProvider() { }
+    public CompositeValueProvider()
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="CompositeValueProvider"/>.
     /// </summary>
     /// <param name="valueProviders">The sequence of <see cref="IValueProvider"/> to add to this instance of
     /// <see cref="CompositeValueProvider"/>.</param>
-    public CompositeValueProvider(IList<IValueProvider> valueProviders) : base(valueProviders) { }
+    public CompositeValueProvider(IList<IValueProvider> valueProviders) : base(valueProviders)
+    {
+    }
 
     /// <summary>
     /// Asynchronously creates a <see cref="CompositeValueProvider"/> using the provided

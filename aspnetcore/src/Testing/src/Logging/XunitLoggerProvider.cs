@@ -15,10 +15,14 @@ public class XunitLoggerProvider : ILoggerProvider
     private readonly LogLevel _minLevel;
     private readonly DateTimeOffset? _logStart;
 
-    public XunitLoggerProvider(ITestOutputHelper output) : this(output, LogLevel.Trace) { }
+    public XunitLoggerProvider(ITestOutputHelper output) : this(output, LogLevel.Trace)
+    {
+    }
 
     public XunitLoggerProvider(ITestOutputHelper output, LogLevel minLevel)
-        : this(output, minLevel, null) { }
+        : this(output, minLevel, null)
+    {
+    }
 
     public XunitLoggerProvider(
         ITestOutputHelper output,
@@ -36,7 +40,9 @@ public class XunitLoggerProvider : ILoggerProvider
         return new XunitLogger(_output, categoryName, _minLevel, _logStart);
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public class XunitLogger : ILogger
@@ -127,6 +133,8 @@ public class XunitLogger : ILogger
 
     private sealed class NullScope : IDisposable
     {
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

@@ -47,7 +47,9 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         });
     }
 
-    private void ConfigureDefaults(JwtBearerOptions o) { }
+    private void ConfigureDefaults(JwtBearerOptions o)
+    {
+    }
 
     [Fact]
     public async Task BearerTokenValidation()

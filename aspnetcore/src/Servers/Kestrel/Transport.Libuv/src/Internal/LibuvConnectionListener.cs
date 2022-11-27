@@ -22,7 +22,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
         private bool _disposed;
 
         public LibuvConnectionListener(LibuvTransportContext context, EndPoint endPoint)
-            : this(new LibuvFunctions(), context, endPoint) { }
+            : this(new LibuvFunctions(), context, endPoint)
+        {
+        }
 
         // For testing
         public LibuvConnectionListener(

@@ -124,7 +124,9 @@ public class ConditionalTheoryTest : IClassFixture<ConditionalTheoryTest.Conditi
     {
         public bool TestRan { get; set; }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 
     [ConditionalTheory]
@@ -144,7 +146,9 @@ public class ConditionalTheoryTest : IClassFixture<ConditionalTheoryTest.Conditi
 
     public class Skippable : IXunitSerializable
     {
-        public Skippable() { }
+        public Skippable()
+        {
+        }
 
         public int Data { get; set; }
         public string Skip { get; set; }

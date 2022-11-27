@@ -1035,5 +1035,7 @@ public class PartialTagHelperTest
         public PropertyModel Property { get; set; }
     }
 
-    private class PropertyModel { }
+    private class PropertyModel
+    {
+    }
 }

@@ -23,7 +23,9 @@ internal sealed class HotReloadService : IActionDescriptorChangeProvider, IDispo
     public HotReloadService(
         IModelMetadataProvider modelMetadataProvider,
         IControllerPropertyActivator controllerPropertyActivator
-    ) : this(modelMetadataProvider, controllerPropertyActivator, null) { }
+    ) : this(modelMetadataProvider, controllerPropertyActivator, null)
+    {
+    }
 
     public HotReloadService(
         IModelMetadataProvider modelMetadataProvider,

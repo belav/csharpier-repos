@@ -194,9 +194,13 @@ public class ComponentFactoryTest
         public TestService2 Property5 { get; set; }
     }
 
-    public class TestService1 { }
+    public class TestService1
+    {
+    }
 
-    public class TestService2 { }
+    public class TestService2
+    {
+    }
 
     private class CustomComponentActivator<TResult> : IComponentActivator
         where TResult : IComponent, new()

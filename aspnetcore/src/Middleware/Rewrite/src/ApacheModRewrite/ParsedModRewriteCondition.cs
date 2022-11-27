@@ -10,7 +10,9 @@ internal sealed class ParsedModRewriteInput
     public OperationType OperationType { get; set; }
     public string? Operand { get; set; }
 
-    public ParsedModRewriteInput() { }
+    public ParsedModRewriteInput()
+    {
+    }
 
     public ParsedModRewriteInput(
         bool invert,

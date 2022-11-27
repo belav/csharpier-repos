@@ -29,7 +29,9 @@ public class BodyModelBinderProvider : IModelBinderProvider
     public BodyModelBinderProvider(
         IList<IInputFormatter> formatters,
         IHttpRequestStreamReaderFactory readerFactory
-    ) : this(formatters, readerFactory, loggerFactory: NullLoggerFactory.Instance) { }
+    ) : this(formatters, readerFactory, loggerFactory: NullLoggerFactory.Instance)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="BodyModelBinderProvider"/>.
@@ -41,7 +43,9 @@ public class BodyModelBinderProvider : IModelBinderProvider
         IList<IInputFormatter> formatters,
         IHttpRequestStreamReaderFactory readerFactory,
         ILoggerFactory loggerFactory
-    ) : this(formatters, readerFactory, loggerFactory, options: null) { }
+    ) : this(formatters, readerFactory, loggerFactory, options: null)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="BodyModelBinderProvider"/>.

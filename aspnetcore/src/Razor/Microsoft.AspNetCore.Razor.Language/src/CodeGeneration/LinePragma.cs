@@ -17,7 +17,9 @@ public readonly struct LinePragma : IEquatable<LinePragma>
             startCharacterIndex: null,
             endCharacterIndex: null,
             characterOffset: null
-        ) { }
+        )
+    {
+    }
 
     public LinePragma(
         int startLineIndex,

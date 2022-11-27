@@ -30,7 +30,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
         public KeyValuePair<string, string> Current { get; private set; }
         object IEnumerator.Current => Current;
 
-        public Http2HeadersEnumerator() { }
+        public Http2HeadersEnumerator()
+        {
+        }
 
         public void Initialize(HttpResponseHeaders headers)
         {
@@ -137,7 +139,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             _knownHeaderType = default;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         internal static int GetResponseHeaderStaticTableId(KnownHeaderType responseHeaderType)
         {

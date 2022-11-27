@@ -6,6 +6,8 @@
 
         public void ActionMethod(
             [FromBody] IsProblematicParameter_ReturnsFalse_ForFromBodyParameter model
-        ) { }
+        )
+        {
+        }
     }
 }

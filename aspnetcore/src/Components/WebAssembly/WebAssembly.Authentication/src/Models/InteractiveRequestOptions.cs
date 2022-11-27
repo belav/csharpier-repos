@@ -164,4 +164,6 @@ public sealed class InteractiveRequestOptions
 [JsonSerializable(typeof(InteractiveRequestOptions))]
 [JsonSerializable(typeof(InteractiveRequestOptions.Converter.OptionsRecord))]
 [JsonSerializable(typeof(JsonElement))]
-internal partial class InteractiveRequestOptionsSerializerContext : JsonSerializerContext { }
+internal partial class InteractiveRequestOptionsSerializerContext : JsonSerializerContext
+{
+}

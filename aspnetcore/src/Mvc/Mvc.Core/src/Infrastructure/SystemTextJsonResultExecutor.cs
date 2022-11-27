@@ -85,7 +85,9 @@ internal sealed partial class SystemTextJsonResultExecutor : IActionResultExecut
                 await responseStream.FlushAsync(context.HttpContext.RequestAborted);
             }
             catch (OperationCanceledException)
-                when (context.HttpContext.RequestAborted.IsCancellationRequested) { }
+                when (context.HttpContext.RequestAborted.IsCancellationRequested)
+            {
+            }
         }
         else
         {
@@ -111,7 +113,9 @@ internal sealed partial class SystemTextJsonResultExecutor : IActionResultExecut
                 await transcodingStream.FlushAsync(context.HttpContext.RequestAborted);
             }
             catch (OperationCanceledException)
-                when (context.HttpContext.RequestAborted.IsCancellationRequested) { }
+                when (context.HttpContext.RequestAborted.IsCancellationRequested)
+            {
+            }
             catch (Exception ex)
             {
                 // TranscodingStream may write to the inner stream as part of it's disposal.
@@ -125,7 +129,9 @@ internal sealed partial class SystemTextJsonResultExecutor : IActionResultExecut
                 {
                     await transcodingStream.DisposeAsync();
                 }
-                catch when (exceptionDispatchInfo != null) { }
+                catch when (exceptionDispatchInfo != null)
+                {
+                }
 
                 exceptionDispatchInfo?.Throw();
             }

@@ -81,7 +81,9 @@ public class RouteTableFactoryTests
     }
 
     [Route("Test1")]
-    private class MyComponent : ComponentBase { }
+    private class MyComponent : ComponentBase
+    {
+    }
 
     [Fact]
     public void CanDiscoverRoutes_WithInheritance()
@@ -100,7 +102,9 @@ public class RouteTableFactoryTests
     }
 
     [Route("Test2")]
-    private class MyInheritedComponent : MyComponent { }
+    private class MyInheritedComponent : MyComponent
+    {
+    }
 
     [Fact]
     public void CanMatchRootTemplate()
@@ -1137,7 +1141,11 @@ public class RouteTableFactoryTests
         }
     }
 
-    class TestHandler1 { }
+    class TestHandler1
+    {
+    }
 
-    class TestHandler2 { }
+    class TestHandler2
+    {
+    }
 }

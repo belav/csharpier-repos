@@ -3,4 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
-public class ComponentRuntimeCodeGenerationTest : ComponentCodeGenerationTestBase { }
+public class ComponentRuntimeCodeGenerationTest : ComponentCodeGenerationTestBase
+{
+}

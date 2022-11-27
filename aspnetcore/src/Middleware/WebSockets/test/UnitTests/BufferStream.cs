@@ -272,7 +272,9 @@ public class BufferStream : Stream
         return result;
     }
 
-    public override void EndWrite(IAsyncResult asyncResult) { }
+    public override void EndWrite(IAsyncResult asyncResult)
+    {
+    }
 
     public override Task WriteAsync(
         byte[] buffer,

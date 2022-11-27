@@ -53,7 +53,9 @@ public class AuthorizationPageApplicationModelProviderTest
     public class ModelWithAuthorizeHandlers : PageModel
     {
         [Authorize]
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
     }
 
     [Fact]
@@ -116,7 +118,9 @@ public class AuthorizationPageApplicationModelProviderTest
     [Authorize]
     private class TestModel : PageModel
     {
-        public virtual void OnGet() { }
+        public virtual void OnGet()
+        {
+        }
     }
 
     [Fact]
@@ -162,12 +166,16 @@ public class AuthorizationPageApplicationModelProviderTest
     }
 
     [Authorize(Policy = "Base")]
-    public class BaseModel : PageModel { }
+    public class BaseModel : PageModel
+    {
+    }
 
     [Authorize(Policy = "Derived")]
     private class DerivedModel : BaseModel
     {
-        public virtual void OnGet() { }
+        public virtual void OnGet()
+        {
+        }
     }
 
     [Fact]
@@ -205,7 +213,9 @@ public class AuthorizationPageApplicationModelProviderTest
     [AllowAnonymous]
     public class AnonymousModel : PageModel
     {
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
     }
 
     private static PageApplicationModelProviderContext GetApplicationProviderContext(

@@ -19,7 +19,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
     public class TestIsControllerAction : TestIsControllerActionBase, IDisposable
     {
-        static TestIsControllerAction() { }
+        static TestIsControllerAction()
+        {
+        }
 
         public override IActionResult AbstractMethod() => null;
 
@@ -40,7 +42,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
         public IActionResult Ordinary() => null;
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 
     public class OverridesObjectMethods : ControllerBase
@@ -54,7 +58,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
     public class ExplicitIDisposable : ControllerBase, IDisposable
     {
-        void IDisposable.Dispose() { }
+        void IDisposable.Dispose()
+        {
+        }
     }
 
     public class NotDisposable
@@ -66,13 +72,17 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     {
         public IActionResult Dispose() => null;
 
-        void IDisposable.Dispose() { }
+        void IDisposable.Dispose()
+        {
+        }
     }
 
     public class NotDisposableWithDisposeThatIsNotInterfaceContract : IDisposable
     {
         public IActionResult Dispose(int id) => null;
 
-        void IDisposable.Dispose() { }
+        void IDisposable.Dispose()
+        {
+        }
     }
 }

@@ -355,7 +355,9 @@ public class StackTraceHelperTest
     [MethodImpl(MethodImplOptions.NoOptimization | MethodImplOptions.NoInlining)]
     private void GenericMethod<T>(T val) where T : class => throw new Exception();
 
-    private class StackTraceHiddenAttribute : Attribute { }
+    private class StackTraceHiddenAttribute : Attribute
+    {
+    }
 
     [StackTraceHidden]
     private class TypeWithStackTraceHiddenAttribute

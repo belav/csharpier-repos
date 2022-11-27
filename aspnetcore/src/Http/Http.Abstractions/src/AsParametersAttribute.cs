@@ -9,4 +9,6 @@ using System;
 /// Specifies that a route handler delegate's parameter represents a structured parameter list.
 /// </summary>
 [AttributeUsage(AttributeTargets.Parameter, Inherited = false, AllowMultiple = false)]
-public sealed class AsParametersAttribute : Attribute { }
+public sealed class AsParametersAttribute : Attribute
+{
+}

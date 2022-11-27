@@ -64,5 +64,7 @@ internal sealed class AzureADOpenIdConnectOptionsConfiguration
         return null;
     }
 
-    public void Configure(OpenIdConnectOptions options) { }
+    public void Configure(OpenIdConnectOptions options)
+    {
+    }
 }

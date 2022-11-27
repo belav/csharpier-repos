@@ -42,7 +42,9 @@ public class Startup
                     await next.Invoke(context);
                 }
                 catch (Microsoft.AspNetCore.Http.BadHttpRequestException ex)
-                    when (ex.StatusCode == StatusCodes.Status413RequestEntityTooLarge) { }
+                    when (ex.StatusCode == StatusCodes.Status413RequestEntityTooLarge)
+                {
+                }
             }
         );
 

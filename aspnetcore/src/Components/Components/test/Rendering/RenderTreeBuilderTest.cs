@@ -2028,17 +2028,23 @@ public class RenderTreeBuilderTest
 
     private class TestComponent : IComponent
     {
-        public void Attach(RenderHandle renderHandle) { }
+        public void Attach(RenderHandle renderHandle)
+        {
+        }
 
         public Task SetParametersAsync(ParameterView parameters) =>
             throw new NotImplementedException();
     }
 
-    private class OtherComponent : TestComponent { }
+    private class OtherComponent : TestComponent
+    {
+    }
 
     private class TestRenderer : Renderer
     {
-        public TestRenderer() : base(new TestServiceProvider(), NullLoggerFactory.Instance) { }
+        public TestRenderer() : base(new TestServiceProvider(), NullLoggerFactory.Instance)
+        {
+        }
 
         public override Dispatcher Dispatcher { get; } = Dispatcher.CreateDefault();
 

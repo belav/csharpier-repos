@@ -9,7 +9,9 @@ public class DuplexStream : Stream
     public BufferStream ReadStream { get; }
     public BufferStream WriteStream { get; }
 
-    public DuplexStream() : this(new BufferStream(), new BufferStream()) { }
+    public DuplexStream() : this(new BufferStream(), new BufferStream())
+    {
+    }
 
     public DuplexStream(BufferStream readStream, BufferStream writeStream)
     {

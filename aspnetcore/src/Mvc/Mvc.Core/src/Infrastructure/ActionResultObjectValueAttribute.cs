@@ -39,4 +39,6 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
     AllowMultiple = false,
     Inherited = false
 )]
-public sealed class ActionResultObjectValueAttribute : Attribute { }
+public sealed class ActionResultObjectValueAttribute : Attribute
+{
+}

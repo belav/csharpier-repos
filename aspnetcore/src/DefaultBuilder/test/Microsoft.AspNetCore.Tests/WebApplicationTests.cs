@@ -205,7 +205,9 @@ public class WebApplicationTests
 
         public IFeatureCollection Features { get; } = new FeatureCollection();
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public Task StartAsync<TContext>(
             IHttpApplication<TContext> application,
@@ -2336,7 +2338,9 @@ public class WebApplicationTests
             ILoggerFactory logger,
             UrlEncoder encoder,
             ISystemClock clock
-        ) : base(options, logger, encoder, clock) { }
+        ) : base(options, logger, encoder, clock)
+        {
+        }
 
         protected override Task HandleChallengeAsync(AuthenticationProperties properties) =>
             Task.CompletedTask;
@@ -2439,13 +2443,19 @@ public class WebApplicationTests
         }
     }
 
-    private class Service : IService { }
+    private class Service : IService
+    {
+    }
 
-    private interface IService { }
+    private interface IService
+    {
+    }
 
     private class Service2
     {
-        public Service2(Service service) { }
+        public Service2(Service service)
+        {
+        }
     }
 
     private class MyStartup : IStartup
@@ -2480,9 +2490,13 @@ public class WebApplicationTests
             _currentListener.Value = this;
         }
 
-        public void OnCompleted() { }
+        public void OnCompleted()
+        {
+        }
 
-        public void OnError(Exception error) { }
+        public void OnError(Exception error)
+        {
+        }
 
         public void OnNext(DiagnosticListener value)
         {
@@ -2619,7 +2633,9 @@ public class WebApplicationTests
             return Task.CompletedTask;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         private class MockServerAddressesFeature : IServerAddressesFeature
         {

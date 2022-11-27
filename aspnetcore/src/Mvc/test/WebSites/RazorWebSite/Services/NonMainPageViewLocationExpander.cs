@@ -7,7 +7,9 @@ namespace RazorWebSite;
 
 public class NonMainPageViewLocationExpander : IViewLocationExpander
 {
-    public void PopulateValues(ViewLocationExpanderContext context) { }
+    public void PopulateValues(ViewLocationExpanderContext context)
+    {
+    }
 
     public virtual IEnumerable<string> ExpandViewLocations(
         ViewLocationExpanderContext context,

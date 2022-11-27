@@ -26,7 +26,9 @@ public class PublishedSitesFixture : IDisposable
     public PublishedApplicationPublisher OutOfProcessTestSite { get; } =
         new PublishedApplicationPublisher(Helpers.GetInProcessTestSitesName());
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 
     public IISDeploymentParameters GetBaseDeploymentParameters(
         HostingModel hostingModel = HostingModel.InProcess

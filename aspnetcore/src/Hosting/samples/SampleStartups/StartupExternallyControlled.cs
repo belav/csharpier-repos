@@ -26,7 +26,9 @@ public class StartupExternallyControlled : StartupBase
         );
     }
 
-    public StartupExternallyControlled() { }
+    public StartupExternallyControlled()
+    {
+    }
 
     public void Start()
     {

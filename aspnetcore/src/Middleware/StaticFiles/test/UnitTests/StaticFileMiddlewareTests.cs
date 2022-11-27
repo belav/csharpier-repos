@@ -161,14 +161,18 @@ public class StaticFileMiddlewareTests
             await StaticFilesTestServer.Create(
                 app => app.UseStaticFiles(new StaticFileOptions { ContentTypeProvider = null })
             )
-        ) { }
+        )
+        {
+        }
 
         // No exception, default provided
         using (
             await StaticFilesTestServer.Create(
                 app => app.UseStaticFiles(new StaticFileOptions { FileProvider = null })
             )
-        ) { }
+        )
+        {
+        }
 
         // PathString(null) is OK.
         using var host = await StaticFilesTestServer.Create(

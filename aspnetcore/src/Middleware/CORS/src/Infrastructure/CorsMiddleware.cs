@@ -31,7 +31,9 @@ public class CorsMiddleware
         RequestDelegate next,
         ICorsService corsService,
         ILoggerFactory loggerFactory
-    ) : this(next, corsService, loggerFactory, policyName: null) { }
+    ) : this(next, corsService, loggerFactory, policyName: null)
+    {
+    }
 
     /// <summary>
     /// Instantiates a new <see cref="CorsMiddleware"/>.

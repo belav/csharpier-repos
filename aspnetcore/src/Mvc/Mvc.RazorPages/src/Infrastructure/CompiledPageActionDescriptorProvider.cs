@@ -100,5 +100,7 @@ public sealed class CompiledPageActionDescriptorProvider : IActionDescriptorProv
     }
 
     /// <inheritdoc/>
-    public void OnProvidersExecuted(ActionDescriptorProviderContext context) { }
+    public void OnProvidersExecuted(ActionDescriptorProviderContext context)
+    {
+    }
 }

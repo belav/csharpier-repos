@@ -32,5 +32,7 @@ public class NoContentController : Controller
         return Task.FromResult<bool>(true);
     }
 
-    public void ReturnVoid() { }
+    public void ReturnVoid()
+    {
+    }
 }

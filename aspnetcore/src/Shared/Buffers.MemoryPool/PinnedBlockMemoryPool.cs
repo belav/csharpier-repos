@@ -110,7 +110,9 @@ internal sealed class PinnedBlockMemoryPool : MemoryPool<byte>
             if (disposing)
             {
                 // Discard blocks in pool
-                while (_blocks.TryDequeue(out _)) { }
+                while (_blocks.TryDequeue(out _))
+                {
+                }
             }
         }
     }

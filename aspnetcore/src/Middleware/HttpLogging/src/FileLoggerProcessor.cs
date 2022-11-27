@@ -121,7 +121,9 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
                 _messageQueue.Add(message);
                 return;
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException)
+            {
+            }
         }
     }
 

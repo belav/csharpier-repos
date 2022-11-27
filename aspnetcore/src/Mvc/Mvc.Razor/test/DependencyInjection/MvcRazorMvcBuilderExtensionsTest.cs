@@ -79,7 +79,11 @@ public class MvcRazorMvcBuilderExtensionsTest
         Assert.Equal(ServiceLifetime.Transient, activator.Lifetime);
     }
 
-    private class TestTagHelperOne : TagHelper { }
+    private class TestTagHelperOne : TagHelper
+    {
+    }
 
-    private class TestTagHelperTwo : TagHelper { }
+    private class TestTagHelperTwo : TagHelper
+    {
+    }
 }

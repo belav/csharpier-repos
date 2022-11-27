@@ -316,7 +316,9 @@ public abstract class InputBase<TValue> : ComponentBase, IDisposable
     }
 
     /// <inheritdoc/>
-    protected virtual void Dispose(bool disposing) { }
+    protected virtual void Dispose(bool disposing)
+    {
+    }
 
     void IDisposable.Dispose()
     {

@@ -73,7 +73,9 @@ public class ServicesModelBinderProviderTest
         Assert.Equal(isOptional, binder.IsOptional);
     }
 
-    private class IPersonService { }
+    private class IPersonService
+    {
+    }
 
     public static TheoryData<ParameterInfo, bool> ParameterInfoData()
     {
@@ -92,7 +94,9 @@ public class ServicesModelBinderProviderTest
         public void TestMethod(
             [FromServices] IPersonService param1,
             [FromServices] IPersonService param2 = null
-        ) { }
+        )
+        {
+        }
 
 #nullable restore
 
@@ -100,7 +104,9 @@ public class ServicesModelBinderProviderTest
         public void TestMethod2(
             [FromServices] IPersonService param1,
             [FromServices] IPersonService? param2
-        ) { }
+        )
+        {
+        }
 
 #nullable restore
 

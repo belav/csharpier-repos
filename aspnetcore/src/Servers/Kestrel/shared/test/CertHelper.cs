@@ -102,7 +102,9 @@ public static class CertHelper
                 }
             }
         }
-        catch { }
+        catch
+        {
+        }
         ;
 
         try
@@ -125,7 +127,9 @@ public static class CertHelper
                 }
             }
         }
-        catch { }
+        catch
+        {
+        }
         ;
     }
 

@@ -481,7 +481,9 @@ public class SimpleTypeModelBinderTest
         };
     }
 
-    private sealed class TestClass { }
+    private sealed class TestClass
+    {
+    }
 
     [Flags]
     private enum FlagsEnum

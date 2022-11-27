@@ -828,8 +828,12 @@ internal static class CodeWriterExtensions
     {
         public static readonly NullDisposable Default = new NullDisposable();
 
-        private NullDisposable() { }
+        private NullDisposable()
+        {
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

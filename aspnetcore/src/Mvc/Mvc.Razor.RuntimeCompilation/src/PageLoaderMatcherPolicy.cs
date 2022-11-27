@@ -18,7 +18,9 @@ internal sealed class PageLoaderMatcherPolicy : MatcherPolicy, IEndpointSelector
     /// service will not be registered. Since Razor Pages is not a pre-req for runtime compilation, we'll defer reading the service
     /// until we need to load a page in the body of <see cref="ApplyAsync(HttpContext, CandidateSet)"/>.
     /// </remarks>
-    public PageLoaderMatcherPolicy() : this(loader: null) { }
+    public PageLoaderMatcherPolicy() : this(loader: null)
+    {
+    }
 
     public PageLoaderMatcherPolicy(PageLoader? loader)
     {

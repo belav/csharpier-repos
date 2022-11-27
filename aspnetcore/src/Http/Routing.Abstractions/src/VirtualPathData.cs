@@ -18,7 +18,9 @@ public class VirtualPathData
     /// <param name="router">The object that is used to generate the URL.</param>
     /// <param name="virtualPath">The generated URL.</param>
     public VirtualPathData(IRouter router, string virtualPath)
-        : this(router, virtualPath, dataTokens: null) { }
+        : this(router, virtualPath, dataTokens: null)
+    {
+    }
 
     /// <summary>
     ///  Initializes a new instance of the <see cref="VirtualPathData"/> class.

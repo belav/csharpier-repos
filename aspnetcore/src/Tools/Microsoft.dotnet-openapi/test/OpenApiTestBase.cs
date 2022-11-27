@@ -141,7 +141,9 @@ public sealed class TestHttpClientWrapper : IHttpClientWrapper
         _results = results;
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 
     public Task<IHttpResponseMessageWrapper> GetResponseAsync(string url)
     {
@@ -195,7 +197,9 @@ public sealed class TestHttpResponseMessageWrapper : IHttpResponseMessageWrapper
         return _contentDisposition;
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+    }
 }
 
 public class TemporaryNSwagProject

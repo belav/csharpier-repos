@@ -18,7 +18,9 @@ public class AuthenticationFailedContext : RemoteAuthenticationContext<Negotiate
         HttpContext context,
         AuthenticationScheme scheme,
         NegotiateOptions options
-    ) : base(context, scheme, options, properties: null) { }
+    ) : base(context, scheme, options, properties: null)
+    {
+    }
 
     /// <summary>
     /// The exception that occurred while processing the authentication.

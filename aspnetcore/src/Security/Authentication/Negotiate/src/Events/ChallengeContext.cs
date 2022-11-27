@@ -19,7 +19,9 @@ public class ChallengeContext : PropertiesContext<NegotiateOptions>
         AuthenticationScheme scheme,
         NegotiateOptions options,
         AuthenticationProperties properties
-    ) : base(context, scheme, options, properties) { }
+    ) : base(context, scheme, options, properties)
+    {
+    }
 
     /// <summary>
     /// Gets a value that determines if this challenge was handled.

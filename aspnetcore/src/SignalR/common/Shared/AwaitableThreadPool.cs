@@ -16,7 +16,9 @@ internal static class AwaitableThreadPool
 
     public readonly struct Awaitable : ICriticalNotifyCompletion
     {
-        public void GetResult() { }
+        public void GetResult()
+        {
+        }
 
         public Awaitable GetAwaiter() => this;
 

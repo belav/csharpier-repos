@@ -10,7 +10,9 @@ internal class AnnotatedProblemDetails
     /// <remarks>
     /// Required for JSON.NET deserialization.
     /// </remarks>
-    public AnnotatedProblemDetails() { }
+    public AnnotatedProblemDetails()
+    {
+    }
 
     public AnnotatedProblemDetails(ProblemDetails problemDetails)
     {

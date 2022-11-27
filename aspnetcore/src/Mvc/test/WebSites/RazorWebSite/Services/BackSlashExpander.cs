@@ -8,7 +8,9 @@ namespace RazorWebSite;
 
 public class BackSlashExpander : IViewLocationExpander
 {
-    public void PopulateValues(ViewLocationExpanderContext context) { }
+    public void PopulateValues(ViewLocationExpanderContext context)
+    {
+    }
 
     public virtual IEnumerable<string> ExpandViewLocations(
         ViewLocationExpanderContext context,

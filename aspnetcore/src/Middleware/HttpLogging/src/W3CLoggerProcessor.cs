@@ -140,5 +140,7 @@ internal class W3CLoggerProcessor : FileLoggerProcessor
     }
 
     // Extensibility point for tests
-    internal virtual void OnWrite(string message) { }
+    internal virtual void OnWrite(string message)
+    {
+    }
 }

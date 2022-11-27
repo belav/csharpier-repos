@@ -2607,5 +2607,7 @@ public abstract class CommonResourceInvokerTest
         resultFilter4.Verify();
     }
 
-    public class TestResult : ActionResult { }
+    public class TestResult : ActionResult
+    {
+    }
 }

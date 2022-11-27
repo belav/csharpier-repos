@@ -504,7 +504,9 @@ public class FormFileModelBinderTest
         public IFormFile[] ArrayProperty { get; }
     }
 
-    private class FileList : List<IFormFile> { }
+    private class FileList : List<IFormFile>
+    {
+    }
 
     private class NestedFormFiles
     {

@@ -135,7 +135,9 @@ internal sealed class BrowserFileStream : Stream
         {
             _ = _jsStreamReference?.DisposeAsync().Preserve();
         }
-        catch { }
+        catch
+        {
+        }
 
         _isDisposed = true;
 

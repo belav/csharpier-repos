@@ -32,7 +32,9 @@ public class ApiConventionTypeAttributeTest
     public static class ConventionWithProducesAttribute
     {
         [Produces(typeof(void))]
-        public static void Get() { }
+        public static void Get()
+        {
+        }
     }
 
     [Fact]
@@ -57,7 +59,9 @@ public class ApiConventionTypeAttributeTest
     public static class ConventionWithRouteAttribute
     {
         [HttpGet("url")]
-        public static void Get() { }
+        public static void Get()
+        {
+        }
     }
 
     [Fact]
@@ -90,7 +94,9 @@ public class ApiConventionTypeAttributeTest
         [Produces(typeof(void))]
         [ServiceFilter(typeof(object))]
         [Authorize]
-        public static void Get() { }
+        public static void Get()
+        {
+        }
     }
 
     private static string GetErrorMessage(string methodName, params Type[] attributes)

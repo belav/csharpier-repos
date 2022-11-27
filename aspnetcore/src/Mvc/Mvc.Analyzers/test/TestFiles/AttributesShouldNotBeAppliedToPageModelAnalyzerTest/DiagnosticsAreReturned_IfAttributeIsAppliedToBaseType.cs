@@ -9,9 +9,13 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     {
         [ /*MM*/
         Authorize]
-        public void OnGet() { }
+        public void OnGet()
+        {
+        }
     }
 
     public class DiagnosticsAreReturned_IfAttributeIsAppliedToBaseType
-        : DiagnosticsAreReturned_IfAttributeIsAppliedToBaseTypeBase { }
+        : DiagnosticsAreReturned_IfAttributeIsAppliedToBaseTypeBase
+    {
+    }
 }

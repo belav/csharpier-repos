@@ -633,5 +633,7 @@ public class TagHelperExecutionContextTest
         Assert.Same(tagHelper2, tagHelpers[1]);
     }
 
-    private class PTagHelper : TagHelper { }
+    private class PTagHelper : TagHelper
+    {
+    }
 }

@@ -505,7 +505,9 @@ public class EndpointMetadataProviderTest
         public string RoutePattern { get; init; }
     }
 
-    private class CustomAttribute : Attribute { }
+    private class CustomAttribute : Attribute
+    {
+    }
 
     private enum MetadataSource
     {

@@ -2208,7 +2208,9 @@ public class DataAnnotationsMetadataProviderTest
         public static readonly IEqualityComparer<KeyValuePair<EnumGroupAndName, string>> Instance =
             new KVPEnumGroupAndNameComparer();
 
-        private KVPEnumGroupAndNameComparer() { }
+        private KVPEnumGroupAndNameComparer()
+        {
+        }
 
         public bool Equals(
             KeyValuePair<EnumGroupAndName, string> x,
@@ -2239,7 +2241,9 @@ public class DataAnnotationsMetadataProviderTest
         }
     }
 
-    private class EmptyClass { }
+    private class EmptyClass
+    {
+    }
 
     private class ClassWithFields
     {
@@ -2267,7 +2271,9 @@ public class DataAnnotationsMetadataProviderTest
         Three = 3
     }
 
-    private enum EmptyEnum { }
+    private enum EmptyEnum
+    {
+    }
 
     private enum EnumWithDisplayNames
     {
@@ -2346,7 +2352,9 @@ public class DataAnnotationsMetadataProviderTest
         Zero = 0,
     }
 
-    private struct EmptyStruct { }
+    private struct EmptyStruct
+    {
+    }
 
     private struct StructWithFields
     {
@@ -2393,12 +2401,16 @@ public class DataAnnotationsMetadataProviderTest
 
         public string? NullableReferenceType { get; set; } = default!;
 
-        public void Method(string nonNullableParameter, string? nullableParameter) { }
+        public void Method(string nonNullableParameter, string? nullableParameter)
+        {
+        }
 
         public void MethodWithDefault(
             string nonNullableParameter,
             string defaultValueParameter = "sample_data"
-        ) { }
+        )
+        {
+        }
     }
 
     private class TypeWithAllNonNullProperties

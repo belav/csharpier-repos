@@ -17,7 +17,9 @@ public class BindingInfo
     /// <summary>
     /// Creates a new <see cref="BindingInfo"/>.
     /// </summary>
-    public BindingInfo() { }
+    public BindingInfo()
+    {
+    }
 
     /// <summary>
     /// Creates a copy of a <see cref="BindingInfo"/>.

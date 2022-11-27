@@ -10,7 +10,9 @@ namespace Microsoft.DotNet.OpenApi.Add.Tests;
 
 public class OpenApiAddFileTests : OpenApiTestBase
 {
-    public OpenApiAddFileTests(ITestOutputHelper output) : base(output) { }
+    public OpenApiAddFileTests(ITestOutputHelper output) : base(output)
+    {
+    }
 
     [Fact]
     public void OpenApi_Empty_ShowsHelp()

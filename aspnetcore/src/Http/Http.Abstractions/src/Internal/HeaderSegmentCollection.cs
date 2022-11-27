@@ -127,7 +127,9 @@ internal readonly struct HeaderSegmentCollection
             get { return Current; }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public bool MoveNext()
         {

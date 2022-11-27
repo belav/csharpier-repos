@@ -164,9 +164,13 @@ namespace Microsoft.AspNetCore.Mvc
             Assert.True(options.SuppressMapClientErrors);
         }
 
-        private class ControllerOne { }
+        private class ControllerOne
+        {
+        }
 
-        private class ControllerTwo { }
+        private class ControllerTwo
+        {
+        }
 
         private static ApplicationPartManager GetApplicationPartManager(params TypeInfo[] types)
         {
@@ -196,7 +200,11 @@ namespace Microsoft.AspNetCore.Mvc
 // independent.
 namespace Microsoft.AspNetCore.Mvc.MvcServiceCollectionExtensionsTestControllers
 {
-    public class ControllerTypeA : ControllerBase { }
+    public class ControllerTypeA : ControllerBase
+    {
+    }
 
-    public class TypeBController { }
+    public class TypeBController
+    {
+    }
 }

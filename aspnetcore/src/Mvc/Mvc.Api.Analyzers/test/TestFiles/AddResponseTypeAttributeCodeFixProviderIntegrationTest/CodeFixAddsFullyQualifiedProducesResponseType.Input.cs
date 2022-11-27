@@ -8,7 +8,9 @@ namespace TestApp._INPUT_
 
     [ApiController]
     [Route("[controller]/[action]")]
-    public class BaseController : ControllerBase { }
+    public class BaseController : ControllerBase
+    {
+    }
 }
 
 namespace TestApp._INPUT_

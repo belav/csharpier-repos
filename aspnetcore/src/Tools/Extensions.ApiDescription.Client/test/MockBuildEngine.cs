@@ -95,7 +95,11 @@ internal sealed class MockBuildEngine : IBuildEngine3
         }
     }
 
-    public void Reacquire() { }
+    public void Reacquire()
+    {
+    }
 
-    public void Yield() { }
+    public void Yield()
+    {
+    }
 }

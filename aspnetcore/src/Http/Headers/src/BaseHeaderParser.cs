@@ -7,7 +7,9 @@ namespace Microsoft.Net.Http.Headers;
 
 internal abstract class BaseHeaderParser<T> : HttpHeaderParser<T>
 {
-    protected BaseHeaderParser(bool supportsMultipleValues) : base(supportsMultipleValues) { }
+    protected BaseHeaderParser(bool supportsMultipleValues) : base(supportsMultipleValues)
+    {
+    }
 
     protected abstract int GetParsedValueLength(
         StringSegment value,

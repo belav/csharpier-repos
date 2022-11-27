@@ -116,7 +116,9 @@ public class TemporaryCSharpProject
         return this;
     }
 
-    protected virtual void AddAdditionalAttributes(StringBuilder sb, ItemSpec item) { }
+    protected virtual void AddAdditionalAttributes(StringBuilder sb, ItemSpec item)
+    {
+    }
 
     public TemporaryCSharpProject WithProjectReference(
         TemporaryCSharpProject reference,

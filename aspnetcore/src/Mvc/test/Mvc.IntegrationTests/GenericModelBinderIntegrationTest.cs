@@ -124,7 +124,9 @@ public class GenericModelBinderIntegrationTest
     }
 
     [BindAddress]
-    private class Address { }
+    private class Address
+    {
+    }
 
     private class BindAddressAttribute : Attribute, IBindingSourceMetadata
     {

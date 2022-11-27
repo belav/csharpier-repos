@@ -17,7 +17,9 @@ public class StaticFileOptions : SharedOptionsBase
     /// <summary>
     /// Defaults to all request paths
     /// </summary>
-    public StaticFileOptions() : this(new SharedOptions()) { }
+    public StaticFileOptions() : this(new SharedOptions())
+    {
+    }
 
     /// <summary>
     /// Defaults to all request paths

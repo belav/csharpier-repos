@@ -11,7 +11,9 @@ namespace ApiExplorerWebSite;
 public class ApiExplorerResponseTypeOverrideOnActionController : Controller
 {
     [HttpGet("Controller")]
-    public void GetController() { }
+    public void GetController()
+    {
+    }
 
     [HttpGet("Action")]
     [Produces(typeof(Customer))]
@@ -34,4 +36,6 @@ public class ErrorInfo
     public string Message { get; set; }
 }
 
-public class ErrorInfoOverride { }
+public class ErrorInfoOverride
+{
+}

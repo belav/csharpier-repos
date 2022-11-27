@@ -15,7 +15,9 @@ namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.IntegrationTests;
 public class ServerStreamingTests : IntegrationTestBase
 {
     public ServerStreamingTests(GrpcTestFixture<Startup> fixture, ITestOutputHelper outputHelper)
-        : base(fixture, outputHelper) { }
+        : base(fixture, outputHelper)
+    {
+    }
 
     [Fact]
     public async Task GetWithRouteParameter_WriteOne_SuccessResult()

@@ -85,7 +85,9 @@ public abstract class RazorEnginePhaseBase : IRazorEnginePhase
         }
     }
 
-    protected virtual void OnIntialized() { }
+    protected virtual void OnIntialized()
+    {
+    }
 
     protected abstract void ExecuteCore(RazorCodeDocument codeDocument);
 }

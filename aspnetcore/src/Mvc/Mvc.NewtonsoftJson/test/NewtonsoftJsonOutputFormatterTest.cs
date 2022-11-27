@@ -634,7 +634,9 @@ public class NewtonsoftJsonOutputFormatterTest : JsonOutputFormatterTestBase
                 ArrayPool<char>.Shared,
                 new MvcOptions(),
                 new MvcNewtonsoftJsonOptions()
-            ) { }
+            )
+        {
+        }
 
         public new JsonSerializerSettings SerializerSettings => base.SerializerSettings;
     }

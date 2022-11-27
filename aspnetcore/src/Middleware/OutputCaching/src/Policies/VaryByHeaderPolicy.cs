@@ -12,7 +12,9 @@ internal sealed class VaryByHeaderPolicy : IOutputCachePolicy
 {
     private readonly StringValues _headerNames;
 
-    private VaryByHeaderPolicy() { }
+    private VaryByHeaderPolicy()
+    {
+    }
 
     public VaryByHeaderPolicy(string header, params string[] headerNames)
     {

@@ -473,11 +473,15 @@ public class DefaultModelMetadataProviderTest
         public void Method1(
             object paramWithNoAttributes,
             [Model("ParamAttrib1"), Model("ParamAttrib2")] object paramWithTwoAttributes
-        ) { }
+        )
+        {
+        }
     }
 
     [Model("OnPropertyType")]
-    private class PropertyType { }
+    private class PropertyType
+    {
+    }
 
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
     private class ModelAttribute : Attribute
@@ -497,7 +501,9 @@ public class DefaultModelMetadataProviderTest
         public PropertyType Property1 { get; set; }
     }
 
-    private void GetMetadataForParameterTestMethod([Model("OnParameter")] ModelType parameter) { }
+    private void GetMetadataForParameterTestMethod([Model("OnParameter")] ModelType parameter)
+    {
+    }
 
     private class BaseModelWithHiding
     {

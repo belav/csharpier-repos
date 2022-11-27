@@ -381,7 +381,9 @@ public class PageActionDescriptorProviderTest
 
         public int Order => -1000;
 
-        public void OnProvidersExecuted(PageRouteModelProviderContext context) { }
+        public void OnProvidersExecuted(PageRouteModelProviderContext context)
+        {
+        }
 
         public void OnProvidersExecuting(PageRouteModelProviderContext context)
         {

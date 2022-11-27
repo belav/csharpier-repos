@@ -9,5 +9,7 @@ namespace RazorPagesWebSite;
 [AllowAnonymous]
 public class AnonymousModel : PageModel
 {
-    public void OnGet() { }
+    public void OnGet()
+    {
+    }
 }

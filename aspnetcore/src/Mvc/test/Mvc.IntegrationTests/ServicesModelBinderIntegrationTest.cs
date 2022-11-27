@@ -168,14 +168,18 @@ public class ServicesModelBinderIntegrationTest
     private class TestController
     {
 #nullable enable
-        public void Action(IActionResult? service, ITypeActivatorCache? service2) { }
+        public void Action(IActionResult? service, ITypeActivatorCache? service2)
+        {
+        }
 
 #nullable restore
 
         public void ActionWithDefaultValue(
             IActionResult service = default,
             ITypeActivatorCache service2 = default
-        ) { }
+        )
+        {
+        }
     }
 
     [Fact]

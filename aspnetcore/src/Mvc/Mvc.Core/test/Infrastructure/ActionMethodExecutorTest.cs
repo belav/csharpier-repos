@@ -570,7 +570,9 @@ public class ActionMethodExecutorTest
             Task.FromResult(new ActionResult<TestModel>(new TestModel()));
     }
 
-    private class TestModel { }
+    private class TestModel
+    {
+    }
 
     private class CustomConvertibleFromAction : IConvertToActionResult
     {

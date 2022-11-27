@@ -92,7 +92,9 @@ public class SystemTextJsonOutputFormatter : TextOutputFormatter
                 await responseStream.FlushAsync(httpContext.RequestAborted);
             }
             catch (OperationCanceledException)
-                when (context.HttpContext.RequestAborted.IsCancellationRequested) { }
+                when (context.HttpContext.RequestAborted.IsCancellationRequested)
+            {
+            }
         }
         else
         {
@@ -129,7 +131,9 @@ public class SystemTextJsonOutputFormatter : TextOutputFormatter
                 {
                     await transcodingStream.DisposeAsync();
                 }
-                catch when (exceptionDispatchInfo != null) { }
+                catch when (exceptionDispatchInfo != null)
+                {
+                }
 
                 exceptionDispatchInfo?.Throw();
             }

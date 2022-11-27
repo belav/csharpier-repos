@@ -17,7 +17,9 @@ public sealed class ProducesDefaultResponseTypeAttribute
     /// <summary>
     /// Initializes an instance of <see cref="ProducesResponseTypeAttribute"/>.
     /// </summary>
-    public ProducesDefaultResponseTypeAttribute() : this(typeof(void)) { }
+    public ProducesDefaultResponseTypeAttribute() : this(typeof(void))
+    {
+    }
 
     /// <summary>
     /// Initializes an instance of <see cref="ProducesResponseTypeAttribute"/>.

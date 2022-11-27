@@ -8,7 +8,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 internal class SyntaxTrivia : SyntaxNode
 {
     internal SyntaxTrivia(GreenNode green, SyntaxNode parent, int position)
-        : base(green, parent, position) { }
+        : base(green, parent, position)
+    {
+    }
 
     internal new InternalSyntax.SyntaxTrivia Green => (InternalSyntax.SyntaxTrivia)base.Green;
 

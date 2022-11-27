@@ -29,7 +29,9 @@ public sealed partial class JsonHttpResult<TValue>
             statusCode: null,
             contentType: null,
             jsonSerializerOptions: jsonSerializerOptions
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Json"/> class with the values.
@@ -47,7 +49,9 @@ public sealed partial class JsonHttpResult<TValue>
             statusCode: statusCode,
             contentType: null,
             jsonSerializerOptions: jsonSerializerOptions
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Json"/> class with the values.

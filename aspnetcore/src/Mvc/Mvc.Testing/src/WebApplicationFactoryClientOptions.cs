@@ -17,7 +17,9 @@ public class WebApplicationFactoryClientOptions
     /// <summary>
     /// Initializes a new instance of <see cref="WebApplicationFactoryClientOptions"/>.
     /// </summary>
-    public WebApplicationFactoryClientOptions() { }
+    public WebApplicationFactoryClientOptions()
+    {
+    }
 
     // Copy constructor
     internal WebApplicationFactoryClientOptions(WebApplicationFactoryClientOptions clientOptions)

@@ -49,7 +49,9 @@ public class OpenApiSchemaGeneratorTests
         Assert.Equal("date-span", schema.Format);
     }
 
-    class Todo : Dictionary<string, object> { }
+    class Todo : Dictionary<string, object>
+    {
+    }
 
     class Products : IList<int>
     {

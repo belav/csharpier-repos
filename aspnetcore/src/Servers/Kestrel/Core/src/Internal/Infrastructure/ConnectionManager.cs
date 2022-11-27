@@ -14,7 +14,9 @@ internal sealed class ConnectionManager
     private readonly KestrelTrace _trace;
 
     public ConnectionManager(KestrelTrace trace, long? upgradedConnectionLimit)
-        : this(trace, GetCounter(upgradedConnectionLimit)) { }
+        : this(trace, GetCounter(upgradedConnectionLimit))
+    {
+    }
 
     public ConnectionManager(KestrelTrace trace, ResourceCounter upgradedConnections)
     {

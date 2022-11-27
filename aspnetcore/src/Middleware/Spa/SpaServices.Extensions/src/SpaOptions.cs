@@ -18,7 +18,9 @@ public class SpaOptions
     /// <summary>
     /// Constructs a new instance of <see cref="SpaOptions"/>.
     /// </summary>
-    public SpaOptions() { }
+    public SpaOptions()
+    {
+    }
 
     /// <summary>
     /// Constructs a new instance of <see cref="SpaOptions"/>.

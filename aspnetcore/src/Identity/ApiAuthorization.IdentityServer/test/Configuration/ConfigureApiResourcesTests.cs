@@ -124,7 +124,9 @@ public class ConfigureApiResourcesTests
     {
         private readonly IDictionary<string, ResourceDefinition> _definitions;
 
-        public TestLocalApiDescriptor() : this(new Dictionary<string, ResourceDefinition>()) { }
+        public TestLocalApiDescriptor() : this(new Dictionary<string, ResourceDefinition>())
+        {
+        }
 
         public TestLocalApiDescriptor(IDictionary<string, ResourceDefinition> definitions)
         {

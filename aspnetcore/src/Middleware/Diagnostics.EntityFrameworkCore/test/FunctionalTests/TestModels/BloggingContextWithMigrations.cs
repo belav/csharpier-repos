@@ -9,7 +9,9 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests;
 
 public class BloggingContextWithMigrations : BloggingContext
 {
-    public BloggingContextWithMigrations(DbContextOptions options) : base(options) { }
+    public BloggingContextWithMigrations(DbContextOptions options) : base(options)
+    {
+    }
 
     // Providing a factory method so that the ctor is hidden from DI
     public static BloggingContextWithMigrations CreateWithoutExternalServiceProvider(
@@ -74,6 +76,8 @@ public class BloggingContextWithMigrations : BloggingContext
         protected override void BuildTargetModel(ModelBuilder modelBuilder) =>
             BuildSnapshotModel(modelBuilder);
 
-        protected override void Up(MigrationBuilder migrationBuilder) { }
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+        }
     }
 }

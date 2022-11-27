@@ -232,7 +232,9 @@ public class PropertyAsParameterInfoTests
             [Test] int withTestAttribute,
             [Sample] int withSampleAttribute,
             int withDefaultValue = 10
-        ) { }
+        )
+        {
+        }
     }
 
     private class DerivedArgumentList : ArgumentList
@@ -246,10 +248,16 @@ public class PropertyAsParameterInfoTests
     }
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter, Inherited = true)]
-    private class SampleAttribute : Attribute { }
+    private class SampleAttribute : Attribute
+    {
+    }
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter, Inherited = true)]
-    private class TestAttribute : Attribute { }
+    private class TestAttribute : Attribute
+    {
+    }
 
-    private class DerivedTestAttribute : TestAttribute { }
+    private class DerivedTestAttribute : TestAttribute
+    {
+    }
 }

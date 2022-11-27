@@ -11,7 +11,9 @@ internal class DirectiveHtmlTokenizer : HtmlTokenizer
     private bool _visitedFirstTokenStart;
     private SourceLocation _firstTokenVisitLocation = SourceLocation.Undefined;
 
-    public DirectiveHtmlTokenizer(ITextDocument source) : base(source) { }
+    public DirectiveHtmlTokenizer(ITextDocument source) : base(source)
+    {
+    }
 
     protected override StateResult Dispatch()
     {

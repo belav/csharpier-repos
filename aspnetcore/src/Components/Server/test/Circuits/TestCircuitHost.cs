@@ -36,7 +36,9 @@ internal class TestCircuitHost : CircuitHost
             navigationManager,
             circuitHandlers,
             logger
-        ) { }
+        )
+    {
+    }
 
     public static CircuitHost Create(
         CircuitId? circuitId = null,

@@ -978,9 +978,13 @@ public class ApiResponseTypeProviderTest
         return actionDescriptor;
     }
 
-    public class BaseModel { }
+    public class BaseModel
+    {
+    }
 
-    public class DerivedModel : BaseModel { }
+    public class DerivedModel : BaseModel
+    {
+    }
 
     public class TestController
     {
@@ -1008,6 +1012,8 @@ public class ApiResponseTypeProviderTest
     {
         [ProducesResponseType(206)]
         [ProducesResponseType(406)]
-        public static void Search(object searchTerm, int page) { }
+        public static void Search(object searchTerm, int page)
+        {
+        }
     }
 }

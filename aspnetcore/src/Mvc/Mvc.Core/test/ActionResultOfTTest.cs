@@ -125,9 +125,13 @@ public class ActionResultOfTTest
         Assert.Equal(StatusCodes.Status200OK, objectResult.StatusCode);
     }
 
-    private class BaseItem { }
+    private class BaseItem
+    {
+    }
 
-    private class DerivedItem : BaseItem { }
+    private class DerivedItem : BaseItem
+    {
+    }
 
     private class TestResult : IResult
     {

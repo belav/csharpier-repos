@@ -29,7 +29,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         private List<GCHandle> _pins = new List<GCHandle>(BUFFER_COUNT + 1);
         private List<MemoryHandle> _handles = new List<MemoryHandle>(BUFFER_COUNT + 1);
 
-        public UvWriteReq(ILibuvTrace logger) : base(logger) { }
+        public UvWriteReq(ILibuvTrace logger) : base(logger)
+        {
+        }
 
         public override void Init(LibuvThread thread)
         {

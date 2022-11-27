@@ -101,7 +101,9 @@ public class WebAssemblyHostTest
                 DefaultWebAssemblyJSRuntime.Instance,
                 CultureInfo.CurrentCulture,
                 CultureInfo.CurrentUICulture
-            ) { }
+            )
+        {
+        }
 
         public override ValueTask LoadCurrentCultureResourcesAsync() => default;
     }

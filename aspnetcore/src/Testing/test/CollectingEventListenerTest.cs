@@ -54,36 +54,64 @@ public class CollectingEventListenerTests
 
     public class CollectingTests
     {
-        public class A : CollectingTestBase { }
+        public class A : CollectingTestBase
+        {
+        }
 
-        public class B : CollectingTestBase { }
+        public class B : CollectingTestBase
+        {
+        }
 
-        public class C : CollectingTestBase { }
+        public class C : CollectingTestBase
+        {
+        }
 
-        public class D : CollectingTestBase { }
+        public class D : CollectingTestBase
+        {
+        }
 
-        public class E : CollectingTestBase { }
+        public class E : CollectingTestBase
+        {
+        }
 
-        public class F : CollectingTestBase { }
+        public class F : CollectingTestBase
+        {
+        }
 
-        public class G : CollectingTestBase { }
+        public class G : CollectingTestBase
+        {
+        }
     }
 
     public class NonCollectingTests
     {
-        public class A : NonCollectingTestBase { }
+        public class A : NonCollectingTestBase
+        {
+        }
 
-        public class B : NonCollectingTestBase { }
+        public class B : NonCollectingTestBase
+        {
+        }
 
-        public class C : NonCollectingTestBase { }
+        public class C : NonCollectingTestBase
+        {
+        }
 
-        public class D : NonCollectingTestBase { }
+        public class D : NonCollectingTestBase
+        {
+        }
 
-        public class E : NonCollectingTestBase { }
+        public class E : NonCollectingTestBase
+        {
+        }
 
-        public class F : NonCollectingTestBase { }
+        public class F : NonCollectingTestBase
+        {
+        }
 
-        public class G : NonCollectingTestBase { }
+        public class G : NonCollectingTestBase
+        {
+        }
     }
 }
 
@@ -92,7 +120,9 @@ public class TestEventSource : EventSource
 {
     public static readonly TestEventSource Log = new TestEventSource();
 
-    private TestEventSource() { }
+    private TestEventSource()
+    {
+    }
 
     [Event(eventId: 1, Level = EventLevel.Informational, Message = "Test")]
     public void Test() => WriteEvent(1);

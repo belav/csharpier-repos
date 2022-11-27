@@ -69,7 +69,9 @@ public class PageInformation : IDisposable
         {
             _logger.LogError(e.Failure);
         }
-        catch { }
+        catch
+        {
+        }
         FailedRequests.Add(e.Failure);
     }
 
@@ -80,7 +82,9 @@ public class PageInformation : IDisposable
         {
             _logger.LogError(e);
         }
-        catch { }
+        catch
+        {
+        }
 
         PageErrors.Add(e);
     }

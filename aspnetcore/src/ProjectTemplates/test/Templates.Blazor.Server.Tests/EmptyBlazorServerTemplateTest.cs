@@ -17,7 +17,9 @@ namespace Templates.Blazor.Test;
 public class EmptyBlazorServerTemplateTest : BlazorTemplateTest
 {
     public EmptyBlazorServerTemplateTest(ProjectFactoryFixture projectFactory)
-        : base(projectFactory) { }
+        : base(projectFactory)
+    {
+    }
 
     public override string ProjectType { get; } = "blazorserver-empty";
 

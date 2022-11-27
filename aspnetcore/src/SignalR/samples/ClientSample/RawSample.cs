@@ -66,8 +66,12 @@ internal class RawSample
             await shutdown.Task;
         }
         catch (AggregateException aex)
-            when (aex.InnerExceptions.All(e => e is OperationCanceledException)) { }
-        catch (OperationCanceledException) { }
+            when (aex.InnerExceptions.All(e => e is OperationCanceledException))
+        {
+        }
+        catch (OperationCanceledException)
+        {
+        }
         finally
         {
             await connection.DisposeAsync();

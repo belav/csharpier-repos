@@ -14,9 +14,13 @@ public class TestPipeReader : PipeReader
         ReadResults = new List<ValueTask<ReadResult>>();
     }
 
-    public override void AdvanceTo(SequencePosition consumed) { }
+    public override void AdvanceTo(SequencePosition consumed)
+    {
+    }
 
-    public override void AdvanceTo(SequencePosition consumed, SequencePosition examined) { }
+    public override void AdvanceTo(SequencePosition consumed, SequencePosition examined)
+    {
+    }
 
     public override void CancelPendingRead()
     {

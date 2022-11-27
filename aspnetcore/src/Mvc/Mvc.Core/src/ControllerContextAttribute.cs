@@ -9,4 +9,6 @@ namespace Microsoft.AspNetCore.Mvc;
 /// set method.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-public class ControllerContextAttribute : Attribute { }
+public class ControllerContextAttribute : Attribute
+{
+}

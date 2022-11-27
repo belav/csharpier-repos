@@ -125,7 +125,9 @@ public class HostingTests
 
     private class TestStartup
     {
-        public void Configure(IApplicationBuilder app) { }
+        public void Configure(IApplicationBuilder app)
+        {
+        }
     }
 
     public class FakeServer : IServer
@@ -150,6 +152,8 @@ public class HostingTests
 
         public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

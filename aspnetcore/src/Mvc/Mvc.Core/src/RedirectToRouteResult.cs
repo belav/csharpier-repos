@@ -21,7 +21,9 @@ public class RedirectToRouteResult : ActionResult, IKeepTempDataResult
     /// </summary>
     /// <param name="routeValues">The parameters for the route.</param>
     public RedirectToRouteResult(object? routeValues)
-        : this(routeName: null, routeValues: routeValues) { }
+        : this(routeName: null, routeValues: routeValues)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values
@@ -30,7 +32,9 @@ public class RedirectToRouteResult : ActionResult, IKeepTempDataResult
     /// <param name="routeName">The name of the route.</param>
     /// <param name="routeValues">The parameters for the route.</param>
     public RedirectToRouteResult(string? routeName, object? routeValues)
-        : this(routeName, routeValues, permanent: false) { }
+        : this(routeName, routeValues, permanent: false)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values
@@ -40,7 +44,9 @@ public class RedirectToRouteResult : ActionResult, IKeepTempDataResult
     /// <param name="routeValues">The parameters for the route.</param>
     /// <param name="permanent">If set to true, makes the redirect permanent (301). Otherwise a temporary redirect is used (302).</param>
     public RedirectToRouteResult(string? routeName, object? routeValues, bool permanent)
-        : this(routeName, routeValues, permanent, fragment: null) { }
+        : this(routeName, routeValues, permanent, fragment: null)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values
@@ -55,7 +61,9 @@ public class RedirectToRouteResult : ActionResult, IKeepTempDataResult
         object? routeValues,
         bool permanent,
         bool preserveMethod
-    ) : this(routeName, routeValues, permanent, preserveMethod, fragment: null) { }
+    ) : this(routeName, routeValues, permanent, preserveMethod, fragment: null)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values
@@ -65,7 +73,9 @@ public class RedirectToRouteResult : ActionResult, IKeepTempDataResult
     /// <param name="routeValues">The parameters for the route.</param>
     /// <param name="fragment">The fragment to add to the URL.</param>
     public RedirectToRouteResult(string? routeName, object? routeValues, string? fragment)
-        : this(routeName, routeValues, permanent: false, fragment: fragment) { }
+        : this(routeName, routeValues, permanent: false, fragment: fragment)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values
@@ -80,7 +90,9 @@ public class RedirectToRouteResult : ActionResult, IKeepTempDataResult
         object? routeValues,
         bool permanent,
         string? fragment
-    ) : this(routeName, routeValues, permanent, preserveMethod: false, fragment: fragment) { }
+    ) : this(routeName, routeValues, permanent, preserveMethod: false, fragment: fragment)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values

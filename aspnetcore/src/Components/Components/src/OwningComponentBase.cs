@@ -59,7 +59,9 @@ public abstract class OwningComponentBase : ComponentBase, IDisposable
     }
 
     /// <inheritdoc />
-    protected virtual void Dispose(bool disposing) { }
+    protected virtual void Dispose(bool disposing)
+    {
+    }
 }
 
 /// <summary>

@@ -122,7 +122,9 @@ public partial class HttpResultsHelperTests
     [JsonSerializable(typeof(Todo))]
     [JsonSerializable(typeof(TodoChild))]
     [JsonSerializable(typeof(TodoStruct))]
-    private partial class TestJsonContext : JsonSerializerContext { }
+    private partial class TestJsonContext : JsonSerializerContext
+    {
+    }
 
     private class Todo
     {
@@ -133,7 +135,9 @@ public partial class HttpResultsHelperTests
 
     private struct TodoStruct
     {
-        public TodoStruct() { }
+        public TodoStruct()
+        {
+        }
 
         public int Id { get; set; }
         public string Name { get; set; } = "Todo";

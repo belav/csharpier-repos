@@ -351,7 +351,9 @@ public class ModelAttributesTest
     }
 
     [ModelBinder(Name = "Custom")]
-    private class DerivedModelWithAttributes : BaseModel { }
+    private class DerivedModelWithAttributes : BaseModel
+    {
+    }
 
     [ModelMetadataType(typeof(BaseModel))]
     private class BaseViewModel
@@ -405,10 +407,14 @@ public class ModelAttributesTest
     }
 
     [ClassValidator]
-    private class PropertyType { }
+    private class PropertyType
+    {
+    }
 
     [Bind]
-    private class MetadataPropertyType { }
+    private class MetadataPropertyType
+    {
+    }
 
     [IrrelevantAttribute] // We verify this is ignored
     private class MethodWithParamAttributesType
@@ -418,8 +424,12 @@ public class ModelAttributesTest
             object noAttributes,
             [Required, Range(1, 100)] int validationAttributes,
             [BindRequired] BaseModel mergedAttributes
-        ) { }
+        )
+        {
+        }
     }
 
-    private class IrrelevantAttribute : Attribute { }
+    private class IrrelevantAttribute : Attribute
+    {
+    }
 }

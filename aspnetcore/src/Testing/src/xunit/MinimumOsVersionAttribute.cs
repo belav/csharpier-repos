@@ -24,7 +24,8 @@ public class MinimumOSVersionAttribute : Attribute, ITestCondition
 
     public MinimumOSVersionAttribute(OperatingSystems operatingSystem, string minVersion)
         : this(operatingSystem, Version.Parse(minVersion), GetCurrentOS(), GetCurrentOSVersion())
-    { }
+    {
+    }
 
     // to enable unit testing
     internal MinimumOSVersionAttribute(

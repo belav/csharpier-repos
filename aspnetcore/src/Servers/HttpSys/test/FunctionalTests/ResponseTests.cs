@@ -314,7 +314,9 @@ public class ResponseTests
                     );
                     return;
                 }
-                catch (IOException) { }
+                catch (IOException)
+                {
+                }
 
                 try
                 {

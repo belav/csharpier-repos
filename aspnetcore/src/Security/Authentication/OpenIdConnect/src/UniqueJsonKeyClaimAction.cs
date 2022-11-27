@@ -22,7 +22,9 @@ public class UniqueJsonKeyClaimAction : JsonKeyClaimAction
     /// <param name="valueType">The value to use for Claim.ValueType when creating a Claim.</param>
     /// <param name="jsonKey">The top level key to look for in the json user data.</param>
     public UniqueJsonKeyClaimAction(string claimType, string valueType, string jsonKey)
-        : base(claimType, valueType, jsonKey) { }
+        : base(claimType, valueType, jsonKey)
+    {
+    }
 
     /// <inheritdoc />
     public override void Run(JsonElement userData, ClaimsIdentity identity, string issuer)

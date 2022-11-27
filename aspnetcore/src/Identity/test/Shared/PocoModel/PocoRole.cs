@@ -35,7 +35,9 @@ public class PocoRole<TKey> where TKey : IEquatable<TKey>
     /// <summary>
     ///     Constructor
     /// </summary>
-    public PocoRole() { }
+    public PocoRole()
+    {
+    }
 
     /// <summary>
     ///     Constructor

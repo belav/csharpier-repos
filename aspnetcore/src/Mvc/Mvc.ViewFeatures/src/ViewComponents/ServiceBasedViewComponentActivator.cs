@@ -27,5 +27,7 @@ public class ServiceBasedViewComponentActivator : IViewComponentActivator
     }
 
     /// <inheritdoc />
-    public virtual void Release(ViewComponentContext context, object viewComponent) { }
+    public virtual void Release(ViewComponentContext context, object viewComponent)
+    {
+    }
 }

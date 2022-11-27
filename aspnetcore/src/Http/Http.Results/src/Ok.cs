@@ -18,7 +18,9 @@ public sealed class Ok : IResult, IEndpointMetadataProvider, IStatusCodeHttpResu
     /// <summary>
     /// Initializes a new instance of the <see cref="Ok"/> class with the values.
     /// </summary>
-    internal Ok() { }
+    internal Ok()
+    {
+    }
 
     /// <summary>
     /// Gets the HTTP status code: <see cref="StatusCodes.Status200OK"/>

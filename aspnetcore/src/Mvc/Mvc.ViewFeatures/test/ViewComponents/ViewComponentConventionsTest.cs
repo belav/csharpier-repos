@@ -104,48 +104,84 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             Assert.Equal(expected, result);
         }
 
-        public class PublicNestedClass : ViewComponent { }
+        public class PublicNestedClass : ViewComponent
+        {
+        }
 
-        private class PrivateNestedClass : ViewComponent { }
+        private class PrivateNestedClass : ViewComponent
+        {
+        }
     }
 }
 
 // These types need to be public/non-nested for validity of the test
 namespace Microsoft.AspNetCore.Mvc.ViewComponentConventionsTestClasses
 {
-    public class PublicClass : ViewComponent { }
+    public class PublicClass : ViewComponent
+    {
+    }
 
-    internal class InternalClass : ViewComponent { }
+    internal class InternalClass : ViewComponent
+    {
+    }
 
-    public abstract class AbstractClass : ViewComponent { }
+    public abstract class AbstractClass : ViewComponent
+    {
+    }
 
-    public class GenericViewComponent<T> : ViewComponent { }
+    public class GenericViewComponent<T> : ViewComponent
+    {
+    }
 
-    public interface IAmAnInterfaceViewComponent { }
+    public interface IAmAnInterfaceViewComponent
+    {
+    }
 
-    public class Nada { }
+    public class Nada
+    {
+    }
 
     [NonViewComponent]
-    public class NonViewComponentAttributeViewComponent { }
+    public class NonViewComponentAttributeViewComponent
+    {
+    }
 
-    public class ChildOfNonViewComponent : NonViewComponentAttributeViewComponent { }
+    public class ChildOfNonViewComponent : NonViewComponentAttributeViewComponent
+    {
+    }
 
-    public class NamingConventionViewComponent { }
+    public class NamingConventionViewComponent
+    {
+    }
 
-    public class DerivedNamingConvention : NamingConventionViewComponent { }
+    public class DerivedNamingConvention : NamingConventionViewComponent
+    {
+    }
 
-    public class CaseInsensitiveNamingConventionVIEWCOMPONENT { }
+    public class CaseInsensitiveNamingConventionVIEWCOMPONENT
+    {
+    }
 
     [ViewComponent]
-    public class WithAttribute { }
+    public class WithAttribute
+    {
+    }
 
-    public class DerivedWithAttribute : WithAttribute { }
+    public class DerivedWithAttribute : WithAttribute
+    {
+    }
 
     [ViewComponent(Name = "Name")]
-    public class WithAttributeAndName { }
+    public class WithAttributeAndName
+    {
+    }
 
-    public class DerivedWithAttributeAndName : WithAttributeAndName { }
+    public class DerivedWithAttributeAndName : WithAttributeAndName
+    {
+    }
 
     [ViewComponent(Name = "New.Name")]
-    public class DerivedWithOverriddenAttributeName : WithAttributeAndName { }
+    public class DerivedWithOverriddenAttributeName : WithAttributeAndName
+    {
+    }
 }

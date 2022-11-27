@@ -13,7 +13,9 @@ public class SelectListItem
     /// <summary>
     /// Initializes a new instance of <see cref="SelectListItem"/>.
     /// </summary>
-    public SelectListItem() { }
+    public SelectListItem()
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SelectListItem"/>.

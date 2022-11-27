@@ -51,7 +51,9 @@ internal sealed class PageRequestDelegateFactory : IRequestDelegateFactory
             loggerFactory,
             mapper,
             null
-        ) { }
+        )
+    {
+    }
 
     public PageRequestDelegateFactory(
         PageActionInvokerCache cache,

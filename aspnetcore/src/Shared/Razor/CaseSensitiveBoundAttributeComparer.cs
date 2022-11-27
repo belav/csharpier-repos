@@ -14,7 +14,9 @@ internal sealed class CaseSensitiveTagHelperAttributeComparer
     public static readonly CaseSensitiveTagHelperAttributeComparer Default =
         new CaseSensitiveTagHelperAttributeComparer();
 
-    private CaseSensitiveTagHelperAttributeComparer() { }
+    private CaseSensitiveTagHelperAttributeComparer()
+    {
+    }
 
     public bool Equals(TagHelperAttribute attributeX, TagHelperAttribute attributeY)
     {

@@ -117,7 +117,9 @@ public class TestHub : Hub
     {
         public Unserializable Child { get; private set; }
 
-        private Unserializable() { }
+        private Unserializable()
+        {
+        }
 
         internal static Unserializable Create()
         {

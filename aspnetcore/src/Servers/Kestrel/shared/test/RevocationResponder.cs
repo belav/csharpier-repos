@@ -99,7 +99,9 @@ internal sealed class RevocationResponder : IDisposable
         {
             context = _listener.GetContext();
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
 
         if (context != null)
         {
@@ -115,7 +117,9 @@ internal sealed class RevocationResponder : IDisposable
         {
             context = await _listener.GetContextAsync();
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+        }
 
         if (context != null)
         {
@@ -149,7 +153,9 @@ internal sealed class RevocationResponder : IDisposable
                     Trace(e.ToString());
                 }
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             return;
         }
@@ -163,7 +169,9 @@ internal sealed class RevocationResponder : IDisposable
                 context.Response.StatusCode = 404;
                 context.Response.Close();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
     }
 
@@ -296,7 +304,9 @@ internal sealed class RevocationResponder : IDisposable
                 Trace($"Listening at {uriPrefix}");
                 return listener;
             }
-            catch { }
+            catch
+            {
+            }
         }
     }
 

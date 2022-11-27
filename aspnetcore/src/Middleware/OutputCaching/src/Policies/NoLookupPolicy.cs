@@ -10,7 +10,9 @@ internal sealed class NoLookupPolicy : IOutputCachePolicy
 {
     public static NoLookupPolicy Instance = new();
 
-    private NoLookupPolicy() { }
+    private NoLookupPolicy()
+    {
+    }
 
     /// <inheritdoc />
     ValueTask IOutputCachePolicy.ServeResponseAsync(

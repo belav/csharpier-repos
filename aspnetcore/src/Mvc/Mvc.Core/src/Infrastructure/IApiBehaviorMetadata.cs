@@ -14,4 +14,6 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 /// features and behavior targeted at improving the developer experience for building APIs.
 /// </para>
 /// </summary>
-public interface IApiBehaviorMetadata : IFilterMetadata { }
+public interface IApiBehaviorMetadata : IFilterMetadata
+{
+}

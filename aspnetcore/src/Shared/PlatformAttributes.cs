@@ -37,7 +37,9 @@ internal
 #endif
 sealed class TargetPlatformAttribute : OSPlatformAttribute
 {
-    public TargetPlatformAttribute(string platformName) : base(platformName) { }
+    public TargetPlatformAttribute(string platformName) : base(platformName)
+    {
+    }
 }
 
 /// <summary>
@@ -71,7 +73,9 @@ internal
 #endif
 sealed class SupportedOSPlatformAttribute : OSPlatformAttribute
 {
-    public SupportedOSPlatformAttribute(string platformName) : base(platformName) { }
+    public SupportedOSPlatformAttribute(string platformName) : base(platformName)
+    {
+    }
 }
 
 /// <summary>
@@ -98,5 +102,7 @@ internal
 #endif
 sealed class UnsupportedOSPlatformAttribute : OSPlatformAttribute
 {
-    public UnsupportedOSPlatformAttribute(string platformName) : base(platformName) { }
+    public UnsupportedOSPlatformAttribute(string platformName) : base(platformName)
+    {
+    }
 }

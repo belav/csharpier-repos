@@ -19,7 +19,9 @@ internal sealed partial class SignOutResult : IResult
     /// <summary>
     /// Initializes a new instance of <see cref="SignOutResult"/> with the default sign out scheme.
     /// </summary>
-    public SignOutResult() : this(Array.Empty<string>()) { }
+    public SignOutResult() : this(Array.Empty<string>())
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignOutResult"/> with the default sign out scheme.
@@ -27,14 +29,18 @@ internal sealed partial class SignOutResult : IResult
     /// </summary>
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-out operation.</param>
     public SignOutResult(AuthenticationProperties properties)
-        : this(Array.Empty<string>(), properties) { }
+        : this(Array.Empty<string>(), properties)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignOutResult"/> with the
     /// specified authentication scheme.
     /// </summary>
     /// <param name="authenticationScheme">The authentication scheme to use when signing out the user.</param>
-    public SignOutResult(string authenticationScheme) : this(new[] { authenticationScheme }) { }
+    public SignOutResult(string authenticationScheme) : this(new[] { authenticationScheme })
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignOutResult"/> with the
@@ -42,7 +48,9 @@ internal sealed partial class SignOutResult : IResult
     /// </summary>
     /// <param name="authenticationSchemes">The authentication schemes to use when signing out the user.</param>
     public SignOutResult(IList<string> authenticationSchemes)
-        : this(authenticationSchemes, properties: null) { }
+        : this(authenticationSchemes, properties: null)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignOutResult"/> with the
@@ -51,7 +59,9 @@ internal sealed partial class SignOutResult : IResult
     /// <param name="authenticationScheme">The authentication schemes to use when signing out the user.</param>
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-out operation.</param>
     public SignOutResult(string authenticationScheme, AuthenticationProperties? properties)
-        : this(new[] { authenticationScheme }, properties) { }
+        : this(new[] { authenticationScheme }, properties)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignOutResult"/> with the

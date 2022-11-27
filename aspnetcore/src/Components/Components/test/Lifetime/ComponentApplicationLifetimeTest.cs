@@ -289,7 +289,9 @@ public class ComponentApplicationLifetimeTest
     private class TestRenderer : Renderer
     {
         public TestRenderer()
-            : base(new ServiceCollection().BuildServiceProvider(), NullLoggerFactory.Instance) { }
+            : base(new ServiceCollection().BuildServiceProvider(), NullLoggerFactory.Instance)
+        {
+        }
 
         private readonly Dispatcher _dispatcher = Dispatcher.CreateDefault();
 

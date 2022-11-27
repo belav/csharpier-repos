@@ -671,7 +671,9 @@ public class DefaultAuthorizationServiceTests
         Assert.False(allowed.Succeeded);
     }
 
-    public class CustomRequirement : IAuthorizationRequirement { }
+    public class CustomRequirement : IAuthorizationRequirement
+    {
+    }
 
     public class CustomHandler : AuthorizationHandler<CustomRequirement>
     {
@@ -871,7 +873,9 @@ public class DefaultAuthorizationServiceTests
         Assert.False(allowed.Succeeded);
     }
 
-    public class ExpenseReport { }
+    public class ExpenseReport
+    {
+    }
 
     public static class Operations
     {
@@ -1251,7 +1255,9 @@ public class DefaultAuthorizationServiceTests
 
     public class BadContext : AuthorizationHandlerContext
     {
-        public BadContext() : base(new List<IAuthorizationRequirement>(), null, null) { }
+        public BadContext() : base(new List<IAuthorizationRequirement>(), null, null)
+        {
+        }
 
         public override bool HasFailed
         {

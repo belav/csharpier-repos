@@ -76,5 +76,7 @@ internal sealed class IdentityServerJwtBearerOptionsConfiguration
         }
     }
 
-    public void Configure(JwtBearerOptions options) { }
+    public void Configure(JwtBearerOptions options)
+    {
+    }
 }

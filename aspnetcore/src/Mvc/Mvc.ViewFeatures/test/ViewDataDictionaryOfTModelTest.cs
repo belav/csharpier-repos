@@ -415,7 +415,11 @@ public class ViewDataDictionaryOfTModelTest
         Assert.Equal(expectedMessage, exception.Message);
     }
 
-    private class TestModel { }
+    private class TestModel
+    {
+    }
 
-    private class SupremeTestModel : TestModel { }
+    private class SupremeTestModel : TestModel
+    {
+    }
 }

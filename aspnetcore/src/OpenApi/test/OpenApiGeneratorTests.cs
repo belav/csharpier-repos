@@ -1091,7 +1091,9 @@ public class OpenApiOperationGeneratorTests
         return generator.GetOpenApiOperation(methodInfo, endpointMetadata, routePattern);
     }
 
-    private static void TestAction() { }
+    private static void TestAction()
+    {
+    }
 
     // Shared with OpenApiRouteHandlerExtensionsTests
     internal class ServiceProviderIsService : IServiceProviderIsService
@@ -1107,9 +1109,13 @@ public class OpenApiOperationGeneratorTests
         public IFileProvider ContentRootFileProvider { get; set; }
     }
 
-    private class InferredJsonClass { }
+    private class InferredJsonClass
+    {
+    }
 
-    private interface IInferredJsonInterface { }
+    private interface IInferredJsonInterface
+    {
+    }
 
     private record TryParseStringRecord(int Value)
     {
@@ -1123,7 +1129,9 @@ public class OpenApiOperationGeneratorTests
             throw new NotImplementedException();
     }
 
-    private interface IInferredServiceInterface { }
+    private interface IInferredServiceInterface
+    {
+    }
 
     private record BindAsyncRecord(int Value)
     {

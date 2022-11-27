@@ -513,7 +513,9 @@ public class MapConnectionHandlerTests
     }
 
     [Authorize]
-    private class DoubleAuthConnectionHandler : AuthConnectionHandler { }
+    private class DoubleAuthConnectionHandler : AuthConnectionHandler
+    {
+    }
 
     [Authorize]
     private class AuthConnectionHandler : ConnectionHandler
@@ -524,7 +526,9 @@ public class MapConnectionHandlerTests
         }
     }
 
-    private class TestRequirement : IAuthorizationRequirement { }
+    private class TestRequirement : IAuthorizationRequirement
+    {
+    }
 
     private IHost BuildWebHost(Action<IEndpointRouteBuilder> configure)
     {

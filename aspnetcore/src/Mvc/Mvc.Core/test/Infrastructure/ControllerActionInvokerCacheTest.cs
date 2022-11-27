@@ -63,7 +63,9 @@ public class ControllerActionInvokerCacheTest
 
     private class TestFilter : IFilterMetadata
     {
-        public TestFilter() { }
+        public TestFilter()
+        {
+        }
 
         public TestFilter(string data)
         {
@@ -75,7 +77,9 @@ public class ControllerActionInvokerCacheTest
 
     private class TestController
     {
-        public void Index() { }
+        public void Index()
+        {
+        }
     }
 
     private class CustomActionDescriptorCollectionProvider : IActionDescriptorCollectionProvider

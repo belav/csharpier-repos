@@ -132,7 +132,9 @@ internal static class QuicTestHelpers
 
     private class TestConnectionHeartbeatFeature : IConnectionHeartbeatFeature
     {
-        public void OnHeartbeat(Action<object> action, object state) { }
+        public void OnHeartbeat(Action<object> action, object state)
+        {
+        }
     }
 
     private static bool RemoteCertificateValidationCallback(

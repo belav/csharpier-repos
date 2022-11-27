@@ -206,9 +206,13 @@ public class EndpointRoutingMiddlewareTest
             _onNext = onNext;
         }
 
-        public void OnCompleted() { }
+        public void OnCompleted()
+        {
+        }
 
-        public void OnError(Exception error) { }
+        public void OnError(Exception error)
+        {
+        }
 
         public void OnNext(KeyValuePair<string, object> value)
         {

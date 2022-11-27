@@ -9,5 +9,7 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter;
 internal sealed class StackPolicy : BasePolicy
 {
     public StackPolicy(IOptions<QueuePolicyOptions> options)
-        : base(options, QueueProcessingOrder.NewestFirst) { }
+        : base(options, QueueProcessingOrder.NewestFirst)
+    {
+    }
 }

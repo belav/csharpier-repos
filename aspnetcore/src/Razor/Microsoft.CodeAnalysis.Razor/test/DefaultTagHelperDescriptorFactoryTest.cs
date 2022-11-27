@@ -3339,9 +3339,15 @@ public class DefaultTagHelperDescriptorFactoryTest
 }
 
 [AspNetCore.Razor.TagHelpers.OutputElementHint("hinted-value")]
-public class OutputElementHintTagHelper : AspNetCore.Razor.TagHelpers.TagHelper { }
+public class OutputElementHintTagHelper : AspNetCore.Razor.TagHelpers.TagHelper
+{
+}
 
-public class InheritedOutputElementHintTagHelper : OutputElementHintTagHelper { }
+public class InheritedOutputElementHintTagHelper : OutputElementHintTagHelper
+{
+}
 
 [AspNetCore.Razor.TagHelpers.OutputElementHint("overridden")]
-public class OverriddenOutputElementHintTagHelper : OutputElementHintTagHelper { }
+public class OverriddenOutputElementHintTagHelper : OutputElementHintTagHelper
+{
+}

@@ -20,7 +20,9 @@ public class AttributeRouteModel
     /// <summary>
     /// Initializes a new instance of <see cref="AttributeRoute"/>.
     /// </summary>
-    public AttributeRouteModel() { }
+    public AttributeRouteModel()
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="AttributeRoute"/> using the specified <paramref name="templateProvider"/>.

@@ -109,7 +109,9 @@ internal class TestQueue : IQueuePolicy
     }
 
     public TestQueue(Func<TestQueue, bool> onTryEnter, Action onExit = null)
-        : this(state => Task.FromResult(onTryEnter(state)), onExit) { }
+        : this(state => Task.FromResult(onTryEnter(state)), onExit)
+    {
+    }
 
     public async ValueTask<bool> TryEnterAsync()
     {

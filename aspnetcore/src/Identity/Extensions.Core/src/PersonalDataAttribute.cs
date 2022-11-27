@@ -9,4 +9,6 @@ namespace Microsoft.AspNetCore.Identity;
 /// Used to indicate that a something is considered personal data.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property)]
-public class PersonalDataAttribute : Attribute { }
+public class PersonalDataAttribute : Attribute
+{
+}

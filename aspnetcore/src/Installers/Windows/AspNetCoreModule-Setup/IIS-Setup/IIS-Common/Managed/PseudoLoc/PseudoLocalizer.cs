@@ -474,9 +474,13 @@ namespace Microsoft.Web.Utility
             return true;
         }
 
-        public static void Enable(Type resourcesType) { }
+        public static void Enable(Type resourcesType)
+        {
+        }
 
-        public static void EnableAutoPseudoLocalizationFromHostExecutable() { }
+        public static void EnableAutoPseudoLocalizationFromHostExecutable()
+        {
+        }
 
         public static string PseudoLocalizeString(string str)
         {

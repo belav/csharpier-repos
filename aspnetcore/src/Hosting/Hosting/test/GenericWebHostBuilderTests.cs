@@ -150,6 +150,8 @@ public class GenericWebHostBuilderTests
 
         public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 }

@@ -21,7 +21,9 @@ public sealed class NewtonsoftJsonValidationMetadataProvider
     /// <summary>
     /// Creates a new <see cref="NewtonsoftJsonValidationMetadataProvider"/> with the default <see cref="CamelCaseNamingStrategy"/>
     /// </summary>
-    public NewtonsoftJsonValidationMetadataProvider() : this(new CamelCaseNamingStrategy()) { }
+    public NewtonsoftJsonValidationMetadataProvider() : this(new CamelCaseNamingStrategy())
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="NewtonsoftJsonValidationMetadataProvider"/> with an optional <see cref="NamingStrategy"/>

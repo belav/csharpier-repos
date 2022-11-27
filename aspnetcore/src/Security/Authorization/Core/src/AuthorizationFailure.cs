@@ -14,7 +14,9 @@ public class AuthorizationFailure
 {
     private static readonly AuthorizationFailure _explicitFailure = new() { FailCalled = true };
 
-    private AuthorizationFailure() { }
+    private AuthorizationFailure()
+    {
+    }
 
     /// <summary>
     /// Failure was due to <see cref="AuthorizationHandlerContext.Fail()"/> being called.

@@ -448,7 +448,9 @@ internal sealed class CertificateConfig
     }
 
     // For testing
-    internal CertificateConfig() { }
+    internal CertificateConfig()
+    {
+    }
 
     public IConfigurationSection? ConfigSection { get; }
 

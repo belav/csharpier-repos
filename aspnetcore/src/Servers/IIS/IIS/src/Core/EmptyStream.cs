@@ -18,7 +18,9 @@ internal sealed class EmptyStream : ReadOnlyStream
         _state = HttpStreamState.Open;
     }
 
-    public override void Flush() { }
+    public override void Flush()
+    {
+    }
 
     public override Task FlushAsync(CancellationToken cancellationToken)
     {

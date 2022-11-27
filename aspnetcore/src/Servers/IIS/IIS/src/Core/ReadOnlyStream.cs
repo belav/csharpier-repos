@@ -25,7 +25,9 @@ internal abstract class ReadOnlyStream : Stream
         set => throw new NotSupportedException();
     }
 
-    public override void Flush() { }
+    public override void Flush()
+    {
+    }
 
     public override Task FlushAsync(CancellationToken cancellationToken)
     {

@@ -116,7 +116,9 @@ internal sealed class QueryCollectionInternal : IQueryCollection
             _notEmpty ? _dictionaryEnumerator.Current : default;
 
         /// <inheritdoc />
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         object IEnumerator.Current => Current;
 

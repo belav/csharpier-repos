@@ -12,4 +12,6 @@ namespace Microsoft.AspNetCore.Testing;
     "Microsoft.AspNetCore.Testing." + nameof(ConditionalFactDiscoverer),
     "Microsoft.AspNetCore.Testing"
 )]
-public class ConditionalFactAttribute : FactAttribute { }
+public class ConditionalFactAttribute : FactAttribute
+{
+}

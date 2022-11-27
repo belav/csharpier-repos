@@ -11,5 +11,7 @@ namespace Identity.ExternalClaims.Pages.Account;
 
 public class ResetPasswordConfirmationModel : PageModel
 {
-    public void OnGet() { }
+    public void OnGet()
+    {
+    }
 }

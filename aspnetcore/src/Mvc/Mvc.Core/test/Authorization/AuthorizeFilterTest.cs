@@ -420,7 +420,9 @@ public class AuthorizeFilterTest
     public class DerivedAuthorizeFilter : AuthorizeFilter
     {
         public DerivedAuthorizeFilter()
-            : base(new AuthorizationPolicyBuilder().RequireAssertion(a => false).Build()) { }
+            : base(new AuthorizationPolicyBuilder().RequireAssertion(a => false).Build())
+        {
+        }
     }
 
     [Fact]

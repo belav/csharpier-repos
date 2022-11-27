@@ -561,7 +561,11 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
             throw new System.NotImplementedException();
     }
 
-    private class TestAuthenticationState : RemoteAuthenticationState { }
+    private class TestAuthenticationState : RemoteAuthenticationState
+    {
+    }
 
-    private class TestAccount : RemoteUserAccount { }
+    private class TestAccount : RemoteUserAccount
+    {
+    }
 }

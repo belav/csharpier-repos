@@ -120,5 +120,7 @@ public abstract class RevalidatingServerAuthenticationStateProvider
     }
 
     /// <inheritdoc />
-    protected virtual void Dispose(bool disposing) { }
+    protected virtual void Dispose(bool disposing)
+    {
+    }
 }

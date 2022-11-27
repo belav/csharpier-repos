@@ -149,7 +149,9 @@ public class DownloadFilesController : Controller
         {
             Directory.Delete(Path.Combine(_testFilesPath), recursive: true);
         }
-        catch { }
+        catch
+        {
+        }
 
         base.Dispose(disposing);
     }

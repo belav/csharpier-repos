@@ -903,9 +903,13 @@ public class TestServerTests
         }
     }
 
-    public interface IProxyHttpContext { }
+    public interface IProxyHttpContext
+    {
+    }
 
-    public interface IProxyException { }
+    public interface IProxyException
+    {
+    }
 
     public class Startup
     {
@@ -917,7 +921,9 @@ public class TestServerTests
 
     public class SimpleService
     {
-        public SimpleService() { }
+        public SimpleService()
+        {
+        }
 
         public string Message { get; set; }
     }
@@ -929,7 +935,9 @@ public class TestServerTests
             services.AddSingleton<SimpleService>();
         }
 
-        public void ConfigureFooServices(IServiceCollection services) { }
+        public void ConfigureFooServices(IServiceCollection services)
+        {
+        }
 
         public void Configure(IApplicationBuilder app)
         {

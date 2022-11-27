@@ -251,7 +251,9 @@ internal static class Utilities
                     server.StartAsync(new DummyApplication(app), CancellationToken.None).Wait();
                     return server;
                 }
-                catch (HttpSysException) { }
+                catch (HttpSysException)
+                {
+                }
             }
             NextHttpsPort = BaseHttpsPort;
         }

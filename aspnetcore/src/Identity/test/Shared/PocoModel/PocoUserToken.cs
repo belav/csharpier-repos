@@ -6,7 +6,9 @@ namespace Microsoft.AspNetCore.Identity.Test;
 /// <summary>
 /// Entity type for a user's token
 /// </summary>
-public class PocoUserToken : PocoUserToken<string> { }
+public class PocoUserToken : PocoUserToken<string>
+{
+}
 
 /// <summary>
 /// Entity type for a user's token

@@ -419,7 +419,9 @@ public class FileExtensionContentTypeProvider : IContentTypeProvider
                 { ".z", "application/x-compress" },
                 { ".zip", "application/x-zip-compressed" },
             }
-        ) { }
+        )
+    {
+    }
     #endregion
 
     /// <summary>

@@ -667,7 +667,9 @@ public class RequestTests
                     result.SetException(new Exception("This should have aborted"));
                     return;
                 }
-                catch (IOException) { }
+                catch (IOException)
+                {
+                }
 
                 result.SetResult(httpContext.RequestAborted.IsCancellationRequested);
             }

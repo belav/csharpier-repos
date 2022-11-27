@@ -18,7 +18,9 @@ public class HotReloadTest : ServerTestBase<BasicTestAppServerSiteFixture<HotRel
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<HotReloadStartup> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture, output) { }
+    ) : base(browserFixture, serverFixture, output)
+    {
+    }
 
     public override async Task InitializeAsync()
     {

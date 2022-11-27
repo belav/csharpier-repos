@@ -567,7 +567,9 @@ public class ActionParameterIntegrationTest
 
     public record ActionParameter_RecordTypeWithMultipleConstructors(string Name, int Age)
     {
-        public ActionParameter_RecordTypeWithMultipleConstructors(string Name) : this(Name, 0) { }
+        public ActionParameter_RecordTypeWithMultipleConstructors(string Name) : this(Name, 0)
+        {
+        }
     }
 
     [Fact]
@@ -962,7 +964,9 @@ public class ActionParameterIntegrationTest
     {
         private readonly string _name;
 
-        public AbstractClassWithNoDefaultConstructor() : this("James") { }
+        public AbstractClassWithNoDefaultConstructor() : this("James")
+        {
+        }
 
         public AbstractClassWithNoDefaultConstructor(string name)
         {
@@ -981,7 +985,9 @@ public class ActionParameterIntegrationTest
             [Display(Name = "My Display Name"), StringLength(3)]
                 string displayNameStringLengthParam,
             ModelWithIValidatableObject validatableObject
-        ) { }
+        )
+        {
+        }
 
         private static MethodInfo MyActionMethodInfo =>
             typeof(BindingAndValidationController).GetMethod(nameof(MyAction));
@@ -1006,7 +1012,9 @@ public class ActionParameterIntegrationTest
         public void MyAction(
             [Required] string Name,
             [ValidateNever] ModelWithIValidatableObject validatableObject
-        ) { }
+        )
+        {
+        }
 
         private static MethodInfo MyActionMethodInfo =>
             typeof(ParameterWithValidateNever).GetMethod(nameof(MyAction));
@@ -1028,7 +1036,9 @@ public class ActionParameterIntegrationTest
     {
         private readonly ICollection<T> _original;
 
-        public CustomReadOnlyCollection() : this(new List<T>()) { }
+        public CustomReadOnlyCollection() : this(new List<T>())
+        {
+        }
 
         public CustomReadOnlyCollection(ICollection<T> original)
         {
@@ -1092,7 +1102,9 @@ public class ActionParameterIntegrationTest
     {
         public CustomComplexTypeModelBinder(
             IDictionary<ModelMetadata, IModelBinder> propertyBinders
-        ) : base(propertyBinders, NullLoggerFactory.Instance) { }
+        ) : base(propertyBinders, NullLoggerFactory.Instance)
+        {
+        }
 
         protected override object CreateModel(ModelBindingContext bindingContext)
         {

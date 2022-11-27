@@ -31,7 +31,9 @@ public class ModelBinderAttribute : Attribute, IModelNameProvider, IBinderTypePr
     /// <summary>
     /// Initializes a new instance of <see cref="ModelBinderAttribute"/>.
     /// </summary>
-    public ModelBinderAttribute() { }
+    public ModelBinderAttribute()
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ModelBinderAttribute"/>.

@@ -241,14 +241,22 @@ public class RouterTest
     }
 
     [Route("feb")]
-    public class FebComponent : ComponentBase { }
+    public class FebComponent : ComponentBase
+    {
+    }
 
     [Route("jan")]
-    public class JanComponent : ComponentBase { }
+    public class JanComponent : ComponentBase
+    {
+    }
 
     [Route("{*matchAnything}")]
-    public class MatchAnythingComponent : ComponentBase { }
+    public class MatchAnythingComponent : ComponentBase
+    {
+    }
 
     [Route("a/b")]
-    public class MultiSegmentRouteComponent : ComponentBase { }
+    public class MultiSegmentRouteComponent : ComponentBase
+    {
+    }
 }

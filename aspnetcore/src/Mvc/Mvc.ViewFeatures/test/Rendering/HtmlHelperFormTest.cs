@@ -472,7 +472,9 @@ public class HtmlHelperFormTest
         Assert.NotNull(writer);
 
         // Act & Assert
-        using (var form = htmlHelper.BeginForm()) { }
+        using (var form = htmlHelper.BeginForm())
+        {
+        }
 
         Assert.Equal(
             "<form><antiforgery></antiforgery></form>",
@@ -521,7 +523,9 @@ public class HtmlHelperFormTest
                 antiforgery: null,
                 htmlAttributes: null
             )
-        ) { }
+        )
+        {
+        }
 
         Assert.Equal(
             "<form><antiforgery></antiforgery></form>",
@@ -571,7 +575,9 @@ public class HtmlHelperFormTest
                 antiforgery: false,
                 htmlAttributes: null
             )
-        ) { }
+        )
+        {
+        }
 
         Assert.Equal("<form></form>", writer.GetStringBuilder().ToString());
     }
@@ -613,7 +619,9 @@ public class HtmlHelperFormTest
         // Act & Assert
         using (
             var form = htmlHelper.BeginForm(FormMethod.Get, antiforgery: null, htmlAttributes: null)
-        ) { }
+        )
+        {
+        }
 
         Assert.Equal("<form></form>", writer.GetStringBuilder().ToString());
     }
@@ -657,7 +665,9 @@ public class HtmlHelperFormTest
         Assert.NotNull(writer);
 
         // Act & Assert
-        using (var form = htmlHelper.BeginForm(method, antiforgery: true, htmlAttributes: null)) { }
+        using (var form = htmlHelper.BeginForm(method, antiforgery: true, htmlAttributes: null))
+        {
+        }
 
         Assert.Equal(
             "<form><antiforgery></antiforgery></form>",
@@ -754,7 +764,9 @@ public class HtmlHelperFormTest
         Assert.NotNull(writer);
 
         // Act & Assert
-        using (var form = htmlHelper.BeginRouteForm(routeValues: null)) { }
+        using (var form = htmlHelper.BeginRouteForm(routeValues: null))
+        {
+        }
 
         Assert.Equal(
             "<form><antiforgery></antiforgery></form>",
@@ -804,7 +816,9 @@ public class HtmlHelperFormTest
                 antiforgery: null,
                 htmlAttributes: null
             )
-        ) { }
+        )
+        {
+        }
 
         Assert.Equal(
             "<form><antiforgery></antiforgery></form>",
@@ -855,7 +869,9 @@ public class HtmlHelperFormTest
                 antiforgery: false,
                 htmlAttributes: null
             )
-        ) { }
+        )
+        {
+        }
 
         Assert.Equal("<form></form>", writer.GetStringBuilder().ToString());
     }
@@ -902,7 +918,9 @@ public class HtmlHelperFormTest
                 antiforgery: null,
                 htmlAttributes: null
             )
-        ) { }
+        )
+        {
+        }
 
         Assert.Equal("<form></form>", writer.GetStringBuilder().ToString());
     }
@@ -953,7 +971,9 @@ public class HtmlHelperFormTest
                 antiforgery: true,
                 htmlAttributes: null
             )
-        ) { }
+        )
+        {
+        }
 
         Assert.Equal(
             "<form><antiforgery></antiforgery></form>",

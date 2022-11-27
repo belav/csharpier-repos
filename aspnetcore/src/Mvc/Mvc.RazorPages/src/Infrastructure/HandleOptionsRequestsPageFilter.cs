@@ -28,7 +28,9 @@ internal sealed class HandleOptionsRequestsPageFilter : IPageFilter, IOrderedFil
     /// </summary>
     public int Order => 1000;
 
-    public void OnPageHandlerExecuted(PageHandlerExecutedContext context) { }
+    public void OnPageHandlerExecuted(PageHandlerExecutedContext context)
+    {
+    }
 
     public void OnPageHandlerExecuting(PageHandlerExecutingContext context)
     {
@@ -47,5 +49,7 @@ internal sealed class HandleOptionsRequestsPageFilter : IPageFilter, IOrderedFil
         }
     }
 
-    public void OnPageHandlerSelected(PageHandlerSelectedContext context) { }
+    public void OnPageHandlerSelected(PageHandlerSelectedContext context)
+    {
+    }
 }

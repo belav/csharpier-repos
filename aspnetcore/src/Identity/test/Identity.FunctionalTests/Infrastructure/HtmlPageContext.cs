@@ -7,10 +7,14 @@ public class HtmlPageContext
 {
     private readonly IDictionary<string, object> _properties;
 
-    protected HtmlPageContext() : this(new Dictionary<string, object>()) { }
+    protected HtmlPageContext() : this(new Dictionary<string, object>())
+    {
+    }
 
     protected HtmlPageContext(HtmlPageContext currentContext)
-        : this(new Dictionary<string, object>(currentContext._properties)) { }
+        : this(new Dictionary<string, object>(currentContext._properties))
+    {
+    }
 
     private HtmlPageContext(IDictionary<string, object> properties)
     {

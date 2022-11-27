@@ -27,7 +27,9 @@ public class ByteOrderMarkTest : LoggedTest
         }
     }
 
-    public ByteOrderMarkTest() { }
+    public ByteOrderMarkTest()
+    {
+    }
 
     [Theory]
     [InlineData("Web.ProjectTemplates")]

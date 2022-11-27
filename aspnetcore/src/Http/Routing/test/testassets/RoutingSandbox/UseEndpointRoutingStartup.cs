@@ -138,7 +138,9 @@ public class UseEndpointRoutingStartup
         return context.Response.WriteAsync("I have a method metadata attribute");
     }
 
-    private class AuthorizeAttribute : Attribute { }
+    private class AuthorizeAttribute : Attribute
+    {
+    }
 
     private class HttpGetAttribute : Attribute, IHttpMethodMetadata
     {

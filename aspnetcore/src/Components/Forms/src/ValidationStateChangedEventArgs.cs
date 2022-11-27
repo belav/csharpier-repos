@@ -17,5 +17,7 @@ public sealed class ValidationStateChangedEventArgs : EventArgs
     /// <summary>
     /// Creates a new instance of <see cref="ValidationStateChangedEventArgs" />
     /// </summary>
-    public ValidationStateChangedEventArgs() { }
+    public ValidationStateChangedEventArgs()
+    {
+    }
 }

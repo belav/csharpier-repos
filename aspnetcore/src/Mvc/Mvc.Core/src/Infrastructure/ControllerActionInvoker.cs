@@ -663,7 +663,9 @@ internal partial class ControllerActionInvoker : ResourceInvoker, IActionInvoker
             IList<IFilterMetadata> filters,
             IDictionary<string, object?> actionArguments,
             object controller
-        ) : base(actionContext, filters, actionArguments, controller) { }
+        ) : base(actionContext, filters, actionArguments, controller)
+        {
+        }
     }
 
     private sealed class ActionExecutedContextSealed : ActionExecutedContext
@@ -672,7 +674,9 @@ internal partial class ControllerActionInvoker : ResourceInvoker, IActionInvoker
             ActionContext actionContext,
             IList<IFilterMetadata> filters,
             object controller
-        ) : base(actionContext, filters, controller) { }
+        ) : base(actionContext, filters, controller)
+        {
+        }
     }
 
     // Internal for unit testing

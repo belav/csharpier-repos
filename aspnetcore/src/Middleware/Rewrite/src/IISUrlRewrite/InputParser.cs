@@ -14,7 +14,9 @@ internal sealed class InputParser
     private readonly IISRewriteMapCollection? _rewriteMaps;
     private readonly bool _alwaysUseManagedServerVariables;
 
-    public InputParser() { }
+    public InputParser()
+    {
+    }
 
     public InputParser(IISRewriteMapCollection? rewriteMaps, bool alwaysUseManagedServerVariables)
     {

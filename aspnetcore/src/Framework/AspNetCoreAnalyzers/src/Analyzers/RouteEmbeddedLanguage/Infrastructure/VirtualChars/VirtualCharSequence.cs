@@ -47,7 +47,8 @@ internal partial struct VirtualCharSequence
     private readonly TextSpan _span;
 
     private VirtualCharSequence(Chunk sequence) : this(sequence, new TextSpan(0, sequence.Length))
-    { }
+    {
+    }
 
     private VirtualCharSequence(Chunk sequence, TextSpan span)
     {

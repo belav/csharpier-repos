@@ -5971,7 +5971,9 @@ public class RendererTest
 
     private class NoOpRenderer : Renderer
     {
-        public NoOpRenderer() : base(new TestServiceProvider(), NullLoggerFactory.Instance) { }
+        public NoOpRenderer() : base(new TestServiceProvider(), NullLoggerFactory.Instance)
+        {
+        }
 
         public override Dispatcher Dispatcher { get; } = Dispatcher.CreateDefault();
 
@@ -6343,7 +6345,9 @@ public class RendererTest
             return Task.CompletedTask;
         }
 
-        protected override void BuildRenderTree(RenderTreeBuilder builder) { }
+        protected override void BuildRenderTree(RenderTreeBuilder builder)
+        {
+        }
     }
 
     private class DisposableComponent : AutoRenderComponent, IDisposable
@@ -6359,7 +6363,9 @@ public class RendererTest
             DisposeAction?.Invoke();
         }
 
-        protected override void BuildRenderTree(RenderTreeBuilder builder) { }
+        protected override void BuildRenderTree(RenderTreeBuilder builder)
+        {
+        }
     }
 
     private class AsyncDisposableComponent : AutoRenderComponent, IAsyncDisposable
@@ -6375,7 +6381,9 @@ public class RendererTest
             return AsyncDisposeAction == null ? default : AsyncDisposeAction.Invoke();
         }
 
-        protected override void BuildRenderTree(RenderTreeBuilder builder) { }
+        protected override void BuildRenderTree(RenderTreeBuilder builder)
+        {
+        }
     }
 
     class TestAsyncRenderer : TestRenderer
@@ -6763,7 +6771,9 @@ public class RendererTest
         }
     }
 
-    private class DerivedEventArgs : EventArgs { }
+    private class DerivedEventArgs : EventArgs
+    {
+    }
 
     class CallbackOnRenderComponent : AutoRenderComponent
     {
@@ -6789,7 +6799,9 @@ public class RendererTest
         [Parameter]
         public int SomeParam { get; set; }
 
-        public void Attach(RenderHandle renderHandle) { }
+        public void Attach(RenderHandle renderHandle)
+        {
+        }
 
         public Task SetParametersAsync(ParameterView parameters)
         {

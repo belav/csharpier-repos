@@ -117,7 +117,9 @@ public class WebHostBuilderTests
     [MemberData(nameof(DefaultWebHostBuildersWithConfig))]
     public async Task UseStartupFactoryWorks(IWebHostBuilder builder)
     {
-        void ConfigureServices(IServiceCollection services) { }
+        void ConfigureServices(IServiceCollection services)
+        {
+        }
         void Configure(IApplicationBuilder app)
         {
             app.Run(context => context.Response.WriteAsync("UseStartupFactoryWorks"));
@@ -359,7 +361,9 @@ public class WebHostBuilderTests
             .UseServer(new TestServer())
             .UseStartup<StartupNoServices>();
 
-        using (hostBuilder.Build()) { }
+        using (hostBuilder.Build())
+        {
+        }
     }
 
     [Fact]
@@ -384,7 +388,9 @@ public class WebHostBuilderTests
             .UseServer(new TestServer())
             .UseStartup<StartupNoServices>();
 
-        using (hostBuilder.Build()) { }
+        using (hostBuilder.Build())
+        {
+        }
     }
 
     [Theory]
@@ -415,7 +421,9 @@ public class WebHostBuilderTests
             .UseServer(new TestServer())
             .UseStartup<StartupNoServices>();
 
-        using (hostBuilder.Build()) { }
+        using (hostBuilder.Build())
+        {
+        }
     }
 
     [Theory]
@@ -669,7 +677,9 @@ public class WebHostBuilderTests
                 .UseServer(new TestServer())
                 .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                 .Build()
-        ) { }
+        )
+        {
+        }
     }
 
     [Theory]
@@ -1237,7 +1247,9 @@ public class WebHostBuilderTests
             Assert.Equal("value", config["testhostingstartup:config"]);
         }
 
-        public void Configure(IApplicationBuilder app) { }
+        public void Configure(IApplicationBuilder app)
+        {
+        }
     }
 
     [Theory]
@@ -1583,10 +1595,14 @@ public class WebHostBuilderTests
             return Task.CompletedTask;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 
-    private static void StaticConfigureMethod(IApplicationBuilder app) { }
+    private static void StaticConfigureMethod(IApplicationBuilder app)
+    {
+    }
 
     private IWebHostBuilder CreateWebHostBuilder()
     {
@@ -1686,7 +1702,9 @@ public class WebHostBuilderTests
         IFeatureCollection IServer.Features { get; } = new FeatureCollection();
         public RequestDelegate RequestDelegate { get; private set; }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public Task StartAsync<TContext>(
             IHttpApplication<TContext> application,
@@ -1751,7 +1769,9 @@ public class WebHostBuilderTests
             DisposableServiceCtor = disposable;
         }
 
-        public void ConfigureServices(IServiceCollection services) { }
+        public void ConfigureServices(IServiceCollection services)
+        {
+        }
 
         public void Configure(IApplicationBuilder app, DisposableService disposable)
         {
@@ -1878,14 +1898,18 @@ public class WebHostBuilderTests
 
     public class StartupWithResolvedDisposableThatThrows
     {
-        public StartupWithResolvedDisposableThatThrows(DisposableService service) { }
+        public StartupWithResolvedDisposableThatThrows(DisposableService service)
+        {
+        }
 
         public void ConfigureServices(IServiceCollection services)
         {
             throw new InvalidOperationException();
         }
 
-        public void Configure(IApplicationBuilder app) { }
+        public void Configure(IApplicationBuilder app)
+        {
+        }
     }
 
     public class TestLoggerProvider : ILoggerProvider
@@ -1895,19 +1919,29 @@ public class WebHostBuilderTests
         public ILogger CreateLogger(string categoryName) =>
             new TestLogger(categoryName, Sink, enabled: true);
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 
     private class ServiceC
     {
-        public ServiceC(ServiceD serviceD) { }
+        public ServiceC(ServiceD serviceD)
+        {
+        }
     }
 
-    internal class ServiceD { }
+    internal class ServiceD
+    {
+    }
 
-    internal class ServiceA { }
+    internal class ServiceA
+    {
+    }
 
-    internal class ServiceB { }
+    internal class ServiceB
+    {
+    }
 
     private class DisposableLoggerFactory : ILoggerFactory
     {
@@ -1920,6 +1954,8 @@ public class WebHostBuilderTests
 
         public ILogger CreateLogger(string categoryName) => NullLogger.Instance;
 
-        public void AddProvider(ILoggerProvider provider) { }
+        public void AddProvider(ILoggerProvider provider)
+        {
+        }
     }
 }

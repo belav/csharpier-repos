@@ -5976,7 +5976,9 @@ public class DfaMatcherBuilderTest
         Assert.Empty(candidate.Constraints);
     }
 
-    private class CustomParameterPolicy : IParameterPolicy { }
+    private class CustomParameterPolicy : IParameterPolicy
+    {
+    }
 
     [Fact]
     public void CreateCandidates_CreatesScoresCorrectly()
@@ -6118,7 +6120,9 @@ public class DfaMatcherBuilderTest
 
     private class TestMetadata1
     {
-        public TestMetadata1() { }
+        public TestMetadata1()
+        {
+        }
 
         public TestMetadata1(int state)
         {
@@ -6164,7 +6168,9 @@ public class DfaMatcherBuilderTest
 
     private class TestMetadata2
     {
-        public TestMetadata2() { }
+        public TestMetadata2()
+        {
+        }
 
         public TestMetadata2(bool state)
         {

@@ -29,7 +29,9 @@ public class DirectoryBrowserMiddlewareTests
                 app => app.UseDirectoryBrowser(new DirectoryBrowserOptions { Formatter = null }),
                 services => services.AddDirectoryBrowser()
             )
-        ) { }
+        )
+        {
+        }
 
         // No exception, default provided
         using (
@@ -37,7 +39,9 @@ public class DirectoryBrowserMiddlewareTests
                 app => app.UseDirectoryBrowser(new DirectoryBrowserOptions { FileProvider = null }),
                 services => services.AddDirectoryBrowser()
             )
-        ) { }
+        )
+        {
+        }
 
         // PathString(null) is OK.
         using var host = await StaticFilesTestServer.Create(

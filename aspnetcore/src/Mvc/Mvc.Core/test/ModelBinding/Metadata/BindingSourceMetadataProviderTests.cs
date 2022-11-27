@@ -25,5 +25,7 @@ public class BindingSourceMetadataProviderTests
         Assert.Equal(BindingSource.Special, context.BindingMetadata.BindingSource);
     }
 
-    private class Test { }
+    private class Test
+    {
+    }
 }

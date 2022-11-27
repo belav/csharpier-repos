@@ -176,5 +176,7 @@ public class DotNetObjectReferenceJsonConverterTest
         Assert.Equal(json1, json2);
     }
 
-    private class TestModel { }
+    private class TestModel
+    {
+    }
 }

@@ -381,5 +381,7 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint> where TFl
         };
     }
 
-    private sealed class TestClass { }
+    private sealed class TestClass
+    {
+    }
 }

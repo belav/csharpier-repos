@@ -15,7 +15,9 @@ internal sealed class WebAppContext : IWebAppContext
     /// </summary>
     public static WebAppContext Default { get; } = new WebAppContext();
 
-    private WebAppContext() { }
+    private WebAppContext()
+    {
+    }
 
     /// <inheritdoc />
     public string HomeFolder { get; } = Environment.GetEnvironmentVariable("HOME");

@@ -14,9 +14,13 @@ public class DummyApplication : IHttpApplication<HttpContext>
     private readonly RequestDelegate _requestDelegate;
     private readonly IHttpContextFactory _httpContextFactory;
 
-    public DummyApplication() : this(_ => Task.CompletedTask) { }
+    public DummyApplication() : this(_ => Task.CompletedTask)
+    {
+    }
 
-    public DummyApplication(RequestDelegate requestDelegate) : this(requestDelegate, null) { }
+    public DummyApplication(RequestDelegate requestDelegate) : this(requestDelegate, null)
+    {
+    }
 
     public DummyApplication(RequestDelegate requestDelegate, IHttpContextFactory httpContextFactory)
     {

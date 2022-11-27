@@ -43,7 +43,9 @@ public struct SourceLocation : IEquatable<SourceLocation>
             absoluteIndex: absoluteIndex,
             lineIndex: lineIndex,
             characterIndex: characterIndex
-        ) { }
+        )
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SourceLocation"/>.

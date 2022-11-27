@@ -7,5 +7,7 @@ namespace RoutingWebSite.Pages;
 
 public class DynamicPageModel : PageModel
 {
-    public void OnGet() { }
+    public void OnGet()
+    {
+    }
 }

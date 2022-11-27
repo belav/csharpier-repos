@@ -9,7 +9,9 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account;
 public class ConfirmEmail : DefaultUIPage
 {
     public ConfirmEmail(HttpClient client, IHtmlDocument document, DefaultUIContext context)
-        : base(client, document, context) { }
+        : base(client, document, context)
+    {
+    }
 
     public static async Task<ConfirmEmail> Create(
         IHtmlAnchorElement link,

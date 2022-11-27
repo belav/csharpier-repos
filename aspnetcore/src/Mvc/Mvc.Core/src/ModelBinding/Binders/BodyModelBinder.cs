@@ -35,7 +35,9 @@ public partial class BodyModelBinder : IModelBinder
     public BodyModelBinder(
         IList<IInputFormatter> formatters,
         IHttpRequestStreamReaderFactory readerFactory
-    ) : this(formatters, readerFactory, loggerFactory: null) { }
+    ) : this(formatters, readerFactory, loggerFactory: null)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="BodyModelBinder"/>.
@@ -50,7 +52,9 @@ public partial class BodyModelBinder : IModelBinder
         IList<IInputFormatter> formatters,
         IHttpRequestStreamReaderFactory readerFactory,
         ILoggerFactory? loggerFactory
-    ) : this(formatters, readerFactory, loggerFactory, options: null) { }
+    ) : this(formatters, readerFactory, loggerFactory, options: null)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="BodyModelBinder"/>.

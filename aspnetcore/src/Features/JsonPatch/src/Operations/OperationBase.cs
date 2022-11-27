@@ -39,7 +39,9 @@ public class OperationBase
     [JsonProperty("from")]
     public string from { get; set; }
 
-    public OperationBase() { }
+    public OperationBase()
+    {
+    }
 
     public OperationBase(string op, string path, string from)
     {

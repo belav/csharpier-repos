@@ -13,7 +13,9 @@ internal sealed class CorsHttpMethodActionConstraint : HttpMethodActionConstrain
     private readonly string AccessControlRequestMethod = "Access-Control-Request-Method";
 
     public CorsHttpMethodActionConstraint(HttpMethodActionConstraint constraint)
-        : base(constraint.HttpMethods) { }
+        : base(constraint.HttpMethods)
+    {
+    }
 
     public override bool Accept(ActionConstraintContext context)
     {

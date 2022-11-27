@@ -379,7 +379,9 @@ public static class MvcServiceCollectionExtensions
     [DebuggerDisplay("{Name}")]
     private sealed class FrameworkAssemblyPart : AssemblyPart, ICompilationReferencesProvider
     {
-        public FrameworkAssemblyPart(Assembly assembly) : base(assembly) { }
+        public FrameworkAssemblyPart(Assembly assembly) : base(assembly)
+        {
+        }
 
         IEnumerable<string> ICompilationReferencesProvider.GetReferencePaths() =>
             Enumerable.Empty<string>();

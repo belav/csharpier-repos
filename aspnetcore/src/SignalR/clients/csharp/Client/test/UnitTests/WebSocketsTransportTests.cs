@@ -57,7 +57,9 @@ public class WebSocketsTransportTests : VerifiableLoggedTest
 
         public override string SubProtocol => string.Empty;
 
-        public override void Abort() { }
+        public override void Abort()
+        {
+        }
 
         public override Task CloseAsync(
             WebSocketCloseStatus closeStatus,
@@ -75,7 +77,9 @@ public class WebSocketsTransportTests : VerifiableLoggedTest
             cancellationToken.ThrowIfCancellationRequested();
         }
 
-        public override void Dispose() { }
+        public override void Dispose()
+        {
+        }
 
         public override async Task<WebSocketReceiveResult> ReceiveAsync(
             ArraySegment<byte> buffer,

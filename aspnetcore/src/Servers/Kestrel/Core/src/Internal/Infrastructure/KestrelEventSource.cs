@@ -40,7 +40,9 @@ internal sealed class KestrelEventSource : EventSource
 
     private readonly List<WeakReference<KestrelServerOptions>> _options = new();
 
-    private KestrelEventSource() { }
+    private KestrelEventSource()
+    {
+    }
 
     // NOTE
     // - The 'Start' and 'Stop' suffixes on the following event names have special meaning in EventSource. They

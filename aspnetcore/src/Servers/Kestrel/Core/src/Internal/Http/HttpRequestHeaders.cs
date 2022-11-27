@@ -259,7 +259,9 @@ internal sealed partial class HttpRequestHeaders : HttpHeaders
 
         object IEnumerator.Current => Current;
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public void Reset() => throw new NotSupportedException();
     }
@@ -287,7 +289,9 @@ internal sealed partial class HttpRequestHeaders : HttpHeaders
 
         readonly object IEnumerator.Current => _current;
 
-        public readonly void Dispose() { }
+        public readonly void Dispose()
+        {
+        }
 
         public void Reset()
         {

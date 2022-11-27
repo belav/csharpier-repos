@@ -94,7 +94,9 @@ public class RenderTreeDiffBuilderBenchmark
 
     private sealed class FakeRenderer : Renderer
     {
-        public FakeRenderer() : base(new TestServiceProvider(), NullLoggerFactory.Instance) { }
+        public FakeRenderer() : base(new TestServiceProvider(), NullLoggerFactory.Instance)
+        {
+        }
 
         public override Dispatcher Dispatcher { get; } = Dispatcher.CreateDefault();
 

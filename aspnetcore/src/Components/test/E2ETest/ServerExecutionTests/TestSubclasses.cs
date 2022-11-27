@@ -15,7 +15,9 @@ public class ServerBindTest : BindTest
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
+    ) : base(browserFixture, serverFixture.WithServerExecution(), output)
+    {
+    }
 }
 
 public class ServerEventBubblingTest : EventBubblingTest
@@ -24,7 +26,9 @@ public class ServerEventBubblingTest : EventBubblingTest
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
+    ) : base(browserFixture, serverFixture.WithServerExecution(), output)
+    {
+    }
 }
 
 public class ServerInteropTest : InteropTest
@@ -38,7 +42,9 @@ public class ServerInteropTest : InteropTest
             browserFixture,
             serverFixture.WithServerExecution().WithAdditionalArguments(GetAdditionalArguments()),
             output
-        ) { }
+        )
+    {
+    }
 
     private static string[] GetAdditionalArguments() => new string[] { "--detailedErrors", "true" };
 }
@@ -49,7 +55,9 @@ public class ServerRoutingTest : RoutingTest
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
+    ) : base(browserFixture, serverFixture.WithServerExecution(), output)
+    {
+    }
 }
 
 public class ServerCascadingValueTest : CascadingValueTest
@@ -58,7 +66,9 @@ public class ServerCascadingValueTest : CascadingValueTest
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
+    ) : base(browserFixture, serverFixture.WithServerExecution(), output)
+    {
+    }
 }
 
 public class ServerEventCallbackTest : EventCallbackTest
@@ -67,7 +77,9 @@ public class ServerEventCallbackTest : EventCallbackTest
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
+    ) : base(browserFixture, serverFixture.WithServerExecution(), output)
+    {
+    }
 }
 
 public class ServerFormsTest : FormsTest
@@ -76,7 +88,9 @@ public class ServerFormsTest : FormsTest
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
+    ) : base(browserFixture, serverFixture.WithServerExecution(), output)
+    {
+    }
 }
 
 public class ServerKeyTest : KeyTest
@@ -85,7 +99,9 @@ public class ServerKeyTest : KeyTest
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
+    ) : base(browserFixture, serverFixture.WithServerExecution(), output)
+    {
+    }
 }
 
 public class ServerInputFileTest : InputFileTest
@@ -94,7 +110,9 @@ public class ServerInputFileTest : InputFileTest
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
+    ) : base(browserFixture, serverFixture.WithServerExecution(), output)
+    {
+    }
 }
 
 public class ServerVirtualizationTest : VirtualizationTest
@@ -103,7 +121,9 @@ public class ServerVirtualizationTest : VirtualizationTest
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
+    ) : base(browserFixture, serverFixture.WithServerExecution(), output)
+    {
+    }
 }
 
 public class ServerDynamicComponentRenderingTest : DynamicComponentRenderingTest
@@ -112,7 +132,9 @@ public class ServerDynamicComponentRenderingTest : DynamicComponentRenderingTest
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
+    ) : base(browserFixture, serverFixture.WithServerExecution(), output)
+    {
+    }
 }
 
 public class ServerEventCustomArgsTest : EventCustomArgsTest
@@ -121,7 +143,9 @@ public class ServerEventCustomArgsTest : EventCustomArgsTest
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
+    ) : base(browserFixture, serverFixture.WithServerExecution(), output)
+    {
+    }
 }
 
 public class ServerErrorBoundaryTest : ErrorBoundaryTest
@@ -130,5 +154,7 @@ public class ServerErrorBoundaryTest : ErrorBoundaryTest
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
+    ) : base(browserFixture, serverFixture.WithServerExecution(), output)
+    {
+    }
 }

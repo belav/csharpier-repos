@@ -12,7 +12,9 @@ internal class DirectiveDescriptorComparer : IEqualityComparer<DirectiveDescript
 {
     public static readonly DirectiveDescriptorComparer Default = new DirectiveDescriptorComparer();
 
-    protected DirectiveDescriptorComparer() { }
+    protected DirectiveDescriptorComparer()
+    {
+    }
 
     public bool Equals(DirectiveDescriptor descriptorX, DirectiveDescriptor descriptorY)
     {

@@ -422,7 +422,9 @@ public class ContextWithGenerics
         IdentityUserTokenWithStuff
     >
 {
-    public ContextWithGenerics(DbContextOptions options) : base(options) { }
+    public ContextWithGenerics(DbContextOptions options) : base(options)
+    {
+    }
 }
 
 #endregion

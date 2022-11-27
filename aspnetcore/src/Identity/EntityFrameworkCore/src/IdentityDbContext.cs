@@ -14,12 +14,16 @@ public class IdentityDbContext : IdentityDbContext<IdentityUser, IdentityRole, s
     /// Initializes a new instance of <see cref="IdentityDbContext"/>.
     /// </summary>
     /// <param name="options">The options to be used by a <see cref="DbContext"/>.</param>
-    public IdentityDbContext(DbContextOptions options) : base(options) { }
+    public IdentityDbContext(DbContextOptions options) : base(options)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="IdentityDbContext" /> class.
     /// </summary>
-    protected IdentityDbContext() { }
+    protected IdentityDbContext()
+    {
+    }
 }
 
 /// <summary>
@@ -33,12 +37,16 @@ public class IdentityDbContext<TUser> : IdentityDbContext<TUser, IdentityRole, s
     /// Initializes a new instance of <see cref="IdentityDbContext"/>.
     /// </summary>
     /// <param name="options">The options to be used by a <see cref="DbContext"/>.</param>
-    public IdentityDbContext(DbContextOptions options) : base(options) { }
+    public IdentityDbContext(DbContextOptions options) : base(options)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="IdentityDbContext" /> class.
     /// </summary>
-    protected IdentityDbContext() { }
+    protected IdentityDbContext()
+    {
+    }
 }
 
 /// <summary>
@@ -66,12 +74,16 @@ public class IdentityDbContext<TUser, TRole, TKey>
     /// Initializes a new instance of the db context.
     /// </summary>
     /// <param name="options">The options to be used by a <see cref="DbContext"/>.</param>
-    public IdentityDbContext(DbContextOptions options) : base(options) { }
+    public IdentityDbContext(DbContextOptions options) : base(options)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the class.
     /// </summary>
-    protected IdentityDbContext() { }
+    protected IdentityDbContext()
+    {
+    }
 }
 
 /// <summary>
@@ -108,12 +120,16 @@ public abstract class IdentityDbContext<
     /// Initializes a new instance of the class.
     /// </summary>
     /// <param name="options">The options to be used by a <see cref="DbContext"/>.</param>
-    public IdentityDbContext(DbContextOptions options) : base(options) { }
+    public IdentityDbContext(DbContextOptions options) : base(options)
+    {
+    }
 
     /// <summary>
     /// Initializes a new instance of the class.
     /// </summary>
-    protected IdentityDbContext() { }
+    protected IdentityDbContext()
+    {
+    }
 
     /// <summary>
     /// Gets or sets the <see cref="DbSet{TEntity}"/> of User roles.

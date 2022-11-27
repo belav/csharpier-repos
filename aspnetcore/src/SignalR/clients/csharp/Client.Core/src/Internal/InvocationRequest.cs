@@ -116,7 +116,9 @@ internal abstract partial class InvocationRequest : IDisposable
                 invocationId,
                 loggerFactory.CreateLogger<Streaming>(),
                 hubConnection
-            ) { }
+            )
+        {
+        }
 
         public ChannelReader<object?> Result => _channel.Reader;
 
@@ -191,7 +193,9 @@ internal abstract partial class InvocationRequest : IDisposable
                 invocationId,
                 loggerFactory.CreateLogger<NonStreaming>(),
                 hubConnection
-            ) { }
+            )
+        {
+        }
 
         public Task<object?> Result => _completionSource.Task;
 

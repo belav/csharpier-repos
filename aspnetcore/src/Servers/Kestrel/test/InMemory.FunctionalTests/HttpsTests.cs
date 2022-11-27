@@ -553,7 +553,9 @@ public class HttpsTests : LoggedTest
                     );
                 }
             )
-        ) { }
+        )
+        {
+        }
 
         Assert.NotNull(bindFeatures);
 
@@ -607,7 +609,9 @@ public class HttpsTests : LoggedTest
                     );
                 }
             )
-        ) { }
+        )
+        {
+        }
 
         Assert.NotNull(bindFeatures);
 
@@ -657,7 +661,9 @@ public class HttpsTests : LoggedTest
                     );
                 }
             )
-        ) { }
+        )
+        {
+        }
 
         Assert.False(bindCalled);
     }
@@ -756,7 +762,9 @@ public class HttpsTests : LoggedTest
                     );
                 }
             )
-        ) { }
+        )
+        {
+        }
 
         Assert.NotNull(bindFeatures);
 
@@ -820,7 +828,9 @@ public class HttpsTests : LoggedTest
                     );
                 }
             )
-        ) { }
+        )
+        {
+        }
 
         Assert.NotNull(bindFeatures);
 
@@ -1008,14 +1018,18 @@ public class HttpsTests : LoggedTest
             }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
     }
 
     private class HttpsConnectionFilterLogger : ILogger
     {
         private readonly int? _expectedEventId;
 
-        public HttpsConnectionFilterLogger() { }
+        public HttpsConnectionFilterLogger()
+        {
+        }
 
         public HttpsConnectionFilterLogger(int expectedEventId)
         {

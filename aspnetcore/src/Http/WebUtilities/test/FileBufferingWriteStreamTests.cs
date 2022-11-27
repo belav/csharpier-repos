@@ -440,7 +440,9 @@ public class FileBufferingWriteStreamTests : IDisposable
         {
             Directory.Delete(TempDirectory, recursive: true);
         }
-        catch { }
+        catch
+        {
+        }
     }
 
     private static byte[] ReadFileContent(FileStream fileStream)

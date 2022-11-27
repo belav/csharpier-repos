@@ -51,7 +51,9 @@ public class WebHostServiceTests
         IFeatureCollection IServer.Features { get; }
         public RequestDelegate RequestDelegate { get; private set; }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
         public Task StartAsync<TContext>(
             IHttpApplication<TContext> application,

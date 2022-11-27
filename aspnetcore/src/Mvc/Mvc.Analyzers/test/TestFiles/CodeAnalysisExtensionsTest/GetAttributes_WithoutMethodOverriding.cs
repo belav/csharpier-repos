@@ -3,6 +3,8 @@
     public class GetAttributes_WithoutMethodOverriding
     {
         [ProducesResponseType(201)]
-        public void Method() { }
+        public void Method()
+        {
+        }
     }
 }

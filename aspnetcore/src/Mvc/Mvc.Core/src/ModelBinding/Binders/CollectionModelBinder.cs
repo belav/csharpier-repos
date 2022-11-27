@@ -34,7 +34,9 @@ public partial class CollectionModelBinder<TElement> : ICollectionModelBinder
     /// </param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
     public CollectionModelBinder(IModelBinder elementBinder, ILoggerFactory loggerFactory)
-        : this(elementBinder, loggerFactory, allowValidatingTopLevelNodes: true) { }
+        : this(elementBinder, loggerFactory, allowValidatingTopLevelNodes: true)
+    {
+    }
 
     /// <summary>
     /// Creates a new <see cref="CollectionModelBinder{TElement}"/>.

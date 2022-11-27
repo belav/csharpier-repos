@@ -3,4 +3,6 @@
 
 namespace BasicWebSite.Models;
 
-public class Product_Xml : Product { }
+public class Product_Xml : Product
+{
+}
