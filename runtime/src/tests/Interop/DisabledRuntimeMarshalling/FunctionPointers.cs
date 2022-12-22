@@ -15,7 +15,13 @@ public unsafe class FunctionPointers
     {
         short s = 42;
         bool b = true;
-        Assert.True(DisabledRuntimeMarshallingNative.GetStructWithShortAndBoolCallback()(new StructWithShortAndBool(s, b), s, b));
+        Assert.True(
+            DisabledRuntimeMarshallingNative.GetStructWithShortAndBoolCallback()(
+                new StructWithShortAndBool(s, b),
+                s,
+                b
+            )
+        );
     }
 
     [Fact]
@@ -24,6 +30,12 @@ public unsafe class FunctionPointers
         short s = 41;
         bool b = true;
 
-        Assert.False(DisabledRuntimeMarshallingNative.GetStructWithShortAndBoolWithVariantBoolCallback()(new StructWithShortAndBool(s, b), s, b));
+        Assert.False(
+            DisabledRuntimeMarshallingNative.GetStructWithShortAndBoolWithVariantBoolCallback()(
+                new StructWithShortAndBool(s, b),
+                s,
+                b
+            )
+        );
     }
 }

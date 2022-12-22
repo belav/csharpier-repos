@@ -4,4 +4,8 @@
 using Xunit;
 
 // This is to avoid parallelism so that one test doesn't affect another.
-[assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly, DisableTestParallelization = true, MaxParallelThreads = 1)]
+[assembly: CollectionBehavior(
+    CollectionBehavior.CollectionPerAssembly,
+    DisableTestParallelization = true,
+    MaxParallelThreads = 1
+)]

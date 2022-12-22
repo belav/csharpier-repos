@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Simplification
         public static readonly SyntaxAnnotation DontSimplifyAnnotation = new();
         public static readonly SyntaxAnnotation SimplifyModuleNameAnnotation = new();
 
-        public static TNode CopyAnnotations<TNode>(SyntaxNode from, TNode to) where TNode : SyntaxNode
+        public static TNode CopyAnnotations<TNode>(SyntaxNode from, TNode to)
+            where TNode : SyntaxNode
         {
             // Because we are removing a node that may have annotations (i.e. formatting), we need
             // to copy those annotations to the new node. However, we can only copy all annotations
@@ -68,7 +69,10 @@ namespace Microsoft.CodeAnalysis.Simplification
             return to;
         }
 
-        internal static ISymbol GetOriginalSymbolInfo(SemanticModel semanticModel, SyntaxNode expression)
+        internal static ISymbol GetOriginalSymbolInfo(
+            SemanticModel semanticModel,
+            SyntaxNode expression
+        )
         {
             Contract.ThrowIfNull(expression);
             var annotation1 = expression.GetAnnotations(SymbolAnnotation.Kind).FirstOrDefault();
@@ -81,7 +85,9 @@ namespace Microsoft.CodeAnalysis.Simplification
                 }
             }
 
-            var annotation2 = expression.GetAnnotations(SpecialTypeAnnotation.Kind).FirstOrDefault();
+            var annotation2 = expression
+                .GetAnnotations(SpecialTypeAnnotation.Kind)
+                .FirstOrDefault();
             if (annotation2 != null)
             {
                 var specialType = SpecialTypeAnnotation.GetSpecialType(annotation2);
@@ -111,7 +117,10 @@ namespace Microsoft.CodeAnalysis.Simplification
         }
 
         internal static bool ShouldSimplifyThisOrMeMemberAccessExpression(
-            SemanticModel semanticModel, OptionSet optionSet, ISymbol symbol)
+            SemanticModel semanticModel,
+            OptionSet optionSet,
+            ISymbol symbol
+        )
         {
             // If we're accessing a static member off of this/me then we should always consider this
             // simplifiable.  Note: in C# this isn't even legal to access a static off of `this`,
@@ -119,10 +128,38 @@ namespace Microsoft.CodeAnalysis.Simplification
             if (symbol.IsStatic)
                 return true;
 
-            if ((symbol.IsKind(SymbolKind.Field) && optionSet.GetOption(CodeStyleOptions2.QualifyFieldAccess, semanticModel.Language).Value ||
-                (symbol.IsKind(SymbolKind.Property) && optionSet.GetOption(CodeStyleOptions2.QualifyPropertyAccess, semanticModel.Language).Value) ||
-                (symbol.IsKind(SymbolKind.Method) && optionSet.GetOption(CodeStyleOptions2.QualifyMethodAccess, semanticModel.Language).Value) ||
-                (symbol.IsKind(SymbolKind.Event) && optionSet.GetOption(CodeStyleOptions2.QualifyEventAccess, semanticModel.Language).Value)))
+            if (
+                (
+                    symbol.IsKind(SymbolKind.Field)
+                        && optionSet
+                            .GetOption(CodeStyleOptions2.QualifyFieldAccess, semanticModel.Language)
+                            .Value
+                    || (
+                        symbol.IsKind(SymbolKind.Property)
+                        && optionSet
+                            .GetOption(
+                                CodeStyleOptions2.QualifyPropertyAccess,
+                                semanticModel.Language
+                            )
+                            .Value
+                    )
+                    || (
+                        symbol.IsKind(SymbolKind.Method)
+                        && optionSet
+                            .GetOption(
+                                CodeStyleOptions2.QualifyMethodAccess,
+                                semanticModel.Language
+                            )
+                            .Value
+                    )
+                    || (
+                        symbol.IsKind(SymbolKind.Event)
+                        && optionSet
+                            .GetOption(CodeStyleOptions2.QualifyEventAccess, semanticModel.Language)
+                            .Value
+                    )
+                )
+            )
             {
                 return false;
             }
@@ -130,10 +167,26 @@ namespace Microsoft.CodeAnalysis.Simplification
             return true;
         }
 
-        internal static bool PreferPredefinedTypeKeywordInDeclarations(OptionSet optionSet, string language)
-            => optionSet.GetOption(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, language).Value;
+        internal static bool PreferPredefinedTypeKeywordInDeclarations(
+            OptionSet optionSet,
+            string language
+        ) =>
+            optionSet
+                .GetOption(
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                    language
+                )
+                .Value;
 
-        internal static bool PreferPredefinedTypeKeywordInMemberAccess(OptionSet optionSet, string language)
-            => optionSet.GetOption(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, language).Value;
+        internal static bool PreferPredefinedTypeKeywordInMemberAccess(
+            OptionSet optionSet,
+            string language
+        ) =>
+            optionSet
+                .GetOption(
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                    language
+                )
+                .Value;
     }
 }

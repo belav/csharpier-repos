@@ -16,22 +16,26 @@ internal class InitializedHandler : ILspServiceNotificationHandler<InitializedPa
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public InitializedHandler()
-    {
-    }
+    public InitializedHandler() { }
 
     public bool MutatesSolutionState => true;
 
     public bool RequiresLSPSolution => false;
 
-    public async Task HandleNotificationAsync(InitializedParams request, RequestContext requestContext, CancellationToken cancellationToken)
+    public async Task HandleNotificationAsync(
+        InitializedParams request,
+        RequestContext requestContext,
+        CancellationToken cancellationToken
+    )
     {
         var clientCapabilities = requestContext.GetRequiredClientCapabilities();
         var onInitializeList = requestContext.GetRequiredServices<IOnInitialized>();
 
         foreach (var onInitialize in onInitializeList)
         {
-            await onInitialize.OnInitializedAsync(clientCapabilities, cancellationToken).ConfigureAwait(false);
+            await onInitialize
+                .OnInitializedAsync(clientCapabilities, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 }

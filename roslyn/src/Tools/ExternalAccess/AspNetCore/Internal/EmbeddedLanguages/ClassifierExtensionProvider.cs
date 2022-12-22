@@ -12,12 +12,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.Internal.EmbeddedLang
         : AbstractProjectExtensionProvider<
             AspNetCoreClassifierExtensionProvider,
             IAspNetCoreEmbeddedLanguageClassifier,
-            ExportAspNetCoreEmbeddedLanguageClassifierAttribute>
+            ExportAspNetCoreEmbeddedLanguageClassifierAttribute
+        >
     {
-        protected override ImmutableArray<string> GetLanguages(ExportAspNetCoreEmbeddedLanguageClassifierAttribute exportAttribute)
-            => ImmutableArray.Create(exportAttribute.Language);
+        protected override ImmutableArray<string> GetLanguages(
+            ExportAspNetCoreEmbeddedLanguageClassifierAttribute exportAttribute
+        ) => ImmutableArray.Create(exportAttribute.Language);
 
-        protected override bool TryGetExtensionsFromReference(AnalyzerReference reference, out ImmutableArray<IAspNetCoreEmbeddedLanguageClassifier> extensions)
+        protected override bool TryGetExtensionsFromReference(
+            AnalyzerReference reference,
+            out ImmutableArray<IAspNetCoreEmbeddedLanguageClassifier> extensions
+        )
         {
             extensions = default;
             return false;

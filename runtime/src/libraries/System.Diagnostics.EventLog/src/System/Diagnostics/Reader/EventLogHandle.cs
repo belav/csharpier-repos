@@ -11,23 +11,16 @@ namespace System.Diagnostics.Eventing.Reader
     /// </summary>
     internal sealed class EventLogHandle : SafeHandle
     {
-        public EventLogHandle()
-            : base(IntPtr.Zero, true)
-        {
-        }
+        public EventLogHandle() : base(IntPtr.Zero, true) { }
 
-        internal EventLogHandle(IntPtr handle, bool ownsHandle)
-            : base(IntPtr.Zero, ownsHandle)
+        internal EventLogHandle(IntPtr handle, bool ownsHandle) : base(IntPtr.Zero, ownsHandle)
         {
             SetHandle(handle);
         }
 
         public override bool IsInvalid
         {
-            get
-            {
-                return IsClosed || handle == IntPtr.Zero;
-            }
+            get { return IsClosed || handle == IntPtr.Zero; }
         }
 
         protected override bool ReleaseHandle()
@@ -41,10 +34,7 @@ namespace System.Diagnostics.Eventing.Reader
         // use IsInvalid instead. Zero is provided where a NULL handle needed
         public static EventLogHandle Zero
         {
-            get
-            {
-                return new EventLogHandle();
-            }
+            get { return new EventLogHandle(); }
         }
     }
 }

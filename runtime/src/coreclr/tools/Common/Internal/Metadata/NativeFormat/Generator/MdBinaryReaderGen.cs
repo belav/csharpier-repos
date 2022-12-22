@@ -3,16 +3,13 @@
 
 //
 // Generates the C# MdBinaryReader class. This classes is responsible for correctly decoding
-// data members in the .metadata file. See NativeFormatReaderGen.cs for how the MetadataReader 
+// data members in the .metadata file. See NativeFormatReaderGen.cs for how the MetadataReader
 // use this class.
 //
 
 class MdBinaryReaderGen : CsWriter
 {
-    public MdBinaryReaderGen(string fileName)
-        : base(fileName)
-    {
-    }
+    public MdBinaryReaderGen(string fileName) : base(fileName) { }
 
     public void EmitSource()
     {
@@ -61,7 +58,9 @@ class MdBinaryReaderGen : CsWriter
     {
         string collectionTypeName = $"{typeName}Collection";
 
-        OpenScope($"public static uint Read(this NativeReader reader, uint offset, out {collectionTypeName} values)");
+        OpenScope(
+            $"public static uint Read(this NativeReader reader, uint offset, out {collectionTypeName} values)"
+        );
         WriteLine($"values = new {collectionTypeName}(reader, offset);");
         WriteLine("uint count;");
         WriteLine("offset = reader.DecodeUnsigned(offset, out count);");
@@ -77,7 +76,9 @@ class MdBinaryReaderGen : CsWriter
     {
         string collectionTypeName = $"{typeName}Collection";
 
-        OpenScope($"public static unsafe uint Read(this NativeReader reader, uint offset, out {collectionTypeName} values)");
+        OpenScope(
+            $"public static unsafe uint Read(this NativeReader reader, uint offset, out {collectionTypeName} values)"
+        );
         WriteLine($"values = new {collectionTypeName}(reader, offset);");
         WriteLine("uint count;");
         WriteLine("offset = reader.DecodeUnsigned(offset, out count);");
@@ -88,7 +89,9 @@ class MdBinaryReaderGen : CsWriter
 
     private void EmitReadEnum(EnumType enumType)
     {
-        OpenScope($"public static uint Read(this NativeReader reader, uint offset, out {enumType.Name} value)");
+        OpenScope(
+            $"public static uint Read(this NativeReader reader, uint offset, out {enumType.Name} value)"
+        );
         WriteLine($"uint ivalue;");
         WriteLine("offset = reader.DecodeUnsigned(offset, out ivalue);");
         WriteLine($"value = ({enumType.Name})ivalue;");
@@ -98,7 +101,9 @@ class MdBinaryReaderGen : CsWriter
 
     private void EmitRead(string typeName)
     {
-        OpenScope($"public static uint Read(this NativeReader reader, uint offset, out {typeName} handle)");
+        OpenScope(
+            $"public static uint Read(this NativeReader reader, uint offset, out {typeName} handle)"
+        );
         WriteLine("uint value;");
         WriteLine("offset = reader.DecodeUnsigned(offset, out value);");
         WriteLine($"handle = new {typeName}((int)value);");

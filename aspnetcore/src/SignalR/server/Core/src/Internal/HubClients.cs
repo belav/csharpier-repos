@@ -21,6 +21,7 @@ internal sealed class HubClients<THub> : IHubClients where THub : Hub
     }
 
     IClientProxy IHubClients<IClientProxy>.Client(string connectionId) => Client(connectionId);
+
     public ISingleClientProxy Client(string connectionId)
     {
         return new SingleClientProxy<THub>(_lifetimeManager, connectionId);

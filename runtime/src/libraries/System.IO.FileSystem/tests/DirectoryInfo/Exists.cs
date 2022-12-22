@@ -38,7 +38,9 @@ namespace System.IO.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInAppContainer))] // Can't read root in appcontainer
         public void Root()
         {
-            Assert.True(new DirectoryInfo(Path.GetPathRoot(Directory.GetCurrentDirectory())).Exists);
+            Assert.True(
+                new DirectoryInfo(Path.GetPathRoot(Directory.GetCurrentDirectory())).Exists
+            );
         }
 
         [Fact]
@@ -50,7 +52,11 @@ namespace System.IO.Tests
         [Fact]
         public void DotDotPath()
         {
-            Assert.True(new DirectoryInfo(Path.Combine(TestDirectory, Path.GetRandomFileName(), "..")).Exists);
+            Assert.True(
+                new DirectoryInfo(
+                    Path.Combine(TestDirectory, Path.GetRandomFileName(), "..")
+                ).Exists
+            );
         }
 
         [Fact]
@@ -108,8 +114,11 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)]  // Uses P/Invokes
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/67853", TestPlatforms.iOS | TestPlatforms.tvOS)]
+        [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)] // Uses P/Invokes
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/67853",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
         public void FalseForNonRegularFile()
         {
             string fileName = GetTestFilePath();

@@ -41,8 +41,9 @@ public class ConventionSetBuilder
     /// </summary>
     /// <typeparam name="TImplementation">The type of the old convention.</typeparam>
     /// <param name="conventionFactory">The factory that creates the new convention.</param>
-    public virtual void Replace<TImplementation>(Func<IServiceProvider, TImplementation> conventionFactory)
-        where TImplementation : IConvention
+    public virtual void Replace<TImplementation>(
+        Func<IServiceProvider, TImplementation> conventionFactory
+    ) where TImplementation : IConvention
     {
         var convention = conventionFactory(_serviceProvider);
         _conventionSet.Replace(convention);
@@ -62,8 +63,7 @@ public class ConventionSetBuilder
     ///     Removes the convention of the given type.
     /// </summary>
     /// <param name="conventionType">The convention type to remove.</param>
-    public virtual void Remove(Type conventionType)
-        => _conventionSet.Remove(conventionType);
+    public virtual void Remove(Type conventionType) => _conventionSet.Remove(conventionType);
 
     #region Hidden System.Object members
 
@@ -72,8 +72,7 @@ public class ConventionSetBuilder
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -82,8 +81,7 @@ public class ConventionSetBuilder
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
@@ -91,8 +89,7 @@ public class ConventionSetBuilder
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

@@ -16,7 +16,7 @@ namespace System.IO
     internal sealed class StdInReader : TextReader
     {
         private static string? s_moveLeftString; // string written to move the cursor to the left
-        private static string? s_clearToEol;     // string written to clear from cursor to end of line
+        private static string? s_clearToEol; // string written to clear from cursor to end of line
 
         private readonly StringBuilder _readLineSB; // SB that holds readLine output.  This is a field simply to enable reuse; it's only used in ReadLine.
         private readonly Stack<ConsoleKeyInfo> _tmpKeys = new Stack<ConsoleKeyInfo>(); // temporary working stack; should be empty outside of ReadLine
@@ -52,9 +52,10 @@ namespace System.IO
             // rare, so just allocate.
             const int MaxStackAllocation = 256;
             int maxCharsCount = _encoding.GetMaxCharCount(buffer.Length);
-            Span<char> chars = (uint)maxCharsCount <= MaxStackAllocation ?
-                stackalloc char[MaxStackAllocation] :
-                new char[maxCharsCount];
+            Span<char> chars =
+                (uint)maxCharsCount <= MaxStackAllocation
+                    ? stackalloc char[MaxStackAllocation]
+                    : new char[maxCharsCount];
             int charLen = _encoding.GetChars(buffer, chars);
             chars = chars.Slice(0, charLen);
 
@@ -69,7 +70,10 @@ namespace System.IO
                 int spaceRemaining = _unprocessedBufferToBeRead.Length - _endIndex;
                 if (spaceRemaining < chars.Length)
                 {
-                    Array.Resize(ref _unprocessedBufferToBeRead, _unprocessedBufferToBeRead.Length * 2);
+                    Array.Resize(
+                        ref _unprocessedBufferToBeRead,
+                        _unprocessedBufferToBeRead.Length * 2
+                    );
                 }
             }
 
@@ -122,7 +126,14 @@ namespace System.IO
             {
                 Debug.Assert(!buffer.IsEmpty);
 
-                encoder.Convert(chunk.Span, buffer, flush: false, out int charsUsed, out int bytesUsed, out bool completed);
+                encoder.Convert(
+                    chunk.Span,
+                    buffer,
+                    flush: false,
+                    out int charsUsed,
+                    out int bytesUsed,
+                    out bool completed
+                );
                 buffer = buffer.Slice(bytesUsed);
                 bytesUsedTotal += bytesUsed;
                 charsUsedTotal += charsUsed;
@@ -148,10 +159,12 @@ namespace System.IO
             // or we need to read a new line from stdin.
             bool freshKeys = _availableKeys.Count == 0;
 
-           // Don't carry over chars from previous ReadLine call.
+            // Don't carry over chars from previous ReadLine call.
             _readLineSB.Clear();
 
-            Interop.Sys.InitializeConsoleBeforeRead(distinguishNewLines: !ConsoleUtils.UseNet6KeyParser);
+            Interop.Sys.InitializeConsoleBeforeRead(
+                distinguishNewLines: !ConsoleUtils.UseNet6KeyParser
+            );
             try
             {
                 // Read key-by-key until we've read a line.
@@ -202,22 +215,37 @@ namespace System.IO
                         {
                             // The ReadLine input may wrap across terminal rows and we need to handle that.
                             // note: ConsolePal will cache the cursor position to avoid making many slow cursor position fetch operations.
-                            if (ConsolePal.TryGetCursorPosition(out int left, out int top, reinitializeForRead: true) &&
-                                left == 0 && top > 0)
+                            if (
+                                ConsolePal.TryGetCursorPosition(
+                                    out int left,
+                                    out int top,
+                                    reinitializeForRead: true
+                                )
+                                && left == 0
+                                && top > 0
+                            )
                             {
-                                s_clearToEol ??= ConsolePal.TerminalFormatStringsInstance.ClrEol ?? string.Empty;
+                                s_clearToEol ??=
+                                    ConsolePal.TerminalFormatStringsInstance.ClrEol ?? string.Empty;
 
                                 // Move to end of previous line
                                 ConsolePal.SetCursorPosition(ConsolePal.WindowWidth - 1, top - 1);
                                 // Clear from cursor to end of the line
-                                ConsolePal.WriteStdoutAnsiString(s_clearToEol, mayChangeCursorPosition: false);
+                                ConsolePal.WriteStdoutAnsiString(
+                                    s_clearToEol,
+                                    mayChangeCursorPosition: false
+                                );
                             }
                             else
                             {
                                 if (s_moveLeftString == null)
                                 {
-                                    string? moveLeft = ConsolePal.TerminalFormatStringsInstance.CursorLeft;
-                                    s_moveLeftString = !string.IsNullOrEmpty(moveLeft) ? moveLeft + " " + moveLeft : string.Empty;
+                                    string? moveLeft = ConsolePal
+                                        .TerminalFormatStringsInstance
+                                        .CursorLeft;
+                                    s_moveLeftString = !string.IsNullOrEmpty(moveLeft)
+                                        ? moveLeft + " " + moveLeft
+                                        : string.Empty;
                                 }
 
                                 Console.Write(s_moveLeftString);
@@ -296,9 +324,12 @@ namespace System.IO
 
         private static bool IsEol(char c)
         {
-            return
-                c != ConsolePal.s_posixDisableValue &&
-                (c == ConsolePal.s_veolCharacter || c == ConsolePal.s_veol2Character || c == ConsolePal.s_veofCharacter);
+            return c != ConsolePal.s_posixDisableValue
+                && (
+                    c == ConsolePal.s_veolCharacter
+                    || c == ConsolePal.s_veol2Character
+                    || c == ConsolePal.s_veofCharacter
+                );
         }
 
         /// <summary>
@@ -345,18 +376,42 @@ namespace System.IO
                     {
                         // Could be empty if EOL entered on its own.  Pick one of the EOL characters we have,
                         // or just use 0 if none are available.
-                        return new ConsoleKeyInfo((char)
-                            (ConsolePal.s_veolCharacter != ConsolePal.s_posixDisableValue ? ConsolePal.s_veolCharacter :
-                             ConsolePal.s_veol2Character != ConsolePal.s_posixDisableValue ? ConsolePal.s_veol2Character :
-                             ConsolePal.s_veofCharacter != ConsolePal.s_posixDisableValue ? ConsolePal.s_veofCharacter :
-                             0),
-                            default(ConsoleKey), false, false, false);
+                        return new ConsoleKeyInfo(
+                            (char)(
+                                ConsolePal.s_veolCharacter != ConsolePal.s_posixDisableValue
+                                    ? ConsolePal.s_veolCharacter
+                                    : ConsolePal.s_veol2Character != ConsolePal.s_posixDisableValue
+                                        ? ConsolePal.s_veol2Character
+                                        : ConsolePal.s_veofCharacter
+                                        != ConsolePal.s_posixDisableValue
+                                            ? ConsolePal.s_veofCharacter
+                                            : 0
+                            ),
+                            default(ConsoleKey),
+                            false,
+                            false,
+                            false
+                        );
                     }
                 }
 
                 return useNet6KeyParser
-                    ? Net6KeyParser.Parse(_unprocessedBufferToBeRead, ConsolePal.TerminalFormatStringsInstance, ConsolePal.s_posixDisableValue, ConsolePal.s_veraseCharacter, ref _startIndex, _endIndex)
-                    : KeyParser.Parse(_unprocessedBufferToBeRead, ConsolePal.TerminalFormatStringsInstance, ConsolePal.s_posixDisableValue, ConsolePal.s_veraseCharacter, ref _startIndex, _endIndex);
+                    ? Net6KeyParser.Parse(
+                        _unprocessedBufferToBeRead,
+                        ConsolePal.TerminalFormatStringsInstance,
+                        ConsolePal.s_posixDisableValue,
+                        ConsolePal.s_veraseCharacter,
+                        ref _startIndex,
+                        _endIndex
+                    )
+                    : KeyParser.Parse(
+                        _unprocessedBufferToBeRead,
+                        ConsolePal.TerminalFormatStringsInstance,
+                        ConsolePal.s_posixDisableValue,
+                        ConsolePal.s_veraseCharacter,
+                        ref _startIndex,
+                        _endIndex
+                    );
             }
             finally
             {
@@ -365,6 +420,7 @@ namespace System.IO
         }
 
         /// <summary>Gets whether there's input waiting on stdin.</summary>
-        internal static bool StdinReady => Interop.Sys.StdinReady(distinguishNewLines: !ConsoleUtils.UseNet6KeyParser);
+        internal static bool StdinReady =>
+            Interop.Sys.StdinReady(distinguishNewLines: !ConsoleUtils.UseNet6KeyParser);
     }
 }

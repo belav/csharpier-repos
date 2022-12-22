@@ -19,8 +19,8 @@ public class DependentKeyValueFactoryFactory
     /// </summary>
     public virtual IDependentKeyValueFactory<TKey> CreateSimple<TKey>(
         IForeignKey foreignKey,
-        IPrincipalKeyValueFactory<TKey> principalKeyValueFactory)
-        where TKey : notnull
+        IPrincipalKeyValueFactory<TKey> principalKeyValueFactory
+    ) where TKey : notnull
     {
         var dependentIsNullable = foreignKey.Properties[0].ClrType.IsNullableType();
         var principalIsNullable = foreignKey.PrincipalKey.Properties[0].ClrType.IsNullableType();
@@ -28,17 +28,34 @@ public class DependentKeyValueFactoryFactory
         if (dependentIsNullable)
         {
             return principalIsNullable
-                ? new SimpleFullyNullableDependentKeyValueFactory<TKey>(foreignKey, principalKeyValueFactory)
-                : (IDependentKeyValueFactory<TKey>)Activator.CreateInstance(
-                    typeof(SimpleNullableDependentKeyValueFactory<>).MakeGenericType(
-                        typeof(TKey)), foreignKey, principalKeyValueFactory)!;
+                ? new SimpleFullyNullableDependentKeyValueFactory<TKey>(
+                    foreignKey,
+                    principalKeyValueFactory
+                )
+                : (IDependentKeyValueFactory<TKey>)
+                    Activator.CreateInstance(
+                        typeof(SimpleNullableDependentKeyValueFactory<>).MakeGenericType(
+                            typeof(TKey)
+                        ),
+                        foreignKey,
+                        principalKeyValueFactory
+                    )!;
         }
 
         return principalIsNullable
-            ? (IDependentKeyValueFactory<TKey>)Activator.CreateInstance(
-                typeof(SimpleNullablePrincipalDependentKeyValueFactory<,>).MakeGenericType(
-                    typeof(TKey), typeof(TKey).UnwrapNullableType()), foreignKey, principalKeyValueFactory)!
-            : new SimpleNonNullableDependentKeyValueFactory<TKey>(foreignKey, principalKeyValueFactory);
+            ? (IDependentKeyValueFactory<TKey>)
+                Activator.CreateInstance(
+                    typeof(SimpleNullablePrincipalDependentKeyValueFactory<,>).MakeGenericType(
+                        typeof(TKey),
+                        typeof(TKey).UnwrapNullableType()
+                    ),
+                    foreignKey,
+                    principalKeyValueFactory
+                )!
+            : new SimpleNonNullableDependentKeyValueFactory<TKey>(
+                foreignKey,
+                principalKeyValueFactory
+            );
     }
 
     /// <summary>
@@ -49,6 +66,6 @@ public class DependentKeyValueFactoryFactory
     /// </summary>
     public virtual IDependentKeyValueFactory<object[]> CreateComposite(
         IForeignKey foreignKey,
-        IPrincipalKeyValueFactory<object[]> principalKeyValueFactory)
-        => new CompositeDependentKeyValueFactory(foreignKey, principalKeyValueFactory);
+        IPrincipalKeyValueFactory<object[]> principalKeyValueFactory
+    ) => new CompositeDependentKeyValueFactory(foreignKey, principalKeyValueFactory);
 }

@@ -6,15 +6,16 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
 public class TestClass
 {
-    public struct S1
-    {
-    }
+    public struct S1 { }
+
     public struct S2
     {
         public ulong ulong_1;
     }
+
     static bool s_bool_2 = false;
     static byte s_byte_3 = 5;
     static int s_int_8 = 2;
@@ -24,13 +25,15 @@ public class TestClass
     sbyte sbyte_26 = 10;
     S2 s2_33 = new S2();
     static int s_loopInvariant = 4;
+
     public bool LeafMethod0()
     {
         unchecked
         {
-            return 15>=4&& s_bool_2;
+            return 15 >= 4 && s_bool_2;
         }
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public int LeafMethod6()
     {
@@ -39,7 +42,15 @@ public class TestClass
             return s_int_8 >>= int_24;
         }
     }
-    public uint Method1(out S2 p_s2_34, out S1 p_s1_35, S1 p_s1_36, out byte p_byte_37, S1 p_s1_38, ref ulong p_ulong_39)
+
+    public uint Method1(
+        out S2 p_s2_34,
+        out S1 p_s1_35,
+        S1 p_s1_36,
+        out byte p_byte_37,
+        S1 p_s1_38,
+        ref ulong p_ulong_39
+    )
     {
         unchecked
         {
@@ -48,11 +59,12 @@ public class TestClass
             sbyte sbyte_48 = 1;
             p_s2_34 = s2_33;
             p_s1_35 = s_s1_16;
-            p_byte_37 = s_byte_3 = s_byte_3 <<= 15^4;
-            int __loopvar43 = 15-4, __loopSecondaryVar43_0 = s_loopInvariant;
-            for (; s_int_8 < 15%4; s_int_8++)
+            p_byte_37 = s_byte_3 = s_byte_3 <<= 15 ^ 4;
+            int __loopvar43 = 15 - 4,
+                __loopSecondaryVar43_0 = s_loopInvariant;
+            for (; s_int_8 < 15 % 4; s_int_8++)
             {
-                if ((sbyte_26 += 15-4)< sbyte_48)
+                if ((sbyte_26 += 15 - 4) < sbyte_48)
                 {
                     switch (char_42 = char_42 = char_42)
                     {
@@ -67,24 +79,20 @@ public class TestClass
                                 int __loopvar9 = s_loopInvariant;
                                 while (bool_40)
                                 {
-                                    if (bool_40 = s_bool_2 = (int_24 %= 15+4)> (int_24 &= LeafMethod6()))
-                                    {
-                                    }
-                                    else
-                                    {
-                                    }
+                                    if (
+                                        bool_40 = s_bool_2 =
+                                            (int_24 %= 15 + 4) > (int_24 &= LeafMethod6())
+                                    ) { }
+                                    else { }
                                     try
                                     {
-                                        int __loopvar8 = s_loopInvariant, __loopSecondaryVar8_0 = 15+4;
+                                        int __loopvar8 = s_loopInvariant,
+                                            __loopSecondaryVar8_0 = 15 + 4;
                                     }
-                                    catch (System.TimeZoneNotFoundException)
-                                    {
-                                    }
+                                    catch (System.TimeZoneNotFoundException) { }
                                 }
                             }
-                            else
-                            {
-                            }
+                            else { }
                             break;
                         }
                         case 'A':
@@ -109,23 +117,30 @@ public class TestClass
                         }
                     }
                 }
-                else
-                {
-                }
+                else { }
             }
-            return 15|4;
+            return 15 | 4;
         }
     }
+
     public void Method0()
     {
         unchecked
         {
             uint uint_99 = 5;
             S1 s1_101 = new S1();
-            uint_99 = Method1(out s_s2_17, out s1_101, s_s1_16, out s_byte_3, s_s1_16, ref s2_33.ulong_1);
+            uint_99 = Method1(
+                out s_s2_17,
+                out s1_101,
+                s_s1_16,
+                out s_byte_3,
+                s_s1_16,
+                ref s2_33.ulong_1
+            );
             return;
         }
     }
+
     public static int Main(string[] args)
     {
         new TestClass().Method0();

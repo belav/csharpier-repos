@@ -10,10 +10,21 @@ namespace System.Configuration
         // the config path of the configuration record where this directive was defined
 
         internal SectionXmlInfo(
-            string configKey, string definitionConfigPath, string targetConfigPath, string subPath,
-            string filename, int lineNumber, object streamVersion,
-            string rawXml, string configSource, string configSourceStreamName, object configSourceStreamVersion,
-            string protectionProviderName, OverrideModeSetting overrideMode, bool skipInChildApps)
+            string configKey,
+            string definitionConfigPath,
+            string targetConfigPath,
+            string subPath,
+            string filename,
+            int lineNumber,
+            object streamVersion,
+            string rawXml,
+            string configSource,
+            string configSourceStreamName,
+            object configSourceStreamVersion,
+            string protectionProviderName,
+            OverrideModeSetting overrideMode,
+            bool skipInChildApps
+        )
         {
             ConfigKey = configKey;
             DefinitionConfigPath = definitionConfigPath;

@@ -36,7 +36,8 @@ namespace System.Xml.Serialization
         [return: NotNullIfNotNull(nameof(value))]
         internal static string? FromDefaultValue(object? value, string formatter)
         {
-            if (value == null) return null;
+            if (value == null)
+                return null;
             Type type = value.GetType();
             if (type == typeof(DateTime))
             {
@@ -82,13 +83,22 @@ namespace System.Xml.Serialization
 
         internal static string FromTime(DateTime value)
         {
-            if (!LocalAppContextSwitches.IgnoreKindInUtcTimeSerialization && value.Kind == DateTimeKind.Utc)
+            if (
+                !LocalAppContextSwitches.IgnoreKindInUtcTimeSerialization
+                && value.Kind == DateTimeKind.Utc
+            )
             {
-                return XmlConvert.ToString(DateTime.MinValue + value.TimeOfDay, "HH:mm:ss.fffffffZ");
+                return XmlConvert.ToString(
+                    DateTime.MinValue + value.TimeOfDay,
+                    "HH:mm:ss.fffffffZ"
+                );
             }
             else
             {
-                return XmlConvert.ToString(DateTime.MinValue + value.TimeOfDay, "HH:mm:ss.fffffffzzzzzz");
+                return XmlConvert.ToString(
+                    DateTime.MinValue + value.TimeOfDay,
+                    "HH:mm:ss.fffffffzzzzzz"
+                );
             }
         }
 
@@ -141,7 +151,8 @@ namespace System.Xml.Serialization
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < toks.Length; i++)
                 {
-                    if (i > 0) sb.Append(' ');
+                    if (i > 0)
+                        sb.Append(' ');
                     sb.Append(FromXmlNmToken(toks[i]));
                 }
                 return sb.ToString();
@@ -172,7 +183,10 @@ namespace System.Xml.Serialization
         {
 #if DEBUG
             // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
-            if (ids.Length != vals.Length) throw new InvalidOperationException(SR.Format(SR.XmlInternalErrorDetails, "Invalid enum"));
+            if (ids.Length != vals.Length)
+                throw new InvalidOperationException(
+                    SR.Format(SR.XmlInternalErrorDetails, "Invalid enum")
+                );
 #endif
 
             long originalValue = val;
@@ -201,7 +215,9 @@ namespace System.Xml.Serialization
             if (val != 0)
             {
                 // failed to parse the enum value
-                throw new InvalidOperationException(SR.Format(SR.XmlUnknownConstant, originalValue, typeName ?? "enum"));
+                throw new InvalidOperationException(
+                    SR.Format(SR.XmlUnknownConstant, originalValue, typeName ?? "enum")
+                );
             }
             if (sb.Length == 0 && iZero >= 0)
             {
@@ -243,7 +259,8 @@ namespace System.Xml.Serialization
             throw new XmlException(SR.Format(SR.XmlUnsupportedDefaultValue, formatter));
         }
 
-        private static readonly string[] s_allDateTimeFormats = new string[] {
+        private static readonly string[] s_allDateTimeFormats = new string[]
+        {
             "yyyy-MM-ddTHH:mm:ss.fffffffzzzzzz",
             "yyyy",
             "---dd",
@@ -262,7 +279,6 @@ namespace System.Xml.Serialization
             "yyyy-MM-dd",
             "yyyy-MM-ddZ",
             "yyyy-MM-ddzzzzzz",
-
             "HH:mm:ss",
             "HH:mm:ss.f",
             "HH:mm:ss.ff",
@@ -312,7 +328,8 @@ namespace System.Xml.Serialization
             "yyyy-MM-ddTHH:mm:ss.ffffffzzzzzz",
         };
 
-        private static readonly string[] s_allDateFormats = new string[] {
+        private static readonly string[] s_allDateFormats = new string[]
+        {
             "yyyy-MM-ddzzzzzz",
             "yyyy-MM-dd",
             "yyyy-MM-ddZ",
@@ -332,7 +349,8 @@ namespace System.Xml.Serialization
             "yyyyzzzzzz",
         };
 
-        private static readonly string[] s_allTimeFormats = new string[] {
+        private static readonly string[] s_allTimeFormats = new string[]
+        {
             "HH:mm:ss.fffffffzzzzzz",
             "HH:mm:ss",
             "HH:mm:ss.f",
@@ -386,11 +404,26 @@ namespace System.Xml.Serialization
         {
             if (!LocalAppContextSwitches.IgnoreKindInUtcTimeSerialization)
             {
-                return DateTime.ParseExact(value, s_allTimeFormats, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AllowLeadingWhite | DateTimeStyles.AllowTrailingWhite | DateTimeStyles.NoCurrentDateDefault | DateTimeStyles.RoundtripKind);
+                return DateTime.ParseExact(
+                    value,
+                    s_allTimeFormats,
+                    DateTimeFormatInfo.InvariantInfo,
+                    DateTimeStyles.AllowLeadingWhite
+                        | DateTimeStyles.AllowTrailingWhite
+                        | DateTimeStyles.NoCurrentDateDefault
+                        | DateTimeStyles.RoundtripKind
+                );
             }
             else
             {
-                return DateTime.ParseExact(value, s_allTimeFormats, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AllowLeadingWhite | DateTimeStyles.AllowTrailingWhite | DateTimeStyles.NoCurrentDateDefault);
+                return DateTime.ParseExact(
+                    value,
+                    s_allTimeFormats,
+                    DateTimeFormatInfo.InvariantInfo,
+                    DateTimeStyles.AllowLeadingWhite
+                        | DateTimeStyles.AllowTrailingWhite
+                        | DateTimeStyles.NoCurrentDateDefault
+                );
             }
         }
 
@@ -426,7 +459,8 @@ namespace System.Xml.Serialization
         [return: NotNullIfNotNull(nameof(value))]
         internal static byte[]? ToByteArrayBase64(string? value)
         {
-            if (value == null) return null;
+            if (value == null)
+                return null;
             value = value.Trim();
             if (value.Length == 0)
                 return Array.Empty<byte>();
@@ -436,7 +470,8 @@ namespace System.Xml.Serialization
         [return: NotNullIfNotNull(nameof(value))]
         internal static byte[]? ToByteArrayHex(string? value)
         {
-            if (value == null) return null;
+            if (value == null)
+                return null;
             return XmlConvert.FromBinHexString(value.AsSpan().Trim(), true);
         }
 
@@ -450,7 +485,9 @@ namespace System.Xml.Serialization
                 if (id != null)
                     value |= (long)id;
                 else if (validate && parts[i].Length > 0)
-                    throw new InvalidOperationException(SR.Format(SR.XmlUnknownConstant, parts[i], typeName));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.XmlUnknownConstant, parts[i], typeName)
+                    );
             }
             return value;
         }

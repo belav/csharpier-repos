@@ -14,10 +14,8 @@ namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class RoutePatternAnalyzer : DiagnosticAnalyzer
 {
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(new[]
-    {
-        DiagnosticDescriptors.RoutePatternIssue
-    });
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
+        ImmutableArray.Create(new[] { DiagnosticDescriptors.RoutePatternIssue });
 
     public void Analyze(SemanticModelAnalysisContext context)
     {
@@ -34,7 +32,8 @@ public class RoutePatternAnalyzer : DiagnosticAnalyzer
         SemanticModelAnalysisContext context,
         SyntaxNode node,
         ref WellKnownTypes? wellKnownTypes,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
 
@@ -47,20 +46,42 @@ public class RoutePatternAnalyzer : DiagnosticAnalyzer
             else
             {
                 var token = child.AsToken();
-                if (!RouteStringSyntaxDetector.IsRouteStringSyntaxToken(token, context.SemanticModel, cancellationToken))
+                if (
+                    !RouteStringSyntaxDetector.IsRouteStringSyntaxToken(
+                        token,
+                        context.SemanticModel,
+                        cancellationToken
+                    )
+                )
                 {
                     continue;
                 }
 
-                if (wellKnownTypes == null && !WellKnownTypes.TryGetOrCreate(context.SemanticModel.Compilation, out wellKnownTypes))
+                if (
+                    wellKnownTypes == null
+                    && !WellKnownTypes.TryGetOrCreate(
+                        context.SemanticModel.Compilation,
+                        out wellKnownTypes
+                    )
+                )
                 {
                     return;
                 }
 
-                var usageContext = RoutePatternUsageDetector.BuildContext(token, context.SemanticModel, wellKnownTypes, cancellationToken);
+                var usageContext = RoutePatternUsageDetector.BuildContext(
+                    token,
+                    context.SemanticModel,
+                    wellKnownTypes,
+                    cancellationToken
+                );
 
-                var virtualChars = CSharpVirtualCharService.Instance.TryConvertToVirtualChars(token);
-                var tree = RoutePatternParser.TryParse(virtualChars, supportTokenReplacement: usageContext.IsMvcAttribute);
+                var virtualChars = CSharpVirtualCharService.Instance.TryConvertToVirtualChars(
+                    token
+                );
+                var tree = RoutePatternParser.TryParse(
+                    virtualChars,
+                    supportTokenReplacement: usageContext.IsMvcAttribute
+                );
                 if (tree == null)
                 {
                     continue;
@@ -68,13 +89,16 @@ public class RoutePatternAnalyzer : DiagnosticAnalyzer
 
                 foreach (var diag in tree.Diagnostics)
                 {
-                    context.ReportDiagnostic(Diagnostic.Create(
-                        DiagnosticDescriptors.RoutePatternIssue,
-                        Location.Create(context.SemanticModel.SyntaxTree, diag.Span),
-                        DiagnosticDescriptors.RoutePatternIssue.DefaultSeverity,
-                        additionalLocations: null,
-                        properties: null,
-                        diag.Message));
+                    context.ReportDiagnostic(
+                        Diagnostic.Create(
+                            DiagnosticDescriptors.RoutePatternIssue,
+                            Location.Create(context.SemanticModel.SyntaxTree, diag.Span),
+                            DiagnosticDescriptors.RoutePatternIssue.DefaultSeverity,
+                            additionalLocations: null,
+                            properties: null,
+                            diag.Message
+                        )
+                    );
                 }
             }
         }

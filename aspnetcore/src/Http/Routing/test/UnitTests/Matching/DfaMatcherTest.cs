@@ -15,16 +15,30 @@ namespace Microsoft.AspNetCore.Routing.Matching;
 // so we're reusing the services here.
 public class DfaMatcherTest
 {
-    private RouteEndpoint CreateEndpoint(string template, int order, object defaults = null, object requiredValues = null, object policies = null)
+    private RouteEndpoint CreateEndpoint(
+        string template,
+        int order,
+        object defaults = null,
+        object requiredValues = null,
+        object policies = null
+    )
     {
-        return EndpointFactory.CreateRouteEndpoint(template, defaults, policies, requiredValues, order, displayName: template);
+        return EndpointFactory.CreateRouteEndpoint(
+            template,
+            defaults,
+            policies,
+            requiredValues,
+            order,
+            displayName: template
+        );
     }
 
     private DataSourceDependentMatcher CreateDfaMatcher(
         EndpointDataSource dataSource,
         MatcherPolicy[] policies = null,
         EndpointSelector endpointSelector = null,
-        ILoggerFactory loggerFactory = null)
+        ILoggerFactory loggerFactory = null
+    )
     {
         var serviceCollection = new ServiceCollection()
             .AddLogging()
@@ -62,10 +76,9 @@ public class DfaMatcherTest
     public async Task MatchAsync_ValidRouteConstraint_EndpointMatched()
     {
         // Arrange
-        var endpointDataSource = new DefaultEndpointDataSource(new List<Endpoint>
-            {
-                CreateEndpoint("/{p:int}", 0)
-            });
+        var endpointDataSource = new DefaultEndpointDataSource(
+            new List<Endpoint> { CreateEndpoint("/{p:int}", 0) }
+        );
 
         var matcher = CreateDfaMatcher(endpointDataSource);
 
@@ -83,10 +96,9 @@ public class DfaMatcherTest
     public async Task MatchAsync_InvalidRouteConstraint_NoEndpointMatched()
     {
         // Arrange
-        var endpointDataSource = new DefaultEndpointDataSource(new List<Endpoint>
-            {
-                CreateEndpoint("/{p:int}", 0)
-            });
+        var endpointDataSource = new DefaultEndpointDataSource(
+            new List<Endpoint> { CreateEndpoint("/{p:int}", 0) }
+        );
 
         var matcher = CreateDfaMatcher(endpointDataSource);
 
@@ -107,12 +119,16 @@ public class DfaMatcherTest
         var endpoint = CreateEndpoint(
             "{controller=Home}/{action=Index}/{id?}",
             0,
-            requiredValues: new { controller = "Home", action = "Index", area = (string)null, page = (string)null });
-
-        var dataSource = new DefaultEndpointDataSource(new List<Endpoint>
+            requiredValues: new
             {
-                endpoint
-            });
+                controller = "Home",
+                action = "Index",
+                area = (string)null,
+                page = (string)null
+            }
+        );
+
+        var dataSource = new DefaultEndpointDataSource(new List<Endpoint> { endpoint });
 
         var matcher = CreateDfaMatcher(dataSource);
 
@@ -136,7 +152,8 @@ public class DfaMatcherTest
             {
                 Assert.Equal("controller", kvp.Key);
                 Assert.Equal("Home", kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -146,12 +163,16 @@ public class DfaMatcherTest
         var endpoint = CreateEndpoint(
             "{controller}/{action}",
             0,
-            requiredValues: new { controller = "Home", action = "Index", area = (string)null, page = (string)null });
-
-        var dataSource = new DefaultEndpointDataSource(new List<Endpoint>
+            requiredValues: new
             {
-                endpoint
-            });
+                controller = "Home",
+                action = "Index",
+                area = (string)null,
+                page = (string)null
+            }
+        );
+
+        var dataSource = new DefaultEndpointDataSource(new List<Endpoint> { endpoint });
 
         var matcher = CreateDfaMatcher(dataSource);
 
@@ -172,12 +193,16 @@ public class DfaMatcherTest
         var endpoint = CreateEndpoint(
             "{controller}/{action}/{id?}",
             0,
-            requiredValues: new { controller = "Home", action = "Index", area = (string)null, page = (string)null });
-
-        var dataSource = new DefaultEndpointDataSource(new List<Endpoint>
+            requiredValues: new
             {
-                endpoint
-            });
+                controller = "Home",
+                action = "Index",
+                area = (string)null,
+                page = (string)null
+            }
+        );
+
+        var dataSource = new DefaultEndpointDataSource(new List<Endpoint> { endpoint });
 
         var matcher = CreateDfaMatcher(dataSource);
 
@@ -206,7 +231,8 @@ public class DfaMatcherTest
             {
                 Assert.Equal("id", kvp.Key);
                 Assert.Equal("123", kvp.Value);
-            });
+            }
+        );
     }
 
     [Theory]
@@ -221,12 +247,16 @@ public class DfaMatcherTest
         var endpoint = CreateEndpoint(
             "{controller=TestController}/{action=TestAction}/{id=17}/{**catchAll}",
             0,
-            requiredValues: new { controller = "TestController", action = "TestAction", area = (string)null, page = (string)null });
-
-        var dataSource = new DefaultEndpointDataSource(new List<Endpoint>
+            requiredValues: new
             {
-                endpoint
-            });
+                controller = "TestController",
+                action = "TestAction",
+                area = (string)null,
+                page = (string)null
+            }
+        );
+
+        var dataSource = new DefaultEndpointDataSource(new List<Endpoint> { endpoint });
 
         var matcher = CreateDfaMatcher(dataSource);
 
@@ -251,17 +281,27 @@ public class DfaMatcherTest
         var endpoint1 = CreateEndpoint(
             "{controller}/{action}/{id?}",
             0,
-            requiredValues: new { controller = "Home", action = "Index", area = (string)null, page = (string)null });
+            requiredValues: new
+            {
+                controller = "Home",
+                action = "Index",
+                area = (string)null,
+                page = (string)null
+            }
+        );
         var endpoint2 = CreateEndpoint(
             "{controller}/{action}/{id?}",
             0,
-            requiredValues: new { controller = "Login", action = "Index", area = (string)null, page = (string)null });
-
-        var dataSource = new DefaultEndpointDataSource(new List<Endpoint>
+            requiredValues: new
             {
-                endpoint1,
-                endpoint2
-            });
+                controller = "Login",
+                action = "Index",
+                area = (string)null,
+                page = (string)null
+            }
+        );
+
+        var dataSource = new DefaultEndpointDataSource(new List<Endpoint> { endpoint1, endpoint2 });
 
         var matcher = CreateDfaMatcher(dataSource);
 
@@ -290,12 +330,16 @@ public class DfaMatcherTest
         var endpoint = CreateEndpoint(
             "ConventionalTransformerRoute/{controller:slugify}/{action=Index}/{param:slugify?}",
             0,
-            requiredValues: new { controller = "ConventionalTransformer", action = "Index", area = (string)null, page = (string)null });
-
-        var dataSource = new DefaultEndpointDataSource(new List<Endpoint>
+            requiredValues: new
             {
-                endpoint
-            });
+                controller = "ConventionalTransformer",
+                action = "Index",
+                area = (string)null,
+                page = (string)null
+            }
+        );
+
+        var dataSource = new DefaultEndpointDataSource(new List<Endpoint> { endpoint });
 
         var matcher = CreateDfaMatcher(dataSource);
 
@@ -319,7 +363,8 @@ public class DfaMatcherTest
             {
                 Assert.Equal("controller", kvp.Key);
                 Assert.Equal("ConventionalTransformer", kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -329,11 +374,7 @@ public class DfaMatcherTest
         var endpoint1 = CreateEndpoint("a/c", 0);
         var endpoint2 = CreateEndpoint("{param:length(2)}/b/c", 0);
 
-        var dataSource = new DefaultEndpointDataSource(new List<Endpoint>
-            {
-                endpoint1,
-                endpoint2
-            });
+        var dataSource = new DefaultEndpointDataSource(new List<Endpoint> { endpoint1, endpoint2 });
 
         var matcher = (DfaMatcher)CreateDfaMatcher(dataSource).CurrentMatcher;
         var buffer = new PathSegment[3];
@@ -356,11 +397,7 @@ public class DfaMatcherTest
         var endpoint1 = CreateEndpoint("a/c", 0);
         var endpoint2 = CreateEndpoint("{param:length(2)}/b/c", 0);
 
-        var dataSource = new DefaultEndpointDataSource(new List<Endpoint>
-            {
-                endpoint1,
-                endpoint2
-            });
+        var dataSource = new DefaultEndpointDataSource(new List<Endpoint> { endpoint1, endpoint2 });
 
         var matcher = (DfaMatcher)CreateDfaMatcher(dataSource).CurrentMatcher;
         var buffer = new PathSegment[3];
@@ -383,11 +420,7 @@ public class DfaMatcherTest
         var endpoint1 = CreateEndpoint("a/b/c", 0);
         var endpoint2 = CreateEndpoint("{param:length(2)}/b/c", 0);
 
-        var dataSource = new DefaultEndpointDataSource(new List<Endpoint>
-            {
-                endpoint1,
-                endpoint2
-            });
+        var dataSource = new DefaultEndpointDataSource(new List<Endpoint> { endpoint1, endpoint2 });
 
         var matcher = (DfaMatcher)CreateDfaMatcher(dataSource).CurrentMatcher;
         var buffer = new PathSegment[3];
@@ -409,11 +442,7 @@ public class DfaMatcherTest
         // Note that the literal now meets the constraint, so there will be an explicit branch and two candidates
         var endpoint1 = CreateEndpoint("aa/b/c", 0);
         var endpoint2 = CreateEndpoint("{param:length(2)}/b/c", 0);
-        var endpoints = new List<Endpoint>
-            {
-                endpoint2,
-                endpoint1,
-            };
+        var endpoints = new List<Endpoint> { endpoint2, endpoint1, };
         var dataSource = new DefaultEndpointDataSource(endpoints);
 
         var matcher = (DfaMatcher)CreateDfaMatcher(dataSource).CurrentMatcher;
@@ -425,7 +454,13 @@ public class DfaMatcherTest
 
         // Assert
         // We expect 2 candidates, since the path on the tree (aa -> b -> c = ({param:length(2)}/b/c)) meets the length(2) constraint.
-        Assert.Equal(endpoints.ToArray(), set.candidates.Select(e => e.Endpoint).OrderBy(e => ((RouteEndpoint)e).RoutePattern.RawText).ToArray());
+        Assert.Equal(
+            endpoints.ToArray(),
+            set.candidates
+                .Select(e => e.Endpoint)
+                .OrderBy(e => ((RouteEndpoint)e).RoutePattern.RawText)
+                .ToArray()
+        );
     }
 
     [Fact]
@@ -435,11 +470,7 @@ public class DfaMatcherTest
         var endpoint1 = CreateEndpoint("a/b/c", 0);
         var endpoint2 = CreateEndpoint("a/{param:length(2)}/c", 0);
 
-        var dataSource = new DefaultEndpointDataSource(new List<Endpoint>
-            {
-                endpoint1,
-                endpoint2
-            });
+        var dataSource = new DefaultEndpointDataSource(new List<Endpoint> { endpoint1, endpoint2 });
 
         var matcher = (DfaMatcher)CreateDfaMatcher(dataSource).CurrentMatcher;
         var buffer = new PathSegment[3];
@@ -461,11 +492,7 @@ public class DfaMatcherTest
         var endpoint1 = CreateEndpoint("a/b/d", 0);
         var endpoint2 = CreateEndpoint("a/{param:length(2)}/c", 0);
 
-        var dataSource = new DefaultEndpointDataSource(new List<Endpoint>
-            {
-                endpoint1,
-                endpoint2
-            });
+        var dataSource = new DefaultEndpointDataSource(new List<Endpoint> { endpoint1, endpoint2 });
 
         var matcher = (DfaMatcher)CreateDfaMatcher(dataSource).CurrentMatcher;
         var buffer = new PathSegment[3];
@@ -488,11 +515,7 @@ public class DfaMatcherTest
         var endpoint1 = CreateEndpoint("a/b/c", 0);
         var endpoint2 = CreateEndpoint("a/{param:length(2)}/c", 0);
 
-        var dataSource = new DefaultEndpointDataSource(new List<Endpoint>
-            {
-                endpoint1,
-                endpoint2
-            });
+        var dataSource = new DefaultEndpointDataSource(new List<Endpoint> { endpoint1, endpoint2 });
 
         var matcher = (DfaMatcher)CreateDfaMatcher(dataSource).CurrentMatcher;
         var buffer = new PathSegment[3];
@@ -514,11 +537,7 @@ public class DfaMatcherTest
         // Note that the literal now meets the constraint, so there will be an explicit branch and two candidates
         var endpoint1 = CreateEndpoint("a/bb/c", 0);
         var endpoint2 = CreateEndpoint("a/{param:length(2)}/c", 0);
-        var endpoints = new List<Endpoint>
-            {
-                endpoint2,
-                endpoint1,
-            };
+        var endpoints = new List<Endpoint> { endpoint2, endpoint1, };
         var dataSource = new DefaultEndpointDataSource(endpoints);
 
         var matcher = (DfaMatcher)CreateDfaMatcher(dataSource).CurrentMatcher;
@@ -530,10 +549,19 @@ public class DfaMatcherTest
 
         // Assert
         // We expect 2 candidates, since the path on the tree (aa -> b -> c = ({param:length(2)}/b/c)) meets the length(2) constraint.
-        Assert.Equal(endpoints.ToArray(), set.candidates.Select(e => e.Endpoint).OrderBy(e => ((RouteEndpoint)e).RoutePattern.RawText).ToArray());
+        Assert.Equal(
+            endpoints.ToArray(),
+            set.candidates
+                .Select(e => e.Endpoint)
+                .OrderBy(e => ((RouteEndpoint)e).RoutePattern.RawText)
+                .ToArray()
+        );
     }
 
-    private (HttpContext context, string path, int count) CreateMatchingContext(string requestPath, PathSegment[] buffer)
+    private (HttpContext context, string path, int count) CreateMatchingContext(
+        string requestPath,
+        PathSegment[] buffer
+    )
     {
         var context = CreateContext();
         context.Request.Path = requestPath;
@@ -550,12 +578,10 @@ public class DfaMatcherTest
         var endpoint = CreateEndpoint(
             "{controller}/{action=TESTACTION}/{id?}",
             0,
-            requiredValues: new { controller = "TestController", action = "TestAction" });
+            requiredValues: new { controller = "TestController", action = "TestAction" }
+        );
 
-        var dataSource = new DefaultEndpointDataSource(new List<Endpoint>
-            {
-                endpoint
-            });
+        var dataSource = new DefaultEndpointDataSource(new List<Endpoint> { endpoint });
 
         var matcher = CreateDfaMatcher(dataSource);
 
@@ -579,7 +605,8 @@ public class DfaMatcherTest
             {
                 Assert.Equal("controller", kvp.Key);
                 Assert.Equal("TestController", kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -589,11 +616,9 @@ public class DfaMatcherTest
         var higherOrderEndpoint = CreateEndpoint("/Teams", 1);
         var lowerOrderEndpoint = CreateEndpoint("/Teams", 0);
 
-        var endpointDataSource = new DefaultEndpointDataSource(new List<Endpoint>
-            {
-                higherOrderEndpoint,
-                lowerOrderEndpoint
-            });
+        var endpointDataSource = new DefaultEndpointDataSource(
+            new List<Endpoint> { higherOrderEndpoint, lowerOrderEndpoint }
+        );
 
         var matcher = CreateDfaMatcher(endpointDataSource);
 
@@ -617,31 +642,34 @@ public class DfaMatcherTest
         var endpointSelector = new Mock<EndpointSelector>();
         endpointSelector
             .Setup(s => s.SelectAsync(It.IsAny<HttpContext>(), It.IsAny<CandidateSet>()))
-            .Callback<HttpContext, CandidateSet>((c, cs) =>
-            {
-                Assert.Equal(2, cs.Count);
+            .Callback<HttpContext, CandidateSet>(
+                (c, cs) =>
+                {
+                    Assert.Equal(2, cs.Count);
 
-                Assert.Same(endpoint1, cs[0].Endpoint);
-                Assert.True(cs.IsValidCandidate(0));
-                Assert.Equal(0, cs[0].Score);
-                Assert.Null(cs[0].Values);
+                    Assert.Same(endpoint1, cs[0].Endpoint);
+                    Assert.True(cs.IsValidCandidate(0));
+                    Assert.Equal(0, cs[0].Score);
+                    Assert.Null(cs[0].Values);
 
-                Assert.Same(endpoint2, cs[1].Endpoint);
-                Assert.True(cs.IsValidCandidate(1));
-                Assert.Equal(1, cs[1].Score);
-                Assert.Null(cs[1].Values);
+                    Assert.Same(endpoint2, cs[1].Endpoint);
+                    Assert.True(cs.IsValidCandidate(1));
+                    Assert.Equal(1, cs[1].Score);
+                    Assert.Null(cs[1].Values);
 
-                c.SetEndpoint(endpoint2);
-            })
+                    c.SetEndpoint(endpoint2);
+                }
+            )
             .Returns(Task.CompletedTask);
 
-        var endpointDataSource = new DefaultEndpointDataSource(new List<Endpoint>
-            {
-                endpoint1,
-                endpoint2
-            });
+        var endpointDataSource = new DefaultEndpointDataSource(
+            new List<Endpoint> { endpoint1, endpoint2 }
+        );
 
-        var matcher = CreateDfaMatcher(endpointDataSource, endpointSelector: endpointSelector.Object);
+        var matcher = CreateDfaMatcher(
+            endpointDataSource,
+            endpointSelector: endpointSelector.Object
+        );
 
         var httpContext = CreateContext();
         httpContext.Request.Path = "/Teams";
@@ -663,31 +691,34 @@ public class DfaMatcherTest
         var endpointSelector = new Mock<EndpointSelector>();
         endpointSelector
             .Setup(s => s.SelectAsync(It.IsAny<HttpContext>(), It.IsAny<CandidateSet>()))
-            .Callback<HttpContext, CandidateSet>((c, cs) =>
-            {
-                Assert.Equal(2, cs.Count);
+            .Callback<HttpContext, CandidateSet>(
+                (c, cs) =>
+                {
+                    Assert.Equal(2, cs.Count);
 
-                Assert.Same(endpoint1, cs[0].Endpoint);
-                Assert.True(cs.IsValidCandidate(0));
-                Assert.Equal(0, cs[0].Score);
-                Assert.Empty(cs[0].Values);
+                    Assert.Same(endpoint1, cs[0].Endpoint);
+                    Assert.True(cs.IsValidCandidate(0));
+                    Assert.Equal(0, cs[0].Score);
+                    Assert.Empty(cs[0].Values);
 
-                Assert.Same(endpoint2, cs[1].Endpoint);
-                Assert.True(cs.IsValidCandidate(1));
-                Assert.Equal(1, cs[1].Score);
-                Assert.Empty(cs[1].Values);
+                    Assert.Same(endpoint2, cs[1].Endpoint);
+                    Assert.True(cs.IsValidCandidate(1));
+                    Assert.Equal(1, cs[1].Score);
+                    Assert.Empty(cs[1].Values);
 
-                c.SetEndpoint(endpoint2);
-            })
+                    c.SetEndpoint(endpoint2);
+                }
+            )
             .Returns(Task.CompletedTask);
 
-        var endpointDataSource = new DefaultEndpointDataSource(new List<Endpoint>
-            {
-                endpoint1,
-                endpoint2
-            });
+        var endpointDataSource = new DefaultEndpointDataSource(
+            new List<Endpoint> { endpoint1, endpoint2 }
+        );
 
-        var matcher = CreateDfaMatcher(endpointDataSource, endpointSelector: endpointSelector.Object);
+        var matcher = CreateDfaMatcher(
+            endpointDataSource,
+            endpointSelector: endpointSelector.Object
+        );
 
         var httpContext = CreateContext();
         httpContext.Request.Path = "/Teams";
@@ -710,31 +741,34 @@ public class DfaMatcherTest
         var endpointSelector = new Mock<EndpointSelector>();
         endpointSelector
             .Setup(s => s.SelectAsync(It.IsAny<HttpContext>(), It.IsAny<CandidateSet>()))
-            .Callback<HttpContext, CandidateSet>((c, cs) =>
-            {
-                Assert.Equal(2, cs.Count);
+            .Callback<HttpContext, CandidateSet>(
+                (c, cs) =>
+                {
+                    Assert.Equal(2, cs.Count);
 
-                Assert.Same(endpoint1, cs[0].Endpoint);
-                Assert.True(cs.IsValidCandidate(0));
-                Assert.Equal(0, cs[0].Score);
-                Assert.Empty(cs[0].Values);
+                    Assert.Same(endpoint1, cs[0].Endpoint);
+                    Assert.True(cs.IsValidCandidate(0));
+                    Assert.Equal(0, cs[0].Score);
+                    Assert.Empty(cs[0].Values);
 
-                Assert.Same(endpoint2, cs[1].Endpoint);
-                Assert.True(cs.IsValidCandidate(1));
-                Assert.Equal(1, cs[1].Score);
-                Assert.Empty(cs[1].Values);
+                    Assert.Same(endpoint2, cs[1].Endpoint);
+                    Assert.True(cs.IsValidCandidate(1));
+                    Assert.Equal(1, cs[1].Score);
+                    Assert.Empty(cs[1].Values);
 
-                c.SetEndpoint(endpoint2);
-            })
+                    c.SetEndpoint(endpoint2);
+                }
+            )
             .Returns(Task.CompletedTask);
 
-        var endpointDataSource = new DefaultEndpointDataSource(new List<Endpoint>
-            {
-                endpoint1,
-                endpoint2
-            });
+        var endpointDataSource = new DefaultEndpointDataSource(
+            new List<Endpoint> { endpoint1, endpoint2 }
+        );
 
-        var matcher = CreateDfaMatcher(endpointDataSource, endpointSelector: endpointSelector.Object);
+        var matcher = CreateDfaMatcher(
+            endpointDataSource,
+            endpointSelector: endpointSelector.Object
+        );
 
         var httpContext = CreateContext();
         httpContext.Request.Path = "/Teams";
@@ -750,13 +784,15 @@ public class DfaMatcherTest
     public async Task MatchAsync_NoCandidates_Logging()
     {
         // Arrange
-        var endpointDataSource = new DefaultEndpointDataSource(new List<Endpoint>
-            {
-                CreateEndpoint("/{p:int}", 0)
-            });
+        var endpointDataSource = new DefaultEndpointDataSource(
+            new List<Endpoint> { CreateEndpoint("/{p:int}", 0) }
+        );
 
         var sink = new TestSink();
-        var matcher = CreateDfaMatcher(endpointDataSource, loggerFactory: new TestLoggerFactory(sink, enabled: true));
+        var matcher = CreateDfaMatcher(
+            endpointDataSource,
+            loggerFactory: new TestLoggerFactory(sink, enabled: true)
+        );
 
         var httpContext = CreateContext();
         httpContext.Request.Path = "/";
@@ -773,20 +809,23 @@ public class DfaMatcherTest
             {
                 Assert.Equal(1000, log.EventId);
                 Assert.Equal("No candidates found for the request path '/'", log.Message);
-            });
+            }
+        );
     }
 
     [Fact]
     public async Task MatchAsync_ConstraintRejectsEndpoint_Logging()
     {
         // Arrange
-        var endpointDataSource = new DefaultEndpointDataSource(new List<Endpoint>
-            {
-                CreateEndpoint("/{p:int}", 0)
-            });
+        var endpointDataSource = new DefaultEndpointDataSource(
+            new List<Endpoint> { CreateEndpoint("/{p:int}", 0) }
+        );
 
         var sink = new TestSink();
-        var matcher = CreateDfaMatcher(endpointDataSource, loggerFactory: new TestLoggerFactory(sink, enabled: true));
+        var matcher = CreateDfaMatcher(
+            endpointDataSource,
+            loggerFactory: new TestLoggerFactory(sink, enabled: true)
+        );
 
         var httpContext = CreateContext();
         httpContext.Request.Path = "/One";
@@ -807,26 +846,35 @@ public class DfaMatcherTest
             (log) =>
             {
                 Assert.Equal(1003, log.EventId);
-                Assert.Equal("Endpoint '/{p:int}' with route pattern '/{p:int}' was rejected by constraint 'p':'Microsoft.AspNetCore.Routing.Constraints.IntRouteConstraint' with value 'One' for the request path '/One'", log.Message);
+                Assert.Equal(
+                    "Endpoint '/{p:int}' with route pattern '/{p:int}' was rejected by constraint 'p':'Microsoft.AspNetCore.Routing.Constraints.IntRouteConstraint' with value 'One' for the request path '/One'",
+                    log.Message
+                );
             },
             (log) =>
             {
                 Assert.Equal(1004, log.EventId);
-                Assert.Equal("Endpoint '/{p:int}' with route pattern '/{p:int}' is not valid for the request path '/One'", log.Message);
-            });
+                Assert.Equal(
+                    "Endpoint '/{p:int}' with route pattern '/{p:int}' is not valid for the request path '/One'",
+                    log.Message
+                );
+            }
+        );
     }
 
     [Fact]
     public async Task MatchAsync_ComplexSegmentRejectsEndpoint_Logging()
     {
         // Arrange
-        var endpointDataSource = new DefaultEndpointDataSource(new List<Endpoint>
-            {
-                CreateEndpoint("/x-{id}-y", 0)
-            });
+        var endpointDataSource = new DefaultEndpointDataSource(
+            new List<Endpoint> { CreateEndpoint("/x-{id}-y", 0) }
+        );
 
         var sink = new TestSink();
-        var matcher = CreateDfaMatcher(endpointDataSource, loggerFactory: new TestLoggerFactory(sink, enabled: true));
+        var matcher = CreateDfaMatcher(
+            endpointDataSource,
+            loggerFactory: new TestLoggerFactory(sink, enabled: true)
+        );
 
         var httpContext = CreateContext();
         httpContext.Request.Path = "/One";
@@ -847,28 +895,40 @@ public class DfaMatcherTest
             (log) =>
             {
                 Assert.Equal(1002, log.EventId);
-                Assert.Equal("Endpoint '/x-{id}-y' with route pattern '/x-{id}-y' was rejected by complex segment 'x-{id}-y' for the request path '/One'", log.Message);
+                Assert.Equal(
+                    "Endpoint '/x-{id}-y' with route pattern '/x-{id}-y' was rejected by complex segment 'x-{id}-y' for the request path '/One'",
+                    log.Message
+                );
             },
             (log) =>
             {
                 Assert.Equal(1004, log.EventId);
-                Assert.Equal("Endpoint '/x-{id}-y' with route pattern '/x-{id}-y' is not valid for the request path '/One'", log.Message);
-            });
+                Assert.Equal(
+                    "Endpoint '/x-{id}-y' with route pattern '/x-{id}-y' is not valid for the request path '/One'",
+                    log.Message
+                );
+            }
+        );
     }
 
     [Fact]
     public async Task MatchAsync_MultipleCandidates_Logging()
     {
         // Arrange
-        var endpointDataSource = new DefaultEndpointDataSource(new List<Endpoint>
+        var endpointDataSource = new DefaultEndpointDataSource(
+            new List<Endpoint>
             {
                 CreateEndpoint("/{one}", 0),
                 CreateEndpoint("/{p:int}", 1),
                 CreateEndpoint("/x-{id}-y", 2),
-            });
+            }
+        );
 
         var sink = new TestSink();
-        var matcher = CreateDfaMatcher(endpointDataSource, loggerFactory: new TestLoggerFactory(sink, enabled: true));
+        var matcher = CreateDfaMatcher(
+            endpointDataSource,
+            loggerFactory: new TestLoggerFactory(sink, enabled: true)
+        );
 
         var httpContext = CreateContext();
         httpContext.Request.Path = "/One";
@@ -889,53 +949,74 @@ public class DfaMatcherTest
             (log) =>
             {
                 Assert.Equal(1005, log.EventId);
-                Assert.Equal("Endpoint '/{one}' with route pattern '/{one}' is valid for the request path '/One'", log.Message);
+                Assert.Equal(
+                    "Endpoint '/{one}' with route pattern '/{one}' is valid for the request path '/One'",
+                    log.Message
+                );
             },
             (log) =>
             {
                 Assert.Equal(1003, log.EventId);
-                Assert.Equal("Endpoint '/{p:int}' with route pattern '/{p:int}' was rejected by constraint 'p':'Microsoft.AspNetCore.Routing.Constraints.IntRouteConstraint' with value 'One' for the request path '/One'", log.Message);
+                Assert.Equal(
+                    "Endpoint '/{p:int}' with route pattern '/{p:int}' was rejected by constraint 'p':'Microsoft.AspNetCore.Routing.Constraints.IntRouteConstraint' with value 'One' for the request path '/One'",
+                    log.Message
+                );
             },
             (log) =>
             {
                 Assert.Equal(1004, log.EventId);
-                Assert.Equal("Endpoint '/{p:int}' with route pattern '/{p:int}' is not valid for the request path '/One'", log.Message);
+                Assert.Equal(
+                    "Endpoint '/{p:int}' with route pattern '/{p:int}' is not valid for the request path '/One'",
+                    log.Message
+                );
             },
             (log) =>
             {
                 Assert.Equal(1002, log.EventId);
-                Assert.Equal("Endpoint '/x-{id}-y' with route pattern '/x-{id}-y' was rejected by complex segment 'x-{id}-y' for the request path '/One'", log.Message);
+                Assert.Equal(
+                    "Endpoint '/x-{id}-y' with route pattern '/x-{id}-y' was rejected by complex segment 'x-{id}-y' for the request path '/One'",
+                    log.Message
+                );
             },
             (log) =>
             {
                 Assert.Equal(1004, log.EventId);
-                Assert.Equal("Endpoint '/x-{id}-y' with route pattern '/x-{id}-y' is not valid for the request path '/One'", log.Message);
-            });
+                Assert.Equal(
+                    "Endpoint '/x-{id}-y' with route pattern '/x-{id}-y' is not valid for the request path '/One'",
+                    log.Message
+                );
+            }
+        );
     }
 
     [Fact]
     public async Task MatchAsync_RunsApplicableEndpointSelectorPolicies()
     {
         // Arrange
-        var dataSource = new DefaultEndpointDataSource(new List<Endpoint>
+        var dataSource = new DefaultEndpointDataSource(
+            new List<Endpoint>
             {
                 CreateEndpoint("/test/{id:alpha}", 0),
                 CreateEndpoint("/test/{id:int}", 0),
                 CreateEndpoint("/test/{id}", 0),
-            });
+            }
+        );
 
         var policy = new Mock<MatcherPolicy>();
         policy
             .As<IEndpointSelectorPolicy>()
-            .Setup(p => p.AppliesToEndpoints(It.IsAny<IReadOnlyList<Endpoint>>())).Returns(true);
+            .Setup(p => p.AppliesToEndpoints(It.IsAny<IReadOnlyList<Endpoint>>()))
+            .Returns(true);
         policy
             .As<IEndpointSelectorPolicy>()
             .Setup(p => p.ApplyAsync(It.IsAny<HttpContext>(), It.IsAny<CandidateSet>()))
-            .Returns<HttpContext, CandidateSet>((c, cs) =>
-            {
-                cs.SetValidity(1, false);
-                return Task.CompletedTask;
-            });
+            .Returns<HttpContext, CandidateSet>(
+                (c, cs) =>
+                {
+                    cs.SetValidity(1, false);
+                    return Task.CompletedTask;
+                }
+            );
 
         var matcher = CreateDfaMatcher(dataSource, policies: new[] { policy.Object, });
 
@@ -953,24 +1034,29 @@ public class DfaMatcherTest
     public async Task MatchAsync_SkipsNonApplicableEndpointSelectorPolicies()
     {
         // Arrange
-        var dataSource = new DefaultEndpointDataSource(new List<Endpoint>
+        var dataSource = new DefaultEndpointDataSource(
+            new List<Endpoint>
             {
                 CreateEndpoint("/test/{id:alpha}", 0),
                 CreateEndpoint("/test/{id:int}", 0),
                 CreateEndpoint("/test/{id}", 0),
-            });
+            }
+        );
 
         var policy = new Mock<MatcherPolicy>();
         policy
             .As<IEndpointSelectorPolicy>()
-            .Setup(p => p.AppliesToEndpoints(It.IsAny<IReadOnlyList<Endpoint>>())).Returns(false);
+            .Setup(p => p.AppliesToEndpoints(It.IsAny<IReadOnlyList<Endpoint>>()))
+            .Returns(false);
         policy
             .As<IEndpointSelectorPolicy>()
             .Setup(p => p.ApplyAsync(It.IsAny<HttpContext>(), It.IsAny<CandidateSet>()))
-            .Returns<HttpContext, CandidateSet>((c, cs) =>
-            {
-                throw null; // Won't be called.
-            });
+            .Returns<HttpContext, CandidateSet>(
+                (c, cs) =>
+                {
+                    throw null; // Won't be called.
+                }
+            );
 
         var matcher = CreateDfaMatcher(dataSource, policies: new[] { policy.Object, });
 
@@ -988,40 +1074,47 @@ public class DfaMatcherTest
     public async Task MatchAsync_RunsEndpointSelectorPolicies_CanShortCircuit()
     {
         // Arrange
-        var dataSource = new DefaultEndpointDataSource(new List<Endpoint>
+        var dataSource = new DefaultEndpointDataSource(
+            new List<Endpoint>
             {
                 CreateEndpoint("/test/{id:alpha}", 0),
                 CreateEndpoint("/test/{id:int}", 0),
                 CreateEndpoint("/test/{id}", 0),
-            });
+            }
+        );
 
         var policy1 = new Mock<MatcherPolicy>();
         policy1
             .As<IEndpointSelectorPolicy>()
-            .Setup(p => p.AppliesToEndpoints(It.IsAny<IReadOnlyList<Endpoint>>())).Returns(true);
+            .Setup(p => p.AppliesToEndpoints(It.IsAny<IReadOnlyList<Endpoint>>()))
+            .Returns(true);
         policy1
             .As<IEndpointSelectorPolicy>()
             .Setup(p => p.ApplyAsync(It.IsAny<HttpContext>(), It.IsAny<CandidateSet>()))
-            .Returns<HttpContext, CandidateSet>((c, cs) =>
-            {
-                c.SetEndpoint(cs[0].Endpoint);
-                return Task.CompletedTask;
-            });
+            .Returns<HttpContext, CandidateSet>(
+                (c, cs) =>
+                {
+                    c.SetEndpoint(cs[0].Endpoint);
+                    return Task.CompletedTask;
+                }
+            );
 
         // This should never run, it's after policy1 which short circuits
         var policy2 = new Mock<MatcherPolicy>();
-        policy2
-            .SetupGet(p => p.Order)
-            .Returns(1000);
+        policy2.SetupGet(p => p.Order).Returns(1000);
         policy2
             .As<IEndpointSelectorPolicy>()
-            .Setup(p => p.AppliesToEndpoints(It.IsAny<IReadOnlyList<Endpoint>>())).Returns(true);
+            .Setup(p => p.AppliesToEndpoints(It.IsAny<IReadOnlyList<Endpoint>>()))
+            .Returns(true);
         policy2
             .As<IEndpointSelectorPolicy>()
             .Setup(p => p.ApplyAsync(It.IsAny<HttpContext>(), It.IsAny<CandidateSet>()))
             .Throws(new InvalidOperationException());
 
-        var matcher = CreateDfaMatcher(dataSource, policies: new[] { policy1.Object, policy2.Object, });
+        var matcher = CreateDfaMatcher(
+            dataSource,
+            policies: new[] { policy1.Object, policy2.Object, }
+        );
 
         var httpContext = CreateContext();
         httpContext.Request.Path = "/test/17";

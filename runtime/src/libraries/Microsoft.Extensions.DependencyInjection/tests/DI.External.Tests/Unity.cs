@@ -5,21 +5,23 @@ using System;
 
 namespace Microsoft.Extensions.DependencyInjection.Specification
 {
-    public class UnityDependencyInjectionSpecificationTests: SkippableDependencyInjectionSpecificationTests
+    public class UnityDependencyInjectionSpecificationTests
+        : SkippableDependencyInjectionSpecificationTests
     {
         public override bool SupportsIServiceProviderIsService => false;
 
         // See https://github.com/unitycontainer/microsoft-dependency-injection/issues/87
         public override bool ExpectStructWithPublicDefaultConstructorInvoked => true;
 
-        public override string[] SkippedTests => new[]
-        {
-            "SingletonServiceCanBeResolvedFromScope"
-        };
+        public override string[] SkippedTests => new[] { "SingletonServiceCanBeResolvedFromScope" };
 
-        protected override IServiceProvider CreateServiceProviderImpl(IServiceCollection serviceCollection)
+        protected override IServiceProvider CreateServiceProviderImpl(
+            IServiceCollection serviceCollection
+        )
         {
-            return Unity.Microsoft.DependencyInjection.ServiceProviderExtensions.BuildServiceProvider(serviceCollection);
+            return Unity.Microsoft.DependencyInjection.ServiceProviderExtensions.BuildServiceProvider(
+                serviceCollection
+            );
         }
     }
 }

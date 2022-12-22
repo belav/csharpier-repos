@@ -20,9 +20,7 @@ namespace System.CommandLine
         /// <param name="values">The values that are allowed for the option.</param>
         /// <typeparam name="TOption">The type of the option's parsed value.</typeparam>
         /// <returns>The configured argument.</returns>
-        public static TOption FromAmong<TOption>(
-            this TOption option,
-            params string[] values)
+        public static TOption FromAmong<TOption>(this TOption option, params string[] values)
             where TOption : Option
         {
             option.Argument.AllowedValues?.Clear();
@@ -40,16 +38,14 @@ namespace System.CommandLine
         /// <param name="option">The option for which to add completions.</param>
         /// <param name="values">The completions to add.</param>
         /// <returns>The option being extended.</returns>
-        public static TOption AddCompletions<TOption>(
-            this TOption option,
-            params string[] values)
+        public static TOption AddCompletions<TOption>(this TOption option, params string[] values)
             where TOption : Option
         {
             option.Argument.Completions.Add(values);
 
             return option;
         }
-        
+
         /// <summary>
         /// Adds completions for an option.
         /// </summary>
@@ -59,14 +55,14 @@ namespace System.CommandLine
         /// <returns>The option being extended.</returns>
         public static TOption AddCompletions<TOption>(
             this TOption option,
-            Func<CompletionContext, IEnumerable<string>> complete)
-            where TOption : Option
+            Func<CompletionContext, IEnumerable<string>> complete
+        ) where TOption : Option
         {
             option.Argument.Completions.Add(complete);
 
             return option;
         }
-   
+
         /// <summary>
         /// Adds completions for an option.
         /// </summary>
@@ -76,8 +72,8 @@ namespace System.CommandLine
         /// <returns>The option being extended.</returns>
         public static TOption AddCompletions<TOption>(
             this TOption option,
-            CompletionDelegate complete)
-            where TOption : Option
+            CompletionDelegate complete
+        ) where TOption : Option
         {
             option.Argument.Completions.Add(complete);
 
@@ -138,8 +134,7 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="option">The option to configure.</param>
         /// <returns>The option being extended.</returns>
-        public static TOption LegalFilePathsOnly<TOption>(
-            this TOption option)
+        public static TOption LegalFilePathsOnly<TOption>(this TOption option)
             where TOption : Option
         {
             option.Argument.LegalFilePathsOnly();
@@ -153,8 +148,7 @@ namespace System.CommandLine
         /// <remarks>A parse error will result, for example, if file path separators are found in the parsed value.</remarks>
         /// <param name="option">The option to configure.</param>
         /// <returns>The option being extended.</returns>
-        public static TOption LegalFileNamesOnly<TOption>(
-            this TOption option)
+        public static TOption LegalFileNamesOnly<TOption>(this TOption option)
             where TOption : Option
         {
             option.Argument.LegalFileNamesOnly();
@@ -169,9 +163,7 @@ namespace System.CommandLine
         /// <param name="option">The option to use to parse the command line input.</param>
         /// <param name="commandLine">A command line string to parse, which can include spaces and quotes equivalent to what can be entered into a terminal.</param>
         /// <returns>A parse result describing the outcome of the parse operation.</returns>
-        public static ParseResult Parse(
-            this Option option,
-            string commandLine) =>
+        public static ParseResult Parse(this Option option, string commandLine) =>
             option.GetOrCreateDefaultSimpleParser().Parse(commandLine);
 
         /// <summary>
@@ -180,9 +172,7 @@ namespace System.CommandLine
         /// <param name="option">The option to use to parse the command line input.</param>
         /// <param name="args">The string options to parse.</param>
         /// <returns>A parse result describing the outcome of the parse operation.</returns>
-        public static ParseResult Parse(
-            this Option option,
-            string[] args) =>
+        public static ParseResult Parse(this Option option, string[] args) =>
             option.GetOrCreateDefaultSimpleParser().Parse(args);
     }
 }

@@ -21,7 +21,11 @@ namespace IntelHardwareIntrinsicTest
 
             if (Sse.IsSupported)
             {
-                using (TestTable<float> floatTable = new TestTable<float>(new float[4] { 1, -5, 100, 3 }))
+                using (
+                    TestTable<float> floatTable = new TestTable<float>(
+                        new float[4] { 1, -5, 100, 3 }
+                    )
+                )
                 {
                     try
                     {
@@ -71,6 +75,7 @@ namespace IntelHardwareIntrinsicTest
             public void* inArrayPtr => inHandle.AddrOfPinnedObject().ToPointer();
 
             GCHandle inHandle;
+
             public TestTable(T[] a)
             {
                 this.inArray = a;

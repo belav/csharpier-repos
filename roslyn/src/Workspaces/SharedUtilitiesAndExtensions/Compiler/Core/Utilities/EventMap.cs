@@ -14,12 +14,9 @@ namespace Roslyn.Utilities
     {
         private readonly NonReentrantLock _guard = new();
 
-        private readonly Dictionary<string, object> _eventNameToRegistries =
-            new();
+        private readonly Dictionary<string, object> _eventNameToRegistries = new();
 
-        public EventMap()
-        {
-        }
+        public EventMap() { }
 
         public void AddEventHandler<TEventHandler>(string eventName, TEventHandler eventHandler)
             where TEventHandler : class
@@ -58,15 +55,17 @@ namespace Roslyn.Utilities
 
         [PerformanceSensitive(
             "https://developercommunity.visualstudio.com/content/problem/854696/changing-target-framework-takes-10-minutes-with-10.html",
-            AllowImplicitBoxing = false)]
+            AllowImplicitBoxing = false
+        )]
         public EventHandlerSet<TEventHandler> GetEventHandlers<TEventHandler>(string eventName)
             where TEventHandler : class
         {
             return new EventHandlerSet<TEventHandler>(this.GetRegistries<TEventHandler>(eventName));
         }
 
-        private ImmutableArray<Registry<TEventHandler>> GetRegistries<TEventHandler>(string eventName)
-            where TEventHandler : class
+        private ImmutableArray<Registry<TEventHandler>> GetRegistries<TEventHandler>(
+            string eventName
+        ) where TEventHandler : class
         {
             using (_guard.DisposableWait())
             {
@@ -74,8 +73,9 @@ namespace Roslyn.Utilities
             }
         }
 
-        private ImmutableArray<Registry<TEventHandler>> GetRegistries_NoLock<TEventHandler>(string eventName)
-            where TEventHandler : class
+        private ImmutableArray<Registry<TEventHandler>> GetRegistries_NoLock<TEventHandler>(
+            string eventName
+        ) where TEventHandler : class
         {
             _guard.AssertHasLock();
             if (_eventNameToRegistries.TryGetValue(eventName, out var registries))
@@ -86,8 +86,10 @@ namespace Roslyn.Utilities
             return ImmutableArray.Create<Registry<TEventHandler>>();
         }
 
-        private void SetRegistries_NoLock<TEventHandler>(string eventName, ImmutableArray<Registry<TEventHandler>> registries)
-            where TEventHandler : class
+        private void SetRegistries_NoLock<TEventHandler>(
+            string eventName,
+            ImmutableArray<Registry<TEventHandler>> registries
+        ) where TEventHandler : class
         {
             _guard.AssertHasLock();
 
@@ -99,11 +101,9 @@ namespace Roslyn.Utilities
         {
             private TEventHandler? _handler;
 
-            public Registry(TEventHandler handler)
-                => _handler = handler;
+            public Registry(TEventHandler handler) => _handler = handler;
 
-            public void Unregister()
-                => _handler = null;
+            public void Unregister() => _handler = null;
 
             public void Invoke<TArg>(Action<TEventHandler, TArg> invoker, TArg arg)
             {
@@ -114,8 +114,7 @@ namespace Roslyn.Utilities
                 }
             }
 
-            public bool HasHandler(TEventHandler handler)
-                => handler.Equals(_handler);
+            public bool HasHandler(TEventHandler handler) => handler.Equals(_handler);
 
             public bool Equals(Registry<TEventHandler>? other)
             {
@@ -137,20 +136,17 @@ namespace Roslyn.Utilities
                 return other._handler.Equals(_handler);
             }
 
-            public override bool Equals(object? obj)
-                => Equals(obj as Registry<TEventHandler>);
+            public override bool Equals(object? obj) => Equals(obj as Registry<TEventHandler>);
 
-            public override int GetHashCode()
-                => _handler == null ? 0 : _handler.GetHashCode();
+            public override int GetHashCode() => _handler == null ? 0 : _handler.GetHashCode();
         }
 
-        internal struct EventHandlerSet<TEventHandler>
-            where TEventHandler : class
+        internal struct EventHandlerSet<TEventHandler> where TEventHandler : class
         {
             private readonly ImmutableArray<Registry<TEventHandler>> _registries;
 
-            internal EventHandlerSet(ImmutableArray<Registry<TEventHandler>> registries)
-                => _registries = registries;
+            internal EventHandlerSet(ImmutableArray<Registry<TEventHandler>> registries) =>
+                _registries = registries;
 
             public bool HasHandlers
             {

@@ -29,7 +29,11 @@ namespace System.Net.Security
         private List<string>? _ocspUrls;
         private X509Certificate2? _ca;
 
-        private SslStreamCertificateContext(X509Certificate2 target, X509Certificate2[] intermediates, SslCertificateTrust? trust)
+        private SslStreamCertificateContext(
+            X509Certificate2 target,
+            X509Certificate2[] intermediates,
+            SslCertificateTrust? trust
+        )
         {
             Certificate = target;
             IntermediateCertificates = intermediates;
@@ -54,7 +58,7 @@ namespace System.Net.Security
                     }
                 }
 
-                if (KeyHandle== null)
+                if (KeyHandle == null)
                 {
                     throw new NotSupportedException(SR.net_ssl_io_no_server_cert);
                 }
@@ -102,9 +106,7 @@ namespace System.Net.Security
                     return task.Result;
                 }
             }
-            catch
-            {
-            }
+            catch { }
 
             return null;
         }
@@ -198,9 +200,16 @@ namespace System.Net.Security
             IntPtr subject = Certificate.Handle;
             IntPtr issuer = caCert.Handle;
 
-            using (SafeOcspRequestHandle ocspRequest = Interop.Crypto.X509BuildOcspRequest(subject, issuer))
+            using (
+                SafeOcspRequestHandle ocspRequest = Interop.Crypto.X509BuildOcspRequest(
+                    subject,
+                    issuer
+                )
+            )
             {
-                byte[] rentedBytes = ArrayPool<byte>.Shared.Rent(Interop.Crypto.GetOcspRequestDerSize(ocspRequest));
+                byte[] rentedBytes = ArrayPool<byte>.Shared.Rent(
+                    Interop.Crypto.GetOcspRequestDerSize(ocspRequest)
+                );
                 int encodingSize = Interop.Crypto.EncodeOcspRequest(ocspRequest, rentedBytes);
                 ArraySegment<byte> encoded = new ArraySegment<byte>(rentedBytes, 0, encodingSize);
 
@@ -210,11 +219,21 @@ namespace System.Net.Security
                 for (int i = 0; i < _ocspUrls.Count; i++)
                 {
                     string url = MakeUrl(_ocspUrls[i], rentedChars);
-                    ret = await System.Net.Http.X509ResourceClient.DownloadAssetAsync(url, TimeSpan.MaxValue).ConfigureAwait(false);
+                    ret = await System.Net.Http.X509ResourceClient
+                        .DownloadAssetAsync(url, TimeSpan.MaxValue)
+                        .ConfigureAwait(false);
 
                     if (ret is not null)
                     {
-                        if (!Interop.Crypto.X509DecodeOcspToExpiration(ret, ocspRequest, subject, issuer, out DateTimeOffset expiration))
+                        if (
+                            !Interop.Crypto.X509DecodeOcspToExpiration(
+                                ret,
+                                ocspRequest,
+                                subject,
+                                issuer,
+                                out DateTimeOffset expiration
+                            )
+                        )
                         {
                             continue;
                         }

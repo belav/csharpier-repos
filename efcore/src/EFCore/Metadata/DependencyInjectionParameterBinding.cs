@@ -15,8 +15,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 /// </remarks>
 public class DependencyInjectionParameterBinding : ServiceParameterBinding
 {
-    private static readonly MethodInfo GetServiceMethod
-        = typeof(InfrastructureExtensions).GetMethod(nameof(InfrastructureExtensions.GetService))!;
+    private static readonly MethodInfo GetServiceMethod =
+        typeof(InfrastructureExtensions).GetMethod(nameof(InfrastructureExtensions.GetService))!;
 
     /// <summary>
     ///     Creates a new <see cref="DependencyInjectionParameterBinding" /> instance for the given service type.
@@ -27,10 +27,8 @@ public class DependencyInjectionParameterBinding : ServiceParameterBinding
     public DependencyInjectionParameterBinding(
         Type parameterType,
         Type serviceType,
-        params IPropertyBase[]? serviceProperties)
-        : base(parameterType, serviceType, serviceProperties)
-    {
-    }
+        params IPropertyBase[]? serviceProperties
+    ) : base(parameterType, serviceType, serviceProperties) { }
 
     /// <summary>
     ///     Creates an expression tree representing the binding of the value of a property from a
@@ -41,7 +39,8 @@ public class DependencyInjectionParameterBinding : ServiceParameterBinding
     /// <returns>The expression tree.</returns>
     public override Expression BindToParameter(
         Expression materializationExpression,
-        Expression entityTypeExpression)
+        Expression entityTypeExpression
+    )
     {
         Check.NotNull(materializationExpression, nameof(materializationExpression));
         Check.NotNull(entityTypeExpression, nameof(entityTypeExpression));
@@ -51,8 +50,11 @@ public class DependencyInjectionParameterBinding : ServiceParameterBinding
             Expression.Convert(
                 Expression.Property(
                     materializationExpression,
-                    MaterializationContext.ContextProperty),
-                typeof(IInfrastructure<IServiceProvider>)));
+                    MaterializationContext.ContextProperty
+                ),
+                typeof(IInfrastructure<IServiceProvider>)
+            )
+        );
     }
 
     /// <summary>
@@ -60,6 +62,6 @@ public class DependencyInjectionParameterBinding : ServiceParameterBinding
     /// </summary>
     /// <param name="consumedProperties">The new consumed properties.</param>
     /// <returns>A copy with replaced consumed properties.</returns>
-    public override ParameterBinding With(IPropertyBase[] consumedProperties)
-        => new DependencyInjectionParameterBinding(ParameterType, ServiceType, consumedProperties);
+    public override ParameterBinding With(IPropertyBase[] consumedProperties) =>
+        new DependencyInjectionParameterBinding(ParameterType, ServiceType, consumedProperties);
 }

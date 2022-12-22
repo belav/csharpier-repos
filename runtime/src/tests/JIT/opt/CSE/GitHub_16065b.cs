@@ -17,11 +17,13 @@ namespace GitHub_16065b
         }
 
         public int GetIndex(int row, int column)
-        { 
+        {
             return this.Offset + row + this.LeadingDimension * column;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImpl(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         public ArraySlice Diagonal(int index)
         {
             int offset = (index > 0) ? GetIndex(0, index) : GetIndex(-index, 0);
@@ -29,6 +31,7 @@ namespace GitHub_16065b
             int stride = this.LeadingDimension + 1;
             return new ArraySlice(offset, stride);
         }
+
         public ArraySlice GetStride(int index)
         {
             int offset = (index > 0) ? GetIndex(0, index) : GetIndex(-index, 0);
@@ -37,6 +40,7 @@ namespace GitHub_16065b
             return new ArraySlice(offset, stride);
         }
     }
+
     struct ArraySlice
     {
         public int Offset;
@@ -52,11 +56,13 @@ namespace GitHub_16065b
     class Vector
     {
         public ArraySlice Storage;
+
         public Vector(ArraySlice storage)
         {
             Storage = storage;
         }
     }
+
     class Matrix
     {
         public Array2D Storage;
@@ -65,6 +71,7 @@ namespace GitHub_16065b
         {
             Storage = storage;
         }
+
         public Vector GetDiagonal(int index)
         {
             ArraySlice storage = this.Storage.Diagonal(index);

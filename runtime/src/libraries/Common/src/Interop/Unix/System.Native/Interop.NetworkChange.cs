@@ -16,10 +16,16 @@ internal static partial class Interop
             AvailabilityChanged = 2
         }
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_CreateNetworkChangeListenerSocket")]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_CreateNetworkChangeListenerSocket"
+        )]
         public static unsafe partial Error CreateNetworkChangeListenerSocket(IntPtr* socket);
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_ReadEvents")]
-        public static unsafe partial Error ReadEvents(SafeHandle socket, delegate* unmanaged<IntPtr, NetworkChangeKind, void> onNetworkChange);
+        public static unsafe partial Error ReadEvents(
+            SafeHandle socket,
+            delegate* unmanaged<IntPtr, NetworkChangeKind, void> onNetworkChange
+        );
     }
 }

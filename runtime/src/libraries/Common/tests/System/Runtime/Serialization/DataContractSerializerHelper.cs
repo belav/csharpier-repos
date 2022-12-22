@@ -11,7 +11,13 @@ namespace System.Runtime.Serialization.Tests
 {
     public static class DataContractSerializerHelper
     {
-        internal static T SerializeAndDeserialize<T>(T value, string baseline, DataContractSerializerSettings settings = null, Func<DataContractSerializer> serializerFactory = null, bool skipStringCompare = false)
+        internal static T SerializeAndDeserialize<T>(
+            T value,
+            string baseline,
+            DataContractSerializerSettings settings = null,
+            Func<DataContractSerializer> serializerFactory = null,
+            bool skipStringCompare = false
+        )
         {
             DataContractSerializer dcs;
             if (serializerFactory != null)
@@ -20,7 +26,10 @@ namespace System.Runtime.Serialization.Tests
             }
             else
             {
-                dcs = (settings != null) ? new DataContractSerializer(typeof(T), settings) : new DataContractSerializer(typeof(T));
+                dcs =
+                    (settings != null)
+                        ? new DataContractSerializer(typeof(T), settings)
+                        : new DataContractSerializer(typeof(T));
             }
 
             using (MemoryStream ms = new MemoryStream())
@@ -33,8 +42,17 @@ namespace System.Runtime.Serialization.Tests
                 if (!skipStringCompare)
                 {
                     Utils.CompareResult result = Utils.Compare(baseline, actualOutput);
-                    Assert.True(result.Equal, string.Format("{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
-                        Environment.NewLine, result.ErrorMessage, value, baseline, actualOutput));
+                    Assert.True(
+                        result.Equal,
+                        string.Format(
+                            "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
+                            Environment.NewLine,
+                            result.ErrorMessage,
+                            value,
+                            baseline,
+                            actualOutput
+                        )
+                    );
                 }
 
                 ms.Position = 0;
@@ -44,5 +62,4 @@ namespace System.Runtime.Serialization.Tests
             }
         }
     }
-
 }

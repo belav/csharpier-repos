@@ -16,13 +16,14 @@ public class Program
         Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(webBuilder =>
             {
-                webBuilder.UseStartup<Startup>()
+                webBuilder
+                    .UseStartup<Startup>()
                     .ConfigureKestrel(options =>
-                     {
-                         options.ConfigureHttpsDefaults(opt =>
-                         {
-                             opt.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
-                         });
-                     });
+                    {
+                        options.ConfigureHttpsDefaults(opt =>
+                        {
+                            opt.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
+                        });
+                    });
             });
 }

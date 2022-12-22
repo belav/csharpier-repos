@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixIncorrectConstraint
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        CSharpFixIncorrectConstraintCodeFixProvider>;
+        CSharpFixIncorrectConstraintCodeFixProvider
+    >;
 
     public class FixIncorrectConstraintTests
     {
@@ -21,15 +22,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixIncorrectConstraint
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C<T> where T : {|CS9010:enum|}
 {
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C<T> where T : struct, System.Enum
 {
 }",
-
             }.RunAsync();
         }
 
@@ -38,19 +40,20 @@ class C<T> where T : struct, System.Enum
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C<T> where T : {|CS9010:enum|}
 {
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C<T> where T : struct, Enum
 {
 }",
-
             }.RunAsync();
         }
 
@@ -59,11 +62,13 @@ class C<T> where T : struct, Enum
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C<T> where T : {|CS9011:delegate|}
 {
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C<T> where T : System.Delegate
 {
 }",
@@ -75,13 +80,15 @@ class C<T> where T : System.Delegate
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C<T> where T : {|CS9011:delegate|}
 {
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C<T> where T : Delegate

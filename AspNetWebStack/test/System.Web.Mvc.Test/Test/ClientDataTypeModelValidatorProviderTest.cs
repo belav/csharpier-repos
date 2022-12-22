@@ -10,32 +10,59 @@ namespace System.Web.Mvc.Test
 {
     public class ClientDataTypeModelValidatorProviderTest
     {
-        private static readonly ModelMetadataProvider _metadataProvider = new DataAnnotationsModelMetadataProvider();
-        private static readonly ModelValidatorProvider _validatorProvider = new ClientDataTypeModelValidatorProvider();
+        private static readonly ModelMetadataProvider _metadataProvider =
+            new DataAnnotationsModelMetadataProvider();
+        private static readonly ModelValidatorProvider _validatorProvider =
+            new ClientDataTypeModelValidatorProvider();
 
         private bool ReturnsValidator<TValidator>(string propertyName)
         {
-            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(null, typeof(SampleModel), propertyName);
-            IEnumerable<ModelValidator> validators = _validatorProvider.GetValidators(metadata, new ControllerContext());
+            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(
+                null,
+                typeof(SampleModel),
+                propertyName
+            );
+            IEnumerable<ModelValidator> validators = _validatorProvider.GetValidators(
+                metadata,
+                new ControllerContext()
+            );
             return validators.Any(v => v is TValidator);
         }
 
         [Theory]
         [InlineData("Byte"), InlineData("SByte"), InlineData("Int16"), InlineData("UInt16")]
         [InlineData("Int32"), InlineData("UInt32"), InlineData("Int64"), InlineData("UInt64")]
-        [InlineData("Single"), InlineData("Double"), InlineData("Decimal"), InlineData("NullableInt32")]
+        [
+            InlineData("Single"),
+            InlineData("Double"),
+            InlineData("Decimal"),
+            InlineData("NullableInt32")
+        ]
         public void GetValidators_NumericValidatorTypes(string propertyName)
         {
             // Act & assert
-            Assert.True(ReturnsValidator<ClientDataTypeModelValidatorProvider.NumericModelValidator>(propertyName));
+            Assert.True(
+                ReturnsValidator<ClientDataTypeModelValidatorProvider.NumericModelValidator>(
+                    propertyName
+                )
+            );
         }
 
         [Theory]
-        [InlineData("String"), InlineData("Object"), InlineData("DateTime"), InlineData("NullableDateTime")]
+        [
+            InlineData("String"),
+            InlineData("Object"),
+            InlineData("DateTime"),
+            InlineData("NullableDateTime")
+        ]
         public void GetValidators_NonNumericValidatorTypes(string propertyName)
         {
             // Act & assert
-            Assert.False(ReturnsValidator<ClientDataTypeModelValidatorProvider.NumericModelValidator>(propertyName));
+            Assert.False(
+                ReturnsValidator<ClientDataTypeModelValidatorProvider.NumericModelValidator>(
+                    propertyName
+                )
+            );
         }
 
         [Theory]
@@ -43,51 +70,100 @@ namespace System.Web.Mvc.Test
         public void GetValidators_DateTimeValidatorTypes(string propertyName)
         {
             // Act & assert
-            Assert.True(ReturnsValidator<ClientDataTypeModelValidatorProvider.DateModelValidator>(propertyName));
+            Assert.True(
+                ReturnsValidator<ClientDataTypeModelValidatorProvider.DateModelValidator>(
+                    propertyName
+                )
+            );
         }
 
         [Theory]
-        [InlineData("Int32"), InlineData("NullableInt32"), InlineData("String"), InlineData("Object"), InlineData("Time")]
+        [
+            InlineData("Int32"),
+            InlineData("NullableInt32"),
+            InlineData("String"),
+            InlineData("Object"),
+            InlineData("Time")
+        ]
         public void GetValidators_NonDateTimeValidatorTypes(string propertyName)
         {
             // Act & assert
-            Assert.False(ReturnsValidator<ClientDataTypeModelValidatorProvider.DateModelValidator>(propertyName));
+            Assert.False(
+                ReturnsValidator<ClientDataTypeModelValidatorProvider.DateModelValidator>(
+                    propertyName
+                )
+            );
         }
 
         [Fact]
         public void GuardClauses()
         {
             // Arrange
-            ModelMetadata metadata = _metadataProvider.GetMetadataForType(null, typeof(SampleModel));
+            ModelMetadata metadata = _metadataProvider.GetMetadataForType(
+                null,
+                typeof(SampleModel)
+            );
 
             // Act & assert
             Assert.ThrowsArgumentNullOrEmpty(
-                () => new ClientDataTypeModelValidatorProvider.ClientModelValidator(metadata, new ControllerContext(), "testValidationType", errorMessage: null),
-                "errorMessage");
+                () =>
+                    new ClientDataTypeModelValidatorProvider.ClientModelValidator(
+                        metadata,
+                        new ControllerContext(),
+                        "testValidationType",
+                        errorMessage: null
+                    ),
+                "errorMessage"
+            );
 
             Assert.ThrowsArgumentNullOrEmpty(
-                () => new ClientDataTypeModelValidatorProvider.ClientModelValidator(metadata, new ControllerContext(), "testValidationType", errorMessage: String.Empty),
-                "errorMessage");
+                () =>
+                    new ClientDataTypeModelValidatorProvider.ClientModelValidator(
+                        metadata,
+                        new ControllerContext(),
+                        "testValidationType",
+                        errorMessage: String.Empty
+                    ),
+                "errorMessage"
+            );
 
             Assert.ThrowsArgumentNullOrEmpty(
-                () => new ClientDataTypeModelValidatorProvider.ClientModelValidator(metadata, new ControllerContext(), validationType: null, errorMessage: "testErrorMessage"),
-                "validationType");
+                () =>
+                    new ClientDataTypeModelValidatorProvider.ClientModelValidator(
+                        metadata,
+                        new ControllerContext(),
+                        validationType: null,
+                        errorMessage: "testErrorMessage"
+                    ),
+                "validationType"
+            );
 
             Assert.ThrowsArgumentNullOrEmpty(
-                () => new ClientDataTypeModelValidatorProvider.ClientModelValidator(metadata, new ControllerContext(), validationType: String.Empty, errorMessage: "testErrorMessage"),
-                "validationType");
+                () =>
+                    new ClientDataTypeModelValidatorProvider.ClientModelValidator(
+                        metadata,
+                        new ControllerContext(),
+                        validationType: String.Empty,
+                        errorMessage: "testErrorMessage"
+                    ),
+                "validationType"
+            );
         }
 
         [Fact]
         public void GetValidators_ThrowsIfContextIsNull()
         {
             // Arrange
-            ModelMetadata metadata = _metadataProvider.GetMetadataForType(null, typeof(SampleModel));
+            ModelMetadata metadata = _metadataProvider.GetMetadataForType(
+                null,
+                typeof(SampleModel)
+            );
 
             // Act & assert
             Assert.ThrowsArgumentNull(
                 () => _validatorProvider.GetValidators(metadata, null),
-                "context");
+                "context"
+            );
         }
 
         [Fact]
@@ -96,15 +172,23 @@ namespace System.Web.Mvc.Test
             // Act & assert
             Assert.ThrowsArgumentNull(
                 () => _validatorProvider.GetValidators(null, new ControllerContext()),
-                "metadata");
+                "metadata"
+            );
         }
 
         [Fact]
         public void NumericValidator_GetClientValidationRules()
         {
             // Arrange
-            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(null, typeof(SampleModel), "Int32");
-            var validator = new ClientDataTypeModelValidatorProvider.NumericModelValidator(metadata, new ControllerContext());
+            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(
+                null,
+                typeof(SampleModel),
+                "Int32"
+            );
+            var validator = new ClientDataTypeModelValidatorProvider.NumericModelValidator(
+                metadata,
+                new ControllerContext()
+            );
 
             // Act
             ModelClientValidationRule[] rules = validator.GetClientValidationRules().ToArray();
@@ -120,8 +204,15 @@ namespace System.Web.Mvc.Test
         public void DateValidator_GetClientValidationRules()
         {
             // Arrange
-            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(null, typeof(SampleModel), "DateTime");
-            var validator = new ClientDataTypeModelValidatorProvider.DateModelValidator(metadata, new ControllerContext());
+            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(
+                null,
+                typeof(SampleModel),
+                "DateTime"
+            );
+            var validator = new ClientDataTypeModelValidatorProvider.DateModelValidator(
+                metadata,
+                new ControllerContext()
+            );
 
             // Act
             ModelClientValidationRule[] rules = validator.GetClientValidationRules().ToArray();
@@ -138,15 +229,26 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             ObservableModel model = new ObservableModel();
-            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(() => model.TheProperty, typeof(ObservableModel), "TheProperty");
+            ModelMetadata metadata = _metadataProvider.GetMetadataForProperty(
+                () => model.TheProperty,
+                typeof(ObservableModel),
+                "TheProperty"
+            );
             ControllerContext controllerContext = new ControllerContext();
 
             // Act
-            ModelValidator[] validators = new ClientDataTypeModelValidatorProvider().GetValidators(metadata, controllerContext).ToArray();
-            ModelValidationResult[] results = validators.SelectMany(o => o.Validate(model)).ToArray();
+            ModelValidator[] validators = new ClientDataTypeModelValidatorProvider()
+                .GetValidators(metadata, controllerContext)
+                .ToArray();
+            ModelValidationResult[] results = validators
+                .SelectMany(o => o.Validate(model))
+                .ToArray();
 
             // Assert
-            Assert.Equal(new Type[] { typeof(ClientDataTypeModelValidatorProvider.NumericModelValidator) }, Array.ConvertAll(validators, o => o.GetType()));
+            Assert.Equal(
+                new Type[] { typeof(ClientDataTypeModelValidatorProvider.NumericModelValidator) },
+                Array.ConvertAll(validators, o => o.GetType())
+            );
             Assert.Empty(results);
             Assert.False(model.PropertyWasRead());
         }
@@ -156,7 +258,12 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             ModelMetadata metadata = _metadataProvider.GetMetadataForType(null, typeof(object));
-            var validator = new ClientDataTypeModelValidatorProvider.ClientModelValidator(metadata, new ControllerContext(), "testValidationType", "testErrorMessage");
+            var validator = new ClientDataTypeModelValidatorProvider.ClientModelValidator(
+                metadata,
+                new ControllerContext(),
+                "testValidationType",
+                "testErrorMessage"
+            );
 
             // Act
             IEnumerable<ModelValidationResult> result = validator.Validate(null);

@@ -13,8 +13,7 @@ namespace Microsoft.CodeAnalysis
         {
             private readonly ComparisonOptions _options;
 
-            private SymbolKeyComparer(ComparisonOptions options)
-                => _options = options;
+            private SymbolKeyComparer(ComparisonOptions options) => _options = options;
 
             public bool Equals(SymbolKey x, SymbolKey y)
             {
@@ -29,7 +28,7 @@ namespace Microsoft.CodeAnalysis
                 }
                 else
                 {
-                    // This is harder.  To compare these we need to remove the entries related to 
+                    // This is harder.  To compare these we need to remove the entries related to
                     // assemblies.
                     var data1 = RemoveAssemblyKeys(x._symbolKeyData);
                     var data2 = RemoveAssemblyKeys(y._symbolKeyData);
@@ -45,22 +44,28 @@ namespace Microsoft.CodeAnalysis
                 return reader.RemoveAssemblySymbolKeys();
             }
 
-            public int GetHashCode(SymbolKey obj)
-                => obj.GetHashCode();
+            public int GetHashCode(SymbolKey obj) => obj.GetHashCode();
 
-            public static IEqualityComparer<SymbolKey> GetComparer(bool ignoreCase, bool ignoreAssemblyKey)
-                => GetComparer(new ComparisonOptions(ignoreCase, ignoreAssemblyKey));
+            public static IEqualityComparer<SymbolKey> GetComparer(
+                bool ignoreCase,
+                bool ignoreAssemblyKey
+            ) => GetComparer(new ComparisonOptions(ignoreCase, ignoreAssemblyKey));
 
-            private static readonly SymbolKeyComparer[] s_cachedComparers = new SymbolKeyComparer[4];
+            private static readonly SymbolKeyComparer[] s_cachedComparers = new SymbolKeyComparer[
+                4
+            ];
 
-            private static SymbolKeyComparer EnsureInitialized(ref SymbolKeyComparer location, ComparisonOptions options)
+            private static SymbolKeyComparer EnsureInitialized(
+                ref SymbolKeyComparer location,
+                ComparisonOptions options
+            )
             {
                 // This doesn't need to be interlocked since comparers store no state
                 return location ??= new SymbolKeyComparer(options);
             }
 
-            public static IEqualityComparer<SymbolKey> GetComparer(ComparisonOptions options)
-                => EnsureInitialized(ref s_cachedComparers[options.FlagsValue], options);
+            public static IEqualityComparer<SymbolKey> GetComparer(ComparisonOptions options) =>
+                EnsureInitialized(ref s_cachedComparers[options.FlagsValue], options);
         }
     }
 }

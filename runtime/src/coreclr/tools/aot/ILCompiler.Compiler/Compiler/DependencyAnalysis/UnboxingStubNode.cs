@@ -27,7 +27,9 @@ namespace ILCompiler.DependencyAnalysis
         {
             get
             {
-                string sectionName = _targetDetails.IsWindows ? WindowsSectionName : UnixSectionName;
+                string sectionName = _targetDetails.IsWindows
+                    ? WindowsSectionName
+                    : UnixSectionName;
                 return new ObjectNodeSection(sectionName, SectionType.Executable);
             }
         }
@@ -57,7 +59,8 @@ namespace ILCompiler.DependencyAnalysis
             return "unbox_" + nameMangler.GetMangledMethodName(method);
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override int ClassCode => -1846923013;
 

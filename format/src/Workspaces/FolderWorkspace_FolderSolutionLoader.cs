@@ -10,12 +10,21 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
     {
         private static class FolderSolutionLoader
         {
-            private static ImmutableArray<ProjectLoader> ProjectLoaders
-                => ImmutableArray.Create<ProjectLoader>(new CSharpProjectLoader(), new VisualBasicProjectLoader());
+            private static ImmutableArray<ProjectLoader> ProjectLoaders =>
+                ImmutableArray.Create<ProjectLoader>(
+                    new CSharpProjectLoader(),
+                    new VisualBasicProjectLoader()
+                );
 
-            public static SolutionInfo LoadSolutionInfo(string folderPath, SourceFileMatcher fileMatcher)
+            public static SolutionInfo LoadSolutionInfo(
+                string folderPath,
+                SourceFileMatcher fileMatcher
+            )
             {
-                var absoluteFolderPath = Path.GetFullPath(folderPath, Directory.GetCurrentDirectory());
+                var absoluteFolderPath = Path.GetFullPath(
+                    folderPath,
+                    Directory.GetCurrentDirectory()
+                );
 
                 var filePaths = GetMatchingFilePaths(absoluteFolderPath, fileMatcher);
                 var editorConfigPaths = EditorConfigFinder.GetEditorConfigPaths(folderPath);
@@ -25,7 +34,11 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
                 // Create projects for each of the supported languages.
                 foreach (var loader in ProjectLoaders)
                 {
-                    var projectInfo = loader.LoadProjectInfo(folderPath, filePaths, editorConfigPaths);
+                    var projectInfo = loader.LoadProjectInfo(
+                        folderPath,
+                        filePaths,
+                        editorConfigPaths
+                    );
                     if (projectInfo is null)
                     {
                         continue;
@@ -39,10 +52,14 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
                     SolutionId.CreateNewId(debugName: absoluteFolderPath),
                     version: default,
                     absoluteFolderPath,
-                    projectInfos);
+                    projectInfos
+                );
             }
 
-            private static ImmutableArray<string> GetMatchingFilePaths(string folderPath, SourceFileMatcher fileMatcher)
+            private static ImmutableArray<string> GetMatchingFilePaths(
+                string folderPath,
+                SourceFileMatcher fileMatcher
+            )
             {
                 // If only file paths were given to be included, then avoid matching against all
                 // the files beneath the folderPath and instead check if the specified files exist.
@@ -59,9 +76,11 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
                     {
                         // The FileSystemGlobbing.Matcher only supports the '*' wildcard and paths
                         // ending in a directory separator are treated as folder paths.
-                        if (globs[index].Contains('*') ||
-                            globs[index].EndsWith('\\') ||
-                            globs[index].EndsWith('/'))
+                        if (
+                            globs[index].Contains('*')
+                            || globs[index].EndsWith('\\')
+                            || globs[index].EndsWith('/')
+                        )
                         {
                             return false;
                         }
@@ -70,7 +89,10 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
                     return true;
                 }
 
-                static ImmutableArray<string> ValidateFilePaths(string folderPath, ImmutableArray<string> paths)
+                static ImmutableArray<string> ValidateFilePaths(
+                    string folderPath,
+                    ImmutableArray<string> paths
+                )
                 {
                     var filePaths = ImmutableArray.CreateBuilder<string>(paths.Length);
                     for (var index = 0; index < paths.Length; index++)

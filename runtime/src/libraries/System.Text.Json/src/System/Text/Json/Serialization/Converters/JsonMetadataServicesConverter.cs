@@ -40,10 +40,14 @@ namespace System.Text.Json.Serialization.Converters
         internal override Type? ElementType => Converter.ElementType;
 
         internal override bool ConstructorIsParameterized => Converter.ConstructorIsParameterized;
-        internal override bool SupportsCreateObjectDelegate => Converter.SupportsCreateObjectDelegate;
+        internal override bool SupportsCreateObjectDelegate =>
+            Converter.SupportsCreateObjectDelegate;
         internal override bool CanHaveMetadata => Converter.CanHaveMetadata;
 
-        public JsonMetadataServicesConverter(Func<JsonConverter<T>> converterCreator, ConverterStrategy converterStrategy)
+        public JsonMetadataServicesConverter(
+            Func<JsonConverter<T>> converterCreator,
+            ConverterStrategy converterStrategy
+        )
         {
             if (converterCreator is null)
             {
@@ -60,20 +64,34 @@ namespace System.Text.Json.Serialization.Converters
             _converterStrategy = converter.ConverterStrategy;
         }
 
-        internal override bool OnTryRead(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options, scoped ref ReadStack state, out T? value)
-             => Converter.OnTryRead(ref reader, typeToConvert, options, ref state, out value);
+        internal override bool OnTryRead(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options,
+            scoped ref ReadStack state,
+            out T? value
+        ) => Converter.OnTryRead(ref reader, typeToConvert, options, ref state, out value);
 
-        internal override bool OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, ref WriteStack state)
+        internal override bool OnTryWrite(
+            Utf8JsonWriter writer,
+            T value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        )
         {
             JsonTypeInfo jsonTypeInfo = state.Current.JsonTypeInfo;
 
             Debug.Assert(options == jsonTypeInfo.Options);
 
-            if (!state.SupportContinuation &&
-                jsonTypeInfo.CanUseSerializeHandler &&
-                !state.CurrentContainsMetadata) // Do not use the fast path if state needs to write metadata.
+            if (
+                !state.SupportContinuation
+                && jsonTypeInfo.CanUseSerializeHandler
+                && !state.CurrentContainsMetadata
+            ) // Do not use the fast path if state needs to write metadata.
             {
-                Debug.Assert(jsonTypeInfo is JsonTypeInfo<T> typeInfo && typeInfo.SerializeHandler != null);
+                Debug.Assert(
+                    jsonTypeInfo is JsonTypeInfo<T> typeInfo && typeInfo.SerializeHandler != null
+                );
                 Debug.Assert(options.SerializerContext?.CanUseSerializationLogic == true);
                 ((JsonTypeInfo<T>)jsonTypeInfo).SerializeHandler!(writer, value);
                 return true;
@@ -83,7 +101,9 @@ namespace System.Text.Json.Serialization.Converters
             return Converter.OnTryWrite(writer, value, options, ref state);
         }
 
-        internal override void ConfigureJsonTypeInfo(JsonTypeInfo jsonTypeInfo, JsonSerializerOptions options)
-            => Converter.ConfigureJsonTypeInfo(jsonTypeInfo, options);
+        internal override void ConfigureJsonTypeInfo(
+            JsonTypeInfo jsonTypeInfo,
+            JsonSerializerOptions options
+        ) => Converter.ConfigureJsonTypeInfo(jsonTypeInfo, options);
     }
 }

@@ -13,7 +13,12 @@ namespace ILCompiler.DependencyAnalysis
     {
         private struct HeaderItem
         {
-            public HeaderItem(ReadyToRunSectionType id, ObjectNode node, ISymbolNode startSymbol, ISymbolNode endSymbol)
+            public HeaderItem(
+                ReadyToRunSectionType id,
+                ObjectNode node,
+                ISymbolNode startSymbol,
+                ISymbolNode endSymbol
+            )
             {
                 Id = id;
                 Node = node;
@@ -35,7 +40,12 @@ namespace ILCompiler.DependencyAnalysis
             _target = target;
         }
 
-        public void Add(ReadyToRunSectionType id, ObjectNode node, ISymbolNode startSymbol, ISymbolNode endSymbol = null)
+        public void Add(
+            ReadyToRunSectionType id,
+            ObjectNode node,
+            ISymbolNode startSymbol,
+            ISymbolNode endSymbol = null
+        )
         {
             _items.Add(new HeaderItem(id, node, startSymbol, endSymbol));
         }
@@ -45,10 +55,12 @@ namespace ILCompiler.DependencyAnalysis
             sb.Append(nameMangler.CompilationUnitPrefix);
             sb.Append("__ReadyToRunHeader");
         }
+
         public int Offset => 0;
         public override bool IsShareable => false;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override bool StaticDependenciesAreComputed => true;
 

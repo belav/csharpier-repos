@@ -24,15 +24,11 @@ namespace System.Security.Cryptography
 
         [SupportedOSPlatform("windows")]
         public AesCng(string keyName)
-            : this(keyName, CngProvider.MicrosoftSoftwareKeyStorageProvider)
-        {
-        }
+            : this(keyName, CngProvider.MicrosoftSoftwareKeyStorageProvider) { }
 
         [SupportedOSPlatform("windows")]
         public AesCng(string keyName, CngProvider provider)
-            : this(keyName, provider, CngKeyOpenOptions.None)
-        {
-        }
+            : this(keyName, provider, CngKeyOpenOptions.None) { }
 
         [SupportedOSPlatform("windows")]
         public AesCng(string keyName, CngProvider provider, CngKeyOpenOptions openOptions)
@@ -42,27 +38,14 @@ namespace System.Security.Cryptography
 
         public override byte[] Key
         {
-            get
-            {
-                return _core.GetKeyIfExportable();
-            }
-            set
-            {
-                _core.SetKey(value);
-            }
+            get { return _core.GetKeyIfExportable(); }
+            set { _core.SetKey(value); }
         }
 
         public override int KeySize
         {
-            get
-            {
-                return base.KeySize;
-            }
-
-            set
-            {
-                _core.SetKeySize(value, this);
-            }
+            get { return base.KeySize; }
+            set { _core.SetKeySize(value, this); }
         }
 
         public override ICryptoTransform CreateDecryptor()
@@ -101,18 +84,26 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> ciphertext,
             Span<byte> destination,
             PaddingMode paddingMode,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ILiteSymmetricCipher cipher = _core.CreateLiteSymmetricCipher(
                 iv: default,
                 encrypting: false,
                 paddingMode,
                 CipherMode.ECB,
-                feedbackSizeInBits: 0);
+                feedbackSizeInBits: 0
+            );
 
             using (cipher)
             {
-                return UniversalCryptoOneShot.OneShotDecrypt(cipher, paddingMode, ciphertext, destination, out bytesWritten);
+                return UniversalCryptoOneShot.OneShotDecrypt(
+                    cipher,
+                    paddingMode,
+                    ciphertext,
+                    destination,
+                    out bytesWritten
+                );
             }
         }
 
@@ -120,18 +111,26 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> plaintext,
             Span<byte> destination,
             PaddingMode paddingMode,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ILiteSymmetricCipher cipher = _core.CreateLiteSymmetricCipher(
                 iv: default,
                 encrypting: true,
                 paddingMode,
                 CipherMode.ECB,
-                feedbackSizeInBits: 0);
+                feedbackSizeInBits: 0
+            );
 
             using (cipher)
             {
-                return UniversalCryptoOneShot.OneShotEncrypt(cipher, paddingMode, plaintext, destination, out bytesWritten);
+                return UniversalCryptoOneShot.OneShotEncrypt(
+                    cipher,
+                    paddingMode,
+                    plaintext,
+                    destination,
+                    out bytesWritten
+                );
             }
         }
 
@@ -140,18 +139,26 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> iv,
             Span<byte> destination,
             PaddingMode paddingMode,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ILiteSymmetricCipher cipher = _core.CreateLiteSymmetricCipher(
                 iv,
                 encrypting: true,
                 paddingMode,
                 CipherMode.CBC,
-                feedbackSizeInBits: 0);
+                feedbackSizeInBits: 0
+            );
 
             using (cipher)
             {
-                return UniversalCryptoOneShot.OneShotEncrypt(cipher, paddingMode, plaintext, destination, out bytesWritten);
+                return UniversalCryptoOneShot.OneShotEncrypt(
+                    cipher,
+                    paddingMode,
+                    plaintext,
+                    destination,
+                    out bytesWritten
+                );
             }
         }
 
@@ -160,18 +167,26 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> iv,
             Span<byte> destination,
             PaddingMode paddingMode,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ILiteSymmetricCipher cipher = _core.CreateLiteSymmetricCipher(
                 iv,
                 encrypting: false,
                 paddingMode,
                 CipherMode.CBC,
-                feedbackSizeInBits: 0);
+                feedbackSizeInBits: 0
+            );
 
             using (cipher)
             {
-                return UniversalCryptoOneShot.OneShotDecrypt(cipher, paddingMode, ciphertext, destination, out bytesWritten);
+                return UniversalCryptoOneShot.OneShotDecrypt(
+                    cipher,
+                    paddingMode,
+                    ciphertext,
+                    destination,
+                    out bytesWritten
+                );
             }
         }
 
@@ -181,18 +196,26 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             PaddingMode paddingMode,
             int feedbackSizeInBits,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ILiteSymmetricCipher cipher = _core.CreateLiteSymmetricCipher(
                 iv,
                 encrypting: false,
                 paddingMode,
                 CipherMode.CFB,
-                feedbackSizeInBits);
+                feedbackSizeInBits
+            );
 
             using (cipher)
             {
-                return UniversalCryptoOneShot.OneShotDecrypt(cipher, paddingMode, ciphertext, destination, out bytesWritten);
+                return UniversalCryptoOneShot.OneShotDecrypt(
+                    cipher,
+                    paddingMode,
+                    ciphertext,
+                    destination,
+                    out bytesWritten
+                );
             }
         }
 
@@ -202,18 +225,26 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             PaddingMode paddingMode,
             int feedbackSizeInBits,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ILiteSymmetricCipher cipher = _core.CreateLiteSymmetricCipher(
                 iv,
                 encrypting: true,
                 paddingMode,
                 CipherMode.CFB,
-                feedbackSizeInBits);
+                feedbackSizeInBits
+            );
 
             using (cipher)
             {
-                return UniversalCryptoOneShot.OneShotEncrypt(cipher, paddingMode, plaintext, destination, out bytesWritten);
+                return UniversalCryptoOneShot.OneShotEncrypt(
+                    cipher,
+                    paddingMode,
+                    plaintext,
+                    destination,
+                    out bytesWritten
+                );
             }
         }
 
@@ -222,8 +253,16 @@ namespace System.Security.Cryptography
             base.Dispose(disposing);
         }
 
-        byte[] ICngSymmetricAlgorithm.BaseKey { get { return base.Key; } set { base.Key = value; } }
-        int ICngSymmetricAlgorithm.BaseKeySize { get { return base.KeySize; } set { base.KeySize = value; } }
+        byte[] ICngSymmetricAlgorithm.BaseKey
+        {
+            get { return base.Key; }
+            set { base.Key = value; }
+        }
+        int ICngSymmetricAlgorithm.BaseKeySize
+        {
+            get { return base.KeySize; }
+            set { base.KeySize = value; }
+        }
 
         bool ICngSymmetricAlgorithm.IsWeakKey(byte[] key)
         {
@@ -235,7 +274,10 @@ namespace System.Security.Cryptography
             return this.GetPaddingSize(mode, feedbackSizeBits);
         }
 
-        SafeAlgorithmHandle ICngSymmetricAlgorithm.GetEphemeralModeHandle(CipherMode mode, int feedbackSizeInBits)
+        SafeAlgorithmHandle ICngSymmetricAlgorithm.GetEphemeralModeHandle(
+            CipherMode mode,
+            int feedbackSizeInBits
+        )
         {
             try
             {

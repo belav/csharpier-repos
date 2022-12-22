@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis
             ArrayBuilder<SyntaxInputNode> syntaxInputBuilder,
             ArrayBuilder<IIncrementalGeneratorOutputNode> outputNodes,
             ISyntaxHelper syntaxHelper,
-            string sourceExtension)
+            string sourceExtension
+        )
         {
             _syntaxInputBuilder = syntaxInputBuilder;
             _outputNodes = outputNodes;
@@ -37,35 +38,102 @@ namespace Microsoft.CodeAnalysis
             _sourceExtension = sourceExtension;
         }
 
-        public SyntaxValueProvider SyntaxProvider => new(this, _syntaxInputBuilder, RegisterOutput, SyntaxHelper);
+        public SyntaxValueProvider SyntaxProvider =>
+            new(this, _syntaxInputBuilder, RegisterOutput, SyntaxHelper);
 
-        public IncrementalValueProvider<Compilation> CompilationProvider => new IncrementalValueProvider<Compilation>(SharedInputNodes.Compilation.WithRegisterOutput(RegisterOutput).WithTrackingName(WellKnownGeneratorInputs.Compilation));
+        public IncrementalValueProvider<Compilation> CompilationProvider =>
+            new IncrementalValueProvider<Compilation>(
+                SharedInputNodes.Compilation
+                    .WithRegisterOutput(RegisterOutput)
+                    .WithTrackingName(WellKnownGeneratorInputs.Compilation)
+            );
 
         // Use a ReferenceEqualityComparer as we want to rerun this stage whenever the CompilationOptions changes at all
         // (e.g. we don't care if it has the same conceptual value, we're ok rerunning as long as the actual instance
         // changes).
-        internal IncrementalValueProvider<CompilationOptions> CompilationOptionsProvider
-            => new(SharedInputNodes.CompilationOptions.WithRegisterOutput(RegisterOutput)
-                .WithComparer(ReferenceEqualityComparer.Instance)
-                .WithTrackingName(WellKnownGeneratorInputs.CompilationOptions));
+        internal IncrementalValueProvider<CompilationOptions> CompilationOptionsProvider =>
+            new(
+                SharedInputNodes.CompilationOptions
+                    .WithRegisterOutput(RegisterOutput)
+                    .WithComparer(ReferenceEqualityComparer.Instance)
+                    .WithTrackingName(WellKnownGeneratorInputs.CompilationOptions)
+            );
 
-        public IncrementalValueProvider<ParseOptions> ParseOptionsProvider => new IncrementalValueProvider<ParseOptions>(SharedInputNodes.ParseOptions.WithRegisterOutput(RegisterOutput).WithTrackingName(WellKnownGeneratorInputs.ParseOptions));
+        public IncrementalValueProvider<ParseOptions> ParseOptionsProvider =>
+            new IncrementalValueProvider<ParseOptions>(
+                SharedInputNodes.ParseOptions
+                    .WithRegisterOutput(RegisterOutput)
+                    .WithTrackingName(WellKnownGeneratorInputs.ParseOptions)
+            );
 
-        public IncrementalValuesProvider<AdditionalText> AdditionalTextsProvider => new IncrementalValuesProvider<AdditionalText>(SharedInputNodes.AdditionalTexts.WithRegisterOutput(RegisterOutput).WithTrackingName(WellKnownGeneratorInputs.AdditionalTexts));
+        public IncrementalValuesProvider<AdditionalText> AdditionalTextsProvider =>
+            new IncrementalValuesProvider<AdditionalText>(
+                SharedInputNodes.AdditionalTexts
+                    .WithRegisterOutput(RegisterOutput)
+                    .WithTrackingName(WellKnownGeneratorInputs.AdditionalTexts)
+            );
 
-        public IncrementalValueProvider<AnalyzerConfigOptionsProvider> AnalyzerConfigOptionsProvider => new IncrementalValueProvider<AnalyzerConfigOptionsProvider>(SharedInputNodes.AnalyzerConfigOptions.WithRegisterOutput(RegisterOutput).WithTrackingName(WellKnownGeneratorInputs.AnalyzerConfigOptions));
+        public IncrementalValueProvider<AnalyzerConfigOptionsProvider> AnalyzerConfigOptionsProvider =>
+            new IncrementalValueProvider<AnalyzerConfigOptionsProvider>(
+                SharedInputNodes.AnalyzerConfigOptions
+                    .WithRegisterOutput(RegisterOutput)
+                    .WithTrackingName(WellKnownGeneratorInputs.AnalyzerConfigOptions)
+            );
 
-        public IncrementalValuesProvider<MetadataReference> MetadataReferencesProvider => new IncrementalValuesProvider<MetadataReference>(SharedInputNodes.MetadataReferences.WithRegisterOutput(RegisterOutput).WithTrackingName(WellKnownGeneratorInputs.MetadataReferences));
+        public IncrementalValuesProvider<MetadataReference> MetadataReferencesProvider =>
+            new IncrementalValuesProvider<MetadataReference>(
+                SharedInputNodes.MetadataReferences
+                    .WithRegisterOutput(RegisterOutput)
+                    .WithTrackingName(WellKnownGeneratorInputs.MetadataReferences)
+            );
 
-        public void RegisterSourceOutput<TSource>(IncrementalValueProvider<TSource> source, Action<SourceProductionContext, TSource> action) => RegisterSourceOutput(source.Node, action, IncrementalGeneratorOutputKind.Source, _sourceExtension);
+        public void RegisterSourceOutput<TSource>(
+            IncrementalValueProvider<TSource> source,
+            Action<SourceProductionContext, TSource> action
+        ) =>
+            RegisterSourceOutput(
+                source.Node,
+                action,
+                IncrementalGeneratorOutputKind.Source,
+                _sourceExtension
+            );
 
-        public void RegisterSourceOutput<TSource>(IncrementalValuesProvider<TSource> source, Action<SourceProductionContext, TSource> action) => RegisterSourceOutput(source.Node, action, IncrementalGeneratorOutputKind.Source, _sourceExtension);
+        public void RegisterSourceOutput<TSource>(
+            IncrementalValuesProvider<TSource> source,
+            Action<SourceProductionContext, TSource> action
+        ) =>
+            RegisterSourceOutput(
+                source.Node,
+                action,
+                IncrementalGeneratorOutputKind.Source,
+                _sourceExtension
+            );
 
-        public void RegisterImplementationSourceOutput<TSource>(IncrementalValueProvider<TSource> source, Action<SourceProductionContext, TSource> action) => RegisterSourceOutput(source.Node, action, IncrementalGeneratorOutputKind.Implementation, _sourceExtension);
+        public void RegisterImplementationSourceOutput<TSource>(
+            IncrementalValueProvider<TSource> source,
+            Action<SourceProductionContext, TSource> action
+        ) =>
+            RegisterSourceOutput(
+                source.Node,
+                action,
+                IncrementalGeneratorOutputKind.Implementation,
+                _sourceExtension
+            );
 
-        public void RegisterImplementationSourceOutput<TSource>(IncrementalValuesProvider<TSource> source, Action<SourceProductionContext, TSource> action) => RegisterSourceOutput(source.Node, action, IncrementalGeneratorOutputKind.Implementation, _sourceExtension);
+        public void RegisterImplementationSourceOutput<TSource>(
+            IncrementalValuesProvider<TSource> source,
+            Action<SourceProductionContext, TSource> action
+        ) =>
+            RegisterSourceOutput(
+                source.Node,
+                action,
+                IncrementalGeneratorOutputKind.Implementation,
+                _sourceExtension
+            );
 
-        public void RegisterPostInitializationOutput(Action<IncrementalGeneratorPostInitializationContext> callback) => _outputNodes.Add(new PostInitOutputNode(callback.WrapUserAction()));
+        public void RegisterPostInitializationOutput(
+            Action<IncrementalGeneratorPostInitializationContext> callback
+        ) => _outputNodes.Add(new PostInitOutputNode(callback.WrapUserAction()));
 
         private void RegisterOutput(IIncrementalGeneratorOutputNode outputNode)
         {
@@ -75,9 +143,16 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        private static void RegisterSourceOutput<TSource>(IIncrementalGeneratorNode<TSource> node, Action<SourceProductionContext, TSource> action, IncrementalGeneratorOutputKind kind, string sourceExt)
+        private static void RegisterSourceOutput<TSource>(
+            IIncrementalGeneratorNode<TSource> node,
+            Action<SourceProductionContext, TSource> action,
+            IncrementalGeneratorOutputKind kind,
+            string sourceExt
+        )
         {
-            node.RegisterOutput(new SourceOutputNode<TSource>(node, action.WrapUserAction(), kind, sourceExt));
+            node.RegisterOutput(
+                new SourceOutputNode<TSource>(node, action.WrapUserAction(), kind, sourceExt)
+            );
         }
     }
 
@@ -88,7 +163,10 @@ namespace Microsoft.CodeAnalysis
     {
         internal readonly AdditionalSourcesCollection AdditionalSources;
 
-        internal IncrementalGeneratorPostInitializationContext(AdditionalSourcesCollection additionalSources, CancellationToken cancellationToken)
+        internal IncrementalGeneratorPostInitializationContext(
+            AdditionalSourcesCollection additionalSources,
+            CancellationToken cancellationToken
+        )
         {
             AdditionalSources = additionalSources;
             CancellationToken = cancellationToken;
@@ -104,14 +182,16 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="hintName">An identifier that can be used to reference this source text, must be unique within this generator</param>
         /// <param name="source">The source code to add to the compilation</param>
-        public void AddSource(string hintName, string source) => AddSource(hintName, SourceText.From(source, Encoding.UTF8));
+        public void AddSource(string hintName, string source) =>
+            AddSource(hintName, SourceText.From(source, Encoding.UTF8));
 
         /// <summary>
         /// Adds a <see cref="SourceText"/> to the compilation that will be available during subsequent phases
         /// </summary>
         /// <param name="hintName">An identifier that can be used to reference this source text, must be unique within this generator</param>
         /// <param name="sourceText">The <see cref="SourceText"/> to add to the compilation</param>
-        public void AddSource(string hintName, SourceText sourceText) => AdditionalSources.Add(hintName, sourceText);
+        public void AddSource(string hintName, SourceText sourceText) =>
+            AdditionalSources.Add(hintName, sourceText);
     }
 
     /// <summary>
@@ -122,7 +202,11 @@ namespace Microsoft.CodeAnalysis
         internal readonly AdditionalSourcesCollection Sources;
         internal readonly DiagnosticBag Diagnostics;
 
-        internal SourceProductionContext(AdditionalSourcesCollection sources, DiagnosticBag diagnostics, CancellationToken cancellationToken)
+        internal SourceProductionContext(
+            AdditionalSourcesCollection sources,
+            DiagnosticBag diagnostics,
+            CancellationToken cancellationToken
+        )
         {
             CancellationToken = cancellationToken;
             Sources = sources;
@@ -136,17 +220,19 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="hintName">An identifier that can be used to reference this source text, must be unique within this generator</param>
         /// <param name="source">The source code to add to the compilation</param>
-        public void AddSource(string hintName, string source) => AddSource(hintName, SourceText.From(source, Encoding.UTF8));
+        public void AddSource(string hintName, string source) =>
+            AddSource(hintName, SourceText.From(source, Encoding.UTF8));
 
         /// <summary>
         /// Adds a <see cref="SourceText"/> to the compilation
         /// </summary>
         /// <param name="hintName">An identifier that can be used to reference this source text, must be unique within this generator</param>
         /// <param name="sourceText">The <see cref="SourceText"/> to add to the compilation</param>
-        public void AddSource(string hintName, SourceText sourceText) => Sources.Add(hintName, sourceText);
+        public void AddSource(string hintName, SourceText sourceText) =>
+            Sources.Add(hintName, sourceText);
 
         /// <summary>
-        /// Adds a <see cref="Diagnostic"/> to the users compilation 
+        /// Adds a <see cref="Diagnostic"/> to the users compilation
         /// </summary>
         /// <param name="diagnostic">The diagnostic that should be added to the compilation</param>
         /// <remarks>
@@ -166,7 +252,11 @@ namespace Microsoft.CodeAnalysis
 
         internal readonly GeneratorRunStateTable.Builder GeneratorRunStateBuilder;
 
-        public IncrementalExecutionContext(DriverStateTable.Builder? tableBuilder, GeneratorRunStateTable.Builder generatorRunStateBuilder, AdditionalSourcesCollection sources)
+        public IncrementalExecutionContext(
+            DriverStateTable.Builder? tableBuilder,
+            GeneratorRunStateTable.Builder generatorRunStateBuilder,
+            AdditionalSourcesCollection sources
+        )
         {
             TableBuilder = tableBuilder;
             GeneratorRunStateBuilder = generatorRunStateBuilder;
@@ -174,8 +264,16 @@ namespace Microsoft.CodeAnalysis
             Diagnostics = DiagnosticBag.GetInstance();
         }
 
-        internal (ImmutableArray<GeneratedSourceText> sources, ImmutableArray<Diagnostic> diagnostics, GeneratorRunStateTable executedSteps) ToImmutableAndFree()
-                => (Sources.ToImmutableAndFree(), Diagnostics.ToReadOnlyAndFree(), GeneratorRunStateBuilder.ToImmutableAndFree());
+        internal (
+            ImmutableArray<GeneratedSourceText> sources,
+            ImmutableArray<Diagnostic> diagnostics,
+            GeneratorRunStateTable executedSteps
+        ) ToImmutableAndFree() =>
+            (
+                Sources.ToImmutableAndFree(),
+                Diagnostics.ToReadOnlyAndFree(),
+                GeneratorRunStateBuilder.ToImmutableAndFree()
+            );
 
         internal void Free()
         {

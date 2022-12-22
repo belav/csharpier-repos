@@ -19,15 +19,22 @@ namespace System.Runtime.CompilerServices
         private static unsafe void* GetSpanDataFrom(
             RuntimeFieldHandle fldHandle,
             RuntimeTypeHandle targetTypeHandle,
-            out int count)
+            out int count
+        )
         {
-            fixed (int *pCount = &count)
+            fixed (int* pCount = &count)
             {
-                return (void*)GetSpanDataFrom(fldHandle.Value, targetTypeHandle.Value, new IntPtr(pCount));
+                return (void*)GetSpanDataFrom(
+                    fldHandle.Value,
+                    targetTypeHandle.Value,
+                    new IntPtr(pCount)
+                );
             }
         }
 
-        [Obsolete("OffsetToStringData has been deprecated. Use string.GetPinnableReference() instead.")]
+        [Obsolete(
+            "OffsetToStringData has been deprecated. Use string.GetPinnableReference() instead."
+        )]
         public static int OffsetToStringData
         {
             [Intrinsic]
@@ -81,9 +88,7 @@ namespace System.Runtime.CompilerServices
             return SufficientExecutionStack();
         }
 
-        public static void PrepareDelegate(Delegate d)
-        {
-        }
+        public static void PrepareDelegate(Delegate d) { }
 
         public static void PrepareMethod(RuntimeMethodHandle method)
         {
@@ -95,13 +100,19 @@ namespace System.Runtime.CompilerServices
             }
         }
 
-        public static void PrepareMethod(RuntimeMethodHandle method, RuntimeTypeHandle[]? instantiation)
+        public static void PrepareMethod(
+            RuntimeMethodHandle method,
+            RuntimeTypeHandle[]? instantiation
+        )
         {
             if (method.IsNullHandle())
                 throw new ArgumentException(SR.Argument_InvalidHandle);
             unsafe
             {
-                IntPtr[]? instantiations = RuntimeTypeHandle.CopyRuntimeTypeHandles(instantiation, out int length);
+                IntPtr[]? instantiations = RuntimeTypeHandle.CopyRuntimeTypeHandles(
+                    instantiation,
+                    out int length
+                );
                 fixed (IntPtr* pinst = instantiations)
                 {
                     PrepareMethod(method.Value, pinst, length);
@@ -127,7 +138,8 @@ namespace System.Runtime.CompilerServices
         internal static ref byte GetRawData(this object obj) => ref obj.GetRawData();
 
         [Intrinsic]
-        public static bool IsReferenceOrContainsReferences<T>() => IsReferenceOrContainsReferences<T>();
+        public static bool IsReferenceOrContainsReferences<T>() =>
+            IsReferenceOrContainsReferences<T>();
 
         [Intrinsic]
         internal static bool IsBitwiseEquatable<T>() => IsBitwiseEquatable<T>();
@@ -146,13 +158,18 @@ namespace System.Runtime.CompilerServices
         // Mono uses a conservative GC so there is no need for this API to be full implemented.
         internal unsafe ref struct GCFrameRegistration
         {
-            public GCFrameRegistration(void* allocation, uint elemCount, bool areByRefs = true)
-            {
-            }
+            public GCFrameRegistration(void* allocation, uint elemCount, bool areByRefs = true) { }
         }
 
-        internal static unsafe void RegisterForGCReporting(GCFrameRegistration* pRegistration) { /* nop */ }
-        internal static unsafe void UnregisterForGCReporting(GCFrameRegistration* pRegistration) { /* nop */ }
+        internal static unsafe void RegisterForGCReporting(
+            GCFrameRegistration* pRegistration
+        ) { /* nop */
+        }
+
+        internal static unsafe void UnregisterForGCReporting(
+            GCFrameRegistration* pRegistration
+        ) { /* nop */
+        }
 
         public static object GetUninitializedObject(
             // This API doesn't call any constructors, but the type needs to be seen as constructed.
@@ -160,8 +177,12 @@ namespace System.Runtime.CompilerServices
             // This obviously won't cover a type with no constructor. Reference types with no
             // constructor are an academic problem. Valuetypes with no constructors are a problem,
             // but IL Linker currently treats them as always implicitly boxed.
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type type)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                Type type
+        )
         {
             if (type is not RuntimeType rt)
             {
@@ -173,9 +194,12 @@ namespace System.Runtime.CompilerServices
             return GetUninitializedObjectInternal(new RuntimeTypeHandle(rt).Value);
         }
 
-
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern unsafe void PrepareMethod(IntPtr method, IntPtr* instantiations, int ninst);
+        private static extern unsafe void PrepareMethod(
+            IntPtr method,
+            IntPtr* instantiations,
+            int ninst
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern object GetUninitializedObjectInternal(IntPtr type);
@@ -187,7 +211,8 @@ namespace System.Runtime.CompilerServices
         private static extern unsafe IntPtr GetSpanDataFrom(
             IntPtr fldHandle,
             IntPtr targetTypeHandle,
-            IntPtr count);
+            IntPtr count
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern void RunClassConstructor(IntPtr type);

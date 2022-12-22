@@ -11,7 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class RelationalMapToJsonConvention : IEntityTypeAnnotationChangedConvention, IModelFinalizingConvention
+public class RelationalMapToJsonConvention
+    : IEntityTypeAnnotationChangedConvention,
+        IModelFinalizingConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="RelationalMapToJsonConvention" />.
@@ -20,7 +22,8 @@ public class RelationalMapToJsonConvention : IEntityTypeAnnotationChangedConvent
     /// <param name="relationalDependencies">Parameter object containing relational dependencies for this convention.</param>
     public RelationalMapToJsonConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
     {
         Dependencies = dependencies;
         RelationalDependencies = relationalDependencies;
@@ -42,7 +45,8 @@ public class RelationalMapToJsonConvention : IEntityTypeAnnotationChangedConvent
         string name,
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation,
-        IConventionContext<IConventionAnnotation> context)
+        IConventionContext<IConventionAnnotation> context
+    )
     {
         if (name != RelationalAnnotationNames.ContainerColumnName)
         {
@@ -52,8 +56,9 @@ public class RelationalMapToJsonConvention : IEntityTypeAnnotationChangedConvent
         var jsonColumnName = annotation?.Value as string;
         if (!string.IsNullOrEmpty(jsonColumnName))
         {
-            var jsonColumnTypeMapping = ((IRelationalTypeMappingSource)Dependencies.TypeMappingSource).FindMapping(
-                typeof(JsonElement))!;
+            var jsonColumnTypeMapping = (
+                (IRelationalTypeMappingSource)Dependencies.TypeMappingSource
+            ).FindMapping(typeof(JsonElement))!;
 
             entityTypeBuilder.Metadata.SetContainerColumnTypeMapping(jsonColumnTypeMapping);
         }
@@ -66,11 +71,20 @@ public class RelationalMapToJsonConvention : IEntityTypeAnnotationChangedConvent
     /// <inheritdoc />
     public virtual void ProcessModelFinalizing(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
-        foreach (var jsonEntityType in modelBuilder.Metadata.GetEntityTypes().Where(e => e.IsMappedToJson()))
+        foreach (
+            var jsonEntityType in modelBuilder.Metadata
+                .GetEntityTypes()
+                .Where(e => e.IsMappedToJson())
+        )
         {
-            foreach (var enumProperty in jsonEntityType.GetDeclaredProperties().Where(p => p.ClrType.IsEnum))
+            foreach (
+                var enumProperty in jsonEntityType
+                    .GetDeclaredProperties()
+                    .Where(p => p.ClrType.IsEnum)
+            )
             {
                 // by default store enums as strings - values should be human-readable
                 enumProperty.Builder.HasConversion(typeof(string));

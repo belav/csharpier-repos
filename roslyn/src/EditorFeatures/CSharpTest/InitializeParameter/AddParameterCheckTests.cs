@@ -16,8 +16,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 {
-    using VerifyCS = CSharpCodeRefactoringVerifier<
-        CSharpAddParameterCheckCodeRefactoringProvider>;
+    using VerifyCS = CSharpCodeRefactoringVerifier<CSharpAddParameterCheckCodeRefactoringProvider>;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsInitializeParameter)]
     public class AddParameterCheckTests
@@ -33,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         [Fact]
         public async Task TestSimpleReferenceType_AlreadyNullChecked()
         {
-            var testCode = @"
+            var testCode =
+                @"
 using System;
 
 class C
@@ -58,7 +58,7 @@ class C
         public async Task TestSimpleReferenceType()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C
@@ -67,7 +67,7 @@ class C
     {
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -79,7 +79,8 @@ class C
             throw new ArgumentNullException(nameof(s));
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -88,7 +89,8 @@ class C
             await new VerifyCS.Test
             {
                 LanguageVersion = LanguageVersion.CSharp6,
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -97,7 +99,8 @@ class C
     {
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -117,7 +120,7 @@ class C
         public async Task TestNullable()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C
@@ -126,7 +129,7 @@ class C
     {
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -138,13 +141,15 @@ class C
             throw new ArgumentNullException(nameof(i));
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(47030, "https://github.com/dotnet/roslyn/issues/47030")]
         public async Task TestNotOnOutParameter()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     public C([||]out string s)
@@ -158,7 +163,8 @@ class C
         [Fact]
         public async Task TestNotOnValueType()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -174,7 +180,8 @@ class C
         [Fact]
         public async Task TestNotOnInterfaceParameter()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 interface I
@@ -188,7 +195,8 @@ interface I
         [Fact]
         public async Task TestNotOnNullableParameter()
         {
-            var code = @"
+            var code =
+                @"
 #nullable enable
 
 using System;
@@ -206,7 +214,8 @@ class C
         [Fact]
         public async Task TestNotOnAbstractParameter()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 abstract class C
@@ -219,7 +228,8 @@ abstract class C
         [Fact]
         public async Task TestNotOnExternParameter()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -234,7 +244,8 @@ class C
         [InlineData(LanguageVersion.CSharp8)]
         public async Task TestNotOnPartialMethodDefinition1(LanguageVersion languageVersion)
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 partial class C
@@ -256,7 +267,8 @@ partial class C
         [Fact]
         public async Task TestNotOnExtendedPartialMethodDefinition1()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 partial class C
@@ -280,7 +292,8 @@ partial class C
         [InlineData(LanguageVersion.CSharp8)]
         public async Task TestNotOnPartialMethodDefinition2(LanguageVersion languageVersion)
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 partial class C
@@ -302,7 +315,8 @@ partial class C
         [Fact]
         public async Task TestNotOnExtendedPartialMethodDefinition2()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 partial class C
@@ -325,7 +339,7 @@ partial class C
         public async Task TestOnPartialMethodImplementation1()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 partial class C
@@ -336,7 +350,7 @@ partial class C
     {
     }
 }",
-@"
+                @"
 using System;
 
 partial class C
@@ -350,7 +364,8 @@ partial class C
             throw new ArgumentNullException(nameof(s));
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -359,7 +374,8 @@ partial class C
             await new VerifyCS.Test
             {
                 LanguageVersion = LanguageVersion.CSharp9,
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 partial class C
@@ -370,7 +386,8 @@ partial class C
     {
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 partial class C
@@ -392,7 +409,7 @@ partial class C
         public async Task TestOnPartialMethodImplementation2()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 partial class C
@@ -403,7 +420,7 @@ partial class C
 
     partial void M(string s);
 }",
-@"
+                @"
 using System;
 
 partial class C
@@ -417,7 +434,8 @@ partial class C
     }
 
     partial void M(string s);
-}");
+}"
+            );
         }
 
         [Fact]
@@ -426,7 +444,8 @@ partial class C
             await new VerifyCS.Test
             {
                 LanguageVersion = LanguageVersion.CSharp9,
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 partial class C
@@ -437,7 +456,8 @@ partial class C
 
     public partial void M(string s);
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 partial class C
@@ -459,7 +479,7 @@ partial class C
         public async Task TestUpdateExistingFieldAssignment()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C
@@ -471,7 +491,7 @@ class C
         _s = s;
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -482,7 +502,8 @@ class C
     {
         _s = s ?? throw new ArgumentNullException(nameof(s));
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -490,7 +511,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -499,7 +521,8 @@ class C
     {
     }
 }",
-                FixedCode = @$"
+                FixedCode =
+                    @$"
 using System;
 
 class C
@@ -508,22 +531,24 @@ class C
     {{
         if (string.IsNullOrEmpty(a))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(a)}").Replace("\"", "\\\"")}"", nameof(a));
+            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(a)}") .Replace("\"", "\\\"")}"", nameof(a));
         }}
 
         if (string.IsNullOrEmpty(b))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(b)}").Replace("\"", "\\\"")}"", nameof(b));
+            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(b)}") .Replace("\"", "\\\"")}"", nameof(b));
         }}
 
         if (string.IsNullOrEmpty(c))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(c)}").Replace("\"", "\\\"")}"", nameof(c));
+            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(c)}") .Replace("\"", "\\\"")}"", nameof(c));
         }}
     }}
 }}",
                 CodeActionIndex = 3,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -532,7 +557,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 #nullable enable
 
 using System;
@@ -543,7 +569,8 @@ class C
     {
     }
 }",
-                FixedCode = @$"
+                FixedCode =
+                    @$"
 #nullable enable
 
 using System;
@@ -554,24 +581,27 @@ class C
     {{
         if (string.IsNullOrEmpty(a))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(a)}").Replace("\"", "\\\"")}"", nameof(a));
+            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(a)}") .Replace("\"", "\\\"")}"", nameof(a));
         }}
 
         if (string.IsNullOrEmpty(b))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(b)}").Replace("\"", "\\\"")}"", nameof(b));
+            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(b)}") .Replace("\"", "\\\"")}"", nameof(b));
         }}
     }}
 }}",
                 CodeActionIndex = 3,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestCursorNotOnParameters()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -588,7 +618,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -597,7 +628,8 @@ class C
     {
     }
 }",
-                FixedCode = @$"
+                FixedCode =
+                    @$"
 using System;
 
 class C
@@ -606,17 +638,19 @@ class C
     {{
         if (string.IsNullOrEmpty(a))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(a)}").Replace("\"", "\\\"")}"", nameof(a));
+            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(a)}") .Replace("\"", "\\\"")}"", nameof(a));
         }}
 
         if (string.IsNullOrEmpty(c))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(c)}").Replace("\"", "\\\"")}"", nameof(c));
+            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(c)}") .Replace("\"", "\\\"")}"", nameof(c));
         }}
     }}
 }}",
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -625,7 +659,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -634,7 +669,8 @@ class C
     {
     }
 }",
-                FixedCode = @$"
+                FixedCode =
+                    @$"
 using System;
 
 class C
@@ -643,17 +679,19 @@ class C
     {{
         if (string.IsNullOrEmpty(a))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(a)}").Replace("\"", "\\\"")}"", nameof(a));
+            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(a)}") .Replace("\"", "\\\"")}"", nameof(a));
         }}
 
         if (string.IsNullOrEmpty(c))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(c)}").Replace("\"", "\\\"")}"", nameof(c));
+            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(c)}") .Replace("\"", "\\\"")}"", nameof(c));
         }}
     }}
 }}",
                 CodeActionIndex = 3,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -662,7 +700,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -671,7 +710,8 @@ class C
     {
     }
 }",
-                FixedCode = @$"
+                FixedCode =
+                    @$"
 using System;
 
 class C
@@ -680,7 +720,7 @@ class C
     {{
         if (string.IsNullOrEmpty(a))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(a)}").Replace("\"", "\\\"")}"", nameof(a));
+            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(a)}") .Replace("\"", "\\\"")}"", nameof(a));
         }}
 
         if (b is null)
@@ -690,12 +730,14 @@ class C
 
         if (string.IsNullOrEmpty(c))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(c)}").Replace("\"", "\\\"")}"", nameof(c));
+            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(c)}") .Replace("\"", "\\\"")}"", nameof(c));
         }}
     }}
 }}",
                 CodeActionIndex = 3,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -704,7 +746,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -713,7 +756,8 @@ class C
     {
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -737,7 +781,9 @@ class C
     }
 }",
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -746,7 +792,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -755,7 +802,8 @@ class C
     {
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -779,7 +827,9 @@ class C
     }
 }",
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
@@ -787,7 +837,7 @@ class C
         public async Task TestUpdateExistingPropertyAssignment()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C
@@ -799,7 +849,7 @@ class C
         S = s;
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -810,7 +860,8 @@ class C
     {
         S = s ?? throw new ArgumentNullException(nameof(s));
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -819,7 +870,8 @@ class C
             await new VerifyCS.Test
             {
                 LanguageVersion = LanguageVersion.CSharp6,
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -831,7 +883,8 @@ class C
         S = s;
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -856,7 +909,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -868,7 +922,8 @@ class C
         S = s;
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -887,7 +942,11 @@ class C
 }",
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferThrowExpression, false, NotificationOption2.Silent }
+                    {
+                        CSharpCodeStyleOptions.PreferThrowExpression,
+                        false,
+                        NotificationOption2.Silent
+                    }
                 }
             }.RunAsync();
         }
@@ -896,7 +955,7 @@ class C
         public async Task TestUpdateExpressionBody1()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C
@@ -906,7 +965,7 @@ class C
     public C([||]string s)
         => S = s;
 }",
-@"
+                @"
 using System;
 
 class C
@@ -915,14 +974,15 @@ class C
 
     public C(string s)
         => S = s ?? throw new ArgumentNullException(nameof(s));
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestUpdateExpressionBody2()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C
@@ -934,7 +994,7 @@ class C
     {
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -952,7 +1012,8 @@ class C
     private void Init()
     {
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -960,7 +1021,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -972,7 +1034,8 @@ class C
     {
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -993,7 +1056,10 @@ class C
 }",
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement }
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                        CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+                    }
                 }
             }.RunAsync();
         }
@@ -1002,7 +1068,7 @@ class C
         public async Task TestUpdateLocalFunctionExpressionBody_NonVoid()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C
@@ -1014,7 +1080,7 @@ class C
 
     private int Init() => 1;
 }",
-@"
+                @"
 using System;
 
 class C
@@ -1033,14 +1099,15 @@ class C
     }
 
     private int Init() => 1;
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(20983, "https://github.com/dotnet/roslyn/issues/20983")]
         public async Task TestUpdateLocalFunctionExpressionBody_Void()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C
@@ -1052,7 +1119,7 @@ class C
 
     private int Init() => 1;
 }",
-@"
+                @"
 using System;
 
 class C
@@ -1071,14 +1138,15 @@ class C
     }
 
     private int Init() => 1;
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(20983, "https://github.com/dotnet/roslyn/issues/20983")]
         public async Task TestUpdateLambdaExpressionBody_NonVoid()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C
@@ -1090,7 +1158,7 @@ class C
         int GetValue() => 0;
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -1109,14 +1177,15 @@ class C
 
         int GetValue() => 0;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(20983, "https://github.com/dotnet/roslyn/issues/20983")]
         public async Task TestUpdateLambdaExpressionBody_Void()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C
@@ -1128,7 +1197,7 @@ class C
         void NoValue() { }
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -1147,14 +1216,15 @@ class C
 
         void NoValue() { }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestInsertAfterExistingNullCheck1()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C
@@ -1166,7 +1236,7 @@ class C
         }
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -1182,14 +1252,15 @@ class C
             throw new ArgumentNullException(nameof(s));
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestInsertBeforeExistingNullCheck1()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C
@@ -1201,7 +1272,7 @@ class C
         }
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -1217,13 +1288,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWithExistingNullCheck1()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -1242,7 +1315,8 @@ class C
         [Fact]
         public async Task TestMissingWithExistingNullCheck2()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -1260,7 +1334,8 @@ class C
         [Fact]
         public async Task TestMissingWithExistingNullCheck3()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -1278,7 +1353,8 @@ class C
         [Fact]
         public async Task TestMissingWithExistingNullCheck4()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -1296,7 +1372,8 @@ class C
         [Fact]
         public async Task TestMissingWithExistingNullCheck5()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -1315,7 +1392,8 @@ class C
         [Fact]
         public async Task TestMissingWithExistingNullCheck6()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -1334,7 +1412,8 @@ class C
         [Fact, WorkItem(20983, "https://github.com/dotnet/roslyn/issues/20983")]
         public async Task TestMissingWithExistingNullCheckInLocalFunction()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -1356,7 +1435,8 @@ class C
         [Fact, WorkItem(20983, "https://github.com/dotnet/roslyn/issues/20983")]
         public async Task TestMissingWithExistingNullCheckInLambda()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -1372,7 +1452,8 @@ class C
         [Fact]
         public async Task TestMissingWithoutParameterName()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -1388,7 +1469,7 @@ class C
         public async Task TestInMethod()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C
@@ -1397,7 +1478,7 @@ class C
     {
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -1409,14 +1490,15 @@ class C
             throw new ArgumentNullException(nameof(s));
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestInOperator()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C
@@ -1426,7 +1508,7 @@ class C
         return null;
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -1440,14 +1522,15 @@ class C
 
         return null;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(20983, "https://github.com/dotnet/roslyn/issues/20983")]
         public async Task TestOnSimpleLambdaParameter()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C
@@ -1457,7 +1540,7 @@ class C
         Func<string, int> f = [||]s => { return 0; };
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -1474,14 +1557,15 @@ class C
             return 0;
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(20983, "https://github.com/dotnet/roslyn/issues/20983")]
         public async Task TestOnSimpleLambdaParameter_EmptyBlock()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C
@@ -1491,7 +1575,7 @@ class C
         Action<string> f = [||]s => { };
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -1506,14 +1590,15 @@ class C
             }
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(20983, "https://github.com/dotnet/roslyn/issues/20983")]
         public async Task TestOnParenthesizedLambdaParameter()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C
@@ -1523,7 +1608,7 @@ class C
         Func<string, int> f = ([||]string s) => { return 0; };
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -1540,7 +1625,8 @@ class C
             return 0;
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(20983, "https://github.com/dotnet/roslyn/issues/20983")]
@@ -1549,7 +1635,8 @@ class C
             await new VerifyCS.Test
             {
                 LanguageVersion = LanguageVersion.CSharp11,
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -1559,7 +1646,8 @@ class C
         Func<string, int> f = ([||]_) => { return 0; };
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -1583,7 +1671,8 @@ class C
         [Fact, WorkItem(20983, "https://github.com/dotnet/roslyn/issues/20983")]
         public async Task TestOnDiscardLambdaParameter2()
         {
-            var testCode = @"
+            var testCode =
+                @"
 using System;
 
 class C
@@ -1605,7 +1694,7 @@ class C
         public async Task TestOnAnonymousMethodParameter()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C
@@ -1615,7 +1704,7 @@ class C
         Func<string, int> f = delegate ([||]string s) { return 0; };
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -1632,14 +1721,15 @@ class C
             return 0;
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(20983, "https://github.com/dotnet/roslyn/issues/20983")]
         public async Task TestOnLocalFunctionParameter()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C
@@ -1651,7 +1741,7 @@ class C
         }
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -1666,13 +1756,15 @@ class C
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotOnIndexerParameter()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int this[[||]string s]
@@ -1686,10 +1778,12 @@ class C
 
             await VerifyCS.VerifyRefactoringAsync(code, code);
         }
+
         [Fact]
         public async Task TestNotOnIndexerParameters()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int this[[|object a|], object b, object c]
@@ -1709,7 +1803,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -1718,7 +1813,8 @@ class C
     {
     }
 }",
-                FixedCode = $@"
+                FixedCode =
+                    $@"
 using System;
 
 class C
@@ -1727,7 +1823,7 @@ class C
     {{
         if (string.IsNullOrEmpty(s))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}").Replace("\"", "\\\"")}"", nameof(s));
+            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}") .Replace("\"", "\\\"")}"", nameof(s));
         }}
     }}
 }}",
@@ -1741,7 +1837,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -1750,7 +1847,8 @@ class C
     {
     }
 }",
-                FixedCode = $@"
+                FixedCode =
+                    $@"
 using System;
 
 class C
@@ -1759,12 +1857,14 @@ class C
     {{
         if (string.IsNullOrWhiteSpace(s))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_whitespace, "{nameof(s)}").Replace("\"", "\\\"")}"", nameof(s));
+            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_whitespace, "{nameof(s)}") .Replace("\"", "\\\"")}"", nameof(s));
         }}
     }}
 }}",
                 CodeActionIndex = 2,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_string_IsNullOrWhiteSpace_check)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_string_IsNullOrWhiteSpace_check
+                )
             }.RunAsync();
         }
 
@@ -1774,7 +1874,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -1783,7 +1884,8 @@ class C
     {
     }
 }",
-                FixedCode = $@"
+                FixedCode =
+                    $@"
 using System;
 
 class C
@@ -1792,7 +1894,7 @@ class C
     {{
         if (string.IsNullOrEmpty(s))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}").Replace("\"", "\\\"")}"", nameof(s));
+            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}") .Replace("\"", "\\\"")}"", nameof(s));
         }}
     }}
 }}",
@@ -1804,7 +1906,8 @@ class C
         [Fact, WorkItem(19173, "https://github.com/dotnet/roslyn/issues/19173")]
         public async Task TestMissingOnUnboundTypeWithExistingNullCheck()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     public C(string [||]s)
@@ -1823,7 +1926,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class Program
@@ -1832,7 +1936,8 @@ class Program
     {
     }
 }",
-                FixedCode = @$"
+                FixedCode =
+                    @$"
 using System;
 
 class Program
@@ -1841,7 +1946,7 @@ class Program
     {{
         if (String.IsNullOrEmpty(bar))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(bar)}").Replace("\"", "\\\"")}"", nameof(bar));
+            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(bar)}") .Replace("\"", "\\\"")}"", nameof(bar));
         }}
     }}
 }}",
@@ -1849,7 +1954,10 @@ class Program
                 CodeActionEquivalenceKey = nameof(FeaturesResources.Add_string_IsNullOrEmpty_check),
                 Options =
                 {
-                    { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, CodeStyleOptions2.FalseWithSuggestionEnforcement }
+                    {
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
                 }
             }.RunAsync();
         }
@@ -1861,7 +1969,8 @@ class Program
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -1870,7 +1979,8 @@ class C
     {
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -1882,7 +1992,13 @@ class C
 }",
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferBraces, new CodeStyleOption2<PreferBracesPreference>((PreferBracesPreference)preferBraces, NotificationOption2.Silent) },
+                    {
+                        CSharpCodeStyleOptions.PreferBraces,
+                        new CodeStyleOption2<PreferBracesPreference>(
+                            (PreferBracesPreference)preferBraces,
+                            NotificationOption2.Silent
+                        )
+                    },
                 }
             }.RunAsync();
         }
@@ -1892,22 +2008,29 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
 {
     public C(string s[||])
 }",
-                ExpectedDiagnostics = {
+                ExpectedDiagnostics =
+                {
                     // /0/Test0.cs(6,12): error CS0501: 'C.C(string)' must declare a body because it is not marked abstract, extern, or partial
-                    DiagnosticResult.CompilerError("CS0501").WithLocation(6, 12).WithArguments("C.C(string)"),
+                    DiagnosticResult
+                        .CompilerError("CS0501")
+                        .WithLocation(6, 12)
+                        .WithArguments("C.C(string)"),
                     // /0/Test0.cs(6,23): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithLocation(6, 23),
                 },
                 FixedState =
                 {
-                    Sources = { @"
+                    Sources =
+                    {
+                        @"
 using System;
 
 class C
@@ -1919,7 +2042,8 @@ class C
             throw new ArgumentNullException(nameof(s));
         }
     }
-}" },
+}"
+                    },
                     InheritanceMode = StateInheritanceMode.Explicit
                 }
             }.RunAsync();
@@ -1929,7 +2053,7 @@ class C
         public async Task TestInArrowExpression1()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 using System.Linq;
 
@@ -1940,7 +2064,7 @@ class C
             .OrderBy(x => x)
             .Count();
 }",
-@"
+                @"
 using System;
 using System.Linq;
 
@@ -1957,14 +2081,15 @@ class C
             .OrderBy(x => x)
             .Count();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(21501, "https://github.com/dotnet/roslyn/issues/21501")]
         public async Task TestInArrowExpression2()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 using System.Linq;
 
@@ -1975,7 +2100,7 @@ class C
             .OrderBy(x => x)
             .Count(); /* Bar */
 }",
-@"
+                @"
 using System;
 using System.Linq;
 
@@ -1992,13 +2117,15 @@ class C
             .OrderBy(x => x)
             .Count(); /* Bar */
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(21501, "https://github.com/dotnet/roslyn/issues/21501")]
         public async Task TestMissingInArrowExpression1()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 using System.Linq;
 
@@ -2017,7 +2144,8 @@ class C
         [Fact, WorkItem(21501, "https://github.com/dotnet/roslyn/issues/21501")]
         public async Task TestMissingInArrowExpression2()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 using System.Linq;
 
@@ -2041,7 +2169,7 @@ class C
         public async Task TestInArrowExpression3()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 using System.Linq;
 
@@ -2052,7 +2180,7 @@ class C
             .OrderBy(x => x)
             .Count();
 }",
-@"
+                @"
 using System;
 using System.Linq;
 
@@ -2069,14 +2197,15 @@ class C
             .OrderBy(x => x)
             .Count();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(29190, "https://github.com/dotnet/roslyn/issues/29190")]
         public async Task TestSimpleReferenceTypeWithParameterNameSelected1()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 using System;
 
 class C
@@ -2085,7 +2214,7 @@ class C
     {
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -2097,13 +2226,15 @@ class C
             throw new ArgumentNullException(nameof(s));
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(29333, "https://github.com/dotnet/roslyn/issues/29333")]
         public async Task TestLambdaWithIncorrectNumberOfParameters()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -2113,24 +2244,31 @@ class C
         M((x[||]
     }
 }";
-            await VerifyCS.VerifyRefactoringAsync(code,
+            await VerifyCS.VerifyRefactoringAsync(
+                code,
                 new[]
                 {
                     // /0/Test0.cs(8,12): error CS0103: The name 'x' does not exist in the current context
-                    DiagnosticResult.CompilerError("CS0103").WithLocation(8, 12).WithArguments("x"),
+                    DiagnosticResult
+                        .CompilerError("CS0103")
+                        .WithLocation(8, 12)
+                        .WithArguments("x"),
                     // /0/Test0.cs(8,13): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithLocation(8, 13),
                     // /0/Test0.cs(8,13): error CS1026: ) expected
                     DiagnosticResult.CompilerError("CS1026").WithLocation(8, 13),
                     // /0/Test0.cs(8,13): error CS1026: ) expected
                     DiagnosticResult.CompilerError("CS1026").WithLocation(8, 13),
-                }, code);
+                },
+                code
+            );
         }
 
         [Fact, WorkItem(41824, "https://github.com/dotnet/roslyn/issues/41824")]
         public async Task TestMissingInArgList()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     private static void M()
@@ -2149,14 +2287,14 @@ class C
         public async Task TestImportSystem()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 class C
 {
     public C([||]string s)
     {
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -2168,7 +2306,8 @@ class C
             throw new ArgumentNullException(nameof(s));
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(52385, "https://github.com/dotnet/roslyn/issues/52385")]
@@ -2176,7 +2315,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -2185,7 +2325,8 @@ class C
     {
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -2210,7 +2351,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -2219,7 +2361,8 @@ class C
     {
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -2244,7 +2387,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -2253,7 +2397,8 @@ class C
     {
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -2280,7 +2425,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -2289,7 +2435,8 @@ class C
     {
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -2313,7 +2460,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -2322,7 +2470,8 @@ class C
     {
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -2346,7 +2495,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -2355,7 +2505,8 @@ class C
     {
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -2382,7 +2533,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -2391,7 +2543,8 @@ class C
     {
     }
 }",
-                FixedCode = $@"
+                FixedCode =
+                    $@"
 using System;
 
 class C
@@ -2399,7 +2552,7 @@ class C
     public C(string s)
     {{
         if (string.IsNullOrEmpty(s))
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}").Replace("\"", "\\\"")}"", nameof(s));
+            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}") .Replace("\"", "\\\"")}"", nameof(s));
     }}
 }}",
                 Options =
@@ -2418,7 +2571,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -2427,7 +2581,8 @@ class C
     {
     }
 }",
-                FixedCode = @$"
+                FixedCode =
+                    @$"
 using System;
 
 class C
@@ -2435,13 +2590,13 @@ class C
     public C(string s)
     {{
         if (string.IsNullOrEmpty(s))
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}").Replace("\"", "\\\"")}"", nameof(s));
+            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}") .Replace("\"", "\\\"")}"", nameof(s));
     }}
 }}",
                 Options =
                 {
                     { CSharpCodeStyleOptions.PreferThrowExpression, false },
-                    { CSharpCodeStyleOptions.PreferBraces, PreferBracesPreference.WhenMultiline},
+                    { CSharpCodeStyleOptions.PreferBraces, PreferBracesPreference.WhenMultiline },
                     { CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine, false },
                 },
                 CodeActionIndex = 1,
@@ -2454,7 +2609,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -2463,7 +2619,8 @@ class C
     {
     }
 }",
-                FixedCode = @$"
+                FixedCode =
+                    @$"
 using System;
 
 class C
@@ -2472,7 +2629,7 @@ class C
     {{
         if (string.IsNullOrEmpty(s))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}").Replace("\"", "\\\"")}"", nameof(s));
+            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}") .Replace("\"", "\\\"")}"", nameof(s));
         }}
     }}
 }}",
@@ -2492,7 +2649,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -2501,14 +2659,15 @@ class C
     {
     }
 }",
-                FixedCode = @$"
+                FixedCode =
+                    @$"
 using System;
 
 class C
 {{
     public C(string s)
     {{
-        if (string.IsNullOrEmpty(s)) throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}").Replace("\"", "\\\"")}"", nameof(s));
+        if (string.IsNullOrEmpty(s)) throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}") .Replace("\"", "\\\"")}"", nameof(s));
     }}
 }}",
                 Options =
@@ -2527,7 +2686,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -2536,14 +2696,15 @@ class C
     {
     }
 }",
-                FixedCode = @$"
+                FixedCode =
+                    @$"
 using System;
 
 class C
 {{
     public C(string s)
     {{
-        if (string.IsNullOrEmpty(s)) throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}").Replace("\"", "\\\"")}"", nameof(s));
+        if (string.IsNullOrEmpty(s)) throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}") .Replace("\"", "\\\"")}"", nameof(s));
     }}
 }}",
                 Options =
@@ -2562,7 +2723,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -2571,7 +2733,8 @@ class C
     {
     }
 }",
-                FixedCode = @$"
+                FixedCode =
+                    @$"
 using System;
 
 class C
@@ -2580,7 +2743,7 @@ class C
     {{
         if (string.IsNullOrEmpty(s))
         {{
-            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}").Replace("\"", "\\\"")}"", nameof(s));
+            throw new ArgumentException($""{string.Format(FeaturesResources._0_cannot_be_null_or_empty, "{nameof(s)}") .Replace("\"", "\\\"")}"", nameof(s));
         }}
     }}
 }}",
@@ -2600,7 +2763,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -2609,7 +2773,8 @@ class C
     {
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -2628,14 +2793,17 @@ class C
                     { CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine, true },
                 },
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = nameof(FeaturesResources.Add_null_checks_for_all_parameters)
+                CodeActionEquivalenceKey = nameof(
+                    FeaturesResources.Add_null_checks_for_all_parameters
+                )
             }.RunAsync();
         }
 
         [Fact, WorkItem(58811, "https://github.com/dotnet/roslyn/issues/58811")]
         public async Task TestMissingParameter1()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class C
@@ -2650,7 +2818,8 @@ class C
         [Fact, WorkItem(58811, "https://github.com/dotnet/roslyn/issues/58811")]
         public async Task TestMissingParameter2()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class C
@@ -2665,7 +2834,8 @@ class C
         [Fact, WorkItem(58811, "https://github.com/dotnet/roslyn/issues/58811")]
         public async Task TestMissingParameter3()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class C
@@ -2680,7 +2850,8 @@ class C
         [Fact, WorkItem(58811, "https://github.com/dotnet/roslyn/issues/58811")]
         public async Task TestMissingParameter4()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class C
@@ -2695,7 +2866,8 @@ class C
         [Fact, WorkItem(58779, "https://github.com/dotnet/roslyn/issues/58779")]
         public async Task TestNotInRecord()
         {
-            var code = @"
+            var code =
+                @"
 record C([||]string s) { public string s; }";
             await new VerifyCS.Test
             {

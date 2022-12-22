@@ -33,10 +33,12 @@ namespace Microsoft.Extensions.Hosting
             {
                 ThrowHelper.ThrowIfNull(environment);
 
-                configBuilder.AddInMemoryCollection(new[]
-                {
-                    new KeyValuePair<string, string?>(HostDefaults.EnvironmentKey, environment)
-                });
+                configBuilder.AddInMemoryCollection(
+                    new[]
+                    {
+                        new KeyValuePair<string, string?>(HostDefaults.EnvironmentKey, environment)
+                    }
+                );
             });
         }
 
@@ -53,10 +55,12 @@ namespace Microsoft.Extensions.Hosting
             {
                 ThrowHelper.ThrowIfNull(contentRoot);
 
-                configBuilder.AddInMemoryCollection(new[]
-                {
-                    new KeyValuePair<string, string?>(HostDefaults.ContentRootKey, contentRoot)
-                });
+                configBuilder.AddInMemoryCollection(
+                    new[]
+                    {
+                        new KeyValuePair<string, string?>(HostDefaults.ContentRootKey, contentRoot)
+                    }
+                );
             });
         }
 
@@ -67,8 +71,10 @@ namespace Microsoft.Extensions.Hosting
         /// <param name="configure"></param>
         /// <returns>The <see cref="IHostBuilder"/>.</returns>
         [RequiresDynamicCode(Host.RequiresDynamicCodeMessage)]
-        public static IHostBuilder UseDefaultServiceProvider(this IHostBuilder hostBuilder, Action<ServiceProviderOptions> configure)
-            => hostBuilder.UseDefaultServiceProvider((context, options) => configure(options));
+        public static IHostBuilder UseDefaultServiceProvider(
+            this IHostBuilder hostBuilder,
+            Action<ServiceProviderOptions> configure
+        ) => hostBuilder.UseDefaultServiceProvider((context, options) => configure(options));
 
         /// <summary>
         /// Specify the <see cref="IServiceProvider"/> to be the default one.
@@ -77,7 +83,10 @@ namespace Microsoft.Extensions.Hosting
         /// <param name="configure">The delegate that configures the <see cref="IServiceProvider"/>.</param>
         /// <returns>The <see cref="IHostBuilder"/>.</returns>
         [RequiresDynamicCode(Host.RequiresDynamicCodeMessage)]
-        public static IHostBuilder UseDefaultServiceProvider(this IHostBuilder hostBuilder, Action<HostBuilderContext, ServiceProviderOptions> configure)
+        public static IHostBuilder UseDefaultServiceProvider(
+            this IHostBuilder hostBuilder,
+            Action<HostBuilderContext, ServiceProviderOptions> configure
+        )
         {
             return hostBuilder.UseServiceProviderFactory(context =>
             {
@@ -93,9 +102,15 @@ namespace Microsoft.Extensions.Hosting
         /// <param name="hostBuilder">The <see cref="IHostBuilder" /> to configure.</param>
         /// <param name="configureLogging">The delegate that configures the <see cref="ILoggingBuilder"/>.</param>
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
-        public static IHostBuilder ConfigureLogging(this IHostBuilder hostBuilder, Action<HostBuilderContext, ILoggingBuilder> configureLogging)
+        public static IHostBuilder ConfigureLogging(
+            this IHostBuilder hostBuilder,
+            Action<HostBuilderContext, ILoggingBuilder> configureLogging
+        )
         {
-            return hostBuilder.ConfigureServices((context, collection) => collection.AddLogging(builder => configureLogging(context, builder)));
+            return hostBuilder.ConfigureServices(
+                (context, collection) =>
+                    collection.AddLogging(builder => configureLogging(context, builder))
+            );
         }
 
         /// <summary>
@@ -104,21 +119,14 @@ namespace Microsoft.Extensions.Hosting
         /// <param name="hostBuilder">The <see cref="IHostBuilder" /> to configure.</param>
         /// <param name="configureLogging">The delegate that configures the <see cref="ILoggingBuilder"/>.</param>
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
-        public static IHostBuilder ConfigureLogging(this IHostBuilder hostBuilder, Action<ILoggingBuilder> configureLogging)
-        {
-            return hostBuilder.ConfigureServices((context, collection) => collection.AddLogging(builder => configureLogging(builder)));
-        }
-
-        /// <summary>
-        /// Adds a delegate for configuring the <see cref="HostOptions"/> of the <see cref="IHost"/>.
-        /// </summary>
-        /// <param name="hostBuilder">The <see cref="IHostBuilder" /> to configure.</param>
-        /// <param name="configureOptions">The delegate for configuring the <see cref="HostOptions"/>.</param>
-        /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
-        public static IHostBuilder ConfigureHostOptions(this IHostBuilder hostBuilder, Action<HostBuilderContext, HostOptions> configureOptions)
+        public static IHostBuilder ConfigureLogging(
+            this IHostBuilder hostBuilder,
+            Action<ILoggingBuilder> configureLogging
+        )
         {
             return hostBuilder.ConfigureServices(
-                (context, collection) => collection.Configure<HostOptions>(options => configureOptions(context, options)));
+                (context, collection) => collection.AddLogging(builder => configureLogging(builder))
+            );
         }
 
         /// <summary>
@@ -127,9 +135,31 @@ namespace Microsoft.Extensions.Hosting
         /// <param name="hostBuilder">The <see cref="IHostBuilder" /> to configure.</param>
         /// <param name="configureOptions">The delegate for configuring the <see cref="HostOptions"/>.</param>
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
-        public static IHostBuilder ConfigureHostOptions(this IHostBuilder hostBuilder, Action<HostOptions> configureOptions)
+        public static IHostBuilder ConfigureHostOptions(
+            this IHostBuilder hostBuilder,
+            Action<HostBuilderContext, HostOptions> configureOptions
+        )
         {
-            return hostBuilder.ConfigureServices(collection => collection.Configure(configureOptions));
+            return hostBuilder.ConfigureServices(
+                (context, collection) =>
+                    collection.Configure<HostOptions>(options => configureOptions(context, options))
+            );
+        }
+
+        /// <summary>
+        /// Adds a delegate for configuring the <see cref="HostOptions"/> of the <see cref="IHost"/>.
+        /// </summary>
+        /// <param name="hostBuilder">The <see cref="IHostBuilder" /> to configure.</param>
+        /// <param name="configureOptions">The delegate for configuring the <see cref="HostOptions"/>.</param>
+        /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
+        public static IHostBuilder ConfigureHostOptions(
+            this IHostBuilder hostBuilder,
+            Action<HostOptions> configureOptions
+        )
+        {
+            return hostBuilder.ConfigureServices(
+                collection => collection.Configure(configureOptions)
+            );
         }
 
         /// <summary>
@@ -141,9 +171,14 @@ namespace Microsoft.Extensions.Hosting
         /// <param name="configureDelegate">The delegate for configuring the <see cref="IConfigurationBuilder"/> that will be used
         /// to construct the <see cref="IConfiguration"/> for the host.</param>
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
-        public static IHostBuilder ConfigureAppConfiguration(this IHostBuilder hostBuilder, Action<IConfigurationBuilder> configureDelegate)
+        public static IHostBuilder ConfigureAppConfiguration(
+            this IHostBuilder hostBuilder,
+            Action<IConfigurationBuilder> configureDelegate
+        )
         {
-            return hostBuilder.ConfigureAppConfiguration((context, builder) => configureDelegate(builder));
+            return hostBuilder.ConfigureAppConfiguration(
+                (context, builder) => configureDelegate(builder)
+            );
         }
 
         /// <summary>
@@ -152,9 +187,14 @@ namespace Microsoft.Extensions.Hosting
         /// <param name="hostBuilder">The <see cref="IHostBuilder" /> to configure.</param>
         /// <param name="configureDelegate">The delegate for configuring the <see cref="IServiceCollection"/>.</param>
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
-        public static IHostBuilder ConfigureServices(this IHostBuilder hostBuilder, Action<IServiceCollection> configureDelegate)
+        public static IHostBuilder ConfigureServices(
+            this IHostBuilder hostBuilder,
+            Action<IServiceCollection> configureDelegate
+        )
         {
-            return hostBuilder.ConfigureServices((context, collection) => configureDelegate(collection));
+            return hostBuilder.ConfigureServices(
+                (context, collection) => configureDelegate(collection)
+            );
         }
 
         /// <summary>
@@ -165,9 +205,14 @@ namespace Microsoft.Extensions.Hosting
         /// <param name="hostBuilder">The <see cref="IHostBuilder" /> to configure.</param>
         /// <param name="configureDelegate">The delegate for configuring the <typeparamref name="TContainerBuilder"/>.</param>
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
-        public static IHostBuilder ConfigureContainer<TContainerBuilder>(this IHostBuilder hostBuilder, Action<TContainerBuilder> configureDelegate)
+        public static IHostBuilder ConfigureContainer<TContainerBuilder>(
+            this IHostBuilder hostBuilder,
+            Action<TContainerBuilder> configureDelegate
+        )
         {
-            return hostBuilder.ConfigureContainer<TContainerBuilder>((context, builder) => configureDelegate(builder));
+            return hostBuilder.ConfigureContainer<TContainerBuilder>(
+                (context, builder) => configureDelegate(builder)
+            );
         }
 
         /// <summary>
@@ -192,13 +237,25 @@ namespace Microsoft.Extensions.Hosting
         [RequiresDynamicCode(Host.RequiresDynamicCodeMessage)]
         public static IHostBuilder ConfigureDefaults(this IHostBuilder builder, string[]? args)
         {
-            return builder.ConfigureHostConfiguration(config => ApplyDefaultHostConfiguration(config, args))
-                          .ConfigureAppConfiguration((hostingContext, config) => ApplyDefaultAppConfiguration(hostingContext, config, args))
-                          .ConfigureServices(AddDefaultServices)
-                          .UseServiceProviderFactory(context => new DefaultServiceProviderFactory(CreateDefaultServiceProviderOptions(context)));
+            return builder
+                .ConfigureHostConfiguration(config => ApplyDefaultHostConfiguration(config, args))
+                .ConfigureAppConfiguration(
+                    (hostingContext, config) =>
+                        ApplyDefaultAppConfiguration(hostingContext, config, args)
+                )
+                .ConfigureServices(AddDefaultServices)
+                .UseServiceProviderFactory(
+                    context =>
+                        new DefaultServiceProviderFactory(
+                            CreateDefaultServiceProviderOptions(context)
+                        )
+                );
         }
 
-        internal static void ApplyDefaultHostConfiguration(IConfigurationBuilder hostConfigBuilder, string[]? args)
+        internal static void ApplyDefaultHostConfiguration(
+            IConfigurationBuilder hostConfigBuilder,
+            string[]? args
+        )
         {
             // If we're running anywhere other than C:\Windows\system32, we default to using the CWD for the ContentRoot.
             // However, since many things like Windows services and MSIX installers have C:\Windows\system32 as there CWD which is not likely
@@ -209,12 +266,18 @@ namespace Microsoft.Extensions.Hosting
             // any trailing directory separator characters. I'm not even sure the casing can ever be different from these APIs, but I think it makes sense to
             // ignore case for Windows path comparisons given the file system is usually (always?) going to be case insensitive for the system path.
             string cwd = Environment.CurrentDirectory;
-            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || !string.Equals(cwd, Environment.GetFolderPath(Environment.SpecialFolder.System), StringComparison.OrdinalIgnoreCase))
+            if (
+                !RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                || !string.Equals(
+                    cwd,
+                    Environment.GetFolderPath(Environment.SpecialFolder.System),
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
-                hostConfigBuilder.AddInMemoryCollection(new[]
-                {
-                    new KeyValuePair<string, string?>(HostDefaults.ContentRootKey, cwd),
-                });
+                hostConfigBuilder.AddInMemoryCollection(
+                    new[] { new KeyValuePair<string, string?>(HostDefaults.ContentRootKey, cwd), }
+                );
             }
 
             hostConfigBuilder.AddEnvironmentVariables(prefix: "DOTNET_");
@@ -224,20 +287,33 @@ namespace Microsoft.Extensions.Hosting
             }
         }
 
-        internal static void ApplyDefaultAppConfiguration(HostBuilderContext hostingContext, IConfigurationBuilder appConfigBuilder, string[]? args)
+        internal static void ApplyDefaultAppConfiguration(
+            HostBuilderContext hostingContext,
+            IConfigurationBuilder appConfigBuilder,
+            string[]? args
+        )
         {
             IHostEnvironment env = hostingContext.HostingEnvironment;
             bool reloadOnChange = GetReloadConfigOnChangeValue(hostingContext);
 
-            appConfigBuilder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: reloadOnChange)
-                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: reloadOnChange);
+            appConfigBuilder
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: reloadOnChange)
+                .AddJsonFile(
+                    $"appsettings.{env.EnvironmentName}.json",
+                    optional: true,
+                    reloadOnChange: reloadOnChange
+                );
 
             if (env.IsDevelopment() && env.ApplicationName is { Length: > 0 })
             {
                 try
                 {
                     var appAssembly = Assembly.Load(new AssemblyName(env.ApplicationName));
-                    appConfigBuilder.AddUserSecrets(appAssembly, optional: true, reloadOnChange: reloadOnChange);
+                    appConfigBuilder.AddUserSecrets(
+                        appAssembly,
+                        optional: true,
+                        reloadOnChange: reloadOnChange
+                    );
                 }
                 catch (FileNotFoundException)
                 {
@@ -252,19 +328,30 @@ namespace Microsoft.Extensions.Hosting
                 appConfigBuilder.AddCommandLine(args);
             }
 
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode", Justification = "Calling IConfiguration.GetValue is safe when the T is bool.")]
-            static bool GetReloadConfigOnChangeValue(HostBuilderContext hostingContext) => hostingContext.Configuration.GetValue("hostBuilder:reloadConfigOnChange", defaultValue: true);
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2026:RequiresUnreferencedCode",
+                Justification = "Calling IConfiguration.GetValue is safe when the T is bool."
+            )]
+            static bool GetReloadConfigOnChangeValue(HostBuilderContext hostingContext) =>
+                hostingContext.Configuration.GetValue(
+                    "hostBuilder:reloadConfigOnChange",
+                    defaultValue: true
+                );
         }
 
-        internal static void AddDefaultServices(HostBuilderContext hostingContext, IServiceCollection services)
+        internal static void AddDefaultServices(
+            HostBuilderContext hostingContext,
+            IServiceCollection services
+        )
         {
             services.AddLogging(logging =>
             {
                 bool isWindows =
 #if NETCOREAPP
-                    OperatingSystem.IsWindows();
+                OperatingSystem.IsWindows();
 #else
-                    RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 #endif
 
                 // IMPORTANT: This needs to be added *before* configuration is loaded, this lets
@@ -294,14 +381,16 @@ namespace Microsoft.Extensions.Hosting
                 logging.Configure(options =>
                 {
                     options.ActivityTrackingOptions =
-                        ActivityTrackingOptions.SpanId |
-                        ActivityTrackingOptions.TraceId |
-                        ActivityTrackingOptions.ParentId;
+                        ActivityTrackingOptions.SpanId
+                        | ActivityTrackingOptions.TraceId
+                        | ActivityTrackingOptions.ParentId;
                 });
             });
         }
 
-        internal static ServiceProviderOptions CreateDefaultServiceProviderOptions(HostBuilderContext context)
+        internal static ServiceProviderOptions CreateDefaultServiceProviderOptions(
+            HostBuilderContext context
+        )
         {
             bool isDevelopment = context.HostingEnvironment.IsDevelopment();
             return new ServiceProviderOptions
@@ -323,7 +412,9 @@ namespace Microsoft.Extensions.Hosting
         [UnsupportedOSPlatform("tvos")]
         public static IHostBuilder UseConsoleLifetime(this IHostBuilder hostBuilder)
         {
-            return hostBuilder.ConfigureServices(collection => collection.AddSingleton<IHostLifetime, ConsoleLifetime>());
+            return hostBuilder.ConfigureServices(
+                collection => collection.AddSingleton<IHostLifetime, ConsoleLifetime>()
+            );
         }
 
         /// <summary>
@@ -337,7 +428,10 @@ namespace Microsoft.Extensions.Hosting
         [UnsupportedOSPlatform("browser")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
-        public static IHostBuilder UseConsoleLifetime(this IHostBuilder hostBuilder, Action<ConsoleLifetimeOptions> configureOptions)
+        public static IHostBuilder UseConsoleLifetime(
+            this IHostBuilder hostBuilder,
+            Action<ConsoleLifetimeOptions> configureOptions
+        )
         {
             return hostBuilder.ConfigureServices(collection =>
             {
@@ -356,7 +450,10 @@ namespace Microsoft.Extensions.Hosting
         [UnsupportedOSPlatform("browser")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
-        public static Task RunConsoleAsync(this IHostBuilder hostBuilder, CancellationToken cancellationToken = default)
+        public static Task RunConsoleAsync(
+            this IHostBuilder hostBuilder,
+            CancellationToken cancellationToken = default
+        )
         {
             return hostBuilder.UseConsoleLifetime().Build().RunAsync(cancellationToken);
         }
@@ -372,9 +469,16 @@ namespace Microsoft.Extensions.Hosting
         [UnsupportedOSPlatform("browser")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
-        public static Task RunConsoleAsync(this IHostBuilder hostBuilder, Action<ConsoleLifetimeOptions> configureOptions, CancellationToken cancellationToken = default)
+        public static Task RunConsoleAsync(
+            this IHostBuilder hostBuilder,
+            Action<ConsoleLifetimeOptions> configureOptions,
+            CancellationToken cancellationToken = default
+        )
         {
-            return hostBuilder.UseConsoleLifetime(configureOptions).Build().RunAsync(cancellationToken);
+            return hostBuilder
+                .UseConsoleLifetime(configureOptions)
+                .Build()
+                .RunAsync(cancellationToken);
         }
     }
 }

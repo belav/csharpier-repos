@@ -28,7 +28,8 @@ namespace System.IO.Hashing.Tests
         protected abstract bool TryStaticOneShot(
             ReadOnlySpan<byte> source,
             Span<byte> destination,
-            out int bytesWritten);
+            out int bytesWritten
+        );
 
         [Fact]
         public void TestsDefined()
@@ -38,15 +39,23 @@ namespace System.IO.Hashing.Tests
             Type defType = typeof(NonCryptoHashTestDriver);
             List<string>? missingMethods = null;
 
-            foreach (MethodInfo info in defType.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic))
+            foreach (
+                MethodInfo info in defType.GetMethods(
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                )
+            )
             {
                 if (info.IsFamily && info.Name.EndsWith(DriverSuffix, StringComparison.Ordinal))
                 {
-                    string targetMethodName = info.Name.Substring(0, info.Name.Length - DriverSuffix.Length);
+                    string targetMethodName = info.Name.Substring(
+                        0,
+                        info.Name.Length - DriverSuffix.Length
+                    );
 
                     MethodInfo info2 = implType.GetMethod(
                         targetMethodName,
-                        BindingFlags.Instance | BindingFlags.Public);
+                        BindingFlags.Instance | BindingFlags.Public
+                    );
 
                     if (info2 is null && !info.IsDefined(typeof(OverrideOptionalAttribute)))
                     {
@@ -172,7 +181,8 @@ namespace System.IO.Hashing.Tests
         {
             AssertExtensions.Throws<ArgumentNullException>(
                 "source",
-                () => StaticOneShot((byte[])null));
+                () => StaticOneShot((byte[])null)
+            );
         }
 
         protected void StaticVerifyOneShotArrayDriver(TestCase testCase)
@@ -215,7 +225,8 @@ namespace System.IO.Hashing.Tests
 
                 AssertExtensions.Throws<ArgumentException>(
                     "destination",
-                    () => StaticOneShot(ReadOnlySpan<byte>.Empty, destination.AsSpan(0, i)));
+                    () => StaticOneShot(ReadOnlySpan<byte>.Empty, destination.AsSpan(0, i))
+                );
 
                 for (int j = 0; j < destination.Length; j++)
                 {
@@ -272,7 +283,9 @@ namespace System.IO.Hashing.Tests
                 byte fill = (byte)~i;
                 buf.Fill(fill);
 
-                Assert.False(TryStaticOneShot(ReadOnlySpan<byte>.Empty, buf.Slice(0, i), out int written));
+                Assert.False(
+                    TryStaticOneShot(ReadOnlySpan<byte>.Empty, buf.Slice(0, i), out int written)
+                );
                 Assert.Equal(0, written);
 
                 for (int j = 0; j < buf.Length; j++)
@@ -290,7 +303,8 @@ namespace System.IO.Hashing.Tests
 
                 Assert.Equal(
                     _emptyHashHex ??= TestCase.ToHexString(_emptyHash),
-                    TestCase.ToHexString(result));
+                    TestCase.ToHexString(result)
+                );
             }
         }
 
@@ -305,7 +319,10 @@ namespace System.IO.Hashing.Tests
             {
                 if (output is null || output.Length == 0)
                 {
-                    throw new ArgumentException("Argument should not be null or empty.", nameof(output));
+                    throw new ArgumentException(
+                        "Argument should not be null or empty.",
+                        nameof(output)
+                    );
                 }
 
                 Name = name;
@@ -339,7 +356,11 @@ namespace System.IO.Hashing.Tests
                 for (int i = 0; i < hexString.Length; i += 2)
                 {
                     string s = hexString.Substring(i, 2);
-                    bytes[i / 2] = byte.Parse(s, global::System.Globalization.NumberStyles.HexNumber, null);
+                    bytes[i / 2] = byte.Parse(
+                        s,
+                        global::System.Globalization.NumberStyles.HexNumber,
+                        null
+                    );
                 }
 
                 return bytes;
@@ -363,8 +384,7 @@ namespace System.IO.Hashing.Tests
             private readonly byte[] _input;
             public ReadOnlySpan<byte> Input => new ReadOnlySpan<byte>(_input);
 
-            public TestCase(string name, byte[] input, byte[] output)
-                : base(name, output)
+            public TestCase(string name, byte[] input, byte[] output) : base(name, output)
             {
                 _input = input;
             }
@@ -419,8 +439,6 @@ namespace System.IO.Hashing.Tests
         }
 
         [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-        private sealed class OverrideOptionalAttribute : Attribute
-        {
-        }
+        private sealed class OverrideOptionalAttribute : Attribute { }
     }
 }

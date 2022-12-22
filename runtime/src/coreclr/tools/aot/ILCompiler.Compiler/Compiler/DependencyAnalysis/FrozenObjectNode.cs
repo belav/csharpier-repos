@@ -19,7 +19,11 @@ namespace ILCompiler.DependencyAnalysis
         private readonly TypePreinit.ISerializableReference _data;
         private readonly int _allocationSiteId;
 
-        public FrozenObjectNode(MetadataType owningType, int allocationSiteId, TypePreinit.ISerializableReference data)
+        public FrozenObjectNode(
+            MetadataType owningType,
+            int allocationSiteId,
+            TypePreinit.ISerializableReference data
+        )
         {
             _owningType = owningType;
             _allocationSiteId = allocationSiteId;
@@ -28,7 +32,8 @@ namespace ILCompiler.DependencyAnalysis
 
         public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
-            sb.Append(nameMangler.CompilationUnitPrefix).Append("__FrozenObj_")
+            sb.Append(nameMangler.CompilationUnitPrefix)
+                .Append("__FrozenObj_")
                 .Append(nameMangler.GetMangledTypeName(_owningType))
                 .Append(_allocationSiteId.ToStringInvariant());
         }
@@ -46,7 +51,11 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        public override void EncodeData(ref ObjectDataBuilder dataBuilder, NodeFactory factory, bool relocsOnly)
+        public override void EncodeData(
+            ref ObjectDataBuilder dataBuilder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             int initialOffset = dataBuilder.CountBytes;
 
@@ -64,7 +73,8 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory)
         {

@@ -13,7 +13,6 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveRedundantEquality
         : AbstractRemoveRedundantEqualityDiagnosticAnalyzer
     {
         public CSharpRemoveRedundantEqualityDiagnosticAnalyzer() : base(CSharpSyntaxFacts.Instance)
-        {
-        }
+        { }
     }
 }

@@ -5,13 +5,12 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class UpdatesSqlServerTest : UpdatesSqlServerTestBase<UpdatesSqlServerTest.UpdatesSqlServerFixture>
+public class UpdatesSqlServerTest
+    : UpdatesSqlServerTestBase<UpdatesSqlServerTest.UpdatesSqlServerFixture>
 {
     // ReSharper disable once UnusedParameter.Local
     public UpdatesSqlServerTest(UpdatesSqlServerFixture fixture, ITestOutputHelper testOutputHelper)
-        : base(fixture, testOutputHelper)
-    {
-    }
+        : base(fixture, testOutputHelper) { }
 
     public override void Save_with_shared_foreign_key()
     {
@@ -35,7 +34,8 @@ SET IMPLICIT_TRANSACTIONS OFF;
 SET NOCOUNT ON;
 INSERT INTO [Categories] ([Discriminator], [Name], [PrincipalId])
 OUTPUT INSERTED.[Id]
-VALUES (@p0, @p1, @p2);");
+VALUES (@p0, @p1, @p2);"
+        );
     }
 
     public override void Save_replaced_principal()
@@ -68,12 +68,12 @@ FROM [Categories] AS [c]",
 
 SELECT [p].[Id], [p].[Discriminator], [p].[DependentId], [p].[Name], [p].[Price]
 FROM [ProductBase] AS [p]
-WHERE [p].[Discriminator] = N'Product' AND [p].[DependentId] = @__category_PrincipalId_0");
+WHERE [p].[Discriminator] = N'Product' AND [p].[DependentId] = @__category_PrincipalId_0"
+        );
     }
 
     public class UpdatesSqlServerFixture : UpdatesSqlServerFixtureBase
     {
-        protected override string StoreName
-            => "UpdateTest";
+        protected override string StoreName => "UpdateTest";
     }
 }

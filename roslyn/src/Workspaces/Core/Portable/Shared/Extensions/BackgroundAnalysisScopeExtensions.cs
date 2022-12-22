@@ -9,11 +9,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static class BackgroundAnalysisScopeExtensions
     {
-        public static CompilerDiagnosticsScope ToEquivalentCompilerDiagnosticsScope(this BackgroundAnalysisScope backgroundAnalysisScope)
-            => backgroundAnalysisScope switch
+        public static CompilerDiagnosticsScope ToEquivalentCompilerDiagnosticsScope(
+            this BackgroundAnalysisScope backgroundAnalysisScope
+        ) =>
+            backgroundAnalysisScope switch
             {
                 BackgroundAnalysisScope.None => CompilerDiagnosticsScope.None,
-                BackgroundAnalysisScope.ActiveFile => CompilerDiagnosticsScope.VisibleFilesAndFilesWithPreviouslyReportedDiagnostics,
+                BackgroundAnalysisScope.ActiveFile
+                    => CompilerDiagnosticsScope.VisibleFilesAndFilesWithPreviouslyReportedDiagnostics,
                 BackgroundAnalysisScope.OpenFiles => CompilerDiagnosticsScope.OpenFiles,
                 BackgroundAnalysisScope.FullSolution => CompilerDiagnosticsScope.FullSolution,
                 _ => throw ExceptionUtilities.UnexpectedValue(backgroundAnalysisScope),

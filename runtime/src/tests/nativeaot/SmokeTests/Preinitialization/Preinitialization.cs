@@ -46,7 +46,9 @@ internal class Program
         TestDuplicatedFields.Run();
         TestInstanceDelegate.Run();
 #else
-        Console.WriteLine("Preinitialization is disabled in multimodule builds for now. Skipping test.");
+        Console.WriteLine(
+            "Preinitialization is disabled in multimodule builds for now. Skipping test."
+        );
 #endif
 
         return 100;
@@ -180,7 +182,8 @@ class TestArray
 
     enum MyEnum
     {
-        One, Two
+        One,
+        Two
     }
 
     static byte[] s_byteArray;
@@ -191,10 +194,7 @@ class TestArray
 
     static TestArray()
     {
-        s_byteArray = new byte[]
-        {
-            1, 2, 3, 9, 8, 7, 1, 2, 3, 9, 8, 7
-        };
+        s_byteArray = new byte[] { 1, 2, 3, 9, 8, 7, 1, 2, 3, 9, 8, 7 };
 
         s_byteArrayCount = s_byteArray.Length;
 
@@ -509,9 +509,7 @@ class TestTryCatch
 class TestBadClass
 {
     [StructLayout(LayoutKind.Explicit)]
-    class BadLayoutClass<T>
-    {
-    }
+    class BadLayoutClass<T> { }
 
     static int s_cookie;
     static object s_badClass;
@@ -541,8 +539,15 @@ class TestBadClass
 
 class TestRefs
 {
-    struct IntStruct { public int Value { get; set; } }
-    struct DoubleStruct { public double Value { get; set; } }
+    struct IntStruct
+    {
+        public int Value { get; set; }
+    }
+
+    struct DoubleStruct
+    {
+        public double Value { get; set; }
+    }
 
     static IntStruct s_value1;
     static IntStruct s_value2;
@@ -657,7 +662,6 @@ class TestInitFromOtherClassDouble
     }
 }
 
-
 class TestDelegateToOtherClass
 {
     static Func<int> s_getCookie = OtherClass.s_otherclass.GetCookie;
@@ -676,7 +680,12 @@ class TestDelegateToOtherClass
         public static readonly Func<Type> s_getStringType = YetAnotherClass.s_otherString.GetType;
         public static readonly OtherClass s_otherclassFromYetAnother = YetAnotherClass.s_otherclass;
         public static readonly string s_otherStringFromYetAnother = YetAnotherClass.s_otherString;
-        public OtherClass(int cookie) { _cookie = cookie; }
+
+        public OtherClass(int cookie)
+        {
+            _cookie = cookie;
+        }
+
         public int GetCookie() => _cookie;
     }
 
@@ -828,14 +837,16 @@ unsafe class TestFunctionPointers
     struct WithFunctionPointer
     {
         public void* Ptr;
-        internal static WithFunctionPointer s_foo { get; } = new WithFunctionPointer() { Ptr = (delegate*<void>)&X };
+        internal static WithFunctionPointer s_foo { get; } =
+            new WithFunctionPointer() { Ptr = (delegate* <void>)&X };
+
         internal static void X() { }
     }
 
     public static void Run()
     {
         Assert.IsLazyInitialized(typeof(WithFunctionPointer));
-        Assert.AreEqual(WithFunctionPointer.s_foo.Ptr, (delegate*<void>)&WithFunctionPointer.X);
+        Assert.AreEqual(WithFunctionPointer.s_foo.Ptr, (delegate* <void>)&WithFunctionPointer.X);
     }
 }
 
@@ -857,8 +868,14 @@ class TestGCInteraction
             WithFrozenObjects.s_someObject,
         };
 
-        var h1 = new DependentHandle(WithFrozenObjects.s_someObject, WithFrozenObjects.s_someStringLiteral);
-        var h2 = new DependentHandle(WithFrozenObjects.s_someStringLiteral, WithFrozenObjects.s_someObject);
+        var h1 = new DependentHandle(
+            WithFrozenObjects.s_someObject,
+            WithFrozenObjects.s_someStringLiteral
+        );
+        var h2 = new DependentHandle(
+            WithFrozenObjects.s_someStringLiteral,
+            WithFrozenObjects.s_someObject
+        );
 
         GC.Collect();
         GC.WaitForPendingFinalizers();
@@ -900,7 +917,9 @@ class TestInstanceDelegate
         public static Func<int> Instance2 = Target.GetCookie;
 
         private int _cookie;
+
         public ClassWithInstanceDelegate(int cookie) => _cookie = cookie;
+
         public int GetCookie() => _cookie;
     }
 
@@ -909,17 +928,28 @@ class TestInstanceDelegate
         Assert.IsPreinitialized(typeof(ClassWithInstanceDelegate));
         Assert.AreEqual(42, ClassWithInstanceDelegate.Instance1());
         Assert.AreEqual(123, ClassWithInstanceDelegate.Instance2());
-        Assert.AreSame(ClassWithInstanceDelegate.Target, ClassWithInstanceDelegate.Instance2.Target);
+        Assert.AreSame(
+            ClassWithInstanceDelegate.Target,
+            ClassWithInstanceDelegate.Instance2.Target
+        );
     }
 }
 
 static class Assert
 {
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-        Justification = "Yep, we don't want to keep the cctor if it wasn't kept")]
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2070:UnrecognizedReflectionPattern",
+        Justification = "Yep, we don't want to keep the cctor if it wasn't kept"
+    )]
     private static bool HasCctor(Type type)
     {
-        return type.GetConstructor(BindingFlags.NonPublic | BindingFlags.Static, null, Type.EmptyTypes, null) != null;
+        return type.GetConstructor(
+                BindingFlags.NonPublic | BindingFlags.Static,
+                null,
+                Type.EmptyTypes,
+                null
+            ) != null;
     }
 
     public static void IsPreinitialized(Type type)

@@ -29,22 +29,27 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         [InlineData(10, false)]
         public void ActivateClass(int count, bool synchronous)
         {
-            string [] args = {
+            string[] args =
+            {
                 "comhost",
                 synchronous ? "synchronous" : "concurrent",
                 $"{count}",
                 sharedState.ComHostPath,
                 sharedState.ClsidString
             };
-            CommandResult result = sharedState.CreateNativeHostCommand(args, sharedState.ComLibraryFixture.BuiltDotnet.BinPath)
+            CommandResult result = sharedState
+                .CreateNativeHostCommand(args, sharedState.ComLibraryFixture.BuiltDotnet.BinPath)
                 .Execute();
 
-            result.Should().Pass()
-                .And.HaveStdOutContaining("New instance of Server created");
+            result.Should().Pass().And.HaveStdOutContaining("New instance of Server created");
 
             for (var i = 1; i <= count; ++i)
             {
-                result.Should().HaveStdOutContaining($"Activation of {sharedState.ClsidString} succeeded. {i} of {count}");
+                result
+                    .Should()
+                    .HaveStdOutContaining(
+                        $"Activation of {sharedState.ClsidString} succeeded. {i} of {count}"
+                    );
             }
         }
 
@@ -53,22 +58,30 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         {
             using (var fixture = sharedState.ComLibraryFixture.Copy())
             {
-                File.WriteAllText(Path.Combine(fixture.TestProject.BuiltApp.Location, "hostfxr.dll"), string.Empty);
+                File.WriteAllText(
+                    Path.Combine(fixture.TestProject.BuiltApp.Location, "hostfxr.dll"),
+                    string.Empty
+                );
                 var comHostWithAppLocalFxr = Path.Combine(
                     fixture.TestProject.BuiltApp.Location,
-                    $"{ fixture.TestProject.AssemblyName }.comhost.dll");
+                    $"{fixture.TestProject.AssemblyName}.comhost.dll"
+                );
 
-                string[] args = {
+                string[] args =
+                {
                     "comhost",
                     "synchronous",
                     "1",
                     comHostWithAppLocalFxr,
                     sharedState.ClsidString
-                    };
-                CommandResult result = sharedState.CreateNativeHostCommand(args, fixture.BuiltDotnet.BinPath)
+                };
+                CommandResult result = sharedState
+                    .CreateNativeHostCommand(args, fixture.BuiltDotnet.BinPath)
                     .Execute();
 
-                result.Should().Pass()
+                result
+                    .Should()
+                    .Pass()
                     .And.HaveStdOutContaining("New instance of Server created")
                     .And.HaveStdOutContaining($"Activation of {sharedState.ClsidString} succeeded.")
                     .And.HaveStdErrContaining("Using environment variable DOTNET_ROOT");
@@ -80,27 +93,29 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         {
             using (var fixture = sharedState.ComLibraryFixture.Copy())
             {
-                string missingRuntimeConfig = Path.Combine(fixture.TestProject.BuiltApp.Location,
-                            $"{ fixture.TestProject.AssemblyName }.runtimeconfig.json");
+                string missingRuntimeConfig = Path.Combine(
+                    fixture.TestProject.BuiltApp.Location,
+                    $"{fixture.TestProject.AssemblyName}.runtimeconfig.json"
+                );
 
                 File.Delete(missingRuntimeConfig);
 
                 var comHost = Path.Combine(
                     fixture.TestProject.BuiltApp.Location,
-                    $"{ fixture.TestProject.AssemblyName }.comhost.dll");
+                    $"{fixture.TestProject.AssemblyName}.comhost.dll"
+                );
 
-                string[] args = {
-                    "comhost",
-                    "errorinfo",
-                    "1",
-                    comHost,
-                    sharedState.ClsidString
-                };
-                CommandResult result = sharedState.CreateNativeHostCommand(args, fixture.BuiltDotnet.BinPath)
+                string[] args = { "comhost", "errorinfo", "1", comHost, sharedState.ClsidString };
+                CommandResult result = sharedState
+                    .CreateNativeHostCommand(args, fixture.BuiltDotnet.BinPath)
                     .Execute();
 
-                result.Should().Pass()
-                    .And.HaveStdOutContaining($"The specified runtimeconfig.json [{missingRuntimeConfig}] does not exist");
+                result
+                    .Should()
+                    .Pass()
+                    .And.HaveStdOutContaining(
+                        $"The specified runtimeconfig.json [{missingRuntimeConfig}] does not exist"
+                    );
             }
         }
 
@@ -111,19 +126,17 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             {
                 var comHost = Path.Combine(
                     fixture.TestProject.BuiltApp.Location,
-                    $"{ fixture.TestProject.AssemblyName }.comhost.dll");
+                    $"{fixture.TestProject.AssemblyName}.comhost.dll"
+                );
 
-                string[] args = {
-                    "comhost",
-                    "typelib",
-                    "2",
-                    comHost,
-                    sharedState.ClsidString
-                };
-                CommandResult result = sharedState.CreateNativeHostCommand(args, fixture.BuiltDotnet.BinPath)
+                string[] args = { "comhost", "typelib", "2", comHost, sharedState.ClsidString };
+                CommandResult result = sharedState
+                    .CreateNativeHostCommand(args, fixture.BuiltDotnet.BinPath)
                     .Execute();
 
-                result.Should().Pass()
+                result
+                    .Should()
+                    .Pass()
                     .And.HaveStdOutContaining("Loading default type library succeeded.")
                     .And.HaveStdOutContaining("Loading type library 1 succeeded.")
                     .And.HaveStdOutContaining("Loading type library 2 succeeded.");
@@ -154,9 +167,21 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     .BuildProject();
 
                 // Create a .clsidmap from the assembly
-                ClsidMapPath = Path.Combine(BaseDirectory, $"{ ComLibraryFixture.TestProject.AssemblyName }.clsidmap");
-                using (var assemblyStream = new FileStream(ComLibraryFixture.TestProject.AppDll, FileMode.Open, FileAccess.Read, FileShare.Delete | FileShare.Read))
-                using (var peReader = new System.Reflection.PortableExecutable.PEReader(assemblyStream))
+                ClsidMapPath = Path.Combine(
+                    BaseDirectory,
+                    $"{ComLibraryFixture.TestProject.AssemblyName}.clsidmap"
+                );
+                using (
+                    var assemblyStream = new FileStream(
+                        ComLibraryFixture.TestProject.AppDll,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.Delete | FileShare.Read
+                    )
+                )
+                using (
+                    var peReader = new System.Reflection.PortableExecutable.PEReader(assemblyStream)
+                )
                 {
                     if (peReader.HasMetadata)
                     {
@@ -168,7 +193,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 // Use the locally built comhost to create a comhost with the embedded .clsidmap
                 ComHostPath = Path.Combine(
                     ComLibraryFixture.TestProject.BuiltApp.Location,
-                    $"{ ComLibraryFixture.TestProject.AssemblyName }.comhost.dll");
+                    $"{ComLibraryFixture.TestProject.AssemblyName}.comhost.dll"
+                );
 
                 // Include the test type libraries in the ComHost tests.
                 TypeLibraries = new Dictionary<int, string>
@@ -181,7 +207,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     Path.Combine(RepoDirectories.HostArtifacts, "comhost.dll"),
                     ComHostPath,
                     ClsidMapPath,
-                    TypeLibraries);
+                    TypeLibraries
+                );
             }
 
             protected override void Dispose(bool disposing)

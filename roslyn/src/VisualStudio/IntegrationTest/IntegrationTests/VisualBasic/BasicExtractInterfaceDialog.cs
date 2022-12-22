@@ -19,25 +19,28 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
     {
         protected override string LanguageName => LanguageNames.VisualBasic;
 
-        private ExtractInterfaceDialog_OutOfProc ExtractInterfaceDialog => VisualStudio.ExtractInterfaceDialog;
+        private ExtractInterfaceDialog_OutOfProc ExtractInterfaceDialog =>
+            VisualStudio.ExtractInterfaceDialog;
 
         public BasicExtractInterfaceDialog(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicExtractInterfaceDialog))
-        {
-        }
+            : base(instanceFactory, nameof(BasicExtractInterfaceDialog)) { }
 
         [WpfFact]
         public void CoreScenario()
         {
-            SetUpEditor(@"Class C$$
+            SetUpEditor(
+                @"Class C$$
     Public Sub M()
     End Sub
-End Class");
+End Class"
+            );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Extract interface...",
+            VisualStudio.Editor.Verify.CodeAction(
+                "Extract interface...",
                 applyFix: true,
-                blockUntilComplete: false);
+                blockUntilComplete: false
+            );
 
             ExtractInterfaceDialog.VerifyOpen();
             ExtractInterfaceDialog.ClickOK();
@@ -46,32 +49,40 @@ End Class");
             var project = new ProjectUtils.Project(ProjectName);
             VisualStudio.SolutionExplorer.OpenFile(project, "Class1.vb");
 
-            VisualStudio.Editor.Verify.TextContains(@"Class C
+            VisualStudio.Editor.Verify.TextContains(
+                @"Class C
     Implements IC
 
     Public Sub M() Implements IC.M
     End Sub
-End Class");
+End Class"
+            );
 
             VisualStudio.SolutionExplorer.OpenFile(project, "IC.vb");
 
-            VisualStudio.Editor.Verify.TextContains(@"Interface IC
+            VisualStudio.Editor.Verify.TextContains(
+                @"Interface IC
     Sub M()
-End Interface");
+End Interface"
+            );
         }
 
         [WpfFact]
         public void CheckFileName()
         {
-            SetUpEditor(@"Class C2$$
+            SetUpEditor(
+                @"Class C2$$
     Public Sub M()
     End Sub
-End Class");
+End Class"
+            );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Extract interface...",
+            VisualStudio.Editor.Verify.CodeAction(
+                "Extract interface...",
                 applyFix: true,
-                blockUntilComplete: false);
+                blockUntilComplete: false
+            );
 
             ExtractInterfaceDialog.VerifyOpen();
 
@@ -85,14 +96,18 @@ End Class");
         [WpfFact]
         public void CheckSameFile()
         {
-            SetUpEditor(@"Class C$$
+            SetUpEditor(
+                @"Class C$$
     Public Sub M()
     End Sub
-End Class");
+End Class"
+            );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Extract interface...",
+            VisualStudio.Editor.Verify.CodeAction(
+                "Extract interface...",
                 applyFix: true,
-                blockUntilComplete: false);
+                blockUntilComplete: false
+            );
 
             ExtractInterfaceDialog.VerifyOpen();
 
@@ -102,7 +117,8 @@ End Class");
             ExtractInterfaceDialog.VerifyClosed();
 
             _ = new ProjectUtils.Project(ProjectName);
-            VisualStudio.Editor.Verify.TextContains(@"Interface IC
+            VisualStudio.Editor.Verify.TextContains(
+                @"Interface IC
     Sub M()
 End Interface
 
@@ -111,23 +127,27 @@ Class C
 
     Public Sub M() Implements IC.M
     End Sub
-End Class");
-
+End Class"
+            );
         }
 
         [WpfFact]
         public void CheckSameFileOnlySelectedItems()
         {
-            SetUpEditor(@"Class C$$
+            SetUpEditor(
+                @"Class C$$
     Public Sub M1()
     Public Sub M2()
     End Sub
-End Class");
+End Class"
+            );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Extract interface...",
+            VisualStudio.Editor.Verify.CodeAction(
+                "Extract interface...",
                 applyFix: true,
-                blockUntilComplete: false);
+                blockUntilComplete: false
+            );
 
             ExtractInterfaceDialog.VerifyOpen();
             ExtractInterfaceDialog.ClickDeselectAll();
@@ -136,7 +156,8 @@ End Class");
             ExtractInterfaceDialog.ClickOK();
             ExtractInterfaceDialog.VerifyClosed();
 
-            VisualStudio.Editor.Verify.TextContains(@"Interface IC
+            VisualStudio.Editor.Verify.TextContains(
+                @"Interface IC
     Sub M2()
 End Interface
 
@@ -146,23 +167,28 @@ Class C
     Public Sub M1()
     Public Sub M2() Implements IC.M2
     End Sub
-End Class");
+End Class"
+            );
         }
 
         [WpfFact]
         public void CheckSameFileNamespace()
         {
-            SetUpEditor(@"Namespace A
+            SetUpEditor(
+                @"Namespace A
     Class C$$
         Public Sub M()
         End Sub
     End Class
-End Namespace");
+End Namespace"
+            );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Extract interface...",
+            VisualStudio.Editor.Verify.CodeAction(
+                "Extract interface...",
                 applyFix: true,
-                blockUntilComplete: false);
+                blockUntilComplete: false
+            );
 
             ExtractInterfaceDialog.VerifyOpen();
 
@@ -172,7 +198,8 @@ End Namespace");
             ExtractInterfaceDialog.VerifyClosed();
 
             _ = new ProjectUtils.Project(ProjectName);
-            VisualStudio.Editor.Verify.TextContains(@"Namespace A
+            VisualStudio.Editor.Verify.TextContains(
+                @"Namespace A
     Interface IC
         Sub M()
     End Interface
@@ -183,7 +210,8 @@ End Namespace");
         Public Sub M() Implements IC.M
         End Sub
     End Class
-End Namespace");
+End Namespace"
+            );
         }
     }
 }

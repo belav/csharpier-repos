@@ -55,26 +55,36 @@ public abstract class Http3TestBase : TestApplicationErrorLoggerLoggedTest, IDis
     protected readonly RequestDelegate _echoPath;
     protected readonly RequestDelegate _echoHost;
 
-    protected static readonly IEnumerable<KeyValuePair<string, string>> _browserRequestHeaders = new[]
-    {
-        new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
-        new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
-        new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
-        new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:80"),
-        new KeyValuePair<string, string>("user-agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0"),
-        new KeyValuePair<string, string>("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"),
-        new KeyValuePair<string, string>("accept-language", "en-US,en;q=0.5"),
-        new KeyValuePair<string, string>("accept-encoding", "gzip, deflate, br"),
-        new KeyValuePair<string, string>("upgrade-insecure-requests", "1"),
-    };
+    protected static readonly IEnumerable<KeyValuePair<string, string>> _browserRequestHeaders =
+        new[]
+        {
+            new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
+            new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
+            new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
+            new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:80"),
+            new KeyValuePair<string, string>(
+                "user-agent",
+                "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0"
+            ),
+            new KeyValuePair<string, string>(
+                "accept",
+                "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+            ),
+            new KeyValuePair<string, string>("accept-language", "en-US,en;q=0.5"),
+            new KeyValuePair<string, string>("accept-encoding", "gzip, deflate, br"),
+            new KeyValuePair<string, string>("upgrade-insecure-requests", "1"),
+        };
 
-    protected static IEnumerable<KeyValuePair<string, string>> ReadRateRequestHeaders(int expectedBytes) => new[]
-    {
-        new KeyValuePair<string, string>(InternalHeaderNames.Method, "POST"),
-        new KeyValuePair<string, string>(InternalHeaderNames.Path, "/" + expectedBytes),
-        new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
-        new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:80"),
-    };
+    protected static IEnumerable<KeyValuePair<string, string>> ReadRateRequestHeaders(
+        int expectedBytes
+    ) =>
+        new[]
+        {
+            new KeyValuePair<string, string>(InternalHeaderNames.Method, "POST"),
+            new KeyValuePair<string, string>(InternalHeaderNames.Path, "/" + expectedBytes),
+            new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
+            new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:80"),
+        };
 
     public Http3TestBase()
     {
@@ -93,7 +103,10 @@ public abstract class Http3TestBase : TestApplicationErrorLoggerLoggedTest, IDis
 
         _readRateApplication = async context =>
         {
-            var expectedBytes = int.Parse(context.Request.Path.Value.Substring(1), CultureInfo.InvariantCulture);
+            var expectedBytes = int.Parse(
+                context.Request.Path.Value.Substring(1),
+                CultureInfo.InvariantCulture
+            );
 
             var buffer = new byte[16 * 1024];
             var received = 0;
@@ -121,7 +134,9 @@ public abstract class Http3TestBase : TestApplicationErrorLoggerLoggedTest, IDis
         _echoPath = context =>
         {
             context.Response.Headers["path"] = context.Request.Path.ToString();
-            context.Response.Headers["rawtarget"] = context.Features.Get<IHttpRequestFeature>().RawTarget;
+            context.Response.Headers["rawtarget"] = context.Features
+                .Get<IHttpRequestFeature>()
+                .RawTarget;
 
             return Task.CompletedTask;
         };
@@ -134,7 +149,12 @@ public abstract class Http3TestBase : TestApplicationErrorLoggerLoggedTest, IDis
         };
     }
 
-    public override void Initialize(TestContext context, MethodInfo methodInfo, object[] testMethodArguments, ITestOutputHelper testOutputHelper)
+    public override void Initialize(
+        TestContext context,
+        MethodInfo methodInfo,
+        object[] testMethodArguments,
+        ITestOutputHelper testOutputHelper
+    )
     {
         base.Initialize(context, methodInfo, testMethodArguments, testOutputHelper);
 
@@ -143,14 +163,22 @@ public abstract class Http3TestBase : TestApplicationErrorLoggerLoggedTest, IDis
             Scheduler = PipeScheduler.Inline,
         };
 
-        Http3Api = new Http3InMemory(_serviceContext, _serviceContext.MockSystemClock, _mockTimeoutHandler.Object, LoggerFactory);
+        Http3Api = new Http3InMemory(
+            _serviceContext,
+            _serviceContext.MockSystemClock,
+            _mockTimeoutHandler.Object,
+            LoggerFactory
+        );
     }
 
     public void AssertExpectedErrorMessages(string expectedErrorMessage)
     {
         if (expectedErrorMessage != null)
         {
-            Assert.Contains(LogMessages, m => m.Exception?.Message.Contains(expectedErrorMessage) ?? false);
+            Assert.Contains(
+                LogMessages,
+                m => m.Exception?.Message.Contains(expectedErrorMessage) ?? false
+            );
         }
     }
 
@@ -158,9 +186,15 @@ public abstract class Http3TestBase : TestApplicationErrorLoggerLoggedTest, IDis
     {
         if (expectedErrorMessage?.Length > 0)
         {
-            var message = Assert.Single(LogMessages, m => m.Exception != null && exceptionType.IsAssignableFrom(m.Exception.GetType()));
+            var message = Assert.Single(
+                LogMessages,
+                m => m.Exception != null && exceptionType.IsAssignableFrom(m.Exception.GetType())
+            );
 
-            Assert.Contains(expectedErrorMessage, expected => message.Exception.Message.Contains(expected));
+            Assert.Contains(
+                expectedErrorMessage,
+                expected => message.Exception.Message.Contains(expected)
+            );
         }
     }
 }

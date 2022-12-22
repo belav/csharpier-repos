@@ -18,7 +18,9 @@ namespace System
     /// </remarks>
     [Serializable]
     [DebuggerDisplay("Count = {InnerExceptionCount}")]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class AggregateException : Exception
     {
         private readonly Exception[] _innerExceptions; // Complete set of exceptions.
@@ -27,18 +29,14 @@ namespace System
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateException"/> class.
         /// </summary>
-        public AggregateException()
-            : this(SR.AggregateException_ctor_DefaultMessage)
-        {
-        }
+        public AggregateException() : this(SR.AggregateException_ctor_DefaultMessage) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateException"/> class with
         /// a specified error message.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
-        public AggregateException(string? message)
-            : base(message)
+        public AggregateException(string? message) : base(message)
         {
             _innerExceptions = Array.Empty<Exception>();
         }
@@ -68,10 +66,11 @@ namespace System
         /// is null.</exception>
         /// <exception cref="System.ArgumentException">An element of <paramref name="innerExceptions"/> is
         /// null.</exception>
-        public AggregateException(IEnumerable<Exception> innerExceptions) :
-            this(SR.AggregateException_ctor_DefaultMessage, innerExceptions ?? throw new ArgumentNullException(nameof(innerExceptions)))
-        {
-        }
+        public AggregateException(IEnumerable<Exception> innerExceptions)
+            : this(
+                SR.AggregateException_ctor_DefaultMessage,
+                innerExceptions ?? throw new ArgumentNullException(nameof(innerExceptions))
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateException"/> class with
@@ -82,10 +81,11 @@ namespace System
         /// is null.</exception>
         /// <exception cref="System.ArgumentException">An element of <paramref name="innerExceptions"/> is
         /// null.</exception>
-        public AggregateException(params Exception[] innerExceptions) :
-            this(SR.AggregateException_ctor_DefaultMessage, innerExceptions ?? throw new ArgumentNullException(nameof(innerExceptions)))
-        {
-        }
+        public AggregateException(params Exception[] innerExceptions)
+            : this(
+                SR.AggregateException_ctor_DefaultMessage,
+                innerExceptions ?? throw new ArgumentNullException(nameof(innerExceptions))
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateException"/> class with a specified error
@@ -98,9 +98,13 @@ namespace System
         /// <exception cref="System.ArgumentException">An element of <paramref name="innerExceptions"/> is
         /// null.</exception>
         public AggregateException(string? message, IEnumerable<Exception> innerExceptions)
-            : this(message, new List<Exception>(innerExceptions ?? throw new ArgumentNullException(nameof(innerExceptions))).ToArray(), cloneExceptions: false)
-        {
-        }
+            : this(
+                message,
+                new List<Exception>(
+                    innerExceptions ?? throw new ArgumentNullException(nameof(innerExceptions))
+                ).ToArray(),
+                cloneExceptions: false
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateException"/> class with a specified error
@@ -112,15 +116,22 @@ namespace System
         /// is null.</exception>
         /// <exception cref="System.ArgumentException">An element of <paramref name="innerExceptions"/> is
         /// null.</exception>
-        public AggregateException(string? message, params Exception[] innerExceptions) :
-            this(message, innerExceptions ?? throw new ArgumentNullException(nameof(innerExceptions)), cloneExceptions: true)
-        {
-        }
+        public AggregateException(string? message, params Exception[] innerExceptions)
+            : this(
+                message,
+                innerExceptions ?? throw new ArgumentNullException(nameof(innerExceptions)),
+                cloneExceptions: true
+            ) { }
 
-        private AggregateException(string? message, Exception[] innerExceptions, bool cloneExceptions) :
-            base(message, innerExceptions.Length > 0 ? innerExceptions[0] : null)
+        private AggregateException(
+            string? message,
+            Exception[] innerExceptions,
+            bool cloneExceptions
+        ) : base(message, innerExceptions.Length > 0 ? innerExceptions[0] : null)
         {
-            _innerExceptions = cloneExceptions ? new Exception[innerExceptions.Length] : innerExceptions;
+            _innerExceptions = cloneExceptions
+                ? new Exception[innerExceptions.Length]
+                : innerExceptions;
 
             for (int i = 0; i < _innerExceptions.Length; i++)
             {
@@ -144,10 +155,8 @@ namespace System
         /// is null.</exception>
         /// <exception cref="System.ArgumentException">An element of <paramref name="innerExceptionInfos"/> is
         /// null.</exception>
-        internal AggregateException(List<ExceptionDispatchInfo> innerExceptionInfos) :
-            this(SR.AggregateException_ctor_DefaultMessage, innerExceptionInfos)
-        {
-        }
+        internal AggregateException(List<ExceptionDispatchInfo> innerExceptionInfos)
+            : this(SR.AggregateException_ctor_DefaultMessage, innerExceptionInfos) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateException"/> class with a specified error
@@ -163,7 +172,10 @@ namespace System
         /// <exception cref="System.ArgumentException">An element of <paramref name="innerExceptionInfos"/> is
         /// null.</exception>
         internal AggregateException(string message, List<ExceptionDispatchInfo> innerExceptionInfos)
-            : base(message, innerExceptionInfos.Count != 0 ? innerExceptionInfos[0].SourceException : null)
+            : base(
+                message,
+                innerExceptionInfos.Count != 0 ? innerExceptionInfos[0].SourceException : null
+            )
         {
             _innerExceptions = new Exception[innerExceptionInfos.Count];
 
@@ -183,10 +195,11 @@ namespace System
         /// contains contextual information about the source or destination. </param>
         /// <exception cref="System.ArgumentNullException">The <paramref name="info"/> argument is null.</exception>
         /// <exception cref="System.Runtime.Serialization.SerializationException">The exception could not be deserialized correctly.</exception>
-        protected AggregateException(SerializationInfo info, StreamingContext context) :
-            base(info, context)
+        protected AggregateException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
-            Exception[]? innerExceptions = info.GetValue("InnerExceptions", typeof(Exception[])) as Exception[]; // Do not rename (binary serialization)
+            Exception[]? innerExceptions =
+                info.GetValue("InnerExceptions", typeof(Exception[])) as Exception[]; // Do not rename (binary serialization)
             if (innerExceptions is null)
             {
                 throw new SerializationException(SR.AggregateException_DeserializationFailure);
@@ -233,8 +246,8 @@ namespace System
         /// Gets a read-only collection of the <see cref="System.Exception"/> instances that caused the
         /// current exception.
         /// </summary>
-        public ReadOnlyCollection<Exception> InnerExceptions => _rocView ??= new ReadOnlyCollection<Exception>(_innerExceptions);
-
+        public ReadOnlyCollection<Exception> InnerExceptions =>
+            _rocView ??= new ReadOnlyCollection<Exception>(_innerExceptions);
 
         /// <summary>
         /// Invokes a handler on each <see cref="System.Exception"/> contained by this <see
@@ -274,10 +287,13 @@ namespace System
             // If there are unhandled exceptions remaining, throw them.
             if (unhandledExceptions != null)
             {
-                throw new AggregateException(Message, unhandledExceptions.ToArray(), cloneExceptions: false);
+                throw new AggregateException(
+                    Message,
+                    unhandledExceptions.ToArray(),
+                    cloneExceptions: false
+                );
             }
         }
-
 
         /// <summary>
         /// Flattens the inner instances of <see cref="AggregateException"/> by expanding its contained <see cref="Exception"/> instances
@@ -304,7 +320,9 @@ namespace System
             while (exceptionsToFlatten.Count > nDequeueIndex)
             {
                 // dequeue one from exceptionsToFlatten
-                ReadOnlyCollection<Exception> currentInnerExceptions = exceptionsToFlatten[nDequeueIndex++].InnerExceptions;
+                ReadOnlyCollection<Exception> currentInnerExceptions = exceptionsToFlatten[
+                    nDequeueIndex++
+                ].InnerExceptions;
 
                 for (int i = 0; i < currentInnerExceptions.Count; i++)
                 {
@@ -328,7 +346,11 @@ namespace System
                 }
             }
 
-            return new AggregateException(GetType() == typeof(AggregateException) ? base.Message : Message, flattenedExceptions.ToArray(), cloneExceptions: false);
+            return new AggregateException(
+                GetType() == typeof(AggregateException) ? base.Message : Message,
+                flattenedExceptions.ToArray(),
+                cloneExceptions: false
+            );
         }
 
         /// <summary>Gets a message that describes the exception.</summary>
@@ -370,7 +392,11 @@ namespace System
                     continue; // Already logged in base.ToString()
 
                 text.Append(Environment.NewLineConst + InnerExceptionPrefix);
-                text.AppendFormat(CultureInfo.InvariantCulture, SR.AggregateException_InnerException, i);
+                text.AppendFormat(
+                    CultureInfo.InvariantCulture,
+                    SR.AggregateException_InnerException,
+                    i
+                );
                 text.Append(_innerExceptions[i].ToString());
                 text.Append("<---");
                 text.AppendLine();

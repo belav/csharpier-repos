@@ -14,13 +14,15 @@ namespace System.Formats.Tar
     {
         // Constructor called when reading a TarEntry from a TarReader.
         internal PosixTarEntry(TarHeader header, TarReader readerOfOrigin, TarEntryFormat format)
-            : base(header, readerOfOrigin, format)
-        {
-        }
+            : base(header, readerOfOrigin, format) { }
 
         // Constructor called when the user creates a TarEntry instance from scratch.
-        internal PosixTarEntry(TarEntryType entryType, string entryName, TarEntryFormat format, bool isGea)
-            : base(entryType, entryName, format, isGea)
+        internal PosixTarEntry(
+            TarEntryType entryType,
+            string entryName,
+            TarEntryFormat format,
+            bool isGea
+        ) : base(entryType, entryName, format, isGea)
         {
             _header._uName = string.Empty;
             _header._gName = string.Empty;
@@ -29,8 +31,7 @@ namespace System.Formats.Tar
         }
 
         // Constructor called when converting an entry to the selected format.
-        internal PosixTarEntry(TarEntry other, TarEntryFormat format)
-            : base(other, format)
+        internal PosixTarEntry(TarEntry other, TarEntryFormat format) : base(other, format)
         {
             if (other is PosixTarEntry)
             {
@@ -56,7 +57,11 @@ namespace System.Formats.Tar
             get => _header._devMajor;
             set
             {
-                if (_header._typeFlag is not TarEntryType.BlockDevice and not TarEntryType.CharacterDevice)
+                if (
+                    _header._typeFlag
+                    is not TarEntryType.BlockDevice
+                        and not TarEntryType.CharacterDevice
+                )
                 {
                     throw new InvalidOperationException(SR.TarEntryBlockOrCharacterExpected);
                 }
@@ -80,7 +85,11 @@ namespace System.Formats.Tar
             get => _header._devMinor;
             set
             {
-                if (_header._typeFlag is not TarEntryType.BlockDevice and not TarEntryType.CharacterDevice)
+                if (
+                    _header._typeFlag
+                    is not TarEntryType.BlockDevice
+                        and not TarEntryType.CharacterDevice
+                )
                 {
                     throw new InvalidOperationException(SR.TarEntryBlockOrCharacterExpected);
                 }

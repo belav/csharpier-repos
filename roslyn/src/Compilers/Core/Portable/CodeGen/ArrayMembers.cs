@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using EmitContext = Microsoft.CodeAnalysis.Emit.EmitContext;
 
-
 // Contains support for pseudo-methods on multidimensional arrays.
 //
 // Opcodes such as newarr, ldelem, ldelema, stelem do not work with
@@ -53,7 +52,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
 {
     /// <summary>
     /// Constructs and caches already created pseudo-methods.
-    /// Every compiled module is supposed to have one of this, created lazily 
+    /// Every compiled module is supposed to have one of this, created lazily
     /// (multidimensional arrays are not common).
     /// </summary>
     internal class ArrayMethods
@@ -79,26 +78,28 @@ namespace Microsoft.CodeAnalysis.CodeGen
         /// <summary>
         /// Acquires an element getter method for a given array type
         /// </summary>
-        public ArrayMethod GetArrayGet(Cci.IArrayTypeReference arrayType)
-            => GetArrayMethod(arrayType, ArrayMethodKind.GET);
+        public ArrayMethod GetArrayGet(Cci.IArrayTypeReference arrayType) =>
+            GetArrayMethod(arrayType, ArrayMethodKind.GET);
 
         /// <summary>
         /// Acquires an element setter method for a given array type
         /// </summary>
-        public ArrayMethod GetArraySet(Cci.IArrayTypeReference arrayType)
-            => GetArrayMethod(arrayType, ArrayMethodKind.SET);
+        public ArrayMethod GetArraySet(Cci.IArrayTypeReference arrayType) =>
+            GetArrayMethod(arrayType, ArrayMethodKind.SET);
 
         /// <summary>
         /// Acquires an element referencer method for a given array type
         /// </summary>
-        public ArrayMethod GetArrayAddress(Cci.IArrayTypeReference arrayType)
-            => GetArrayMethod(arrayType, ArrayMethodKind.ADDRESS);
+        public ArrayMethod GetArrayAddress(Cci.IArrayTypeReference arrayType) =>
+            GetArrayMethod(arrayType, ArrayMethodKind.ADDRESS);
 
         /// <summary>
         /// Maps {array type, method kind} tuples to implementing pseudo-methods.
         /// </summary>
-        private readonly ConcurrentDictionary<(byte methodKind, IReferenceOrISignature arrayType), ArrayMethod> _dict =
-            new ConcurrentDictionary<(byte, IReferenceOrISignature), ArrayMethod>();
+        private readonly ConcurrentDictionary<
+            (byte methodKind, IReferenceOrISignature arrayType),
+            ArrayMethod
+        > _dict = new ConcurrentDictionary<(byte, IReferenceOrISignature), ArrayMethod>();
 
         /// <summary>
         /// lazily fetches or creates a new array method.
@@ -118,7 +119,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
             return result;
         }
 
-        private static ArrayMethod MakeArrayMethod(Cci.IArrayTypeReference arrayType, ArrayMethodKind id)
+        private static ArrayMethod MakeArrayMethod(
+            Cci.IArrayTypeReference arrayType,
+            ArrayMethodKind id
+        )
         {
             switch (id)
             {
@@ -138,9 +142,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             throw ExceptionUtilities.UnexpectedValue(id);
         }
 
-
         /// <summary>
-        /// "newobj ArrayConstructor"  is equivalent of "newarr ElementType" 
+        /// "newobj ArrayConstructor"  is equivalent of "newarr ElementType"
         /// when working with multidimensional arrays
         /// </summary>
         private sealed class ArrayConstructor : ArrayMethod
@@ -149,12 +152,12 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
             public override string Name => ".ctor";
 
-            public override Cci.ITypeReference GetType(EmitContext context)
-                => context.Module.GetPlatformType(Cci.PlatformType.SystemVoid, context);
+            public override Cci.ITypeReference GetType(EmitContext context) =>
+                context.Module.GetPlatformType(Cci.PlatformType.SystemVoid, context);
         }
 
         /// <summary>
-        /// "call ArrayGet"  is equivalent of "ldelem ElementType" 
+        /// "call ArrayGet"  is equivalent of "ldelem ElementType"
         /// when working with multidimensional arrays
         /// </summary>
         private sealed class ArrayGet : ArrayMethod
@@ -163,12 +166,12 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
             public override string Name => "Get";
 
-            public override Cci.ITypeReference GetType(EmitContext context)
-                => arrayType.GetElementType(context);
+            public override Cci.ITypeReference GetType(EmitContext context) =>
+                arrayType.GetElementType(context);
         }
 
         /// <summary>
-        /// "call ArrayAddress"  is equivalent of "ldelema ElementType" 
+        /// "call ArrayAddress"  is equivalent of "ldelema ElementType"
         /// when working with multidimensional arrays
         /// </summary>
         private sealed class ArrayAddress : ArrayMethod
@@ -177,14 +180,14 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
             public override bool ReturnValueIsByRef => true;
 
-            public override Cci.ITypeReference GetType(EmitContext context)
-                => arrayType.GetElementType(context);
+            public override Cci.ITypeReference GetType(EmitContext context) =>
+                arrayType.GetElementType(context);
 
             public override string Name => "Address";
         }
 
         /// <summary>
-        /// "call ArraySet"  is equivalent of "stelem ElementType" 
+        /// "call ArraySet"  is equivalent of "stelem ElementType"
         /// when working with multidimensional arrays
         /// </summary>
         private sealed class ArraySet : ArrayMethod
@@ -193,8 +196,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
             public override string Name => "Set";
 
-            public override Cci.ITypeReference GetType(EmitContext context)
-                => context.Module.GetPlatformType(Cci.PlatformType.SystemVoid, context);
+            public override Cci.ITypeReference GetType(EmitContext context) =>
+                context.Module.GetPlatformType(Cci.PlatformType.SystemVoid, context);
 
             protected override ImmutableArray<ArrayMethodParameterInfo> MakeParameters()
             {
@@ -214,8 +217,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
     /// <summary>
     /// Represents a parameter in an array pseudo-method.
-    /// 
-    /// NOTE: It appears that only number of indices is used for verification, 
+    ///
+    /// NOTE: It appears that only number of indices is used for verification,
     /// types just have to be Int32.
     /// Even though actual arguments can be native ints.
     /// </summary>
@@ -224,7 +227,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
         // position in the signature
         private readonly ushort _index;
 
-        // cache common parameter instances 
+        // cache common parameter instances
         // (we can do this since the only data we have is the index)
         private static readonly ArrayMethodParameterInfo s_index0 = new ArrayMethodParameterInfo(0);
         private static readonly ArrayMethodParameterInfo s_index1 = new ArrayMethodParameterInfo(1);
@@ -240,33 +243,37 @@ namespace Microsoft.CodeAnalysis.CodeGen
         {
             switch (index)
             {
-                case 0: return s_index0;
-                case 1: return s_index1;
-                case 2: return s_index2;
-                case 3: return s_index3;
+                case 0:
+                    return s_index0;
+                case 1:
+                    return s_index1;
+                case 2:
+                    return s_index2;
+                case 3:
+                    return s_index3;
             }
 
             return new ArrayMethodParameterInfo(index);
         }
 
-        public ImmutableArray<Cci.ICustomModifier> RefCustomModifiers
-            => ImmutableArray<Cci.ICustomModifier>.Empty;
+        public ImmutableArray<Cci.ICustomModifier> RefCustomModifiers =>
+            ImmutableArray<Cci.ICustomModifier>.Empty;
 
-        public ImmutableArray<Cci.ICustomModifier> CustomModifiers
-            => ImmutableArray<Cci.ICustomModifier>.Empty;
+        public ImmutableArray<Cci.ICustomModifier> CustomModifiers =>
+            ImmutableArray<Cci.ICustomModifier>.Empty;
 
         public bool IsByReference => false;
 
-        public virtual Cci.ITypeReference GetType(EmitContext context)
-            => context.Module.GetPlatformType(Cci.PlatformType.SystemInt32, context);
+        public virtual Cci.ITypeReference GetType(EmitContext context) =>
+            context.Module.GetPlatformType(Cci.PlatformType.SystemInt32, context);
 
         public ushort Index => _index;
     }
 
     /// <summary>
     /// Represents the "value" parameter of the Set pseudo-method.
-    /// 
-    /// NOTE: unlike index parameters, type of the value parameter must match 
+    ///
+    /// NOTE: unlike index parameters, type of the value parameter must match
     /// the actual element type.
     /// </summary>
     internal sealed class ArraySetValueParameterInfo : ArrayMethodParameterInfo
@@ -279,8 +286,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             _arrayType = arrayType;
         }
 
-        public override Cci.ITypeReference GetType(EmitContext context)
-            => _arrayType.GetElementType(context);
+        public override Cci.ITypeReference GetType(EmitContext context) =>
+            _arrayType.GetElementType(context);
     }
 
     /// <summary>
@@ -317,8 +324,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             return parameters.ToImmutableAndFree();
         }
 
-        public ImmutableArray<Cci.IParameterTypeInformation> GetParameters(EmitContext context)
-            => StaticCast<Cci.IParameterTypeInformation>.From(_parameters);
+        public ImmutableArray<Cci.IParameterTypeInformation> GetParameters(EmitContext context) =>
+            StaticCast<Cci.IParameterTypeInformation>.From(_parameters);
 
         public bool AcceptsExtraArguments => false;
 
@@ -328,8 +335,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         public Cci.IMethodDefinition? GetResolvedMethod(EmitContext context) => null;
 
-        public ImmutableArray<Cci.IParameterTypeInformation> ExtraParameters
-            => ImmutableArray<Cci.IParameterTypeInformation>.Empty;
+        public ImmutableArray<Cci.IParameterTypeInformation> ExtraParameters =>
+            ImmutableArray<Cci.IParameterTypeInformation>.Empty;
 
         public Cci.IGenericMethodInstanceReference? AsGenericMethodInstanceReference => null;
 
@@ -339,30 +346,28 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         public ushort ParameterCount => (ushort)_parameters.Length;
 
-        public ImmutableArray<Cci.ICustomModifier> RefCustomModifiers
-            => ImmutableArray<Cci.ICustomModifier>.Empty;
+        public ImmutableArray<Cci.ICustomModifier> RefCustomModifiers =>
+            ImmutableArray<Cci.ICustomModifier>.Empty;
 
-        public ImmutableArray<Cci.ICustomModifier> ReturnValueCustomModifiers
-            => ImmutableArray<Cci.ICustomModifier>.Empty;
+        public ImmutableArray<Cci.ICustomModifier> ReturnValueCustomModifiers =>
+            ImmutableArray<Cci.ICustomModifier>.Empty;
 
         public Cci.ITypeReference GetContainingType(EmitContext context)
         {
-            // We are not translating arrayType. 
+            // We are not translating arrayType.
             // It is an array type and it is never generic or contained in a generic.
             return this.arrayType;
         }
 
-        public IEnumerable<Cci.ICustomAttribute> GetAttributes(EmitContext context)
-            => SpecializedCollections.EmptyEnumerable<Cci.ICustomAttribute>();
+        public IEnumerable<Cci.ICustomAttribute> GetAttributes(EmitContext context) =>
+            SpecializedCollections.EmptyEnumerable<Cci.ICustomAttribute>();
 
-        public void Dispatch(Cci.MetadataVisitor visitor)
-            => visitor.Visit(this);
+        public void Dispatch(Cci.MetadataVisitor visitor) => visitor.Visit(this);
 
-        public Cci.IDefinition? AsDefinition(EmitContext context)
-            => null;
+        public Cci.IDefinition? AsDefinition(EmitContext context) => null;
 
-        public override string ToString()
-            => ((object?)arrayType.GetInternalSymbol() ?? arrayType).ToString() + "." + Name;
+        public override string ToString() =>
+            ((object?)arrayType.GetInternalSymbol() ?? arrayType).ToString() + "." + Name;
 
         Symbols.ISymbolInternal? Cci.IReference.GetInternalSymbol() => null;
 

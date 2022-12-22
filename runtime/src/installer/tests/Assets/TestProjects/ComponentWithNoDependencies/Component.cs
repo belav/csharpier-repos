@@ -15,7 +15,9 @@ namespace Component
 
         private static void PrintComponentCallLog(string name, IntPtr arg, int size)
         {
-            Console.WriteLine($"Called {name}(0x{arg.ToString("x")}, {size}) - component call count: {componentCallCount}");
+            Console.WriteLine(
+                $"Called {name}(0x{arg.ToString("x")}, {size}) - component call count: {componentCallCount}"
+            );
         }
 
         public static int ComponentEntryPoint1(IntPtr arg, int size)

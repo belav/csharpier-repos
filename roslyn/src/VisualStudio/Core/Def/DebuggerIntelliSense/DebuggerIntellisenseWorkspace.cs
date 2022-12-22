@@ -22,7 +22,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
             SetCurrentSolution(solution);
         }
 
-        public void OpenDocument(DocumentId documentId, SourceTextContainer textContainer)
-            => OnDocumentOpened(documentId, textContainer);
+        public void OpenDocument(DocumentId documentId, SourceTextContainer textContainer) =>
+            OnDocumentOpened(documentId, textContainer);
     }
 }

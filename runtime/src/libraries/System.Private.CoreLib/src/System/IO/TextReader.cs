@@ -36,9 +36,7 @@ namespace System.IO
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
 
         // Returns the next available character without actually reading it from
         // the input stream. The current position of the TextReader is not changed by
@@ -73,11 +71,17 @@ namespace System.IO
 
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             if (buffer.Length - index < count)
             {
@@ -88,7 +92,8 @@ namespace System.IO
             for (n = 0; n < count; n++)
             {
                 int ch = Read();
-                if (ch == -1) break;
+                if (ch == -1)
+                    break;
                 buffer[index + n] = (char)ch;
             }
 
@@ -138,7 +143,8 @@ namespace System.IO
         //
         public virtual int ReadBlock(char[] buffer, int index, int count)
         {
-            int i, n = 0;
+            int i,
+                n = 0;
             do
             {
                 n += (i = Read(buffer, index + n, count - n));
@@ -181,7 +187,8 @@ namespace System.IO
             while (true)
             {
                 int ch = Read();
-                if (ch == -1) break;
+                if (ch == -1)
+                    break;
                 if (ch == '\r' || ch == '\n')
                 {
                     if (ch == '\r' && Peek() == '\n')
@@ -225,8 +232,13 @@ namespace System.IO
             new ValueTask<string?>(ReadLineCoreAsync(cancellationToken));
 
         private Task<string?> ReadLineCoreAsync(CancellationToken cancellationToken) =>
-            Task<string?>.Factory.StartNew(static state => ((TextReader)state!).ReadLine(), this,
-                cancellationToken, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            Task<string?>.Factory.StartNew(
+                static state => ((TextReader)state!).ReadLine(),
+                this,
+                cancellationToken,
+                TaskCreationOptions.DenyChildAttach,
+                TaskScheduler.Default
+            );
 
         public virtual Task<string> ReadToEndAsync() => ReadToEndAsync(default);
 
@@ -251,7 +263,10 @@ namespace System.IO
             try
             {
                 int len;
-                while ((len = await ReadAsyncInternal(chars, cancellationToken).ConfigureAwait(false)) != 0)
+                while (
+                    (len = await ReadAsyncInternal(chars, cancellationToken).ConfigureAwait(false))
+                    != 0
+                )
                 {
                     sb.Append(chars, 0, len);
                 }
@@ -269,7 +284,10 @@ namespace System.IO
 
             if (index < 0 || count < 0)
             {
-                throw new ArgumentOutOfRangeException(index < 0 ? nameof(index) : nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    index < 0 ? nameof(index) : nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             if (buffer.Length - index < count)
             {
@@ -279,21 +297,43 @@ namespace System.IO
             return ReadAsyncInternal(new Memory<char>(buffer, index, count), default).AsTask();
         }
 
-        public virtual ValueTask<int> ReadAsync(Memory<char> buffer, CancellationToken cancellationToken = default) =>
-            new ValueTask<int>(MemoryMarshal.TryGetArray(buffer, out ArraySegment<char> array) ?
-                ReadAsync(array.Array!, array.Offset, array.Count) :
-                Task<int>.Factory.StartNew(static state =>
-                {
-                    var t = (TupleSlim<TextReader, Memory<char>>)state!;
-                    return t.Item1.Read(t.Item2.Span);
-                }, new TupleSlim<TextReader, Memory<char>>(this, buffer), cancellationToken, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default));
+        public virtual ValueTask<int> ReadAsync(
+            Memory<char> buffer,
+            CancellationToken cancellationToken = default
+        ) =>
+            new ValueTask<int>(
+                MemoryMarshal.TryGetArray(buffer, out ArraySegment<char> array)
+                    ? ReadAsync(array.Array!, array.Offset, array.Count)
+                    : Task<int>.Factory.StartNew(
+                        static state =>
+                        {
+                            var t = (TupleSlim<TextReader, Memory<char>>)state!;
+                            return t.Item1.Read(t.Item2.Span);
+                        },
+                        new TupleSlim<TextReader, Memory<char>>(this, buffer),
+                        cancellationToken,
+                        TaskCreationOptions.DenyChildAttach,
+                        TaskScheduler.Default
+                    )
+            );
 
-        internal virtual ValueTask<int> ReadAsyncInternal(Memory<char> buffer, CancellationToken cancellationToken) =>
-            new ValueTask<int>(Task<int>.Factory.StartNew(static state =>
-            {
-                var t = (TupleSlim<TextReader, Memory<char>>)state!;
-                return t.Item1.Read(t.Item2.Span);
-            }, new TupleSlim<TextReader, Memory<char>>(this, buffer), cancellationToken, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default));
+        internal virtual ValueTask<int> ReadAsyncInternal(
+            Memory<char> buffer,
+            CancellationToken cancellationToken
+        ) =>
+            new ValueTask<int>(
+                Task<int>.Factory.StartNew(
+                    static state =>
+                    {
+                        var t = (TupleSlim<TextReader, Memory<char>>)state!;
+                        return t.Item1.Read(t.Item2.Span);
+                    },
+                    new TupleSlim<TextReader, Memory<char>>(this, buffer),
+                    cancellationToken,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                )
+            );
 
         public virtual Task<int> ReadBlockAsync(char[] buffer, int index, int count)
         {
@@ -301,7 +341,10 @@ namespace System.IO
 
             if (index < 0 || count < 0)
             {
-                throw new ArgumentOutOfRangeException(index < 0 ? nameof(index) : nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    index < 0 ? nameof(index) : nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             if (buffer.Length - index < count)
             {
@@ -311,21 +354,37 @@ namespace System.IO
             return ReadBlockAsyncInternal(new Memory<char>(buffer, index, count), default).AsTask();
         }
 
-        public virtual ValueTask<int> ReadBlockAsync(Memory<char> buffer, CancellationToken cancellationToken = default) =>
-            new ValueTask<int>(MemoryMarshal.TryGetArray(buffer, out ArraySegment<char> array) ?
-                ReadBlockAsync(array.Array!, array.Offset, array.Count) :
-                Task<int>.Factory.StartNew(static state =>
-                {
-                    var t = (TupleSlim<TextReader, Memory<char>>)state!;
-                    return t.Item1.ReadBlock(t.Item2.Span);
-                }, new TupleSlim<TextReader, Memory<char>>(this, buffer), cancellationToken, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default));
+        public virtual ValueTask<int> ReadBlockAsync(
+            Memory<char> buffer,
+            CancellationToken cancellationToken = default
+        ) =>
+            new ValueTask<int>(
+                MemoryMarshal.TryGetArray(buffer, out ArraySegment<char> array)
+                    ? ReadBlockAsync(array.Array!, array.Offset, array.Count)
+                    : Task<int>.Factory.StartNew(
+                        static state =>
+                        {
+                            var t = (TupleSlim<TextReader, Memory<char>>)state!;
+                            return t.Item1.ReadBlock(t.Item2.Span);
+                        },
+                        new TupleSlim<TextReader, Memory<char>>(this, buffer),
+                        cancellationToken,
+                        TaskCreationOptions.DenyChildAttach,
+                        TaskScheduler.Default
+                    )
+            );
 
-        internal async ValueTask<int> ReadBlockAsyncInternal(Memory<char> buffer, CancellationToken cancellationToken)
+        internal async ValueTask<int> ReadBlockAsyncInternal(
+            Memory<char> buffer,
+            CancellationToken cancellationToken
+        )
         {
-            int n = 0, i;
+            int n = 0,
+                i;
             do
             {
-                i = await ReadAsyncInternal(buffer.Slice(n), cancellationToken).ConfigureAwait(false);
+                i = await ReadAsyncInternal(buffer.Slice(n), cancellationToken)
+                    .ConfigureAwait(false);
                 n += i;
             } while (i > 0 && n < buffer.Length);
 
@@ -367,10 +426,12 @@ namespace System.IO
             public override int Read() => _in.Read();
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public override int Read(char[] buffer, int index, int count) => _in.Read(buffer, index, count);
+            public override int Read(char[] buffer, int index, int count) =>
+                _in.Read(buffer, index, count);
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public override int ReadBlock(char[] buffer, int index, int count) => _in.ReadBlock(buffer, index, count);
+            public override int ReadBlock(char[] buffer, int index, int count) =>
+                _in.ReadBlock(buffer, index, count);
 
             [MethodImpl(MethodImplOptions.Synchronized)]
             public override string? ReadLine() => _in.ReadLine();
@@ -386,15 +447,19 @@ namespace System.IO
             public override Task<string?> ReadLineAsync() => Task.FromResult(ReadLine());
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public override ValueTask<string?> ReadLineAsync(CancellationToken cancellationToken)
-                => cancellationToken.IsCancellationRequested ? ValueTask.FromCanceled<string?>(cancellationToken) : new ValueTask<string?>(ReadLine());
+            public override ValueTask<string?> ReadLineAsync(CancellationToken cancellationToken) =>
+                cancellationToken.IsCancellationRequested
+                    ? ValueTask.FromCanceled<string?>(cancellationToken)
+                    : new ValueTask<string?>(ReadLine());
 
             [MethodImpl(MethodImplOptions.Synchronized)]
             public override Task<string> ReadToEndAsync() => Task.FromResult(ReadToEnd());
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public override Task<string> ReadToEndAsync(CancellationToken cancellationToken)
-                => cancellationToken.IsCancellationRequested ? Task.FromCanceled<string>(cancellationToken) : Task.FromResult(ReadToEnd());
+            public override Task<string> ReadToEndAsync(CancellationToken cancellationToken) =>
+                cancellationToken.IsCancellationRequested
+                    ? Task.FromCanceled<string>(cancellationToken)
+                    : Task.FromResult(ReadToEnd());
 
             [MethodImpl(MethodImplOptions.Synchronized)]
             public override Task<int> ReadBlockAsync(char[] buffer, int index, int count)
@@ -402,7 +467,10 @@ namespace System.IO
                 ArgumentNullException.ThrowIfNull(buffer);
 
                 if (index < 0 || count < 0)
-                    throw new ArgumentOutOfRangeException(index < 0 ? nameof(index) : nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                    throw new ArgumentOutOfRangeException(
+                        index < 0 ? nameof(index) : nameof(count),
+                        SR.ArgumentOutOfRange_NeedNonNegNum
+                    );
                 if (buffer.Length - index < count)
                     throw new ArgumentException(SR.Argument_InvalidOffLen);
 
@@ -415,7 +483,10 @@ namespace System.IO
                 ArgumentNullException.ThrowIfNull(buffer);
 
                 if (index < 0 || count < 0)
-                    throw new ArgumentOutOfRangeException(index < 0 ? nameof(index) : nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                    throw new ArgumentOutOfRangeException(
+                        index < 0 ? nameof(index) : nameof(count),
+                        SR.ArgumentOutOfRange_NeedNonNegNum
+                    );
                 if (buffer.Length - index < count)
                     throw new ArgumentException(SR.Argument_InvalidOffLen);
 

@@ -19,51 +19,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
     [Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypeAbstract)]
     public class MakeTypeAbstractTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public MakeTypeAbstractTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+        public MakeTypeAbstractTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpMakeTypeAbstractCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpMakeTypeAbstractCodeFixProvider());
 
         [Fact]
         public async Task TestMethod()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 public class Goo
 {
     public abstract void [|M|]();
 }",
-@"
+                @"
 public abstract class Goo
 {
     public abstract void M();
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMethodEnclosingClassWithoutAccessibility()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class Goo
 {
     public abstract void [|M|]();
 }",
-@"
+                @"
 abstract class Goo
 {
     public abstract void M();
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMethodEnclosingClassDocumentationComment()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 /// <summary>
 /// Some class comment.
 /// </summary>
@@ -71,85 +71,90 @@ public class Goo
 {
     public abstract void [|M|]();
 }",
-@"
+                @"
 /// <summary>
 /// Some class comment.
 /// </summary>
 public abstract class Goo
 {
     public abstract void M();
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestPropertyGetter()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 public class Goo
 {
     public abstract object P { [|get|]; }
 }",
-@"
+                @"
 public abstract class Goo
 {
     public abstract object P { get; }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestPropertySetter()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 public class Goo
 {
     public abstract object P { [|set|]; }
 }",
-@"
+                @"
 public abstract class Goo
 {
     public abstract object P { set; }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIndexerGetter()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 public class Goo
 {
     public abstract object this[object o] { [|get|]; }
 }",
-@"
+                @"
 public abstract class Goo
 {
     public abstract object this[object o] { get; }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIndexerSetter()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 public class Goo
 {
     public abstract object this[object o] { [|set|]; }
 }",
-@"
+                @"
 public abstract class Goo
 {
     public abstract object this[object o] { set; }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(54218, "https://github.com/dotnet/roslyn/issues/54218")]
         public async Task TestPartialClass()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 public partial class Goo
 {
     public abstract void [|M|]();
@@ -158,7 +163,7 @@ public partial class Goo
 public partial class Goo
 {
 }",
-@"
+                @"
 public abstract partial class Goo
 {
     public abstract void M();
@@ -166,139 +171,151 @@ public abstract partial class Goo
 
 public partial class Goo
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestEventAdd()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 public class Goo
 {
     public abstract event System.EventHandler E { [|add|]; }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestEventRemove()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 public class Goo
 {
     public abstract event System.EventHandler E { [|remove|]; }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMethodWithBody()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 public class Goo
 {
     public abstract int [|M|]() => 3;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestPropertyGetterWithArrowBody()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 public class Goo
 {
     public abstract int [|P|] => 3;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestPropertyGetterWithBody()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 public class Goo
 {
     public abstract int P
     {
         [|get|] { return 1; }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestStructNestedInClass()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 public class C
 {
     public struct S
     {
         public abstract void [|Goo|]();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMethodEnclosingClassStatic()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 public static class Goo
 {
     public abstract void [|M|]();
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestRecord()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 public record Goo
 {
     public abstract void [|M|]();
 }",
-@"
+                @"
 public abstract record Goo
 {
     public abstract void M();
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestRecordClass()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 public record class Goo
 {
     public abstract void [|M|]();
 }",
-@"
+                @"
 public abstract record class Goo
 {
     public abstract void M();
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestRecordStruct()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 public record struct Goo
 {
     public abstract void [|M|]();
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task FixAll()
         {
             await TestInRegularAndScript1Async(
-@"namespace NS
+                @"namespace NS
 {
     using System;
 
@@ -322,7 +339,7 @@ public record struct Goo
         }
     }
 }",
-@"namespace NS
+                @"namespace NS
 {
     using System;
 
@@ -345,7 +362,8 @@ public record struct Goo
             public abstract void M();
         }
     }
-}");
+}"
+            );
         }
     }
 }

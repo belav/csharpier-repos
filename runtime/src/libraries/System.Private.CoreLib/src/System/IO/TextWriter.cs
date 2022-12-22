@@ -38,17 +38,15 @@ namespace System.IO
         // Can be null - if so, ask for the Thread's CurrentCulture every time.
         private readonly IFormatProvider? _internalFormatProvider;
 
-        protected TextWriter()
-        {
-        }
+        protected TextWriter() { }
 
         protected TextWriter(IFormatProvider? formatProvider)
         {
             _internalFormatProvider = formatProvider;
         }
 
-        public virtual IFormatProvider FormatProvider
-            => _internalFormatProvider ?? CultureInfo.CurrentCulture;
+        public virtual IFormatProvider FormatProvider =>
+            _internalFormatProvider ?? CultureInfo.CurrentCulture;
 
         public virtual void Close()
         {
@@ -56,9 +54,7 @@ namespace System.IO
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
 
         public void Dispose()
         {
@@ -83,14 +79,9 @@ namespace System.IO
         // written to the underlying device. This default method is empty, but
         // descendant classes can override the method to provide the appropriate
         // functionality.
-        public virtual void Flush()
-        {
-        }
+        public virtual void Flush() { }
 
-        public abstract Encoding Encoding
-        {
-            get;
-        }
+        public abstract Encoding Encoding { get; }
 
         /// <summary>
         /// Returns the line terminator string used by this TextWriter. The default line
@@ -121,9 +112,7 @@ namespace System.IO
         // but descendant classes can override the method to provide the
         // appropriate functionality.
         //
-        public virtual void Write(char value)
-        {
-        }
+        public virtual void Write(char value) { }
 
         // Writes a character array to the text stream. This default method calls
         // Write(char) for each of the characters in the character array.
@@ -147,18 +136,25 @@ namespace System.IO
 
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             if (buffer.Length - index < count)
             {
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
             }
 
-            for (int i = 0; i < count; i++) Write(buffer[index + i]);
+            for (int i = 0; i < count; i++)
+                Write(buffer[index + i]);
         }
 
         // Writes a span of characters to the text stream.
@@ -294,7 +290,10 @@ namespace System.IO
         // Writes out a formatted string.  Uses the same semantics as
         // string.Format.
         //
-        public virtual void Write([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0)
+        public virtual void Write(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0
+        )
         {
             Write(string.Format(FormatProvider, format, arg0));
         }
@@ -302,7 +301,11 @@ namespace System.IO
         // Writes out a formatted string.  Uses the same semantics as
         // string.Format.
         //
-        public virtual void Write([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1)
+        public virtual void Write(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0,
+            object? arg1
+        )
         {
             Write(string.Format(FormatProvider, format, arg0, arg1));
         }
@@ -310,7 +313,12 @@ namespace System.IO
         // Writes out a formatted string.  Uses the same semantics as
         // string.Format.
         //
-        public virtual void Write([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1, object? arg2)
+        public virtual void Write(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0,
+            object? arg1,
+            object? arg2
+        )
         {
             Write(string.Format(FormatProvider, format, arg0, arg1, arg2));
         }
@@ -318,7 +326,10 @@ namespace System.IO
         // Writes out a formatted string.  Uses the same semantics as
         // string.Format.
         //
-        public virtual void Write([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, params object?[] arg)
+        public virtual void Write(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            params object?[] arg
+        )
         {
             Write(string.Format(FormatProvider, format, arg));
         }
@@ -491,7 +502,10 @@ namespace System.IO
         // Writes out a formatted string and a new line.  Uses the same
         // semantics as string.Format.
         //
-        public virtual void WriteLine([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0)
+        public virtual void WriteLine(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0
+        )
         {
             WriteLine(string.Format(FormatProvider, format, arg0));
         }
@@ -499,7 +513,11 @@ namespace System.IO
         // Writes out a formatted string and a new line.  Uses the same
         // semantics as string.Format.
         //
-        public virtual void WriteLine([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1)
+        public virtual void WriteLine(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0,
+            object? arg1
+        )
         {
             WriteLine(string.Format(FormatProvider, format, arg0, arg1));
         }
@@ -507,7 +525,12 @@ namespace System.IO
         // Writes out a formatted string and a new line.  Uses the same
         // semantics as string.Format.
         //
-        public virtual void WriteLine([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1, object? arg2)
+        public virtual void WriteLine(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0,
+            object? arg1,
+            object? arg2
+        )
         {
             WriteLine(string.Format(FormatProvider, format, arg0, arg1, arg2));
         }
@@ -515,25 +538,40 @@ namespace System.IO
         // Writes out a formatted string and a new line.  Uses the same
         // semantics as string.Format.
         //
-        public virtual void WriteLine([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, params object?[] arg)
+        public virtual void WriteLine(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            params object?[] arg
+        )
         {
             WriteLine(string.Format(FormatProvider, format, arg));
         }
 
         #region Task based Async APIs
         public virtual Task WriteAsync(char value) =>
-            Task.Factory.StartNew(static state =>
-            {
-                var t = (TupleSlim<TextWriter, char>)state!;
-                t.Item1.Write(t.Item2);
-            }, new TupleSlim<TextWriter, char>(this, value), CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            Task.Factory.StartNew(
+                static state =>
+                {
+                    var t = (TupleSlim<TextWriter, char>)state!;
+                    t.Item1.Write(t.Item2);
+                },
+                new TupleSlim<TextWriter, char>(this, value),
+                CancellationToken.None,
+                TaskCreationOptions.DenyChildAttach,
+                TaskScheduler.Default
+            );
 
         public virtual Task WriteAsync(string? value) =>
-            Task.Factory.StartNew(static state =>
-            {
-                var t = (TupleSlim<TextWriter, string?>)state!;
-                t.Item1.Write(t.Item2);
-            }, new TupleSlim<TextWriter, string?>(this, value), CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            Task.Factory.StartNew(
+                static state =>
+                {
+                    var t = (TupleSlim<TextWriter, string?>)state!;
+                    t.Item1.Write(t.Item2);
+                },
+                new TupleSlim<TextWriter, string?>(this, value),
+                CancellationToken.None,
+                TaskCreationOptions.DenyChildAttach,
+                TaskScheduler.Default
+            );
 
         /// <summary>
         /// Equivalent to WriteAsync(stringBuilder.ToString()) however it uses the
@@ -541,12 +579,16 @@ namespace System.IO
         /// </summary>
         /// <param name="value">The string (as a StringBuilder) to write to the stream</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        public virtual Task WriteAsync(StringBuilder? value, CancellationToken cancellationToken = default)
+        public virtual Task WriteAsync(
+            StringBuilder? value,
+            CancellationToken cancellationToken = default
+        )
         {
-            return
-                cancellationToken.IsCancellationRequested ? Task.FromCanceled(cancellationToken) :
-                value == null ? Task.CompletedTask :
-                WriteAsyncCore(value, cancellationToken);
+            return cancellationToken.IsCancellationRequested
+                ? Task.FromCanceled(cancellationToken)
+                : value == null
+                    ? Task.CompletedTask
+                    : WriteAsyncCore(value, cancellationToken);
 
             async Task WriteAsyncCore(StringBuilder sb, CancellationToken ct)
             {
@@ -568,35 +610,63 @@ namespace System.IO
         }
 
         public virtual Task WriteAsync(char[] buffer, int index, int count) =>
-            Task.Factory.StartNew(static state =>
-            {
-                var t = (TupleSlim<TextWriter, char[], int, int>)state!;
-                t.Item1.Write(t.Item2, t.Item3, t.Item4);
-            }, new TupleSlim<TextWriter, char[], int, int>(this, buffer, index, count), CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-
-        public virtual Task WriteAsync(ReadOnlyMemory<char> buffer, CancellationToken cancellationToken = default) =>
-            cancellationToken.IsCancellationRequested ? Task.FromCanceled(cancellationToken) :
-            MemoryMarshal.TryGetArray(buffer, out ArraySegment<char> array) ?
-                WriteAsync(array.Array!, array.Offset, array.Count) :
-                Task.Factory.StartNew(static state =>
+            Task.Factory.StartNew(
+                static state =>
                 {
-                    var t = (TupleSlim<TextWriter, ReadOnlyMemory<char>>)state!;
-                    t.Item1.Write(t.Item2.Span);
-                }, new TupleSlim<TextWriter, ReadOnlyMemory<char>>(this, buffer), cancellationToken, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                    var t = (TupleSlim<TextWriter, char[], int, int>)state!;
+                    t.Item1.Write(t.Item2, t.Item3, t.Item4);
+                },
+                new TupleSlim<TextWriter, char[], int, int>(this, buffer, index, count),
+                CancellationToken.None,
+                TaskCreationOptions.DenyChildAttach,
+                TaskScheduler.Default
+            );
+
+        public virtual Task WriteAsync(
+            ReadOnlyMemory<char> buffer,
+            CancellationToken cancellationToken = default
+        ) =>
+            cancellationToken.IsCancellationRequested
+                ? Task.FromCanceled(cancellationToken)
+                : MemoryMarshal.TryGetArray(buffer, out ArraySegment<char> array)
+                    ? WriteAsync(array.Array!, array.Offset, array.Count)
+                    : Task.Factory.StartNew(
+                        static state =>
+                        {
+                            var t = (TupleSlim<TextWriter, ReadOnlyMemory<char>>)state!;
+                            t.Item1.Write(t.Item2.Span);
+                        },
+                        new TupleSlim<TextWriter, ReadOnlyMemory<char>>(this, buffer),
+                        cancellationToken,
+                        TaskCreationOptions.DenyChildAttach,
+                        TaskScheduler.Default
+                    );
 
         public virtual Task WriteLineAsync(char value) =>
-            Task.Factory.StartNew(static state =>
-            {
-                var t = (TupleSlim<TextWriter, char>)state!;
-                t.Item1.WriteLine(t.Item2);
-            }, new TupleSlim<TextWriter, char>(this, value), CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            Task.Factory.StartNew(
+                static state =>
+                {
+                    var t = (TupleSlim<TextWriter, char>)state!;
+                    t.Item1.WriteLine(t.Item2);
+                },
+                new TupleSlim<TextWriter, char>(this, value),
+                CancellationToken.None,
+                TaskCreationOptions.DenyChildAttach,
+                TaskScheduler.Default
+            );
 
         public virtual Task WriteLineAsync(string? value) =>
-            Task.Factory.StartNew(static state =>
-            {
-                var t = (TupleSlim<TextWriter, string?>)state!;
-                t.Item1.WriteLine(t.Item2);
-            }, new TupleSlim<TextWriter, string?>(this, value), CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            Task.Factory.StartNew(
+                static state =>
+                {
+                    var t = (TupleSlim<TextWriter, string?>)state!;
+                    t.Item1.WriteLine(t.Item2);
+                },
+                new TupleSlim<TextWriter, string?>(this, value),
+                CancellationToken.None,
+                TaskCreationOptions.DenyChildAttach,
+                TaskScheduler.Default
+            );
 
         /// <summary>
         /// Equivalent to WriteLineAsync(stringBuilder.ToString()) however it uses the
@@ -604,12 +674,16 @@ namespace System.IO
         /// </summary>
         /// <param name="value">The string (as a StringBuilder) to write to the stream</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        public virtual Task WriteLineAsync(StringBuilder? value, CancellationToken cancellationToken = default)
+        public virtual Task WriteLineAsync(
+            StringBuilder? value,
+            CancellationToken cancellationToken = default
+        )
         {
-            return
-                cancellationToken.IsCancellationRequested ? Task.FromCanceled(cancellationToken) :
-                value == null ? WriteAsync(CoreNewLine, cancellationToken) :
-                WriteLineAsyncCore(value, cancellationToken);
+            return cancellationToken.IsCancellationRequested
+                ? Task.FromCanceled(cancellationToken)
+                : value == null
+                    ? WriteAsync(CoreNewLine, cancellationToken)
+                    : WriteLineAsyncCore(value, cancellationToken);
 
             async Task WriteLineAsyncCore(StringBuilder sb, CancellationToken ct)
             {
@@ -632,21 +706,37 @@ namespace System.IO
         }
 
         public virtual Task WriteLineAsync(char[] buffer, int index, int count) =>
-            Task.Factory.StartNew(static state =>
-            {
-                var t = (TupleSlim<TextWriter, char[], int, int>)state!;
-                t.Item1.WriteLine(t.Item2, t.Item3, t.Item4);
-            }, new TupleSlim<TextWriter, char[], int, int>(this, buffer, index, count), CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
-
-        public virtual Task WriteLineAsync(ReadOnlyMemory<char> buffer, CancellationToken cancellationToken = default) =>
-            cancellationToken.IsCancellationRequested ? Task.FromCanceled(cancellationToken) :
-            MemoryMarshal.TryGetArray(buffer, out ArraySegment<char> array) ?
-                WriteLineAsync(array.Array!, array.Offset, array.Count) :
-                Task.Factory.StartNew(static state =>
+            Task.Factory.StartNew(
+                static state =>
                 {
-                    var t = (TupleSlim<TextWriter, ReadOnlyMemory<char>>)state!;
-                    t.Item1.WriteLine(t.Item2.Span);
-                }, new TupleSlim<TextWriter, ReadOnlyMemory<char>>(this, buffer), cancellationToken, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                    var t = (TupleSlim<TextWriter, char[], int, int>)state!;
+                    t.Item1.WriteLine(t.Item2, t.Item3, t.Item4);
+                },
+                new TupleSlim<TextWriter, char[], int, int>(this, buffer, index, count),
+                CancellationToken.None,
+                TaskCreationOptions.DenyChildAttach,
+                TaskScheduler.Default
+            );
+
+        public virtual Task WriteLineAsync(
+            ReadOnlyMemory<char> buffer,
+            CancellationToken cancellationToken = default
+        ) =>
+            cancellationToken.IsCancellationRequested
+                ? Task.FromCanceled(cancellationToken)
+                : MemoryMarshal.TryGetArray(buffer, out ArraySegment<char> array)
+                    ? WriteLineAsync(array.Array!, array.Offset, array.Count)
+                    : Task.Factory.StartNew(
+                        static state =>
+                        {
+                            var t = (TupleSlim<TextWriter, ReadOnlyMemory<char>>)state!;
+                            t.Item1.WriteLine(t.Item2.Span);
+                        },
+                        new TupleSlim<TextWriter, ReadOnlyMemory<char>>(this, buffer),
+                        cancellationToken,
+                        TaskCreationOptions.DenyChildAttach,
+                        TaskScheduler.Default
+                    );
 
         public virtual Task WriteLineAsync()
         {
@@ -655,46 +745,37 @@ namespace System.IO
 
         public virtual Task FlushAsync()
         {
-            return Task.Factory.StartNew(static state => ((TextWriter)state!).Flush(), this,
-                CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            return Task.Factory.StartNew(
+                static state => ((TextWriter)state!).Flush(),
+                this,
+                CancellationToken.None,
+                TaskCreationOptions.DenyChildAttach,
+                TaskScheduler.Default
+            );
         }
         #endregion
 
         private sealed class NullTextWriter : TextWriter
         {
-            internal NullTextWriter()
-            {
-            }
+            internal NullTextWriter() { }
 
             public override IFormatProvider FormatProvider => CultureInfo.InvariantCulture;
 
             public override Encoding Encoding => Encoding.Unicode;
 
-            public override void Write(char[] buffer, int index, int count)
-            {
-            }
+            public override void Write(char[] buffer, int index, int count) { }
 
-            public override void Write(string? value)
-            {
-            }
+            public override void Write(string? value) { }
 
             // Not strictly necessary, but for perf reasons
-            public override void WriteLine()
-            {
-            }
+            public override void WriteLine() { }
 
             // Not strictly necessary, but for perf reasons
-            public override void WriteLine(string? value)
-            {
-            }
+            public override void WriteLine(string? value) { }
 
-            public override void WriteLine(object? value)
-            {
-            }
+            public override void WriteLine(object? value) { }
 
-            public override void Write(char value)
-            {
-            }
+            public override void Write(char value) { }
         }
 
         public static TextWriter Synchronized(TextWriter writer)
@@ -747,7 +828,8 @@ namespace System.IO
             public override void Write(char[]? buffer) => _out.Write(buffer);
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public override void Write(char[] buffer, int index, int count) => _out.Write(buffer, index, count);
+            public override void Write(char[] buffer, int index, int count) =>
+                _out.Write(buffer, index, count);
 
             [MethodImpl(MethodImplOptions.Synchronized)]
             public override void Write(ReadOnlySpan<char> buffer) => _out.Write(buffer);
@@ -786,16 +868,31 @@ namespace System.IO
             public override void Write(object? value) => _out.Write(value);
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public override void Write([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0) => _out.Write(format, arg0);
+            public override void Write(
+                [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+                object? arg0
+            ) => _out.Write(format, arg0);
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public override void Write([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1) => _out.Write(format, arg0, arg1);
+            public override void Write(
+                [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+                object? arg0,
+                object? arg1
+            ) => _out.Write(format, arg0, arg1);
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public override void Write([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1, object? arg2) => _out.Write(format, arg0, arg1, arg2);
+            public override void Write(
+                [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+                object? arg0,
+                object? arg1,
+                object? arg2
+            ) => _out.Write(format, arg0, arg1, arg2);
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public override void Write([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object?[] arg) => _out.Write(format, arg);
+            public override void Write(
+                [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+                object?[] arg
+            ) => _out.Write(format, arg);
 
             [MethodImpl(MethodImplOptions.Synchronized)]
             public override void WriteLine() => _out.WriteLine();
@@ -810,7 +907,8 @@ namespace System.IO
             public override void WriteLine(char[]? buffer) => _out.WriteLine(buffer);
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public override void WriteLine(char[] buffer, int index, int count) => _out.WriteLine(buffer, index, count);
+            public override void WriteLine(char[] buffer, int index, int count) =>
+                _out.WriteLine(buffer, index, count);
 
             [MethodImpl(MethodImplOptions.Synchronized)]
             public override void WriteLine(ReadOnlySpan<char> buffer) => _out.WriteLine(buffer);
@@ -846,16 +944,31 @@ namespace System.IO
             public override void WriteLine(object? value) => _out.WriteLine(value);
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public override void WriteLine([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0) => _out.WriteLine(format, arg0);
+            public override void WriteLine(
+                [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+                object? arg0
+            ) => _out.WriteLine(format, arg0);
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public override void WriteLine([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1) => _out.WriteLine(format, arg0, arg1);
+            public override void WriteLine(
+                [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+                object? arg0,
+                object? arg1
+            ) => _out.WriteLine(format, arg0, arg1);
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public override void WriteLine([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1, object? arg2) => _out.WriteLine(format, arg0, arg1, arg2);
+            public override void WriteLine(
+                [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+                object? arg0,
+                object? arg1,
+                object? arg2
+            ) => _out.WriteLine(format, arg0, arg1, arg2);
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public override void WriteLine([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object?[] arg) => _out.WriteLine(format, arg);
+            public override void WriteLine(
+                [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+                object?[] arg
+            ) => _out.WriteLine(format, arg);
 
             //
             // On SyncTextWriter all APIs should run synchronously, even the async ones.
@@ -883,7 +996,10 @@ namespace System.IO
             }
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public override Task WriteAsync(StringBuilder? value, CancellationToken cancellationToken = default)
+            public override Task WriteAsync(
+                StringBuilder? value,
+                CancellationToken cancellationToken = default
+            )
             {
                 if (cancellationToken.IsCancellationRequested)
                 {
@@ -902,7 +1018,10 @@ namespace System.IO
             }
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public override Task WriteAsync(ReadOnlyMemory<char> buffer, CancellationToken cancellationToken = default)
+            public override Task WriteAsync(
+                ReadOnlyMemory<char> buffer,
+                CancellationToken cancellationToken = default
+            )
             {
                 if (cancellationToken.IsCancellationRequested)
                 {
@@ -914,7 +1033,10 @@ namespace System.IO
             }
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public override Task WriteLineAsync(ReadOnlyMemory<char> buffer, CancellationToken cancellationToken = default)
+            public override Task WriteLineAsync(
+                ReadOnlyMemory<char> buffer,
+                CancellationToken cancellationToken = default
+            )
             {
                 if (cancellationToken.IsCancellationRequested)
                 {
@@ -947,7 +1069,10 @@ namespace System.IO
             }
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public override Task WriteLineAsync(StringBuilder? value, CancellationToken cancellationToken = default)
+            public override Task WriteLineAsync(
+                StringBuilder? value,
+                CancellationToken cancellationToken = default
+            )
             {
                 if (cancellationToken.IsCancellationRequested)
                 {

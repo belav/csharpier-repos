@@ -8,7 +8,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
     /// Availability status for applying changes under a session.
     /// </summary>
     /// <remarks>
-    /// Do not change the value for any of the preexisting status, as this is the value 
+    /// Do not change the value for any of the preexisting status, as this is the value
     /// used when reporting telemetry.
     /// </remarks>
     internal enum ManagedHotReloadAvailabilityStatus

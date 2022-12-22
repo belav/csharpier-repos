@@ -39,7 +39,6 @@ namespace System.Diagnostics.Metrics
 
     internal partial struct StringSequence2 : IEquatable<StringSequence2>, IStringSequence
     {
-
         public string this[int i]
         {
             get
@@ -74,7 +73,8 @@ namespace System.Diagnostics.Metrics
         public int Length => 2;
 
         // this isn't exactly identical to the netcore algorithm, but good enough
-        public override int GetHashCode() => (Value1?.GetHashCode() ?? 0) ^ (Value2?.GetHashCode() ?? 0 << 3);
+        public override int GetHashCode() =>
+            (Value1?.GetHashCode() ?? 0) ^ (Value2?.GetHashCode() ?? 0 << 3);
     }
 
     internal partial struct StringSequence3 : IEquatable<StringSequence3>, IStringSequence
@@ -121,21 +121,18 @@ namespace System.Diagnostics.Metrics
         public int Length => 3;
 
         // this isn't exactly identical to the netcore algorithm, but good enough
-        public override int GetHashCode() => (Value1?.GetHashCode() ?? 0) ^ (Value2?.GetHashCode() ?? 0 << 3) ^ (Value3?.GetHashCode() ?? 0 << 6);
+        public override int GetHashCode() =>
+            (Value1?.GetHashCode() ?? 0)
+            ^ (Value2?.GetHashCode() ?? 0 << 3)
+            ^ (Value3?.GetHashCode() ?? 0 << 6);
     }
 
     internal partial struct StringSequenceMany : IEquatable<StringSequenceMany>, IStringSequence
     {
         public string this[int i]
         {
-            get
-            {
-                return _values[i];
-            }
-            set
-            {
-                _values[i] = value;
-            }
+            get { return _values[i]; }
+            set { _values[i] = value; }
         }
 
         public int Length => _values.Length;

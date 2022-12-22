@@ -26,8 +26,8 @@ namespace System.CommandLine.Parsing
         public static async Task<int> InvokeAsync(
             this ParseResult parseResult,
             IConsole? console = null,
-            CancellationToken cancellationToken = default) =>
-            await new InvocationPipeline(parseResult).InvokeAsync(console, cancellationToken);
+            CancellationToken cancellationToken = default
+        ) => await new InvocationPipeline(parseResult).InvokeAsync(console, cancellationToken);
 
         /// <summary>
         /// Invokes the appropriate command handler for a parsed command line input.
@@ -35,9 +35,7 @@ namespace System.CommandLine.Parsing
         /// <param name="parseResult">A parse result on which the invocation is based.</param>
         /// <param name="console">A console to which output can be written. By default, <see cref="System.Console"/> is used.</param>
         /// <returns>A value that can be used as a process exit code.</returns>
-        public static int Invoke(
-            this ParseResult parseResult,
-            IConsole? console = null) =>
+        public static int Invoke(this ParseResult parseResult, IConsole? console = null) =>
             new InvocationPipeline(parseResult).Invoke(console);
 
         /// <summary>
@@ -76,21 +74,21 @@ namespace System.CommandLine.Parsing
         private static void Diagram(
             this StringBuilder builder,
             SymbolResult symbolResult,
-            ParseResult parseResult)
+            ParseResult parseResult
+        )
         {
             if (parseResult.Errors.Any(e => e.SymbolResult == symbolResult))
             {
                 builder.Append("!");
             }
 
-
             switch (symbolResult)
             {
                 case ArgumentResult argumentResult:
                 {
                     var includeArgumentName =
-                        argumentResult.Argument.FirstParent!.Symbol is Command command &&
-                        command.Arguments.Count > 1;
+                        argumentResult.Argument.FirstParent!.Symbol is Command command
+                        && command.Arguments.Count > 1;
 
                     if (includeArgumentName)
                     {
@@ -101,7 +99,8 @@ namespace System.CommandLine.Parsing
 
                     if (argumentResult.Argument.Arity.MaximumNumberOfValues > 0)
                     {
-                        ArgumentConversionResult conversionResult = argumentResult.GetArgumentConversionResult();
+                        ArgumentConversionResult conversionResult =
+                            argumentResult.GetArgumentConversionResult();
                         switch (conversionResult.Result)
                         {
                             case ArgumentConversionResultType.NoArgument:
@@ -112,12 +111,12 @@ namespace System.CommandLine.Parsing
                                     case string s:
                                         builder.Append($"<{s}>");
                                         break;
-                                
+
                                     case IEnumerable items:
                                         builder.Append("<");
                                         builder.Append(
-                                            string.Join("> <",
-                                                        items.Cast<object>().ToArray()));
+                                            string.Join("> <", items.Cast<object>().ToArray())
+                                        );
                                         builder.Append(">");
                                         break;
 
@@ -132,7 +131,9 @@ namespace System.CommandLine.Parsing
 
                             default: // failures
                                 builder.Append("<");
-                                builder.Append(string.Join("> <", symbolResult.Tokens.Select(t => t.Value)));
+                                builder.Append(
+                                    string.Join("> <", symbolResult.Tokens.Select(t => t.Value))
+                                );
                                 builder.Append(">");
 
                                 break;
@@ -161,9 +162,13 @@ namespace System.CommandLine.Parsing
                     {
                         var child = symbolResult.Children[i];
 
-                        if (child is ArgumentResult arg &&
-                            (arg.Argument.ValueType == typeof(bool) ||
-                             arg.Argument.Arity.MaximumNumberOfValues == 0))
+                        if (
+                            child is ArgumentResult arg
+                            && (
+                                arg.Argument.ValueType == typeof(bool)
+                                || arg.Argument.Arity.MaximumNumberOfValues == 0
+                            )
+                        )
                         {
                             continue;
                         }
@@ -186,9 +191,7 @@ namespace System.CommandLine.Parsing
         /// <param name="parseResult">The parse result to check for the presence of the option.</param>
         /// <param name="option">The option to check for the presence of.</param>
         /// <returns><see langword="true"/> if the option is present; otherwise,  <see langword="false"/>.</returns>
-        public static bool HasOption(
-            this ParseResult parseResult,
-            Option option)
+        public static bool HasOption(this ParseResult parseResult, Option option)
         {
             if (parseResult is null)
             {

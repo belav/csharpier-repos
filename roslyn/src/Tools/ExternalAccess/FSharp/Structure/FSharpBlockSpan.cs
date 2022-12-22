@@ -45,13 +45,32 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Structure
         public string Type { get; }
 
         public FSharpBlockSpan(
-            string type, bool isCollapsible, TextSpan textSpan, string bannerText = Ellipses, bool autoCollapse = false, bool isDefaultCollapsed = false)
-            : this(type, isCollapsible, textSpan, textSpan, bannerText, autoCollapse, isDefaultCollapsed)
-        {
-        }
+            string type,
+            bool isCollapsible,
+            TextSpan textSpan,
+            string bannerText = Ellipses,
+            bool autoCollapse = false,
+            bool isDefaultCollapsed = false
+        )
+            : this(
+                type,
+                isCollapsible,
+                textSpan,
+                textSpan,
+                bannerText,
+                autoCollapse,
+                isDefaultCollapsed
+            ) { }
 
         public FSharpBlockSpan(
-            string type, bool isCollapsible, TextSpan textSpan, TextSpan hintSpan, string bannerText = Ellipses, bool autoCollapse = false, bool isDefaultCollapsed = false)
+            string type,
+            bool isCollapsible,
+            TextSpan textSpan,
+            TextSpan hintSpan,
+            string bannerText = Ellipses,
+            bool autoCollapse = false,
+            bool isDefaultCollapsed = false
+        )
         {
             TextSpan = textSpan;
             BannerText = bannerText;

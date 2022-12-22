@@ -7,8 +7,7 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class F1ULongSqlServerFixture : F1SqlServerFixtureBase<ulong>
 {
-    protected override string StoreName
-        => "F1TestULong";
+    protected override string StoreName => "F1TestULong";
 
     protected override void BuildModelExternal(ModelBuilder modelBuilder)
     {
@@ -41,27 +40,26 @@ public class F1ULongSqlServerFixture : F1SqlServerFixtureBase<ulong>
     }
 }
 
-public class F1SqlServerFixture : F1SqlServerFixtureBase<byte[]>
-{
-}
+public class F1SqlServerFixture : F1SqlServerFixtureBase<byte[]> { }
 
 public abstract class F1SqlServerFixtureBase<TRowVersion> : F1RelationalFixture<TRowVersion>
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-    public override TestHelpers TestHelpers
-        => SqlServerTestHelpers.Instance;
+    public override TestHelpers TestHelpers => SqlServerTestHelpers.Instance;
 
     protected override void BuildModelExternal(ModelBuilder modelBuilder)
     {
         base.BuildModelExternal(modelBuilder);
 
-        modelBuilder.Entity<TitleSponsor>()
+        modelBuilder
+            .Entity<TitleSponsor>()
             .OwnsOne(
-                s => s.Details, eb =>
+                s => s.Details,
+                eb =>
                 {
                     eb.Property(d => d.Space).HasColumnType("decimal(18,2)");
-                });
+                }
+            );
     }
 }

@@ -17,7 +17,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> plaintext,
             Span<byte> ciphertext,
             Span<byte> tag,
-            ReadOnlySpan<byte> aad)
+            ReadOnlySpan<byte> aad
+        )
         {
             fixed (byte* keyPtr = key)
             fixed (byte* noncePtr = nonce)
@@ -28,12 +29,19 @@ internal static partial class Interop
             {
                 const int Success = 1;
                 int result = AppleCryptoNative_ChaCha20Poly1305Encrypt(
-                    keyPtr, key.Length,
-                    noncePtr, nonce.Length,
-                    plaintextPtr, plaintext.Length,
-                    ciphertextPtr, ciphertext.Length,
-                    tagPtr, tag.Length,
-                    aadPtr, aad.Length);
+                    keyPtr,
+                    key.Length,
+                    noncePtr,
+                    nonce.Length,
+                    plaintextPtr,
+                    plaintext.Length,
+                    ciphertextPtr,
+                    ciphertext.Length,
+                    tagPtr,
+                    tag.Length,
+                    aadPtr,
+                    aad.Length
+                );
 
                 if (result != Success)
                 {
@@ -51,7 +59,8 @@ internal static partial class Interop
             ReadOnlySpan<byte> ciphertext,
             ReadOnlySpan<byte> tag,
             Span<byte> plaintext,
-            ReadOnlySpan<byte> aad)
+            ReadOnlySpan<byte> aad
+        )
         {
             fixed (byte* keyPtr = key)
             fixed (byte* noncePtr = nonce)
@@ -63,12 +72,19 @@ internal static partial class Interop
                 const int Success = 1;
                 const int AuthTagMismatch = -1;
                 int result = AppleCryptoNative_ChaCha20Poly1305Decrypt(
-                    keyPtr, key.Length,
-                    noncePtr, nonce.Length,
-                    ciphertextPtr, ciphertext.Length,
-                    tagPtr, tag.Length,
-                    plaintextPtr, plaintext.Length,
-                    aadPtr, aad.Length);
+                    keyPtr,
+                    key.Length,
+                    noncePtr,
+                    nonce.Length,
+                    ciphertextPtr,
+                    ciphertext.Length,
+                    tagPtr,
+                    tag.Length,
+                    plaintextPtr,
+                    plaintext.Length,
+                    aadPtr,
+                    aad.Length
+                );
 
                 if (result != Success)
                 {
@@ -100,7 +116,8 @@ internal static partial class Interop
             byte* tagPtr,
             int tagLength,
             byte* aadPtr,
-            int aadLength);
+            int aadLength
+        );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
         private static unsafe partial int AppleCryptoNative_ChaCha20Poly1305Decrypt(
@@ -115,6 +132,7 @@ internal static partial class Interop
             byte* plaintextPtr,
             int plaintextLength,
             byte* aadPtr,
-            int aadLength);
+            int aadLength
+        );
     }
 }

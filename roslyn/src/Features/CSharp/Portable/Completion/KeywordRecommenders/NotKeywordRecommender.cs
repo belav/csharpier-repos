@@ -9,12 +9,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class NotKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public NotKeywordRecommender()
-            : base(SyntaxKind.NotKeyword)
-        {
-        }
+        public NotKeywordRecommender() : base(SyntaxKind.NotKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-            => context.IsAtStartOfPattern;
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) => context.IsAtStartOfPattern;
     }
 }

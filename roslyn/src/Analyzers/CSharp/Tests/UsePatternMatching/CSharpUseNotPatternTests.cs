@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseNotPatternDiagnosticAnalyzer,
-        CSharpUseNotPatternCodeFixProvider>;
+        CSharpUseNotPatternCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseNotPattern)]
     public partial class CSharpUseNotPatternTests
@@ -25,7 +26,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
             await new VerifyCS.Test
             {
                 TestCode =
-@"class C
+                    @"class C
 {
     void M(object x)
     {
@@ -35,7 +36,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
     }
 }",
                 FixedCode =
-@"class C
+                    @"class C
 {
     void M(object x)
     {
@@ -54,7 +55,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
             await new VerifyCS.Test
             {
                 TestCode =
-@"class C
+                    @"class C
 {
     void M(object x)
     {
@@ -64,7 +65,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
     }
 }",
                 FixedCode =
-@"class C
+                    @"class C
 {
     void M(object x)
     {
@@ -83,7 +84,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
             await new VerifyCS.Test
             {
                 TestCode =
-@"class C
+                    @"class C
 {
     void M(object x)
     {
@@ -93,7 +94,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
     }
 }",
                 FixedCode =
-@"class C
+                    @"class C
 {
     void M(object x)
     {
@@ -112,7 +113,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
             await new VerifyCS.Test
             {
                 TestCode =
-@"class C
+                    @"class C
 {
     void M(object x)
     {
@@ -131,7 +132,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
             await new VerifyCS.Test
             {
                 TestCode =
-@"class C
+                    @"class C
 {
     void M(object x)
     {
@@ -141,7 +142,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
     }
 }",
                 FixedCode =
-@"class C
+                    @"class C
 {
     void M(object x)
     {

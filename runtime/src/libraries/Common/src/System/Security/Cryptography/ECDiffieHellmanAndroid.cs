@@ -18,10 +18,7 @@ namespace System.Security.Cryptography
                 KeySizeValue = _key.KeySize;
             }
 
-            public ECDiffieHellmanAndroid()
-                : this(521)
-            {
-            }
+            public ECDiffieHellmanAndroid() : this(521) { }
 
             public ECDiffieHellmanAndroid(int keySize)
             {
@@ -50,10 +47,7 @@ namespace System.Security.Cryptography
 
             public override int KeySize
             {
-                get
-                {
-                    return base.KeySize;
-                }
+                get { return base.KeySize; }
                 set
                 {
                     if (KeySize == value)
@@ -100,7 +94,8 @@ namespace System.Security.Cryptography
             public override void ImportEncryptedPkcs8PrivateKey(
                 ReadOnlySpan<byte> passwordBytes,
                 ReadOnlySpan<byte> source,
-                out int bytesRead)
+                out int bytesRead
+            )
             {
                 ThrowIfDisposed();
                 base.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
@@ -109,7 +104,8 @@ namespace System.Security.Cryptography
             public override void ImportEncryptedPkcs8PrivateKey(
                 ReadOnlySpan<char> password,
                 ReadOnlySpan<byte> source,
-                out int bytesRead)
+                out int bytesRead
+            )
             {
                 ThrowIfDisposed();
                 base.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);

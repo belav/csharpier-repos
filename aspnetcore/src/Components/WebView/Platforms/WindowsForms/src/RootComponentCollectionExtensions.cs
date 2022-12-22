@@ -21,8 +21,11 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
         /// <param name="components">The collection to which the component should be added.</param>
         /// <param name="selector">The selector to which the component will be associated.</param>
         /// <param name="parameters">The optional creation parameters for the component.</param>
-        public static void Add<TComponent>(this ObservableCollection<RootComponent> components, string selector, IDictionary<string, object> parameters = null)
-            where TComponent : IComponent
+        public static void Add<TComponent>(
+            this ObservableCollection<RootComponent> components,
+            string selector,
+            IDictionary<string, object> parameters = null
+        ) where TComponent : IComponent
         {
             components.Add(new RootComponent(selector, typeof(TComponent), parameters));
         }
@@ -33,7 +36,10 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
         /// </summary>
         /// <param name="components">The collection from which the component associated with the selector should be removed.</param>
         /// <param name="selector">The selector associated with the component to be removed.</param>
-        public static void Remove(this ObservableCollection<RootComponent> components, string selector)
+        public static void Remove(
+            this ObservableCollection<RootComponent> components,
+            string selector
+        )
         {
             for (var i = 0; i < components.Count; i++)
             {
@@ -44,7 +50,10 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
                 }
             }
 
-            throw new ArgumentException($"There is no root component with selector '{selector}'.", nameof(selector));
+            throw new ArgumentException(
+                $"There is no root component with selector '{selector}'.",
+                nameof(selector)
+            );
         }
     }
 }

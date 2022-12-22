@@ -15,7 +15,13 @@ using CombinedDependencyList = System.Collections.Generic.List<ILCompiler.Depend
 namespace ILCompiler.DependencyAnalysis
 {
     [DebuggerTypeProxy(typeof(MethodCodeNodeDebugView))]
-    public class MethodCodeNode : ObjectNode, IMethodBodyNode, INodeWithCodeInfo, INodeWithDebugInfo, ISymbolDefinitionNode, ISpecialUnboxThunkNode
+    public class MethodCodeNode
+        : ObjectNode,
+            IMethodBodyNode,
+            INodeWithCodeInfo,
+            INodeWithDebugInfo,
+            ISymbolDefinitionNode,
+            ISpecialUnboxThunkNode
     {
         private MethodDesc _method;
         private ObjectData _methodCode;
@@ -33,7 +39,9 @@ namespace ILCompiler.DependencyAnalysis
         public MethodCodeNode(MethodDesc method)
         {
             Debug.Assert(!method.IsAbstract);
-            Debug.Assert(!method.IsGenericMethodDefinition && !method.OwningType.IsGenericDefinition);
+            Debug.Assert(
+                !method.IsGenericMethodDefinition && !method.OwningType.IsGenericDefinition
+            );
             Debug.Assert(method.GetCanonMethodTarget(CanonicalFormKind.Specific) == method);
             _method = method;
         }
@@ -45,17 +53,26 @@ namespace ILCompiler.DependencyAnalysis
             _isFoldable = isFoldable;
         }
 
-        public MethodDesc Method =>  _method;
+        public MethodDesc Method => _method;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectNodeSection Section
         {
             get
             {
-                return _method.Context.Target.IsWindows ?
-                    (_isFoldable ? ObjectNodeSection.FoldableManagedCodeWindowsContentSection : ObjectNodeSection.ManagedCodeWindowsContentSection) :
-                    (_isFoldable ? ObjectNodeSection.FoldableManagedCodeUnixContentSection : ObjectNodeSection.ManagedCodeUnixContentSection);
+                return _method.Context.Target.IsWindows
+                    ? (
+                        _isFoldable
+                            ? ObjectNodeSection.FoldableManagedCodeWindowsContentSection
+                            : ObjectNodeSection.ManagedCodeWindowsContentSection
+                    )
+                    : (
+                        _isFoldable
+                            ? ObjectNodeSection.FoldableManagedCodeUnixContentSection
+                            : ObjectNodeSection.ManagedCodeUnixContentSection
+                    );
             }
         }
 
@@ -65,27 +82,44 @@ namespace ILCompiler.DependencyAnalysis
         {
             sb.Append(nameMangler.GetMangledMethodName(_method));
         }
+
         public int Offset => 0;
-        public override bool IsShareable => _method is InstantiatedMethod || EETypeNode.IsTypeNodeShareable(_method.OwningType);
+        public override bool IsShareable =>
+            _method is InstantiatedMethod || EETypeNode.IsTypeNodeShareable(_method.OwningType);
 
-        public override bool HasConditionalStaticDependencies => CodeBasedDependencyAlgorithm.HasConditionalDependenciesDueToMethodCodePresence(_method);
+        public override bool HasConditionalStaticDependencies =>
+            CodeBasedDependencyAlgorithm.HasConditionalDependenciesDueToMethodCodePresence(_method);
 
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory)
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        )
         {
             CombinedDependencyList dependencies = null;
-            CodeBasedDependencyAlgorithm.AddConditionalDependenciesDueToMethodCodePresence(ref dependencies, factory, _method);
-            return dependencies ?? (IEnumerable<CombinedDependencyListEntry>)Array.Empty<CombinedDependencyListEntry>();
+            CodeBasedDependencyAlgorithm.AddConditionalDependenciesDueToMethodCodePresence(
+                ref dependencies,
+                factory,
+                _method
+            );
+            return dependencies
+                ?? (IEnumerable<CombinedDependencyListEntry>)
+                    Array.Empty<CombinedDependencyListEntry>();
         }
 
         protected override DependencyList ComputeNonRelocationBasedDependencies(NodeFactory factory)
         {
-            DependencyList dependencies = _nonRelocationDependencies != null ? new DependencyList(_nonRelocationDependencies) : null;
+            DependencyList dependencies =
+                _nonRelocationDependencies != null
+                    ? new DependencyList(_nonRelocationDependencies)
+                    : null;
 
             TypeDesc owningType = _method.OwningType;
             if (factory.PreinitializationManager.HasEagerStaticConstructor(owningType))
             {
                 dependencies ??= new DependencyList();
-                dependencies.Add(factory.EagerCctorIndirection(owningType.GetStaticConstructor()), "Eager .cctor");
+                dependencies.Add(
+                    factory.EagerCctorIndirection(owningType.GetStaticConstructor()),
+                    "Eager .cctor"
+                );
             }
 
             if (_ehInfo != null)
@@ -97,7 +131,12 @@ namespace ILCompiler.DependencyAnalysis
             if (MethodAssociatedDataNode.MethodHasAssociatedData(factory, this))
             {
                 dependencies ??= new DependencyList();
-                dependencies.Add(new DependencyListEntry(factory.MethodAssociatedData(this), "Method associated data"));
+                dependencies.Add(
+                    new DependencyListEntry(
+                        factory.MethodAssociatedData(this),
+                        "Method associated data"
+                    )
+                );
             }
 
             return dependencies;
@@ -108,13 +147,16 @@ namespace ILCompiler.DependencyAnalysis
             return _methodCode;
         }
 
-        public bool IsSpecialUnboxingThunk => ((CompilerTypeSystemContext)Method.Context).IsSpecialUnboxingThunk(_method);
+        public bool IsSpecialUnboxingThunk =>
+            ((CompilerTypeSystemContext)Method.Context).IsSpecialUnboxingThunk(_method);
 
         public ISymbolNode GetUnboxingThunkTarget(NodeFactory factory)
         {
             Debug.Assert(IsSpecialUnboxingThunk);
 
-            MethodDesc nonUnboxingMethod = ((CompilerTypeSystemContext)Method.Context).GetTargetOfSpecialUnboxingThunk(_method);
+            MethodDesc nonUnboxingMethod = (
+                (CompilerTypeSystemContext)Method.Context
+            ).GetTargetOfSpecialUnboxingThunk(_method);
             return factory.MethodEntrypoint(nonUnboxingMethod, false);
         }
 
@@ -214,9 +256,9 @@ namespace ILCompiler.DependencyAnalysis
                     TypeDesc varType;
                     if (!sig.IsStatic && varInfo.VarNumber == 0)
                     {
-                        varType = _method.OwningType.IsValueType ?
-                            _method.OwningType.MakeByRefType() :
-                            _method.OwningType;
+                        varType = _method.OwningType.IsValueType
+                            ? _method.OwningType.MakeByRefType()
+                            : _method.OwningType;
                     }
                     else
                     {
@@ -227,7 +269,12 @@ namespace ILCompiler.DependencyAnalysis
                     if (name == null)
                         continue;
 
-                    yield return new DebugVarInfoMetadata(name, varType, isParameter: true, varInfo);
+                    yield return new DebugVarInfoMetadata(
+                        name,
+                        varType,
+                        isParameter: true,
+                        varInfo
+                    );
                 }
                 else
                 {
@@ -237,7 +284,12 @@ namespace ILCompiler.DependencyAnalysis
                     if (name == null)
                         continue;
 
-                    yield return new DebugVarInfoMetadata(name, _localTypes[localNumber], isParameter: false, varInfo);
+                    yield return new DebugVarInfoMetadata(
+                        name,
+                        _localTypes[localNumber],
+                        isParameter: false,
+                        varInfo
+                    );
                 }
             }
         }
@@ -249,7 +301,9 @@ namespace ILCompiler.DependencyAnalysis
 
         public IEnumerable<NativeSequencePoint> GetNativeSequencePoints()
         {
-            var sequencePoints = new (string Document, int LineNumber)[_debugLocInfos.Length * 4 /* chosen empirically */];
+            var sequencePoints = new (string Document, int LineNumber)[
+                _debugLocInfos.Length * 4 /* chosen empirically */
+            ];
             try
             {
                 foreach (var sequencePoint in _debugInfo.GetSequencePoints())
@@ -257,7 +311,10 @@ namespace ILCompiler.DependencyAnalysis
                     int offset = sequencePoint.Offset;
                     if (offset >= sequencePoints.Length)
                     {
-                        int newLength = Math.Max(2 * sequencePoints.Length, sequencePoint.Offset + 1);
+                        int newLength = Math.Max(
+                            2 * sequencePoints.Length,
+                            sequencePoint.Offset + 1
+                        );
                         Array.Resize(ref sequencePoints, newLength);
                     }
                     sequencePoints[offset] = (sequencePoint.Document, sequencePoint.LineNumber);
@@ -285,7 +342,8 @@ namespace ILCompiler.DependencyAnalysis
                         yield return new NativeSequencePoint(
                             nativeMapping.NativeOffset,
                             sequencePoint.Document,
-                            sequencePoint.LineNumber);
+                            sequencePoint.LineNumber
+                        );
                         previousNativeOffset = nativeMapping.NativeOffset;
                     }
                 }
@@ -327,7 +385,8 @@ namespace ILCompiler.DependencyAnalysis
                         var d = Disassembler.Disassemble(
                             _node.Method.Context.Target.Architecture,
                             _node._methodCode.Data,
-                            _node._methodCode.Relocs);
+                            _node._methodCode.Relocs
+                        );
                         sb.Append(d);
                     }
                     else
@@ -346,7 +405,7 @@ namespace ILCompiler.DependencyAnalysis
         public readonly int NativeOffset;
         public readonly int ILOffset;
 
-        public DebugLocInfo(int nativeOffset, int ilOffset)
-            => (NativeOffset, ILOffset) = (nativeOffset, ilOffset);
+        public DebugLocInfo(int nativeOffset, int ilOffset) =>
+            (NativeOffset, ILOffset) = (nativeOffset, ilOffset);
     }
 }

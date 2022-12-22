@@ -163,7 +163,9 @@ internal sealed class ServerAddressesCollection : ICollection<string>
         {
             if (IsReadOnly)
             {
-                throw new InvalidOperationException($"{nameof(IServerAddressesFeature)}.{nameof(IServerAddressesFeature.Addresses)} cannot be modified after the server has started.");
+                throw new InvalidOperationException(
+                    $"{nameof(IServerAddressesFeature)}.{nameof(IServerAddressesFeature.Addresses)} cannot be modified after the server has started."
+                );
             }
         }
     }

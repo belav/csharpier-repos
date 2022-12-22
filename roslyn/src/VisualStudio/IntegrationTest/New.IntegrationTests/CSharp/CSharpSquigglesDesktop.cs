@@ -13,9 +13,6 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     {
         protected override bool SupportsGlobalUsings => false;
 
-        public CSharpSquigglesDesktop()
-            : base(WellKnownProjectTemplates.ClassLibrary)
-        {
-        }
+        public CSharpSquigglesDesktop() : base(WellKnownProjectTemplates.ClassLibrary) { }
     }
 }

@@ -33,10 +33,19 @@ namespace System.Diagnostics.Tests
                 try
                 {
                     // Find the relevant ProcessThread in this process
-                    ProcessThread targetThread = currentProcess.Threads.Cast<ProcessThread>().Single(pt => pt.Id == targetThreadId);
+                    ProcessThread targetThread = currentProcess.Threads
+                        .Cast<ProcessThread>()
+                        .Single(pt => pt.Id == targetThreadId);
 
                     // Try setting and getting its priority
-                    foreach (ThreadPriorityLevel level in new[] { ThreadPriorityLevel.AboveNormal, ThreadPriorityLevel.BelowNormal, ThreadPriorityLevel.Normal })
+                    foreach (
+                        ThreadPriorityLevel level in new[]
+                        {
+                            ThreadPriorityLevel.AboveNormal,
+                            ThreadPriorityLevel.BelowNormal,
+                            ThreadPriorityLevel.Normal
+                        }
+                    )
                     {
                         targetThread.PriorityLevel = ThreadPriorityLevel.AboveNormal;
                         Assert.Equal(ThreadPriorityLevel.AboveNormal, targetThread.PriorityLevel);

@@ -14,7 +14,10 @@ public class ParsedPathTests
     [InlineData("foo/bar~01baz", new string[] { "foo", "bar~1baz" })]
     [InlineData("foo/bar~10baz", new string[] { "foo", "bar/0baz" })]
     [InlineData("foo/bar~1baz", new string[] { "foo", "bar/baz" })]
-    [InlineData("foo/bar~0/~0/~1~1/~0~0/baz", new string[] { "foo", "bar~", "~", "//", "~~", "baz" })]
+    [InlineData(
+        "foo/bar~0/~0/~1~1/~0~0/baz",
+        new string[] { "foo", "bar~", "~", "//", "~~", "baz" }
+    )]
     [InlineData("~0~1foo", new string[] { "~/foo" })]
     public void ParsingValidPathShouldSucceed(string path, string[] expected)
     {

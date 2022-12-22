@@ -12,20 +12,29 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.ConditionalExpressionInStringInterpolation
 {
-    [Trait(Traits.Feature, Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString)]
-    public class CSharpAddParenthesesAroundConditionalExpressionInInterpolatedStringCodeFixProviderTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    [Trait(
+        Traits.Feature,
+        Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+    )]
+    public class CSharpAddParenthesesAroundConditionalExpressionInInterpolatedStringCodeFixProviderTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public CSharpAddParenthesesAroundConditionalExpressionInInterpolatedStringCodeFixProviderTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        public CSharpAddParenthesesAroundConditionalExpressionInInterpolatedStringCodeFixProviderTests(
+            ITestOutputHelper logger
+        ) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpAddParenthesesAroundConditionalExpressionInInterpolatedStringCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                null,
+                new CSharpAddParenthesesAroundConditionalExpressionInInterpolatedStringCodeFixProvider()
+            );
 
         private async Task TestInMethodAsync(string initialMethodBody, string expectedMethodBody)
         {
-            var template = @"
+            var template =
+                @"
 class Application
 {{
     public void M()
@@ -34,8 +43,10 @@ class Application
     }}
 }}";
             await TestInRegularAndScriptAsync(
-                string.Format(template, initialMethodBody),
-                string.Format(template, expectedMethodBody)).ConfigureAwait(false);
+                    string.Format(template, initialMethodBody),
+                    string.Format(template, expectedMethodBody)
+                )
+                .ConfigureAwait(false);
         }
 
         [Fact]
@@ -43,27 +54,32 @@ class Application
         {
             await TestInMethodAsync(
                 @"var s = $""{ true ? 1 [|:|] 2}"";",
-                @"var s = $""{ (true ? 1 : 2)}"";");
+                @"var s = $""{ (true ? 1 : 2)}"";"
+            );
         }
 
         [Fact]
         public async Task TestAddParenthesesMultiLineConditionalExpression1()
         {
-            await TestInMethodAsync(@"
+            await TestInMethodAsync(
+                @"
 var s = $@""{ true
             [|? 1|]
             : 2}"";
-", @"
+",
+                @"
 var s = $@""{ (true
             ? 1
             : 2)}"";
-");
+"
+            );
         }
 
         [Fact]
         public async Task TestAddParenthesesMultiLineConditionalExpression2()
         {
-            await TestInMethodAsync(@"
+            await TestInMethodAsync(
+                @"
 var s = $@""{
             true
             ?
@@ -71,7 +87,8 @@ var s = $@""{
             : 
             2
             }"";
-", @"
+",
+                @"
 var s = $@""{
             (true
             ?
@@ -79,7 +96,8 @@ var s = $@""{
             : 
             2
 )            }"";
-");
+"
+            );
         }
 
         [Fact]
@@ -87,7 +105,8 @@ var s = $@""{
         {
             await TestInMethodAsync(
                 @"var s = $""{ /* Leading1 */ true /* Leading2 */ ? /* TruePart1 */ 1 /* TruePart2 */[|:|] /* FalsePart1 */ 2 /* FalsePart2 */ }"";",
-                @"var s = $""{ /* Leading1 */ (true /* Leading2 */ ? /* TruePart1 */ 1 /* TruePart2 */: /* FalsePart1 */ 2) /* FalsePart2 */ }"";");
+                @"var s = $""{ /* Leading1 */ (true /* Leading2 */ ? /* TruePart1 */ 1 /* TruePart2 */: /* FalsePart1 */ 2) /* FalsePart2 */ }"";"
+            );
         }
 
         [Fact]
@@ -95,7 +114,8 @@ var s = $@""{
         {
             await TestInMethodAsync(
                 @"var s = $""{ true ? new int[0] [|:|] new int[] {} }"";",
-                @"var s = $""{ (true ? new int[0] : new int[] {}) }"";");
+                @"var s = $""{ (true ? new int[0] : new int[] {}) }"";"
+            );
         }
 
         [Fact]
@@ -103,7 +123,8 @@ var s = $@""{
         {
             await TestInMethodAsync(
                 @"var s = $""{ true ? ""1"" [|:|] ""2"" }"";",
-                @"var s = $""{ (true ? ""1"" : ""2"") }"";");
+                @"var s = $""{ (true ? ""1"" : ""2"") }"";"
+            );
         }
 
         [Fact]
@@ -111,7 +132,8 @@ var s = $@""{
         {
             await TestInMethodAsync(
                 @"var s = $""{ true ? ""1"" [|:|] @""""""2"""""" }"";",
-                @"var s = $""{ (true ? ""1"" : @""""""2"""""") }"";");
+                @"var s = $""{ (true ? ""1"" : @""""""2"""""") }"";"
+            );
         }
 
         [Fact]
@@ -119,7 +141,8 @@ var s = $@""{
         {
             await TestInMethodAsync(
                 @"var s = $""{ true ? ""1"" [|:|] ""2)"" }"";",
-                @"var s = $""{ (true ? ""1"" : ""2)"") }"";");
+                @"var s = $""{ (true ? ""1"" : ""2)"") }"";"
+            );
         }
 
         [Fact]
@@ -127,7 +150,8 @@ var s = $@""{
         {
             await TestInMethodAsync(
                 @"var s = $""{ true ? ""1"" [|:|] ""2\"""" }"";",
-                @"var s = $""{ (true ? ""1"" : ""2\"""") }"";");
+                @"var s = $""{ (true ? ""1"" : ""2\"""") }"";"
+            );
         }
 
         [Fact]
@@ -135,7 +159,8 @@ var s = $@""{
         {
             await TestInMethodAsync(
                 @"var s = $""{ true ? ""1"" [|:|] ""M(new int[] {}, \""Parameter\"");"" }"";",
-                @"var s = $""{ (true ? ""1"" : ""M(new int[] {}, \""Parameter\"");"") }"";");
+                @"var s = $""{ (true ? ""1"" : ""M(new int[] {}, \""Parameter\"");"") }"";"
+            );
         }
 
         [Fact]
@@ -143,7 +168,8 @@ var s = $@""{
         {
             await TestInMethodAsync(
                 @"var s2 = $""{ true ? ""1"" [|:|] (false ? ""2"" : ""3"") };",
-                @"var s2 = $""{ (true ? ""1"" : (false ? ""2"" : ""3"")) };");
+                @"var s2 = $""{ (true ? ""1"" : (false ? ""2"" : ""3"")) };"
+            );
         }
 
         [Fact]
@@ -151,7 +177,8 @@ var s = $@""{
         {
             await TestInMethodAsync(
                 @"var s2 = $""{ true ? ""1"" [|:|] false ? ""2"" : ""3"" };",
-                @"var s2 = $""{ (true ? ""1"" : false ? ""2"" : ""3"") };");
+                @"var s2 = $""{ (true ? ""1"" : false ? ""2"" : ""3"") };"
+            );
         }
 
         [Fact]
@@ -159,7 +186,8 @@ var s = $@""{
         {
             await TestInMethodAsync(
                 @"var s2 = $""{ (true ? ""1"" : false ? $""{ true ? ""2"" [|:|] ""3""}"" : ""4"") }""",
-                @"var s2 = $""{ (true ? ""1"" : false ? $""{ (true ? ""2"" : ""3"")}"" : ""4"") }""");
+                @"var s2 = $""{ (true ? ""1"" : false ? $""{ (true ? ""2"" : ""3"")}"" : ""4"") }"""
+            );
         }
 
         [Fact]
@@ -167,7 +195,8 @@ var s = $@""{
         {
             await TestInMethodAsync(
                 @"var s3 = $""Text1 { true ? ""Text2"" [|:|] ""Text3""} Text4 { (true ? ""Text5"" : ""Text6"")} Text7"";",
-                @"var s3 = $""Text1 { (true ? ""Text2"" : ""Text3"")} Text4 { (true ? ""Text5"" : ""Text6"")} Text7"";");
+                @"var s3 = $""Text1 { (true ? ""Text2"" : ""Text3"")} Text4 { (true ? ""Text5"" : ""Text6"")} Text7"";"
+            );
         }
 
         [Fact]
@@ -175,7 +204,8 @@ var s = $@""{
         {
             await TestInMethodAsync(
                 @"var s3 = $""Text1 { (true ? ""Text2"" : ""Text3"")} Text4 { true ? ""Text5"" [|:|] ""Text6""} Text7"";",
-                @"var s3 = $""Text1 { (true ? ""Text2"" : ""Text3"")} Text4 { (true ? ""Text5"" : ""Text6"")} Text7"";");
+                @"var s3 = $""Text1 { (true ? ""Text2"" : ""Text3"")} Text4 { (true ? ""Text5"" : ""Text6"")} Text7"";"
+            );
         }
 
         [Fact]
@@ -183,7 +213,8 @@ var s = $@""{
         {
             await TestInMethodAsync(
                 @"var s3 = $""Text1 { true ? ""Text2"" [|:|] ""Text3""} Text4 { true ? ""Text5"" : ""Text6""} Text7"";",
-                @"var s3 = $""Text1 { (true ? ""Text2"" : ""Text3"")} Text4 { true ? ""Text5"" : ""Text6""} Text7"";");
+                @"var s3 = $""Text1 { (true ? ""Text2"" : ""Text3"")} Text4 { true ? ""Text5"" : ""Text6""} Text7"";"
+            );
         }
 
         [Fact]
@@ -197,7 +228,8 @@ var s = $@""{
                 @"
                 PreviousLineOfCode();
                 var s3 = $""Text1 { (true ? ""Text2"" :)
-                NextLineOfCode();");
+                NextLineOfCode();"
+            );
         }
 
         [Fact]
@@ -211,7 +243,8 @@ var s = $@""{
                 @"
                 PreviousLineOfCode();
                 var s3 = $""Text1 { (true ? ""Text2"" : "")
-                NextLineOfCode();");
+                NextLineOfCode();"
+            );
         }
 
         [Fact]
@@ -225,7 +258,8 @@ var s = $@""{
                 @"
                 PreviousLineOfCode();
                 var s3 = $""Text1 { (true ? ""Text2"" : ""Text3)
-                NextLineOfCode();");
+                NextLineOfCode();"
+            );
         }
 
         [Fact]
@@ -239,7 +273,8 @@ var s = $@""{
                 @"
                 PreviousLineOfCode();
                 var s3 = $""Text1 { (true ? ""Text2"" : ""Text3"")
-                NextLineOfCode();");
+                NextLineOfCode();"
+            );
         }
 
         [Fact]
@@ -253,7 +288,8 @@ var s = $@""{
                 @"
                 PreviousLineOfCode();
                 var s3 = $""Text1 { (true ? ""Text2"" : ""Text3"") }
-                NextLineOfCode();");
+                NextLineOfCode();"
+            );
         }
 
         [Fact]
@@ -267,7 +303,8 @@ var s = $@""{
                 @"
                 (
                 var s3 = $""Text1 { (true ? ""Text2"" : ""Text3"") }
-                NextLineOfCode();");
+                NextLineOfCode();"
+            );
         }
 
         [Fact]
@@ -281,7 +318,8 @@ var s = $@""{
                 @"
                 PreviousLineOfCode();
                 var s3 = $""Text1 { (true ? ""Text2"" : ""Text3"") }
-                NextLineOfCode(");
+                NextLineOfCode("
+            );
         }
 
         [Fact]
@@ -295,7 +333,8 @@ var s = $@""{
                 @"
                 PreviousLineOfCode();
                 var s3 = ($""Text1 { (true ? ""Text2"" : ""Text3"") }
-                NextLineOfCode();");
+                NextLineOfCode();"
+            );
         }
 
         [Fact]
@@ -303,7 +342,8 @@ var s = $@""{
         {
             await TestInMethodAsync(
                 @"var s3 = $""{ true ? 1 [|:|] 2 )}""",
-                @"var s3 = $""{ (true ? 1 : 2 )}""");
+                @"var s3 = $""{ (true ? 1 : 2 )}"""
+            );
         }
     }
 }

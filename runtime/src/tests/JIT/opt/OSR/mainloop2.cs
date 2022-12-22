@@ -7,17 +7,17 @@ using System;
 
 class MainNestedLoop
 {
-   public static int Main()
-   {
-       long result = 0;
-       for (int i = 0; i < 1_000; i++)
-       {
-           for (int j = 0; j < 1_000; j++)
-           {
-               result += (long)(i * 1_000 + j);
-           }
-       }
+    public static int Main()
+    {
+        long result = 0;
+        for (int i = 0; i < 1_000; i++)
+        {
+            for (int j = 0; j < 1_000; j++)
+            {
+                result += (long)(i * 1_000 + j);
+            }
+        }
 
-       return result == 499999500000 ? 100 : -1;
-   }  
+        return result == 499999500000 ? 100 : -1;
+    }
 }

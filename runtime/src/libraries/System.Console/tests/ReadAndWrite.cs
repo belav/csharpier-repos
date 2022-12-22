@@ -261,17 +261,26 @@ public class ReadAndWrite
             Assert.Equal(strAsBytes.Length, encoding.GetByteCount(charsPtr, strAsChars.Length));
 
             byte[] outputArr = new byte[encoding.GetMaxByteCount(strAsChars.Length)];
-            Assert.Equal(strAsBytes.Length, encoding.GetBytes(strAsChars, 0, strAsChars.Length, outputArr, 0));
+            Assert.Equal(
+                strAsBytes.Length,
+                encoding.GetBytes(strAsChars, 0, strAsChars.Length, outputArr, 0)
+            );
             fixed (byte* bytesPtr = outputArr)
             {
-                Assert.Equal(strAsBytes.Length, encoding.GetBytes(charsPtr, strAsChars.Length, bytesPtr, outputArr.Length));
+                Assert.Equal(
+                    strAsBytes.Length,
+                    encoding.GetBytes(charsPtr, strAsChars.Length, bytesPtr, outputArr.Length)
+                );
             }
             Assert.Equal(strAsBytes.Length, encoding.GetBytes(str, 0, str.Length, outputArr, 0));
         }
     }
 
     [Fact]
-    [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "Not supported on Browser, iOS, MacCatalyst, or tvOS.")]
+    [SkipOnPlatform(
+        TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS,
+        "Not supported on Browser, iOS, MacCatalyst, or tvOS."
+    )]
     public static unsafe void OutputEncodingPreamble()
     {
         Encoding curEncoding = Console.OutputEncoding;
@@ -294,7 +303,10 @@ public class ReadAndWrite
     }
 
     [Fact]
-    [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "Not supported on Browser, iOS, MacCatalyst, or tvOS.")]
+    [SkipOnPlatform(
+        TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS,
+        "Not supported on Browser, iOS, MacCatalyst, or tvOS."
+    )]
     public static unsafe void OutputEncoding()
     {
         Encoding curEncoding = Console.OutputEncoding;
@@ -334,7 +346,8 @@ public class ReadAndWrite
         Assert.Throws<PlatformNotSupportedException>(() => Console.InputEncoding);
     }
 
-    static readonly string[] s_testLines = new string[] {
+    static readonly string[] s_testLines = new string[]
+    {
         "3232 Hello32 Hello 5032 Hello 50 532 Hello 50 5 aTrueaabcdbc1.23123.4561.23439505050System.ObjectHello World",
         "32",
         "",
@@ -362,7 +375,10 @@ public class ReadAndWrite
     };
 
     [Fact]
-    [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "Not supported on Browser, iOS, MacCatalyst, or tvOS.")]
+    [SkipOnPlatform(
+        TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS,
+        "Not supported on Browser, iOS, MacCatalyst, or tvOS."
+    )]
     public static void ReadAndReadLine()
     {
         TextWriter savedStandardOutput = Console.Out;
@@ -401,7 +417,6 @@ public class ReadAndWrite
                     }
                 }
             }
-
         }
         finally
         {
@@ -413,23 +428,35 @@ public class ReadAndWrite
     [Fact]
     public static void OpenStandardInput_NegativeBufferSize_ThrowsArgumentOutOfRangeException()
     {
-        AssertExtensions.Throws<ArgumentOutOfRangeException>("bufferSize", () => Console.OpenStandardInput(-1));
+        AssertExtensions.Throws<ArgumentOutOfRangeException>(
+            "bufferSize",
+            () => Console.OpenStandardInput(-1)
+        );
     }
 
     [Fact]
     public static void OpenStandardOutput_NegativeBufferSize_ThrowsArgumentOutOfRangeException()
     {
-        AssertExtensions.Throws<ArgumentOutOfRangeException>("bufferSize", () => Console.OpenStandardOutput(-1));
+        AssertExtensions.Throws<ArgumentOutOfRangeException>(
+            "bufferSize",
+            () => Console.OpenStandardOutput(-1)
+        );
     }
 
     [Fact]
     public static void OpenStandardError_NegativeBufferSize_ThrowsArgumentOutOfRangeException()
     {
-        AssertExtensions.Throws<ArgumentOutOfRangeException>("bufferSize", () => Console.OpenStandardError(-1));
+        AssertExtensions.Throws<ArgumentOutOfRangeException>(
+            "bufferSize",
+            () => Console.OpenStandardError(-1)
+        );
     }
 
     [Fact]
-    [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "Not supported on Browser, iOS, MacCatalyst, or tvOS.")]
+    [SkipOnPlatform(
+        TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS,
+        "Not supported on Browser, iOS, MacCatalyst, or tvOS."
+    )]
     public static async Task FlushOnStreams_Nop()
     {
         using Stream input = Console.OpenStandardInput();
@@ -440,7 +467,9 @@ public class ReadAndWrite
         {
             s.Flush();
             await s.FlushAsync();
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await s.FlushAsync(new CancellationToken(canceled: true)));
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                async () => await s.FlushAsync(new CancellationToken(canceled: true))
+            );
         }
     }
 }

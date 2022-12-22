@@ -30,7 +30,9 @@ internal sealed class WebServerStartup
     private static readonly object LaunchLock = new object();
     private static string LaunchedDebugProxyUrl = "";
     private ILogger? _logger;
-    public WebServerStartup(IWebHostEnvironment hostingEnvironment) => _hostingEnvironment = hostingEnvironment;
+
+    public WebServerStartup(IWebHostEnvironment hostingEnvironment) =>
+        _hostingEnvironment = hostingEnvironment;
 
     public static int StartDebugProxy(string devToolsHost)
     {
@@ -41,8 +43,10 @@ internal sealed class WebServerStartup
         var generateRandomPort = new Random().Next(5000, 5300);
         var processStartInfo = new ProcessStartInfo
         {
-            FileName = "dotnet" + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".exe" : ""),
-            Arguments = $"exec \"{executablePath}\" --OwnerPid {ownerPid} --DevToolsUrl {devToolsHost} --DevToolsProxyPort {generateRandomPort}",
+            FileName =
+                "dotnet" + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".exe" : ""),
+            Arguments =
+                $"exec \"{executablePath}\" --OwnerPid {ownerPid} --DevToolsUrl {devToolsHost} --DevToolsProxyPort {generateRandomPort}",
             UseShellExecute = false,
             RedirectStandardOutput = true,
         };
@@ -54,11 +58,13 @@ internal sealed class WebServerStartup
         return generateRandomPort;
     }
 
-    public void Configure(IApplicationBuilder app,
-                          IOptions<WebServerOptions> optionsContainer,
-                          TaskCompletionSource<ServerURLs> realUrlsAvailableTcs,
-                          ILogger logger,
-                          IHostApplicationLifetime applicationLifetime)
+    public void Configure(
+        IApplicationBuilder app,
+        IOptions<WebServerOptions> optionsContainer,
+        TaskCompletionSource<ServerURLs> realUrlsAvailableTcs,
+        ILogger logger,
+        IHostApplicationLifetime applicationLifetime
+    )
     {
         _logger = logger;
         var provider = new FileExtensionContentTypeProvider();
@@ -74,20 +80,24 @@ internal sealed class WebServerStartup
         WebServerOptions options = optionsContainer.Value;
         if (options.WebServerUseCrossOriginPolicy)
         {
-            app.Use((context, next) =>
-            {
-                context.Response.Headers.Add("Cross-Origin-Embedder-Policy", "require-corp");
-                context.Response.Headers.Add("Cross-Origin-Opener-Policy", "same-origin");
-                return next();
-            });
+            app.Use(
+                (context, next) =>
+                {
+                    context.Response.Headers.Add("Cross-Origin-Embedder-Policy", "require-corp");
+                    context.Response.Headers.Add("Cross-Origin-Opener-Policy", "same-origin");
+                    return next();
+                }
+            );
         }
 
-        app.UseStaticFiles(new StaticFileOptions
-        {
-            FileProvider = new PhysicalFileProvider(_hostingEnvironment.ContentRootPath),
-            ContentTypeProvider = provider,
-            ServeUnknownFileTypes = true
-        });
+        app.UseStaticFiles(
+            new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(_hostingEnvironment.ContentRootPath),
+                ContentTypeProvider = provider,
+                ServeUnknownFileTypes = true
+            }
+        );
 
         if (options.WebServerUseCors)
         {
@@ -99,59 +109,74 @@ internal sealed class WebServerStartup
         {
             app.UseRouter(router =>
             {
-                router.MapGet("/console", async context =>
-                {
-                    if (!context.WebSockets.IsWebSocketRequest)
+                router.MapGet(
+                    "/console",
+                    async context =>
                     {
-                        context.Response.StatusCode = 400;
-                        return;
-                    }
+                        if (!context.WebSockets.IsWebSocketRequest)
+                        {
+                            context.Response.StatusCode = 400;
+                            return;
+                        }
 
-                    using WebSocket socket = await context.WebSockets.AcceptWebSocketAsync();
-                    await options.OnConsoleConnected(socket);
-                });
+                        using WebSocket socket = await context.WebSockets.AcceptWebSocketAsync();
+                        await options.OnConsoleConnected(socket);
+                    }
+                );
             });
         }
 
-        app.Map("/debug", app =>
-        {
-            app.Run(async (context) =>
+        app.Map(
+            "/debug",
+            app =>
             {
-                //debug from VS
-                var queryParams = HttpUtility.ParseQueryString(context.Request.QueryString.Value!);
-                var browserParam = queryParams.Get("browser");
-                Uri? browserUrl = null;
-                var devToolsHost = "http://localhost:9222";
-                if (browserParam != null)
-                {
-                    browserUrl = new Uri(browserParam);
-                    devToolsHost = $"http://{browserUrl.Host}:{browserUrl.Port}";
-                }
-                lock (LaunchLock)
-                {
-                    if (LaunchedDebugProxyUrl == "")
+                app.Run(
+                    async (context) =>
                     {
-                        LaunchedDebugProxyUrl = $"http://localhost:{StartDebugProxy(devToolsHost)}";
+                        //debug from VS
+                        var queryParams = HttpUtility.ParseQueryString(
+                            context.Request.QueryString.Value!
+                        );
+                        var browserParam = queryParams.Get("browser");
+                        Uri? browserUrl = null;
+                        var devToolsHost = "http://localhost:9222";
+                        if (browserParam != null)
+                        {
+                            browserUrl = new Uri(browserParam);
+                            devToolsHost = $"http://{browserUrl.Host}:{browserUrl.Port}";
+                        }
+                        lock (LaunchLock)
+                        {
+                            if (LaunchedDebugProxyUrl == "")
+                            {
+                                LaunchedDebugProxyUrl =
+                                    $"http://localhost:{StartDebugProxy(devToolsHost)}";
+                            }
+                        }
+                        var requestPath = context.Request.Path.ToString();
+                        if (requestPath == string.Empty)
+                        {
+                            requestPath = "/";
+                        }
+                        context.Response.Redirect(
+                            $"{LaunchedDebugProxyUrl}{browserUrl!.PathAndQuery}"
+                        );
+                        await Task.FromResult(0);
                     }
-                }
-                var requestPath = context.Request.Path.ToString();
-                if (requestPath == string.Empty)
-                {
-                    requestPath = "/";
-                }
-                context.Response.Redirect($"{LaunchedDebugProxyUrl}{browserUrl!.PathAndQuery}");
-                await Task.FromResult(0);
-            });
-        });
+                );
+            }
+        );
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapGet("/", context =>
-            {
-                context.Response.Redirect("index.html", permanent: false);
-                return Task.CompletedTask;
-            });
+            endpoints.MapGet(
+                "/",
+                context =>
+                {
+                    context.Response.Redirect("index.html", permanent: false);
+                    return Task.CompletedTask;
+                }
+            );
         });
-
 
         applicationLifetime.ApplicationStarted.Register(() =>
         {
@@ -159,8 +184,8 @@ internal sealed class WebServerStartup
             try
             {
                 ICollection<string>? addresses = app.ServerFeatures
-                                                    .Get<IServerAddressesFeature>()
-                                                    ?.Addresses;
+                    .Get<IServerAddressesFeature>()
+                    ?.Addresses;
 
                 string? ipAddress = null;
                 string? ipAddressSecure = null;
@@ -171,7 +196,11 @@ internal sealed class WebServerStartup
                 }
 
                 if (ipAddress == null)
-                    tcs.SetException(new InvalidOperationException("Failed to determine web server's IP address or port"));
+                    tcs.SetException(
+                        new InvalidOperationException(
+                            "Failed to determine web server's IP address or port"
+                        )
+                    );
                 else
                     tcs.SetResult(new ServerURLs(ipAddress, ipAddressSecure));
             }
@@ -182,12 +211,18 @@ internal sealed class WebServerStartup
                 throw;
             }
 
-            static string? GetHttpServerAddress(ICollection<string> addresses, bool secure)
-                => addresses?
-                        .Where(a => a.StartsWith(secure ? "https:" : "http:", StringComparison.InvariantCultureIgnoreCase))
-                        .Select(a => new Uri(a))
-                        .Select(uri => uri.ToString())
-                        .FirstOrDefault();
+            static string? GetHttpServerAddress(ICollection<string> addresses, bool secure) =>
+                addresses
+                    ?.Where(
+                        a =>
+                            a.StartsWith(
+                                secure ? "https:" : "http:",
+                                StringComparison.InvariantCultureIgnoreCase
+                            )
+                    )
+                    .Select(a => new Uri(a))
+                    .Select(uri => uri.ToString())
+                    .FirstOrDefault();
         });
     }
 }

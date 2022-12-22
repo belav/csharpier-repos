@@ -9,6 +9,7 @@ namespace Test
     class AA
     {
         static ulong m_ul;
+
         static int Main()
         {
             try

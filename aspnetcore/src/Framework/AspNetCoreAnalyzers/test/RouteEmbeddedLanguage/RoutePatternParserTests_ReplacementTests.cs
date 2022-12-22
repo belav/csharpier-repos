@@ -14,7 +14,9 @@ public partial class RoutePatternParserTests
     [Fact]
     public void TestReplacement()
     {
-        Test(@"""[controller]""", @"<Tree>
+        Test(
+            @"""[controller]""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Replacement>
@@ -26,13 +28,17 @@ public partial class RoutePatternParserTests
     <EndOfFile />
   </CompilationUnit>
   <Parameters />
-</Tree>", runReplaceTokens: true);
+</Tree>",
+            runReplaceTokens: true
+        );
     }
 
     [Fact]
     public void TestEscapedReplacement()
     {
-        Test(@"""[[controller]]""", @"<Tree>
+        Test(
+            @"""[[controller]]""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -42,13 +48,17 @@ public partial class RoutePatternParserTests
     <EndOfFile />
   </CompilationUnit>
   <Parameters />
-</Tree>", runReplaceTokens: true);
+</Tree>",
+            runReplaceTokens: true
+        );
     }
 
     [Fact]
     public void TestIncompleteReplacement()
     {
-        Test(@"""[controller""", @"<Tree>
+        Test(
+            @"""[controller""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Replacement>
@@ -63,13 +73,17 @@ public partial class RoutePatternParserTests
     <Diagnostic Message=""A replacement token is not closed."" Span=""[20..20)"" Text="""" />
   </Diagnostics>
   <Parameters />
-</Tree>", runReplaceTokens: true);
+</Tree>",
+            runReplaceTokens: true
+        );
     }
 
     [Fact]
     public void TestOpenBracketInReplacement()
     {
-        Test(@"""[cont[controller]""", @"<Tree>
+        Test(
+            @"""[cont[controller]""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Replacement>
@@ -84,13 +98,17 @@ public partial class RoutePatternParserTests
     <Diagnostic Message=""An unescaped '[' token is not allowed inside of a replacement token. Use '[[' to escape."" Span=""[10..25)"" Text=""cont[controller"" />
   </Diagnostics>
   <Parameters />
-</Tree>", runReplaceTokens: true);
+</Tree>",
+            runReplaceTokens: true
+        );
     }
 
     [Fact]
     public void TestEmptyReplacement()
     {
-        Test(@"""[]""", @"<Tree>
+        Test(
+            @"""[]""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Replacement>
@@ -105,13 +123,17 @@ public partial class RoutePatternParserTests
     <Diagnostic Message=""An empty replacement token ('[]') is not allowed."" Span=""[10..11)"" Text=""]"" />
   </Diagnostics>
   <Parameters />
-</Tree>", runReplaceTokens: true);
+</Tree>",
+            runReplaceTokens: true
+        );
     }
 
     [Fact]
     public void TestEndReplacement()
     {
-        Test(@"""]""", @"<Tree>
+        Test(
+            @"""]""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -124,13 +146,17 @@ public partial class RoutePatternParserTests
     <Diagnostic Message=""Token delimiters ('[', ']') are imbalanced."" Span=""[9..10)"" Text=""]"" />
   </Diagnostics>
   <Parameters />
-</Tree>", runReplaceTokens: true);
+</Tree>",
+            runReplaceTokens: true
+        );
     }
 
     [Fact]
     public void TestRepeatedReplacement()
     {
-        Test(@"""[one][two]""", @"<Tree>
+        Test(
+            @"""[one][two]""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Replacement>
@@ -147,13 +173,17 @@ public partial class RoutePatternParserTests
     <EndOfFile />
   </CompilationUnit>
   <Parameters />
-</Tree>", runReplaceTokens: true);
+</Tree>",
+            runReplaceTokens: true
+        );
     }
 
     [Fact]
     public void TestMultipleReplacements()
     {
-        Test(@"""[controller]/[action]""", @"<Tree>
+        Test(
+            @"""[controller]/[action]""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Replacement>
@@ -175,13 +205,17 @@ public partial class RoutePatternParserTests
     <EndOfFile />
   </CompilationUnit>
   <Parameters />
-</Tree>", runReplaceTokens: true);
+</Tree>",
+            runReplaceTokens: true
+        );
     }
 
     [Fact]
     public void TestReplacementThenEscapedBracket()
     {
-        Test(@"""[controller][[""", @"<Tree>
+        Test(
+            @"""[controller][[""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Replacement>
@@ -196,13 +230,17 @@ public partial class RoutePatternParserTests
     <EndOfFile />
   </CompilationUnit>
   <Parameters />
-</Tree>", runReplaceTokens: true);
+</Tree>",
+            runReplaceTokens: true
+        );
     }
 
     [Fact]
     public void TestLiteralThenReplacement()
     {
-        Test(@"""thisisSomeText[action]""", @"<Tree>
+        Test(
+            @"""thisisSomeText[action]""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -217,13 +255,17 @@ public partial class RoutePatternParserTests
     <EndOfFile />
   </CompilationUnit>
   <Parameters />
-</Tree>", runReplaceTokens: true);
+</Tree>",
+            runReplaceTokens: true
+        );
     }
 
     [Fact]
     public void TestMultipleTokenEscapes()
     {
-        Test(@"""[[-]][[/[[controller]]""", @"<Tree>
+        Test(
+            @"""[[-]][[/[[controller]]""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -241,13 +283,18 @@ public partial class RoutePatternParserTests
     <EndOfFile />
   </CompilationUnit>
   <Parameters />
-</Tree>", runReplaceTokens: true, allowDiagnosticsMismatch: true);
+</Tree>",
+            runReplaceTokens: true,
+            allowDiagnosticsMismatch: true
+        );
     }
 
     [Fact]
     public void TestReplacementContainingEscapedBackets()
     {
-        Test(@"""[contr[[oller]/[act]]ion]""", @"<Tree>
+        Test(
+            @"""[contr[[oller]/[act]]ion]""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Replacement>
@@ -269,13 +316,18 @@ public partial class RoutePatternParserTests
     <EndOfFile />
   </CompilationUnit>
   <Parameters />
-</Tree>", runReplaceTokens: true, allowDiagnosticsMismatch: true);
+</Tree>",
+            runReplaceTokens: true,
+            allowDiagnosticsMismatch: true
+        );
     }
 
     [Fact]
     public void TestReplacementContainingBraces()
     {
-        Test(@"""[contr}oller]/[act{ion]/{id}""", @"<Tree>
+        Test(
+            @"""[contr}oller]/[act{ion]/{id}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Replacement>
@@ -311,13 +363,18 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""id"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>", runReplaceTokens: true, allowDiagnosticsMismatch: true);
+</Tree>",
+            runReplaceTokens: true,
+            allowDiagnosticsMismatch: true
+        );
     }
 
     [Fact]
     public void TestReplacementInEscapedBrackets()
     {
-        Test(@"""[controller]/[[[action]]]/id""", @"<Tree>
+        Test(
+            @"""[controller]/[[[action]]]/id""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Replacement>
@@ -353,13 +410,18 @@ public partial class RoutePatternParserTests
     <EndOfFile />
   </CompilationUnit>
   <Parameters />
-</Tree>", runReplaceTokens: true, allowDiagnosticsMismatch: true);
+</Tree>",
+            runReplaceTokens: true,
+            allowDiagnosticsMismatch: true
+        );
     }
 
     [Fact]
     public void TestReplacementInEscapedBrackets2()
     {
-        Test(@"""[controller]/[[[[[action]]]]]/id""", @"<Tree>
+        Test(
+            @"""[controller]/[[[[[action]]]]]/id""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Replacement>
@@ -395,13 +457,18 @@ public partial class RoutePatternParserTests
     <EndOfFile />
   </CompilationUnit>
   <Parameters />
-</Tree>", runReplaceTokens: true, allowDiagnosticsMismatch: true);
+</Tree>",
+            runReplaceTokens: true,
+            allowDiagnosticsMismatch: true
+        );
     }
 
     [Fact]
     public void TestReplacementInEscapedBrackets3()
     {
-        Test(@"""[controller]/[[[[[[[action]]]]]]]/id""", @"<Tree>
+        Test(
+            @"""[controller]/[[[[[[[action]]]]]]]/id""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Replacement>
@@ -437,13 +504,18 @@ public partial class RoutePatternParserTests
     <EndOfFile />
   </CompilationUnit>
   <Parameters />
-</Tree>", runReplaceTokens: true, allowDiagnosticsMismatch: true);
+</Tree>",
+            runReplaceTokens: true,
+            allowDiagnosticsMismatch: true
+        );
     }
 
     [Fact]
     public void TestReplacementInEscapedBrackets4()
     {
-        Test(@"""[controller]/[[[[[action]]]]]]]/id""", @"<Tree>
+        Test(
+            @"""[controller]/[[[[[action]]]]]]]/id""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Replacement>
@@ -479,13 +551,18 @@ public partial class RoutePatternParserTests
     <EndOfFile />
   </CompilationUnit>
   <Parameters />
-</Tree>", runReplaceTokens: true, allowDiagnosticsMismatch: true);
+</Tree>",
+            runReplaceTokens: true,
+            allowDiagnosticsMismatch: true
+        );
     }
 
     [Fact]
     public void TestOpenBracketInLiteral()
     {
-        Test(@"""controller]""", @"<Tree>
+        Test(
+            @"""controller]""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -498,6 +575,8 @@ public partial class RoutePatternParserTests
     <Diagnostic Message=""Token delimiters ('[', ']') are imbalanced."" Span=""[9..20)"" Text=""controller]"" />
   </Diagnostics>
   <Parameters />
-</Tree>", runReplaceTokens: true);
+</Tree>",
+            runReplaceTokens: true
+        );
     }
 }

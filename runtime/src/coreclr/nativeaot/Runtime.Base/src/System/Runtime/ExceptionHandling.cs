@@ -16,22 +16,19 @@ namespace System.Runtime
     public enum RhFailFastReason
     {
         Unknown = 0,
-        InternalError = 1,                                   // "Runtime internal error"
-        UnhandledException_ExceptionDispatchNotAllowed = 2,  // "Unhandled exception: no handler found before escaping a finally clause or other fail-fast scope."
-        UnhandledException_CallerDidNotHandle = 3,           // "Unhandled exception: no handler found in calling method."
-        ClassLibDidNotTranslateExceptionID = 4,              // "Unable to translate failure into a classlib-specific exception object."
-        UnhandledException = 5,                              // "unhandled exception"
-        UnhandledExceptionFromPInvoke = 6,                   // "Unhandled exception: an unmanaged exception was thrown out of a managed-to-native transition."
+        InternalError = 1, // "Runtime internal error"
+        UnhandledException_ExceptionDispatchNotAllowed = 2, // "Unhandled exception: no handler found before escaping a finally clause or other fail-fast scope."
+        UnhandledException_CallerDidNotHandle = 3, // "Unhandled exception: no handler found in calling method."
+        ClassLibDidNotTranslateExceptionID = 4, // "Unable to translate failure into a classlib-specific exception object."
+        UnhandledException = 5, // "unhandled exception"
+        UnhandledExceptionFromPInvoke = 6, // "Unhandled exception: an unmanaged exception was thrown out of a managed-to-native transition."
     }
 
     internal static unsafe partial class EH
     {
         internal static UIntPtr MaxSP
         {
-            get
-            {
-                return (UIntPtr)(void*)(-1);
-            }
+            get { return (UIntPtr)(void*)(-1); }
         }
 
         private enum RhEHClauseKind
@@ -60,8 +57,7 @@ namespace System.Runtime
             ///</summary>
             public bool ContainsCodeOffset(uint codeOffset)
             {
-                return ((codeOffset >= _tryStartOffset) &&
-                        (codeOffset < _tryEndOffset));
+                return ((codeOffset >= _tryStartOffset) && (codeOffset < _tryEndOffset));
             }
         }
 
@@ -82,13 +78,19 @@ namespace System.Runtime
         // Given an address pointing somewhere into a managed module, get the classlib-defined fail-fast
         // function and invoke it.  Any failure to find and invoke the function, or if it returns, results in
         // MRT-defined fail-fast behavior.
-        internal static void FailFastViaClasslib(RhFailFastReason reason, object unhandledException,
-            IntPtr classlibAddress)
+        internal static void FailFastViaClasslib(
+            RhFailFastReason reason,
+            object unhandledException,
+            IntPtr classlibAddress
+        )
         {
             // Find the classlib function that will fail fast. This is a RuntimeExport function from the
             // classlib module, and is therefore managed-callable.
-            IntPtr pFailFastFunction = (IntPtr)InternalCalls.RhpGetClasslibFunctionFromCodeAddress(classlibAddress,
-                                                                           ClassLibFunctionId.FailFast);
+            IntPtr pFailFastFunction = (IntPtr)
+                InternalCalls.RhpGetClasslibFunctionFromCodeAddress(
+                    classlibAddress,
+                    ClassLibFunctionId.FailFast
+                );
 
             if (pFailFastFunction == IntPtr.Zero)
             {
@@ -99,8 +101,12 @@ namespace System.Runtime
             try
             {
                 // Invoke the classlib fail fast function.
-                ((delegate*<RhFailFastReason, object, IntPtr, IntPtr, void>)pFailFastFunction)
-                    (reason, unhandledException, IntPtr.Zero, IntPtr.Zero);
+                ((delegate* <RhFailFastReason, object, IntPtr, IntPtr, void>)pFailFastFunction)(
+                    reason,
+                    unhandledException,
+                    IntPtr.Zero,
+                    IntPtr.Zero
+                );
             }
             catch when (true)
             {
@@ -122,9 +128,7 @@ namespace System.Runtime
 #else
         [StructLayout(LayoutKind.Explicit, Size = 0x10)] // this is small enough that it should trip an assert in RhpCopyContextFromExInfo
 #endif
-        private struct OSCONTEXT
-        {
-        }
+        private struct OSCONTEXT { }
 
         internal static unsafe void* PointerAlign(void* ptr, int alignmentInBytes)
         {
@@ -138,8 +142,11 @@ namespace System.Runtime
 
         private static void OnFirstChanceExceptionViaClassLib(object exception)
         {
-            IntPtr pOnFirstChanceFunction =
-                (IntPtr)InternalCalls.RhpGetClasslibFunctionFromEEType(exception.GetMethodTable(), ClassLibFunctionId.OnFirstChance);
+            IntPtr pOnFirstChanceFunction = (IntPtr)
+                InternalCalls.RhpGetClasslibFunctionFromEEType(
+                    exception.GetMethodTable(),
+                    ClassLibFunctionId.OnFirstChance
+                );
 
             if (pOnFirstChanceFunction == IntPtr.Zero)
             {
@@ -148,7 +155,7 @@ namespace System.Runtime
 
             try
             {
-                ((delegate*<object, void>)pOnFirstChanceFunction)(exception);
+                ((delegate* <object, void>)pOnFirstChanceFunction)(exception);
             }
             catch when (true)
             {
@@ -158,8 +165,11 @@ namespace System.Runtime
 
         private static void OnUnhandledExceptionViaClassLib(object exception)
         {
-            IntPtr pOnUnhandledExceptionFunction =
-                (IntPtr)InternalCalls.RhpGetClasslibFunctionFromEEType(exception.GetMethodTable(), ClassLibFunctionId.OnUnhandledException);
+            IntPtr pOnUnhandledExceptionFunction = (IntPtr)
+                InternalCalls.RhpGetClasslibFunctionFromEEType(
+                    exception.GetMethodTable(),
+                    ClassLibFunctionId.OnUnhandledException
+                );
 
             if (pOnUnhandledExceptionFunction == IntPtr.Zero)
             {
@@ -168,7 +178,7 @@ namespace System.Runtime
 
             try
             {
-                ((delegate*<object, void>)pOnUnhandledExceptionFunction)(exception);
+                ((delegate* <object, void>)pOnUnhandledExceptionFunction)(exception);
             }
             catch when (true)
             {
@@ -178,17 +188,21 @@ namespace System.Runtime
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         internal static unsafe void UnhandledExceptionFailFastViaClasslib(
-            RhFailFastReason reason, object unhandledException, IntPtr classlibAddress, ref ExInfo exInfo)
+            RhFailFastReason reason,
+            object unhandledException,
+            IntPtr classlibAddress,
+            ref ExInfo exInfo
+        )
         {
-            IntPtr pFailFastFunction =
-                (IntPtr)InternalCalls.RhpGetClasslibFunctionFromCodeAddress(classlibAddress, ClassLibFunctionId.FailFast);
+            IntPtr pFailFastFunction = (IntPtr)
+                InternalCalls.RhpGetClasslibFunctionFromCodeAddress(
+                    classlibAddress,
+                    ClassLibFunctionId.FailFast
+                );
 
             if (pFailFastFunction == IntPtr.Zero)
             {
-                FailFastViaClasslib(
-                    reason,
-                    unhandledException,
-                    classlibAddress);
+                FailFastViaClasslib(reason, unhandledException, classlibAddress);
             }
 
             // 16-byte align the context.  This is overkill on x86 and ARM, but simplifies things slightly.
@@ -200,8 +214,12 @@ namespace System.Runtime
 
             try
             {
-                ((delegate*<RhFailFastReason, object, IntPtr, void*, void>)pFailFastFunction)
-                    (reason, unhandledException, exInfo._pExContext->IP, pContext);
+                ((delegate* <RhFailFastReason, object, IntPtr, void*, void>)pFailFastFunction)(
+                    reason,
+                    unhandledException,
+                    exInfo._pExContext->IP,
+                    pContext
+                );
             }
             catch when (true)
             {
@@ -218,20 +236,32 @@ namespace System.Runtime
             RH_EH_FIRST_RETHROW_FRAME = 2,
         }
 
-        private static void AppendExceptionStackFrameViaClasslib(object exception, IntPtr ip,
-            ref bool isFirstRethrowFrame, ref bool isFirstFrame)
+        private static void AppendExceptionStackFrameViaClasslib(
+            object exception,
+            IntPtr ip,
+            ref bool isFirstRethrowFrame,
+            ref bool isFirstFrame
+        )
         {
-            IntPtr pAppendStackFrame = (IntPtr)InternalCalls.RhpGetClasslibFunctionFromCodeAddress(ip,
-                ClassLibFunctionId.AppendExceptionStackFrame);
+            IntPtr pAppendStackFrame = (IntPtr)
+                InternalCalls.RhpGetClasslibFunctionFromCodeAddress(
+                    ip,
+                    ClassLibFunctionId.AppendExceptionStackFrame
+                );
 
             if (pAppendStackFrame != IntPtr.Zero)
             {
-                int flags = (isFirstFrame ? (int)RhEHFrameType.RH_EH_FIRST_FRAME : 0) |
-                            (isFirstRethrowFrame ? (int)RhEHFrameType.RH_EH_FIRST_RETHROW_FRAME : 0);
+                int flags =
+                    (isFirstFrame ? (int)RhEHFrameType.RH_EH_FIRST_FRAME : 0)
+                    | (isFirstRethrowFrame ? (int)RhEHFrameType.RH_EH_FIRST_RETHROW_FRAME : 0);
 
                 try
                 {
-                    ((delegate*<object, IntPtr, int, void>)pAppendStackFrame)(exception, ip, flags);
+                    ((delegate* <object, IntPtr, int, void>)pAppendStackFrame)(
+                        exception,
+                        ip,
+                        flags
+                    );
                 }
                 catch when (true)
                 {
@@ -251,14 +281,17 @@ namespace System.Runtime
         {
             // Find the classlib function that will give us the exception object we want to throw. This
             // is a RuntimeExport function from the classlib module, and is therefore managed-callable.
-            IntPtr pGetRuntimeExceptionFunction =
-                (IntPtr)InternalCalls.RhpGetClasslibFunctionFromCodeAddress(address, ClassLibFunctionId.GetRuntimeException);
+            IntPtr pGetRuntimeExceptionFunction = (IntPtr)
+                InternalCalls.RhpGetClasslibFunctionFromCodeAddress(
+                    address,
+                    ClassLibFunctionId.GetRuntimeException
+                );
 
             // Return the exception object we get from the classlib.
             Exception? e = null;
             try
             {
-                e = ((delegate*<ExceptionIDs, Exception>)pGetRuntimeExceptionFunction)(id);
+                e = ((delegate* <ExceptionIDs, Exception>)pGetRuntimeExceptionFunction)(id);
             }
             catch when (true)
             {
@@ -271,7 +304,8 @@ namespace System.Runtime
                 FailFastViaClasslib(
                     RhFailFastReason.ClassLibDidNotTranslateExceptionID,
                     null,
-                    address);
+                    address
+                );
             }
 
             return e;
@@ -280,21 +314,28 @@ namespace System.Runtime
         // Given an ExceptionID and an MethodTable address, get an exception object of a type that the module containing
         // the given address will understand. This finds the classlib-defined GetRuntimeException function and asks
         // it for the exception object.
-        internal static Exception GetClasslibExceptionFromEEType(ExceptionIDs id, MethodTable* pEEType)
+        internal static Exception GetClasslibExceptionFromEEType(
+            ExceptionIDs id,
+            MethodTable* pEEType
+        )
         {
             // Find the classlib function that will give us the exception object we want to throw. This
             // is a RuntimeExport function from the classlib module, and is therefore managed-callable.
             IntPtr pGetRuntimeExceptionFunction = IntPtr.Zero;
             if (pEEType != null)
             {
-                pGetRuntimeExceptionFunction = (IntPtr)InternalCalls.RhpGetClasslibFunctionFromEEType(pEEType, ClassLibFunctionId.GetRuntimeException);
+                pGetRuntimeExceptionFunction = (IntPtr)
+                    InternalCalls.RhpGetClasslibFunctionFromEEType(
+                        pEEType,
+                        ClassLibFunctionId.GetRuntimeException
+                    );
             }
 
             // Return the exception object we get from the classlib.
             Exception? e = null;
             try
             {
-                e = ((delegate*<ExceptionIDs, Exception>)pGetRuntimeExceptionFunction)(id);
+                e = ((delegate* <ExceptionIDs, Exception>)pGetRuntimeExceptionFunction)(id);
             }
             catch when (true)
             {
@@ -307,7 +348,8 @@ namespace System.Runtime
                 FailFastViaClasslib(
                     RhFailFastReason.ClassLibDidNotTranslateExceptionID,
                     null,
-                    (IntPtr)pEEType);
+                    (IntPtr)pEEType
+                );
             }
 
             return e;
@@ -445,10 +487,7 @@ namespace System.Runtime
 
             internal object ThrownException
             {
-                get
-                {
-                    return _exception;
-                }
+                get { return _exception; }
             }
 
             [FieldOffset(AsmOffsets.OFFSETOF__ExInfo__m_pPrevExInfo)]
@@ -458,7 +497,7 @@ namespace System.Runtime
             internal PAL_LIMITED_CONTEXT* _pExContext;
 
             [FieldOffset(AsmOffsets.OFFSETOF__ExInfo__m_exception)]
-            private object _exception;  // actual object reference, specially reported by GcScanRootsWorker
+            private object _exception; // actual object reference, specially reported by GcScanRootsWorker
 
             [FieldOffset(AsmOffsets.OFFSETOF__ExInfo__m_kind)]
             internal ExKind _kind;
@@ -563,7 +602,10 @@ namespace System.Runtime
             if (exceptionObj == null)
             {
                 IntPtr faultingCodeAddress = exInfo._pExContext->IP;
-                exceptionObj = GetClasslibException(ExceptionIDs.NullReference, faultingCodeAddress);
+                exceptionObj = GetClasslibException(
+                    ExceptionIDs.NullReference,
+                    faultingCodeAddress
+                );
             }
 
             exInfo.Init(exceptionObj);
@@ -588,7 +630,11 @@ namespace System.Runtime
             FallbackFailFast(RhFailFastReason.InternalError, null);
         }
 
-        private static void DispatchEx(scoped ref StackFrameIterator frameIter, ref ExInfo exInfo, uint startIdx)
+        private static void DispatchEx(
+            scoped ref StackFrameIterator frameIter,
+            ref ExInfo exInfo,
+            uint startIdx
+        )
         {
             Debug.Assert(exInfo._passNumber == 1, "expected asm throw routine to set the pass");
             object exceptionObj = exInfo.ThrownException;
@@ -610,7 +656,10 @@ namespace System.Runtime
             UIntPtr prevFramePtr = UIntPtr.Zero;
             bool unwoundReversePInvoke = false;
 
-            bool isValid = frameIter.Init(exInfo._pExContext, (exInfo._kind & ExKind.InstructionFaultFlag) != 0);
+            bool isValid = frameIter.Init(
+                exInfo._pExContext,
+                (exInfo._kind & ExKind.InstructionFaultFlag) != 0
+            );
             Debug.Assert(isValid, "RhThrowEx called with an unexpected context");
 
             OnFirstChanceExceptionViaClassLib(exceptionObj);
@@ -627,11 +676,25 @@ namespace System.Runtime
 
                 DebugScanCallFrame(exInfo._passNumber, frameIter.ControlPC, frameIter.SP);
 
-                UpdateStackTrace(exceptionObj, exInfo._frameIter.FramePointer, (IntPtr)frameIter.OriginalControlPC, ref isFirstRethrowFrame, ref prevFramePtr, ref isFirstFrame);
+                UpdateStackTrace(
+                    exceptionObj,
+                    exInfo._frameIter.FramePointer,
+                    (IntPtr)frameIter.OriginalControlPC,
+                    ref isFirstRethrowFrame,
+                    ref prevFramePtr,
+                    ref isFirstFrame
+                );
 
                 byte* pHandler;
-                if (FindFirstPassHandler(exceptionObj, startIdx, ref frameIter,
-                                         out catchingTryRegionIdx, out pHandler))
+                if (
+                    FindFirstPassHandler(
+                        exceptionObj,
+                        startIdx,
+                        ref frameIter,
+                        out catchingTryRegionIdx,
+                        out pHandler
+                    )
+                )
                 {
                     handlingFrameSP = frameIter.SP;
                     pCatchHandler = pHandler;
@@ -649,12 +712,16 @@ namespace System.Runtime
                     RhFailFastReason.UnhandledException,
                     exceptionObj,
                     (IntPtr)prevOriginalPC, // IP of the last frame that did not handle the exception
-                    ref exInfo);
+                    ref exInfo
+                );
             }
 
             // We FailFast above if the exception goes unhandled.  Therefore, we cannot run the second pass
             // without a catch handler.
-            Debug.Assert(pCatchHandler != null, "We should have a handler if we're starting the second pass");
+            Debug.Assert(
+                pCatchHandler != null,
+                "We should have a handler if we're starting the second pass"
+            );
 
             // ------------------------------------------------
             //
@@ -671,8 +738,15 @@ namespace System.Runtime
 
             exInfo._passNumber = 2;
             startIdx = MaxTryRegionIdx;
-            isValid = frameIter.Init(exInfo._pExContext, (exInfo._kind & ExKind.InstructionFaultFlag) != 0);
-            for (; isValid && ((byte*)frameIter.SP <= (byte*)handlingFrameSP); isValid = frameIter.Next(&startIdx))
+            isValid = frameIter.Init(
+                exInfo._pExContext,
+                (exInfo._kind & ExKind.InstructionFaultFlag) != 0
+            );
+            for (
+                ;
+                isValid && ((byte*)frameIter.SP <= (byte*)handlingFrameSP);
+                isValid = frameIter.Next(&startIdx)
+            )
             {
                 Debug.Assert(isValid, "second-pass EH unwind failed unexpectedly");
                 DebugScanCallFrame(exInfo._passNumber, frameIter.ControlPC, frameIter.SP);
@@ -681,7 +755,7 @@ namespace System.Runtime
 #if TARGET_ARM64
                     && (frameIter.ControlPC == prevControlPC)
 #endif
-                    )
+                )
                 {
                     // invoke only a partial second-pass here...
                     InvokeSecondPass(ref exInfo, startIdx, catchingTryRegionIdx);
@@ -698,7 +772,11 @@ namespace System.Runtime
             // ------------------------------------------------
             exInfo._idxCurClause = catchingTryRegionIdx;
             InternalCalls.RhpCallCatchFunclet(
-                exceptionObj, pCatchHandler, frameIter.RegisterSet, ref exInfo);
+                exceptionObj,
+                pCatchHandler,
+                frameIter.RegisterSet,
+                ref exInfo
+            );
             // currently, RhpCallCatchFunclet will resume after the catch
             Debug.Assert(false, "unreachable");
             FallbackFailFast(RhFailFastReason.InternalError, null);
@@ -714,12 +792,20 @@ namespace System.Runtime
         private static void DebugVerifyHandlingFrame(UIntPtr handlingFrameSP)
         {
             Debug.Assert(handlingFrameSP != MaxSP, "Handling frame must have an SP value");
-            Debug.Assert(((UIntPtr*)handlingFrameSP) > &handlingFrameSP,
-                "Handling frame must have a valid stack frame pointer");
+            Debug.Assert(
+                ((UIntPtr*)handlingFrameSP) > &handlingFrameSP,
+                "Handling frame must have a valid stack frame pointer"
+            );
         }
 
-        private static void UpdateStackTrace(object exceptionObj, UIntPtr curFramePtr, IntPtr ip,
-            ref bool isFirstRethrowFrame, ref UIntPtr prevFramePtr, ref bool isFirstFrame)
+        private static void UpdateStackTrace(
+            object exceptionObj,
+            UIntPtr curFramePtr,
+            IntPtr ip,
+            ref bool isFirstRethrowFrame,
+            ref UIntPtr prevFramePtr,
+            ref bool isFirstFrame
+        )
         {
             // We use the fact that all funclet stack frames belonging to the same logical method activation
             // will have the same FramePointer value.  Additionally, the stackwalker will return a sequence of
@@ -729,28 +815,44 @@ namespace System.Runtime
             // and corresponds to the current 'IP state' of the method.
             if ((prevFramePtr == UIntPtr.Zero) || (curFramePtr != prevFramePtr))
             {
-                AppendExceptionStackFrameViaClasslib(exceptionObj, ip,
-                    ref isFirstRethrowFrame, ref isFirstFrame);
+                AppendExceptionStackFrameViaClasslib(
+                    exceptionObj,
+                    ip,
+                    ref isFirstRethrowFrame,
+                    ref isFirstFrame
+                );
             }
             prevFramePtr = curFramePtr;
         }
 
-        private static bool FindFirstPassHandler(object exception, uint idxStart,
-            ref StackFrameIterator frameIter, out uint tryRegionIdx, out byte* pHandler)
+        private static bool FindFirstPassHandler(
+            object exception,
+            uint idxStart,
+            ref StackFrameIterator frameIter,
+            out uint tryRegionIdx,
+            out byte* pHandler
+        )
         {
             pHandler = null;
             tryRegionIdx = MaxTryRegionIdx;
 
             EHEnum ehEnum;
             byte* pbMethodStartAddress;
-            if (!InternalCalls.RhpEHEnumInitFromStackFrameIterator(ref frameIter, &pbMethodStartAddress, &ehEnum))
+            if (
+                !InternalCalls.RhpEHEnumInitFromStackFrameIterator(
+                    ref frameIter,
+                    &pbMethodStartAddress,
+                    &ehEnum
+                )
+            )
                 return false;
 
             byte* pbControlPC = frameIter.ControlPC;
 
             uint codeOffset = (uint)(pbControlPC - pbMethodStartAddress);
 
-            uint lastTryStart = 0, lastTryEnd = 0;
+            uint lastTryStart = 0,
+                lastTryEnd = 0;
 
             // Search the clauses for one that contains the current offset.
             RhEHClause ehClause;
@@ -764,13 +866,17 @@ namespace System.Runtime
                 {
                     if (curIdx <= idxStart)
                     {
-                        lastTryStart = ehClause._tryStartOffset; lastTryEnd = ehClause._tryEndOffset;
+                        lastTryStart = ehClause._tryStartOffset;
+                        lastTryEnd = ehClause._tryEndOffset;
                         continue;
                     }
 
                     // Now, we continue skipping while the try region is identical to the one that invoked the
                     // previous dispatch.
-                    if ((ehClause._tryStartOffset == lastTryStart) && (ehClause._tryEndOffset == lastTryEnd))
+                    if (
+                        (ehClause._tryStartOffset == lastTryStart)
+                        && (ehClause._tryEndOffset == lastTryEnd)
+                    )
                         continue;
 
                     // We are done skipping. This is required to handle empty finally block markers that are used
@@ -780,9 +886,12 @@ namespace System.Runtime
 
                 RhEHClauseKind clauseKind = ehClause._clauseKind;
 
-                if (((clauseKind != RhEHClauseKind.RH_EH_CLAUSE_TYPED) &&
-                     (clauseKind != RhEHClauseKind.RH_EH_CLAUSE_FILTER))
-                    || !ehClause.ContainsCodeOffset(codeOffset))
+                if (
+                    (
+                        (clauseKind != RhEHClauseKind.RH_EH_CLAUSE_TYPED)
+                        && (clauseKind != RhEHClauseKind.RH_EH_CLAUSE_FILTER)
+                    ) || !ehClause.ContainsCodeOffset(codeOffset)
+                )
                 {
                     continue;
                 }
@@ -791,7 +900,12 @@ namespace System.Runtime
                 // most containing.
                 if (clauseKind == RhEHClauseKind.RH_EH_CLAUSE_TYPED)
                 {
-                    if (ShouldTypedClauseCatchThisException(exception, (MethodTable*)ehClause._pTargetType))
+                    if (
+                        ShouldTypedClauseCatchThisException(
+                            exception,
+                            (MethodTable*)ehClause._pTargetType
+                        )
+                    )
                     {
                         pHandler = ehClause._handlerAddress;
                         tryRegionIdx = curIdx;
@@ -801,8 +915,11 @@ namespace System.Runtime
                 else
                 {
                     byte* pFilterFunclet = ehClause._filterAddress;
-                    bool shouldInvokeHandler =
-                        InternalCalls.RhpCallFilterFunclet(exception, pFilterFunclet, frameIter.RegisterSet);
+                    bool shouldInvokeHandler = InternalCalls.RhpCallFilterFunclet(
+                        exception,
+                        pFilterFunclet,
+                        frameIter.RegisterSet
+                    );
 
                     if (shouldInvokeHandler)
                     {
@@ -840,8 +957,10 @@ namespace System.Runtime
         }
 #endif // DEBUG && !INPLACE_RUNTIME
 
-
-        private static bool ShouldTypedClauseCatchThisException(object exception, MethodTable* pClauseType)
+        private static bool ShouldTypedClauseCatchThisException(
+            object exception,
+            MethodTable* pClauseType
+        )
         {
 #if DEBUG && !INPLACE_RUNTIME
             AssertNotRuntimeObject(pClauseType);
@@ -854,22 +973,34 @@ namespace System.Runtime
         {
             InvokeSecondPass(ref exInfo, idxStart, MaxTryRegionIdx);
         }
+
         private static void InvokeSecondPass(ref ExInfo exInfo, uint idxStart, uint idxLimit)
         {
             EHEnum ehEnum;
             byte* pbMethodStartAddress;
-            if (!InternalCalls.RhpEHEnumInitFromStackFrameIterator(ref exInfo._frameIter, &pbMethodStartAddress, &ehEnum))
+            if (
+                !InternalCalls.RhpEHEnumInitFromStackFrameIterator(
+                    ref exInfo._frameIter,
+                    &pbMethodStartAddress,
+                    &ehEnum
+                )
+            )
                 return;
 
             byte* pbControlPC = exInfo._frameIter.ControlPC;
 
             uint codeOffset = (uint)(pbControlPC - pbMethodStartAddress);
 
-            uint lastTryStart = 0, lastTryEnd = 0;
+            uint lastTryStart = 0,
+                lastTryEnd = 0;
 
             // Search the clauses for one that contains the current offset.
             RhEHClause ehClause;
-            for (uint curIdx = 0; InternalCalls.RhpEHEnumNext(&ehEnum, &ehClause) && curIdx < idxLimit; curIdx++)
+            for (
+                uint curIdx = 0;
+                InternalCalls.RhpEHEnumNext(&ehEnum, &ehClause) && curIdx < idxLimit;
+                curIdx++
+            )
             {
                 //
                 // Skip to the starting try region.  This is used by collided unwinds and rethrows to pickup where
@@ -879,13 +1010,17 @@ namespace System.Runtime
                 {
                     if (curIdx <= idxStart)
                     {
-                        lastTryStart = ehClause._tryStartOffset; lastTryEnd = ehClause._tryEndOffset;
+                        lastTryStart = ehClause._tryStartOffset;
+                        lastTryEnd = ehClause._tryEndOffset;
                         continue;
                     }
 
                     // Now, we continue skipping while the try region is identical to the one that invoked the
                     // previous dispatch.
-                    if ((ehClause._tryStartOffset == lastTryStart) && (ehClause._tryEndOffset == lastTryEnd))
+                    if (
+                        (ehClause._tryStartOffset == lastTryStart)
+                        && (ehClause._tryEndOffset == lastTryEnd)
+                    )
                         continue;
 
                     // We are done skipping. This is required to handle empty finally block markers that are used
@@ -895,8 +1030,10 @@ namespace System.Runtime
 
                 RhEHClauseKind clauseKind = ehClause._clauseKind;
 
-                if ((clauseKind != RhEHClauseKind.RH_EH_CLAUSE_FAULT)
-                    || !ehClause.ContainsCodeOffset(codeOffset))
+                if (
+                    (clauseKind != RhEHClauseKind.RH_EH_CLAUSE_FAULT)
+                    || !ehClause.ContainsCodeOffset(codeOffset)
+                )
                 {
                     continue;
                 }
@@ -921,15 +1058,35 @@ namespace System.Runtime
             }
         }
 
-        [UnmanagedCallersOnly(EntryPoint = "RhpFailFastForPInvokeExceptionPreemp", CallConvs = new Type[] { typeof(CallConvCdecl) })]
-        public static void RhpFailFastForPInvokeExceptionPreemp(IntPtr PInvokeCallsiteReturnAddr, void* pExceptionRecord, void* pContextRecord)
+        [UnmanagedCallersOnly(
+            EntryPoint = "RhpFailFastForPInvokeExceptionPreemp",
+            CallConvs = new Type[] { typeof(CallConvCdecl) }
+        )]
+        public static void RhpFailFastForPInvokeExceptionPreemp(
+            IntPtr PInvokeCallsiteReturnAddr,
+            void* pExceptionRecord,
+            void* pContextRecord
+        )
         {
-            FailFastViaClasslib(RhFailFastReason.UnhandledExceptionFromPInvoke, null, PInvokeCallsiteReturnAddr);
+            FailFastViaClasslib(
+                RhFailFastReason.UnhandledExceptionFromPInvoke,
+                null,
+                PInvokeCallsiteReturnAddr
+            );
         }
+
         [RuntimeExport("RhpFailFastForPInvokeExceptionCoop")]
-        public static void RhpFailFastForPInvokeExceptionCoop(IntPtr classlibBreadcrumb, void* pExceptionRecord, void* pContextRecord)
+        public static void RhpFailFastForPInvokeExceptionCoop(
+            IntPtr classlibBreadcrumb,
+            void* pExceptionRecord,
+            void* pContextRecord
+        )
         {
-            FailFastViaClasslib(RhFailFastReason.UnhandledExceptionFromPInvoke, null, classlibBreadcrumb);
+            FailFastViaClasslib(
+                RhFailFastReason.UnhandledExceptionFromPInvoke,
+                null,
+                classlibBreadcrumb
+            );
         }
     } // static class EH
 }

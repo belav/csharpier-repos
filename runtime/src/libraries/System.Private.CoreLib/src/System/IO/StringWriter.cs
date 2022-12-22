@@ -19,23 +19,17 @@ namespace System.IO
 
         // Constructs a new StringWriter. A new StringBuilder is automatically
         // created and associated with the new StringWriter.
-        public StringWriter()
-            : this(new StringBuilder(), CultureInfo.CurrentCulture)
-        {
-        }
+        public StringWriter() : this(new StringBuilder(), CultureInfo.CurrentCulture) { }
 
         public StringWriter(IFormatProvider? formatProvider)
-            : this(new StringBuilder(), formatProvider)
-        {
-        }
+            : this(new StringBuilder(), formatProvider) { }
 
         // Constructs a new StringWriter that writes to the given StringBuilder.
         //
-        public StringWriter(StringBuilder sb) : this(sb, CultureInfo.CurrentCulture)
-        {
-        }
+        public StringWriter(StringBuilder sb) : this(sb, CultureInfo.CurrentCulture) { }
 
-        public StringWriter(StringBuilder sb, IFormatProvider? formatProvider) : base(formatProvider)
+        public StringWriter(StringBuilder sb, IFormatProvider? formatProvider)
+            : base(formatProvider)
         {
             ArgumentNullException.ThrowIfNull(sb);
 
@@ -55,7 +49,6 @@ namespace System.IO
             _isOpen = false;
             base.Dispose(disposing);
         }
-
 
         public override Encoding Encoding => s_encoding ??= new UnicodeEncoding(false, false);
 
@@ -91,11 +84,17 @@ namespace System.IO
 
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             if (buffer.Length - index < count)
             {
@@ -219,7 +218,10 @@ namespace System.IO
             return Task.CompletedTask;
         }
 
-        public override Task WriteAsync(ReadOnlyMemory<char> buffer, CancellationToken cancellationToken = default)
+        public override Task WriteAsync(
+            ReadOnlyMemory<char> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -230,7 +232,10 @@ namespace System.IO
             return Task.CompletedTask;
         }
 
-        public override Task WriteAsync(StringBuilder? value, CancellationToken cancellationToken = default)
+        public override Task WriteAsync(
+            StringBuilder? value,
+            CancellationToken cancellationToken = default
+        )
         {
             if (GetType() != typeof(StringWriter))
             {
@@ -265,7 +270,10 @@ namespace System.IO
             return Task.CompletedTask;
         }
 
-        public override Task WriteLineAsync(StringBuilder? value, CancellationToken cancellationToken = default)
+        public override Task WriteLineAsync(
+            StringBuilder? value,
+            CancellationToken cancellationToken = default
+        )
         {
             if (GetType() != typeof(StringWriter))
             {
@@ -295,7 +303,10 @@ namespace System.IO
             return Task.CompletedTask;
         }
 
-        public override Task WriteLineAsync(ReadOnlyMemory<char> buffer, CancellationToken cancellationToken = default)
+        public override Task WriteLineAsync(
+            ReadOnlyMemory<char> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {

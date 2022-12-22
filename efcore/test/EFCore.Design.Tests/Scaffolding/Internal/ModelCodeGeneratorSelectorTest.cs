@@ -12,10 +12,10 @@ public class ModelCodeGeneratorSelectorTest
     {
         var expected = new TestModelCodeGenerator("C#");
         var selector = new ModelCodeGeneratorSelector(
-            new[] { new TestModelCodeGenerator("C#"), expected });
+            new[] { new TestModelCodeGenerator("C#"), expected }
+        );
 
-        var result = selector.Select(
-            new ModelCodeGenerationOptions { Language = "C#" });
+        var result = selector.Select(new ModelCodeGenerationOptions { Language = "C#" });
 
         Assert.Same(expected, result);
     }
@@ -23,14 +23,15 @@ public class ModelCodeGeneratorSelectorTest
     [ConditionalFact]
     public void Select_throws_when_no_service_for_language()
     {
-        var selector = new ModelCodeGeneratorSelector(
-            new[] { new TestModelCodeGenerator("C#") });
+        var selector = new ModelCodeGeneratorSelector(new[] { new TestModelCodeGenerator("C#") });
         var options = new ModelCodeGenerationOptions { Language = "VB" };
 
-        var ex = Assert.Throws<OperationException>(
-            () => selector.Select(options));
+        var ex = Assert.Throws<OperationException>(() => selector.Select(options));
 
-        Assert.Equal(DesignStrings.NoLanguageService("VB", nameof(IModelCodeGenerator)), ex.Message);
+        Assert.Equal(
+            DesignStrings.NoLanguageService("VB", nameof(IModelCodeGenerator)),
+            ex.Message
+        );
     }
 
     [ConditionalFact]
@@ -44,10 +45,16 @@ public class ModelCodeGeneratorSelectorTest
                 expected,
                 new TestTemplatedModelGenerator(hasTemplates: false),
                 new TestModelCodeGenerator("C#")
-            });
+            }
+        );
 
         var result = selector.Select(
-            new ModelCodeGenerationOptions { Language = "C#", ProjectDir = Directory.GetCurrentDirectory() });
+            new ModelCodeGenerationOptions
+            {
+                Language = "C#",
+                ProjectDir = Directory.GetCurrentDirectory()
+            }
+        );
 
         Assert.Same(expected, result);
     }
@@ -57,26 +64,32 @@ public class ModelCodeGeneratorSelectorTest
     {
         var expected = new TestModelCodeGenerator("C#");
         var selector = new ModelCodeGeneratorSelector(
-            new IModelCodeGenerator[] { new TestTemplatedModelGenerator(hasTemplates: false), new TestModelCodeGenerator("C#"), expected });
+            new IModelCodeGenerator[]
+            {
+                new TestTemplatedModelGenerator(hasTemplates: false),
+                new TestModelCodeGenerator("C#"),
+                expected
+            }
+        );
 
-        var result = selector.Select(
-            new ModelCodeGenerationOptions { Language = "C#" });
+        var result = selector.Select(new ModelCodeGenerationOptions { Language = "C#" });
 
         Assert.Same(expected, result);
     }
 
     private class TestModelCodeGenerator : ModelCodeGenerator
     {
-        public TestModelCodeGenerator(string language)
-            : base(new ModelCodeGeneratorDependencies())
+        public TestModelCodeGenerator(string language) : base(new ModelCodeGeneratorDependencies())
         {
             Language = language;
         }
 
         public override string Language { get; }
 
-        public override ScaffoldedModel GenerateModel(IModel model, ModelCodeGenerationOptions options)
-            => throw new NotImplementedException();
+        public override ScaffoldedModel GenerateModel(
+            IModel model,
+            ModelCodeGenerationOptions options
+        ) => throw new NotImplementedException();
     }
 
     private class TestTemplatedModelGenerator : TemplatedModelGenerator
@@ -89,10 +102,11 @@ public class ModelCodeGeneratorSelectorTest
             _hasTemplates = hasTemplates;
         }
 
-        public override ScaffoldedModel GenerateModel(IModel model, ModelCodeGenerationOptions options)
-            => throw new NotImplementedException();
+        public override ScaffoldedModel GenerateModel(
+            IModel model,
+            ModelCodeGenerationOptions options
+        ) => throw new NotImplementedException();
 
-        public override bool HasTemplates(string projectDir)
-            => _hasTemplates;
+        public override bool HasTemplates(string projectDir) => _hasTemplates;
     }
 }

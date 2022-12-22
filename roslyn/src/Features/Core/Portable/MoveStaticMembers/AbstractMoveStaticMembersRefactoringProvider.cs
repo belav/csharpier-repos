@@ -17,13 +17,16 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
 {
     internal abstract class AbstractMoveStaticMembersRefactoringProvider : CodeRefactoringProvider
     {
-        protected abstract Task<ImmutableArray<SyntaxNode>> GetSelectedNodesAsync(CodeRefactoringContext context);
+        protected abstract Task<ImmutableArray<SyntaxNode>> GetSelectedNodesAsync(
+            CodeRefactoringContext context
+        );
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
             var (document, span, cancellationToken) = context;
 
-            var service = document.Project.Solution.Services.GetService<IMoveStaticMembersOptionsService>();
+            var service =
+                document.Project.Solution.Services.GetService<IMoveStaticMembersOptionsService>();
             if (service == null)
             {
                 return;
@@ -35,17 +38,29 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                 return;
             }
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (semanticModel == null)
             {
                 return;
             }
 
             var memberNodeSymbolPairs = selectedMemberNodes
-                .SelectAsArray(m => (node: m, symbol: semanticModel.GetRequiredDeclaredSymbol(m, cancellationToken)))
+                .SelectAsArray(
+                    m =>
+                        (
+                            node: m,
+                            symbol: semanticModel.GetRequiredDeclaredSymbol(m, cancellationToken)
+                        )
+                )
                 // Use same logic as pull members up for determining if a selected member
                 // is valid to be moved into a base
-                .WhereAsArray(pair => MemberAndDestinationValidator.IsMemberValid(pair.symbol) && pair.symbol.IsStatic);
+                .WhereAsArray(
+                    pair =>
+                        MemberAndDestinationValidator.IsMemberValid(pair.symbol)
+                        && pair.symbol.IsStatic
+                );
 
             if (memberNodeSymbolPairs.IsEmpty)
             {
@@ -64,9 +79,16 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             // we want to use a span which covers all the selected viable member nodes, so that more specific nodes have priority
             var memberSpan = TextSpan.FromBounds(
                 memberNodeSymbolPairs.First().node.FullSpan.Start,
-                memberNodeSymbolPairs.Last().node.FullSpan.End);
+                memberNodeSymbolPairs.Last().node.FullSpan.End
+            );
 
-            var action = new MoveStaticMembersWithDialogCodeAction(document, service, containingType, context.Options, selectedMembers);
+            var action = new MoveStaticMembersWithDialogCodeAction(
+                document,
+                service,
+                containingType,
+                context.Options,
+                selectedMembers
+            );
 
             context.RegisterRefactoring(action, memberSpan);
         }

@@ -24,16 +24,26 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
         private readonly IPdbSourceDocumentLogger? _logger;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code"
+        )]
         public PdbFileLocatorService(
             [Import(AllowDefault = true)] ISourceLinkService? sourceLinkService,
-            [Import(AllowDefault = true)] IPdbSourceDocumentLogger? logger)
+            [Import(AllowDefault = true)] IPdbSourceDocumentLogger? logger
+        )
         {
             _sourceLinkService = sourceLinkService;
             _logger = logger;
         }
 
-        public async Task<DocumentDebugInfoReader?> GetDocumentDebugInfoReaderAsync(string dllPath, bool useDefaultSymbolServers, TelemetryMessage telemetry, CancellationToken cancellationToken)
+        public async Task<DocumentDebugInfoReader?> GetDocumentDebugInfoReaderAsync(
+            string dllPath,
+            bool useDefaultSymbolServers,
+            TelemetryMessage telemetry,
+            CancellationToken cancellationToken
+        )
         {
             var dllStream = IOUtilities.PerformIO(() => ReadFileIfExists(dllPath));
             if (dllStream is null)
@@ -45,7 +55,14 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             try
             {
                 // Try to load the pdb file from disk, or embedded
-                if (peReader.TryOpenAssociatedPortablePdb(dllPath, ReadFileIfExists, out var pdbReaderProvider, out var pdbFilePath))
+                if (
+                    peReader.TryOpenAssociatedPortablePdb(
+                        dllPath,
+                        ReadFileIfExists,
+                        out var pdbReaderProvider,
+                        out var pdbFilePath
+                    )
+                )
                 {
                     Contract.ThrowIfNull(pdbReaderProvider);
 
@@ -73,7 +90,12 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                     {
                         var delay = Task.Delay(SymbolLocatorTimeout, cancellationToken);
                         // Call the debugger to find the PDB from a symbol server etc.
-                        var pdbResultTask = _sourceLinkService.GetPdbFilePathAsync(dllPath, peReader, useDefaultSymbolServers, cancellationToken);
+                        var pdbResultTask = _sourceLinkService.GetPdbFilePathAsync(
+                            dllPath,
+                            peReader,
+                            useDefaultSymbolServers,
+                            cancellationToken
+                        );
 
                         var winner = await Task.WhenAny(pdbResultTask, delay).ConfigureAwait(false);
 
@@ -82,22 +104,29 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                             var pdbResult = await pdbResultTask.ConfigureAwait(false);
                             if (pdbResult is not null)
                             {
-                                pdbStream = IOUtilities.PerformIO(() => File.OpenRead(pdbResult.PdbFilePath));
+                                pdbStream = IOUtilities.PerformIO(
+                                    () => File.OpenRead(pdbResult.PdbFilePath)
+                                );
                                 if (pdbStream is not null)
                                 {
-                                    var readerProvider = MetadataReaderProvider.FromPortablePdbStream(pdbStream);
+                                    var readerProvider =
+                                        MetadataReaderProvider.FromPortablePdbStream(pdbStream);
                                     telemetry.SetPdbSource("symbolserver");
                                     result = new DocumentDebugInfoReader(peReader, readerProvider);
                                     _logger?.Log(FeaturesResources.Found_PDB_on_symbol_server);
                                 }
                                 else
                                 {
-                                    _logger?.Log(FeaturesResources.Found_PDB_on_symbol_server_but_could_not_read_file);
+                                    _logger?.Log(
+                                        FeaturesResources.Found_PDB_on_symbol_server_but_could_not_read_file
+                                    );
                                 }
                             }
                             else
                             {
-                                _logger?.Log(FeaturesResources.Could_not_find_PDB_on_disk_or_embedded_or_server);
+                                _logger?.Log(
+                                    FeaturesResources.Could_not_find_PDB_on_disk_or_embedded_or_server
+                                );
                             }
                         }
                         else

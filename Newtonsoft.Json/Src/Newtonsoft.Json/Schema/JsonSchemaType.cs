@@ -38,7 +38,9 @@ namespace Newtonsoft.Json.Schema
     /// </note>
     /// </summary>
     [Flags]
-    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+    [Obsolete(
+        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details."
+    )]
     public enum JsonSchemaType
     {
         /// <summary>

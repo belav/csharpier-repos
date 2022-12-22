@@ -13,14 +13,14 @@ namespace System.CommandLine.Help
         {
             var output = context.Console.Out.CreateTextWriter();
 
-            var helpContext = new HelpContext(context.BindingContext.HelpBuilder,
-                                              context.ParseResult.CommandResult.Command,
-                                              output,
-                                              context.ParseResult);
+            var helpContext = new HelpContext(
+                context.BindingContext.HelpBuilder,
+                context.ParseResult.CommandResult.Command,
+                output,
+                context.ParseResult
+            );
 
-            context.BindingContext
-                   .HelpBuilder
-                   .Write(helpContext);
+            context.BindingContext.HelpBuilder.Write(helpContext);
         }
     }
 }

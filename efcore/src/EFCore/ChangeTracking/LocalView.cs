@@ -46,13 +46,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 ///     </para>
 /// </remarks>
 /// <typeparam name="TEntity">The type of the entity in the local view.</typeparam>
-public class LocalView<[DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TEntity> :
-    ICollection<TEntity>,
-    INotifyCollectionChanged,
-    INotifyPropertyChanged,
-    INotifyPropertyChanging,
-    IListSource
-    where TEntity : class
+public class LocalView<
+    [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TEntity
+>
+    : ICollection<TEntity>,
+        INotifyCollectionChanged,
+        INotifyPropertyChanged,
+        INotifyPropertyChanging,
+        IListSource where TEntity : class
 {
     private ObservableBackedBindingList<TEntity>? _bindingList;
     private ObservableCollection<TEntity>? _observable;
@@ -103,8 +104,10 @@ public class LocalView<[DynamicallyAccessedMembers(IEntityType.DynamicallyAccess
     private void LocalViewCollectionChanged(object? _, NotifyCollectionChangedEventArgs args)
     {
         Check.DebugAssert(
-            args.Action == NotifyCollectionChangedAction.Add || args.Action == NotifyCollectionChangedAction.Remove,
-            "action is not Add or Remove");
+            args.Action == NotifyCollectionChangedAction.Add
+                || args.Action == NotifyCollectionChangedAction.Remove,
+            "action is not Add or Remove"
+        );
 
         if (_triggeringLocalViewChange)
         {
@@ -117,12 +120,18 @@ public class LocalView<[DynamicallyAccessedMembers(IEntityType.DynamicallyAccess
 
             if (args.Action == NotifyCollectionChangedAction.Remove)
             {
-                Check.DebugAssert(args.OldItems!.Count == 1, $"OldItems.Count is {args.OldItems.Count}");
+                Check.DebugAssert(
+                    args.OldItems!.Count == 1,
+                    $"OldItems.Count is {args.OldItems.Count}"
+                );
                 _observable!.Remove((TEntity)args.OldItems[0]!);
             }
             else
             {
-                Check.DebugAssert(args.NewItems!.Count == 1, $"NewItems.Count is {args.NewItems.Count}");
+                Check.DebugAssert(
+                    args.NewItems!.Count == 1,
+                    $"NewItems.Count is {args.NewItems.Count}"
+                );
                 _observable!.Add((TEntity)args.NewItems[0]!);
             }
         }
@@ -149,8 +158,10 @@ public class LocalView<[DynamicallyAccessedMembers(IEntityType.DynamicallyAccess
             }
             else
             {
-                if (args.Action == NotifyCollectionChangedAction.Remove
-                    || args.Action == NotifyCollectionChangedAction.Replace)
+                if (
+                    args.Action == NotifyCollectionChangedAction.Remove
+                    || args.Action == NotifyCollectionChangedAction.Replace
+                )
                 {
                     foreach (TEntity entity in args.OldItems!)
                     {
@@ -158,8 +169,10 @@ public class LocalView<[DynamicallyAccessedMembers(IEntityType.DynamicallyAccess
                     }
                 }
 
-                if (args.Action == NotifyCollectionChangedAction.Add
-                    || args.Action == NotifyCollectionChangedAction.Replace)
+                if (
+                    args.Action == NotifyCollectionChangedAction.Add
+                    || args.Action == NotifyCollectionChangedAction.Replace
+                )
                 {
                     foreach (TEntity entity in args.NewItems!)
                     {
@@ -179,16 +192,15 @@ public class LocalView<[DynamicallyAccessedMembers(IEntityType.DynamicallyAccess
     ///     that are not marked as deleted.
     /// </summary>
     /// <returns>An enumerator for the collection.</returns>
-    public virtual IEnumerator<TEntity> GetEnumerator()
-        => _context.GetDependencies().StateManager.GetNonDeletedEntities<TEntity>().GetEnumerator();
+    public virtual IEnumerator<TEntity> GetEnumerator() =>
+        _context.GetDependencies().StateManager.GetNonDeletedEntities<TEntity>().GetEnumerator();
 
     /// <summary>
     ///     Returns an <see cref="IEnumerator{T}" /> for all tracked entities of type TEntity
     ///     that are not marked as deleted.
     /// </summary>
     /// <returns>An enumerator for the collection.</returns>
-    IEnumerator IEnumerable.GetEnumerator()
-        => GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     /// <summary>
     ///     Adds a new entity to the <see cref="DbContext" />. If the entity is not being tracked or is currently
@@ -212,8 +224,7 @@ public class LocalView<[DynamicallyAccessedMembers(IEntityType.DynamicallyAccess
         // was wanted in this case.
 
         var entry = _context.GetDependencies().StateManager.GetOrCreateEntry(item, _entityType);
-        if (entry.EntityState == EntityState.Deleted
-            || entry.EntityState == EntityState.Detached)
+        if (entry.EntityState == EntityState.Deleted || entry.EntityState == EntityState.Detached)
         {
             try
             {
@@ -254,7 +265,12 @@ public class LocalView<[DynamicallyAccessedMembers(IEntityType.DynamicallyAccess
     /// </remarks>
     public virtual void Clear()
     {
-        foreach (var entity in _context.GetDependencies().StateManager.GetNonDeletedEntities<TEntity>().ToList())
+        foreach (
+            var entity in _context
+                .GetDependencies()
+                .StateManager.GetNonDeletedEntities<TEntity>()
+                .ToList()
+        )
         {
             Remove(entity);
         }
@@ -291,7 +307,9 @@ public class LocalView<[DynamicallyAccessedMembers(IEntityType.DynamicallyAccess
     /// <param name="arrayIndex">The index into the array to start copying.</param>
     public virtual void CopyTo(TEntity[] array, int arrayIndex)
     {
-        foreach (var entity in _context.GetDependencies().StateManager.GetNonDeletedEntities<TEntity>())
+        foreach (
+            var entity in _context.GetDependencies().StateManager.GetNonDeletedEntities<TEntity>()
+        )
         {
             array[arrayIndex++] = entity;
         }
@@ -317,8 +335,7 @@ public class LocalView<[DynamicallyAccessedMembers(IEntityType.DynamicallyAccess
     public virtual bool Remove(TEntity item)
     {
         var entry = _context.GetDependencies().StateManager.TryGetEntry(item);
-        if (entry != null
-            && entry.EntityState != EntityState.Deleted)
+        if (entry != null && entry.EntityState != EntityState.Deleted)
         {
             try
             {
@@ -354,10 +371,11 @@ public class LocalView<[DynamicallyAccessedMembers(IEntityType.DynamicallyAccess
 
         if (entry.Entity is TEntity entity)
         {
-            var wasIn = previousState != EntityState.Detached
-                && previousState != EntityState.Deleted;
+            var wasIn =
+                previousState != EntityState.Detached && previousState != EntityState.Deleted;
 
-            var isIn = entry.EntityState != EntityState.Detached
+            var isIn =
+                entry.EntityState != EntityState.Detached
                 && entry.EntityState != EntityState.Deleted;
 
             if (wasIn != isIn)
@@ -415,8 +433,7 @@ public class LocalView<[DynamicallyAccessedMembers(IEntityType.DynamicallyAccess
     /// <summary>
     ///     False, since the collection is not read-only.
     /// </summary>
-    public virtual bool IsReadOnly
-        => false;
+    public virtual bool IsReadOnly => false;
 
     /// <summary>
     ///     Occurs when a property of this collection (such as <see cref="Count" />) changes.
@@ -439,31 +456,31 @@ public class LocalView<[DynamicallyAccessedMembers(IEntityType.DynamicallyAccess
     ///     Raises the <see cref="PropertyChanged" /> event.
     /// </summary>
     /// <param name="e">Details of the property that changed.</param>
-    protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
-        => PropertyChanged?.Invoke(this, e);
+    protected virtual void OnPropertyChanged(PropertyChangedEventArgs e) =>
+        PropertyChanged?.Invoke(this, e);
 
     /// <summary>
     ///     Raises the <see cref="PropertyChanging" /> event.
     /// </summary>
     /// <param name="e">Details of the property that is changing.</param>
-    protected virtual void OnPropertyChanging(PropertyChangingEventArgs e)
-        => PropertyChanging?.Invoke(this, e);
+    protected virtual void OnPropertyChanging(PropertyChangingEventArgs e) =>
+        PropertyChanging?.Invoke(this, e);
 
     /// <summary>
     ///     Raises the <see cref="CollectionChanged" /> event.
     /// </summary>
     /// <param name="e">Details of the change.</param>
-    protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
-        => CollectionChanged?.Invoke(this, e);
+    protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e) =>
+        CollectionChanged?.Invoke(this, e);
 
-    private void OnCountPropertyChanged()
-        => OnPropertyChanged(ObservableHashSetSingletons.CountPropertyChanged);
+    private void OnCountPropertyChanged() =>
+        OnPropertyChanged(ObservableHashSetSingletons.CountPropertyChanged);
 
-    private void OnCountPropertyChanging()
-        => OnPropertyChanging(ObservableHashSetSingletons.CountPropertyChanging);
+    private void OnCountPropertyChanging() =>
+        OnPropertyChanging(ObservableHashSetSingletons.CountPropertyChanging);
 
-    private void OnCollectionChanged(NotifyCollectionChangedAction action, object item)
-        => OnCollectionChanged(new NotifyCollectionChangedEventArgs(action, item));
+    private void OnCollectionChanged(NotifyCollectionChangedAction action, object item) =>
+        OnCollectionChanged(new NotifyCollectionChangedEventArgs(action, item));
 
     /// <summary>
     ///     Returns a <see cref="BindingList{T}" /> implementation that stays in sync with this collection.
@@ -475,9 +492,10 @@ public class LocalView<[DynamicallyAccessedMembers(IEntityType.DynamicallyAccess
     /// </remarks>
     /// <returns>The binding list.</returns>
     [RequiresUnreferencedCode(
-        "BindingList raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code.")]
-    public virtual BindingList<TEntity> ToBindingList()
-        => _bindingList ??= new ObservableBackedBindingList<TEntity>(ToObservableCollection());
+        "BindingList raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code."
+    )]
+    public virtual BindingList<TEntity> ToBindingList() =>
+        _bindingList ??= new ObservableBackedBindingList<TEntity>(ToObservableCollection());
 
     /// <summary>
     ///     This method is called by data binding frameworks when attempting to data bind
@@ -490,15 +508,14 @@ public class LocalView<[DynamicallyAccessedMembers(IEntityType.DynamicallyAccess
     /// </remarks>
     /// <exception cref="NotSupportedException">Always thrown.</exception>
     /// <returns>Never returns, always throws an exception.</returns>
-    IList IListSource.GetList()
-        => throw new NotSupportedException(CoreStrings.DataBindingToLocalWithIListSource);
+    IList IListSource.GetList() =>
+        throw new NotSupportedException(CoreStrings.DataBindingToLocalWithIListSource);
 
     /// <summary>
     ///     Gets a value indicating whether the collection is a collection of System.Collections.IList objects.
     ///     Always returns <see langword="false" />.
     /// </summary>
-    bool IListSource.ContainsListCollection
-        => false;
+    bool IListSource.ContainsListCollection => false;
 
     /// <summary>
     ///     Resets this view, clearing any <see cref="IBindingList" /> created with <see cref="ToBindingList" /> and

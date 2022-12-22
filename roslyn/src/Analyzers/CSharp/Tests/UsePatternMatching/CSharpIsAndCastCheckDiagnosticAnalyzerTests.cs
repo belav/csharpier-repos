@@ -22,21 +22,25 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsInlineTypeCheck)]
-    public partial class CSharpIsAndCastCheckDiagnosticAnalyzerTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class CSharpIsAndCastCheckDiagnosticAnalyzerTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public CSharpIsAndCastCheckDiagnosticAnalyzerTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+        public CSharpIsAndCastCheckDiagnosticAnalyzerTests(ITestOutputHelper logger) : base(logger)
+        { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpIsAndCastCheckDiagnosticAnalyzer(), new CSharpIsAndCastCheckCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpIsAndCastCheckDiagnosticAnalyzer(),
+                new CSharpIsAndCastCheckCodeFixProvider()
+            );
 
         [Fact]
         public async Task InlineTypeCheck1()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -46,7 +50,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -54,14 +58,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingInCSharp6()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -70,14 +75,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
             [|var|] v = (string)x;
         }
     }
-}", new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)));
+}",
+                new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp6
+                    )
+                )
+            );
         }
 
         [Fact]
         public async Task TestMissingInWrongName()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -86,14 +97,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
             [|var|] v = (string)y;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingInWrongType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -102,14 +114,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
             [|var|] v = (bool)x;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingOnMultiVar()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -118,14 +131,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
             var [|v|] = (string)x, v1 = "";
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingOnNonDeclaration()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -134,14 +148,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
             [|v|] = (string)x;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingOnAsExpression()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -150,14 +165,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
             [|var|] v = (string)x;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task InlineTypeCheckComplexExpression1()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -167,7 +183,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -175,14 +191,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestInlineTypeCheckWithElse()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -195,7 +212,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -206,14 +223,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestComments1()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -224,7 +242,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         } 
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -233,14 +251,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestComments2()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -250,7 +269,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         } 
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -259,14 +278,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestComments3()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -277,7 +297,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         } 
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -287,14 +307,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(17126, "https://github.com/dotnet/roslyn/issues/17126")]
         public async Task TestComments4()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 namespace N {
     class Program {
         public static void Main()
@@ -311,7 +332,7 @@ namespace N {
         }
     }
 }",
-@"using System;
+                @"using System;
 namespace N {
     class Program {
         public static void Main()
@@ -325,14 +346,15 @@ namespace N {
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task InlineTypeCheckParenthesized1()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -342,7 +364,7 @@ namespace N {
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -350,14 +372,15 @@ namespace N {
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task InlineTypeCheckParenthesized2()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -367,7 +390,7 @@ namespace N {
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -375,14 +398,15 @@ namespace N {
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task InlineTypeCheckParenthesized3()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -392,7 +416,7 @@ namespace N {
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -400,14 +424,15 @@ namespace N {
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task InlineTypeCheckScopeConflict1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -420,14 +445,15 @@ namespace N {
             var v = 1;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task InlineTypeCheckScopeConflict2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -441,14 +467,15 @@ namespace N {
             var v = 1;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task InlineTypeCheckScopeConflict3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -462,14 +489,15 @@ namespace N {
             [|var|] v = (bool)x;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task InlineTypeCheckScopeNonConflict1()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -485,7 +513,7 @@ namespace N {
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -499,14 +527,15 @@ namespace N {
             var v = 1;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(18053, "https://github.com/dotnet/roslyn/issues/18053")]
         public async Task TestMissingWhenTypesDoNotMatch()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class SyntaxNode
+                @"class SyntaxNode
 {
     public SyntaxNode Parent;
 }
@@ -530,14 +559,15 @@ public static class C
             parent = parent.Parent;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(429612, "https://devdiv.visualstudio.com/DevDiv/_workitems/edit/429612")]
         public async Task TestMissingWithNullableType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public object Convert(object value)
@@ -549,14 +579,15 @@ class C
 
         return null;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(21172, "https://github.com/dotnet/roslyn/issues/21172")]
         public async Task TestMissingWithDynamic()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public object Convert(object value)
@@ -568,15 +599,15 @@ class C
 
         return null;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestSeverity()
         {
             var source =
-
-@"class C
+                @"class C
 {
     void M()
     {
@@ -587,14 +618,19 @@ class C
     }
 }";
             var warningOption = new CodeStyleOption2<bool>(true, NotificationOption2.Warning);
-            var options = Option(CSharpCodeStyleOptions.PreferPatternMatchingOverIsWithCastCheck, warningOption);
-            var testParameters = new TestParameters(options: options, parseOptions: TestOptions.Regular8);
+            var options = Option(
+                CSharpCodeStyleOptions.PreferPatternMatchingOverIsWithCastCheck,
+                warningOption
+            );
+            var testParameters = new TestParameters(
+                options: options,
+                parseOptions: TestOptions.Regular8
+            );
 
             using var workspace = CreateWorkspaceFromOptions(source, testParameters);
             var diag = (await GetDiagnosticsAsync(workspace, testParameters)).Single();
             Assert.Equal(DiagnosticSeverity.Warning, diag.Severity);
             Assert.Equal(IDEDiagnosticIds.InlineIsTypeCheckId, diag.Id);
-
         }
     }
 }

@@ -16,7 +16,11 @@ internal class LspServiceLifeCycleManager : ILifeCycleManager, ILspService
     private readonly IClientLanguageServerManager _clientLanguageServerManager;
     private readonly AbstractLanguageServer<RequestContext> _languageServerTarget;
 
-    public LspServiceLifeCycleManager(AbstractLanguageServer<RequestContext> languageServerTarget, ILspLogger logger, IClientLanguageServerManager clientLanguageServerManager)
+    public LspServiceLifeCycleManager(
+        AbstractLanguageServer<RequestContext> languageServerTarget,
+        ILspLogger logger,
+        IClientLanguageServerManager clientLanguageServerManager
+    )
     {
         _logger = logger;
         _clientLanguageServerManager = clientLanguageServerManager;
@@ -36,7 +40,9 @@ internal class LspServiceLifeCycleManager : ILifeCycleManager, ILspService
                 MessageType = MessageType.Info,
                 Message = message
             };
-            await _clientLanguageServerManager.SendNotificationAsync("window/logMessage", messageParams, CancellationToken.None).ConfigureAwait(false);
+            await _clientLanguageServerManager
+                .SendNotificationAsync("window/logMessage", messageParams, CancellationToken.None)
+                .ConfigureAwait(false);
         }
         catch (ConnectionLostException)
         {

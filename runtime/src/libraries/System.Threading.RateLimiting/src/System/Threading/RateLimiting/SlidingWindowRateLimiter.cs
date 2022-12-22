@@ -34,10 +34,14 @@ namespace System.Threading.RateLimiting
 
         private static readonly RateLimitLease SuccessfulLease = new SlidingWindowLease(true, null);
         private static readonly RateLimitLease FailedLease = new SlidingWindowLease(false, null);
-        private static readonly double TickFrequency = (double)TimeSpan.TicksPerSecond / Stopwatch.Frequency;
+        private static readonly double TickFrequency =
+            (double)TimeSpan.TicksPerSecond / Stopwatch.Frequency;
 
         /// <inheritdoc />
-        public override TimeSpan? IdleDuration => _idleSince is null ? null : new TimeSpan((long)((Stopwatch.GetTimestamp() - _idleSince) * TickFrequency));
+        public override TimeSpan? IdleDuration =>
+            _idleSince is null
+                ? null
+                : new TimeSpan((long)((Stopwatch.GetTimestamp() - _idleSince) * TickFrequency));
 
         /// <inheritdoc />
         public override bool IsAutoReplenishing => _options.AutoReplenishment;
@@ -57,19 +61,31 @@ namespace System.Threading.RateLimiting
             }
             if (options.PermitLimit <= 0)
             {
-                throw new ArgumentException(SR.Format(SR.ShouldBeGreaterThan0, nameof(options.PermitLimit)), nameof(options));
+                throw new ArgumentException(
+                    SR.Format(SR.ShouldBeGreaterThan0, nameof(options.PermitLimit)),
+                    nameof(options)
+                );
             }
             if (options.SegmentsPerWindow <= 0)
             {
-                throw new ArgumentException(SR.Format(SR.ShouldBeGreaterThan0, nameof(options.SegmentsPerWindow)), nameof(options));
+                throw new ArgumentException(
+                    SR.Format(SR.ShouldBeGreaterThan0, nameof(options.SegmentsPerWindow)),
+                    nameof(options)
+                );
             }
             if (options.QueueLimit < 0)
             {
-                throw new ArgumentException(SR.Format(SR.ShouldBeGreaterThanOrEqual0, nameof(options.QueueLimit)), nameof(options));
+                throw new ArgumentException(
+                    SR.Format(SR.ShouldBeGreaterThanOrEqual0, nameof(options.QueueLimit)),
+                    nameof(options)
+                );
             }
             if (options.Window <= TimeSpan.Zero)
             {
-                throw new ArgumentException(SR.Format(SR.ShouldBeGreaterThanTimeSpan0, nameof(options.Window)), nameof(options));
+                throw new ArgumentException(
+                    SR.Format(SR.ShouldBeGreaterThanTimeSpan0, nameof(options.Window)),
+                    nameof(options)
+                );
             }
 
             _options = new SlidingWindowRateLimiterOptions
@@ -116,7 +132,11 @@ namespace System.Threading.RateLimiting
             // These amounts of resources can never be acquired
             if (requestCount > _options.PermitLimit)
             {
-                throw new ArgumentOutOfRangeException(nameof(requestCount), requestCount, SR.Format(SR.PermitLimitExceeded, requestCount, _options.PermitLimit));
+                throw new ArgumentOutOfRangeException(
+                    nameof(requestCount),
+                    requestCount,
+                    SR.Format(SR.PermitLimitExceeded, requestCount, _options.PermitLimit)
+                );
             }
 
             // Return SuccessfulLease or FailedLease depending to indicate limiter state
@@ -146,12 +166,19 @@ namespace System.Threading.RateLimiting
         }
 
         /// <inheritdoc/>
-        protected override ValueTask<RateLimitLease> AcquireAsyncCore(int requestCount, CancellationToken cancellationToken = default)
+        protected override ValueTask<RateLimitLease> AcquireAsyncCore(
+            int requestCount,
+            CancellationToken cancellationToken = default
+        )
         {
             // These amounts of resources can never be acquired
             if (requestCount > _options.PermitLimit)
             {
-                throw new ArgumentOutOfRangeException(nameof(requestCount), requestCount, SR.Format(SR.PermitLimitExceeded, requestCount, _options.PermitLimit));
+                throw new ArgumentOutOfRangeException(
+                    nameof(requestCount),
+                    requestCount,
+                    SR.Format(SR.PermitLimitExceeded, requestCount, _options.PermitLimit)
+                );
             }
 
             ThrowIfDisposed();
@@ -174,7 +201,10 @@ namespace System.Threading.RateLimiting
                 Debug.Assert(_options.QueueLimit >= _queueCount);
                 if (_options.QueueLimit - _queueCount < requestCount)
                 {
-                    if (_options.QueueProcessingOrder == QueueProcessingOrder.NewestFirst && requestCount <= _options.QueueLimit)
+                    if (
+                        _options.QueueProcessingOrder == QueueProcessingOrder.NewestFirst
+                        && requestCount <= _options.QueueLimit
+                    )
                     {
                         // Remove oldest items from queue until there is space for the newest acquisition request
                         do
@@ -190,8 +220,7 @@ namespace System.Threading.RateLimiting
                             {
                                 Interlocked.Increment(ref _failedLeasesCount);
                             }
-                        }
-                        while (_options.QueueLimit - _queueCount < requestCount);
+                        } while (_options.QueueLimit - _queueCount < requestCount);
                     }
                     else
                     {
@@ -205,10 +234,13 @@ namespace System.Threading.RateLimiting
                 CancellationTokenRegistration ctr = default;
                 if (cancellationToken.CanBeCanceled)
                 {
-                    ctr = cancellationToken.Register(static obj =>
-                    {
-                        ((CancelQueueState)obj!).TrySetCanceled();
-                    }, tcs);
+                    ctr = cancellationToken.Register(
+                        static obj =>
+                        {
+                            ((CancelQueueState)obj!).TrySetCanceled();
+                        },
+                        tcs
+                    );
                 }
 
                 RequestRegistration registration = new RequestRegistration(requestCount, tcs, ctr);
@@ -220,7 +252,10 @@ namespace System.Threading.RateLimiting
             }
         }
 
-        private bool TryLeaseUnsynchronized(int requestCount, [NotNullWhen(true)] out RateLimitLease? lease)
+        private bool TryLeaseUnsynchronized(
+            int requestCount,
+            [NotNullWhen(true)] out RateLimitLease? lease
+        )
         {
             ThrowIfDisposed();
 
@@ -237,7 +272,13 @@ namespace System.Threading.RateLimiting
 
                 // a. If there are no items queued we can lease
                 // b. If there are items queued but the processing order is NewestFirst, then we can lease the incoming request since it is the newest
-                if (_queueCount == 0 || (_queueCount > 0 && _options.QueueProcessingOrder == QueueProcessingOrder.NewestFirst))
+                if (
+                    _queueCount == 0
+                    || (
+                        _queueCount > 0
+                        && _options.QueueProcessingOrder == QueueProcessingOrder.NewestFirst
+                    )
+                )
                 {
                     _idleSince = null;
                     _requestsPerSegment[_currentSegmentIndex] += requestCount;
@@ -293,7 +334,11 @@ namespace System.Threading.RateLimiting
                     return;
                 }
 
-                if (((nowTicks - _lastReplenishmentTick) * TickFrequency) < ReplenishmentPeriod.Ticks && !_options.AutoReplenishment)
+                if (
+                    ((nowTicks - _lastReplenishmentTick) * TickFrequency)
+                        < ReplenishmentPeriod.Ticks
+                    && !_options.AutoReplenishment
+                )
                 {
                     return;
                 }
@@ -318,9 +363,9 @@ namespace System.Threading.RateLimiting
                 while (_queue.Count > 0)
                 {
                     RequestRegistration nextPendingRequest =
-                          _options.QueueProcessingOrder == QueueProcessingOrder.OldestFirst
-                          ? _queue.PeekHead()
-                          : _queue.PeekTail();
+                        _options.QueueProcessingOrder == QueueProcessingOrder.OldestFirst
+                            ? _queue.PeekHead()
+                            : _queue.PeekTail();
 
                     // If we have enough permits after replenishing to serve the queued requests
                     if (_requestCount >= nextPendingRequest.Count)
@@ -328,8 +373,8 @@ namespace System.Threading.RateLimiting
                         // Request can be fulfilled
                         nextPendingRequest =
                             _options.QueueProcessingOrder == QueueProcessingOrder.OldestFirst
-                            ? _queue.DequeueHead()
-                            : _queue.DequeueTail();
+                                ? _queue.DequeueHead()
+                                : _queue.DequeueTail();
 
                         _queueCount -= nextPendingRequest.Count;
                         _requestCount -= nextPendingRequest.Count;
@@ -384,9 +429,10 @@ namespace System.Threading.RateLimiting
                 _renewTimer?.Dispose();
                 while (_queue.Count > 0)
                 {
-                    RequestRegistration next = _options.QueueProcessingOrder == QueueProcessingOrder.OldestFirst
-                        ? _queue.DequeueHead()
-                        : _queue.DequeueTail();
+                    RequestRegistration next =
+                        _options.QueueProcessingOrder == QueueProcessingOrder.OldestFirst
+                            ? _queue.DequeueHead()
+                            : _queue.DequeueTail();
                     next.CancellationTokenRegistration.Dispose();
                     next.Tcs.TrySetResult(FailedLease);
                 }
@@ -410,7 +456,10 @@ namespace System.Threading.RateLimiting
 
         private sealed class SlidingWindowLease : RateLimitLease
         {
-            private static readonly string[] s_allMetadataNames = new[] { MetadataName.RetryAfter.Name };
+            private static readonly string[] s_allMetadataNames = new[]
+            {
+                MetadataName.RetryAfter.Name
+            };
 
             private readonly TimeSpan? _retryAfter;
 
@@ -439,7 +488,11 @@ namespace System.Threading.RateLimiting
 
         private readonly struct RequestRegistration
         {
-            public RequestRegistration(int requestCount, TaskCompletionSource<RateLimitLease> tcs, CancellationTokenRegistration cancellationTokenRegistration)
+            public RequestRegistration(
+                int requestCount,
+                TaskCompletionSource<RateLimitLease> tcs,
+                CancellationTokenRegistration cancellationTokenRegistration
+            )
             {
                 Count = requestCount;
                 // Use VoidAsyncOperationWithData<T> instead
@@ -460,8 +513,11 @@ namespace System.Threading.RateLimiting
             private readonly SlidingWindowRateLimiter _limiter;
             private readonly CancellationToken _cancellationToken;
 
-            public CancelQueueState(int requestCount, SlidingWindowRateLimiter limiter, CancellationToken cancellationToken)
-                : base(TaskCreationOptions.RunContinuationsAsynchronously)
+            public CancelQueueState(
+                int requestCount,
+                SlidingWindowRateLimiter limiter,
+                CancellationToken cancellationToken
+            ) : base(TaskCreationOptions.RunContinuationsAsynchronously)
             {
                 _requestCount = requestCount;
                 _limiter = limiter;

@@ -23,8 +23,8 @@ public class MigratorEventData : EventData
     public MigratorEventData(
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
-        IMigrator migrator)
-        : base(eventDefinition, messageGenerator)
+        IMigrator migrator
+    ) : base(eventDefinition, messageGenerator)
     {
         Migrator = migrator;
     }

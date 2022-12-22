@@ -5,14 +5,11 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class EntitySplittingSqliteTest : EntitySplittingTestBase
 {
-    public EntitySplittingSqliteTest(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
+    public EntitySplittingSqliteTest(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
+    { }
 
-    protected override ITestStoreFactory TestStoreFactory
-        => SqliteTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-        => base.OnModelCreating(modelBuilder);
+    protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+        base.OnModelCreating(modelBuilder);
 }

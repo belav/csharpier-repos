@@ -3,27 +3,28 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class CompositeKeysSplitQueryRelationalTestBase<TFixture> : CompositeKeysQueryTestBase<TFixture>
-    where TFixture : CompositeKeysQueryFixtureBase, new()
+public abstract class CompositeKeysSplitQueryRelationalTestBase<TFixture>
+    : CompositeKeysQueryTestBase<TFixture> where TFixture : CompositeKeysQueryFixtureBase, new()
 {
-    public CompositeKeysSplitQueryRelationalTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+    public CompositeKeysSplitQueryRelationalTestBase(TFixture fixture) : base(fixture) { }
 
-    protected override Expression RewriteServerQueryExpression(Expression serverQueryExpression)
-        => new SplitQueryRewritingExpressionVisitor().Visit(serverQueryExpression);
+    protected override Expression RewriteServerQueryExpression(Expression serverQueryExpression) =>
+        new SplitQueryRewritingExpressionVisitor().Visit(serverQueryExpression);
 
     private class SplitQueryRewritingExpressionVisitor : ExpressionVisitor
     {
-        private readonly MethodInfo _asSplitQueryMethod
-            = typeof(RelationalQueryableExtensions).GetMethod(nameof(RelationalQueryableExtensions.AsSplitQuery));
+        private readonly MethodInfo _asSplitQueryMethod =
+            typeof(RelationalQueryableExtensions).GetMethod(
+                nameof(RelationalQueryableExtensions.AsSplitQuery)
+            );
 
         protected override Expression VisitExtension(Expression extensionExpression)
         {
             if (extensionExpression is EntityQueryRootExpression rootExpression)
             {
-                var splitMethod = _asSplitQueryMethod.MakeGenericMethod(rootExpression.EntityType.ClrType);
+                var splitMethod = _asSplitQueryMethod.MakeGenericMethod(
+                    rootExpression.EntityType.ClrType
+                );
 
                 return Expression.Call(splitMethod, rootExpression);
             }
@@ -32,10 +33,13 @@ public abstract class CompositeKeysSplitQueryRelationalTestBase<TFixture> : Comp
         }
     }
 
-    protected virtual bool CanExecuteQueryString
-        => false;
+    protected virtual bool CanExecuteQueryString => false;
 
-    protected override QueryAsserter CreateQueryAsserter(TFixture fixture)
-        => new RelationalQueryAsserter(
-            fixture, RewriteExpectedQueryExpression, RewriteServerQueryExpression, canExecuteQueryString: CanExecuteQueryString);
+    protected override QueryAsserter CreateQueryAsserter(TFixture fixture) =>
+        new RelationalQueryAsserter(
+            fixture,
+            RewriteExpectedQueryExpression,
+            RewriteServerQueryExpression,
+            canExecuteQueryString: CanExecuteQueryString
+        );
 }

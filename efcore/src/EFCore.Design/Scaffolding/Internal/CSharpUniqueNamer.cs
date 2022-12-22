@@ -9,8 +9,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class CSharpUniqueNamer<T> : CSharpNamer<T>
-    where T : notnull
+public class CSharpUniqueNamer<T> : CSharpNamer<T> where T : notnull
 {
     private readonly HashSet<string> _usedNames = new(StringComparer.OrdinalIgnoreCase);
 
@@ -23,10 +22,8 @@ public class CSharpUniqueNamer<T> : CSharpNamer<T>
     public CSharpUniqueNamer(
         Func<T, string> nameGetter,
         ICSharpUtilities cSharpUtilities,
-        Func<string, string>? singularizePluralizer)
-        : this(nameGetter, null, cSharpUtilities, singularizePluralizer)
-    {
-    }
+        Func<string, string>? singularizePluralizer
+    ) : this(nameGetter, null, cSharpUtilities, singularizePluralizer) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -38,8 +35,8 @@ public class CSharpUniqueNamer<T> : CSharpNamer<T>
         Func<T, string> nameGetter,
         IEnumerable<string>? usedNames,
         ICSharpUtilities cSharpUtilities,
-        Func<string, string>? singularizePluralizer)
-        : base(nameGetter, cSharpUtilities, singularizePluralizer)
+        Func<string, string>? singularizePluralizer
+    ) : base(nameGetter, cSharpUtilities, singularizePluralizer)
     {
         if (usedNames != null)
         {

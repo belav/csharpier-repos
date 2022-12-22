@@ -17,10 +17,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"StringList:0", "val0"},
-                {"StringList:1", "val1"},
-                {"StringList:2", "val2"},
-                {"StringList:x", "valx"}
+                { "StringList:0", "val0" },
+                { "StringList:1", "val1" },
+                { "StringList:2", "val2" },
+                { "StringList:x", "valx" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -42,10 +42,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"StringList:0", null},
-                {"StringList:1", null},
-                {"StringList:2", null},
-                {"StringList:x", null}
+                { "StringList:0", null },
+                { "StringList:1", null },
+                { "StringList:2", null },
+                { "StringList:x", null }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -62,8 +62,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"InvalidList:0", "true"},
-                {"InvalidList:1", "invalid"},
+                { "InvalidList:0", "true" },
+                { "InvalidList:1", "invalid" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -81,8 +81,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"InvalidDictionary:0", "true"},
-                {"InvalidDictionary:1", "invalid"},
+                { "InvalidDictionary:0", "true" },
+                { "InvalidDictionary:1", "invalid" },
             };
             var config = new ConfigurationBuilder().AddInMemoryCollection(input).Build();
             var dict = new Dictionary<string, bool>();
@@ -98,10 +98,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"StringList:0", "val0"},
-                {"StringList:1", "val1"},
-                {"StringList:2", "val2"},
-                {"StringList:x", "valx"}
+                { "StringList:0", "val0" },
+                { "StringList:1", "val1" },
+                { "StringList:2", "val2" },
+                { "StringList:x", "valx" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -124,9 +124,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"ObjectList:0:Integer", "30"},
-                {"ObjectList:1:Integer", "31"},
-                {"ObjectList:2:Integer", "32"},
+                { "ObjectList:0:Integer", "30" },
+                { "ObjectList:1:Integer", "31" },
+                { "ObjectList:2:Integer", "32" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -148,9 +148,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"StringDictionary:abc", "val_1"},
-                {"StringDictionary:def", "val_2"},
-                {"StringDictionary:ghi", "val_3"}
+                { "StringDictionary:abc", "val_1" },
+                { "StringDictionary:def", "val_2" },
+                { "StringDictionary:ghi", "val_3" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -172,9 +172,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"EnumDictionary:abc", "val_1"},
-                {"EnumDictionary:def", "val_2"},
-                {"EnumDictionary:ghi", "val_3"}
+                { "EnumDictionary:abc", "val_1" },
+                { "EnumDictionary:def", "val_2" },
+                { "EnumDictionary:ghi", "val_3" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -196,9 +196,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"EnumDictionary:abc", "val_1"},
-                {"EnumDictionary:def", "val_2"},
-                {"EnumDictionary:ghi", "val_3"}
+                { "EnumDictionary:abc", "val_1" },
+                { "EnumDictionary:def", "val_2" },
+                { "EnumDictionary:ghi", "val_3" }
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(input);
@@ -263,9 +263,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"IntegerKeyDictionary:0", "val_0"},
-                {"IntegerKeyDictionary:1", "val_1"},
-                {"IntegerKeyDictionary:2", "val_2"}
+                { "IntegerKeyDictionary:0", "val_0" },
+                { "IntegerKeyDictionary:1", "val_1" },
+                { "IntegerKeyDictionary:2", "val_2" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -287,10 +287,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"StringList:0", "val0"},
-                {"StringList:1", "val1"},
-                {"StringList:2", "val2"},
-                {"StringList:x", "valx"}
+                { "StringList:0", "val0" },
+                { "StringList:1", "val1" },
+                { "StringList:2", "val2" },
+                { "StringList:x", "valx" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -314,10 +314,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"IntList:0", "42"},
-                {"IntList:1", "43"},
-                {"IntList:2", "44"},
-                {"IntList:x", "45"}
+                { "IntList:0", "42" },
+                { "IntList:1", "43" },
+                { "IntList:2", "44" },
+                { "IntList:x", "45" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -342,10 +342,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"AlreadyInitializedList:0", "val0"},
-                {"AlreadyInitializedList:1", "val1"},
-                {"AlreadyInitializedList:2", "val2"},
-                {"AlreadyInitializedList:x", "valx"}
+                { "AlreadyInitializedList:0", "val0" },
+                { "AlreadyInitializedList:1", "val1" },
+                { "AlreadyInitializedList:2", "val2" },
+                { "AlreadyInitializedList:x", "valx" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -371,10 +371,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"AlreadyInitializedListInterface:0", "val0"},
-                {"AlreadyInitializedListInterface:1", "val1"},
-                {"AlreadyInitializedListInterface:2", "val2"},
-                {"AlreadyInitializedListInterface:x", "valx"}
+                { "AlreadyInitializedListInterface:0", "val0" },
+                { "AlreadyInitializedListInterface:1", "val1" },
+                { "AlreadyInitializedListInterface:2", "val2" },
+                { "AlreadyInitializedListInterface:x", "valx" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -400,10 +400,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"CustomList:0", "val0"},
-                {"CustomList:1", "val1"},
-                {"CustomList:2", "val2"},
-                {"CustomList:x", "valx"}
+                { "CustomList:0", "val0" },
+                { "CustomList:1", "val1" },
+                { "CustomList:2", "val2" },
+                { "CustomList:x", "valx" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -428,9 +428,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"ObjectList:0:Integer", "30"},
-                {"ObjectList:1:Integer", "31"},
-                {"ObjectList:2:Integer", "32"},
+                { "ObjectList:0:Integer", "30" },
+                { "ObjectList:1:Integer", "31" },
+                { "ObjectList:2:Integer", "32" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -452,11 +452,11 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"NestedLists:0:0", "val00"},
-                {"NestedLists:0:1", "val01"},
-                {"NestedLists:1:0", "val10"},
-                {"NestedLists:1:1", "val11"},
-                {"NestedLists:1:2", "val12"},
+                { "NestedLists:0:0", "val00" },
+                { "NestedLists:0:1", "val01" },
+                { "NestedLists:1:0", "val10" },
+                { "NestedLists:1:1", "val11" },
+                { "NestedLists:1:2", "val12" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -482,9 +482,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"StringDictionary:abc", "val_1"},
-                {"StringDictionary:def", "val_2"},
-                {"StringDictionary:ghi", "val_3"}
+                { "StringDictionary:abc", "val_1" },
+                { "StringDictionary:def", "val_2" },
+                { "StringDictionary:ghi", "val_3" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -543,7 +543,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             var config = new ConfigurationBuilder().AddInMemoryCollection(input).Build();
             var origin = new Dictionary<KeyEnum, IDictionary<KeyUintEnum, string>>
             {
-                [KeyEnum.abc] = new Dictionary<KeyUintEnum, string> {  [KeyUintEnum.abc] = "val_1" }
+                [KeyEnum.abc] = new Dictionary<KeyUintEnum, string> { [KeyUintEnum.abc] = "val_1" }
             };
 
             config.Bind(origin);
@@ -557,15 +557,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [Fact]
         public void ShouldPreserveExistingValuesInArrayWhenItIsDictionaryElement()
         {
-            var input = new Dictionary<string, string>
-            {
-                ["ascii:b"] = "98",
-            };
+            var input = new Dictionary<string, string> { ["ascii:b"] = "98", };
             var config = new ConfigurationBuilder().AddInMemoryCollection(input).Build();
-            var origin = new Dictionary<string, int[]>
-            {
-                ["ascii"] = new int[] { 97 }
-            };
+            var origin = new Dictionary<string, int[]> { ["ascii"] = new int[] { 97 } };
 
             config.Bind(origin);
 
@@ -577,12 +571,11 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"AlreadyInitializedStringDictionaryInterface:abc", "val_1"},
-                {"AlreadyInitializedStringDictionaryInterface:def", "val_2"},
-                {"AlreadyInitializedStringDictionaryInterface:ghi", "val_3"},
-
-                {"IDictionaryNoSetter:Key1", "Value1"},
-                {"IDictionaryNoSetter:Key2", "Value2"},
+                { "AlreadyInitializedStringDictionaryInterface:abc", "val_1" },
+                { "AlreadyInitializedStringDictionaryInterface:def", "val_2" },
+                { "AlreadyInitializedStringDictionaryInterface:ghi", "val_3" },
+                { "IDictionaryNoSetter:Key1", "Value1" },
+                { "IDictionaryNoSetter:Key2", "Value2" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -595,7 +588,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             Assert.NotNull(options.AlreadyInitializedStringDictionaryInterface);
             Assert.Equal(4, options.AlreadyInitializedStringDictionaryInterface.Count);
 
-            Assert.Equal("This was already here", options.AlreadyInitializedStringDictionaryInterface["123"]);
+            Assert.Equal(
+                "This was already here",
+                options.AlreadyInitializedStringDictionaryInterface["123"]
+            );
             Assert.Equal("val_1", options.AlreadyInitializedStringDictionaryInterface["abc"]);
             Assert.Equal("val_2", options.AlreadyInitializedStringDictionaryInterface["def"]);
             Assert.Equal("val_3", options.AlreadyInitializedStringDictionaryInterface["ghi"]);
@@ -610,9 +606,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"AlreadyInitializedHashSetDictionary:123:0", "val_1"},
-                {"AlreadyInitializedHashSetDictionary:123:1", "val_2"},
-                {"AlreadyInitializedHashSetDictionary:123:2", "val_3"}
+                { "AlreadyInitializedHashSetDictionary:123:0", "val_1" },
+                { "AlreadyInitializedHashSetDictionary:123:1", "val_2" },
+                { "AlreadyInitializedHashSetDictionary:123:2", "val_3" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -625,7 +621,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             Assert.NotNull(options.AlreadyInitializedHashSetDictionary);
             Assert.Equal(1, options.AlreadyInitializedHashSetDictionary.Count);
 
-            Assert.Equal("This was already here", options.AlreadyInitializedHashSetDictionary["123"].ElementAt(0));
+            Assert.Equal(
+                "This was already here",
+                options.AlreadyInitializedHashSetDictionary["123"].ElementAt(0)
+            );
             Assert.Equal("val_1", options.AlreadyInitializedHashSetDictionary["123"].ElementAt(1));
             Assert.Equal("val_2", options.AlreadyInitializedHashSetDictionary["123"].ElementAt(2));
             Assert.Equal("val_3", options.AlreadyInitializedHashSetDictionary["123"].ElementAt(3));
@@ -634,19 +633,13 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [Fact]
         public void CanOverrideExistingDictionaryKey()
         {
-            var input = new Dictionary<string, string>
-            {
-                {"abc", "override"}
-            };
+            var input = new Dictionary<string, string> { { "abc", "override" } };
 
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var options = new Dictionary<string, string>
-            {
-                {"abc", "default"}
-            };
+            var options = new Dictionary<string, string> { { "abc", "default" } };
 
             config.Bind(options);
 
@@ -661,9 +654,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"IntDictionary:abc", "42"},
-                {"IntDictionary:def", "43"},
-                {"IntDictionary:ghi", "44"}
+                { "IntDictionary:abc", "42" },
+                { "IntDictionary:def", "43" },
+                { "IntDictionary:ghi", "44" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -685,9 +678,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"ObjectDictionary:abc:Integer", "1"},
-                {"ObjectDictionary:def:Integer", "2"},
-                {"ObjectDictionary:ghi:Integer", "3"}
+                { "ObjectDictionary:abc:Integer", "1" },
+                { "ObjectDictionary:def:Integer", "2" },
+                { "ObjectDictionary:ghi:Integer", "3" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -709,11 +702,11 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"ListDictionary:abc:0", "abc_0"},
-                {"ListDictionary:abc:1", "abc_1"},
-                {"ListDictionary:def:0", "def_0"},
-                {"ListDictionary:def:1", "def_1"},
-                {"ListDictionary:def:2", "def_2"}
+                { "ListDictionary:abc:0", "abc_0" },
+                { "ListDictionary:abc:1", "abc_1" },
+                { "ListDictionary:def:0", "def_0" },
+                { "ListDictionary:def:1", "def_1" },
+                { "ListDictionary:def:2", "def_2" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -739,11 +732,11 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"ISetDictionary:abc:0", "abc_0"},
-                {"ISetDictionary:abc:1", "abc_1"},
-                {"ISetDictionary:def:0", "def_0"},
-                {"ISetDictionary:def:1", "def_1"},
-                {"ISetDictionary:def:2", "def_2"}
+                { "ISetDictionary:abc:0", "abc_0" },
+                { "ISetDictionary:abc:1", "abc_1" },
+                { "ISetDictionary:def:0", "def_0" },
+                { "ISetDictionary:def:1", "def_1" },
+                { "ISetDictionary:def:2", "def_2" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -769,11 +762,11 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"ObjectList:0:ListInNestedOption:0", "00"},
-                {"ObjectList:0:ListInNestedOption:1", "01"},
-                {"ObjectList:1:ListInNestedOption:0", "10"},
-                {"ObjectList:1:ListInNestedOption:1", "11"},
-                {"ObjectList:1:ListInNestedOption:2", "12"},
+                { "ObjectList:0:ListInNestedOption:0", "00" },
+                { "ObjectList:0:ListInNestedOption:1", "01" },
+                { "ObjectList:1:ListInNestedOption:0", "10" },
+                { "ObjectList:1:ListInNestedOption:1", "11" },
+                { "ObjectList:1:ListInNestedOption:2", "12" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -799,9 +792,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"NonStringKeyDictionary:abc", "val_1"},
-                {"NonStringKeyDictionary:def", "val_2"},
-                {"NonStringKeyDictionary:ghi", "val_3"}
+                { "NonStringKeyDictionary:abc", "val_1" },
+                { "NonStringKeyDictionary:def", "val_2" },
+                { "NonStringKeyDictionary:ghi", "val_3" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -819,10 +812,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"StringArray:0", "val0"},
-                {"StringArray:1", "val1"},
-                {"StringArray:2", "val2"},
-                {"StringArray:x", "valx"}
+                { "StringArray:0", "val0" },
+                { "StringArray:1", "val1" },
+                { "StringArray:2", "val2" },
+                { "StringArray:x", "valx" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -842,16 +835,15 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             Assert.Equal("valx", array[3]);
         }
 
-
         [Fact]
         public void BindStringArray()
         {
             var input = new Dictionary<string, string>
             {
-                {"StringArray:0", "val0"},
-                {"StringArray:1", "val1"},
-                {"StringArray:2", "val2"},
-                {"StringArray:x", "valx"}
+                { "StringArray:0", "val0" },
+                { "StringArray:1", "val1" },
+                { "StringArray:2", "val2" },
+                { "StringArray:x", "valx" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -876,10 +868,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"AlreadyInitializedArray:0", "val0"},
-                {"AlreadyInitializedArray:1", "val1"},
-                {"AlreadyInitializedArray:2", "val2"},
-                {"AlreadyInitializedArray:x", "valx"}
+                { "AlreadyInitializedArray:0", "val0" },
+                { "AlreadyInitializedArray:1", "val1" },
+                { "AlreadyInitializedArray:2", "val2" },
+                { "AlreadyInitializedArray:x", "valx" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -906,10 +898,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"AlreadyInitializedArray:0", "val0"},
-                {"AlreadyInitializedArray:1", "val1"},
-                {"AlreadyInitializedArray:2", "val2"},
-                {"AlreadyInitializedArray:x", "valx"}
+                { "AlreadyInitializedArray:0", "val0" },
+                { "AlreadyInitializedArray:1", "val1" },
+                { "AlreadyInitializedArray:2", "val2" },
+                { "AlreadyInitializedArray:x", "valx" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -937,11 +929,11 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"ObjectArray:0:ArrayInNestedOption:0", "0"},
-                {"ObjectArray:0:ArrayInNestedOption:1", "1"},
-                {"ObjectArray:1:ArrayInNestedOption:0", "10"},
-                {"ObjectArray:1:ArrayInNestedOption:1", "11"},
-                {"ObjectArray:1:ArrayInNestedOption:2", "12"},
+                { "ObjectArray:0:ArrayInNestedOption:0", "0" },
+                { "ObjectArray:0:ArrayInNestedOption:1", "1" },
+                { "ObjectArray:1:ArrayInNestedOption:0", "10" },
+                { "ObjectArray:1:ArrayInNestedOption:1", "11" },
+                { "ObjectArray:1:ArrayInNestedOption:2", "12" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -966,8 +958,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"DimensionalArray:0:0", "a"},
-                {"DimensionalArray:0:1", "b"}
+                { "DimensionalArray:0:0", "a" },
+                { "DimensionalArray:0:1", "b" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -975,11 +967,11 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             var config = configurationBuilder.Build();
             var options = new OptionsWithArrays();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(options));
+            var exception = Assert.Throws<InvalidOperationException>(() => config.Bind(options));
             Assert.Equal(
                 SR.Format(SR.Error_UnsupportedMultidimensionalArray, typeof(string[,])),
-                exception.Message);
+                exception.Message
+            );
         }
 
         [Fact]
@@ -987,11 +979,11 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"JaggedArray:0:0", "00"},
-                {"JaggedArray:0:1", "01"},
-                {"JaggedArray:1:0", "10"},
-                {"JaggedArray:1:1", "11"},
-                {"JaggedArray:1:2", "12"},
+                { "JaggedArray:0:0", "00" },
+                { "JaggedArray:0:1", "01" },
+                { "JaggedArray:1:0", "10" },
+                { "JaggedArray:1:1", "11" },
+                { "JaggedArray:1:2", "12" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1016,9 +1008,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"ReadOnlyArray:0", "10"},
-                {"ReadOnlyArray:1", "20"},
-                {"ReadOnlyArray:2", "30"},
+                { "ReadOnlyArray:0", "10" },
+                { "ReadOnlyArray:1", "20" },
+                { "ReadOnlyArray:2", "30" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1035,10 +1027,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"IEnumerable:0", "val0"},
-                {"IEnumerable:1", "val1"},
-                {"IEnumerable:2", "val2"},
-                {"IEnumerable:x", "valx"}
+                { "IEnumerable:0", "val0" },
+                { "IEnumerable:1", "val1" },
+                { "IEnumerable:2", "val2" },
+                { "IEnumerable:x", "valx" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1063,13 +1055,12 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"AlreadyInitializedIEnumerableInterface:0", "val0"},
-                {"AlreadyInitializedIEnumerableInterface:1", "val1"},
-                {"AlreadyInitializedIEnumerableInterface:2", "val2"},
-                {"AlreadyInitializedIEnumerableInterface:x", "valx"},
-                
-                {"ICollectionNoSetter:0", "val0"},
-                {"ICollectionNoSetter:1", "val1"},
+                { "AlreadyInitializedIEnumerableInterface:0", "val0" },
+                { "AlreadyInitializedIEnumerableInterface:1", "val1" },
+                { "AlreadyInitializedIEnumerableInterface:2", "val2" },
+                { "AlreadyInitializedIEnumerableInterface:x", "valx" },
+                { "ICollectionNoSetter:0", "val0" },
+                { "ICollectionNoSetter:1", "val1" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1092,8 +1083,14 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
             // the original list hasn't been touched
             Assert.Equal(2, options.ListUsedInIEnumerableFieldAndShouldNotBeTouched.Count);
-            Assert.Equal("This was here too", options.ListUsedInIEnumerableFieldAndShouldNotBeTouched.ElementAt(0));
-            Assert.Equal("Don't touch me!", options.ListUsedInIEnumerableFieldAndShouldNotBeTouched.ElementAt(1));
+            Assert.Equal(
+                "This was here too",
+                options.ListUsedInIEnumerableFieldAndShouldNotBeTouched.ElementAt(0)
+            );
+            Assert.Equal(
+                "Don't touch me!",
+                options.ListUsedInIEnumerableFieldAndShouldNotBeTouched.ElementAt(1)
+            );
 
             Assert.Equal(2, options.ICollectionNoSetter.Count);
             Assert.Equal("val0", options.ICollectionNoSetter.ElementAt(0));
@@ -1109,8 +1106,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
             var input = new Dictionary<string, string>
             {
-                {"AlreadyInitializedCustomListDerivedFromIEnumerable:0", "val0"},
-                {"AlreadyInitializedCustomListDerivedFromIEnumerable:1", "val1"},
+                { "AlreadyInitializedCustomListDerivedFromIEnumerable:0", "val0" },
+                { "AlreadyInitializedCustomListDerivedFromIEnumerable:1", "val1" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1139,8 +1136,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
             var input = new Dictionary<string, string>
             {
-                {"AlreadyInitializedCustomListIndirectlyDerivedFromIEnumerable:0", "val0"},
-                {"AlreadyInitializedCustomListIndirectlyDerivedFromIEnumerable:1", "val1"},
+                { "AlreadyInitializedCustomListIndirectlyDerivedFromIEnumerable:0", "val0" },
+                { "AlreadyInitializedCustomListIndirectlyDerivedFromIEnumerable:1", "val1" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1150,7 +1147,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             var options = new InitializedCollectionsOptions();
             config.Bind(options);
 
-            var array = options.AlreadyInitializedCustomListIndirectlyDerivedFromIEnumerable.ToArray();
+            var array =
+                options.AlreadyInitializedCustomListIndirectlyDerivedFromIEnumerable.ToArray();
 
             Assert.Equal(4, array.Length);
 
@@ -1169,7 +1167,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
             var input = new Dictionary<string, string>
             {
-                {"AlreadyInitializedDictionary:existing_key_1", "overridden!"},
+                { "AlreadyInitializedDictionary:existing_key_1", "overridden!" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1186,10 +1184,19 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             Assert.Equal("overridden!", options.AlreadyInitializedDictionary["existing_key_1"]);
             Assert.Equal("val_2", options.AlreadyInitializedDictionary["existing_key_2"]);
 
-            Assert.NotEqual(options.AlreadyInitializedDictionary, InitializedCollectionsOptions.ExistingDictionary);
+            Assert.NotEqual(
+                options.AlreadyInitializedDictionary,
+                InitializedCollectionsOptions.ExistingDictionary
+            );
 
-            Assert.Equal("val_1", InitializedCollectionsOptions.ExistingDictionary["existing_key_1"]);
-            Assert.Equal("val_2", InitializedCollectionsOptions.ExistingDictionary["existing_key_2"]);
+            Assert.Equal(
+                "val_1",
+                InitializedCollectionsOptions.ExistingDictionary["existing_key_1"]
+            );
+            Assert.Equal(
+                "val_2",
+                InitializedCollectionsOptions.ExistingDictionary["existing_key_2"]
+            );
         }
 
         [Fact]
@@ -1197,10 +1204,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"ICollection:0", "val0"},
-                {"ICollection:1", "val1"},
-                {"ICollection:2", "val2"},
-                {"ICollection:x", "valx"}
+                { "ICollection:0", "val0" },
+                { "ICollection:1", "val1" },
+                { "ICollection:2", "val2" },
+                { "ICollection:x", "valx" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1225,10 +1232,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"IList:0", "val0"},
-                {"IList:1", "val1"},
-                {"IList:2", "val2"},
-                {"IList:x", "valx"}
+                { "IList:0", "val0" },
+                { "IList:1", "val1" },
+                { "IList:2", "val2" },
+                { "IList:x", "valx" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1253,10 +1260,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"IReadOnlyCollection:0", "val0"},
-                {"IReadOnlyCollection:1", "val1"},
-                {"IReadOnlyCollection:2", "val2"},
-                {"IReadOnlyCollection:x", "valx"}
+                { "IReadOnlyCollection:0", "val0" },
+                { "IReadOnlyCollection:1", "val1" },
+                { "IReadOnlyCollection:2", "val2" },
+                { "IReadOnlyCollection:x", "valx" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1281,10 +1288,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"IReadOnlyList:0", "val0"},
-                {"IReadOnlyList:1", "val1"},
-                {"IReadOnlyList:2", "val2"},
-                {"IReadOnlyList:x", "valx"}
+                { "IReadOnlyList:0", "val0" },
+                { "IReadOnlyList:1", "val1" },
+                { "IReadOnlyList:2", "val2" },
+                { "IReadOnlyList:x", "valx" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1309,9 +1316,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"IDictionary:abc", "val_1"},
-                {"IDictionary:def", "val_2"},
-                {"IDictionary:ghi", "val_3"}
+                { "IDictionary:abc", "val_1" },
+                { "IDictionary:def", "val_2" },
+                { "IDictionary:ghi", "val_3" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1333,9 +1340,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"IReadOnlyDictionary:abc", "val_1"},
-                {"IReadOnlyDictionary:def", "val_2"},
-                {"IReadOnlyDictionary:ghi", "val_3"}
+                { "IReadOnlyDictionary:abc", "val_1" },
+                { "IReadOnlyDictionary:def", "val_2" },
+                { "IReadOnlyDictionary:ghi", "val_3" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1360,8 +1367,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"ConfigValues:0", "5"},
-                {"ConfigValues:1", "50"},
+                { "ConfigValues:0", "5" },
+                { "ConfigValues:1", "50" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1383,8 +1390,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"ListPropertyWithoutSetter:0", "a"},
-                {"ListPropertyWithoutSetter:1", "b"},
+                { "ListPropertyWithoutSetter:0", "a" },
+                { "ListPropertyWithoutSetter:1", "b" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1412,22 +1419,22 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             public InitializedCollectionsOptions()
             {
-                AlreadyInitializedIEnumerableInterface = ListUsedInIEnumerableFieldAndShouldNotBeTouched;
+                AlreadyInitializedIEnumerableInterface =
+                    ListUsedInIEnumerableFieldAndShouldNotBeTouched;
                 AlreadyInitializedDictionary = ExistingDictionary;
             }
 
-            public List<string> ListUsedInIEnumerableFieldAndShouldNotBeTouched = new()
-            {
-                "This was here too",
-                "Don't touch me!"
-            };
+            public List<string> ListUsedInIEnumerableFieldAndShouldNotBeTouched =
+                new() { "This was here too", "Don't touch me!" };
 
-            public static ReadOnlyDictionary<string, string> ExistingDictionary = new(
-                new Dictionary<string, string>
-                {
-                    {"existing_key_1", "val_1"},
-                    {"existing_key_2", "val_2"}
-                });
+            public static ReadOnlyDictionary<string, string> ExistingDictionary =
+                new(
+                    new Dictionary<string, string>
+                    {
+                        { "existing_key_1", "val_1" },
+                        { "existing_key_2", "val_2" }
+                    }
+                );
 
             public IEnumerable<string> AlreadyInitializedIEnumerableInterface { get; set; }
 
@@ -1445,9 +1452,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         private class CustomList : List<string>
         {
             // Add an overload, just to make sure binding picks the right Add method
-            public void Add(string a, string b)
-            {
-            }
+            public void Add(string a, string b) { }
         }
 
         private class CustomListDerivedFromIEnumerable : IEnumerable<string>
@@ -1459,13 +1464,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
-        internal interface IDerivedOne : IDerivedTwo
-        {
-        }
+        internal interface IDerivedOne : IDerivedTwo { }
 
-        internal interface IDerivedTwo : IEnumerable<string>
-        {
-        }
+        internal interface IDerivedTwo : IEnumerable<string> { }
 
         private class CustomListIndirectlyDerivedFromIEnumerable : IDerivedOne
         {
@@ -1476,9 +1477,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
-        private class CustomDictionary<T> : Dictionary<string, T>
-        {
-        }
+        private class CustomDictionary<T> : Dictionary<string, T> { }
 
         private class NestedOptions
         {
@@ -1530,14 +1529,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             public OptionsWithLists()
             {
-                AlreadyInitializedList = new List<string>
-                {
-                    "This was here before"
-                };
-                AlreadyInitializedListInterface = new List<string>
-                {
-                    "This was here too"
-                };
+                AlreadyInitializedList = new List<string> { "This was here before" };
+                AlreadyInitializedListInterface = new List<string> { "This was here too" };
             }
 
             public CustomList CustomList { get; set; }
@@ -1572,7 +1565,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
                 AlreadyInitializedHashSetDictionary = new Dictionary<string, HashSet<string>>
                 {
-                    ["123"] = new HashSet<string>(new[] {"This was already here"})
+                    ["123"] = new HashSet<string>(new[] { "This was already here" })
                 };
             }
 
@@ -1580,7 +1573,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
             public Dictionary<string, string> StringDictionary { get; set; }
 
-            public IDictionary<string, string> IDictionaryNoSetter { get; } = new Dictionary<string, string>();
+            public IDictionary<string, string> IDictionaryNoSetter { get; } =
+                new Dictionary<string, string>();
 
             public Dictionary<string, NestedOptions> ObjectDictionary { get; set; }
 
@@ -1593,8 +1587,14 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             // activate an interface
             public IDictionary<string, string> StringDictionaryInterface { get; set; }
 
-            public IDictionary<string, string> AlreadyInitializedStringDictionaryInterface { get; set; }
-            public IDictionary<string, HashSet<string>> AlreadyInitializedHashSetDictionary { get; set; }
+            public IDictionary<
+                string,
+                string
+            > AlreadyInitializedStringDictionaryInterface { get; set; }
+            public IDictionary<
+                string,
+                HashSet<string>
+            > AlreadyInitializedHashSetDictionary { get; set; }
         }
 
         private class OptionsWithInterdependentProperties

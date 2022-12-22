@@ -23,16 +23,22 @@ internal class NonMutatingDocumentChangeTracker : IDocumentChangeTracker
 {
     public void StartTracking(Uri documentUri, SourceText initialText)
     {
-        throw new InvalidOperationException("Mutating documents not allowed in a non-mutating request handler");
+        throw new InvalidOperationException(
+            "Mutating documents not allowed in a non-mutating request handler"
+        );
     }
 
     public void StopTracking(Uri documentUri)
     {
-        throw new InvalidOperationException("Mutating documents not allowed in a non-mutating request handler");
+        throw new InvalidOperationException(
+            "Mutating documents not allowed in a non-mutating request handler"
+        );
     }
 
     public void UpdateTrackedDocument(Uri documentUri, SourceText text)
     {
-        throw new InvalidOperationException("Mutating documents not allowed in a non-mutating request handler");
+        throw new InvalidOperationException(
+            "Mutating documents not allowed in a non-mutating request handler"
+        );
     }
 }

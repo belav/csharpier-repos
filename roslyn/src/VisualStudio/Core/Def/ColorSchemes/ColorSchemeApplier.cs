@@ -36,7 +36,10 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
 
         private readonly object _gate = new();
 
-        private ImmutableDictionary<ColorSchemeName, ImmutableArray<RegistryItem>>? _colorSchemeRegistryItems;
+        private ImmutableDictionary<
+            ColorSchemeName,
+            ImmutableArray<RegistryItem>
+        >? _colorSchemeRegistryItems;
         private bool _isInitialized = false;
 
         [ImportingConstructor]
@@ -44,7 +47,8 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
         public ColorSchemeApplier(
             IThreadingContext threadingContext,
             IGlobalOptionService globalOptions,
-            SVsServiceProvider serviceProvider)
+            SVsServiceProvider serviceProvider
+        )
         {
             _threadingContext = threadingContext;
             _serviceProvider = serviceProvider;
@@ -52,7 +56,11 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
 
             _settings = new ColorSchemeSettings(threadingContext, _serviceProvider, globalOptions);
             _colorSchemes = ColorSchemeSettings.GetColorSchemes();
-            _classificationVerifier = new ClassificationVerifier(threadingContext, _asyncServiceProvider, _colorSchemes);
+            _classificationVerifier = new ClassificationVerifier(
+                threadingContext,
+                _asyncServiceProvider,
+                _colorSchemes
+            );
         }
 
         public async Task InitializeAsync(CancellationToken cancellationToken)
@@ -67,10 +75,16 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
 
             // We need to update the theme whenever the Editor Color Scheme setting changes or the VS Theme changes.
             await TaskScheduler.Default;
-            var settingsManager = await _asyncServiceProvider.GetServiceAsync<SVsSettingsPersistenceManager, ISettingsManager>(_threadingContext.JoinableTaskFactory).ConfigureAwait(false);
+            var settingsManager = await _asyncServiceProvider
+                .GetServiceAsync<SVsSettingsPersistenceManager, ISettingsManager>(
+                    _threadingContext.JoinableTaskFactory
+                )
+                .ConfigureAwait(false);
 
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            settingsManager.GetSubset(ColorSchemeOptions.ColorSchemeSettingKey).SettingChangedAsync += ColorSchemeChangedAsync;
+            settingsManager
+                .GetSubset(ColorSchemeOptions.ColorSchemeSettingKey)
+                .SettingChangedAsync += ColorSchemeChangedAsync;
             VSColorTheme.ThemeChanged += VSColorTheme_ThemeChanged;
 
             await TaskScheduler.Default;
@@ -91,40 +105,56 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var colorScheme = await TryGetUpdatedColorSchemeAsync(cancellationToken).ConfigureAwait(false);
+            var colorScheme = await TryGetUpdatedColorSchemeAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (colorScheme == null)
                 return;
 
             _colorSchemeRegistryItems ??= _colorSchemes.ToImmutableDictionary(
-                kvp => kvp.Key, kvp => RegistryItemConverter.Convert(kvp.Value));
+                kvp => kvp.Key,
+                kvp => RegistryItemConverter.Convert(kvp.Value)
+            );
 
-            await _settings.ApplyColorSchemeAsync(
-                colorScheme.Value, _colorSchemeRegistryItems[colorScheme.Value], cancellationToken).ConfigureAwait(false);
+            await _settings
+                .ApplyColorSchemeAsync(
+                    colorScheme.Value,
+                    _colorSchemeRegistryItems[colorScheme.Value],
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
-        private void VSColorTheme_ThemeChanged(ThemeChangedEventArgs e)
-            => QueueColorSchemeUpdateAsync().Forget();
+        private void VSColorTheme_ThemeChanged(ThemeChangedEventArgs e) =>
+            QueueColorSchemeUpdateAsync().Forget();
 
-        private Task ColorSchemeChangedAsync(object sender, PropertyChangedEventArgs args)
-            => QueueColorSchemeUpdateAsync();
+        private Task ColorSchemeChangedAsync(object sender, PropertyChangedEventArgs args) =>
+            QueueColorSchemeUpdateAsync();
 
         private async Task QueueColorSchemeUpdateAsync()
         {
             // Wait until things have settled down from the theme change, since we will potentially be changing theme colors.
-            await VsTaskLibraryHelper.StartOnIdle(_threadingContext.JoinableTaskFactory, () => UpdateColorSchemeAsync(_threadingContext.DisposalToken));
+            await VsTaskLibraryHelper.StartOnIdle(
+                _threadingContext.JoinableTaskFactory,
+                () => UpdateColorSchemeAsync(_threadingContext.DisposalToken)
+            );
         }
 
         /// <summary>
         /// Returns true if the color scheme needs updating.
         /// </summary>
-        private async Task<ColorSchemeName?> TryGetUpdatedColorSchemeAsync(CancellationToken cancellationToken)
+        private async Task<ColorSchemeName?> TryGetUpdatedColorSchemeAsync(
+            CancellationToken cancellationToken
+        )
         {
             // The color scheme that is currently applied to the registry
-            var appliedColorScheme = await _settings.GetAppliedColorSchemeAsync(cancellationToken).ConfigureAwait(false);
+            var appliedColorScheme = await _settings
+                .GetAppliedColorSchemeAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // If this is a supported theme then, use the users configured scheme, otherwise fallback to the VS 2017.
             // Custom themes would be based on the MEF exported color information for classifications which matches the VS 2017 theme.
-            var configuredColorScheme = await IsSupportedThemeAsync(cancellationToken).ConfigureAwait(false)
+            var configuredColorScheme = await IsSupportedThemeAsync(cancellationToken)
+                .ConfigureAwait(false)
                 ? _settings.GetConfiguredColorScheme()
                 : ColorSchemeName.VisualStudio2017;
 
@@ -134,32 +164,47 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
             return configuredColorScheme;
         }
 
-        public async Task<bool> IsSupportedThemeAsync(CancellationToken cancellationToken)
-            => IsSupportedTheme(await GetThemeIdAsync(cancellationToken).ConfigureAwait(false));
+        public async Task<bool> IsSupportedThemeAsync(CancellationToken cancellationToken) =>
+            IsSupportedTheme(await GetThemeIdAsync(cancellationToken).ConfigureAwait(false));
 
         private bool IsSupportedTheme(Guid themeId)
         {
             return _colorSchemes.Values.Any(
-                scheme => scheme.Themes.Any(
-                    static (theme, themeId) => theme.Guid == themeId, themeId));
+                scheme =>
+                    scheme.Themes.Any(static (theme, themeId) => theme.Guid == themeId, themeId)
+            );
         }
 
-        public async Task<bool> IsThemeCustomizedAsync(CancellationToken cancellationToken)
-            => await _classificationVerifier.AreForegroundColorsCustomizedAsync(
-                _settings.GetConfiguredColorScheme(),
-                await GetThemeIdAsync(cancellationToken).ConfigureAwait(false),
-                cancellationToken).ConfigureAwait(false);
+        public async Task<bool> IsThemeCustomizedAsync(CancellationToken cancellationToken) =>
+            await _classificationVerifier
+                .AreForegroundColorsCustomizedAsync(
+                    _settings.GetConfiguredColorScheme(),
+                    await GetThemeIdAsync(cancellationToken).ConfigureAwait(false),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
         private async Task<Guid> GetThemeIdAsync(CancellationToken cancellationToken)
         {
             await TaskScheduler.Default;
-            var settingsManager = await _asyncServiceProvider.GetServiceAsync<SVsSettingsPersistenceManager, ISettingsManager>(_threadingContext.JoinableTaskFactory).ConfigureAwait(false);
+            var settingsManager = await _asyncServiceProvider
+                .GetServiceAsync<SVsSettingsPersistenceManager, ISettingsManager>(
+                    _threadingContext.JoinableTaskFactory
+                )
+                .ConfigureAwait(false);
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             //  Look up the value from the new roamed theme property first
             //  Fallback to the original roamed theme property if that fails
-            var currentThemeString = settingsManager.GetValueOrDefault<string?>(ColorThemeNewValueName, defaultValue: null) ??
-                settingsManager.GetValueOrDefault<string?>(ColorThemeValueName, defaultValue: null);
+            var currentThemeString =
+                settingsManager.GetValueOrDefault<string?>(
+                    ColorThemeNewValueName,
+                    defaultValue: null
+                )
+                ?? settingsManager.GetValueOrDefault<string?>(
+                    ColorThemeValueName,
+                    defaultValue: null
+                );
 
             if (currentThemeString is null)
             {

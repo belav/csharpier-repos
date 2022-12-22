@@ -8,12 +8,11 @@ namespace Microsoft.EntityFrameworkCore;
 public class DesignExceptionTest
 {
     [ConditionalFact]
-    public void OperationException_exposes_public_empty_constructor()
-        => new OperationException();
+    public void OperationException_exposes_public_empty_constructor() => new OperationException();
 
     [ConditionalFact]
-    public void OperationException_exposes_public_string_constructor()
-        => Assert.Equal("Foo", new OperationException("Foo").Message);
+    public void OperationException_exposes_public_string_constructor() =>
+        Assert.Equal("Foo", new OperationException("Foo").Message);
 
     [ConditionalFact]
     public void OperationException_exposes_public_string_and_inner_exception_constructor()
@@ -33,7 +32,10 @@ public class DesignExceptionTest
             SerializeAndDeserialize(
                 new OperationException(
                     "But somehow the vital connection is made",
-                    new Exception("Bang!"))));
+                    new Exception("Bang!")
+                )
+            )
+        );
 
         Assert.Equal("But somehow the vital connection is made", transportedException.Message);
         Assert.Equal("Bang!", transportedException.InnerException.Message);

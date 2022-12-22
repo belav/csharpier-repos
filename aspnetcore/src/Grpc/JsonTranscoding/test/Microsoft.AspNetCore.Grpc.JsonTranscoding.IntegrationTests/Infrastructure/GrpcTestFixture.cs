@@ -32,10 +32,14 @@ public class GrpcTestFixture<TStartup> : IDisposable where TStartup : class
     public GrpcTestFixture()
     {
         LoggerFactory = new LoggerFactory();
-        LoggerFactory.AddProvider(new ForwardingLoggerProvider((logLevel, category, eventId, message, exception) =>
-        {
-            LoggedMessage?.Invoke(logLevel, category, eventId, message, exception);
-        }));
+        LoggerFactory.AddProvider(
+            new ForwardingLoggerProvider(
+                (logLevel, category, eventId, message, exception) =>
+                {
+                    LoggedMessage?.Invoke(logLevel, category, eventId, message, exception);
+                }
+            )
+        );
     }
 
     public void ConfigureWebHost(Action<IWebHostBuilder> configure)
@@ -56,9 +60,7 @@ public class GrpcTestFixture<TStartup> : IDisposable where TStartup : class
                 })
                 .ConfigureWebHostDefaults(webHost =>
                 {
-                    webHost
-                        .UseTestServer()
-                        .UseStartup<TStartup>();
+                    webHost.UseTestServer().UseStartup<TStartup>();
 
                     _configureWebHost?.Invoke(webHost);
                 });

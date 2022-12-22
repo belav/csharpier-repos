@@ -12,6 +12,7 @@ namespace MS.Internal.Xml.XPath
     internal abstract class CacheOutputQuery : Query
     {
         internal Query input;
+
         // int count; -- we reusing it here
         protected List<XPathNavigator> outputBuffer;
 
@@ -21,6 +22,7 @@ namespace MS.Internal.Xml.XPath
             this.outputBuffer = new List<XPathNavigator>();
             this.count = 0;
         }
+
         protected CacheOutputQuery(CacheOutputQuery other) : base(other)
         {
             this.input = Clone(other.input);
@@ -43,7 +45,7 @@ namespace MS.Internal.Xml.XPath
             outputBuffer.Clear();
             count = 0;
             return input.Evaluate(context); // This is trick. IDQuery needs this value. Otherwise we would return this.
-                                            // All subclasses should and would anyway override this method and return this.
+            // All subclasses should and would anyway override this method and return this.
         }
 
         public override XPathNavigator? Advance()
@@ -69,9 +71,27 @@ namespace MS.Internal.Xml.XPath
             }
         }
 
-        public override XPathResultType StaticType { get { return XPathResultType.NodeSet; } }
-        public override int CurrentPosition { get { return count; } }
-        public override int Count { get { return outputBuffer.Count; } }
-        public override QueryProps Properties { get { return QueryProps.Merge | QueryProps.Cached | QueryProps.Position | QueryProps.Count; } }
+        public override XPathResultType StaticType
+        {
+            get { return XPathResultType.NodeSet; }
+        }
+        public override int CurrentPosition
+        {
+            get { return count; }
+        }
+        public override int Count
+        {
+            get { return outputBuffer.Count; }
+        }
+        public override QueryProps Properties
+        {
+            get
+            {
+                return QueryProps.Merge
+                    | QueryProps.Cached
+                    | QueryProps.Position
+                    | QueryProps.Count;
+            }
+        }
     }
 }

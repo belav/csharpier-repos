@@ -26,7 +26,12 @@ public interface ICookieManager
     /// <param name="key"></param>
     /// <param name="value"></param>
     /// <param name="options"></param>
-    void AppendResponseCookie(HttpContext context, string key, string? value, CookieOptions options);
+    void AppendResponseCookie(
+        HttpContext context,
+        string key,
+        string? value,
+        CookieOptions options
+    );
 
     /// <summary>
     /// Append a delete cookie to the response.

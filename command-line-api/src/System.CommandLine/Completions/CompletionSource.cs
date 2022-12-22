@@ -13,8 +13,11 @@ namespace System.CommandLine.Completions
     /// </summary>
     internal static class CompletionSource
     {
-        private static readonly ConcurrentDictionary<Type, ICompletionSource> _completionSourcesByType = new();
-        
+        private static readonly ConcurrentDictionary<
+            Type,
+            ICompletionSource
+        > _completionSourcesByType = new();
+
         /// <summary>
         /// Gets a completion source that provides completions for a type (e.g. enum) with well-known values.
         /// </summary>
@@ -23,7 +26,8 @@ namespace System.CommandLine.Completions
             return _completionSourcesByType.GetOrAdd(type, t => new CompletionSourceForType(t));
         }
 
-        internal static ICompletionSource Empty { get; } = new AnonymousCompletionSource(static _ => Array.Empty<CompletionItem>());
+        internal static ICompletionSource Empty { get; } =
+            new AnonymousCompletionSource(static _ => Array.Empty<CompletionItem>());
 
         private class CompletionSourceForType : ICompletionSource
         {
@@ -56,16 +60,16 @@ namespace System.CommandLine.Completions
                 {
                     return new AnonymousCompletionSource(_ => GetEnumNames());
 
-                    IEnumerable<CompletionItem> GetEnumNames() => Enum.GetNames(type).Select(n => new CompletionItem(n));
+                    IEnumerable<CompletionItem> GetEnumNames() =>
+                        Enum.GetNames(type).Select(n => new CompletionItem(n));
                 }
 
                 if (type == typeof(bool))
                 {
-                    return new AnonymousCompletionSource(static  _ => new CompletionItem[]
-                    {
-                        new(bool.TrueString),
-                        new(bool.FalseString)
-                    });
+                    return new AnonymousCompletionSource(
+                        static _ =>
+                            new CompletionItem[] { new(bool.TrueString), new(bool.FalseString) }
+                    );
                 }
 
                 return Empty;

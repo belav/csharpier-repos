@@ -15,13 +15,22 @@ namespace System.Web.Http.Tracing.Tracers
     /// <summary>
     /// Tracer for <see cref="ExceptionFilterAttribute"/>.
     /// </summary>
-    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "internal type needs to override, tracer are not sealed")]
-    internal class ExceptionFilterAttributeTracer : ExceptionFilterAttribute, IDecorator<ExceptionFilterAttribute>
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1813:AvoidUnsealedAttributes",
+        Justification = "internal type needs to override, tracer are not sealed"
+    )]
+    internal class ExceptionFilterAttributeTracer
+        : ExceptionFilterAttribute,
+            IDecorator<ExceptionFilterAttribute>
     {
         private readonly ExceptionFilterAttribute _innerFilter;
         private readonly ITraceWriter _traceStore;
 
-        public ExceptionFilterAttributeTracer(ExceptionFilterAttribute innerFilter, ITraceWriter traceWriter)
+        public ExceptionFilterAttributeTracer(
+            ExceptionFilterAttribute innerFilter,
+            ITraceWriter traceWriter
+        )
         {
             Contract.Assert(innerFilter != null);
             Contract.Assert(traceWriter != null);
@@ -37,18 +46,12 @@ namespace System.Web.Http.Tracing.Tracers
 
         public override bool AllowMultiple
         {
-            get
-            {
-                return _innerFilter.AllowMultiple;
-            }
+            get { return _innerFilter.AllowMultiple; }
         }
 
         public override object TypeId
         {
-            get
-            {
-                return _innerFilter.TypeId;
-            }
+            get { return _innerFilter.TypeId; }
         }
 
         public override bool Equals(object obj)
@@ -73,17 +76,22 @@ namespace System.Web.Http.Tracing.Tracers
 
         public override void OnException(HttpActionExecutedContext actionExecutedContext)
         {
-           // this will not trace, all traces go through the async call.
+            // this will not trace, all traces go through the async call.
         }
 
-        public override Task OnExceptionAsync(HttpActionExecutedContext actionExecutedContext, CancellationToken cancellationToken)
+        public override Task OnExceptionAsync(
+            HttpActionExecutedContext actionExecutedContext,
+            CancellationToken cancellationToken
+        )
         {
             return OnExceptionAsyncCore(actionExecutedContext, cancellationToken);
         }
 
-        private Task OnExceptionAsyncCore(HttpActionExecutedContext actionExecutedContext,
-                                          CancellationToken cancellationToken,
-                                          [CallerMemberName] string methodName = null)
+        private Task OnExceptionAsyncCore(
+            HttpActionExecutedContext actionExecutedContext,
+            CancellationToken cancellationToken,
+            [CallerMemberName] string methodName = null
+        )
         {
             return _traceStore.TraceBeginEndAsync(
                 actionExecutedContext.Request,
@@ -121,7 +129,8 @@ namespace System.Web.Http.Tracing.Tracers
                     {
                         tr.Status = response.StatusCode;
                     }
-                });
+                }
+            );
         }
     }
 }

@@ -8,13 +8,16 @@ using Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.Langu
 
 namespace Microsoft.CodeAnalysis.Editor.EmbeddedLanguages.RegularExpressions
 {
-    internal sealed class RegexEmbeddedLanguageEditorFeatures : RegexEmbeddedLanguage, IEmbeddedLanguageEditorFeatures
+    internal sealed class RegexEmbeddedLanguageEditorFeatures
+        : RegexEmbeddedLanguage,
+            IEmbeddedLanguageEditorFeatures
     {
         public IBraceMatcher BraceMatcher { get; }
 
         public RegexEmbeddedLanguageEditorFeatures(
-            AbstractEmbeddedLanguageFeaturesProvider provider, EmbeddedLanguageInfo info)
-            : base(provider, info)
+            AbstractEmbeddedLanguageFeaturesProvider provider,
+            EmbeddedLanguageInfo info
+        ) : base(provider, info)
         {
             BraceMatcher = new RegexBraceMatcher(this);
         }

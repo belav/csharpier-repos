@@ -10,8 +10,10 @@ namespace System.Text.Json
 {
     public static partial class JsonSerializer
     {
-        internal const string SerializationUnreferencedCodeMessage = "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved.";
-        internal const string SerializationRequiresDynamicCodeMessage = "JSON serialization and deserialization might require types that cannot be statically analyzed and might need runtime code generation. Use System.Text.Json source generation for native AOT applications.";
+        internal const string SerializationUnreferencedCodeMessage =
+            "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved.";
+        internal const string SerializationRequiresDynamicCodeMessage =
+            "JSON serialization and deserialization might require types that cannot be statically analyzed and might need runtime code generation. Use System.Text.Json source generation for native AOT applications.";
 
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
@@ -36,8 +38,8 @@ namespace System.Text.Json
 
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
-        private static JsonTypeInfo<T> GetTypeInfo<T>(JsonSerializerOptions? options)
-            => (JsonTypeInfo<T>)GetTypeInfo(options, typeof(T));
+        private static JsonTypeInfo<T> GetTypeInfo<T>(JsonSerializerOptions? options) =>
+            (JsonTypeInfo<T>)GetTypeInfo(options, typeof(T));
 
         private static JsonTypeInfo GetTypeInfo(JsonSerializerContext context, Type inputType)
         {
@@ -55,11 +57,15 @@ namespace System.Text.Json
         }
 
         internal static bool IsValidNumberHandlingValue(JsonNumberHandling handling) =>
-            JsonHelpers.IsInRangeInclusive((int)handling, 0,
+            JsonHelpers.IsInRangeInclusive(
+                (int)handling,
+                0,
                 (int)(
-                JsonNumberHandling.Strict |
-                JsonNumberHandling.AllowReadingFromString |
-                JsonNumberHandling.WriteAsString |
-                JsonNumberHandling.AllowNamedFloatingPointLiterals));
+                    JsonNumberHandling.Strict
+                    | JsonNumberHandling.AllowReadingFromString
+                    | JsonNumberHandling.WriteAsString
+                    | JsonNumberHandling.AllowNamedFloatingPointLiterals
+                )
+            );
     }
 }

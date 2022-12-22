@@ -27,11 +27,26 @@ namespace Internal.Runtime.CompilerHelpers
         /// </summary>
         private static IntPtr s_moduleGCStaticsSpines;
 
-        [UnmanagedCallersOnly(EntryPoint = "InitializeModules", CallConvs = new Type[] { typeof(CallConvCdecl) })]
-        internal static unsafe void InitializeModules(IntPtr osModule, IntPtr* pModuleHeaders, int count, IntPtr* pClasslibFunctions, int nClasslibFunctions)
+        [UnmanagedCallersOnly(
+            EntryPoint = "InitializeModules",
+            CallConvs = new Type[] { typeof(CallConvCdecl) }
+        )]
+        internal static unsafe void InitializeModules(
+            IntPtr osModule,
+            IntPtr* pModuleHeaders,
+            int count,
+            IntPtr* pClasslibFunctions,
+            int nClasslibFunctions
+        )
         {
             RuntimeImports.RhpRegisterOsModule(osModule);
-            TypeManagerHandle[] modules = CreateTypeManagers(osModule, pModuleHeaders, count, pClasslibFunctions, nClasslibFunctions);
+            TypeManagerHandle[] modules = CreateTypeManagers(
+                osModule,
+                pModuleHeaders,
+                count,
+                pClasslibFunctions,
+                nClasslibFunctions
+            );
             object[] gcStaticBaseSpines = new object[count];
 
             for (int i = 0; i < modules.Length; i++)
@@ -39,7 +54,10 @@ namespace Internal.Runtime.CompilerHelpers
                 InitializeGlobalTablesForModule(modules[i], i, gcStaticBaseSpines);
             }
 
-            s_moduleGCStaticsSpines = RuntimeImports.RhHandleAlloc(gcStaticBaseSpines, GCHandleType.Normal);
+            s_moduleGCStaticsSpines = RuntimeImports.RhHandleAlloc(
+                gcStaticBaseSpines,
+                GCHandleType.Normal
+            );
 
             // We are now at a stage where we can use GC statics - publish the list of modules
             // so that the eager constructors can access it.
@@ -62,7 +80,9 @@ namespace Internal.Runtime.CompilerHelpers
         {
             if (outputModules != null)
             {
-                int copyLimit = (s_moduleCount < outputModules.Length ? s_moduleCount : outputModules.Length);
+                int copyLimit = (
+                    s_moduleCount < outputModules.Length ? s_moduleCount : outputModules.Length
+                );
                 for (int copyIndex = 0; copyIndex < copyLimit; copyIndex++)
                 {
                     outputModules[copyIndex] = s_modules[copyIndex];
@@ -71,7 +91,13 @@ namespace Internal.Runtime.CompilerHelpers
             return s_moduleCount;
         }
 
-        private static unsafe TypeManagerHandle[] CreateTypeManagers(IntPtr osModule, IntPtr* pModuleHeaders, int count, IntPtr* pClasslibFunctions, int nClasslibFunctions)
+        private static unsafe TypeManagerHandle[] CreateTypeManagers(
+            IntPtr osModule,
+            IntPtr* pModuleHeaders,
+            int count,
+            IntPtr* pClasslibFunctions,
+            int nClasslibFunctions
+        )
         {
             // Count the number of modules so we can allocate an array to hold the TypeManager objects.
             // At this stage of startup, complex collection classes will not work.
@@ -91,7 +117,12 @@ namespace Internal.Runtime.CompilerHelpers
             {
                 if (pModuleHeaders[i] != IntPtr.Zero)
                 {
-                    modules[moduleIndex] = RuntimeImports.RhpCreateTypeManager(osModule, pModuleHeaders[i], pClasslibFunctions, nClasslibFunctions);
+                    modules[moduleIndex] = RuntimeImports.RhpCreateTypeManager(
+                        osModule,
+                        pModuleHeaders[i],
+                        pClasslibFunctions,
+                        nClasslibFunctions
+                    );
                     moduleIndex++;
                 }
             }
@@ -104,17 +135,30 @@ namespace Internal.Runtime.CompilerHelpers
         /// statics, etc that need initializing. InitializeGlobalTables walks through the modules
         /// and offers each a chance to initialize its global tables.
         /// </summary>
-        private static unsafe void InitializeGlobalTablesForModule(TypeManagerHandle typeManager, int moduleIndex, object[] gcStaticBaseSpines)
+        private static unsafe void InitializeGlobalTablesForModule(
+            TypeManagerHandle typeManager,
+            int moduleIndex,
+            object[] gcStaticBaseSpines
+        )
         {
             // Configure the module indirection cell with the newly created TypeManager. This allows EETypes to find
             // their interface dispatch map tables.
             int length;
-            TypeManagerSlot* section = (TypeManagerSlot*)RuntimeImports.RhGetModuleSection(typeManager, ReadyToRunSectionType.TypeManagerIndirection, out length);
+            TypeManagerSlot* section = (TypeManagerSlot*)
+                RuntimeImports.RhGetModuleSection(
+                    typeManager,
+                    ReadyToRunSectionType.TypeManagerIndirection,
+                    out length
+                );
             section->TypeManager = typeManager;
             section->ModuleIndex = moduleIndex;
 
             // Initialize statics if any are present
-            IntPtr staticsSection = RuntimeImports.RhGetModuleSection(typeManager, ReadyToRunSectionType.GCStaticRegion, out length);
+            IntPtr staticsSection = RuntimeImports.RhGetModuleSection(
+                typeManager,
+                ReadyToRunSectionType.GCStaticRegion,
+                out length
+            );
             if (staticsSection != IntPtr.Zero)
             {
                 Debug.Assert(length % IntPtr.Size == 0);
@@ -123,12 +167,21 @@ namespace Internal.Runtime.CompilerHelpers
 
                 // Call write barrier directly. Assigning object reference does a type check.
                 Debug.Assert((uint)moduleIndex < (uint)gcStaticBaseSpines.Length);
-                ref object rawSpineIndexData = ref Unsafe.As<byte, object>(ref Unsafe.As<RawArrayData>(gcStaticBaseSpines).Data);
-                InternalCalls.RhpAssignRef(ref Unsafe.Add(ref rawSpineIndexData, moduleIndex), spine);
+                ref object rawSpineIndexData = ref Unsafe.As<byte, object>(
+                    ref Unsafe.As<RawArrayData>(gcStaticBaseSpines).Data
+                );
+                InternalCalls.RhpAssignRef(
+                    ref Unsafe.Add(ref rawSpineIndexData, moduleIndex),
+                    spine
+                );
             }
 
             // Initialize frozen object segment for the module with GC present
-            IntPtr frozenObjectSection = RuntimeImports.RhGetModuleSection(typeManager, ReadyToRunSectionType.FrozenObjectRegion, out length);
+            IntPtr frozenObjectSection = RuntimeImports.RhGetModuleSection(
+                typeManager,
+                ReadyToRunSectionType.FrozenObjectRegion,
+                out length
+            );
             if (frozenObjectSection != IntPtr.Zero)
             {
                 Debug.Assert(length % IntPtr.Size == 0);
@@ -136,12 +189,19 @@ namespace Internal.Runtime.CompilerHelpers
             }
         }
 
-        private static unsafe void InitializeModuleFrozenObjectSegment(IntPtr segmentStart, int length)
+        private static unsafe void InitializeModuleFrozenObjectSegment(
+            IntPtr segmentStart,
+            int length
+        )
         {
-            if (RuntimeImports.RhpRegisterFrozenSegment(segmentStart, (IntPtr)length) == IntPtr.Zero)
+            if (
+                RuntimeImports.RhpRegisterFrozenSegment(segmentStart, (IntPtr)length) == IntPtr.Zero
+            )
             {
                 // This should only happen if we ran out of memory.
-                RuntimeExceptionHelpers.FailFast("Failed to register frozen object segment for the module.");
+                RuntimeExceptionHelpers.FailFast(
+                    "Failed to register frozen object segment for the module."
+                );
             }
         }
 
@@ -153,9 +213,13 @@ namespace Internal.Runtime.CompilerHelpers
             }
         }
 
-        private static unsafe void RunInitializers(TypeManagerHandle typeManager, ReadyToRunSectionType section)
+        private static unsafe void RunInitializers(
+            TypeManagerHandle typeManager,
+            ReadyToRunSectionType section
+        )
         {
-            var initializers = (delegate*<void>*)RuntimeImports.RhGetModuleSection(typeManager, section, out int length);
+            var initializers = (delegate* <void>*)
+                RuntimeImports.RhGetModuleSection(typeManager, section, out int length);
             Debug.Assert(length % IntPtr.Size == 0);
             int count = length / IntPtr.Size;
             for (int i = 0; i < count; i++)
@@ -170,10 +234,16 @@ namespace Internal.Runtime.CompilerHelpers
 
             object[] spine = new object[length / IntPtr.Size];
 
-            ref object rawSpineData = ref Unsafe.As<byte, object>(ref Unsafe.As<RawArrayData>(spine).Data);
+            ref object rawSpineData = ref Unsafe.As<byte, object>(
+                ref Unsafe.As<RawArrayData>(spine).Data
+            );
 
             int currentBase = 0;
-            for (IntPtr* block = (IntPtr*)gcStaticRegionStart; block < (IntPtr*)gcStaticRegionEnd; block++)
+            for (
+                IntPtr* block = (IntPtr*)gcStaticRegionStart;
+                block < (IntPtr*)gcStaticRegionEnd;
+                block++
+            )
             {
                 // Gc Static regions can be shared by modules linked together during compilation. To ensure each
                 // is initialized once, the static region pointer is stored with lowest bit set in the image.
@@ -181,27 +251,37 @@ namespace Internal.Runtime.CompilerHelpers
                 // whose lowest bit is no longer set.
                 IntPtr* pBlock = (IntPtr*)*block;
                 nint blockAddr = *pBlock;
-                if ((blockAddr & GCStaticRegionConstants.Uninitialized) == GCStaticRegionConstants.Uninitialized)
+                if (
+                    (blockAddr & GCStaticRegionConstants.Uninitialized)
+                    == GCStaticRegionConstants.Uninitialized
+                )
                 {
                     object? obj = null;
                     RuntimeImports.RhAllocateNewObject(
                         new IntPtr(blockAddr & ~GCStaticRegionConstants.Mask),
                         (uint)GC_ALLOC_FLAGS.GC_ALLOC_PINNED_OBJECT_HEAP,
-                        Unsafe.AsPointer(ref obj));
+                        Unsafe.AsPointer(ref obj)
+                    );
                     if (obj == null)
                     {
                         RuntimeExceptionHelpers.FailFast("Failed allocating GC static bases");
                     }
 
-
-                    if ((blockAddr & GCStaticRegionConstants.HasPreInitializedData) == GCStaticRegionConstants.HasPreInitializedData)
+                    if (
+                        (blockAddr & GCStaticRegionConstants.HasPreInitializedData)
+                        == GCStaticRegionConstants.HasPreInitializedData
+                    )
                     {
                         // The next pointer is preinitialized data blob that contains preinitialized static GC fields,
                         // which are pointer relocs to GC objects in frozen segment.
                         // It actually has all GC fields including non-preinitialized fields and we simply copy over the
                         // entire blob to this object, overwriting everything.
                         IntPtr pPreInitDataAddr = *(pBlock + 1);
-                        RuntimeImports.RhBulkMoveWithWriteBarrier(ref obj.GetRawData(), ref *(byte *)pPreInitDataAddr, obj.GetRawObjectDataSize());
+                        RuntimeImports.RhBulkMoveWithWriteBarrier(
+                            ref obj.GetRawData(),
+                            ref *(byte*)pPreInitDataAddr,
+                            obj.GetRawObjectDataSize()
+                        );
                     }
 
                     // Call write barrier directly. Assigning object reference does a type check.

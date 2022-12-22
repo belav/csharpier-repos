@@ -14,10 +14,7 @@ namespace System.Security.Cryptography.Pkcs
         // Constructors
         //
 
-        public ContentInfo(byte[] content)
-            : this(Oids.Pkcs7DataOid.CopyOid(), content)
-        {
-        }
+        public ContentInfo(byte[] content) : this(Oids.Pkcs7DataOid.CopyOid(), content) { }
 
         public ContentInfo(Oid contentType, byte[] content)
         {

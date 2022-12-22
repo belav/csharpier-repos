@@ -21,27 +21,46 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal sealed class SimpleProgramNamedTypeSymbol : SourceMemberContainerTypeSymbol
     {
-        internal SimpleProgramNamedTypeSymbol(NamespaceSymbol globalNamespace, MergedTypeDeclaration declaration, BindingDiagnosticBag diagnostics)
-            : base(globalNamespace, declaration, diagnostics)
+        internal SimpleProgramNamedTypeSymbol(
+            NamespaceSymbol globalNamespace,
+            MergedTypeDeclaration declaration,
+            BindingDiagnosticBag diagnostics
+        ) : base(globalNamespace, declaration, diagnostics)
         {
             Debug.Assert(globalNamespace.IsGlobalNamespace);
             Debug.Assert(declaration.Kind == DeclarationKind.SimpleProgram);
-            Debug.Assert(declaration.Name == WellKnownMemberNames.TopLevelStatementsEntryPointTypeName);
+            Debug.Assert(
+                declaration.Name == WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
+            );
 
             state.NotePartComplete(CompletionPart.EnumUnderlyingType); // No work to do for this.
         }
 
-        internal static SynthesizedSimpleProgramEntryPointSymbol? GetSimpleProgramEntryPoint(CSharpCompilation compilation)
+        internal static SynthesizedSimpleProgramEntryPointSymbol? GetSimpleProgramEntryPoint(
+            CSharpCompilation compilation
+        )
         {
-            return (SynthesizedSimpleProgramEntryPointSymbol?)GetSimpleProgramNamedTypeSymbol(compilation)?.GetMembersAndInitializers().NonTypeMembers[0];
+            return (SynthesizedSimpleProgramEntryPointSymbol?)
+                GetSimpleProgramNamedTypeSymbol(
+                    compilation
+                )?.GetMembersAndInitializers().NonTypeMembers[0];
         }
 
-        private static SimpleProgramNamedTypeSymbol? GetSimpleProgramNamedTypeSymbol(CSharpCompilation compilation)
+        private static SimpleProgramNamedTypeSymbol? GetSimpleProgramNamedTypeSymbol(
+            CSharpCompilation compilation
+        )
         {
-            return compilation.SourceModule.GlobalNamespace.GetTypeMembers(WellKnownMemberNames.TopLevelStatementsEntryPointTypeName).OfType<SimpleProgramNamedTypeSymbol>().SingleOrDefault();
+            return compilation.SourceModule.GlobalNamespace
+                .GetTypeMembers(WellKnownMemberNames.TopLevelStatementsEntryPointTypeName)
+                .OfType<SimpleProgramNamedTypeSymbol>()
+                .SingleOrDefault();
         }
 
-        internal static SynthesizedSimpleProgramEntryPointSymbol? GetSimpleProgramEntryPoint(CSharpCompilation compilation, CompilationUnitSyntax compilationUnit, bool fallbackToMainEntryPoint)
+        internal static SynthesizedSimpleProgramEntryPointSymbol? GetSimpleProgramEntryPoint(
+            CSharpCompilation compilation,
+            CompilationUnitSyntax compilationUnit,
+            bool fallbackToMainEntryPoint
+        )
         {
             var type = GetSimpleProgramNamedTypeSymbol(compilation);
 
@@ -54,17 +73,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             foreach (SynthesizedSimpleProgramEntryPointSymbol entryPoint in entryPoints)
             {
-                if (entryPoint.SyntaxTree == compilationUnit.SyntaxTree && entryPoint.SyntaxNode == compilationUnit)
+                if (
+                    entryPoint.SyntaxTree == compilationUnit.SyntaxTree
+                    && entryPoint.SyntaxNode == compilationUnit
+                )
                 {
                     return entryPoint;
                 }
             }
 
-            return fallbackToMainEntryPoint ? (SynthesizedSimpleProgramEntryPointSymbol)entryPoints[0] : null;
+            return fallbackToMainEntryPoint
+                ? (SynthesizedSimpleProgramEntryPointSymbol)entryPoints[0]
+                : null;
         }
 
-        protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData)
-            => throw ExceptionUtilities.Unreachable;
+        protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData) =>
+            throw ExceptionUtilities.Unreachable;
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
@@ -82,26 +106,39 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return NoLocation.Singleton; // No explicit base list
         }
 
-        internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics
-            => this.DeclaringCompilation.GetSpecialType(Microsoft.CodeAnalysis.SpecialType.System_Object);
+        internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics =>
+            this.DeclaringCompilation.GetSpecialType(
+                Microsoft.CodeAnalysis.SpecialType.System_Object
+            );
 
         protected override void CheckBase(BindingDiagnosticBag diagnostics)
         {
-            // check that System.Object is available. 
-            Binder.GetSpecialType(this.DeclaringCompilation, SpecialType.System_Object, NoLocation.Singleton, diagnostics);
+            // check that System.Object is available.
+            Binder.GetSpecialType(
+                this.DeclaringCompilation,
+                SpecialType.System_Object,
+                NoLocation.Singleton,
+                diagnostics
+            );
         }
 
-        internal override NamedTypeSymbol GetDeclaredBaseType(ConsList<TypeSymbol> basesBeingResolved)
+        internal override NamedTypeSymbol GetDeclaredBaseType(
+            ConsList<TypeSymbol> basesBeingResolved
+        )
         {
             return BaseTypeNoUseSiteDiagnostics;
         }
 
-        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(ConsList<TypeSymbol> basesBeingResolved)
+        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
+            ConsList<TypeSymbol> basesBeingResolved
+        )
         {
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
-        internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(ConsList<TypeSymbol> basesBeingResolved)
+        internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
+            ConsList<TypeSymbol> basesBeingResolved
+        )
         {
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
@@ -193,14 +230,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool HasCodeAnalysisEmbeddedAttribute => false;
 
-        protected override MembersAndInitializers BuildMembersAndInitializers(BindingDiagnosticBag diagnostics)
+        protected override MembersAndInitializers BuildMembersAndInitializers(
+            BindingDiagnosticBag diagnostics
+        )
         {
             bool reportAnError = false;
             foreach (var singleDecl in declaration.Declarations)
             {
                 if (reportAnError)
                 {
-                    Binder.Error(diagnostics, ErrorCode.ERR_SimpleProgramMultipleUnitsWithTopLevelStatements, singleDecl.NameLocation);
+                    Binder.Error(
+                        diagnostics,
+                        ErrorCode.ERR_SimpleProgramMultipleUnitsWithTopLevelStatements,
+                        singleDecl.NameLocation
+                    );
                 }
                 else
                 {
@@ -208,17 +251,37 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
 
-            return new MembersAndInitializers(nonTypeMembers: declaration.Declarations.SelectAsArray<SingleTypeDeclaration, Symbol>(singleDeclaration => new SynthesizedSimpleProgramEntryPointSymbol(this, singleDeclaration, diagnostics)),
-                                              staticInitializers: ImmutableArray<ImmutableArray<FieldOrPropertyInitializer>>.Empty,
-                                              instanceInitializers: ImmutableArray<ImmutableArray<FieldOrPropertyInitializer>>.Empty,
-                                              haveIndexers: false,
-                                              isNullableEnabledForInstanceConstructorsAndFields: false,
-                                              isNullableEnabledForStaticConstructorsAndFields: false);
+            return new MembersAndInitializers(
+                nonTypeMembers: declaration.Declarations.SelectAsArray<
+                    SingleTypeDeclaration,
+                    Symbol
+                >(
+                    singleDeclaration =>
+                        new SynthesizedSimpleProgramEntryPointSymbol(
+                            this,
+                            singleDeclaration,
+                            diagnostics
+                        )
+                ),
+                staticInitializers: ImmutableArray<
+                    ImmutableArray<FieldOrPropertyInitializer>
+                >.Empty,
+                instanceInitializers: ImmutableArray<
+                    ImmutableArray<FieldOrPropertyInitializer>
+                >.Empty,
+                haveIndexers: false,
+                isNullableEnabledForInstanceConstructorsAndFields: false,
+                isNullableEnabledForStaticConstructorsAndFields: false
+            );
         }
 
         public override bool IsImplicitlyDeclared => false;
 
-        internal override bool IsDefinedInSourceTree(SyntaxTree tree, TextSpan? definedWithinSpan, CancellationToken cancellationToken)
+        internal override bool IsDefinedInSourceTree(
+            SyntaxTree tree,
+            TextSpan? definedWithinSpan,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var member in GetMembersAndInitializers().NonTypeMembers)
             {
@@ -233,12 +296,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return false;
         }
 
-        internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+        internal override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        )
         {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
-            AddSynthesizedAttribute(ref attributes,
-                this.DeclaringCompilation.TrySynthesizeAttribute(WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor));
+            AddSynthesizedAttribute(
+                ref attributes,
+                this.DeclaringCompilation.TrySynthesizeAttribute(
+                    WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor
+                )
+            );
         }
 
         /// <summary>

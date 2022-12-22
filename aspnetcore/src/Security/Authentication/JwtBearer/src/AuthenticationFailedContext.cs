@@ -17,8 +17,8 @@ public class AuthenticationFailedContext : ResultContext<JwtBearerOptions>
     public AuthenticationFailedContext(
         HttpContext context,
         AuthenticationScheme scheme,
-        JwtBearerOptions options)
-        : base(context, scheme, options) { }
+        JwtBearerOptions options
+    ) : base(context, scheme, options) { }
 
     /// <summary>
     /// Gets or sets the exception associated with the authentication failure.

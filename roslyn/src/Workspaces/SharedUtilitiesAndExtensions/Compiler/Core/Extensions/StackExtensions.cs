@@ -28,8 +28,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 stack.Push(v);
         }
 
-        internal static void PushReverse<T, U>(this Stack<T> stack, IList<U> range)
-            where U : T
+        internal static void PushReverse<T, U>(this Stack<T> stack, IList<U> range) where U : T
         {
             Contract.ThrowIfNull(stack);
             Contract.ThrowIfNull(range);

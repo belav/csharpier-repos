@@ -39,7 +39,12 @@ namespace System.Runtime.InteropServices.JavaScript
         [MethodImpl(MethodImplOptions.NoInlining)] // https://github.com/dotnet/runtime/issues/71425
         public static IntPtr CreateCSOwnedObject(string typeName, object[] parms)
         {
-            Interop.Runtime.CreateCSOwnedObjectRef(typeName, parms, out int exception, out object res);
+            Interop.Runtime.CreateCSOwnedObjectRef(
+                typeName,
+                parms,
+                out int exception,
+                out object res
+            );
             if (exception != 0)
                 throw new JSException((string)res);
 

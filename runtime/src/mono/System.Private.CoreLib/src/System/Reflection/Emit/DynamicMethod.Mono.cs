@@ -63,9 +63,19 @@ namespace System.Reflection.Emit
         public DynamicILInfo GetDynamicILInfo() => _dynamicILInfo ??= new DynamicILInfo(this);
 
         public ILGenerator GetILGenerator(int streamSize) =>
-            _ilGenerator ??= new ILGenerator(Module, new DynamicMethodTokenGenerator(this), streamSize);
+            _ilGenerator ??= new ILGenerator(
+                Module,
+                new DynamicMethodTokenGenerator(this),
+                streamSize
+            );
 
-        public override object? Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object? Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             if ((CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs)
                 throw new NotSupportedException(SR.NotSupported_CallToVarArg);
@@ -84,7 +94,12 @@ namespace System.Reflection.Emit
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void create_dynamic_method(DynamicMethod m, string name, MethodAttributes attributes, CallingConventions callingConvention);
+        private static extern void create_dynamic_method(
+            DynamicMethod m,
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention
+        );
 
         private void CreateDynMethod()
         {
@@ -94,7 +109,9 @@ namespace System.Reflection.Emit
                 if (_mhandle.Value == IntPtr.Zero)
                 {
                     if (_ilGenerator == null || _ilGenerator.ILOffset == 0)
-                        throw new InvalidOperationException(SR.Format(SR.InvalidOperation_BadEmptyMethodBody, Name));
+                        throw new InvalidOperationException(
+                            SR.Format(SR.InvalidOperation_BadEmptyMethodBody, Name)
+                        );
 
                     _ilGenerator.label_fixup(this);
 

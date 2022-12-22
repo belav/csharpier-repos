@@ -17,15 +17,30 @@ internal class RoutePatternClassifier : IAspNetCoreEmbeddedLanguageClassifier
 {
     public void RegisterClassifications(AspNetCoreEmbeddedLanguageClassificationContext context)
     {
-        if (!WellKnownTypes.TryGetOrCreate(context.SemanticModel.Compilation, out var wellKnownTypes))
+        if (
+            !WellKnownTypes.TryGetOrCreate(
+                context.SemanticModel.Compilation,
+                out var wellKnownTypes
+            )
+        )
         {
             return;
         }
 
-        var usageContext = RoutePatternUsageDetector.BuildContext(context.SyntaxToken, context.SemanticModel, wellKnownTypes, context.CancellationToken);
+        var usageContext = RoutePatternUsageDetector.BuildContext(
+            context.SyntaxToken,
+            context.SemanticModel,
+            wellKnownTypes,
+            context.CancellationToken
+        );
 
-        var virtualChars = CSharpVirtualCharService.Instance.TryConvertToVirtualChars(context.SyntaxToken);
-        var tree = RoutePatternParser.TryParse(virtualChars, supportTokenReplacement: usageContext.IsMvcAttribute);
+        var virtualChars = CSharpVirtualCharService.Instance.TryConvertToVirtualChars(
+            context.SyntaxToken
+        );
+        var tree = RoutePatternParser.TryParse(
+            virtualChars,
+            supportTokenReplacement: usageContext.IsMvcAttribute
+        );
 
         if (tree != null)
         {
@@ -158,6 +173,7 @@ internal class RoutePatternClassifier : IAspNetCoreEmbeddedLanguageClassifier
     // Just for unit tests. Don't use in production code.
     internal static class TestAccessor
     {
-        public static Assembly ExternalAccessAssembly => typeof(IAspNetCoreEmbeddedLanguageClassifier).Assembly;
+        public static Assembly ExternalAccessAssembly =>
+            typeof(IAspNetCoreEmbeddedLanguageClassifier).Assembly;
     }
 }

@@ -184,7 +184,9 @@ namespace System.Threading
             // any given time.  We also require that the sync entry index has not been already set.
             Debug.Assert(SyncTable.s_lock.IsAcquired);
             Debug.Assert((syncIndex & MASK_HASHCODE_INDEX) == syncIndex);
-            int oldBits, newBits, hashOrIndex;
+            int oldBits,
+                newBits,
+                hashOrIndex;
 
             do
             {
@@ -207,8 +209,7 @@ namespace System.Threading
                 // Store the sync entry index
                 newBits &= ~(BIT_SBLK_IS_HASHCODE | MASK_HASHCODE_INDEX);
                 newBits |= syncIndex;
-            }
-            while (Interlocked.CompareExchange(ref *pHeader, newBits, oldBits) != oldBits);
+            } while (Interlocked.CompareExchange(ref *pHeader, newBits, oldBits) != oldBits);
         }
     }
 }

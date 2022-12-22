@@ -19,44 +19,52 @@ namespace DebuggerTests;
 
 class FirefoxInspectorClient : InspectorClient
 {
-    internal string? BreakpointActorId {get; set;}
-    internal string? ConsoleActorId {get; set;}
-    internal string? ThreadActorId {get; set;}
+    internal string? BreakpointActorId { get; set; }
+    internal string? ConsoleActorId { get; set; }
+    internal string? ThreadActorId { get; set; }
     private ClientWebSocket? _clientSocket;
 
-    public FirefoxInspectorClient(ILogger logger) : base(logger)
-    {
-    }
+    public FirefoxInspectorClient(ILogger logger) : base(logger) { }
 
-    protected override async Task<WasmDebuggerConnection> SetupConnection(Uri webserverUri, CancellationToken token)
+    protected override async Task<WasmDebuggerConnection> SetupConnection(
+        Uri webserverUri,
+        CancellationToken token
+    )
     {
         _clientSocket = await ConnectToWebServer(webserverUri, token);
 
         ArraySegment<byte> buff = new(new byte[10]);
-        _ = _clientSocket.ReceiveAsync(buff, token)
-                        .ContinueWith(async t =>
-                        {
-                            if (token.IsCancellationRequested)
-                                return;
+        _ = _clientSocket
+            .ReceiveAsync(buff, token)
+            .ContinueWith(
+                async t =>
+                {
+                    if (token.IsCancellationRequested)
+                        return;
 
-                            logger.LogTrace($"** client socket closed, so stopping the client loop too");
-                            // Webserver connection is closed
-                            // So, stop the loop here too
-                            // _clientInitiatedClose.TrySetResult();
-                            await ShutdownAsync(token);
-                        }, TaskContinuationOptions.NotOnRanToCompletion | TaskContinuationOptions.RunContinuationsAsynchronously)
-                        .ConfigureAwait(false);
+                    logger.LogTrace($"** client socket closed, so stopping the client loop too");
+                    // Webserver connection is closed
+                    // So, stop the loop here too
+                    // _clientInitiatedClose.TrySetResult();
+                    await ShutdownAsync(token);
+                },
+                TaskContinuationOptions.NotOnRanToCompletion
+                    | TaskContinuationOptions.RunContinuationsAsynchronously
+            )
+            .ConfigureAwait(false);
 
         RunLoopStopped += (_, _) =>
         {
-            logger.LogDebug($"RunLoop stopped, closing the websocket, state: {_clientSocket.State}");
+            logger.LogDebug(
+                $"RunLoop stopped, closing the websocket, state: {_clientSocket.State}"
+            );
             if (_clientSocket.State == WebSocketState.Open)
             {
                 _clientSocket.Abort();
             }
         };
 
-        IPEndPoint endpoint = new (IPAddress.Parse("127.0.0.1"), DebuggerTestBase.FirefoxProxyPort);
+        IPEndPoint endpoint = new(IPAddress.Parse("127.0.0.1"), DebuggerTestBase.FirefoxProxyPort);
         try
         {
             TcpClient tcpClient = new();
@@ -77,31 +85,78 @@ class FirefoxInspectorClient : InspectorClient
         if (command.Value?["result"]?["value"]?["tabs"] != null)
         {
             var toCmd = command.Value?["result"]?["value"]?["tabs"]?[0]?["actor"]?.Value<string>();
-            var res = await SendCommand("getWatcher", JObject.FromObject(new { type = "getWatcher", isServerTargetSwitchingEnabled = true, to = toCmd}), token);
+            var res = await SendCommand(
+                "getWatcher",
+                JObject.FromObject(
+                    new
+                    {
+                        type = "getWatcher",
+                        isServerTargetSwitchingEnabled = true,
+                        to = toCmd
+                    }
+                ),
+                token
+            );
             var watcherId = res.Value?["result"]?["value"]?["actor"]?.Value<string>();
-            res = await SendCommand("watchResources", JObject.FromObject(new { type = "watchResources", resourceTypes = new JArray("console-message"), to = watcherId}), token);
-            res = await SendCommand("watchTargets", JObject.FromObject(new { type = "watchTargets", targetType = "frame", to = watcherId}), token);
+            res = await SendCommand(
+                "watchResources",
+                JObject.FromObject(
+                    new
+                    {
+                        type = "watchResources",
+                        resourceTypes = new JArray("console-message"),
+                        to = watcherId
+                    }
+                ),
+                token
+            );
+            res = await SendCommand(
+                "watchTargets",
+                JObject.FromObject(
+                    new
+                    {
+                        type = "watchTargets",
+                        targetType = "frame",
+                        to = watcherId
+                    }
+                ),
+                token
+            );
             UpdateTarget(res.Value?["result"]?["value"]?["target"] as JObject);
-            await SendCommand("attach", JObject.FromObject(new
-                {
-                    type = "attach",
-                    options =  JObject.FromObject(new
-                        {
-                            pauseOnExceptions = false,
-                            ignoreCaughtExceptions = true,
-                            shouldShowOverlay = true,
-                            shouldIncludeSavedFrames = true,
-                            shouldIncludeAsyncLiveFrames = false,
-                            skipBreakpoints = false,
-                            logEventBreakpoints = false,
-                            observeAsmJS = true,
-                            breakpoints = new JArray(),
-                            eventBreakpoints = new JArray()
-                        }),
-                    to = ThreadActorId
-                }), token);
-            res = await SendCommand("getBreakpointListActor", JObject.FromObject(new { type = "getBreakpointListActor", to = watcherId}), token);
-            BreakpointActorId = res.Value?["result"]?["value"]?["breakpointList"]?["actor"]?.Value<string>();
+            await SendCommand(
+                "attach",
+                JObject.FromObject(
+                    new
+                    {
+                        type = "attach",
+                        options = JObject.FromObject(
+                            new
+                            {
+                                pauseOnExceptions = false,
+                                ignoreCaughtExceptions = true,
+                                shouldShowOverlay = true,
+                                shouldIncludeSavedFrames = true,
+                                shouldIncludeAsyncLiveFrames = false,
+                                skipBreakpoints = false,
+                                logEventBreakpoints = false,
+                                observeAsmJS = true,
+                                breakpoints = new JArray(),
+                                eventBreakpoints = new JArray()
+                            }
+                        ),
+                        to = ThreadActorId
+                    }
+                ),
+                token
+            );
+            res = await SendCommand(
+                "getBreakpointListActor",
+                JObject.FromObject(new { type = "getBreakpointListActor", to = watcherId }),
+                token
+            );
+            BreakpointActorId = res.Value?["result"]?["value"]?["breakpointList"]?[
+                "actor"
+            ]?.Value<string>();
         }
     }
 
@@ -114,7 +169,10 @@ class FirefoxInspectorClient : InspectorClient
             return onEvent(method, res, token);
         }
 
-        if (res["type"]?.Value<string>() == "target-available-form" && res["target"] is JObject target)
+        if (
+            res["type"]?.Value<string>() == "target-available-form"
+            && res["target"] is JObject target
+        )
         {
             UpdateTarget(target);
             return Task.CompletedTask;
@@ -132,7 +190,9 @@ class FirefoxInspectorClient : InspectorClient
                 if (pending_cmds.Remove(messageId, out var item))
                     item.SetResult(Result.FromJsonFirefox(res));
                 else
-                    logger.LogDebug($"HandleMessage: Could not find any pending cmd for {messageId}. msg: {msg}");
+                    logger.LogDebug(
+                        $"HandleMessage: Could not find any pending cmd for {messageId}. msg: {msg}"
+                    );
             }
             return null;
         }
@@ -160,20 +220,28 @@ class FirefoxInspectorClient : InspectorClient
                 }
                 case "resource-available-form":
                 {
-                    if (res["resources"]?[0]?["resourceType"]?.Value<string>() == "console-message" /*&& res["resources"][0]["arguments"] != null*/)
+                    if (
+                        res["resources"]?[0]?["resourceType"]?.Value<string>() == "console-message" /*&& res["resources"][0]["arguments"] != null*/
+                    )
                     {
                         method = "Runtime.consoleAPICalled";
                         var args = new JArray();
                         // FIXME: unnecessary alloc
-                        foreach (JToken? argument in res["resources"]?[0]?["message"]?["arguments"]?.Value<JArray>() ?? new JArray())
+                        foreach (
+                            JToken? argument in res["resources"]?[0]?["message"]?[
+                                "arguments"
+                            ]?.Value<JArray>() ?? new JArray()
+                        )
                         {
-                            args.Add(JObject.FromObject(new { value = argument.Value<string>()}));
+                            args.Add(JObject.FromObject(new { value = argument.Value<string>() }));
                         }
-                        res = JObject.FromObject(new
+                        res = JObject.FromObject(
+                            new
                             {
-                                type =  res["resources"]?[0]?["message"]?["level"]?.Value<string>(),
+                                type = res["resources"]?[0]?["message"]?["level"]?.Value<string>(),
                                 args
-                            });
+                            }
+                        );
                     }
                     break;
                 }
@@ -183,7 +251,12 @@ class FirefoxInspectorClient : InspectorClient
         return null;
     }
 
-    public override Task<Result> SendCommand(SessionId sessionId, string method, JObject? args, CancellationToken token)
+    public override Task<Result> SendCommand(
+        SessionId sessionId,
+        string method,
+        JObject? args,
+        CancellationToken token
+    )
     {
         if (args == null)
             args = new JObject();

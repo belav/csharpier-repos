@@ -68,10 +68,7 @@ namespace System.Threading
 
         internal static ulong CurrentOSThreadId
         {
-            get
-            {
-                return RuntimeImports.RhCurrentOSThreadId();
-            }
+            get { return RuntimeImports.RhCurrentOSThreadId(); }
         }
 
         // Slow path executed once per thread
@@ -115,7 +112,10 @@ namespace System.Threading
         {
             get
             {
-                return ((ThreadState)_threadState & (ThreadState.Unstarted | ThreadState.Stopped | ThreadState.Aborted)) == 0;
+                return (
+                        (ThreadState)_threadState
+                        & (ThreadState.Unstarted | ThreadState.Stopped | ThreadState.Aborted)
+                    ) == 0;
             }
         }
 
@@ -146,7 +146,16 @@ namespace System.Threading
                 {
                     int threadState = SetThreadStateBit(ThreadState.Background);
                     // was foreground and has started
-                    if ((threadState & ((int)ThreadState.Background | (int)ThreadState.Unstarted | (int)ThreadState.Stopped)) == 0)
+                    if (
+                        (
+                            threadState
+                            & (
+                                (int)ThreadState.Background
+                                | (int)ThreadState.Unstarted
+                                | (int)ThreadState.Stopped
+                            )
+                        ) == 0
+                    )
                     {
                         DecrementRunningForeground();
                     }
@@ -155,7 +164,16 @@ namespace System.Threading
                 {
                     int threadState = ClearThreadStateBit(ThreadState.Background);
                     // was background and has started
-                    if ((threadState & ((int)ThreadState.Background | (int)ThreadState.Unstarted | (int)ThreadState.Stopped)) == (int)ThreadState.Background)
+                    if (
+                        (
+                            threadState
+                            & (
+                                (int)ThreadState.Background
+                                | (int)ThreadState.Unstarted
+                                | (int)ThreadState.Stopped
+                            )
+                        ) == (int)ThreadState.Background
+                    )
                     {
                         IncrementRunningForeground();
                         _mayNeedResetForThreadPool = true;
@@ -250,13 +268,17 @@ namespace System.Threading
 
         private bool GetThreadStateBit(ThreadState bit)
         {
-            Debug.Assert((bit & ThreadState.Stopped) == 0, "ThreadState.Stopped bit may be stale; use GetThreadState instead.");
+            Debug.Assert(
+                (bit & ThreadState.Stopped) == 0,
+                "ThreadState.Stopped bit may be stale; use GetThreadState instead."
+            );
             return (_threadState & (int)bit) != 0;
         }
 
         private int SetThreadStateBit(ThreadState bit)
         {
-            int oldState, newState;
+            int oldState,
+                newState;
             do
             {
                 oldState = _threadState;
@@ -267,7 +289,8 @@ namespace System.Threading
 
         private int ClearThreadStateBit(ThreadState bit)
         {
-            int oldState, newState;
+            int oldState,
+                newState;
             do
             {
                 oldState = _threadState;
@@ -299,7 +322,8 @@ namespace System.Threading
                 throw new ArgumentOutOfRangeException(
                     nameof(millisecondsTimeout),
                     millisecondsTimeout,
-                    SR.ArgumentOutOfRange_NeedNonNegOrNegative1);
+                    SR.ArgumentOutOfRange_NeedNonNegOrNegative1
+                );
             }
             return millisecondsTimeout;
         }
@@ -481,7 +505,9 @@ namespace System.Threading
             Debug.Assert(ProcessorIdRefreshRate <= ProcessorIdCacheCountDownMask);
 
             // Mask with int.MaxValue to ensure the execution Id is not negative
-            t_currentProcessorIdCache = ((currentProcessorId << ProcessorIdCacheShift) & int.MaxValue) + ProcessorIdRefreshRate;
+            t_currentProcessorIdCache =
+                ((currentProcessorId << ProcessorIdCacheShift) & int.MaxValue)
+                + ProcessorIdRefreshRate;
 
             return currentProcessorId;
         }

@@ -18,21 +18,20 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseSystemHashCode)]
-    public partial class UseSystemHashCodeTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class UseSystemHashCodeTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseSystemHashCodeTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        public UseSystemHashCodeTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new UseSystemHashCodeDiagnosticAnalyzer(), new UseSystemHashCodeCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (new UseSystemHashCodeDiagnosticAnalyzer(), new UseSystemHashCodeCodeFixProvider());
 
         [Fact]
         public async Task TestDerivedClassWithFieldWithBase()
         {
             await TestInRegularAndScript1Async(
-@"namespace System { public struct HashCode { } }
+                @"namespace System { public struct HashCode { } }
 
 class B
 {
@@ -51,7 +50,7 @@ class C : B
         return hashCode;
     }
 }",
-@"namespace System { public struct HashCode { } }
+                @"namespace System { public struct HashCode { } }
 
 class B
 {
@@ -66,14 +65,15 @@ class C : B
     {
         return System.HashCode.Combine(base.GetHashCode(), j);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestDerivedClassWithFieldWithNoBase()
         {
             await TestInRegularAndScript1Async(
-@"namespace System { public struct HashCode { } }
+                @"namespace System { public struct HashCode { } }
 
 class B
 {
@@ -91,7 +91,7 @@ class C : B
         return hashCode;
     }
 }",
-@"namespace System { public struct HashCode { } }
+                @"namespace System { public struct HashCode { } }
 
 class B
 {
@@ -106,14 +106,15 @@ class C : B
     {
         return System.HashCode.Combine(j);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestDerivedClassWithNoFieldWithBase()
         {
             await TestInRegularAndScript1Async(
-@"namespace System { public struct HashCode { } }
+                @"namespace System { public struct HashCode { } }
 
 class B
 {
@@ -131,7 +132,7 @@ class C : B
         return hashCode;
     }
 }",
-@"namespace System { public struct HashCode { } }
+                @"namespace System { public struct HashCode { } }
 
 class B
 {
@@ -146,14 +147,15 @@ class C : B
     {
         return System.HashCode.Combine(base.GetHashCode());
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFieldAndProp()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -170,7 +172,7 @@ class C
         return hashCode;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -183,14 +185,15 @@ class C
     {
         return System.HashCode.Combine(i, S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestUnchecked()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -210,7 +213,7 @@ class C
         }
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -223,14 +226,15 @@ class C
     {
         return System.HashCode.Combine(i, S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotOnNonGetHashCode()
         {
             await TestMissingAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -246,14 +250,15 @@ class C
         hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
         return hashCode;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotWithoutReturn()
         {
             await TestMissingAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -268,14 +273,15 @@ class C
         hashCode = hashCode * -1521134295 + i.GetHashCode();
         hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotWithoutLocal()
         {
             await TestMissingAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -290,14 +296,15 @@ class C
         hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
         return hashCode;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotWithMultipleLocals()
         {
             await TestMissingAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -313,14 +320,15 @@ class C
         hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
         return hashCode;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotWithoutInitializer()
         {
             await TestMissingAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -336,14 +344,15 @@ class C
         hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
         return hashCode;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotReturningAccumulator()
         {
             await TestMissingAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -359,14 +368,15 @@ class C
         hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
         return 0;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAcumulatorInitializedToField()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -382,7 +392,7 @@ class C
         return hashCode;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -395,14 +405,15 @@ class C
     {
         return System.HashCode.Combine(i, S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAcumulatorInitializedToHashedField()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -418,7 +429,7 @@ class C
         return hashCode;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -431,14 +442,15 @@ class C
     {
         return System.HashCode.Combine(i, S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingOnThisGetHashCode()
         {
             await TestMissingAsync(
-@"namespace System { public struct HashCode { } }
+                @"namespace System { public struct HashCode { } }
 
 class B
 {
@@ -456,14 +468,15 @@ class C : B
         hashCode = hashCode * -1521134295 + j.GetHashCode();
         return hashCode;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWithNoSystemHashCode()
         {
             await TestMissingAsync(
-@"
+                @"
 class B
 {
     public override int GetHashCode() => 0;
@@ -480,14 +493,15 @@ class C : B
         hashCode = hashCode * -1521134295 + j.GetHashCode();
         return hashCode;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestDirectNullCheck1()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -504,7 +518,7 @@ class C
         return hashCode;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -517,14 +531,15 @@ class C
     {
         return System.HashCode.Combine(i, S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestDirectNullCheck2()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -541,7 +556,7 @@ class C
         return hashCode;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -554,14 +569,15 @@ class C
     {
         return System.HashCode.Combine(i, S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestInt64Pattern()
         {
             await TestInRegularAndScript1Async(
-@"namespace System { public struct HashCode { } }
+                @"namespace System { public struct HashCode { } }
 
 class C
 {
@@ -574,7 +590,7 @@ class C
         return hashCode;
     }
 }",
-@"namespace System { public struct HashCode { } }
+                @"namespace System { public struct HashCode { } }
 
 class C
 {
@@ -584,14 +600,15 @@ class C
     {
         return System.HashCode.Combine(j);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestInt64Pattern2()
         {
             await TestInRegularAndScript1Async(
-@"namespace System { public struct HashCode { } }
+                @"namespace System { public struct HashCode { } }
 
 class C
 {
@@ -604,7 +621,7 @@ class C
         return (int)hashCode;
     }
 }",
-@"namespace System { public struct HashCode { } }
+                @"namespace System { public struct HashCode { } }
 
 class C
 {
@@ -614,14 +631,15 @@ class C
     {
         return System.HashCode.Combine(j);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestTuple()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -635,7 +653,7 @@ class C
         return (i, S).GetHashCode();
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -648,14 +666,15 @@ class C
     {
         return System.HashCode.Combine(i, S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNullable1()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -672,7 +691,7 @@ class C
         return hashCode;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -685,14 +704,15 @@ class C
     {
         return System.HashCode.Combine(i, S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNullable2()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -709,7 +729,7 @@ class C
         return hashCode;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -722,14 +742,15 @@ class C
     {
         return System.HashCode.Combine(i, S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNullable3()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -746,7 +767,7 @@ class C
         return hashCode;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -759,14 +780,15 @@ class C
     {
         return System.HashCode.Combine(i, S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNullable4()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -783,7 +805,7 @@ class C
         return hashCode;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -796,14 +818,15 @@ class C
     {
         return System.HashCode.Combine(i, S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNullable_Enable_1()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 #nullable enable
@@ -822,7 +845,7 @@ class C
         return hashCode;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 #nullable enable
@@ -837,14 +860,15 @@ class C
     {
         return System.HashCode.Combine(i, S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNullable_Enable_2()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 #nullable enable
@@ -863,7 +887,7 @@ class C
         return hashCode;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 #nullable enable
@@ -878,14 +902,15 @@ class C
     {
         return System.HashCode.Combine(i, S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNullable_Enable_3()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 #nullable enable
@@ -904,7 +929,7 @@ class C
         return hashCode;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 #nullable enable
@@ -919,14 +944,15 @@ class C
     {
         return System.HashCode.Combine(i, S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNullable_Enable_4()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 #nullable enable
@@ -945,7 +971,7 @@ class C
         return hashCode;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 #nullable enable
@@ -960,14 +986,15 @@ class C
     {
         return System.HashCode.Combine(i, S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNullable_Disable_1()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 #nullable disable
@@ -986,7 +1013,7 @@ class C
         return hashCode;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 #nullable disable
@@ -1001,14 +1028,15 @@ class C
     {
         return System.HashCode.Combine(i, S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNullable_Disable_2()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 #nullable disable
@@ -1027,7 +1055,7 @@ class C
         return hashCode;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 #nullable disable
@@ -1042,14 +1070,15 @@ class C
     {
         return System.HashCode.Combine(i, S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNullable_Disable_3()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 #nullable disable
@@ -1068,7 +1097,7 @@ class C
         return hashCode;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 #nullable disable
@@ -1083,14 +1112,15 @@ class C
     {
         return System.HashCode.Combine(i, S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNullable_Disable_4()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 #nullable disable
@@ -1109,7 +1139,7 @@ class C
         return hashCode;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 #nullable disable
@@ -1124,14 +1154,15 @@ class C
     {
         return System.HashCode.Combine(i, S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotOnExistingUsageOfSystemHashCode()
         {
             await TestMissingAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -1144,14 +1175,15 @@ class C
     {
         return HashCode.Combine(i, S);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotOnExistingUsageOfSystemHashCode2()
         {
             await TestMissingAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -1167,14 +1199,15 @@ class C
         hash.Add(S);
         return hash.ToHashCode();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(39916, "https://github.com/dotnet/roslyn/issues/39916")]
         public async Task TestManyFields_ImplicitType()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -1196,7 +1229,7 @@ class C
         return hashCode;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -1217,14 +1250,16 @@ class C
         hash.Add(i);
         return hash.ToHashCode();
     }
-}", new TestParameters(options: UseVarTestExtensions.PreferImplicitTypeWithInfo(this)));
+}",
+                new TestParameters(options: UseVarTestExtensions.PreferImplicitTypeWithInfo(this))
+            );
         }
 
         [Fact, WorkItem(39916, "https://github.com/dotnet/roslyn/issues/39916")]
         public async Task TestManyFields_ExplicitType()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -1246,7 +1281,7 @@ class C
         return hashCode;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 namespace System { public struct HashCode { } }
 
 class C 
@@ -1267,14 +1302,15 @@ class C
         hash.Add(i);
         return hash.ToHashCode();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotOnSingleReturnedMember()
         {
             await TestMissingAsync(
-@"namespace System { public struct HashCode { } }
+                @"namespace System { public struct HashCode { } }
 
 class C
 {
@@ -1284,14 +1320,15 @@ class C
     {
         return j;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotOnSingleMemberWithInvokedGetHashCode()
         {
             await TestMissingAsync(
-@"namespace System { public struct HashCode { } }
+                @"namespace System { public struct HashCode { } }
 
 class C
 {
@@ -1301,14 +1338,15 @@ class C
     {
         return j.GetHashCode();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotOnSimpleBaseReturn()
         {
             await TestMissingAsync(
-@"namespace System { public struct HashCode { } }
+                @"namespace System { public struct HashCode { } }
 
 class C
 {
@@ -1318,7 +1356,8 @@ class C
     {
         return base.GetHashCode();
     }
-}");
+}"
+            );
         }
     }
 }

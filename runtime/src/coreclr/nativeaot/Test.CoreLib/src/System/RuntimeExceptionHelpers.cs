@@ -83,19 +83,24 @@ namespace System
         public enum RhFailFastReason
         {
             Unknown = 0,
-            InternalError = 1,                                   // "Runtime internal error"
-            UnhandledException_ExceptionDispatchNotAllowed = 2,  // "Unhandled exception: no handler found before escaping a finally clause or other fail-fast scope."
-            UnhandledException_CallerDidNotHandle = 3,           // "Unhandled exception: no handler found in calling method."
-            ClassLibDidNotTranslateExceptionID = 4,              // "Unable to translate failure into a classlib-specific exception object."
-            UnhandledException = 5,                              // "Unhandled exception: a managed exception was not handled before reaching unmanaged code"
-            UnhandledExceptionFromPInvoke = 6,                   // "Unhandled exception: an unmanaged exception was thrown out of a managed-to-native transition."
+            InternalError = 1, // "Runtime internal error"
+            UnhandledException_ExceptionDispatchNotAllowed = 2, // "Unhandled exception: no handler found before escaping a finally clause or other fail-fast scope."
+            UnhandledException_CallerDidNotHandle = 3, // "Unhandled exception: no handler found in calling method."
+            ClassLibDidNotTranslateExceptionID = 4, // "Unable to translate failure into a classlib-specific exception object."
+            UnhandledException = 5, // "Unhandled exception: a managed exception was not handled before reaching unmanaged code"
+            UnhandledExceptionFromPInvoke = 6, // "Unhandled exception: an unmanaged exception was thrown out of a managed-to-native transition."
         }
 
         // This is the classlib-provided fail-fast function that will be invoked whenever the runtime
         // needs to cause the process to exit. It is the classlib's opportunity to customize the
         // termination behavior in whatever way necessary.
         [RuntimeExport("FailFast")]
-        public static void RuntimeFailFast(RhFailFastReason reason, Exception exception, IntPtr pExAddress, IntPtr pExContext)
+        public static void RuntimeFailFast(
+            RhFailFastReason reason,
+            Exception exception,
+            IntPtr pExAddress,
+            IntPtr pExContext
+        )
         {
             RuntimeImports.RhpFallbackFailFast();
         }
@@ -114,13 +119,9 @@ namespace System
         }
 
         [RuntimeExport("OnFirstChanceException")]
-        internal static void OnFirstChanceException(object e)
-        {
-        }
+        internal static void OnFirstChanceException(object e) { }
 
         [RuntimeExport("OnUnhandledException")]
-        internal static void OnUnhandledException(object e)
-        {
-        }
+        internal static void OnUnhandledException(object e) { }
     }
 }

@@ -33,23 +33,22 @@ namespace Internal.TypeSystem
 
         protected override int ComputeHashCode()
         {
-            return TypeHashingAlgorithms.ComputeMethodHashCode(OwningType.GetHashCode(), Instantiation.ComputeGenericInstanceHashCode(TypeHashingAlgorithms.ComputeNameHashCode(Name)));
+            return TypeHashingAlgorithms.ComputeMethodHashCode(
+                OwningType.GetHashCode(),
+                Instantiation.ComputeGenericInstanceHashCode(
+                    TypeHashingAlgorithms.ComputeNameHashCode(Name)
+                )
+            );
         }
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _methodDef.Context;
-            }
+            get { return _methodDef.Context; }
         }
 
         public override TypeDesc OwningType
         {
-            get
-            {
-                return _methodDef.OwningType;
-            }
+            get { return _methodDef.OwningType; }
         }
 
         private TypeDesc Instantiate(TypeDesc type)
@@ -79,42 +78,27 @@ namespace Internal.TypeSystem
 
         public override Instantiation Instantiation
         {
-            get
-            {
-                return _instantiation;
-            }
+            get { return _instantiation; }
         }
 
         public override bool IsVirtual
         {
-            get
-            {
-                return _methodDef.IsVirtual;
-            }
+            get { return _methodDef.IsVirtual; }
         }
 
         public override bool IsNewSlot
         {
-            get
-            {
-                return _methodDef.IsNewSlot;
-            }
+            get { return _methodDef.IsNewSlot; }
         }
 
         public override bool IsAbstract
         {
-            get
-            {
-                return _methodDef.IsAbstract;
-            }
+            get { return _methodDef.IsAbstract; }
         }
 
         public override bool IsFinal
         {
-            get
-            {
-                return _methodDef.IsFinal;
-            }
+            get { return _methodDef.IsFinal; }
         }
 
         public override bool HasCustomAttribute(string attributeNamespace, string attributeName)
@@ -124,10 +108,7 @@ namespace Internal.TypeSystem
 
         public override bool IsDefaultConstructor
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override MethodDesc GetMethodDefinition()
@@ -142,10 +123,7 @@ namespace Internal.TypeSystem
 
         public override string Name
         {
-            get
-            {
-                return _methodDef.Name;
-            }
+            get { return _methodDef.Name; }
         }
     }
 }

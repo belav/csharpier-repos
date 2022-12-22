@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         // Because of this usage pattern, we can cache information about these 'old' declarations
         // and keep that around as long as they do not change.  For example, we keep a single 'merged
         // declaration' for all those root declarations as well as sets of interesting information
-        // (like the type names in those decls). 
+        // (like the type names in those decls).
         private class Cache
         {
             private readonly DeclarationTable _table;
@@ -44,8 +44,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         Interlocked.CompareExchange(
                             ref _mergedRoot,
-                            MergedNamespaceDeclaration.Create(_table._allOlderRootDeclarations.InInsertionOrder.Select(static lazyRoot => lazyRoot.Value).AsImmutable<SingleNamespaceDeclaration>()),
-                            comparand: null);
+                            MergedNamespaceDeclaration.Create(
+                                _table._allOlderRootDeclarations.InInsertionOrder
+                                    .Select(static lazyRoot => lazyRoot.Value)
+                                    .AsImmutable<SingleNamespaceDeclaration>()
+                            ),
+                            comparand: null
+                        );
                     }
 
                     return _mergedRoot;
@@ -57,7 +62,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 get
                 {
                     if (_typeNames is null)
-                        Interlocked.CompareExchange(ref _typeNames, GetTypeNames(this.MergedRoot), comparand: null);
+                        Interlocked.CompareExchange(
+                            ref _typeNames,
+                            GetTypeNames(this.MergedRoot),
+                            comparand: null
+                        );
 
                     return _typeNames;
                 }
@@ -68,7 +77,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 get
                 {
                     if (_namespaceNames is null)
-                        Interlocked.CompareExchange(ref _namespaceNames, GetNamespaceNames(this.MergedRoot), comparand: null);
+                        Interlocked.CompareExchange(
+                            ref _namespaceNames,
+                            GetNamespaceNames(this.MergedRoot),
+                            comparand: null
+                        );
 
                     return _namespaceNames;
                 }
@@ -82,7 +95,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         ImmutableInterlocked.InterlockedInitialize(
                             ref _referenceDirectives,
-                            MergedRoot.Declarations.OfType<RootSingleNamespaceDeclaration>().SelectMany(r => r.ReferenceDirectives).AsImmutable());
+                            MergedRoot.Declarations
+                                .OfType<RootSingleNamespaceDeclaration>()
+                                .SelectMany(r => r.ReferenceDirectives)
+                                .AsImmutable()
+                        );
                     }
 
                     return _referenceDirectives;

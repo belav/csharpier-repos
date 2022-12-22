@@ -16,10 +16,7 @@ public readonly record struct TypeMappingInfo
     ///     Creates a new instance of <see cref="TypeMappingInfo" />.
     /// </summary>
     /// <param name="property">The property for which mapping is needed.</param>
-    public TypeMappingInfo(IProperty property)
-        : this(property.GetPrincipals())
-    {
-    }
+    public TypeMappingInfo(IProperty property) : this(property.GetPrincipals()) { }
 
     /// <summary>
     ///     Creates a new instance of <see cref="TypeMappingInfo" />.
@@ -46,7 +43,8 @@ public readonly record struct TypeMappingInfo
         bool? fallbackUnicode = null,
         int? fallbackSize = null,
         int? fallbackPrecision = null,
-        int? fallbackScale = null)
+        int? fallbackScale = null
+    )
     {
         ValueConverter? customConverter = null;
         int? size = null;
@@ -108,7 +106,8 @@ public readonly record struct TypeMappingInfo
         IsKeyOrIndex = property.IsKey() || property.IsForeignKey() || property.IsIndex();
         Size = size ?? mappingHints?.Size ?? fallbackSize;
         IsUnicode = isUnicode ?? mappingHints?.IsUnicode ?? fallbackUnicode;
-        IsRowVersion = property.IsConcurrencyToken && property.ValueGenerated == ValueGenerated.OnAddOrUpdate;
+        IsRowVersion =
+            property.IsConcurrencyToken && property.ValueGenerated == ValueGenerated.OnAddOrUpdate;
         ClrType = (customConverter?.ProviderClrType ?? property.ClrType).UnwrapNullableType();
         Scale = scale ?? mappingHints?.Scale ?? fallbackScale;
         Precision = precision ?? mappingHints?.Precision ?? fallbackPrecision;
@@ -127,8 +126,8 @@ public readonly record struct TypeMappingInfo
         bool? unicode = null,
         int? size = null,
         int? precision = null,
-        int? scale = null)
-        : this(member.GetMemberType())
+        int? scale = null
+    ) : this(member.GetMemberType())
     {
         IsUnicode = unicode;
         Size = size;
@@ -153,7 +152,8 @@ public readonly record struct TypeMappingInfo
         int? size = null,
         bool? rowVersion = null,
         int? precision = null,
-        int? scale = null)
+        int? scale = null
+    )
     {
         ClrType = type?.UnwrapNullableType();
 
@@ -180,7 +180,8 @@ public readonly record struct TypeMappingInfo
         bool? unicode = null,
         int? size = null,
         int? precision = null,
-        int? scale = null)
+        int? scale = null
+    )
     {
         IsRowVersion = source.IsRowVersion;
         IsKeyOrIndex = source.IsKeyOrIndex;
@@ -200,8 +201,8 @@ public readonly record struct TypeMappingInfo
     /// </summary>
     /// <param name="converterInfo">The converter to apply.</param>
     /// <returns>The new mapping info.</returns>
-    public TypeMappingInfo WithConverter(in ValueConverterInfo converterInfo)
-        => new(this, converterInfo);
+    public TypeMappingInfo WithConverter(in ValueConverterInfo converterInfo) =>
+        new(this, converterInfo);
 
     /// <summary>
     ///     Indicates whether or not the mapping is part of a key or index.

@@ -19,27 +19,52 @@ namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage;
 internal class RoutePatternHighlighter : IAspNetCoreEmbeddedLanguageDocumentHighlighter
 {
     public ImmutableArray<AspNetCoreDocumentHighlights> GetDocumentHighlights(
-        SemanticModel semanticModel, SyntaxToken token, int position, CancellationToken cancellationToken)
+        SemanticModel semanticModel,
+        SyntaxToken token,
+        int position,
+        CancellationToken cancellationToken
+    )
     {
         if (!WellKnownTypes.TryGetOrCreate(semanticModel.Compilation, out var wellKnownTypes))
         {
             return ImmutableArray<AspNetCoreDocumentHighlights>.Empty;
         }
 
-        var usageContext = RoutePatternUsageDetector.BuildContext(token, semanticModel, wellKnownTypes, cancellationToken);
+        var usageContext = RoutePatternUsageDetector.BuildContext(
+            token,
+            semanticModel,
+            wellKnownTypes,
+            cancellationToken
+        );
 
         var virtualChars = CSharpVirtualCharService.Instance.TryConvertToVirtualChars(token);
-        var tree = RoutePatternParser.TryParse(virtualChars, supportTokenReplacement: usageContext.IsMvcAttribute);
+        var tree = RoutePatternParser.TryParse(
+            virtualChars,
+            supportTokenReplacement: usageContext.IsMvcAttribute
+        );
         if (tree == null)
         {
             return ImmutableArray<AspNetCoreDocumentHighlights>.Empty;
         }
 
-        return GetHighlights(tree, semanticModel, wellKnownTypes, position, usageContext.MethodSymbol, cancellationToken);
+        return GetHighlights(
+            tree,
+            semanticModel,
+            wellKnownTypes,
+            position,
+            usageContext.MethodSymbol,
+            cancellationToken
+        );
     }
 
     private static ImmutableArray<AspNetCoreDocumentHighlights> GetHighlights(
-        RoutePatternTree tree, SemanticModel semanticModel, WellKnownTypes wellKnownTypes, int position, IMethodSymbol methodSymbol, CancellationToken cancellationToken)
+        RoutePatternTree tree,
+        SemanticModel semanticModel,
+        WellKnownTypes wellKnownTypes,
+        int position,
+        IMethodSymbol methodSymbol,
+        CancellationToken cancellationToken
+    )
     {
         var virtualChar = tree.Text.Find(position);
         if (virtualChar == null)
@@ -56,29 +81,51 @@ internal class RoutePatternHighlighter : IAspNetCoreEmbeddedLanguageDocumentHigh
         var highlightSpans = ImmutableArray.CreateBuilder<AspNetCoreHighlightSpan>();
 
         // Highlight the parameter in the route string, e.g. "{id}" highlights "id".
-        highlightSpans.Add(new AspNetCoreHighlightSpan(node.GetSpan(), AspNetCoreHighlightSpanKind.Reference));
+        highlightSpans.Add(
+            new AspNetCoreHighlightSpan(node.GetSpan(), AspNetCoreHighlightSpanKind.Reference)
+        );
 
         if (methodSymbol != null)
         {
             // Resolve possible parameter symbols. Includes properties from AsParametersAttribute.
-            var parameters = RoutePatternParametersDetector.ResolvedParameters(methodSymbol, wellKnownTypes);
+            var parameters = RoutePatternParametersDetector.ResolvedParameters(
+                methodSymbol,
+                wellKnownTypes
+            );
 
             // Match route parameter to method parameter. Parameters in a route aren't case sensitive.
             // First attempt an exact match, then a case insensitive match.
             var parameterName = node.ParameterNameToken.Value.ToString();
-            var matchingParameter = parameters.FirstOrDefault(s => s.Name == parameterName)
-                ?? parameters.FirstOrDefault(s => string.Equals(s.Name, parameterName, StringComparison.OrdinalIgnoreCase));
+            var matchingParameter =
+                parameters.FirstOrDefault(s => s.Name == parameterName)
+                ?? parameters.FirstOrDefault(
+                    s => string.Equals(s.Name, parameterName, StringComparison.OrdinalIgnoreCase)
+                );
 
             if (matchingParameter != null)
             {
-                HighlightSymbol(semanticModel, methodSymbol, highlightSpans, matchingParameter, cancellationToken);
+                HighlightSymbol(
+                    semanticModel,
+                    methodSymbol,
+                    highlightSpans,
+                    matchingParameter,
+                    cancellationToken
+                );
             }
         }
 
-        return ImmutableArray.Create(new AspNetCoreDocumentHighlights(highlightSpans.ToImmutable()));
+        return ImmutableArray.Create(
+            new AspNetCoreDocumentHighlights(highlightSpans.ToImmutable())
+        );
     }
 
-    private static void HighlightSymbol(SemanticModel semanticModel, IMethodSymbol methodSymbol, IList<AspNetCoreHighlightSpan> highlightSpans, ISymbol? matchingParameter, CancellationToken cancellationToken)
+    private static void HighlightSymbol(
+        SemanticModel semanticModel,
+        IMethodSymbol methodSymbol,
+        IList<AspNetCoreHighlightSpan> highlightSpans,
+        ISymbol? matchingParameter,
+        CancellationToken cancellationToken
+    )
     {
         // Highlight parameter in method signature.
         // e.g. "{id}" in route highlights id in "void Foo(string id) {}"
@@ -87,7 +134,12 @@ internal class RoutePatternHighlighter : IAspNetCoreEmbeddedLanguageDocumentHigh
             var syntaxNode = item.GetSyntax(cancellationToken);
             if (syntaxNode is ParameterSyntax parameterSyntax)
             {
-                highlightSpans.Add(new AspNetCoreHighlightSpan(parameterSyntax.Identifier.Span, AspNetCoreHighlightSpanKind.Definition));
+                highlightSpans.Add(
+                    new AspNetCoreHighlightSpan(
+                        parameterSyntax.Identifier.Span,
+                        AspNetCoreHighlightSpanKind.Definition
+                    )
+                );
             }
         }
 
@@ -100,25 +152,47 @@ internal class RoutePatternHighlighter : IAspNetCoreEmbeddedLanguageDocumentHigh
             // Have to call GetSymbolInfo because it's easy to have identifiers with the same name
             // that reference a different API. For example, a type with the same name as parameter.
             // GetSymbolInfo can be slow. To reduce calls to it we only get IdentifierNameSyntax
-            // nodes, filter them by name first, then check GetSymbolInfo. 
+            // nodes, filter them by name first, then check GetSymbolInfo.
             var parameterReferences = methodSyntax
                 .DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
                 .Where(i => i.Identifier.Text == matchingParameter.Name)
-                .Where(i => semanticModel.GetSymbolInfo(i) is var symbolInfo && SymbolEqualityComparer.Default.Equals(symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.FirstOrDefault(), matchingParameter));
+                .Where(
+                    i =>
+                        semanticModel.GetSymbolInfo(i) is var symbolInfo
+                        && SymbolEqualityComparer.Default.Equals(
+                            symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.FirstOrDefault(),
+                            matchingParameter
+                        )
+                );
 
             foreach (var reference in parameterReferences)
             {
-                highlightSpans.Add(new AspNetCoreHighlightSpan(reference.Identifier.Span, AspNetCoreHighlightSpanKind.Reference));
+                highlightSpans.Add(
+                    new AspNetCoreHighlightSpan(
+                        reference.Identifier.Span,
+                        AspNetCoreHighlightSpanKind.Reference
+                    )
+                );
             }
         }
     }
 
-    private static RoutePatternNameParameterPartNode? FindParameterNode(RoutePatternNode node, VirtualChar ch)
-        => FindNode<RoutePatternNameParameterPartNode>(node, ch, (parameter, c) => parameter.ParameterNameToken.VirtualChars.Contains(c));
+    private static RoutePatternNameParameterPartNode? FindParameterNode(
+        RoutePatternNode node,
+        VirtualChar ch
+    ) =>
+        FindNode<RoutePatternNameParameterPartNode>(
+            node,
+            ch,
+            (parameter, c) => parameter.ParameterNameToken.VirtualChars.Contains(c)
+        );
 
-    private static TNode? FindNode<TNode>(RoutePatternNode node, VirtualChar ch, Func<TNode, VirtualChar, bool> predicate)
-        where TNode : RoutePatternNode
+    private static TNode? FindNode<TNode>(
+        RoutePatternNode node,
+        VirtualChar ch,
+        Func<TNode, VirtualChar, bool> predicate
+    ) where TNode : RoutePatternNode
     {
         if (node is TNode nodeMatch && predicate(nodeMatch, ch))
         {

@@ -9,8 +9,7 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         private Uri _baseUri;
         private string _relativeUri;
 
-        internal CalledResolveUriEventArgs(Uri baseUri, string relativeUri)
-            : base()
+        internal CalledResolveUriEventArgs(Uri baseUri, string relativeUri) : base()
         {
             _baseUri = baseUri;
             _relativeUri = relativeUri;
@@ -80,8 +79,7 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         // -----------------
         // Constructors
         // -----------------
-        public CXmlTestResolver()
-            : base()
+        public CXmlTestResolver() : base()
         {
             _resolver = new XmlUrlResolver();
         }
@@ -110,7 +108,10 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         public override object GetEntity(Uri absoluteUri, string role, Type ofObjectToReturn)
         {
             // Fire the CalledGetEntity event
-            CalledGetEntity(this, new CalledGetEntityEventArgs(absoluteUri, role, ofObjectToReturn));
+            CalledGetEntity(
+                this,
+                new CalledGetEntityEventArgs(absoluteUri, role, ofObjectToReturn)
+            );
 
             return _resolver.GetEntity(absoluteUri, role, ofObjectToReturn);
         }

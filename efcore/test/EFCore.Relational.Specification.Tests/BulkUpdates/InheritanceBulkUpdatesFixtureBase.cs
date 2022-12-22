@@ -3,14 +3,16 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
-public abstract class InheritanceBulkUpdatesFixtureBase : InheritanceQueryFixtureBase, IBulkUpdatesFixtureBase
+public abstract class InheritanceBulkUpdatesFixtureBase
+    : InheritanceQueryFixtureBase,
+        IBulkUpdatesFixtureBase
 {
-    protected override string StoreName
-        => "InheritanceBulkUpdatesTest";
+    protected override string StoreName => "InheritanceBulkUpdatesTest";
 
-    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-        => base.AddOptions(builder).ConfigureWarnings(w => w.Log(CoreEventId.FirstWithoutOrderByAndFilterWarning));
+    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+        base.AddOptions(builder)
+            .ConfigureWarnings(w => w.Log(CoreEventId.FirstWithoutOrderByAndFilterWarning));
 
-    public void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    public void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction) =>
+        facade.UseTransaction(transaction.GetDbTransaction());
 }

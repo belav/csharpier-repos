@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
         public CSharpSmartTokenFormatter(
             OptionSet optionSet,
             IEnumerable<AbstractFormattingRule> formattingRules,
-            CompilationUnitSyntax root)
+            CompilationUnitSyntax root
+        )
         {
             Contract.ThrowIfNull(optionSet);
             Contract.ThrowIfNull(formattingRules);
@@ -42,7 +43,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
         }
 
         public IList<TextChange> FormatRange(
-            Workspace workspace, SyntaxToken startToken, SyntaxToken endToken, CancellationToken cancellationToken)
+            Workspace workspace,
+            SyntaxToken startToken,
+            SyntaxToken endToken,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfTrue(startToken.Kind() is SyntaxKind.None or SyntaxKind.EndOfFileToken);
             Contract.ThrowIfTrue(endToken.Kind() is SyntaxKind.None or SyntaxKind.EndOfFileToken);
@@ -57,21 +62,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             // Exception 2: Similar behavior for do-while
             if (common.ContainsDiagnostics && !CloseBraceOfTryOrDoBlock(endToken))
             {
-                smartTokenformattingRules = (new NoLineChangeFormattingRule()).Concat(_formattingRules);
+                smartTokenformattingRules = (new NoLineChangeFormattingRule()).Concat(
+                    _formattingRules
+                );
             }
 
-            return Formatter.GetFormattedTextChanges(_root, new TextSpan[] { TextSpan.FromBounds(startToken.SpanStart, endToken.Span.End) }, workspace, _optionSet, smartTokenformattingRules, cancellationToken);
+            return Formatter.GetFormattedTextChanges(
+                _root,
+                new TextSpan[] { TextSpan.FromBounds(startToken.SpanStart, endToken.Span.End) },
+                workspace,
+                _optionSet,
+                smartTokenformattingRules,
+                cancellationToken
+            );
         }
 
         private static bool CloseBraceOfTryOrDoBlock(SyntaxToken endToken)
         {
-            return endToken.IsKind(SyntaxKind.CloseBraceToken) &&
-                endToken.Parent.IsKind(SyntaxKind.Block) &&
-                (endToken.Parent.IsParentKind(SyntaxKind.TryStatement) || endToken.Parent.IsParentKind(SyntaxKind.DoStatement));
+            return endToken.IsKind(SyntaxKind.CloseBraceToken)
+                && endToken.Parent.IsKind(SyntaxKind.Block)
+                && (
+                    endToken.Parent.IsParentKind(SyntaxKind.TryStatement)
+                    || endToken.Parent.IsParentKind(SyntaxKind.DoStatement)
+                );
         }
 
         public async Task<IList<TextChange>> FormatTokenAsync(
-            Workspace workspace, SyntaxToken token, CancellationToken cancellationToken)
+            Workspace workspace,
+            SyntaxToken token,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfTrue(token.Kind() is SyntaxKind.None or SyntaxKind.EndOfFileToken);
 
@@ -86,11 +106,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             // This is a heuristic to prevent brace completion from breaking user expectation/muscle memory in common scenarios (see Devdiv:823958).
             // Formatter uses FindToken on the position, which returns token to left, if there is nothing to the right and returns token to the right
             // if there exists one. If the shape is "{|}", we're including '}' in the formatting range. Avoid doing that to improve verbatim typing
-            // in the following special scenarios.  
+            // in the following special scenarios.
             var adjustedEndPosition = token.Span.End;
-            if (token.IsKind(SyntaxKind.OpenBraceToken) &&
-                (token.Parent.IsInitializerForArrayOrCollectionCreationExpression() ||
-                    token.Parent is AnonymousObjectCreationExpressionSyntax))
+            if (
+                token.IsKind(SyntaxKind.OpenBraceToken)
+                && (
+                    token.Parent.IsInitializerForArrayOrCollectionCreationExpression()
+                    || token.Parent is AnonymousObjectCreationExpressionSyntax
+                )
+            )
             {
                 var nextToken = token.GetNextToken(includeZeroWidth: true);
                 if (nextToken.IsKind(SyntaxKind.CloseBraceToken))
@@ -100,31 +124,53 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                 }
             }
 
-            var smartTokenformattingRules = (new SmartTokenFormattingRule()).Concat(_formattingRules);
+            var smartTokenformattingRules = (new SmartTokenFormattingRule()).Concat(
+                _formattingRules
+            );
             var adjustedStartPosition = previousToken.SpanStart;
-            var indentStyle = _optionSet.GetOption(FormattingOptions.SmartIndent, LanguageNames.CSharp);
-            if (token.IsKind(SyntaxKind.OpenBraceToken) &&
-                indentStyle != FormattingOptions.IndentStyle.Smart)
+            var indentStyle = _optionSet.GetOption(
+                FormattingOptions.SmartIndent,
+                LanguageNames.CSharp
+            );
+            if (
+                token.IsKind(SyntaxKind.OpenBraceToken)
+                && indentStyle != FormattingOptions.IndentStyle.Smart
+            )
             {
                 RoslynDebug.AssertNotNull(token.SyntaxTree);
-                var text = await token.SyntaxTree.GetTextAsync(cancellationToken).ConfigureAwait(false);
+                var text = await token.SyntaxTree
+                    .GetTextAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 if (token.IsFirstTokenOnLine(text))
                 {
                     adjustedStartPosition = token.SpanStart;
                 }
             }
 
-            return Formatter.GetFormattedTextChanges(_root,
+            return Formatter.GetFormattedTextChanges(
+                _root,
                 new TextSpan[] { TextSpan.FromBounds(adjustedStartPosition, adjustedEndPosition) },
-                workspace, _optionSet, smartTokenformattingRules, cancellationToken);
+                workspace,
+                _optionSet,
+                smartTokenformattingRules,
+                cancellationToken
+            );
         }
 
         private class NoLineChangeFormattingRule : AbstractFormattingRule
         {
-            public override AdjustNewLinesOperation? GetAdjustNewLinesOperation(in SyntaxToken previousToken, in SyntaxToken currentToken, in NextGetAdjustNewLinesOperation nextOperation)
+            public override AdjustNewLinesOperation? GetAdjustNewLinesOperation(
+                in SyntaxToken previousToken,
+                in SyntaxToken currentToken,
+                in NextGetAdjustNewLinesOperation nextOperation
+            )
             {
                 // no line operation. no line changes what so ever
-                var lineOperation = base.GetAdjustNewLinesOperation(in previousToken, in currentToken, in nextOperation);
+                var lineOperation = base.GetAdjustNewLinesOperation(
+                    in previousToken,
+                    in currentToken,
+                    in nextOperation
+                );
                 if (lineOperation != null)
                 {
                     // ignore force if same line option
@@ -135,7 +181,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
 
                     // basically means don't ever put new line if there isn't already one, but do
                     // indentation.
-                    return FormattingOperations.CreateAdjustNewLinesOperation(line: 0, option: AdjustNewLinesOption.PreserveLines);
+                    return FormattingOperations.CreateAdjustNewLinesOperation(
+                        line: 0,
+                        option: AdjustNewLinesOption.PreserveLines
+                    );
                 }
 
                 return null;
@@ -144,20 +193,38 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
 
         private class SmartTokenFormattingRule : NoLineChangeFormattingRule
         {
-            public override void AddSuppressOperations(List<SuppressOperation> list, SyntaxNode node, in NextSuppressOperationAction nextOperation)
+            public override void AddSuppressOperations(
+                List<SuppressOperation> list,
+                SyntaxNode node,
+                in NextSuppressOperationAction nextOperation
+            )
             {
                 // don't suppress anything
             }
 
-            public override AdjustSpacesOperation? GetAdjustSpacesOperation(in SyntaxToken previousToken, in SyntaxToken currentToken, in NextGetAdjustSpacesOperation nextOperation)
+            public override AdjustSpacesOperation? GetAdjustSpacesOperation(
+                in SyntaxToken previousToken,
+                in SyntaxToken currentToken,
+                in NextGetAdjustSpacesOperation nextOperation
+            )
             {
-                var spaceOperation = base.GetAdjustSpacesOperation(in previousToken, in currentToken, in nextOperation);
+                var spaceOperation = base.GetAdjustSpacesOperation(
+                    in previousToken,
+                    in currentToken,
+                    in nextOperation
+                );
 
                 // if there is force space operation, convert it to ForceSpaceIfSingleLine operation.
                 // (force space basically means remove all line breaks)
-                if (spaceOperation != null && spaceOperation.Option == AdjustSpacesOption.ForceSpaces)
+                if (
+                    spaceOperation != null
+                    && spaceOperation.Option == AdjustSpacesOption.ForceSpaces
+                )
                 {
-                    return FormattingOperations.CreateAdjustSpacesOperation(spaceOperation.Space, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
+                    return FormattingOperations.CreateAdjustSpacesOperation(
+                        spaceOperation.Space,
+                        AdjustSpacesOption.ForceSpacesIfOnSingleLine
+                    );
                 }
 
                 return spaceOperation;

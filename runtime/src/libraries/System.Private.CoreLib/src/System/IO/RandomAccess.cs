@@ -86,7 +86,11 @@ namespace System.IO
         /// <exception cref="T:System.UnauthorizedAccessException"><paramref name="handle" /> was not opened for reading.</exception>
         /// <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         /// <remarks>Position of the file is not advanced.</remarks>
-        public static long Read(SafeFileHandle handle, IReadOnlyList<Memory<byte>> buffers, long fileOffset)
+        public static long Read(
+            SafeFileHandle handle,
+            IReadOnlyList<Memory<byte>> buffers,
+            long fileOffset
+        )
         {
             ValidateInput(handle, fileOffset);
             ValidateBuffers(buffers);
@@ -110,7 +114,12 @@ namespace System.IO
         /// <exception cref="T:System.UnauthorizedAccessException"><paramref name="handle" /> was not opened for reading.</exception>
         /// <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         /// <remarks>Position of the file is not advanced.</remarks>
-        public static ValueTask<int> ReadAsync(SafeFileHandle handle, Memory<byte> buffer, long fileOffset, CancellationToken cancellationToken = default)
+        public static ValueTask<int> ReadAsync(
+            SafeFileHandle handle,
+            Memory<byte> buffer,
+            long fileOffset,
+            CancellationToken cancellationToken = default
+        )
         {
             ValidateInput(handle, fileOffset);
 
@@ -138,7 +147,12 @@ namespace System.IO
         /// <exception cref="T:System.UnauthorizedAccessException"><paramref name="handle" /> was not opened for reading.</exception>
         /// <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         /// <remarks>Position of the file is not advanced.</remarks>
-        public static ValueTask<long> ReadAsync(SafeFileHandle handle, IReadOnlyList<Memory<byte>> buffers, long fileOffset, CancellationToken cancellationToken = default)
+        public static ValueTask<long> ReadAsync(
+            SafeFileHandle handle,
+            IReadOnlyList<Memory<byte>> buffers,
+            long fileOffset,
+            CancellationToken cancellationToken = default
+        )
         {
             ValidateInput(handle, fileOffset);
             ValidateBuffers(buffers);
@@ -186,7 +200,11 @@ namespace System.IO
         /// <exception cref="T:System.UnauthorizedAccessException"><paramref name="handle" /> was not opened for writing.</exception>
         /// <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         /// <remarks>Position of the file is not advanced.</remarks>
-        public static void Write(SafeFileHandle handle, IReadOnlyList<ReadOnlyMemory<byte>> buffers, long fileOffset)
+        public static void Write(
+            SafeFileHandle handle,
+            IReadOnlyList<ReadOnlyMemory<byte>> buffers,
+            long fileOffset
+        )
         {
             ValidateInput(handle, fileOffset);
             ValidateBuffers(buffers);
@@ -210,7 +228,12 @@ namespace System.IO
         /// <exception cref="T:System.UnauthorizedAccessException"><paramref name="handle" /> was not opened for writing.</exception>
         /// <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         /// <remarks>Position of the file is not advanced.</remarks>
-        public static ValueTask WriteAsync(SafeFileHandle handle, ReadOnlyMemory<byte> buffer, long fileOffset, CancellationToken cancellationToken = default)
+        public static ValueTask WriteAsync(
+            SafeFileHandle handle,
+            ReadOnlyMemory<byte> buffer,
+            long fileOffset,
+            CancellationToken cancellationToken = default
+        )
         {
             ValidateInput(handle, fileOffset);
 
@@ -238,7 +261,12 @@ namespace System.IO
         /// <exception cref="T:System.UnauthorizedAccessException"><paramref name="handle" /> was not opened for writing.</exception>
         /// <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         /// <remarks>Position of the file is not advanced.</remarks>
-        public static ValueTask WriteAsync(SafeFileHandle handle, IReadOnlyList<ReadOnlyMemory<byte>> buffers, long fileOffset, CancellationToken cancellationToken = default)
+        public static ValueTask WriteAsync(
+            SafeFileHandle handle,
+            IReadOnlyList<ReadOnlyMemory<byte>> buffers,
+            long fileOffset,
+            CancellationToken cancellationToken = default
+        )
         {
             ValidateInput(handle, fileOffset);
             ValidateBuffers(buffers);
@@ -285,28 +313,54 @@ namespace System.IO
             }
         }
 
-        private static ValueTask<int> ScheduleSyncReadAtOffsetAsync(SafeFileHandle handle, Memory<byte> buffer,
-            long fileOffset, CancellationToken cancellationToken, OSFileStreamStrategy? strategy)
+        private static ValueTask<int> ScheduleSyncReadAtOffsetAsync(
+            SafeFileHandle handle,
+            Memory<byte> buffer,
+            long fileOffset,
+            CancellationToken cancellationToken,
+            OSFileStreamStrategy? strategy
+        )
         {
-            return handle.GetThreadPoolValueTaskSource().QueueRead(buffer, fileOffset, cancellationToken, strategy);
+            return handle
+                .GetThreadPoolValueTaskSource()
+                .QueueRead(buffer, fileOffset, cancellationToken, strategy);
         }
 
-        private static ValueTask<long> ScheduleSyncReadScatterAtOffsetAsync(SafeFileHandle handle, IReadOnlyList<Memory<byte>> buffers,
-            long fileOffset, CancellationToken cancellationToken)
+        private static ValueTask<long> ScheduleSyncReadScatterAtOffsetAsync(
+            SafeFileHandle handle,
+            IReadOnlyList<Memory<byte>> buffers,
+            long fileOffset,
+            CancellationToken cancellationToken
+        )
         {
-            return handle.GetThreadPoolValueTaskSource().QueueReadScatter(buffers, fileOffset, cancellationToken);
+            return handle
+                .GetThreadPoolValueTaskSource()
+                .QueueReadScatter(buffers, fileOffset, cancellationToken);
         }
 
-        private static ValueTask ScheduleSyncWriteAtOffsetAsync(SafeFileHandle handle, ReadOnlyMemory<byte> buffer,
-            long fileOffset, CancellationToken cancellationToken, OSFileStreamStrategy? strategy)
+        private static ValueTask ScheduleSyncWriteAtOffsetAsync(
+            SafeFileHandle handle,
+            ReadOnlyMemory<byte> buffer,
+            long fileOffset,
+            CancellationToken cancellationToken,
+            OSFileStreamStrategy? strategy
+        )
         {
-            return handle.GetThreadPoolValueTaskSource().QueueWrite(buffer, fileOffset, cancellationToken, strategy);
+            return handle
+                .GetThreadPoolValueTaskSource()
+                .QueueWrite(buffer, fileOffset, cancellationToken, strategy);
         }
 
-        private static ValueTask ScheduleSyncWriteGatherAtOffsetAsync(SafeFileHandle handle, IReadOnlyList<ReadOnlyMemory<byte>> buffers,
-            long fileOffset, CancellationToken cancellationToken)
+        private static ValueTask ScheduleSyncWriteGatherAtOffsetAsync(
+            SafeFileHandle handle,
+            IReadOnlyList<ReadOnlyMemory<byte>> buffers,
+            long fileOffset,
+            CancellationToken cancellationToken
+        )
         {
-            return handle.GetThreadPoolValueTaskSource().QueueWriteGather(buffers, fileOffset, cancellationToken);
+            return handle
+                .GetThreadPoolValueTaskSource()
+                .QueueWriteGather(buffers, fileOffset, cancellationToken);
         }
     }
 }

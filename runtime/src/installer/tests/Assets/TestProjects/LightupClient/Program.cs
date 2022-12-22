@@ -17,17 +17,17 @@ namespace LightupClient
             try
             {
                 asmGreet = Assembly.Load(new AssemblyName("LightupLib"));
-                
+
                 // Get reference to the method that we wish to invoke
                 Type type = asmGreet.GetType("LightupLib.Greet");
                 var method = System.Reflection.TypeExtensions.GetMethod(type, "Hello");
 
                 // Invoke it
-                string greeting = (string)method.Invoke(null, new object[] {"LightupClient"});
+                string greeting = (string)method.Invoke(null, new object[] { "LightupClient" });
                 Console.WriteLine("{0}", greeting);
             }
-            catch(FileNotFoundException ex)
-            {               
+            catch (FileNotFoundException ex)
+            {
                 Console.WriteLine("Exception: Failed to load the lightup assembly!");
                 Console.WriteLine(ex.ToString());
                 iRetVal = -1;

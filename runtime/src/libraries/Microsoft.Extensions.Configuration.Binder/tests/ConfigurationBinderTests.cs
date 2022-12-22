@@ -15,11 +15,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
     {
         public class ComplexOptions
         {
-            private static Dictionary<string, int> _existingDictionary = new()
-            {
-                {"existing-item1", 1},
-                {"existing-item2", 2},
-            };
+            private static Dictionary<string, int> _existingDictionary =
+                new() { { "existing-item1", 1 }, { "existing-item2", 2 }, };
 
             public ComplexOptions()
             {
@@ -58,14 +55,23 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
             public ISet<string> NonInstantiatedISet { get; set; } = null!;
             public HashSet<string> NonInstantiatedHashSet { get; set; } = null!;
-            public IDictionary<string, ISet<string>> NonInstantiatedDictionaryWithISet { get; set; } = null!;
-            public IDictionary<string, HashSet<string>> InstantiatedDictionaryWithHashSet { get; set; } =
+            public IDictionary<
+                string,
+                ISet<string>
+            > NonInstantiatedDictionaryWithISet { get; set; } = null!;
+            public IDictionary<
+                string,
+                HashSet<string>
+            > InstantiatedDictionaryWithHashSet { get; set; } =
                 new Dictionary<string, HashSet<string>>();
 
-            public IDictionary<string, HashSet<string>> InstantiatedDictionaryWithHashSetWithSomeValues { get; set; } =
+            public IDictionary<
+                string,
+                HashSet<string>
+            > InstantiatedDictionaryWithHashSetWithSomeValues { get; set; } =
                 new Dictionary<string, HashSet<string>>
                 {
-                    {"item1", new HashSet<string>(new[] {"existing1", "existing2"})}
+                    { "item1", new HashSet<string>(new[] { "existing1", "existing2" }) }
                 };
 
             public IEnumerable<string> NonInstantiatedIEnumerable { get; set; } = null!;
@@ -75,43 +81,51 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             public ISet<string> ISetNoSetter { get; } = new HashSet<string>();
 
             public HashSet<string> InstantiatedHashSetWithSomeValues { get; set; } =
-                new HashSet<string>(new[] {"existing1", "existing2"});
+                new HashSet<string>(new[] { "existing1", "existing2" });
 
             public SortedSet<string> InstantiatedSortedSetWithSomeValues { get; set; } =
-                new SortedSet<string>(new[] {"existing1", "existing2"});
+                new SortedSet<string>(new[] { "existing1", "existing2" });
 
             public SortedSet<string> NonInstantiatedSortedSetWithSomeValues { get; set; } = null!;
 
             public ISet<string> InstantiatedISetWithSomeValues { get; set; } =
                 new HashSet<string>(new[] { "existing1", "existing2" });
-            
+
             public ISet<UnsupportedTypeInHashSet> HashSetWithUnsupportedKey { get; set; } =
                 new HashSet<UnsupportedTypeInHashSet>();
 
-            public ISet<UnsupportedTypeInHashSet> UninstantiatedHashSetWithUnsupportedKey { get; set; } 
+            public ISet<UnsupportedTypeInHashSet> UninstantiatedHashSetWithUnsupportedKey { get; set; }
 
 #if NETCOREAPP
-            public IReadOnlySet<string> InstantiatedIReadOnlySet { get; set; } = new HashSet<string>();
+            public IReadOnlySet<string> InstantiatedIReadOnlySet { get; set; } =
+                new HashSet<string>();
             public IReadOnlySet<string> InstantiatedIReadOnlySetWithSomeValues { get; set; } =
                 new HashSet<string>(new[] { "existing1", "existing2" });
             public IReadOnlySet<string> NonInstantiatedIReadOnlySet { get; set; }
-            public IDictionary<string, IReadOnlySet<string>> InstantiatedDictionaryWithReadOnlySetWithSomeValues { get; set; } =
+            public IDictionary<
+                string,
+                IReadOnlySet<string>
+            > InstantiatedDictionaryWithReadOnlySetWithSomeValues { get; set; } =
                 new Dictionary<string, IReadOnlySet<string>>
                 {
-                    {"item1", new HashSet<string>(new[] {"existing1", "existing2"})}
+                    { "item1", new HashSet<string>(new[] { "existing1", "existing2" }) }
                 };
 #endif
-            public IReadOnlyDictionary<string, int> InstantiatedReadOnlyDictionaryWithWithSomeValues { get; set; } =
-                _existingDictionary;
+            public IReadOnlyDictionary<
+                string,
+                int
+            > InstantiatedReadOnlyDictionaryWithWithSomeValues { get; set; } = _existingDictionary;
 
             public IReadOnlyDictionary<string, int> NonInstantiatedReadOnlyDictionary { get; set; }
 
-            public CustomICollectionWithoutAnAddMethod InstantiatedCustomICollectionWithoutAnAddMethod { get; set; } = new();
+            public CustomICollectionWithoutAnAddMethod InstantiatedCustomICollectionWithoutAnAddMethod { get; set; } =
+                new();
             public CustomICollectionWithoutAnAddMethod NonInstantiatedCustomICollectionWithoutAnAddMethod { get; set; }
 
             public IEnumerable<string> InstantiatedIEnumerable { get; set; } = new List<string>();
             public ICollection<string> InstantiatedICollection { get; set; } = new List<string>();
-            public IReadOnlyCollection<string> InstantiatedIReadOnlyCollection { get; set; } = new List<string>();
+            public IReadOnlyCollection<string> InstantiatedIReadOnlyCollection { get; set; } =
+                new List<string>();
         }
 
         public class NestedOptions
@@ -123,20 +137,15 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             public override string Virtual
             {
-                get
-                {
-                    return base.Virtual;
-                }
-                set
-                {
-                    base.Virtual = "Derived:" + value;
-                }
+                get { return base.Virtual; }
+                set { base.Virtual = "Derived:" + value; }
             }
         }
 
         public class UnsupportedTypeInHashSet { }
 
         public interface ICustomCollectionDerivedFromIEnumerableT<out T> : IEnumerable<T> { }
+
         public interface ICustomCollectionDerivedFromICollectionT<T> : ICollection<T> { }
 
         public class MyClassWithCustomCollections
@@ -148,6 +157,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         public class CustomICollectionWithoutAnAddMethod : ICollection<string>
         {
             private readonly List<string> _items = new();
+
             public IEnumerator<string> GetEnumerator() => _items.GetEnumerator();
 
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -166,9 +176,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             public bool IsReadOnly => false;
         }
 
-        public interface ICustomSet<T> : ISet<T>
-        {
-        }
+        public interface ICustomSet<T> : ISet<T> { }
 
         public class MyClassWithCustomSet
         {
@@ -182,14 +190,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
         public class ConfigWithInstantiatedIReadOnlyDictionary
         {
-            public static Dictionary<string, int> _existingDictionary = new()
-            {
-                {"existing-item1", 1},
-                {"existing-item2", 2},
-            };
+            public static Dictionary<string, int> _existingDictionary =
+                new() { { "existing-item1", 1 }, { "existing-item2", 2 }, };
 
-            public IReadOnlyDictionary<string, int> Dictionary { get; set; } =
-                _existingDictionary;
+            public IReadOnlyDictionary<string, int> Dictionary { get; set; } = _existingDictionary;
         }
 
         public class ConfigWithNonInstantiatedReadOnlyDictionary
@@ -199,19 +203,13 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
         public class ConfigWithInstantiatedConcreteDictionary
         {
-            public static Dictionary<string, int> _existingDictionary = new()
-            {
-                {"existing-item1", 1},
-                {"existing-item2", 2},
-            };
+            public static Dictionary<string, int> _existingDictionary =
+                new() { { "existing-item1", 1 }, { "existing-item2", 2 }, };
 
-            public Dictionary<string, int> Dictionary { get; set; } =
-                _existingDictionary;
+            public Dictionary<string, int> Dictionary { get; set; } = _existingDictionary;
         }
 
-        public interface ICustomDictionary<T, T1> : IDictionary<T, T1>
-        {
-        }
+        public interface ICustomDictionary<T, T1> : IDictionary<T, T1> { }
 
         public class NullableOptions
         {
@@ -252,8 +250,11 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
         public record struct RecordStructTypeOptions(string Color, int Length);
 
-        public record RecordOptionsWithNesting(int Number, RecordOptionsWithNesting.RecordNestedOptions Nested1,
-            RecordOptionsWithNesting.RecordNestedOptions Nested2 = null!)
+        public record RecordOptionsWithNesting(
+            int Number,
+            RecordOptionsWithNesting.RecordNestedOptions Nested1,
+            RecordOptionsWithNesting.RecordNestedOptions Nested2 = null!
+        )
         {
             public record RecordNestedOptions(string ValueA, int ValueB);
         }
@@ -281,7 +282,11 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             public string Name { get; }
             public string Address { get; }
 
-            public ClassWhereParametersMatchPropertiesAndFields(string name, string address, int age)
+            public ClassWhereParametersMatchPropertiesAndFields(
+                string name,
+                string address,
+                int age
+            )
             {
                 Name = name;
                 Address = address;
@@ -291,7 +296,11 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             public int GetAge() => Age;
         }
 
-        public record RecordWhereParametersHaveDefaultValue(string Name, string Address, int Age = 42);
+        public record RecordWhereParametersHaveDefaultValue(
+            string Name,
+            string Address,
+            int Age = 42
+        );
 
         public record ClassWhereParametersHaveDefaultValue
         {
@@ -306,7 +315,6 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
                 Age = age;
             }
         }
-
 
         public record RecordTypeOptions(string Color, int Length);
 
@@ -348,7 +356,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             }
 
             public string Color { get; set; }
-            public int Length { get; set;  }
+            public int Length { get; set; }
         }
 
         public class ImmutableLengthAndColorClass
@@ -365,7 +373,12 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
         public class ImmutableClassWithOneParameterizedConstructor
         {
-            public ImmutableClassWithOneParameterizedConstructor(string string1, int int1, string string2, int int2)
+            public ImmutableClassWithOneParameterizedConstructor(
+                string string1,
+                int int1,
+                string string2,
+                int int2
+            )
             {
                 String1 = string1;
                 Int1 = int1;
@@ -381,7 +394,12 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
         public class ImmutableClassWithOneParameterizedConstructorButWithInParameter
         {
-            public ImmutableClassWithOneParameterizedConstructorButWithInParameter(in string string1, int int1, string string2, int int2)
+            public ImmutableClassWithOneParameterizedConstructorButWithInParameter(
+                in string string1,
+                int int1,
+                string string2,
+                int int2
+            )
             {
                 String1 = string1;
                 Int1 = int1;
@@ -397,7 +415,12 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
         public class ImmutableClassWithOneParameterizedConstructorButWithRefParameter
         {
-            public ImmutableClassWithOneParameterizedConstructorButWithRefParameter(string string1, ref int int1, string string2, int int2)
+            public ImmutableClassWithOneParameterizedConstructorButWithRefParameter(
+                string string1,
+                ref int int1,
+                string string2,
+                int int2
+            )
             {
                 String1 = string1;
                 Int1 = int1;
@@ -413,8 +436,12 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
         public class ImmutableClassWithOneParameterizedConstructorButWithOutParameter
         {
-            public ImmutableClassWithOneParameterizedConstructorButWithOutParameter(string string1, int int1,
-                string string2, out decimal int2)
+            public ImmutableClassWithOneParameterizedConstructorButWithOutParameter(
+                string string1,
+                int int1,
+                string string2,
+                out decimal int2
+            )
             {
                 String1 = string1;
                 Int1 = int1;
@@ -436,14 +463,23 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
                 Int1 = int1;
             }
 
-            public ImmutableClassWithMultipleParameterizedConstructors(string string1, int int1, string string2)
+            public ImmutableClassWithMultipleParameterizedConstructors(
+                string string1,
+                int int1,
+                string string2
+            )
             {
                 String1 = string1;
                 Int1 = int1;
                 String2 = string2;
             }
 
-            public ImmutableClassWithMultipleParameterizedConstructors(string string1, int int1, string string2, int int2)
+            public ImmutableClassWithMultipleParameterizedConstructors(
+                string string1,
+                int int1,
+                string string2,
+                int int2
+            )
             {
                 String1 = string1;
                 Int1 = int1;
@@ -510,8 +546,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"Section:Option1", "opt1"},
-                {"Section:option2", "opt2"}
+                { "Section:Option1", "opt1" },
+                { "Section:option2", "opt2" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -531,10 +567,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"Section:Integer", "-2"},
-                {"Section:Boolean", "TRUe"},
-                {"Section:Nested:Integer", "11"},
-                {"Section:Virtual", "Sup"}
+                { "Section:Integer", "-2" },
+                { "Section:Boolean", "TRUe" },
+                { "Section:Nested:Integer", "11" },
+                { "Section:Virtual", "Sup" }
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -559,10 +595,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"Section:Integer", "-2"},
-                {"Section:Boolean", "TRUe"},
-                {"Section:Nested:Integer", "11"},
-                {"Section:Virtual", "Sup"}
+                { "Section:Integer", "-2" },
+                { "Section:Boolean", "TRUe" },
+                { "Section:Nested:Integer", "11" },
+                { "Section:Virtual", "Sup" }
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -582,12 +618,12 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"Section:Integer", "-2"},
-                {"Section:Boolean", "TRUe"},
-                {"Section:Nested:Integer", "11"},
-                {"Section:Virtual", "Sup"},
-                {"Section:DerivedSection:Nested:Integer", "11"},
-                {"Section:DerivedSection:Virtual", "Sup"}
+                { "Section:Integer", "-2" },
+                { "Section:Boolean", "TRUe" },
+                { "Section:Nested:Integer", "11" },
+                { "Section:Virtual", "Sup" },
+                { "Section:DerivedSection:Nested:Integer", "11" },
+                { "Section:DerivedSection:Virtual", "Sup" }
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -616,10 +652,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [Fact]
         public void CanBindConfigurationKeyNameAttributes()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"Named_Property", "Yo"},
-            };
+            var dic = new Dictionary<string, string> { { "Named_Property", "Yo" }, };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -634,8 +667,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"NonInstantiatedIEnumerable:0", "Yo1"},
-                {"NonInstantiatedIEnumerable:1", "Yo2"},
+                { "NonInstantiatedIEnumerable:0", "Yo1" },
+                { "NonInstantiatedIEnumerable:1", "Yo2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -654,9 +687,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"NonInstantiatedISet:0", "Yo1"},
-                {"NonInstantiatedISet:1", "Yo2"},
-                {"NonInstantiatedISet:2", "Yo2"},
+                { "NonInstantiatedISet:0", "Yo1" },
+                { "NonInstantiatedISet:1", "Yo2" },
+                { "NonInstantiatedISet:2", "Yo2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -675,9 +708,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"ISetNoSetter:0", "Yo1"},
-                {"ISetNoSetter:1", "Yo2"},
-                {"ISetNoSetter:2", "Yo2"},
+                { "ISetNoSetter:0", "Yo1" },
+                { "ISetNoSetter:1", "Yo2" },
+                { "ISetNoSetter:2", "Yo2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -697,8 +730,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"InstantiatedIReadOnlySet:0", "Yo1"},
-                {"InstantiatedIReadOnlySet:1", "Yo2"},
+                { "InstantiatedIReadOnlySet:0", "Yo1" },
+                { "InstantiatedIReadOnlySet:1", "Yo2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -717,8 +750,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"InstantiatedIReadOnlySetWithSomeValues:0", "Yo1"},
-                {"InstantiatedIReadOnlySetWithSomeValues:1", "Yo2"},
+                { "InstantiatedIReadOnlySetWithSomeValues:0", "Yo1" },
+                { "InstantiatedIReadOnlySetWithSomeValues:1", "Yo2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -739,8 +772,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"NonInstantiatedIReadOnlySet:0", "Yo1"},
-                {"NonInstantiatedIReadOnlySet:1", "Yo2"},
+                { "NonInstantiatedIReadOnlySet:0", "Yo1" },
+                { "NonInstantiatedIReadOnlySet:1", "Yo2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -759,10 +792,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"InstantiatedDictionaryWithReadOnlySetWithSomeValues:foo:0", "foo-1"},
-                {"InstantiatedDictionaryWithReadOnlySetWithSomeValues:foo:1", "foo-2"},
-                {"InstantiatedDictionaryWithReadOnlySetWithSomeValues:bar:0", "bar-1"},
-                {"InstantiatedDictionaryWithReadOnlySetWithSomeValues:bar:1", "bar-2"},
+                { "InstantiatedDictionaryWithReadOnlySetWithSomeValues:foo:0", "foo-1" },
+                { "InstantiatedDictionaryWithReadOnlySetWithSomeValues:foo:1", "foo-2" },
+                { "InstantiatedDictionaryWithReadOnlySetWithSomeValues:bar:0", "bar-1" },
+                { "InstantiatedDictionaryWithReadOnlySetWithSomeValues:bar:1", "bar-2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -772,21 +805,38 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             var options = config.Get<ComplexOptions>()!;
 
             Assert.Equal(3, options.InstantiatedDictionaryWithReadOnlySetWithSomeValues.Count);
-            Assert.Equal("existing1", options.InstantiatedDictionaryWithReadOnlySetWithSomeValues["item1"].ElementAt(0));
-            Assert.Equal("existing2", options.InstantiatedDictionaryWithReadOnlySetWithSomeValues["item1"].ElementAt(1));
+            Assert.Equal(
+                "existing1",
+                options.InstantiatedDictionaryWithReadOnlySetWithSomeValues["item1"].ElementAt(0)
+            );
+            Assert.Equal(
+                "existing2",
+                options.InstantiatedDictionaryWithReadOnlySetWithSomeValues["item1"].ElementAt(1)
+            );
 
-            Assert.Equal("foo-1", options.InstantiatedDictionaryWithReadOnlySetWithSomeValues["foo"].ElementAt(0));
-            Assert.Equal("foo-2", options.InstantiatedDictionaryWithReadOnlySetWithSomeValues["foo"].ElementAt(1));
-            Assert.Equal("bar-1", options.InstantiatedDictionaryWithReadOnlySetWithSomeValues["bar"].ElementAt(0));
-            Assert.Equal("bar-2", options.InstantiatedDictionaryWithReadOnlySetWithSomeValues["bar"].ElementAt(1));
+            Assert.Equal(
+                "foo-1",
+                options.InstantiatedDictionaryWithReadOnlySetWithSomeValues["foo"].ElementAt(0)
+            );
+            Assert.Equal(
+                "foo-2",
+                options.InstantiatedDictionaryWithReadOnlySetWithSomeValues["foo"].ElementAt(1)
+            );
+            Assert.Equal(
+                "bar-1",
+                options.InstantiatedDictionaryWithReadOnlySetWithSomeValues["bar"].ElementAt(0)
+            );
+            Assert.Equal(
+                "bar-2",
+                options.InstantiatedDictionaryWithReadOnlySetWithSomeValues["bar"].ElementAt(1)
+            );
         }
 #endif
 
         public class Foo
         {
             public IReadOnlyDictionary<string, int> Items { get; set; } =
-                new Dictionary<string, int> {{"existing-item1", 1}, {"existing-item2", 2}};
-
+                new Dictionary<string, int> { { "existing-item1", 1 }, { "existing-item2", 2 } };
         }
 
         [Fact]
@@ -794,8 +844,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"Items:item3", "3"},
-                {"Items:item4", "4"}
+                { "Items:item3", "3" },
+                { "Items:item4", "4" }
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -809,8 +859,6 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             Assert.Equal(2, options.Items["existing-item2"]);
             Assert.Equal(3, options.Items["item3"]);
             Assert.Equal(4, options.Items["item4"]);
-
-            
         }
 
         [Fact]
@@ -818,8 +866,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"Dictionary:existing-item1", "666"},
-                {"Dictionary:item3", "3"}
+                { "Dictionary:existing-item1", "666" },
+                { "Dictionary:item3", "3" }
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -831,7 +879,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             Assert.Equal(3, options.Dictionary.Count);
 
             // does not overwrite original
-            Assert.Equal(1, ConfigWithInstantiatedIReadOnlyDictionary._existingDictionary["existing-item1"]);
+            Assert.Equal(
+                1,
+                ConfigWithInstantiatedIReadOnlyDictionary._existingDictionary["existing-item1"]
+            );
 
             Assert.Equal(666, options.Dictionary["existing-item1"]);
             Assert.Equal(2, options.Dictionary["existing-item2"]);
@@ -843,8 +894,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"Dictionary:item1", "1"},
-                {"Dictionary:item2", "2"}
+                { "Dictionary:item1", "1" },
+                { "Dictionary:item2", "2" }
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -864,8 +915,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"Dictionary:existing-item1", "666"},
-                {"Dictionary:item3", "3"}
+                { "Dictionary:existing-item1", "666" },
+                { "Dictionary:item3", "3" }
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -877,7 +928,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             Assert.Equal(3, options.Dictionary.Count);
 
             // overwrites original
-            Assert.Equal(666, ConfigWithInstantiatedConcreteDictionary._existingDictionary["existing-item1"]);
+            Assert.Equal(
+                666,
+                ConfigWithInstantiatedConcreteDictionary._existingDictionary["existing-item1"]
+            );
             Assert.Equal(666, options.Dictionary["existing-item1"]);
             Assert.Equal(2, options.Dictionary["existing-item2"]);
             Assert.Equal(3, options.Dictionary["item3"]);
@@ -888,8 +942,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"InstantiatedReadOnlyDictionaryWithWithSomeValues:item3", "3"},
-                {"InstantiatedReadOnlyDictionaryWithWithSomeValues:item4", "4"}
+                { "InstantiatedReadOnlyDictionaryWithWithSomeValues:item3", "3" },
+                { "InstantiatedReadOnlyDictionaryWithWithSomeValues:item4", "4" }
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -911,8 +965,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"NonInstantiatedReadOnlyDictionary:item3", "3"},
-                {"NonInstantiatedReadOnlyDictionary:item4", "4"}
+                { "NonInstantiatedReadOnlyDictionary:item3", "3" },
+                { "NonInstantiatedReadOnlyDictionary:item4", "4" }
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -925,17 +979,16 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             Assert.Equal(3, options.NonInstantiatedReadOnlyDictionary["item3"]);
             Assert.Equal(4, options.NonInstantiatedReadOnlyDictionary["item4"]);
         }
-        
 
         [Fact]
         public void CanBindNonInstantiatedDictionaryOfISet()
         {
             var dic = new Dictionary<string, string>
             {
-                {"NonInstantiatedDictionaryWithISet:foo:0", "foo-1"},
-                {"NonInstantiatedDictionaryWithISet:foo:1", "foo-2"},
-                {"NonInstantiatedDictionaryWithISet:bar:0", "bar-1"},
-                {"NonInstantiatedDictionaryWithISet:bar:1", "bar-2"},
+                { "NonInstantiatedDictionaryWithISet:foo:0", "foo-1" },
+                { "NonInstantiatedDictionaryWithISet:foo:1", "foo-2" },
+                { "NonInstantiatedDictionaryWithISet:bar:0", "bar-1" },
+                { "NonInstantiatedDictionaryWithISet:bar:1", "bar-2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -956,10 +1009,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"InstantiatedDictionaryWithHashSet:foo:0", "foo-1"},
-                {"InstantiatedDictionaryWithHashSet:foo:1", "foo-2"},
-                {"InstantiatedDictionaryWithHashSet:bar:0", "bar-1"},
-                {"InstantiatedDictionaryWithHashSet:bar:1", "bar-2"},
+                { "InstantiatedDictionaryWithHashSet:foo:0", "foo-1" },
+                { "InstantiatedDictionaryWithHashSet:foo:1", "foo-2" },
+                { "InstantiatedDictionaryWithHashSet:bar:0", "bar-1" },
+                { "InstantiatedDictionaryWithHashSet:bar:1", "bar-2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -980,10 +1033,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"InstantiatedDictionaryWithHashSetWithSomeValues:foo:0", "foo-1"},
-                {"InstantiatedDictionaryWithHashSetWithSomeValues:foo:1", "foo-2"},
-                {"InstantiatedDictionaryWithHashSetWithSomeValues:bar:0", "bar-1"},
-                {"InstantiatedDictionaryWithHashSetWithSomeValues:bar:1", "bar-2"},
+                { "InstantiatedDictionaryWithHashSetWithSomeValues:foo:0", "foo-1" },
+                { "InstantiatedDictionaryWithHashSetWithSomeValues:foo:1", "foo-2" },
+                { "InstantiatedDictionaryWithHashSetWithSomeValues:bar:0", "bar-1" },
+                { "InstantiatedDictionaryWithHashSetWithSomeValues:bar:1", "bar-2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -993,81 +1046,112 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             var options = config.Get<ComplexOptions>()!;
 
             Assert.Equal(3, options.InstantiatedDictionaryWithHashSetWithSomeValues.Count);
-            Assert.Equal("existing1", options.InstantiatedDictionaryWithHashSetWithSomeValues["item1"].ElementAt(0));
-            Assert.Equal("existing2", options.InstantiatedDictionaryWithHashSetWithSomeValues["item1"].ElementAt(1));
+            Assert.Equal(
+                "existing1",
+                options.InstantiatedDictionaryWithHashSetWithSomeValues["item1"].ElementAt(0)
+            );
+            Assert.Equal(
+                "existing2",
+                options.InstantiatedDictionaryWithHashSetWithSomeValues["item1"].ElementAt(1)
+            );
 
-            Assert.Equal("foo-1", options.InstantiatedDictionaryWithHashSetWithSomeValues["foo"].ElementAt(0));
-            Assert.Equal("foo-2", options.InstantiatedDictionaryWithHashSetWithSomeValues["foo"].ElementAt(1));
-            Assert.Equal("bar-1", options.InstantiatedDictionaryWithHashSetWithSomeValues["bar"].ElementAt(0));
-            Assert.Equal("bar-2", options.InstantiatedDictionaryWithHashSetWithSomeValues["bar"].ElementAt(1));
+            Assert.Equal(
+                "foo-1",
+                options.InstantiatedDictionaryWithHashSetWithSomeValues["foo"].ElementAt(0)
+            );
+            Assert.Equal(
+                "foo-2",
+                options.InstantiatedDictionaryWithHashSetWithSomeValues["foo"].ElementAt(1)
+            );
+            Assert.Equal(
+                "bar-1",
+                options.InstantiatedDictionaryWithHashSetWithSomeValues["bar"].ElementAt(0)
+            );
+            Assert.Equal(
+                "bar-2",
+                options.InstantiatedDictionaryWithHashSetWithSomeValues["bar"].ElementAt(1)
+            );
         }
 
         [Fact]
         public void ThrowsForCustomIEnumerableCollection()
         {
             var configurationBuilder = new ConfigurationBuilder();
-            configurationBuilder.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                ["CustomIEnumerableCollection:0"] = "Yo!",
-            });
+            configurationBuilder.AddInMemoryCollection(
+                new Dictionary<string, string> { ["CustomIEnumerableCollection:0"] = "Yo!", }
+            );
             var config = configurationBuilder.Build();
 
             var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Get<MyClassWithCustomCollections>());
+                () => config.Get<MyClassWithCustomCollections>()
+            );
             Assert.Equal(
-                SR.Format(SR.Error_CannotActivateAbstractOrInterface, typeof(ICustomCollectionDerivedFromIEnumerableT<string>)),
-                exception.Message);
+                SR.Format(
+                    SR.Error_CannotActivateAbstractOrInterface,
+                    typeof(ICustomCollectionDerivedFromIEnumerableT<string>)
+                ),
+                exception.Message
+            );
         }
 
         [Fact]
         public void ThrowsForCustomICollection()
         {
             var configurationBuilder = new ConfigurationBuilder();
-            configurationBuilder.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                ["CustomCollection:0"] = "Yo!",
-            });
+            configurationBuilder.AddInMemoryCollection(
+                new Dictionary<string, string> { ["CustomCollection:0"] = "Yo!", }
+            );
             var config = configurationBuilder.Build();
 
             var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Get<MyClassWithCustomCollections>());
+                () => config.Get<MyClassWithCustomCollections>()
+            );
             Assert.Equal(
-                SR.Format(SR.Error_CannotActivateAbstractOrInterface, typeof(ICustomCollectionDerivedFromICollectionT<string>)),
-                exception.Message);
+                SR.Format(
+                    SR.Error_CannotActivateAbstractOrInterface,
+                    typeof(ICustomCollectionDerivedFromICollectionT<string>)
+                ),
+                exception.Message
+            );
         }
 
         [Fact]
         public void ThrowsForCustomDictionary()
         {
             var configurationBuilder = new ConfigurationBuilder();
-            configurationBuilder.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                ["CustomDictionary:0"] = "Yo!",
-            });
+            configurationBuilder.AddInMemoryCollection(
+                new Dictionary<string, string> { ["CustomDictionary:0"] = "Yo!", }
+            );
             var config = configurationBuilder.Build();
 
             var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Get<MyClassWithCustomDictionary>());
+                () => config.Get<MyClassWithCustomDictionary>()
+            );
             Assert.Equal(
-                SR.Format(SR.Error_CannotActivateAbstractOrInterface, typeof(ICustomDictionary<string, int>)),
-                exception.Message);
+                SR.Format(
+                    SR.Error_CannotActivateAbstractOrInterface,
+                    typeof(ICustomDictionary<string, int>)
+                ),
+                exception.Message
+            );
         }
 
         [Fact]
         public void ThrowsForCustomSet()
         {
             var configurationBuilder = new ConfigurationBuilder();
-            configurationBuilder.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                ["CustomSet:0"] = "Yo!",
-            });
+            configurationBuilder.AddInMemoryCollection(
+                new Dictionary<string, string> { ["CustomSet:0"] = "Yo!", }
+            );
             var config = configurationBuilder.Build();
 
             var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Get<MyClassWithCustomSet>());
+                () => config.Get<MyClassWithCustomSet>()
+            );
             Assert.Equal(
                 SR.Format(SR.Error_CannotActivateAbstractOrInterface, typeof(ICustomSet<string>)),
-                exception.Message);
+                exception.Message
+            );
         }
 
         [Fact]
@@ -1075,9 +1159,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"InstantiatedISet:0", "Yo1"},
-                {"InstantiatedISet:1", "Yo2"},
-                {"InstantiatedISet:2", "Yo2"},
+                { "InstantiatedISet:0", "Yo1" },
+                { "InstantiatedISet:1", "Yo2" },
+                { "InstantiatedISet:2", "Yo2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1096,8 +1180,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"InstantiatedISetWithSomeValues:0", "Yo1"},
-                {"InstantiatedISetWithSomeValues:1", "Yo2"},
+                { "InstantiatedISetWithSomeValues:0", "Yo1" },
+                { "InstantiatedISetWithSomeValues:1", "Yo2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1118,8 +1202,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"InstantiatedHashSetWithSomeValues:0", "Yo1"},
-                {"InstantiatedHashSetWithSomeValues:1", "Yo2"},
+                { "InstantiatedHashSetWithSomeValues:0", "Yo1" },
+                { "InstantiatedHashSetWithSomeValues:1", "Yo2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1140,8 +1224,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"NonInstantiatedHashSet:0", "Yo1"},
-                {"NonInstantiatedHashSet:1", "Yo2"},
+                { "NonInstantiatedHashSet:0", "Yo1" },
+                { "NonInstantiatedHashSet:1", "Yo2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1160,8 +1244,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"InstantiatedSortedSetWithSomeValues:0", "Yo1"},
-                {"InstantiatedSortedSetWithSomeValues:1", "Yo2"},
+                { "InstantiatedSortedSetWithSomeValues:0", "Yo1" },
+                { "InstantiatedSortedSetWithSomeValues:1", "Yo2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1182,8 +1266,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"NonInstantiatedSortedSetWithSomeValues:0", "Yo1"},
-                {"NonInstantiatedSortedSetWithSomeValues:1", "Yo2"},
+                { "NonInstantiatedSortedSetWithSomeValues:0", "Yo1" },
+                { "NonInstantiatedSortedSetWithSomeValues:1", "Yo2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1202,8 +1286,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"HashSetWithUnsupportedKey:0", "Yo1"},
-                {"HashSetWithUnsupportedKey:1", "Yo2"},
+                { "HashSetWithUnsupportedKey:0", "Yo1" },
+                { "HashSetWithUnsupportedKey:1", "Yo2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1220,8 +1304,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"UninstantiatedHashSetWithUnsupportedKey:0", "Yo1"},
-                {"UninstantiatedHashSetWithUnsupportedKey:1", "Yo2"},
+                { "UninstantiatedHashSetWithUnsupportedKey:0", "Yo1" },
+                { "UninstantiatedHashSetWithUnsupportedKey:1", "Yo2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1238,8 +1322,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"InstantiatedIEnumerable:0", "Yo1"},
-                {"InstantiatedIEnumerable:1", "Yo2"},
+                { "InstantiatedIEnumerable:0", "Yo1" },
+                { "InstantiatedIEnumerable:1", "Yo2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1258,8 +1342,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"InstantiatedCustomICollectionWithoutAnAddMethod:0", "Yo1"},
-                {"InstantiatedCustomICollectionWithoutAnAddMethod:1", "Yo2"},
+                { "InstantiatedCustomICollectionWithoutAnAddMethod:0", "Yo1" },
+                { "InstantiatedCustomICollectionWithoutAnAddMethod:1", "Yo2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1269,8 +1353,14 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             var options = config.Get<ComplexOptions>()!;
 
             Assert.Equal(2, options.InstantiatedCustomICollectionWithoutAnAddMethod.Count);
-            Assert.Equal("Yo1", options.InstantiatedCustomICollectionWithoutAnAddMethod.ElementAt(0));
-            Assert.Equal("Yo2", options.InstantiatedCustomICollectionWithoutAnAddMethod.ElementAt(1));
+            Assert.Equal(
+                "Yo1",
+                options.InstantiatedCustomICollectionWithoutAnAddMethod.ElementAt(0)
+            );
+            Assert.Equal(
+                "Yo2",
+                options.InstantiatedCustomICollectionWithoutAnAddMethod.ElementAt(1)
+            );
         }
 
         [Fact]
@@ -1278,8 +1368,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"NonInstantiatedCustomICollectionWithoutAnAddMethod:0", "Yo1"},
-                {"NonInstantiatedCustomICollectionWithoutAnAddMethod:1", "Yo2"},
+                { "NonInstantiatedCustomICollectionWithoutAnAddMethod:0", "Yo1" },
+                { "NonInstantiatedCustomICollectionWithoutAnAddMethod:1", "Yo2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1289,8 +1379,14 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             var options = config.Get<ComplexOptions>()!;
 
             Assert.Equal(2, options.NonInstantiatedCustomICollectionWithoutAnAddMethod.Count);
-            Assert.Equal("Yo1", options.NonInstantiatedCustomICollectionWithoutAnAddMethod.ElementAt(0));
-            Assert.Equal("Yo2", options.NonInstantiatedCustomICollectionWithoutAnAddMethod.ElementAt(1));
+            Assert.Equal(
+                "Yo1",
+                options.NonInstantiatedCustomICollectionWithoutAnAddMethod.ElementAt(0)
+            );
+            Assert.Equal(
+                "Yo2",
+                options.NonInstantiatedCustomICollectionWithoutAnAddMethod.ElementAt(1)
+            );
         }
 
         [Fact]
@@ -1298,8 +1394,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"InstantiatedICollection:0", "Yo1"},
-                {"InstantiatedICollection:1", "Yo2"},
+                { "InstantiatedICollection:0", "Yo1" },
+                { "InstantiatedICollection:1", "Yo2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1318,8 +1414,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"InstantiatedIReadOnlyCollection:0", "Yo1"},
-                {"InstantiatedIReadOnlyCollection:1", "Yo2"},
+                { "InstantiatedIReadOnlyCollection:0", "Yo1" },
+                { "InstantiatedIReadOnlyCollection:1", "Yo2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1338,9 +1434,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"InstantiatedIEnumerable:0", null},
-                {"InstantiatedIEnumerable:1", "Yo1"},
-                {"InstantiatedIEnumerable:2", "Yo2"},
+                { "InstantiatedIEnumerable:0", null },
+                { "InstantiatedIEnumerable:1", "Yo1" },
+                { "InstantiatedIEnumerable:2", "Yo2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1357,10 +1453,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [Fact]
         public void EmptyStringIsNullable()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"empty", ""},
-            };
+            var dic = new Dictionary<string, string> { { "empty", "" }, };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -1374,9 +1467,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"}
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" }
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1390,10 +1483,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [Fact]
         public void CanBindToObjectProperty()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"Object", "whatever" }
-            };
+            var dic = new Dictionary<string, string> { { "Object", "whatever" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -1409,10 +1499,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"Integer", null},
-                {"Boolean", null},
-                {"Nested:Integer", null},
-                {"Object", null }
+                { "Integer", null },
+                { "Boolean", null },
+                { "Nested:Integer", null },
+                { "Object", null }
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1433,10 +1523,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"ThisDoesNotExistInTheModel", "42"},
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"}
+                { "ThisDoesNotExistInTheModel", "42" },
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" }
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1445,22 +1535,29 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             var instance = new ComplexOptions();
 
             var ex = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true));
+                () => config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true)
+            );
 
-            string expectedMessage = SR.Format(SR.Error_MissingConfig,
-                nameof(BinderOptions.ErrorOnUnknownConfiguration), nameof(BinderOptions), typeof(ComplexOptions), "'ThisDoesNotExistInTheModel'");
+            string expectedMessage = SR.Format(
+                SR.Error_MissingConfig,
+                nameof(BinderOptions.ErrorOnUnknownConfiguration),
+                nameof(BinderOptions),
+                typeof(ComplexOptions),
+                "'ThisDoesNotExistInTheModel'"
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
+
         [Fact]
         public void ThrowsIfPropertyInConfigMissingInNestedModel()
         {
             var dic = new Dictionary<string, string>
             {
-                {"Nested:ThisDoesNotExistInTheModel", "42"},
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"}
+                { "Nested:ThisDoesNotExistInTheModel", "42" },
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" }
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1468,11 +1565,17 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
             var instance = new ComplexOptions();
 
-            string expectedMessage = SR.Format(SR.Error_MissingConfig,
-                nameof(BinderOptions.ErrorOnUnknownConfiguration), nameof(BinderOptions), typeof(NestedOptions), "'ThisDoesNotExistInTheModel'");
+            string expectedMessage = SR.Format(
+                SR.Error_MissingConfig,
+                nameof(BinderOptions.ErrorOnUnknownConfiguration),
+                nameof(BinderOptions),
+                typeof(NestedOptions),
+                "'ThisDoesNotExistInTheModel'"
+            );
 
             var ex = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true));
+                () => config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true)
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -1480,9 +1583,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [Fact]
         public void GetDefaultsWhenDataDoesNotExist()
         {
-            var dic = new Dictionary<string, string>
-            {
-            };
+            var dic = new Dictionary<string, string> { };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -1501,10 +1602,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [Fact]
         public void GetUri()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"AnUri", "http://www.bing.com"}
-            };
+            var dic = new Dictionary<string, string> { { "AnUri", "http://www.bing.com" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -1538,10 +1636,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         public void CanReadAllSupportedTypes(string value, Type type)
         {
             // arrange
-            var dic = new Dictionary<string, string>
-            {
-                {"Value", value}
-            };
+            var dic = new Dictionary<string, string> { { "Value", value } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -1586,10 +1681,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             // arrange
             const string IncorrectValue = "Invalid data";
             const string ConfigKey = "Value";
-            var dic = new Dictionary<string, string>
-            {
-                {ConfigKey, IncorrectValue}
-            };
+            var dic = new Dictionary<string, string> { { ConfigKey, IncorrectValue } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -1598,27 +1690,25 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             var options = Activator.CreateInstance(optionsType);
 
             // act
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(options));
+            var exception = Assert.Throws<InvalidOperationException>(() => config.Bind(options));
 
             var getValueException = Assert.Throws<InvalidOperationException>(
-                () => config.GetValue(type, "Value"));
+                () => config.GetValue(type, "Value")
+            );
 
             var getException = Assert.Throws<InvalidOperationException>(
-                () => config.GetSection("Value").Get(type));
+                () => config.GetSection("Value").Get(type)
+            );
 
             // assert
             Assert.NotNull(exception.InnerException);
             Assert.NotNull(getException.InnerException);
+            Assert.Equal(SR.Format(SR.Error_FailedBinding, ConfigKey, type), exception.Message);
+            Assert.Equal(SR.Format(SR.Error_FailedBinding, ConfigKey, type), getException.Message);
             Assert.Equal(
                 SR.Format(SR.Error_FailedBinding, ConfigKey, type),
-                exception.Message);
-            Assert.Equal(
-                SR.Format(SR.Error_FailedBinding, ConfigKey, type),
-                getException.Message);
-            Assert.Equal(
-                SR.Format(SR.Error_FailedBinding, ConfigKey, type),
-                getValueException.Message);
+                getValueException.Message
+            );
         }
 
         [Fact]
@@ -1627,10 +1717,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             const string IncorrectValue = "Invalid data";
             const string ConfigKey = "Nested:Value";
 
-            var dic = new Dictionary<string, string>
-            {
-                {ConfigKey, IncorrectValue}
-            };
+            var dic = new Dictionary<string, string> { { ConfigKey, IncorrectValue } };
 
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1638,11 +1725,12 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
             var options = new OptionsWithNesting();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(options));
+            var exception = Assert.Throws<InvalidOperationException>(() => config.Bind(options));
 
-            Assert.Equal(SR.Format(SR.Error_FailedBinding, ConfigKey, typeof(int)),
-                exception.Message);
+            Assert.Equal(
+                SR.Format(SR.Error_FailedBinding, ConfigKey, typeof(int)),
+                exception.Message
+            );
         }
 
         [Fact]
@@ -1658,9 +1746,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"}
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" }
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1679,9 +1767,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"}
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" }
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1700,10 +1788,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"},
-                {"Virtual", "Sup"}
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" },
+                { "Virtual", "Sup" }
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1723,10 +1811,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"},
-                {"Virtual", "Sup"}
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" },
+                { "Virtual", "Sup" }
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1744,10 +1832,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [Fact]
         public void GetCanReadStaticProperty()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"StaticProperty", "stuff"},
-            };
+            var dic = new Dictionary<string, string> { { "StaticProperty", "stuff" }, };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -1760,10 +1845,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [Fact]
         public void BindCanReadStaticProperty()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"StaticProperty", "other stuff"},
-            };
+            var dic = new Dictionary<string, string> { { "StaticProperty", "other stuff" }, };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -1779,10 +1861,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"obj", "whut" },
-                {"obj:Integer", "-2"},
-                {"obj:Boolean", "TRUe"},
-                {"obj:Nested:Integer", "11"}
+                { "obj", "whut" },
+                { "obj:Integer", "-2" },
+                { "obj:Boolean", "TRUe" },
+                { "obj:Nested:Integer", "11" }
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1806,16 +1888,15 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [InlineData("ProtectedPrivateSet")]
         public void GetIgnoresTests(string property)
         {
-            var dic = new Dictionary<string, string>
-            {
-                {property, "stuff"},
-            };
+            var dic = new Dictionary<string, string> { { property, "stuff" }, };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
             var options = config.Get<ComplexOptions>();
-            Assert.Null(options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options));
+            Assert.Null(
+                options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options)
+            );
         }
 
         [Theory]
@@ -1828,16 +1909,16 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [InlineData("ProtectedPrivateSet")]
         public void GetCanSetNonPublicWhenSet(string property)
         {
-            var dic = new Dictionary<string, string>
-            {
-                {property, "stuff"},
-            };
+            var dic = new Dictionary<string, string> { { property, "stuff" }, };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
             var options = config.Get<ComplexOptions>(o => o.BindNonPublicProperties = true);
-            Assert.Equal("stuff", options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options));
+            Assert.Equal(
+                "stuff",
+                options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options)
+            );
         }
 
         [Theory]
@@ -1846,16 +1927,15 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [InlineData("ProtectedReadOnly")]
         public void NonPublicModeGetStillIgnoresReadonly(string property)
         {
-            var dic = new Dictionary<string, string>
-            {
-                {property, "stuff"},
-            };
+            var dic = new Dictionary<string, string> { { property, "stuff" }, };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
             var options = config.Get<ComplexOptions>(o => o.BindNonPublicProperties = true);
-            Assert.Null(options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options));
+            Assert.Null(
+                options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options)
+            );
         }
 
         [Theory]
@@ -1869,10 +1949,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [InlineData("ProtectedPrivateSet")]
         public void BindIgnoresTests(string property)
         {
-            var dic = new Dictionary<string, string>
-            {
-                {property, "stuff"},
-            };
+            var dic = new Dictionary<string, string> { { property, "stuff" }, };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -1880,7 +1957,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             var options = new ComplexOptions();
             config.Bind(options);
 
-            Assert.Null(options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options));
+            Assert.Null(
+                options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options)
+            );
         }
 
         [Theory]
@@ -1893,17 +1972,17 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [InlineData("ProtectedPrivateSet")]
         public void BindCanSetNonPublicWhenSet(string property)
         {
-            var dic = new Dictionary<string, string>
-            {
-                {property, "stuff"},
-            };
+            var dic = new Dictionary<string, string> { { property, "stuff" }, };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
             var options = new ComplexOptions();
             config.Bind(options, o => o.BindNonPublicProperties = true);
-            Assert.Equal("stuff", options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options));
+            Assert.Equal(
+                "stuff",
+                options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options)
+            );
         }
 
         [Theory]
@@ -1912,36 +1991,34 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [InlineData("ProtectedReadOnly")]
         public void NonPublicModeBindStillIgnoresReadonly(string property)
         {
-            var dic = new Dictionary<string, string>
-            {
-                {property, "stuff"},
-            };
+            var dic = new Dictionary<string, string> { { property, "stuff" }, };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
             var options = new ComplexOptions();
             config.Bind(options, o => o.BindNonPublicProperties = true);
-            Assert.Null(options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options));
+            Assert.Null(
+                options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options)
+            );
         }
 
         [Fact]
         public void ExceptionWhenTryingToBindToInterface()
         {
-            var input = new Dictionary<string, string>
-            {
-                {"ISomeInterfaceProperty:Subkey", "x"}
-            };
+            var input = new Dictionary<string, string> { { "ISomeInterfaceProperty:Subkey", "x" } };
 
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
             var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions()));
+                () => config.Bind(new TestOptions())
+            );
             Assert.Equal(
                 SR.Format(SR.Error_CannotActivateAbstractOrInterface, typeof(ISomeInterface)),
-                exception.Message);
+                exception.Message
+            );
         }
 
         [Fact]
@@ -1949,7 +2026,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"ClassWithoutPublicConstructorProperty:Subkey", "x"}
+                { "ClassWithoutPublicConstructorProperty:Subkey", "x" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1957,10 +2034,15 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             var config = configurationBuilder.Build();
 
             var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions()));
+                () => config.Bind(new TestOptions())
+            );
             Assert.Equal(
-                SR.Format(SR.Error_MissingPublicInstanceConstructor, typeof(ClassWithoutPublicConstructor)),
-                exception.Message);
+                SR.Format(
+                    SR.Error_MissingPublicInstanceConstructor,
+                    typeof(ClassWithoutPublicConstructor)
+                ),
+                exception.Message
+            );
         }
 
         [Fact]
@@ -1968,9 +2050,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"ClassWhereParametersDoNotMatchPropertiesProperty:Name", "John"},
-                {"ClassWhereParametersDoNotMatchPropertiesProperty:Address", "123, Abc St."},
-                {"ClassWhereParametersDoNotMatchPropertiesProperty:Age", "42"}
+                { "ClassWhereParametersDoNotMatchPropertiesProperty:Name", "John" },
+                { "ClassWhereParametersDoNotMatchPropertiesProperty:Address", "123, Abc St." },
+                { "ClassWhereParametersDoNotMatchPropertiesProperty:Age", "42" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1978,10 +2060,16 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             var config = configurationBuilder.Build();
 
             var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions()));
+                () => config.Bind(new TestOptions())
+            );
             Assert.Equal(
-                SR.Format(SR.Error_ConstructorParametersDoNotMatchProperties, typeof(ClassWhereParametersDoNotMatchProperties), "age"),
-                exception.Message);
+                SR.Format(
+                    SR.Error_ConstructorParametersDoNotMatchProperties,
+                    typeof(ClassWhereParametersDoNotMatchProperties),
+                    "age"
+                ),
+                exception.Message
+            );
         }
 
         [Fact]
@@ -1989,8 +2077,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"LineProperty:Color", "Red"},
-                {"LineProperty:Length", "22"}
+                { "LineProperty:Color", "Red" },
+                { "LineProperty:Length", "22" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1998,10 +2086,16 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             var config = configurationBuilder.Build();
 
             var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions()));
+                () => config.Bind(new TestOptions())
+            );
             Assert.Equal(
-                SR.Format(SR.Error_ParameterHasNoMatchingConfig, typeof(Line), nameof(Line.Thickness)),
-                exception.Message);
+                SR.Format(
+                    SR.Error_ParameterHasNoMatchingConfig,
+                    typeof(Line),
+                    nameof(Line.Thickness)
+                ),
+                exception.Message
+            );
         }
 
         [Fact]
@@ -2009,9 +2103,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"ClassWhereParametersDoNotMatchPropertiesProperty:Name", "John"},
-                {"ClassWhereParametersDoNotMatchPropertiesProperty:Address", "123, Abc St."},
-                {"ClassWhereParametersDoNotMatchPropertiesProperty:Age", "42"}
+                { "ClassWhereParametersDoNotMatchPropertiesProperty:Name", "John" },
+                { "ClassWhereParametersDoNotMatchPropertiesProperty:Address", "123, Abc St." },
+                { "ClassWhereParametersDoNotMatchPropertiesProperty:Age", "42" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -2019,10 +2113,16 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             var config = configurationBuilder.Build();
 
             var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions()));
+                () => config.Bind(new TestOptions())
+            );
             Assert.Equal(
-                SR.Format(SR.Error_ConstructorParametersDoNotMatchProperties, typeof(ClassWhereParametersDoNotMatchProperties), "age"),
-                exception.Message);
+                SR.Format(
+                    SR.Error_ConstructorParametersDoNotMatchProperties,
+                    typeof(ClassWhereParametersDoNotMatchProperties),
+                    "age"
+                ),
+                exception.Message
+            );
         }
 
         [Fact]
@@ -2030,8 +2130,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"ClassWhereParametersHaveDefaultValueProperty:Name", "John"},
-                {"ClassWhereParametersHaveDefaultValueProperty:Address", "123, Abc St."}
+                { "ClassWhereParametersHaveDefaultValueProperty:Name", "John" },
+                { "ClassWhereParametersHaveDefaultValueProperty:Address", "123, Abc St." }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -2042,7 +2142,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
             config.Bind(testOptions);
             Assert.Equal("John", testOptions.ClassWhereParametersHaveDefaultValueProperty.Name);
-            Assert.Equal("123, Abc St.", testOptions.ClassWhereParametersHaveDefaultValueProperty.Address);
+            Assert.Equal(
+                "123, Abc St.",
+                testOptions.ClassWhereParametersHaveDefaultValueProperty.Address
+            );
             Assert.Equal(42, testOptions.ClassWhereParametersHaveDefaultValueProperty.Age);
         }
 
@@ -2051,9 +2154,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"ClassWhereParametersMatchPropertiesAndFieldsProperty:Name", "John"},
-                {"ClassWhereParametersMatchPropertiesAndFieldsProperty:Address", "123, Abc St."},
-                {"ClassWhereParametersMatchPropertiesAndFieldsProperty:Age", "42"}
+                { "ClassWhereParametersMatchPropertiesAndFieldsProperty:Name", "John" },
+                { "ClassWhereParametersMatchPropertiesAndFieldsProperty:Address", "123, Abc St." },
+                { "ClassWhereParametersMatchPropertiesAndFieldsProperty:Age", "42" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -2061,11 +2164,17 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             var config = configurationBuilder.Build();
 
             var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions()));
+                () => config.Bind(new TestOptions())
+            );
 
             Assert.Equal(
-                SR.Format(SR.Error_ConstructorParametersDoNotMatchProperties, typeof(ClassWhereParametersMatchPropertiesAndFields), "age"),
-                exception.Message);
+                SR.Format(
+                    SR.Error_ConstructorParametersDoNotMatchProperties,
+                    typeof(ClassWhereParametersMatchPropertiesAndFields),
+                    "age"
+                ),
+                exception.Message
+            );
         }
 
         [Fact]
@@ -2073,8 +2182,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"RecordWhereParametersHaveDefaultValueProperty:Name", "John"},
-                {"RecordWhereParametersHaveDefaultValueProperty:Address", "123, Abc St."}
+                { "RecordWhereParametersHaveDefaultValueProperty:Name", "John" },
+                { "RecordWhereParametersHaveDefaultValueProperty:Address", "123, Abc St." }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -2085,7 +2194,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
             config.Bind(testOptions);
             Assert.Equal("John", testOptions.RecordWhereParametersHaveDefaultValueProperty.Name);
-            Assert.Equal("123, Abc St.", testOptions.RecordWhereParametersHaveDefaultValueProperty.Address);
+            Assert.Equal(
+                "123, Abc St.",
+                testOptions.RecordWhereParametersHaveDefaultValueProperty.Address
+            );
             Assert.Equal(42, testOptions.RecordWhereParametersHaveDefaultValueProperty.Age);
         }
 
@@ -2094,7 +2206,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"ThrowsWhenActivatedProperty:subkey", "x"}
+                { "ThrowsWhenActivatedProperty:subkey", "x" }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -2102,11 +2214,13 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             var config = configurationBuilder.Build();
 
             var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions()));
+                () => config.Bind(new TestOptions())
+            );
             Assert.NotNull(exception.InnerException);
             Assert.Equal(
                 SR.Format(SR.Error_FailedToActivate, typeof(ThrowsWhenActivated)),
-                exception.Message);
+                exception.Message
+            );
         }
 
         [Fact]
@@ -2114,7 +2228,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var input = new Dictionary<string, string>
             {
-                {"NestedOptionsProperty:NestedOptions2Property:ISomeInterfaceProperty:subkey", "x"}
+                {
+                    "NestedOptionsProperty:NestedOptions2Property:ISomeInterfaceProperty:subkey",
+                    "x"
+                }
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -2122,10 +2239,12 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             var config = configurationBuilder.Build();
 
             var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions()));
+                () => config.Bind(new TestOptions())
+            );
             Assert.Equal(
                 SR.Format(SR.Error_CannotActivateAbstractOrInterface, typeof(ISomeInterface)),
-                exception.Message);
+                exception.Message
+            );
         }
 
         [Fact]
@@ -2133,8 +2252,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"MyInt32", "42"},
-                {"MyString", "hello world"},
+                { "MyInt32", "42" },
+                { "MyString", "hello world" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -2148,11 +2267,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [Fact]
         public void CanBindImmutableClass()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"Length", "42"},
-                {"Color", "Green"},
-            };
+            var dic = new Dictionary<string, string> { { "Length", "42" }, { "Color", "Green" }, };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -2167,9 +2282,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"ContainerName", "Container123"},
-                {"LengthAndColor:Length", "42"},
-                {"LengthAndColor:Color", "Green"},
+                { "ContainerName", "Container123" },
+                { "LengthAndColor:Length", "42" },
+                { "LengthAndColor:Color", "Green" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -2188,18 +2303,23 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"String1", "s1"},
-                {"Int1", "1"},
-                {"String2", "s2"},
-                {"Int2", "2"},
+                { "String1", "s1" },
+                { "Int1", "1" },
+                { "String2", "s2" },
+                { "Int2", "2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
-            string expectedMessage = SR.Format(SR.Error_MultipleParameterizedConstructors, "Microsoft.Extensions.Configuration.Binder.Test.ConfigurationBinderTests+ImmutableClassWithMultipleParameterizedConstructors");
+            string expectedMessage = SR.Format(
+                SR.Error_MultipleParameterizedConstructors,
+                "Microsoft.Extensions.Configuration.Binder.Test.ConfigurationBinderTests+ImmutableClassWithMultipleParameterizedConstructors"
+            );
 
-            var ex = Assert.Throws<InvalidOperationException>(() => config.Get<ImmutableClassWithMultipleParameterizedConstructors>());
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => config.Get<ImmutableClassWithMultipleParameterizedConstructors>()
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -2211,18 +2331,24 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"String1", "s1"},
-                {"Int1", "1"},
-                {"String2", "s2"},
-                {"Int2", "2"},
+                { "String1", "s1" },
+                { "Int1", "1" },
+                { "String2", "s2" },
+                { "Int2", "2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
-            string expectedMessage = SR.Format(SR.Error_CannotBindToConstructorParameter, "Microsoft.Extensions.Configuration.Binder.Test.ConfigurationBinderTests+ImmutableClassWithOneParameterizedConstructorButWithInParameter", "string1");
+            string expectedMessage = SR.Format(
+                SR.Error_CannotBindToConstructorParameter,
+                "Microsoft.Extensions.Configuration.Binder.Test.ConfigurationBinderTests+ImmutableClassWithOneParameterizedConstructorButWithInParameter",
+                "string1"
+            );
 
-            var ex = Assert.Throws<InvalidOperationException>(() => config.Get<ImmutableClassWithOneParameterizedConstructorButWithInParameter>());
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => config.Get<ImmutableClassWithOneParameterizedConstructorButWithInParameter>()
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -2234,18 +2360,24 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"String1", "s1"},
-                {"Int1", "1"},
-                {"String2", "s2"},
-                {"Int2", "2"},
+                { "String1", "s1" },
+                { "Int1", "1" },
+                { "String2", "s2" },
+                { "Int2", "2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
-            string expectedMessage = SR.Format(SR.Error_CannotBindToConstructorParameter, "Microsoft.Extensions.Configuration.Binder.Test.ConfigurationBinderTests+ImmutableClassWithOneParameterizedConstructorButWithRefParameter", "int1");
+            string expectedMessage = SR.Format(
+                SR.Error_CannotBindToConstructorParameter,
+                "Microsoft.Extensions.Configuration.Binder.Test.ConfigurationBinderTests+ImmutableClassWithOneParameterizedConstructorButWithRefParameter",
+                "int1"
+            );
 
-            var ex = Assert.Throws<InvalidOperationException>(() => config.Get<ImmutableClassWithOneParameterizedConstructorButWithRefParameter>());
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => config.Get<ImmutableClassWithOneParameterizedConstructorButWithRefParameter>()
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -2257,18 +2389,24 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"String1", "s1"},
-                {"Int1", "1"},
-                {"String2", "s2"},
-                {"Int2", "2"},
+                { "String1", "s1" },
+                { "Int1", "1" },
+                { "String2", "s2" },
+                { "Int2", "2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
-            string expectedMessage = SR.Format(SR.Error_CannotBindToConstructorParameter, "Microsoft.Extensions.Configuration.Binder.Test.ConfigurationBinderTests+ImmutableClassWithOneParameterizedConstructorButWithOutParameter", "int2");
+            string expectedMessage = SR.Format(
+                SR.Error_CannotBindToConstructorParameter,
+                "Microsoft.Extensions.Configuration.Binder.Test.ConfigurationBinderTests+ImmutableClassWithOneParameterizedConstructorButWithOutParameter",
+                "int2"
+            );
 
-            var ex = Assert.Throws<InvalidOperationException>(() => config.Get<ImmutableClassWithOneParameterizedConstructorButWithOutParameter>());
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => config.Get<ImmutableClassWithOneParameterizedConstructorButWithOutParameter>()
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -2276,11 +2414,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [Fact]
         public void CanBindMutableStruct_UnmatchedConstructorsAreIgnored()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"Length", "42"},
-                {"Color", "Green"},
-            };
+            var dic = new Dictionary<string, string> { { "Length", "42" }, { "Color", "Green" }, };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -2297,10 +2431,10 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"String1", "s1"},
-                {"Int1", "1"},
-                {"String2", "s2"},
-                {"Int2", "2"},
+                { "String1", "s1" },
+                { "Int1", "1" },
+                { "String2", "s2" },
+                { "Int2", "2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -2318,9 +2452,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"Length", "42"},
-                {"Color", "Green"},
-                {"Thickness", "1.23"},
+                { "Length", "42" },
+                { "Color", "Green" },
+                { "Thickness", "1.23" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -2337,9 +2471,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"Length", "42"},
-                {"Color", "Green"},
-                {"Thickness", "1.23"},
+                { "Length", "42" },
+                { "Color", "Green" },
+                { "Thickness", "1.23" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -2354,11 +2488,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [Fact]
         public void CanBindRecordOptions()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"Length", "42"},
-                {"Color", "Green"},
-            };
+            var dic = new Dictionary<string, string> { { "Length", "42" }, { "Color", "Green" }, };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -2371,11 +2501,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [Fact]
         public void CanBindRecordStructOptions()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"Length", "42"},
-                {"Color", "Green"},
-            };
+            var dic = new Dictionary<string, string> { { "Length", "42" }, { "Color", "Green" }, };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -2390,11 +2516,11 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             var dic = new Dictionary<string, string>
             {
-                {"Number", "1"},
-                {"Nested1:ValueA", "Cool"},
-                {"Nested1:ValueB", "42"},
-                {"Nested2:ValueA", "Uncool"},
-                {"Nested2:ValueB", "24"},
+                { "Number", "1" },
+                { "Nested1:ValueA", "Cool" },
+                { "Nested1:ValueB", "42" },
+                { "Nested2:ValueA", "Uncool" },
+                { "Nested2:ValueB", "24" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -2411,11 +2537,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [Fact]
         public void CanBindOnParametersAndProperties_PropertiesAreSetAfterTheConstructor()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"Length", "42"},
-                {"Color", "Green"},
-            };
+            var dic = new Dictionary<string, string> { { "Length", "42" }, { "Color", "Green" }, };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -2428,11 +2550,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [Fact]
         public void CanBindReadonlyRecordStructOptions()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"Length", "42"},
-                {"Color", "Green"},
-            };
+            var dic = new Dictionary<string, string> { { "Length", "42" }, { "Color", "Green" }, };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -2461,10 +2579,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [Fact]
         public void CanBindByteArrayWhenValueIsNull()
         {
-            var dic = new Dictionary<string, string>
-            {
-                { "MyByteArray", null }
-            };
+            var dic = new Dictionary<string, string> { { "MyByteArray", null } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -2485,25 +2600,30 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             var config = configurationBuilder.Build();
 
             var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Get<ByteArrayOptions>());
+                () => config.Get<ByteArrayOptions>()
+            );
             Assert.Equal(
                 SR.Format(SR.Error_FailedBinding, "MyByteArray", typeof(byte[])),
-                exception.Message);
+                exception.Message
+            );
         }
 
         [Fact]
         public void DoesNotReadPropertiesUnnecessarily()
         {
             ConfigurationBuilder configurationBuilder = new();
-            configurationBuilder.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                { nameof(ClassWithReadOnlyPropertyThatThrows.Safe), "value" },
-                { nameof(ClassWithReadOnlyPropertyThatThrows.StringThrows), "value" },
-                { $"{nameof(ClassWithReadOnlyPropertyThatThrows.EnumerableThrows)}:0", "0" },
-            });
+            configurationBuilder.AddInMemoryCollection(
+                new Dictionary<string, string>
+                {
+                    { nameof(ClassWithReadOnlyPropertyThatThrows.Safe), "value" },
+                    { nameof(ClassWithReadOnlyPropertyThatThrows.StringThrows), "value" },
+                    { $"{nameof(ClassWithReadOnlyPropertyThatThrows.EnumerableThrows)}:0", "0" },
+                }
+            );
             IConfiguration config = configurationBuilder.Build();
 
-            ClassWithReadOnlyPropertyThatThrows bound = config.Get<ClassWithReadOnlyPropertyThatThrows>();
+            ClassWithReadOnlyPropertyThatThrows bound =
+                config.Get<ClassWithReadOnlyPropertyThatThrows>();
             Assert.Equal("value", bound.Safe);
         }
 
@@ -2515,12 +2635,14 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         public void CanBindNestedStructProperties()
         {
             ConfigurationBuilder configurationBuilder = new();
-            configurationBuilder.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                { "ReadWriteNestedStruct:String", "s" },
-                { "ReadWriteNestedStruct:DeeplyNested:Int32", "100" },
-                { "ReadWriteNestedStruct:DeeplyNested:Boolean", "true" },
-            });
+            configurationBuilder.AddInMemoryCollection(
+                new Dictionary<string, string>
+                {
+                    { "ReadWriteNestedStruct:String", "s" },
+                    { "ReadWriteNestedStruct:DeeplyNested:Int32", "100" },
+                    { "ReadWriteNestedStruct:DeeplyNested:Boolean", "true" },
+                }
+            );
             IConfiguration config = configurationBuilder.Build();
 
             StructWithNestedStructs bound = config.Get<StructWithNestedStructs>();
@@ -2533,12 +2655,14 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         public void IgnoresReadOnlyNestedStructProperties()
         {
             ConfigurationBuilder configurationBuilder = new();
-            configurationBuilder.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                { "ReadOnlyNestedStruct:String", "s" },
-                { "ReadOnlyNestedStruct:DeeplyNested:Int32", "100" },
-                { "ReadOnlyNestedStruct:DeeplyNested:Boolean", "true" },
-            });
+            configurationBuilder.AddInMemoryCollection(
+                new Dictionary<string, string>
+                {
+                    { "ReadOnlyNestedStruct:String", "s" },
+                    { "ReadOnlyNestedStruct:DeeplyNested:Int32", "100" },
+                    { "ReadOnlyNestedStruct:DeeplyNested:Boolean", "true" },
+                }
+            );
             IConfiguration config = configurationBuilder.Build();
 
             StructWithNestedStructs bound = config.Get<StructWithNestedStructs>();
@@ -2551,12 +2675,14 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         public void CanBindNullableNestedStructProperties()
         {
             ConfigurationBuilder configurationBuilder = new();
-            configurationBuilder.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                { "NullableNestedStruct:String", "s" },
-                { "NullableNestedStruct:DeeplyNested:Int32", "100" },
-                { "NullableNestedStruct:DeeplyNested:Boolean", "true" },
-            });
+            configurationBuilder.AddInMemoryCollection(
+                new Dictionary<string, string>
+                {
+                    { "NullableNestedStruct:String", "s" },
+                    { "NullableNestedStruct:DeeplyNested:Int32", "100" },
+                    { "NullableNestedStruct:DeeplyNested:Boolean", "true" },
+                }
+            );
             IConfiguration config = configurationBuilder.Build();
 
             StructWithNestedStructs bound = config.Get<StructWithNestedStructs>();
@@ -2570,15 +2696,17 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         public void CanBindVirtualProperties()
         {
             ConfigurationBuilder configurationBuilder = new();
-            configurationBuilder.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                { $"{nameof(BaseClassWithVirtualProperty.Test)}:0", "1" },
-                { $"{nameof(BaseClassWithVirtualProperty.TestGetSetOverridden)}", "2" },
-                { $"{nameof(BaseClassWithVirtualProperty.TestGetOverridden)}", "3" },
-                { $"{nameof(BaseClassWithVirtualProperty.TestSetOverridden)}", "4" },
-                { $"{nameof(BaseClassWithVirtualProperty.TestNoOverridden)}", "5" },
-                { $"{nameof(BaseClassWithVirtualProperty.TestVirtualSet)}", "6" }
-            });
+            configurationBuilder.AddInMemoryCollection(
+                new Dictionary<string, string>
+                {
+                    { $"{nameof(BaseClassWithVirtualProperty.Test)}:0", "1" },
+                    { $"{nameof(BaseClassWithVirtualProperty.TestGetSetOverridden)}", "2" },
+                    { $"{nameof(BaseClassWithVirtualProperty.TestGetOverridden)}", "3" },
+                    { $"{nameof(BaseClassWithVirtualProperty.TestSetOverridden)}", "4" },
+                    { $"{nameof(BaseClassWithVirtualProperty.TestNoOverridden)}", "5" },
+                    { $"{nameof(BaseClassWithVirtualProperty.TestVirtualSet)}", "6" }
+                }
+            );
             IConfiguration config = configurationBuilder.Build();
 
             var test = new ClassOverridingVirtualProperty();
@@ -2596,10 +2724,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         public void CanBindPrivatePropertiesFromBaseClass()
         {
             ConfigurationBuilder configurationBuilder = new();
-            configurationBuilder.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                { "PrivateProperty", "a" }
-            });
+            configurationBuilder.AddInMemoryCollection(
+                new Dictionary<string, string> { { "PrivateProperty", "a" } }
+            );
             IConfiguration config = configurationBuilder.Build();
 
             var test = new ClassOverridingVirtualProperty();
@@ -2607,15 +2734,11 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             Assert.Equal("a", test.ExposePrivatePropertyValue());
         }
 
-        private interface ISomeInterface
-        {
-        }
+        private interface ISomeInterface { }
 
         private class ClassWithoutPublicConstructor
         {
-            private ClassWithoutPublicConstructor()
-            {
-            }
+            private ClassWithoutPublicConstructor() { }
         }
 
         private class ThrowsWhenActivated
@@ -2658,7 +2781,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         {
             public string StringThrows => throw new InvalidOperationException(nameof(StringThrows));
 
-            public IEnumerable<int> EnumerableThrows => throw new InvalidOperationException(nameof(EnumerableThrows));
+            public IEnumerable<int> EnumerableThrows =>
+                throw new InvalidOperationException(nameof(EnumerableThrows));
 
             public string Safe { get; set; }
         }
@@ -2707,7 +2831,11 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
         public class ClassOverridingVirtualProperty : BaseClassWithVirtualProperty
         {
-            public override string[] Test { get => base.Test; set => base.Test = value; }
+            public override string[] Test
+            {
+                get => base.Test;
+                set => base.Test = value;
+            }
 
             public override string? TestGetSetOverridden { get; set; }
             public override string? TestGetOverridden => base.TestGetOverridden;

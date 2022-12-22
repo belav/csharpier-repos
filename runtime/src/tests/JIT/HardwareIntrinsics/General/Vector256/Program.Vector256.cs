@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["Abs.Byte"] = AbsByte,
                 ["Abs.Double"] = AbsDouble,
                 ["Abs.Int16"] = AbsInt16,

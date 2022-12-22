@@ -11,19 +11,19 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.AddAccessibilityModifiers
 {
-    internal class CSharpAddAccessibilityModifiers : AbstractAddAccessibilityModifiers<MemberDeclarationSyntax>
+    internal class CSharpAddAccessibilityModifiers
+        : AbstractAddAccessibilityModifiers<MemberDeclarationSyntax>
     {
         public static readonly CSharpAddAccessibilityModifiers Instance = new();
 
-        protected CSharpAddAccessibilityModifiers()
-        {
-        }
+        protected CSharpAddAccessibilityModifiers() { }
 
         public override bool ShouldUpdateAccessibilityModifier(
             IAccessibilityFacts accessibilityFacts,
             MemberDeclarationSyntax member,
             AccessibilityModifiersRequired option,
-            out SyntaxToken name)
+            out SyntaxToken name
+        )
         {
             // Have to have a name to report the issue on.
             name = member.GetNameToken();
@@ -53,6 +53,7 @@ namespace Microsoft.CodeAnalysis.CSharp.AddAccessibilityModifiers
                     case SyntaxKind.CompilationUnit:
                     case SyntaxKind.FileScopedNamespaceDeclaration:
                     case SyntaxKind.NamespaceDeclaration:
+
                         {
                             // Default is internal
                             if (accessibility != Accessibility.Internal)
@@ -65,6 +66,7 @@ namespace Microsoft.CodeAnalysis.CSharp.AddAccessibilityModifiers
                     case SyntaxKind.RecordDeclaration:
                     case SyntaxKind.StructDeclaration:
                     case SyntaxKind.RecordStructDeclaration:
+
                         {
                             // Inside a type, default is private
                             if (accessibility != Accessibility.Private)

@@ -18,13 +18,26 @@ namespace Tracing.Tests.GCFinalizers
             {
                 new EventPipeProvider("Microsoft-DotNETCore-SampleProfiler", EventLevel.Verbose),
                 //GCKeyword (0x1): 0b1
-                new EventPipeProvider("Microsoft-Windows-DotNETRuntime", EventLevel.Informational, 0b1)
+                new EventPipeProvider(
+                    "Microsoft-Windows-DotNETRuntime",
+                    EventLevel.Informational,
+                    0b1
+                )
             };
 
-            return IpcTraceTest.RunAndValidateEventCounts(_expectedEventCounts, _eventGeneratingAction, providers, 1024, _DoesTraceContainEvents);
+            return IpcTraceTest.RunAndValidateEventCounts(
+                _expectedEventCounts,
+                _eventGeneratingAction,
+                providers,
+                1024,
+                _DoesTraceContainEvents
+            );
         }
 
-        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<string, ExpectedEventCount>()
+        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<
+            string,
+            ExpectedEventCount
+        >()
         {
             { "Microsoft-Windows-DotNETRuntime", -1 },
             { "Microsoft-Windows-DotNETRuntimeRundown", -1 },
@@ -52,7 +65,8 @@ namespace Tracing.Tests.GCFinalizers
             source.Clr.GCFinalizersStop += (eventData) => GCFinalizersEndEvents += 1;
             int GCFinalizersStartEvents = 0;
             source.Clr.GCFinalizersStart += (eventData) => GCFinalizersStartEvents += 1;
-            return () => {
+            return () =>
+            {
                 Logger.logger.Log("Event counts validation");
                 Logger.logger.Log("GCFinalizersEndEvents: " + GCFinalizersEndEvents);
                 Logger.logger.Log("GCFinalizersStartEvents: " + GCFinalizersStartEvents);

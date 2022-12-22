@@ -46,12 +46,20 @@ internal static partial class Interop
         internal static partial void SslSetAcceptState(SafeSslHandle ssl);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslSetAlpnProtos")]
-        internal static unsafe partial int SslSetAlpnProtos(SafeSslHandle ssl, byte* protos, int len);
+        internal static unsafe partial int SslSetAlpnProtos(
+            SafeSslHandle ssl,
+            byte* protos,
+            int len
+        );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslGetVersion")]
         internal static partial IntPtr SslGetVersion(SafeSslHandle ssl);
 
-        [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslSetTlsExtHostName", StringMarshalling = StringMarshalling.Utf8)]
+        [LibraryImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_SslSetTlsExtHostName",
+            StringMarshalling = StringMarshalling.Utf8
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool SslSetTlsExtHostName(SafeSslHandle ssl, string host);
 
@@ -62,7 +70,11 @@ internal static partial class Interop
         internal static unsafe partial int SslSetSession(SafeSslHandle ssl, IntPtr session);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslGet0AlpnSelected")]
-        internal static partial void SslGetAlpnSelected(SafeSslHandle ssl, out IntPtr protocol, out int len);
+        internal static partial void SslGetAlpnSelected(
+            SafeSslHandle ssl,
+            out IntPtr protocol,
+            out int len
+        );
 
         internal static unsafe ReadOnlySpan<byte> SslGetAlpnSelected(SafeSslHandle ssl)
         {
@@ -76,11 +88,29 @@ internal static partial class Interop
             return new ReadOnlySpan<byte>((void*)protocol, len);
         }
 
-        [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslWrite", SetLastError = true)]
-        internal static partial int SslWrite(SafeSslHandle ssl, ref byte buf, int num, out SslErrorCode error);
+        [LibraryImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_SslWrite",
+            SetLastError = true
+        )]
+        internal static partial int SslWrite(
+            SafeSslHandle ssl,
+            ref byte buf,
+            int num,
+            out SslErrorCode error
+        );
 
-        [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslRead", SetLastError = true)]
-        internal static partial int SslRead(SafeSslHandle ssl, ref byte buf, int num, out SslErrorCode error);
+        [LibraryImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_SslRead",
+            SetLastError = true
+        )]
+        internal static partial int SslRead(
+            SafeSslHandle ssl,
+            ref byte buf,
+            int num,
+            out SslErrorCode error
+        );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslRenegotiate")]
         internal static partial int SslRenegotiate(SafeSslHandle ssl, out SslErrorCode error);
@@ -96,9 +126,17 @@ internal static partial class Interop
         internal static partial int SslShutdown(SafeSslHandle ssl);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslSetBio")]
-        internal static partial void SslSetBio(SafeSslHandle ssl, SafeBioHandle rbio, SafeBioHandle wbio);
+        internal static partial void SslSetBio(
+            SafeSslHandle ssl,
+            SafeBioHandle rbio,
+            SafeBioHandle wbio
+        );
 
-        [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslDoHandshake", SetLastError = true)]
+        [LibraryImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_SslDoHandshake",
+            SetLastError = true
+        )]
         internal static partial int SslDoHandshake(SafeSslHandle ssl, out SslErrorCode error);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_IsSslStateOK")]
@@ -129,18 +167,31 @@ internal static partial class Interop
         internal static partial bool SslSessionReused(SafeSslHandle ssl);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslGetClientCAList")]
-        private static partial SafeSharedX509NameStackHandle SslGetClientCAList_private(SafeSslHandle ssl);
+        private static partial SafeSharedX509NameStackHandle SslGetClientCAList_private(
+            SafeSslHandle ssl
+        );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslGetCurrentCipherId")]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool SslGetCurrentCipherId(SafeSslHandle ssl, out int cipherId);
 
-        [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetOpenSslCipherSuiteName")]
-        private static partial IntPtr GetOpenSslCipherSuiteName(SafeSslHandle ssl, int cipherSuite, out int isTls12OrLower);
+        [LibraryImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_GetOpenSslCipherSuiteName"
+        )]
+        private static partial IntPtr GetOpenSslCipherSuiteName(
+            SafeSslHandle ssl,
+            int cipherSuite,
+            out int isTls12OrLower
+        );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SetCiphers")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool SslSetCiphers(SafeSslHandle ssl, byte* cipherList, byte* cipherSuites);
+        internal static unsafe partial bool SslSetCiphers(
+            SafeSslHandle ssl,
+            byte* cipherList,
+            byte* cipherSuites
+        );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslSetVerifyPeer")]
         internal static partial void SslSetVerifyPeer(SafeSslHandle ssl);
@@ -163,7 +214,10 @@ internal static partial class Interop
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslUsePrivateKey")]
         internal static partial int SslUsePrivateKey(SafeSslHandle ssl, SafeEvpPKeyHandle keyPtr);
 
-        [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslSetClientCertCallback")]
+        [LibraryImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_SslSetClientCertCallback"
+        )]
         internal static unsafe partial void SslSetClientCertCallback(SafeSslHandle ssl, int set);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslSetPostHandshakeAuth")]
@@ -187,14 +241,19 @@ internal static partial class Interop
             internal static readonly bool Tls13Supported = Tls13SupportedImpl() != 0;
         }
 
-        internal static int GetAlpnProtocolListSerializedLength(List<SslApplicationProtocol> applicationProtocols)
+        internal static int GetAlpnProtocolListSerializedLength(
+            List<SslApplicationProtocol> applicationProtocols
+        )
         {
             int protocolSize = 0;
             foreach (SslApplicationProtocol protocol in applicationProtocols)
             {
                 if (protocol.Protocol.Length == 0 || protocol.Protocol.Length > byte.MaxValue)
                 {
-                    throw new ArgumentException(SR.net_ssl_app_protocols_invalid, nameof(applicationProtocols));
+                    throw new ArgumentException(
+                        SR.net_ssl_app_protocols_invalid,
+                        nameof(applicationProtocols)
+                    );
                 }
 
                 protocolSize += protocol.Protocol.Length + 1;
@@ -203,10 +262,15 @@ internal static partial class Interop
             return protocolSize;
         }
 
-        internal static void SerializeAlpnProtocolList(List<SslApplicationProtocol> applicationProtocols, Span<byte> buffer)
+        internal static void SerializeAlpnProtocolList(
+            List<SslApplicationProtocol> applicationProtocols,
+            Span<byte> buffer
+        )
         {
-            Debug.Assert(GetAlpnProtocolListSerializedLength(applicationProtocols) == buffer.Length,
-                "GetAlpnProtocolListSerializedSize(applicationProtocols) == buffer.Length");
+            Debug.Assert(
+                GetAlpnProtocolListSerializedLength(applicationProtocols) == buffer.Length,
+                "GetAlpnProtocolListSerializedSize(applicationProtocols) == buffer.Length"
+            );
 
             int offset = 0;
             foreach (SslApplicationProtocol protocol in applicationProtocols)
@@ -217,15 +281,22 @@ internal static partial class Interop
             }
         }
 
-        internal static unsafe int SslSetAlpnProtos(SafeSslHandle ssl, List<SslApplicationProtocol> applicationProtocols)
+        internal static unsafe int SslSetAlpnProtos(
+            SafeSslHandle ssl,
+            List<SslApplicationProtocol> applicationProtocols
+        )
         {
             int length = GetAlpnProtocolListSerializedLength(applicationProtocols);
-            Span<byte> buffer = length <= 256 ? stackalloc byte[256].Slice(0, length) : new byte[length];
+            Span<byte> buffer =
+                length <= 256 ? stackalloc byte[256].Slice(0, length) : new byte[length];
             SerializeAlpnProtocolList(applicationProtocols, buffer);
             return SslSetAlpnProtos(ssl, buffer);
         }
 
-        internal static unsafe int SslSetAlpnProtos(SafeSslHandle ssl, Span<byte> serializedProtocols)
+        internal static unsafe int SslSetAlpnProtos(
+            SafeSslHandle ssl,
+            Span<byte> serializedProtocols
+        )
         {
             fixed (byte* pBuffer = &MemoryMarshal.GetReference(serializedProtocols))
             {
@@ -239,7 +310,11 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslAddClientCAs")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static unsafe partial bool SslAddClientCAs(SafeSslHandle ssl, IntPtr* x509s, int count);
+        private static unsafe partial bool SslAddClientCAs(
+            SafeSslHandle ssl,
+            IntPtr* x509s,
+            int count
+        );
 
         internal static unsafe bool SslAddClientCAs(SafeSslHandle ssl, Span<IntPtr> x509handles)
         {
@@ -250,9 +325,16 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static unsafe partial void CryptoNative_SslStapleOcsp(SafeSslHandle ssl, byte* buf, int len);
+        private static unsafe partial void CryptoNative_SslStapleOcsp(
+            SafeSslHandle ssl,
+            byte* buf,
+            int len
+        );
 
-        internal static unsafe void SslStapleOcsp(SafeSslHandle ssl, ReadOnlySpan<byte> stapledResponse)
+        internal static unsafe void SslStapleOcsp(
+            SafeSslHandle ssl,
+            ReadOnlySpan<byte> stapledResponse
+        )
         {
             Debug.Assert(stapledResponse.Length > 0);
 
@@ -281,9 +363,15 @@ internal static partial class Interop
             return true;
         }
 
-        internal static string? GetOpenSslCipherSuiteName(SafeSslHandle ssl, TlsCipherSuite cipherSuite, out bool isTls12OrLower)
+        internal static string? GetOpenSslCipherSuiteName(
+            SafeSslHandle ssl,
+            TlsCipherSuite cipherSuite,
+            out bool isTls12OrLower
+        )
         {
-            string? ret = Marshal.PtrToStringUTF8(GetOpenSslCipherSuiteName(ssl, (int)cipherSuite, out int isTls12OrLowerInt));
+            string? ret = Marshal.PtrToStringUTF8(
+                GetOpenSslCipherSuiteName(ssl, (int)cipherSuite, out int isTls12OrLowerInt)
+            );
             isTls12OrLower = isTls12OrLowerInt != 0;
             return ret;
         }
@@ -345,18 +433,12 @@ namespace Microsoft.Win32.SafeHandles
 
         public SafeBioHandle? InputBio
         {
-            get
-            {
-                return _readBio;
-            }
+            get { return _readBio; }
         }
 
         public SafeBioHandle? OutputBio
         {
-            get
-            {
-                return _writeBio;
-            }
+            get { return _writeBio; }
         }
 
         internal void MarkHandshakeCompleted()
@@ -391,7 +473,10 @@ namespace Microsoft.Win32.SafeHandles
             {
                 // The only way this should be able to happen without thread aborts is if we hit OOMs while
                 // manipulating the safe handles, in which case we may leak the bio handles.
-                Debug.Fail("Unexpected exception while transferring SafeBioHandle ownership to SafeSslHandle", exc.ToString());
+                Debug.Fail(
+                    "Unexpected exception while transferring SafeBioHandle ownership to SafeSslHandle",
+                    exc.ToString()
+                );
                 throw;
             }
 
@@ -465,11 +550,10 @@ namespace Microsoft.Win32.SafeHandles
             }
         }
 
-        public SafeSslHandle() : base(IntPtr.Zero, true)
-        {
-        }
+        public SafeSslHandle() : base(IntPtr.Zero, true) { }
 
-        internal SafeSslHandle(IntPtr validSslPointer, bool ownsHandle) : base(IntPtr.Zero, ownsHandle)
+        internal SafeSslHandle(IntPtr validSslPointer, bool ownsHandle)
+            : base(IntPtr.Zero, ownsHandle)
         {
             handle = validSslPointer;
         }

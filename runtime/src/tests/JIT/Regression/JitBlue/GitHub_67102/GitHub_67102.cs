@@ -29,11 +29,12 @@ internal enum ScrollOrientation
 internal class OrientationBasedMeasures
 {
     public ScrollOrientation ScrollOrientation { get; set; } = ScrollOrientation.Vertical;
+
     public Size MinorMajorSize(double minor, double major)
     {
-        return ScrollOrientation == ScrollOrientation.Vertical ?
-            new Size(minor, major) :
-            new Size(major, minor);
+        return ScrollOrientation == ScrollOrientation.Vertical
+            ? new Size(minor, major)
+            : new Size(major, minor);
     }
 }
 

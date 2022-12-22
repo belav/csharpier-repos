@@ -16,8 +16,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private readonly ImmutableArray<LocalSymbol> _locals;
 
-        public SimpleLocalScopeBinder(ImmutableArray<LocalSymbol> locals, Binder next) :
-            base(next)
+        public SimpleLocalScopeBinder(ImmutableArray<LocalSymbol> locals, Binder next) : base(next)
         {
             _locals = locals;
         }
@@ -27,12 +26,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             return _locals;
         }
 
-        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(SyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
+            SyntaxNode scopeDesignator
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(CSharpSyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
+            CSharpSyntaxNode scopeDesignator
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }

@@ -26,6 +26,7 @@ public interface IModelCodeGeneratorSelector
     /// <returns>The <see cref="IModelCodeGenerator" />.</returns>
     IModelCodeGenerator Select(ModelCodeGenerationOptions options)
 #pragma warning disable CS0618 // Type or member is obsolete
-        => Select(options.Language);
+        =>
+        Select(options.Language);
 #pragma warning restore CS0618
 }

@@ -34,12 +34,12 @@ namespace System.Data.SqlTypes
         //        - m_lCurLen must be x_lNull.
         // 5) SqlChars contains a Lazy Materialized Blob (ie, StorageState.Delayed)
         //
-        internal char[]? _rgchBuf;  // Data buffer
+        internal char[]? _rgchBuf; // Data buffer
         private long _lCurLen; // Current data length
         internal SqlStreamChars? _stream;
         private SqlBytesCharsState _state;
 
-        private char[]? _rgchWorkBuf;   // A 1-char work buffer.
+        private char[]? _rgchWorkBuf; // A 1-char work buffer.
 
         // The max data length that we support at this time.
         private const long x_lMaxLen = int.MaxValue;
@@ -78,9 +78,7 @@ namespace System.Data.SqlTypes
         }
 
         // Create a SqlChars from a SqlString
-        public SqlChars(SqlString value) : this(value.IsNull ? null : value.Value.ToCharArray())
-        {
-        }
+        public SqlChars(SqlString value) : this(value.IsNull ? null : value.Value.ToCharArray()) { }
 
         // Create a SqlChars from a SqlStreamChars
         internal SqlChars(SqlStreamChars s)
@@ -102,10 +100,7 @@ namespace System.Data.SqlTypes
         // INullable
         public bool IsNull
         {
-            get
-            {
-                return _state == SqlBytesCharsState.Null;
-            }
+            get { return _state == SqlBytesCharsState.Null; }
         }
 
         // Property: the in-memory buffer of SqlChars
@@ -211,10 +206,7 @@ namespace System.Data.SqlTypes
 
         internal SqlStreamChars Stream
         {
-            get
-            {
-                return FStream() ? _stream! : new SqlStreamChars(this);
-            }
+            get { return FStream() ? _stream! : new SqlStreamChars(this); }
             set
             {
                 _lCurLen = x_lNull;
@@ -274,7 +266,6 @@ namespace System.Data.SqlTypes
 
                 if (value > _rgchBuf.Length)
                     throw new ArgumentOutOfRangeException(nameof(value));
-
                 else if (IsNull)
                     // At this point we know that value is small enough
                     // Go back in buffer mode
@@ -428,9 +419,7 @@ namespace System.Data.SqlTypes
         {
             Debug.Assert(_state >= SqlBytesCharsState.Null && _state <= SqlBytesCharsState.Stream);
 
-            if (IsNull)
-            {
-            }
+            if (IsNull) { }
             else
             {
                 Debug.Assert((_lCurLen >= 0 && _lCurLen <= x_lMaxLen) || FStream());
@@ -547,10 +536,7 @@ namespace System.Data.SqlTypes
         // Since SqlChars is mutable, have to be property and create a new one each time.
         public static SqlChars Null
         {
-            get
-            {
-                return new SqlChars((char[]?)null);
-            }
+            get { return new SqlChars((char[]?)null); }
         }
     } // class SqlChars
 
@@ -563,7 +549,7 @@ namespace System.Data.SqlTypes
         //      Data members
         // --------------------------------------------------------------
 
-        private readonly SqlChars _sqlchars;        // the SqlChars object
+        private readonly SqlChars _sqlchars; // the SqlChars object
         private long _lPosition;
 
         // --------------------------------------------------------------

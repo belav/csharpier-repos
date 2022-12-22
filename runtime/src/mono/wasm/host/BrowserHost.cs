@@ -29,10 +29,12 @@ internal sealed class BrowserHost
         _args = args;
     }
 
-    public static async Task<int> InvokeAsync(CommonConfiguration commonArgs,
-                                              ILoggerFactory loggerFactory,
-                                              ILogger logger,
-                                              CancellationToken token)
+    public static async Task<int> InvokeAsync(
+        CommonConfiguration commonArgs,
+        ILoggerFactory loggerFactory,
+        ILogger logger,
+        CancellationToken token
+    )
     {
         var args = new BrowserArguments(commonArgs);
         args.Validate();
@@ -47,14 +49,28 @@ internal sealed class BrowserHost
         if (_args.CommonConfig.Debugging)
         {
             ProxyOptions options = _args.CommonConfig.ToProxyOptions();
-            _ = Task.Run(() => DebugProxyHost.RunDebugProxyAsync(options, Array.Empty<string>(), loggerFactory, token), token)
-                    .ConfigureAwait(false);
+            _ = Task.Run(
+                    () =>
+                        DebugProxyHost.RunDebugProxyAsync(
+                            options,
+                            Array.Empty<string>(),
+                            loggerFactory,
+                            token
+                        ),
+                    token
+                )
+                .ConfigureAwait(false);
         }
 
         Dictionary<string, string> envVars = new();
         if (_args.CommonConfig.HostProperties.EnvironmentVariables is not null)
         {
-            foreach (KeyValuePair<string, string> kvp in _args.CommonConfig.HostProperties.EnvironmentVariables)
+            foreach (
+                KeyValuePair<string, string> kvp in _args
+                    .CommonConfig
+                    .HostProperties
+                    .EnvironmentVariables
+            )
                 envVars[kvp.Key] = kvp.Value;
         }
 
@@ -64,21 +80,29 @@ internal sealed class BrowserHost
                 envVars[(string)de.Key] = (string)de.Value;
         }
 
-        var runArgsJson = new RunArgumentsJson(applicationArguments: _args.AppArgs,
-                                               runtimeArguments: _args.CommonConfig.RuntimeArguments,
-                                               environmentVariables: envVars,
-                                               forwardConsoleToWS: _args.ForwardConsoleOutput ?? false,
-                                               debugging: _args.CommonConfig.Debugging);
+        var runArgsJson = new RunArgumentsJson(
+            applicationArguments: _args.AppArgs,
+            runtimeArguments: _args.CommonConfig.RuntimeArguments,
+            environmentVariables: envVars,
+            forwardConsoleToWS: _args.ForwardConsoleOutput ?? false,
+            debugging: _args.CommonConfig.Debugging
+        );
         runArgsJson.Save(Path.Combine(_args.CommonConfig.AppPath, "runArgs.json"));
 
         string[] urls = envVars.TryGetValue("ASPNETCORE_URLS", out string? aspnetUrls)
-                            ? aspnetUrls.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
-                            : new string[] { $"http://127.0.0.1:{_args.CommonConfig.HostProperties.WebServerPort}", "https://127.0.0.1:0" };
+            ? aspnetUrls.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
+            : new string[]
+            {
+                $"http://127.0.0.1:{_args.CommonConfig.HostProperties.WebServerPort}",
+                "https://127.0.0.1:0"
+            };
 
-        (ServerURLs serverURLs, IWebHost host) = await StartWebServerAsync(_args.CommonConfig.AppPath,
-                                                                           _args.ForwardConsoleOutput ?? false,
-                                                                           urls,
-                                                                           token);
+        (ServerURLs serverURLs, IWebHost host) = await StartWebServerAsync(
+            _args.CommonConfig.AppPath,
+            _args.ForwardConsoleOutput ?? false,
+            urls,
+            token
+        );
 
         string[] fullUrls = BuildUrls(serverURLs, _args.AppArgs);
         Console.WriteLine();
@@ -88,7 +112,12 @@ internal sealed class BrowserHost
         await host.WaitForShutdownAsync(token);
     }
 
-    private async Task<(ServerURLs, IWebHost)> StartWebServerAsync(string appPath, bool forwardConsole, string[] urls, CancellationToken token)
+    private async Task<(ServerURLs, IWebHost)> StartWebServerAsync(
+        string appPath,
+        bool forwardConsole,
+        string[] urls,
+        CancellationToken token
+    )
     {
         WasmTestMessagesProcessor? logProcessor = null;
         if (forwardConsole)
@@ -96,22 +125,30 @@ internal sealed class BrowserHost
             logProcessor = new(_logger);
         }
 
-        WebServerOptions options = new
-        (
-            OnConsoleConnected: forwardConsole
-                                    ? socket => RunConsoleMessagesPump(socket, logProcessor!, token)
-                                    : null,
-            ContentRootPath: Path.GetFullPath(appPath),
-            WebServerUseCors: true,
-            WebServerUseCrossOriginPolicy: true,
-            Urls: urls
-        );
+        WebServerOptions options =
+            new(
+                OnConsoleConnected: forwardConsole
+                    ? socket => RunConsoleMessagesPump(socket, logProcessor!, token)
+                    : null,
+                ContentRootPath: Path.GetFullPath(appPath),
+                WebServerUseCors: true,
+                WebServerUseCrossOriginPolicy: true,
+                Urls: urls
+            );
 
-        (ServerURLs serverURLs, IWebHost host) = await WebServer.StartAsync(options, _logger, token);
+        (ServerURLs serverURLs, IWebHost host) = await WebServer.StartAsync(
+            options,
+            _logger,
+            token
+        );
         return (serverURLs, host);
     }
 
-    private async Task RunConsoleMessagesPump(WebSocket socket, WasmTestMessagesProcessor messagesProcessor, CancellationToken token)
+    private async Task RunConsoleMessagesPump(
+        WebSocket socket,
+        WasmTestMessagesProcessor messagesProcessor,
+        CancellationToken token
+    )
     {
         byte[] buff = new byte[4000];
         var mem = new MemoryStream();
@@ -125,7 +162,9 @@ internal sealed class BrowserHost
                     break;
                 }
 
-                WebSocketReceiveResult result = await socket.ReceiveAsync(new ArraySegment<byte>(buff), token).ConfigureAwait(false);
+                WebSocketReceiveResult result = await socket
+                    .ReceiveAsync(new ArraySegment<byte>(buff), token)
+                    .ConfigureAwait(false);
                 if (result.MessageType == WebSocketMessageType.Close)
                 {
                     // tcs.SetResult(false);
@@ -174,17 +213,9 @@ internal sealed class BrowserHost
 
         return string.IsNullOrEmpty(serverURLs.Https)
             ? (new[] { httpUrl })
-            : (new[]
-                {
-                    httpUrl,
-                    BuildUrl(serverURLs.Https!, filename, query)
-                });
+            : (new[] { httpUrl, BuildUrl(serverURLs.Https!, filename, query) });
 
-        static string BuildUrl(string baseUrl, string htmlFileName, string query)
-            => new UriBuilder(baseUrl)
-            {
-                Query = query,
-                Path = htmlFileName
-            }.ToString();
+        static string BuildUrl(string baseUrl, string htmlFileName, string query) =>
+            new UriBuilder(baseUrl) { Query = query, Path = htmlFileName }.ToString();
     }
 }

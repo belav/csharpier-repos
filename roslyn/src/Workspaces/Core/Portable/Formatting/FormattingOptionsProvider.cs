@@ -16,10 +16,9 @@ namespace Microsoft.CodeAnalysis.Formatting
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FormattingOptionsProvider()
-        {
-        }
+        public FormattingOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = FormattingOptions2.AllOptions.As<IOption>();
+        public ImmutableArray<IOption> Options { get; } =
+            FormattingOptions2.AllOptions.As<IOption>();
     }
 }

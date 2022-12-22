@@ -18,13 +18,22 @@ public class Program
     {
         var messageSent = new ManualResetEventSlim(false);
 
-        using (var host = WebHost.Start("http://127.0.0.1:0", router =>
-            router.MapGet("route", async (req, res, data) =>
-            {
-                var env = req.HttpContext.RequestServices.GetRequiredService<IHostEnvironment>();
-                await res.WriteAsync(env.ApplicationName);
-                messageSent.Set();
-            })))
+        using (
+            var host = WebHost.Start(
+                "http://127.0.0.1:0",
+                router =>
+                    router.MapGet(
+                        "route",
+                        async (req, res, data) =>
+                        {
+                            var env =
+                                req.HttpContext.RequestServices.GetRequiredService<IHostEnvironment>();
+                            await res.WriteAsync(env.ApplicationName);
+                            messageSent.Set();
+                        }
+                    )
+            )
+        )
         {
             // Need these for test deployer to consider host deployment successful
             // The address written here is used by the client to send requests

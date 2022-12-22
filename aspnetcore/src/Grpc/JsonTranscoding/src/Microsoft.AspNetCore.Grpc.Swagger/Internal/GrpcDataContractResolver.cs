@@ -31,12 +31,17 @@ internal sealed class GrpcDataContractResolver : ISerializerDataContractResolver
         {
             if (typeof(IMessage).IsAssignableFrom(type))
             {
-                var property = type.GetProperty("Descriptor", BindingFlags.Public | BindingFlags.Static);
+                var property = type.GetProperty(
+                    "Descriptor",
+                    BindingFlags.Public | BindingFlags.Static
+                );
                 messageDescriptor = property?.GetValue(null) as MessageDescriptor;
 
                 if (messageDescriptor == null)
                 {
-                    throw new InvalidOperationException($"Couldn't resolve message descriptor for {type}.");
+                    throw new InvalidOperationException(
+                        $"Couldn't resolve message descriptor for {type}."
+                    );
                 }
 
                 _messageTypeMapping[type] = messageDescriptor;
@@ -53,12 +58,19 @@ internal sealed class GrpcDataContractResolver : ISerializerDataContractResolver
             if (_enumTypeMapping.TryGetValue(type, out var enumDescriptor))
             {
                 var values = enumDescriptor.Values.Select(v => v.Name).ToList();
-                return DataContract.ForPrimitive(type, DataType.String, dataFormat: null, value =>
-                {
-                    var match = enumDescriptor.Values.SingleOrDefault(v => v.Number == (int)value);
-                    var name = match?.Name ?? value.ToString();
-                    return @"""" + name + @"""";
-                });
+                return DataContract.ForPrimitive(
+                    type,
+                    DataType.String,
+                    dataFormat: null,
+                    value =>
+                    {
+                        var match = enumDescriptor.Values.SingleOrDefault(
+                            v => v.Number == (int)value
+                        );
+                        var name = match?.Name ?? value.ToString();
+                        return @"""" + name + @"""";
+                    }
+                );
             }
         }
 
@@ -73,17 +85,29 @@ internal sealed class GrpcDataContractResolver : ISerializerDataContractResolver
             {
                 var field = messageDescriptor.Fields[Int32Value.ValueFieldNumber];
 
-                return _innerContractResolver.GetDataContractForType(MessageDescriptorHelpers.ResolveFieldType(field));
+                return _innerContractResolver.GetDataContractForType(
+                    MessageDescriptorHelpers.ResolveFieldType(field)
+                );
             }
-            if (messageDescriptor.FullName == Timestamp.Descriptor.FullName ||
-                messageDescriptor.FullName == Duration.Descriptor.FullName ||
-                messageDescriptor.FullName == FieldMask.Descriptor.FullName)
+            if (
+                messageDescriptor.FullName == Timestamp.Descriptor.FullName
+                || messageDescriptor.FullName == Duration.Descriptor.FullName
+                || messageDescriptor.FullName == FieldMask.Descriptor.FullName
+            )
             {
-                return DataContract.ForPrimitive(messageDescriptor.ClrType, DataType.String, dataFormat: null);
+                return DataContract.ForPrimitive(
+                    messageDescriptor.ClrType,
+                    DataType.String,
+                    dataFormat: null
+                );
             }
             if (messageDescriptor.FullName == Struct.Descriptor.FullName)
             {
-                return DataContract.ForObject(messageDescriptor.ClrType, Array.Empty<DataProperty>(), extensionDataType: typeof(Value));
+                return DataContract.ForObject(
+                    messageDescriptor.ClrType,
+                    Array.Empty<DataProperty>(),
+                    extensionDataType: typeof(Value)
+                );
             }
             if (messageDescriptor.FullName == ListValue.Descriptor.FullName)
             {
@@ -91,7 +115,11 @@ internal sealed class GrpcDataContractResolver : ISerializerDataContractResolver
             }
             if (messageDescriptor.FullName == Value.Descriptor.FullName)
             {
-                return DataContract.ForPrimitive(messageDescriptor.ClrType, DataType.Unknown, dataFormat: null);
+                return DataContract.ForPrimitive(
+                    messageDescriptor.ClrType,
+                    DataType.Unknown,
+                    dataFormat: null
+                );
             }
             if (messageDescriptor.FullName == Any.Descriptor.FullName)
             {
@@ -99,7 +127,11 @@ internal sealed class GrpcDataContractResolver : ISerializerDataContractResolver
                 {
                     new DataProperty("@type", typeof(string), isRequired: true)
                 };
-                return DataContract.ForObject(messageDescriptor.ClrType, anyProperties, extensionDataType: typeof(Value));
+                return DataContract.ForObject(
+                    messageDescriptor.ClrType,
+                    anyProperties,
+                    extensionDataType: typeof(Value)
+                );
             }
         }
 
@@ -123,14 +155,20 @@ internal sealed class GrpcDataContractResolver : ISerializerDataContractResolver
             }
             else if (field.IsRepeated)
             {
-                fieldType = typeof(IList<>).MakeGenericType(MessageDescriptorHelpers.ResolveFieldType(field));
+                fieldType = typeof(IList<>).MakeGenericType(
+                    MessageDescriptorHelpers.ResolveFieldType(field)
+                );
             }
             else
             {
                 fieldType = MessageDescriptorHelpers.ResolveFieldType(field);
             }
 
-            var propertyName = ServiceDescriptorHelpers.FormatUnderscoreName(field.Name, pascalCase: true, preservePeriod: false);
+            var propertyName = ServiceDescriptorHelpers.FormatUnderscoreName(
+                field.Name,
+                pascalCase: true,
+                preservePeriod: false
+            );
             var propertyInfo = messageDescriptor.ClrType.GetProperty(propertyName);
 
             properties.Add(new DataProperty(field.JsonName, fieldType, memberInfo: propertyInfo));

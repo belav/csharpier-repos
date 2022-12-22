@@ -20,8 +20,13 @@ public static class EndpointFilterExtensions
     /// <param name="filter">The <see cref="IEndpointFilter"/> to register.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route handler.</returns>
     [RequiresUnreferencedCode(EndpointRouteBuilderExtensions.MapEndpointTrimmerWarning)]
-    public static TBuilder AddEndpointFilter<TBuilder>(this TBuilder builder, IEndpointFilter filter) where TBuilder : IEndpointConventionBuilder =>
-        builder.AddEndpointFilterFactory((routeHandlerContext, next) => (context) => filter.InvokeAsync(context, next));
+    public static TBuilder AddEndpointFilter<TBuilder>(
+        this TBuilder builder,
+        IEndpointFilter filter
+    ) where TBuilder : IEndpointConventionBuilder =>
+        builder.AddEndpointFilterFactory(
+            (routeHandlerContext, next) => (context) => filter.InvokeAsync(context, next)
+        );
 
     /// <summary>
     /// Registers a filter of type <typeparamref name="TFilterType"/> onto the route handler.
@@ -31,7 +36,10 @@ public static class EndpointFilterExtensions
     /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route handler.</returns>
     [RequiresUnreferencedCode(EndpointRouteBuilderExtensions.MapEndpointTrimmerWarning)]
-    public static TBuilder AddEndpointFilter<TBuilder, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFilterType>(this TBuilder builder)
+    public static TBuilder AddEndpointFilter<
+        TBuilder,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFilterType
+    >(this TBuilder builder)
         where TBuilder : IEndpointConventionBuilder
         where TFilterType : IEndpointFilter
     {
@@ -40,22 +48,28 @@ public static class EndpointFilterExtensions
         ObjectFactory filterFactory;
         try
         {
-            filterFactory = ActivatorUtilities.CreateFactory(typeof(TFilterType), new[] { typeof(EndpointFilterFactoryContext) });
+            filterFactory = ActivatorUtilities.CreateFactory(
+                typeof(TFilterType),
+                new[] { typeof(EndpointFilterFactoryContext) }
+            );
         }
         catch (InvalidOperationException)
         {
             filterFactory = ActivatorUtilities.CreateFactory(typeof(TFilterType), Type.EmptyTypes);
         }
 
-        builder.AddEndpointFilterFactory((routeHandlerContext, next) =>
-        {
-            var invokeArguments = new[] { routeHandlerContext };
-            return (context) =>
+        builder.AddEndpointFilterFactory(
+            (routeHandlerContext, next) =>
             {
-                var filter = (IEndpointFilter)filterFactory.Invoke(context.HttpContext.RequestServices, invokeArguments);
-                return filter.InvokeAsync(context, next);
-            };
-        });
+                var invokeArguments = new[] { routeHandlerContext };
+                return (context) =>
+                {
+                    var filter = (IEndpointFilter)
+                        filterFactory.Invoke(context.HttpContext.RequestServices, invokeArguments);
+                    return filter.InvokeAsync(context, next);
+                };
+            }
+        );
         return builder;
     }
 
@@ -66,8 +80,9 @@ public static class EndpointFilterExtensions
     /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route handler.</returns>
     [RequiresUnreferencedCode(EndpointRouteBuilderExtensions.MapEndpointTrimmerWarning)]
-    public static RouteHandlerBuilder AddEndpointFilter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFilterType>(this RouteHandlerBuilder builder)
-        where TFilterType : IEndpointFilter
+    public static RouteHandlerBuilder AddEndpointFilter<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFilterType
+    >(this RouteHandlerBuilder builder) where TFilterType : IEndpointFilter
     {
         // We have a RouteHandlerBuiler and GroupRouteBuilder-specific AddFilter methods for convenience so you don't have to specify both arguments most the time.
         return builder.AddEndpointFilter<RouteHandlerBuilder, TFilterType>();
@@ -80,8 +95,9 @@ public static class EndpointFilterExtensions
     /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route handler.</returns>
     [RequiresUnreferencedCode(EndpointRouteBuilderExtensions.MapEndpointTrimmerWarning)]
-    public static RouteGroupBuilder AddEndpointFilter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFilterType>(this RouteGroupBuilder builder)
-        where TFilterType : IEndpointFilter
+    public static RouteGroupBuilder AddEndpointFilter<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFilterType
+    >(this RouteGroupBuilder builder) where TFilterType : IEndpointFilter
     {
         // We have a RouteHandlerBuiler and GroupRouteBuilder-specific AddFilter methods for convenience so you don't have to specify both arguments most the time.
         return builder.AddEndpointFilter<RouteGroupBuilder, TFilterType>();
@@ -94,10 +110,18 @@ public static class EndpointFilterExtensions
     /// <param name="routeHandlerFilter">A method representing the core logic of the filter.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route handler.</returns>
     [RequiresUnreferencedCode(EndpointRouteBuilderExtensions.MapEndpointTrimmerWarning)]
-    public static TBuilder AddEndpointFilter<TBuilder>(this TBuilder builder, Func<EndpointFilterInvocationContext, EndpointFilterDelegate, ValueTask<object?>> routeHandlerFilter)
-        where TBuilder : IEndpointConventionBuilder
+    public static TBuilder AddEndpointFilter<TBuilder>(
+        this TBuilder builder,
+        Func<
+            EndpointFilterInvocationContext,
+            EndpointFilterDelegate,
+            ValueTask<object?>
+        > routeHandlerFilter
+    ) where TBuilder : IEndpointConventionBuilder
     {
-        return builder.AddEndpointFilterFactory((routeHandlerContext, next) => (context) => routeHandlerFilter(context, next));
+        return builder.AddEndpointFilterFactory(
+            (routeHandlerContext, next) => (context) => routeHandlerFilter(context, next)
+        );
     }
 
     /// <summary>
@@ -107,8 +131,14 @@ public static class EndpointFilterExtensions
     /// <param name="filterFactory">A method representing the logic for constructing the filter.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route handler.</returns>
     [RequiresUnreferencedCode(EndpointRouteBuilderExtensions.MapEndpointTrimmerWarning)]
-    public static TBuilder AddEndpointFilterFactory<TBuilder>(this TBuilder builder, Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate> filterFactory)
-        where TBuilder : IEndpointConventionBuilder
+    public static TBuilder AddEndpointFilterFactory<TBuilder>(
+        this TBuilder builder,
+        Func<
+            EndpointFilterFactoryContext,
+            EndpointFilterDelegate,
+            EndpointFilterDelegate
+        > filterFactory
+    ) where TBuilder : IEndpointConventionBuilder
     {
         builder.Add(endpointBuilder =>
         {

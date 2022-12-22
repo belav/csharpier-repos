@@ -10,9 +10,7 @@ public class TestStringLocalizer : IStringLocalizer
 {
     private CultureInfo _culture { get; set; }
 
-    public TestStringLocalizer() : this(null)
-    {
-    }
+    public TestStringLocalizer() : this(null) { }
 
     public TestStringLocalizer(CultureInfo culture)
     {

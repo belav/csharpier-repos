@@ -10,10 +10,7 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 public class CodeGenerationIntegrationTest : IntegrationTestBase
 {
-    public CodeGenerationIntegrationTest()
-        : base(generateBaselines: null)
-    {
-    }
+    public CodeGenerationIntegrationTest() : base(generateBaselines: null) { }
 
     #region Runtime
     [Fact]
@@ -887,7 +884,9 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
     public void AttributeTargetingTagHelpers_DesignTime()
     {
         // Arrange, Act & Assert
-        RunDesignTimeTagHelpersTest(TestTagHelperDescriptors.AttributeTargetingTagHelperDescriptors);
+        RunDesignTimeTagHelpersTest(
+            TestTagHelperDescriptors.AttributeTargetingTagHelperDescriptors
+        );
     }
 
     [Fact]
@@ -908,7 +907,9 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
     public void DynamicAttributeTagHelpers_DesignTime()
     {
         // Arrange, Act & Assert
-        RunDesignTimeTagHelpersTest(TestTagHelperDescriptors.DynamicAttributeTagHelpers_Descriptors);
+        RunDesignTimeTagHelpersTest(
+            TestTagHelperDescriptors.DynamicAttributeTagHelpers_Descriptors
+        );
     }
 
     [Fact]
@@ -988,8 +989,8 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
         {
             builder.ConfigureDocumentClassifier();
 
-                // Some of these tests use templates
-                builder.AddTargetExtension(new TemplateTargetExtension());
+            // Some of these tests use templates
+            builder.AddTargetExtension(new TemplateTargetExtension());
 
             SectionDirective.Register(builder);
         });
@@ -1014,8 +1015,8 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
         {
             builder.ConfigureDocumentClassifier();
 
-                // Some of these tests use templates
-                builder.AddTargetExtension(new TemplateTargetExtension());
+            // Some of these tests use templates
+            builder.AddTargetExtension(new TemplateTargetExtension());
 
             SectionDirective.Register(builder);
         });
@@ -1038,8 +1039,8 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
         {
             builder.ConfigureDocumentClassifier();
 
-                // Some of these tests use templates
-                builder.AddTargetExtension(new TemplateTargetExtension());
+            // Some of these tests use templates
+            builder.AddTargetExtension(new TemplateTargetExtension());
 
             SectionDirective.Register(builder);
         });
@@ -1048,7 +1049,12 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
         var imports = GetImports(projectEngine, projectItem);
 
         // Act
-        var codeDocument = projectEngine.Process(RazorSourceDocument.ReadFrom(projectItem), FileKinds.Legacy, imports, descriptors.ToList());
+        var codeDocument = projectEngine.Process(
+            RazorSourceDocument.ReadFrom(projectItem),
+            FileKinds.Legacy,
+            imports,
+            descriptors.ToList()
+        );
 
         // Assert
         AssertDocumentNodeMatchesBaseline(codeDocument.GetDocumentIntermediateNode());
@@ -1062,8 +1068,8 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
         {
             builder.ConfigureDocumentClassifier();
 
-                // Some of these tests use templates
-                builder.AddTargetExtension(new TemplateTargetExtension());
+            // Some of these tests use templates
+            builder.AddTargetExtension(new TemplateTargetExtension());
 
             SectionDirective.Register(builder);
         });
@@ -1072,7 +1078,12 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
         var imports = GetImports(projectEngine, projectItem);
 
         // Act
-        var codeDocument = projectEngine.ProcessDesignTime(RazorSourceDocument.ReadFrom(projectItem), FileKinds.Legacy, imports, descriptors.ToList());
+        var codeDocument = projectEngine.ProcessDesignTime(
+            RazorSourceDocument.ReadFrom(projectItem),
+            FileKinds.Legacy,
+            imports,
+            descriptors.ToList()
+        );
 
         // Assert
         AssertDocumentNodeMatchesBaseline(codeDocument.GetDocumentIntermediateNode());
@@ -1080,11 +1091,17 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
         AssertSourceMappingsMatchBaseline(codeDocument);
     }
 
-    private static IReadOnlyList<RazorSourceDocument> GetImports(RazorProjectEngine projectEngine, RazorProjectItem projectItem)
+    private static IReadOnlyList<RazorSourceDocument> GetImports(
+        RazorProjectEngine projectEngine,
+        RazorProjectItem projectItem
+    )
     {
         var importFeatures = projectEngine.ProjectFeatures.OfType<IImportProjectFeature>();
         var importItems = importFeatures.SelectMany(f => f.GetImports(projectItem));
-        var importSourceDocuments = importItems.Where(i => i.Exists).Select(i => RazorSourceDocument.ReadFrom(i)).ToList();
+        var importSourceDocuments = importItems
+            .Where(i => i.Exists)
+            .Select(i => RazorSourceDocument.ReadFrom(i))
+            .ToList();
 
         return importSourceDocuments;
     }

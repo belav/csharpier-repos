@@ -26,10 +26,7 @@ public class KeyBuilder<T> : KeyBuilder
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public KeyBuilder(IMutableKey key)
-        : base(key)
-    {
-    }
+    public KeyBuilder(IMutableKey key) : base(key) { }
 
     /// <summary>
     ///     Adds or updates an annotation on the key. If an annotation with the key specified in
@@ -38,6 +35,6 @@ public class KeyBuilder<T> : KeyBuilder
     /// <param name="annotation">The key of the annotation to be added or updated.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual KeyBuilder<T> HasAnnotation(string annotation, object? value)
-        => (KeyBuilder<T>)base.HasAnnotation(annotation, value);
+    public new virtual KeyBuilder<T> HasAnnotation(string annotation, object? value) =>
+        (KeyBuilder<T>)base.HasAnnotation(annotation, value);
 }

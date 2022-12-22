@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Components.Forms;
 /// <summary>
 /// An input component used for selecting a value from a group of choices.
 /// </summary>
-public class InputRadio<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> : ComponentBase
+public class InputRadio<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue>
+    : ComponentBase
 {
     /// <summary>
     /// Gets context for this <see cref="InputRadio{TValue}"/>.
@@ -20,7 +21,8 @@ public class InputRadio<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTyp
     /// <summary>
     /// Gets or sets a collection of additional attributes that will be applied to the input element.
     /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
 
     /// <summary>
     /// Gets or sets the value of this input.
@@ -31,7 +33,8 @@ public class InputRadio<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTyp
     /// <summary>
     /// Gets or sets the name of the parent input radio group.
     /// </summary>
-    [Parameter] public string? Name { get; set; }
+    [Parameter]
+    public string? Name { get; set; }
 
     /// <summary>
     /// Gets or sets the associated <see cref="ElementReference"/>.
@@ -39,19 +42,25 @@ public class InputRadio<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTyp
     /// May be <see langword="null"/> if accessed before the component is rendered.
     /// </para>
     /// </summary>
-    [DisallowNull] public ElementReference? Element { get; protected set; }
+    [DisallowNull]
+    public ElementReference? Element { get; protected set; }
 
-    [CascadingParameter] private InputRadioContext? CascadedContext { get; set; }
+    [CascadingParameter]
+    private InputRadioContext? CascadedContext { get; set; }
 
     /// <inheritdoc />
     protected override void OnParametersSet()
     {
-        Context = string.IsNullOrEmpty(Name) ? CascadedContext : CascadedContext?.FindContextInAncestors(Name);
+        Context = string.IsNullOrEmpty(Name)
+            ? CascadedContext
+            : CascadedContext?.FindContextInAncestors(Name);
 
         if (Context == null)
         {
-            throw new InvalidOperationException($"{GetType()} must have an ancestor {typeof(InputRadioGroup<TValue>)} " +
-                $"with a matching 'Name' property, if specified.");
+            throw new InvalidOperationException(
+                $"{GetType()} must have an ancestor {typeof(InputRadioGroup<TValue>)} "
+                    + $"with a matching 'Name' property, if specified."
+            );
         }
     }
 
@@ -62,7 +71,11 @@ public class InputRadio<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTyp
 
         builder.OpenElement(0, "input");
         builder.AddMultipleAttributes(1, AdditionalAttributes);
-        builder.AddAttributeIfNotNullOrEmpty(2, "class", AttributeUtilities.CombineClassNames(AdditionalAttributes, Context.FieldClass));
+        builder.AddAttributeIfNotNullOrEmpty(
+            2,
+            "class",
+            AttributeUtilities.CombineClassNames(AdditionalAttributes, Context.FieldClass)
+        );
         builder.AddAttribute(3, "type", "radio");
         builder.AddAttribute(4, "name", Context.GroupName);
         builder.AddAttribute(5, "value", BindConverter.FormatValue(Value?.ToString()));

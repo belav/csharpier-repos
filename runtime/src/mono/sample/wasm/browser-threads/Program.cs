@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -30,15 +30,20 @@ namespace Sample
         {
             var comp = new ExpensiveComputation(n);
             comp.Start();
-            #pragma warning disable CS4014
+#pragma warning disable CS4014
             WaitForCompletion(comp);
             _demo = new Demo(UpdateProgress, comp);
         }
 
-        public static async Task WaitForCompletion (ExpensiveComputation comp) {
-            Console.WriteLine($"WaitForCompletion started on thread {Thread.CurrentThread.ManagedThreadId}");
+        public static async Task WaitForCompletion(ExpensiveComputation comp)
+        {
+            Console.WriteLine(
+                $"WaitForCompletion started on thread {Thread.CurrentThread.ManagedThreadId}"
+            );
             await comp.Completion;
-            Console.WriteLine($"WaitForCompletion completed on thread {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine(
+                $"WaitForCompletion completed on thread {Thread.CurrentThread.ManagedThreadId}"
+            );
             UpdateProgress("✌︎");
         }
 
@@ -52,16 +57,23 @@ namespace Sample
         }
 
         [JSExport]
-        public static int GetAnswer() { return _demo.Result; }
+        public static int GetAnswer()
+        {
+            return _demo.Result;
+        }
     }
-
 }
 
 public class ExpensiveComputation
 {
     private readonly TaskCompletionSource<int> _tcs = new();
     private readonly int UpTo;
-    public ExpensiveComputation(int n) { UpTo = n; }
+
+    public ExpensiveComputation(int n)
+    {
+        UpTo = n;
+    }
+
     public long CallCounter { get; private set; }
     public Task<int> Completion => _tcs.Task;
 
@@ -78,6 +90,7 @@ public class ExpensiveComputation
         else
             _tcs.SetException(new Exception("Fibonacci computation exceeded Int32.MaxValue"));
     }
+
     public long Fib(int n)
     {
         CallCounter++;
@@ -102,7 +115,6 @@ public class ExpensiveComputation
         garbage[12] = new object();
         garbage[197] = garbage;
     }
-
 }
 
 public class Demo
@@ -112,7 +124,15 @@ public class Demo
         private readonly Action<string> _updateProgress;
         private int _counter = 0;
 
-        private readonly IReadOnlyList<string> _animations = new string[] { "⚀", "⚁", "⚂", "⚃", "⚄", "⚅" };
+        private readonly IReadOnlyList<string> _animations = new string[]
+        {
+            "⚀",
+            "⚁",
+            "⚂",
+            "⚃",
+            "⚄",
+            "⚅"
+        };
 
         public void Step(string suffix = "")
         {
@@ -127,8 +147,6 @@ public class Demo
         {
             _updateProgress = updateProgress;
         }
-
-
     }
 
     private readonly Action<string> _updateProgress;

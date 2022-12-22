@@ -17,15 +17,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructReadOnly;
 
 using VerifyCS = CSharpCodeFixVerifier<
     CSharpMakeStructReadOnlyDiagnosticAnalyzer,
-    CSharpMakeStructReadOnlyCodeFixProvider>;
+    CSharpMakeStructReadOnlyCodeFixProvider
+>;
 
 [Trait(Traits.Feature, Traits.Features.CodeActionsMakeStructReadOnly)]
 public class MakeStructReadOnlyTests
 {
-    private static Task TestMissingAsync(string testCode, LanguageVersion version = LanguageVersion.Preview)
-        => TestAsync(testCode, testCode, version);
+    private static Task TestMissingAsync(
+        string testCode,
+        LanguageVersion version = LanguageVersion.Preview
+    ) => TestAsync(testCode, testCode, version);
 
-    private static async Task TestAsync(string testCode, string fixedCode, LanguageVersion version = LanguageVersion.Preview)
+    private static async Task TestAsync(
+        string testCode,
+        string fixedCode,
+        LanguageVersion version = LanguageVersion.Preview
+    )
     {
         await new VerifyCS.Test
         {
@@ -40,161 +47,177 @@ public class MakeStructReadOnlyTests
     public async Task ShouldNotTriggerForCSharp7_1()
     {
         await TestMissingAsync(
-@"struct S
+            @"struct S
 {
     readonly int i;
-}", LanguageVersion.CSharp7_1);
+}",
+            LanguageVersion.CSharp7_1
+        );
     }
 
     [Fact]
     public async Task ShouldTriggerFor7_2()
     {
         await TestAsync(
-@"struct [|S|]
+            @"struct [|S|]
 {
     readonly int i;
 }",
-@"readonly struct S
+            @"readonly struct S
 {
     readonly int i;
 }",
-LanguageVersion.CSharp7_2);
+            LanguageVersion.CSharp7_2
+        );
     }
 
     [Fact]
     public async Task TestMissingWithAlreadyReadOnlyStruct()
     {
         await TestMissingAsync(
-@"readonly struct S
+            @"readonly struct S
 {
     readonly int i;
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestMissingWithAlreadyReadOnlyRecordStruct()
     {
         await TestMissingAsync(
-@"readonly record struct S
+            @"readonly record struct S
 {
     readonly int i;
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestMissingWithMutableField()
     {
         await TestMissingAsync(
-@"struct S
+            @"struct S
 {
     int i;
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestMissingWithMutableFieldRecordStruct()
     {
         await TestMissingAsync(
-@"record struct S
+            @"record struct S
 {
     int i;
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestMissingWithMutableAndReadOnlyField()
     {
         await TestMissingAsync(
-@"struct S
+            @"struct S
 {
     int i;
     readonly int j;
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestMissingWithMutableAndReadOnlyFieldRecordStruct1()
     {
         await TestMissingAsync(
-@"record struct S
+            @"record struct S
 {
     int i;
     readonly int j;
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestMissingWithMutableAndReadOnlyFieldRecordStruct2()
     {
         await TestMissingAsync(
-@"record struct S(int j)
+            @"record struct S(int j)
 {
     int i;
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestMissingWithMutableProperty()
     {
         await TestMissingAsync(
-@"struct S
+            @"struct S
 {
     int P { get; set; }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestMissingWithMutablePropertyRecordStruct1()
     {
         await TestMissingAsync(
-@"record struct S
+            @"record struct S
 {
     int P { get; set; }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestMissingWithMutablePropertyRecordStruct2()
     {
         await TestMissingAsync(
-@"record struct S(int q)
+            @"record struct S(int q)
 {
     int P { get; set; }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestMissingWithEmptyStruct()
     {
         await TestMissingAsync(
-@"struct S
+            @"struct S
 {
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestMissingWithEmptyRecordStruct()
     {
         await TestMissingAsync(
-@"record struct S
+            @"record struct S
 {
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestMissingWithEmptyStructPrimaryConstructor()
     {
         await TestMissingAsync(
-@"record struct S()
+            @"record struct S()
 {
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestMissingWithOtherReadonlyPartialPart()
     {
         await TestMissingAsync(
-@"partial struct S
+            @"partial struct S
 {
     readonly int i;
 }
@@ -202,131 +225,141 @@ LanguageVersion.CSharp7_2);
 readonly partial struct S
 {
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task TestOnStructWithReadOnlyField()
     {
         await TestAsync(
-@"struct [|S|]
+            @"struct [|S|]
 {
     readonly int i;
 }",
-@"readonly struct S
+            @"readonly struct S
 {
     readonly int i;
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestOnRecordStructWithReadOnlyField()
     {
         await TestAsync(
-@"record struct [|S|]
+            @"record struct [|S|]
 {
     readonly int i;
 }",
-@"readonly record struct S
+            @"readonly record struct S
 {
     readonly int i;
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestOnStructWithGetOnlyProperty()
     {
         await TestAsync(
-@"struct [|S|]
+            @"struct [|S|]
 {
     int P { get; }
 }",
-@"readonly struct S
+            @"readonly struct S
 {
     int P { get; }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestOnRecordStructWithGetOnlyProperty()
     {
         await TestAsync(
-@"record struct [|S|]
+            @"record struct [|S|]
 {
     int P { get; }
 }",
-@"readonly record struct S
+            @"readonly record struct S
 {
     int P { get; }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestOnStructWithInitOnlyProperty()
     {
         await TestAsync(
-@"struct [|S|]
+            @"struct [|S|]
 {
     int P { get; init; }
 }",
-@"readonly struct S
+            @"readonly struct S
 {
     int P { get; init; }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestOnRecordStructWithInitOnlyProperty()
     {
         await TestAsync(
-@"record struct [|S|]
+            @"record struct [|S|]
 {
     int P { get; init; }
 }",
-@"readonly record struct S
+            @"readonly record struct S
 {
     int P { get; init; }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestOnRecordStructWithReadOnlyField2()
     {
         await TestAsync(
-@"record struct [|S|]
+            @"record struct [|S|]
 {
     readonly int i;
 }",
-@"readonly record struct S
+            @"readonly record struct S
 {
     readonly int i;
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestMissingRecordStructWithPrimaryConstructorField()
     {
         await TestMissingAsync(
-@"record struct S(int i)
+            @"record struct S(int i)
 {
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestMissingOnRecordStructWithPrimaryConstructorFieldAndNormalField()
     {
         await TestMissingAsync(
-@"record struct S(int i)
+            @"record struct S(int i)
 {
     readonly int j;
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestNestedStructs1()
     {
         await TestAsync(
-@"struct [|S|]
+            @"struct [|S|]
 {
     readonly int i;
 
@@ -335,7 +368,7 @@ readonly partial struct S
         readonly int j;
     }
 }",
-@"readonly struct S
+            @"readonly struct S
 {
     readonly int i;
 
@@ -343,14 +376,15 @@ readonly partial struct S
     {
         readonly int j;
     }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestNestedStructs2()
     {
         await TestAsync(
-@"struct [|S|]
+            @"struct [|S|]
 {
     readonly int i;
 
@@ -359,7 +393,7 @@ readonly partial struct S
         int j;
     }
 }",
-@"readonly struct S
+            @"readonly struct S
 {
     readonly int i;
 
@@ -367,14 +401,15 @@ readonly partial struct S
     {
         int j;
     }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestNestedStructs3()
     {
         await TestAsync(
-@"struct S
+            @"struct S
 {
     int i;
 
@@ -383,7 +418,7 @@ readonly partial struct S
         readonly int j;
     }
 }",
-@"struct S
+            @"struct S
 {
     int i;
 
@@ -391,14 +426,15 @@ readonly partial struct S
     {
         readonly int j;
     }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestNestedStructs4()
     {
         await TestAsync(
-@"struct [|S|]
+            @"struct [|S|]
 {
     readonly int i;
 
@@ -412,7 +448,7 @@ readonly partial struct S
         }
     }
 }",
-@"readonly struct S
+            @"readonly struct S
 {
     readonly int i;
 
@@ -425,30 +461,32 @@ readonly partial struct S
             this = default;
         }
     }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestDocComments1()
     {
         await TestAsync(
-@"/// <summary>docs</summary>
+            @"/// <summary>docs</summary>
 record struct [|S|]
 {
     readonly int j;
 }",
-@"/// <summary>docs</summary>
+            @"/// <summary>docs</summary>
 readonly record struct S
 {
     readonly int j;
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestDocComments2()
     {
         await TestAsync(
-@"namespace N
+            @"namespace N
 {
     /// <summary>docs</summary>
     record struct [|S|]
@@ -456,85 +494,90 @@ readonly record struct S
         readonly int j;
     }
 }",
-@"namespace N
+            @"namespace N
 {
     /// <summary>docs</summary>
     readonly record struct S
     {
         readonly int j;
     }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestExistingModifier1()
     {
         await TestAsync(
-@"public record struct [|S|]
+            @"public record struct [|S|]
 {
     readonly int j;
 }",
-@"public readonly record struct S
+            @"public readonly record struct S
 {
     readonly int j;
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestExistingModifier2()
     {
         await TestAsync(
-@"namespace N
+            @"namespace N
 {
     public record struct [|S|]
     {
         readonly int j;
     }
 }",
-@"namespace N
+            @"namespace N
 {
     public readonly record struct S
     {
         readonly int j;
     }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestOnStructWithReadOnlyFieldAndMutableNormalProp()
     {
         await TestAsync(
-@"struct [|S|]
+            @"struct [|S|]
 {
     readonly int i;
 
     int P { set { } }
 }",
-@"readonly struct S
+            @"readonly struct S
 {
     readonly int i;
 
     int P { set { } }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestOnStructWithReadOnlyFieldAndMutableAutoProp()
     {
         await TestMissingAsync(
-@"struct S
+            @"struct S
 {
     readonly int i;
 
     int P { get; set; }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestMissingOnStructThatWritesToThis1()
     {
         await TestMissingAsync(
-@"struct S
+            @"struct S
 {
     readonly int i;
 
@@ -542,14 +585,15 @@ readonly record struct S
     {
         this = default;
     }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestMissingOnStructThatWritesToThis2()
     {
         await TestMissingAsync(
-@"struct S
+            @"struct S
 {
     readonly int i;
 
@@ -563,14 +607,15 @@ static class Extensions
 {
     public static void ByRef(ref this S s) { }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task TestMissingOnStructThatWritesToThis3()
     {
         await TestMissingAsync(
-@"struct S
+            @"struct S
 {
     readonly int i;
 
@@ -580,14 +625,15 @@ static class Extensions
     }
 
     void Goo(ref S s) { }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestMissingOnStructThatWritesToThis4()
     {
         await TestMissingAsync(
-@"struct S
+            @"struct S
 {
     readonly int i;
 
@@ -597,14 +643,15 @@ static class Extensions
     }
 
     void Goo(out S s) { s = default; }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestMissingOnStructThatWritesToThis5()
     {
         await TestMissingAsync(
-@"struct S
+            @"struct S
 {
     readonly int i;
 
@@ -612,14 +659,15 @@ static class Extensions
     {
         ref S s = ref this;
     }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestMissingOnStructThatWritesToThis6()
     {
         await TestMissingAsync(
-@"struct S
+            @"struct S
 {
     readonly int i;
 
@@ -629,14 +677,15 @@ static class Extensions
     }
 
     public static S operator++(S s) => default;
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestOnStructThatReadsFromThis1()
     {
         await TestAsync(
-@"struct [|S|]
+            @"struct [|S|]
 {
     readonly int i;
 
@@ -647,7 +696,7 @@ static class Extensions
 
     void Goo(in S s) { }
 }",
-@"readonly struct S
+            @"readonly struct S
 {
     readonly int i;
 
@@ -657,14 +706,15 @@ static class Extensions
     }
 
     void Goo(in S s) { }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestOnStructThatReadsFromThis2()
     {
         await TestAsync(
-@"struct [|S|]
+            @"struct [|S|]
 {
     readonly int i;
 
@@ -675,7 +725,7 @@ static class Extensions
 
     void Goo() { }
 }",
-@"readonly struct S
+            @"readonly struct S
 {
     readonly int i;
 
@@ -685,14 +735,15 @@ static class Extensions
     }
 
     void Goo() { }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestOnStructThatReadsFromThis3()
     {
         await TestAsync(
-@"struct [|S|]
+            @"struct [|S|]
 {
     readonly int i;
 
@@ -706,7 +757,7 @@ static class Extensions
 {
     public static void Goo(this S s) { }
 }",
-@"readonly struct S
+            @"readonly struct S
 {
     readonly int i;
 
@@ -719,14 +770,15 @@ static class Extensions
 static class Extensions
 {
     public static void Goo(this S s) { }
-}");
+}"
+        );
     }
 
     [Fact]
     public async Task TestOnStructThatReadsFromThis4()
     {
         await TestAsync(
-@"struct [|S|]
+            @"struct [|S|]
 {
     readonly int i;
 
@@ -735,7 +787,7 @@ static class Extensions
         ref readonly S s = ref this;
     }
 }",
-@"readonly struct S
+            @"readonly struct S
 {
     readonly int i;
 
@@ -743,6 +795,7 @@ static class Extensions
     {
         ref readonly S s = ref this;
     }
-}");
+}"
+        );
     }
 }

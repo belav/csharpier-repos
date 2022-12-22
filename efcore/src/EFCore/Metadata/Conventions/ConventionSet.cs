@@ -29,7 +29,8 @@ public class ConventionSet
     /// <summary>
     ///     Conventions to run when an annotation is set or removed on a model.
     /// </summary>
-    public virtual List<IModelAnnotationChangedConvention> ModelAnnotationChangedConventions { get; } = new();
+    public virtual List<IModelAnnotationChangedConvention> ModelAnnotationChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when an entity type is added to the model.
@@ -49,22 +50,26 @@ public class ConventionSet
     /// <summary>
     ///     Conventions to run when a property is ignored.
     /// </summary>
-    public virtual List<IEntityTypeMemberIgnoredConvention> EntityTypeMemberIgnoredConventions { get; } = new();
+    public virtual List<IEntityTypeMemberIgnoredConvention> EntityTypeMemberIgnoredConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when the base entity type is changed.
     /// </summary>
-    public virtual List<IEntityTypeBaseTypeChangedConvention> EntityTypeBaseTypeChangedConventions { get; } = new();
+    public virtual List<IEntityTypeBaseTypeChangedConvention> EntityTypeBaseTypeChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when a primary key is changed.
     /// </summary>
-    public virtual List<IEntityTypePrimaryKeyChangedConvention> EntityTypePrimaryKeyChangedConventions { get; } = new();
+    public virtual List<IEntityTypePrimaryKeyChangedConvention> EntityTypePrimaryKeyChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when an annotation is set or removed on an entity type.
     /// </summary>
-    public virtual List<IEntityTypeAnnotationChangedConvention> EntityTypeAnnotationChangedConventions { get; } = new();
+    public virtual List<IEntityTypeAnnotationChangedConvention> EntityTypeAnnotationChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when a foreign key is added.
@@ -79,43 +84,50 @@ public class ConventionSet
     /// <summary>
     ///     Conventions to run when the principal end of a relationship is configured.
     /// </summary>
-    public virtual List<IForeignKeyPrincipalEndChangedConvention> ForeignKeyPrincipalEndChangedConventions { get; } = new();
+    public virtual List<IForeignKeyPrincipalEndChangedConvention> ForeignKeyPrincipalEndChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when the properties or the principal key of a foreign key are changed.
     /// </summary>
-    public virtual List<IForeignKeyPropertiesChangedConvention> ForeignKeyPropertiesChangedConventions { get; } = new();
+    public virtual List<IForeignKeyPropertiesChangedConvention> ForeignKeyPropertiesChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when the uniqueness of a foreign key is changed.
     /// </summary>
-    public virtual List<IForeignKeyUniquenessChangedConvention> ForeignKeyUniquenessChangedConventions { get; } = new();
+    public virtual List<IForeignKeyUniquenessChangedConvention> ForeignKeyUniquenessChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when the requiredness of a foreign key is changed.
     /// </summary>
-    public virtual List<IForeignKeyRequirednessChangedConvention> ForeignKeyRequirednessChangedConventions { get; } = new();
+    public virtual List<IForeignKeyRequirednessChangedConvention> ForeignKeyRequirednessChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when the requiredness of a foreign key is changed.
     /// </summary>
-    public virtual List<IForeignKeyDependentRequirednessChangedConvention> ForeignKeyDependentRequirednessChangedConventions { get; }
-        = new();
+    public virtual List<IForeignKeyDependentRequirednessChangedConvention> ForeignKeyDependentRequirednessChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when the ownership of a foreign key is changed.
     /// </summary>
-    public virtual List<IForeignKeyOwnershipChangedConvention> ForeignKeyOwnershipChangedConventions { get; } = new();
+    public virtual List<IForeignKeyOwnershipChangedConvention> ForeignKeyOwnershipChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when an annotation is changed on a foreign key.
     /// </summary>
-    public virtual List<IForeignKeyAnnotationChangedConvention> ForeignKeyAnnotationChangedConventions { get; } = new();
+    public virtual List<IForeignKeyAnnotationChangedConvention> ForeignKeyAnnotationChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when a navigation is set to <see langword="null" /> on a foreign key.
     /// </summary>
-    public virtual List<IForeignKeyNullNavigationSetConvention> ForeignKeyNullNavigationSetConventions { get; } = new();
+    public virtual List<IForeignKeyNullNavigationSetConvention> ForeignKeyNullNavigationSetConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when a navigation property is added.
@@ -125,7 +137,8 @@ public class ConventionSet
     /// <summary>
     ///     Conventions to run when an annotation is changed on a navigation property.
     /// </summary>
-    public virtual List<INavigationAnnotationChangedConvention> NavigationAnnotationChangedConventions { get; } = new();
+    public virtual List<INavigationAnnotationChangedConvention> NavigationAnnotationChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when a navigation property is removed.
@@ -135,27 +148,32 @@ public class ConventionSet
     /// <summary>
     ///     Conventions to run when a skip navigation property is added.
     /// </summary>
-    public virtual List<ISkipNavigationAddedConvention> SkipNavigationAddedConventions { get; } = new();
+    public virtual List<ISkipNavigationAddedConvention> SkipNavigationAddedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when an annotation is changed on a skip navigation property.
     /// </summary>
-    public virtual List<ISkipNavigationAnnotationChangedConvention> SkipNavigationAnnotationChangedConventions { get; } = new();
+    public virtual List<ISkipNavigationAnnotationChangedConvention> SkipNavigationAnnotationChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when a skip navigation foreign key is changed.
     /// </summary>
-    public virtual List<ISkipNavigationForeignKeyChangedConvention> SkipNavigationForeignKeyChangedConventions { get; } = new();
+    public virtual List<ISkipNavigationForeignKeyChangedConvention> SkipNavigationForeignKeyChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when a skip navigation inverse is changed.
     /// </summary>
-    public virtual List<ISkipNavigationInverseChangedConvention> SkipNavigationInverseChangedConventions { get; } = new();
+    public virtual List<ISkipNavigationInverseChangedConvention> SkipNavigationInverseChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when a skip navigation property is removed.
     /// </summary>
-    public virtual List<ISkipNavigationRemovedConvention> SkipNavigationRemovedConventions { get; } = new();
+    public virtual List<ISkipNavigationRemovedConvention> SkipNavigationRemovedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when a key is added.
@@ -170,7 +188,8 @@ public class ConventionSet
     /// <summary>
     ///     Conventions to run when an annotation is changed on a key.
     /// </summary>
-    public virtual List<IKeyAnnotationChangedConvention> KeyAnnotationChangedConventions { get; } = new();
+    public virtual List<IKeyAnnotationChangedConvention> KeyAnnotationChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when an index is added.
@@ -185,17 +204,20 @@ public class ConventionSet
     /// <summary>
     ///     Conventions to run when the uniqueness of an index is changed.
     /// </summary>
-    public virtual List<IIndexUniquenessChangedConvention> IndexUniquenessChangedConventions { get; } = new();
+    public virtual List<IIndexUniquenessChangedConvention> IndexUniquenessChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when the sort order of an index is changed.
     /// </summary>
-    public virtual List<IIndexSortOrderChangedConvention> IndexSortOrderChangedConventions { get; } = new();
+    public virtual List<IIndexSortOrderChangedConvention> IndexSortOrderChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when an annotation is changed on an index.
     /// </summary>
-    public virtual List<IIndexAnnotationChangedConvention> IndexAnnotationChangedConventions { get; } = new();
+    public virtual List<IIndexAnnotationChangedConvention> IndexAnnotationChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when a property is added.
@@ -205,17 +227,20 @@ public class ConventionSet
     /// <summary>
     ///     Conventions to run when the nullability of a property is changed.
     /// </summary>
-    public virtual List<IPropertyNullabilityChangedConvention> PropertyNullabilityChangedConventions { get; } = new();
+    public virtual List<IPropertyNullabilityChangedConvention> PropertyNullabilityChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when the field of a property is changed.
     /// </summary>
-    public virtual List<IPropertyFieldChangedConvention> PropertyFieldChangedConventions { get; } = new();
+    public virtual List<IPropertyFieldChangedConvention> PropertyFieldChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when an annotation is changed on a property.
     /// </summary>
-    public virtual List<IPropertyAnnotationChangedConvention> PropertyAnnotationChangedConventions { get; } = new();
+    public virtual List<IPropertyAnnotationChangedConvention> PropertyAnnotationChangedConventions { get; } =
+        new();
 
     /// <summary>
     ///     Conventions to run when a property is removed.
@@ -232,255 +257,465 @@ public class ConventionSet
         where TImplementation : IConvention
     {
         var oldConvetionType = typeof(TImplementation);
-        if (newConvention is IModelInitializedConvention modelInitializedConvention
-            && !Replace(ModelInitializedConventions, modelInitializedConvention, oldConvetionType))
+        if (
+            newConvention is IModelInitializedConvention modelInitializedConvention
+            && !Replace(ModelInitializedConventions, modelInitializedConvention, oldConvetionType)
+        )
         {
             ModelInitializedConventions.Add(modelInitializedConvention);
         }
 
-        if (newConvention is IModelFinalizingConvention modelFinalizingConvention
-            && !Replace(ModelFinalizingConventions, modelFinalizingConvention, oldConvetionType))
+        if (
+            newConvention is IModelFinalizingConvention modelFinalizingConvention
+            && !Replace(ModelFinalizingConventions, modelFinalizingConvention, oldConvetionType)
+        )
         {
             ModelFinalizingConventions.Add(modelFinalizingConvention);
         }
 
-        if (newConvention is IModelFinalizedConvention modelFinalizedConvention
-            && !Replace(ModelFinalizedConventions, modelFinalizedConvention, oldConvetionType))
+        if (
+            newConvention is IModelFinalizedConvention modelFinalizedConvention
+            && !Replace(ModelFinalizedConventions, modelFinalizedConvention, oldConvetionType)
+        )
         {
             ModelFinalizedConventions.Add(modelFinalizedConvention);
         }
 
-        if (newConvention is IModelAnnotationChangedConvention modelAnnotationChangedConvention
-            && !Replace(ModelAnnotationChangedConventions, modelAnnotationChangedConvention, oldConvetionType))
+        if (
+            newConvention is IModelAnnotationChangedConvention modelAnnotationChangedConvention
+            && !Replace(
+                ModelAnnotationChangedConventions,
+                modelAnnotationChangedConvention,
+                oldConvetionType
+            )
+        )
         {
             ModelAnnotationChangedConventions.Add(modelAnnotationChangedConvention);
         }
 
-        if (newConvention is IEntityTypeAddedConvention entityTypeAddedConvention
-            && !Replace(EntityTypeAddedConventions, entityTypeAddedConvention, oldConvetionType))
+        if (
+            newConvention is IEntityTypeAddedConvention entityTypeAddedConvention
+            && !Replace(EntityTypeAddedConventions, entityTypeAddedConvention, oldConvetionType)
+        )
         {
             EntityTypeAddedConventions.Add(entityTypeAddedConvention);
         }
 
-        if (newConvention is IEntityTypeIgnoredConvention entityTypeIgnoredConvention
-            && !Replace(EntityTypeIgnoredConventions, entityTypeIgnoredConvention, oldConvetionType))
+        if (
+            newConvention is IEntityTypeIgnoredConvention entityTypeIgnoredConvention
+            && !Replace(EntityTypeIgnoredConventions, entityTypeIgnoredConvention, oldConvetionType)
+        )
         {
             EntityTypeIgnoredConventions.Add(entityTypeIgnoredConvention);
         }
 
-        if (newConvention is IEntityTypeRemovedConvention entityTypeRemovedConvention
-            && !Replace(EntityTypeRemovedConventions, entityTypeRemovedConvention, oldConvetionType))
+        if (
+            newConvention is IEntityTypeRemovedConvention entityTypeRemovedConvention
+            && !Replace(EntityTypeRemovedConventions, entityTypeRemovedConvention, oldConvetionType)
+        )
         {
             EntityTypeRemovedConventions.Add(entityTypeRemovedConvention);
         }
 
-        if (newConvention is IEntityTypeMemberIgnoredConvention entityTypeMemberIgnoredConvention
-            && !Replace(EntityTypeMemberIgnoredConventions, entityTypeMemberIgnoredConvention, oldConvetionType))
+        if (
+            newConvention is IEntityTypeMemberIgnoredConvention entityTypeMemberIgnoredConvention
+            && !Replace(
+                EntityTypeMemberIgnoredConventions,
+                entityTypeMemberIgnoredConvention,
+                oldConvetionType
+            )
+        )
         {
             EntityTypeMemberIgnoredConventions.Add(entityTypeMemberIgnoredConvention);
         }
 
-        if (newConvention is IEntityTypeBaseTypeChangedConvention entityTypeBaseTypeChangedConvention
-            && !Replace(EntityTypeBaseTypeChangedConventions, entityTypeBaseTypeChangedConvention, oldConvetionType))
+        if (
+            newConvention
+                is IEntityTypeBaseTypeChangedConvention entityTypeBaseTypeChangedConvention
+            && !Replace(
+                EntityTypeBaseTypeChangedConventions,
+                entityTypeBaseTypeChangedConvention,
+                oldConvetionType
+            )
+        )
         {
             EntityTypeBaseTypeChangedConventions.Add(entityTypeBaseTypeChangedConvention);
         }
 
-        if (newConvention is IEntityTypePrimaryKeyChangedConvention entityTypePrimaryKeyChangedConvention
-            && !Replace(EntityTypePrimaryKeyChangedConventions, entityTypePrimaryKeyChangedConvention, oldConvetionType))
+        if (
+            newConvention
+                is IEntityTypePrimaryKeyChangedConvention entityTypePrimaryKeyChangedConvention
+            && !Replace(
+                EntityTypePrimaryKeyChangedConventions,
+                entityTypePrimaryKeyChangedConvention,
+                oldConvetionType
+            )
+        )
         {
             EntityTypePrimaryKeyChangedConventions.Add(entityTypePrimaryKeyChangedConvention);
         }
 
-        if (newConvention is IEntityTypeAnnotationChangedConvention entityTypeAnnotationChangedConvention
-            && !Replace(EntityTypeAnnotationChangedConventions, entityTypeAnnotationChangedConvention, oldConvetionType))
+        if (
+            newConvention
+                is IEntityTypeAnnotationChangedConvention entityTypeAnnotationChangedConvention
+            && !Replace(
+                EntityTypeAnnotationChangedConventions,
+                entityTypeAnnotationChangedConvention,
+                oldConvetionType
+            )
+        )
         {
             EntityTypeAnnotationChangedConventions.Add(entityTypeAnnotationChangedConvention);
         }
 
-        if (newConvention is IForeignKeyAddedConvention foreignKeyAddedConvention
-            && !Replace(ForeignKeyAddedConventions, foreignKeyAddedConvention, oldConvetionType))
+        if (
+            newConvention is IForeignKeyAddedConvention foreignKeyAddedConvention
+            && !Replace(ForeignKeyAddedConventions, foreignKeyAddedConvention, oldConvetionType)
+        )
         {
             ForeignKeyAddedConventions.Add(foreignKeyAddedConvention);
         }
 
-        if (newConvention is IForeignKeyRemovedConvention foreignKeyRemovedConvention
-            && !Replace(ForeignKeyRemovedConventions, foreignKeyRemovedConvention, oldConvetionType))
+        if (
+            newConvention is IForeignKeyRemovedConvention foreignKeyRemovedConvention
+            && !Replace(ForeignKeyRemovedConventions, foreignKeyRemovedConvention, oldConvetionType)
+        )
         {
             ForeignKeyRemovedConventions.Add(foreignKeyRemovedConvention);
         }
 
-        if (newConvention is IForeignKeyPrincipalEndChangedConvention foreignKeyPrincipalEndChangedConvention
-            && !Replace(ForeignKeyPrincipalEndChangedConventions, foreignKeyPrincipalEndChangedConvention, oldConvetionType))
+        if (
+            newConvention
+                is IForeignKeyPrincipalEndChangedConvention foreignKeyPrincipalEndChangedConvention
+            && !Replace(
+                ForeignKeyPrincipalEndChangedConventions,
+                foreignKeyPrincipalEndChangedConvention,
+                oldConvetionType
+            )
+        )
         {
             ForeignKeyPrincipalEndChangedConventions.Add(foreignKeyPrincipalEndChangedConvention);
         }
 
-        if (newConvention is IForeignKeyPropertiesChangedConvention foreignKeyPropertiesChangedConvention
-            && !Replace(ForeignKeyPropertiesChangedConventions, foreignKeyPropertiesChangedConvention, oldConvetionType))
+        if (
+            newConvention
+                is IForeignKeyPropertiesChangedConvention foreignKeyPropertiesChangedConvention
+            && !Replace(
+                ForeignKeyPropertiesChangedConventions,
+                foreignKeyPropertiesChangedConvention,
+                oldConvetionType
+            )
+        )
         {
             ForeignKeyPropertiesChangedConventions.Add(foreignKeyPropertiesChangedConvention);
         }
 
-        if (newConvention is IForeignKeyUniquenessChangedConvention foreignKeyUniquenessChangedConvention
-            && !Replace(ForeignKeyUniquenessChangedConventions, foreignKeyUniquenessChangedConvention, oldConvetionType))
+        if (
+            newConvention
+                is IForeignKeyUniquenessChangedConvention foreignKeyUniquenessChangedConvention
+            && !Replace(
+                ForeignKeyUniquenessChangedConventions,
+                foreignKeyUniquenessChangedConvention,
+                oldConvetionType
+            )
+        )
         {
             ForeignKeyUniquenessChangedConventions.Add(foreignKeyUniquenessChangedConvention);
         }
 
-        if (newConvention is IForeignKeyRequirednessChangedConvention foreignKeyRequirednessChangedConvention
-            && !Replace(ForeignKeyRequirednessChangedConventions, foreignKeyRequirednessChangedConvention, oldConvetionType))
+        if (
+            newConvention
+                is IForeignKeyRequirednessChangedConvention foreignKeyRequirednessChangedConvention
+            && !Replace(
+                ForeignKeyRequirednessChangedConventions,
+                foreignKeyRequirednessChangedConvention,
+                oldConvetionType
+            )
+        )
         {
             ForeignKeyRequirednessChangedConventions.Add(foreignKeyRequirednessChangedConvention);
         }
 
-        if (newConvention is IForeignKeyDependentRequirednessChangedConvention foreignKeyDependentRequirednessChangedConvention
+        if (
+            newConvention
+                is IForeignKeyDependentRequirednessChangedConvention foreignKeyDependentRequirednessChangedConvention
             && !Replace(
-                ForeignKeyDependentRequirednessChangedConventions, foreignKeyDependentRequirednessChangedConvention, oldConvetionType))
+                ForeignKeyDependentRequirednessChangedConventions,
+                foreignKeyDependentRequirednessChangedConvention,
+                oldConvetionType
+            )
+        )
         {
-            ForeignKeyDependentRequirednessChangedConventions.Add(foreignKeyDependentRequirednessChangedConvention);
+            ForeignKeyDependentRequirednessChangedConventions.Add(
+                foreignKeyDependentRequirednessChangedConvention
+            );
         }
 
-        if (newConvention is IForeignKeyOwnershipChangedConvention foreignKeyOwnershipChangedConvention
-            && !Replace(ForeignKeyOwnershipChangedConventions, foreignKeyOwnershipChangedConvention, oldConvetionType))
+        if (
+            newConvention
+                is IForeignKeyOwnershipChangedConvention foreignKeyOwnershipChangedConvention
+            && !Replace(
+                ForeignKeyOwnershipChangedConventions,
+                foreignKeyOwnershipChangedConvention,
+                oldConvetionType
+            )
+        )
         {
             ForeignKeyOwnershipChangedConventions.Add(foreignKeyOwnershipChangedConvention);
         }
 
-        if (newConvention is IForeignKeyAnnotationChangedConvention foreignKeyAnnotationChangedConvention
-            && !Replace(ForeignKeyAnnotationChangedConventions, foreignKeyAnnotationChangedConvention, oldConvetionType))
+        if (
+            newConvention
+                is IForeignKeyAnnotationChangedConvention foreignKeyAnnotationChangedConvention
+            && !Replace(
+                ForeignKeyAnnotationChangedConventions,
+                foreignKeyAnnotationChangedConvention,
+                oldConvetionType
+            )
+        )
         {
             ForeignKeyAnnotationChangedConventions.Add(foreignKeyAnnotationChangedConvention);
         }
 
-        if (newConvention is IForeignKeyNullNavigationSetConvention foreignKeyNullNavigationSetConvention
-            && !Replace(ForeignKeyNullNavigationSetConventions, foreignKeyNullNavigationSetConvention, oldConvetionType))
+        if (
+            newConvention
+                is IForeignKeyNullNavigationSetConvention foreignKeyNullNavigationSetConvention
+            && !Replace(
+                ForeignKeyNullNavigationSetConventions,
+                foreignKeyNullNavigationSetConvention,
+                oldConvetionType
+            )
+        )
         {
             ForeignKeyNullNavigationSetConventions.Add(foreignKeyNullNavigationSetConvention);
         }
 
-        if (newConvention is INavigationAddedConvention navigationAddedConvention
-            && !Replace(NavigationAddedConventions, navigationAddedConvention, oldConvetionType))
+        if (
+            newConvention is INavigationAddedConvention navigationAddedConvention
+            && !Replace(NavigationAddedConventions, navigationAddedConvention, oldConvetionType)
+        )
         {
             NavigationAddedConventions.Add(navigationAddedConvention);
         }
 
-        if (newConvention is INavigationAnnotationChangedConvention navigationAnnotationChangedConvention
-            && !Replace(NavigationAnnotationChangedConventions, navigationAnnotationChangedConvention, oldConvetionType))
+        if (
+            newConvention
+                is INavigationAnnotationChangedConvention navigationAnnotationChangedConvention
+            && !Replace(
+                NavigationAnnotationChangedConventions,
+                navigationAnnotationChangedConvention,
+                oldConvetionType
+            )
+        )
         {
             NavigationAnnotationChangedConventions.Add(navigationAnnotationChangedConvention);
         }
 
-        if (newConvention is INavigationRemovedConvention navigationRemovedConvention
-            && !Replace(NavigationRemovedConventions, navigationRemovedConvention, oldConvetionType))
+        if (
+            newConvention is INavigationRemovedConvention navigationRemovedConvention
+            && !Replace(NavigationRemovedConventions, navigationRemovedConvention, oldConvetionType)
+        )
         {
             NavigationRemovedConventions.Add(navigationRemovedConvention);
         }
 
-        if (newConvention is ISkipNavigationAddedConvention skipNavigationAddedConvention
-            && !Replace(SkipNavigationAddedConventions, skipNavigationAddedConvention, oldConvetionType))
+        if (
+            newConvention is ISkipNavigationAddedConvention skipNavigationAddedConvention
+            && !Replace(
+                SkipNavigationAddedConventions,
+                skipNavigationAddedConvention,
+                oldConvetionType
+            )
+        )
         {
             SkipNavigationAddedConventions.Add(skipNavigationAddedConvention);
         }
 
-        if (newConvention is ISkipNavigationAnnotationChangedConvention skipNavigationAnnotationChangedConvention
-            && !Replace(SkipNavigationAnnotationChangedConventions, skipNavigationAnnotationChangedConvention, oldConvetionType))
+        if (
+            newConvention
+                is ISkipNavigationAnnotationChangedConvention skipNavigationAnnotationChangedConvention
+            && !Replace(
+                SkipNavigationAnnotationChangedConventions,
+                skipNavigationAnnotationChangedConvention,
+                oldConvetionType
+            )
+        )
         {
-            SkipNavigationAnnotationChangedConventions.Add(skipNavigationAnnotationChangedConvention);
+            SkipNavigationAnnotationChangedConventions.Add(
+                skipNavigationAnnotationChangedConvention
+            );
         }
 
-        if (newConvention is ISkipNavigationForeignKeyChangedConvention skipNavigationForeignKeyChangedConvention
-            && !Replace(SkipNavigationForeignKeyChangedConventions, skipNavigationForeignKeyChangedConvention, oldConvetionType))
+        if (
+            newConvention
+                is ISkipNavigationForeignKeyChangedConvention skipNavigationForeignKeyChangedConvention
+            && !Replace(
+                SkipNavigationForeignKeyChangedConventions,
+                skipNavigationForeignKeyChangedConvention,
+                oldConvetionType
+            )
+        )
         {
-            SkipNavigationForeignKeyChangedConventions.Add(skipNavigationForeignKeyChangedConvention);
+            SkipNavigationForeignKeyChangedConventions.Add(
+                skipNavigationForeignKeyChangedConvention
+            );
         }
 
-        if (newConvention is ISkipNavigationInverseChangedConvention skipNavigationInverseChangedConvention
-            && !Replace(SkipNavigationInverseChangedConventions, skipNavigationInverseChangedConvention, oldConvetionType))
+        if (
+            newConvention
+                is ISkipNavigationInverseChangedConvention skipNavigationInverseChangedConvention
+            && !Replace(
+                SkipNavigationInverseChangedConventions,
+                skipNavigationInverseChangedConvention,
+                oldConvetionType
+            )
+        )
         {
             SkipNavigationInverseChangedConventions.Add(skipNavigationInverseChangedConvention);
         }
 
-        if (newConvention is ISkipNavigationRemovedConvention skipNavigationRemovedConvention
-            && !Replace(SkipNavigationRemovedConventions, skipNavigationRemovedConvention, oldConvetionType))
+        if (
+            newConvention is ISkipNavigationRemovedConvention skipNavigationRemovedConvention
+            && !Replace(
+                SkipNavigationRemovedConventions,
+                skipNavigationRemovedConvention,
+                oldConvetionType
+            )
+        )
         {
             SkipNavigationRemovedConventions.Add(skipNavigationRemovedConvention);
         }
 
-        if (newConvention is IKeyAddedConvention keyAddedConvention
-            && !Replace(KeyAddedConventions, keyAddedConvention, oldConvetionType))
+        if (
+            newConvention is IKeyAddedConvention keyAddedConvention
+            && !Replace(KeyAddedConventions, keyAddedConvention, oldConvetionType)
+        )
         {
             KeyAddedConventions.Add(keyAddedConvention);
         }
 
-        if (newConvention is IKeyRemovedConvention keyRemovedConvention
-            && !Replace(KeyRemovedConventions, keyRemovedConvention, oldConvetionType))
+        if (
+            newConvention is IKeyRemovedConvention keyRemovedConvention
+            && !Replace(KeyRemovedConventions, keyRemovedConvention, oldConvetionType)
+        )
         {
             KeyRemovedConventions.Add(keyRemovedConvention);
         }
 
-        if (newConvention is IKeyAnnotationChangedConvention keyAnnotationChangedConvention
-            && !Replace(KeyAnnotationChangedConventions, keyAnnotationChangedConvention, oldConvetionType))
+        if (
+            newConvention is IKeyAnnotationChangedConvention keyAnnotationChangedConvention
+            && !Replace(
+                KeyAnnotationChangedConventions,
+                keyAnnotationChangedConvention,
+                oldConvetionType
+            )
+        )
         {
             KeyAnnotationChangedConventions.Add(keyAnnotationChangedConvention);
         }
 
-        if (newConvention is IIndexAddedConvention indexAddedConvention
-            && !Replace(IndexAddedConventions, indexAddedConvention, oldConvetionType))
+        if (
+            newConvention is IIndexAddedConvention indexAddedConvention
+            && !Replace(IndexAddedConventions, indexAddedConvention, oldConvetionType)
+        )
         {
             IndexAddedConventions.Add(indexAddedConvention);
         }
 
-        if (newConvention is IIndexRemovedConvention indexRemovedConvention
-            && !Replace(IndexRemovedConventions, indexRemovedConvention, oldConvetionType))
+        if (
+            newConvention is IIndexRemovedConvention indexRemovedConvention
+            && !Replace(IndexRemovedConventions, indexRemovedConvention, oldConvetionType)
+        )
         {
             IndexRemovedConventions.Add(indexRemovedConvention);
         }
 
-        if (newConvention is IIndexUniquenessChangedConvention indexUniquenessChangedConvention
-            && !Replace(IndexUniquenessChangedConventions, indexUniquenessChangedConvention, oldConvetionType))
+        if (
+            newConvention is IIndexUniquenessChangedConvention indexUniquenessChangedConvention
+            && !Replace(
+                IndexUniquenessChangedConventions,
+                indexUniquenessChangedConvention,
+                oldConvetionType
+            )
+        )
         {
             IndexUniquenessChangedConventions.Add(indexUniquenessChangedConvention);
         }
 
-        if (newConvention is IIndexSortOrderChangedConvention indexSortOrderChangedConvention
-            && !Replace(IndexSortOrderChangedConventions, indexSortOrderChangedConvention, oldConvetionType))
+        if (
+            newConvention is IIndexSortOrderChangedConvention indexSortOrderChangedConvention
+            && !Replace(
+                IndexSortOrderChangedConventions,
+                indexSortOrderChangedConvention,
+                oldConvetionType
+            )
+        )
         {
             IndexSortOrderChangedConventions.Add(indexSortOrderChangedConvention);
         }
 
-        if (newConvention is IIndexAnnotationChangedConvention indexAnnotationChangedConvention
-            && !Replace(IndexAnnotationChangedConventions, indexAnnotationChangedConvention, oldConvetionType))
+        if (
+            newConvention is IIndexAnnotationChangedConvention indexAnnotationChangedConvention
+            && !Replace(
+                IndexAnnotationChangedConventions,
+                indexAnnotationChangedConvention,
+                oldConvetionType
+            )
+        )
         {
             IndexAnnotationChangedConventions.Add(indexAnnotationChangedConvention);
         }
 
-        if (newConvention is IPropertyAddedConvention propertyAddedConvention
-            && !Replace(PropertyAddedConventions, propertyAddedConvention, oldConvetionType))
+        if (
+            newConvention is IPropertyAddedConvention propertyAddedConvention
+            && !Replace(PropertyAddedConventions, propertyAddedConvention, oldConvetionType)
+        )
         {
             PropertyAddedConventions.Add(propertyAddedConvention);
         }
 
-        if (newConvention is IPropertyNullabilityChangedConvention propertyNullabilityChangedConvention
-            && !Replace(PropertyNullabilityChangedConventions, propertyNullabilityChangedConvention, oldConvetionType))
+        if (
+            newConvention
+                is IPropertyNullabilityChangedConvention propertyNullabilityChangedConvention
+            && !Replace(
+                PropertyNullabilityChangedConventions,
+                propertyNullabilityChangedConvention,
+                oldConvetionType
+            )
+        )
         {
             PropertyNullabilityChangedConventions.Add(propertyNullabilityChangedConvention);
         }
 
-        if (newConvention is IPropertyFieldChangedConvention propertyFieldChangedConvention
-            && !Replace(PropertyFieldChangedConventions, propertyFieldChangedConvention, oldConvetionType))
+        if (
+            newConvention is IPropertyFieldChangedConvention propertyFieldChangedConvention
+            && !Replace(
+                PropertyFieldChangedConventions,
+                propertyFieldChangedConvention,
+                oldConvetionType
+            )
+        )
         {
             PropertyFieldChangedConventions.Add(propertyFieldChangedConvention);
         }
 
-        if (newConvention is IPropertyAnnotationChangedConvention propertyAnnotationChangedConvention
-            && !Replace(PropertyAnnotationChangedConventions, propertyAnnotationChangedConvention, oldConvetionType))
+        if (
+            newConvention
+                is IPropertyAnnotationChangedConvention propertyAnnotationChangedConvention
+            && !Replace(
+                PropertyAnnotationChangedConventions,
+                propertyAnnotationChangedConvention,
+                oldConvetionType
+            )
+        )
         {
             PropertyAnnotationChangedConventions.Add(propertyAnnotationChangedConvention);
         }
 
-        if (newConvention is IPropertyRemovedConvention propertyRemovedConvention
-            && !Replace(PropertyRemovedConventions, propertyRemovedConvention, oldConvetionType))
+        if (
+            newConvention is IPropertyRemovedConvention propertyRemovedConvention
+            && !Replace(PropertyRemovedConventions, propertyRemovedConvention, oldConvetionType)
+        )
         {
             PropertyRemovedConventions.Add(propertyRemovedConvention);
         }
@@ -496,8 +731,8 @@ public class ConventionSet
     /// <returns><see langword="true" /> if the convention was replaced.</returns>
     public static bool Replace<TConvention, TImplementation>(
         List<TConvention> conventionsList,
-        TImplementation newConvention)
-        where TImplementation : TConvention
+        TImplementation newConvention
+    ) where TImplementation : TConvention
     {
         Check.NotNull(conventionsList, nameof(conventionsList));
         Check.NotNull(newConvention, nameof(newConvention));
@@ -508,7 +743,8 @@ public class ConventionSet
     private static bool Replace<TConvention>(
         List<TConvention> conventionsList,
         TConvention newConvention,
-        Type oldConventionType)
+        Type oldConventionType
+    )
     {
         Check.NotNull(conventionsList, nameof(conventionsList));
         Check.NotNull(newConvention, nameof(newConvention));
@@ -577,12 +813,18 @@ public class ConventionSet
             EntityTypeBaseTypeChangedConventions.Add(entityTypeBaseTypeChangedConvention);
         }
 
-        if (convention is IEntityTypePrimaryKeyChangedConvention entityTypePrimaryKeyChangedConvention)
+        if (
+            convention
+            is IEntityTypePrimaryKeyChangedConvention entityTypePrimaryKeyChangedConvention
+        )
         {
             EntityTypePrimaryKeyChangedConventions.Add(entityTypePrimaryKeyChangedConvention);
         }
 
-        if (convention is IEntityTypeAnnotationChangedConvention entityTypeAnnotationChangedConvention)
+        if (
+            convention
+            is IEntityTypeAnnotationChangedConvention entityTypeAnnotationChangedConvention
+        )
         {
             EntityTypeAnnotationChangedConventions.Add(entityTypeAnnotationChangedConvention);
         }
@@ -597,42 +839,67 @@ public class ConventionSet
             ForeignKeyRemovedConventions.Add(foreignKeyRemovedConvention);
         }
 
-        if (convention is IForeignKeyPrincipalEndChangedConvention foreignKeyPrincipalEndChangedConvention)
+        if (
+            convention
+            is IForeignKeyPrincipalEndChangedConvention foreignKeyPrincipalEndChangedConvention
+        )
         {
             ForeignKeyPrincipalEndChangedConventions.Add(foreignKeyPrincipalEndChangedConvention);
         }
 
-        if (convention is IForeignKeyPropertiesChangedConvention foreignKeyPropertiesChangedConvention)
+        if (
+            convention
+            is IForeignKeyPropertiesChangedConvention foreignKeyPropertiesChangedConvention
+        )
         {
             ForeignKeyPropertiesChangedConventions.Add(foreignKeyPropertiesChangedConvention);
         }
 
-        if (convention is IForeignKeyUniquenessChangedConvention foreignKeyUniquenessChangedConvention)
+        if (
+            convention
+            is IForeignKeyUniquenessChangedConvention foreignKeyUniquenessChangedConvention
+        )
         {
             ForeignKeyUniquenessChangedConventions.Add(foreignKeyUniquenessChangedConvention);
         }
 
-        if (convention is IForeignKeyRequirednessChangedConvention foreignKeyRequirednessChangedConvention)
+        if (
+            convention
+            is IForeignKeyRequirednessChangedConvention foreignKeyRequirednessChangedConvention
+        )
         {
             ForeignKeyRequirednessChangedConventions.Add(foreignKeyRequirednessChangedConvention);
         }
 
-        if (convention is IForeignKeyDependentRequirednessChangedConvention foreignKeyDependentRequirednessChangedConvention)
+        if (
+            convention
+            is IForeignKeyDependentRequirednessChangedConvention foreignKeyDependentRequirednessChangedConvention
+        )
         {
-            ForeignKeyDependentRequirednessChangedConventions.Add(foreignKeyDependentRequirednessChangedConvention);
+            ForeignKeyDependentRequirednessChangedConventions.Add(
+                foreignKeyDependentRequirednessChangedConvention
+            );
         }
 
-        if (convention is IForeignKeyOwnershipChangedConvention foreignKeyOwnershipChangedConvention)
+        if (
+            convention is IForeignKeyOwnershipChangedConvention foreignKeyOwnershipChangedConvention
+        )
         {
             ForeignKeyOwnershipChangedConventions.Add(foreignKeyOwnershipChangedConvention);
         }
 
-        if (convention is IForeignKeyAnnotationChangedConvention foreignKeyAnnotationChangedConvention)
+        if (
+            convention
+            is IForeignKeyAnnotationChangedConvention foreignKeyAnnotationChangedConvention
+        )
         {
             ForeignKeyAnnotationChangedConventions.Add(foreignKeyAnnotationChangedConvention);
         }
 
-        if (convention is IForeignKeyNullNavigationSetConvention foreignKeyNullNavigationSetConvention)
+        if (
+            convention
+            is IForeignKeyNullNavigationSetConvention foreignKeyNullNavigationSetConvention
+        )
         {
             ForeignKeyNullNavigationSetConventions.Add(foreignKeyNullNavigationSetConvention);
         }
@@ -642,7 +909,10 @@ public class ConventionSet
             NavigationAddedConventions.Add(navigationAddedConvention);
         }
 
-        if (convention is INavigationAnnotationChangedConvention navigationAnnotationChangedConvention)
+        if (
+            convention
+            is INavigationAnnotationChangedConvention navigationAnnotationChangedConvention
+        )
         {
             NavigationAnnotationChangedConventions.Add(navigationAnnotationChangedConvention);
         }
@@ -657,17 +927,30 @@ public class ConventionSet
             SkipNavigationAddedConventions.Add(skipNavigationAddedConvention);
         }
 
-        if (convention is ISkipNavigationAnnotationChangedConvention skipNavigationAnnotationChangedConvention)
+        if (
+            convention
+            is ISkipNavigationAnnotationChangedConvention skipNavigationAnnotationChangedConvention
+        )
         {
-            SkipNavigationAnnotationChangedConventions.Add(skipNavigationAnnotationChangedConvention);
+            SkipNavigationAnnotationChangedConventions.Add(
+                skipNavigationAnnotationChangedConvention
+            );
         }
 
-        if (convention is ISkipNavigationForeignKeyChangedConvention skipNavigationForeignKeyChangedConvention)
+        if (
+            convention
+            is ISkipNavigationForeignKeyChangedConvention skipNavigationForeignKeyChangedConvention
+        )
         {
-            SkipNavigationForeignKeyChangedConventions.Add(skipNavigationForeignKeyChangedConvention);
+            SkipNavigationForeignKeyChangedConventions.Add(
+                skipNavigationForeignKeyChangedConvention
+            );
         }
 
-        if (convention is ISkipNavigationInverseChangedConvention skipNavigationInverseChangedConvention)
+        if (
+            convention
+            is ISkipNavigationInverseChangedConvention skipNavigationInverseChangedConvention
+        )
         {
             SkipNavigationInverseChangedConventions.Add(skipNavigationInverseChangedConvention);
         }
@@ -722,7 +1005,9 @@ public class ConventionSet
             PropertyAddedConventions.Add(propertyAddedConvention);
         }
 
-        if (convention is IPropertyNullabilityChangedConvention propertyNullabilityChangedConvention)
+        if (
+            convention is IPropertyNullabilityChangedConvention propertyNullabilityChangedConvention
+        )
         {
             PropertyNullabilityChangedConventions.Add(propertyNullabilityChangedConvention);
         }
@@ -754,7 +1039,8 @@ public class ConventionSet
     public static bool AddBefore<TConvention>(
         List<TConvention> conventionsList,
         TConvention newConvention,
-        Type existingConventionType)
+        Type existingConventionType
+    )
     {
         Check.NotNull(conventionsList, nameof(conventionsList));
         Check.NotNull(newConvention, nameof(newConvention));
@@ -782,7 +1068,8 @@ public class ConventionSet
     public static bool AddAfter<TConvention>(
         List<TConvention> conventionsList,
         TConvention newConvention,
-        Type existingConventionType)
+        Type existingConventionType
+    )
     {
         Check.NotNull(conventionsList, nameof(conventionsList));
         Check.NotNull(newConvention, nameof(newConvention));
@@ -890,7 +1177,11 @@ public class ConventionSet
             Remove(ForeignKeyRequirednessChangedConventions, conventionType);
         }
 
-        if (typeof(IForeignKeyDependentRequirednessChangedConvention).IsAssignableFrom(conventionType))
+        if (
+            typeof(IForeignKeyDependentRequirednessChangedConvention).IsAssignableFrom(
+                conventionType
+            )
+        )
         {
             Remove(ForeignKeyDependentRequirednessChangedConventions, conventionType);
         }
@@ -1025,7 +1316,8 @@ public class ConventionSet
     /// <returns><see langword="true" /> if the convention was removed.</returns>
     public static bool Remove<TConvention>(
         List<TConvention> conventionsList,
-        Type existingConventionType)
+        Type existingConventionType
+    )
     {
         Check.NotNull(conventionsList, nameof(conventionsList));
 
@@ -1051,6 +1343,6 @@ public class ConventionSet
     ///     </para>
     /// </summary>
     /// <returns>The convention set.</returns>
-    public static ConventionSet CreateConventionSet(DbContext context)
-        => context.GetService<IConventionSetBuilder>().CreateConventionSet();
+    public static ConventionSet CreateConventionSet(DbContext context) =>
+        context.GetService<IConventionSetBuilder>().CreateConventionSet();
 }

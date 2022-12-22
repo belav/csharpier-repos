@@ -22,8 +22,12 @@ namespace ILCompiler.DependencyAnalysis
         {
             sb.Append(nameMangler.NodeMangler.ThreadStaticsIndex(_type));
         }
+
         public int Offset => 0;
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
+
         public override ObjectNodeSection Section
         {
             get
@@ -41,7 +45,10 @@ namespace ILCompiler.DependencyAnalysis
         {
             return new DependencyList
             {
-                new DependencyListEntry(factory.TypeThreadStaticsSymbol(_type), "Thread static storage")
+                new DependencyListEntry(
+                    factory.TypeThreadStaticsSymbol(_type),
+                    "Thread static storage"
+                )
             };
         }
 

@@ -15,7 +15,8 @@ public partial class RoutePatternAnalyzerTests
     public async Task StringSyntax_AttributeProperty_ReportResults()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 
@@ -32,7 +33,8 @@ class HttpGet : Attribute
     [StringSyntax(""Route"")]
     public string Pattern { get; set; }
 }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
@@ -40,14 +42,18 @@ class HttpGet : Attribute
         var diagnostic = Assert.Single(diagnostics);
         Assert.Same(DiagnosticDescriptors.RoutePatternIssue, diagnostic.Descriptor);
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal($"Route issue: {Resources.TemplateRoute_InvalidRouteTemplate}", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            $"Route issue: {Resources.TemplateRoute_InvalidRouteTemplate}",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task StringSyntax_AttributeCtorArgument_ReportResults()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 
@@ -65,7 +71,8 @@ class HttpGet : Attribute
     {
     }
 }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
@@ -73,14 +80,18 @@ class HttpGet : Attribute
         var diagnostic = Assert.Single(diagnostics);
         Assert.Same(DiagnosticDescriptors.RoutePatternIssue, diagnostic.Descriptor);
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal($"Route issue: {Resources.TemplateRoute_InvalidRouteTemplate}", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            $"Route issue: {Resources.TemplateRoute_InvalidRouteTemplate}",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task StringSyntax_FieldSet_ReportResults()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -93,7 +104,8 @@ class Program
     [StringSyntax(""Route"")]
     private static string field;
 }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
@@ -101,14 +113,18 @@ class Program
         var diagnostic = Assert.Single(diagnostics);
         Assert.Same(DiagnosticDescriptors.RoutePatternIssue, diagnostic.Descriptor);
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal($"Route issue: {Resources.TemplateRoute_InvalidRouteTemplate}", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            $"Route issue: {Resources.TemplateRoute_InvalidRouteTemplate}",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task StringSyntax_PropertySet_ReportResults()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -121,7 +137,8 @@ class Program
     [StringSyntax(""Route"")]
     private static string prop { get; set; }
 }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
@@ -129,14 +146,18 @@ class Program
         var diagnostic = Assert.Single(diagnostics);
         Assert.Same(DiagnosticDescriptors.RoutePatternIssue, diagnostic.Descriptor);
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal($"Route issue: {Resources.TemplateRoute_InvalidRouteTemplate}", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            $"Route issue: {Resources.TemplateRoute_InvalidRouteTemplate}",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task StringSyntax_MethodArgument_ReportResults()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -150,7 +171,8 @@ class Program
     {
     }
 }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
@@ -158,14 +180,18 @@ class Program
         var diagnostic = Assert.Single(diagnostics);
         Assert.Same(DiagnosticDescriptors.RoutePatternIssue, diagnostic.Descriptor);
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal($"Route issue: {Resources.TemplateRoute_InvalidRouteTemplate}", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            $"Route issue: {Resources.TemplateRoute_InvalidRouteTemplate}",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task StringSyntax_MethodArgument_MultipleResults()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -179,7 +205,8 @@ class Program
     {
     }
 }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
@@ -189,20 +216,28 @@ class Program
             d =>
             {
                 Assert.Same(DiagnosticDescriptors.RoutePatternIssue, d.Descriptor);
-                Assert.Equal($"Route issue: {Resources.FormatTemplateRoute_InvalidLiteral("~hi?")}", d.GetMessage(CultureInfo.InvariantCulture));
+                Assert.Equal(
+                    $"Route issue: {Resources.FormatTemplateRoute_InvalidLiteral("~hi?")}",
+                    d.GetMessage(CultureInfo.InvariantCulture)
+                );
             },
             d =>
             {
                 Assert.Same(DiagnosticDescriptors.RoutePatternIssue, d.Descriptor);
-                Assert.Equal($"Route issue: {Resources.TemplateRoute_InvalidRouteTemplate}", d.GetMessage(CultureInfo.InvariantCulture));
-            });
+                Assert.Equal(
+                    $"Route issue: {Resources.TemplateRoute_InvalidRouteTemplate}",
+                    d.GetMessage(CultureInfo.InvariantCulture)
+                );
+            }
+        );
     }
 
     [Fact]
     public async Task BadTokenReplacement_MethodArgument_MultipleResults()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -216,7 +251,8 @@ class Program
     {
     }
 }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
@@ -228,7 +264,8 @@ class Program
     public async Task BadTokenReplacement_MvcAction_TokenReplacementDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Mvc;
 
@@ -246,7 +283,8 @@ public class TestController
     {
     }
 }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
@@ -256,7 +294,11 @@ public class TestController
             d =>
             {
                 Assert.Same(DiagnosticDescriptors.RoutePatternIssue, d.Descriptor);
-                Assert.Equal($"Route issue: {Resources.AttributeRoute_TokenReplacement_UnclosedToken}", d.GetMessage(CultureInfo.InvariantCulture));
-            });
+                Assert.Equal(
+                    $"Route issue: {Resources.AttributeRoute_TokenReplacement_UnclosedToken}",
+                    d.GetMessage(CultureInfo.InvariantCulture)
+                );
+            }
+        );
     }
 }

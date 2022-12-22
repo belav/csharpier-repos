@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             CodeModelState state,
             object parent,
             ProjectId projectId,
-            ITypeSymbol typeSymbol)
+            ITypeSymbol typeSymbol
+        )
         {
             var collection = new ExternalMemberCollection(state, parent, projectId, typeSymbol);
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
@@ -33,8 +34,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
         private readonly SymbolKey _typeSymbolId;
         private ImmutableArray<EnvDTE.CodeElement> _children;
 
-        private ExternalMemberCollection(CodeModelState state, object parent, ProjectId projectId, ITypeSymbol typeSymbol)
-            : base(state, parent)
+        private ExternalMemberCollection(
+            CodeModelState state,
+            object parent,
+            ProjectId projectId,
+            ITypeSymbol typeSymbol
+        ) : base(state, parent)
         {
             _projectId = projectId;
             _typeSymbolId = typeSymbol.GetSymbolKey();
@@ -50,7 +55,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                     throw Exceptions.ThrowEFail();
                 }
 
-                if (_typeSymbolId.Resolve(project.GetCompilationAsync().Result).Symbol is not ITypeSymbol typeSymbol)
+                if (
+                    _typeSymbolId.Resolve(project.GetCompilationAsync().Result).Symbol
+                    is not ITypeSymbol typeSymbol
+                )
                 {
                     throw Exceptions.ThrowEFail();
                 }
@@ -61,13 +69,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                 {
                     if (this.CodeModelService.IsValidExternalSymbol(member))
                     {
-                        childrenBuilder.Add(this.State.CodeModelService.CreateExternalCodeElement(this.State, _projectId, member));
+                        childrenBuilder.Add(
+                            this.State.CodeModelService.CreateExternalCodeElement(
+                                this.State,
+                                _projectId,
+                                member
+                            )
+                        );
                     }
                 }
 
                 foreach (var typeMember in typeSymbol.GetTypeMembers())
                 {
-                    childrenBuilder.Add(this.State.CodeModelService.CreateExternalCodeElement(this.State, _projectId, typeMember));
+                    childrenBuilder.Add(
+                        this.State.CodeModelService.CreateExternalCodeElement(
+                            this.State,
+                            _projectId,
+                            typeMember
+                        )
+                    );
                 }
 
                 _children = childrenBuilder.ToImmutableAndFree();

@@ -15,7 +15,20 @@ internal class LocallocTest
     // so fixed-out-args platforms will need to move the outgoing argument space
     // along with the localloc.
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static int FunctionWithLotsOfArguments(int a, int b, int c, int d, int e, int f, int g, int h, int j, int k, int l, int m)
+    public static int FunctionWithLotsOfArguments(
+        int a,
+        int b,
+        int c,
+        int d,
+        int e,
+        int f,
+        int g,
+        int h,
+        int j,
+        int k,
+        int l,
+        int m
+    )
     {
         return a + b + c + d + e + f + g + h + j + k + l + m;
     }
@@ -26,13 +39,13 @@ internal class LocallocTest
         ulong local2 = local1 + 1;
         int size = 0;
 #if LOCALLOC_SMALL
-		Int32* intArray1 = stackalloc Int32[1];
-		Int32* intArray2 = stackalloc Int32[1];
-		size = 1;
+        Int32* intArray1 = stackalloc Int32[1];
+        Int32* intArray2 = stackalloc Int32[1];
+        size = 1;
 #elif LOCALLOC_LARGE
-		Int32* intArray1 = stackalloc Int32[0x1000];
-		Int32* intArray2 = stackalloc Int32[0x1000];
-		size = 0x1000;
+        Int32* intArray1 = stackalloc Int32[0x1000];
+        Int32* intArray2 = stackalloc Int32[0x1000];
+        size = 0x1000;
 #else
         Int32* intArray1 = stackalloc Int32[Global.stackAllocSize];
         Int32* intArray2 = stackalloc Int32[Global.stackAllocSize];
@@ -54,12 +67,11 @@ internal class LocallocTest
             {
                 return 1;
             }
-            if (FunctionWithLotsOfArguments(1,2,3,4,5,1,2,3,4,5,1,2) != 33)
+            if (FunctionWithLotsOfArguments(1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2) != 33)
             {
                 return 1;
             }
         }
-
 
         if (!Global.verifyStack("intArray1", intArray1, size, 1000))
         {
@@ -78,7 +90,7 @@ internal class LocallocTest
             return 1;
         }
 
-        if (FunctionWithLotsOfArguments(0,2,3,4,5,1,2,3,4,5,1,2) != 32)
+        if (FunctionWithLotsOfArguments(0, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2) != 32)
         {
             return 1;
         }

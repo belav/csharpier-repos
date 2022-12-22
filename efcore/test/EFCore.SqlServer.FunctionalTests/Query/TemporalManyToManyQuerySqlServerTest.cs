@@ -6,10 +6,14 @@ using Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 namespace Microsoft.EntityFrameworkCore.Query;
 
 [SqlServerCondition(SqlServerCondition.SupportsTemporalTablesCascadeDelete)]
-public class TemporalManyToManyQuerySqlServerTest : ManyToManyQueryRelationalTestBase<TemporalManyToManyQuerySqlServerFixture>
+public class TemporalManyToManyQuerySqlServerTest
+    : ManyToManyQueryRelationalTestBase<TemporalManyToManyQuerySqlServerFixture>
 {
 #pragma warning disable IDE0060 // Remove unused parameter
-    public TemporalManyToManyQuerySqlServerTest(TemporalManyToManyQuerySqlServerFixture fixture, ITestOutputHelper testOutputHelper)
+    public TemporalManyToManyQuerySqlServerTest(
+        TemporalManyToManyQuerySqlServerFixture fixture,
+        ITestOutputHelper testOutputHelper
+    )
 #pragma warning restore IDE0060 // Remove unused parameter
         : base(fixture)
     {
@@ -41,7 +45,10 @@ public class TemporalManyToManyQuerySqlServerTest : ManyToManyQueryRelationalTes
             typeof(UnidirectionalEntityLeaf),
         };
 
-        var rewriter = new TemporalPointInTimeQueryRewriter(Fixture.ChangesDate, temporalEntityTypes);
+        var rewriter = new TemporalPointInTimeQueryRewriter(
+            Fixture.ChangesDate,
+            temporalEntityTypes
+        );
 
         return rewriter.Visit(serverQueryExpression);
     }
@@ -57,7 +64,8 @@ WHERE NOT EXISTS (
     SELECT 1
     FROM [JoinOneToTwo] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [j]
     INNER JOIN [EntityTwos] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0] ON [j].[TwoId] = [e0].[Id]
-    WHERE [e].[Id] = [j].[OneId] AND NOT ([e0].[Name] LIKE N'%B%'))");
+    WHERE [e].[Id] = [j].[OneId] AND NOT ([e0].[Name] LIKE N'%B%'))"
+        );
     }
 
     public override async Task Skip_navigation_any_without_predicate(bool async)
@@ -71,7 +79,8 @@ WHERE EXISTS (
     SELECT 1
     FROM [JoinOneToThreePayloadFull] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [j]
     INNER JOIN [EntityThrees] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0] ON [j].[ThreeId] = [e0].[Id]
-    WHERE [e].[Id] = [j].[OneId] AND ([e0].[Name] LIKE N'%B%'))");
+    WHERE [e].[Id] = [j].[OneId] AND ([e0].[Name] LIKE N'%B%'))"
+        );
     }
 
     public override async Task Skip_navigation_any_with_predicate(bool async)
@@ -85,7 +94,8 @@ WHERE EXISTS (
     SELECT 1
     FROM [EntityOneEntityTwo] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0]
     INNER JOIN [EntityTwos] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e1] ON [e0].[TwoSkipSharedId] = [e1].[Id]
-    WHERE [e].[Id] = [e0].[OneSkipSharedId] AND ([e1].[Name] LIKE N'%B%'))");
+    WHERE [e].[Id] = [e0].[OneSkipSharedId] AND ([e1].[Name] LIKE N'%B%'))"
+        );
     }
 
     public override async Task Skip_navigation_contains(bool async)
@@ -99,7 +109,8 @@ WHERE EXISTS (
     SELECT 1
     FROM [JoinOneToThreePayloadFullShared] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [j]
     INNER JOIN [EntityThrees] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0] ON [j].[ThreeId] = [e0].[Id]
-    WHERE [e].[Id] = [j].[OneId] AND [e0].[Id] = 1)");
+    WHERE [e].[Id] = [j].[OneId] AND [e0].[Id] = 1)"
+        );
     }
 
     public override async Task Skip_navigation_count_without_predicate(bool async)
@@ -113,7 +124,8 @@ WHERE (
     SELECT COUNT(*)
     FROM [JoinOneSelfPayload] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [j]
     INNER JOIN [EntityOnes] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0] ON [j].[LeftId] = [e0].[Id]
-    WHERE [e].[Id] = [j].[RightId]) > 0");
+    WHERE [e].[Id] = [j].[RightId]) > 0"
+        );
     }
 
     public override async Task Skip_navigation_count_with_predicate(bool async)
@@ -131,7 +143,8 @@ ORDER BY (
         FROM [EntityRoots] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0]
         WHERE [e0].[Discriminator] IN (N'EntityBranch', N'EntityLeaf')
     ) AS [t] ON [j].[EntityBranchId] = [t].[Id]
-    WHERE [e].[Id] = [j].[EntityOneId] AND ([t].[Name] IS NOT NULL) AND ([t].[Name] LIKE N'L%')), [e].[Id]");
+    WHERE [e].[Id] = [j].[EntityOneId] AND ([t].[Name] IS NOT NULL) AND ([t].[Name] LIKE N'L%')), [e].[Id]"
+        );
     }
 
     public override async Task Skip_navigation_long_count_without_predicate(bool async)
@@ -145,7 +158,8 @@ WHERE (
     SELECT COUNT_BIG(*)
     FROM [JoinTwoToThree] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [j]
     INNER JOIN [EntityThrees] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0] ON [j].[ThreeId] = [e0].[Id]
-    WHERE [e].[Id] = [j].[TwoId]) > CAST(0 AS bigint)");
+    WHERE [e].[Id] = [j].[TwoId]) > CAST(0 AS bigint)"
+        );
     }
 
     public override async Task Skip_navigation_long_count_with_predicate(bool async)
@@ -159,7 +173,8 @@ ORDER BY (
     SELECT COUNT_BIG(*)
     FROM [EntityTwoEntityTwo] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0]
     INNER JOIN [EntityTwos] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e1] ON [e0].[SelfSkipSharedLeftId] = [e1].[Id]
-    WHERE [e].[Id] = [e0].[SelfSkipSharedRightId] AND ([e1].[Name] IS NOT NULL) AND ([e1].[Name] LIKE N'L%')) DESC, [e].[Id]");
+    WHERE [e].[Id] = [e0].[SelfSkipSharedRightId] AND ([e1].[Name] IS NOT NULL) AND ([e1].[Name] LIKE N'L%')) DESC, [e].[Id]"
+        );
     }
 
     public override async Task Skip_navigation_select_many_average(bool async)
@@ -173,7 +188,8 @@ INNER JOIN (
     SELECT [e1].[Key1], [e0].[TwoSkipSharedId]
     FROM [EntityCompositeKeyEntityTwo] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0]
     INNER JOIN [EntityCompositeKeys] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e1] ON [e0].[CompositeKeySkipSharedKey1] = [e1].[Key1] AND [e0].[CompositeKeySkipSharedKey2] = [e1].[Key2] AND [e0].[CompositeKeySkipSharedKey3] = [e1].[Key3]
-) AS [t] ON [e].[Id] = [t].[TwoSkipSharedId]");
+) AS [t] ON [e].[Id] = [t].[TwoSkipSharedId]"
+        );
     }
 
     public override async Task Skip_navigation_select_many_max(bool async)
@@ -187,7 +203,8 @@ INNER JOIN (
     SELECT [e0].[Key1], [j].[ThreeId]
     FROM [JoinThreeToCompositeKeyFull] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [j]
     INNER JOIN [EntityCompositeKeys] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0] ON [j].[CompositeId1] = [e0].[Key1] AND [j].[CompositeId2] = [e0].[Key2] AND [j].[CompositeId3] = [e0].[Key3]
-) AS [t] ON [e].[Id] = [t].[ThreeId]");
+) AS [t] ON [e].[Id] = [t].[ThreeId]"
+        );
     }
 
     public override async Task Skip_navigation_select_many_min(bool async)
@@ -201,7 +218,8 @@ INNER JOIN (
     SELECT [e1].[Id], [e0].[ThreeSkipSharedId]
     FROM [EntityRootEntityThree] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0]
     INNER JOIN [EntityRoots] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e1] ON [e0].[RootSkipSharedId] = [e1].[Id]
-) AS [t] ON [e].[Id] = [t].[ThreeSkipSharedId]");
+) AS [t] ON [e].[Id] = [t].[ThreeSkipSharedId]"
+        );
     }
 
     public override async Task Skip_navigation_select_many_sum(bool async)
@@ -215,7 +233,8 @@ INNER JOIN (
     SELECT [e1].[Key1], [e0].[RootSkipSharedId]
     FROM [EntityCompositeKeyEntityRoot] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0]
     INNER JOIN [EntityCompositeKeys] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e1] ON [e0].[CompositeKeySkipSharedKey1] = [e1].[Key1] AND [e0].[CompositeKeySkipSharedKey2] = [e1].[Key2] AND [e0].[CompositeKeySkipSharedKey3] = [e1].[Key3]
-) AS [t] ON [e].[Id] = [t].[RootSkipSharedId]");
+) AS [t] ON [e].[Id] = [t].[RootSkipSharedId]"
+        );
     }
 
     public override async Task Skip_navigation_select_subquery_average(bool async)
@@ -229,7 +248,8 @@ INNER JOIN (
     INNER JOIN [EntityCompositeKeys] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0] ON [j].[CompositeId1] = [e0].[Key1] AND [j].[CompositeId2] = [e0].[Key2] AND [j].[CompositeId3] = [e0].[Key3]
     WHERE [e].[Id] = [j].[LeafId])
 FROM [EntityRoots] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]
-WHERE [e].[Discriminator] = N'EntityLeaf'");
+WHERE [e].[Discriminator] = N'EntityLeaf'"
+        );
     }
 
     public override async Task Skip_navigation_select_subquery_max(bool async)
@@ -242,7 +262,8 @@ WHERE [e].[Discriminator] = N'EntityLeaf'");
     FROM [JoinOneToTwo] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [j]
     INNER JOIN [EntityOnes] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0] ON [j].[OneId] = [e0].[Id]
     WHERE [e].[Id] = [j].[TwoId])
-FROM [EntityTwos] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]");
+FROM [EntityTwos] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]"
+        );
     }
 
     public override async Task Skip_navigation_select_subquery_min(bool async)
@@ -255,7 +276,8 @@ FROM [EntityTwos] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]");
     FROM [JoinOneToThreePayloadFull] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [j]
     INNER JOIN [EntityOnes] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0] ON [j].[OneId] = [e0].[Id]
     WHERE [e].[Id] = [j].[ThreeId])
-FROM [EntityThrees] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]");
+FROM [EntityThrees] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]"
+        );
     }
 
     public override async Task Skip_navigation_select_subquery_sum(bool async)
@@ -268,7 +290,8 @@ FROM [EntityThrees] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]")
     FROM [EntityOneEntityTwo] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0]
     INNER JOIN [EntityOnes] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e1] ON [e0].[OneSkipSharedId] = [e1].[Id]
     WHERE [e].[Id] = [e0].[TwoSkipSharedId])
-FROM [EntityTwos] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]");
+FROM [EntityTwos] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]"
+        );
     }
 
     public override async Task Skip_navigation_order_by_first_or_default(bool async)
@@ -286,7 +309,8 @@ LEFT JOIN (
         INNER JOIN [EntityOnes] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0] ON [j].[OneId] = [e0].[Id]
     ) AS [t]
     WHERE [t].[row] <= 1
-) AS [t0] ON [e].[Id] = [t0].[ThreeId]");
+) AS [t0] ON [e].[Id] = [t0].[ThreeId]"
+        );
     }
 
     public override async Task Skip_navigation_order_by_single_or_default(bool async)
@@ -306,7 +330,8 @@ OUTER APPLY (
         ORDER BY [e0].[Id]
     ) AS [t]
     ORDER BY [t].[Id]
-) AS [t0]");
+) AS [t0]"
+        );
     }
 
     public override async Task Skip_navigation_order_by_last_or_default(bool async)
@@ -325,7 +350,8 @@ LEFT JOIN (
     ) AS [t]
     WHERE [t].[row] <= 1
 ) AS [t0] ON [e].[Id] = [t0].[EntityBranchId]
-WHERE [e].[Discriminator] IN (N'EntityBranch', N'EntityLeaf')");
+WHERE [e].[Discriminator] IN (N'EntityBranch', N'EntityLeaf')"
+        );
     }
 
     public override async Task Skip_navigation_order_by_reverse_first_or_default(bool async)
@@ -343,7 +369,8 @@ LEFT JOIN (
         INNER JOIN [EntityTwos] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0] ON [j].[TwoId] = [e0].[Id]
     ) AS [t]
     WHERE [t].[row] <= 1
-) AS [t0] ON [e].[Id] = [t0].[ThreeId]");
+) AS [t0] ON [e].[Id] = [t0].[ThreeId]"
+        );
     }
 
     public override async Task Skip_navigation_cast(bool async)
@@ -362,7 +389,8 @@ LEFT JOIN (
         WHERE [e0].[Discriminator] = N'EntityLeaf'
     ) AS [t] ON [j].[LeafId] = [t].[Id]
 ) AS [t0] ON [e].[Key1] = [t0].[CompositeId1] AND [e].[Key2] = [t0].[CompositeId2] AND [e].[Key3] = [t0].[CompositeId3]
-ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[LeafId], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3]");
+ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[LeafId], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3]"
+        );
     }
 
     public override async Task Skip_navigation_of_type(bool async)
@@ -378,7 +406,8 @@ LEFT JOIN (
     INNER JOIN [EntityRoots] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e1] ON [e0].[RootSkipSharedId] = [e1].[Id]
     WHERE [e1].[Discriminator] = N'EntityLeaf'
 ) AS [t] ON [e].[Key1] = [t].[CompositeKeySkipSharedKey1] AND [e].[Key2] = [t].[CompositeKeySkipSharedKey2] AND [e].[Key3] = [t].[CompositeKeySkipSharedKey3]
-ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t].[RootSkipSharedId], [t].[CompositeKeySkipSharedKey1], [t].[CompositeKeySkipSharedKey2], [t].[CompositeKeySkipSharedKey3]");
+ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t].[RootSkipSharedId], [t].[CompositeKeySkipSharedKey1], [t].[CompositeKeySkipSharedKey2], [t].[CompositeKeySkipSharedKey3]"
+        );
     }
 
     public override async Task Join_with_skip_navigation(bool async)
@@ -393,7 +422,8 @@ INNER JOIN [EntityTwos] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [
     FROM [EntityTwoEntityTwo] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e1]
     INNER JOIN [EntityTwos] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e2] ON [e1].[SelfSkipSharedRightId] = [e2].[Id]
     WHERE [e0].[Id] = [e1].[SelfSkipSharedLeftId]
-    ORDER BY [e2].[Id])");
+    ORDER BY [e2].[Id])"
+        );
     }
 
     public override async Task Left_join_with_skip_navigation(bool async)
@@ -414,7 +444,8 @@ LEFT JOIN [EntityCompositeKeys] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.00000
     INNER JOIN [EntityThrees] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e3] ON [j].[ThreeId] = [e3].[Id]
     WHERE [e0].[Key1] = [j].[CompositeId1] AND [e0].[Key2] = [j].[CompositeId2] AND [e0].[Key3] = [j].[CompositeId3]
     ORDER BY [e3].[Id])
-ORDER BY [e].[Key1], [e0].[Key1], [e].[Key2], [e0].[Key2]");
+ORDER BY [e].[Key1], [e0].[Key1], [e].[Key2], [e0].[Key2]"
+        );
     }
 
     public override async Task Select_many_over_skip_navigation(bool async)
@@ -428,7 +459,8 @@ INNER JOIN (
     SELECT [e1].[Id], [e1].[CollectionInverseId], [e1].[Name], [e1].[PeriodEnd], [e1].[PeriodStart], [e1].[ReferenceInverseId], [e0].[RootSkipSharedId]
     FROM [EntityRootEntityThree] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0]
     INNER JOIN [EntityThrees] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e1] ON [e0].[ThreeSkipSharedId] = [e1].[Id]
-) AS [t] ON [e].[Id] = [t].[RootSkipSharedId]");
+) AS [t] ON [e].[Id] = [t].[RootSkipSharedId]"
+        );
     }
 
     public override async Task Select_many_over_skip_navigation_where(bool async)
@@ -442,7 +474,8 @@ LEFT JOIN (
     SELECT [e0].[Id], [e0].[CollectionInverseId], [e0].[ExtraId], [e0].[Name], [e0].[PeriodEnd], [e0].[PeriodStart], [e0].[ReferenceInverseId], [j].[OneId]
     FROM [JoinOneToTwo] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [j]
     INNER JOIN [EntityTwos] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0] ON [j].[TwoId] = [e0].[Id]
-) AS [t] ON [e].[Id] = [t].[OneId]");
+) AS [t] ON [e].[Id] = [t].[OneId]"
+        );
     }
 
     public override async Task Select_many_over_skip_navigation_order_by_skip(bool async)
@@ -460,7 +493,8 @@ INNER JOIN (
         INNER JOIN [EntityThrees] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0] ON [j].[ThreeId] = [e0].[Id]
     ) AS [t]
     WHERE 2 < [t].[row]
-) AS [t0] ON [e].[Id] = [t0].[OneId]");
+) AS [t0] ON [e].[Id] = [t0].[OneId]"
+        );
     }
 
     public override async Task Select_many_over_skip_navigation_order_by_take(bool async)
@@ -478,7 +512,8 @@ INNER JOIN (
         INNER JOIN [EntityTwos] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e1] ON [e0].[TwoSkipSharedId] = [e1].[Id]
     ) AS [t]
     WHERE [t].[row] <= 2
-) AS [t0] ON [e].[Id] = [t0].[OneSkipSharedId]");
+) AS [t0] ON [e].[Id] = [t0].[OneSkipSharedId]"
+        );
     }
 
     public override async Task Select_many_over_skip_navigation_order_by_skip_take(bool async)
@@ -496,7 +531,8 @@ INNER JOIN (
         INNER JOIN [EntityThrees] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0] ON [j].[ThreeId] = [e0].[Id]
     ) AS [t]
     WHERE 2 < [t].[row] AND [t].[row] <= 5
-) AS [t0] ON [e].[Id] = [t0].[OneId]");
+) AS [t0] ON [e].[Id] = [t0].[OneId]"
+        );
     }
 
     public override async Task Select_many_over_skip_navigation_of_type(bool async)
@@ -511,7 +547,8 @@ INNER JOIN (
     FROM [EntityRootEntityThree] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0]
     INNER JOIN [EntityRoots] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e1] ON [e0].[RootSkipSharedId] = [e1].[Id]
     WHERE [e1].[Discriminator] IN (N'EntityBranch', N'EntityLeaf')
-) AS [t] ON [e].[Id] = [t].[ThreeSkipSharedId]");
+) AS [t] ON [e].[Id] = [t].[ThreeSkipSharedId]"
+        );
     }
 
     public override async Task Select_many_over_skip_navigation_cast(bool async)
@@ -529,7 +566,8 @@ INNER JOIN (
         FROM [EntityRoots] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0]
         WHERE [e0].[Discriminator] IN (N'EntityBranch', N'EntityLeaf')
     ) AS [t] ON [j].[EntityBranchId] = [t].[Id]
-) AS [t0] ON [e].[Id] = [t0].[EntityOneId]");
+) AS [t0] ON [e].[Id] = [t0].[EntityOneId]"
+        );
     }
 
     public override async Task Select_skip_navigation(bool async)
@@ -544,7 +582,8 @@ LEFT JOIN (
     FROM [JoinOneSelfPayload] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [j]
     INNER JOIN [EntityOnes] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0] ON [j].[LeftId] = [e0].[Id]
 ) AS [t] ON [e].[Id] = [t].[RightId]
-ORDER BY [e].[Id], [t].[LeftId], [t].[RightId]");
+ORDER BY [e].[Id], [t].[LeftId], [t].[RightId]"
+        );
     }
 
     public override async Task Select_skip_navigation_multiple(bool async)
@@ -569,7 +608,8 @@ LEFT JOIN (
     FROM [EntityCompositeKeyEntityTwo] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e3]
     INNER JOIN [EntityCompositeKeys] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e4] ON [e3].[CompositeKeySkipSharedKey1] = [e4].[Key1] AND [e3].[CompositeKeySkipSharedKey2] = [e4].[Key2] AND [e3].[CompositeKeySkipSharedKey3] = [e4].[Key3]
 ) AS [t1] ON [e].[Id] = [t1].[TwoSkipSharedId]
-ORDER BY [e].[Id], [t].[ThreeId], [t].[TwoId], [t].[Id], [t0].[SelfSkipSharedLeftId], [t0].[SelfSkipSharedRightId], [t0].[Id], [t1].[TwoSkipSharedId], [t1].[CompositeKeySkipSharedKey1], [t1].[CompositeKeySkipSharedKey2], [t1].[CompositeKeySkipSharedKey3], [t1].[Key1], [t1].[Key2]");
+ORDER BY [e].[Id], [t].[ThreeId], [t].[TwoId], [t].[Id], [t0].[SelfSkipSharedLeftId], [t0].[SelfSkipSharedRightId], [t0].[Id], [t1].[TwoSkipSharedId], [t1].[CompositeKeySkipSharedKey1], [t1].[CompositeKeySkipSharedKey2], [t1].[CompositeKeySkipSharedKey3], [t1].[Key1], [t1].[Key2]"
+        );
     }
 
     public override async Task Select_skip_navigation_first_or_default(bool async)
@@ -588,7 +628,8 @@ LEFT JOIN (
     ) AS [t]
     WHERE [t].[row] <= 1
 ) AS [t0] ON [e].[Id] = [t0].[ThreeId]
-ORDER BY [e].[Id]");
+ORDER BY [e].[Id]"
+        );
     }
 
     public override async Task Include_skip_navigation(bool async)
@@ -603,7 +644,8 @@ LEFT JOIN (
     FROM [EntityCompositeKeyEntityRoot] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0]
     INNER JOIN [EntityRoots] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e1] ON [e0].[RootSkipSharedId] = [e1].[Id]
 ) AS [t] ON [e].[Key1] = [t].[CompositeKeySkipSharedKey1] AND [e].[Key2] = [t].[CompositeKeySkipSharedKey2] AND [e].[Key3] = [t].[CompositeKeySkipSharedKey3]
-ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t].[RootSkipSharedId], [t].[CompositeKeySkipSharedKey1], [t].[CompositeKeySkipSharedKey2], [t].[CompositeKeySkipSharedKey3]");
+ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t].[RootSkipSharedId], [t].[CompositeKeySkipSharedKey1], [t].[CompositeKeySkipSharedKey2], [t].[CompositeKeySkipSharedKey3]"
+        );
     }
 
     public override async Task Include_skip_navigation_then_reference(bool async)
@@ -619,7 +661,8 @@ LEFT JOIN (
     INNER JOIN [EntityOnes] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0] ON [j].[OneId] = [e0].[Id]
     LEFT JOIN [EntityTwos] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e1] ON [e0].[Id] = [e1].[ReferenceInverseId]
 ) AS [t] ON [e].[Id] = [t].[TwoId]
-ORDER BY [e].[Id], [t].[OneId], [t].[TwoId], [t].[Id]");
+ORDER BY [e].[Id], [t].[OneId], [t].[TwoId], [t].[Id]"
+        );
     }
 
     public override async Task Include_skip_navigation_then_include_skip_navigation(bool async)
@@ -643,10 +686,13 @@ LEFT JOIN (
         INNER JOIN [EntityOnes] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e1] ON [j0].[EntityOneId] = [e1].[Id]
     ) AS [t0] ON [t].[Id] = [t0].[EntityBranchId]
 ) AS [t1] ON [e].[Key1] = [t1].[CompositeId1] AND [e].[Key2] = [t1].[CompositeId2] AND [e].[Key3] = [t1].[CompositeId3]
-ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t1].[LeafId], [t1].[CompositeId1], [t1].[CompositeId2], [t1].[CompositeId3], [t1].[Id], [t1].[EntityBranchId], [t1].[EntityOneId]");
+ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t1].[LeafId], [t1].[CompositeId1], [t1].[CompositeId2], [t1].[CompositeId3], [t1].[Id], [t1].[EntityBranchId], [t1].[EntityOneId]"
+        );
     }
 
-    public override async Task Include_skip_navigation_then_include_reference_and_skip_navigation(bool async)
+    public override async Task Include_skip_navigation_then_include_reference_and_skip_navigation(
+        bool async
+    )
     {
         await base.Include_skip_navigation_then_include_reference_and_skip_navigation(async);
 
@@ -664,7 +710,8 @@ LEFT JOIN (
         INNER JOIN [EntityOnes] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e2] ON [j0].[RightId] = [e2].[Id]
     ) AS [t] ON [e0].[Id] = [t].[LeftId]
 ) AS [t0] ON [e].[Id] = [t0].[ThreeId]
-ORDER BY [e].[Id], [t0].[OneId], [t0].[ThreeId], [t0].[Id], [t0].[Id0], [t0].[LeftId], [t0].[RightId]");
+ORDER BY [e].[Id], [t0].[OneId], [t0].[ThreeId], [t0].[Id], [t0].[Id0], [t0].[LeftId], [t0].[RightId]"
+        );
     }
 
     public override async Task Include_skip_navigation_and_reference(bool async)
@@ -680,10 +727,13 @@ LEFT JOIN (
     FROM [EntityOneEntityTwo] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e1]
     INNER JOIN [EntityOnes] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e2] ON [e1].[OneSkipSharedId] = [e2].[Id]
 ) AS [t] ON [e].[Id] = [t].[TwoSkipSharedId]
-ORDER BY [e].[Id], [e0].[Id], [t].[OneSkipSharedId], [t].[TwoSkipSharedId]");
+ORDER BY [e].[Id], [e0].[Id], [t].[OneSkipSharedId], [t].[TwoSkipSharedId]"
+        );
     }
 
-    public override async Task Include_skip_navigation_then_include_inverse_works_for_tracking_query(bool async)
+    public override async Task Include_skip_navigation_then_include_inverse_works_for_tracking_query(
+        bool async
+    )
     {
         await base.Include_skip_navigation_then_include_inverse_works_for_tracking_query(async);
 
@@ -700,7 +750,8 @@ LEFT JOIN (
         INNER JOIN [EntityThrees] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e1] ON [j0].[ThreeId] = [e1].[Id]
     ) AS [t] ON [e0].[Id] = [t].[OneId]
 ) AS [t0] ON [e].[Id] = [t0].[ThreeId]
-ORDER BY [e].[Id], [t0].[OneId], [t0].[ThreeId], [t0].[Id], [t0].[OneId0], [t0].[ThreeId0]");
+ORDER BY [e].[Id], [t0].[OneId], [t0].[ThreeId], [t0].[Id], [t0].[OneId0], [t0].[ThreeId0]"
+        );
     }
 
     public override async Task Filtered_include_skip_navigation_where(bool async)
@@ -716,7 +767,8 @@ LEFT JOIN (
     INNER JOIN [EntityOnes] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0] ON [j].[OneId] = [e0].[Id]
     WHERE [e0].[Id] < 10
 ) AS [t] ON [e].[Id] = [t].[ThreeId]
-ORDER BY [e].[Id], [t].[OneId], [t].[ThreeId]");
+ORDER BY [e].[Id], [t].[OneId], [t].[ThreeId]"
+        );
     }
 
     public override async Task Filtered_include_skip_navigation_order_by(bool async)
@@ -731,7 +783,8 @@ LEFT JOIN (
     FROM [JoinTwoToThree] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [j]
     INNER JOIN [EntityTwos] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e0] ON [j].[TwoId] = [e0].[Id]
 ) AS [t] ON [e].[Id] = [t].[ThreeId]
-ORDER BY [e].[Id], [t].[Id], [t].[ThreeId]");
+ORDER BY [e].[Id], [t].[Id], [t].[ThreeId]"
+        );
     }
 
     public override async Task Filtered_include_skip_navigation_order_by_skip(bool async)
@@ -750,7 +803,8 @@ LEFT JOIN (
     ) AS [t]
     WHERE 2 < [t].[row]
 ) AS [t0] ON [e].[Id] = [t0].[SelfSkipSharedLeftId]
-ORDER BY [e].[Id], [t0].[SelfSkipSharedLeftId], [t0].[Id]");
+ORDER BY [e].[Id], [t0].[SelfSkipSharedLeftId], [t0].[Id]"
+        );
     }
 
     public override async Task Filtered_include_skip_navigation_order_by_take(bool async)
@@ -769,7 +823,8 @@ LEFT JOIN (
     ) AS [t]
     WHERE [t].[row] <= 2
 ) AS [t0] ON [e].[Key1] = [t0].[CompositeKeySkipSharedKey1] AND [e].[Key2] = [t0].[CompositeKeySkipSharedKey2] AND [e].[Key3] = [t0].[CompositeKeySkipSharedKey3]
-ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeKeySkipSharedKey1], [t0].[CompositeKeySkipSharedKey2], [t0].[CompositeKeySkipSharedKey3], [t0].[Id]");
+ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeKeySkipSharedKey1], [t0].[CompositeKeySkipSharedKey2], [t0].[CompositeKeySkipSharedKey3], [t0].[Id]"
+        );
     }
 
     public override async Task Filtered_include_skip_navigation_order_by_skip_take(bool async)
@@ -788,7 +843,8 @@ LEFT JOIN (
     ) AS [t]
     WHERE 1 < [t].[row] AND [t].[row] <= 3
 ) AS [t0] ON [e].[Key1] = [t0].[CompositeId1] AND [e].[Key2] = [t0].[CompositeId2] AND [e].[Key3] = [t0].[CompositeId3]
-ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[Id0]");
+ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[Id0]"
+        );
     }
 
     public override async Task Filtered_then_include_skip_navigation_where(bool async)
@@ -809,7 +865,8 @@ LEFT JOIN (
         WHERE [e2].[Id] < 10
     ) AS [t] ON [e1].[Id] = [t].[ThreeId]
 ) AS [t0] ON [e].[Id] = [t0].[RootSkipSharedId]
-ORDER BY [e].[Id], [t0].[RootSkipSharedId], [t0].[ThreeSkipSharedId], [t0].[Id], [t0].[OneId], [t0].[ThreeId]");
+ORDER BY [e].[Id], [t0].[RootSkipSharedId], [t0].[ThreeSkipSharedId], [t0].[Id], [t0].[OneId], [t0].[ThreeId]"
+        );
     }
 
     public override async Task Filtered_then_include_skip_navigation_order_by_skip_take(bool async)
@@ -833,10 +890,13 @@ LEFT JOIN (
         WHERE 1 < [t].[row] AND [t].[row] <= 3
     ) AS [t0] ON [e1].[Key1] = [t0].[CompositeId1] AND [e1].[Key2] = [t0].[CompositeId2] AND [e1].[Key3] = [t0].[CompositeId3]
 ) AS [t1] ON [e].[Id] = [t1].[RootSkipSharedId]
-ORDER BY [e].[Id], [t1].[RootSkipSharedId], [t1].[CompositeKeySkipSharedKey1], [t1].[CompositeKeySkipSharedKey2], [t1].[CompositeKeySkipSharedKey3], [t1].[Key1], [t1].[Key2], [t1].[Key3], [t1].[CompositeId1], [t1].[CompositeId2], [t1].[CompositeId3], [t1].[Id0]");
+ORDER BY [e].[Id], [t1].[RootSkipSharedId], [t1].[CompositeKeySkipSharedKey1], [t1].[CompositeKeySkipSharedKey2], [t1].[CompositeKeySkipSharedKey3], [t1].[Key1], [t1].[Key2], [t1].[Key3], [t1].[CompositeId1], [t1].[CompositeId2], [t1].[CompositeId3], [t1].[Id0]"
+        );
     }
 
-    public override async Task Filtered_include_skip_navigation_where_then_include_skip_navigation(bool async)
+    public override async Task Filtered_include_skip_navigation_where_then_include_skip_navigation(
+        bool async
+    )
     {
         await base.Filtered_include_skip_navigation_where_then_include_skip_navigation(async);
 
@@ -855,12 +915,17 @@ LEFT JOIN (
     WHERE [e0].[Key1] < 5
 ) AS [t0] ON [e].[Id] = [t0].[LeafId]
 WHERE [e].[Discriminator] = N'EntityLeaf'
-ORDER BY [e].[Id], [t0].[LeafId], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[Key1], [t0].[Key2], [t0].[Key3], [t0].[TwoSkipSharedId], [t0].[CompositeKeySkipSharedKey1], [t0].[CompositeKeySkipSharedKey2], [t0].[CompositeKeySkipSharedKey3]");
+ORDER BY [e].[Id], [t0].[LeafId], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[Key1], [t0].[Key2], [t0].[Key3], [t0].[TwoSkipSharedId], [t0].[CompositeKeySkipSharedKey1], [t0].[CompositeKeySkipSharedKey2], [t0].[CompositeKeySkipSharedKey3]"
+        );
     }
 
-    public override async Task Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where(bool async)
+    public override async Task Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where(
+        bool async
+    )
     {
-        await base.Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where(async);
+        await base.Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where(
+            async
+        );
 
         AssertSql(
             @"SELECT [e].[Id], [e].[Name], [e].[PeriodEnd], [e].[PeriodStart], [t1].[OneId], [t1].[TwoId], [t1].[JoinOneToTwoExtraId], [t1].[PeriodEnd], [t1].[PeriodStart], [t1].[Id], [t1].[CollectionInverseId], [t1].[ExtraId], [t1].[Name], [t1].[PeriodEnd0], [t1].[PeriodStart0], [t1].[ReferenceInverseId], [t1].[ThreeId], [t1].[TwoId0], [t1].[PeriodEnd1], [t1].[PeriodStart1], [t1].[Id0], [t1].[CollectionInverseId0], [t1].[Name0], [t1].[PeriodEnd00], [t1].[PeriodStart00], [t1].[ReferenceInverseId0]
@@ -882,12 +947,17 @@ OUTER APPLY (
         WHERE [e1].[Id] < 10
     ) AS [t0] ON [t].[Id] = [t0].[TwoId]
 ) AS [t1]
-ORDER BY [e].[Id], [t1].[Id], [t1].[OneId], [t1].[TwoId], [t1].[ThreeId], [t1].[TwoId0]");
+ORDER BY [e].[Id], [t1].[Id], [t1].[OneId], [t1].[TwoId], [t1].[ThreeId], [t1].[TwoId0]"
+        );
     }
 
-    public override async Task Filtered_include_skip_navigation_where_then_include_skip_navigation_order_by_skip_take(bool async)
+    public override async Task Filtered_include_skip_navigation_where_then_include_skip_navigation_order_by_skip_take(
+        bool async
+    )
     {
-        await base.Filtered_include_skip_navigation_where_then_include_skip_navigation_order_by_skip_take(async);
+        await base.Filtered_include_skip_navigation_where_then_include_skip_navigation_order_by_skip_take(
+            async
+        );
 
         AssertSql(
             @"SELECT [e].[Id], [e].[Name], [e].[PeriodEnd], [e].[PeriodStart], [t1].[OneId], [t1].[TwoId], [t1].[JoinOneToTwoExtraId], [t1].[PeriodEnd], [t1].[PeriodStart], [t1].[Id], [t1].[CollectionInverseId], [t1].[ExtraId], [t1].[Name], [t1].[PeriodEnd0], [t1].[PeriodStart0], [t1].[ReferenceInverseId], [t1].[ThreeId], [t1].[TwoId0], [t1].[PeriodEnd1], [t1].[PeriodStart1], [t1].[Id0], [t1].[CollectionInverseId0], [t1].[Name0], [t1].[PeriodEnd00], [t1].[PeriodStart00], [t1].[ReferenceInverseId0]
@@ -907,7 +977,8 @@ LEFT JOIN (
     ) AS [t0] ON [e0].[Id] = [t0].[TwoId]
     WHERE [e0].[Id] < 10
 ) AS [t1] ON [e].[Id] = [t1].[OneId]
-ORDER BY [e].[Id], [t1].[OneId], [t1].[TwoId], [t1].[Id], [t1].[TwoId0], [t1].[Id0]");
+ORDER BY [e].[Id], [t1].[OneId], [t1].[TwoId], [t1].[Id], [t1].[TwoId0], [t1].[Id0]"
+        );
     }
 
     public override async Task Filter_include_on_skip_navigation_combined(bool async)
@@ -925,10 +996,13 @@ LEFT JOIN (
     LEFT JOIN [EntityTwos] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e2] ON [e0].[Id] = [e2].[CollectionInverseId]
     WHERE [e0].[Id] < 10
 ) AS [t] ON [e].[Id] = [t].[TwoId]
-ORDER BY [e].[Id], [t].[OneId], [t].[TwoId], [t].[Id], [t].[Id0]");
+ORDER BY [e].[Id], [t].[OneId], [t].[TwoId], [t].[Id], [t].[Id0]"
+        );
     }
 
-    public override async Task Filter_include_on_skip_navigation_combined_with_filtered_then_includes(bool async)
+    public override async Task Filter_include_on_skip_navigation_combined_with_filtered_then_includes(
+        bool async
+    )
     {
         await base.Filter_include_on_skip_navigation_combined_with_filtered_then_includes(async);
 
@@ -960,10 +1034,13 @@ LEFT JOIN (
     ) AS [t1] ON [e0].[Id] = [t1].[EntityOneId]
     WHERE [e0].[Id] < 10
 ) AS [t3] ON [e].[Id] = [t3].[ThreeId]
-ORDER BY [e].[Id], [t3].[OneId], [t3].[ThreeId], [t3].[Id], [t3].[OneId0], [t3].[Id0], [t3].[TwoId], [t3].[EntityBranchId], [t3].[EntityOneId]");
+ORDER BY [e].[Id], [t3].[OneId], [t3].[ThreeId], [t3].[Id], [t3].[OneId0], [t3].[Id0], [t3].[TwoId], [t3].[EntityBranchId], [t3].[EntityOneId]"
+        );
     }
 
-    public override async Task Filtered_include_on_skip_navigation_then_filtered_include_on_navigation(bool async)
+    public override async Task Filtered_include_on_skip_navigation_then_filtered_include_on_navigation(
+        bool async
+    )
     {
         await base.Filtered_include_on_skip_navigation_then_filtered_include_on_navigation(async);
 
@@ -981,10 +1058,13 @@ LEFT JOIN (
     ) AS [t] ON [e0].[Id] = [t].[CollectionInverseId]
     WHERE [e0].[Id] > 15
 ) AS [t0] ON [e].[Id] = [t0].[ThreeId]
-ORDER BY [e].[Id], [t0].[OneId], [t0].[ThreeId], [t0].[Id]");
+ORDER BY [e].[Id], [t0].[OneId], [t0].[ThreeId], [t0].[Id]"
+        );
     }
 
-    public override async Task Filtered_include_on_navigation_then_filtered_include_on_skip_navigation(bool async)
+    public override async Task Filtered_include_on_navigation_then_filtered_include_on_skip_navigation(
+        bool async
+    )
     {
         await base.Filtered_include_on_navigation_then_filtered_include_on_skip_navigation(async);
 
@@ -1002,33 +1082,33 @@ LEFT JOIN (
     ) AS [t] ON [e0].[Id] = [t].[TwoId]
     WHERE [e0].[Id] > 15
 ) AS [t0] ON [e].[Id] = [t0].[CollectionInverseId]
-ORDER BY [e].[Id], [t0].[Id], [t0].[ThreeId], [t0].[TwoId]");
+ORDER BY [e].[Id], [t0].[Id], [t0].[ThreeId], [t0].[TwoId]"
+        );
     }
 
     public override async Task Includes_accessed_via_different_path_are_merged(bool async)
     {
         await base.Includes_accessed_via_different_path_are_merged(async);
 
-        AssertSql(
-            @"");
+        AssertSql(@"");
     }
 
     public override async Task Filtered_includes_accessed_via_different_path_are_merged(bool async)
     {
         await base.Filtered_includes_accessed_via_different_path_are_merged(async);
 
-        AssertSql(
-            @"");
+        AssertSql(@"");
     }
 
-    public override async Task Throws_when_different_filtered_then_include_via_different_paths(bool async)
+    public override async Task Throws_when_different_filtered_then_include_via_different_paths(
+        bool async
+    )
     {
         await base.Throws_when_different_filtered_then_include_via_different_paths(async);
 
-        AssertSql(
-            @"");
+        AssertSql(@"");
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 }

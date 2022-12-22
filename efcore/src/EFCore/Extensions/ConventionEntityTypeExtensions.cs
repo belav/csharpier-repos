@@ -22,10 +22,12 @@ public static class ConventionEntityTypeExtensions
     public static void SetDefiningQuery(
         this IConventionEntityType entityType,
         LambdaExpression? definingQuery,
-        bool fromDataAnnotation = false)
-        => ((EntityType)entityType).SetDefiningQuery(
+        bool fromDataAnnotation = false
+    ) =>
+        ((EntityType)entityType).SetDefiningQuery(
             definingQuery,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     Returns the configuration source for <see cref="EntityTypeExtensions.GetDefiningQuery" />.
@@ -33,6 +35,7 @@ public static class ConventionEntityTypeExtensions
     /// <param name="entityType">The entity type.</param>
     /// <returns>The configuration source for <see cref="EntityTypeExtensions.GetDefiningQuery" />.</returns>
     [Obsolete("Use InMemoryEntityTypeExtensions.GetInMemoryQueryConfigurationSource")]
-    public static ConfigurationSource? GetDefiningQueryConfigurationSource(this IConventionEntityType entityType)
-        => entityType.FindAnnotation(CoreAnnotationNames.DefiningQuery)?.GetConfigurationSource();
+    public static ConfigurationSource? GetDefiningQueryConfigurationSource(
+        this IConventionEntityType entityType
+    ) => entityType.FindAnnotation(CoreAnnotationNames.DefiningQuery)?.GetConfigurationSource();
 }

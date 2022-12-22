@@ -33,8 +33,11 @@ namespace System.Net.Http
             return _stream;
         }
 
-        protected override void SerializeToStream(Stream stream, TransportContext? context,
-            CancellationToken cancellationToken)
+        protected override void SerializeToStream(
+            Stream stream,
+            TransportContext? context,
+            CancellationToken cancellationToken
+        )
         {
             ArgumentNullException.ThrowIfNull(stream);
 
@@ -45,20 +48,32 @@ namespace System.Net.Http
             }
         }
 
-        protected sealed override Task SerializeToStreamAsync(Stream stream, TransportContext? context) =>
-            SerializeToStreamAsync(stream, context, CancellationToken.None);
+        protected sealed override Task SerializeToStreamAsync(
+            Stream stream,
+            TransportContext? context
+        ) => SerializeToStreamAsync(stream, context, CancellationToken.None);
 
-        protected sealed override Task SerializeToStreamAsync(Stream stream, TransportContext? context, CancellationToken cancellationToken)
+        protected sealed override Task SerializeToStreamAsync(
+            Stream stream,
+            TransportContext? context,
+            CancellationToken cancellationToken
+        )
         {
             ArgumentNullException.ThrowIfNull(stream);
             return Impl(stream, context, cancellationToken);
 
-            async Task Impl(Stream stream, TransportContext? context, CancellationToken cancellationToken)
+            async Task Impl(
+                Stream stream,
+                TransportContext? context,
+                CancellationToken cancellationToken
+            )
             {
                 using (Stream contentStream = ConsumeStream())
                 {
                     const int BufferSize = 8192;
-                    await contentStream.CopyToAsync(stream, BufferSize, cancellationToken).ConfigureAwait(false);
+                    await contentStream
+                        .CopyToAsync(stream, BufferSize, cancellationToken)
+                        .ConfigureAwait(false);
                 }
             }
         }
@@ -69,14 +84,14 @@ namespace System.Net.Http
             return false;
         }
 
-        protected sealed override Stream CreateContentReadStream(CancellationToken cancellationToken) =>
-            ConsumeStream();
+        protected sealed override Stream CreateContentReadStream(
+            CancellationToken cancellationToken
+        ) => ConsumeStream();
 
         protected sealed override Task<Stream> CreateContentReadStreamAsync() =>
             Task.FromResult<Stream>(ConsumeStream());
 
-        internal sealed override Stream TryCreateContentReadStream() =>
-            ConsumeStream();
+        internal sealed override Stream TryCreateContentReadStream() => ConsumeStream();
 
         internal override bool AllowDuplex => false;
 

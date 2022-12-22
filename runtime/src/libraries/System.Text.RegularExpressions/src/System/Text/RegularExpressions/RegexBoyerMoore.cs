@@ -36,12 +36,23 @@ namespace System.Text.RegularExpressions
         /// Constructs a Boyer-Moore state machine for searching for the string
         /// pattern. The string must not be zero-length.
         /// </summary>
-        public RegexBoyerMoore(string pattern, bool caseInsensitive, bool rightToLeft, CultureInfo culture)
+        public RegexBoyerMoore(
+            string pattern,
+            bool caseInsensitive,
+            bool rightToLeft,
+            CultureInfo culture
+        )
         {
             // Sorry, you just can't use Boyer-Moore to find an empty pattern.
             // We're doing this for your own protection. (Really, for speed.)
-            Debug.Assert(pattern.Length != 0, "RegexBoyerMoore called with an empty string. This is bad for perf");
-            Debug.Assert(pattern.Length <= MaxLimit, "RegexBoyerMoore can take a long time for large patterns");
+            Debug.Assert(
+                pattern.Length != 0,
+                "RegexBoyerMoore called with an empty string. This is bad for perf"
+            );
+            Debug.Assert(
+                pattern.Length <= MaxLimit,
+                "RegexBoyerMoore can take a long time for large patterns"
+            );
 #if DEBUG
             if (caseInsensitive)
             {
@@ -49,7 +60,10 @@ namespace System.Text.RegularExpressions
                 {
                     // We expect each individual character to have been lower-cased. We don't validate the whole
                     // string at once because the rest of the library doesn't currently recognize/support surrogate pairs.
-                    Debug.Assert(c == culture.TextInfo.ToLower(c), "Pattern wasn't lowercased with provided culture");
+                    Debug.Assert(
+                        c == culture.TextInfo.ToLower(c),
+                        "Pattern wasn't lowercased with provided culture"
+                    );
                 }
             }
 #endif
@@ -132,7 +146,7 @@ namespace System.Text.RegularExpressions
                 examine -= bump;
             }
 
-        OuterloopBreak:
+            OuterloopBreak:
 
             match = last - bump;
 
@@ -224,7 +238,8 @@ namespace System.Text.RegularExpressions
 
         /// <summary>Gets whether IndexOf could be used to perform the match.</summary>
         public bool PatternSupportsIndexOf =>
-            !RightToLeft && (!CaseInsensitive || !RegexCharClass.ParticipatesInCaseConversion(Pattern));
+            !RightToLeft
+            && (!CaseInsensitive || !RegexCharClass.ParticipatesInCaseConversion(Pattern));
 
         /// <summary>
         /// When a regex is anchored, we can do a quick IsMatch test instead of a Scan
@@ -316,7 +331,10 @@ namespace System.Text.RegularExpressions
                 {
                     if (chTest < 128)
                         advance = NegativeASCII[chTest];
-                    else if (null != NegativeUnicode && (null != (unicodeLookup = NegativeUnicode[chTest >> 8])))
+                    else if (
+                        null != NegativeUnicode
+                        && (null != (unicodeLookup = NegativeUnicode[chTest >> 8]))
+                    )
                         advance = unicodeLookup[chTest & 0xFF];
                     else
                         advance = defadv;
@@ -346,7 +364,10 @@ namespace System.Text.RegularExpressions
                             advance = Positive[match];
                             if ((chTest & 0xFF80) == 0)
                                 test2 = (match - startmatch) + NegativeASCII[chTest];
-                            else if (null != NegativeUnicode && (null != (unicodeLookup = NegativeUnicode[chTest >> 8])))
+                            else if (
+                                null != NegativeUnicode
+                                && (null != (unicodeLookup = NegativeUnicode[chTest >> 8]))
+                            )
                                 test2 = (match - startmatch) + unicodeLookup[chTest & 0xFF];
                             else
                             {

@@ -15,27 +15,267 @@ namespace System.Net.Mime
     /// </summary>
     internal sealed class QEncodedStream : DelegatedStream, IEncodableStream
     {
-
-        private static ReadOnlySpan<byte> HexDecodeMap => new byte[] // rely on C# compiler optimization to eliminate allocation
-        {
-            // 0   1   2   3   4   5   6   7   8   9   A   B   C   D   E   F
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // 0
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // 1
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // 2
-             0,   1,   2,   3,   4,   5,   6,   7,   8,   9,  255,  255, 255, 255, 255, 255, // 3
-             255, 10,  11,  12,  13,  14,  15,  255, 255, 255, 255, 255, 255, 255, 255, 255, // 4
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // 5
-             255, 10,  11,  12,  13,  14,  15,  255, 255, 255, 255, 255, 255, 255, 255, 255, // 6
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // 7
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // 8
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // 9
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // A
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // B
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // C
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // D
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // E
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // F
-        };
+        private static ReadOnlySpan<byte> HexDecodeMap =>
+            new byte[] // rely on C# compiler optimization to eliminate allocation
+            {
+                // 0   1   2   3   4   5   6   7   8   9   A   B   C   D   E   F
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 0
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 1
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 2
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 3
+                255,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 4
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 5
+                255,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 6
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 7
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 8
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 9
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // A
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // B
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // C
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // D
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // E
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // F
+            };
 
         private ReadStateInfo? _readState;
         private readonly WriteStateInfoBase _writeState;
@@ -51,11 +291,24 @@ namespace System.Net.Mime
 
         internal WriteStateInfoBase WriteState => _writeState;
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
 
-            WriteAsyncResult result = new WriteAsyncResult(this, buffer, offset, count, callback, state);
+            WriteAsyncResult result = new WriteAsyncResult(
+                this,
+                buffer,
+                offset,
+                count,
+                callback,
+                state
+            );
             result.Write();
             return result;
         }
@@ -168,9 +421,13 @@ namespace System.Net.Mime
                                     byte b1 = HexDecodeMap[source[1]];
                                     byte b2 = HexDecodeMap[source[2]];
                                     if (b1 == 255)
-                                        throw new FormatException(SR.Format(SR.InvalidHexDigit, b1));
+                                        throw new FormatException(
+                                            SR.Format(SR.InvalidHexDigit, b1)
+                                        );
                                     if (b2 == 255)
-                                        throw new FormatException(SR.Format(SR.InvalidHexDigit, b2));
+                                        throw new FormatException(
+                                            SR.Format(SR.InvalidHexDigit, b2)
+                                        );
 
                                     *dest++ = (byte)((b1 << 4) + b2);
                                 }
@@ -179,18 +436,21 @@ namespace System.Net.Mime
                         }
                     }
                 }
-            EndWhile:
+                EndWhile:
                 return (int)(dest - start);
             }
         }
 
-        public int EncodeBytes(byte[] buffer, int offset, int count) =>_encoder.EncodeBytes(buffer, offset, count, true, true);
+        public int EncodeBytes(byte[] buffer, int offset, int count) =>
+            _encoder.EncodeBytes(buffer, offset, count, true, true);
 
-        public int EncodeString(string value, Encoding encoding) => _encoder.EncodeString(value, encoding);
+        public int EncodeString(string value, Encoding encoding) =>
+            _encoder.EncodeString(value, encoding);
 
         public string GetEncodedString() => _encoder.GetEncodedString();
 
-        public override void EndWrite(IAsyncResult asyncResult) => WriteAsyncResult.End(asyncResult);
+        public override void EndWrite(IAsyncResult asyncResult) =>
+            WriteAsyncResult.End(asyncResult);
 
         public override void Flush()
         {
@@ -243,8 +503,14 @@ namespace System.Net.Mime
 
             private int _written;
 
-            internal WriteAsyncResult(QEncodedStream parent, byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-                : base(null, state, callback)
+            internal WriteAsyncResult(
+                QEncodedStream parent,
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback? callback,
+                object? state
+            ) : base(null, state, callback)
             {
                 _parent = parent;
                 _buffer = buffer;
@@ -289,7 +555,13 @@ namespace System.Net.Mime
                     _written += _parent.EncodeBytes(_buffer, _offset + _written, _count - _written);
                     if (_written < _count)
                     {
-                        IAsyncResult result = _parent.BaseStream.BeginWrite(_parent.WriteState.Buffer, 0, _parent.WriteState.Length, s_onWrite, this);
+                        IAsyncResult result = _parent.BaseStream.BeginWrite(
+                            _parent.WriteState.Buffer,
+                            0,
+                            _parent.WriteState.Length,
+                            s_onWrite,
+                            this
+                        );
                         if (!result.CompletedSynchronously)
                         {
                             break;

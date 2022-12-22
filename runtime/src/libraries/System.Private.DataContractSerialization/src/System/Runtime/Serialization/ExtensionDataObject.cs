@@ -12,9 +12,7 @@ namespace System.Runtime.Serialization
     {
         private IList<ExtensionDataMember>? _members;
 
-        internal ExtensionDataObject()
-        {
-        }
+        internal ExtensionDataObject() { }
 
         internal IList<ExtensionDataMember>? Members
         {
@@ -54,7 +52,7 @@ namespace System.Runtime.Serialization
     internal interface IDataNode
     {
         Type DataType { get; }
-        object? Value { get; set; }  // boxes for primitives
+        object? Value { get; set; } // boxes for primitives
         string? DataContractName { get; set; }
         string? DataContractNamespace { get; set; }
         string? ClrTypeName { get; set; }
@@ -85,8 +83,7 @@ namespace System.Runtime.Serialization
             _isFinalValue = true;
         }
 
-        internal DataNode(T value)
-            : this()
+        internal DataNode(T value) : this()
         {
             _value = value;
         }
@@ -155,11 +152,28 @@ namespace System.Runtime.Serialization
             element.childElementIndex = 0;
 
             if (DataContractName != null)
-                AddQualifiedNameAttribute(element, Globals.XsiPrefix, Globals.XsiTypeLocalName, Globals.SchemaInstanceNamespace, DataContractName, DataContractNamespace);
+                AddQualifiedNameAttribute(
+                    element,
+                    Globals.XsiPrefix,
+                    Globals.XsiTypeLocalName,
+                    Globals.SchemaInstanceNamespace,
+                    DataContractName,
+                    DataContractNamespace
+                );
             if (ClrTypeName != null)
-                element.AddAttribute(Globals.SerPrefix, Globals.SerializationNamespace, Globals.ClrTypeLocalName, ClrTypeName);
+                element.AddAttribute(
+                    Globals.SerPrefix,
+                    Globals.SerializationNamespace,
+                    Globals.ClrTypeLocalName,
+                    ClrTypeName
+                );
             if (ClrAssemblyName != null)
-                element.AddAttribute(Globals.SerPrefix, Globals.SerializationNamespace, Globals.ClrAssemblyLocalName, ClrAssemblyName);
+                element.AddAttribute(
+                    Globals.SerPrefix,
+                    Globals.SerializationNamespace,
+                    Globals.ClrAssemblyLocalName,
+                    ClrAssemblyName
+                );
         }
 
         public virtual void Clear()
@@ -168,7 +182,14 @@ namespace System.Runtime.Serialization
             _clrTypeName = _clrAssemblyName = null;
         }
 
-        internal static void AddQualifiedNameAttribute(ElementData element, string elementPrefix, string elementName, string elementNs, string valueName, string? valueNs)
+        internal static void AddQualifiedNameAttribute(
+            ElementData element,
+            string elementPrefix,
+            string elementName,
+            string elementNs,
+            string valueName,
+            string? valueNs
+        )
         {
             string prefix = ExtensionDataReader.GetPrefix(valueNs);
             element.AddAttribute(elementPrefix, elementNs, elementName, prefix + ":" + valueName);
@@ -179,7 +200,11 @@ namespace System.Runtime.Serialization
                 for (int i = 0; i < element.attributes.Length; i++)
                 {
                     AttributeData attribute = element.attributes[i];
-                    if (attribute != null && attribute.prefix == Globals.XmlnsPrefix && attribute.localName == prefix)
+                    if (
+                        attribute != null
+                        && attribute.prefix == Globals.XmlnsPrefix
+                        && attribute.localName == prefix
+                    )
                     {
                         prefixDeclaredOnElement = true;
                         break;
@@ -291,7 +316,12 @@ namespace System.Runtime.Serialization
         {
             base.GetData(element);
 
-            element.AddAttribute(Globals.SerPrefix, Globals.SerializationNamespace, Globals.ArraySizeLocalName, Size.ToString(NumberFormatInfo.InvariantInfo));
+            element.AddAttribute(
+                Globals.SerPrefix,
+                Globals.SerializationNamespace,
+                Globals.ArraySizeLocalName,
+                Size.ToString(NumberFormatInfo.InvariantInfo)
+            );
         }
 
         public override void Clear()
@@ -336,7 +366,14 @@ namespace System.Runtime.Serialization
             base.GetData(element);
 
             if (FactoryTypeName != null)
-                AddQualifiedNameAttribute(element, Globals.SerPrefix, Globals.ISerializableFactoryTypeLocalName, Globals.SerializationNamespace, FactoryTypeName, FactoryTypeNamespace);
+                AddQualifiedNameAttribute(
+                    element,
+                    Globals.SerPrefix,
+                    Globals.ISerializableFactoryTypeLocalName,
+                    Globals.SerializationNamespace,
+                    FactoryTypeName,
+                    FactoryTypeNamespace
+                );
         }
 
         public override void Clear()

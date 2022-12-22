@@ -30,4 +30,3 @@ internal class test
         return 100;
     }
 }
-

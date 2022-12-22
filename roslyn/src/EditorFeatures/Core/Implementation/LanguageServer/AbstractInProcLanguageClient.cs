@@ -22,7 +22,10 @@ using StreamJsonRpc;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
 {
-    internal abstract partial class AbstractInProcLanguageClient : ILanguageClient, ILanguageServerFactory, ICapabilitiesProvider
+    internal abstract partial class AbstractInProcLanguageClient
+        : ILanguageClient,
+            ILanguageServerFactory,
+            ICapabilitiesProvider
     {
         private readonly string? _diagnosticsClientName;
         private readonly IThreadingContext _threadingContext;
@@ -77,7 +80,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         /// <summary>
         /// Unused, implementing <see cref="ILanguageClient"/>
         /// </summary>
-        public event AsyncEventHandler<EventArgs>? StopAsync { add { } remove { } }
+        public event AsyncEventHandler<EventArgs>? StopAsync
+        {
+            add { }
+            remove { }
+        }
 
         public AbstractInProcLanguageClient(
             AbstractRequestDispatcherFactory requestDispatcherFactory,
@@ -87,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             LspWorkspaceRegistrationService lspWorkspaceRegistrationService,
             ILspLoggerFactory lspLoggerFactory,
             IThreadingContext threadingContext,
-            string? diagnosticsClientName)
+            string? diagnosticsClientName
+        )
         {
             _requestDispatcherFactory = requestDispatcherFactory;
             GlobalOptions = globalOptions;
@@ -124,30 +132,38 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             // https://github.com/dotnet/roslyn/issues/29602 will track removing this hack
             // since that's the primary offending persister that needs to be addressed.
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            _ = GetCapabilities(new VSInternalClientCapabilities { SupportsVisualStudioExtensions = true });
+            _ = GetCapabilities(
+                new VSInternalClientCapabilities { SupportsVisualStudioExtensions = true }
+            );
 
             if (_languageServer is not null)
             {
-                Contract.ThrowIfFalse(_languageServer.HasShutdownStarted, "The language server has not yet been asked to shutdown.");
+                Contract.ThrowIfFalse(
+                    _languageServer.HasShutdownStarted,
+                    "The language server has not yet been asked to shutdown."
+                );
 
                 await _languageServer.DisposeAsync().ConfigureAwait(false);
             }
 
             var (clientStream, serverStream) = FullDuplexStream.CreatePair();
 
-            _languageServer = (LanguageServerTarget)await CreateAsync(
-                this,
-                serverStream,
-                serverStream,
-                _lspLoggerFactory,
-                _diagnosticsClientName,
-                cancellationToken).ConfigureAwait(false);
+            _languageServer = (LanguageServerTarget)
+                await CreateAsync(
+                        this,
+                        serverStream,
+                        serverStream,
+                        _lspLoggerFactory,
+                        _diagnosticsClientName,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
             return new Connection(clientStream, clientStream);
         }
 
         /// <summary>
-        /// Signals that the extension has been loaded.  The server can be started immediately, or wait for user action to start.  
+        /// Signals that the extension has been loaded.  The server can be started immediately, or wait for user action to start.
         /// To start the server, invoke the <see cref="StartAsync"/> event;
         /// </summary>
         public async Task OnLoadedAsync()
@@ -171,24 +187,28 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             Stream outputStream,
             ILspLoggerFactory lspLoggerFactory,
             string? clientName,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var jsonMessageFormatter = new JsonMessageFormatter();
-            VSInternalExtensionUtilities.AddVSInternalExtensionConverters(jsonMessageFormatter.JsonSerializer);
+            VSInternalExtensionUtilities.AddVSInternalExtensionConverters(
+                jsonMessageFormatter.JsonSerializer
+            );
 
-            var jsonRpc = new JsonRpc(new HeaderDelimitedMessageHandler(outputStream, inputStream, jsonMessageFormatter))
+            var jsonRpc = new JsonRpc(
+                new HeaderDelimitedMessageHandler(outputStream, inputStream, jsonMessageFormatter)
+            )
             {
                 ExceptionStrategy = ExceptionProcessing.ISerializable,
             };
 
             var serverTypeName = languageClient.GetType().Name;
 
-            var logger = await lspLoggerFactory.CreateLoggerAsync(serverTypeName, clientName, jsonRpc, cancellationToken).ConfigureAwait(false);
+            var logger = await lspLoggerFactory
+                .CreateLoggerAsync(serverTypeName, clientName, jsonRpc, cancellationToken)
+                .ConfigureAwait(false);
 
-            var server = languageClient.Create(
-                jsonRpc,
-                languageClient,
-                logger);
+            var server = languageClient.Create(jsonRpc, languageClient, logger);
 
             jsonRpc.StartListening();
             return server;
@@ -197,7 +217,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         public ILanguageServerTarget Create(
             JsonRpc jsonRpc,
             ICapabilitiesProvider capabilitiesProvider,
-            ILspLogger logger)
+            ILspLogger logger
+        )
         {
             return new VisualStudioInProcLanguageServer(
                 _requestDispatcherFactory,
@@ -211,16 +232,23 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                 SupportedLanguages,
                 clientName: _diagnosticsClientName,
                 userVisibleServerName: this.Name,
-                telemetryServerTypeName: this.GetType().Name);
+                telemetryServerTypeName: this.GetType().Name
+            );
         }
 
         public abstract ServerCapabilities GetCapabilities(ClientCapabilities clientCapabilities);
 
-        public Task<InitializationFailureContext?> OnServerInitializeFailedAsync(ILanguageClientInitializationInfo initializationState)
+        public Task<InitializationFailureContext?> OnServerInitializeFailedAsync(
+            ILanguageClientInitializationInfo initializationState
+        )
         {
             var initializationFailureContext = new InitializationFailureContext();
-            initializationFailureContext.FailureMessage = string.Format(EditorFeaturesResources.Language_client_initialization_failed,
-                Name, initializationState.StatusMessage, initializationState.InitializationException?.ToString());
+            initializationFailureContext.FailureMessage = string.Format(
+                EditorFeaturesResources.Language_client_initialization_failed,
+                Name,
+                initializationState.StatusMessage,
+                initializationState.InitializationException?.ToString()
+            );
             return Task.FromResult<InitializationFailureContext?>(initializationFailureContext);
         }
 

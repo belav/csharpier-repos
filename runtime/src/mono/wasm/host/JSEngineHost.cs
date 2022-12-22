@@ -25,10 +25,12 @@ internal sealed class JSEngineHost
         _logger = logger;
     }
 
-    public static async Task<int> InvokeAsync(CommonConfiguration commonArgs,
-                                              ILoggerFactory loggerFactory,
-                                              ILogger logger,
-                                              CancellationToken token)
+    public static async Task<int> InvokeAsync(
+        CommonConfiguration commonArgs,
+        ILoggerFactory loggerFactory,
+        ILogger logger,
+        CancellationToken token
+    )
     {
         var args = new JSEngineArguments(commonArgs);
         args.Validate();
@@ -67,8 +69,10 @@ internal sealed class JSEngineHost
         if (_args.CommonConfig.Debugging)
             throw new CommandLineException($"Debugging not supported with {_args.Host}");
 
-        var runArgsJson = new RunArgumentsJson(applicationArguments: Array.Empty<string>(),
-                                               runtimeArguments: _args.CommonConfig.RuntimeArguments);
+        var runArgsJson = new RunArgumentsJson(
+            applicationArguments: Array.Empty<string>(),
+            runtimeArguments: _args.CommonConfig.RuntimeArguments
+        );
         runArgsJson.Save(Path.Combine(_args.CommonConfig.AppPath, "runArgs.json"));
 
         var args = new List<string>();
@@ -90,19 +94,26 @@ internal sealed class JSEngineHost
 
         args.AddRange(_args.AppArgs);
 
-        ProcessStartInfo psi = new()
-        {
-            FileName = engineBinary,
-            WorkingDirectory = _args.CommonConfig.AppPath
-        };
+        ProcessStartInfo psi =
+            new() { FileName = engineBinary, WorkingDirectory = _args.CommonConfig.AppPath };
 
         foreach (string? arg in args)
             psi.ArgumentList.Add(arg!);
 
-        int exitCode = await Utils.TryRunProcess(psi,
-                                    _logger,
-                                    msg => { if (msg != null) _logger.LogInformation(msg); },
-                                    msg => { if (msg != null) _logger.LogInformation(msg); });
+        int exitCode = await Utils.TryRunProcess(
+            psi,
+            _logger,
+            msg =>
+            {
+                if (msg != null)
+                    _logger.LogInformation(msg);
+            },
+            msg =>
+            {
+                if (msg != null)
+                    _logger.LogInformation(msg);
+            }
+        );
 
         return exitCode;
     }

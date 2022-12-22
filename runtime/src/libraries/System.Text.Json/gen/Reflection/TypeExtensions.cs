@@ -24,7 +24,10 @@ namespace System.Text.Json.Reflection
             sb.Append("global::");
 
             string @namespace = type.Namespace;
-            if (!string.IsNullOrEmpty(@namespace) && @namespace != JsonConstants.GlobalNamespaceValue)
+            if (
+                !string.IsNullOrEmpty(@namespace)
+                && @namespace != JsonConstants.GlobalNamespaceValue
+            )
             {
                 sb.Append(@namespace);
                 sb.Append('.');
@@ -35,7 +38,12 @@ namespace System.Text.Json.Reflection
 
             return sb.ToString();
 
-            static void AppendTypeChain(StringBuilder sb, Type type, Type[] genericArguments, ref int argumentIndex)
+            static void AppendTypeChain(
+                StringBuilder sb,
+                Type type,
+                Type[] genericArguments,
+                ref int argumentIndex
+            )
             {
                 Type declaringType = type.DeclaringType;
                 if (declaringType != null)
@@ -96,7 +104,11 @@ namespace System.Text.Json.Reflection
             return sb.ToString();
         }
 
-        public static bool IsNullableValueType(this Type type, Type nullableOfTType, out Type? underlyingType)
+        public static bool IsNullableValueType(
+            this Type type,
+            Type nullableOfTType,
+            out Type? underlyingType
+        )
         {
             Debug.Assert(nullableOfTType != null);
 
@@ -149,8 +161,10 @@ namespace System.Text.Json.Reflection
             return false;
         }
 
-        public static bool CanUseDefaultConstructorForDeserialization(this Type type)
-            => (type.GetConstructor(Type.EmptyTypes) != null || type.IsValueType) && !type.IsAbstract && !type.IsInterface;
+        public static bool CanUseDefaultConstructorForDeserialization(this Type type) =>
+            (type.GetConstructor(Type.EmptyTypes) != null || type.IsValueType)
+            && !type.IsAbstract
+            && !type.IsInterface;
 
         public static bool IsObjectType(this Type type) => type.FullName == "System.Object";
 

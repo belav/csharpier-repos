@@ -31,79 +31,117 @@ namespace System.Net.WebSockets.Client.Tests
         public SendReceiveTest_Http2(ITestOutputHelper output) : base(output) { }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser, "System.Net.Sockets is not supported on this platform")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser,
+            "System.Net.Sockets is not supported on this platform"
+        )]
         public async Task ReceiveNoThrowAfterSend_NoSsl()
         {
             var serverMessage = new byte[] { 4, 5, 6 };
-            await Http2LoopbackServer.CreateClientAndServerAsync(async uri =>
-            {
-                using (var cws = new ClientWebSocket())
-                using (var cts = new CancellationTokenSource(TimeOutMilliseconds))
+            await Http2LoopbackServer.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    cws.Options.HttpVersion = HttpVersion.Version20;
-                    cws.Options.HttpVersionPolicy = HttpVersionPolicy.RequestVersionExact;
+                    using (var cws = new ClientWebSocket())
+                    using (var cts = new CancellationTokenSource(TimeOutMilliseconds))
+                    {
+                        cws.Options.HttpVersion = HttpVersion.Version20;
+                        cws.Options.HttpVersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
-                    await cws.ConnectAsync(uri, GetInvoker(), cts.Token);
+                        await cws.ConnectAsync(uri, GetInvoker(), cts.Token);
 
-                    await cws.SendAsync(new byte[] { 2, 3, 4 }, WebSocketMessageType.Binary, true, cts.Token);
+                        await cws.SendAsync(
+                            new byte[] { 2, 3, 4 },
+                            WebSocketMessageType.Binary,
+                            true,
+                            cts.Token
+                        );
 
-                    var readBuffer = new byte[serverMessage.Length];
-                    await cws.ReceiveAsync(readBuffer, cts.Token);
-                    Assert.Equal(serverMessage, readBuffer);
-                }
-            },
-            async server =>
-            {
-                Http2LoopbackConnection connection = await server.EstablishConnectionAsync(new SettingsEntry { SettingId = SettingId.EnableConnect, Value = 1 });
-                (int streamId, HttpRequestData requestData) = await connection.ReadAndParseRequestHeaderAsync(readBody: false);
-                // send status 200 OK to establish websocket
-                await connection.SendResponseHeadersAsync(streamId, endStream: false).ConfigureAwait(false);
+                        var readBuffer = new byte[serverMessage.Length];
+                        await cws.ReceiveAsync(readBuffer, cts.Token);
+                        Assert.Equal(serverMessage, readBuffer);
+                    }
+                },
+                async server =>
+                {
+                    Http2LoopbackConnection connection = await server.EstablishConnectionAsync(
+                        new SettingsEntry { SettingId = SettingId.EnableConnect, Value = 1 }
+                    );
+                    (int streamId, HttpRequestData requestData) =
+                        await connection.ReadAndParseRequestHeaderAsync(readBody: false);
+                    // send status 200 OK to establish websocket
+                    await connection
+                        .SendResponseHeadersAsync(streamId, endStream: false)
+                        .ConfigureAwait(false);
 
-                // send reply
-                byte binaryMessageType = 2;
-                var prefix = new byte[] { binaryMessageType, (byte)serverMessage.Length };
-                byte[] constructMessage = prefix.Concat(serverMessage).ToArray();
-                await connection.SendResponseDataAsync(streamId, constructMessage, endStream: false);
-
-            }, new Http2Options() { WebSocketEndpoint = true, UseSsl = false });
+                    // send reply
+                    byte binaryMessageType = 2;
+                    var prefix = new byte[] { binaryMessageType, (byte)serverMessage.Length };
+                    byte[] constructMessage = prefix.Concat(serverMessage).ToArray();
+                    await connection.SendResponseDataAsync(
+                        streamId,
+                        constructMessage,
+                        endStream: false
+                    );
+                },
+                new Http2Options() { WebSocketEndpoint = true, UseSsl = false }
+            );
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser, "Self-signed certificates are not supported on browser")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser,
+            "Self-signed certificates are not supported on browser"
+        )]
         public async Task ReceiveNoThrowAfterSend_WithSsl()
         {
             var serverMessage = new byte[] { 4, 5, 6 };
-            await Http2LoopbackServer.CreateClientAndServerAsync(async uri =>
-            {
-                using (var cws = new ClientWebSocket())
-                using (var cts = new CancellationTokenSource(TimeOutMilliseconds))
+            await Http2LoopbackServer.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    cws.Options.HttpVersion = HttpVersion.Version20;
-                    cws.Options.HttpVersionPolicy = HttpVersionPolicy.RequestVersionExact;
+                    using (var cws = new ClientWebSocket())
+                    using (var cts = new CancellationTokenSource(TimeOutMilliseconds))
+                    {
+                        cws.Options.HttpVersion = HttpVersion.Version20;
+                        cws.Options.HttpVersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
-                    await cws.ConnectAsync(uri, GetInvoker(), cts.Token);
+                        await cws.ConnectAsync(uri, GetInvoker(), cts.Token);
 
-                    await cws.SendAsync(new byte[] { 2, 3, 4 }, WebSocketMessageType.Binary, true, cts.Token);
+                        await cws.SendAsync(
+                            new byte[] { 2, 3, 4 },
+                            WebSocketMessageType.Binary,
+                            true,
+                            cts.Token
+                        );
 
-                    var readBuffer = new byte[serverMessage.Length];
-                    await cws.ReceiveAsync(readBuffer, cts.Token);
-                    Assert.Equal(serverMessage, readBuffer);
-                }
-            },
-            async server =>
-            {
-                Http2LoopbackConnection connection = await server.EstablishConnectionAsync(new SettingsEntry { SettingId = SettingId.EnableConnect, Value = 1 });
-                (int streamId, HttpRequestData requestData) = await connection.ReadAndParseRequestHeaderAsync(readBody: false);
-                // send status 200 OK to establish websocket
-                await connection.SendResponseHeadersAsync(streamId, endStream: false).ConfigureAwait(false);
+                        var readBuffer = new byte[serverMessage.Length];
+                        await cws.ReceiveAsync(readBuffer, cts.Token);
+                        Assert.Equal(serverMessage, readBuffer);
+                    }
+                },
+                async server =>
+                {
+                    Http2LoopbackConnection connection = await server.EstablishConnectionAsync(
+                        new SettingsEntry { SettingId = SettingId.EnableConnect, Value = 1 }
+                    );
+                    (int streamId, HttpRequestData requestData) =
+                        await connection.ReadAndParseRequestHeaderAsync(readBody: false);
+                    // send status 200 OK to establish websocket
+                    await connection
+                        .SendResponseHeadersAsync(streamId, endStream: false)
+                        .ConfigureAwait(false);
 
-                // send reply
-                byte binaryMessageType = 2;
-                var prefix = new byte[] { binaryMessageType, (byte)serverMessage.Length };
-                byte[] constructMessage = prefix.Concat(serverMessage).ToArray();
-                await connection.SendResponseDataAsync(streamId, constructMessage, endStream: false);
-
-            }, new Http2Options() { WebSocketEndpoint = true });
+                    // send reply
+                    byte binaryMessageType = 2;
+                    var prefix = new byte[] { binaryMessageType, (byte)serverMessage.Length };
+                    byte[] constructMessage = prefix.Concat(serverMessage).ToArray();
+                    await connection.SendResponseDataAsync(
+                        streamId,
+                        constructMessage,
+                        endStream: false
+                    );
+                },
+                new Http2Options() { WebSocketEndpoint = true }
+            );
         }
     }
 }

@@ -31,7 +31,10 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         using (Fixture.TestSqlLoggerFactory.SuspendRecordingEvents())
         {
-            Assert.Equal("New", context.WithOutputParameter.Single(b => b.Id == newEntity1.Id).Name);
+            Assert.Equal(
+                "New",
+                context.WithOutputParameter.Single(b => b.Id == newEntity1.Id).Name
+            );
         }
     }
 
@@ -48,8 +51,14 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         using (Fixture.TestSqlLoggerFactory.SuspendRecordingEvents())
         {
-            Assert.Equal("New1", context.WithOutputParameter.Single(b => b.Id == newEntity1.Id).Name);
-            Assert.Equal("New2", context.WithOutputParameter.Single(b => b.Id == newEntity2.Id).Name);
+            Assert.Equal(
+                "New1",
+                context.WithOutputParameter.Single(b => b.Id == newEntity1.Id).Name
+            );
+            Assert.Equal(
+                "New2",
+                context.WithOutputParameter.Single(b => b.Id == newEntity2.Id).Name
+            );
         }
     }
 
@@ -102,7 +111,10 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         using (Fixture.TestSqlLoggerFactory.SuspendRecordingEvents())
         {
-            Assert.Equal("Foo", context.WithOutputParameterAndResultColumn.Single(b => b.Id == entity.Id).Name);
+            Assert.Equal(
+                "Foo",
+                context.WithOutputParameterAndResultColumn.Single(b => b.Id == entity.Id).Name
+            );
         }
     }
 
@@ -123,7 +135,10 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         using (Fixture.TestSqlLoggerFactory.SuspendRecordingEvents())
         {
-            Assert.Equal("Updated", (await context.WithOutputParameter.SingleAsync(w => w.Id == entity.Id)).Name);
+            Assert.Equal(
+                "Updated",
+                (await context.WithOutputParameter.SingleAsync(w => w.Id == entity.Id)).Name
+            );
         }
     }
 
@@ -154,7 +169,9 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual async Task Update_with_output_parameter_and_rows_affected_result_column(bool async)
+    public virtual async Task Update_with_output_parameter_and_rows_affected_result_column(
+        bool async
+    )
     {
         await using var context = CreateContext();
 
@@ -170,7 +187,9 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         using (Fixture.TestSqlLoggerFactory.SuspendRecordingEvents())
         {
-            var actual = await context.WithOutputParameterAndRowsAffectedResultColumn.SingleAsync(w => w.Id == entity.Id);
+            var actual = await context.WithOutputParameterAndRowsAffectedResultColumn.SingleAsync(
+                w => w.Id == entity.Id
+            );
 
             Assert.Equal("Updated", actual.Name);
             Assert.Equal(8, actual.AdditionalProperty);
@@ -179,7 +198,9 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual async Task Update_with_output_parameter_and_rows_affected_result_column_concurrency_failure(bool async)
+    public virtual async Task Update_with_output_parameter_and_rows_affected_result_column_concurrency_failure(
+        bool async
+    )
     {
         await using var context1 = CreateContext();
 
@@ -189,7 +210,9 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         await using (var context2 = CreateContext())
         {
-            var entity2 = await context2.WithOutputParameterAndRowsAffectedResultColumn.SingleAsync(w => w.Name == "Initial");
+            var entity2 = await context2.WithOutputParameterAndRowsAffectedResultColumn.SingleAsync(
+                w => w.Name == "Initial"
+            );
             context2.WithOutputParameterAndRowsAffectedResultColumn.Remove(entity2);
             await context2.SaveChangesAsync();
         }
@@ -198,7 +221,9 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         entity1.Name = "Updated";
 
-        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(async () => await SaveChanges(context1, async));
+        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
+            async () => await SaveChanges(context1, async)
+        );
         var entry = exception.Entries.Single();
         Assert.Same(entity1, entry.Entity);
     }
@@ -265,7 +290,10 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         using (Fixture.TestSqlLoggerFactory.SuspendRecordingEvents())
         {
-            Assert.Equal("Updated", (await context.WithRowsAffectedParameter.SingleAsync(w => w.Id == entity.Id)).Name);
+            Assert.Equal(
+                "Updated",
+                (await context.WithRowsAffectedParameter.SingleAsync(w => w.Id == entity.Id)).Name
+            );
         }
     }
 
@@ -281,7 +309,9 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         await using (var context2 = CreateContext())
         {
-            var entity2 = await context2.WithRowsAffectedParameter.SingleAsync(w => w.Name == "Initial");
+            var entity2 = await context2.WithRowsAffectedParameter.SingleAsync(
+                w => w.Name == "Initial"
+            );
             context2.WithRowsAffectedParameter.Remove(entity2);
             await context2.SaveChangesAsync();
         }
@@ -290,7 +320,9 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         entity1.Name = "Updated";
 
-        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(async () => await SaveChanges(context1, async));
+        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
+            async () => await SaveChanges(context1, async)
+        );
         var entry = exception.Entries.Single();
         Assert.Same(entity1, entry.Entity);
     }
@@ -313,7 +345,12 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         using (Fixture.TestSqlLoggerFactory.SuspendRecordingEvents())
         {
-            Assert.Equal("Updated", (await context.WithRowsAffectedResultColumn.SingleAsync(w => w.Id == entity.Id)).Name);
+            Assert.Equal(
+                "Updated",
+                (
+                    await context.WithRowsAffectedResultColumn.SingleAsync(w => w.Id == entity.Id)
+                ).Name
+            );
         }
     }
 
@@ -329,7 +366,9 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         await using (var context2 = CreateContext())
         {
-            var entity2 = await context2.WithRowsAffectedResultColumn.SingleAsync(w => w.Name == "Initial");
+            var entity2 = await context2.WithRowsAffectedResultColumn.SingleAsync(
+                w => w.Name == "Initial"
+            );
             context2.WithRowsAffectedResultColumn.Remove(entity2);
             await context2.SaveChangesAsync();
         }
@@ -338,7 +377,9 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         entity1.Name = "Updated";
 
-        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(async () => await SaveChanges(context1, async));
+        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
+            async () => await SaveChanges(context1, async)
+        );
         var entry = exception.Entries.Single();
         Assert.Same(entity1, entry.Entity);
     }
@@ -361,7 +402,10 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         using (Fixture.TestSqlLoggerFactory.SuspendRecordingEvents())
         {
-            Assert.Equal("Updated", (await context.WithRowsAffectedReturnValue.SingleAsync(w => w.Id == entity.Id)).Name);
+            Assert.Equal(
+                "Updated",
+                (await context.WithRowsAffectedReturnValue.SingleAsync(w => w.Id == entity.Id)).Name
+            );
         }
     }
 
@@ -377,7 +421,9 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         await using (var context2 = CreateContext())
         {
-            var entity2 = await context2.WithRowsAffectedReturnValue.SingleAsync(w => w.Name == "Initial");
+            var entity2 = await context2.WithRowsAffectedReturnValue.SingleAsync(
+                w => w.Name == "Initial"
+            );
             context2.WithRowsAffectedReturnValue.Remove(entity2);
             await SaveChanges(context2, async);
         }
@@ -386,7 +432,9 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         entity1.Name = "Updated";
 
-        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(async () => await SaveChanges(context1, async));
+        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
+            async () => await SaveChanges(context1, async)
+        );
         var entry = exception.Entries.Single();
         Assert.Same(entity1, entry.Entity);
     }
@@ -403,7 +451,10 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         await using (var context2 = CreateContext())
         {
-            var entity2 = await context2.WithStoreGeneratedConcurrencyTokenAsInOutParameter.SingleAsync(w => w.Name == "Initial");
+            var entity2 =
+                await context2.WithStoreGeneratedConcurrencyTokenAsInOutParameter.SingleAsync(
+                    w => w.Name == "Initial"
+                );
             entity2.Name = "Updated";
 
             entity1.Name = "Preempted";
@@ -411,7 +462,9 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
             ClearLog();
 
-            var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(async () => await SaveChanges(context2, async));
+            var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
+                async () => await SaveChanges(context2, async)
+            );
             var entry = exception.Entries.Single();
             Assert.Same(entity2, entry.Entity);
         }
@@ -422,7 +475,14 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
             entity1.Name = "Another update";
             await SaveChanges(context1, async);
 
-            Assert.Equal("Another update", (await context1.WithStoreGeneratedConcurrencyTokenAsInOutParameter.SingleAsync(w => w.Id == entity1.Id)).Name);
+            Assert.Equal(
+                "Another update",
+                (
+                    await context1.WithStoreGeneratedConcurrencyTokenAsInOutParameter.SingleAsync(
+                        w => w.Id == entity1.Id
+                    )
+                ).Name
+            );
         }
     }
 
@@ -438,7 +498,10 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         await using (var context2 = CreateContext())
         {
-            var entity2 = await context2.WithStoreGeneratedConcurrencyTokenAsTwoParameters.SingleAsync(w => w.Name == "Initial");
+            var entity2 =
+                await context2.WithStoreGeneratedConcurrencyTokenAsTwoParameters.SingleAsync(
+                    w => w.Name == "Initial"
+                );
             entity2.Name = "Updated";
 
             entity1.Name = "Preempted";
@@ -446,7 +509,9 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
             ClearLog();
 
-            var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(async () => await SaveChanges(context2, async));
+            var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
+                async () => await SaveChanges(context2, async)
+            );
             var entry = exception.Entries.Single();
             Assert.Same(entity2, entry.Entity);
         }
@@ -457,7 +522,14 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
             entity1.Name = "Another update";
             await SaveChanges(context1, async);
 
-            Assert.Equal("Another update", (await context1.WithStoreGeneratedConcurrencyTokenAsTwoParameters.SingleAsync(w => w.Id == entity1.Id)).Name);
+            Assert.Equal(
+                "Another update",
+                (
+                    await context1.WithStoreGeneratedConcurrencyTokenAsTwoParameters.SingleAsync(
+                        w => w.Id == entity1.Id
+                    )
+                ).Name
+            );
         }
     }
 
@@ -469,7 +541,8 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         var entity1 = new EntityWithAdditionalProperty
         {
-            Name = "Initial", AdditionalProperty = 8 // The concurrency token
+            Name = "Initial",
+            AdditionalProperty = 8 // The concurrency token
         };
 
         context1.WithUserManagedConcurrencyToken.Add(entity1);
@@ -480,7 +553,9 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         await using (var context2 = CreateContext())
         {
-            var entity2 = await context2.WithUserManagedConcurrencyToken.SingleAsync(w => w.Name == "Initial");
+            var entity2 = await context2.WithUserManagedConcurrencyToken.SingleAsync(
+                w => w.Name == "Initial"
+            );
             entity2.Name = "Preempted";
             entity2.AdditionalProperty = 999;
             await SaveChanges(context2, async);
@@ -488,7 +563,9 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
 
         ClearLog();
 
-        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(async () => await SaveChanges(context1, async));
+        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
+            async () => await SaveChanges(context1, async)
+        );
         Assert.Same(entity1, Assert.Single(exception.Entries).Entity);
     }
 
@@ -513,7 +590,12 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
         {
             Assert.Equal(
                 "Updated",
-                (await context.WithOriginalAndCurrentValueOnNonConcurrencyToken.SingleAsync(w => w.Id == entity.Id)).Name);
+                (
+                    await context.WithOriginalAndCurrentValueOnNonConcurrencyToken.SingleAsync(
+                        w => w.Id == entity.Id
+                    )
+                ).Name
+            );
         }
     }
 
@@ -532,7 +614,11 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
         using (Fixture.TestSqlLoggerFactory.SuspendRecordingEvents())
         {
             Assert.Same(
-                entity, await context.WithInputOrOutputParameter.SingleAsync(w => w.Id == entity.Id && w.Name == "Initial"));
+                entity,
+                await context.WithInputOrOutputParameter.SingleAsync(
+                    w => w.Id == entity.Id && w.Name == "Initial"
+                )
+            );
         }
     }
 
@@ -551,7 +637,11 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
         using (Fixture.TestSqlLoggerFactory.SuspendRecordingEvents())
         {
             Assert.Same(
-                entity, await context.WithInputOrOutputParameter.SingleAsync(w => w.Id == entity.Id && w.Name == "Some default value"));
+                entity,
+                await context.WithInputOrOutputParameter.SingleAsync(
+                    w => w.Id == entity.Id && w.Name == "Some default value"
+                )
+            );
         }
     }
 
@@ -651,16 +741,18 @@ public class StoredProcedureUpdateTestBase<TFixture> : IClassFixture<TFixture>
         }
     }
 
-    protected StoredProcedureUpdateContext CreateContext()
-        => Fixture.CreateContext();
+    protected StoredProcedureUpdateContext CreateContext() => Fixture.CreateContext();
 
-    public static IEnumerable<object[]> IsAsyncData = new[] { new object[] { false }, new object[] { true } };
+    public static IEnumerable<object[]> IsAsyncData = new[]
+    {
+        new object[] { false },
+        new object[] { true }
+    };
 
-    protected virtual void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    protected virtual void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    protected virtual void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected virtual void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 
     protected TFixture Fixture { get; }
 }

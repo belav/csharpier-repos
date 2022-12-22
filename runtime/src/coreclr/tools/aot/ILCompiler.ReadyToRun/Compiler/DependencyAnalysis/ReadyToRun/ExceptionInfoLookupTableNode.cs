@@ -48,7 +48,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
-            return new ObjectData(_ehInfoBuilder.ToArray(), Array.Empty<Relocation>(), alignment: 4, definedSymbols: new ISymbolDefinitionNode[] { this });
+            return new ObjectData(
+                _ehInfoBuilder.ToArray(),
+                Array.Empty<Relocation>(),
+                alignment: 4,
+                definedSymbols: new ISymbolDefinitionNode[] { this }
+            );
         }
 
         protected override string GetName(NodeFactory context)
@@ -68,8 +73,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         private readonly EHInfoNode _ehInfoNode;
 
-        public ExceptionInfoLookupTableNode(NodeFactory nodeFactory)
-            : base(nodeFactory.Target)
+        public ExceptionInfoLookupTableNode(NodeFactory nodeFactory) : base(nodeFactory.Target)
         {
             _nodeFactory = nodeFactory;
             _ehInfoNode = new EHInfoNode();
@@ -108,12 +112,20 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             if (relocsOnly)
             {
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
             }
 
             LayoutMethodsWithEHInfo();
 
-            ObjectDataBuilder exceptionInfoLookupBuilder = new ObjectDataBuilder(factory, relocsOnly);
+            ObjectDataBuilder exceptionInfoLookupBuilder = new ObjectDataBuilder(
+                factory,
+                relocsOnly
+            );
             exceptionInfoLookupBuilder.RequireInitialAlignment(2 * sizeof(uint));
 
             // Add the symbol representing this object node
@@ -122,13 +134,24 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             // First, emit the actual EH records in sequence and store map from methods to the EH record symbols
             for (int index = 0; index < _methodNodes.Count; index++)
             {
-                exceptionInfoLookupBuilder.EmitReloc(_methodNodes[index], RelocType.IMAGE_REL_BASED_ADDR32NB);
-                exceptionInfoLookupBuilder.EmitReloc(_ehInfoNode, RelocType.IMAGE_REL_BASED_ADDR32NB, _ehInfoOffsets[index]);
+                exceptionInfoLookupBuilder.EmitReloc(
+                    _methodNodes[index],
+                    RelocType.IMAGE_REL_BASED_ADDR32NB
+                );
+                exceptionInfoLookupBuilder.EmitReloc(
+                    _ehInfoNode,
+                    RelocType.IMAGE_REL_BASED_ADDR32NB,
+                    _ehInfoOffsets[index]
+                );
             }
 
             // Sentinel record - method RVA = -1, EH info offset = end of the EH info block
             exceptionInfoLookupBuilder.EmitUInt(~0u);
-            exceptionInfoLookupBuilder.EmitReloc(_ehInfoNode, RelocType.IMAGE_REL_BASED_ADDR32NB, _ehInfoNode.Count);
+            exceptionInfoLookupBuilder.EmitReloc(
+                _ehInfoNode,
+                RelocType.IMAGE_REL_BASED_ADDR32NB,
+                _ehInfoNode.Count
+            );
 
             return exceptionInfoLookupBuilder.ToObjectData();
         }
@@ -147,7 +170,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         protected override DependencyList ComputeNonRelocationBasedDependencies(NodeFactory factory)
         {
-            return new DependencyNodeCore<NodeFactory>.DependencyList(new DependencyListEntry[] { new DependencyListEntry(_ehInfoNode, "EH info array") });
+            return new DependencyNodeCore<NodeFactory>.DependencyList(
+                new DependencyListEntry[] { new DependencyListEntry(_ehInfoNode, "EH info array") }
+            );
         }
 
         public override int ClassCode => 582513248;

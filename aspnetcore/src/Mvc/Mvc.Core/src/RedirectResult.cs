@@ -22,8 +22,7 @@ public class RedirectResult : ActionResult, IKeepTempDataResult
     /// provided.
     /// </summary>
     /// <param name="url">The local URL to redirect to.</param>
-    public RedirectResult(string url)
-        : this(url, permanent: false)
+    public RedirectResult(string url) : this(url, permanent: false)
     {
         if (url == null)
         {
@@ -37,10 +36,8 @@ public class RedirectResult : ActionResult, IKeepTempDataResult
     /// </summary>
     /// <param name="url">The URL to redirect to.</param>
     /// <param name="permanent">Specifies whether the redirect should be permanent (301) or temporary (302).</param>
-    public RedirectResult(string url, bool permanent)
-        : this(url, permanent, preserveMethod: false)
-    {
-    }
+    public RedirectResult(string url, bool permanent) : this(url, permanent, preserveMethod: false)
+    { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectResult"/> class with the values
@@ -107,7 +104,9 @@ public class RedirectResult : ActionResult, IKeepTempDataResult
             throw new ArgumentNullException(nameof(context));
         }
 
-        var executor = context.HttpContext.RequestServices.GetRequiredService<IActionResultExecutor<RedirectResult>>();
+        var executor = context.HttpContext.RequestServices.GetRequiredService<
+            IActionResultExecutor<RedirectResult>
+        >();
         return executor.ExecuteAsync(context, this);
     }
 }

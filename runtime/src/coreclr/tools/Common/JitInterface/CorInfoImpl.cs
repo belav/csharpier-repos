@@ -74,7 +74,8 @@ namespace Internal.JitInterface
             public HRESULT hr;
         }
 
-        private Dictionary<MethodDesc, PgoInstrumentationResults> _pgoResults = new Dictionary<MethodDesc, PgoInstrumentationResults>();
+        private Dictionary<MethodDesc, PgoInstrumentationResults> _pgoResults =
+            new Dictionary<MethodDesc, PgoInstrumentationResults>();
 
         [DllImport(JitLibrary)]
         private static extern IntPtr jitStartup(IntPtr host);
@@ -94,7 +95,8 @@ namespace Internal.JitInterface
                 if (s_jit != IntPtr.Zero)
                 {
                     AppDomain.CurrentDomain.ProcessExit += (_, _) => JitProcessShutdownWork(s_jit);
-                    AppDomain.CurrentDomain.UnhandledException += (_, _) => JitProcessShutdownWork(s_jit);
+                    AppDomain.CurrentDomain.UnhandledException += (_, _) =>
+                        JitProcessShutdownWork(s_jit);
                 }
             }
 
@@ -119,10 +121,24 @@ namespace Internal.JitInterface
         }
 
         [DllImport(JitLibrary)]
-        private static extern uint getLikelyClasses(LikelyClassMethodRecord* pLikelyClasses, uint maxLikelyClasses, PgoInstrumentationSchema* schema, uint countSchemaItems, byte*pInstrumentationData, int ilOffset);
+        private static extern uint getLikelyClasses(
+            LikelyClassMethodRecord* pLikelyClasses,
+            uint maxLikelyClasses,
+            PgoInstrumentationSchema* schema,
+            uint countSchemaItems,
+            byte* pInstrumentationData,
+            int ilOffset
+        );
 
         [DllImport(JitLibrary)]
-        private static extern uint getLikelyMethods(LikelyClassMethodRecord* pLikelyMethods, uint maxLikelyMethods, PgoInstrumentationSchema* schema, uint countSchemaItems, byte*pInstrumentationData, int ilOffset);
+        private static extern uint getLikelyMethods(
+            LikelyClassMethodRecord* pLikelyMethods,
+            uint maxLikelyMethods,
+            PgoInstrumentationSchema* schema,
+            uint countSchemaItems,
+            byte* pInstrumentationData,
+            int ilOffset
+        );
 
         [DllImport(JitSupportLibrary)]
         private static extern IntPtr GetJitHost(IntPtr configProvider);
@@ -138,15 +154,25 @@ namespace Internal.JitInterface
         }
 
         [DllImport(JitSupportLibrary)]
-        private static extern CorJitResult JitCompileMethod(out IntPtr exception,
-            IntPtr jit, IntPtr thisHandle, IntPtr callbacks,
-            ref CORINFO_METHOD_INFO info, uint flags, out IntPtr nativeEntry, out uint codeSize);
+        private static extern CorJitResult JitCompileMethod(
+            out IntPtr exception,
+            IntPtr jit,
+            IntPtr thisHandle,
+            IntPtr callbacks,
+            ref CORINFO_METHOD_INFO info,
+            uint flags,
+            out IntPtr nativeEntry,
+            out uint codeSize
+        );
 
         [DllImport(JitSupportLibrary)]
         private static extern uint GetMaxIntrinsicSIMDVectorLength(IntPtr jit, CORJIT_FLAGS* flags);
 
         [DllImport(JitSupportLibrary)]
-        private static extern IntPtr AllocException([MarshalAs(UnmanagedType.LPWStr)]string message, int messageLength);
+        private static extern IntPtr AllocException(
+            [MarshalAs(UnmanagedType.LPWStr)] string message,
+            int messageLength
+        );
 
         [DllImport(JitSupportLibrary)]
         private static extern void JitSetOs(IntPtr jit, CORINFO_OS os);
@@ -187,21 +213,23 @@ namespace Internal.JitInterface
 
         private Logger Logger
         {
-            get
-            {
-                return _compilation.Logger;
-            }
+            get { return _compilation.Logger; }
         }
 
         private CORINFO_MODULE_STRUCT_* _methodScope; // Needed to resolve CORINFO_EH_CLAUSE tokens
 
-        public static IEnumerable<PgoSchemaElem> ConvertTypeHandleHistogramsToCompactTypeHistogramFormat(PgoSchemaElem[] pgoData, CompilationModuleGroup compilationModuleGroup)
+        public static IEnumerable<PgoSchemaElem> ConvertTypeHandleHistogramsToCompactTypeHistogramFormat(
+            PgoSchemaElem[] pgoData,
+            CompilationModuleGroup compilationModuleGroup
+        )
         {
             bool hasHistogram = false;
             foreach (var elem in pgoData)
             {
-                if (elem.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes ||
-                    elem.InstrumentationKind == PgoInstrumentationKind.HandleHistogramMethods)
+                if (
+                    elem.InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes
+                    || elem.InstrumentationKind == PgoInstrumentationKind.HandleHistogramMethods
+                )
                 {
                     // found histogram
                     hasHistogram = true;
@@ -222,18 +250,39 @@ namespace Internal.JitInterface
                 Dictionary<IntPtr, object> handleToObject = new Dictionary<IntPtr, object>();
 
                 MemoryStream memoryStreamInstrumentationData = new MemoryStream();
-                ComputeJitPgoInstrumentationSchema(LocalObjectToHandle, pgoData, out var nativeSchema, memoryStreamInstrumentationData);
+                ComputeJitPgoInstrumentationSchema(
+                    LocalObjectToHandle,
+                    pgoData,
+                    out var nativeSchema,
+                    memoryStreamInstrumentationData
+                );
                 var instrumentationData = memoryStreamInstrumentationData.ToArray();
 
                 for (int i = 0; i < pgoData.Length; i++)
                 {
-                    if ((i + 1 < pgoData.Length) &&
-                        (pgoData[i].InstrumentationKind == PgoInstrumentationKind.HandleHistogramIntCount ||
-                         pgoData[i].InstrumentationKind == PgoInstrumentationKind.HandleHistogramLongCount) &&
-                        (pgoData[i + 1].InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes ||
-                         pgoData[i + 1].InstrumentationKind == PgoInstrumentationKind.HandleHistogramMethods))
+                    if (
+                        (i + 1 < pgoData.Length)
+                        && (
+                            pgoData[i].InstrumentationKind
+                                == PgoInstrumentationKind.HandleHistogramIntCount
+                            || pgoData[i].InstrumentationKind
+                                == PgoInstrumentationKind.HandleHistogramLongCount
+                        )
+                        && (
+                            pgoData[i + 1].InstrumentationKind
+                                == PgoInstrumentationKind.HandleHistogramTypes
+                            || pgoData[i + 1].InstrumentationKind
+                                == PgoInstrumentationKind.HandleHistogramMethods
+                        )
+                    )
                     {
-                        PgoSchemaElem? newElem = ComputeLikelyClassMethod(i, handleToObject, nativeSchema, instrumentationData, compilationModuleGroup);
+                        PgoSchemaElem? newElem = ComputeLikelyClassMethod(
+                            i,
+                            handleToObject,
+                            nativeSchema,
+                            instrumentationData,
+                            compilationModuleGroup
+                        );
                         if (newElem.HasValue)
                         {
                             yield return newElem.Value;
@@ -258,28 +307,51 @@ namespace Internal.JitInterface
             }
         }
 
-        private static PgoSchemaElem? ComputeLikelyClassMethod(int index, Dictionary<IntPtr, object> handleToObject, PgoInstrumentationSchema[] nativeSchema, byte[] instrumentationData, CompilationModuleGroup compilationModuleGroup)
+        private static PgoSchemaElem? ComputeLikelyClassMethod(
+            int index,
+            Dictionary<IntPtr, object> handleToObject,
+            PgoInstrumentationSchema[] nativeSchema,
+            byte[] instrumentationData,
+            CompilationModuleGroup compilationModuleGroup
+        )
         {
             // getLikelyClasses will use two entries from the native schema table. There must be at least two present to avoid overruning the buffer
             if (index > (nativeSchema.Length - 2))
                 return null;
 
-            bool isType = nativeSchema[index + 1].InstrumentationKind == PgoInstrumentationKind.HandleHistogramTypes;
+            bool isType =
+                nativeSchema[index + 1].InstrumentationKind
+                == PgoInstrumentationKind.HandleHistogramTypes;
 
-            fixed(PgoInstrumentationSchema* pSchema = &nativeSchema[index])
+            fixed (PgoInstrumentationSchema* pSchema = &nativeSchema[index])
             {
-                fixed(byte* pInstrumentationData = &instrumentationData[0])
+                fixed (byte* pInstrumentationData = &instrumentationData[0])
                 {
                     // We're going to store only the most popular type/method to reduce size of the profile
-                    LikelyClassMethodRecord* likelyClassMethods = stackalloc LikelyClassMethodRecord[1];
+                    LikelyClassMethodRecord* likelyClassMethods =
+                        stackalloc LikelyClassMethodRecord[1];
                     uint numberOfRecords;
                     if (isType)
                     {
-                        numberOfRecords = getLikelyClasses(likelyClassMethods, 1, pSchema, 2, pInstrumentationData, nativeSchema[index].ILOffset);
+                        numberOfRecords = getLikelyClasses(
+                            likelyClassMethods,
+                            1,
+                            pSchema,
+                            2,
+                            pInstrumentationData,
+                            nativeSchema[index].ILOffset
+                        );
                     }
                     else
                     {
-                        numberOfRecords = getLikelyMethods(likelyClassMethods, 1, pSchema, 2, pInstrumentationData, nativeSchema[index].ILOffset);
+                        numberOfRecords = getLikelyMethods(
+                            likelyClassMethods,
+                            1,
+                            pSchema,
+                            2,
+                            pInstrumentationData,
+                            nativeSchema[index].ILOffset
+                        );
                     }
 
                     if (numberOfRecords > 0)
@@ -297,7 +369,8 @@ namespace Internal.JitInterface
                         }
                         else
                         {
-                            MethodDesc method = (MethodDesc)handleToObject[likelyClassMethods->handle];
+                            MethodDesc method = (MethodDesc)
+                                handleToObject[likelyClassMethods->handle];
 
 #if READYTORUN
                             if (compilationModuleGroup.VersionsWithMethodBody(method))
@@ -310,10 +383,14 @@ namespace Internal.JitInterface
                         if (newData != null)
                         {
                             PgoSchemaElem likelyClassElem = default(PgoSchemaElem);
-                            likelyClassElem.InstrumentationKind = isType ? PgoInstrumentationKind.GetLikelyClass : PgoInstrumentationKind.GetLikelyMethod;
+                            likelyClassElem.InstrumentationKind = isType
+                                ? PgoInstrumentationKind.GetLikelyClass
+                                : PgoInstrumentationKind.GetLikelyMethod;
                             likelyClassElem.ILOffset = nativeSchema[index].ILOffset;
                             likelyClassElem.Count = 1;
-                            likelyClassElem.Other = (int)(likelyClassMethods->likelihood | (numberOfRecords << 8));
+                            likelyClassElem.Other = (int)(
+                                likelyClassMethods->likelihood | (numberOfRecords << 8)
+                            );
                             likelyClassElem.DataObject = newData;
                             return likelyClassElem;
                         }
@@ -324,12 +401,18 @@ namespace Internal.JitInterface
             return null;
         }
 
-        private CompilationResult CompileMethodInternal(IMethodNode methodCodeNodeNeedingCode, MethodIL methodIL)
+        private CompilationResult CompileMethodInternal(
+            IMethodNode methodCodeNodeNeedingCode,
+            MethodIL methodIL
+        )
         {
             // methodIL must not be null
             if (methodIL == null)
             {
-                ThrowHelper.ThrowInvalidProgramException(ExceptionStringID.InvalidProgramSpecific, MethodBeingCompiled);
+                ThrowHelper.ThrowInvalidProgramException(
+                    ExceptionStringID.InvalidProgramSpecific,
+                    MethodBeingCompiled
+                );
             }
 
             CORINFO_METHOD_INFO methodInfo;
@@ -346,9 +429,16 @@ namespace Internal.JitInterface
             IntPtr exception;
             IntPtr nativeEntry;
             uint codeSize;
-            var result = JitCompileMethod(out exception,
-                    _jit, (IntPtr)Unsafe.AsPointer(ref _this), _unmanagedCallbacks,
-                    ref methodInfo, (uint)CorJitFlag.CORJIT_FLAG_CALL_GETJITFLAGS, out nativeEntry, out codeSize);
+            var result = JitCompileMethod(
+                out exception,
+                _jit,
+                (IntPtr)Unsafe.AsPointer(ref _this),
+                _unmanagedCallbacks,
+                ref methodInfo,
+                (uint)CorJitFlag.CORJIT_FLAG_CALL_GETJITFLAGS,
+                out nativeEntry,
+                out codeSize
+            );
             if (exception != IntPtr.Zero)
             {
                 if (_lastException != null)
@@ -374,7 +464,10 @@ namespace Internal.JitInterface
                     else
                     {
                         // This is just a bug somewhere.
-                        throw new CodeGenerationFailedException(_methodCodeNode.Method, _lastException.SourceException);
+                        throw new CodeGenerationFailedException(
+                            _methodCodeNode.Method,
+                            _lastException.SourceException
+                        );
                     }
 #endif
                 }
@@ -443,16 +536,18 @@ namespace Internal.JitInterface
             var relocs = _codeRelocs.ToArray();
             Array.Sort(relocs, (x, y) => (x.Offset - y.Offset));
 
-            int alignment = JitConfigProvider.Instance.HasFlag(CorJitFlag.CORJIT_FLAG_SIZE_OPT) ?
-                _compilation.NodeFactory.Target.MinimumFunctionAlignment :
-                _compilation.NodeFactory.Target.OptimumFunctionAlignment;
+            int alignment = JitConfigProvider.Instance.HasFlag(CorJitFlag.CORJIT_FLAG_SIZE_OPT)
+                ? _compilation.NodeFactory.Target.MinimumFunctionAlignment
+                : _compilation.NodeFactory.Target.OptimumFunctionAlignment;
 
             alignment = Math.Max(alignment, _codeAlignment);
 
-            var objectData = new ObjectNode.ObjectData(_code,
-                                                       relocs,
-                                                       alignment,
-                                                       new ISymbolDefinitionNode[] { _methodCodeNode });
+            var objectData = new ObjectNode.ObjectData(
+                _code,
+                relocs,
+                alignment,
+                new ISymbolDefinitionNode[] { _methodCodeNode }
+            );
             ObjectNode.ObjectData ehInfo = _ehClauses != null ? EncodeEHInfo() : null;
             DebugEHClauseInfo[] debugEHClauseInfos = null;
             if (_ehClauses != null)
@@ -461,17 +556,25 @@ namespace Internal.JitInterface
                 for (int i = 0; i < _ehClauses.Length; i++)
                 {
                     var clause = _ehClauses[i];
-                    debugEHClauseInfos[i] = new DebugEHClauseInfo(clause.TryOffset, clause.TryLength,
-                                                        clause.HandlerOffset, clause.HandlerLength);
+                    debugEHClauseInfos[i] = new DebugEHClauseInfo(
+                        clause.TryOffset,
+                        clause.TryLength,
+                        clause.HandlerOffset,
+                        clause.HandlerLength
+                    );
                 }
             }
 
 #pragma warning disable SA1001, SA1113, SA1115 // Comma should be on the same line as previous parameter
-            _methodCodeNode.SetCode(objectData
+            _methodCodeNode.SetCode(
+                objectData
 #if !SUPPORT_JIT && !READYTORUN
-                , isFoldable: (_compilation._compilationOptions & RyuJitCompilationOptions.MethodBodyFolding) != 0
+                ,
+                isFoldable: (
+                    _compilation._compilationOptions & RyuJitCompilationOptions.MethodBodyFolding
+                ) != 0
 #endif
-                );
+            );
 #pragma warning restore SA1001, SA1113, SA1115 // Comma should be on the same line as previous parameter
 
             _methodCodeNode.InitializeFrameInfos(_frameInfos);
@@ -515,13 +618,24 @@ namespace Internal.JitInterface
 
             if (needPerMethodInstructionSetFixup)
             {
-                TargetArchitecture architecture = _compilation.TypeSystemContext.Target.Architecture;
+                TargetArchitecture architecture = _compilation
+                    .TypeSystemContext
+                    .Target
+                    .Architecture;
                 _actualInstructionSetSupported.ExpandInstructionSetByImplication(architecture);
-                _actualInstructionSetUnsupported.ExpandInstructionSetByReverseImplication(architecture);
+                _actualInstructionSetUnsupported.ExpandInstructionSetByReverseImplication(
+                    architecture
+                );
                 _actualInstructionSetUnsupported.Set64BitInstructionSetVariants(architecture);
 
-                InstructionSetSupport actualSupport = new InstructionSetSupport(_actualInstructionSetSupported, _actualInstructionSetUnsupported, architecture);
-                var node = _compilation.SymbolNodeFactory.PerMethodInstructionSetSupportFixup(actualSupport);
+                InstructionSetSupport actualSupport = new InstructionSetSupport(
+                    _actualInstructionSetSupported,
+                    _actualInstructionSetUnsupported,
+                    architecture
+                );
+                var node = _compilation.SymbolNodeFactory.PerMethodInstructionSetSupportFixup(
+                    actualSupport
+                );
                 AddPrecodeFixup(node);
             }
 
@@ -539,7 +653,12 @@ namespace Internal.JitInterface
             }
 #else
             var methodIL = (MethodIL)HandleToObject((IntPtr)_methodScope);
-            CodeBasedDependencyAlgorithm.AddDependenciesDueToMethodCodePresence(ref _additionalDependencies, _compilation.NodeFactory, MethodBeingCompiled, methodIL);
+            CodeBasedDependencyAlgorithm.AddDependenciesDueToMethodCodePresence(
+                ref _additionalDependencies,
+                _compilation.NodeFactory,
+                MethodBeingCompiled,
+                methodIL
+            );
             _methodCodeNode.InitializeNonRelocationDependencies(_additionalDependencies);
             _methodCodeNode.InitializeDebugInfo(_debugInfo);
 
@@ -561,28 +680,24 @@ namespace Internal.JitInterface
 
             var relocs = _roDataRelocs.ToArray();
             Array.Sort(relocs, (x, y) => (x.Offset - y.Offset));
-            var objectData = new ObjectNode.ObjectData(_roData,
-                                                       relocs,
-                                                       _roDataAlignment,
-                                                       new ISymbolDefinitionNode[] { _roDataBlob });
+            var objectData = new ObjectNode.ObjectData(
+                _roData,
+                relocs,
+                _roDataAlignment,
+                new ISymbolDefinitionNode[] { _roDataBlob }
+            );
 
             _roDataBlob.InitializeData(objectData);
         }
 
         private MethodDesc MethodBeingCompiled
         {
-            get
-            {
-                return _methodCodeNode.Method;
-            }
+            get { return _methodCodeNode.Method; }
         }
 
         private int PointerSize
         {
-            get
-            {
-                return _compilation.TypeSystemContext.Target.PointerSize;
-            }
+            get { return _compilation.TypeSystemContext.Target.PointerSize; }
         }
 
         private Dictionary<object, GCHandle> _pins = new Dictionary<object, GCHandle>();
@@ -655,14 +770,17 @@ namespace Internal.JitInterface
             _pgoResults.Clear();
         }
 
-        private Dictionary<object, IntPtr> _objectToHandle = new Dictionary<object, IntPtr>(new JitObjectComparer());
+        private Dictionary<object, IntPtr> _objectToHandle = new Dictionary<object, IntPtr>(
+            new JitObjectComparer()
+        );
         private List<object> _handleToObject = new List<object>();
 
         private const int handleMultiplier = 8;
         private const int handleBase = 0x420000;
 
 #if DEBUG
-        private static readonly IntPtr s_handleHighBitSet = (sizeof(IntPtr) == 4) ? new IntPtr(0x40000000) : new IntPtr(0x4000000000000000);
+        private static readonly IntPtr s_handleHighBitSet =
+            (sizeof(IntPtr) == 4) ? new IntPtr(0x40000000) : new IntPtr(0x4000000000000000);
 #endif
 
         private IntPtr ObjectToHandle(object obj)
@@ -685,24 +803,47 @@ namespace Internal.JitInterface
         private object HandleToObject(IntPtr handle)
         {
 #if DEBUG
-            handle = new IntPtr(~(long)s_handleHighBitSet & (long) handle);
+            handle = new IntPtr(~(long)s_handleHighBitSet & (long)handle);
 #endif
             int index = ((int)handle - handleBase) / handleMultiplier;
             return _handleToObject[index];
         }
 
-        private MethodDesc HandleToObject(CORINFO_METHOD_STRUCT_* method) => (MethodDesc)HandleToObject((IntPtr)method);
-        private CORINFO_METHOD_STRUCT_* ObjectToHandle(MethodDesc method) => (CORINFO_METHOD_STRUCT_*)ObjectToHandle((object)method);
-        private TypeDesc HandleToObject(CORINFO_CLASS_STRUCT_* type) => (TypeDesc)HandleToObject((IntPtr)type);
-        private CORINFO_CLASS_STRUCT_* ObjectToHandle(TypeDesc type) => (CORINFO_CLASS_STRUCT_*)ObjectToHandle((object)type);
-        private FieldDesc HandleToObject(CORINFO_FIELD_STRUCT_* field) => (FieldDesc)HandleToObject((IntPtr)field);
-        private CORINFO_FIELD_STRUCT_* ObjectToHandle(FieldDesc field) => (CORINFO_FIELD_STRUCT_*)ObjectToHandle((object)field);
-        private MethodILScope HandleToObject(CORINFO_MODULE_STRUCT_* module) => (MethodIL)HandleToObject((IntPtr)module);
-        private CORINFO_MODULE_STRUCT_* ObjectToHandle(MethodILScope methodIL) => (CORINFO_MODULE_STRUCT_*)ObjectToHandle((object)methodIL);
-        private MethodSignature HandleToObject(MethodSignatureInfo* method) => (MethodSignature)HandleToObject((IntPtr)method);
-        private MethodSignatureInfo* ObjectToHandle(MethodSignature method) => (MethodSignatureInfo*)ObjectToHandle((object)method);
+        private MethodDesc HandleToObject(CORINFO_METHOD_STRUCT_* method) =>
+            (MethodDesc)HandleToObject((IntPtr)method);
 
-        private bool Get_CORINFO_METHOD_INFO(MethodDesc method, MethodIL methodIL, CORINFO_METHOD_INFO* methodInfo)
+        private CORINFO_METHOD_STRUCT_* ObjectToHandle(MethodDesc method) =>
+            (CORINFO_METHOD_STRUCT_*)ObjectToHandle((object)method);
+
+        private TypeDesc HandleToObject(CORINFO_CLASS_STRUCT_* type) =>
+            (TypeDesc)HandleToObject((IntPtr)type);
+
+        private CORINFO_CLASS_STRUCT_* ObjectToHandle(TypeDesc type) =>
+            (CORINFO_CLASS_STRUCT_*)ObjectToHandle((object)type);
+
+        private FieldDesc HandleToObject(CORINFO_FIELD_STRUCT_* field) =>
+            (FieldDesc)HandleToObject((IntPtr)field);
+
+        private CORINFO_FIELD_STRUCT_* ObjectToHandle(FieldDesc field) =>
+            (CORINFO_FIELD_STRUCT_*)ObjectToHandle((object)field);
+
+        private MethodILScope HandleToObject(CORINFO_MODULE_STRUCT_* module) =>
+            (MethodIL)HandleToObject((IntPtr)module);
+
+        private CORINFO_MODULE_STRUCT_* ObjectToHandle(MethodILScope methodIL) =>
+            (CORINFO_MODULE_STRUCT_*)ObjectToHandle((object)methodIL);
+
+        private MethodSignature HandleToObject(MethodSignatureInfo* method) =>
+            (MethodSignature)HandleToObject((IntPtr)method);
+
+        private MethodSignatureInfo* ObjectToHandle(MethodSignature method) =>
+            (MethodSignatureInfo*)ObjectToHandle((object)method);
+
+        private bool Get_CORINFO_METHOD_INFO(
+            MethodDesc method,
+            MethodIL methodIL,
+            CORINFO_METHOD_INFO* methodInfo
+        )
         {
             if (methodIL == null)
             {
@@ -718,7 +859,9 @@ namespace Internal.JitInterface
             methodInfo->maxStack = (uint)methodIL.MaxStack;
             var exceptionRegions = methodIL.GetExceptionRegions();
             methodInfo->EHcount = (uint)exceptionRegions.Length;
-            methodInfo->options = methodIL.IsInitLocals ? CorInfoOptions.CORINFO_OPT_INIT_LOCALS : (CorInfoOptions)0;
+            methodInfo->options = methodIL.IsInitLocals
+                ? CorInfoOptions.CORINFO_OPT_INIT_LOCALS
+                : (CorInfoOptions)0;
 
             if (method.AcquiresInstMethodTableFromThis())
             {
@@ -740,14 +883,20 @@ namespace Internal.JitInterface
         }
 
         private Dictionary<Instantiation, IntPtr[]> _instantiationToJitVisibleInstantiation;
+
         private CORINFO_CLASS_STRUCT_** GetJitInstantiation(Instantiation inst)
         {
-            IntPtr [] jitVisibleInstantiation;
+            IntPtr[] jitVisibleInstantiation;
             _instantiationToJitVisibleInstantiation ??= new Dictionary<Instantiation, IntPtr[]>();
 
-            if (!_instantiationToJitVisibleInstantiation.TryGetValue(inst, out jitVisibleInstantiation))
+            if (
+                !_instantiationToJitVisibleInstantiation.TryGetValue(
+                    inst,
+                    out jitVisibleInstantiation
+                )
+            )
             {
-                jitVisibleInstantiation =  new IntPtr[inst.Length];
+                jitVisibleInstantiation = new IntPtr[inst.Length];
                 for (int i = 0; i < inst.Length; i++)
                     jitVisibleInstantiation[i] = (IntPtr)ObjectToHandle(inst[i]);
                 _instantiationToJitVisibleInstantiation.Add(inst, jitVisibleInstantiation);
@@ -755,7 +904,12 @@ namespace Internal.JitInterface
             return (CORINFO_CLASS_STRUCT_**)GetPin(jitVisibleInstantiation);
         }
 
-        private void Get_CORINFO_SIG_INFO(MethodDesc method, CORINFO_SIG_INFO* sig, MethodILScope scope, bool suppressHiddenArgument = false)
+        private void Get_CORINFO_SIG_INFO(
+            MethodDesc method,
+            CORINFO_SIG_INFO* sig,
+            MethodILScope scope,
+            bool suppressHiddenArgument = false
+        )
         {
             Get_CORINFO_SIG_INFO(method.Signature, sig, scope);
 
@@ -793,15 +947,22 @@ namespace Internal.JitInterface
             }
         }
 
-        private void Get_CORINFO_SIG_INFO(MethodSignature signature, CORINFO_SIG_INFO* sig, MethodILScope scope)
+        private void Get_CORINFO_SIG_INFO(
+            MethodSignature signature,
+            CORINFO_SIG_INFO* sig,
+            MethodILScope scope
+        )
         {
-            sig->callConv = (CorInfoCallConv)(signature.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask);
+            sig->callConv = (CorInfoCallConv)(
+                signature.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask
+            );
 
             // Varargs are not supported in .NET Core
             if (sig->callConv == CorInfoCallConv.CORINFO_CALLCONV_VARARG)
                 ThrowHelper.ThrowBadImageFormatException();
 
-            if (!signature.IsStatic) sig->callConv |= CorInfoCallConv.CORINFO_CALLCONV_HASTHIS;
+            if (!signature.IsStatic)
+                sig->callConv |= CorInfoCallConv.CORINFO_CALLCONV_HASTHIS;
 
             TypeDesc returnType = signature.ReturnType;
 
@@ -809,7 +970,7 @@ namespace Internal.JitInterface
             sig->_retType = (byte)corInfoRetType;
             sig->retTypeSigClass = ObjectToHandle(signature.ReturnType);
 
-            sig->flags = 0;    // used by IL stubs code
+            sig->flags = 0; // used by IL stubs code
 
             sig->numArgs = (ushort)signature.Length;
 
@@ -843,7 +1004,6 @@ namespace Internal.JitInterface
             sig->sigInst.methInstCount = 0;
 
             sig->args = (CORINFO_ARG_LIST_STRUCT_*)0; // CORINFO_ARG_LIST_STRUCT_ is argument index
-
 
             sig->pSig = null;
             sig->cbSig = 0; // Not used by the JIT
@@ -914,12 +1074,18 @@ namespace Internal.JitInterface
 
         private CORINFO_CONTEXT_STRUCT* contextFromMethod(MethodDesc method)
         {
-            return (CORINFO_CONTEXT_STRUCT*)(((ulong)ObjectToHandle(method)) | (ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_METHOD);
+            return (CORINFO_CONTEXT_STRUCT*)(
+                ((ulong)ObjectToHandle(method))
+                | (ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_METHOD
+            );
         }
 
         private CORINFO_CONTEXT_STRUCT* contextFromType(TypeDesc type)
         {
-            return (CORINFO_CONTEXT_STRUCT*)(((ulong)ObjectToHandle(type)) | (ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_CLASS);
+            return (CORINFO_CONTEXT_STRUCT*)(
+                ((ulong)ObjectToHandle(type))
+                | (ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_CLASS
+            );
         }
 
         private static CORINFO_CONTEXT_STRUCT* contextFromMethodBeingCompiled()
@@ -934,13 +1100,20 @@ namespace Internal.JitInterface
                 return MethodBeingCompiled;
             }
 
-            if (((ulong)contextStruct & (ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_MASK) == (ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_CLASS)
+            if (
+                ((ulong)contextStruct & (ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_MASK)
+                == (ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_CLASS
+            )
             {
                 return null;
             }
             else
             {
-                return HandleToObject((CORINFO_METHOD_STRUCT_*)((ulong)contextStruct & ~(ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_MASK));
+                return HandleToObject(
+                    (CORINFO_METHOD_STRUCT_*)(
+                        (ulong)contextStruct & ~(ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_MASK
+                    )
+                );
             }
         }
 
@@ -951,13 +1124,24 @@ namespace Internal.JitInterface
                 return MethodBeingCompiled.OwningType;
             }
 
-            if (((ulong)contextStruct & (ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_MASK) == (ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_CLASS)
+            if (
+                ((ulong)contextStruct & (ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_MASK)
+                == (ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_CLASS
+            )
             {
-                return HandleToObject((CORINFO_CLASS_STRUCT_*)((ulong)contextStruct & ~(ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_MASK));
+                return HandleToObject(
+                    (CORINFO_CLASS_STRUCT_*)(
+                        (ulong)contextStruct & ~(ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_MASK
+                    )
+                );
             }
             else
             {
-                return HandleToObject((CORINFO_METHOD_STRUCT_*)((ulong)contextStruct & ~(ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_MASK)).OwningType;
+                return HandleToObject(
+                    (CORINFO_METHOD_STRUCT_*)(
+                        (ulong)contextStruct & ~(ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_MASK
+                    )
+                ).OwningType;
             }
         }
 
@@ -965,10 +1149,16 @@ namespace Internal.JitInterface
         {
             if (contextStruct == contextFromMethodBeingCompiled())
             {
-                return MethodBeingCompiled.HasInstantiation ? (TypeSystemEntity)MethodBeingCompiled: (TypeSystemEntity)MethodBeingCompiled.OwningType;
+                return MethodBeingCompiled.HasInstantiation
+                    ? (TypeSystemEntity)MethodBeingCompiled
+                    : (TypeSystemEntity)MethodBeingCompiled.OwningType;
             }
 
-            return (TypeSystemEntity)HandleToObject((IntPtr)((ulong)contextStruct & ~(ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_MASK));
+            return (TypeSystemEntity)HandleToObject(
+                (IntPtr)(
+                    (ulong)contextStruct & ~(ulong)CorInfoContextFlags.CORINFO_CONTEXTFLAGS_MASK
+                )
+            );
         }
 
         private bool isIntrinsic(CORINFO_METHOD_STRUCT_* ftn)
@@ -1066,9 +1256,14 @@ namespace Internal.JitInterface
             if (method.Context.Target.MaximumSimdVectorLength == SimdVectorLength.None)
             {
                 DefType owningDefType = method.OwningType as DefType;
-                if (owningDefType != null && VectorOfTFieldLayoutAlgorithm.IsVectorOfTType(owningDefType))
+                if (
+                    owningDefType != null
+                    && VectorOfTFieldLayoutAlgorithm.IsVectorOfTType(owningDefType)
+                )
                 {
-                    throw new RequiresRuntimeJitException("This function is using SIMD intrinsics, their size is machine specific");
+                    throw new RequiresRuntimeJitException(
+                        "This function is using SIMD intrinsics, their size is machine specific"
+                    );
                 }
             }
 #endif
@@ -1092,13 +1287,20 @@ namespace Internal.JitInterface
         }
 
 #pragma warning disable CA1822 // Mark members as static
-        private void setMethodAttribs(CORINFO_METHOD_STRUCT_* ftn, CorInfoMethodRuntimeFlags attribs)
+        private void setMethodAttribs(
+            CORINFO_METHOD_STRUCT_* ftn,
+            CorInfoMethodRuntimeFlags attribs
+        )
 #pragma warning restore CA1822 // Mark members as static
         {
             // TODO: Inlining
         }
 
-        private void getMethodSig(CORINFO_METHOD_STRUCT_* ftn, CORINFO_SIG_INFO* sig, CORINFO_CLASS_STRUCT_* memberParent)
+        private void getMethodSig(
+            CORINFO_METHOD_STRUCT_* ftn,
+            CORINFO_SIG_INFO* sig,
+            CORINFO_CLASS_STRUCT_* memberParent
+        )
         {
             MethodDesc method = HandleToObject(ftn);
 
@@ -1113,7 +1315,10 @@ namespace Internal.JitInterface
                 {
                     Debug.Assert(type.HasSameTypeDefinition(method.OwningType));
                     Instantiation methodInst = method.Instantiation;
-                    method = _compilation.TypeSystemContext.GetMethodForInstantiatedType(method.GetTypicalMethodDefinition(), (InstantiatedType)type);
+                    method = _compilation.TypeSystemContext.GetMethodForInstantiatedType(
+                        method.GetTypicalMethodDefinition(),
+                        (InstantiatedType)type
+                    );
                     if (methodInst.Length > 0)
                     {
                         method = method.MakeInstantiatedMethod(methodInst);
@@ -1138,7 +1343,10 @@ namespace Internal.JitInterface
             return Get_CORINFO_METHOD_INFO(method, methodIL, info);
         }
 
-        private CorInfoInline canInline(CORINFO_METHOD_STRUCT_* callerHnd, CORINFO_METHOD_STRUCT_* calleeHnd)
+        private CorInfoInline canInline(
+            CORINFO_METHOD_STRUCT_* callerHnd,
+            CORINFO_METHOD_STRUCT_* calleeHnd
+        )
         {
             MethodDesc callerMethod = HandleToObject(callerHnd);
             MethodDesc calleeMethod = HandleToObject(calleeHnd);
@@ -1156,12 +1364,21 @@ namespace Internal.JitInterface
         }
 
 #pragma warning disable CA1822 // Mark members as static
-        private void reportTailCallDecision(CORINFO_METHOD_STRUCT_* callerHnd, CORINFO_METHOD_STRUCT_* calleeHnd, bool fIsTailPrefix, CorInfoTailCall tailCallResult, byte* reason)
+        private void reportTailCallDecision(
+            CORINFO_METHOD_STRUCT_* callerHnd,
+            CORINFO_METHOD_STRUCT_* calleeHnd,
+            bool fIsTailPrefix,
+            CorInfoTailCall tailCallResult,
+            byte* reason
+        )
 #pragma warning restore CA1822 // Mark members as static
-        {
-        }
+        { }
 
-        private void getEHinfo(CORINFO_METHOD_STRUCT_* ftn, uint EHnumber, ref CORINFO_EH_CLAUSE clause)
+        private void getEHinfo(
+            CORINFO_METHOD_STRUCT_* ftn,
+            uint EHnumber,
+            ref CORINFO_EH_CLAUSE clause
+        )
         {
             var methodIL = _compilation.GetMethodIL(HandleToObject(ftn));
 
@@ -1172,7 +1389,11 @@ namespace Internal.JitInterface
             clause.TryLength = (uint)ehRegion.TryLength;
             clause.HandlerOffset = (uint)ehRegion.HandlerOffset;
             clause.HandlerLength = (uint)ehRegion.HandlerLength;
-            clause.ClassTokenOrOffset = (uint)((ehRegion.Kind == ILExceptionRegionKind.Filter) ? ehRegion.FilterOffset : ehRegion.ClassToken);
+            clause.ClassTokenOrOffset = (uint)(
+                (ehRegion.Kind == ILExceptionRegionKind.Filter)
+                    ? ehRegion.FilterOffset
+                    : ehRegion.ClassToken
+            );
         }
 
         private CORINFO_CLASS_STRUCT_* getMethodClass(CORINFO_METHOD_STRUCT_* method)
@@ -1210,7 +1431,8 @@ namespace Internal.JitInterface
             // __Canon cannot be devirtualized
             if (objType.IsCanonicalDefinitionType(CanonicalFormKind.Any))
             {
-                info->detail = CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_CANON;
+                info->detail =
+                    CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_CANON;
                 return false;
             }
 
@@ -1223,11 +1445,18 @@ namespace Internal.JitInterface
                 if (decl.OwningType != ownerTypeDesc)
                 {
                     Debug.Assert(ownerTypeDesc is InstantiatedType);
-                    decl = _compilation.TypeSystemContext.GetMethodForInstantiatedType(decl.GetTypicalMethodDefinition(), (InstantiatedType)ownerTypeDesc);
+                    decl = _compilation.TypeSystemContext.GetMethodForInstantiatedType(
+                        decl.GetTypicalMethodDefinition(),
+                        (InstantiatedType)ownerTypeDesc
+                    );
                 }
             }
 
-            MethodDesc originalImpl = _compilation.ResolveVirtualMethod(decl, objType, out info->detail);
+            MethodDesc originalImpl = _compilation.ResolveVirtualMethod(
+                decl,
+                objType,
+                out info->detail
+            );
 
             if (originalImpl == null)
             {
@@ -1238,10 +1467,17 @@ namespace Internal.JitInterface
                 // cases where the virtual function resolution algorithm either does not function, or is not used
                 // correctly.
 #if DEBUG
-                if (info->detail == CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_UNKNOWN)
+                if (
+                    info->detail == CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_UNKNOWN
+                )
                 {
-                    Console.Error.WriteLine($"Failed devirtualization with unexpected unknown failure while compiling {MethodBeingCompiled} with decl {decl} targeting type {objType}");
-                    Debug.Assert(info->detail != CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_UNKNOWN);
+                    Console.Error.WriteLine(
+                        $"Failed devirtualization with unexpected unknown failure while compiling {MethodBeingCompiled} with decl {decl} targeting type {objType}"
+                    );
+                    Debug.Assert(
+                        info->detail
+                            != CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_UNKNOWN
+                    );
                 }
 #endif
                 return false;
@@ -1270,22 +1506,40 @@ namespace Internal.JitInterface
 
             if (info->pResolvedTokenVirtualMethod != null)
             {
-                methodWithTokenDecl = ComputeMethodWithToken(decl, ref *info->pResolvedTokenVirtualMethod, null, false);
+                methodWithTokenDecl = ComputeMethodWithToken(
+                    decl,
+                    ref *info->pResolvedTokenVirtualMethod,
+                    null,
+                    false
+                );
             }
             else
             {
-                ModuleToken declToken = resolver.GetModuleTokenForMethod(decl.GetTypicalMethodDefinition(), allowDynamicallyCreatedReference: false, throwIfNotFound: false);
+                ModuleToken declToken = resolver.GetModuleTokenForMethod(
+                    decl.GetTypicalMethodDefinition(),
+                    allowDynamicallyCreatedReference: false,
+                    throwIfNotFound: false
+                );
                 if (declToken.IsNull)
                 {
-                    info->detail = CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_DECL_NOT_REPRESENTABLE;
+                    info->detail =
+                        CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_DECL_NOT_REPRESENTABLE;
                     return false;
                 }
                 if (!_compilation.CompilationModuleGroup.VersionsWithTypeReference(decl.OwningType))
                 {
-                    info->detail = CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_DECL_NOT_REPRESENTABLE;
+                    info->detail =
+                        CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_DECL_NOT_REPRESENTABLE;
                     return false;
                 }
-                methodWithTokenDecl = new MethodWithToken(decl, declToken, null, false, null, devirtualizedMethodOwner: decl.OwningType);
+                methodWithTokenDecl = new MethodWithToken(
+                    decl,
+                    declToken,
+                    null,
+                    false,
+                    null,
+                    devirtualizedMethodOwner: decl.OwningType
+                );
             }
             MethodWithToken methodWithTokenImpl;
 #endif
@@ -1301,31 +1555,53 @@ namespace Internal.JitInterface
                 }
                 else
                 {
-                    info->resolvedTokenDevirtualizedMethod = CreateResolvedTokenFromMethod(this, decl
+                    info->resolvedTokenDevirtualizedMethod = CreateResolvedTokenFromMethod(
+                        this,
+                        decl
 #if READYTORUN
-                        , methodWithTokenDecl
+                        ,
+                        methodWithTokenDecl
 #endif
-                        );
+                    );
                 }
                 info->resolvedTokenDevirtualizedUnboxedMethod = default(CORINFO_RESOLVED_TOKEN);
             }
             else
             {
 #if READYTORUN
-                methodWithTokenImpl = new MethodWithToken(nonUnboxingImpl, resolver.GetModuleTokenForMethod(nonUnboxingImpl.GetTypicalMethodDefinition(), allowDynamicallyCreatedReference: false, throwIfNotFound: true), null, unboxingStub, null, devirtualizedMethodOwner: impl.OwningType);
+                methodWithTokenImpl = new MethodWithToken(
+                    nonUnboxingImpl,
+                    resolver.GetModuleTokenForMethod(
+                        nonUnboxingImpl.GetTypicalMethodDefinition(),
+                        allowDynamicallyCreatedReference: false,
+                        throwIfNotFound: true
+                    ),
+                    null,
+                    unboxingStub,
+                    null,
+                    devirtualizedMethodOwner: impl.OwningType
+                );
 #endif
 
-                info->resolvedTokenDevirtualizedMethod = CreateResolvedTokenFromMethod(this, impl
+                info->resolvedTokenDevirtualizedMethod = CreateResolvedTokenFromMethod(
+                    this,
+                    impl
 #if READYTORUN
-                    , methodWithTokenImpl
+                    ,
+                    methodWithTokenImpl
 #endif
-                    );
+                );
 
                 if (unboxingStub)
                 {
-                    info->resolvedTokenDevirtualizedUnboxedMethod = info->resolvedTokenDevirtualizedMethod;
-                    info->resolvedTokenDevirtualizedUnboxedMethod.tokenContext = contextFromMethod(nonUnboxingImpl);
-                    info->resolvedTokenDevirtualizedUnboxedMethod.hMethod = ObjectToHandle(nonUnboxingImpl);
+                    info->resolvedTokenDevirtualizedUnboxedMethod =
+                        info->resolvedTokenDevirtualizedMethod;
+                    info->resolvedTokenDevirtualizedUnboxedMethod.tokenContext = contextFromMethod(
+                        nonUnboxingImpl
+                    );
+                    info->resolvedTokenDevirtualizedUnboxedMethod.hMethod = ObjectToHandle(
+                        nonUnboxingImpl
+                    );
                 }
                 else
                 {
@@ -1338,7 +1614,12 @@ namespace Internal.JitInterface
             // Only generate verification for builds with the stress mode enabled
             if (_compilation.SymbolNodeFactory.VerifyTypeAndFieldLayout)
             {
-                ISymbolNode virtualResolutionNode = _compilation.SymbolNodeFactory.CheckVirtualFunctionOverride(methodWithTokenDecl, objType, methodWithTokenImpl);
+                ISymbolNode virtualResolutionNode =
+                    _compilation.SymbolNodeFactory.CheckVirtualFunctionOverride(
+                        methodWithTokenDecl,
+                        objType,
+                        methodWithTokenImpl
+                    );
                 AddPrecodeFixup(virtualResolutionNode);
             }
 #endif
@@ -1349,14 +1630,19 @@ namespace Internal.JitInterface
 
             return true;
 
-            static CORINFO_RESOLVED_TOKEN CreateResolvedTokenFromMethod(CorInfoImpl jitInterface, MethodDesc method
+            static CORINFO_RESOLVED_TOKEN CreateResolvedTokenFromMethod(
+                CorInfoImpl jitInterface,
+                MethodDesc method
 #if READYTORUN
-                , MethodWithToken methodWithToken
+                ,
+                MethodWithToken methodWithToken
 #endif
-                )
+            )
             {
 #if !READYTORUN
-                MethodDesc unboxedMethodDesc = method.IsUnboxingThunk() ? method.GetUnboxedMethod() : method;
+                MethodDesc unboxedMethodDesc = method.IsUnboxingThunk()
+                    ? method.GetUnboxedMethod()
+                    : method;
                 var methodWithToken = new
                 {
                     Method = unboxedMethodDesc,
@@ -1366,7 +1652,9 @@ namespace Internal.JitInterface
 
                 CORINFO_RESOLVED_TOKEN result = default(CORINFO_RESOLVED_TOKEN);
                 MethodILScope scope = jitInterface._compilation.GetMethodIL(methodWithToken.Method);
-                scope ??= EcmaMethodILScope.Create((EcmaMethod)methodWithToken.Method.GetTypicalMethodDefinition());
+                scope ??= EcmaMethodILScope.Create(
+                    (EcmaMethod)methodWithToken.Method.GetTypicalMethodDefinition()
+                );
                 result.tokenScope = jitInterface.ObjectToHandle(scope);
                 result.tokenContext = jitInterface.contextFromMethod(method);
 #if READYTORUN
@@ -1374,7 +1662,9 @@ namespace Internal.JitInterface
                 if (methodWithToken.Token.TokenType != CorTokenType.mdtMethodDef)
                 {
                     Debug.Assert(false); // This should never happen, but we protect against total failure with the throw below.
-                    throw new RequiresRuntimeJitException("Attempt to devirtualize and unable to create token for devirtualized method");
+                    throw new RequiresRuntimeJitException(
+                        "Attempt to devirtualize and unable to create token for devirtualized method"
+                    );
                 }
 #else
                 result.token = (mdToken)0x06BAAAAD;
@@ -1387,7 +1677,10 @@ namespace Internal.JitInterface
             }
         }
 
-        private CORINFO_METHOD_STRUCT_* getUnboxedEntry(CORINFO_METHOD_STRUCT_* ftn, ref bool requiresInstMethodTableArg)
+        private CORINFO_METHOD_STRUCT_* getUnboxedEntry(
+            CORINFO_METHOD_STRUCT_* ftn,
+            ref bool requiresInstMethodTableArg
+        )
         {
             MethodDesc result = null;
             requiresInstMethodTableArg = false;
@@ -1409,7 +1702,9 @@ namespace Internal.JitInterface
             return comparer != null ? ObjectToHandle(comparer) : null;
         }
 
-        private CORINFO_CLASS_STRUCT_* getDefaultEqualityComparerClass(CORINFO_CLASS_STRUCT_* elemType)
+        private CORINFO_CLASS_STRUCT_* getDefaultEqualityComparerClass(
+            CORINFO_CLASS_STRUCT_* elemType
+        )
         {
             TypeDesc comparand = HandleToObject(elemType);
             TypeDesc comparer = IL.Stubs.ComparerIntrinsics.GetEqualityComparerForType(comparand);
@@ -1422,29 +1717,46 @@ namespace Internal.JitInterface
             return type.IsIntrinsic;
         }
 
-        private CorInfoCallConvExtension getUnmanagedCallConv(CORINFO_METHOD_STRUCT_* method, CORINFO_SIG_INFO* sig, ref bool pSuppressGCTransition)
+        private CorInfoCallConvExtension getUnmanagedCallConv(
+            CORINFO_METHOD_STRUCT_* method,
+            CORINFO_SIG_INFO* sig,
+            ref bool pSuppressGCTransition
+        )
         {
             pSuppressGCTransition = false;
 
             if (method != null)
             {
                 MethodDesc methodDesc = HandleToObject(method);
-                CorInfoCallConvExtension callConv = GetUnmanagedCallConv(HandleToObject(method), out pSuppressGCTransition);
+                CorInfoCallConvExtension callConv = GetUnmanagedCallConv(
+                    HandleToObject(method),
+                    out pSuppressGCTransition
+                );
                 return callConv;
             }
             else
             {
                 Debug.Assert(sig != null);
 
-                CorInfoCallConvExtension callConv = GetUnmanagedCallConv(HandleToObject(sig->methodSignature), out pSuppressGCTransition);
+                CorInfoCallConvExtension callConv = GetUnmanagedCallConv(
+                    HandleToObject(sig->methodSignature),
+                    out pSuppressGCTransition
+                );
                 return callConv;
             }
         }
-        private static CorInfoCallConvExtension GetUnmanagedCallConv(MethodDesc methodDesc, out bool suppressGCTransition)
+
+        private static CorInfoCallConvExtension GetUnmanagedCallConv(
+            MethodDesc methodDesc,
+            out bool suppressGCTransition
+        )
         {
             UnmanagedCallingConventions callingConventions;
 
-            if ((methodDesc.Signature.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask) == 0)
+            if (
+                (methodDesc.Signature.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask)
+                == 0
+            )
             {
                 if (methodDesc.IsPInvoke)
                 {
@@ -1453,23 +1765,34 @@ namespace Internal.JitInterface
                 else
                 {
                     Debug.Assert(methodDesc.IsUnmanagedCallersOnly);
-                    callingConventions = methodDesc.GetUnmanagedCallersOnlyMethodCallingConventions();
+                    callingConventions =
+                        methodDesc.GetUnmanagedCallersOnlyMethodCallingConventions();
                 }
             }
             else
             {
-                callingConventions = methodDesc.Signature.GetStandaloneMethodSignatureCallingConventions();
+                callingConventions =
+                    methodDesc.Signature.GetStandaloneMethodSignatureCallingConventions();
             }
 
             return ToCorInfoCallConvExtension(callingConventions, out suppressGCTransition);
         }
 
-        private static CorInfoCallConvExtension GetUnmanagedCallConv(MethodSignature signature, out bool suppressGCTransition)
+        private static CorInfoCallConvExtension GetUnmanagedCallConv(
+            MethodSignature signature,
+            out bool suppressGCTransition
+        )
         {
-            return ToCorInfoCallConvExtension(signature.GetStandaloneMethodSignatureCallingConventions(), out suppressGCTransition);
+            return ToCorInfoCallConvExtension(
+                signature.GetStandaloneMethodSignatureCallingConventions(),
+                out suppressGCTransition
+            );
         }
 
-        private static CorInfoCallConvExtension ToCorInfoCallConvExtension(UnmanagedCallingConventions callConvs, out bool suppressGCTransition)
+        private static CorInfoCallConvExtension ToCorInfoCallConvExtension(
+            UnmanagedCallingConventions callConvs,
+            out bool suppressGCTransition
+        )
         {
             CorInfoCallConvExtension result;
             switch (callConvs & UnmanagedCallingConventions.CallingConventionMask)
@@ -1497,36 +1820,65 @@ namespace Internal.JitInterface
                 result = result switch
                 {
                     CorInfoCallConvExtension.C => CorInfoCallConvExtension.CMemberFunction,
-                    CorInfoCallConvExtension.Stdcall => CorInfoCallConvExtension.StdcallMemberFunction,
-                    CorInfoCallConvExtension.Fastcall => CorInfoCallConvExtension.FastcallMemberFunction,
+                    CorInfoCallConvExtension.Stdcall
+                        => CorInfoCallConvExtension.StdcallMemberFunction,
+                    CorInfoCallConvExtension.Fastcall
+                        => CorInfoCallConvExtension.FastcallMemberFunction,
                     _ => result,
                 };
             }
 
-            suppressGCTransition = (callConvs & UnmanagedCallingConventions.IsSuppressGcTransition) != 0;
+            suppressGCTransition =
+                (callConvs & UnmanagedCallingConventions.IsSuppressGcTransition) != 0;
 
             return result;
         }
 
-        private bool satisfiesMethodConstraints(CORINFO_CLASS_STRUCT_* parent, CORINFO_METHOD_STRUCT_* method)
-        { throw new NotImplementedException("satisfiesMethodConstraints"); }
-        private bool isCompatibleDelegate(CORINFO_CLASS_STRUCT_* objCls, CORINFO_CLASS_STRUCT_* methodParentCls, CORINFO_METHOD_STRUCT_* method, CORINFO_CLASS_STRUCT_* delegateCls, ref bool pfIsOpenDelegate)
-        { throw new NotImplementedException("isCompatibleDelegate"); }
+        private bool satisfiesMethodConstraints(
+            CORINFO_CLASS_STRUCT_* parent,
+            CORINFO_METHOD_STRUCT_* method
+        )
+        {
+            throw new NotImplementedException("satisfiesMethodConstraints");
+        }
+
+        private bool isCompatibleDelegate(
+            CORINFO_CLASS_STRUCT_* objCls,
+            CORINFO_CLASS_STRUCT_* methodParentCls,
+            CORINFO_METHOD_STRUCT_* method,
+            CORINFO_CLASS_STRUCT_* delegateCls,
+            ref bool pfIsOpenDelegate
+        )
+        {
+            throw new NotImplementedException("isCompatibleDelegate");
+        }
+
         private void setPatchpointInfo(PatchpointInfo* patchpointInfo)
-        { throw new NotImplementedException("setPatchpointInfo"); }
+        {
+            throw new NotImplementedException("setPatchpointInfo");
+        }
+
         private PatchpointInfo* getOSRInfo(ref uint ilOffset)
-        { throw new NotImplementedException("getOSRInfo"); }
+        {
+            throw new NotImplementedException("getOSRInfo");
+        }
 
 #pragma warning disable CA1822 // Mark members as static
         private void methodMustBeLoadedBeforeCodeIsRun(CORINFO_METHOD_STRUCT_* method)
 #pragma warning restore CA1822 // Mark members as static
-        {
-        }
+        { }
 
         private CORINFO_METHOD_STRUCT_* mapMethodDeclToMethodImpl(CORINFO_METHOD_STRUCT_* method)
-        { throw new NotImplementedException("mapMethodDeclToMethodImpl"); }
+        {
+            throw new NotImplementedException("mapMethodDeclToMethodImpl");
+        }
 
-        private static object ResolveTokenWithSubstitution(MethodILScope methodIL, mdToken token, Instantiation typeInst, Instantiation methodInst)
+        private static object ResolveTokenWithSubstitution(
+            MethodILScope methodIL,
+            mdToken token,
+            Instantiation typeInst,
+            Instantiation methodInst
+        )
         {
             // Grab the generic definition of the method IL, resolve the token within the definition,
             // and instantiate it with the given context.
@@ -1548,7 +1900,11 @@ namespace Internal.JitInterface
             return result;
         }
 
-        private static object ResolveTokenInScope(MethodILScope methodIL, object typeOrMethodContext, mdToken token)
+        private static object ResolveTokenInScope(
+            MethodILScope methodIL,
+            object typeOrMethodContext,
+            mdToken token
+        )
         {
             MethodDesc owningMethod = methodIL.OwningMethod;
 
@@ -1558,15 +1914,20 @@ namespace Internal.JitInterface
             // Resolve the token in the inlining context.
 
             object result;
-            if (owningMethod != typeOrMethodContext &&
-                owningMethod.IsCanonicalMethod(CanonicalFormKind.Any))
+            if (
+                owningMethod != typeOrMethodContext
+                && owningMethod.IsCanonicalMethod(CanonicalFormKind.Any)
+            )
             {
                 Instantiation methodInst = default;
 
                 Instantiation typeInst;
                 if (typeOrMethodContext is TypeDesc typeContext)
                 {
-                    Debug.Assert(typeContext.HasSameTypeDefinition(owningMethod.OwningType) || typeContext.IsArray);
+                    Debug.Assert(
+                        typeContext.HasSameTypeDefinition(owningMethod.OwningType)
+                            || typeContext.IsArray
+                    );
                     typeInst = typeContext.Instantiation;
                 }
                 else
@@ -1578,11 +1939,19 @@ namespace Internal.JitInterface
                     // 3. The methods are the same generic
                     // AND
                     // The methods are on the same type
-                    Debug.Assert((methodContext.HasInstantiation && !owningMethod.HasInstantiation) ||
-                        (!methodContext.HasInstantiation && !owningMethod.HasInstantiation) ||
-                        methodContext.GetTypicalMethodDefinition() == owningMethod.GetTypicalMethodDefinition() ||
-                        (owningMethod.Name == "CreateDefaultInstance" && methodContext.Name == "CreateInstance"));
-                    Debug.Assert(methodContext.OwningType.HasSameTypeDefinition(owningMethod.OwningType));
+                    Debug.Assert(
+                        (methodContext.HasInstantiation && !owningMethod.HasInstantiation)
+                            || (!methodContext.HasInstantiation && !owningMethod.HasInstantiation)
+                            || methodContext.GetTypicalMethodDefinition()
+                                == owningMethod.GetTypicalMethodDefinition()
+                            || (
+                                owningMethod.Name == "CreateDefaultInstance"
+                                && methodContext.Name == "CreateInstance"
+                            )
+                    );
+                    Debug.Assert(
+                        methodContext.OwningType.HasSameTypeDefinition(owningMethod.OwningType)
+                    );
                     typeInst = methodContext.OwningType.Instantiation;
                     methodInst = methodContext.Instantiation;
                 }
@@ -1606,17 +1975,27 @@ namespace Internal.JitInterface
 
             var methodIL = HandleToObject(pResolvedToken.tokenScope);
 
-            var typeOrMethodContext = (pResolvedToken.tokenContext == contextFromMethodBeingCompiled()) ?
-                MethodBeingCompiled : HandleToObject((IntPtr)pResolvedToken.tokenContext);
+            var typeOrMethodContext =
+                (pResolvedToken.tokenContext == contextFromMethodBeingCompiled())
+                    ? MethodBeingCompiled
+                    : HandleToObject((IntPtr)pResolvedToken.tokenContext);
 
-            object result = GetRuntimeDeterminedObjectForToken(methodIL, typeOrMethodContext, pResolvedToken.token);
+            object result = GetRuntimeDeterminedObjectForToken(
+                methodIL,
+                typeOrMethodContext,
+                pResolvedToken.token
+            );
             if (pResolvedToken.tokenType == CorInfoTokenKind.CORINFO_TOKENKIND_Newarr)
                 result = ((TypeDesc)result).MakeArrayType();
 
             return result;
         }
 
-        private static object GetRuntimeDeterminedObjectForToken(MethodILScope methodIL, object typeOrMethodContext, mdToken token)
+        private static object GetRuntimeDeterminedObjectForToken(
+            MethodILScope methodIL,
+            object typeOrMethodContext,
+            mdToken token
+        )
         {
             object result = ResolveTokenInScope(methodIL, typeOrMethodContext, token);
 
@@ -1624,8 +2003,14 @@ namespace Internal.JitInterface
             {
                 if (method.IsSharedByGenericInstantiations)
                 {
-                    MethodDesc sharedMethod = methodIL.OwningMethod.GetSharedRuntimeFormMethodTarget();
-                    result = ResolveTokenWithSubstitution(methodIL, token, sharedMethod.OwningType.Instantiation, sharedMethod.Instantiation);
+                    MethodDesc sharedMethod =
+                        methodIL.OwningMethod.GetSharedRuntimeFormMethodTarget();
+                    result = ResolveTokenWithSubstitution(
+                        methodIL,
+                        token,
+                        sharedMethod.OwningType.Instantiation,
+                        sharedMethod.Instantiation
+                    );
                     Debug.Assert(((MethodDesc)result).IsRuntimeDeterminedExactMethod);
                 }
             }
@@ -1633,8 +2018,14 @@ namespace Internal.JitInterface
             {
                 if (field.OwningType.IsCanonicalSubtype(CanonicalFormKind.Any))
                 {
-                    MethodDesc sharedMethod = methodIL.OwningMethod.GetSharedRuntimeFormMethodTarget();
-                    result = ResolveTokenWithSubstitution(methodIL, token, sharedMethod.OwningType.Instantiation, sharedMethod.Instantiation);
+                    MethodDesc sharedMethod =
+                        methodIL.OwningMethod.GetSharedRuntimeFormMethodTarget();
+                    result = ResolveTokenWithSubstitution(
+                        methodIL,
+                        token,
+                        sharedMethod.OwningType.Instantiation,
+                        sharedMethod.Instantiation
+                    );
                     Debug.Assert(((FieldDesc)result).OwningType.IsRuntimeDeterminedSubtype);
                 }
             }
@@ -1643,13 +2034,25 @@ namespace Internal.JitInterface
                 TypeDesc type = (TypeDesc)result;
                 if (type.IsCanonicalSubtype(CanonicalFormKind.Any))
                 {
-                    MethodDesc sharedMethod = methodIL.OwningMethod.GetSharedRuntimeFormMethodTarget();
-                    result = ResolveTokenWithSubstitution(methodIL, token, sharedMethod.OwningType.Instantiation, sharedMethod.Instantiation);
-                    Debug.Assert(((TypeDesc)result).IsRuntimeDeterminedSubtype ||
-                        /* If the resolved type is not runtime determined there's a chance we went down this path
-                           because there was a literal typeof(__Canon) in the compiled IL - check for that
-                           by resolving the token in the definition. */
-                        ((TypeDesc)methodIL.GetMethodILScopeDefinition().GetObject((int)token)).IsCanonicalDefinitionType(CanonicalFormKind.Any));
+                    MethodDesc sharedMethod =
+                        methodIL.OwningMethod.GetSharedRuntimeFormMethodTarget();
+                    result = ResolveTokenWithSubstitution(
+                        methodIL,
+                        token,
+                        sharedMethod.OwningType.Instantiation,
+                        sharedMethod.Instantiation
+                    );
+                    Debug.Assert(
+                        ((TypeDesc)result).IsRuntimeDeterminedSubtype
+                            ||
+                            /* If the resolved type is not runtime determined there's a chance we went down this path
+                               because there was a literal typeof(__Canon) in the compiled IL - check for that
+                               by resolving the token in the definition. */
+                            (
+                                (TypeDesc)
+                                    methodIL.GetMethodILScopeDefinition().GetObject((int)token)
+                            ).IsCanonicalDefinitionType(CanonicalFormKind.Any)
+                    );
                 }
             }
 
@@ -1660,10 +2063,16 @@ namespace Internal.JitInterface
         {
             var methodIL = HandleToObject(pResolvedToken.tokenScope);
 
-            var typeOrMethodContext = (pResolvedToken.tokenContext == contextFromMethodBeingCompiled()) ?
-                MethodBeingCompiled : HandleToObject((IntPtr)pResolvedToken.tokenContext);
+            var typeOrMethodContext =
+                (pResolvedToken.tokenContext == contextFromMethodBeingCompiled())
+                    ? MethodBeingCompiled
+                    : HandleToObject((IntPtr)pResolvedToken.tokenContext);
 
-            object result = ResolveTokenInScope(methodIL, typeOrMethodContext, pResolvedToken.token);
+            object result = ResolveTokenInScope(
+                methodIL,
+                typeOrMethodContext,
+                pResolvedToken.token
+            );
 
             pResolvedToken.hClass = null;
             pResolvedToken.hMethod = null;
@@ -1672,13 +2081,24 @@ namespace Internal.JitInterface
 #if READYTORUN
             TypeDesc owningType = methodIL.OwningMethod.GetTypicalMethodDefinition().OwningType;
             bool recordToken;
-            if (!_compilation.CompilationModuleGroup.VersionsWithMethodBody(methodIL.OwningMethod.GetTypicalMethodDefinition()))
+            if (
+                !_compilation.CompilationModuleGroup.VersionsWithMethodBody(
+                    methodIL.OwningMethod.GetTypicalMethodDefinition()
+                )
+            )
             {
-                recordToken = (methodIL.GetMethodILScopeDefinition() is IMethodTokensAreUseableInCompilation) && owningType is EcmaType;
+                recordToken =
+                    (methodIL.GetMethodILScopeDefinition() is IMethodTokensAreUseableInCompilation)
+                    && owningType is EcmaType;
             }
             else
             {
-                recordToken = (_compilation.CompilationModuleGroup.VersionsWithType(owningType) || _compilation.CompilationModuleGroup.CrossModuleInlineableType(owningType)) && owningType is EcmaType;
+                recordToken =
+                    (
+                        _compilation.CompilationModuleGroup.VersionsWithType(owningType)
+                        || _compilation.CompilationModuleGroup.CrossModuleInlineableType(owningType)
+                    )
+                    && owningType is EcmaType;
             }
 #endif
 
@@ -1701,11 +2121,15 @@ namespace Internal.JitInterface
                     resolver.AddModuleTokenForMethod(method, methodModuleToken);
                 }
 #else
-                _compilation.NodeFactory.MetadataManager.GetDependenciesDueToAccess(ref _additionalDependencies, _compilation.NodeFactory, (MethodIL)methodIL, method);
+                _compilation.NodeFactory.MetadataManager.GetDependenciesDueToAccess(
+                    ref _additionalDependencies,
+                    _compilation.NodeFactory,
+                    (MethodIL)methodIL,
+                    method
+                );
 #endif
             }
-            else
-            if (result is FieldDesc)
+            else if (result is FieldDesc)
             {
                 FieldDesc field = result as FieldDesc;
 
@@ -1724,7 +2148,12 @@ namespace Internal.JitInterface
 #endif
 
 #if !READYTORUN
-                _compilation.NodeFactory.MetadataManager.GetDependenciesDueToAccess(ref _additionalDependencies, _compilation.NodeFactory, (MethodIL)methodIL, field);
+                _compilation.NodeFactory.MetadataManager.GetDependenciesDueToAccess(
+                    ref _additionalDependencies,
+                    _compilation.NodeFactory,
+                    (MethodIL)methodIL,
+                    field
+                );
 #endif
             }
             else
@@ -1734,14 +2163,20 @@ namespace Internal.JitInterface
 #if READYTORUN
                 if (recordToken)
                 {
-                    _compilation.NodeFactory.Resolver.AddModuleTokenForType(type, HandleToModuleToken(ref pResolvedToken));
+                    _compilation.NodeFactory.Resolver.AddModuleTokenForType(
+                        type,
+                        HandleToModuleToken(ref pResolvedToken)
+                    );
                 }
 #endif
 
                 if (pResolvedToken.tokenType == CorInfoTokenKind.CORINFO_TOKENKIND_Newarr)
                 {
                     if (type.IsVoid)
-                        ThrowHelper.ThrowInvalidProgramException(ExceptionStringID.InvalidProgramSpecific, methodIL.OwningMethod);
+                        ThrowHelper.ThrowInvalidProgramException(
+                            ExceptionStringID.InvalidProgramSpecific,
+                            methodIL.OwningMethod
+                        );
 
                     type = type.MakeArrayType();
                 }
@@ -1764,7 +2199,12 @@ namespace Internal.JitInterface
             return true;
         }
 
-        private void findSig(CORINFO_MODULE_STRUCT_* module, uint sigTOK, CORINFO_CONTEXT_STRUCT* context, CORINFO_SIG_INFO* sig)
+        private void findSig(
+            CORINFO_MODULE_STRUCT_* module,
+            uint sigTOK,
+            CORINFO_CONTEXT_STRUCT* context,
+            CORINFO_SIG_INFO* sig
+        )
         {
             var methodIL = HandleToObject(module);
             var methodSig = (MethodSignature)methodIL.GetObject((int)sigTOK);
@@ -1782,13 +2222,24 @@ namespace Internal.JitInterface
 #endif
         }
 
-        private void findCallSiteSig(CORINFO_MODULE_STRUCT_* module, uint methTOK, CORINFO_CONTEXT_STRUCT* context, CORINFO_SIG_INFO* sig)
+        private void findCallSiteSig(
+            CORINFO_MODULE_STRUCT_* module,
+            uint methTOK,
+            CORINFO_CONTEXT_STRUCT* context,
+            CORINFO_SIG_INFO* sig
+        )
         {
             var methodIL = HandleToObject(module);
-            Get_CORINFO_SIG_INFO(((MethodDesc)methodIL.GetObject((int)methTOK)), sig: sig, methodIL);
+            Get_CORINFO_SIG_INFO(
+                ((MethodDesc)methodIL.GetObject((int)methTOK)),
+                sig: sig,
+                methodIL
+            );
         }
 
-        private CORINFO_CLASS_STRUCT_* getTokenTypeAsHandle(ref CORINFO_RESOLVED_TOKEN pResolvedToken)
+        private CORINFO_CLASS_STRUCT_* getTokenTypeAsHandle(
+            ref CORINFO_RESOLVED_TOKEN pResolvedToken
+        )
         {
             WellKnownType result = WellKnownType.RuntimeTypeHandle;
 
@@ -1796,8 +2247,7 @@ namespace Internal.JitInterface
             {
                 result = WellKnownType.RuntimeMethodHandle;
             }
-            else
-            if (pResolvedToken.hField != null)
+            else if (pResolvedToken.hField != null)
             {
                 result = WellKnownType.RuntimeFieldHandle;
             }
@@ -1805,17 +2255,29 @@ namespace Internal.JitInterface
             return ObjectToHandle(_compilation.TypeSystemContext.GetWellKnownType(result));
         }
 
-        private static CorInfoCanSkipVerificationResult canSkipVerification(CORINFO_MODULE_STRUCT_* module)
+        private static CorInfoCanSkipVerificationResult canSkipVerification(
+            CORINFO_MODULE_STRUCT_* module
+        )
         {
             return CorInfoCanSkipVerificationResult.CORINFO_VERIFICATION_CAN_SKIP;
         }
 
         private bool isValidToken(CORINFO_MODULE_STRUCT_* module, uint metaTOK)
-        { throw new NotImplementedException("isValidToken"); }
-        private bool isValidStringRef(CORINFO_MODULE_STRUCT_* module, uint metaTOK)
-        { throw new NotImplementedException("isValidStringRef"); }
+        {
+            throw new NotImplementedException("isValidToken");
+        }
 
-        private int getStringLiteral(CORINFO_MODULE_STRUCT_* module, uint metaTOK, char* buffer, int size)
+        private bool isValidStringRef(CORINFO_MODULE_STRUCT_* module, uint metaTOK)
+        {
+            throw new NotImplementedException("isValidStringRef");
+        }
+
+        private int getStringLiteral(
+            CORINFO_MODULE_STRUCT_* module,
+            uint metaTOK,
+            char* buffer,
+            int size
+        )
         {
             Debug.Assert(size >= 0);
 
@@ -1859,7 +2321,10 @@ namespace Internal.JitInterface
             return null;
         }
 
-        private CORINFO_CLASS_STRUCT_* getTypeInstantiationArgument(CORINFO_CLASS_STRUCT_* cls, uint index)
+        private CORINFO_CLASS_STRUCT_* getTypeInstantiationArgument(
+            CORINFO_CLASS_STRUCT_* cls,
+            uint index
+        )
         {
             TypeDesc type = HandleToObject(cls);
             Instantiation inst = type.Instantiation;
@@ -1867,8 +2332,14 @@ namespace Internal.JitInterface
             return index < (uint)inst.Length ? ObjectToHandle(inst[(int)index]) : null;
         }
 
-
-        private int appendClassName(char** ppBuf, ref int pnBufLen, CORINFO_CLASS_STRUCT_* cls, bool fNamespace, bool fFullInst, bool fAssembly)
+        private int appendClassName(
+            char** ppBuf,
+            ref int pnBufLen,
+            CORINFO_CLASS_STRUCT_* cls,
+            bool fNamespace,
+            bool fFullInst,
+            bool fAssembly
+        )
         {
             // We support enough of this to make SIMD work, but not much else.
 
@@ -1907,7 +2378,10 @@ namespace Internal.JitInterface
         }
 
 #pragma warning disable CA1822 // Mark members as static
-        private CorInfoInlineTypeCheck canInlineTypeCheck(CORINFO_CLASS_STRUCT_* cls, CorInfoInlineTypeCheckSource source)
+        private CorInfoInlineTypeCheck canInlineTypeCheck(
+            CORINFO_CLASS_STRUCT_* cls,
+            CorInfoInlineTypeCheckSource source
+        )
 #pragma warning restore CA1822 // Mark members as static
         {
             // TODO: when we support multiple modules at runtime, this will need to do more work
@@ -1948,7 +2422,11 @@ namespace Internal.JitInterface
                     result |= CorInfoFlag.CORINFO_FLG_BYREF_LIKE;
 
                 // The CLR has more complicated rules around CUSTOMLAYOUT, but this will do.
-                if (metadataType.IsExplicitLayout || (metadataType.IsSequentialLayout && metadataType.GetClassLayout().Size != 0) || metadataType.IsWellKnownType(WellKnownType.TypedReference))
+                if (
+                    metadataType.IsExplicitLayout
+                    || (metadataType.IsSequentialLayout && metadataType.GetClassLayout().Size != 0)
+                    || metadataType.IsWellKnownType(WellKnownType.TypedReference)
+                )
                     result |= CorInfoFlag.CORINFO_FLG_CUSTOMLAYOUT;
 
                 if (metadataType.IsUnsafeValueType)
@@ -1999,11 +2477,19 @@ namespace Internal.JitInterface
         }
 
         private CORINFO_MODULE_STRUCT_* getClassModule(CORINFO_CLASS_STRUCT_* cls)
-        { throw new NotImplementedException("getClassModule"); }
+        {
+            throw new NotImplementedException("getClassModule");
+        }
+
         private CORINFO_ASSEMBLY_STRUCT_* getModuleAssembly(CORINFO_MODULE_STRUCT_* mod)
-        { throw new NotImplementedException("getModuleAssembly"); }
+        {
+            throw new NotImplementedException("getModuleAssembly");
+        }
+
         private byte* getAssemblyName(CORINFO_ASSEMBLY_STRUCT_* assem)
-        { throw new NotImplementedException("getAssemblyName"); }
+        {
+            throw new NotImplementedException("getAssemblyName");
+        }
 
 #pragma warning disable CA1822 // Mark members as static
         private void* LongLifetimeMalloc(UIntPtr sz)
@@ -2019,8 +2505,14 @@ namespace Internal.JitInterface
             Marshal.FreeCoTaskMem((IntPtr)obj);
         }
 
-        private UIntPtr getClassModuleIdForStatics(CORINFO_CLASS_STRUCT_* cls, CORINFO_MODULE_STRUCT_** pModule, void** ppIndirection)
-        { throw new NotImplementedException("getClassModuleIdForStatics"); }
+        private UIntPtr getClassModuleIdForStatics(
+            CORINFO_CLASS_STRUCT_* cls,
+            CORINFO_MODULE_STRUCT_** pModule,
+            void** ppIndirection
+        )
+        {
+            throw new NotImplementedException("getClassModuleIdForStatics");
+        }
 
         private uint getClassSize(CORINFO_CLASS_STRUCT_* cls)
         {
@@ -2087,8 +2579,11 @@ namespace Internal.JitInterface
                 }
             }
 
-            if (type.Context.Target.Architecture == TargetArchitecture.ARM &&
-                alignment < 8 && type.RequiresAlign8())
+            if (
+                type.Context.Target.Architecture == TargetArchitecture.ARM
+                && alignment < 8
+                && type.RequiresAlign8()
+            )
             {
                 // If the structure contains 64-bit primitive fields and the platform requires 8-byte alignment for
                 // such fields then make sure we return at least 8-byte alignment. Note that it's technically possible
@@ -2103,7 +2598,8 @@ namespace Internal.JitInterface
             return alignment;
         }
 
-        private Dictionary<DefType, bool> _doubleAlignHeuristicCache = new Dictionary<DefType, bool>();
+        private Dictionary<DefType, bool> _doubleAlignHeuristicCache =
+            new Dictionary<DefType, bool>();
 
         //*******************************************************************************
         //
@@ -2111,7 +2607,7 @@ namespace Internal.JitInterface
         //
         private static bool ShouldAlign8(int dwR8Fields, int dwTotalFields)
         {
-            return dwR8Fields*2>dwTotalFields && dwR8Fields>=2;
+            return dwR8Fields * 2 > dwTotalFields && dwR8Fields >= 2;
         }
 
         private static bool ShouldAlign8(DefType type)
@@ -2136,7 +2632,6 @@ namespace Internal.JitInterface
         private uint getClassAlignmentRequirement(CORINFO_CLASS_STRUCT_* cls, bool fDoubleAlignHint)
         {
             DefType type = (DefType)HandleToObject(cls);
-
 
             var target = type.Context.Target;
             if (fDoubleAlignHint)
@@ -2239,7 +2734,8 @@ namespace Internal.JitInterface
 
             int pointerSize = PointerSize;
 
-            int ptrsCount = AlignmentHelper.AlignUp(type.InstanceFieldSize.AsInt, pointerSize) / pointerSize;
+            int ptrsCount =
+                AlignmentHelper.AlignUp(type.InstanceFieldSize.AsInt, pointerSize) / pointerSize;
 
             // Assume no GC pointers at first
             for (int i = 0; i < ptrsCount; i++)
@@ -2295,11 +2791,19 @@ namespace Internal.JitInterface
             throw new InvalidOperationException();
         }
 
-        private bool checkMethodModifier(CORINFO_METHOD_STRUCT_* hMethod, byte* modifier, bool fOptional)
-        { throw new NotImplementedException("checkMethodModifier"); }
+        private bool checkMethodModifier(
+            CORINFO_METHOD_STRUCT_* hMethod,
+            byte* modifier,
+            bool fOptional
+        )
+        {
+            throw new NotImplementedException("checkMethodModifier");
+        }
 
         private CorInfoHelpFunc getSharedCCtorHelper(CORINFO_CLASS_STRUCT_* clsHnd)
-        { throw new NotImplementedException("getSharedCCtorHelper"); }
+        {
+            throw new NotImplementedException("getSharedCCtorHelper");
+        }
 
         private CORINFO_CLASS_STRUCT_* getTypeForBox(CORINFO_CLASS_STRUCT_* cls)
         {
@@ -2315,16 +2819,23 @@ namespace Internal.JitInterface
             var type = HandleToObject(cls);
 
             if (type.IsByRefLike)
-                ThrowHelper.ThrowInvalidProgramException(ExceptionStringID.InvalidProgramSpecific, MethodBeingCompiled);
+                ThrowHelper.ThrowInvalidProgramException(
+                    ExceptionStringID.InvalidProgramSpecific,
+                    MethodBeingCompiled
+                );
 
-            return type.IsNullable ? CorInfoHelpFunc.CORINFO_HELP_BOX_NULLABLE : CorInfoHelpFunc.CORINFO_HELP_BOX;
+            return type.IsNullable
+                ? CorInfoHelpFunc.CORINFO_HELP_BOX_NULLABLE
+                : CorInfoHelpFunc.CORINFO_HELP_BOX;
         }
 
         private CorInfoHelpFunc getUnBoxHelper(CORINFO_CLASS_STRUCT_* cls)
         {
             var type = HandleToObject(cls);
 
-            return type.IsNullable ? CorInfoHelpFunc.CORINFO_HELP_UNBOX_NULLABLE : CorInfoHelpFunc.CORINFO_HELP_UNBOX;
+            return type.IsNullable
+                ? CorInfoHelpFunc.CORINFO_HELP_UNBOX_NULLABLE
+                : CorInfoHelpFunc.CORINFO_HELP_UNBOX;
         }
 
         private byte* getHelperName(CorInfoHelpFunc helpFunc)
@@ -2332,7 +2843,11 @@ namespace Internal.JitInterface
             return (byte*)GetPin(StringToUTF8(helpFunc.ToString()));
         }
 
-        private CorInfoInitClassResult initClass(CORINFO_FIELD_STRUCT_* field, CORINFO_METHOD_STRUCT_* method, CORINFO_CONTEXT_STRUCT* context)
+        private CorInfoInitClassResult initClass(
+            CORINFO_FIELD_STRUCT_* field,
+            CORINFO_METHOD_STRUCT_* method,
+            CORINFO_CONTEXT_STRUCT* context
+        )
         {
             FieldDesc fd = field == null ? null : HandleToObject(field);
             Debug.Assert(fd == null || fd.IsStatic);
@@ -2344,10 +2859,9 @@ namespace Internal.JitInterface
 #if READYTORUN
                 IsClassPreInited(type)
 #else
-                _isFallbackBodyCompilation ||
-                !_compilation.HasLazyStaticConstructor(type)
+                _isFallbackBodyCompilation || !_compilation.HasLazyStaticConstructor(type)
 #endif
-                )
+            )
             {
                 return CorInfoInitClassResult.CORINFO_INITCLASS_NOT_REQUIRED;
             }
@@ -2396,7 +2910,8 @@ namespace Internal.JitInterface
 
                 // Shared generic code has to use helper. Moreover, tell JIT not to inline since
                 // inlining of generic dictionary lookups is not supported.
-                return CorInfoInitClassResult.CORINFO_INITCLASS_USE_HELPER | CorInfoInitClassResult.CORINFO_INITCLASS_DONT_INLINE;
+                return CorInfoInitClassResult.CORINFO_INITCLASS_USE_HELPER
+                    | CorInfoInitClassResult.CORINFO_INITCLASS_DONT_INLINE;
             }
 
             //
@@ -2420,9 +2935,16 @@ namespace Internal.JitInterface
                 // This optimization may cause static fields in reference types to be accessed without cctor being triggered
                 // for NULL "this" object. It does not conform with what the spec says. However, we have been historically
                 // doing it for perf reasons.
-                if (!typeToInit.IsValueType && !typeToInit.IsInterface && !typeToInit.IsBeforeFieldInit)
+                if (
+                    !typeToInit.IsValueType
+                    && !typeToInit.IsInterface
+                    && !typeToInit.IsBeforeFieldInit
+                )
                 {
-                    if (typeToInit == typeFromContext(context) || typeToInit == MethodBeingCompiled.OwningType)
+                    if (
+                        typeToInit == typeFromContext(context)
+                        || typeToInit == MethodBeingCompiled.OwningType
+                    )
                     {
                         // The class will be initialized by the time we access the field.
                         return CorInfoInitClassResult.CORINFO_INITCLASS_NOT_REQUIRED;
@@ -2430,7 +2952,10 @@ namespace Internal.JitInterface
                 }
 
                 // If we are currently compiling the class constructor for this static field access then we can skip the initClass
-                if (MethodBeingCompiled.OwningType == typeToInit && MethodBeingCompiled.IsStaticConstructor)
+                if (
+                    MethodBeingCompiled.OwningType == typeToInit
+                    && MethodBeingCompiled.IsStaticConstructor
+                )
                 {
                     // The class will be initialized by the time we access the field.
                     return CorInfoInitClassResult.CORINFO_INITCLASS_NOT_REQUIRED;
@@ -2445,29 +2970,58 @@ namespace Internal.JitInterface
             switch (classId)
             {
                 case CorInfoClassId.CLASSID_SYSTEM_OBJECT:
-                    return ObjectToHandle(_compilation.TypeSystemContext.GetWellKnownType(WellKnownType.Object));
+                    return ObjectToHandle(
+                        _compilation.TypeSystemContext.GetWellKnownType(WellKnownType.Object)
+                    );
 
                 case CorInfoClassId.CLASSID_TYPED_BYREF:
-                    return ObjectToHandle(_compilation.TypeSystemContext.GetWellKnownType(WellKnownType.TypedReference));
+                    return ObjectToHandle(
+                        _compilation.TypeSystemContext.GetWellKnownType(
+                            WellKnownType.TypedReference
+                        )
+                    );
 
                 case CorInfoClassId.CLASSID_TYPE_HANDLE:
-                    return ObjectToHandle(_compilation.TypeSystemContext.GetWellKnownType(WellKnownType.RuntimeTypeHandle));
+                    return ObjectToHandle(
+                        _compilation.TypeSystemContext.GetWellKnownType(
+                            WellKnownType.RuntimeTypeHandle
+                        )
+                    );
 
                 case CorInfoClassId.CLASSID_FIELD_HANDLE:
-                    return ObjectToHandle(_compilation.TypeSystemContext.GetWellKnownType(WellKnownType.RuntimeFieldHandle));
+                    return ObjectToHandle(
+                        _compilation.TypeSystemContext.GetWellKnownType(
+                            WellKnownType.RuntimeFieldHandle
+                        )
+                    );
 
                 case CorInfoClassId.CLASSID_METHOD_HANDLE:
-                    return ObjectToHandle(_compilation.TypeSystemContext.GetWellKnownType(WellKnownType.RuntimeMethodHandle));
+                    return ObjectToHandle(
+                        _compilation.TypeSystemContext.GetWellKnownType(
+                            WellKnownType.RuntimeMethodHandle
+                        )
+                    );
 
                 case CorInfoClassId.CLASSID_ARGUMENT_HANDLE:
-                    ThrowHelper.ThrowTypeLoadException("System", "RuntimeArgumentHandle", _compilation.TypeSystemContext.SystemModule);
+                    ThrowHelper.ThrowTypeLoadException(
+                        "System",
+                        "RuntimeArgumentHandle",
+                        _compilation.TypeSystemContext.SystemModule
+                    );
                     return null;
 
                 case CorInfoClassId.CLASSID_STRING:
-                    return ObjectToHandle(_compilation.TypeSystemContext.GetWellKnownType(WellKnownType.String));
+                    return ObjectToHandle(
+                        _compilation.TypeSystemContext.GetWellKnownType(WellKnownType.String)
+                    );
 
                 case CorInfoClassId.CLASSID_RUNTIME_TYPE:
-                    return ObjectToHandle(_compilation.TypeSystemContext.SystemModule.GetKnownType("System", "RuntimeType"));
+                    return ObjectToHandle(
+                        _compilation.TypeSystemContext.SystemModule.GetKnownType(
+                            "System",
+                            "RuntimeType"
+                        )
+                    );
 
                 default:
                     throw new NotImplementedException();
@@ -2495,11 +3049,19 @@ namespace Internal.JitInterface
         }
 
         private bool canCast(CORINFO_CLASS_STRUCT_* child, CORINFO_CLASS_STRUCT_* parent)
-        { throw new NotImplementedException("canCast"); }
-        private bool areTypesEquivalent(CORINFO_CLASS_STRUCT_* cls1, CORINFO_CLASS_STRUCT_* cls2)
-        { throw new NotImplementedException("areTypesEquivalent"); }
+        {
+            throw new NotImplementedException("canCast");
+        }
 
-        private TypeCompareState compareTypesForCast(CORINFO_CLASS_STRUCT_* fromClass, CORINFO_CLASS_STRUCT_* toClass)
+        private bool areTypesEquivalent(CORINFO_CLASS_STRUCT_* cls1, CORINFO_CLASS_STRUCT_* cls2)
+        {
+            throw new NotImplementedException("areTypesEquivalent");
+        }
+
+        private TypeCompareState compareTypesForCast(
+            CORINFO_CLASS_STRUCT_* fromClass,
+            CORINFO_CLASS_STRUCT_* toClass
+        )
         {
             TypeDesc fromType = HandleToObject(fromClass);
             TypeDesc toType = HandleToObject(toClass);
@@ -2515,7 +3077,10 @@ namespace Internal.JitInterface
                 // If casting to Nullable<T>, don't try to optimize
                 result = TypeCompareState.May;
             }
-            else if (!fromType.IsCanonicalSubtype(CanonicalFormKind.Any) && !toType.IsCanonicalSubtype(CanonicalFormKind.Any))
+            else if (
+                !fromType.IsCanonicalSubtype(CanonicalFormKind.Any)
+                && !toType.IsCanonicalSubtype(CanonicalFormKind.Any)
+            )
             {
                 // If the types are not shared, we can check directly.
                 if (fromType.CanCastTo(toType))
@@ -2523,7 +3088,10 @@ namespace Internal.JitInterface
                 else
                     result = TypeCompareState.MustNot;
             }
-            else if (fromType.IsCanonicalSubtype(CanonicalFormKind.Any) && !toType.IsCanonicalSubtype(CanonicalFormKind.Any))
+            else if (
+                fromType.IsCanonicalSubtype(CanonicalFormKind.Any)
+                && !toType.IsCanonicalSubtype(CanonicalFormKind.Any)
+            )
             {
                 // Casting from a shared type to an unshared type.
                 // Only handle casts to interface types for now
@@ -2581,7 +3149,10 @@ namespace Internal.JitInterface
             return result;
         }
 
-        private TypeCompareState compareTypesForEquality(CORINFO_CLASS_STRUCT_* cls1, CORINFO_CLASS_STRUCT_* cls2)
+        private TypeCompareState compareTypesForEquality(
+            CORINFO_CLASS_STRUCT_* cls1,
+            CORINFO_CLASS_STRUCT_* cls2
+        )
         {
             TypeCompareState result = TypeCompareState.May;
 
@@ -2589,7 +3160,10 @@ namespace Internal.JitInterface
             TypeDesc type2 = HandleToObject(cls2);
 
             // If neither type is a canonical subtype, type handle comparison suffices
-            if (!type1.IsCanonicalSubtype(CanonicalFormKind.Any) && !type2.IsCanonicalSubtype(CanonicalFormKind.Any))
+            if (
+                !type1.IsCanonicalSubtype(CanonicalFormKind.Any)
+                && !type2.IsCanonicalSubtype(CanonicalFormKind.Any)
+            )
             {
                 result = (type1 == type2 ? TypeCompareState.Must : TypeCompareState.MustNot);
             }
@@ -2600,7 +3174,10 @@ namespace Internal.JitInterface
                 // be equal unless the type defs are the same.
                 if (type1.IsValueType || type2.IsValueType)
                 {
-                    if (!type1.IsCanonicalDefinitionType(CanonicalFormKind.Universal) && !type2.IsCanonicalDefinitionType(CanonicalFormKind.Universal))
+                    if (
+                        !type1.IsCanonicalDefinitionType(CanonicalFormKind.Universal)
+                        && !type2.IsCanonicalDefinitionType(CanonicalFormKind.Universal)
+                    )
                     {
                         if (!type1.HasSameTypeDefinition(type2))
                         {
@@ -2612,7 +3189,10 @@ namespace Internal.JitInterface
                 // types cannot be equal unless the type defs are the same.
                 else
                 {
-                    if (!type1.IsCanonicalDefinitionType(CanonicalFormKind.Any) && !type2.IsCanonicalDefinitionType(CanonicalFormKind.Any))
+                    if (
+                        !type1.IsCanonicalDefinitionType(CanonicalFormKind.Any)
+                        && !type2.IsCanonicalDefinitionType(CanonicalFormKind.Any)
+                    )
                     {
                         if (!type1.HasSameTypeDefinition(type2))
                         {
@@ -2625,7 +3205,10 @@ namespace Internal.JitInterface
             return result;
         }
 
-        private CORINFO_CLASS_STRUCT_* mergeClasses(CORINFO_CLASS_STRUCT_* cls1, CORINFO_CLASS_STRUCT_* cls2)
+        private CORINFO_CLASS_STRUCT_* mergeClasses(
+            CORINFO_CLASS_STRUCT_* cls1,
+            CORINFO_CLASS_STRUCT_* cls2
+        )
         {
             TypeDesc type1 = HandleToObject(cls1);
             TypeDesc type2 = HandleToObject(cls2);
@@ -2664,14 +3247,22 @@ namespace Internal.JitInterface
             // actually true for reference types as well, but it is a little excessive to deal with.
             if (type1.IsArray && type2.IsArray)
             {
-                TypeDesc arrayClass = _compilation.TypeSystemContext.GetWellKnownType(WellKnownType.Array);
-                Debug.Assert((merged.IsArray && reflexive.IsArray)
-                         || ((merged == arrayClass) && (reflexive == arrayClass)));
+                TypeDesc arrayClass = _compilation.TypeSystemContext.GetWellKnownType(
+                    WellKnownType.Array
+                );
+                Debug.Assert(
+                    (merged.IsArray && reflexive.IsArray)
+                        || ((merged == arrayClass) && (reflexive == arrayClass))
+                );
             }
 
             // The results must always be assignable
-            Debug.Assert(type1.CanCastTo(merged) && type2.CanCastTo(merged) && type1.CanCastTo(reflexive)
-                     && type2.CanCastTo(reflexive));
+            Debug.Assert(
+                type1.CanCastTo(merged)
+                    && type2.CanCastTo(merged)
+                    && type1.CanCastTo(reflexive)
+                    && type2.CanCastTo(reflexive)
+            );
 #endif
 
             return ObjectToHandle(merged);
@@ -2702,9 +3293,14 @@ namespace Internal.JitInterface
         }
 
         private CORINFO_CLASS_STRUCT_* getParentType(CORINFO_CLASS_STRUCT_* cls)
-        { throw new NotImplementedException("getParentType"); }
+        {
+            throw new NotImplementedException("getParentType");
+        }
 
-        private CorInfoType getChildType(CORINFO_CLASS_STRUCT_* clsHnd, CORINFO_CLASS_STRUCT_** clsRet)
+        private CorInfoType getChildType(
+            CORINFO_CLASS_STRUCT_* clsHnd,
+            CORINFO_CLASS_STRUCT_** clsRet
+        )
         {
             CorInfoType result = CorInfoType.CORINFO_TYPE_UNDEF;
 
@@ -2723,7 +3319,9 @@ namespace Internal.JitInterface
         }
 
         private bool satisfiesClassConstraints(CORINFO_CLASS_STRUCT_* cls)
-        { throw new NotImplementedException("satisfiesClassConstraints"); }
+        {
+            throw new NotImplementedException("satisfiesClassConstraints");
+        }
 
         private bool isSDArray(CORINFO_CLASS_STRUCT_* cls)
         {
@@ -2763,8 +3361,7 @@ namespace Internal.JitInterface
             var fd = HandleToObject(field);
 
             // Check for invalid arguments passed to InitializeArray intrinsic
-            if (!fd.HasRva ||
-                size > fd.FieldType.GetElementSize().AsInt)
+            if (!fd.HasRva || size > fd.FieldType.GetElementSize().AsInt)
             {
                 return null;
             }
@@ -2773,7 +3370,11 @@ namespace Internal.JitInterface
         }
 
 #pragma warning disable CA1822 // Mark members as static
-        private CorInfoIsAccessAllowedResult canAccessClass(ref CORINFO_RESOLVED_TOKEN pResolvedToken, CORINFO_METHOD_STRUCT_* callerHandle, ref CORINFO_HELPER_DESC pAccessHelper)
+        private CorInfoIsAccessAllowedResult canAccessClass(
+            ref CORINFO_RESOLVED_TOKEN pResolvedToken,
+            CORINFO_METHOD_STRUCT_* callerHandle,
+            ref CORINFO_HELPER_DESC pAccessHelper
+        )
 #pragma warning restore CA1822 // Mark members as static
         {
             // TODO: Access check
@@ -2801,7 +3402,11 @@ namespace Internal.JitInterface
             return ObjectToHandle(fieldDesc.OwningType);
         }
 
-        private CorInfoType getFieldType(CORINFO_FIELD_STRUCT_* field, CORINFO_CLASS_STRUCT_** structType, CORINFO_CLASS_STRUCT_* memberParent)
+        private CorInfoType getFieldType(
+            CORINFO_FIELD_STRUCT_* field,
+            CORINFO_CLASS_STRUCT_** structType,
+            CORINFO_CLASS_STRUCT_* memberParent
+        )
         {
             FieldDesc fieldDesc = HandleToObject(field);
             TypeDesc fieldType = fieldDesc.FieldType;
@@ -2833,9 +3438,13 @@ namespace Internal.JitInterface
             Debug.Assert(field.IsIntrinsic);
 
             var owningType = field.OwningType;
-            if ((owningType.IsWellKnownType(WellKnownType.IntPtr) ||
-                    owningType.IsWellKnownType(WellKnownType.UIntPtr)) &&
-                        field.Name == "Zero")
+            if (
+                (
+                    owningType.IsWellKnownType(WellKnownType.IntPtr)
+                    || owningType.IsWellKnownType(WellKnownType.UIntPtr)
+                )
+                && field.Name == "Zero"
+            )
             {
                 return CORINFO_FIELD_ACCESSOR.CORINFO_FIELD_INTRINSIC_ZERO;
             }
@@ -2843,8 +3452,11 @@ namespace Internal.JitInterface
             {
                 return CORINFO_FIELD_ACCESSOR.CORINFO_FIELD_INTRINSIC_EMPTY_STRING;
             }
-            else if (owningType.Name == "BitConverter" && owningType.Namespace == "System" &&
-                field.Name == "IsLittleEndian")
+            else if (
+                owningType.Name == "BitConverter"
+                && owningType.Namespace == "System"
+                && field.Name == "IsLittleEndian"
+            )
             {
                 return CORINFO_FIELD_ACCESSOR.CORINFO_FIELD_INTRINSIC_ISLITTLEENDIAN;
             }
@@ -2857,7 +3469,12 @@ namespace Internal.JitInterface
             return HandleToObject(fldHnd).IsStatic;
         }
 
-        private void getBoundaries(CORINFO_METHOD_STRUCT_* ftn, ref uint cILOffsets, ref uint* pILOffsets, BoundaryTypes* implicitBoundaries)
+        private void getBoundaries(
+            CORINFO_METHOD_STRUCT_* ftn,
+            ref uint cILOffsets,
+            ref uint* pILOffsets,
+            BoundaryTypes* implicitBoundaries
+        )
         {
             // TODO: Debugging
             cILOffsets = 0;
@@ -2865,7 +3482,12 @@ namespace Internal.JitInterface
             *implicitBoundaries = BoundaryTypes.DEFAULT_BOUNDARIES;
         }
 
-        private void getVars(CORINFO_METHOD_STRUCT_* ftn, ref uint cVars, ILVarInfo** vars, ref bool extendOthers)
+        private void getVars(
+            CORINFO_METHOD_STRUCT_* ftn,
+            ref uint cVars,
+            ILVarInfo** vars,
+            ref bool extendOthers
+        )
         {
             // TODO: Debugging
 
@@ -2877,7 +3499,12 @@ namespace Internal.JitInterface
         }
 
 #pragma warning disable CA1822 // Mark members as static
-        private void reportRichMappings(InlineTreeNode* inlineTree, uint numInlineTree, RichOffsetMapping* mappings, uint numMappings)
+        private void reportRichMappings(
+            InlineTreeNode* inlineTree,
+            uint numInlineTree,
+            RichOffsetMapping* mappings,
+            uint numMappings
+        )
 #pragma warning restore CA1822 // Mark members as static
         {
             Marshal.FreeHGlobal((IntPtr)inlineTree);
@@ -2905,7 +3532,11 @@ namespace Internal.JitInterface
             return (CORINFO_ARG_LIST_STRUCT_*)((int)args + 1);
         }
 
-        private CorInfoTypeWithMod getArgType(CORINFO_SIG_INFO* sig, CORINFO_ARG_LIST_STRUCT_* args, CORINFO_CLASS_STRUCT_** vcTypeRet)
+        private CorInfoTypeWithMod getArgType(
+            CORINFO_SIG_INFO* sig,
+            CORINFO_ARG_LIST_STRUCT_* args,
+            CORINFO_CLASS_STRUCT_** vcTypeRet
+        )
         {
             int index = (int)args;
             object sigObj = HandleToObject((IntPtr)sig->methodSignature);
@@ -2926,11 +3557,15 @@ namespace Internal.JitInterface
 
                 CorInfoType corInfoType = asCorInfoType(type, vcTypeRet);
 
-                return (CorInfoTypeWithMod)corInfoType | (locals[index].IsPinned ? CorInfoTypeWithMod.CORINFO_TYPE_MOD_PINNED : 0);
+                return (CorInfoTypeWithMod)corInfoType
+                    | (locals[index].IsPinned ? CorInfoTypeWithMod.CORINFO_TYPE_MOD_PINNED : 0);
             }
         }
 
-        private CORINFO_CLASS_STRUCT_* getArgClass(CORINFO_SIG_INFO* sig, CORINFO_ARG_LIST_STRUCT_* args)
+        private CORINFO_CLASS_STRUCT_* getArgClass(
+            CORINFO_SIG_INFO* sig,
+            CORINFO_ARG_LIST_STRUCT_* args
+        )
         {
             int index = (int)args;
             object sigObj = HandleToObject((IntPtr)sig->methodSignature);
@@ -2954,20 +3589,31 @@ namespace Internal.JitInterface
             var type = (DefType)HandleToObject(hClass);
 
             // See MethodTable::GetHFAType and Compiler::GetHfaType.
-            return (type.ValueTypeShapeCharacteristics & ValueTypeShapeCharacteristics.AggregateMask) switch
+            return (
+                type.ValueTypeShapeCharacteristics & ValueTypeShapeCharacteristics.AggregateMask
+            ) switch
             {
-                ValueTypeShapeCharacteristics.Float32Aggregate => CorInfoHFAElemType.CORINFO_HFA_ELEM_FLOAT,
-                ValueTypeShapeCharacteristics.Float64Aggregate => CorInfoHFAElemType.CORINFO_HFA_ELEM_DOUBLE,
-                ValueTypeShapeCharacteristics.Vector64Aggregate => CorInfoHFAElemType.CORINFO_HFA_ELEM_VECTOR64,
-                ValueTypeShapeCharacteristics.Vector128Aggregate => CorInfoHFAElemType.CORINFO_HFA_ELEM_VECTOR128,
+                ValueTypeShapeCharacteristics.Float32Aggregate
+                    => CorInfoHFAElemType.CORINFO_HFA_ELEM_FLOAT,
+                ValueTypeShapeCharacteristics.Float64Aggregate
+                    => CorInfoHFAElemType.CORINFO_HFA_ELEM_DOUBLE,
+                ValueTypeShapeCharacteristics.Vector64Aggregate
+                    => CorInfoHFAElemType.CORINFO_HFA_ELEM_VECTOR64,
+                ValueTypeShapeCharacteristics.Vector128Aggregate
+                    => CorInfoHFAElemType.CORINFO_HFA_ELEM_VECTOR128,
                 _ => CorInfoHFAElemType.CORINFO_HFA_ELEM_NONE
             };
         }
 
         private HRESULT GetErrorHRESULT(_EXCEPTION_POINTERS* pExceptionPointers)
-        { throw new NotImplementedException("GetErrorHRESULT"); }
+        {
+            throw new NotImplementedException("GetErrorHRESULT");
+        }
+
         private uint GetErrorMessage(char* buffer, uint bufferLength)
-        { throw new NotImplementedException("GetErrorMessage"); }
+        {
+            throw new NotImplementedException("GetErrorMessage");
+        }
 
 #pragma warning disable CA1822 // Mark members as static
         private int FilterException(_EXCEPTION_POINTERS* pExceptionPointers)
@@ -3000,14 +3646,22 @@ namespace Internal.JitInterface
         }
 
         private void ThrowExceptionForJitResult(HRESULT result)
-        { throw new NotImplementedException("ThrowExceptionForJitResult"); }
+        {
+            throw new NotImplementedException("ThrowExceptionForJitResult");
+        }
+
         private void ThrowExceptionForHelper(ref CORINFO_HELPER_DESC throwHelper)
-        { throw new NotImplementedException("ThrowExceptionForHelper"); }
+        {
+            throw new NotImplementedException("ThrowExceptionForHelper");
+        }
 
         public static CORINFO_OS TargetToOs(TargetDetails target)
         {
-            return target.IsWindows ? CORINFO_OS.CORINFO_WINNT :
-                   target.IsOSX ? CORINFO_OS.CORINFO_MACOS : CORINFO_OS.CORINFO_UNIX;
+            return target.IsWindows
+                ? CORINFO_OS.CORINFO_WINNT
+                : target.IsOSX
+                    ? CORINFO_OS.CORINFO_MACOS
+                    : CORINFO_OS.CORINFO_UNIX;
         }
 
         private void getEEInfo(ref CORINFO_EE_INFO pEEInfoOut)
@@ -3025,15 +3679,17 @@ namespace Internal.JitInterface
 
             pEEInfoOut.inlinedCallFrameInfo.size = (uint)SizeOfPInvokeTransitionFrame;
 
-            pEEInfoOut.offsetOfDelegateInstance = (uint)pointerSize;            // Delegate::m_firstParameter
+            pEEInfoOut.offsetOfDelegateInstance = (uint)pointerSize; // Delegate::m_firstParameter
             pEEInfoOut.offsetOfDelegateFirstTarget = OffsetOfDelegateFirstTarget;
 
             pEEInfoOut.sizeOfReversePInvokeFrame = (uint)SizeOfReversePInvokeTransitionFrame;
 
             pEEInfoOut.osPageSize = new UIntPtr(0x1000);
 
-            pEEInfoOut.maxUncheckedOffsetForNullObject = (_compilation.NodeFactory.Target.IsWindows) ?
-                new UIntPtr(32 * 1024 - 1) : new UIntPtr((uint)pEEInfoOut.osPageSize / 2 - 1);
+            pEEInfoOut.maxUncheckedOffsetForNullObject =
+                (_compilation.NodeFactory.Target.IsWindows)
+                    ? new UIntPtr(32 * 1024 - 1)
+                    : new UIntPtr((uint)pEEInfoOut.osPageSize / 2 - 1);
 
             pEEInfoOut.targetAbi = TargetABI;
             pEEInfoOut.osType = TargetToOs(_compilation.NodeFactory.Target);
@@ -3059,10 +3715,14 @@ namespace Internal.JitInterface
 
             // Need to cast down to EcmaMethod. Do not use this as a precedent that casting to Ecma*
             // within the JitInterface is fine. We might want to consider moving this to Compilation.
-            TypeSystem.Ecma.EcmaMethod ecmaMethodDefinition = methodDefinition as TypeSystem.Ecma.EcmaMethod;
+            TypeSystem.Ecma.EcmaMethod ecmaMethodDefinition =
+                methodDefinition as TypeSystem.Ecma.EcmaMethod;
             if (ecmaMethodDefinition != null)
             {
-                return (mdToken)System.Reflection.Metadata.Ecma335.MetadataTokens.GetToken(ecmaMethodDefinition.Handle);
+                return (mdToken)
+                    System.Reflection.Metadata.Ecma335.MetadataTokens.GetToken(
+                        ecmaMethodDefinition.Handle
+                    );
             }
 
             return 0;
@@ -3092,7 +3752,12 @@ namespace Internal.JitInterface
             return (byte*)GetPin(StringToUTF8(method.Name));
         }
 
-        private static string getMethodNameFromMetadataImpl(MethodDesc method, out string className, out string namespaceName, out string enclosingClassName)
+        private static string getMethodNameFromMetadataImpl(
+            MethodDesc method,
+            out string className,
+            out string namespaceName,
+            out string enclosingClassName
+        )
         {
             className = null;
             namespaceName = null;
@@ -3119,7 +3784,12 @@ namespace Internal.JitInterface
             return result;
         }
 
-        private byte* getMethodNameFromMetadata(CORINFO_METHOD_STRUCT_* ftn, byte** className, byte** namespaceName, byte** enclosingClassName)
+        private byte* getMethodNameFromMetadata(
+            CORINFO_METHOD_STRUCT_* ftn,
+            byte** className,
+            byte** namespaceName,
+            byte** enclosingClassName
+        )
         {
             MethodDesc method = HandleToObject(ftn);
 
@@ -3128,14 +3798,21 @@ namespace Internal.JitInterface
             string namespaceResult;
             string enclosingResult;
 
-            result = getMethodNameFromMetadataImpl(method, out classResult, out namespaceResult, out enclosingResult);
+            result = getMethodNameFromMetadataImpl(
+                method,
+                out classResult,
+                out namespaceResult,
+                out enclosingResult
+            );
 
             if (className != null)
                 *className = classResult != null ? (byte*)GetPin(StringToUTF8(classResult)) : null;
             if (namespaceName != null)
-                *namespaceName = namespaceResult != null ? (byte*)GetPin(StringToUTF8(namespaceResult)) : null;
+                *namespaceName =
+                    namespaceResult != null ? (byte*)GetPin(StringToUTF8(namespaceResult)) : null;
             if (enclosingClassName != null)
-                *enclosingClassName = enclosingResult != null ? (byte*)GetPin(StringToUTF8(enclosingResult)) : null;
+                *enclosingClassName =
+                    enclosingResult != null ? (byte*)GetPin(StringToUTF8(enclosingResult)) : null;
 
             return result != null ? (byte*)GetPin(StringToUTF8(result)) : null;
         }
@@ -3145,29 +3822,51 @@ namespace Internal.JitInterface
             return (uint)HandleToObject(ftn).GetHashCode();
         }
 
-        private UIntPtr findNameOfToken(CORINFO_MODULE_STRUCT_* moduleHandle, mdToken token, byte* szFQName, UIntPtr FQNameCapacity)
-        { throw new NotImplementedException("findNameOfToken"); }
+        private UIntPtr findNameOfToken(
+            CORINFO_MODULE_STRUCT_* moduleHandle,
+            mdToken token,
+            byte* szFQName,
+            UIntPtr FQNameCapacity
+        )
+        {
+            throw new NotImplementedException("findNameOfToken");
+        }
 
-        private bool getSystemVAmd64PassStructInRegisterDescriptor(CORINFO_CLASS_STRUCT_* structHnd, SYSTEMV_AMD64_CORINFO_STRUCT_REG_PASSING_DESCRIPTOR* structPassInRegDescPtr)
+        private bool getSystemVAmd64PassStructInRegisterDescriptor(
+            CORINFO_CLASS_STRUCT_* structHnd,
+            SYSTEMV_AMD64_CORINFO_STRUCT_REG_PASSING_DESCRIPTOR* structPassInRegDescPtr
+        )
         {
             TypeDesc typeDesc = HandleToObject(structHnd);
 
-            SystemVStructClassificator.GetSystemVAmd64PassStructInRegisterDescriptor(typeDesc, out *structPassInRegDescPtr);
+            SystemVStructClassificator.GetSystemVAmd64PassStructInRegisterDescriptor(
+                typeDesc,
+                out *structPassInRegDescPtr
+            );
             return true;
         }
 
         private uint getLoongArch64PassStructInRegisterFlags(CORINFO_CLASS_STRUCT_* cls)
         {
             TypeDesc typeDesc = HandleToObject(cls);
-            return LoongArch64PassStructInRegister.GetLoongArch64PassStructInRegisterFlags(typeDesc);
+            return LoongArch64PassStructInRegister.GetLoongArch64PassStructInRegisterFlags(
+                typeDesc
+            );
         }
 
         private uint getThreadTLSIndex(ref void* ppIndirection)
-        { throw new NotImplementedException("getThreadTLSIndex"); }
-        private void* getInlinedCallFrameVptr(ref void* ppIndirection)
-        { throw new NotImplementedException("getInlinedCallFrameVptr"); }
+        {
+            throw new NotImplementedException("getThreadTLSIndex");
+        }
 
-        private Dictionary<CorInfoHelpFunc, ISymbolNode> _helperCache = new Dictionary<CorInfoHelpFunc, ISymbolNode>();
+        private void* getInlinedCallFrameVptr(ref void* ppIndirection)
+        {
+            throw new NotImplementedException("getInlinedCallFrameVptr");
+        }
+
+        private Dictionary<CorInfoHelpFunc, ISymbolNode> _helperCache =
+            new Dictionary<CorInfoHelpFunc, ISymbolNode>();
+
         private void* getHelperFtn(CorInfoHelpFunc ftnNum, ref void* ppIndirection)
         {
             ISymbolNode entryPoint;
@@ -3188,8 +3887,14 @@ namespace Internal.JitInterface
             }
         }
 
-        private void getFunctionFixedEntryPoint(CORINFO_METHOD_STRUCT_* ftn, bool isUnsafeFunctionPointer, ref CORINFO_CONST_LOOKUP pResult)
-        { throw new NotImplementedException("getFunctionFixedEntryPoint"); }
+        private void getFunctionFixedEntryPoint(
+            CORINFO_METHOD_STRUCT_* ftn,
+            bool isUnsafeFunctionPointer,
+            ref CORINFO_CONST_LOOKUP pResult
+        )
+        {
+            throw new NotImplementedException("getFunctionFixedEntryPoint");
+        }
 
 #pragma warning disable CA1822 // Mark members as static
         private CorInfoHelpFunc getLazyStringLiteralHelper(CORINFO_MODULE_STRUCT_* handle)
@@ -3199,11 +3904,21 @@ namespace Internal.JitInterface
             return CorInfoHelpFunc.CORINFO_HELP_UNDEF;
         }
 
-        private CORINFO_MODULE_STRUCT_* embedModuleHandle(CORINFO_MODULE_STRUCT_* handle, ref void* ppIndirection)
-        { throw new NotImplementedException("embedModuleHandle"); }
+        private CORINFO_MODULE_STRUCT_* embedModuleHandle(
+            CORINFO_MODULE_STRUCT_* handle,
+            ref void* ppIndirection
+        )
+        {
+            throw new NotImplementedException("embedModuleHandle");
+        }
 
-        private CORINFO_FIELD_STRUCT_* embedFieldHandle(CORINFO_FIELD_STRUCT_* handle, ref void* ppIndirection)
-        { throw new NotImplementedException("embedFieldHandle"); }
+        private CORINFO_FIELD_STRUCT_* embedFieldHandle(
+            CORINFO_FIELD_STRUCT_* handle,
+            ref void* ppIndirection
+        )
+        {
+            throw new NotImplementedException("embedFieldHandle");
+        }
 
         private static CORINFO_RUNTIME_LOOKUP_KIND GetGenericRuntimeLookupKind(MethodDesc method)
         {
@@ -3218,7 +3933,10 @@ namespace Internal.JitInterface
             }
         }
 
-        private void getLocationOfThisType(CORINFO_METHOD_STRUCT_* context, ref CORINFO_LOOKUP_KIND result)
+        private void getLocationOfThisType(
+            CORINFO_METHOD_STRUCT_* context,
+            ref CORINFO_LOOKUP_KIND result
+        )
         {
             MethodDesc method = HandleToObject(context);
 
@@ -3234,17 +3952,32 @@ namespace Internal.JitInterface
             }
         }
 
-        private void* GetCookieForPInvokeCalliSig(CORINFO_SIG_INFO* szMetaSig, ref void* ppIndirection)
-        { throw new NotImplementedException("GetCookieForPInvokeCalliSig"); }
+        private void* GetCookieForPInvokeCalliSig(
+            CORINFO_SIG_INFO* szMetaSig,
+            ref void* ppIndirection
+        )
+        {
+            throw new NotImplementedException("GetCookieForPInvokeCalliSig");
+        }
 #pragma warning disable CA1822 // Mark members as static
-        private CORINFO_JUST_MY_CODE_HANDLE_* getJustMyCodeHandle(CORINFO_METHOD_STRUCT_* method, ref CORINFO_JUST_MY_CODE_HANDLE_* ppIndirection)
+        private CORINFO_JUST_MY_CODE_HANDLE_* getJustMyCodeHandle(
+            CORINFO_METHOD_STRUCT_* method,
+            ref CORINFO_JUST_MY_CODE_HANDLE_* ppIndirection
+        )
 #pragma warning restore CA1822 // Mark members as static
         {
             ppIndirection = null;
             return null;
         }
-        private void GetProfilingHandle(ref bool pbHookFunction, ref void* pProfilerHandle, ref bool pbIndirectedHandles)
-        { throw new NotImplementedException("GetProfilingHandle"); }
+
+        private void GetProfilingHandle(
+            ref bool pbHookFunction,
+            ref void* pProfilerHandle,
+            ref bool pbIndirectedHandles
+        )
+        {
+            throw new NotImplementedException("GetProfilingHandle");
+        }
 
         /// <summary>
         /// Create a CORINFO_CONST_LOOKUP to a symbol and put the address into the addr field
@@ -3253,23 +3986,36 @@ namespace Internal.JitInterface
         {
             CORINFO_CONST_LOOKUP constLookup = default(CORINFO_CONST_LOOKUP);
             constLookup.addr = (void*)ObjectToHandle(symbol);
-            constLookup.accessType = symbol.RepresentsIndirectionCell ? InfoAccessType.IAT_PVALUE : InfoAccessType.IAT_VALUE;
+            constLookup.accessType = symbol.RepresentsIndirectionCell
+                ? InfoAccessType.IAT_PVALUE
+                : InfoAccessType.IAT_VALUE;
             return constLookup;
         }
 
-        private bool canAccessFamily(CORINFO_METHOD_STRUCT_* hCaller, CORINFO_CLASS_STRUCT_* hInstanceType)
-        { throw new NotImplementedException("canAccessFamily"); }
+        private bool canAccessFamily(
+            CORINFO_METHOD_STRUCT_* hCaller,
+            CORINFO_CLASS_STRUCT_* hInstanceType
+        )
+        {
+            throw new NotImplementedException("canAccessFamily");
+        }
+
         private bool isRIDClassDomainID(CORINFO_CLASS_STRUCT_* cls)
-        { throw new NotImplementedException("isRIDClassDomainID"); }
+        {
+            throw new NotImplementedException("isRIDClassDomainID");
+        }
+
         private uint getClassDomainID(CORINFO_CLASS_STRUCT_* cls, ref void* ppIndirection)
-        { throw new NotImplementedException("getClassDomainID"); }
+        {
+            throw new NotImplementedException("getClassDomainID");
+        }
 
         private void* getFieldAddress(CORINFO_FIELD_STRUCT_* field, void** ppIndirection)
         {
             FieldDesc fieldDesc = HandleToObject(field);
             Debug.Assert(fieldDesc.HasRva);
             ISymbolNode node = _compilation.GetFieldRvaData(fieldDesc);
-            void *handle = (void *)ObjectToHandle(node);
+            void* handle = (void*)ObjectToHandle(node);
             if (node.RepresentsIndirectionCell)
             {
                 *ppIndirection = handle;
@@ -3283,7 +4029,10 @@ namespace Internal.JitInterface
             }
         }
 
-        private CORINFO_CLASS_STRUCT_* getStaticFieldCurrentClass(CORINFO_FIELD_STRUCT_* field, byte* pIsSpeculative)
+        private CORINFO_CLASS_STRUCT_* getStaticFieldCurrentClass(
+            CORINFO_FIELD_STRUCT_* field,
+            byte* pIsSpeculative
+        )
         {
             if (pIsSpeculative != null)
                 *pIsSpeculative = 1;
@@ -3292,26 +4041,62 @@ namespace Internal.JitInterface
         }
 
         private IntPtr getVarArgsHandle(CORINFO_SIG_INFO* pSig, ref void* ppIndirection)
-        { throw new NotImplementedException("getVarArgsHandle"); }
+        {
+            throw new NotImplementedException("getVarArgsHandle");
+        }
+
         private bool canGetVarArgsHandle(CORINFO_SIG_INFO* pSig)
-        { throw new NotImplementedException("canGetVarArgsHandle"); }
+        {
+            throw new NotImplementedException("canGetVarArgsHandle");
+        }
 
         private InfoAccessType emptyStringLiteral(ref void* ppValue)
         {
-            return constructStringLiteral(_methodScope, (mdToken)CorTokenType.mdtString, ref ppValue);
+            return constructStringLiteral(
+                _methodScope,
+                (mdToken)CorTokenType.mdtString,
+                ref ppValue
+            );
         }
 
-        private uint getFieldThreadLocalStoreID(CORINFO_FIELD_STRUCT_* field, ref void* ppIndirection)
-        { throw new NotImplementedException("getFieldThreadLocalStoreID"); }
-        private void addActiveDependency(CORINFO_MODULE_STRUCT_* moduleFrom, CORINFO_MODULE_STRUCT_* moduleTo)
-        { throw new NotImplementedException("addActiveDependency"); }
-        private CORINFO_METHOD_STRUCT_* GetDelegateCtor(CORINFO_METHOD_STRUCT_* methHnd, CORINFO_CLASS_STRUCT_* clsHnd, CORINFO_METHOD_STRUCT_* targetMethodHnd, ref DelegateCtorArgs pCtorData)
-        { throw new NotImplementedException("GetDelegateCtor"); }
+        private uint getFieldThreadLocalStoreID(
+            CORINFO_FIELD_STRUCT_* field,
+            ref void* ppIndirection
+        )
+        {
+            throw new NotImplementedException("getFieldThreadLocalStoreID");
+        }
+
+        private void addActiveDependency(
+            CORINFO_MODULE_STRUCT_* moduleFrom,
+            CORINFO_MODULE_STRUCT_* moduleTo
+        )
+        {
+            throw new NotImplementedException("addActiveDependency");
+        }
+
+        private CORINFO_METHOD_STRUCT_* GetDelegateCtor(
+            CORINFO_METHOD_STRUCT_* methHnd,
+            CORINFO_CLASS_STRUCT_* clsHnd,
+            CORINFO_METHOD_STRUCT_* targetMethodHnd,
+            ref DelegateCtorArgs pCtorData
+        )
+        {
+            throw new NotImplementedException("GetDelegateCtor");
+        }
+
         private void MethodCompileComplete(CORINFO_METHOD_STRUCT_* methHnd)
-        { throw new NotImplementedException("MethodCompileComplete"); }
+        {
+            throw new NotImplementedException("MethodCompileComplete");
+        }
 
 #pragma warning disable CA1822 // Mark members as static
-        private bool getTailCallHelpers(ref CORINFO_RESOLVED_TOKEN callToken, CORINFO_SIG_INFO* sig, CORINFO_GET_TAILCALL_HELPERS_FLAGS flags, ref CORINFO_TAILCALL_HELPERS pResult)
+        private bool getTailCallHelpers(
+            ref CORINFO_RESOLVED_TOKEN callToken,
+            CORINFO_SIG_INFO* sig,
+            CORINFO_GET_TAILCALL_HELPERS_FLAGS flags,
+            ref CORINFO_TAILCALL_HELPERS pResult
+        )
 #pragma warning restore CA1822 // Mark members as static
         {
             // Slow tailcalls are not supported yet
@@ -3368,7 +4153,9 @@ namespace Internal.JitInterface
                 {
                     _roDataAlignment = 32;
                 }
-                else if ((args.flag & CorJitAllocMemFlag.CORJIT_ALLOCMEM_FLG_RODATA_16BYTE_ALIGN) != 0)
+                else if (
+                    (args.flag & CorJitAllocMemFlag.CORJIT_ALLOCMEM_FLG_RODATA_16BYTE_ALIGN) != 0
+                )
                 {
                     _roDataAlignment = 16;
                 }
@@ -3396,10 +4183,22 @@ namespace Internal.JitInterface
             _numFrameInfos++;
         }
 
-        private void allocUnwindInfo(byte* pHotCode, byte* pColdCode, uint startOffset, uint endOffset, uint unwindSize, byte* pUnwindBlock, CorJitFuncKind funcKind)
+        private void allocUnwindInfo(
+            byte* pHotCode,
+            byte* pColdCode,
+            uint startOffset,
+            uint endOffset,
+            uint unwindSize,
+            byte* pUnwindBlock,
+            CorJitFuncKind funcKind
+        )
         {
-            Debug.Assert(FrameInfoFlags.Filter == (FrameInfoFlags)CorJitFuncKind.CORJIT_FUNC_FILTER);
-            Debug.Assert(FrameInfoFlags.Handler == (FrameInfoFlags)CorJitFuncKind.CORJIT_FUNC_HANDLER);
+            Debug.Assert(
+                FrameInfoFlags.Filter == (FrameInfoFlags)CorJitFuncKind.CORJIT_FUNC_FILTER
+            );
+            Debug.Assert(
+                FrameInfoFlags.Handler == (FrameInfoFlags)CorJitFuncKind.CORJIT_FUNC_HANDLER
+            );
 
             FrameInfoFlags flags = (FrameInfoFlags)funcKind;
 
@@ -3419,13 +4218,21 @@ namespace Internal.JitInterface
 #if !READYTORUN
             var target = _compilation.TypeSystemContext.Target;
 
-            if (target.Architecture == TargetArchitecture.ARM64 && target.OperatingSystem == TargetOS.Linux)
+            if (
+                target.Architecture == TargetArchitecture.ARM64
+                && target.OperatingSystem == TargetOS.Linux
+            )
             {
                 blobData = CompressARM64CFI(blobData);
             }
 #endif
 
-            _frameInfos[_usedFrameInfos++] = new FrameInfo(flags, (int)startOffset, (int)endOffset, blobData);
+            _frameInfos[_usedFrameInfos++] = new FrameInfo(
+                flags,
+                (int)startOffset,
+                (int)endOffset,
+                blobData
+            );
         }
 
         private void* allocGCInfo(UIntPtr size)
@@ -3459,14 +4266,16 @@ namespace Internal.JitInterface
         }
 
 #pragma warning disable CA1822 // Mark members as static
-        private void recordCallSite(uint instrOffset, CORINFO_SIG_INFO* callSig, CORINFO_METHOD_STRUCT_* methodHandle)
+        private void recordCallSite(
+            uint instrOffset,
+            CORINFO_SIG_INFO* callSig,
+            CORINFO_METHOD_STRUCT_* methodHandle
+        )
 #pragma warning restore CA1822 // Mark members as static
-        {
-        }
+        { }
 
         private ArrayBuilder<Relocation> _codeRelocs;
         private ArrayBuilder<Relocation> _roDataRelocs;
-
 
         /// <summary>
         /// Various type of block.
@@ -3475,12 +4284,16 @@ namespace Internal.JitInterface
         {
             /// <summary>Not a generated block.</summary>
             Unknown = -1,
+
             /// <summary>Represent code.</summary>
             Code = 0,
+
             /// <summary>Represent cold code (i.e. code not called frequently).</summary>
             ColdCode = 1,
+
             /// <summary>Read-only data.</summary>
             ROData = 2,
+
             /// <summary>Instrumented Block Count Data</summary>
             BBCounts = 3
         }
@@ -3500,7 +4313,10 @@ namespace Internal.JitInterface
             {
                 fixed (byte* pColdCode = _coldCode)
                 {
-                    if (pColdCode <= (byte*)location && (byte*)location < pColdCode + _coldCode.Length)
+                    if (
+                        pColdCode <= (byte*)location
+                        && (byte*)location < pColdCode + _coldCode.Length
+                    )
                     {
                         offset = (int)((byte*)location - pColdCode);
                         return BlockType.ColdCode;
@@ -3550,7 +4366,10 @@ namespace Internal.JitInterface
         }
 
         // Translates relocation type constants used by JIT (defined in winnt.h) to RelocType enumeration
-        private static RelocType GetRelocType(TargetArchitecture targetArchitecture, ushort fRelocType)
+        private static RelocType GetRelocType(
+            TargetArchitecture targetArchitecture,
+            ushort fRelocType
+        )
         {
             switch (targetArchitecture)
             {
@@ -3594,7 +4413,14 @@ namespace Internal.JitInterface
             }
         }
 
-        private void recordRelocation(void* location, void* locationRW, void* target, ushort fRelocType, ushort slotNum, int addlDelta)
+        private void recordRelocation(
+            void* location,
+            void* locationRW,
+            void* target,
+            ushort fRelocType,
+            ushort slotNum,
+            int addlDelta
+        )
         {
             // slotNum is not used
             Debug.Assert(slotNum == 0);
@@ -3604,7 +4430,10 @@ namespace Internal.JitInterface
             Debug.Assert(locationBlock != BlockType.Unknown, "BlockType.Unknown not expected");
 
             int length;
-            ref ArrayBuilder<Relocation> sourceBlock = ref findRelocBlock(locationBlock, out length);
+            ref ArrayBuilder<Relocation> sourceBlock = ref findRelocBlock(
+                locationBlock,
+                out length
+            );
 
             int relocDelta;
             BlockType targetBlock = findKnownBlock(target, out relocDelta);
@@ -3647,7 +4476,10 @@ namespace Internal.JitInterface
 
             relocDelta += addlDelta;
 
-            TargetArchitecture targetArchitecture = _compilation.TypeSystemContext.Target.Architecture;
+            TargetArchitecture targetArchitecture = _compilation
+                .TypeSystemContext
+                .Target
+                .Architecture;
             RelocType relocType = GetRelocType(targetArchitecture, fRelocType);
             // relocDelta is stored as the value
             Relocation.WriteValue(relocType, location, relocDelta);
@@ -3689,7 +4521,9 @@ namespace Internal.JitInterface
                 case TargetArchitecture.LoongArch64:
                     return (uint)ImageFileMachine.LoongArch64;
                 default:
-                    throw new NotImplementedException("Expected target architecture is not supported");
+                    throw new NotImplementedException(
+                        "Expected target architecture is not supported"
+                    );
             }
         }
 
@@ -3755,23 +4589,37 @@ namespace Internal.JitInterface
             flags.Set(CorJitFlag.CORJIT_FLAG_PREJIT);
             flags.Set(CorJitFlag.CORJIT_FLAG_USE_PINVOKE_HELPERS);
 
-            TargetArchitecture targetArchitecture = _compilation.TypeSystemContext.Target.Architecture;
+            TargetArchitecture targetArchitecture = _compilation
+                .TypeSystemContext
+                .Target
+                .Architecture;
 
             switch (targetArchitecture)
             {
                 case TargetArchitecture.X64:
                 case TargetArchitecture.X86:
                     Debug.Assert(InstructionSet.X86_SSE2 == InstructionSet.X64_SSE2);
-                    Debug.Assert(_compilation.InstructionSetSupport.IsInstructionSetSupported(InstructionSet.X86_SSE2));
+                    Debug.Assert(
+                        _compilation.InstructionSetSupport.IsInstructionSetSupported(
+                            InstructionSet.X86_SSE2
+                        )
+                    );
                     break;
 
                 case TargetArchitecture.ARM64:
-                    Debug.Assert(_compilation.InstructionSetSupport.IsInstructionSetSupported(InstructionSet.ARM64_AdvSimd));
+                    Debug.Assert(
+                        _compilation.InstructionSetSupport.IsInstructionSetSupported(
+                            InstructionSet.ARM64_AdvSimd
+                        )
+                    );
                     break;
             }
 
 #if READYTORUN
-            if (targetArchitecture == TargetArchitecture.ARM && !_compilation.TypeSystemContext.Target.IsWindows)
+            if (
+                targetArchitecture == TargetArchitecture.ARM
+                && !_compilation.TypeSystemContext.Target.IsWindows
+            )
                 flags.Set(CorJitFlag.CORJIT_FLAG_RELATIVE_CODE_RELOCS);
 #endif
 
@@ -3780,19 +4628,37 @@ namespace Internal.JitInterface
                 // Validate UnmanagedCallersOnlyAttribute usage
                 if (!this.MethodBeingCompiled.Signature.IsStatic) // Must be a static method
                 {
-                    ThrowHelper.ThrowInvalidProgramException(ExceptionStringID.InvalidProgramNonStaticMethod, this.MethodBeingCompiled);
+                    ThrowHelper.ThrowInvalidProgramException(
+                        ExceptionStringID.InvalidProgramNonStaticMethod,
+                        this.MethodBeingCompiled
+                    );
                 }
 
-                if (this.MethodBeingCompiled.HasInstantiation || this.MethodBeingCompiled.OwningType.HasInstantiation) // No generics involved
+                if (
+                    this.MethodBeingCompiled.HasInstantiation
+                    || this.MethodBeingCompiled.OwningType.HasInstantiation
+                ) // No generics involved
                 {
-                    ThrowHelper.ThrowInvalidProgramException(ExceptionStringID.InvalidProgramGenericMethod, this.MethodBeingCompiled);
+                    ThrowHelper.ThrowInvalidProgramException(
+                        ExceptionStringID.InvalidProgramGenericMethod,
+                        this.MethodBeingCompiled
+                    );
                 }
 
 #if READYTORUN
                 // TODO: enable this check in full AOT
-                if (Marshaller.IsMarshallingRequired(this.MethodBeingCompiled.Signature, Array.Empty<ParameterMetadata>(), ((MetadataType)this.MethodBeingCompiled.OwningType).Module)) // Only blittable arguments
+                if (
+                    Marshaller.IsMarshallingRequired(
+                        this.MethodBeingCompiled.Signature,
+                        Array.Empty<ParameterMetadata>(),
+                        ((MetadataType)this.MethodBeingCompiled.OwningType).Module
+                    )
+                ) // Only blittable arguments
                 {
-                    ThrowHelper.ThrowInvalidProgramException(ExceptionStringID.InvalidProgramNonBlittableTypes, this.MethodBeingCompiled);
+                    ThrowHelper.ThrowInvalidProgramException(
+                        ExceptionStringID.InvalidProgramNonBlittableTypes,
+                        this.MethodBeingCompiled
+                    );
                 }
 #endif
 
@@ -3824,7 +4690,13 @@ namespace Internal.JitInterface
 
         private MemoryStream _cachedMemoryStream = new MemoryStream();
 
-        public static void ComputeJitPgoInstrumentationSchema(Func<object, IntPtr> objectToHandle, PgoSchemaElem[] pgoResultsSchemas, out PgoInstrumentationSchema[] nativeSchemas, MemoryStream instrumentationData, Func<TypeDesc, bool> typeFilter = null)
+        public static void ComputeJitPgoInstrumentationSchema(
+            Func<object, IntPtr> objectToHandle,
+            PgoSchemaElem[] pgoResultsSchemas,
+            out PgoInstrumentationSchema[] nativeSchemas,
+            MemoryStream instrumentationData,
+            Func<TypeDesc, bool> typeFilter = null
+        )
         {
             nativeSchemas = new PgoInstrumentationSchema[pgoResultsSchemas.Length];
             instrumentationData.SetLength(0);
@@ -3837,11 +4709,14 @@ namespace Internal.JitInterface
                 }
 
                 Debug.Assert((bwInstrumentationData.BaseStream.Position % 8) == 0);
-                nativeSchemas[i].Offset = new IntPtr(checked((int)bwInstrumentationData.BaseStream.Position));
+                nativeSchemas[i].Offset = new IntPtr(
+                    checked((int)bwInstrumentationData.BaseStream.Position)
+                );
                 nativeSchemas[i].ILOffset = pgoResultsSchemas[i].ILOffset;
                 nativeSchemas[i].Count = pgoResultsSchemas[i].Count;
                 nativeSchemas[i].Other = pgoResultsSchemas[i].Other;
-                nativeSchemas[i].InstrumentationKind = (PgoInstrumentationKind)pgoResultsSchemas[i].InstrumentationKind;
+                nativeSchemas[i].InstrumentationKind = (PgoInstrumentationKind)
+                    pgoResultsSchemas[i].InstrumentationKind;
 
                 if (pgoResultsSchemas[i].DataObject == null)
                 {
@@ -3866,7 +4741,10 @@ namespace Internal.JitInterface
                         {
                             IntPtr ptrVal;
 
-                            if (typeVal.AsType != null && (typeFilter == null || typeFilter(typeVal.AsType)))
+                            if (
+                                typeVal.AsType != null
+                                && (typeFilter == null || typeFilter(typeVal.AsType))
+                            )
                             {
                                 ptrVal = (IntPtr)objectToHandle(typeVal.AsType);
                             }
@@ -3892,8 +4770,13 @@ namespace Internal.JitInterface
             bwInstrumentationData.Flush();
         }
 
-        private HRESULT getPgoInstrumentationResults(CORINFO_METHOD_STRUCT_* ftnHnd, ref PgoInstrumentationSchema* pSchema, ref uint countSchemaItems, byte** pInstrumentationData,
-            ref PgoSource pPgoSource)
+        private HRESULT getPgoInstrumentationResults(
+            CORINFO_METHOD_STRUCT_* ftnHnd,
+            ref PgoInstrumentationSchema* pSchema,
+            ref uint countSchemaItems,
+            byte** pInstrumentationData,
+            ref PgoSource pPgoSource
+        )
         {
             MethodDesc methodDesc = HandleToObject(ftnHnd);
 
@@ -3907,11 +4790,16 @@ namespace Internal.JitInterface
                 else
                 {
 #pragma warning disable SA1001, SA1113, SA1115 // Commas should be spaced correctly
-                    ComputeJitPgoInstrumentationSchema(ObjectToHandle, pgoResultsSchemas, out var nativeSchemas, _cachedMemoryStream
+                    ComputeJitPgoInstrumentationSchema(
+                        ObjectToHandle,
+                        pgoResultsSchemas,
+                        out var nativeSchemas,
+                        _cachedMemoryStream
 #if !READYTORUN
-                        , _compilation.CanConstructType
+                        ,
+                        _compilation.CanConstructType
 #endif
-                        );
+                    );
 #pragma warning restore SA1001, SA1113, SA1115 // Commas should be spaced correctly
 
                     var instrumentationData = _cachedMemoryStream.ToArray();
@@ -3937,9 +4825,17 @@ namespace Internal.JitInterface
 
         private bool notifyInstructionSetUsage(InstructionSet instructionSet, bool supportEnabled)
         {
-            instructionSet = InstructionSetFlags.ConvertToImpliedInstructionSetForVectorInstructionSets(_compilation.TypeSystemContext.Target.Architecture, instructionSet);
+            instructionSet =
+                InstructionSetFlags.ConvertToImpliedInstructionSetForVectorInstructionSets(
+                    _compilation.TypeSystemContext.Target.Architecture,
+                    instructionSet
+                );
 
-            Debug.Assert(!_compilation.InstructionSetSupport.NonSpecifiableFlags.HasInstructionSet(instructionSet));
+            Debug.Assert(
+                !_compilation.InstructionSetSupport.NonSpecifiableFlags.HasInstructionSet(
+                    instructionSet
+                )
+            );
 
             if (supportEnabled)
             {
@@ -3950,9 +4846,11 @@ namespace Internal.JitInterface
                 // By policy we code review all changes into corelib, such that failing to use an instruction
                 // set is not a reason to not support usage of it. Except for functions which check if a given
                 // feature is supported or hardware accelerated.
-                if (!isMethodDefinedInCoreLib() ||
-                    MethodBeingCompiled.Name == "get_IsSupported" ||
-                    MethodBeingCompiled.Name == "get_IsHardwareAccelerated")
+                if (
+                    !isMethodDefinedInCoreLib()
+                    || MethodBeingCompiled.Name == "get_IsSupported"
+                    || MethodBeingCompiled.Name == "get_IsHardwareAccelerated"
+                )
                 {
                     _actualInstructionSetUnsupported.AddInstructionSet(instructionSet);
                 }
@@ -3962,11 +4860,21 @@ namespace Internal.JitInterface
 #else
         private bool notifyInstructionSetUsage(InstructionSet instructionSet, bool supportEnabled)
         {
-            instructionSet = InstructionSetFlags.ConvertToImpliedInstructionSetForVectorInstructionSets(_compilation.TypeSystemContext.Target.Architecture, instructionSet);
+            instructionSet =
+                InstructionSetFlags.ConvertToImpliedInstructionSetForVectorInstructionSets(
+                    _compilation.TypeSystemContext.Target.Architecture,
+                    instructionSet
+                );
 
-            Debug.Assert(!_compilation.InstructionSetSupport.NonSpecifiableFlags.HasInstructionSet(instructionSet));
+            Debug.Assert(
+                !_compilation.InstructionSetSupport.NonSpecifiableFlags.HasInstructionSet(
+                    instructionSet
+                )
+            );
 
-            return supportEnabled ? _compilation.InstructionSetSupport.IsInstructionSetSupported(instructionSet) : false;
+            return supportEnabled
+                ? _compilation.InstructionSetSupport.IsInstructionSetSupported(instructionSet)
+                : false;
         }
 #endif
     }

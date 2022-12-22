@@ -8,7 +8,16 @@ namespace System.Globalization
 {
     internal static partial class FormatProvider
     {
-        internal static void FormatBigInteger(ref ValueStringBuilder sb, int precision, int scale, bool sign, ReadOnlySpan<char> format, NumberFormatInfo numberFormatInfo, char[] digits, int startIndex)
+        internal static void FormatBigInteger(
+            ref ValueStringBuilder sb,
+            int precision,
+            int scale,
+            bool sign,
+            ReadOnlySpan<char> format,
+            NumberFormatInfo numberFormatInfo,
+            char[] digits,
+            int startIndex
+        )
         {
             unsafe
             {
@@ -23,11 +32,23 @@ namespace System.Globalization
                     char fmt = Number.ParseFormatSpecifier(format, out int maxDigits);
                     if (fmt != 0)
                     {
-                        Number.NumberToString(ref sb, ref numberBuffer, fmt, maxDigits, numberFormatInfo, isDecimal: false);
+                        Number.NumberToString(
+                            ref sb,
+                            ref numberBuffer,
+                            fmt,
+                            maxDigits,
+                            numberFormatInfo,
+                            isDecimal: false
+                        );
                     }
                     else
                     {
-                        Number.NumberToStringFormat(ref sb, ref numberBuffer, format, numberFormatInfo);
+                        Number.NumberToStringFormat(
+                            ref sb,
+                            ref numberBuffer,
+                            format,
+                            numberFormatInfo
+                        );
                     }
                 }
             }
@@ -37,14 +58,13 @@ namespace System.Globalization
             ReadOnlySpan<char> s,
             NumberStyles styles,
             NumberFormatInfo numberFormatInfo,
-            StringBuilder receiver,  // Receives the decimal digits
+            StringBuilder receiver, // Receives the decimal digits
             out int precision,
             out int scale,
             out bool sign
-            )
+        )
         {
             FormatProvider.Number.NumberBuffer numberBuffer = default;
-
             unsafe
             {
                 // Note: because we passed a non-null StringBuilder (receiver) to TryStringToNumber, it streams the digits into
@@ -55,7 +75,16 @@ namespace System.Globalization
                 // to something that will AV.
                 numberBuffer.overrideDigits = (char*)0x1;
             }
-            if (!Number.TryStringToNumber(s, styles, ref numberBuffer, receiver, numberFormatInfo, parseDecimal: false))
+            if (
+                !Number.TryStringToNumber(
+                    s,
+                    styles,
+                    ref numberBuffer,
+                    receiver,
+                    numberFormatInfo,
+                    parseDecimal: false
+                )
+            )
             {
                 precision = default(int);
                 scale = default(int);

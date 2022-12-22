@@ -8,36 +8,34 @@ using Xunit;
 public struct VT
 {
     public short[,] short2darr;
-    public short[, ,] short3darr;
+    public short[,,] short3darr;
     public short[,] short2darr_b;
-    public short[, ,] short3darr_b;
+    public short[,,] short3darr_b;
 }
 
 public class CL
 {
     public short[,] short2darr = { { 0, 1 }, { 0, 0 } };
-    public short[, ,] short3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    public short[,,] short3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
     public short[,] short2darr_b = { { 0, 49 }, { 0, 0 } };
-    public short[, ,] short3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    public short[,,] short3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
 }
 
 public class shortMDArrTest
 {
-
     static short[,] short2darr = { { 0, 1 }, { 0, 0 } };
-    static short[, ,] short3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    static short[,,] short3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
     static short[,] short2darr_b = { { 0, 49 }, { 0, 0 } };
-    static short[, ,] short3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    static short[,,] short3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
 
     static short[][,] ja1 = new short[2][,];
-    static short[][, ,] ja2 = new short[2][, ,];
+    static short[][,,] ja2 = new short[2][,,];
     static short[][,] ja1_b = new short[2][,];
-    static short[][, ,] ja2_b = new short[2][, ,];
+    static short[][,,] ja2_b = new short[2][,,];
 
     [Fact]
     public static int TestEntryPoint()
     {
-
         bool pass = true;
 
         VT vt1;
@@ -1167,8 +1165,5 @@ public class shortMDArrTest
             Console.WriteLine("PASSED");
             return 100;
         }
-
-
     }
-
 };

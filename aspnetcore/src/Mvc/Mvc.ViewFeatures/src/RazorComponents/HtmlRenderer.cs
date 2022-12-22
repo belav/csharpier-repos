@@ -13,16 +13,36 @@ namespace Microsoft.AspNetCore.Components.Rendering;
 
 internal sealed class HtmlRenderer : Renderer
 {
-    private static readonly HashSet<string> SelfClosingElements = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+    private static readonly HashSet<string> SelfClosingElements = new HashSet<string>(
+        StringComparer.OrdinalIgnoreCase
+    )
     {
-        "area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"
+        "area",
+        "base",
+        "br",
+        "col",
+        "embed",
+        "hr",
+        "img",
+        "input",
+        "link",
+        "meta",
+        "param",
+        "source",
+        "track",
+        "wbr"
     };
 
-    private static readonly Task CanceledRenderTask = Task.FromCanceled(new CancellationToken(canceled: true));
+    private static readonly Task CanceledRenderTask = Task.FromCanceled(
+        new CancellationToken(canceled: true)
+    );
     private readonly IViewBufferScope _viewBufferScope;
 
-    public HtmlRenderer(IServiceProvider serviceProvider, ILoggerFactory loggerFactory, IViewBufferScope viewBufferScope)
-        : base(serviceProvider, loggerFactory)
+    public HtmlRenderer(
+        IServiceProvider serviceProvider,
+        ILoggerFactory loggerFactory,
+        IViewBufferScope viewBufferScope
+    ) : base(serviceProvider, loggerFactory)
     {
         _viewBufferScope = viewBufferScope;
     }
@@ -47,7 +67,10 @@ internal sealed class HtmlRenderer : Renderer
         return CanceledRenderTask;
     }
 
-    public async Task<ComponentRenderedText> RenderComponentAsync(Type componentType, ParameterView initialParameters)
+    public async Task<ComponentRenderedText> RenderComponentAsync(
+        Type componentType,
+        ParameterView initialParameters
+    )
     {
         var component = InstantiateComponent(componentType);
         var componentId = AssignRootComponentId(component);
@@ -56,16 +79,23 @@ internal sealed class HtmlRenderer : Renderer
         return new ComponentRenderedText(componentId, new ComponentHtmlContent(this, componentId));
     }
 
-    public Task<ComponentRenderedText> RenderComponentAsync<TComponent>(ParameterView initialParameters) where TComponent : IComponent
+    public Task<ComponentRenderedText> RenderComponentAsync<TComponent>(
+        ParameterView initialParameters
+    ) where TComponent : IComponent
     {
         return RenderComponentAsync(typeof(TComponent), initialParameters);
     }
 
     /// <inheritdoc />
-    protected override void HandleException(Exception exception)
-        => ExceptionDispatchInfo.Capture(exception).Throw();
+    protected override void HandleException(Exception exception) =>
+        ExceptionDispatchInfo.Capture(exception).Throw();
 
-    private int RenderFrames(HtmlRenderingContext context, ArrayRange<RenderTreeFrame> frames, int position, int maxElements)
+    private int RenderFrames(
+        HtmlRenderingContext context,
+        ArrayRange<RenderTreeFrame> frames,
+        int position,
+        int maxElements
+    )
     {
         var nextPosition = position;
         var endPosition = position + maxElements;
@@ -85,7 +115,8 @@ internal sealed class HtmlRenderer : Renderer
     private int RenderCore(
         HtmlRenderingContext context,
         ArrayRange<RenderTreeFrame> frames,
-        int position)
+        int position
+    )
     {
         ref var frame = ref frames.Array[position];
         switch (frame.FrameType)
@@ -93,7 +124,9 @@ internal sealed class HtmlRenderer : Renderer
             case RenderTreeFrameType.Element:
                 return RenderElement(context, frames, position);
             case RenderTreeFrameType.Attribute:
-                throw new InvalidOperationException($"Attributes should only be encountered within {nameof(RenderElement)}");
+                throw new InvalidOperationException(
+                    $"Attributes should only be encountered within {nameof(RenderElement)}"
+                );
             case RenderTreeFrameType.Text:
                 context.HtmlContentBuilder.Append(frame.TextContent);
                 return ++position;
@@ -108,14 +141,17 @@ internal sealed class HtmlRenderer : Renderer
             case RenderTreeFrameType.ComponentReferenceCapture:
                 return ++position;
             default:
-                throw new InvalidOperationException($"Invalid element frame type '{frame.FrameType}'.");
+                throw new InvalidOperationException(
+                    $"Invalid element frame type '{frame.FrameType}'."
+                );
         }
     }
 
     private int RenderChildComponent(
         HtmlRenderingContext context,
         ArrayRange<RenderTreeFrame> frames,
-        int position)
+        int position
+    )
     {
         ref var frame = ref frames.Array[position];
         var childFrames = GetCurrentRenderTreeFrames(frame.ComponentId);
@@ -126,20 +162,33 @@ internal sealed class HtmlRenderer : Renderer
     private int RenderElement(
         HtmlRenderingContext context,
         ArrayRange<RenderTreeFrame> frames,
-        int position)
+        int position
+    )
     {
         ref var frame = ref frames.Array[position];
         var result = context.HtmlContentBuilder;
         result.AppendHtml("<");
         result.AppendHtml(frame.ElementName);
-        var afterAttributes = RenderAttributes(context, frames, position + 1, frame.ElementSubtreeLength - 1, out var capturedValueAttribute);
+        var afterAttributes = RenderAttributes(
+            context,
+            frames,
+            position + 1,
+            frame.ElementSubtreeLength - 1,
+            out var capturedValueAttribute
+        );
 
         // When we see an <option> as a descendant of a <select>, and the option's "value" attribute matches the
         // "value" attribute on the <select>, then we auto-add the "selected" attribute to that option. This is
         // a way of converting Blazor's select binding feature to regular static HTML.
-        if (context.ClosestSelectValueAsString != null
+        if (
+            context.ClosestSelectValueAsString != null
             && string.Equals(frame.ElementName, "option", StringComparison.OrdinalIgnoreCase)
-            && string.Equals(capturedValueAttribute, context.ClosestSelectValueAsString, StringComparison.Ordinal))
+            && string.Equals(
+                capturedValueAttribute,
+                context.ClosestSelectValueAsString,
+                StringComparison.Ordinal
+            )
+        )
         {
             result.AppendHtml(" selected");
         }
@@ -149,7 +198,11 @@ internal sealed class HtmlRenderer : Renderer
         {
             result.AppendHtml(">");
 
-            var isSelect = string.Equals(frame.ElementName, "select", StringComparison.OrdinalIgnoreCase);
+            var isSelect = string.Equals(
+                frame.ElementName,
+                "select",
+                StringComparison.OrdinalIgnoreCase
+            );
             if (isSelect)
             {
                 context.ClosestSelectValueAsString = capturedValueAttribute;
@@ -188,7 +241,12 @@ internal sealed class HtmlRenderer : Renderer
         }
     }
 
-    private int RenderChildren(HtmlRenderingContext context, ArrayRange<RenderTreeFrame> frames, int position, int maxElements)
+    private int RenderChildren(
+        HtmlRenderingContext context,
+        ArrayRange<RenderTreeFrame> frames,
+        int position,
+        int maxElements
+    )
     {
         if (maxElements == 0)
         {
@@ -200,7 +258,11 @@ internal sealed class HtmlRenderer : Renderer
 
     private static int RenderAttributes(
         HtmlRenderingContext context,
-        ArrayRange<RenderTreeFrame> frames, int position, int maxElements, out string capturedValueAttribute)
+        ArrayRange<RenderTreeFrame> frames,
+        int position,
+        int maxElements,
+        out string capturedValueAttribute
+    )
     {
         capturedValueAttribute = null;
 
@@ -249,7 +311,11 @@ internal sealed class HtmlRenderer : Renderer
 
     private ViewBuffer GetRenderedHtmlContent(int componentId)
     {
-        var viewBuffer = new ViewBuffer(_viewBufferScope, nameof(HtmlRenderer), ViewBuffer.ViewPageSize);
+        var viewBuffer = new ViewBuffer(
+            _viewBufferScope,
+            nameof(HtmlRenderer),
+            ViewBuffer.ViewPageSize
+        );
         var context = new HtmlRenderingContext(viewBuffer);
 
         var frames = GetCurrentRenderTreeFrames(componentId);
@@ -293,4 +359,3 @@ internal sealed class HtmlRenderer : Renderer
         }
     }
 }
-

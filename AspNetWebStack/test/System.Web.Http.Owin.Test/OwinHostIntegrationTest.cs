@@ -58,7 +58,9 @@ namespace System.Web.Http.Owin
                 var response = await client.GetAsync(CreateUrl(port, "Error"));
 
                 Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
-                JObject json = Assert.IsType<JObject>(JToken.Parse(await response.Content.ReadAsStringAsync()));
+                JObject json = Assert.IsType<JObject>(
+                    JToken.Parse(await response.Content.ReadAsStringAsync())
+                );
                 JToken exceptionMessage;
                 Assert.True(json.TryGetValue("ExceptionMessage", out exceptionMessage));
                 Assert.Null(response.Headers.TransferEncodingChunked);
@@ -112,10 +114,7 @@ namespace System.Web.Http.Owin
         {
             public string Throws
             {
-                get
-                {
-                    throw new InvalidOperationException();
-                }
+                get { throw new InvalidOperationException(); }
             }
         }
     }

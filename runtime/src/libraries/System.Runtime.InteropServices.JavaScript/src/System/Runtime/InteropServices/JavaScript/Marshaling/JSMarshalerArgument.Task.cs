@@ -16,7 +16,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <typeparam name="T">Type of the marshaled value.</typeparam>
         /// <param name="arg">The low-level argument representation.</param>
         /// <param name="value">The value to be marshaled.</param>
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.ComponentModel.EditorBrowsableAttribute(
+            System.ComponentModel.EditorBrowsableState.Never
+        )]
         public delegate void ArgumentToManagedCallback<T>(ref JSMarshalerArgument arg, out T value);
 
         /// <summary>
@@ -26,7 +28,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <typeparam name="T">Type of the marshaled value.</typeparam>
         /// <param name="arg">The low-level argument representation.</param>
         /// <param name="value">The value to be marshaled.</param>
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.ComponentModel.EditorBrowsableAttribute(
+            System.ComponentModel.EditorBrowsableState.Never
+        )]
         public delegate void ArgumentToJSCallback<T>(ref JSMarshalerArgument arg, T value);
 
         /// <summary>
@@ -43,11 +47,15 @@ namespace System.Runtime.InteropServices.JavaScript
             }
 
             GCHandle gcHandle = (GCHandle)slot.GCHandle;
-            JSHostImplementation.TaskCallback? holder = (JSHostImplementation.TaskCallback?)gcHandle.Target;
-            if (holder == null) throw new NullReferenceException("JSHostImplementation.TaskCallback");
+            JSHostImplementation.TaskCallback? holder = (JSHostImplementation.TaskCallback?)
+                gcHandle.Target;
+            if (holder == null)
+                throw new NullReferenceException("JSHostImplementation.TaskCallback");
 
             TaskCompletionSource tcs = new TaskCompletionSource(gcHandle);
-            JSHostImplementation.ToManagedCallback callback = (JSMarshalerArgument* arguments_buffer) =>
+            JSHostImplementation.ToManagedCallback callback = (
+                JSMarshalerArgument* arguments_buffer
+            ) =>
             {
                 ref JSMarshalerArgument arg_2 = ref arguments_buffer[3]; // set by caller when this is SetException call
                 // arg_3 set by caller when this is SetResult call, un-used here
@@ -82,18 +90,23 @@ namespace System.Runtime.InteropServices.JavaScript
             }
 
             GCHandle gcHandle = (GCHandle)slot.GCHandle;
-            JSHostImplementation.TaskCallback? holder = (JSHostImplementation.TaskCallback?)gcHandle.Target;
-            if (holder == null) throw new NullReferenceException("JSHostImplementation.TaskCallback");
+            JSHostImplementation.TaskCallback? holder = (JSHostImplementation.TaskCallback?)
+                gcHandle.Target;
+            if (holder == null)
+                throw new NullReferenceException("JSHostImplementation.TaskCallback");
 
             TaskCompletionSource<T> tcs = new TaskCompletionSource<T>(gcHandle);
-            JSHostImplementation.ToManagedCallback callback = (JSMarshalerArgument* arguments_buffer) =>
+            JSHostImplementation.ToManagedCallback callback = (
+                JSMarshalerArgument* arguments_buffer
+            ) =>
             {
                 ref JSMarshalerArgument arg_2 = ref arguments_buffer[3]; // set by caller when this is SetException call
                 ref JSMarshalerArgument arg_3 = ref arguments_buffer[4]; // set by caller when this is SetResult call
                 if (arg_2.slot.Type != MarshalerType.None)
                 {
                     arg_2.ToManaged(out Exception? fail);
-                    if (fail == null) throw new NullReferenceException("Exception");
+                    if (fail == null)
+                        throw new NullReferenceException("Exception");
                     tcs.SetException(fail);
                 }
                 else
@@ -133,7 +146,6 @@ namespace System.Runtime.InteropServices.JavaScript
                     return;
                 }
             }
-
 
             IntPtr jsHandle = CreatePendingPromise();
             slot.JSHandle = jsHandle;
@@ -288,7 +300,6 @@ namespace System.Runtime.InteropServices.JavaScript
                     return;
                 }
             }
-
 
             IntPtr jsHandle = CreatePendingPromise();
             slot.JSHandle = jsHandle;
@@ -446,7 +457,11 @@ namespace System.Runtime.InteropServices.JavaScript
             JavaScriptImports.MarshalPromise(args);
         }
 
-        private static void ResolvePromise<T>(JSObject promise, T value, ArgumentToJSCallback<T> marshaler)
+        private static void ResolvePromise<T>(
+            JSObject promise,
+            T value,
+            ArgumentToJSCallback<T> marshaler
+        )
         {
             if (promise.IsDisposed)
             {

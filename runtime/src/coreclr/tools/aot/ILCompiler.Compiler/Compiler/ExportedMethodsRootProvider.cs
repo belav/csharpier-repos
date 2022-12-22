@@ -29,8 +29,16 @@ namespace ILCompiler
                     foreach (var method in type.GetMethods())
                     {
                         EcmaMethod ecmaMethod = (EcmaMethod)method;
-                        if ((ecmaMethod.IsRuntimeExport && ecmaMethod.GetRuntimeExportName() != null) ||
-                            (ecmaMethod.IsUnmanagedCallersOnly && ecmaMethod.GetUnmanagedCallersOnlyExportName() != null))
+                        if (
+                            (
+                                ecmaMethod.IsRuntimeExport
+                                && ecmaMethod.GetRuntimeExportName() != null
+                            )
+                            || (
+                                ecmaMethod.IsUnmanagedCallersOnly
+                                && ecmaMethod.GetUnmanagedCallersOnlyExportName() != null
+                            )
+                        )
                             yield return ecmaMethod;
                     }
                 }
@@ -44,12 +52,21 @@ namespace ILCompiler
                 if (ecmaMethod.IsRuntimeExport)
                 {
                     string runtimeExportName = ecmaMethod.GetRuntimeExportName();
-                    rootProvider.AddCompilationRoot((MethodDesc)ecmaMethod, "Runtime export", runtimeExportName);
+                    rootProvider.AddCompilationRoot(
+                        (MethodDesc)ecmaMethod,
+                        "Runtime export",
+                        runtimeExportName
+                    );
                 }
                 else if (ecmaMethod.IsUnmanagedCallersOnly)
                 {
-                    string unmanagedCallersOnlyExportName = ecmaMethod.GetUnmanagedCallersOnlyExportName();
-                    rootProvider.AddCompilationRoot((MethodDesc)ecmaMethod, "Native callable", unmanagedCallersOnlyExportName);
+                    string unmanagedCallersOnlyExportName =
+                        ecmaMethod.GetUnmanagedCallersOnlyExportName();
+                    rootProvider.AddCompilationRoot(
+                        (MethodDesc)ecmaMethod,
+                        "Native callable",
+                        unmanagedCallersOnlyExportName
+                    );
                 }
             }
         }

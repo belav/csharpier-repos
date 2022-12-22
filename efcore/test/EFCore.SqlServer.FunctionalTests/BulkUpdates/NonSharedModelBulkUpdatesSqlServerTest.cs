@@ -5,12 +5,11 @@ namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
 public class NonSharedModelBulkUpdatesSqlServerTest : NonSharedModelBulkUpdatesTestBase
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task Delete_aggregate_root_when_eager_loaded_owned_collection(bool async)
     {
@@ -18,7 +17,8 @@ public class NonSharedModelBulkUpdatesSqlServerTest : NonSharedModelBulkUpdatesT
 
         AssertSql(
             @"DELETE FROM [o]
-FROM [Owner] AS [o]");
+FROM [Owner] AS [o]"
+        );
     }
 
     public override async Task Delete_aggregate_root_when_table_sharing_with_owned(bool async)
@@ -27,10 +27,13 @@ FROM [Owner] AS [o]");
 
         AssertSql(
             @"DELETE FROM [o]
-FROM [Owner] AS [o]");
+FROM [Owner] AS [o]"
+        );
     }
 
-    public override async Task Delete_aggregate_root_when_table_sharing_with_non_owned_throws(bool async)
+    public override async Task Delete_aggregate_root_when_table_sharing_with_non_owned_throws(
+        bool async
+    )
     {
         await base.Delete_aggregate_root_when_table_sharing_with_non_owned_throws(async);
 
@@ -45,12 +48,13 @@ FROM [Owner] AS [o]");
             @"DELETE FROM [p]
 FROM [Posts] AS [p]
 LEFT JOIN [Blogs] AS [b] ON [p].[BlogId] = [b].[Id]
-WHERE ([b].[Title] IS NOT NULL) AND ([b].[Title] LIKE N'Arthur%')");
+WHERE ([b].[Title] IS NOT NULL) AND ([b].[Title] LIKE N'Arthur%')"
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        TestSqlLoggerFactory.AssertBaseline(expected);
 
-    private void AssertExecuteUpdateSql(params string[] expected)
-        => TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
+    private void AssertExecuteUpdateSql(params string[] expected) =>
+        TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
 }

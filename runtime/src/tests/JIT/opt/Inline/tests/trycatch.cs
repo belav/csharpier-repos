@@ -19,11 +19,11 @@ namespace JitInliningTest
                 {
                     _prop = value;
                 }
-                catch
-                { }
+                catch { }
             }
         }
     }
+
     internal class PropTest5
     {
         public static int Main()

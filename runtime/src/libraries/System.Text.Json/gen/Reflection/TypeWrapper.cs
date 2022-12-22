@@ -24,7 +24,10 @@ namespace System.Text.Json.Reflection
 
         private Type _elementType;
 
-        public TypeWrapper(ITypeSymbol namedTypeSymbol, MetadataLoadContextInternal metadataLoadContext)
+        public TypeWrapper(
+            ITypeSymbol namedTypeSymbol,
+            MetadataLoadContextInternal metadataLoadContext
+        )
         {
             _typeSymbol = namedTypeSymbol;
             _metadataLoadContext = metadataLoadContext;
@@ -32,7 +35,8 @@ namespace System.Text.Json.Reflection
             _arrayTypeSymbol = _typeSymbol as IArrayTypeSymbol;
         }
 
-        public override Assembly Assembly => new AssemblyWrapper(_typeSymbol.ContainingAssembly, _metadataLoadContext);
+        public override Assembly Assembly =>
+            new AssemblyWrapper(_typeSymbol.ContainingAssembly, _metadataLoadContext);
 
         private string? _assemblyQualifiedName;
 
@@ -111,7 +115,8 @@ namespace System.Text.Json.Reflection
 
         public override Type BaseType => _typeSymbol.BaseType.AsType(_metadataLoadContext);
 
-        public override Type DeclaringType => _typeSymbol.ContainingType?.ConstructedFrom.AsType(_metadataLoadContext);
+        public override Type DeclaringType =>
+            _typeSymbol.ContainingType?.ConstructedFrom.AsType(_metadataLoadContext);
 
         private string? _fullName;
 
@@ -135,7 +140,10 @@ namespace System.Text.Json.Reflection
                     }
                     else
                     {
-                        if (!string.IsNullOrWhiteSpace(Namespace) && Namespace != JsonConstants.GlobalNamespaceValue)
+                        if (
+                            !string.IsNullOrWhiteSpace(Namespace)
+                            && Namespace != JsonConstants.GlobalNamespaceValue
+                        )
                         {
                             sb.Append(Namespace);
                             sb.Append('.');
@@ -192,9 +200,13 @@ namespace System.Text.Json.Reflection
         public override Module Module => throw new NotImplementedException();
 
         public override string Namespace =>
-            IsArray ?
-            GetElementType().Namespace :
-            _typeSymbol.ContainingNamespace?.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining))!;
+            IsArray
+                ? GetElementType().Namespace
+                : _typeSymbol.ContainingNamespace?.ToDisplayString(
+                    SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(
+                        SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining
+                    )
+                )!;
 
         public override Type UnderlyingSystemType => this;
 
@@ -236,9 +248,17 @@ namespace System.Text.Json.Reflection
                     return true;
                 }
 
-                for (INamedTypeSymbol currentSymbol = _namedTypeSymbol; currentSymbol != null; currentSymbol = currentSymbol.ContainingType)
+                for (
+                    INamedTypeSymbol currentSymbol = _namedTypeSymbol;
+                    currentSymbol != null;
+                    currentSymbol = currentSymbol.ContainingType
+                )
                 {
-                    if (currentSymbol.TypeArguments.Any(arg => arg.TypeKind == TypeKind.TypeParameter))
+                    if (
+                        currentSymbol.TypeArguments.Any(
+                            arg => arg.TypeKind == TypeKind.TypeParameter
+                        )
+                    )
                     {
                         return true;
                     }
@@ -248,7 +268,12 @@ namespace System.Text.Json.Reflection
             }
         }
 
-        public override bool IsGenericTypeDefinition => IsGenericType && SymbolEqualityComparer.Default.Equals(_namedTypeSymbol, _namedTypeSymbol.ConstructedFrom);
+        public override bool IsGenericTypeDefinition =>
+            IsGenericType
+            && SymbolEqualityComparer.Default.Equals(
+                _namedTypeSymbol,
+                _namedTypeSymbol.ConstructedFrom
+            );
 
         public override bool IsGenericParameter => _typeSymbol.TypeKind == TypeKind.TypeParameter;
 
@@ -265,7 +290,11 @@ namespace System.Text.Json.Reflection
             AddTypeArguments(args, _namedTypeSymbol, _metadataLoadContext);
             return args.ToArray();
 
-            static void AddTypeArguments(List<Type> args, INamedTypeSymbol typeSymbol, MetadataLoadContextInternal metadataLoadContext)
+            static void AddTypeArguments(
+                List<Type> args,
+                INamedTypeSymbol typeSymbol,
+                MetadataLoadContextInternal metadataLoadContext
+            )
             {
                 if (typeSymbol.ContainingType != null)
                 {
@@ -309,8 +338,16 @@ namespace System.Text.Json.Reflection
                     continue;
                 }
 
-                if (((BindingFlags.Public & bindingAttr) != 0 && c.DeclaredAccessibility == Accessibility.Public) ||
-                    ((BindingFlags.NonPublic & bindingAttr) != 0 && c.DeclaredAccessibility != Accessibility.Public))
+                if (
+                    (
+                        (BindingFlags.Public & bindingAttr) != 0
+                        && c.DeclaredAccessibility == Accessibility.Public
+                    )
+                    || (
+                        (BindingFlags.NonPublic & bindingAttr) != 0
+                        && c.DeclaredAccessibility != Accessibility.Public
+                    )
+                )
                 {
                     ctors.Add(new ConstructorInfoWrapper(c, _metadataLoadContext));
                 }
@@ -337,7 +374,9 @@ namespace System.Text.Json.Reflection
 
         public override Type MakeArrayType()
         {
-            return _metadataLoadContext.Compilation.CreateArrayTypeSymbol(_typeSymbol).AsType(_metadataLoadContext);
+            return _metadataLoadContext.Compilation
+                .CreateArrayTypeSymbol(_typeSymbol)
+                .AsType(_metadataLoadContext);
         }
 
         public override EventInfo GetEvent(string name, BindingFlags bindingAttr)
@@ -366,19 +405,28 @@ namespace System.Text.Json.Reflection
                     // Skip if:
                     if (
                         // this is a backing field
-                        fieldSymbol.AssociatedSymbol != null ||
+                        fieldSymbol.AssociatedSymbol != null
+                        ||
                         // we want a static field and this is not static
-                        (BindingFlags.Static & bindingAttr) != 0 && !fieldSymbol.IsStatic ||
+                        (BindingFlags.Static & bindingAttr) != 0
+                            && !fieldSymbol.IsStatic
+                        ||
                         // we want an instance field and this is static or a constant
-                        (BindingFlags.Instance & bindingAttr) != 0 && (fieldSymbol.IsStatic || fieldSymbol.IsConst) ||
+                        (BindingFlags.Instance & bindingAttr) != 0
+                            && (fieldSymbol.IsStatic || fieldSymbol.IsConst)
+                        ||
                         // symbol represents an explicitly named tuple element
-                        fieldSymbol.IsExplicitlyNamedTupleElement)
+                        fieldSymbol.IsExplicitlyNamedTupleElement
+                    )
                     {
                         continue;
                     }
 
-                    if ((BindingFlags.Public & bindingAttr) != 0 && item.DeclaredAccessibility == Accessibility.Public ||
-                        (BindingFlags.NonPublic & bindingAttr) != 0)
+                    if (
+                        (BindingFlags.Public & bindingAttr) != 0
+                            && item.DeclaredAccessibility == Accessibility.Public
+                        || (BindingFlags.NonPublic & bindingAttr) != 0
+                    )
                     {
                         fields.Add(new FieldInfoWrapper(fieldSymbol, _metadataLoadContext));
                     }
@@ -453,17 +501,26 @@ namespace System.Text.Json.Reflection
                     // Skip if:
                     if (
                         // we want a static property and this is not static
-                        (BindingFlags.Static & bindingAttr) != 0 && !propertySymbol.IsStatic ||
+                        (BindingFlags.Static & bindingAttr) != 0
+                            && !propertySymbol.IsStatic
+                        ||
                         // we want an instance property and this is static
-                        (BindingFlags.Instance & bindingAttr) != 0 && propertySymbol.IsStatic)
+                        (BindingFlags.Instance & bindingAttr) != 0
+                            && propertySymbol.IsStatic
+                    )
                     {
                         continue;
                     }
 
-                    if ((BindingFlags.Public & bindingAttr) != 0 && item.DeclaredAccessibility == Accessibility.Public ||
-                        (BindingFlags.NonPublic & bindingAttr) != 0)
+                    if (
+                        (BindingFlags.Public & bindingAttr) != 0
+                            && item.DeclaredAccessibility == Accessibility.Public
+                        || (BindingFlags.NonPublic & bindingAttr) != 0
+                    )
                     {
-                        properties.Add(new PropertyInfoWrapper(propertySymbol, _metadataLoadContext));
+                        properties.Add(
+                            new PropertyInfoWrapper(propertySymbol, _metadataLoadContext)
+                        );
                     }
                 }
             }
@@ -471,7 +528,16 @@ namespace System.Text.Json.Reflection
             return properties.ToArray();
         }
 
-        public override object InvokeMember(string name, BindingFlags invokeAttr, Binder binder, object target, object[] args, ParameterModifier[] modifiers, CultureInfo culture, string[] namedParameters)
+        public override object InvokeMember(
+            string name,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object target,
+            object[] args,
+            ParameterModifier[] modifiers,
+            CultureInfo culture,
+            string[] namedParameters
+        )
         {
             throw new NotSupportedException();
         }
@@ -505,22 +571,34 @@ namespace System.Text.Json.Reflection
                 {
                     case Accessibility.NotApplicable:
                     case Accessibility.Private:
-                        _typeAttributes |= isNested ? TypeAttributes.NestedPrivate : TypeAttributes.NotPublic;
+                        _typeAttributes |= isNested
+                            ? TypeAttributes.NestedPrivate
+                            : TypeAttributes.NotPublic;
                         break;
                     case Accessibility.ProtectedAndInternal:
-                        _typeAttributes |= isNested ? TypeAttributes.NestedFamANDAssem : TypeAttributes.NotPublic;
+                        _typeAttributes |= isNested
+                            ? TypeAttributes.NestedFamANDAssem
+                            : TypeAttributes.NotPublic;
                         break;
                     case Accessibility.Protected:
-                        _typeAttributes |= isNested ? TypeAttributes.NestedFamily : TypeAttributes.NotPublic;
+                        _typeAttributes |= isNested
+                            ? TypeAttributes.NestedFamily
+                            : TypeAttributes.NotPublic;
                         break;
                     case Accessibility.Internal:
-                        _typeAttributes |= isNested ? TypeAttributes.NestedAssembly : TypeAttributes.NotPublic;
+                        _typeAttributes |= isNested
+                            ? TypeAttributes.NestedAssembly
+                            : TypeAttributes.NotPublic;
                         break;
                     case Accessibility.ProtectedOrInternal:
-                        _typeAttributes |= isNested ? TypeAttributes.NestedFamORAssem : TypeAttributes.NotPublic;
+                        _typeAttributes |= isNested
+                            ? TypeAttributes.NestedFamORAssem
+                            : TypeAttributes.NotPublic;
                         break;
                     case Accessibility.Public:
-                        _typeAttributes |= isNested ? TypeAttributes.NestedPublic : TypeAttributes.Public;
+                        _typeAttributes |= isNested
+                            ? TypeAttributes.NestedPublic
+                            : TypeAttributes.Public;
                         break;
                 }
             }
@@ -528,7 +606,13 @@ namespace System.Text.Json.Reflection
             return _typeAttributes.Value;
         }
 
-        protected override ConstructorInfo GetConstructorImpl(BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers)
+        protected override ConstructorInfo GetConstructorImpl(
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
             foreach (ConstructorInfo constructor in GetConstructors(bindingAttr))
             {
@@ -556,12 +640,26 @@ namespace System.Text.Json.Reflection
             return null;
         }
 
-        protected override MethodInfo GetMethodImpl(string name, BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers)
+        protected override MethodInfo GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
             throw new NotImplementedException();
         }
 
-        protected override PropertyInfo GetPropertyImpl(string name, BindingFlags bindingAttr, Binder binder, Type returnType, Type[] types, ParameterModifier[] modifiers)
+        protected override PropertyInfo GetPropertyImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Type returnType,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
             // TODO: performance; caching; honor bindingAttr
             foreach (PropertyInfo propertyInfo in GetProperties(bindingAttr))
@@ -617,9 +715,19 @@ namespace System.Text.Json.Reflection
         {
             TypeWrapper? tr = c as TypeWrapper ?? _metadataLoadContext.Resolve(c) as TypeWrapper;
 
-            return tr is not null &&
-                (tr._typeSymbol.AllInterfaces.Contains(_typeSymbol, SymbolEqualityComparer.Default) ||
-                (tr._namedTypeSymbol != null && tr._namedTypeSymbol.BaseTypes().Contains(_typeSymbol, SymbolEqualityComparer.Default)));
+            return tr is not null
+                && (
+                    tr._typeSymbol.AllInterfaces.Contains(
+                        _typeSymbol,
+                        SymbolEqualityComparer.Default
+                    )
+                    || (
+                        tr._namedTypeSymbol != null
+                        && tr._namedTypeSymbol
+                            .BaseTypes()
+                            .Contains(_typeSymbol, SymbolEqualityComparer.Default)
+                    )
+                );
         }
 
 #pragma warning disable RS1024 // Compare symbols correctly
@@ -663,6 +771,7 @@ namespace System.Text.Json.Reflection
             return base.Equals(o);
         }
 
-        public Location? Location => _typeSymbol.Locations.Length > 0 ? _typeSymbol.Locations[0] : null;
+        public Location? Location =>
+            _typeSymbol.Locations.Length > 0 ? _typeSymbol.Locations[0] : null;
     }
 }

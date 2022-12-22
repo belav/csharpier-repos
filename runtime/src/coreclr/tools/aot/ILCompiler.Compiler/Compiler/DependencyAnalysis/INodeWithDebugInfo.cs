@@ -15,7 +15,12 @@ namespace ILCompiler.DependencyAnalysis
         public readonly int LineNumber;
         public readonly int ColNumber;
 
-        public NativeSequencePoint(int nativeOffset, string fileName, int lineNumber, int colNumber = 0)
+        public NativeSequencePoint(
+            int nativeOffset,
+            string fileName,
+            int lineNumber,
+            int colNumber = 0
+        )
         {
             NativeOffset = nativeOffset;
             FileName = fileName;
@@ -40,8 +45,12 @@ namespace ILCompiler.DependencyAnalysis
         public readonly bool IsParameter;
         public readonly DebugVarInfo DebugVarInfo;
 
-        public DebugVarInfoMetadata(string name, TypeDesc type, bool isParameter, DebugVarInfo info)
-            => (Name, Type, IsParameter, DebugVarInfo) = (name, type, isParameter, info);
+        public DebugVarInfoMetadata(
+            string name,
+            TypeDesc type,
+            bool isParameter,
+            DebugVarInfo info
+        ) => (Name, Type, IsParameter, DebugVarInfo) = (name, type, isParameter, info);
     }
 
     public readonly struct DebugVarInfo
@@ -49,8 +58,8 @@ namespace ILCompiler.DependencyAnalysis
         public readonly uint VarNumber;
         public readonly DebugVarRangeInfo[] Ranges;
 
-        public DebugVarInfo(uint varNumber, DebugVarRangeInfo[] ranges)
-            => (VarNumber, Ranges) = (varNumber, ranges);
+        public DebugVarInfo(uint varNumber, DebugVarRangeInfo[] ranges) =>
+            (VarNumber, Ranges) = (varNumber, ranges);
     }
 
     public readonly struct DebugVarRangeInfo
@@ -59,8 +68,8 @@ namespace ILCompiler.DependencyAnalysis
         public readonly uint EndOffset;
         public readonly VarLoc VarLoc;
 
-        public DebugVarRangeInfo(uint startOffset, uint endOffset, VarLoc varLoc)
-            => (StartOffset, EndOffset, VarLoc) = (startOffset, endOffset, varLoc);
+        public DebugVarRangeInfo(uint startOffset, uint endOffset, VarLoc varLoc) =>
+            (StartOffset, EndOffset, VarLoc) = (startOffset, endOffset, varLoc);
     }
 
     public static class WellKnownLineNumber

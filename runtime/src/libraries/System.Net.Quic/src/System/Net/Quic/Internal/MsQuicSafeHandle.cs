@@ -27,8 +27,11 @@ internal unsafe class MsQuicSafeHandle : SafeHandle
 
     public QUIC_HANDLE* QuicHandle => (QUIC_HANDLE*)DangerousGetHandle();
 
-    public MsQuicSafeHandle(QUIC_HANDLE* handle, delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void> releaseAction, SafeHandleType safeHandleType)
-        : base((IntPtr)handle, ownsHandle: true)
+    public MsQuicSafeHandle(
+        QUIC_HANDLE* handle,
+        delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void> releaseAction,
+        SafeHandleType safeHandleType
+    ) : base((IntPtr)handle, ownsHandle: true)
     {
         _releaseAction = releaseAction;
         _type = safeHandleType;
@@ -49,9 +52,14 @@ internal unsafe class MsQuicSafeHandle : SafeHandle
                 SafeHandleType.Listener => MsQuicApi.Api.ApiTable->ListenerClose,
                 SafeHandleType.Connection => MsQuicApi.Api.ApiTable->ConnectionClose,
                 SafeHandleType.Stream => MsQuicApi.Api.ApiTable->StreamClose,
-                _ => throw new ArgumentException($"Unexpected value: {safeHandleType}", nameof(safeHandleType))
+                _
+                    => throw new ArgumentException(
+                        $"Unexpected value: {safeHandleType}",
+                        nameof(safeHandleType)
+                    )
             },
-            safeHandleType) { }
+            safeHandleType
+        ) { }
 
     protected override bool ReleaseHandle()
     {
@@ -67,7 +75,8 @@ internal unsafe class MsQuicSafeHandle : SafeHandle
         return true;
     }
 
-    public override string ToString() => _traceId ??= $"[{s_typeName[(int)_type]}][0x{DangerousGetHandle():X11}]";
+    public override string ToString() =>
+        _traceId ??= $"[{s_typeName[(int)_type]}][0x{DangerousGetHandle():X11}]";
 }
 
 internal enum SafeHandleType
@@ -92,8 +101,12 @@ internal sealed class MsQuicContextSafeHandle : MsQuicSafeHandle
     /// </summary>
     private readonly MsQuicSafeHandle? _parent;
 
-    public unsafe MsQuicContextSafeHandle(QUIC_HANDLE* handle, GCHandle context, SafeHandleType safeHandleType, MsQuicSafeHandle? parent = null)
-        : base(handle, safeHandleType)
+    public unsafe MsQuicContextSafeHandle(
+        QUIC_HANDLE* handle,
+        GCHandle context,
+        SafeHandleType safeHandleType,
+        MsQuicSafeHandle? parent = null
+    ) : base(handle, safeHandleType)
     {
         _context = context;
         if (parent is not null)

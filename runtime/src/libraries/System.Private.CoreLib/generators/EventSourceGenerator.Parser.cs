@@ -22,23 +22,33 @@ namespace Generators
             private readonly Compilation _compilation;
             private readonly Action<Diagnostic> _reportDiagnostic;
 
-            public Parser(Compilation compilation, Action<Diagnostic> reportDiagnostic, CancellationToken cancellationToken)
+            public Parser(
+                Compilation compilation,
+                Action<Diagnostic> reportDiagnostic,
+                CancellationToken cancellationToken
+            )
             {
                 _compilation = compilation;
                 _cancellationToken = cancellationToken;
                 _reportDiagnostic = reportDiagnostic;
             }
 
-            public EventSourceClass[] GetEventSourceClasses(List<ClassDeclarationSyntax> classDeclarations)
+            public EventSourceClass[] GetEventSourceClasses(
+                List<ClassDeclarationSyntax> classDeclarations
+            )
             {
-                INamedTypeSymbol? autogenerateAttribute = _compilation.GetBestTypeByMetadataName("System.Diagnostics.Tracing.EventSourceAutoGenerateAttribute");
+                INamedTypeSymbol? autogenerateAttribute = _compilation.GetBestTypeByMetadataName(
+                    "System.Diagnostics.Tracing.EventSourceAutoGenerateAttribute"
+                );
                 if (autogenerateAttribute is null)
                 {
                     // No EventSourceAutoGenerateAttribute
                     return Array.Empty<EventSourceClass>();
                 }
 
-                INamedTypeSymbol? eventSourceAttribute = _compilation.GetBestTypeByMetadataName("System.Diagnostics.Tracing.EventSourceAttribute");
+                INamedTypeSymbol? eventSourceAttribute = _compilation.GetBestTypeByMetadataName(
+                    "System.Diagnostics.Tracing.EventSourceAttribute"
+                );
                 if (eventSourceAttribute is null)
                 {
                     // No EventSourceAttribute
@@ -47,7 +57,12 @@ namespace Generators
 
                 List<EventSourceClass>? results = null;
                 // we enumerate by syntax tree, to minimize the need to instantiate semantic models (since they're expensive)
-                foreach (IGrouping<SyntaxTree, ClassDeclarationSyntax>? group in classDeclarations.GroupBy(x => x.SyntaxTree))
+                foreach (
+                    IGrouping<
+                        SyntaxTree,
+                        ClassDeclarationSyntax
+                    >? group in classDeclarations.GroupBy(x => x.SyntaxTree)
+                )
                 {
                     SemanticModel? sm = null;
                     EventSourceClass? eventSourceClass = null;
@@ -67,21 +82,35 @@ namespace Generators
                                 // need a semantic model for this tree
                                 sm ??= _compilation.GetSemanticModel(classDef.SyntaxTree);
 
-                                if (sm.GetSymbolInfo(ca, _cancellationToken).Symbol is not IMethodSymbol caSymbol)
+                                if (
+                                    sm.GetSymbolInfo(ca, _cancellationToken).Symbol
+                                    is not IMethodSymbol caSymbol
+                                )
                                 {
                                     // badly formed attribute definition, or not the right attribute
                                     continue;
                                 }
 
-                                if (autogenerateAttribute.Equals(caSymbol.ContainingType, SymbolEqualityComparer.Default))
+                                if (
+                                    autogenerateAttribute.Equals(
+                                        caSymbol.ContainingType,
+                                        SymbolEqualityComparer.Default
+                                    )
+                                )
                                 {
                                     autoGenerate = true;
                                     continue;
                                 }
-                                if (eventSourceAttribute.Equals(caSymbol.ContainingType, SymbolEqualityComparer.Default))
+                                if (
+                                    eventSourceAttribute.Equals(
+                                        caSymbol.ContainingType,
+                                        SymbolEqualityComparer.Default
+                                    )
+                                )
                                 {
                                     string nspace = string.Empty;
-                                    NamespaceDeclarationSyntax? ns = classDef.Parent as NamespaceDeclarationSyntax;
+                                    NamespaceDeclarationSyntax? ns =
+                                        classDef.Parent as NamespaceDeclarationSyntax;
                                     if (ns is null)
                                     {
                                         if (classDef.Parent is not CompilationUnitSyntax)
@@ -109,13 +138,19 @@ namespace Generators
                                     string name = className;
                                     string guid = "";
 
-                                    SeparatedSyntaxList<AttributeArgumentSyntax>? args = ca.ArgumentList?.Arguments;
+                                    SeparatedSyntaxList<AttributeArgumentSyntax>? args =
+                                        ca.ArgumentList?.Arguments;
                                     if (args is not null)
                                     {
                                         foreach (AttributeArgumentSyntax? arg in args)
                                         {
-                                            string? argName = arg.NameEquals!.Name.Identifier.ToString();
-                                            string? value = sm.GetConstantValue(arg.Expression, _cancellationToken).ToString();
+                                            string? argName =
+                                                arg.NameEquals!.Name.Identifier.ToString();
+                                            string? value = sm.GetConstantValue(
+                                                    arg.Expression,
+                                                    _cancellationToken
+                                                )
+                                                .ToString();
 
                                             switch (argName)
                                             {
@@ -169,8 +204,22 @@ namespace Generators
             {
                 ReadOnlySpan<byte> namespaceBytes = new byte[] // rely on C# compiler optimization to remove byte[] allocation
                 {
-                    0x48, 0x2C, 0x2D, 0xB2, 0xC3, 0x90, 0x47, 0xC8,
-                    0x87, 0xF8, 0x1A, 0x15, 0xBF, 0xC1, 0x30, 0xFB,
+                    0x48,
+                    0x2C,
+                    0x2D,
+                    0xB2,
+                    0xC3,
+                    0x90,
+                    0x47,
+                    0xC8,
+                    0x87,
+                    0xF8,
+                    0x1A,
+                    0x15,
+                    0xBF,
+                    0xC1,
+                    0x30,
+                    0xFB,
                 };
 
                 byte[] bytes = Encoding.BigEndianUnicode.GetBytes(name);
@@ -187,7 +236,7 @@ namespace Generators
 
                 Array.Resize(ref bytes, 16);
 
-                bytes[7] = unchecked((byte)((bytes[7] & 0x0F) | 0x50));    // Set high 4 bits of octet 7 to 5, as per RFC 4122
+                bytes[7] = unchecked((byte)((bytes[7] & 0x0F) | 0x50)); // Set high 4 bits of octet 7 to 5, as per RFC 4122
                 return new Guid(bytes);
             }
         }

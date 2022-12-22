@@ -43,46 +43,28 @@ internal sealed partial class ResponseBody : Stream
 
     public override bool CanSeek
     {
-        get
-        {
-            return false;
-        }
+        get { return false; }
     }
 
     public override bool CanWrite
     {
-        get
-        {
-            return true;
-        }
+        get { return true; }
     }
 
     public override bool CanRead
     {
-        get
-        {
-            return false;
-        }
+        get { return false; }
     }
 
     public override long Length
     {
-        get
-        {
-            throw new NotSupportedException(Resources.Exception_NoSeek);
-        }
+        get { throw new NotSupportedException(Resources.Exception_NoSeek); }
     }
 
     public override long Position
     {
-        get
-        {
-            throw new NotSupportedException(Resources.Exception_NoSeek);
-        }
-        set
-        {
-            throw new NotSupportedException(Resources.Exception_NoSeek);
-        }
+        get { throw new NotSupportedException(Resources.Exception_NoSeek); }
+        set { throw new NotSupportedException(Resources.Exception_NoSeek); }
     }
 
     // Send headers
@@ -90,7 +72,9 @@ internal sealed partial class ResponseBody : Stream
     {
         if (!RequestContext.AllowSynchronousIO)
         {
-            throw new InvalidOperationException("Synchronous IO APIs are disabled, see AllowSynchronousIO.");
+            throw new InvalidOperationException(
+                "Synchronous IO APIs are disabled, see AllowSynchronousIO."
+            );
         }
 
         if (_disposed)
@@ -107,9 +91,15 @@ internal sealed partial class ResponseBody : Stream
     }
 
     // We never expect endOfRequest and data at the same time
-    private unsafe void FlushInternal(bool endOfRequest, ArraySegment<byte> data = new ArraySegment<byte>())
+    private unsafe void FlushInternal(
+        bool endOfRequest,
+        ArraySegment<byte> data = new ArraySegment<byte>()
+    )
     {
-        Debug.Assert(!(endOfRequest && data.Count > 0), "Data is not supported at the end of the request.");
+        Debug.Assert(
+            !(endOfRequest && data.Count > 0),
+            "Data is not supported at the end of the request."
+        );
 
         if (_skipWrites)
         {
@@ -150,16 +140,17 @@ internal sealed partial class ResponseBody : Stream
                 fixed (HttpApiTypes.HTTP_DATA_CHUNK* pDataChunks = dataChunks)
                 {
                     statusCode = HttpApi.HttpSendResponseEntityBody(
-                            RequestQueueHandle,
-                            RequestId,
-                            (uint)flags,
-                            (ushort)dataChunks.Length,
-                            pDataChunks,
-                            null,
-                            IntPtr.Zero,
-                            0,
-                            SafeNativeOverlapped.Zero,
-                            IntPtr.Zero);
+                        RequestQueueHandle,
+                        RequestId,
+                        (uint)flags,
+                        (ushort)dataChunks.Length,
+                        pDataChunks,
+                        null,
+                        IntPtr.Zero,
+                        0,
+                        SafeNativeOverlapped.Zero,
+                        IntPtr.Zero
+                    );
                 }
             }
         }
@@ -168,13 +159,25 @@ internal sealed partial class ResponseBody : Stream
             FreeDataBuffers(pinnedBuffers);
         }
 
-        if (statusCode != ErrorCodes.ERROR_SUCCESS && statusCode != ErrorCodes.ERROR_HANDLE_EOF
+        if (
+            statusCode != ErrorCodes.ERROR_SUCCESS
+            && statusCode != ErrorCodes.ERROR_HANDLE_EOF
             // Don't throw for disconnects, we were already finished with the response.
-            && (!endOfRequest || (statusCode != ErrorCodes.ERROR_CONNECTION_INVALID && statusCode != ErrorCodes.ERROR_INVALID_PARAMETER)))
+            && (
+                !endOfRequest
+                || (
+                    statusCode != ErrorCodes.ERROR_CONNECTION_INVALID
+                    && statusCode != ErrorCodes.ERROR_INVALID_PARAMETER
+                )
+            )
+        )
         {
             if (ThrowWriteExceptions)
             {
-                var exception = new IOException(string.Empty, new HttpSysException((int)statusCode));
+                var exception = new IOException(
+                    string.Empty,
+                    new HttpSysException((int)statusCode)
+                );
                 Log.WriteError(Logger, exception);
                 Abort();
                 throw exception;
@@ -188,20 +191,32 @@ internal sealed partial class ResponseBody : Stream
         }
     }
 
-    private List<GCHandle> PinDataBuffers(bool endOfRequest, ArraySegment<byte> data, out HttpApiTypes.HTTP_DATA_CHUNK[] dataChunks)
+    private List<GCHandle> PinDataBuffers(
+        bool endOfRequest,
+        ArraySegment<byte> data,
+        out HttpApiTypes.HTTP_DATA_CHUNK[] dataChunks
+    )
     {
         var pins = new List<GCHandle>();
         var hasData = data.Count > 0;
         var chunked = _requestContext.Response.BoundaryType == BoundaryType.Chunked;
         var addTrailers = endOfRequest && _requestContext.Response.HasTrailers;
-        Debug.Assert(!(addTrailers && chunked), "Trailers aren't currently supported for HTTP/1.1 chunking.");
+        Debug.Assert(
+            !(addTrailers && chunked),
+            "Trailers aren't currently supported for HTTP/1.1 chunking."
+        );
 
         var currentChunk = 0;
         // Figure out how many data chunks
         if (chunked && !hasData && endOfRequest)
         {
             dataChunks = new HttpApiTypes.HTTP_DATA_CHUNK[1];
-            SetDataChunk(dataChunks, ref currentChunk, pins, new ArraySegment<byte>(Helpers.ChunkTerminator));
+            SetDataChunk(
+                dataChunks,
+                ref currentChunk,
+                pins,
+                new ArraySegment<byte>(Helpers.ChunkTerminator)
+            );
             return pins;
         }
         else if (!hasData && !addTrailers)
@@ -248,7 +263,12 @@ internal sealed partial class ResponseBody : Stream
 
             if (endOfRequest)
             {
-                SetDataChunk(dataChunks, ref currentChunk, pins, new ArraySegment<byte>(Helpers.ChunkTerminator));
+                SetDataChunk(
+                    dataChunks,
+                    ref currentChunk,
+                    pins,
+                    new ArraySegment<byte>(Helpers.ChunkTerminator)
+                );
             }
         }
 
@@ -264,11 +284,18 @@ internal sealed partial class ResponseBody : Stream
         return pins;
     }
 
-    private static void SetDataChunk(HttpApiTypes.HTTP_DATA_CHUNK[] chunks, ref int chunkIndex, List<GCHandle> pins, ArraySegment<byte> buffer)
+    private static void SetDataChunk(
+        HttpApiTypes.HTTP_DATA_CHUNK[] chunks,
+        ref int chunkIndex,
+        List<GCHandle> pins,
+        ArraySegment<byte> buffer
+    )
     {
         var handle = GCHandle.Alloc(buffer.Array, GCHandleType.Pinned);
         pins.Add(handle);
-        chunks[chunkIndex].DataChunkType = HttpApiTypes.HTTP_DATA_CHUNK_TYPE.HttpDataChunkFromMemory;
+        chunks[chunkIndex].DataChunkType = HttpApiTypes
+            .HTTP_DATA_CHUNK_TYPE
+            .HttpDataChunkFromMemory;
         chunks[chunkIndex].fromMemory.pBuffer = handle.AddrOfPinnedObject() + buffer.Offset;
         chunks[chunkIndex].fromMemory.BufferLength = (uint)buffer.Count;
         chunkIndex++;
@@ -295,7 +322,10 @@ internal sealed partial class ResponseBody : Stream
     }
 
     // Simpler than Flush because it will never be called at the end of the request from Dispose.
-    private unsafe Task FlushInternalAsync(ArraySegment<byte> data, CancellationToken cancellationToken)
+    private unsafe Task FlushInternalAsync(
+        ArraySegment<byte> data,
+        CancellationToken cancellationToken
+    )
     {
         if (_skipWrites)
         {
@@ -340,7 +370,8 @@ internal sealed partial class ResponseBody : Stream
                     IntPtr.Zero,
                     0,
                     asyncResult.NativeOverlapped!,
-                    IntPtr.Zero);
+                    IntPtr.Zero
+                );
             }
         }
         catch (Exception e)
@@ -361,7 +392,10 @@ internal sealed partial class ResponseBody : Stream
             else if (ThrowWriteExceptions)
             {
                 asyncResult.Dispose();
-                Exception exception = new IOException(string.Empty, new HttpSysException((int)statusCode));
+                Exception exception = new IOException(
+                    string.Empty,
+                    new HttpSysException((int)statusCode)
+                );
                 Log.ErrorWhenFlushAsync(Logger, exception);
                 Abort();
                 throw exception;
@@ -406,7 +440,13 @@ internal sealed partial class ResponseBody : Stream
         throw new InvalidOperationException(Resources.Exception_WriteOnlyStream);
     }
 
-    public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+    public override IAsyncResult BeginRead(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback? callback,
+        object? state
+    )
     {
         throw new InvalidOperationException(Resources.Exception_WriteOnlyStream);
     }
@@ -458,8 +498,10 @@ internal sealed partial class ResponseBody : Stream
         {
             flags |= HttpApiTypes.HTTP_FLAGS.HTTP_SEND_RESPONSE_FLAG_DISCONNECT;
         }
-        else if (!endOfRequest
-            && (_leftToWrite != writeCount || _requestContext.Response.TrailersExpected))
+        else if (
+            !endOfRequest
+            && (_leftToWrite != writeCount || _requestContext.Response.TrailersExpected)
+        )
         {
             flags |= HttpApiTypes.HTTP_FLAGS.HTTP_SEND_RESPONSE_FLAG_MORE_DATA;
         }
@@ -487,7 +529,9 @@ internal sealed partial class ResponseBody : Stream
 
         if (!RequestContext.AllowSynchronousIO)
         {
-            throw new InvalidOperationException("Synchronous IO APIs are disabled, see AllowSynchronousIO.");
+            throw new InvalidOperationException(
+                "Synchronous IO APIs are disabled, see AllowSynchronousIO."
+            );
         }
 
         // Validates for null and bounds. Allows count == 0.
@@ -507,17 +551,30 @@ internal sealed partial class ResponseBody : Stream
         // First write with more bytes written than the entire content-length
         if (!_requestContext.Response.HasComputedHeaders && contentLength < count)
         {
-            throw new InvalidOperationException("More bytes written than specified in the Content-Length header.");
+            throw new InvalidOperationException(
+                "More bytes written than specified in the Content-Length header."
+            );
         }
         // A write in a response that has already started where the count exceeds the remainder of the content-length
-        else if (_requestContext.Response.HasComputedHeaders && _requestContext.Response.BoundaryType == BoundaryType.ContentLength
-            && _leftToWrite < count)
+        else if (
+            _requestContext.Response.HasComputedHeaders
+            && _requestContext.Response.BoundaryType == BoundaryType.ContentLength
+            && _leftToWrite < count
+        )
         {
-            throw new InvalidOperationException("More bytes written than specified in the Content-Length header.");
+            throw new InvalidOperationException(
+                "More bytes written than specified in the Content-Length header."
+            );
         }
     }
 
-    public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+    public override IAsyncResult BeginWrite(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback? callback,
+        object? state
+    )
     {
         return TaskToApm.Begin(WriteAsync(buffer, offset, count), callback, state);
     }
@@ -529,7 +586,12 @@ internal sealed partial class ResponseBody : Stream
         TaskToApm.End(asyncResult);
     }
 
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         ValidateBufferArguments(buffer, offset, count);
 
@@ -543,7 +605,12 @@ internal sealed partial class ResponseBody : Stream
         return FlushInternalAsync(data, cancellationToken);
     }
 
-    internal async Task SendFileAsync(string fileName, long offset, long? count, CancellationToken cancellationToken)
+    internal async Task SendFileAsync(
+        string fileName,
+        long offset,
+        long? count,
+        CancellationToken cancellationToken
+    )
     {
         // It's too expensive to validate the file attributes before opening the file. Open the file and then check the lengths.
         // This all happens inside of ResponseStreamAsyncResult.
@@ -560,7 +627,12 @@ internal sealed partial class ResponseBody : Stream
         await SendFileAsyncCore(fileName, offset, count, cancellationToken);
     }
 
-    internal unsafe Task SendFileAsyncCore(string fileName, long offset, long? count, CancellationToken cancellationToken)
+    internal unsafe Task SendFileAsyncCore(
+        string fileName,
+        long offset,
+        long? count,
+        CancellationToken cancellationToken
+    )
     {
         if (_skipWrites)
         {
@@ -582,8 +654,14 @@ internal sealed partial class ResponseBody : Stream
 
         // We are setting buffer size to 1 to prevent FileStream from allocating it's internal buffer
         // It's too expensive to validate anything before opening the file. Open the file and then check the lengths.
-        var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, bufferSize: 1,
-                options: FileOptions.Asynchronous | FileOptions.SequentialScan); // Extremely expensive.
+        var fileStream = new FileStream(
+            fileName,
+            FileMode.Open,
+            FileAccess.Read,
+            FileShare.ReadWrite,
+            bufferSize: 1,
+            options: FileOptions.Asynchronous | FileOptions.SequentialScan
+        ); // Extremely expensive.
 
         try
         {
@@ -614,7 +692,14 @@ internal sealed partial class ResponseBody : Stream
         uint statusCode;
         uint bytesSent = 0;
         var chunked = _requestContext.Response.BoundaryType == BoundaryType.Chunked;
-        var asyncResult = new ResponseStreamAsyncResult(this, fileStream, offset, count.Value, chunked, cancellationToken);
+        var asyncResult = new ResponseStreamAsyncResult(
+            this,
+            fileStream,
+            offset,
+            count.Value,
+            chunked,
+            cancellationToken
+        );
 
         try
         {
@@ -627,16 +712,17 @@ internal sealed partial class ResponseBody : Stream
             {
                 // TODO: If opaque then include the buffer data flag.
                 statusCode = HttpApi.HttpSendResponseEntityBody(
-                        RequestQueueHandle,
-                        RequestId,
-                        (uint)flags,
-                        asyncResult.DataChunkCount,
-                        asyncResult.DataChunks,
-                        &bytesSent,
-                        IntPtr.Zero,
-                        0,
-                        asyncResult.NativeOverlapped!,
-                        IntPtr.Zero);
+                    RequestQueueHandle,
+                    RequestId,
+                    (uint)flags,
+                    asyncResult.DataChunkCount,
+                    asyncResult.DataChunks,
+                    &bytesSent,
+                    IntPtr.Zero,
+                    0,
+                    asyncResult.NativeOverlapped!,
+                    IntPtr.Zero
+                );
             }
         }
         catch (Exception e)
@@ -647,7 +733,10 @@ internal sealed partial class ResponseBody : Stream
             throw;
         }
 
-        if (statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS && statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_IO_PENDING)
+        if (
+            statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
+            && statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_IO_PENDING
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -657,7 +746,10 @@ internal sealed partial class ResponseBody : Stream
             else if (ThrowWriteExceptions)
             {
                 asyncResult.Dispose();
-                var exception = new IOException(string.Empty, new HttpSysException((int)statusCode));
+                var exception = new IOException(
+                    string.Empty,
+                    new HttpSysException((int)statusCode)
+                );
                 Log.FileSendAsyncError(Logger, exception);
                 Abort();
                 throw exception;
@@ -728,28 +820,68 @@ internal sealed partial class ResponseBody : Stream
 
     private static partial class Log
     {
-        [LoggerMessage(LoggerEventIds.FewerBytesThanExpected, LogLevel.Error, "ResponseStream::Dispose; Fewer bytes were written than were specified in the Content-Length.", EventName = "FewerBytesThanExpected")]
+        [LoggerMessage(
+            LoggerEventIds.FewerBytesThanExpected,
+            LogLevel.Error,
+            "ResponseStream::Dispose; Fewer bytes were written than were specified in the Content-Length.",
+            EventName = "FewerBytesThanExpected"
+        )]
         public static partial void FewerBytesThanExpected(ILogger logger);
 
-        [LoggerMessage(LoggerEventIds.WriteError, LogLevel.Error, "Flush", EventName = "WriteError")]
+        [LoggerMessage(
+            LoggerEventIds.WriteError,
+            LogLevel.Error,
+            "Flush",
+            EventName = "WriteError"
+        )]
         public static partial void WriteError(ILogger logger, IOException exception);
 
-        [LoggerMessage(LoggerEventIds.WriteErrorIgnored, LogLevel.Debug, "Flush; Ignored write exception: {StatusCode}", EventName = "WriteFlushedIgnored")]
+        [LoggerMessage(
+            LoggerEventIds.WriteErrorIgnored,
+            LogLevel.Debug,
+            "Flush; Ignored write exception: {StatusCode}",
+            EventName = "WriteFlushedIgnored"
+        )]
         public static partial void WriteErrorIgnored(ILogger logger, uint statusCode);
 
-        [LoggerMessage(LoggerEventIds.ErrorWhenFlushAsync, LogLevel.Debug, "FlushAsync", EventName = "ErrorWhenFlushAsync")]
+        [LoggerMessage(
+            LoggerEventIds.ErrorWhenFlushAsync,
+            LogLevel.Debug,
+            "FlushAsync",
+            EventName = "ErrorWhenFlushAsync"
+        )]
         public static partial void ErrorWhenFlushAsync(ILogger logger, Exception exception);
 
-        [LoggerMessage(LoggerEventIds.WriteFlushCancelled, LogLevel.Debug, "FlushAsync; Write cancelled with error code: {StatusCode}", EventName = "WriteFlushCancelled")]
+        [LoggerMessage(
+            LoggerEventIds.WriteFlushCancelled,
+            LogLevel.Debug,
+            "FlushAsync; Write cancelled with error code: {StatusCode}",
+            EventName = "WriteFlushCancelled"
+        )]
         public static partial void WriteFlushCancelled(ILogger logger, uint statusCode);
 
-        [LoggerMessage(LoggerEventIds.FileSendAsyncError, LogLevel.Error, "SendFileAsync", EventName = "FileSendAsyncError")]
+        [LoggerMessage(
+            LoggerEventIds.FileSendAsyncError,
+            LogLevel.Error,
+            "SendFileAsync",
+            EventName = "FileSendAsyncError"
+        )]
         public static partial void FileSendAsyncError(ILogger logger, Exception exception);
 
-        [LoggerMessage(LoggerEventIds.FileSendAsyncCancelled, LogLevel.Debug, "SendFileAsync; Write cancelled with error code: {StatusCode}", EventName = "FileSendAsyncCancelled")]
+        [LoggerMessage(
+            LoggerEventIds.FileSendAsyncCancelled,
+            LogLevel.Debug,
+            "SendFileAsync; Write cancelled with error code: {StatusCode}",
+            EventName = "FileSendAsyncCancelled"
+        )]
         public static partial void FileSendAsyncCancelled(ILogger logger, uint statusCode);
 
-        [LoggerMessage(LoggerEventIds.FileSendAsyncErrorIgnored, LogLevel.Debug, "SendFileAsync; Ignored write exception: {StatusCode}", EventName = "FileSendAsyncErrorIgnored")]
+        [LoggerMessage(
+            LoggerEventIds.FileSendAsyncErrorIgnored,
+            LogLevel.Debug,
+            "SendFileAsync; Ignored write exception: {StatusCode}",
+            EventName = "FileSendAsyncErrorIgnored"
+        )]
         public static partial void FileSendAsyncErrorIgnored(ILogger logger, uint statusCode);
     }
 }

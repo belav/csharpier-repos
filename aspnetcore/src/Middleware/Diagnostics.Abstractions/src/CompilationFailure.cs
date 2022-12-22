@@ -20,10 +20,8 @@ public class CompilationFailure
         string? sourceFilePath,
         string? sourceFileContent,
         string? compiledContent,
-        IEnumerable<DiagnosticMessage>? messages)
-        : this(sourceFilePath, sourceFileContent, compiledContent, messages, failureSummary: null)
-    {
-    }
+        IEnumerable<DiagnosticMessage>? messages
+    ) : this(sourceFilePath, sourceFileContent, compiledContent, messages, failureSummary: null) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="CompilationFailure"/>.
@@ -39,7 +37,8 @@ public class CompilationFailure
         string? sourceFileContent,
         string? compiledContent,
         IEnumerable<DiagnosticMessage?>? messages,
-        string? failureSummary)
+        string? failureSummary
+    )
     {
         SourceFilePath = sourceFilePath;
         SourceFileContent = sourceFileContent;

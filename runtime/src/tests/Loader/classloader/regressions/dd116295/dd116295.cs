@@ -9,9 +9,7 @@ namespace ConsoleApplication1
 {
     class Program
     {
-        public struct A
-        {
-        }
+        public struct A { }
 
         public struct B
         {
@@ -32,12 +30,12 @@ namespace ConsoleApplication1
                 Console.WriteLine("PASS");
                 return 100;
             }
-            catch(TypeLoadException)
+            catch (TypeLoadException)
             {
                 Console.WriteLine("Caught TypeLoadException, FAIL");
                 return 99;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine("Caught unexpected exception");
                 Console.WriteLine(e);

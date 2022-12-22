@@ -16,31 +16,44 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
 {
-    internal abstract class AbstractAddAccessibilityModifiersCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    internal abstract class AbstractAddAccessibilityModifiersCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
         protected abstract SyntaxNode MapToDeclarator(SyntaxNode declaration);
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.AddAccessibilityModifiersDiagnosticId);
+        public sealed override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.AddAccessibilityModifiersDiagnosticId);
 
         public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
 
-            var priority = diagnostic.Severity == DiagnosticSeverity.Hidden
-                ? CodeActionPriority.Low
-                : CodeActionPriority.Medium;
+            var priority =
+                diagnostic.Severity == DiagnosticSeverity.Hidden
+                    ? CodeActionPriority.Low
+                    : CodeActionPriority.Medium;
 
-            RegisterCodeFix(context, AnalyzersResources.Add_accessibility_modifiers, nameof(AnalyzersResources.Add_accessibility_modifiers), priority);
+            RegisterCodeFix(
+                context,
+                AnalyzersResources.Add_accessibility_modifiers,
+                nameof(AnalyzersResources.Add_accessibility_modifiers),
+                priority
+            );
 
             return Task.CompletedTask;
         }
 
         protected sealed override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             foreach (var diagnostic in diagnostics)
             {

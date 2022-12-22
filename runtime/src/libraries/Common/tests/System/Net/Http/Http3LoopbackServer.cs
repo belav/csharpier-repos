@@ -80,23 +80,32 @@ namespace System.Net.Test.Common
             return await EstablishHttp3ConnectionAsync();
         }
 
-        public override async Task AcceptConnectionAsync(Func<GenericLoopbackConnection, Task> funcAsync)
+        public override async Task AcceptConnectionAsync(
+            Func<GenericLoopbackConnection, Task> funcAsync
+        )
         {
-            await using Http3LoopbackConnection con = await EstablishHttp3ConnectionAsync().ConfigureAwait(false);
+            await using Http3LoopbackConnection con = await EstablishHttp3ConnectionAsync()
+                .ConfigureAwait(false);
             await funcAsync(con).ConfigureAwait(false);
             await con.ShutdownAsync();
         }
 
-        public override async Task<HttpRequestData> HandleRequestAsync(HttpStatusCode statusCode = HttpStatusCode.OK, IList<HttpHeaderData> headers = null, string content = "")
+        public override async Task<HttpRequestData> HandleRequestAsync(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            IList<HttpHeaderData> headers = null,
+            string content = ""
+        )
         {
-            await using Http3LoopbackConnection con = (Http3LoopbackConnection)await EstablishGenericConnectionAsync().ConfigureAwait(false);
+            await using Http3LoopbackConnection con = (Http3LoopbackConnection)
+                await EstablishGenericConnectionAsync().ConfigureAwait(false);
             return await con.HandleRequestAsync(statusCode, headers, content).ConfigureAwait(false);
         }
     }
 
     public sealed class Http3LoopbackServerFactory : LoopbackServerFactory
     {
-        public static Http3LoopbackServerFactory Singleton { get; } = new Http3LoopbackServerFactory();
+        public static Http3LoopbackServerFactory Singleton { get; } =
+            new Http3LoopbackServerFactory();
 
         public override Version Version { get; } = new Version(3, 0);
 
@@ -105,13 +114,22 @@ namespace System.Net.Test.Common
             return new Http3LoopbackServer(CreateOptions(options));
         }
 
-        public override async Task CreateServerAsync(Func<GenericLoopbackServer, Uri, Task> funcAsync, int millisecondsTimeout = 60000, GenericLoopbackOptions options = null)
+        public override async Task CreateServerAsync(
+            Func<GenericLoopbackServer, Uri, Task> funcAsync,
+            int millisecondsTimeout = 60000,
+            GenericLoopbackOptions options = null
+        )
         {
             using GenericLoopbackServer server = CreateServer(options);
-            await funcAsync(server, server.Address).WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout));
+            await funcAsync(server, server.Address)
+                .WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout));
         }
 
-        public override Task<GenericLoopbackConnection> CreateConnectionAsync(SocketWrapper socket, Stream stream, GenericLoopbackOptions options = null)
+        public override Task<GenericLoopbackConnection> CreateConnectionAsync(
+            SocketWrapper socket,
+            Stream stream,
+            GenericLoopbackOptions options = null
+        )
         {
             // TODO: make a new overload that takes a MultiplexedConnection.
             // This method is always unacceptable to call for HTTP/3.
@@ -137,6 +155,7 @@ namespace System.Net.Test.Common
             return http3Options;
         }
     }
+
     public class Http3Options : GenericLoopbackOptions
     {
         public int MaxInboundUnidirectionalStreams { get; set; }

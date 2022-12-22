@@ -2,13 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 
-
 namespace System.Reflection.Metadata.ApplyUpdate.Test
 {
     public class AddStaticField
     {
-        public AddStaticField () {
-        }
+        public AddStaticField() { }
 
         public string GetField => s_field2;
 
@@ -16,10 +14,10 @@ namespace System.Reflection.Metadata.ApplyUpdate.Test
 
         private static string s_field2;
 
-        public void TestMethod () {
+        public void TestMethod()
+        {
             s_field = "spqr";
             s_field2 = "4567";
         }
-
     }
 }

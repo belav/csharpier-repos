@@ -18,7 +18,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Experimentation
 {
     [Export(typeof(VisualStudioExperimentationService))]
     [ExportWorkspaceService(typeof(IExperimentationService), ServiceLayer.Host), Shared]
-    internal class VisualStudioExperimentationService : ForegroundThreadAffinitizedObject, IExperimentationService
+    internal class VisualStudioExperimentationService
+        : ForegroundThreadAffinitizedObject,
+            IExperimentationService
     {
         private readonly object _experimentationServiceOpt;
         private readonly MethodInfo _isCachedFlightEnabledInfo;
@@ -33,8 +35,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Experimentation
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioExperimentationService(IThreadingContext threadingContext, SVsServiceProvider serviceProvider)
-            : base(threadingContext)
+        public VisualStudioExperimentationService(
+            IThreadingContext threadingContext,
+            SVsServiceProvider serviceProvider
+        ) : base(threadingContext)
         {
             object experimentationServiceOpt = null;
             MethodInfo isCachedFlightEnabledInfo = null;
@@ -44,17 +48,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Experimentation
             {
                 try
                 {
-                    featureFlags = (IVsFeatureFlags)await ((IAsyncServiceProvider)serviceProvider).GetServiceAsync(typeof(SVsFeatureFlags)).ConfigureAwait(false);
-                    experimentationServiceOpt = await ((IAsyncServiceProvider)serviceProvider).GetServiceAsync(typeof(SVsExperimentationService)).ConfigureAwait(false);
+                    featureFlags = (IVsFeatureFlags)
+                        await ((IAsyncServiceProvider)serviceProvider)
+                            .GetServiceAsync(typeof(SVsFeatureFlags))
+                            .ConfigureAwait(false);
+                    experimentationServiceOpt = await ((IAsyncServiceProvider)serviceProvider)
+                        .GetServiceAsync(typeof(SVsExperimentationService))
+                        .ConfigureAwait(false);
                     if (experimentationServiceOpt != null)
                     {
-                        isCachedFlightEnabledInfo = experimentationServiceOpt.GetType().GetMethod(
-                            "IsCachedFlightEnabled", BindingFlags.Public | BindingFlags.Instance);
+                        isCachedFlightEnabledInfo = experimentationServiceOpt
+                            .GetType()
+                            .GetMethod(
+                                "IsCachedFlightEnabled",
+                                BindingFlags.Public | BindingFlags.Instance
+                            );
                     }
                 }
-                catch
-                {
-                }
+                catch { }
             });
 
             _featureFlags = featureFlags;
@@ -97,7 +108,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Experimentation
                     // we are not testing all rules but just simple "." check
                     if (experimentName.IndexOf(".") > 0)
                     {
-                        var enabled = _featureFlags.IsFeatureEnabled(experimentName, defaultValue: false);
+                        var enabled = _featureFlags.IsFeatureEnabled(
+                            experimentName,
+                            defaultValue: false
+                        );
                         if (enabled)
                         {
                             return enabled;
@@ -112,12 +126,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Experimentation
 
                 try
                 {
-                    return (bool)_isCachedFlightEnabledInfo.Invoke(_experimentationServiceOpt, new object[] { experimentName });
+                    return (bool)
+                        _isCachedFlightEnabledInfo.Invoke(
+                            _experimentationServiceOpt,
+                            new object[] { experimentName }
+                        );
                 }
-                catch
-                {
-
-                }
+                catch { }
             }
 
             return false;

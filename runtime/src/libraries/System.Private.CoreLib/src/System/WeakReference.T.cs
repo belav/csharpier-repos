@@ -10,10 +10,11 @@ using System.Diagnostics;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     // This class is sealed to mitigate security issues caused by Object::MemberwiseClone.
-    public sealed partial class WeakReference<T> : ISerializable
-        where T : class?
+    public sealed partial class WeakReference<T> : ISerializable where T : class?
     {
         // If you fix bugs here, please fix them in WeakReference<T> at the same time.
 
@@ -32,10 +33,7 @@ namespace System
         // Creates a new WeakReference that keeps track of target.
         // Assumes a Short Weak Reference (ie TrackResurrection is false.)
         //
-        public WeakReference(T target)
-            : this(target, false)
-        {
-        }
+        public WeakReference(T target) : this(target, false) { }
 
         // Creates a new WeakReference that keeps track of target.
         //
@@ -86,10 +84,11 @@ namespace System
         // Creates a new WeakReference that keeps track of target.
         private void Create(T target, bool trackResurrection)
         {
-            IntPtr h = GCHandle.InternalAlloc(target, trackResurrection ? GCHandleType.WeakTrackResurrection : GCHandleType.Weak);
-            _handleAndKind = trackResurrection ?
-                h | TracksResurrectionBit :
-                h;
+            IntPtr h = GCHandle.InternalAlloc(
+                target,
+                trackResurrection ? GCHandleType.WeakTrackResurrection : GCHandleType.Weak
+            );
+            _handleAndKind = trackResurrection ? h | TracksResurrectionBit : h;
         }
 
         private IntPtr Handle => _handleAndKind & ~TracksResurrectionBit;

@@ -14,6 +14,7 @@ struct S0
     public int F2;
     public short F3;
     public short F4;
+
     public S0(short f4) : this()
     {
         F4 = f4;
@@ -24,6 +25,7 @@ struct S1
 {
     public S0 F0;
     public int F3;
+
     public S1(S0 f0) : this()
     {
         F0 = f0;
@@ -33,6 +35,7 @@ struct S1
 struct S3
 {
     public S1 F0;
+
     public S3(S1 f0) : this()
     {
         F0 = f0;
@@ -43,6 +46,7 @@ struct S4
 {
     public ushort F3;
     public S3 F4;
+
     public S4(S3 f4) : this()
     {
         F4 = f4;

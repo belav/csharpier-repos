@@ -32,9 +32,8 @@ namespace System.Security.Cryptography
                 //     -- Only if "includePrivateParameters" is true --
                 //     byte[cbKey]          D
 
-                int blobSize = sizeof(BCRYPT_ECCKEY_BLOB) +
-                    parameters.Q.X!.Length +
-                    parameters.Q.Y!.Length;
+                int blobSize =
+                    sizeof(BCRYPT_ECCKEY_BLOB) + parameters.Q.X!.Length + parameters.Q.Y!.Length;
                 if (includePrivateParameters)
                 {
                     blobSize += parameters.D!.Length;
@@ -45,9 +44,15 @@ namespace System.Security.Cryptography
                 {
                     // Build the header
                     BCRYPT_ECCKEY_BLOB* pBcryptBlob = (BCRYPT_ECCKEY_BLOB*)pBlob;
-                    pBcryptBlob->Magic = ecdh ?
-                        EcdhCurveNameToMagicNumber(parameters.Curve.Oid.FriendlyName, includePrivateParameters) :
-                        EcdsaCurveNameToMagicNumber(parameters.Curve.Oid.FriendlyName, includePrivateParameters);
+                    pBcryptBlob->Magic = ecdh
+                        ? EcdhCurveNameToMagicNumber(
+                            parameters.Curve.Oid.FriendlyName,
+                            includePrivateParameters
+                        )
+                        : EcdsaCurveNameToMagicNumber(
+                            parameters.Curve.Oid.FriendlyName,
+                            includePrivateParameters
+                        );
                     pBcryptBlob->cbKey = parameters.Q.X.Length;
 
                     // Emit the blob
@@ -90,17 +95,18 @@ namespace System.Security.Cryptography
                 //     -- Only if "includePrivateParameters" is true --
                 //     byte[cbSubgroupOrder]        D
 
-                int blobSize = sizeof(BCRYPT_ECCFULLKEY_BLOB) +
-                    curve.Prime!.Length +
-                    curve.A!.Length +
-                    curve.B!.Length +
-                    curve.G.X!.Length +
-                    curve.G.Y!.Length +
-                    curve.Order!.Length +
-                    curve.Cofactor!.Length +
-                    (curve.Seed == null ? 0 : curve.Seed.Length) +
-                    parameters.Q.X!.Length +
-                    parameters.Q.Y!.Length;
+                int blobSize =
+                    sizeof(BCRYPT_ECCFULLKEY_BLOB)
+                    + curve.Prime!.Length
+                    + curve.A!.Length
+                    + curve.B!.Length
+                    + curve.G.X!.Length
+                    + curve.G.Y!.Length
+                    + curve.Order!.Length
+                    + curve.Cofactor!.Length
+                    + (curve.Seed == null ? 0 : curve.Seed.Length)
+                    + parameters.Q.X!.Length
+                    + parameters.Q.Y!.Length;
 
                 if (includePrivateParameters)
                 {
@@ -113,9 +119,17 @@ namespace System.Security.Cryptography
                     // Build the header
                     BCRYPT_ECCFULLKEY_BLOB* pBcryptBlob = (BCRYPT_ECCFULLKEY_BLOB*)pBlob;
                     pBcryptBlob->Version = 1; // No constant for this found in bcrypt.h
-                    pBcryptBlob->Magic = includePrivateParameters ?
-                        (ecdh ? KeyBlobMagicNumber.BCRYPT_ECDH_PRIVATE_GENERIC_MAGIC : KeyBlobMagicNumber.BCRYPT_ECDSA_PRIVATE_GENERIC_MAGIC) :
-                        (ecdh ? KeyBlobMagicNumber.BCRYPT_ECDH_PUBLIC_GENERIC_MAGIC : KeyBlobMagicNumber.BCRYPT_ECDSA_PUBLIC_GENERIC_MAGIC);
+                    pBcryptBlob->Magic = includePrivateParameters
+                        ? (
+                            ecdh
+                                ? KeyBlobMagicNumber.BCRYPT_ECDH_PRIVATE_GENERIC_MAGIC
+                                : KeyBlobMagicNumber.BCRYPT_ECDSA_PRIVATE_GENERIC_MAGIC
+                        )
+                        : (
+                            ecdh
+                                ? KeyBlobMagicNumber.BCRYPT_ECDH_PUBLIC_GENERIC_MAGIC
+                                : KeyBlobMagicNumber.BCRYPT_ECDSA_PUBLIC_GENERIC_MAGIC
+                        );
                     pBcryptBlob->cbCofactor = curve.Cofactor.Length;
                     pBcryptBlob->cbFieldLength = parameters.Q.X.Length;
                     pBcryptBlob->cbSeed = curve.Seed == null ? 0 : curve.Seed.Length;
@@ -151,7 +165,11 @@ namespace System.Security.Cryptography
             }
         }
 
-        internal static void ExportNamedCurveParameters(ref ECParameters ecParams, byte[] ecBlob, bool includePrivateParameters)
+        internal static void ExportNamedCurveParameters(
+            ref ECParameters ecParams,
+            byte[] ecBlob,
+            bool includePrivateParameters
+        )
         {
             // We now have a buffer laid out as follows:
             //     BCRYPT_ECCKEY_BLOB   header
@@ -165,7 +183,6 @@ namespace System.Security.Cryptography
             // Check the magic value in the key blob header. If the blob does not have the required magic,
             // then throw a CryptographicException.
             CheckMagicValueOfKey(magic, includePrivateParameters);
-
             unsafe
             {
                 // Fail-fast if a rogue provider gave us a blob that isn't even the size of the blob header.
@@ -192,7 +209,11 @@ namespace System.Security.Cryptography
             }
         }
 
-        internal static void ExportPrimeCurveParameters(ref ECParameters ecParams, byte[] ecBlob, bool includePrivateParameters)
+        internal static void ExportPrimeCurveParameters(
+            ref ECParameters ecParams,
+            byte[] ecBlob,
+            bool includePrivateParameters
+        )
         {
             // We now have a buffer laid out as follows:
             //     BCRYPT_ECCFULLKEY_BLOB       header
@@ -214,7 +235,6 @@ namespace System.Security.Cryptography
             // Check the magic value in the key blob header. If the blob does not have the required magic,
             // then throw a CryptographicException.
             CheckMagicValueOfKey(magic, includePrivateParameters);
-
             unsafe
             {
                 // Fail-fast if a rogue provider gave us a blob that isn't even the size of the blob header.
@@ -231,19 +251,42 @@ namespace System.Security.Cryptography
 
                     int offset = sizeof(BCRYPT_ECCFULLKEY_BLOB);
 
-                    primeCurve.Prime = Interop.BCrypt.Consume(ecBlob, ref offset, pBcryptBlob->cbFieldLength);
-                    primeCurve.A = Interop.BCrypt.Consume(ecBlob, ref offset, pBcryptBlob->cbFieldLength);
-                    primeCurve.B = Interop.BCrypt.Consume(ecBlob, ref offset, pBcryptBlob->cbFieldLength);
+                    primeCurve.Prime = Interop.BCrypt.Consume(
+                        ecBlob,
+                        ref offset,
+                        pBcryptBlob->cbFieldLength
+                    );
+                    primeCurve.A = Interop.BCrypt.Consume(
+                        ecBlob,
+                        ref offset,
+                        pBcryptBlob->cbFieldLength
+                    );
+                    primeCurve.B = Interop.BCrypt.Consume(
+                        ecBlob,
+                        ref offset,
+                        pBcryptBlob->cbFieldLength
+                    );
                     primeCurve.G = new ECPoint()
                     {
                         X = Interop.BCrypt.Consume(ecBlob, ref offset, pBcryptBlob->cbFieldLength),
                         Y = Interop.BCrypt.Consume(ecBlob, ref offset, pBcryptBlob->cbFieldLength),
                     };
-                    primeCurve.Order = Interop.BCrypt.Consume(ecBlob, ref offset, pBcryptBlob->cbSubgroupOrder);
-                    primeCurve.Cofactor = Interop.BCrypt.Consume(ecBlob, ref offset, pBcryptBlob->cbCofactor);
+                    primeCurve.Order = Interop.BCrypt.Consume(
+                        ecBlob,
+                        ref offset,
+                        pBcryptBlob->cbSubgroupOrder
+                    );
+                    primeCurve.Cofactor = Interop.BCrypt.Consume(
+                        ecBlob,
+                        ref offset,
+                        pBcryptBlob->cbCofactor
+                    );
 
                     // Optional parameters
-                    primeCurve.Seed = pBcryptBlob->cbSeed == 0 ? null : Interop.BCrypt.Consume(ecBlob, ref offset, pBcryptBlob->cbSeed);
+                    primeCurve.Seed =
+                        pBcryptBlob->cbSeed == 0
+                            ? null
+                            : Interop.BCrypt.Consume(ecBlob, ref offset, pBcryptBlob->cbSeed);
 
                     ecParams.Q = new ECPoint
                     {
@@ -253,7 +296,11 @@ namespace System.Security.Cryptography
 
                     if (includePrivateParameters)
                     {
-                        ecParams.D = Interop.BCrypt.Consume(ecBlob, ref offset, pBcryptBlob->cbSubgroupOrder);
+                        ecParams.D = Interop.BCrypt.Consume(
+                            ecBlob,
+                            ref offset,
+                            pBcryptBlob->cbSubgroupOrder
+                        );
                     }
 
                     ecParams.Curve = primeCurve;
@@ -274,15 +321,16 @@ namespace System.Security.Cryptography
             //     byte[cbCofactor]             Cofactor (h)
             //     byte[cbSeed]                 Seed
 
-            int blobSize = sizeof(BCRYPT_ECC_PARAMETER_HEADER) +
-                curve.Prime!.Length +
-                curve.A!.Length +
-                curve.B!.Length +
-                curve.G.X!.Length +
-                curve.G.Y!.Length +
-                curve.Order!.Length +
-                curve.Cofactor!.Length +
-                (curve.Seed == null ? 0 : curve.Seed.Length);
+            int blobSize =
+                sizeof(BCRYPT_ECC_PARAMETER_HEADER)
+                + curve.Prime!.Length
+                + curve.A!.Length
+                + curve.B!.Length
+                + curve.G.X!.Length
+                + curve.G.Y!.Length
+                + curve.Order!.Length
+                + curve.Cofactor!.Length
+                + (curve.Seed == null ? 0 : curve.Seed.Length);
 
             byte[] blob = new byte[blobSize];
             fixed (byte* pBlob = &blob[0])
@@ -323,7 +371,10 @@ namespace System.Security.Cryptography
         /// </summary>
         /// <param name="magic">The expected magic number.</param>
         /// <param name="includePrivateParameters">Private blob if true else public key blob</param>
-        private static void CheckMagicValueOfKey(KeyBlobMagicNumber magic, bool includePrivateParameters)
+        private static void CheckMagicValueOfKey(
+            KeyBlobMagicNumber magic,
+            bool includePrivateParameters
+        )
         {
             if (includePrivateParameters)
             {
@@ -383,24 +434,31 @@ namespace System.Security.Cryptography
         /// to the pre-Win10 magic numbers to support import on pre-Win10 environments
         /// that don't have the named curve functionality.
         /// </summary>
-        private static KeyBlobMagicNumber EcdsaCurveNameToMagicNumber(string? name, bool includePrivateParameters) =>
+        private static KeyBlobMagicNumber EcdsaCurveNameToMagicNumber(
+            string? name,
+            bool includePrivateParameters
+        ) =>
             EcdsaCurveNameToAlgorithm(name) switch
             {
-                AlgorithmName.ECDsaP256 => includePrivateParameters ?
-                       KeyBlobMagicNumber.BCRYPT_ECDSA_PRIVATE_P256_MAGIC :
-                       KeyBlobMagicNumber.BCRYPT_ECDSA_PUBLIC_P256_MAGIC,
+                AlgorithmName.ECDsaP256
+                    => includePrivateParameters
+                        ? KeyBlobMagicNumber.BCRYPT_ECDSA_PRIVATE_P256_MAGIC
+                        : KeyBlobMagicNumber.BCRYPT_ECDSA_PUBLIC_P256_MAGIC,
 
-                AlgorithmName.ECDsaP384 => includePrivateParameters ?
-                        KeyBlobMagicNumber.BCRYPT_ECDSA_PRIVATE_P384_MAGIC :
-                        KeyBlobMagicNumber.BCRYPT_ECDSA_PUBLIC_P384_MAGIC,
+                AlgorithmName.ECDsaP384
+                    => includePrivateParameters
+                        ? KeyBlobMagicNumber.BCRYPT_ECDSA_PRIVATE_P384_MAGIC
+                        : KeyBlobMagicNumber.BCRYPT_ECDSA_PUBLIC_P384_MAGIC,
 
-                AlgorithmName.ECDsaP521 => includePrivateParameters ?
-                        KeyBlobMagicNumber.BCRYPT_ECDSA_PRIVATE_P521_MAGIC :
-                        KeyBlobMagicNumber.BCRYPT_ECDSA_PUBLIC_P521_MAGIC,
+                AlgorithmName.ECDsaP521
+                    => includePrivateParameters
+                        ? KeyBlobMagicNumber.BCRYPT_ECDSA_PRIVATE_P521_MAGIC
+                        : KeyBlobMagicNumber.BCRYPT_ECDSA_PUBLIC_P521_MAGIC,
 
-                _ => includePrivateParameters ?
-                        KeyBlobMagicNumber.BCRYPT_ECDSA_PRIVATE_GENERIC_MAGIC :
-                        KeyBlobMagicNumber.BCRYPT_ECDSA_PUBLIC_GENERIC_MAGIC,
+                _
+                    => includePrivateParameters
+                        ? KeyBlobMagicNumber.BCRYPT_ECDSA_PRIVATE_GENERIC_MAGIC
+                        : KeyBlobMagicNumber.BCRYPT_ECDSA_PUBLIC_GENERIC_MAGIC,
             };
 
         /// <summary>
@@ -408,48 +466,63 @@ namespace System.Security.Cryptography
         /// to the pre-Win10 magic numbers to support import on pre-Win10 environments
         /// that don't have the named curve functionality.
         /// </summary>
-        private static KeyBlobMagicNumber EcdhCurveNameToMagicNumber(string? name, bool includePrivateParameters) =>
+        private static KeyBlobMagicNumber EcdhCurveNameToMagicNumber(
+            string? name,
+            bool includePrivateParameters
+        ) =>
             EcdhCurveNameToAlgorithm(name) switch
             {
-                AlgorithmName.ECDHP256 => includePrivateParameters ?
-                       KeyBlobMagicNumber.BCRYPT_ECDH_PRIVATE_P256_MAGIC :
-                       KeyBlobMagicNumber.BCRYPT_ECDH_PUBLIC_P256_MAGIC,
+                AlgorithmName.ECDHP256
+                    => includePrivateParameters
+                        ? KeyBlobMagicNumber.BCRYPT_ECDH_PRIVATE_P256_MAGIC
+                        : KeyBlobMagicNumber.BCRYPT_ECDH_PUBLIC_P256_MAGIC,
 
-                AlgorithmName.ECDHP384 => includePrivateParameters ?
-                        KeyBlobMagicNumber.BCRYPT_ECDH_PRIVATE_P384_MAGIC :
-                        KeyBlobMagicNumber.BCRYPT_ECDH_PUBLIC_P384_MAGIC,
+                AlgorithmName.ECDHP384
+                    => includePrivateParameters
+                        ? KeyBlobMagicNumber.BCRYPT_ECDH_PRIVATE_P384_MAGIC
+                        : KeyBlobMagicNumber.BCRYPT_ECDH_PUBLIC_P384_MAGIC,
 
-                AlgorithmName.ECDHP521 => includePrivateParameters ?
-                        KeyBlobMagicNumber.BCRYPT_ECDH_PRIVATE_P521_MAGIC :
-                        KeyBlobMagicNumber.BCRYPT_ECDH_PUBLIC_P521_MAGIC,
+                AlgorithmName.ECDHP521
+                    => includePrivateParameters
+                        ? KeyBlobMagicNumber.BCRYPT_ECDH_PRIVATE_P521_MAGIC
+                        : KeyBlobMagicNumber.BCRYPT_ECDH_PUBLIC_P521_MAGIC,
 
-                _ => includePrivateParameters ?
-                        KeyBlobMagicNumber.BCRYPT_ECDH_PRIVATE_GENERIC_MAGIC :
-                        KeyBlobMagicNumber.BCRYPT_ECDH_PUBLIC_GENERIC_MAGIC,
+                _
+                    => includePrivateParameters
+                        ? KeyBlobMagicNumber.BCRYPT_ECDH_PRIVATE_GENERIC_MAGIC
+                        : KeyBlobMagicNumber.BCRYPT_ECDH_PUBLIC_GENERIC_MAGIC,
             };
 
         /// <summary>
         /// Helper method to map between BCrypt.ECC_CURVE_TYPE_ENUM and ECCurve.ECCurveType
         /// </summary>
-        private static Interop.BCrypt.ECC_CURVE_TYPE_ENUM ConvertToCurveTypeEnum(ECCurve.ECCurveType value)
+        private static Interop.BCrypt.ECC_CURVE_TYPE_ENUM ConvertToCurveTypeEnum(
+            ECCurve.ECCurveType value
+        )
         {
             // Currently values 1-3 are interchangeable
-            Debug.Assert(value == ECCurve.ECCurveType.Characteristic2 ||
-                value == ECCurve.ECCurveType.PrimeShortWeierstrass ||
-                value == ECCurve.ECCurveType.PrimeTwistedEdwards);
+            Debug.Assert(
+                value == ECCurve.ECCurveType.Characteristic2
+                    || value == ECCurve.ECCurveType.PrimeShortWeierstrass
+                    || value == ECCurve.ECCurveType.PrimeTwistedEdwards
+            );
             return (Interop.BCrypt.ECC_CURVE_TYPE_ENUM)value;
         }
 
         /// <summary>
         /// Helper method to map between BCrypt.ECC_CURVE_TYPE_ENUM and ECCurve.ECCurveType
         /// </summary>
-        private static ECCurve.ECCurveType ConvertToCurveTypeEnum(Interop.BCrypt.ECC_CURVE_TYPE_ENUM value)
+        private static ECCurve.ECCurveType ConvertToCurveTypeEnum(
+            Interop.BCrypt.ECC_CURVE_TYPE_ENUM value
+        )
         {
             // Currently values 1-3 are interchangeable
             ECCurve.ECCurveType curveType = (ECCurve.ECCurveType)value;
-            Debug.Assert(curveType == ECCurve.ECCurveType.Characteristic2 ||
-                curveType == ECCurve.ECCurveType.PrimeShortWeierstrass ||
-                curveType == ECCurve.ECCurveType.PrimeTwistedEdwards);
+            Debug.Assert(
+                curveType == ECCurve.ECCurveType.Characteristic2
+                    || curveType == ECCurve.ECCurveType.PrimeShortWeierstrass
+                    || curveType == ECCurve.ECCurveType.PrimeTwistedEdwards
+            );
             return curveType;
         }
 
@@ -457,7 +530,8 @@ namespace System.Security.Cryptography
             string blobType,
             ReadOnlySpan<byte> keyBlob,
             string curveName,
-            SafeNCryptProviderHandle provider)
+            SafeNCryptProviderHandle provider
+        )
         {
             ErrorCode errorCode;
             SafeNCryptKeyHandle keyHandle;
@@ -474,7 +548,10 @@ namespace System.Security.Cryptography
                     descPtr = Marshal.AllocHGlobal(Marshal.SizeOf(desc));
                     buffPtr = Marshal.AllocHGlobal(Marshal.SizeOf(buff));
                     buff.cbBuffer = (curveName.Length + 1) * 2; // Add 1 for null terminator
-                    buff.BufferType = Interop.BCrypt.CngBufferDescriptors.NCRYPTBUFFER_ECC_CURVE_NAME;
+                    buff.BufferType = Interop
+                        .BCrypt
+                        .CngBufferDescriptors
+                        .NCRYPTBUFFER_ECC_CURVE_NAME;
                     buff.pvBuffer = safeCurveName.DangerousGetHandle();
                     Marshal.StructureToPtr(buff, buffPtr, false);
 
@@ -491,7 +568,8 @@ namespace System.Security.Cryptography
                         out keyHandle,
                         ref MemoryMarshal.GetReference(keyBlob),
                         keyBlob.Length,
-                        0);
+                        0
+                    );
                 }
                 finally
                 {
@@ -506,7 +584,10 @@ namespace System.Security.Cryptography
                 keyHandle.Dispose();
                 if (errorCode == ErrorCode.NTE_INVALID_PARAMETER)
                 {
-                    throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_CurveNotSupported, curveName), e);
+                    throw new PlatformNotSupportedException(
+                        SR.Format(SR.Cryptography_CurveNotSupported, curveName),
+                        e
+                    );
                 }
                 throw e;
             }

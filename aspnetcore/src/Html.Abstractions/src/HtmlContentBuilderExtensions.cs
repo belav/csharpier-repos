@@ -25,7 +25,8 @@ public static class HtmlContentBuilderExtensions
     public static IHtmlContentBuilder AppendFormat(
         this IHtmlContentBuilder builder,
         string format,
-        params object?[] args)
+        params object?[] args
+    )
     {
         if (builder == null)
         {
@@ -65,7 +66,8 @@ public static class HtmlContentBuilderExtensions
         this IHtmlContentBuilder builder,
         IFormatProvider formatProvider,
         string format,
-        params object?[] args)
+        params object?[] args
+    )
     {
         if (builder == null)
         {
@@ -127,7 +129,10 @@ public static class HtmlContentBuilderExtensions
     /// <param name="builder">The <see cref="IHtmlContentBuilder"/>.</param>
     /// <param name="content">The <see cref="IHtmlContent"/> to append.</param>
     /// <returns>The <see cref="IHtmlContentBuilder"/>.</returns>
-    public static IHtmlContentBuilder AppendLine(this IHtmlContentBuilder builder, IHtmlContent content)
+    public static IHtmlContentBuilder AppendLine(
+        this IHtmlContentBuilder builder,
+        IHtmlContent content
+    )
     {
         if (builder == null)
         {
@@ -146,7 +151,10 @@ public static class HtmlContentBuilderExtensions
     /// <param name="builder">The <see cref="IHtmlContentBuilder"/>.</param>
     /// <param name="encoded">The HTML encoded <see cref="string"/> to append.</param>
     /// <returns>The <see cref="IHtmlContentBuilder"/>.</returns>
-    public static IHtmlContentBuilder AppendHtmlLine(this IHtmlContentBuilder builder, string encoded)
+    public static IHtmlContentBuilder AppendHtmlLine(
+        this IHtmlContentBuilder builder,
+        string encoded
+    )
     {
         if (builder == null)
         {
@@ -183,7 +191,10 @@ public static class HtmlContentBuilderExtensions
     /// <param name="builder">The <see cref="IHtmlContentBuilder"/>.</param>
     /// <param name="content">The <see cref="IHtmlContent"/> value that replaces the content.</param>
     /// <returns>The <see cref="IHtmlContentBuilder"/>.</returns>
-    public static IHtmlContentBuilder SetHtmlContent(this IHtmlContentBuilder builder, IHtmlContent content)
+    public static IHtmlContentBuilder SetHtmlContent(
+        this IHtmlContentBuilder builder,
+        IHtmlContent content
+    )
     {
         if (builder == null)
         {
@@ -202,7 +213,10 @@ public static class HtmlContentBuilderExtensions
     /// <param name="builder">The <see cref="IHtmlContentBuilder"/>.</param>
     /// <param name="encoded">The HTML encoded <see cref="string"/> that replaces the content.</param>
     /// <returns>The <see cref="IHtmlContentBuilder"/>.</returns>
-    public static IHtmlContentBuilder SetHtmlContent(this IHtmlContentBuilder builder, string encoded)
+    public static IHtmlContentBuilder SetHtmlContent(
+        this IHtmlContentBuilder builder,
+        string encoded
+    )
     {
         if (builder == null)
         {

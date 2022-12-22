@@ -14,9 +14,7 @@ namespace System.Collections
         void CopyTo(Array array, int index);
 
         // Number of items in the collections.
-        int Count
-        { get; }
-
+        int Count { get; }
 
         // SyncRoot will return an Object to use for synchronization
         // (thread safety).  You can use this object in your code to take a
@@ -51,8 +49,7 @@ namespace System.Collections
         // that the this pointer may not be sufficient for collections that
         // wrap other collections;  those should return the underlying
         // collection's SyncRoot property.
-        object SyncRoot
-        { get; }
+        object SyncRoot { get; }
 
         // Is this collection synchronized (i.e., thread-safe)?  If you want a
         // thread-safe collection, you can use SyncRoot as an object to
@@ -60,7 +57,6 @@ namespace System.Collections
         // collections in System.Collections, you could call the static
         // Synchronized method to get a thread-safe wrapper around the
         // underlying collection.
-        bool IsSynchronized
-        { get; }
+        bool IsSynchronized { get; }
     }
 }

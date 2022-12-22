@@ -5,7 +5,11 @@ namespace Microsoft.AspNetCore.Rewrite.PatternSegments;
 
 internal sealed class QueryStringSegment : PatternSegment
 {
-    public override string? Evaluate(RewriteContext context, BackReferenceCollection? ruleBackRefernces, BackReferenceCollection? conditionBackReferences)
+    public override string? Evaluate(
+        RewriteContext context,
+        BackReferenceCollection? ruleBackRefernces,
+        BackReferenceCollection? conditionBackReferences
+    )
     {
         var queryString = context.HttpContext.Request.QueryString.ToString();
 

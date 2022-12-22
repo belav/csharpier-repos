@@ -26,13 +26,19 @@ public class Http2FrameWriterBenchmark
     {
         _memoryPool = PinnedBlockMemoryPoolFactory.Create();
 
-        var options = new PipeOptions(_memoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+        var options = new PipeOptions(
+            _memoryPool,
+            readerScheduler: PipeScheduler.Inline,
+            writerScheduler: PipeScheduler.Inline,
+            useSynchronizationContext: false
+        );
         _pipe = new Pipe(options);
 
         var serviceContext = TestContextFactory.CreateServiceContext(
             serverOptions: new KestrelServerOptions(),
             httpParser: new HttpParser<Http1ParsingHandler>(),
-            dateHeaderValueManager: new DateHeaderValueManager());
+            dateHeaderValueManager: new DateHeaderValueManager()
+        );
 
         _frameWriter = new Http2FrameWriter(
             new NullPipeWriter(),
@@ -43,7 +49,8 @@ public class Http2FrameWriterBenchmark
             minResponseDataRate: null,
             "TestConnectionId",
             _memoryPool,
-            serviceContext);
+            serviceContext
+        );
 
         _responseHeaders = new HttpResponseHeaders();
         var headers = (IHeaderDictionary)_responseHeaders;
@@ -54,7 +61,12 @@ public class Http2FrameWriterBenchmark
     [Benchmark]
     public void WriteResponseHeaders()
     {
-        _frameWriter.WriteResponseHeaders(streamId: 0, 200, Http2HeadersFrameFlags.END_STREAM, _responseHeaders);
+        _frameWriter.WriteResponseHeaders(
+            streamId: 0,
+            200,
+            Http2HeadersFrameFlags.END_STREAM,
+            _responseHeaders
+        );
     }
 
     [GlobalCleanup]

@@ -17,14 +17,17 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override IDbTransactionInterceptor CreateChain(IEnumerable<IDbTransactionInterceptor> interceptors)
-        => new CompositeDbTransactionInterceptor(interceptors);
+    protected override IDbTransactionInterceptor CreateChain(
+        IEnumerable<IDbTransactionInterceptor> interceptors
+    ) => new CompositeDbTransactionInterceptor(interceptors);
 
     private sealed class CompositeDbTransactionInterceptor : IDbTransactionInterceptor
     {
         private readonly IDbTransactionInterceptor[] _interceptors;
 
-        public CompositeDbTransactionInterceptor(IEnumerable<IDbTransactionInterceptor> interceptors)
+        public CompositeDbTransactionInterceptor(
+            IEnumerable<IDbTransactionInterceptor> interceptors
+        )
         {
             _interceptors = interceptors.ToArray();
         }
@@ -32,7 +35,8 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
         public InterceptionResult<DbTransaction> TransactionStarting(
             DbConnection connection,
             TransactionStartingEventData eventData,
-            InterceptionResult<DbTransaction> result)
+            InterceptionResult<DbTransaction> result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -45,7 +49,8 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
         public DbTransaction TransactionStarted(
             DbConnection connection,
             TransactionEndEventData eventData,
-            DbTransaction result)
+            DbTransaction result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -59,11 +64,13 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
             DbConnection connection,
             TransactionStartingEventData eventData,
             InterceptionResult<DbTransaction> result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                result = await _interceptors[i].TransactionStartingAsync(connection, eventData, result, cancellationToken)
+                result = await _interceptors[i]
+                    .TransactionStartingAsync(connection, eventData, result, cancellationToken)
                     .ConfigureAwait(false);
             }
 
@@ -74,11 +81,13 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
             DbConnection connection,
             TransactionEndEventData eventData,
             DbTransaction result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                result = await _interceptors[i].TransactionStartedAsync(connection, eventData, result, cancellationToken)
+                result = await _interceptors[i]
+                    .TransactionStartedAsync(connection, eventData, result, cancellationToken)
                     .ConfigureAwait(false);
             }
 
@@ -88,7 +97,8 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
         public DbTransaction TransactionUsed(
             DbConnection connection,
             TransactionEventData eventData,
-            DbTransaction result)
+            DbTransaction result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -102,11 +112,13 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
             DbConnection connection,
             TransactionEventData eventData,
             DbTransaction result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                result = await _interceptors[i].TransactionUsedAsync(connection, eventData, result, cancellationToken)
+                result = await _interceptors[i]
+                    .TransactionUsedAsync(connection, eventData, result, cancellationToken)
                     .ConfigureAwait(false);
             }
 
@@ -116,7 +128,8 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
         public InterceptionResult TransactionCommitting(
             DbTransaction transaction,
             TransactionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -128,7 +141,8 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
 
         public void TransactionCommitted(
             DbTransaction transaction,
-            TransactionEndEventData eventData)
+            TransactionEndEventData eventData
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -140,11 +154,13 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
             DbTransaction transaction,
             TransactionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                result = await _interceptors[i].TransactionCommittingAsync(transaction, eventData, result, cancellationToken)
+                result = await _interceptors[i]
+                    .TransactionCommittingAsync(transaction, eventData, result, cancellationToken)
                     .ConfigureAwait(false);
             }
 
@@ -154,11 +170,13 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
         public async Task TransactionCommittedAsync(
             DbTransaction transaction,
             TransactionEndEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                await _interceptors[i].TransactionCommittedAsync(transaction, eventData, cancellationToken)
+                await _interceptors[i]
+                    .TransactionCommittedAsync(transaction, eventData, cancellationToken)
                     .ConfigureAwait(false);
             }
         }
@@ -166,7 +184,8 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
         public InterceptionResult TransactionRollingBack(
             DbTransaction transaction,
             TransactionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -178,7 +197,8 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
 
         public void TransactionRolledBack(
             DbTransaction transaction,
-            TransactionEndEventData eventData)
+            TransactionEndEventData eventData
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -190,11 +210,13 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
             DbTransaction transaction,
             TransactionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                result = await _interceptors[i].TransactionRollingBackAsync(transaction, eventData, result, cancellationToken)
+                result = await _interceptors[i]
+                    .TransactionRollingBackAsync(transaction, eventData, result, cancellationToken)
                     .ConfigureAwait(false);
             }
 
@@ -204,11 +226,13 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
         public async Task TransactionRolledBackAsync(
             DbTransaction transaction,
             TransactionEndEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                await _interceptors[i].TransactionRolledBackAsync(transaction, eventData, cancellationToken)
+                await _interceptors[i]
+                    .TransactionRolledBackAsync(transaction, eventData, cancellationToken)
                     .ConfigureAwait(false);
             }
         }
@@ -216,7 +240,8 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
         public InterceptionResult CreatingSavepoint(
             DbTransaction transaction,
             TransactionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -226,9 +251,7 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
             return result;
         }
 
-        public void CreatedSavepoint(
-            DbTransaction transaction,
-            TransactionEventData eventData)
+        public void CreatedSavepoint(DbTransaction transaction, TransactionEventData eventData)
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -240,11 +263,13 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
             DbTransaction transaction,
             TransactionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                result = await _interceptors[i].CreatingSavepointAsync(transaction, eventData, result, cancellationToken)
+                result = await _interceptors[i]
+                    .CreatingSavepointAsync(transaction, eventData, result, cancellationToken)
                     .ConfigureAwait(false);
             }
 
@@ -254,11 +279,13 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
         public async Task CreatedSavepointAsync(
             DbTransaction transaction,
             TransactionEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                await _interceptors[i].CreatedSavepointAsync(transaction, eventData, cancellationToken)
+                await _interceptors[i]
+                    .CreatedSavepointAsync(transaction, eventData, cancellationToken)
                     .ConfigureAwait(false);
             }
         }
@@ -266,7 +293,8 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
         public InterceptionResult RollingBackToSavepoint(
             DbTransaction transaction,
             TransactionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -276,9 +304,7 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
             return result;
         }
 
-        public void RolledBackToSavepoint(
-            DbTransaction transaction,
-            TransactionEventData eventData)
+        public void RolledBackToSavepoint(DbTransaction transaction, TransactionEventData eventData)
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -290,11 +316,13 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
             DbTransaction transaction,
             TransactionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                result = await _interceptors[i].RollingBackToSavepointAsync(transaction, eventData, result, cancellationToken)
+                result = await _interceptors[i]
+                    .RollingBackToSavepointAsync(transaction, eventData, result, cancellationToken)
                     .ConfigureAwait(false);
             }
 
@@ -304,11 +332,13 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
         public async Task RolledBackToSavepointAsync(
             DbTransaction transaction,
             TransactionEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                await _interceptors[i].RolledBackToSavepointAsync(transaction, eventData, cancellationToken)
+                await _interceptors[i]
+                    .RolledBackToSavepointAsync(transaction, eventData, cancellationToken)
                     .ConfigureAwait(false);
             }
         }
@@ -316,7 +346,8 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
         public InterceptionResult ReleasingSavepoint(
             DbTransaction transaction,
             TransactionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -326,9 +357,7 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
             return result;
         }
 
-        public void ReleasedSavepoint(
-            DbTransaction transaction,
-            TransactionEventData eventData)
+        public void ReleasedSavepoint(DbTransaction transaction, TransactionEventData eventData)
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -340,11 +369,13 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
             DbTransaction transaction,
             TransactionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                result = await _interceptors[i].ReleasingSavepointAsync(transaction, eventData, result, cancellationToken)
+                result = await _interceptors[i]
+                    .ReleasingSavepointAsync(transaction, eventData, result, cancellationToken)
                     .ConfigureAwait(false);
             }
 
@@ -354,16 +385,21 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
         public async Task ReleasedSavepointAsync(
             DbTransaction transaction,
             TransactionEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                await _interceptors[i].ReleasedSavepointAsync(transaction, eventData, cancellationToken)
+                await _interceptors[i]
+                    .ReleasedSavepointAsync(transaction, eventData, cancellationToken)
                     .ConfigureAwait(false);
             }
         }
 
-        public void TransactionFailed(DbTransaction transaction, TransactionErrorEventData eventData)
+        public void TransactionFailed(
+            DbTransaction transaction,
+            TransactionErrorEventData eventData
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -374,11 +410,13 @@ public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTrans
         public async Task TransactionFailedAsync(
             DbTransaction transaction,
             TransactionErrorEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                await _interceptors[i].TransactionFailedAsync(transaction, eventData, cancellationToken)
+                await _interceptors[i]
+                    .TransactionFailedAsync(transaction, eventData, cancellationToken)
                     .ConfigureAwait(false);
             }
         }

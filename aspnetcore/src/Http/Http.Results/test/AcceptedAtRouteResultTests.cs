@@ -19,19 +19,13 @@ public class AcceptedAtRouteResultTests
         get
         {
             return new TheoryData<object>
-                {
-                    null,
-                    new Dictionary<string, string>()
-                    {
-                        { "hello", "world" }
-                    },
-                    new RouteValueDictionary(
-                        new Dictionary<string, string>()
-                        {
-                            { "test", "case" },
-                            { "sample", "route" }
-                        }),
-                    };
+            {
+                null,
+                new Dictionary<string, string>() { { "hello", "world" } },
+                new RouteValueDictionary(
+                    new Dictionary<string, string>() { { "test", "case" }, { "sample", "route" } }
+                ),
+            };
         }
     }
 
@@ -63,27 +57,38 @@ public class AcceptedAtRouteResultTests
         // Act
         var result = new AcceptedAtRoute(
             routeName: null,
-            routeValues: new Dictionary<string, object>());
+            routeValues: new Dictionary<string, object>()
+        );
 
         // Assert
-        await ExceptionAssert.ThrowsAsync<InvalidOperationException>(() =>
-            result.ExecuteAsync(httpContext),
-            "No route matches the supplied values.");
+        await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
+            () => result.ExecuteAsync(httpContext),
+            "No route matches the supplied values."
+        );
     }
 
     [Fact]
     public void PopulateMetadata_AddsResponseTypeMetadata()
     {
         // Arrange
-        AcceptedAtRoute MyApi() { throw new NotImplementedException(); }
+        AcceptedAtRoute MyApi()
+        {
+            throw new NotImplementedException();
+        }
         var metadata = new List<object>();
-        var builder = new RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse("/"), order: 0);
+        var builder = new RouteEndpointBuilder(
+            requestDelegate: null,
+            RoutePatternFactory.Parse("/"),
+            order: 0
+        );
 
         // Act
         PopulateMetadata<AcceptedAtRoute>(((Delegate)MyApi).GetMethodInfo(), builder);
 
         // Assert
-        var producesResponseTypeMetadata = builder.Metadata.OfType<ProducesResponseTypeMetadata>().Last();
+        var producesResponseTypeMetadata = builder.Metadata
+            .OfType<ProducesResponseTypeMetadata>()
+            .Last();
         Assert.Equal(StatusCodes.Status202Accepted, producesResponseTypeMetadata.StatusCode);
         Assert.Equal(typeof(void), producesResponseTypeMetadata.Type);
     }
@@ -96,15 +101,38 @@ public class AcceptedAtRouteResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     [Fact]
     public void PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull()
     {
         // Act & Assert
-        Assert.Throws<ArgumentNullException>("method", () => PopulateMetadata<AcceptedAtRoute>(null, new RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse("/"), order: 0)));
-        Assert.Throws<ArgumentNullException>("builder", () => PopulateMetadata<AcceptedAtRoute>(((Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull).GetMethodInfo(), null));
+        Assert.Throws<ArgumentNullException>(
+            "method",
+            () =>
+                PopulateMetadata<AcceptedAtRoute>(
+                    null,
+                    new RouteEndpointBuilder(
+                        requestDelegate: null,
+                        RoutePatternFactory.Parse("/"),
+                        order: 0
+                    )
+                )
+        );
+        Assert.Throws<ArgumentNullException>(
+            "builder",
+            () =>
+                PopulateMetadata<AcceptedAtRoute>(
+                    (
+                        (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
+                    ).GetMethodInfo(),
+                    null
+                )
+        );
     }
 
     [Fact]

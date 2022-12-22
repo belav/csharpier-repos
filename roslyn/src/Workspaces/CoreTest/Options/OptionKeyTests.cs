@@ -43,6 +43,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Options
 
             Assert.Equal("(BazLanguage) FooFeature - BarName", toStringResult);
         }
+
         [Fact]
         public void ToStringForDefaultOption()
         {

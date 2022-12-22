@@ -12,22 +12,27 @@ namespace System.Drawing.Imaging
         /// Specifies an invalid type.
         /// </summary>
         Invalid,
+
         /// <summary>
         /// Specifies a standard Windows metafile.
         /// </summary>
         Wmf,
+
         /// <summary>
         /// Specifies a Windows Placeable metafile.
         /// </summary>
         WmfPlaceable,
+
         /// <summary>
         /// Specifies a Windows enhanced metafile.
         /// </summary>
         Emf,
+
         /// <summary>
         /// Specifies a Windows enhanced metafile plus.
         /// </summary>
         EmfPlusOnly,
+
         /// <summary>
         /// Specifies both enhanced and enhanced plus commands in the same file.
         /// </summary>

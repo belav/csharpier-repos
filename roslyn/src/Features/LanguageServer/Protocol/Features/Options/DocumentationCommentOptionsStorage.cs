@@ -11,16 +11,30 @@ namespace Microsoft.CodeAnalysis.DocumentationComments;
 
 internal static class DocumentationCommentOptionsStorage
 {
+    public static DocumentationCommentOptions GetDocumentationCommentOptions(
+        this IGlobalOptionService globalOptions,
+        LineFormattingOptions lineFormatting,
+        string language
+    ) =>
+        new()
+        {
+            LineFormatting = lineFormatting,
+            AutoXmlDocCommentGeneration = globalOptions.GetOption(
+                AutoXmlDocCommentGeneration,
+                language
+            ),
+        };
 
-    public static DocumentationCommentOptions GetDocumentationCommentOptions(this IGlobalOptionService globalOptions, LineFormattingOptions lineFormatting, string language)
-      => new()
-      {
-          LineFormatting = lineFormatting,
-          AutoXmlDocCommentGeneration = globalOptions.GetOption(AutoXmlDocCommentGeneration, language),
-      };
-
-    public static readonly PerLanguageOption2<bool> AutoXmlDocCommentGeneration = new(
-        "DocumentationCommentOptions", "AutoXmlDocCommentGeneration", DocumentationCommentOptions.Default.AutoXmlDocCommentGeneration,
-        storageLocation: new RoamingProfileStorageLocation(language => language == LanguageNames.VisualBasic ? "TextEditor.%LANGUAGE%.Specific.AutoComment" : "TextEditor.%LANGUAGE%.Specific.Automatic XML Doc Comment Generation"));
-
+    public static readonly PerLanguageOption2<bool> AutoXmlDocCommentGeneration =
+        new(
+            "DocumentationCommentOptions",
+            "AutoXmlDocCommentGeneration",
+            DocumentationCommentOptions.Default.AutoXmlDocCommentGeneration,
+            storageLocation: new RoamingProfileStorageLocation(
+                language =>
+                    language == LanguageNames.VisualBasic
+                        ? "TextEditor.%LANGUAGE%.Specific.AutoComment"
+                        : "TextEditor.%LANGUAGE%.Specific.Automatic XML Doc Comment Generation"
+            )
+        );
 }

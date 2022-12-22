@@ -44,10 +44,7 @@ namespace System.Xml
         //
         internal char QuoteChar
         {
-            set
-            {
-                _quoteChar = value;
-            }
+            set { _quoteChar = value; }
         }
 
         internal void StartAttribute(bool cacheAttrValue)
@@ -97,8 +94,7 @@ namespace System.Xml
 
         internal void WriteSurrogateChar(char lowChar, char highChar)
         {
-            if (!XmlCharType.IsLowSurrogate(lowChar) ||
-                 !XmlCharType.IsHighSurrogate(highChar))
+            if (!XmlCharType.IsLowSurrogate(lowChar) || !XmlCharType.IsHighSurrogate(highChar))
             {
                 throw XmlConvert.CreateInvalidSurrogatePairException(lowChar, highChar);
             }
@@ -216,7 +212,9 @@ namespace System.Xml
                         }
                         else
                         {
-                            Debug.Assert((ch < 0x20 && !XmlCharType.IsWhiteSpace(ch)) || (ch > 0xFFFD));
+                            Debug.Assert(
+                                (ch < 0x20 && !XmlCharType.IsWhiteSpace(ch)) || (ch > 0xFFFD)
+                            );
                             WriteCharEntityImpl(ch);
                         }
                         break;
@@ -227,8 +225,7 @@ namespace System.Xml
 
         internal void WriteSurrogateCharEntity(char lowChar, char highChar)
         {
-            if (!XmlCharType.IsLowSurrogate(lowChar) ||
-                 !XmlCharType.IsHighSurrogate(highChar))
+            if (!XmlCharType.IsLowSurrogate(lowChar) || !XmlCharType.IsHighSurrogate(highChar))
             {
                 throw XmlConvert.CreateInvalidSurrogatePairException(lowChar, highChar);
             }
@@ -372,7 +369,9 @@ namespace System.Xml
                         }
                         else
                         {
-                            Debug.Assert((ch < 0x20 && !XmlCharType.IsWhiteSpace(ch)) || (ch > 0xFFFD));
+                            Debug.Assert(
+                                (ch < 0x20 && !XmlCharType.IsWhiteSpace(ch)) || (ch > 0xFFFD)
+                            );
                             WriteCharEntityImpl(ch);
                         }
                         break;
@@ -471,8 +470,6 @@ namespace System.Xml
 
             _textWriter.Write(array, offset, count);
         }
-
-
 
         internal void WriteCharEntity(char ch)
         {

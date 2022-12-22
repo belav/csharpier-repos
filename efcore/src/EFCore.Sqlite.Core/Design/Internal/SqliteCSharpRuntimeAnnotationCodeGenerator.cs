@@ -13,7 +13,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Design.Internal;
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
 #pragma warning disable EF1001 // Internal EF Core API usage.
-public class SqliteCSharpRuntimeAnnotationCodeGenerator : RelationalCSharpRuntimeAnnotationCodeGenerator
+public class SqliteCSharpRuntimeAnnotationCodeGenerator
+    : RelationalCSharpRuntimeAnnotationCodeGenerator
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -23,13 +24,14 @@ public class SqliteCSharpRuntimeAnnotationCodeGenerator : RelationalCSharpRuntim
     /// </summary>
     public SqliteCSharpRuntimeAnnotationCodeGenerator(
         CSharpRuntimeAnnotationCodeGeneratorDependencies dependencies,
-        RelationalCSharpRuntimeAnnotationCodeGeneratorDependencies relationalDependencies)
-        : base(dependencies, relationalDependencies)
-    {
-    }
+        RelationalCSharpRuntimeAnnotationCodeGeneratorDependencies relationalDependencies
+    ) : base(dependencies, relationalDependencies) { }
 
     /// <inheritdoc />
-    public override void Generate(IProperty property, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public override void Generate(
+        IProperty property,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         var annotations = parameters.Annotations;
         if (!parameters.IsRuntime)

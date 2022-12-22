@@ -10,12 +10,14 @@ using Microsoft.CodeAnalysis.Symbols;
 
 namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 {
-    internal sealed class DeletedParameterDefinition : DeletedDefinition<IParameterDefinition>, IParameterDefinition
+    internal sealed class DeletedParameterDefinition
+        : DeletedDefinition<IParameterDefinition>,
+            IParameterDefinition
     {
-        public DeletedParameterDefinition(IParameterDefinition oldParameter, Dictionary<ITypeDefinition, DeletedTypeDefinition> typesUsedByDeletedMembers)
-            : base(oldParameter, typesUsedByDeletedMembers)
-        {
-        }
+        public DeletedParameterDefinition(
+            IParameterDefinition oldParameter,
+            Dictionary<ITypeDefinition, DeletedTypeDefinition> typesUsedByDeletedMembers
+        ) : base(oldParameter, typesUsedByDeletedMembers) { }
 
         public bool HasDefaultValue => OldDefinition.HasDefaultValue;
 
@@ -27,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         public bool IsOut => OldDefinition.IsOut;
 
-        public IMarshallingInformation? MarshallingInformation => OldDefinition.MarshallingInformation;
+        public IMarshallingInformation? MarshallingInformation =>
+            OldDefinition.MarshallingInformation;
 
         public ImmutableArray<byte> MarshallingDescriptor => OldDefinition.MarshallingDescriptor;
 
@@ -35,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         public ImmutableArray<ICustomModifier> CustomModifiers => OldDefinition.CustomModifiers;
 
-        public ImmutableArray<ICustomModifier> RefCustomModifiers => OldDefinition.RefCustomModifiers;
+        public ImmutableArray<ICustomModifier> RefCustomModifiers =>
+            OldDefinition.RefCustomModifiers;
 
         public bool IsByReference => OldDefinition.IsByReference;
 

@@ -24,7 +24,8 @@ internal sealed class BrowserFileStream : Stream
         ElementReference inputFileElement,
         BrowserFile file,
         long maxAllowedSize,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         _jsRuntime = jsRuntime;
         _inputFileElement = inputFileElement;
@@ -49,25 +50,29 @@ internal sealed class BrowserFileStream : Stream
         set => throw new NotSupportedException();
     }
 
-    public override void Flush()
-        => throw new NotSupportedException();
+    public override void Flush() => throw new NotSupportedException();
 
-    public override int Read(byte[] buffer, int offset, int count)
-        => throw new NotSupportedException("Synchronous reads are not supported.");
+    public override int Read(byte[] buffer, int offset, int count) =>
+        throw new NotSupportedException("Synchronous reads are not supported.");
 
-    public override long Seek(long offset, SeekOrigin origin)
-        => throw new NotSupportedException();
+    public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
 
-    public override void SetLength(long value)
-        => throw new NotSupportedException();
+    public override void SetLength(long value) => throw new NotSupportedException();
 
-    public override void Write(byte[] buffer, int offset, int count)
-        => throw new NotSupportedException();
+    public override void Write(byte[] buffer, int offset, int count) =>
+        throw new NotSupportedException();
 
-    public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        => ReadAsync(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
+    public override Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    ) => ReadAsync(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
 
-    public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+    public override async ValueTask<int> ReadAsync(
+        Memory<byte> buffer,
+        CancellationToken cancellationToken = default
+    )
     {
         var bytesAvailableToRead = Length - Position;
         var maxBytesToRead = (int)Math.Min(bytesAvailableToRead, buffer.Length);
@@ -76,7 +81,10 @@ internal sealed class BrowserFileStream : Stream
             return 0;
         }
 
-        var bytesRead = await CopyFileDataIntoBuffer(buffer.Slice(0, maxBytesToRead), cancellationToken);
+        var bytesRead = await CopyFileDataIntoBuffer(
+            buffer.Slice(0, maxBytesToRead),
+            cancellationToken
+        );
 
         _position += bytesRead;
 
@@ -91,14 +99,19 @@ internal sealed class BrowserFileStream : Stream
             InputFileInterop.ReadFileData,
             cancellationToken,
             _inputFileElement,
-            _file.Id);
+            _file.Id
+        );
 
         return await _jsStreamReference.OpenReadStreamAsync(
             _maxAllowedSize,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken
+        );
     }
 
-    private async ValueTask<int> CopyFileDataIntoBuffer(Memory<byte> destination, CancellationToken cancellationToken)
+    private async ValueTask<int> CopyFileDataIntoBuffer(
+        Memory<byte> destination,
+        CancellationToken cancellationToken
+    )
     {
         var stream = await OpenReadStreamTask;
         _copyFileDataCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
@@ -122,9 +135,7 @@ internal sealed class BrowserFileStream : Stream
         {
             _ = _jsStreamReference?.DisposeAsync().Preserve();
         }
-        catch
-        {
-        }
+        catch { }
 
         _isDisposed = true;
 

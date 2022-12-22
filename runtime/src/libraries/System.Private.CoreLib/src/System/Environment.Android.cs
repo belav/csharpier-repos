@@ -17,7 +17,11 @@ namespace System
         {
             if (s_specialFolders == null)
             {
-                Interlocked.CompareExchange(ref s_specialFolders, new Dictionary<SpecialFolder, string>(), null);
+                Interlocked.CompareExchange(
+                    ref s_specialFolders,
+                    new Dictionary<SpecialFolder, string>(),
+                    null
+                );
             }
 
             string? path;
@@ -64,7 +68,7 @@ namespace System
                 case SpecialFolder.DesktopDirectory:
                     return Path.Combine(home, "Desktop");
 
-                case SpecialFolder.MyDocuments:     // Same value as Personal
+                case SpecialFolder.MyDocuments: // Same value as Personal
                     return Path.Combine(home, "Documents");
 
                 case SpecialFolder.MyMusic:

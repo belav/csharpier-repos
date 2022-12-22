@@ -9,25 +9,38 @@ namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
 internal static class RoutePatternParametersDetector
 {
-    public static ImmutableArray<ISymbol> ResolvedParameters(ISymbol symbol, WellKnownTypes wellKnownTypes)
+    public static ImmutableArray<ISymbol> ResolvedParameters(
+        ISymbol symbol,
+        WellKnownTypes wellKnownTypes
+    )
     {
         var resolvedParameterSymbols = ImmutableArray.CreateBuilder<ISymbol>();
         var childSymbols = symbol switch
         {
-            ITypeSymbol typeSymbol => typeSymbol.GetMembers().OfType<IPropertySymbol>().ToImmutableArray().As<ISymbol>(),
+            ITypeSymbol typeSymbol
+                => typeSymbol
+                    .GetMembers()
+                    .OfType<IPropertySymbol>()
+                    .ToImmutableArray()
+                    .As<ISymbol>(),
             IMethodSymbol methodSymbol => methodSymbol.Parameters.As<ISymbol>(),
             _ => throw new InvalidOperationException("Unexpected symbol type: " + symbol)
         };
 
         foreach (var child in childSymbols)
         {
-            if (HasSpecialType(child, wellKnownTypes.ParameterSpecialTypes) || HasExplicitNonRouteAttribute(child, wellKnownTypes.NonRouteMetadataTypes))
+            if (
+                HasSpecialType(child, wellKnownTypes.ParameterSpecialTypes)
+                || HasExplicitNonRouteAttribute(child, wellKnownTypes.NonRouteMetadataTypes)
+            )
             {
                 continue;
             }
             else if (child.HasAttribute(wellKnownTypes.AsParametersAttribute))
             {
-                resolvedParameterSymbols.AddRange(ResolvedParameters(child.GetParameterType(), wellKnownTypes));
+                resolvedParameterSymbols.AddRange(
+                    ResolvedParameters(child.GetParameterType(), wellKnownTypes)
+                );
             }
             else
             {
@@ -55,7 +68,10 @@ internal static class RoutePatternParametersDetector
         return false;
     }
 
-    private static bool HasExplicitNonRouteAttribute(ISymbol child, INamedTypeSymbol[] allNoneRouteMetadataTypes)
+    private static bool HasExplicitNonRouteAttribute(
+        ISymbol child,
+        INamedTypeSymbol[] allNoneRouteMetadataTypes
+    )
     {
         foreach (var attributeData in child.GetAttributes())
         {

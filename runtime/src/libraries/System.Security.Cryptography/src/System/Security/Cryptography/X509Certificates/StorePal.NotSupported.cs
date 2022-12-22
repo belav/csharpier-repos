@@ -9,42 +9,58 @@ namespace System.Security.Cryptography.X509Certificates
     {
         internal static partial IStorePal FromHandle(IntPtr storeHandle)
         {
-            throw new PlatformNotSupportedException(SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported);
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported
+            );
         }
 
         internal static partial ILoaderPal FromBlob(
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
-            X509KeyStorageFlags keyStorageFlags)
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
-            throw new PlatformNotSupportedException(SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported);
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported
+            );
         }
 
         internal static partial ILoaderPal FromFile(
             string fileName,
             SafePasswordHandle password,
-            X509KeyStorageFlags keyStorageFlags)
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
-            throw new PlatformNotSupportedException(SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported);
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported
+            );
         }
 
         internal static partial IExportPal FromCertificate(ICertificatePalCore cert)
         {
-            throw new PlatformNotSupportedException(SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported);
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported
+            );
         }
 
         internal static partial IExportPal LinkFromCertificateCollection(
-            X509Certificate2Collection certificates)
+            X509Certificate2Collection certificates
+        )
         {
-            throw new PlatformNotSupportedException(SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported);
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported
+            );
         }
 
         internal static partial IStorePal FromSystemStore(
             string storeName,
             StoreLocation storeLocation,
-            OpenFlags openFlags)
+            OpenFlags openFlags
+        )
         {
-            throw new PlatformNotSupportedException(SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported);
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported
+            );
         }
     }
 }

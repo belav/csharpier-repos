@@ -9,9 +9,12 @@ using System.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Diagnostics.FunctionalTests;
 
-public class ProblemDetailsExceptionHandlerSampleTest : IClassFixture<TestFixture<ExceptionHandlerSample.StartupWithProblemDetails>>
+public class ProblemDetailsExceptionHandlerSampleTest
+    : IClassFixture<TestFixture<ExceptionHandlerSample.StartupWithProblemDetails>>
 {
-    public ProblemDetailsExceptionHandlerSampleTest(TestFixture<ExceptionHandlerSample.StartupWithProblemDetails> fixture)
+    public ProblemDetailsExceptionHandlerSampleTest(
+        TestFixture<ExceptionHandlerSample.StartupWithProblemDetails> fixture
+    )
     {
         Client = fixture.Client;
     }

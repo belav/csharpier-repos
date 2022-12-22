@@ -12,30 +12,66 @@ namespace DllImportGenerator.IntegrationTests
 {
     partial class NativeExportsNE
     {
-        [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "unicode_return_as_uint", CharSet = CharSet.Unicode)]
+        [GeneratedDllImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "unicode_return_as_uint",
+            CharSet = CharSet.Unicode
+        )]
         public static partial uint ReturnUnicodeAsUInt(char input);
 
-        [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "char_return_as_uint", CharSet = CharSet.Unicode)]
+        [GeneratedDllImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "char_return_as_uint",
+            CharSet = CharSet.Unicode
+        )]
         public static partial char ReturnUIntAsUnicode(uint input);
 
-        [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "char_return_as_refuint", CharSet = CharSet.Unicode)]
+        [GeneratedDllImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "char_return_as_refuint",
+            CharSet = CharSet.Unicode
+        )]
         public static partial void ReturnUIntAsUnicode_Ref(uint input, ref char res);
 
-        [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "char_return_as_refuint", CharSet = CharSet.Unicode)]
+        [GeneratedDllImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "char_return_as_refuint",
+            CharSet = CharSet.Unicode
+        )]
         public static partial void ReturnUIntAsUnicode_Out(uint input, out char res);
 
-        [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "char_return_as_refuint", CharSet = CharSet.Unicode)]
+        [GeneratedDllImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "char_return_as_refuint",
+            CharSet = CharSet.Unicode
+        )]
         public static partial void ReturnUIntAsUnicode_In(uint input, in char res);
 
-        [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "char_return_as_uint", CharSet = CharSet.None)]
+        [GeneratedDllImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "char_return_as_uint",
+            CharSet = CharSet.None
+        )]
         [return: MarshalAs(UnmanagedType.U2)]
-        public static partial char ReturnU2AsU2IgnoreCharSet([MarshalAs(UnmanagedType.U2)] char input);
+        public static partial char ReturnU2AsU2IgnoreCharSet(
+            [MarshalAs(UnmanagedType.U2)] char input
+        );
 
-        [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "char_return_as_uint", CharSet = CharSet.Ansi)]
+        [GeneratedDllImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "char_return_as_uint",
+            CharSet = CharSet.Ansi
+        )]
         [return: MarshalAs(UnmanagedType.I2)]
-        public static partial char ReturnI2AsI2IgnoreCharSet([MarshalAs(UnmanagedType.I2)] char input);
+        public static partial char ReturnI2AsI2IgnoreCharSet(
+            [MarshalAs(UnmanagedType.I2)] char input
+        );
 
-        [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "char_reverse_buffer_ref", CharSet = CharSet.Unicode)]
+        [GeneratedDllImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "char_reverse_buffer_ref",
+            CharSet = CharSet.Unicode
+        )]
         public static partial void ReverseBuffer(ref char buffer, int len);
     }
 
@@ -95,7 +131,10 @@ namespace DllImportGenerator.IntegrationTests
             Array.Copy(chars, expected, chars.Length);
             Array.Reverse(expected);
 
-            NativeExportsNE.ReverseBuffer(ref MemoryMarshal.GetArrayDataReference(chars), chars.Length);
+            NativeExportsNE.ReverseBuffer(
+                ref MemoryMarshal.GetArrayDataReference(chars),
+                chars.Length
+            );
             Assert.Equal(expected, chars);
         }
     }

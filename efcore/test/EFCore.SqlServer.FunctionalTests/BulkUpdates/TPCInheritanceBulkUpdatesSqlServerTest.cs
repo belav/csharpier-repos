@@ -3,7 +3,8 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
-public class TPCInheritanceBulkUpdatesSqlServerTest : TPCInheritanceBulkUpdatesTestBase<TPCInheritanceBulkUpdatesSqlServerFixture>
+public class TPCInheritanceBulkUpdatesSqlServerTest
+    : TPCInheritanceBulkUpdatesTestBase<TPCInheritanceBulkUpdatesSqlServerFixture>
 {
     public TPCInheritanceBulkUpdatesSqlServerTest(TPCInheritanceBulkUpdatesSqlServerFixture fixture)
         : base(fixture)
@@ -12,8 +13,8 @@ public class TPCInheritanceBulkUpdatesSqlServerTest : TPCInheritanceBulkUpdatesT
     }
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task Delete_where_hierarchy(bool async)
     {
@@ -29,7 +30,8 @@ public class TPCInheritanceBulkUpdatesSqlServerTest : TPCInheritanceBulkUpdatesT
         AssertSql(
             @"DELETE FROM [k]
 FROM [Kiwi] AS [k]
-WHERE [k].[Name] = N'Great spotted kiwi'");
+WHERE [k].[Name] = N'Great spotted kiwi'"
+        );
     }
 
     public override async Task Delete_where_using_hierarchy(bool async)
@@ -48,7 +50,8 @@ WHERE (
         SELECT [k].[Id], [k].[CountryId], [k].[Name], [k].[Species], [k].[EagleId], [k].[IsFlightless], NULL AS [Group], [k].[FoundOn], N'Kiwi' AS [Discriminator]
         FROM [Kiwi] AS [k]
     ) AS [t]
-    WHERE [c].[Id] = [t].[CountryId] AND [t].[CountryId] > 0) > 0");
+    WHERE [c].[Id] = [t].[CountryId] AND [t].[CountryId] > 0) > 0"
+        );
     }
 
     public override async Task Delete_where_using_hierarchy_derived(bool async)
@@ -64,7 +67,8 @@ WHERE (
         SELECT [k].[Id], [k].[CountryId], [k].[Name], [k].[Species], [k].[EagleId], [k].[IsFlightless], NULL AS [Group], [k].[FoundOn], N'Kiwi' AS [Discriminator]
         FROM [Kiwi] AS [k]
     ) AS [t]
-    WHERE [c].[Id] = [t].[CountryId] AND [t].[CountryId] > 0) > 0");
+    WHERE [c].[Id] = [t].[CountryId] AND [t].[CountryId] > 0) > 0"
+        );
     }
 
     public override async Task Delete_where_keyless_entity_mapped_to_sql_query(bool async)
@@ -124,7 +128,8 @@ WHERE (
             @"UPDATE [k]
 SET [k].[Name] = N'Kiwi'
 FROM [Kiwi] AS [k]
-WHERE [k].[Name] = N'Great spotted kiwi'");
+WHERE [k].[Name] = N'Great spotted kiwi'"
+        );
     }
 
     public override async Task Update_where_using_hierarchy(bool async)
@@ -144,7 +149,8 @@ WHERE (
         SELECT [k].[Id], [k].[CountryId], [k].[Name], [k].[Species], [k].[EagleId], [k].[IsFlightless], NULL AS [Group], [k].[FoundOn], N'Kiwi' AS [Discriminator]
         FROM [Kiwi] AS [k]
     ) AS [t]
-    WHERE [c].[Id] = [t].[CountryId] AND [t].[CountryId] > 0) > 0");
+    WHERE [c].[Id] = [t].[CountryId] AND [t].[CountryId] > 0) > 0"
+        );
     }
 
     public override async Task Update_where_using_hierarchy_derived(bool async)
@@ -161,7 +167,8 @@ WHERE (
         SELECT [k].[Id], [k].[CountryId], [k].[Name], [k].[Species], [k].[EagleId], [k].[IsFlightless], NULL AS [Group], [k].[FoundOn], N'Kiwi' AS [Discriminator]
         FROM [Kiwi] AS [k]
     ) AS [t]
-    WHERE [c].[Id] = [t].[CountryId] AND [t].[CountryId] > 0) > 0");
+    WHERE [c].[Id] = [t].[CountryId] AND [t].[CountryId] > 0) > 0"
+        );
     }
 
     public override async Task Update_where_keyless_entity_mapped_to_sql_query(bool async)
@@ -171,12 +178,11 @@ WHERE (
         AssertExecuteUpdateSql();
     }
 
-    protected override void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    private void AssertExecuteUpdateSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
+    private void AssertExecuteUpdateSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
 }

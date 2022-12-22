@@ -112,7 +112,11 @@ namespace System.Buffers.Text
         /// This method performs best when the starting index is a constant literal.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void WriteFourDecimalDigits(uint value, Span<byte> buffer, int startingIndex = 0)
+        public static void WriteFourDecimalDigits(
+            uint value,
+            Span<byte> buffer,
+            int startingIndex = 0
+        )
         {
             Debug.Assert(value <= 9999);
 
@@ -136,7 +140,11 @@ namespace System.Buffers.Text
         /// This method performs best when the starting index is a constant literal.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void WriteTwoDecimalDigits(uint value, Span<byte> buffer, int startingIndex = 0)
+        public static void WriteTwoDecimalDigits(
+            uint value,
+            Span<byte> buffer,
+            int startingIndex = 0
+        )
         {
             Debug.Assert(value <= 99);
 

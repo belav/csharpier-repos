@@ -25,7 +25,8 @@ public class LazyLoader : ILazyLoader
     /// </summary>
     public LazyLoader(
         ICurrentDbContext currentContext,
-        IDiagnosticsLogger<DbLoggerCategory.Infrastructure> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Infrastructure> logger
+    )
     {
         Context = currentContext.Context;
         Logger = logger;
@@ -40,7 +41,8 @@ public class LazyLoader : ILazyLoader
     public virtual void SetLoaded(
         object entity,
         [CallerMemberName] string navigationName = "",
-        bool loaded = true)
+        bool loaded = true
+    )
     {
         _loadedStates ??= new Dictionary<string, bool>();
 
@@ -98,7 +100,8 @@ public class LazyLoader : ILazyLoader
     public virtual async Task LoadAsync(
         object entity,
         CancellationToken cancellationToken = default,
-        [CallerMemberName] string navigationName = "")
+        [CallerMemberName] string navigationName = ""
+    )
     {
         Check.NotNull(entity, nameof(entity));
         Check.NotEmpty(navigationName, nameof(navigationName));
@@ -117,11 +120,17 @@ public class LazyLoader : ILazyLoader
         }
     }
 
-    private bool ShouldLoad(object entity, string navigationName, [NotNullWhen(true)] out NavigationEntry? navigationEntry)
+    private bool ShouldLoad(
+        object entity,
+        string navigationName,
+        [NotNullWhen(true)] out NavigationEntry? navigationEntry
+    )
     {
-        if (_loadedStates != null
+        if (
+            _loadedStates != null
             && _loadedStates.TryGetValue(navigationName, out var loaded)
-            && loaded)
+            && loaded
+        )
         {
             navigationEntry = null;
             return false;
@@ -163,6 +172,5 @@ public class LazyLoader : ILazyLoader
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void Dispose()
-        => _disposed = true;
+    public virtual void Dispose() => _disposed = true;
 }

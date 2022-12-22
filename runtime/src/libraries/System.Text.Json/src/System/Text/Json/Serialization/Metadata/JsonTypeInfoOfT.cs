@@ -43,10 +43,7 @@ namespace System.Text.Json.Serialization.Metadata
         public new Func<T>? CreateObject
         {
             get => _typedCreateObject;
-            set
-            {
-                SetCreateObject(value);
-            }
+            set { SetCreateObject(value); }
         }
 
         private protected override void SetCreateObject(Delegate? createObject)
@@ -59,7 +56,9 @@ namespace System.Text.Json.Serialization.Metadata
             {
                 Debug.Assert(_createObject == null);
                 Debug.Assert(_typedCreateObject == null);
-                ThrowHelper.ThrowInvalidOperationException_JsonTypeInfoOperationNotPossibleForKind(Kind);
+                ThrowHelper.ThrowInvalidOperationException_JsonTypeInfoOperationNotPossibleForKind(
+                    Kind
+                );
             }
 
             if (!Converter.SupportsCreateObjectDelegate)
@@ -80,7 +79,9 @@ namespace System.Text.Json.Serialization.Metadata
             else if (createObject is Func<T> typedDelegate)
             {
                 typedCreateObject = typedDelegate;
-                untypedCreateObject = createObject is Func<object> untypedDelegate ? untypedDelegate : () => typedDelegate()!;
+                untypedCreateObject = createObject is Func<object> untypedDelegate
+                    ? untypedDelegate
+                    : () => typedDelegate()!;
             }
             else
             {
@@ -119,10 +120,7 @@ namespace System.Text.Json.Serialization.Metadata
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Action<Utf8JsonWriter, T>? SerializeHandler
         {
-            get
-            {
-                return _serialize;
-            }
+            get { return _serialize; }
             private protected set
             {
                 Debug.Assert(!IsConfigured, "We should not mutate configured JsonTypeInfo");
@@ -136,14 +134,18 @@ namespace System.Text.Json.Serialization.Metadata
             return new JsonPropertyInfo<T>(
                 declaringType: typeof(T),
                 declaringTypeInfo: null,
-                Options)
+                Options
+            )
             {
                 JsonTypeInfo = this,
                 IsForTypeInfo = true,
             };
         }
 
-        private protected override JsonPropertyInfo CreateJsonPropertyInfo(JsonTypeInfo declaringTypeInfo, JsonSerializerOptions options)
+        private protected override JsonPropertyInfo CreateJsonPropertyInfo(
+            JsonTypeInfo declaringTypeInfo,
+            JsonSerializerOptions options
+        )
         {
             return new JsonPropertyInfo<T>(declaringTypeInfo.Type, declaringTypeInfo, options)
             {
@@ -153,7 +155,8 @@ namespace System.Text.Json.Serialization.Metadata
 
         private protected void PopulatePolymorphismMetadata()
         {
-            JsonPolymorphismOptions? options = JsonPolymorphismOptions.CreateFromAttributeDeclarations(Type);
+            JsonPolymorphismOptions? options =
+                JsonPolymorphismOptions.CreateFromAttributeDeclarations(Type);
             if (options != null)
             {
                 options.DeclaringTypeInfo = this;

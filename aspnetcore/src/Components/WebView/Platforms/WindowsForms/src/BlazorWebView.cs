@@ -32,10 +32,7 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
             Dispatcher = new WindowsFormsDispatcher(this);
             RootComponents.CollectionChanged += HandleRootComponentsCollectionChanged;
 
-            _webview = new WebView2Control()
-            {
-                Dock = DockStyle.Fill,
-            };
+            _webview = new WebView2Control() { Dock = DockStyle.Fill, };
             ((BlazorWebViewControlCollection)Controls).AddInternal(_webview);
         }
 
@@ -65,7 +62,9 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
         /// This property must be set to a valid value for the Blazor components to start.
         /// </summary>
         [Category("Behavior")]
-        [Description(@"Path to the host page within the application's static files. Example: wwwroot\index.html.")]
+        [Description(
+            @"Path to the host page within the application's static files. Example: wwwroot\index.html."
+        )]
         public string HostPage
         {
             get => _hostPage;
@@ -78,6 +77,7 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
 
         // Learn more about these methods here: https://docs.microsoft.com/en-us/dotnet/desktop/winforms/controls/defining-default-values-with-the-shouldserialize-and-reset-methods?view=netframeworkdesktop-4.8
         private void ResetHostPage() => HostPage = null;
+
         private bool ShouldSerializeHostPage() => !string.IsNullOrEmpty(HostPage);
 
         /// <summary>
@@ -119,16 +119,16 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
                     : GetSitedParentSite(control.Parent);
 
         private bool RequiredStartupPropertiesSet =>
-            Created &&
-            _webview != null &&
-            HostPage != null &&
-            Services != null;
+            Created && _webview != null && HostPage != null && Services != null;
 
         private void StartWebViewCoreIfPossible()
         {
             // We never start the Blazor code in design time because it doesn't make sense to run
             // a Blazor component in the designer.
-            if (!IsAncestorSiteInDesignMode && (!RequiredStartupPropertiesSet || _webviewManager != null))
+            if (
+                !IsAncestorSiteInDesignMode
+                && (!RequiredStartupPropertiesSet || _webviewManager != null)
+            )
             {
                 return;
             }
@@ -139,7 +139,13 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
             var hostPageRelativePath = Path.GetRelativePath(contentRootDir, HostPage);
             var fileProvider = new PhysicalFileProvider(contentRootDir);
 
-            _webviewManager = new WebView2WebViewManager(new WindowsFormsWebView2Wrapper(_webview), Services, Dispatcher, fileProvider, hostPageRelativePath);
+            _webviewManager = new WebView2WebViewManager(
+                new WindowsFormsWebView2Wrapper(_webview),
+                Services,
+                Dispatcher,
+                fileProvider,
+                hostPageRelativePath
+            );
             foreach (var rootComponent in RootComponents)
             {
                 // Since the page isn't loaded yet, this will always complete synchronously
@@ -148,7 +154,10 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
             _webviewManager.Navigate("/");
         }
 
-        private void HandleRootComponentsCollectionChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
+        private void HandleRootComponentsCollectionChanged(
+            object sender,
+            NotifyCollectionChangedEventArgs eventArgs
+        )
         {
             // If we haven't initialized yet, this is a no-op
             if (_webviewManager != null)
@@ -196,9 +205,7 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
         /// </summary>
         private sealed class BlazorWebViewControlCollection : ControlCollection
         {
-            public BlazorWebViewControlCollection(BlazorWebView owner) : base(owner)
-            {
-            }
+            public BlazorWebViewControlCollection(BlazorWebView owner) : base(owner) { }
 
             /// <summary>
             /// This is the only API we use; everything else is blocked.
@@ -210,9 +217,13 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
             public override bool IsReadOnly => true;
 
             public override void Add(Control value) => throw new NotSupportedException();
+
             public override void Clear() => throw new NotSupportedException();
+
             public override void Remove(Control value) => throw new NotSupportedException();
-            public override void SetChildIndex(Control child, int newIndex) => throw new NotSupportedException();
+
+            public override void SetChildIndex(Control child, int newIndex) =>
+                throw new NotSupportedException();
         }
     }
 }

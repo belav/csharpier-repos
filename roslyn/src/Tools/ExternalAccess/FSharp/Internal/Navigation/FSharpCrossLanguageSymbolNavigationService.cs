@@ -18,30 +18,46 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Navigation
     /// work here.
     /// </summary>
     [Export(typeof(ICrossLanguageSymbolNavigationService)), Shared]
-    internal sealed class FSharpCrossLanguageSymbolNavigationService : ICrossLanguageSymbolNavigationService
+    internal sealed class FSharpCrossLanguageSymbolNavigationService
+        : ICrossLanguageSymbolNavigationService
     {
         private readonly IFSharpCrossLanguageSymbolNavigationService _underlyingService;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public FSharpCrossLanguageSymbolNavigationService(
-            [Import(AllowDefault = true)] IFSharpCrossLanguageSymbolNavigationService underlyingService)
+            [Import(AllowDefault = true)]
+                IFSharpCrossLanguageSymbolNavigationService underlyingService
+        )
         {
             _underlyingService = underlyingService;
         }
 
-        public async Task<INavigableLocation?> TryGetNavigableLocationAsync(string documentationCommentId, CancellationToken cancellationToken)
+        public async Task<INavigableLocation?> TryGetNavigableLocationAsync(
+            string documentationCommentId,
+            CancellationToken cancellationToken
+        )
         {
             // Only defer to actual F# service if it exists.
             if (_underlyingService is null)
                 return null;
 
-            var location = await _underlyingService.TryGetNavigableLocationAsync(documentationCommentId, cancellationToken).ConfigureAwait(false);
+            var location = await _underlyingService
+                .TryGetNavigableLocationAsync(documentationCommentId, cancellationToken)
+                .ConfigureAwait(false);
             if (location == null)
                 return null;
 
-            return new NavigableLocation((options, cancellationToken) =>
-                location.NavigateToAsync(new FSharpNavigationOptions2(options.PreferProvisionalTab, options.ActivateTab), cancellationToken));
+            return new NavigableLocation(
+                (options, cancellationToken) =>
+                    location.NavigateToAsync(
+                        new FSharpNavigationOptions2(
+                            options.PreferProvisionalTab,
+                            options.ActivateTab
+                        ),
+                        cancellationToken
+                    )
+            );
         }
     }
 }

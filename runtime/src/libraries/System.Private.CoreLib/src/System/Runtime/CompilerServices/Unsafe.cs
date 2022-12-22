@@ -818,7 +818,10 @@ namespace System.Runtime.CompilerServices
             typeof(T).ToString();
             throw new PlatformNotSupportedException();
 #else
-            return ref SubtractByteOffset(ref source, (IntPtr)((nint)elementOffset * (nint)SizeOf<T>()));
+            return ref SubtractByteOffset(
+                ref source,
+                (IntPtr)((nint)elementOffset * (nint)SizeOf<T>())
+            );
 #endif
 
             // ldarg .0
@@ -843,7 +846,10 @@ namespace System.Runtime.CompilerServices
             typeof(T).ToString();
             throw new PlatformNotSupportedException();
 #else
-            return ref SubtractByteOffset(ref source, (nuint)(elementOffset * (nuint)Unsafe.SizeOf<T>()));
+            return ref SubtractByteOffset(
+                ref source,
+                (nuint)(elementOffset * (nuint)Unsafe.SizeOf<T>())
+            );
 #endif
 
             // ldarg .0
@@ -901,8 +907,7 @@ namespace System.Runtime.CompilerServices
         // CoreCLR:METHOD__UNSAFE__UNBOX
         [NonVersionable]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ref T Unbox<T>(object box)
-            where T : struct
+        public static ref T Unbox<T>(object box) where T : struct
         {
             throw new PlatformNotSupportedException();
 

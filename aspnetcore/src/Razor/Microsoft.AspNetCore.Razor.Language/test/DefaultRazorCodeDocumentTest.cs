@@ -13,10 +13,7 @@ public class DefaultRazorCodeDocumentTest
         // Arrange
         var source = TestRazorSourceDocument.Create();
 
-        var imports = new RazorSourceDocument[]
-        {
-                TestRazorSourceDocument.Create(),
-        };
+        var imports = new RazorSourceDocument[] { TestRazorSourceDocument.Create(), };
 
         // Act
         var code = new DefaultRazorCodeDocument(source, imports);

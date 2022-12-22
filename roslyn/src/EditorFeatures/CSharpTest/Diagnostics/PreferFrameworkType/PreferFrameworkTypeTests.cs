@@ -18,52 +18,89 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PreferFrameworkType
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseFrameworkType)]
-    public partial class PreferFrameworkTypeTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class PreferFrameworkTypeTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public PreferFrameworkTypeTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+        public PreferFrameworkTypeTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpPreferFrameworkTypeDiagnosticAnalyzer(), new PreferFrameworkTypeCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpPreferFrameworkTypeDiagnosticAnalyzer(),
+                new PreferFrameworkTypeCodeFixProvider()
+            );
 
-        private readonly CodeStyleOption2<bool> onWithInfo = new CodeStyleOption2<bool>(true, NotificationOption2.Suggestion);
-        private readonly CodeStyleOption2<bool> offWithInfo = new CodeStyleOption2<bool>(false, NotificationOption2.Suggestion);
+        private readonly CodeStyleOption2<bool> onWithInfo = new CodeStyleOption2<bool>(
+            true,
+            NotificationOption2.Suggestion
+        );
+        private readonly CodeStyleOption2<bool> offWithInfo = new CodeStyleOption2<bool>(
+            false,
+            NotificationOption2.Suggestion
+        );
 
-        private OptionsCollection NoFrameworkType
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection NoFrameworkType =>
+            new OptionsCollection(GetLanguage())
             {
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, true, NotificationOption2.Suggestion },
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, onWithInfo },
+                {
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                    true,
+                    NotificationOption2.Suggestion
+                },
+                {
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                    onWithInfo
+                },
             };
 
-        private OptionsCollection FrameworkTypeEverywhere
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection FrameworkTypeEverywhere =>
+            new OptionsCollection(GetLanguage())
             {
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, false, NotificationOption2.Suggestion },
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, offWithInfo },
+                {
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                    false,
+                    NotificationOption2.Suggestion
+                },
+                {
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                    offWithInfo
+                },
             };
 
-        private OptionsCollection FrameworkTypeInDeclaration
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection FrameworkTypeInDeclaration =>
+            new OptionsCollection(GetLanguage())
             {
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, false, NotificationOption2.Suggestion },
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, onWithInfo },
+                {
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                    false,
+                    NotificationOption2.Suggestion
+                },
+                {
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                    onWithInfo
+                },
             };
 
-        private OptionsCollection FrameworkTypeInMemberAccess
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection FrameworkTypeInMemberAccess =>
+            new OptionsCollection(GetLanguage())
             {
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, true, NotificationOption2.Suggestion },
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, offWithInfo },
+                {
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                    true,
+                    NotificationOption2.Suggestion
+                },
+                {
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                    offWithInfo
+                },
             };
 
         [Fact]
         public async Task NotWhenOptionsAreNotSet()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -71,14 +108,16 @@ class Program
     {
         [|int|] x = 1;
     }
-}", new TestParameters(options: NoFrameworkType));
+}",
+                new TestParameters(options: NoFrameworkType)
+            );
         }
 
         [Fact]
         public async Task NotOnDynamic()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -86,28 +125,32 @@ class Program
     {
         [|dynamic|] x = 1;
     }
-}", new TestParameters(options: FrameworkTypeInDeclaration));
+}",
+                new TestParameters(options: FrameworkTypeInDeclaration)
+            );
         }
 
         [Fact]
         public async Task NotOnSystemVoid()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
     [|void|] Method()
     {
     }
-}", new TestParameters(options: FrameworkTypeEverywhere));
+}",
+                new TestParameters(options: FrameworkTypeEverywhere)
+            );
         }
 
         [Fact]
         public async Task NotOnUserdefinedType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -115,14 +158,16 @@ class Program
     {
         [|Program|] p;
     }
-}", new TestParameters(options: FrameworkTypeEverywhere));
+}",
+                new TestParameters(options: FrameworkTypeEverywhere)
+            );
         }
 
         [Fact]
         public async Task NotOnFrameworkType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -130,27 +175,31 @@ class Program
     {
         [|Int32|] p;
     }
-}", new TestParameters(options: FrameworkTypeInDeclaration));
+}",
+                new TestParameters(options: FrameworkTypeInDeclaration)
+            );
         }
 
         [Fact]
         public async Task NotOnQualifiedTypeSyntax()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Method()
     {
         [|System.Int32|] p;
     }
-}", new TestParameters(options: FrameworkTypeInDeclaration));
+}",
+                new TestParameters(options: FrameworkTypeInDeclaration)
+            );
         }
 
         [Fact]
         public async Task NotOnFrameworkTypeWithNoPredefinedKeywordEquivalent()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -158,14 +207,16 @@ class Program
     {
         [|List|]<int> p;
     }
-}", new TestParameters(options: FrameworkTypeInDeclaration));
+}",
+                new TestParameters(options: FrameworkTypeInDeclaration)
+            );
         }
 
         [Fact]
         public async Task NotOnIdentifierThatIsNotTypeSyntax()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -173,20 +224,22 @@ class Program
     {
         int [|p|];
     }
-}", new TestParameters(options: FrameworkTypeInDeclaration));
+}",
+                new TestParameters(options: FrameworkTypeInDeclaration)
+            );
         }
 
         [Fact]
         public async Task QualifiedReplacementWhenNoUsingFound()
         {
             var code =
-@"class Program
+                @"class Program
 {
     [|string|] _myfield = 5;
 }";
 
             var expected =
-@"class Program
+                @"class Program
 {
     System.String _myfield = 5;
 }";
@@ -197,14 +250,14 @@ class Program
         public async Task FieldDeclaration()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     [|int|] _myfield;
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     Int32 _myfield;
@@ -216,14 +269,14 @@ class Program
         public async Task FieldDeclarationWithInitializer()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     [|string|] _myfield = 5;
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     String _myfield = 5;
@@ -235,14 +288,14 @@ class Program
         public async Task DelegateDeclaration()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     public delegate [|int|] PerformCalculation(int x, int y);
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     public delegate Int32 PerformCalculation(int x, int y);
@@ -254,14 +307,14 @@ class Program
         public async Task PropertyDeclaration()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     public [|long|] MyProperty { get; set; }
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     public Int64 MyProperty { get; set; }
@@ -273,7 +326,7 @@ class Program
         public async Task GenericPropertyDeclaration()
         {
             var code =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 class Program
 {
@@ -281,7 +334,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 class Program
 {
@@ -294,14 +347,14 @@ class Program
         public async Task QualifiedReplacementInGenericTypeParameter()
         {
             var code =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 class Program
 {
     public List<[|long|]> MyProperty { get; set; }
 }";
 
             var expected =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 class Program
 {
     public List<System.Int64> MyProperty { get; set; }
@@ -313,14 +366,14 @@ class Program
         public async Task MethodDeclarationReturnType()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     public [|long|] Method() { }
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     public Int64 Method() { }
@@ -332,14 +385,14 @@ class Program
         public async Task MethodDeclarationParameters()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     public void Method([|double|] d) { }
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     public void Method(Double d) { }
@@ -351,7 +404,7 @@ class Program
         public async Task GenericMethodInvocation()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     public void Method<T>() { }
@@ -359,7 +412,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     public void Method<T>() { }
@@ -372,7 +425,7 @@ class Program
         public async Task LocalDeclaration()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -382,7 +435,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -397,7 +450,7 @@ class Program
         public async Task MemberAccess()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -407,7 +460,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -422,7 +475,7 @@ class Program
         public async Task MemberAccess2()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -432,7 +485,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -447,7 +500,7 @@ class Program
         public async Task DocCommentTriviaCrefExpression()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     /// <see cref=""[|int|].MaxValue""/>
@@ -457,7 +510,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     /// <see cref=""Int32.MaxValue""/>
@@ -472,7 +525,7 @@ class Program
         public async Task DefaultExpression()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -482,7 +535,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -497,7 +550,7 @@ class Program
         public async Task TypeOfExpression()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -507,7 +560,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -522,7 +575,7 @@ class Program
         public async Task NameOfExpression()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -532,7 +585,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -547,7 +600,7 @@ class Program
         public async Task FormalParametersWithinLambdaExression()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -557,7 +610,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -572,7 +625,7 @@ class Program
         public async Task DelegateMethodExpression()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -582,7 +635,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -597,7 +650,7 @@ class Program
         public async Task ObjectCreationExpression()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -607,7 +660,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -622,7 +675,7 @@ class Program
         public async Task ArrayDeclaration()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -632,7 +685,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -647,7 +700,7 @@ class Program
         public async Task ArrayInitializer()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -657,7 +710,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -672,7 +725,7 @@ class Program
         public async Task MultiDimentionalArrayAsGenericTypeParameter()
         {
             var code =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 class Program
 {
@@ -683,7 +736,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 class Program
 {
@@ -699,7 +752,7 @@ class Program
         public async Task ForStatement()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -709,7 +762,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -724,7 +777,7 @@ class Program
         public async Task ForeachStatement()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -734,7 +787,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -749,7 +802,7 @@ class Program
         public async Task LeadingTrivia()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -760,7 +813,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -776,7 +829,7 @@ class Program
         public async Task TrailingTrivia()
         {
             var code =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()
@@ -786,7 +839,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Program
 {
     void Method()

@@ -21,17 +21,31 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
         public static readonly TestWaitIndicator Default = new TestWaitIndicator();
 
         private readonly IWaitContext _waitContext;
-        private readonly Microsoft.VisualStudio.Language.Intellisense.Utilities.IWaitContext _platformWaitContext = new UncancellableWaitContext();
+        private readonly Microsoft.VisualStudio.Language.Intellisense.Utilities.IWaitContext _platformWaitContext =
+            new UncancellableWaitContext();
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public TestWaitIndicator()
-            => _waitContext = new UncancellableWaitContext();
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public TestWaitIndicator() => _waitContext = new UncancellableWaitContext();
 
-        IWaitContext IWaitIndicator.StartWait(string title, string message, bool allowCancel, bool showProgress)
-            => _waitContext;
+        IWaitContext IWaitIndicator.StartWait(
+            string title,
+            string message,
+            bool allowCancel,
+            bool showProgress
+        ) => _waitContext;
 
-        WaitIndicatorResult IWaitIndicator.Wait(string title, string message, bool allowCancel, bool showProgress, Action<IWaitContext> action)
+        WaitIndicatorResult IWaitIndicator.Wait(
+            string title,
+            string message,
+            bool allowCancel,
+            bool showProgress,
+            Action<IWaitContext> action
+        )
         {
             try
             {
@@ -45,10 +59,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
             return WaitIndicatorResult.Completed;
         }
 
-        VisualStudioIndicator.IWaitContext VisualStudioIndicator.IWaitIndicator.StartWait(string title, string message, bool allowCancel)
-            => _platformWaitContext;
+        VisualStudioIndicator.IWaitContext VisualStudioIndicator.IWaitIndicator.StartWait(
+            string title,
+            string message,
+            bool allowCancel
+        ) => _platformWaitContext;
 
-        VisualStudioIndicator.WaitIndicatorResult VisualStudioIndicator.IWaitIndicator.Wait(string title, string message, bool allowCancel, Action<VisualStudioIndicator.IWaitContext> action)
+        VisualStudioIndicator.WaitIndicatorResult VisualStudioIndicator.IWaitIndicator.Wait(
+            string title,
+            string message,
+            bool allowCancel,
+            Action<VisualStudioIndicator.IWaitContext> action
+        )
         {
             try
             {
@@ -62,7 +84,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
             return VisualStudioIndicator.WaitIndicatorResult.Completed;
         }
 
-        private sealed class UncancellableWaitContext : IWaitContext, VisualStudioIndicator.IWaitContext
+        private sealed class UncancellableWaitContext
+            : IWaitContext,
+                VisualStudioIndicator.IWaitContext
         {
             public CancellationToken CancellationToken
             {
@@ -71,37 +95,21 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
 
             public IProgressTracker ProgressTracker { get; } = new ProgressTracker();
 
-            public void UpdateProgress()
-            {
-            }
+            public void UpdateProgress() { }
 
             public bool AllowCancel
             {
-                get
-                {
-                    return false;
-                }
-
-                set
-                {
-                }
+                get { return false; }
+                set { }
             }
 
             public string Message
             {
-                get
-                {
-                    return "";
-                }
-
-                set
-                {
-                }
+                get { return ""; }
+                set { }
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
     }
 }

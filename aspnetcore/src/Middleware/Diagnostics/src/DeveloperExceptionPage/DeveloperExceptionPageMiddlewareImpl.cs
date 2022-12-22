@@ -33,7 +33,9 @@ internal class DeveloperExceptionPageMiddlewareImpl
     private readonly DiagnosticSource _diagnosticSource;
     private readonly ExceptionDetailsProvider _exceptionDetailsProvider;
     private readonly Func<ErrorContext, Task> _exceptionHandler;
-    private static readonly MediaTypeHeaderValue _textHtmlMediaType = new MediaTypeHeaderValue("text/html");
+    private static readonly MediaTypeHeaderValue _textHtmlMediaType = new MediaTypeHeaderValue(
+        "text/html"
+    );
     private readonly IProblemDetailsService? _problemDetailsService;
 
     /// <summary>
@@ -53,7 +55,8 @@ internal class DeveloperExceptionPageMiddlewareImpl
         IWebHostEnvironment hostingEnvironment,
         DiagnosticSource diagnosticSource,
         IEnumerable<IDeveloperPageExceptionFilter> filters,
-        IProblemDetailsService? problemDetailsService = null)
+        IProblemDetailsService? problemDetailsService = null
+    )
     {
         if (next == null)
         {
@@ -75,14 +78,19 @@ internal class DeveloperExceptionPageMiddlewareImpl
         _logger = loggerFactory.CreateLogger<DeveloperExceptionPageMiddleware>();
         _fileProvider = _options.FileProvider ?? hostingEnvironment.ContentRootFileProvider;
         _diagnosticSource = diagnosticSource;
-        _exceptionDetailsProvider = new ExceptionDetailsProvider(_fileProvider, _logger, _options.SourceCodeLineCount);
+        _exceptionDetailsProvider = new ExceptionDetailsProvider(
+            _fileProvider,
+            _logger,
+            _options.SourceCodeLineCount
+        );
         _exceptionHandler = DisplayException;
         _problemDetailsService = problemDetailsService;
 
         foreach (var filter in filters.Reverse())
         {
             var nextFilter = _exceptionHandler;
-            _exceptionHandler = errorContext => filter.HandleExceptionAsync(errorContext, nextFilter);
+            _exceptionHandler = errorContext =>
+                filter.HandleExceptionAsync(errorContext, nextFilter);
         }
     }
 
@@ -126,7 +134,11 @@ internal class DeveloperExceptionPageMiddlewareImpl
                 const string eventName = "Microsoft.AspNetCore.Diagnostics.UnhandledException";
                 if (_diagnosticSource.IsEnabled(eventName))
                 {
-                    WriteDiagnosticEvent(_diagnosticSource, eventName, new { httpContext = context, exception = ex });
+                    WriteDiagnosticEvent(
+                        _diagnosticSource,
+                        eventName,
+                        new { httpContext = context, exception = ex }
+                    );
                 }
 
                 return;
@@ -139,10 +151,16 @@ internal class DeveloperExceptionPageMiddlewareImpl
             throw;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026",
-            Justification = "The values being passed into Write have the commonly used properties being preserved with DynamicDependency.")]
-        static void WriteDiagnosticEvent<TValue>(DiagnosticSource diagnosticSource, string name, TValue value)
-            => diagnosticSource.Write(name, value);
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026",
+            Justification = "The values being passed into Write have the commonly used properties being preserved with DynamicDependency."
+        )]
+        static void WriteDiagnosticEvent<TValue>(
+            DiagnosticSource diagnosticSource,
+            string name,
+            TValue value
+        ) => diagnosticSource.Write(name, value);
     }
 
     // Assumes the response headers have not been sent.  If they have, still attempt to write to the body.
@@ -188,11 +206,9 @@ internal class DeveloperExceptionPageMiddlewareImpl
                 RouteValues = httpContext.Features.Get<IRouteValuesFeature>()?.RouteValues,
             };
 
-            await _problemDetailsService.WriteAsync(new()
-            {
-                HttpContext = httpContext,
-                ProblemDetails = problemDetails
-            });
+            await _problemDetailsService.WriteAsync(
+                new() { HttpContext = httpContext, ProblemDetails = problemDetails }
+            );
         }
 
         // If the response has not started, assume the problem details was not written.
@@ -216,7 +232,8 @@ internal class DeveloperExceptionPageMiddlewareImpl
 
     private Task DisplayCompilationException(
         HttpContext context,
-        ICompilationException compilationException)
+        ICompilationException compilationException
+    )
     {
         var model = new CompilationErrorPageModel(_options);
 
@@ -235,7 +252,10 @@ internal class DeveloperExceptionPageMiddlewareImpl
             }
 
             var stackFrames = new List<StackFrameSourceCodeInfo>();
-            var exceptionDetails = new ExceptionDetails(compilationFailure.FailureSummary!, stackFrames);
+            var exceptionDetails = new ExceptionDetails(
+                compilationFailure.FailureSummary!,
+                stackFrames
+            );
             model.ErrorDetails.Add(exceptionDetails);
             model.CompiledContent.Add(compilationFailure.CompiledContent);
 
@@ -244,9 +264,10 @@ internal class DeveloperExceptionPageMiddlewareImpl
                 continue;
             }
 
-            var sourceLines = compilationFailure
-                    .SourceFileContent?
-                    .Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            var sourceLines = compilationFailure.SourceFileContent?.Split(
+                new[] { Environment.NewLine },
+                StringSplitOptions.None
+            );
 
             foreach (var item in compilationFailure.Messages)
             {
@@ -264,7 +285,12 @@ internal class DeveloperExceptionPageMiddlewareImpl
 
                 if (sourceLines != null)
                 {
-                    _exceptionDetailsProvider.ReadFrameContent(frame, sourceLines, item.StartLine, item.EndLine);
+                    _exceptionDetailsProvider.ReadFrameContent(
+                        frame,
+                        sourceLines,
+                        item.StartLine,
+                        item.EndLine
+                    );
                 }
 
                 frame.ErrorDetails = item.Message;
@@ -304,7 +330,9 @@ internal class DeveloperExceptionPageMiddlewareImpl
 
         if (ex is BadHttpRequestException badHttpRequestException)
         {
-            var badRequestReasonPhrase = WebUtilities.ReasonPhrases.GetReasonPhrase(badHttpRequestException.StatusCode);
+            var badRequestReasonPhrase = WebUtilities.ReasonPhrases.GetReasonPhrase(
+                badHttpRequestException.StatusCode
+            );
 
             if (!string.IsNullOrEmpty(badRequestReasonPhrase))
             {

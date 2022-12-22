@@ -7,8 +7,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class TestAppServiceProviderFactory : AppServiceProviderFactory
 {
-    public TestAppServiceProviderFactory(Assembly startupAssembly, IOperationReporter reporter = null)
-        : base(startupAssembly, reporter ?? new TestOperationReporter())
-    {
-    }
+    public TestAppServiceProviderFactory(
+        Assembly startupAssembly,
+        IOperationReporter reporter = null
+    ) : base(startupAssembly, reporter ?? new TestOperationReporter()) { }
 }

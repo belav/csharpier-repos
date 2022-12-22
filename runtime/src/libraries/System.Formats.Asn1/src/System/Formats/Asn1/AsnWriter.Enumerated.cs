@@ -80,7 +80,8 @@ namespace System.Formats.Asn1
             {
                 throw new ArgumentException(
                     SR.Argument_EnumeratedValueRequiresNonFlagsEnum,
-                    nameof(tEnum));
+                    nameof(tEnum)
+                );
             }
 
             if (backingType == typeof(ulong))

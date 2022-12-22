@@ -25,8 +25,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         private readonly MethodDesc[] _instrumentationDataMethods;
         private readonly ProfileDataManager _profileDataManager;
 
-        public InstrumentationDataTableNode(NodeFactory factory, MethodDesc[] instrumentationDataMethods, ProfileDataManager profileDataManager)
-            : base(factory.Target)
+        public InstrumentationDataTableNode(
+            NodeFactory factory,
+            MethodDesc[] instrumentationDataMethods,
+            ProfileDataManager profileDataManager
+        ) : base(factory.Target)
         {
             _factory = factory;
             _instrumentationDataMethods = instrumentationDataMethods;
@@ -38,9 +41,14 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _symbolNodeFactory = symbolNodeFactory;
         }
 
-        class PgoValueEmitter : IPgoEncodedValueEmitter<TypeSystemEntityOrUnknown, TypeSystemEntityOrUnknown>
+        class PgoValueEmitter
+            : IPgoEncodedValueEmitter<TypeSystemEntityOrUnknown, TypeSystemEntityOrUnknown>
         {
-            public PgoValueEmitter(CompilationModuleGroup compilationGroup, ReadyToRunSymbolNodeFactory factory, bool actuallyCaptureOutput)
+            public PgoValueEmitter(
+                CompilationModuleGroup compilationGroup,
+                ReadyToRunSymbolNodeFactory factory,
+                bool actuallyCaptureOutput
+            )
             {
                 _compilationGroup = compilationGroup;
                 _symbolFactory = factory;
@@ -60,8 +68,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             public IReadOnlyList<Import> ReferencedImports => _imports;
             List<long> _longs = new List<long>();
             List<Import> _imports = new List<Import>();
-            Dictionary<TypeSystemEntityOrUnknown, int> _typeConversions = new Dictionary<TypeSystemEntityOrUnknown, int>();
-            Dictionary<TypeSystemEntityOrUnknown, int> _methodConversions = new Dictionary<TypeSystemEntityOrUnknown, int>();
+            Dictionary<TypeSystemEntityOrUnknown, int> _typeConversions =
+                new Dictionary<TypeSystemEntityOrUnknown, int>();
+            Dictionary<TypeSystemEntityOrUnknown, int> _methodConversions =
+                new Dictionary<TypeSystemEntityOrUnknown, int>();
             int _unknownTypesFound = 0;
             int _unknownMethodsFound = 0;
             CompilationModuleGroup _compilationGroup;
@@ -78,17 +88,25 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 // This writer wants the done emitted as a schema terminator
                 return false;
             }
+
             public void EmitLong(long value, long previousValue)
             {
                 if (_actuallyCaptureOutput)
                     _longs.Add(value - previousValue);
             }
-            public void EmitType(TypeSystemEntityOrUnknown type, TypeSystemEntityOrUnknown previousValue)
+
+            public void EmitType(
+                TypeSystemEntityOrUnknown type,
+                TypeSystemEntityOrUnknown previousValue
+            )
             {
                 EmitLong(TypeToInt(type), TypeToInt(previousValue));
             }
 
-            public void EmitMethod(TypeSystemEntityOrUnknown method, TypeSystemEntityOrUnknown previousValue)
+            public void EmitMethod(
+                TypeSystemEntityOrUnknown method,
+                TypeSystemEntityOrUnknown previousValue
+            )
             {
                 EmitLong(MethodToInt(method), MethodToInt(previousValue));
             }
@@ -102,9 +120,16 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 {
                     return computedInt;
                 }
-                if (handle.AsType != null && _compilationGroup.VersionsWithTypeReference(handle.AsType))
+                if (
+                    handle.AsType != null
+                    && _compilationGroup.VersionsWithTypeReference(handle.AsType)
+                )
                 {
-                    Import typeHandleImport = (Import)_symbolFactory.CreateReadyToRunHelper(ReadyToRunHelperId.TypeHandle, handle.AsType);
+                    Import typeHandleImport = (Import)
+                        _symbolFactory.CreateReadyToRunHelper(
+                            ReadyToRunHelperId.TypeHandle,
+                            handle.AsType
+                        );
                     _imports.Add(typeHandleImport);
 
                     if (_actuallyCaptureOutput)
@@ -118,7 +143,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                             throw new Exception("Unexpected high index for table import");
                         }
 
-                        computedInt = (typeHandleImport.IndexFromBeginningOfArray << 4) | typeHandleImport.Table.IndexFromBeginningOfArray;
+                        computedInt =
+                            (typeHandleImport.IndexFromBeginningOfArray << 4)
+                            | typeHandleImport.Table.IndexFromBeginningOfArray;
                     }
                     else
                     {
@@ -142,13 +169,27 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 {
                     return computedInt;
                 }
-                if (handle.AsMethod != null && _compilationGroup.VersionsWithMethodBody(handle.AsMethod))
+                if (
+                    handle.AsMethod != null
+                    && _compilationGroup.VersionsWithMethodBody(handle.AsMethod)
+                )
                 {
-                    EcmaMethod typicalMethod = (EcmaMethod)handle.AsMethod.GetTypicalMethodDefinition();
-                    ModuleToken moduleToken = new ModuleToken(typicalMethod.Module, typicalMethod.Handle);
+                    EcmaMethod typicalMethod = (EcmaMethod)
+                        handle.AsMethod.GetTypicalMethodDefinition();
+                    ModuleToken moduleToken = new ModuleToken(
+                        typicalMethod.Module,
+                        typicalMethod.Handle
+                    );
 
-                    MethodWithToken tok = new MethodWithToken(handle.AsMethod, moduleToken, constrainedType: null, unboxing: false, context: null);
-                    Import methodHandleImport = (Import)_symbolFactory.CreateReadyToRunHelper(ReadyToRunHelperId.MethodHandle, tok);
+                    MethodWithToken tok = new MethodWithToken(
+                        handle.AsMethod,
+                        moduleToken,
+                        constrainedType: null,
+                        unboxing: false,
+                        context: null
+                    );
+                    Import methodHandleImport = (Import)
+                        _symbolFactory.CreateReadyToRunHelper(ReadyToRunHelperId.MethodHandle, tok);
                     _imports.Add(methodHandleImport);
 
                     if (_actuallyCaptureOutput)
@@ -162,7 +203,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                             throw new Exception("Unexpected high index for table import");
                         }
 
-                        computedInt = (methodHandleImport.IndexFromBeginningOfArray << 4) | methodHandleImport.Table.IndexFromBeginningOfArray;
+                        computedInt =
+                            (methodHandleImport.IndexFromBeginningOfArray << 4)
+                            | methodHandleImport.Table.IndexFromBeginningOfArray;
                     }
                     else
                     {
@@ -186,57 +229,108 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         protected override DependencyList ComputeNonRelocationBasedDependencies(NodeFactory factory)
         {
-            PgoValueEmitter pgoEmitter = new PgoValueEmitter(_factory.CompilationModuleGroup, _symbolNodeFactory, false);
+            PgoValueEmitter pgoEmitter = new PgoValueEmitter(
+                _factory.CompilationModuleGroup,
+                _symbolNodeFactory,
+                false
+            );
             foreach (MethodDesc method in _instrumentationDataMethods)
             {
-                PgoProcessor.EncodePgoData(_profileDataManager[method].SchemaData, pgoEmitter, false);
+                PgoProcessor.EncodePgoData(
+                    _profileDataManager[method].SchemaData,
+                    pgoEmitter,
+                    false
+                );
             }
-            DependencyListEntry[] symbols = new DependencyListEntry[pgoEmitter.ReferencedImports.Count];
+            DependencyListEntry[] symbols = new DependencyListEntry[
+                pgoEmitter.ReferencedImports.Count
+            ];
             for (int i = 0; i < symbols.Length; i++)
             {
-                symbols[i] = new DependencyListEntry(pgoEmitter.ReferencedImports[i], "Pgo Instrumentation Data");
+                symbols[i] = new DependencyListEntry(
+                    pgoEmitter.ReferencedImports[i],
+                    "Pgo Instrumentation Data"
+                );
             }
 
             return new DependencyList(symbols);
         }
 
-
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             if (relocsOnly)
             {
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, Array.Empty<ISymbolDefinitionNode>());
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    Array.Empty<ISymbolDefinitionNode>()
+                );
             }
 
-            PgoValueEmitter pgoEmitter = new PgoValueEmitter(_factory.CompilationModuleGroup, _symbolNodeFactory, true);
+            PgoValueEmitter pgoEmitter = new PgoValueEmitter(
+                _factory.CompilationModuleGroup,
+                _symbolNodeFactory,
+                true
+            );
             NativeWriter hashtableWriter = new NativeWriter();
 
             Section hashtableSection = hashtableWriter.NewSection();
             VertexHashtable vertexHashtable = new VertexHashtable();
             hashtableSection.Place(vertexHashtable);
 
-            Dictionary<byte[], BlobVertex> uniqueInstrumentationData = new Dictionary<byte[], BlobVertex>(ByteArrayComparer.Instance);
+            Dictionary<byte[], BlobVertex> uniqueInstrumentationData = new Dictionary<
+                byte[],
+                BlobVertex
+            >(ByteArrayComparer.Instance);
 
             foreach (MethodDesc method in _instrumentationDataMethods)
             {
                 pgoEmitter.Clear();
-                PgoProcessor.EncodePgoData(CorInfoImpl.ConvertTypeHandleHistogramsToCompactTypeHistogramFormat(_profileDataManager[method].SchemaData, factory.CompilationModuleGroup), pgoEmitter, false);
+                PgoProcessor.EncodePgoData(
+                    CorInfoImpl.ConvertTypeHandleHistogramsToCompactTypeHistogramFormat(
+                        _profileDataManager[method].SchemaData,
+                        factory.CompilationModuleGroup
+                    ),
+                    pgoEmitter,
+                    false
+                );
 
-                byte[] signature = InstanceEntryPointTableNode.BuildSignatureForMethodDefinedInModule(method, factory);
+                byte[] signature =
+                    InstanceEntryPointTableNode.BuildSignatureForMethodDefinedInModule(
+                        method,
+                        factory
+                    );
                 BlobVertex signatureBlob = new BlobVertex(signature);
 
                 byte[] encodedInstrumentationData = pgoEmitter.ToByteArray();
                 BlobVertex instrumentationDataBlob = null;
-                if (!uniqueInstrumentationData.TryGetValue(encodedInstrumentationData, out instrumentationDataBlob))
+                if (
+                    !uniqueInstrumentationData.TryGetValue(
+                        encodedInstrumentationData,
+                        out instrumentationDataBlob
+                    )
+                )
                 {
                     instrumentationDataBlob = new BlobVertex(encodedInstrumentationData);
                     hashtableSection.Place(instrumentationDataBlob);
-                    uniqueInstrumentationData.Add(encodedInstrumentationData, instrumentationDataBlob);
+                    uniqueInstrumentationData.Add(
+                        encodedInstrumentationData,
+                        instrumentationDataBlob
+                    );
                 }
 
-                PgoInstrumentedDataWithSignatureBlobVertex pgoDataVertex = new PgoInstrumentedDataWithSignatureBlobVertex(signatureBlob, 0, instrumentationDataBlob);
+                PgoInstrumentedDataWithSignatureBlobVertex pgoDataVertex =
+                    new PgoInstrumentedDataWithSignatureBlobVertex(
+                        signatureBlob,
+                        0,
+                        instrumentationDataBlob
+                    );
                 hashtableSection.Place(pgoDataVertex);
-                vertexHashtable.Append(unchecked((uint)ReadyToRunHashCode.MethodHashCode(method)), pgoDataVertex);
+                vertexHashtable.Append(
+                    unchecked((uint)ReadyToRunHashCode.MethodHashCode(method)),
+                    pgoDataVertex
+                );
             }
 
             MemoryStream hashtableContent = new MemoryStream();
@@ -245,7 +339,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 data: hashtableContent.ToArray(),
                 relocs: null,
                 alignment: 8,
-                definedSymbols: new ISymbolDefinitionNode[] { this });
+                definedSymbols: new ISymbolDefinitionNode[] { this }
+            );
         }
 
         public override int ClassCode => 1887299452;

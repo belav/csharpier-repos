@@ -29,6 +29,7 @@ namespace DependencyLogViewer
                 OpenFile(argPath);
             }
         }
+
 #nullable restore
 
         private void explore_Click(object sender, EventArgs e)
@@ -134,7 +135,9 @@ namespace DependencyLogViewer
             // Today you have to be Admin to collect ETW events (anyone can write ETW events). If user elects to use ETW events, they must be Admin.
             if (!(TraceEventSession.IsElevated() ?? false))
             {
-                MessageBox.Show("Error: Relaunch program as an adminstrator to collect ETW Events.");
+                MessageBox.Show(
+                    "Error: Relaunch program as an adminstrator to collect ETW Events."
+                );
             }
             else
             {
@@ -142,7 +145,8 @@ namespace DependencyLogViewer
                 MessageBox.Show("ETW Events have been enabled");
             }
         }
-       public static void showError(string msg)
+
+        public static void showError(string msg)
         {
             MessageBox.Show($"Invalid file upload: {msg}");
         }

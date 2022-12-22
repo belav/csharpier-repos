@@ -15,7 +15,10 @@ namespace System.Text
 {
     internal static class StringBuilderExtensions
     {
-        public static unsafe StringBuilder Append(this StringBuilder stringBuilder, ReadOnlySpan<char> span)
+        public static unsafe StringBuilder Append(
+            this StringBuilder stringBuilder,
+            ReadOnlySpan<char> span
+        )
         {
             fixed (char* ptr = &MemoryMarshal.GetReference(span))
             {
@@ -36,7 +39,11 @@ namespace System
 {
     internal static class StringExtensions
     {
-        public static string Create<TState>(int length, TState state, SpanAction<char, TState> action)
+        public static string Create<TState>(
+            int length,
+            TState state,
+            SpanAction<char, TState> action
+        )
         {
             Span<char> span = length <= 256 ? stackalloc char[length] : new char[length];
             action(span, state);
@@ -75,7 +82,12 @@ namespace System.Threading
             while (true)
             {
                 uint newValue = current | value;
-                uint oldValue = (uint)Interlocked.CompareExchange(ref Unsafe.As<uint, int>(ref location1), (int)newValue, (int)current);
+                uint oldValue = (uint)
+                    Interlocked.CompareExchange(
+                        ref Unsafe.As<uint, int>(ref location1),
+                        (int)newValue,
+                        (int)current
+                    );
                 if (oldValue == current)
                 {
                     return oldValue;

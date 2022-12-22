@@ -15,7 +15,6 @@ using Microsoft.Diagnostics.Tracing.Parsers.Clr;
 
 namespace Tracing.Tests.RundownValidation
 {
-
     public class RundownValidation
     {
         public static int Main(string[] args)
@@ -29,10 +28,19 @@ namespace Tracing.Tests.RundownValidation
                 new EventPipeProvider("Microsoft-DotNETCore-SampleProfiler", EventLevel.Verbose)
             };
 
-            return IpcTraceTest.RunAndValidateEventCounts(_expectedEventCounts, _eventGeneratingAction, providers, 1024, _DoesRundownContainMethodEvents);
+            return IpcTraceTest.RunAndValidateEventCounts(
+                _expectedEventCounts,
+                _eventGeneratingAction,
+                providers,
+                1024,
+                _DoesRundownContainMethodEvents
+            );
         }
 
-        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<string, ExpectedEventCount>()
+        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<
+            string,
+            ExpectedEventCount
+        >()
         {
             { "Microsoft-Windows-DotNETRuntimeRundown", -1 }
         };
@@ -40,7 +48,9 @@ namespace Tracing.Tests.RundownValidation
         // We only care about rundown so skip generating any events.
         private static Action _eventGeneratingAction = () => { };
 
-        private static Func<EventPipeEventSource, Func<int>> _DoesRundownContainMethodEvents = (source) =>
+        private static Func<EventPipeEventSource, Func<int>> _DoesRundownContainMethodEvents = (
+            source
+        ) =>
         {
             bool hasMethodDCStopVerbose = false;
             bool hasMethodILToNativeMap = false;

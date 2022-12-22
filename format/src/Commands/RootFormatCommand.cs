@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
 
         public static RootCommand GetCommand()
         {
-            var formatCommand = new RootCommand(Resources.Formats_code_to_match_editorconfig_settings)
+            var formatCommand = new RootCommand(
+                Resources.Formats_code_to_match_editorconfig_settings
+            )
             {
                 FormatWhitespaceCommand.GetCommand(),
                 FormatStyleCommand.GetCommand(),
@@ -32,38 +34,68 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
 
         private class FormatCommandDefaultHandler : ICommandHandler
         {
-            public int Invoke(InvocationContext context) => InvokeAsync(context).GetAwaiter().GetResult();
+            public int Invoke(InvocationContext context) =>
+                InvokeAsync(context).GetAwaiter().GetResult();
 
             public async Task<int> InvokeAsync(InvocationContext context)
             {
                 var parseResult = context.ParseResult;
                 var formatOptions = parseResult.ParseVerbosityOption(FormatOptions.Instance);
-                var logger = context.Console.SetupLogging(minimalLogLevel: formatOptions.LogLevel, minimalErrorLevel: LogLevel.Warning);
+                var logger = context.Console.SetupLogging(
+                    minimalLogLevel: formatOptions.LogLevel,
+                    minimalErrorLevel: LogLevel.Warning
+                );
                 formatOptions = parseResult.ParseCommonOptions(formatOptions, logger);
                 formatOptions = parseResult.ParseWorkspaceOptions(formatOptions);
 
-                if (parseResult.HasOption(SeverityOption) &&
-                    parseResult.GetValueForOption(SeverityOption) is string { Length: > 0 } defaultSeverity)
+                if (
+                    parseResult.HasOption(SeverityOption)
+                    && parseResult.GetValueForOption(SeverityOption)
+                        is string { Length: > 0 } defaultSeverity
+                )
                 {
-                    formatOptions = formatOptions with { AnalyzerSeverity = GetSeverity(defaultSeverity) };
-                    formatOptions = formatOptions with { CodeStyleSeverity = GetSeverity(defaultSeverity) };
+                    formatOptions = formatOptions with
+                    {
+                        AnalyzerSeverity = GetSeverity(defaultSeverity)
+                    };
+                    formatOptions = formatOptions with
+                    {
+                        CodeStyleSeverity = GetSeverity(defaultSeverity)
+                    };
                 }
 
-                if (parseResult.HasOption(DiagnosticsOption) &&
-                    parseResult.GetValueForOption(DiagnosticsOption) is string[] { Length: > 0 } diagnostics)
+                if (
+                    parseResult.HasOption(DiagnosticsOption)
+                    && parseResult.GetValueForOption(DiagnosticsOption)
+                        is string[] { Length: > 0 } diagnostics
+                )
                 {
-                    formatOptions = formatOptions with { Diagnostics = diagnostics.ToImmutableHashSet() };
+                    formatOptions = formatOptions with
+                    {
+                        Diagnostics = diagnostics.ToImmutableHashSet()
+                    };
                 }
 
-                if (parseResult.HasOption(ExcludeDiagnosticsOption) &&
-                    parseResult.GetValueForOption(ExcludeDiagnosticsOption) is string[] { Length: > 0 } excludeDiagnostics)
+                if (
+                    parseResult.HasOption(ExcludeDiagnosticsOption)
+                    && parseResult.GetValueForOption(ExcludeDiagnosticsOption)
+                        is string[] { Length: > 0 } excludeDiagnostics
+                )
                 {
-                    formatOptions = formatOptions with { ExcludeDiagnostics = excludeDiagnostics.ToImmutableHashSet() };
+                    formatOptions = formatOptions with
+                    {
+                        ExcludeDiagnostics = excludeDiagnostics.ToImmutableHashSet()
+                    };
                 }
 
-                formatOptions = formatOptions with { FixCategory = FixCategory.Whitespace | FixCategory.CodeStyle | FixCategory.Analyzers };
+                formatOptions = formatOptions with
+                {
+                    FixCategory =
+                        FixCategory.Whitespace | FixCategory.CodeStyle | FixCategory.Analyzers
+                };
 
-                return await FormatAsync(formatOptions, logger, context.GetCancellationToken()).ConfigureAwait(false);
+                return await FormatAsync(formatOptions, logger, context.GetCancellationToken())
+                    .ConfigureAwait(false);
             }
         }
     }

@@ -25,6 +25,7 @@ namespace ILCompiler.DependencyAnalysis
         {
             sb.Append("__readonlydata_" + nameMangler.GetMangledMethodName(_owningMethod));
         }
+
         public int Offset => 0;
         public override bool IsShareable => true;
 
@@ -39,7 +40,8 @@ namespace ILCompiler.DependencyAnalysis
             return _data;
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
 #if !SUPPORT_JIT
         public override int ClassCode => 674507768;

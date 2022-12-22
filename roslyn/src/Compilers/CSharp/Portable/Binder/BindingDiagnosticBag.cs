@@ -13,32 +13,32 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal sealed class BindingDiagnosticBag : BindingDiagnosticBag<AssemblySymbol>
     {
-        public static readonly BindingDiagnosticBag Discarded = new BindingDiagnosticBag(null, null);
+        public static readonly BindingDiagnosticBag Discarded = new BindingDiagnosticBag(
+            null,
+            null
+        );
 
-        public BindingDiagnosticBag()
-            : this(usePool: false)
-        { }
+        public BindingDiagnosticBag() : this(usePool: false) { }
 
-        private BindingDiagnosticBag(bool usePool)
-            : base(usePool)
-        { }
+        private BindingDiagnosticBag(bool usePool) : base(usePool) { }
 
         public BindingDiagnosticBag(DiagnosticBag? diagnosticBag)
-            : base(diagnosticBag, dependenciesBag: null)
-        {
-        }
+            : base(diagnosticBag, dependenciesBag: null) { }
 
-        public BindingDiagnosticBag(DiagnosticBag? diagnosticBag, ICollection<AssemblySymbol>? dependenciesBag)
-            : base(diagnosticBag, dependenciesBag)
-        {
-        }
+        public BindingDiagnosticBag(
+            DiagnosticBag? diagnosticBag,
+            ICollection<AssemblySymbol>? dependenciesBag
+        ) : base(diagnosticBag, dependenciesBag) { }
 
         internal static BindingDiagnosticBag GetInstance()
         {
             return new BindingDiagnosticBag(usePool: true);
         }
 
-        internal static BindingDiagnosticBag GetInstance(bool withDiagnostics, bool withDependencies)
+        internal static BindingDiagnosticBag GetInstance(
+            bool withDiagnostics,
+            bool withDependencies
+        )
         {
             if (withDiagnostics)
             {
@@ -51,7 +51,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else if (withDependencies)
             {
-                return new BindingDiagnosticBag(diagnosticBag: null, PooledHashSet<AssemblySymbol>.GetInstance());
+                return new BindingDiagnosticBag(
+                    diagnosticBag: null,
+                    PooledHashSet<AssemblySymbol>.GetInstance()
+                );
             }
             else
             {
@@ -144,7 +147,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        protected override bool ReportUseSiteDiagnostic(DiagnosticInfo diagnosticInfo, DiagnosticBag diagnosticBag, Location location)
+        protected override bool ReportUseSiteDiagnostic(
+            DiagnosticInfo diagnosticInfo,
+            DiagnosticBag diagnosticBag,
+            Location location
+        )
         {
             return Symbol.ReportUseSiteDiagnostic(diagnosticInfo, diagnosticBag, location);
         }
@@ -163,7 +170,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             return info;
         }
 
-        internal CSDiagnosticInfo Add(ErrorCode code, Location location, ImmutableArray<Symbol> symbols, params object[] args)
+        internal CSDiagnosticInfo Add(
+            ErrorCode code,
+            Location location,
+            ImmutableArray<Symbol> symbols,
+            params object[] args
+        )
         {
             var info = new CSDiagnosticInfo(code, args, symbols, ImmutableArray<Location>.Empty);
             Add(info, location);

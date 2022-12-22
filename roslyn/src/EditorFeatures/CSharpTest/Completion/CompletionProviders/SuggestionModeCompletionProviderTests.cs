@@ -19,8 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class SuggestionModeCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(CSharpSuggestionModeCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(CSharpSuggestionModeCompletionProvider);
 
         [Fact]
         public async Task AfterFirstExplicitArgument()
@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task AfterFirstImplicitArgumentInMethodCall()
         {
-            var markup = @"class c
+            var markup =
+                @"class c
 {
     private void bar(Func<int, int, bool> f) { }
     
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task AfterFirstExplicitArgumentInMethodCall()
         {
-            var markup = @"class c
+            var markup =
+                @"class c
 {
     private void bar(Func<int, int, bool> f) { }
     
@@ -73,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public async Task DelegateTypeExpected1()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 
 class c
 {
@@ -89,13 +92,16 @@ class c
         }
 
         [Fact]
-        public async Task DelegateTypeExpected2()
-            => await VerifyBuilderAsync(AddUsingDirectives("using System;", AddInsideMethod(@"Func<int, int, int> f = $$")));
+        public async Task DelegateTypeExpected2() =>
+            await VerifyBuilderAsync(
+                AddUsingDirectives("using System;", AddInsideMethod(@"Func<int, int, int> f = $$"))
+            );
 
         [Fact]
         public async Task ObjectInitializerDelegateType()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -117,7 +123,8 @@ class a
         [Fact, WorkItem(817145, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/817145")]
         public async Task ExplicitArrayInitializer()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 
 class a
 {
@@ -132,7 +139,8 @@ class a
         [Fact]
         public async Task ImplicitArrayInitializerUnknownType()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 
 class a
 {
@@ -147,7 +155,8 @@ class a
         [Fact]
         public async Task ImplicitArrayInitializerKnownDelegateType()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 
 class a
 {
@@ -162,7 +171,8 @@ class a
         [Fact]
         public async Task TernaryOperatorUnknownType()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 
 class a
 {
@@ -177,7 +187,8 @@ class a
         [Fact]
         public async Task TernaryOperatorKnownDelegateType1()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 
 class a
 {
@@ -192,7 +203,8 @@ class a
         [Fact]
         public async Task TernaryOperatorKnownDelegateType2()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 
 class a
 {
@@ -207,7 +219,8 @@ class a
         [Fact]
         public async Task OverloadTakesADelegate1()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 
 class a
 {
@@ -225,7 +238,8 @@ class a
         [Fact]
         public async Task OverloadTakesDelegate2()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 
 class a
 {
@@ -243,7 +257,8 @@ class a
         [Fact]
         public async Task ExplicitCastToDelegate()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 
 class a
 {
@@ -259,7 +274,8 @@ class a
         [Fact, WorkItem(860580, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/860580")]
         public async Task ReturnStatement()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 
 class a
 {
@@ -274,7 +290,8 @@ class a
         [Fact]
         public async Task BuilderInAnonymousType1()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 
 class a
 {
@@ -289,7 +306,8 @@ class a
         [Fact]
         public async Task BuilderInAnonymousType2()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 
 class a
 {
@@ -304,7 +322,8 @@ class a
         [Fact]
         public async Task BuilderInAnonymousType3()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 class a
 {
     int bar()
@@ -318,7 +337,8 @@ class a
         [Fact]
         public async Task BuilderInFromClause()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 using System.Linq;
 
 class a
@@ -334,7 +354,8 @@ class a
         [Fact, WorkItem(823968, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/823968")]
         public async Task BuilderInJoinClause()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -353,7 +374,8 @@ class a
         [Fact, WorkItem(544290, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544290")]
         public async Task ParenthesizedLambdaArgument()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -367,7 +389,8 @@ class Program
         [Fact, WorkItem(544379, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544379")]
         public async Task IncompleteParenthesizedLambdaArgument()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -381,7 +404,8 @@ class Program
         [Fact, WorkItem(544379, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544379")]
         public async Task IncompleteNestedParenthesizedLambdaArgument()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -395,7 +419,8 @@ class Program
         [Fact]
         public async Task ParenthesizedExpressionInVarDeclaration()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -409,7 +434,8 @@ class Program
         [Fact, WorkItem(24432, "https://github.com/dotnet/roslyn/issues/24432")]
         public async Task TestInObjectCreation()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 class Program
 {
     static void Main()
@@ -423,7 +449,8 @@ class Program
         [Fact, WorkItem(24432, "https://github.com/dotnet/roslyn/issues/24432")]
         public async Task TestInArrayCreation()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 class Program
 {
     static void Main()
@@ -437,7 +464,8 @@ class Program
         [Fact, WorkItem(24432, "https://github.com/dotnet/roslyn/issues/24432")]
         public async Task TestInArrayCreation2()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 class Program
 {
     static void Main()
@@ -451,7 +479,8 @@ class Program
         [Fact]
         public async Task TupleExpressionInVarDeclaration()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -465,7 +494,8 @@ class Program
         [Fact]
         public async Task TupleExpressionInVarDeclaration2()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -479,7 +509,8 @@ class Program
         [Fact]
         public async Task IncompleteLambdaInActionDeclaration()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -493,7 +524,8 @@ class Program
         [Fact]
         public async Task TupleWithNamesInActionDeclaration()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -507,7 +539,8 @@ class Program
         [Fact]
         public async Task TupleWithNamesInActionDeclaration2()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -521,7 +554,8 @@ class Program
         [Fact]
         public async Task TupleWithNamesInVarDeclaration()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -535,7 +569,8 @@ class Program
         [Fact, WorkItem(546363, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546363")]
         public async Task BuilderForLinqExpression()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 using System.Linq.Expressions;
  
 public class Class
@@ -551,7 +586,8 @@ public class Class
         [Fact, WorkItem(546363, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546363")]
         public async Task NotInTypeParameter()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 using System.Linq.Expressions;
  
 public class Class
@@ -567,7 +603,8 @@ public class Class
         [Fact, WorkItem(611477, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/611477")]
         public async Task ExtensionMethodFaultTolerance()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -613,7 +650,8 @@ namespace Outer
         [Fact, WorkItem(834609, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/834609")]
         public async Task LambdaWithAutomaticBraceCompletion()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 using System;
  
 public class Class
@@ -629,7 +667,8 @@ public class Class
         [Fact, WorkItem(858112, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/858112")]
         public async Task ThisConstructorInitializer()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 class X 
 { 
     X(Func<X> x) : this($$) { } 
@@ -640,7 +679,8 @@ class X
         [Fact, WorkItem(858112, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/858112")]
         public async Task BaseConstructorInitializer()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 class B
 {
     public B(Func<B> x) {}
@@ -656,7 +696,8 @@ class D : B
         [Fact, WorkItem(887842, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/887842")]
         public async Task PreprocessorExpression()
         {
-            var markup = @"class C
+            var markup =
+                @"class C
 {
 #if $$
 }";
@@ -666,7 +707,8 @@ class D : B
         [Fact, WorkItem(967254, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/967254")]
         public async Task ImplicitArrayInitializerAfterNew()
         {
-            var markup = @"using System;
+            var markup =
+                @"using System;
 
 class a
 {
@@ -730,7 +772,8 @@ class a
         [Fact, WorkItem(12818, "https://github.com/dotnet/roslyn/issues/12818")]
         public async Task UnwrapParamsArray()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C {
     C(params Action<int>[] a) {
@@ -743,7 +786,8 @@ class C {
         [Fact, WorkItem(12818, "https://github.com/dotnet/roslyn/issues/12818")]
         public async Task DoNotUnwrapRegularArray()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C {
     C(Action<int>[] a) {
@@ -756,7 +800,8 @@ class C {
         [Fact, WorkItem(47662, "https://github.com/dotnet/roslyn/issues/47662")]
         public async Task LambdaExpressionInImplicitObjectCreation()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C {
     C(Action<int> a) {
@@ -769,7 +814,8 @@ class C {
         [Fact, WorkItem(15443, "https://github.com/dotnet/roslyn/issues/15443")]
         public async Task NotBuilderWhenDelegateInferredRightOfDotInInvocation()
         {
-            var markup = @"
+            var markup =
+                @"
 class C {
 	Action a = Task.$$
 }";
@@ -779,7 +825,8 @@ class C {
         [Fact, WorkItem(15443, "https://github.com/dotnet/roslyn/issues/15443")]
         public async Task NotBuilderInTypeArgument()
         {
-            var markup = @"
+            var markup =
+                @"
 namespace ConsoleApplication1
 {
     class Program
@@ -799,7 +846,8 @@ namespace ConsoleApplication1
         [Fact, WorkItem(16176, "https://github.com/dotnet/roslyn/issues/16176")]
         public async Task NotBuilderForLambdaAfterNew()
         {
-            var markup = @"
+            var markup =
+                @"
 class C {
 	Action a = new $$
 }";
@@ -809,7 +857,8 @@ class C {
         [Fact, WorkItem(20937, "https://github.com/dotnet/roslyn/issues/20937")]
         public async Task AsyncLambda()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 using System.Threading.Tasks;
 class Program
@@ -826,7 +875,8 @@ class Program
         [Fact, WorkItem(20937, "https://github.com/dotnet/roslyn/issues/20937")]
         public async Task AsyncLambdaAfterComma()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 using System.Threading.Tasks;
 class Program
@@ -843,7 +893,8 @@ class Program
         [Fact, WorkItem(28586, "https://github.com/dotnet/roslyn/issues/28586")]
         public async Task WithExtensionAndInstanceMethod1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 
 public sealed class Goo
@@ -874,7 +925,8 @@ public static class Repro
         [Fact, WorkItem(28586, "https://github.com/dotnet/roslyn/issues/28586")]
         public async Task WithExtensionAndInstanceMethod2()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 
 public sealed class Goo
@@ -905,7 +957,8 @@ public static class Repro
         [Fact, WorkItem(28586, "https://github.com/dotnet/roslyn/issues/28586")]
         public async Task WithExtensionAndInstanceMethod3()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 
 public sealed class Goo
@@ -936,7 +989,8 @@ public static class Repro
         [Fact, WorkItem(28586, "https://github.com/dotnet/roslyn/issues/28586")]
         public async Task WithExtensionAndInstanceMethod4()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 
 public sealed class Goo
@@ -967,7 +1021,8 @@ public static class Repro
         [Fact, WorkItem(28586, "https://github.com/dotnet/roslyn/issues/28586")]
         public async Task WithExtensionAndInstanceMethod5()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 
 public sealed class Goo
@@ -998,7 +1053,8 @@ public static class Repro
         [Fact, WorkItem(28586, "https://github.com/dotnet/roslyn/issues/28586")]
         public async Task WithExtensionAndInstanceMethod6()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 
 public sealed class Goo
@@ -1029,7 +1085,8 @@ public static class Repro
         [Fact, WorkItem(28586, "https://github.com/dotnet/roslyn/issues/28586")]
         public async Task WithExtensionAndInstanceMethod7()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 
 public sealed class Goo
@@ -1060,7 +1117,8 @@ public static class Repro
         [Fact, WorkItem(28586, "https://github.com/dotnet/roslyn/issues/28586")]
         public async Task WithNonDelegateExtensionAndInstanceMethod1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 
 public sealed class Goo
@@ -1091,7 +1149,8 @@ public static class Repro
         [Fact, WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestInDeclarationPattern()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void M()
@@ -1106,7 +1165,8 @@ class C
         [Fact, WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestInDeclarationPattern2()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void M()
@@ -1121,7 +1181,8 @@ class C
         [Fact, WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestInRecursivePattern()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     int P { get; }
@@ -1137,7 +1198,8 @@ class C
         [Fact, WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestInPropertyPattern()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     int P { get; }
@@ -1153,7 +1215,8 @@ class C
         [Fact, WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestInAndPattern()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void M()
@@ -1168,7 +1231,8 @@ class C
         [Fact, WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestInAndOrPattern()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void M()
@@ -1183,7 +1247,8 @@ class C
         [Fact, WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestInSwitchStatement()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void M()
@@ -1201,7 +1266,8 @@ class C
         [Fact, WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestInSwitchExpression()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void M()
@@ -1219,7 +1285,8 @@ class C
         [Fact, WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestMissingInNotPattern_Declaration()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void M()
@@ -1234,7 +1301,8 @@ class C
         [Fact, WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestMissingInNotPattern_Declaration2()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void M()
@@ -1249,7 +1317,8 @@ class C
         [Fact, WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestMissingInNotPattern_Recursive()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     int P { get; }
@@ -1265,7 +1334,8 @@ class C
         [Fact, WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestMissingInOrPattern()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void M()
@@ -1280,7 +1350,8 @@ class C
         [Fact, WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestMissingInAndOrPattern()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void M()
@@ -1295,7 +1366,8 @@ class C
         [Fact, WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestMissingInRecursiveOrPattern()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     int P { get; }
@@ -1308,10 +1380,15 @@ class C
             await VerifyNotBuilderAsync(markup);
         }
 
-        [Theory, WorkItem(46927, "https://github.com/dotnet/roslyn/issues/46927"), CombinatorialData]
+        [
+            Theory,
+            WorkItem(46927, "https://github.com/dotnet/roslyn/issues/46927"),
+            CombinatorialData
+        ]
         public async Task FirstArgumentOfInvocation_NoParameter(bool hasTypedChar)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System;
 interface Foo
 {{
@@ -1327,14 +1404,22 @@ class P
             await VerifyNotBuilderAsync(markup);
         }
 
-        [Theory, WorkItem(46927, "https://github.com/dotnet/roslyn/issues/46927"), CombinatorialData]
-        public async Task FirstArgumentOfInvocation_PossibleLambdaExpression(bool isLambda, bool hasTypedChar)
+        [
+            Theory,
+            WorkItem(46927, "https://github.com/dotnet/roslyn/issues/46927"),
+            CombinatorialData
+        ]
+        public async Task FirstArgumentOfInvocation_PossibleLambdaExpression(
+            bool isLambda,
+            bool hasTypedChar
+        )
         {
             var overload = isLambda
                 ? "bool Bar(Func<int, bool> predicate) => true;"
                 : "bool Bar(int x) => true;";
 
-            var markup = $@"
+            var markup =
+                $@"
 using System;
 interface Foo
 {{
@@ -1362,9 +1447,12 @@ class P
         [InlineData("string x = null, string y = null")]
         [InlineData("string x = null, string y = null, params string[] z")]
         [Theory, WorkItem(49656, "https://github.com/dotnet/roslyn/issues/49656")]
-        public async Task FirstArgumentOfInvocation_WithOverloadAcceptEmptyArgumentList(string overloadParameterList)
+        public async Task FirstArgumentOfInvocation_WithOverloadAcceptEmptyArgumentList(
+            string overloadParameterList
+        )
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System;
 interface Foo
 {{
@@ -1381,11 +1469,11 @@ class P
             await VerifyBuilderAsync(markup);
         }
 
-        private async Task VerifyNotBuilderAsync(string markup)
-            => await VerifyWorkerAsync(markup, isBuilder: false);
+        private async Task VerifyNotBuilderAsync(string markup) =>
+            await VerifyWorkerAsync(markup, isBuilder: false);
 
-        private async Task VerifyBuilderAsync(string markup)
-            => await VerifyWorkerAsync(markup, isBuilder: true);
+        private async Task VerifyBuilderAsync(string markup) =>
+            await VerifyWorkerAsync(markup, isBuilder: true);
 
         private async Task VerifyWorkerAsync(string markup, bool isBuilder)
         {
@@ -1399,7 +1487,11 @@ class P
 
                 if (await CanUseSpeculativeSemanticModelAsync(document1, position))
                 {
-                    var document2 = workspaceFixture.UpdateDocument(code, SourceCodeKind.Regular, cleanBeforeUpdate: false);
+                    var document2 = workspaceFixture.UpdateDocument(
+                        code,
+                        SourceCodeKind.Regular,
+                        cleanBeforeUpdate: false
+                    );
                     await CheckResultsAsync(document2, position, isBuilder);
                 }
             }
@@ -1413,24 +1505,44 @@ class P
             triggerInfos.Add(CompletionTrigger.CreateDeletionTrigger('z'));
 
             var service = GetCompletionService(document.Project);
-            var provider = Assert.Single(service.GetTestAccessor().GetAllProviders(ImmutableHashSet<string>.Empty));
+            var provider = Assert.Single(
+                service.GetTestAccessor().GetAllProviders(ImmutableHashSet<string>.Empty)
+            );
 
             foreach (var triggerInfo in triggerInfos)
             {
-                var completionList = await service.GetTestAccessor().GetContextAsync(
-                    provider, document, position, triggerInfo,
-                    options: CompletionOptions.Default, cancellationToken: CancellationToken.None);
+                var completionList = await service
+                    .GetTestAccessor()
+                    .GetContextAsync(
+                        provider,
+                        document,
+                        position,
+                        triggerInfo,
+                        options: CompletionOptions.Default,
+                        cancellationToken: CancellationToken.None
+                    );
 
                 if (isBuilder)
                 {
                     Assert.NotNull(completionList);
-                    Assert.True(completionList.SuggestionModeItem != null, "Expecting a suggestion mode, but none was present");
+                    Assert.True(
+                        completionList.SuggestionModeItem != null,
+                        "Expecting a suggestion mode, but none was present"
+                    );
                 }
                 else
                 {
                     if (completionList != null)
                     {
-                        Assert.True(completionList.SuggestionModeItem == null, "group.Builder == " + (completionList.SuggestionModeItem != null ? completionList.SuggestionModeItem.DisplayText : "null"));
+                        Assert.True(
+                            completionList.SuggestionModeItem == null,
+                            "group.Builder == "
+                                + (
+                                    completionList.SuggestionModeItem != null
+                                        ? completionList.SuggestionModeItem.DisplayText
+                                        : "null"
+                                )
+                        );
                     }
                 }
             }

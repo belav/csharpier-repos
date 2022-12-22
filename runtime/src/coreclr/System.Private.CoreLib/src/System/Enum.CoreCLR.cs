@@ -12,7 +12,12 @@ namespace System
     public abstract partial class Enum
     {
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "Enum_GetValuesAndNames")]
-        private static partial void GetEnumValuesAndNames(QCallTypeHandle enumType, ObjectHandleOnStack values, ObjectHandleOnStack names, Interop.BOOL getNames);
+        private static partial void GetEnumValuesAndNames(
+            QCallTypeHandle enumType,
+            ObjectHandleOnStack values,
+            ObjectHandleOnStack names,
+            Interop.BOOL getNames
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern object InternalBoxEnum(RuntimeType enumType, long value);
@@ -23,7 +28,9 @@ namespace System
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private unsafe CorElementType InternalGetCorElementType()
         {
-            CorElementType elementType = InternalGetCorElementType(RuntimeHelpers.GetMethodTable(this));
+            CorElementType elementType = InternalGetCorElementType(
+                RuntimeHelpers.GetMethodTable(this)
+            );
             GC.KeepAlive(this);
             return elementType;
         }
@@ -65,7 +72,9 @@ namespace System
             // Sanity check the last element in the table
             Debug.Assert(s_underlyingTypes[(int)CorElementType.ELEMENT_TYPE_U] == typeof(nuint));
 
-            RuntimeType? underlyingType = s_underlyingTypes[(int)InternalGetCorElementType((MethodTable*)enumType.GetUnderlyingNativeHandle())];
+            RuntimeType? underlyingType = s_underlyingTypes[
+                (int)InternalGetCorElementType((MethodTable*)enumType.GetUnderlyingNativeHandle())
+            ];
             GC.KeepAlive(enumType);
 
             Debug.Assert(underlyingType != null);
@@ -75,9 +84,9 @@ namespace System
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static EnumInfo GetEnumInfo(RuntimeType enumType, bool getNames = true)
         {
-            return enumType.GenericCache is EnumInfo info && (!getNames || info.Names is not null) ?
-                info :
-                InitializeEnumInfo(enumType, getNames);
+            return enumType.GenericCache is EnumInfo info && (!getNames || info.Names is not null)
+                ? info
+                : InitializeEnumInfo(enumType, getNames);
 
             [MethodImpl(MethodImplOptions.NoInlining)]
             static EnumInfo InitializeEnumInfo(RuntimeType enumType, bool getNames)
@@ -89,7 +98,8 @@ namespace System
                     new QCallTypeHandle(ref enumTypeHandle),
                     ObjectHandleOnStack.Create(ref values),
                     ObjectHandleOnStack.Create(ref names),
-                    getNames ? Interop.BOOL.TRUE : Interop.BOOL.FALSE);
+                    getNames ? Interop.BOOL.TRUE : Interop.BOOL.FALSE
+                );
                 bool hasFlagsAttribute = enumType.IsDefined(typeof(FlagsAttribute), inherit: false);
 
                 var entry = new EnumInfo(hasFlagsAttribute, values!, names!);

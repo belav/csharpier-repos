@@ -14,6 +14,7 @@ internal sealed class OutputCacheKeyProvider : IOutputCacheKeyProvider
 {
     // Use the record separator for delimiting components of the cache key to avoid possible collisions
     private const char KeyDelimiter = '\x1e';
+
     // Use the unit separator for delimiting subcomponents of the cache key to avoid possible collisions
     private const char KeySubDelimiter = '\x1f';
 
@@ -22,7 +23,10 @@ internal sealed class OutputCacheKeyProvider : IOutputCacheKeyProvider
     private readonly ObjectPool<StringBuilder> _builderPool;
     private readonly OutputCacheOptions _options;
 
-    internal OutputCacheKeyProvider(ObjectPoolProvider poolProvider, IOptions<OutputCacheOptions> options)
+    internal OutputCacheKeyProvider(
+        ObjectPoolProvider poolProvider,
+        IOptions<OutputCacheOptions> options
+    )
     {
         ArgumentNullException.ThrowIfNull(poolProvider);
         ArgumentNullException.ThrowIfNull(options);
@@ -84,9 +88,7 @@ internal sealed class OutputCacheKeyProvider : IOutputCacheKeyProvider
                 return false;
             }
 
-            builder
-                .Append(context.CacheVaryByRules.CacheKeyPrefix)
-                .Append(KeyDelimiter);
+            builder.Append(context.CacheVaryByRules.CacheKeyPrefix).Append(KeyDelimiter);
         }
 
         return true;
@@ -97,8 +99,7 @@ internal sealed class OutputCacheKeyProvider : IOutputCacheKeyProvider
     {
         var request = context.HttpContext.Request;
 
-        if (ContainsDelimiters(request.PathBase.Value) ||
-            ContainsDelimiters(request.Path.Value))
+        if (ContainsDelimiters(request.PathBase.Value) || ContainsDelimiters(request.Path.Value))
         {
             return false;
         }
@@ -121,9 +122,7 @@ internal sealed class OutputCacheKeyProvider : IOutputCacheKeyProvider
 
         if (_options.UseCaseSensitivePaths)
         {
-            builder
-                .Append(request.PathBase.Value)
-                .Append(request.Path.Value);
+            builder.Append(request.PathBase.Value).Append(request.Path.Value);
         }
         else
         {
@@ -141,13 +140,17 @@ internal sealed class OutputCacheKeyProvider : IOutputCacheKeyProvider
 
         if (varyByRules == null)
         {
-            throw new InvalidOperationException($"{nameof(OutputCacheContext.CacheVaryByRules)} must not be null on the {nameof(OutputCacheContext)}");
+            throw new InvalidOperationException(
+                $"{nameof(OutputCacheContext.CacheVaryByRules)} must not be null on the {nameof(OutputCacheContext)}"
+            );
         }
 
         var varyHeaderNames = context.CacheVaryByRules.HeaderNames;
         var varyRouteValueNames = context.CacheVaryByRules.RouteValueNames;
         var varyQueryKeys = context.CacheVaryByRules.QueryKeys;
-        var varyByValues = context.CacheVaryByRules.HasVaryByValues ? context.CacheVaryByRules.VaryByValues : null;
+        var varyByValues = context.CacheVaryByRules.HasVaryByValues
+            ? context.CacheVaryByRules.VaryByValues
+            : null;
 
         // Vary by header names
         var headersCount = varyByRules.HeaderNames.Count;
@@ -155,9 +158,7 @@ internal sealed class OutputCacheKeyProvider : IOutputCacheKeyProvider
         if (headersCount > 0)
         {
             // Append a group separator for the header segment of the cache key
-            builder
-                .Append(KeyDelimiter)
-                .Append('H');
+            builder.Append(KeyDelimiter).Append('H');
 
             var requestHeaders = context.HttpContext.Request.Headers;
             for (var i = 0; i < headersCount; i++)
@@ -168,10 +169,7 @@ internal sealed class OutputCacheKeyProvider : IOutputCacheKeyProvider
                 // Delimiters are not checked in the keys since they are taken
                 // from configuration
 
-                builder
-                    .Append(KeyDelimiter)
-                    .Append(header)
-                    .Append('=');
+                builder.Append(KeyDelimiter).Append(header).Append('=');
 
                 var headerValuesArray = headerValues.ToArray();
                 Array.Sort(headerValuesArray, StringComparer.Ordinal);
@@ -192,11 +190,13 @@ internal sealed class OutputCacheKeyProvider : IOutputCacheKeyProvider
         if (varyQueryKeys.Count > 0)
         {
             // Append a group separator for the query key segment of the cache key
-            builder
-                .Append(KeyDelimiter)
-                .Append('Q');
+            builder.Append(KeyDelimiter).Append('Q');
 
-            if (varyQueryKeys.Count == 1 && string.Equals(varyQueryKeys[0], "*", StringComparison.Ordinal) && context.HttpContext.Request.Query.Count > 0)
+            if (
+                varyQueryKeys.Count == 1
+                && string.Equals(varyQueryKeys[0], "*", StringComparison.Ordinal)
+                && context.HttpContext.Request.Query.Count > 0
+            )
             {
                 // Vary by all available query keys
                 var queryArray = context.HttpContext.Request.Query.ToArray();
@@ -244,10 +244,7 @@ internal sealed class OutputCacheKeyProvider : IOutputCacheKeyProvider
                     // Delimiters are not checked in the keys since they are taken
                     // from configuration
 
-                    builder
-                        .Append(KeyDelimiter)
-                        .Append(queryKey)
-                        .Append('=');
+                    builder.Append(KeyDelimiter).Append(queryKey).Append('=');
 
                     var queryValueArray = queryKeyValues.ToArray();
                     Array.Sort(queryValueArray, StringComparer.Ordinal);
@@ -275,9 +272,7 @@ internal sealed class OutputCacheKeyProvider : IOutputCacheKeyProvider
         if (routeValueNamesCount > 0)
         {
             // Append a group separator for the route values segment of the cache key
-            builder
-                .Append(KeyDelimiter)
-                .Append('R');
+            builder.Append(KeyDelimiter).Append('R');
 
             for (var i = 0; i < routeValueNamesCount; i++)
             {
@@ -286,7 +281,10 @@ internal sealed class OutputCacheKeyProvider : IOutputCacheKeyProvider
 
                 // RouteValueNames returns null if the key doesn't exist
                 var routeValueValue = context.HttpContext.Request.RouteValues[routeValueName];
-                var stringRouteValue = Convert.ToString(routeValueValue, CultureInfo.InvariantCulture);
+                var stringRouteValue = Convert.ToString(
+                    routeValueValue,
+                    CultureInfo.InvariantCulture
+                );
 
                 // Delimiters are not checked in the keys since they are taken
                 // from configuration
@@ -296,7 +294,8 @@ internal sealed class OutputCacheKeyProvider : IOutputCacheKeyProvider
                     return false;
                 }
 
-                builder.Append(KeyDelimiter)
+                builder
+                    .Append(KeyDelimiter)
                     .Append(routeValueName)
                     .Append('=')
                     .Append(stringRouteValue);
@@ -312,9 +311,7 @@ internal sealed class OutputCacheKeyProvider : IOutputCacheKeyProvider
         if (valueNamesCount > 0)
         {
             // Append a group separator for the values segment of the cache key
-            builder
-                .Append(KeyDelimiter)
-                .Append('V');
+            builder.Append(KeyDelimiter).Append('V');
 
             for (var i = 0; i < valueNamesCount; i++)
             {
@@ -323,16 +320,12 @@ internal sealed class OutputCacheKeyProvider : IOutputCacheKeyProvider
 
                 var value = varyByRules.VaryByValues[key];
 
-                if (ContainsDelimiters(key) ||
-                    ContainsDelimiters(value))
+                if (ContainsDelimiters(key) || ContainsDelimiters(value))
                 {
                     return false;
                 }
 
-                builder.Append(KeyDelimiter)
-                    .Append(key)
-                    .Append('=')
-                    .Append(value);
+                builder.Append(KeyDelimiter).Append(key).Append('=').Append(value);
             }
         }
 
@@ -357,13 +350,17 @@ internal sealed class OutputCacheKeyProvider : IOutputCacheKeyProvider
     {
         private readonly StringComparer _stringComparer;
 
-        public static QueryKeyComparer OrdinalIgnoreCase { get; } = new QueryKeyComparer(StringComparer.OrdinalIgnoreCase);
+        public static QueryKeyComparer OrdinalIgnoreCase { get; } =
+            new QueryKeyComparer(StringComparer.OrdinalIgnoreCase);
 
         public QueryKeyComparer(StringComparer stringComparer)
         {
             _stringComparer = stringComparer;
         }
 
-        public int Compare(KeyValuePair<string, StringValues> x, KeyValuePair<string, StringValues> y) => _stringComparer.Compare(x.Key, y.Key);
+        public int Compare(
+            KeyValuePair<string, StringValues> x,
+            KeyValuePair<string, StringValues> y
+        ) => _stringComparer.Compare(x.Key, y.Key);
     }
 }

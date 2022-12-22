@@ -9,15 +9,18 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 {
     internal abstract partial class AbstractSymbolCompletionProvider<TSyntaxContext>
     {
-        private sealed class CompletionLinkedFilesSymbolEquivalenceComparer : IEqualityComparer<(ISymbol symbol, bool preselect)>
+        private sealed class CompletionLinkedFilesSymbolEquivalenceComparer
+            : IEqualityComparer<(ISymbol symbol, bool preselect)>
         {
             public static readonly CompletionLinkedFilesSymbolEquivalenceComparer Instance = new();
 
-            public bool Equals((ISymbol symbol, bool preselect) x, (ISymbol symbol, bool preselect) y)
-                => LinkedFilesSymbolEquivalenceComparer.Instance.Equals(x.symbol, y.symbol);
+            public bool Equals(
+                (ISymbol symbol, bool preselect) x,
+                (ISymbol symbol, bool preselect) y
+            ) => LinkedFilesSymbolEquivalenceComparer.Instance.Equals(x.symbol, y.symbol);
 
-            public int GetHashCode((ISymbol symbol, bool preselect) obj)
-                => LinkedFilesSymbolEquivalenceComparer.Instance.GetHashCode(obj.symbol);
+            public int GetHashCode((ISymbol symbol, bool preselect) obj) =>
+                LinkedFilesSymbolEquivalenceComparer.Instance.GetHashCode(obj.symbol);
         }
     }
 }

@@ -12,10 +12,9 @@ namespace Microsoft.Extensions.Options
     /// Implementation of <see cref="IOptionsMonitor{TOptions}"/>.
     /// </summary>
     /// <typeparam name="TOptions">Options type.</typeparam>
-    public class OptionsMonitor<[DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions> :
-        IOptionsMonitor<TOptions>,
-        IDisposable
-        where TOptions : class
+    public class OptionsMonitor<
+        [DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions
+    > : IOptionsMonitor<TOptions>, IDisposable where TOptions : class
     {
         private readonly IOptionsMonitorCache<TOptions> _cache;
         private readonly IOptionsFactory<TOptions> _factory;
@@ -28,7 +27,11 @@ namespace Microsoft.Extensions.Options
         /// <param name="factory">The factory to use to create options.</param>
         /// <param name="sources">The sources used to listen for changes to the options instance.</param>
         /// <param name="cache">The cache used to store options.</param>
-        public OptionsMonitor(IOptionsFactory<TOptions> factory, IEnumerable<IOptionsChangeTokenSource<TOptions>> sources, IOptionsMonitorCache<TOptions> cache)
+        public OptionsMonitor(
+            IOptionsFactory<TOptions> factory,
+            IEnumerable<IOptionsChangeTokenSource<TOptions>> sources,
+            IOptionsMonitorCache<TOptions> cache
+        )
         {
             _factory = factory;
             _cache = cache;
@@ -36,9 +39,10 @@ namespace Microsoft.Extensions.Options
             void RegisterSource(IOptionsChangeTokenSource<TOptions> source)
             {
                 IDisposable registration = ChangeToken.OnChange(
-                          source.GetChangeToken,
-                          InvokeChanged,
-                          source.Name);
+                    source.GetChangeToken,
+                    InvokeChanged,
+                    source.Name
+                );
 
                 _registrations.Add(registration);
             }
@@ -91,8 +95,11 @@ namespace Microsoft.Extensions.Options
             }
 
             // non-allocating fast path
-            return optionsCache.GetOrAdd(name, static (name, factory) => factory.Create(name), _factory);
-
+            return optionsCache.GetOrAdd(
+                name,
+                static (name, factory) => factory.Create(name),
+                _factory
+            );
         }
 
         /// <summary>
@@ -126,7 +133,10 @@ namespace Microsoft.Extensions.Options
             private readonly Action<TOptions, string> _listener;
             private readonly OptionsMonitor<TOptions> _monitor;
 
-            public ChangeTrackerDisposable(OptionsMonitor<TOptions> monitor, Action<TOptions, string> listener)
+            public ChangeTrackerDisposable(
+                OptionsMonitor<TOptions> monitor,
+                Action<TOptions, string> listener
+            )
             {
                 _listener = listener;
                 _monitor = monitor;

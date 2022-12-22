@@ -37,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
             object? hierarchy,
             string? binOutputPath,
             string? assemblyName,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Creates and initializes a new project and returns a <see
@@ -47,14 +48,21 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
         /// </summary>
         /// <param name="id">Project guid</param>
         /// <param name="uniqueName">
-        /// Unique across the entire solution for the life of the solution. 
-        /// This will be unique across regardless of whether projects are added or renamed 
+        /// Unique across the entire solution for the life of the solution.
+        /// This will be unique across regardless of whether projects are added or renamed
         /// to match this project's original name.
         /// </param>
         /// <param name="data">Provides access to msbuild evaluation data for the project.</param>
         /// <param name="hostObject">The IVsHierarchy for the project; this is used to track linked files across multiple projects when determining contexts.</param>
         /// <exception cref="InvalidOperationException">A required property or item is not present in <see cref="EvaluationData"/> or has invalid value.</exception>
-        Task<IWorkspaceProjectContext> CreateProjectContextAsync(Guid id, string uniqueName, string languageName, EvaluationData data, object? hostObject, CancellationToken cancellationToken);
+        Task<IWorkspaceProjectContext> CreateProjectContextAsync(
+            Guid id,
+            string uniqueName,
+            string languageName,
+            EvaluationData data,
+            object? hostObject,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Names of msbuild properties whose values that <see cref="CreateProjectContextAsync(Guid, string, string, EvaluationData, object?, CancellationToken)"/> will receive via <see cref="EvaluationData"/>.
@@ -80,7 +88,11 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
             var value = GetPropertyValue(name);
 
             if (value.IsEmpty())
-                throw new InvalidProjectPropertyValueException(name, value, $"Property '{name}' is required.");
+                throw new InvalidProjectPropertyValueException(
+                    name,
+                    value,
+                    $"Property '{name}' is required."
+                );
 
             return value;
         }
@@ -90,7 +102,11 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
             var value = GetPropertyValue(name);
 
             if (!PathUtilities.IsAbsolute(value))
-                throw new InvalidProjectPropertyValueException(name, value, $"Property '{name}' is required to be an absolute path, but the value is '{value}'.");
+                throw new InvalidProjectPropertyValueException(
+                    name,
+                    value,
+                    $"Property '{name}' is required to be an absolute path, but the value is '{value}'."
+                );
 
             return value;
         }
@@ -101,8 +117,11 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
         public string PropertyName { get; }
         public string Value { get; }
 
-        public InvalidProjectPropertyValueException(string propertyName, string value, string message)
-            : base(message)
+        public InvalidProjectPropertyValueException(
+            string propertyName,
+            string value,
+            string message
+        ) : base(message)
         {
             PropertyName = propertyName;
             Value = value;

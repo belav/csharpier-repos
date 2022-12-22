@@ -5,6 +5,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 public class BringUpTest_JTrueNeFP
 {
     const int Pass = 100;
@@ -25,10 +26,11 @@ public class BringUpTest_JTrueNeFP
                 }
                 returnValue = 3;
             }
-            else returnValue = 2;
+            else
+                returnValue = 2;
         }
-        else returnValue = 1;
-
+        else
+            returnValue = 1;
 
         return returnValue;
     }
@@ -37,9 +39,21 @@ public class BringUpTest_JTrueNeFP
     {
         int returnValue = Pass;
 
-        if (JTrueNeFP(-1f) != 1) { Console.WriteLine("1"); returnValue = Fail; }
-        if (JTrueNeFP(0f) != 2) { Console.WriteLine("2"); returnValue = Fail; }
-        if (JTrueNeFP(1f) != 3) { Console.WriteLine("3"); returnValue = Fail; }
+        if (JTrueNeFP(-1f) != 1)
+        {
+            Console.WriteLine("1");
+            returnValue = Fail;
+        }
+        if (JTrueNeFP(0f) != 2)
+        {
+            Console.WriteLine("2");
+            returnValue = Fail;
+        }
+        if (JTrueNeFP(1f) != 3)
+        {
+            Console.WriteLine("3");
+            returnValue = Fail;
+        }
 
         return returnValue;
     }

@@ -37,7 +37,9 @@ namespace ILCompiler.DependencyAnalysis
         public override bool IsShareable => false;
         public override ObjectNodeSection Section => _externalReferences.Section;
         public override bool StaticDependenciesAreComputed => true;
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         /// <summary>
         /// Helper method to compute the dependencies that would be needed by a hashtable entry for a GVM call.
@@ -46,7 +48,12 @@ namespace ILCompiler.DependencyAnalysis
         /// The dependencies returned from this function will be reported as static dependencies of the TypeGVMEntriesNode,
         /// which we create for each type that has generic virtual methods.
         /// </summary>
-        public static void GetGenericVirtualMethodImplementationDependencies(ref DependencyList dependencies, NodeFactory factory, MethodDesc callingMethod, MethodDesc implementationMethod)
+        public static void GetGenericVirtualMethodImplementationDependencies(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            MethodDesc callingMethod,
+            MethodDesc implementationMethod
+        )
         {
             Debug.Assert(!callingMethod.OwningType.IsInterface);
 
@@ -54,14 +61,31 @@ namespace ILCompiler.DependencyAnalysis
             MethodDesc openCallingMethod = callingMethod.GetTypicalMethodDefinition();
             MethodDesc openImplementationMethod = implementationMethod.GetTypicalMethodDefinition();
 
-            var openCallingMethodNameAndSig = factory.NativeLayout.MethodNameAndSignatureVertex(openCallingMethod);
-            var openImplementationMethodNameAndSig = factory.NativeLayout.MethodNameAndSignatureVertex(openImplementationMethod);
+            var openCallingMethodNameAndSig = factory.NativeLayout.MethodNameAndSignatureVertex(
+                openCallingMethod
+            );
+            var openImplementationMethodNameAndSig =
+                factory.NativeLayout.MethodNameAndSignatureVertex(openImplementationMethod);
 
-            dependencies.Add(new DependencyListEntry(factory.NativeLayout.PlacedSignatureVertex(openCallingMethodNameAndSig), "gvm table calling method signature"));
-            dependencies.Add(new DependencyListEntry(factory.NativeLayout.PlacedSignatureVertex(openImplementationMethodNameAndSig), "gvm table implementation method signature"));
+            dependencies.Add(
+                new DependencyListEntry(
+                    factory.NativeLayout.PlacedSignatureVertex(openCallingMethodNameAndSig),
+                    "gvm table calling method signature"
+                )
+            );
+            dependencies.Add(
+                new DependencyListEntry(
+                    factory.NativeLayout.PlacedSignatureVertex(openImplementationMethodNameAndSig),
+                    "gvm table implementation method signature"
+                )
+            );
         }
 
-        private void AddGenericVirtualMethodImplementation(NodeFactory factory, MethodDesc callingMethod, MethodDesc implementationMethod)
+        private void AddGenericVirtualMethodImplementation(
+            NodeFactory factory,
+            MethodDesc callingMethod,
+            MethodDesc implementationMethod
+        )
         {
             Debug.Assert(!callingMethod.OwningType.IsInterface);
 
@@ -73,21 +97,33 @@ namespace ILCompiler.DependencyAnalysis
             if (!_gvmImplementations.ContainsKey(openCallingMethod))
                 _gvmImplementations[openCallingMethod] = new Dictionary<TypeDesc, MethodDesc>();
 
-            _gvmImplementations[openCallingMethod][openImplementationMethod.OwningType] = openImplementationMethod;
+            _gvmImplementations[openCallingMethod][openImplementationMethod.OwningType] =
+                openImplementationMethod;
         }
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             // This node does not trigger generation of other nodes.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             // Build the GVM table entries from the list of interesting GVMTableEntryNodes
             foreach (var interestingEntry in factory.MetadataManager.GetTypeGVMEntries())
             {
-                foreach (var typeGVMEntryInfo in interestingEntry.ScanForGenericVirtualMethodEntries())
+                foreach (
+                    var typeGVMEntryInfo in interestingEntry.ScanForGenericVirtualMethodEntries()
+                )
                 {
-                    AddGenericVirtualMethodImplementation(factory, typeGVMEntryInfo.CallingMethod, typeGVMEntryInfo.ImplementationMethod);
+                    AddGenericVirtualMethodImplementation(
+                        factory,
+                        typeGVMEntryInfo.CallingMethod,
+                        typeGVMEntryInfo.ImplementationMethod
+                    );
                 }
             }
 
@@ -111,17 +147,38 @@ namespace ILCompiler.DependencyAnalysis
                     TypeDesc implementationType = implementationEntry.Key;
                     MethodDesc implementationMethod = implementationEntry.Value;
 
-                    uint callingTypeId = _externalReferences.GetIndex(factory.NecessaryTypeSymbol(callingMethod.OwningType));
+                    uint callingTypeId = _externalReferences.GetIndex(
+                        factory.NecessaryTypeSymbol(callingMethod.OwningType)
+                    );
                     Vertex vertex = nativeFormatWriter.GetUnsignedConstant(callingTypeId);
 
-                    uint targetTypeId = _externalReferences.GetIndex(factory.NecessaryTypeSymbol(implementationType));
-                    vertex = nativeFormatWriter.GetTuple(vertex, nativeFormatWriter.GetUnsignedConstant(targetTypeId));
+                    uint targetTypeId = _externalReferences.GetIndex(
+                        factory.NecessaryTypeSymbol(implementationType)
+                    );
+                    vertex = nativeFormatWriter.GetTuple(
+                        vertex,
+                        nativeFormatWriter.GetUnsignedConstant(targetTypeId)
+                    );
 
-                    var nameAndSig = factory.NativeLayout.PlacedSignatureVertex(factory.NativeLayout.MethodNameAndSignatureVertex(callingMethod));
-                    vertex = nativeFormatWriter.GetTuple(vertex, nativeFormatWriter.GetUnsignedConstant((uint)nameAndSig.SavedVertex.VertexOffset));
+                    var nameAndSig = factory.NativeLayout.PlacedSignatureVertex(
+                        factory.NativeLayout.MethodNameAndSignatureVertex(callingMethod)
+                    );
+                    vertex = nativeFormatWriter.GetTuple(
+                        vertex,
+                        nativeFormatWriter.GetUnsignedConstant(
+                            (uint)nameAndSig.SavedVertex.VertexOffset
+                        )
+                    );
 
-                    nameAndSig = factory.NativeLayout.PlacedSignatureVertex(factory.NativeLayout.MethodNameAndSignatureVertex(implementationMethod));
-                    vertex = nativeFormatWriter.GetTuple(vertex, nativeFormatWriter.GetUnsignedConstant((uint)nameAndSig.SavedVertex.VertexOffset));
+                    nameAndSig = factory.NativeLayout.PlacedSignatureVertex(
+                        factory.NativeLayout.MethodNameAndSignatureVertex(implementationMethod)
+                    );
+                    vertex = nativeFormatWriter.GetTuple(
+                        vertex,
+                        nativeFormatWriter.GetUnsignedConstant(
+                            (uint)nameAndSig.SavedVertex.VertexOffset
+                        )
+                    );
 
                     int hashCode = callingMethod.OwningType.GetHashCode();
                     hashCode = ((hashCode << 13) ^ hashCode) ^ implementationType.GetHashCode();
@@ -137,7 +194,12 @@ namespace ILCompiler.DependencyAnalysis
 
             _endSymbol.SetSymbolOffset(streamBytes.Length);
 
-            return new ObjectData(streamBytes, Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this, _endSymbol });
+            return new ObjectData(
+                streamBytes,
+                Array.Empty<Relocation>(),
+                1,
+                new ISymbolDefinitionNode[] { this, _endSymbol }
+            );
         }
 
         protected internal override int Phase => (int)ObjectNodePhase.Ordered;

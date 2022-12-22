@@ -7,8 +7,8 @@ public class TestModificationCommandBatch : SingularModificationCommandBatch
 {
     public TestModificationCommandBatch(
         ModificationCommandBatchFactoryDependencies dependencies,
-        int? maxBatchSize)
-        : base(dependencies)
+        int? maxBatchSize
+    ) : base(dependencies)
     {
         MaxBatchSize = maxBatchSize ?? 42;
     }

@@ -50,7 +50,7 @@ namespace System.Runtime.Caching
             _cacheSizeSampleTimes = new DateTime[SAMPLE_COUNT];
             if (memoryCache.UseMemoryCacheManager)
             {
-                InitMemoryCacheManager();   // This magic thing connects us to ObjectCacheHost magically. :/
+                InitMemoryCacheManager(); // This magic thing connects us to ObjectCacheHost magically. :/
             }
             InitDisposableMembers(cacheMemoryLimitMegabytes);
         }
@@ -133,7 +133,10 @@ namespace System.Runtime.Caching
         public void Dispose()
         {
             SRefMultiple sref = _sizedRefMultiple;
-            if (sref != null && Interlocked.CompareExchange(ref _sizedRefMultiple, null, sref) == sref)
+            if (
+                sref != null
+                && Interlocked.CompareExchange(ref _sizedRefMultiple, null, sref) == sref
+            )
             {
                 sref.Dispose();
             }
@@ -176,7 +179,10 @@ namespace System.Runtime.Caching
                 _cacheSizeSampleTimes[_idx] = DateTime.UtcNow;
                 // remember the sample value
                 _cacheSizeSamples[_idx] = sref.ApproximateSize;
-                Dbg.Trace("MemoryCacheStats", "SizedRef.ApproximateSize=" + _cacheSizeSamples[_idx]);
+                Dbg.Trace(
+                    "MemoryCacheStats",
+                    "SizedRef.ApproximateSize=" + _cacheSizeSamples[_idx]
+                );
                 s_memoryCacheManager?.UpdateCacheSize(_cacheSizeSamples[_idx], _memoryCache);
             }
 
@@ -216,7 +222,9 @@ namespace System.Runtime.Caching
                 }
 
 #if PERF
-                Debug.WriteLine($"CacheMemoryMonitor.GetPercentToTrim: percent={percent:N}, lastTrimPercent={lastTrimPercent:N}{Environment.NewLine}");
+                Debug.WriteLine(
+                    $"CacheMemoryMonitor.GetPercentToTrim: percent={percent:N}, lastTrimPercent={lastTrimPercent:N}{Environment.NewLine}"
+                );
 #endif
             }
             return percent;
@@ -225,11 +233,14 @@ namespace System.Runtime.Caching
         internal void SetLimit(int cacheMemoryLimitMegabytes)
         {
             long cacheMemoryLimit = ((long)cacheMemoryLimitMegabytes) << MEGABYTE_SHIFT;
-            _memoryLimit = cacheMemoryLimit != 0 ?
-                cacheMemoryLimit :
-                EffectiveProcessMemoryLimit;
+            _memoryLimit = cacheMemoryLimit != 0 ? cacheMemoryLimit : EffectiveProcessMemoryLimit;
 
-            Dbg.Trace("MemoryCacheStats", "CacheMemoryMonitor.SetLimit: _memoryLimit=" + (_memoryLimit >> MEGABYTE_SHIFT) + "Mb");
+            Dbg.Trace(
+                "MemoryCacheStats",
+                "CacheMemoryMonitor.SetLimit: _memoryLimit="
+                    + (_memoryLimit >> MEGABYTE_SHIFT)
+                    + "Mb"
+            );
 
             if (_memoryLimit > 0)
             {
@@ -242,8 +253,13 @@ namespace System.Runtime.Caching
                 _pressureLow = 97;
             }
 
-            Dbg.Trace("MemoryCacheStats", "CacheMemoryMonitor.SetLimit: _pressureHigh=" + _pressureHigh +
-                        ", _pressureLow=" + _pressureLow);
+            Dbg.Trace(
+                "MemoryCacheStats",
+                "CacheMemoryMonitor.SetLimit: _pressureHigh="
+                    + _pressureHigh
+                    + ", _pressureLow="
+                    + _pressureLow
+            );
         }
 
         private static void InitMemoryCacheManager()
@@ -254,7 +270,8 @@ namespace System.Runtime.Caching
                 IServiceProvider host = ObjectCache.Host;
                 if (host != null)
                 {
-                    memoryCacheManager = host.GetService(typeof(IMemoryCacheManager)) as IMemoryCacheManager;
+                    memoryCacheManager =
+                        host.GetService(typeof(IMemoryCacheManager)) as IMemoryCacheManager;
                 }
                 if (memoryCacheManager != null)
                 {

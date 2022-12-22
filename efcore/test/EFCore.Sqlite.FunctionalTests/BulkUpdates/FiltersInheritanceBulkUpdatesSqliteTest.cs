@@ -3,17 +3,19 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
-public class FiltersInheritanceBulkUpdatesSqliteTest : FiltersInheritanceBulkUpdatesTestBase<FiltersInheritanceBulkUpdatesSqliteFixture>
+public class FiltersInheritanceBulkUpdatesSqliteTest
+    : FiltersInheritanceBulkUpdatesTestBase<FiltersInheritanceBulkUpdatesSqliteFixture>
 {
-    public FiltersInheritanceBulkUpdatesSqliteTest(FiltersInheritanceBulkUpdatesSqliteFixture fixture)
-        : base(fixture)
+    public FiltersInheritanceBulkUpdatesSqliteTest(
+        FiltersInheritanceBulkUpdatesSqliteFixture fixture
+    ) : base(fixture)
     {
         ClearLog();
     }
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task Delete_where_hierarchy(bool async)
     {
@@ -21,7 +23,8 @@ public class FiltersInheritanceBulkUpdatesSqliteTest : FiltersInheritanceBulkUpd
 
         AssertSql(
             @"DELETE FROM ""Animals"" AS ""a""
-WHERE ""a"".""CountryId"" = 1 AND ""a"".""Name"" = 'Great spotted kiwi'");
+WHERE ""a"".""CountryId"" = 1 AND ""a"".""Name"" = 'Great spotted kiwi'"
+        );
     }
 
     public override async Task Delete_where_hierarchy_subquery(bool async)
@@ -42,7 +45,8 @@ WHERE EXISTS (
         ORDER BY ""a0"".""Name""
         LIMIT @__p_1 OFFSET @__p_0
     ) AS ""t""
-    WHERE ""t"".""Id"" = ""a"".""Id"")");
+    WHERE ""t"".""Id"" = ""a"".""Id"")"
+        );
     }
 
     public override async Task Delete_where_hierarchy_derived(bool async)
@@ -51,7 +55,8 @@ WHERE EXISTS (
 
         AssertSql(
             @"DELETE FROM ""Animals"" AS ""a""
-WHERE ""a"".""Discriminator"" = 'Kiwi' AND ""a"".""CountryId"" = 1 AND ""a"".""Name"" = 'Great spotted kiwi'");
+WHERE ""a"".""Discriminator"" = 'Kiwi' AND ""a"".""CountryId"" = 1 AND ""a"".""Name"" = 'Great spotted kiwi'"
+        );
     }
 
     public override async Task Delete_where_using_hierarchy(bool async)
@@ -63,7 +68,8 @@ WHERE ""a"".""Discriminator"" = 'Kiwi' AND ""a"".""CountryId"" = 1 AND ""a"".""N
 WHERE (
     SELECT COUNT(*)
     FROM ""Animals"" AS ""a""
-    WHERE ""a"".""CountryId"" = 1 AND ""c"".""Id"" = ""a"".""CountryId"" AND ""a"".""CountryId"" > 0) > 0");
+    WHERE ""a"".""CountryId"" = 1 AND ""c"".""Id"" = ""a"".""CountryId"" AND ""a"".""CountryId"" > 0) > 0"
+        );
     }
 
     public override async Task Delete_where_using_hierarchy_derived(bool async)
@@ -75,7 +81,8 @@ WHERE (
 WHERE (
     SELECT COUNT(*)
     FROM ""Animals"" AS ""a""
-    WHERE ""a"".""CountryId"" = 1 AND ""c"".""Id"" = ""a"".""CountryId"" AND ""a"".""Discriminator"" = 'Kiwi' AND ""a"".""CountryId"" > 0) > 0");
+    WHERE ""a"".""CountryId"" = 1 AND ""c"".""Id"" = ""a"".""CountryId"" AND ""a"".""Discriminator"" = 'Kiwi' AND ""a"".""CountryId"" > 0) > 0"
+        );
     }
 
     public override async Task Delete_where_keyless_entity_mapped_to_sql_query(bool async)
@@ -114,7 +121,8 @@ WHERE ""a"".""CountryId"" = 1 AND EXISTS (
         SELECT ""a1"".""Id""
         FROM ""Animals"" AS ""a1""
         WHERE ""a1"".""CountryId"" = 1 AND ""a0"".""CountryId"" = ""a1"".""CountryId""
-        LIMIT 1) = ""a"".""Id"")");
+        LIMIT 1) = ""a"".""Id"")"
+        );
     }
 
     public override async Task Update_where_hierarchy(bool async)
@@ -124,7 +132,8 @@ WHERE ""a"".""CountryId"" = 1 AND EXISTS (
         AssertExecuteUpdateSql(
             @"UPDATE ""Animals"" AS ""a""
 SET ""Name"" = 'Animal'
-WHERE ""a"".""CountryId"" = 1 AND ""a"".""Name"" = 'Great spotted kiwi'");
+WHERE ""a"".""CountryId"" = 1 AND ""a"".""Name"" = 'Great spotted kiwi'"
+        );
     }
 
     public override async Task Update_where_hierarchy_subquery(bool async)
@@ -141,7 +150,8 @@ WHERE ""a"".""CountryId"" = 1 AND ""a"".""Name"" = 'Great spotted kiwi'");
         AssertExecuteUpdateSql(
             @"UPDATE ""Animals"" AS ""a""
 SET ""Name"" = 'Kiwi'
-WHERE ""a"".""Discriminator"" = 'Kiwi' AND ""a"".""CountryId"" = 1 AND ""a"".""Name"" = 'Great spotted kiwi'");
+WHERE ""a"".""Discriminator"" = 'Kiwi' AND ""a"".""CountryId"" = 1 AND ""a"".""Name"" = 'Great spotted kiwi'"
+        );
     }
 
     public override async Task Update_where_using_hierarchy(bool async)
@@ -154,7 +164,8 @@ SET ""Name"" = 'Monovia'
 WHERE (
     SELECT COUNT(*)
     FROM ""Animals"" AS ""a""
-    WHERE ""a"".""CountryId"" = 1 AND ""c"".""Id"" = ""a"".""CountryId"" AND ""a"".""CountryId"" > 0) > 0");
+    WHERE ""a"".""CountryId"" = 1 AND ""c"".""Id"" = ""a"".""CountryId"" AND ""a"".""CountryId"" > 0) > 0"
+        );
     }
 
     public override async Task Update_where_using_hierarchy_derived(bool async)
@@ -167,7 +178,8 @@ SET ""Name"" = 'Monovia'
 WHERE (
     SELECT COUNT(*)
     FROM ""Animals"" AS ""a""
-    WHERE ""a"".""CountryId"" = 1 AND ""c"".""Id"" = ""a"".""CountryId"" AND ""a"".""Discriminator"" = 'Kiwi' AND ""a"".""CountryId"" > 0) > 0");
+    WHERE ""a"".""CountryId"" = 1 AND ""c"".""Id"" = ""a"".""CountryId"" AND ""a"".""Discriminator"" = 'Kiwi' AND ""a"".""CountryId"" > 0) > 0"
+        );
     }
 
     public override async Task Update_where_keyless_entity_mapped_to_sql_query(bool async)
@@ -177,12 +189,11 @@ WHERE (
         AssertExecuteUpdateSql();
     }
 
-    protected override void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    private void AssertExecuteUpdateSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
+    private void AssertExecuteUpdateSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
 }

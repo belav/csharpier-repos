@@ -50,12 +50,17 @@ namespace System.Data.Tests
             UniqueConstraint cst;
 
             //must have DataTable exception
-            AssertExtensions.Throws<ArgumentException>(null, () => new UniqueConstraint(new DataColumn("")));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new UniqueConstraint(new DataColumn(""))
+            );
 
             //Null exception
             Assert.Throws<NullReferenceException>(() => new UniqueConstraint((DataColumn)null));
 
-            Assert.Throws<InvalidConstraintException>(() => new UniqueConstraint(new DataColumn[] { }));
+            Assert.Throws<InvalidConstraintException>(
+                () => new UniqueConstraint(new DataColumn[] { })
+            );
 
             DataTable dt = new DataTable("Table1");
             dt.Columns.Add("Col1", typeof(int));
@@ -67,7 +72,9 @@ namespace System.Data.Tests
             ds.Tables.Add(dt2);
 
             //columns from two different tables.
-            Assert.Throws<InvalidConstraintException>(() => new UniqueConstraint(new DataColumn[] { dt.Columns[0], dt2.Columns[0] }));
+            Assert.Throws<InvalidConstraintException>(
+                () => new UniqueConstraint(new DataColumn[] { dt.Columns[0], dt2.Columns[0] })
+            );
         }
 
         [Fact]
@@ -78,8 +85,7 @@ namespace System.Data.Tests
             //Success case
             cst = new UniqueConstraint(_table.Columns[0]);
 
-            cst = new UniqueConstraint(new DataColumn[] {
-                        _table.Columns[0], _table.Columns[1]});
+            cst = new UniqueConstraint(new DataColumn[] { _table.Columns[0], _table.Columns[1] });
 
             //table is set on ctor
             cst = new UniqueConstraint(_table.Columns[0]);
@@ -87,8 +93,7 @@ namespace System.Data.Tests
             Assert.Same(_table, cst.Table);
 
             //table is set on ctor
-            cst = new UniqueConstraint(new DataColumn[] {
-                      _table.Columns[0], _table.Columns[1]});
+            cst = new UniqueConstraint(new DataColumn[] { _table.Columns[0], _table.Columns[1] });
             Assert.Same(_table, cst.Table);
 
             cst = new UniqueConstraint("MyName", _table.Columns[0], true);
@@ -125,10 +130,12 @@ namespace System.Data.Tests
         [Fact]
         public void EqualsAndHashCode()
         {
-            UniqueConstraint cst = new UniqueConstraint(new DataColumn[] {
-                    _table.Columns[0], _table.Columns[1]});
-            UniqueConstraint cst2 = new UniqueConstraint(new DataColumn[] {
-                     _table.Columns[1], _table.Columns[0]});
+            UniqueConstraint cst = new UniqueConstraint(
+                new DataColumn[] { _table.Columns[0], _table.Columns[1] }
+            );
+            UniqueConstraint cst2 = new UniqueConstraint(
+                new DataColumn[] { _table.Columns[1], _table.Columns[0] }
+            );
 
             UniqueConstraint cst3 = new UniqueConstraint(_table.Columns[0]);
             UniqueConstraint cst4 = new UniqueConstraint(_table.Columns[2]);

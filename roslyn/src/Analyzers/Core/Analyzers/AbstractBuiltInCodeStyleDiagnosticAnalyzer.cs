@@ -39,8 +39,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             LocalizableString title,
             LocalizableString? messageFormat = null,
             bool isUnnecessary = false,
-            bool configurable = true)
-            : this(diagnosticId, enforceOnBuild, title, messageFormat, isUnnecessary, configurable)
+            bool configurable = true
+        ) : this(diagnosticId, enforceOnBuild, title, messageFormat, isUnnecessary, configurable)
         {
             AddDiagnosticIdToOptionMapping(diagnosticId, option);
         }
@@ -68,8 +68,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             LocalizableString title,
             LocalizableString? messageFormat = null,
             bool isUnnecessary = false,
-            bool configurable = true)
-            : this(diagnosticId, enforceOnBuild, title, messageFormat, isUnnecessary, configurable)
+            bool configurable = true
+        ) : this(diagnosticId, enforceOnBuild, title, messageFormat, isUnnecessary, configurable)
         {
             RoslynDebug.Assert(options != null);
             Debug.Assert(options.Count > 1);
@@ -79,8 +79,9 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// <summary>
         /// Constructor for a code style analyzer with a multiple diagnostic descriptors with a code style option that can be used to configure each descriptor.
         /// </summary>
-        protected AbstractBuiltInCodeStyleDiagnosticAnalyzer(ImmutableDictionary<DiagnosticDescriptor, IOption2> supportedDiagnosticsWithOptions)
-            : this(supportedDiagnosticsWithOptions.Keys.ToImmutableArray())
+        protected AbstractBuiltInCodeStyleDiagnosticAnalyzer(
+            ImmutableDictionary<DiagnosticDescriptor, IOption2> supportedDiagnosticsWithOptions
+        ) : this(supportedDiagnosticsWithOptions.Keys.ToImmutableArray())
         {
             foreach (var (descriptor, option) in supportedDiagnosticsWithOptions)
                 AddDiagnosticIdToOptionMapping(descriptor.Id, option);
@@ -89,8 +90,12 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// <summary>
         /// Constructor for a code style analyzer with a multiple diagnostic descriptors with zero or more code style options that can be used to configure each descriptor.
         /// </summary>
-        protected AbstractBuiltInCodeStyleDiagnosticAnalyzer(ImmutableDictionary<DiagnosticDescriptor, ImmutableHashSet<IOption2>> supportedDiagnosticsWithOptions)
-            : this(supportedDiagnosticsWithOptions.Keys.ToImmutableArray())
+        protected AbstractBuiltInCodeStyleDiagnosticAnalyzer(
+            ImmutableDictionary<
+                DiagnosticDescriptor,
+                ImmutableHashSet<IOption2>
+            > supportedDiagnosticsWithOptions
+        ) : this(supportedDiagnosticsWithOptions.Keys.ToImmutableArray())
         {
             foreach (var (descriptor, options) in supportedDiagnosticsWithOptions)
             {
@@ -109,12 +114,13 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             }
         }
 
-        private static void AddDiagnosticIdToOptionMapping(string diagnosticId, ImmutableHashSet<IOption2> options)
-            => IDEDiagnosticIdToOptionMappingHelper.AddOptionMapping(diagnosticId, options);
+        private static void AddDiagnosticIdToOptionMapping(
+            string diagnosticId,
+            ImmutableHashSet<IOption2> options
+        ) => IDEDiagnosticIdToOptionMappingHelper.AddOptionMapping(diagnosticId, options);
 
         public abstract DiagnosticAnalyzerCategory GetAnalyzerCategory();
 
-        public virtual bool OpenFileOnly(SimplifierOptions? options)
-            => false;
+        public virtual bool OpenFileOnly(SimplifierOptions? options) => false;
     }
 }

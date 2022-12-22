@@ -15,10 +15,8 @@ public class JsonSerializationTest : ServerTestBase<ToggleExecutionModeServerFix
     public JsonSerializationTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    ) : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {

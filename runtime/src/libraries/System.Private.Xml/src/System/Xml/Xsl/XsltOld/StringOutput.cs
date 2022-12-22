@@ -14,14 +14,10 @@ namespace System.Xml.Xsl.XsltOld
 
         internal string? Result
         {
-            get
-            {
-                return _result;
-            }
+            get { return _result; }
         }
 
-        internal StringOutput(Processor processor)
-        : base(processor)
+        internal StringOutput(Processor processor) : base(processor)
         {
             _builder = new StringBuilder();
         }

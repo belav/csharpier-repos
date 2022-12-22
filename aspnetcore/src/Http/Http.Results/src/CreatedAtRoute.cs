@@ -22,10 +22,8 @@ public sealed class CreatedAtRoute : IResult, IEndpointMetadataProvider, IStatus
     /// provided.
     /// </summary>
     /// <param name="routeValues">The route data to use for generating the URL.</param>
-    internal CreatedAtRoute(object? routeValues)
-        : this(routeName: null, routeValues: routeValues)
-    {
-    }
+    internal CreatedAtRoute(object? routeValues) : this(routeName: null, routeValues: routeValues)
+    { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CreatedAtRoute"/> class with the values
@@ -33,9 +31,7 @@ public sealed class CreatedAtRoute : IResult, IEndpointMetadataProvider, IStatus
     /// </summary>
     /// <param name="routeName">The name of the route to use for generating the URL.</param>
     /// <param name="routeValues">The route data to use for generating the URL.</param>
-    internal CreatedAtRoute(
-        string? routeName,
-        object? routeValues)
+    internal CreatedAtRoute(string? routeName, object? routeValues)
     {
         RouteName = routeName;
         RouteValues = new RouteValueDictionary(routeValues);
@@ -68,7 +64,8 @@ public sealed class CreatedAtRoute : IResult, IEndpointMetadataProvider, IStatus
             httpContext,
             RouteName,
             RouteValues,
-            fragment: FragmentString.Empty);
+            fragment: FragmentString.Empty
+        );
 
         if (string.IsNullOrEmpty(url))
         {
@@ -77,7 +74,9 @@ public sealed class CreatedAtRoute : IResult, IEndpointMetadataProvider, IStatus
 
         // Creating the logger with a string to preserve the category after the refactoring.
         var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Result.CreatedAtRouteResult");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Http.Result.CreatedAtRouteResult"
+        );
 
         httpContext.Response.Headers.Location = url;
 
@@ -88,7 +87,10 @@ public sealed class CreatedAtRoute : IResult, IEndpointMetadataProvider, IStatus
     }
 
     /// <inheritdoc/>
-    static void IEndpointMetadataProvider.PopulateMetadata(MethodInfo method, EndpointBuilder builder)
+    static void IEndpointMetadataProvider.PopulateMetadata(
+        MethodInfo method,
+        EndpointBuilder builder
+    )
     {
         ArgumentNullException.ThrowIfNull(method);
         ArgumentNullException.ThrowIfNull(builder);
