@@ -9,7 +9,10 @@ namespace ILCompiler.DependencyAnalysis
     /// <summary>
     /// Represents a node containing information necessary at runtime to locate type's thread static base.
     /// </summary>
-    public class TypeThreadStaticIndexNode : DehydratableObjectNode, ISymbolDefinitionNode, ISortableSymbolNode
+    public class TypeThreadStaticIndexNode
+        : DehydratableObjectNode,
+            ISymbolDefinitionNode,
+            ISortableSymbolNode
     {
         private MetadataType _type;
 
@@ -22,8 +25,12 @@ namespace ILCompiler.DependencyAnalysis
         {
             sb.Append(nameMangler.NodeMangler.ThreadStaticsIndex(_type));
         }
+
         public int Offset => 0;
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
+
         protected override ObjectNodeSection GetDehydratedSection(NodeFactory factory)
         {
             if (factory.Target.IsWindows)
@@ -31,6 +38,7 @@ namespace ILCompiler.DependencyAnalysis
             else
                 return ObjectNodeSection.DataSection;
         }
+
         public override bool IsShareable => true;
         public override bool StaticDependenciesAreComputed => true;
 
@@ -38,11 +46,17 @@ namespace ILCompiler.DependencyAnalysis
         {
             return new DependencyList
             {
-                new DependencyListEntry(factory.TypeThreadStaticsSymbol(_type), "Thread static storage")
+                new DependencyListEntry(
+                    factory.TypeThreadStaticsSymbol(_type),
+                    "Thread static storage"
+                )
             };
         }
 
-        protected override ObjectData GetDehydratableData(NodeFactory factory, bool relocsOnly = false)
+        protected override ObjectData GetDehydratableData(
+            NodeFactory factory,
+            bool relocsOnly = false
+        )
         {
             ObjectDataBuilder objData = new ObjectDataBuilder(factory, relocsOnly);
 

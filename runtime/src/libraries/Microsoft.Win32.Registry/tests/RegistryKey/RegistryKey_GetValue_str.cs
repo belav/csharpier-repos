@@ -38,7 +38,10 @@ namespace Microsoft.Win32.RegistryTests
             TestRegistryKey.DeleteValue(valueName);
         }
 
-        public static IEnumerable<object[]> TestValueTypes { get { return TestData.TestValueTypes; } }
+        public static IEnumerable<object[]> TestValueTypes
+        {
+            get { return TestData.TestValueTypes; }
+        }
 
         [Theory]
         [MemberData(nameof(TestValueTypes))]

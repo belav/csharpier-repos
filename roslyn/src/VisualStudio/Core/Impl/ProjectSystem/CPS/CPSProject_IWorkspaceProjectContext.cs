@@ -52,10 +52,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             set => _visualStudioProject.IsPrimary = value;
         }
 
-        public Guid Guid
-        {
-            get;
-            set; // VisualStudioProject doesn't allow GUID to be changed after creation
+        public Guid Guid { get; set; // VisualStudioProject doesn't allow GUID to be changed after creation
         }
 
         public bool LastDesignTimeBuildSucceeded
@@ -64,7 +61,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             set => _visualStudioProject.HasAllInformation = value;
         }
 
-        public CPSProject(VisualStudioProject visualStudioProject, VisualStudioWorkspaceImpl visualStudioWorkspace, IProjectCodeModelFactory projectCodeModelFactory, Guid projectGuid)
+        public CPSProject(
+            VisualStudioProject visualStudioProject,
+            VisualStudioWorkspaceImpl visualStudioWorkspace,
+            IProjectCodeModelFactory projectCodeModelFactory,
+            Guid projectGuid
+        )
         {
             _visualStudioProject = visualStudioProject;
             _visualStudioWorkspace = visualStudioWorkspace;
@@ -79,18 +81,36 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
                     _ => null
                 };
 
-                return (prefix != null) ? new ProjectExternalErrorReporter(visualStudioProject.Id, prefix, visualStudioProject.Language, visualStudioWorkspace) : null;
+                return (prefix != null)
+                    ? new ProjectExternalErrorReporter(
+                        visualStudioProject.Id,
+                        prefix,
+                        visualStudioProject.Language,
+                        visualStudioWorkspace
+                    )
+                    : null;
             });
 
-            _projectCodeModel = projectCodeModelFactory.CreateProjectCodeModel(visualStudioProject.Id, new CPSCodeModelInstanceFactory(this));
+            _projectCodeModel = projectCodeModelFactory.CreateProjectCodeModel(
+                visualStudioProject.Id,
+                new CPSCodeModelInstanceFactory(this)
+            );
 
             // If we have a command line parser service for this language, also set up our ability to process options if they come in
-            if (visualStudioWorkspace.Services.GetLanguageServices(visualStudioProject.Language).GetService<ICommandLineParserService>() != null)
+            if (
+                visualStudioWorkspace.Services
+                    .GetLanguageServices(visualStudioProject.Language)
+                    .GetService<ICommandLineParserService>() != null
+            )
             {
-                _visualStudioProjectOptionsProcessor = new VisualStudioProjectOptionsProcessor(_visualStudioProject, visualStudioWorkspace.Services.SolutionServices);
+                _visualStudioProjectOptionsProcessor = new VisualStudioProjectOptionsProcessor(
+                    _visualStudioProject,
+                    visualStudioWorkspace.Services.SolutionServices
+                );
                 _visualStudioWorkspace.AddProjectRuleSetFileToInternalMaps(
                     visualStudioProject,
-                    () => _visualStudioProjectOptionsProcessor.EffectiveRuleSetFilePath);
+                    () => _visualStudioProjectOptionsProcessor.EffectiveRuleSetFilePath
+                );
             }
 
             Guid = projectGuid;
@@ -113,9 +133,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
                 // can be removed now, but we still have tests asserting it.
                 if (!PathUtilities.IsAbsolute(value))
                 {
-                    var rootDirectory = _visualStudioProject.FilePath != null
-                                        ? Path.GetDirectoryName(_visualStudioProject.FilePath)
-                                        : Path.GetTempPath();
+                    var rootDirectory =
+                        _visualStudioProject.FilePath != null
+                            ? Path.GetDirectoryName(_visualStudioProject.FilePath)
+                            : Path.GetTempPath();
 
                     _visualStudioProject.OutputFilePath = Path.Combine(rootDirectory, value);
                 }
@@ -126,16 +147,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             }
         }
 
-        internal string? CompilationOutputAssemblyFilePath
-            => _visualStudioProject.CompilationOutputAssemblyFilePath;
+        internal string? CompilationOutputAssemblyFilePath =>
+            _visualStudioProject.CompilationOutputAssemblyFilePath;
 
         public ProjectId Id => _visualStudioProject.Id;
 
-        public void SetOptions(string commandLineForOptions)
-            => _visualStudioProjectOptionsProcessor?.SetCommandLine(commandLineForOptions);
+        public void SetOptions(string commandLineForOptions) =>
+            _visualStudioProjectOptionsProcessor?.SetCommandLine(commandLineForOptions);
 
-        public void SetOptions(ImmutableArray<string> arguments)
-            => _visualStudioProjectOptionsProcessor?.SetCommandLine(arguments);
+        public void SetOptions(ImmutableArray<string> arguments) =>
+            _visualStudioProjectOptionsProcessor?.SetCommandLine(arguments);
 
         public string? DefaultNamespace
         {
@@ -147,10 +168,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
         {
             if (name == BuildPropertyNames.RootNamespace)
             {
-                // Right now VB doesn't have the concept of "default namespace". But we conjure one in workspace 
-                // by assigning the value of the project's root namespace to it. So various feature can choose to 
+                // Right now VB doesn't have the concept of "default namespace". But we conjure one in workspace
+                // by assigning the value of the project's root namespace to it. So various feature can choose to
                 // use it for their own purpose.
-                // In the future, we might consider officially exposing "default namespace" for VB project 
+                // In the future, we might consider officially exposing "default namespace" for VB project
                 // (e.g. through a <defaultnamespace> msbuild property)
                 DefaultNamespace = value;
             }
@@ -160,15 +181,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             }
             else if (name == BuildPropertyNames.RunAnalyzers)
             {
-                var boolValue = bool.TryParse(value, out var parsedBoolValue) ? parsedBoolValue : (bool?)null;
+                var boolValue = bool.TryParse(value, out var parsedBoolValue)
+                    ? parsedBoolValue
+                    : (bool?)null;
                 _visualStudioProject.RunAnalyzers = boolValue;
             }
             else if (name == BuildPropertyNames.RunAnalyzersDuringLiveAnalysis)
             {
-                var boolValue = bool.TryParse(value, out var parsedBoolValue) ? parsedBoolValue : (bool?)null;
+                var boolValue = bool.TryParse(value, out var parsedBoolValue)
+                    ? parsedBoolValue
+                    : (bool?)null;
                 _visualStudioProject.RunAnalyzersDuringLiveAnalysis = boolValue;
             }
-            else if (name == BuildPropertyNames.TemporaryDependencyNodeTargetIdentifier && !RoslynString.IsNullOrEmpty(value))
+            else if (
+                name == BuildPropertyNames.TemporaryDependencyNodeTargetIdentifier
+                && !RoslynString.IsNullOrEmpty(value)
+            )
             {
                 _visualStudioProject.DependencyNodeTargetIdentifier = value;
             }
@@ -186,9 +214,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
                     // can be removed now, but we still have tests asserting it.
                     if (!PathUtilities.IsAbsolute(value))
                     {
-                        var rootDirectory = _visualStudioProject.FilePath != null
-                                            ? Path.GetDirectoryName(_visualStudioProject.FilePath)
-                                            : Path.GetTempPath();
+                        var rootDirectory =
+                            _visualStudioProject.FilePath != null
+                                ? Path.GetDirectoryName(_visualStudioProject.FilePath)
+                                : Path.GetTempPath();
 
                         _visualStudioProject.OutputRefFilePath = Path.Combine(rootDirectory, value);
                     }
@@ -200,7 +229,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             }
         }
 
-        public void AddMetadataReference(string referencePath, MetadataReferenceProperties properties)
+        public void AddMetadataReference(
+            string referencePath,
+            MetadataReferenceProperties properties
+        )
         {
             referencePath = FileUtilities.NormalizeAbsolutePath(referencePath);
             _visualStudioProject.AddMetadataReference(referencePath, properties);
@@ -209,24 +241,47 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
         public void RemoveMetadataReference(string referencePath)
         {
             referencePath = FileUtilities.NormalizeAbsolutePath(referencePath);
-            _visualStudioProject.RemoveMetadataReference(referencePath, _visualStudioProject.GetPropertiesForMetadataReference(referencePath).Single());
+            _visualStudioProject.RemoveMetadataReference(
+                referencePath,
+                _visualStudioProject.GetPropertiesForMetadataReference(referencePath).Single()
+            );
         }
 
-        public void AddProjectReference(IWorkspaceProjectContext project, MetadataReferenceProperties properties)
+        public void AddProjectReference(
+            IWorkspaceProjectContext project,
+            MetadataReferenceProperties properties
+        )
         {
             var otherProjectId = ((CPSProject)project)._visualStudioProject.Id;
-            _visualStudioProject.AddProjectReference(new ProjectReference(otherProjectId, properties.Aliases, properties.EmbedInteropTypes));
+            _visualStudioProject.AddProjectReference(
+                new ProjectReference(
+                    otherProjectId,
+                    properties.Aliases,
+                    properties.EmbedInteropTypes
+                )
+            );
         }
 
         public void RemoveProjectReference(IWorkspaceProjectContext project)
         {
             var otherProjectId = ((CPSProject)project)._visualStudioProject.Id;
-            var otherProjectReference = _visualStudioProject.GetProjectReferences().Single(pr => pr.ProjectId == otherProjectId);
+            var otherProjectReference = _visualStudioProject
+                .GetProjectReferences()
+                .Single(pr => pr.ProjectId == otherProjectId);
             _visualStudioProject.RemoveProjectReference(otherProjectReference);
         }
 
-        public void AddSourceFile(string filePath, bool isInCurrentContext = true, IEnumerable<string>? folderNames = null, SourceCodeKind sourceCodeKind = SourceCodeKind.Regular)
-            => _visualStudioProject.AddSourceFile(filePath, sourceCodeKind, folderNames.AsImmutableOrNull());
+        public void AddSourceFile(
+            string filePath,
+            bool isInCurrentContext = true,
+            IEnumerable<string>? folderNames = null,
+            SourceCodeKind sourceCodeKind = SourceCodeKind.Regular
+        ) =>
+            _visualStudioProject.AddSourceFile(
+                filePath,
+                sourceCodeKind,
+                folderNames.AsImmutableOrNull()
+            );
 
         public void RemoveSourceFile(string filePath)
         {
@@ -234,8 +289,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             _projectCodeModel.OnSourceFileRemoved(filePath);
         }
 
-        public void AddAdditionalFile(string filePath, bool isInCurrentContext = true)
-            => _visualStudioProject.AddAdditionalFile(filePath);
+        public void AddAdditionalFile(string filePath, bool isInCurrentContext = true) =>
+            _visualStudioProject.AddAdditionalFile(filePath);
 
         public void Dispose()
         {
@@ -244,23 +299,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             _visualStudioProject.RemoveFromWorkspace();
         }
 
-        public void AddAnalyzerReference(string referencePath)
-            => _visualStudioProject.AddAnalyzerReference(referencePath);
+        public void AddAnalyzerReference(string referencePath) =>
+            _visualStudioProject.AddAnalyzerReference(referencePath);
 
-        public void RemoveAnalyzerReference(string referencePath)
-            => _visualStudioProject.RemoveAnalyzerReference(referencePath);
+        public void RemoveAnalyzerReference(string referencePath) =>
+            _visualStudioProject.RemoveAnalyzerReference(referencePath);
 
-        public void RemoveAdditionalFile(string filePath)
-            => _visualStudioProject.RemoveAdditionalFile(filePath);
+        public void RemoveAdditionalFile(string filePath) =>
+            _visualStudioProject.RemoveAdditionalFile(filePath);
 
-        public void AddDynamicFile(string filePath, IEnumerable<string>? folderNames = null)
-            => _visualStudioProject.AddDynamicSourceFile(filePath, folderNames.ToImmutableArrayOrEmpty());
+        public void AddDynamicFile(string filePath, IEnumerable<string>? folderNames = null) =>
+            _visualStudioProject.AddDynamicSourceFile(
+                filePath,
+                folderNames.ToImmutableArrayOrEmpty()
+            );
 
-        public void RemoveDynamicFile(string filePath)
-            => _visualStudioProject.RemoveDynamicSourceFile(filePath);
+        public void RemoveDynamicFile(string filePath) =>
+            _visualStudioProject.RemoveDynamicSourceFile(filePath);
 
-        public void StartBatch()
-            => _batchScopes.Enqueue(_visualStudioProject.CreateBatchScope());
+        public void StartBatch() => _batchScopes.Enqueue(_visualStudioProject.CreateBatchScope());
 
         public ValueTask EndBatchAsync()
         {
@@ -268,16 +325,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             return scope.DisposeAsync();
         }
 
-        public void ReorderSourceFiles(IEnumerable<string>? filePaths)
-            => _visualStudioProject.ReorderSourceFiles(filePaths.ToImmutableArrayOrEmpty());
+        public void ReorderSourceFiles(IEnumerable<string>? filePaths) =>
+            _visualStudioProject.ReorderSourceFiles(filePaths.ToImmutableArrayOrEmpty());
 
-        internal VisualStudioProject GetProject_TestOnly()
-            => _visualStudioProject;
+        internal VisualStudioProject GetProject_TestOnly() => _visualStudioProject;
 
-        public void AddAnalyzerConfigFile(string filePath)
-            => _visualStudioProject.AddAnalyzerConfigFile(filePath);
+        public void AddAnalyzerConfigFile(string filePath) =>
+            _visualStudioProject.AddAnalyzerConfigFile(filePath);
 
-        public void RemoveAnalyzerConfigFile(string filePath)
-            => _visualStudioProject.RemoveAnalyzerConfigFile(filePath);
+        public void RemoveAnalyzerConfigFile(string filePath) =>
+            _visualStudioProject.RemoveAnalyzerConfigFile(filePath);
     }
 }

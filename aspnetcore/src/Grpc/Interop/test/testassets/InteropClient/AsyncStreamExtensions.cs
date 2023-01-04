@@ -28,8 +28,10 @@ public static class AsyncStreamExtensions
     /// <summary>
     /// Reads the entire stream and executes an async action for each element.
     /// </summary>
-    public static async Task ForEachAsync<T>(this IAsyncStreamReader<T> streamReader, Func<T, Task> asyncAction)
-        where T : class
+    public static async Task ForEachAsync<T>(
+        this IAsyncStreamReader<T> streamReader,
+        Func<T, Task> asyncAction
+    ) where T : class
     {
         while (await streamReader.MoveNext().ConfigureAwait(false))
         {
@@ -55,8 +57,11 @@ public static class AsyncStreamExtensions
     /// Writes all elements from given enumerable to the stream.
     /// Completes the stream afterwards unless close = false.
     /// </summary>
-    public static async Task WriteAllAsync<T>(this IClientStreamWriter<T> streamWriter, IEnumerable<T> elements, bool complete = true)
-        where T : class
+    public static async Task WriteAllAsync<T>(
+        this IClientStreamWriter<T> streamWriter,
+        IEnumerable<T> elements,
+        bool complete = true
+    ) where T : class
     {
         foreach (var element in elements)
         {
@@ -71,8 +76,10 @@ public static class AsyncStreamExtensions
     /// <summary>
     /// Writes all elements from given enumerable to the stream.
     /// </summary>
-    public static async Task WriteAllAsync<T>(this IServerStreamWriter<T> streamWriter, IEnumerable<T> elements)
-        where T : class
+    public static async Task WriteAllAsync<T>(
+        this IServerStreamWriter<T> streamWriter,
+        IEnumerable<T> elements
+    ) where T : class
     {
         foreach (var element in elements)
         {

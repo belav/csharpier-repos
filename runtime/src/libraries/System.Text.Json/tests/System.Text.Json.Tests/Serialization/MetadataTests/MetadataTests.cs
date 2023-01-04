@@ -75,7 +75,5 @@ namespace System.Text.Json.Serialization.Tests
     }
 
     [JsonSerializable(typeof(WeatherForecastWithPOCOs))]
-    internal sealed partial class JsonContext : JsonSerializerContext
-    {
-    }
+    internal sealed partial class JsonContext : JsonSerializerContext { }
 }

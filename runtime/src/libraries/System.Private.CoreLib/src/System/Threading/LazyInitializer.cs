@@ -47,7 +47,12 @@ namespace System.Threading
         /// if an object was not used and to then dispose of the object appropriately.
         /// </para>
         /// </remarks>
-        public static T EnsureInitialized<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]T>([NotNull] ref T? target) where T : class =>
+        public static T EnsureInitialized<
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                T
+        >([NotNull] ref T? target) where T : class =>
             Volatile.Read(ref target!) ?? EnsureInitializedCore(ref target);
 
         /// <summary>
@@ -56,7 +61,12 @@ namespace System.Threading
         /// <typeparam name="T">The reference type of the reference to be initialized.</typeparam>
         /// <param name="target">The variable that need to be initialized</param>
         /// <returns>The initialized variable</returns>
-        private static T EnsureInitializedCore<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]T>([NotNull] ref T? target) where T : class
+        private static T EnsureInitializedCore<
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                T
+        >([NotNull] ref T? target) where T : class
         {
             try
             {
@@ -99,7 +109,8 @@ namespace System.Threading
         /// if an object was not used and to then dispose of the object appropriately.
         /// </para>
         /// </remarks>
-        public static T EnsureInitialized<T>([NotNull] ref T? target, Func<T> valueFactory) where T : class =>
+        public static T EnsureInitialized<T>([NotNull] ref T? target, Func<T> valueFactory)
+            where T : class =>
             Volatile.Read(ref target!) ?? EnsureInitializedCore(ref target, valueFactory);
 
         /// <summary>
@@ -109,7 +120,8 @@ namespace System.Threading
         /// <param name="target">The variable that need to be initialized</param>
         /// <param name="valueFactory">The delegate that will be executed to initialize the target</param>
         /// <returns>The initialized variable</returns>
-        private static T EnsureInitializedCore<T>([NotNull] ref T? target, Func<T> valueFactory) where T : class
+        private static T EnsureInitializedCore<T>([NotNull] ref T? target, Func<T> valueFactory)
+            where T : class
         {
             T value = valueFactory();
             if (value == null)
@@ -135,7 +147,16 @@ namespace System.Threading
         /// <paramref name="target"/>. If <paramref name="syncLock"/> is null, and if the target hasn't already
         /// been initialized, a new object will be instantiated.</param>
         /// <returns>The initialized value of type <typeparamref name="T"/>.</returns>
-        public static T EnsureInitialized<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]T>([AllowNull] ref T target, ref bool initialized, [NotNullIfNotNull(nameof(syncLock))] ref object? syncLock)
+        public static T EnsureInitialized<
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                T
+        >(
+            [AllowNull] ref T target,
+            ref bool initialized,
+            [NotNullIfNotNull(nameof(syncLock))] ref object? syncLock
+        )
         {
             // Fast path.
             if (Volatile.Read(ref initialized))
@@ -157,7 +178,12 @@ namespace System.Threading
         /// a new object will be instantiated.
         /// </param>
         /// <returns>The initialized object.</returns>
-        private static T EnsureInitializedCore<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]T>([AllowNull] ref T target, ref bool initialized, [NotNull] ref object? syncLock)
+        private static T EnsureInitializedCore<
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                T
+        >([AllowNull] ref T target, ref bool initialized, [NotNull] ref object? syncLock)
         {
             // Lazily initialize the lock if necessary and then double check if initialization is still required.
             lock (EnsureLockInitialized(ref syncLock))
@@ -170,7 +196,9 @@ namespace System.Threading
                     }
                     catch (MissingMethodException)
                     {
-                        throw new MissingMemberException(SR.Lazy_CreateValue_NoParameterlessCtorForT);
+                        throw new MissingMemberException(
+                            SR.Lazy_CreateValue_NoParameterlessCtorForT
+                        );
                     }
 
                     Volatile.Write(ref initialized, true);
@@ -195,7 +223,12 @@ namespace System.Threading
         /// <param name="valueFactory">The <see cref="System.Func{T}"/> invoked to initialize the
         /// reference or value.</param>
         /// <returns>The initialized value of type <typeparamref name="T"/>.</returns>
-        public static T EnsureInitialized<T>([AllowNull] ref T target, ref bool initialized, [NotNullIfNotNull(nameof(syncLock))] ref object? syncLock, Func<T> valueFactory)
+        public static T EnsureInitialized<T>(
+            [AllowNull] ref T target,
+            ref bool initialized,
+            [NotNullIfNotNull(nameof(syncLock))] ref object? syncLock,
+            Func<T> valueFactory
+        )
         {
             // Fast path.
             if (Volatile.Read(ref initialized))
@@ -219,7 +252,12 @@ namespace System.Threading
         /// The <see cref="System.Func{T}"/> to invoke in order to produce the lazily-initialized value.
         /// </param>
         /// <returns>The initialized object.</returns>
-        private static T EnsureInitializedCore<T>([AllowNull] ref T target, ref bool initialized, [NotNull] ref object? syncLock, Func<T> valueFactory)
+        private static T EnsureInitializedCore<T>(
+            [AllowNull] ref T target,
+            ref bool initialized,
+            [NotNull] ref object? syncLock,
+            Func<T> valueFactory
+        )
         {
             // Lazily initialize the lock if necessary and then double check if initialization is still required.
             lock (EnsureLockInitialized(ref syncLock))
@@ -244,8 +282,13 @@ namespace System.Threading
         /// been initialized, a new object will be instantiated.</param>
         /// <param name="valueFactory">The <see cref="System.Func{T}"/> invoked to initialize the reference.</param>
         /// <returns>The initialized value of type <typeparamref name="T"/>.</returns>
-        public static T EnsureInitialized<T>([NotNull] ref T? target, [NotNullIfNotNull(nameof(syncLock))] ref object? syncLock, Func<T> valueFactory) where T : class =>
-            Volatile.Read(ref target!) ?? EnsureInitializedCore(ref target, ref syncLock, valueFactory);
+        public static T EnsureInitialized<T>(
+            [NotNull] ref T? target,
+            [NotNullIfNotNull(nameof(syncLock))] ref object? syncLock,
+            Func<T> valueFactory
+        ) where T : class =>
+            Volatile.Read(ref target!)
+            ?? EnsureInitializedCore(ref target, ref syncLock, valueFactory);
 
         /// <summary>
         /// Ensure the target is initialized and return the value (slow path). This overload works only for reference type targets.
@@ -259,7 +302,11 @@ namespace System.Threading
         /// The <see cref="System.Func{T}"/> to invoke in order to produce the lazily-initialized value.
         /// </param>
         /// <returns>The initialized object.</returns>
-        private static T EnsureInitializedCore<T>([NotNull] ref T? target, [NotNull] ref object? syncLock, Func<T> valueFactory) where T : class
+        private static T EnsureInitializedCore<T>(
+            [NotNull] ref T? target,
+            [NotNull] ref object? syncLock,
+            Func<T> valueFactory
+        ) where T : class
         {
             // Lazily initialize the lock if necessary and then double check if initialization is still required.
             lock (EnsureLockInitialized(ref syncLock))
@@ -285,8 +332,6 @@ namespace System.Threading
         /// a new object will be instantiated.</param>
         /// <returns>Initialized lock object.</returns>
         private static object EnsureLockInitialized([NotNull] ref object? syncLock) =>
-            syncLock ??
-            Interlocked.CompareExchange(ref syncLock, new object(), null) ??
-            syncLock;
+            syncLock ?? Interlocked.CompareExchange(ref syncLock, new object(), null) ?? syncLock;
     }
 }

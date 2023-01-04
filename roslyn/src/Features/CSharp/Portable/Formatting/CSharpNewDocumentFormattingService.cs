@@ -17,10 +17,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpNewDocumentFormattingService([ImportMany] IEnumerable<Lazy<INewDocumentFormattingProvider, LanguageMetadata>> providers)
-            : base(providers)
-        {
-        }
+        public CSharpNewDocumentFormattingService(
+            [ImportMany]
+                IEnumerable<Lazy<INewDocumentFormattingProvider, LanguageMetadata>> providers
+        ) : base(providers) { }
 
         protected override string Language => LanguageNames.CSharp;
     }

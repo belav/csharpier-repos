@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Func<ValueTask<Checksum>> getChecksumAsync,
             Func<Checksum, ValueTask<SymbolTreeInfo>> createAsync,
             string keySuffix,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var checksum = await getChecksumAsync().ConfigureAwait(false);
 
@@ -47,7 +48,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 // Ok, we can use persistence.  First try to load from the persistence service. The data in the
                 // persistence store must match the checksum passed in.
 
-                var read = await LoadAsync(services, solutionKey, checksum, checksumMustMatch: true, keySuffix, cancellationToken).ConfigureAwait(false);
+                var read = await LoadAsync(
+                        services,
+                        solutionKey,
+                        checksum,
+                        checksumMustMatch: true,
+                        keySuffix,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (read != null)
                 {
                     // If we were able to read something in, it's checksum better
@@ -64,12 +73,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                 var persistentStorageService = services.GetPersistentStorageService();
 
-                var storage = await persistentStorageService.GetStorageAsync(solutionKey, cancellationToken).ConfigureAwait(false);
+                var storage = await persistentStorageService
+                    .GetStorageAsync(solutionKey, cancellationToken)
+                    .ConfigureAwait(false);
                 await using var _ = storage.ConfigureAwait(false);
 
                 using (var stream = SerializableBytes.CreateWritableStream())
                 {
-                    using (var writer = new ObjectWriter(stream, leaveOpen: true, cancellationToken))
+                    using (
+                        var writer = new ObjectWriter(stream, leaveOpen: true, cancellationToken)
+                    )
                     {
                         result.WriteTo(writer);
                     }
@@ -77,7 +90,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     stream.Position = 0;
 
                     var key = PrefixSymbolTreeInfo + keySuffix;
-                    await storage.WriteStreamAsync(key, stream, checksum, cancellationToken).ConfigureAwait(false);
+                    await storage
+                        .WriteStreamAsync(key, stream, checksum, cancellationToken)
+                        .ConfigureAwait(false);
                 }
 
                 return result;
@@ -98,21 +113,29 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Checksum checksum,
             bool checksumMustMatch,
             string keySuffix,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var persistentStorageService = services.GetPersistentStorageService();
 
-            var storage = await persistentStorageService.GetStorageAsync(solutionKey, cancellationToken).ConfigureAwait(false);
+            var storage = await persistentStorageService
+                .GetStorageAsync(solutionKey, cancellationToken)
+                .ConfigureAwait(false);
             await using var _ = storage.ConfigureAwait(false);
 
             // Get the unique key to identify our data.
             var key = PrefixSymbolTreeInfo + keySuffix;
 
             // If the checksum doesn't need to match, then we can pass in 'null' here allowing any result to be found.
-            using var stream = await storage.ReadStreamAsync(key, checksumMustMatch ? checksum : null, cancellationToken).ConfigureAwait(false);
-            using var reader = ObjectReader.TryGetReader(stream, cancellationToken: cancellationToken);
+            using var stream = await storage
+                .ReadStreamAsync(key, checksumMustMatch ? checksum : null, cancellationToken)
+                .ConfigureAwait(false);
+            using var reader = ObjectReader.TryGetReader(
+                stream,
+                cancellationToken: cancellationToken
+            );
 
-            // We have some previously persisted data.  Attempt to read it back.  
+            // We have some previously persisted data.  Attempt to read it back.
             // If we're able to, and the version of the persisted data matches
             // our version, then we can reuse this instance.
             return TryReadSymbolTreeInfo(reader, checksum);
@@ -194,9 +217,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             }
         }
 
-        private static SymbolTreeInfo TryReadSymbolTreeInfo(
-            ObjectReader reader,
-            Checksum checksum)
+        private static SymbolTreeInfo TryReadSymbolTreeInfo(ObjectReader reader, Checksum checksum)
         {
             if (reader == null)
                 return null;
@@ -239,7 +260,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 }
                 else
                 {
-                    receiverTypeNameToExtensionMethodMap = new MultiDictionary<string, ExtensionMethodInfo>();
+                    receiverTypeNameToExtensionMethodMap =
+                        new MultiDictionary<string, ExtensionMethodInfo>();
 
                     for (var i = 0; i < keyCount; i++)
                     {
@@ -251,7 +273,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                             var containerName = reader.ReadString();
                             var name = reader.ReadString();
 
-                            receiverTypeNameToExtensionMethodMap.Add(typeName, new ExtensionMethodInfo(containerName, name));
+                            receiverTypeNameToExtensionMethodMap.Add(
+                                typeName,
+                                new ExtensionMethodInfo(containerName, name)
+                            );
                         }
                     }
                 }
@@ -262,8 +287,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     return null;
 
                 return new SymbolTreeInfo(
-                    checksum, nodeArray, spellChecker, inheritanceMap,
-                    receiverTypeNameToExtensionMethodMap);
+                    checksum,
+                    nodeArray,
+                    spellChecker,
+                    inheritanceMap,
+                    receiverTypeNameToExtensionMethodMap
+                );
             }
             catch
             {
@@ -276,7 +305,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         internal readonly partial struct TestAccessor
         {
             internal static SymbolTreeInfo ReadSymbolTreeInfo(
-                ObjectReader reader, Checksum checksum)
+                ObjectReader reader,
+                Checksum checksum
+            )
             {
                 return TryReadSymbolTreeInfo(reader, checksum);
             }

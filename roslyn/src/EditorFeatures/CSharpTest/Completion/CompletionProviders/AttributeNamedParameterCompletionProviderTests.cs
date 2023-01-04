@@ -16,15 +16,17 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSetSources
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class AttributeNamedParameterCompletionProviderTests : AbstractCSharpCompletionProviderTests
+    public class AttributeNamedParameterCompletionProviderTests
+        : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(AttributeNamedParameterCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(AttributeNamedParameterCompletionProvider);
 
         [Fact]
         public async Task SendEnterThroughToEditorTest()
         {
-            const string markup = @"
+            const string markup =
+                @"
 using System;
 class class1
 {
@@ -39,15 +41,31 @@ public class TestAttribute : Attribute
     public ConsoleColor Color { get; set; }
 }";
 
-            await VerifySendEnterThroughToEnterAsync(markup, "Color =", sendThroughEnterOption: EnterKeyRule.Never, expected: false);
-            await VerifySendEnterThroughToEnterAsync(markup, "Color =", sendThroughEnterOption: EnterKeyRule.AfterFullyTypedWord, expected: true);
-            await VerifySendEnterThroughToEnterAsync(markup, "Color =", sendThroughEnterOption: EnterKeyRule.Always, expected: true);
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "Color =",
+                sendThroughEnterOption: EnterKeyRule.Never,
+                expected: false
+            );
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "Color =",
+                sendThroughEnterOption: EnterKeyRule.AfterFullyTypedWord,
+                expected: true
+            );
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "Color =",
+                sendThroughEnterOption: EnterKeyRule.Always,
+                expected: true
+            );
         }
 
         [Fact]
         public async Task CommitCharacterTest()
         {
-            const string markup = @"
+            const string markup =
+                @"
 using System;
 class class1
 {
@@ -68,7 +86,8 @@ public class TestAttribute : Attribute
         [Fact]
         public async Task SimpleAttributeUsage()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class class1
 {
@@ -89,7 +108,8 @@ public class TestAttribute : Attribute
         [Fact]
         public async Task AfterComma()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class class1
 {
@@ -111,7 +131,8 @@ public class TestAttribute : Attribute
         [Fact, WorkItem(544345, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544345")]
         public async Task ExistingItemsAreFiltered()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class class1
 {
@@ -134,7 +155,8 @@ public class TestAttribute : Attribute
         [Fact]
         public async Task AttributeConstructor()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class TestAttribute : Attribute
 {
@@ -153,7 +175,8 @@ class Goo
         [Fact]
         public async Task AttributeConstructorAfterComma()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class TestAttribute : Attribute
 {
@@ -172,7 +195,8 @@ class Goo
         [Fact, WorkItem(545426, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545426")]
         public async Task TestPropertiesInScript()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 
 class TestAttribute : Attribute
@@ -194,7 +218,8 @@ class Goo
         [Fact, WorkItem(1075278, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1075278")]
         public async Task NotInComment()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class class1
 {

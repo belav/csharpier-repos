@@ -20,14 +20,16 @@ public class TokenReplacementTests
         string receivedToken = null;
 
         var parser = new CommandLineBuilder(command)
-                     .UseTokenReplacer((string tokenToReplace, out IReadOnlyList<string> tokens, out string message) =>
-                     {
-                         receivedToken = tokenToReplace;
-                         tokens = null;
-                         message = "oops!";
-                         return false;
-                     })
-                     .Build();
+            .UseTokenReplacer(
+                (string tokenToReplace, out IReadOnlyList<string> tokens, out string message) =>
+                {
+                    receivedToken = tokenToReplace;
+                    tokens = null;
+                    message = "oops!";
+                    return false;
+                }
+            )
+            .Build();
 
         parser.Parse("@replace-me");
 
@@ -42,13 +44,15 @@ public class TokenReplacementTests
         var command = new RootCommand { argument };
 
         var parser = new CommandLineBuilder(command)
-                     .UseTokenReplacer((string tokenToReplace, out IReadOnlyList<string> tokens, out string message) =>
-                     {
-                         tokens = new[] { "123" };
-                         message = null;
-                         return true;
-                     })
-                     .Build();
+            .UseTokenReplacer(
+                (string tokenToReplace, out IReadOnlyList<string> tokens, out string message) =>
+                {
+                    tokens = new[] { "123" };
+                    message = null;
+                    return true;
+                }
+            )
+            .Build();
 
         var result = parser.Parse("@replace-me");
 
@@ -65,13 +69,15 @@ public class TokenReplacementTests
         var command = new RootCommand { option };
 
         var parser = new CommandLineBuilder(command)
-                     .UseTokenReplacer((string tokenToReplace, out IReadOnlyList<string> tokens, out string message) =>
-                     {
-                         tokens = new[] { "123" };
-                         message = null;
-                         return true;
-                     })
-                     .Build();
+            .UseTokenReplacer(
+                (string tokenToReplace, out IReadOnlyList<string> tokens, out string message) =>
+                {
+                    tokens = new[] { "123" };
+                    message = null;
+                    return true;
+                }
+            )
+            .Build();
 
         var result = parser.Parse("-x @replace-me");
 
@@ -88,13 +94,15 @@ public class TokenReplacementTests
         var command = new RootCommand { new Command("subcommand") { option } };
 
         var parser = new CommandLineBuilder(command)
-                     .UseTokenReplacer((string tokenToReplace, out IReadOnlyList<string> tokens, out string message) =>
-                     {
-                         tokens = new[] { "subcommand", "-x", "123" };
-                         message = null;
-                         return true;
-                     })
-                     .Build();
+            .UseTokenReplacer(
+                (string tokenToReplace, out IReadOnlyList<string> tokens, out string message) =>
+                {
+                    tokens = new[] { "subcommand", "-x", "123" };
+                    message = null;
+                    return true;
+                }
+            )
+            .Build();
 
         var result = parser.Parse("@replace-me");
 
@@ -111,13 +119,15 @@ public class TokenReplacementTests
         var command = new RootCommand { argument };
 
         var parser = new CommandLineBuilder(command)
-                     .UseTokenReplacer((string tokenToReplace, out IReadOnlyList<string> tokens, out string message) =>
-                     {
-                         tokens = new[] { "one two three" };
-                         message = null;
-                         return true;
-                     })
-                     .Build();
+            .UseTokenReplacer(
+                (string tokenToReplace, out IReadOnlyList<string> tokens, out string message) =>
+                {
+                    tokens = new[] { "one two three" };
+                    message = null;
+                    return true;
+                }
+            )
+            .Build();
 
         var result = parser.Parse("@replace-me");
 
@@ -132,21 +142,21 @@ public class TokenReplacementTests
         var command = new RootCommand { argument };
 
         var parser = new CommandLineBuilder(command)
-                     .UseTokenReplacer((string tokenToReplace, out IReadOnlyList<string> tokens, out string message) =>
-                     {
-                         tokens = null;
-                         message = "oops!";
-                         return false;
-                     })
-                     .Build();
+            .UseTokenReplacer(
+                (string tokenToReplace, out IReadOnlyList<string> tokens, out string message) =>
+                {
+                    tokens = null;
+                    message = "oops!";
+                    return false;
+                }
+            )
+            .Build();
 
         var result = parser.Parse("@replace-me");
 
-        result.Errors
-              .Should()
-              .ContainSingle(e => e.Message == "oops!");
+        result.Errors.Should().ContainSingle(e => e.Message == "oops!");
     }
-    
+
     [Fact]
     public void When_token_replacer_returns_false_without_setting_an_error_message_then_the_command_line_is_unchanged_and_no_parse_error_is_produced()
     {
@@ -155,13 +165,15 @@ public class TokenReplacementTests
         var command = new RootCommand { argument };
 
         var parser = new CommandLineBuilder(command)
-                     .UseTokenReplacer((string tokenToReplace, out IReadOnlyList<string> tokens, out string message) =>
-                     {
-                         tokens = null;
-                         message = null;
-                         return false;
-                     })
-                     .Build();
+            .UseTokenReplacer(
+                (string tokenToReplace, out IReadOnlyList<string> tokens, out string message) =>
+                {
+                    tokens = null;
+                    message = null;
+                    return false;
+                }
+            )
+            .Build();
 
         var result = parser.Parse("@replace-me");
 
@@ -178,13 +190,15 @@ public class TokenReplacementTests
         var command = new RootCommand { argument };
 
         var parser = new CommandLineBuilder(command)
-                     .UseTokenReplacer((string tokenToReplace, out IReadOnlyList<string> tokens, out string message) =>
-                     {
-                         tokens = null;
-                         message = null;
-                         return true;
-                     })
-                     .Build();
+            .UseTokenReplacer(
+                (string tokenToReplace, out IReadOnlyList<string> tokens, out string message) =>
+                {
+                    tokens = null;
+                    message = null;
+                    return true;
+                }
+            )
+            .Build();
 
         var result = parser.Parse("@replace-me");
 
@@ -201,13 +215,15 @@ public class TokenReplacementTests
         var command = new RootCommand { argument };
 
         var parser = new CommandLineBuilder(command)
-                     .UseTokenReplacer((string tokenToReplace, out IReadOnlyList<string> tokens, out string message) =>
-                     {
-                         tokens = Array.Empty<string>();
-                         message = null;
-                         return true;
-                     })
-                     .Build();
+            .UseTokenReplacer(
+                (string tokenToReplace, out IReadOnlyList<string> tokens, out string message) =>
+                {
+                    tokens = Array.Empty<string>();
+                    message = null;
+                    return true;
+                }
+            )
+            .Build();
 
         var result = parser.Parse("@replace-me");
 

@@ -30,7 +30,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             ParseAndValidate(text, null, errors);
         }
 
-        private SyntaxTree ParseAndValidate(string text, CSharpParseOptions options, params ErrorDescription[] errors)
+        private SyntaxTree ParseAndValidate(
+            string text,
+            CSharpParseOptions options,
+            params ErrorDescription[] errors
+        )
         {
             var parsedTree = ParseTree(text, options);
             var parsedText = parsedTree.GetCompilationUnitRoot();
@@ -57,37 +61,63 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void Error_StaticPartial()
         {
-            var test = @"
+            var test =
+                @"
 int
 
 static partial class C { }
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = 1585, Line = 4, Column = 1 } //static must precede type
-                           );
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 1585,
+                    Line = 4,
+                    Column = 1
+                } //static must precede type
+            );
         }
 
         [WorkItem(529472, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529472")]
         [Fact(Skip = "529472")]
         public void CS1002ERR_SemicolonExpected()
         {
-            var test = @"
+            var test =
+                @"
 int a  
 Console.Goo
 ";
-            ParseAndValidate(test, TestOptions.Script,
-                new ErrorDescription[] {
-                    new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 2, Column = 6 },
-                    new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 3, Column = 12 }});
+            ParseAndValidate(
+                test,
+                TestOptions.Script,
+                new ErrorDescription[]
+                {
+                    new ErrorDescription
+                    {
+                        Code = (int)ErrorCode.ERR_SemicolonExpected,
+                        Line = 2,
+                        Column = 6
+                    },
+                    new ErrorDescription
+                    {
+                        Code = (int)ErrorCode.ERR_SemicolonExpected,
+                        Line = 3,
+                        Column = 12
+                    }
+                }
+            );
         }
 
         [Fact]
         public void Error_NewKeywordUsedAsOperator()
         {
-            var test = @"
+            var test =
+                @"
 new in
 ";
 
-            UsingTree(test,
+            UsingTree(
+                test,
                 // (2,5): error CS1526: A new expression requires an argument list or (), [], or {} after type
                 // new in
                 Diagnostic(ErrorCode.ERR_BadNewExpr, "in").WithLocation(2, 5),
@@ -96,7 +126,9 @@ new in
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "in").WithLocation(2, 5),
                 // (2,5): error CS7017: Member definition, statement, or end-of-file expected
                 // new in
-                Diagnostic(ErrorCode.ERR_GlobalDefinitionOrStatementExpected, "in").WithLocation(2, 5));
+                Diagnostic(ErrorCode.ERR_GlobalDefinitionOrStatementExpected, "in")
+                    .WithLocation(2, 5)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -130,10 +162,12 @@ new in
         [Fact]
         public void MethodDeclarationAndMethodCall()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 void bar() { }
 bar();
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -184,10 +218,12 @@ bar();
         [Fact]
         public void FieldDeclarationError1()
         {
-            var tree = UsingTree("int x y;",
+            var tree = UsingTree(
+                "int x y;",
                 // (1,7): error CS1002: ; expected
                 // int x y;
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "y").WithLocation(1, 7));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "y").WithLocation(1, 7)
+            );
             Assert.True(tree.GetCompilationUnitRoot().ContainsDiagnostics);
 
             N(SyntaxKind.CompilationUnit);
@@ -226,10 +262,12 @@ bar();
         [Fact]
         public void FieldDeclarationError2()
         {
-            var tree = UsingTree("int x y z;",
+            var tree = UsingTree(
+                "int x y z;",
                 // (1,7): error CS1002: ; expected
                 // int x y z;
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "y").WithLocation(1, 7));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "y").WithLocation(1, 7)
+            );
             Assert.True(tree.GetCompilationUnitRoot().ContainsDiagnostics);
 
             N(SyntaxKind.CompilationUnit);
@@ -277,28 +315,55 @@ bar();
         [Fact]
         public void Constructor()
         {
-            var test = @"
+            var test =
+                @"
 Script() { }
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 2, Column = 10 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 2,
+                    Column = 10
+                }
+            );
         }
 
         [Fact]
         public void StaticConstructor()
         {
-            var test = @"
+            var test =
+                @"
 static Script() { }
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = 1520, Line = 2, Column = 8 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 1520,
+                    Line = 2,
+                    Column = 8
+                }
+            );
         }
 
         [Fact]
         public void Finalizer()
         {
-            var test = @"
+            var test =
+                @"
 ~Script() { }
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 2, Column = 11 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 2,
+                    Column = 11
+                }
+            );
         }
 
         #endregion
@@ -507,9 +572,11 @@ static Script() { }
         [Fact]
         public void NewModifier_Method_ReturnsIdentifier()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new T Goo();
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -573,9 +640,11 @@ new T Goo();
         [Fact]
         public void NewModifier_Method_ReturnsPartial()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new partial Goo();
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -600,9 +669,11 @@ new partial Goo();
         [Fact]
         public void NewModifier_Method_ReturnsPartialArray()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new partial[] Goo();
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -640,9 +711,11 @@ new partial[] Goo();
         [Fact]
         public void NewModifier_Method_ReturnsPartialQualified()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new partial.partial Goo();
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -681,7 +754,10 @@ new partial.partial Goo();
             NewModifier_PartialMethod_ReturnsPredefined("bool", SyntaxKind.BoolKeyword);
         }
 
-        private void NewModifier_PartialMethod_ReturnsPredefined(string typeName, SyntaxKind keyword)
+        private void NewModifier_PartialMethod_ReturnsPredefined(
+            string typeName,
+            SyntaxKind keyword
+        )
         {
             var tree = UsingTree("new partial " + typeName + " Goo();");
 
@@ -710,9 +786,11 @@ new partial.partial Goo();
         [Fact]
         public void NewModifier_PartialMethod_ReturnsPartial()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new partial partial Goo();
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -739,9 +817,11 @@ new partial partial Goo();
         [Fact]
         public void NewModifier_PartialMethod_ReturnsPartialQualified()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new partial partial.partial partial();
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -802,9 +882,11 @@ new partial partial.partial partial();
         [Fact]
         public void NewModifier_Indexer_ReturnsIdentifier()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new T this[int a] { get; }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -847,9 +929,11 @@ new T this[int a] { get; }
         [Fact]
         public void NewModifier_Indexer_ReturnsArray()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new T[] this[int a] { get; }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.IndexerDeclaration);
@@ -906,9 +990,11 @@ new T[] this[int a] { get; }
             // partial indexers are not allowed, but we should still parse it and report a semantic error
             // "Only methods, classes, structs, or interfaces may be partial"
 
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new partial partial this[int i] { get; }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -998,9 +1084,11 @@ new partial partial this[int i] { get; }
         [Fact]
         public void NewModifier_Class()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new class C { }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1018,9 +1106,11 @@ new class C { }
         [Fact]
         public void NewModifier_PartialClass()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new partial class C { }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1041,13 +1131,16 @@ new partial class C { }
         public void NewModifier_ClassWithMisplacedModifiers1()
         {
             var source = "new partial public class C { }";
-            CreateCompilation(source).VerifyDiagnostics(
+            CreateCompilation(source)
+                .VerifyDiagnostics(
                     // (1,5): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
                     // new partial public class C { }
                     Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(1, 5),
                     // (1,26): error CS0106: The modifier 'new' is not valid for this item
                     // new partial public class C { }
-                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "C").WithArguments("new").WithLocation(1, 26)
+                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "C")
+                        .WithArguments("new")
+                        .WithLocation(1, 26)
                 );
             var tree = UsingTree(source);
             N(SyntaxKind.CompilationUnit);
@@ -1070,13 +1163,17 @@ new partial class C { }
         public void NewModifier_ClassWithMisplacedModifiers2()
         {
             var source = "new static partial public class C { }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (1,12): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
-                // new static partial public class C { }
-                Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(1, 12),
-                // (1,33): error CS0106: The modifier 'new' is not valid for this item
-                // new static partial public class C { }
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "C").WithArguments("new").WithLocation(1, 33));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (1,12): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                    // new static partial public class C { }
+                    Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(1, 12),
+                    // (1,33): error CS0106: The modifier 'new' is not valid for this item
+                    // new static partial public class C { }
+                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "C")
+                        .WithArguments("new")
+                        .WithLocation(1, 33)
+                );
             var tree = UsingTree(source);
 
             N(SyntaxKind.CompilationUnit);
@@ -1103,12 +1200,14 @@ new partial class C { }
         [Fact]
         public void Using()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 using Goo;
 using Goo.Bar;
 using Goo = Bar;
 using (var x = bar) { }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1199,9 +1298,11 @@ using (var x = bar) { }
         [Fact]
         public void Unsafe_Block()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 unsafe { }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1224,9 +1325,11 @@ unsafe { }
         [Fact]
         public void Unsafe_Field()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 unsafe int Goo;
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.FieldDeclaration);
@@ -1252,9 +1355,11 @@ unsafe int Goo;
         [Fact]
         public void Unsafe_Method()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 unsafe void Goo() { }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -1283,9 +1388,11 @@ unsafe void Goo() { }
         [Fact]
         public void Unsafe_Property()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 unsafe int Goo { get; }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.PropertyDeclaration);
@@ -1315,7 +1422,8 @@ unsafe int Goo { get; }
         [Fact]
         public void PointerDeclaration()
         {
-            var test = @"
+            var test =
+                @"
 unsafe Idf * Idf;
 ";
             ParseAndValidate(test);
@@ -1328,10 +1436,12 @@ unsafe Idf * Idf;
         [Fact]
         public void Fixed()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 fixed (int* a = b) { }
 fixed int x[5];
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -1410,9 +1520,11 @@ fixed int x[5];
         [Fact]
         public void Delegate1()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 delegate { }();
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1447,9 +1559,11 @@ delegate { }();
         [Fact]
         public void Delegate2()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 delegate(){ }();
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1489,9 +1603,11 @@ delegate(){ }();
         [Fact]
         public void Delegate3()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 delegate void Goo();
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1521,9 +1637,11 @@ delegate void Goo();
         [Fact]
         public void Indexer1()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 bool this[int index]{} 
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1560,9 +1678,11 @@ bool this[int index]{}
         [Fact]
         public void Indexer2()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 public partial bool this[int index] {}
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1601,9 +1721,11 @@ public partial bool this[int index] {}
         [Fact]
         public void Indexer4()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new public bool this[int index] { get; }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1648,9 +1770,11 @@ new public bool this[int index] { get; }
         [Fact]
         public void Indexer5()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 new public bool this[int index] { get; }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1696,38 +1820,78 @@ new public bool this[int index] { get; }
         public void Error_IndexerDefinition()
         {
             var test = @"string this ="""";";
-            ParseAndValidate(test,
-                new ErrorDescription { Code = 1001, Line = 1, Column = 13 },
-                new ErrorDescription { Code = 1003, Line = 1, Column = 13 },
-                new ErrorDescription { Code = 1003, Line = 1, Column = 16 },
-                new ErrorDescription { Code = 1514, Line = 1, Column = 16 },
-                new ErrorDescription { Code = 1014, Line = 1, Column = 16 },
-                new ErrorDescription { Code = 1513, Line = 1, Column = 17 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 1001,
+                    Line = 1,
+                    Column = 13
+                },
+                new ErrorDescription
+                {
+                    Code = 1003,
+                    Line = 1,
+                    Column = 13
+                },
+                new ErrorDescription
+                {
+                    Code = 1003,
+                    Line = 1,
+                    Column = 16
+                },
+                new ErrorDescription
+                {
+                    Code = 1514,
+                    Line = 1,
+                    Column = 16
+                },
+                new ErrorDescription
+                {
+                    Code = 1014,
+                    Line = 1,
+                    Column = 16
+                },
+                new ErrorDescription
+                {
+                    Code = 1513,
+                    Line = 1,
+                    Column = 17
+                }
+            );
 
-            CreateCompilation(test).VerifyDiagnostics(
-                // (1,13): error CS1003: Syntax error, '[' expected
-                // string this ="";
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=").WithArguments("[").WithLocation(1, 13),
-                // (1,13): error CS1001: Identifier expected
-                // string this ="";
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "=").WithLocation(1, 13),
-                // (1,16): error CS1003: Syntax error, ']' expected
-                // string this ="";
-                Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments("]").WithLocation(1, 16),
-                // (1,16): error CS1514: { expected
-                // string this ="";
-                Diagnostic(ErrorCode.ERR_LbraceExpected, ";").WithLocation(1, 16),
-                // (1,16): error CS1014: A get or set accessor expected
-                // string this ="";
-                Diagnostic(ErrorCode.ERR_GetOrSetExpected, ";").WithLocation(1, 16),
-                // (1,17): error CS1513: } expected
-                // string this ="";
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 17),
-                // (1,8): error CS0548: '<invalid-global-code>.this': property or indexer must have at least one accessor
-                // string this ="";
-                Diagnostic(ErrorCode.ERR_PropertyWithNoAccessors, "this").WithArguments("<invalid-global-code>.this").WithLocation(1, 8),
-                // error CS1551: Indexers must have at least one parameter
-                Diagnostic(ErrorCode.ERR_IndexerNeedsParam).WithLocation(1, 1));
+            CreateCompilation(test)
+                .VerifyDiagnostics(
+                    // (1,13): error CS1003: Syntax error, '[' expected
+                    // string this ="";
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "=")
+                        .WithArguments("[")
+                        .WithLocation(1, 13),
+                    // (1,13): error CS1001: Identifier expected
+                    // string this ="";
+                    Diagnostic(ErrorCode.ERR_IdentifierExpected, "=").WithLocation(1, 13),
+                    // (1,16): error CS1003: Syntax error, ']' expected
+                    // string this ="";
+                    Diagnostic(ErrorCode.ERR_SyntaxError, ";")
+                        .WithArguments("]")
+                        .WithLocation(1, 16),
+                    // (1,16): error CS1514: { expected
+                    // string this ="";
+                    Diagnostic(ErrorCode.ERR_LbraceExpected, ";").WithLocation(1, 16),
+                    // (1,16): error CS1014: A get or set accessor expected
+                    // string this ="";
+                    Diagnostic(ErrorCode.ERR_GetOrSetExpected, ";").WithLocation(1, 16),
+                    // (1,17): error CS1513: } expected
+                    // string this ="";
+                    Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 17),
+                    // (1,8): error CS0548: '<invalid-global-code>.this': property or indexer must have at least one accessor
+                    // string this ="";
+                    Diagnostic(ErrorCode.ERR_PropertyWithNoAccessors, "this")
+                        .WithArguments("<invalid-global-code>.this")
+                        .WithLocation(1, 8),
+                    // error CS1551: Indexers must have at least one parameter
+                    Diagnostic(ErrorCode.ERR_IndexerNeedsParam).WithLocation(1, 1)
+                );
         }
 
         #endregion
@@ -1737,7 +1901,8 @@ new public bool this[int index] { get; }
         [Fact]
         public void ExternAlias()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 extern alias Goo;
 extern alias Goo();
 extern alias Goo { get; }
@@ -1745,7 +1910,8 @@ extern alias Goo<T> { get; }
 ",
                 // (5,14): error CS7002: Unexpected use of a generic name
                 // extern alias Goo<T> { get; }
-                Diagnostic(ErrorCode.ERR_UnexpectedGenericName, "Goo").WithLocation(5, 14));
+                Diagnostic(ErrorCode.ERR_UnexpectedGenericName, "Goo").WithLocation(5, 14)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1820,88 +1986,164 @@ extern alias Goo<T> { get; }
         [Fact]
         public void Delegate()
         {
-            var test = @"
+            var test =
+                @"
 delegate { }
 delegate() { }
 delegate void Goo();
 delegate void MyDel(int i);
 ";
-            ParseAndValidate(test,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 2, Column = 13 },
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 3, Column = 15 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 2,
+                    Column = 13
+                },
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 3,
+                    Column = 15
+                }
+            );
         }
 
         [Fact]
         public void ExternAliasAmbiguity()
         {
-            var test = @"
+            var test =
+                @"
 extern alias Goo;
 extern alias Goo();
 extern alias Goo { get; }
 extern alias Goo<T> { get; }
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = 7002, Line = 5, Column = 14 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 7002,
+                    Line = 5,
+                    Column = 14
+                }
+            );
         }
 
         [Fact]
         public void ExternOrdering_Statement()
         {
-            var test = @"
+            var test =
+                @"
 using(var x = 1) { }
 extern alias Goo;
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = 439, Line = 3, Column = 1 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 439,
+                    Line = 3,
+                    Column = 1
+                }
+            );
         }
 
         [Fact]
         public void ExternOrdering_Method()
         {
-            var test = @"
+            var test =
+                @"
 extern void goo();
 extern alias Goo;
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = 439, Line = 3, Column = 1 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 439,
+                    Line = 3,
+                    Column = 1
+                }
+            );
         }
 
         [Fact]
         public void ExternOrdering_Field()
         {
-            var test = @"
+            var test =
+                @"
 int a = 1;
 extern alias Goo;
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = 439, Line = 3, Column = 1 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 439,
+                    Line = 3,
+                    Column = 1
+                }
+            );
         }
 
         [Fact]
         public void ExternOrdering_Property()
         {
-            var test = @"
+            var test =
+                @"
 extern alias Goo { get; }
 extern alias Goo;
 ";
 
-            ParseAndValidate(test, new ErrorDescription { Code = 439, Line = 3, Column = 1 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 439,
+                    Line = 3,
+                    Column = 1
+                }
+            );
         }
 
         [Fact]
         public void UsingOrdering_Statement()
         {
-            var test = @"
+            var test =
+                @"
 using(var x = 1) { }
 using Goo;
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = 1529, Line = 3, Column = 1 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 1529,
+                    Line = 3,
+                    Column = 1
+                }
+            );
         }
 
         [Fact]
         public void UsingOrdering_Member()
         {
-            var test = @"
+            var test =
+                @"
 void goo() { }
 using Goo;
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = 1529, Line = 3, Column = 1 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 1529,
+                    Line = 3,
+                    Column = 1
+                }
+            );
         }
 
         #endregion
@@ -1911,9 +2153,11 @@ using Goo;
         [Fact]
         public void PartialMethod()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 partial void Goo();
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -1933,7 +2177,8 @@ partial void Goo();
                 }
                 N(SyntaxKind.EndOfFileToken);
             }
-            var test = @"
+            var test =
+                @"
 new public bool this[int index] 
  {
      get { return true; }
@@ -1946,7 +2191,8 @@ new public bool this[int index]
         [Fact]
         public void PartialMethodDefinition()
         {
-            var test = @"
+            var test =
+                @"
  partial void Goo();
 ";
             ParseAndValidate(test);
@@ -1956,7 +2202,8 @@ new public bool this[int index]
         [Fact]
         public void UsingNewModifierWithPartialMethodDefinition()
         {
-            var test = @"
+            var test =
+                @"
 new partial void Goo();
 ";
             ParseAndValidate(test);
@@ -1965,28 +2212,41 @@ new partial void Goo();
         [Fact]
         public void ImplementingDeclarationOfPartialMethod()
         {
-            var test = @"
+            var test =
+                @"
 partial void Goo(){};
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = 1597, Line = 2, Column = 21 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 1597,
+                    Line = 2,
+                    Column = 21
+                }
+            );
         }
 
         [Fact]
         public void EnumDeclaration()
         {
-            var test = @"
+            var test =
+                @"
 partial enum @en {};
 ";
-            CreateCompilation(test).VerifyDiagnostics(
-                // (2,14): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
-                // partial enum @en {};
-                Diagnostic(ErrorCode.ERR_PartialMisplaced, "@en").WithLocation(2, 14));
+            CreateCompilation(test)
+                .VerifyDiagnostics(
+                    // (2,14): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                    // partial enum @en {};
+                    Diagnostic(ErrorCode.ERR_PartialMisplaced, "@en").WithLocation(2, 14)
+                );
         }
 
         [Fact]
         public void UsingPartial()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 partial = partial;
 
 partial partial;
@@ -2001,7 +2261,8 @@ partial Goo() { }
 partial partial Goo() { } 
 partial partial[] Goo() { } 
 partial partial<int> Goo() { } 
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2265,7 +2526,8 @@ partial partial<int> Goo() { }
         [Fact]
         public void Attributes()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 [assembly: Goo]
 [module: Bar]
 [Goo]
@@ -2283,7 +2545,8 @@ delegate D();
 ",
                 // (15,11): error CS1001: Identifier expected
                 // delegate D();
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "(").WithLocation(15, 11));
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "(").WithLocation(15, 11)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2473,13 +2736,15 @@ delegate D();
         [Fact]
         public void Fields()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 int x;
 volatile int x;
 readonly int x;
 static int x;
 fixed int x[10];
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2591,7 +2856,19 @@ fixed int x[10];
 
             // pointer decl
             test = @"a.b * c";
-            ParseAndValidate(test, TestOptions.Regular9, new[] { new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 1, Column = 8 } }); // expected ';'
+            ParseAndValidate(
+                test,
+                TestOptions.Regular9,
+                new[]
+                {
+                    new ErrorDescription
+                    {
+                        Code = (int)ErrorCode.ERR_SemicolonExpected,
+                        Line = 1,
+                        Column = 8
+                    }
+                }
+            ); // expected ';'
 
             // multiplication
             test = @"a.b * c;";
@@ -2750,7 +3027,7 @@ fixed int x[10];
 
         // field decls:
         // T ? idf;
-        // T ? idf, ... 
+        // T ? idf, ...
         // T ? idf = <expr>, ...
         // T ? idf = <expr>;
 
@@ -2762,8 +3039,8 @@ fixed int x[10];
         // method decls:
         // T ? idf() where ...
         // T ? idf() { ...
-        // T ? idf(T idf ...            
-        // T ? idf.idf(T idf ...            
+        // T ? idf(T idf ...
+        // T ? idf.idf(T idf ...
         // T ? idf<Ts>(T idf ...
         // T ? idf<Ts>.idf<Ts>. ...(T idf ...
         // T ? idf([Attr]T idf ...
@@ -2784,15 +3061,15 @@ fixed int x[10];
         // T ? idf<Ts>
         // T ? idf<Ts>.
         // T ? idf<Ts>. ... (
-        // T ? idf(                
-        // T ? idf(a               
+        // T ? idf(
+        // T ? idf(a
         // T ? idf(a)
         // T ? idf(this
         // T ? idf(this = ...
-        // T ? idf(this[ ... 
-        // T ? idf(this. ... 
-        // T ? idf(this< ... 
-        // T ? idf(this( ... 
+        // T ? idf(this[ ...
+        // T ? idf(this. ...
+        // T ? idf(this< ...
+        // T ? idf(this( ...
         // T ? idf(ref a)
         // T ? idf()
         // T ? idf();              // method without body must be abstract, which is probably not what user intended to write in interactive
@@ -2978,13 +3255,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_FieldDecl_Comma1()
         {
-            var tree = UsingTree(@"T ? a,", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a,",
+                TestOptions.Script,
                 // (1,7): error CS1001: Identifier expected
                 // T ? a,
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 7),
                 // (1,7): error CS1002: ; expected
                 // T ? a,
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 7));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 7)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -3020,13 +3300,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_FieldDecl_Comma2()
         {
-            var tree = UsingTree(@"T ? a = 1,", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a = 1,",
+                TestOptions.Script,
                 // (1,11): error CS1001: Identifier expected
                 // T ? a = 1,
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 11),
                 // (1,11): error CS1002: ; expected
                 // T ? a = 1,
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 11));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 11)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.FieldDeclaration);
@@ -3071,10 +3354,13 @@ fixed int x[10];
         [Fact]
         public void Ternary_PropertyDecl1()
         {
-            var tree = UsingTree(@"T ? a {", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a {",
+                TestOptions.Script,
                 // (1,8): error CS1513: } expected
                 // T ? a {
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 8));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 8)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.PropertyDeclaration);
@@ -3102,10 +3388,13 @@ fixed int x[10];
         [Fact]
         public void Ternary_PropertyDecl2()
         {
-            var tree = UsingTree(@"T ? a.b {", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a.b {",
+                TestOptions.Script,
                 // (1,10): error CS1513: } expected
                 // T ? a.b {
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 10));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 10)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.PropertyDeclaration);
@@ -3141,10 +3430,13 @@ fixed int x[10];
         [Fact]
         public void Ternary_PropertyDecl3()
         {
-            var tree = UsingTree(@"T ? a<T>.b {", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a<T>.b {",
+                TestOptions.Script,
                 // (1,13): error CS1513: } expected
                 // T ? a<T>.b {
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 13)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.PropertyDeclaration);
@@ -3189,10 +3481,13 @@ fixed int x[10];
         [Fact]
         public void Ternary_PropertyDecl4()
         {
-            var tree = UsingTree(@"T ? a<T?>.b<S>.c {", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a<T?>.b<S>.c {",
+                TestOptions.Script,
                 // (1,19): error CS1513: } expected
                 // T ? a<T?>.b<S>.c {
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 19));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 19)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.PropertyDeclaration);
@@ -3260,10 +3555,13 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl1()
         {
-            var tree = UsingTree(@"T ? a() {", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a() {",
+                TestOptions.Script,
                 // (1,10): error CS1513: } expected
                 // T ? a() {
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 10));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 10)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -3296,7 +3594,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl1_Where()
         {
-            var tree = UsingTree(@"T ? a() where", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a() where",
+                TestOptions.Script,
                 // (1,14): error CS1001: Identifier expected
                 // T ? a() where
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 14),
@@ -3308,7 +3608,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_TypeExpected, "").WithLocation(1, 14),
                 // (1,14): error CS1002: ; expected
                 // T ? a() where
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 14));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 14)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -3353,13 +3654,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl2()
         {
-            var tree = UsingTree(@"T ? a(T b", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(T b",
+                TestOptions.Script,
                 // (1,10): error CS1026: ) expected
                 // T ? a(T b
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 10),
                 // (1,10): error CS1002: ; expected
                 // T ? a(T b
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 10));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 10)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -3396,13 +3700,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl3()
         {
-            var tree = UsingTree(@"T ? a.b(T c", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a.b(T c",
+                TestOptions.Script,
                 // (1,12): error CS1026: ) expected
                 // T ? a.b(T c
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 12),
                 // (1,12): error CS1002: ; expected
                 // T ? a.b(T c
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 12)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -3447,13 +3754,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl4()
         {
-            var tree = UsingTree(@"T ? a<A>.b<B>(C c", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a<A>.b<B>(C c",
+                TestOptions.Script,
                 // (1,18): error CS1026: ) expected
                 // T ? a<A>.b<B>(C c
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 18),
                 // (1,18): error CS1002: ; expected
                 // T ? a<A>.b<B>(C c
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 18));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 18)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -3516,13 +3826,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl5()
         {
-            var tree = UsingTree(@"T ? a([Attr]C c", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a([Attr]C c",
+                TestOptions.Script,
                 // (1,16): error CS1026: ) expected
                 // T ? a([Attr]C c
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 16),
                 // (1,16): error CS1002: ; expected
                 // T ? a([Attr]C c
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 16));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 16)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -3571,7 +3884,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl6()
         {
-            var tree = UsingTree(@"T ? a([Attr(a = b)]c", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a([Attr(a = b)]c",
+                TestOptions.Script,
                 // (1,21): error CS1001: Identifier expected
                 // T ? a([Attr(a = b)]c
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 21),
@@ -3580,7 +3895,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 21),
                 // (1,21): error CS1002: ; expected
                 // T ? a([Attr(a = b)]c
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 21));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 21)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -3649,13 +3965,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl7()
         {
-            var tree = UsingTree(@"T ? a(out C c", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(out C c",
+                TestOptions.Script,
                 // (1,14): error CS1026: ) expected
                 // T ? a(out C c
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 14),
                 // (1,14): error CS1002: ; expected
                 // T ? a(out C c
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 14));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 14)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -3693,13 +4012,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl8()
         {
-            var tree = UsingTree(@"T ? a(C[] a", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(C[] a",
+                TestOptions.Script,
                 // (1,12): error CS1026: ) expected
                 // T ? a(C[] a
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 12),
                 // (1,12): error CS1002: ; expected
                 // T ? a(C[] a
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 12)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -3748,7 +4070,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl9()
         {
-            var tree = UsingTree(@"T ? a(params", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(params",
+                TestOptions.Script,
                 // (1,13): error CS1031: Type expected
                 // T ? a(params
                 Diagnostic(ErrorCode.ERR_TypeExpected, "").WithLocation(1, 13),
@@ -3760,7 +4084,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 13),
                 // (1,13): error CS1002: ; expected
                 // T ? a(params
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 13)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -3798,13 +4123,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl10()
         {
-            var tree = UsingTree(@"T ? a(out T ? b", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(out T ? b",
+                TestOptions.Script,
                 // (1,16): error CS1026: ) expected
                 // T ? a(out T ? b
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 16),
                 // (1,16): error CS1002: ; expected
                 // T ? a(out T ? b
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 16));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 16)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -3846,13 +4174,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl11()
         {
-            var tree = UsingTree(@"T ? a(ref T ? b", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(ref T ? b",
+                TestOptions.Script,
                 // (1,16): error CS1026: ) expected
                 // T ? a(ref T ? b
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 16),
                 // (1,16): error CS1002: ; expected
                 // T ? a(ref T ? b
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 16));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 16)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -3894,13 +4225,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl12()
         {
-            var tree = UsingTree(@"T ? a(params T ? b", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(params T ? b",
+                TestOptions.Script,
                 // (1,19): error CS1026: ) expected
                 // T ? a(params T ? b
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 19),
                 // (1,19): error CS1002: ; expected
                 // T ? a(params T ? b
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 19));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 19)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -3942,13 +4276,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl13()
         {
-            var tree = UsingTree(@"T ? a([Attr]T ? b", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a([Attr]T ? b",
+                TestOptions.Script,
                 // (1,18): error CS1026: ) expected
                 // T ? a([Attr]T ? b
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 18),
                 // (1,18): error CS1002: ; expected
                 // T ? a([Attr]T ? b
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 18));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 18)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -4001,7 +4338,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl14A()
         {
-            var tree = UsingTree(@"T ? a(T ? b,", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(T ? b,",
+                TestOptions.Script,
                 // (1,13): error CS1031: Type expected
                 // T ? a(T ? b,
                 Diagnostic(ErrorCode.ERR_TypeExpected, "").WithLocation(1, 13),
@@ -4013,7 +4352,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 13),
                 // (1,13): error CS1002: ; expected
                 // T ? a(T ? b,
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 13)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -4063,10 +4403,13 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl14B()
         {
-            var tree = UsingTree(@"T ? a(T ? b)", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(T ? b)",
+                TestOptions.Script,
                 // (1,13): error CS1002: ; expected
                 // T ? a(T ? b)
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 13)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -4107,10 +4450,13 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl15()
         {
-            var tree = UsingTree(@"T ? a(T c)", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(T c)",
+                TestOptions.Script,
                 // (1,11): error CS1002: ; expected
                 // T ? a(T c)
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 11));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 11)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -4147,13 +4493,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl16()
         {
-            var tree = UsingTree(@"T ? a(this c d", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(this c d",
+                TestOptions.Script,
                 // (1,15): error CS1026: ) expected
                 // T ? a(this c d
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 15),
                 // (1,15): error CS1002: ; expected
                 // T ? a(this c d
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 15));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 15)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -4191,13 +4540,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl17()
         {
-            var tree = UsingTree(@"T ? a(ref out T a", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(ref out T a",
+                TestOptions.Script,
                 // (1,18): error CS1026: ) expected
                 // T ? a(ref out T a
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 18),
                 // (1,18): error CS1002: ; expected
                 // T ? a(ref out T a
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 18));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 18)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -4236,13 +4588,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl18()
         {
-            var tree = UsingTree(@"T ? a(int a", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(int a",
+                TestOptions.Script,
                 // (1,12): error CS1026: ) expected
                 // T ? a(int a
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 12),
                 // (1,12): error CS1002: ; expected
                 // T ? a(int a
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 12)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -4279,13 +4634,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl19()
         {
-            var tree = UsingTree(@"T ? a(ref int a", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(ref int a",
+                TestOptions.Script,
                 // (1,16): error CS1026: ) expected
                 // T ? a(ref int a
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 16),
                 // (1,16): error CS1002: ; expected
                 // T ? a(ref int a
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 16));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 16)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -4323,7 +4681,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl20()
         {
-            var tree = UsingTree(@"T ? a(T a =", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(T a =",
+                TestOptions.Script,
                 // (1,12): error CS1733: Expected expression
                 // T ? a(T a =
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12),
@@ -4332,7 +4692,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 12),
                 // (1,12): error CS1002: ; expected
                 // T ? a(T a =
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 12)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -4377,13 +4738,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl21()
         {
-            var tree = UsingTree(@"T ? a(T[,] a", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(T[,] a",
+                TestOptions.Script,
                 // (1,13): error CS1026: ) expected
                 // T ? a(T[,] a
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 13),
                 // (1,13): error CS1002: ; expected
                 // T ? a(T[,] a
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 13)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -4437,10 +4801,12 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl22()
         {
-            var tree = UsingTree(@"T ? a(T?[10] a)",
+            var tree = UsingTree(
+                @"T ? a(T?[10] a)",
                 // (1,16): error CS1002: ; expected
                 // T ? a(T?[10] a)
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 16));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 16)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -4496,10 +4862,13 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl_GenericAmbiguity1()
         {
-            var tree = UsingTree(@"T ? m(a < b, c > d)", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(a < b, c > d)",
+                TestOptions.Script,
                 // (1,20): error CS1002: ; expected
                 // T ? m(a < b, c > d)
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 20));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 20)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -4552,13 +4921,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression1()
         {
-            var tree = UsingTree(@"T ? 1", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? 1",
+                TestOptions.Script,
                 // (1,6): error CS1003: Syntax error, ':' expected
                 // T ? 1
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 6),
                 // (1,6): error CS1733: Expected expression
                 // T ? 1
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 6));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 6)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -4593,13 +4965,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression2()
         {
-            var tree = UsingTree(@"T ? a", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a",
+                TestOptions.Script,
                 // (1,6): error CS1003: Syntax error, ':' expected
                 // T ? a
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 6),
                 // (1,6): error CS1733: Expected expression
                 // T ? a
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 6));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 6)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -4634,7 +5009,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression3()
         {
-            var tree = UsingTree(@"T ? a.", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a.",
+                TestOptions.Script,
                 // (1,7): error CS1001: Identifier expected
                 // T ? a.
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 7),
@@ -4643,7 +5020,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 7),
                 // (1,7): error CS1733: Expected expression
                 // T ? a.
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 7));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 7)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -4686,7 +5064,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression4()
         {
-            var tree = UsingTree(@"T ? a[", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a[",
+                TestOptions.Script,
                 // (1,7): error CS1003: Syntax error, ']' expected
                 // T ? a[
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments("]").WithLocation(1, 7),
@@ -4695,7 +5075,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 7),
                 // (1,7): error CS1733: Expected expression
                 // T ? a[
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 7));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 7)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -4738,7 +5119,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression5()
         {
-            var tree = UsingTree(@"T ? a<", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a<",
+                TestOptions.Script,
                 // (1,7): error CS1733: Expected expression
                 // T ? a<
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 7),
@@ -4747,7 +5130,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 7),
                 // (1,7): error CS1733: Expected expression
                 // T ? a<
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 7));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 7)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -4790,13 +5174,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression6()
         {
-            var tree = UsingTree(@"T ? a<b", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a<b",
+                TestOptions.Script,
                 // (1,8): error CS1003: Syntax error, ':' expected
                 // T ? a<b
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 8),
                 // (1,8): error CS1733: Expected expression
                 // T ? a<b
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 8));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 8)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -4839,13 +5226,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression7()
         {
-            var tree = UsingTree(@"T ? a<b>", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a<b>",
+                TestOptions.Script,
                 // (1,9): error CS1003: Syntax error, ':' expected
                 // T ? a<b>
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 9),
                 // (1,9): error CS1733: Expected expression
                 // T ? a<b>
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -4889,13 +5279,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression8()
         {
-            var tree = UsingTree(@"T ? a<b,c>", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a<b,c>",
+                TestOptions.Script,
                 // (1,11): error CS1003: Syntax error, ':' expected
                 // T ? a<b,c>
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 11),
                 // (1,11): error CS1733: Expected expression
                 // T ? a<b,c>
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 11));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 11)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -4944,7 +5337,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression9()
         {
-            var tree = UsingTree(@"T ? a<b>.", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a<b>.",
+                TestOptions.Script,
                 // (1,10): error CS1001: Identifier expected
                 // T ? a<b>.
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 10),
@@ -4953,7 +5348,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 10),
                 // (1,10): error CS1733: Expected expression
                 // T ? a<b>.
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 10));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 10)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -5005,13 +5401,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression10()
         {
-            var tree = UsingTree(@"T ? a<b>.c", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a<b>.c",
+                TestOptions.Script,
                 // (1,11): error CS1003: Syntax error, ':' expected
                 // T ? a<b>.c
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 11),
                 // (1,11): error CS1733: Expected expression
                 // T ? a<b>.c
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 11));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 11)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -5063,7 +5462,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression11()
         {
-            var tree = UsingTree(@"T ? a<b>.c(", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a<b>.c(",
+                TestOptions.Script,
                 // (1,12): error CS1026: ) expected
                 // T ? a<b>.c(
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 12),
@@ -5072,7 +5473,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 12),
                 // (1,12): error CS1733: Expected expression
                 // T ? a<b>.c(
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -5132,7 +5534,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression12()
         {
-            var tree = UsingTree(@"T ? a(", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(",
+                TestOptions.Script,
                 // (1,7): error CS1026: ) expected
                 // T ? a(
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 7),
@@ -5141,7 +5545,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 7),
                 // (1,7): error CS1733: Expected expression
                 // T ? a(
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 7));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 7)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -5184,7 +5589,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression13()
         {
-            var tree = UsingTree(@"T ? a.b(", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a.b(",
+                TestOptions.Script,
                 // (1,9): error CS1026: ) expected
                 // T ? a.b(
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 9),
@@ -5193,7 +5600,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 9),
                 // (1,9): error CS1733: Expected expression
                 // T ? a.b(
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -5244,7 +5652,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression14()
         {
-            var tree = UsingTree(@"T ? m(c", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(c",
+                TestOptions.Script,
                 // (1,8): error CS1026: ) expected
                 // T ? m(c
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 8),
@@ -5253,7 +5663,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 8),
                 // (1,8): error CS1733: Expected expression
                 // T ? m(c
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 8));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 8)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -5303,7 +5714,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression15()
         {
-            var tree = UsingTree(@"T ? m(c,", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(c,",
+                TestOptions.Script,
                 // (1,9): error CS1733: Expected expression
                 // T ? m(c,
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9),
@@ -5315,7 +5728,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 9),
                 // (1,9): error CS1733: Expected expression
                 // T ? m(c,
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -5373,7 +5787,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression16()
         {
-            var tree = UsingTree(@"T ? m(c:", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(c:",
+                TestOptions.Script,
                 // (1,9): error CS1733: Expected expression
                 // T ? m(c:
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9),
@@ -5385,7 +5801,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 9),
                 // (1,9): error CS1733: Expected expression
                 // T ? m(c:
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -5443,7 +5860,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression17()
         {
-            var tree = UsingTree(@"T ? m(c?", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(c?",
+                TestOptions.Script,
                 // (1,9): error CS1733: Expected expression
                 // T ? m(c?
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9),
@@ -5461,7 +5880,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 9),
                 // (1,9): error CS1733: Expected expression
                 // T ? m(c?
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -5524,7 +5944,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression18()
         {
-            var tree = UsingTree(@"T ? m(c? a", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(c? a",
+                TestOptions.Script,
                 // (1,11): error CS1003: Syntax error, ':' expected
                 // T ? m(c? a
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 11),
@@ -5539,7 +5961,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 11),
                 // (1,11): error CS1733: Expected expression
                 // T ? m(c? a
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 11));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 11)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -5602,7 +6025,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression19()
         {
-            var tree = UsingTree(@"T ? m(c? a =", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(c? a =",
+                TestOptions.Script,
                 // (1,13): error CS1733: Expected expression
                 // T ? m(c? a =
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 13),
@@ -5620,7 +6045,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 13),
                 // (1,13): error CS1733: Expected expression
                 // T ? m(c? a =
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 13)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -5691,7 +6117,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression20()
         {
-            var tree = UsingTree(@"T ? m(c? a = b ?", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(c? a = b ?",
+                TestOptions.Script,
                 // (1,17): error CS1733: Expected expression
                 // T ? m(c? a = b ?
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 17),
@@ -5715,7 +6143,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 17),
                 // (1,17): error CS1733: Expected expression
                 // T ? m(c? a = b ?
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 17));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 17)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -5799,13 +6228,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression21()
         {
-            var tree = UsingTree(@"T ? m()", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m()",
+                TestOptions.Script,
                 // (1,8): error CS1003: Syntax error, ':' expected
                 // T ? m()
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 8),
                 // (1,8): error CS1733: Expected expression
                 // T ? m()
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 8));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 8)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -5848,13 +6280,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression22()
         {
-            var tree = UsingTree(@"T ? m(a)", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(a)",
+                TestOptions.Script,
                 // (1,9): error CS1003: Syntax error, ':' expected
                 // T ? m(a)
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 9),
                 // (1,9): error CS1733: Expected expression
                 // T ? m(a)
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -5904,13 +6339,18 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression23()
         {
-            var tree = UsingTree(@"T ? m();", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m();",
+                TestOptions.Script,
                 // (1,8): error CS1003: Syntax error, ':' expected
                 // T ? m();
                 Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(":").WithLocation(1, 8),
                 // (1,8): error CS1525: Invalid expression term ';'
                 // T ? m();
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(1, 8));
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(1, 8)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -5953,13 +6393,18 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression24()
         {
-            var tree = UsingTree(@"T ? m(a);", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(a);",
+                TestOptions.Script,
                 // (1,9): error CS1003: Syntax error, ':' expected
                 // T ? m(a);
                 Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(":").WithLocation(1, 9),
                 // (1,9): error CS1525: Invalid expression term ';'
                 // T ? m(a);
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(1, 9)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -6009,7 +6454,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression25()
         {
-            var tree = UsingTree(@"T ? m(x: 1", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(x: 1",
+                TestOptions.Script,
                 // (1,11): error CS1026: ) expected
                 // T ? m(x: 1
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 11),
@@ -6018,7 +6465,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 11),
                 // (1,11): error CS1733: Expected expression
                 // T ? m(x: 1
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 11));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 11)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -6076,13 +6524,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression26()
         {
-            var tree = UsingTree(@"T ? m(x: 1, y: a ? b : c)", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(x: 1, y: a ? b : c)",
+                TestOptions.Script,
                 // (1,26): error CS1003: Syntax error, ':' expected
                 // T ? m(x: 1, y: a ? b : c)
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 26),
                 // (1,26): error CS1733: Expected expression
                 // T ? m(x: 1, y: a ? b : c)
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 26));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 26)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -6322,7 +6773,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression30()
         {
-            var tree = UsingTree(@"T ? a ?", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a ?",
+                TestOptions.Script,
                 // (1,8): error CS1733: Expected expression
                 // T ? a ?
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 8),
@@ -6337,7 +6790,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 8),
                 // (1,8): error CS1733: Expected expression
                 // T ? a ?
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 8));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 8)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -6385,7 +6839,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression31()
         {
-            var tree = UsingTree(@"T ? a =", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a =",
+                TestOptions.Script,
                 // (1,8): error CS1733: Expected expression
                 // T ? a =
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 8),
@@ -6394,7 +6850,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 8),
                 // (1,8): error CS1733: Expected expression
                 // T ? a =
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 8));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 8)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -6437,13 +6894,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression32()
         {
-            var tree = UsingTree(@"T ? a = b", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a = b",
+                TestOptions.Script,
                 // (1,10): error CS1003: Syntax error, ':' expected
                 // T ? a = b
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 10),
                 // (1,10): error CS1733: Expected expression
                 // T ? a = b
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 10));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 10)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -6486,10 +6946,13 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression33()
         {
-            var tree = UsingTree(@"T ? a = b : ", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a = b : ",
+                TestOptions.Script,
                 // (1,13): error CS1733: Expected expression
-                // T ? a = b : 
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 13));
+                // T ? a = b :
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 13)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -6532,7 +6995,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression34()
         {
-            var tree = UsingTree(@"T ? m(out c", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(out c",
+                TestOptions.Script,
                 // (1,12): error CS1026: ) expected
                 // T ? m(out c
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 12),
@@ -6541,7 +7006,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 12),
                 // (1,12): error CS1733: Expected expression
                 // T ? m(out c
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -6592,7 +7058,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression35()
         {
-            var tree = UsingTree(@"T ? m(ref c", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(ref c",
+                TestOptions.Script,
                 // (1,12): error CS1026: ) expected
                 // T ? m(ref c
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 12),
@@ -6601,7 +7069,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 12),
                 // (1,12): error CS1733: Expected expression
                 // T ? m(ref c
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -6652,13 +7121,19 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression36()
         {
-            var tree = UsingTree(@"T ? m(ref out", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(ref out",
+                TestOptions.Script,
                 // (1,11): error CS1525: Invalid expression term 'out'
                 // T ? m(ref out
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out").WithArguments("out").WithLocation(1, 11),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out")
+                    .WithArguments("out")
+                    .WithLocation(1, 11),
                 // (1,11): error CS1003: Syntax error, ',' expected
                 // T ? m(ref out
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(1, 11),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
+                    .WithArguments(",")
+                    .WithLocation(1, 11),
                 // (1,14): error CS1733: Expected expression
                 // T ? m(ref out
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 14),
@@ -6670,7 +7145,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 14),
                 // (1,14): error CS1733: Expected expression
                 // T ? m(ref out
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 14));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 14)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -6730,13 +7206,19 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression37()
         {
-            var tree = UsingTree(@"T ? m(ref out c", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(ref out c",
+                TestOptions.Script,
                 // (1,11): error CS1525: Invalid expression term 'out'
                 // T ? m(ref out c
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out").WithArguments("out").WithLocation(1, 11),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out")
+                    .WithArguments("out")
+                    .WithLocation(1, 11),
                 // (1,11): error CS1003: Syntax error, ',' expected
                 // T ? m(ref out c
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(1, 11),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
+                    .WithArguments(",")
+                    .WithLocation(1, 11),
                 // (1,16): error CS1026: ) expected
                 // T ? m(ref out c
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 16),
@@ -6745,7 +7227,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 16),
                 // (1,16): error CS1733: Expected expression
                 // T ? m(ref out c
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 16));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 16)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -6805,7 +7288,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression38()
         {
-            var tree = UsingTree(@"T ? m(this", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(this",
+                TestOptions.Script,
                 // (1,11): error CS1026: ) expected
                 // T ? m(this
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 11),
@@ -6814,7 +7299,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 11),
                 // (1,11): error CS1733: Expected expression
                 // T ? m(this
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 11));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 11)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -6864,7 +7350,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression39()
         {
-            var tree = UsingTree(@"T ? m(this.", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(this.",
+                TestOptions.Script,
                 // (1,12): error CS1001: Identifier expected
                 // T ? m(this.
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 12),
@@ -6876,7 +7364,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 12),
                 // (1,12): error CS1733: Expected expression
                 // T ? m(this.
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -6934,7 +7423,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression40()
         {
-            var tree = UsingTree(@"T ? m(this<", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(this<",
+                TestOptions.Script,
                 // (1,12): error CS1733: Expected expression
                 // T ? m(this<
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12),
@@ -6946,7 +7437,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 12),
                 // (1,12): error CS1733: Expected expression
                 // T ? m(this<
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -7004,7 +7496,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression41()
         {
-            var tree = UsingTree(@"T ? m(this[", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(this[",
+                TestOptions.Script,
                 // (1,12): error CS1003: Syntax error, ']' expected
                 // T ? m(this[
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments("]").WithLocation(1, 12),
@@ -7016,7 +7510,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 12),
                 // (1,12): error CS1733: Expected expression
                 // T ? m(this[
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -7074,7 +7569,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression41A()
         {
-            var tree = UsingTree(@"T ? m(this a", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(this a",
+                TestOptions.Script,
                 // (1,12): error CS1003: Syntax error, ',' expected
                 // T ? m(this a
                 Diagnostic(ErrorCode.ERR_SyntaxError, "a").WithArguments(",").WithLocation(1, 12),
@@ -7086,7 +7583,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 13),
                 // (1,13): error CS1733: Expected expression
                 // T ? m(this a
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 13)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -7144,7 +7642,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression42()
         {
-            var tree = UsingTree(@"T ? m(this(", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(this(",
+                TestOptions.Script,
                 // (1,12): error CS1026: ) expected
                 // T ? m(this(
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 12),
@@ -7156,7 +7656,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 12),
                 // (1,12): error CS1733: Expected expression
                 // T ? m(this(
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -7214,7 +7715,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression43()
         {
-            var tree = UsingTree(@"T ? m(T[", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(T[",
+                TestOptions.Script,
                 // (1,9): error CS1003: Syntax error, ']' expected
                 // T ? m(T[
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments("]").WithLocation(1, 9),
@@ -7226,7 +7729,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 9),
                 // (1,9): error CS1733: Expected expression
                 // T ? m(T[
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -7284,7 +7788,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression44()
         {
-            var tree = UsingTree(@"T ? m(T[1", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(T[1",
+                TestOptions.Script,
                 // (1,10): error CS1003: Syntax error, ']' expected
                 // T ? m(T[1
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments("]").WithLocation(1, 10),
@@ -7296,7 +7802,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 10),
                 // (1,10): error CS1733: Expected expression
                 // T ? m(T[1
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 10));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 10)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -7361,7 +7868,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression45()
         {
-            var tree = UsingTree(@"T ? m(T[1]", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(T[1]",
+                TestOptions.Script,
                 // (1,11): error CS1026: ) expected
                 // T ? m(T[1]
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 11),
@@ -7370,7 +7879,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 11),
                 // (1,11): error CS1733: Expected expression
                 // T ? m(T[1]
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 11));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 11)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -7435,7 +7945,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_MethodDecl46()
         {
-            var tree = UsingTree(@"T ? a(T ? a =", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(T ? a =",
+                TestOptions.Script,
                 // (1,14): error CS1733: Expected expression
                 // T ? a(T ? a =
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 14),
@@ -7453,7 +7965,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 14),
                 // (1,14): error CS1733: Expected expression
                 // T ? a(T ? a =
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 14));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 14)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -7524,13 +8037,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression47()
         {
-            var tree = UsingTree(@"T ? a(T)", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(T)",
+                TestOptions.Script,
                 // (1,9): error CS1003: Syntax error, ':' expected
                 // T ? a(T)
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 9),
                 // (1,9): error CS1733: Expected expression
                 // T ? a(T)
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -7580,13 +8096,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression48()
         {
-            var tree = UsingTree(@"T ? a(ref int.MaxValue)", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(ref int.MaxValue)",
+                TestOptions.Script,
                 // (1,24): error CS1003: Syntax error, ':' expected
                 // T ? a(ref int.MaxValue)
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 24),
                 // (1,24): error CS1733: Expected expression
                 // T ? a(ref int.MaxValue)
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 24));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 24)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -7645,7 +8164,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression49()
         {
-            var tree = UsingTree(@"T ? a(ref a,", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(ref a,",
+                TestOptions.Script,
                 // (1,13): error CS1733: Expected expression
                 // T ? a(ref a,
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 13),
@@ -7657,7 +8178,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 13),
                 // (1,13): error CS1733: Expected expression
                 // T ? a(ref a,
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 13)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -7716,7 +8238,9 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression50()
         {
-            var tree = UsingTree(@"T ? a(,", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(,",
+                TestOptions.Script,
                 // (1,7): error CS0839: Argument missing
                 // T ? a(,
                 Diagnostic(ErrorCode.ERR_MissingArgument, ",").WithLocation(1, 7),
@@ -7731,7 +8255,8 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 8),
                 // (1,8): error CS1733: Expected expression
                 // T ? a(,
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 8));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 8)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -7789,13 +8314,16 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression51()
         {
-            var tree = UsingTree(@"T ? a(T ? b[1] : b[2])", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? a(T ? b[1] : b[2])",
+                TestOptions.Script,
                 // (1,23): error CS1003: Syntax error, ':' expected
                 // T ? a(T ? b[1] : b[2])
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 23),
                 // (1,23): error CS1733: Expected expression
                 // T ? a(T ? b[1] : b[2])
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 23));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 23)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -7888,7 +8416,8 @@ fixed int x[10];
         [Fact]
         public void Ternary_Expression52()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 T ? f(a ? b : c)
 ",
                 // (2,17): error CS1003: Syntax error, ':' expected
@@ -7896,7 +8425,8 @@ T ? f(a ? b : c)
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(2, 17),
                 // (2,17): error CS1733: Expected expression
                 // T ? f(a ? b : c)
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(2, 17));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(2, 17)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -7962,10 +8492,13 @@ T ? f(a ? b : c)
         [Fact]
         public void Ternary_Expression_GenericAmbiguity1()
         {
-            var tree = UsingTree(@"T ? m(a < b, c > d) :", TestOptions.Script,
+            var tree = UsingTree(
+                @"T ? m(a < b, c > d) :",
+                TestOptions.Script,
                 // (1,22): error CS1733: Expected expression
                 // T ? m(a < b, c > d) :
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 22));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 22)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -8039,9 +8572,11 @@ T ? f(a ? b : c)
         [Fact]
         public void Ternary_WithQuery_FieldDecl1()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 T? from;
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.FieldDeclaration);
@@ -8070,7 +8605,8 @@ T? from;
         [Fact]
         public void Ternary_WithQuery_Expression1()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 T ? from
 ",
                 // (2,9): error CS1003: Syntax error, ':' expected
@@ -8078,7 +8614,8 @@ T ? from
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(2, 9),
                 // (2,9): error CS1733: Expected expression
                 // T ? from
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(2, 9));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(2, 9)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -8113,7 +8650,8 @@ T ? from
         [Fact]
         public void Ternary_WithQuery_Expression2()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 T ? from x
 ",
                 // (2,11): error CS1001: Identifier expected
@@ -8133,7 +8671,8 @@ T ? from x
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(2, 11),
                 // (2,11): error CS1733: Expected expression
                 // T ? from x
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(2, 11));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(2, 11)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -8192,7 +8731,8 @@ T ? from x
         [Fact]
         public void Ternary_WithQuery_Expression3()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 T ? f(from
 ",
                 // (2,11): error CS1026: ) expected
@@ -8203,7 +8743,8 @@ T ? f(from
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(2, 11),
                 // (2,11): error CS1733: Expected expression
                 // T ? f(from
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(2, 11));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(2, 11)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -8256,7 +8797,8 @@ T ? f(from
         [Fact]
         public void Ternary_WithQuery_Expression4()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 T ? f(from x
 ",
                 // (2,13): error CS1001: Identifier expected
@@ -8279,7 +8821,8 @@ T ? f(from x
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(2, 13),
                 // (2,13): error CS1733: Expected expression
                 // T ? f(from x
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(2, 13));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(2, 13)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -8379,10 +8922,13 @@ T ? f(from x
         [Fact]
         public void From_FieldDecl()
         {
-            var tree = UsingTree(@"from c", TestOptions.Script,
+            var tree = UsingTree(
+                @"from c",
+                TestOptions.Script,
                 // (1,7): error CS1002: ; expected
                 // from c
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 7));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 7)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -8408,13 +8954,15 @@ T ? f(from x
         [Fact]
         public void From_FieldDecl2()
         {
-            var tree = UsingTree(@"from x,",
+            var tree = UsingTree(
+                @"from x,",
                 // (1,8): error CS1001: Identifier expected
                 // from x,
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 8),
                 // (1,8): error CS1002: ; expected
                 // from x,
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 8));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 8)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -8472,13 +9020,15 @@ T ? f(from x
         [Fact]
         public void From_FieldDecl4()
         {
-            var tree = UsingTree(@"from x =",
+            var tree = UsingTree(
+                @"from x =",
                 // (1,9): error CS1733: Expected expression
                 // from x =
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9),
                 // (1,9): error CS1002: ; expected
                 // from x =
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 9)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -8513,7 +9063,8 @@ T ? f(from x
         [Fact]
         public void From_FieldDecl5()
         {
-            var tree = UsingTree(@"from x[",
+            var tree = UsingTree(
+                @"from x[",
                 // (1,7): error CS0650: Bad array declarator: To declare a managed array the rank specifier precedes the variable's identifier. To declare a fixed size buffer field, use the fixed keyword before the field type.
                 // from x[
                 Diagnostic(ErrorCode.ERR_CStyleArray, "[").WithLocation(1, 7),
@@ -8522,7 +9073,8 @@ T ? f(from x
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments("]").WithLocation(1, 8),
                 // (1,8): error CS1002: ; expected
                 // from x[
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 8));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 8)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -8561,13 +9113,15 @@ T ? f(from x
         [Fact]
         public void From_MethodDecl1()
         {
-            var tree = UsingTree(@"from c(",
+            var tree = UsingTree(
+                @"from c(",
                 // (1,8): error CS1026: ) expected
                 // from c(
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 8),
                 // (1,8): error CS1002: ; expected
                 // from c(
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 8));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 8)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.MethodDeclaration);
@@ -8592,7 +9146,8 @@ T ? f(from x
         [Fact]
         public void From_MethodDecl2()
         {
-            var tree = UsingTree(@"from a<",
+            var tree = UsingTree(
+                @"from a<",
                 // (1,8): error CS1001: Identifier expected
                 // from a<
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 8),
@@ -8607,7 +9162,8 @@ T ? f(from x
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 8),
                 // (1,8): error CS1002: ; expected
                 // from a<
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 8));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 8)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -8642,7 +9198,8 @@ T ? f(from x
         [Fact]
         public void From_MethodDecl3()
         {
-            var tree = UsingTree(@"from a.",
+            var tree = UsingTree(
+                @"from a.",
                 // (1,8): error CS1001: Identifier expected
                 // from a.
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 8),
@@ -8654,7 +9211,8 @@ T ? f(from x
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 8),
                 // (1,8): error CS1002: ; expected
                 // from a.
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 8));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 8)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -8688,7 +9246,8 @@ T ? f(from x
         [Fact]
         public void From_MethodDecl4()
         {
-            var tree = UsingTree(@"from a::",
+            var tree = UsingTree(
+                @"from a::",
                 // (1,7): error CS0687: The namespace alias qualifier '::' always resolves to a type or namespace so is illegal here. Consider using '.' instead.
                 // from a::
                 Diagnostic(ErrorCode.ERR_AliasQualAsExpression, "::").WithLocation(1, 7),
@@ -8703,7 +9262,8 @@ T ? f(from x
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 9),
                 // (1,9): error CS1002: ; expected
                 // from a::
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 9)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -8737,7 +9297,8 @@ T ? f(from x
         [Fact]
         public void From_MethodDecl5()
         {
-            var tree = UsingTree(@"from global::",
+            var tree = UsingTree(
+                @"from global::",
                 // (1,12): error CS0687: The namespace alias qualifier '::' always resolves to a type or namespace so is illegal here. Consider using '.' instead.
                 // from global::
                 Diagnostic(ErrorCode.ERR_AliasQualAsExpression, "::").WithLocation(1, 12),
@@ -8752,7 +9313,8 @@ T ? f(from x
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 14),
                 // (1,14): error CS1002: ; expected
                 // from global::
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 14));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 14)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -8786,10 +9348,12 @@ T ? f(from x
         [Fact]
         public void From_PropertyDecl1()
         {
-            var tree = UsingTree(@"from c {",
+            var tree = UsingTree(
+                @"from c {",
                 // (1,9): error CS1513: } expected
                 // from c {
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 9)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.PropertyDeclaration);
@@ -8813,7 +9377,8 @@ T ? f(from x
         [Fact]
         public void From_Query1()
         {
-            var tree = UsingTree(@"from c d",
+            var tree = UsingTree(
+                @"from c d",
                 // (1,9): error CS1003: Syntax error, 'in' expected
                 // from c d
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments("in").WithLocation(1, 9),
@@ -8822,7 +9387,8 @@ T ? f(from x
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9),
                 // (1,9): error CS0742: A query body must end with a select clause or a group clause
                 // from c d
-                Diagnostic(ErrorCode.ERR_ExpectedSelectOrGroup, "").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_ExpectedSelectOrGroup, "").WithLocation(1, 9)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -8868,7 +9434,8 @@ T ? f(from x
         [Fact]
         public void From_Query2()
         {
-            var tree = UsingTree(@"from x* a",
+            var tree = UsingTree(
+                @"from x* a",
                 // (1,10): error CS1003: Syntax error, 'in' expected
                 // from x* a
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments("in").WithLocation(1, 10),
@@ -8877,7 +9444,8 @@ T ? f(from x
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 10),
                 // (1,10): error CS0742: A query body must end with a select clause or a group clause
                 // from x* a
-                Diagnostic(ErrorCode.ERR_ExpectedSelectOrGroup, "").WithLocation(1, 10));
+                Diagnostic(ErrorCode.ERR_ExpectedSelectOrGroup, "").WithLocation(1, 10)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -8928,7 +9496,8 @@ T ? f(from x
         [Fact]
         public void From_Query3()
         {
-            var tree = UsingTree(@"from x? a",
+            var tree = UsingTree(
+                @"from x? a",
                 // (1,10): error CS1003: Syntax error, 'in' expected
                 // from x? a
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments("in").WithLocation(1, 10),
@@ -8937,7 +9506,8 @@ T ? f(from x
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 10),
                 // (1,10): error CS0742: A query body must end with a select clause or a group clause
                 // from x? a
-                Diagnostic(ErrorCode.ERR_ExpectedSelectOrGroup, "").WithLocation(1, 10));
+                Diagnostic(ErrorCode.ERR_ExpectedSelectOrGroup, "").WithLocation(1, 10)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -8988,7 +9558,8 @@ T ? f(from x
         [Fact]
         public void From_Query4()
         {
-            var tree = UsingTree(@"from x[] a",
+            var tree = UsingTree(
+                @"from x[] a",
                 // (1,11): error CS1003: Syntax error, 'in' expected
                 // from x[] a
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments("in").WithLocation(1, 11),
@@ -8997,7 +9568,8 @@ T ? f(from x
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 11),
                 // (1,11): error CS0742: A query body must end with a select clause or a group clause
                 // from x[] a
-                Diagnostic(ErrorCode.ERR_ExpectedSelectOrGroup, "").WithLocation(1, 11));
+                Diagnostic(ErrorCode.ERR_ExpectedSelectOrGroup, "").WithLocation(1, 11)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -9056,13 +9628,15 @@ T ? f(from x
         [Fact]
         public void From_Query5()
         {
-            var tree = UsingTree(@"from goo in",
+            var tree = UsingTree(
+                @"from goo in",
                 // (1,12): error CS1733: Expected expression
                 // from goo in
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 12),
                 // (1,12): error CS0742: A query body must end with a select clause or a group clause
                 // from goo in
-                Diagnostic(ErrorCode.ERR_ExpectedSelectOrGroup, "").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_ExpectedSelectOrGroup, "").WithLocation(1, 12)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -9104,7 +9678,8 @@ T ? f(from x
         [Fact]
         public void From_Query6()
         {
-            var tree = UsingTree(@"from goo.bar in",
+            var tree = UsingTree(
+                @"from goo.bar in",
                 // (1,14): error CS1001: Identifier expected
                 // from goo.bar in
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "in").WithLocation(1, 14),
@@ -9113,7 +9688,8 @@ T ? f(from x
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 16),
                 // (1,16): error CS0742: A query body must end with a select clause or a group clause
                 // from goo.bar in
-                Diagnostic(ErrorCode.ERR_ExpectedSelectOrGroup, "").WithLocation(1, 16));
+                Diagnostic(ErrorCode.ERR_ExpectedSelectOrGroup, "").WithLocation(1, 16)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -9174,16 +9750,20 @@ T ? f(from x
         [Fact]
         public void GlobalStatementSeparators_Comma1()
         {
-            var tree = UsingTree("a < b,c.", TestOptions.Script,
+            var tree = UsingTree(
+                "a < b,c.",
+                TestOptions.Script,
                 // (1,6): error CS1002: ; expected
                 // a < b,c.
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ",").WithLocation(1, 6),
                 // (1,6): error CS7017: Member definition, statement, or end-of-file expected
                 // a < b,c.
-                Diagnostic(ErrorCode.ERR_GlobalDefinitionOrStatementExpected, ",").WithLocation(1, 6),
+                Diagnostic(ErrorCode.ERR_GlobalDefinitionOrStatementExpected, ",")
+                    .WithLocation(1, 6),
                 // (1,9): error CS1001: Identifier expected
                 // a < b,c.
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 9)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -9232,7 +9812,8 @@ T ? f(from x
         [Fact]
         public void GlobalStatementSeparators_Comma2()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 a < b,
 void goo() { }
 ",
@@ -9241,7 +9822,9 @@ void goo() { }
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ",").WithLocation(2, 6),
                 // (2,6): error CS7017: Member definition, statement, or end-of-file expected
                 // a < b,
-                Diagnostic(ErrorCode.ERR_GlobalDefinitionOrStatementExpected, ",").WithLocation(2, 6));
+                Diagnostic(ErrorCode.ERR_GlobalDefinitionOrStatementExpected, ",")
+                    .WithLocation(2, 6)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -9289,7 +9872,8 @@ void goo() { }
         [Fact]
         public void GlobalStatementSeparators_ClosingParen()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 a < b)
 void goo() { }
 ",
@@ -9298,7 +9882,9 @@ void goo() { }
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ")").WithLocation(2, 6),
                 // (2,6): error CS7017: Member definition, statement, or end-of-file expected
                 // a < b)
-                Diagnostic(ErrorCode.ERR_GlobalDefinitionOrStatementExpected, ")").WithLocation(2, 6));
+                Diagnostic(ErrorCode.ERR_GlobalDefinitionOrStatementExpected, ")")
+                    .WithLocation(2, 6)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -9346,7 +9932,8 @@ void goo() { }
         [Fact]
         public void GlobalStatementSeparators_ClosingBracket()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 a < b]
 void goo() { }
 ",
@@ -9355,7 +9942,9 @@ void goo() { }
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "]").WithLocation(2, 6),
                 // (2,6): error CS7017: Member definition, statement, or end-of-file expected
                 // a < b]
-                Diagnostic(ErrorCode.ERR_GlobalDefinitionOrStatementExpected, "]").WithLocation(2, 6));
+                Diagnostic(ErrorCode.ERR_GlobalDefinitionOrStatementExpected, "]")
+                    .WithLocation(2, 6)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.GlobalStatement);
@@ -9403,7 +9992,8 @@ void goo() { }
         [Fact]
         public void GlobalStatementSeparators_ClosingBrace()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 a < b}
 void goo() { }
 ",
@@ -9412,7 +10002,9 @@ void goo() { }
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(2, 6),
                 // (2,6): error CS7017: Member definition, statement, or end-of-file expected
                 // a < b}
-                Diagnostic(ErrorCode.ERR_GlobalDefinitionOrStatementExpected, "}").WithLocation(2, 6));
+                Diagnostic(ErrorCode.ERR_GlobalDefinitionOrStatementExpected, "}")
+                    .WithLocation(2, 6)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -9461,34 +10053,63 @@ void goo() { }
         [Fact]
         public void GlobalStatementSeparators_NonAsciiCharacter()
         {
-            var test = @"
+            var test =
+                @"
 H �oz
 ";
-            ParseAndValidate(test,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 2, Column = 3 },
-                new ErrorDescription { Code = (int)ErrorCode.ERR_UnexpectedCharacter, Line = 2, Column = 3 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 2,
+                    Column = 3
+                },
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_UnexpectedCharacter,
+                    Line = 2,
+                    Column = 3
+                }
+            );
         }
 
         [Fact]
         public void GlobalStatementSeparators_UnicodeCharacter()
         {
-            var test = @"
+            var test =
+                @"
 int नुसौप्रख्यातनिदेशकपुरानी 
 ";
-            ParseAndValidate(test,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 2, Column = 29 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 2,
+                    Column = 29
+                }
+            );
         }
 
         [Fact]
         public void GlobalStatementSeparators_Missing()
         {
-            var test = @"
+            var test =
+                @"
 using System;
 int a
 Console.Goo()
 ";
-            ParseAndValidate(test,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 3, Column = 6 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 3,
+                    Column = 6
+                }
+            );
         }
 
         #endregion
@@ -9499,36 +10120,117 @@ Console.Goo()
         public void OperatorError()
         {
             var test = @"operator";
-            ParseAndValidate(test,
-                new ErrorDescription { Code = 1003, Line = 1, Column = 9 },
-                new ErrorDescription { Code = 1031, Line = 1, Column = 9 },
-                new ErrorDescription { Code = 1003, Line = 1, Column = 1 },
-                new ErrorDescription { Code = 1026, Line = 1, Column = 9 },
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 1, Column = 9 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 1003,
+                    Line = 1,
+                    Column = 9
+                },
+                new ErrorDescription
+                {
+                    Code = 1031,
+                    Line = 1,
+                    Column = 9
+                },
+                new ErrorDescription
+                {
+                    Code = 1003,
+                    Line = 1,
+                    Column = 1
+                },
+                new ErrorDescription
+                {
+                    Code = 1026,
+                    Line = 1,
+                    Column = 9
+                },
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 1,
+                    Column = 9
+                }
+            );
         }
 
         [Fact]
         public void OperatorImplicitError()
         {
             var test = @"implicit";
-            ParseAndValidate(test,
-                new ErrorDescription { Code = 1003, Line = 1, Column = 9 },
-                new ErrorDescription { Code = 1031, Line = 1, Column = 9 },
-                new ErrorDescription { Code = 1003, Line = 1, Column = 9 },
-                new ErrorDescription { Code = 1026, Line = 1, Column = 9 },
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 1, Column = 9 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 1003,
+                    Line = 1,
+                    Column = 9
+                },
+                new ErrorDescription
+                {
+                    Code = 1031,
+                    Line = 1,
+                    Column = 9
+                },
+                new ErrorDescription
+                {
+                    Code = 1003,
+                    Line = 1,
+                    Column = 9
+                },
+                new ErrorDescription
+                {
+                    Code = 1026,
+                    Line = 1,
+                    Column = 9
+                },
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 1,
+                    Column = 9
+                }
+            );
         }
 
         [Fact]
         public void OperatorExplicitError()
         {
             var test = @"explicit";
-            ParseAndValidate(test,
-                new ErrorDescription { Code = 1003, Line = 1, Column = 9 },
-                new ErrorDescription { Code = 1031, Line = 1, Column = 9 },
-                new ErrorDescription { Code = 1003, Line = 1, Column = 9 },
-                new ErrorDescription { Code = 1026, Line = 1, Column = 9 },
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 1, Column = 9 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 1003,
+                    Line = 1,
+                    Column = 9
+                },
+                new ErrorDescription
+                {
+                    Code = 1031,
+                    Line = 1,
+                    Column = 9
+                },
+                new ErrorDescription
+                {
+                    Code = 1003,
+                    Line = 1,
+                    Column = 9
+                },
+                new ErrorDescription
+                {
+                    Code = 1026,
+                    Line = 1,
+                    Column = 9
+                },
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 1,
+                    Column = 9
+                }
+            );
         }
 
         #endregion
@@ -9536,20 +10238,30 @@ Console.Goo()
         [Fact]
         public void FieldDeclaration()
         {
-            var test = @"
+            var test =
+                @"
 volatile int x;
 const int w;
 readonly int y;
 static int z;
 ";
-            ParseAndValidate(test, new ErrorDescription { Code = 145, Line = 3, Column = 11 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 145,
+                    Line = 3,
+                    Column = 11
+                }
+            );
         }
 
         /// bug="3782" project = "Roslyn"
         [Fact]
         public void ClassDeclaration()
         {
-            var test = @"
+            var test =
+                @"
 class C { }
 static class C2 { }
 partial class C3 { }
@@ -9561,7 +10273,8 @@ partial class C3 { }
         [Fact]
         public void InterfaceDeclaration()
         {
-            var test = @"
+            var test =
+                @"
 interface IC { }
 ";
             ParseAndValidate(test);
@@ -9570,39 +10283,83 @@ interface IC { }
         [Fact]
         public void TopLevelXML()
         {
-            var test = @"
+            var test =
+                @"
 <Expects Status=success></Expects>
 ";
-            ParseAndValidate(test,
-                new ErrorDescription { Code = 1525, Line = 2, Column = 1 },
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 2, Column = 10 },
-                new ErrorDescription { Code = 1525, Line = 2, Column = 25 },
-                new ErrorDescription { Code = 1525, Line = 2, Column = 26 },
-                new ErrorDescription { Code = 1733, Line = 2, Column = 35 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 1525,
+                    Line = 2,
+                    Column = 1
+                },
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 2,
+                    Column = 10
+                },
+                new ErrorDescription
+                {
+                    Code = 1525,
+                    Line = 2,
+                    Column = 25
+                },
+                new ErrorDescription
+                {
+                    Code = 1525,
+                    Line = 2,
+                    Column = 26
+                },
+                new ErrorDescription
+                {
+                    Code = 1733,
+                    Line = 2,
+                    Column = 35
+                }
+            );
         }
 
         [Fact]
         public void NotIncorrectKeyword()
         {
-            var test = @"
+            var test =
+                @"
 parial class Test
 {
 }
 ";
-            ParseAndValidate(test,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 2, Column = 8 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 2,
+                    Column = 8
+                }
+            );
         }
 
         [Fact]
         public void Keyword()
         {
-            var test = @"
+            var test =
+                @"
 p class A
  {
  }
 ";
-            ParseAndValidate(test,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_SemicolonExpected, Line = 2, Column = 3 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_SemicolonExpected,
+                    Line = 2,
+                    Column = 3
+                }
+            );
         }
 
         [WorkItem(528532, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528532")]
@@ -9613,7 +10370,10 @@ p class A
             var tree = SyntaxFactory.ParseSyntaxTree(test, options: TestOptions.Script);
 
             Assert.Equal(1, tree.GetCompilationUnitRoot().ChildNodes().Count());
-            Assert.Equal(SyntaxKind.GlobalStatement, tree.GetCompilationUnitRoot().ChildNodes().ToList()[0].Kind());
+            Assert.Equal(
+                SyntaxKind.GlobalStatement,
+                tree.GetCompilationUnitRoot().ChildNodes().ToList()[0].Kind()
+            );
         }
 
         [WorkItem(541164, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541164")]
@@ -9622,10 +10382,27 @@ p class A
         {
             var test = @"Console.WriteLine(""Hello"")?";
 
-            ParseAndValidate(test,
-                new ErrorDescription { Code = 1733, Line = 1, Column = 28 },
-                new ErrorDescription { Code = 1003, Line = 1, Column = 28 },
-                new ErrorDescription { Code = 1733, Line = 1, Column = 28 });
+            ParseAndValidate(
+                test,
+                new ErrorDescription
+                {
+                    Code = 1733,
+                    Line = 1,
+                    Column = 28
+                },
+                new ErrorDescription
+                {
+                    Code = 1003,
+                    Line = 1,
+                    Column = 28
+                },
+                new ErrorDescription
+                {
+                    Code = 1733,
+                    Line = 1,
+                    Column = 28
+                }
+            );
         }
 
         #region Shebang
@@ -9660,8 +10437,10 @@ p class A
             TestShebang(root.GetDirectives().Single(), command);
 
             tree = ParseAndValidate(
-$@"#!{command}
-Console.WriteLine(""Hi!"");", TestOptions.Script);
+                $@"#!{command}
+Console.WriteLine(""Hi!"");",
+                TestOptions.Script
+            );
             root = tree.GetCompilationUnitRoot();
 
             var statement = root.ChildNodes().Single();
@@ -9675,34 +10454,90 @@ Console.WriteLine(""Hi!"");", TestOptions.Script);
         [Fact]
         public void ShebangNotFirstCharacter()
         {
-            ParseAndValidate(" #!/usr/bin/env csi", TestOptions.Script,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_PPDirectiveExpected, Line = 1, Column = 2 });
+            ParseAndValidate(
+                " #!/usr/bin/env csi",
+                TestOptions.Script,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_PPDirectiveExpected,
+                    Line = 1,
+                    Column = 2
+                }
+            );
 
-            ParseAndValidate("\n#!/usr/bin/env csi", TestOptions.Script,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_PPDirectiveExpected, Line = 2, Column = 1 });
+            ParseAndValidate(
+                "\n#!/usr/bin/env csi",
+                TestOptions.Script,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_PPDirectiveExpected,
+                    Line = 2,
+                    Column = 1
+                }
+            );
 
-            ParseAndValidate("\r\n#!/usr/bin/env csi", TestOptions.Script,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_PPDirectiveExpected, Line = 2, Column = 1 });
+            ParseAndValidate(
+                "\r\n#!/usr/bin/env csi",
+                TestOptions.Script,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_PPDirectiveExpected,
+                    Line = 2,
+                    Column = 1
+                }
+            );
 
-            ParseAndValidate("#!/bin/sh\r\n#!/usr/bin/env csi", TestOptions.Script,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_PPDirectiveExpected, Line = 2, Column = 1 });
+            ParseAndValidate(
+                "#!/bin/sh\r\n#!/usr/bin/env csi",
+                TestOptions.Script,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_PPDirectiveExpected,
+                    Line = 2,
+                    Column = 1
+                }
+            );
 
-            ParseAndValidate("a #!/usr/bin/env csi", TestOptions.Script,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_BadDirectivePlacement, Line = 1, Column = 3 });
+            ParseAndValidate(
+                "a #!/usr/bin/env csi",
+                TestOptions.Script,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_BadDirectivePlacement,
+                    Line = 1,
+                    Column = 3
+                }
+            );
         }
 
         [Fact]
         public void ShebangNoBang()
         {
-            ParseAndValidate("#/usr/bin/env csi", TestOptions.Script,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_PPDirectiveExpected, Line = 1, Column = 1 });
+            ParseAndValidate(
+                "#/usr/bin/env csi",
+                TestOptions.Script,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_PPDirectiveExpected,
+                    Line = 1,
+                    Column = 1
+                }
+            );
         }
 
         [Fact]
         public void ShebangSpaceBang()
         {
-            ParseAndValidate("# !/usr/bin/env csi", TestOptions.Script,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_PPDirectiveExpected, Line = 1, Column = 1 });
+            ParseAndValidate(
+                "# !/usr/bin/env csi",
+                TestOptions.Script,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_PPDirectiveExpected,
+                    Line = 1,
+                    Column = 1
+                }
+            );
         }
 
         [Fact]
@@ -9714,14 +10549,25 @@ Console.WriteLine(""Hi!"");", TestOptions.Script);
             Assert.Empty(root.ChildNodes());
             var eof = root.EndOfFileToken;
             Assert.Equal(SyntaxKind.EndOfFileToken, eof.Kind());
-            Assert.Equal(SyntaxKind.SingleLineCommentTrivia, eof.GetLeadingTrivia().Single().Kind());
+            Assert.Equal(
+                SyntaxKind.SingleLineCommentTrivia,
+                eof.GetLeadingTrivia().Single().Kind()
+            );
         }
 
         [Fact]
         public void ShebangNotInScript()
         {
-            ParseAndValidate("#!/usr/bin/env csi", TestOptions.Regular,
-                new ErrorDescription { Code = (int)ErrorCode.ERR_PPDirectiveExpected, Line = 1, Column = 1 });
+            ParseAndValidate(
+                "#!/usr/bin/env csi",
+                TestOptions.Regular,
+                new ErrorDescription
+                {
+                    Code = (int)ErrorCode.ERR_PPDirectiveExpected,
+                    Line = 1,
+                    Column = 1
+                }
+            );
         }
 
         private void TestShebang(SyntaxTrivia trivia, string expectedSkippedText)

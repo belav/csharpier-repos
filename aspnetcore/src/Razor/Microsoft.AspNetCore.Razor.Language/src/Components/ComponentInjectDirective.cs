@@ -19,8 +19,10 @@ internal static class ComponentInjectDirective
             builder.AddTypeToken("TypeName", "The type of the service to inject.");
             builder.AddMemberToken("PropertyName", "The name of the property.");
             builder.Usage = DirectiveUsage.FileScopedMultipleOccurring;
-            builder.Description = "Inject a service from the application's service container into a property.";
-        });
+            builder.Description =
+                "Inject a service from the application's service container into a property.";
+        }
+    );
 
     public static void Register(RazorProjectEngineBuilder builder)
     {

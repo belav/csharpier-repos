@@ -65,7 +65,12 @@ internal class SignatureWriter
                 var field = abstractNode.Fields[i];
                 if (IsNodeOrNodeList(field.Type))
                 {
-                    _writer.WriteLine("    public abstract {0}{1} {2} {{ get; }}", "", field.Type, field.Name);
+                    _writer.WriteLine(
+                        "    public abstract {0}{1} {2} {{ get; }}",
+                        "",
+                        field.Type,
+                        field.Name
+                    );
                 }
             }
             _writer.WriteLine("  }");
@@ -83,13 +88,25 @@ internal class SignatureWriter
             for (int i = 0, n = nodeFields.Count; i < n; i++)
             {
                 var field = nodeFields[i];
-                _writer.WriteLine("    public {0}{1}{2} {3} {{ get; }}", "", "", field.Type, field.Name);
+                _writer.WriteLine(
+                    "    public {0}{1}{2} {3} {{ get; }}",
+                    "",
+                    "",
+                    field.Type,
+                    field.Name
+                );
             }
 
             for (int i = 0, n = valueFields.Count; i < n; i++)
             {
                 var field = valueFields[i];
-                _writer.WriteLine("    public {0}{1}{2} {3} {{ get; }}", "", "", field.Type, field.Name);
+                _writer.WriteLine(
+                    "    public {0}{1}{2} {3} {{ get; }}",
+                    "",
+                    "",
+                    field.Type,
+                    field.Name
+                );
             }
 
             _writer.WriteLine("  }");

@@ -64,22 +64,29 @@ namespace System.Formats.Asn1
             out int unusedBitCount,
             out ReadOnlySpan<byte> value,
             out int bytesConsumed,
-            Asn1Tag? expectedTag = null)
+            Asn1Tag? expectedTag = null
+        )
         {
-            if (TryReadPrimitiveBitStringCore(
-                source,
-                ruleSet,
-                expectedTag ?? Asn1Tag.PrimitiveBitString,
-                contentsLength: out _,
-                headerLength: out _,
-                out int localUbc,
-                out ReadOnlySpan<byte> localValue,
-                out int consumed,
-                out byte normalizedLastByte))
+            if (
+                TryReadPrimitiveBitStringCore(
+                    source,
+                    ruleSet,
+                    expectedTag ?? Asn1Tag.PrimitiveBitString,
+                    contentsLength: out _,
+                    headerLength: out _,
+                    out int localUbc,
+                    out ReadOnlySpan<byte> localValue,
+                    out int consumed,
+                    out byte normalizedLastByte
+                )
+            )
             {
                 // Check that this isn't a BER reader which encountered a situation where
                 // an "unused" bit was not set to 0.
-                if (localValue.Length == 0 || normalizedLastByte == localValue[localValue.Length - 1])
+                if (
+                    localValue.Length == 0
+                    || normalizedLastByte == localValue[localValue.Length - 1]
+                )
                 {
                     unusedBitCount = localUbc;
                     value = localValue;
@@ -160,13 +167,15 @@ namespace System.Formats.Asn1
             out int unusedBitCount,
             out int bytesConsumed,
             out int bytesWritten,
-            Asn1Tag? expectedTag = null)
+            Asn1Tag? expectedTag = null
+        )
         {
             if (source.Overlaps(destination))
             {
                 throw new ArgumentException(
                     SR.Argument_SourceOverlapsDestination,
-                    nameof(destination));
+                    nameof(destination)
+                );
             }
 
             int localUbc;
@@ -175,16 +184,19 @@ namespace System.Formats.Asn1
             int? contentsLength;
             int headerLength;
 
-            if (TryReadPrimitiveBitStringCore(
-                source,
-                ruleSet,
-                expectedTag ?? Asn1Tag.PrimitiveBitString,
-                out contentsLength,
-                out headerLength,
-                out localUbc,
-                out ReadOnlySpan<byte> value,
-                out consumed,
-                out normalizedLastByte))
+            if (
+                TryReadPrimitiveBitStringCore(
+                    source,
+                    ruleSet,
+                    expectedTag ?? Asn1Tag.PrimitiveBitString,
+                    out contentsLength,
+                    out headerLength,
+                    out localUbc,
+                    out ReadOnlySpan<byte> value,
+                    out consumed,
+                    out normalizedLastByte
+                )
+            )
             {
                 if (value.Length > destination.Length)
                 {
@@ -204,14 +216,17 @@ namespace System.Formats.Asn1
 
             // If we get here, the tag was appropriate, but the encoding was constructed.
 
-            if (TryCopyConstructedBitStringValue(
-                Slice(source, headerLength, contentsLength),
-                ruleSet,
-                destination,
-                contentsLength == null,
-                out localUbc,
-                out int bytesRead,
-                out int written))
+            if (
+                TryCopyConstructedBitStringValue(
+                    Slice(source, headerLength, contentsLength),
+                    ruleSet,
+                    destination,
+                    contentsLength == null,
+                    out localUbc,
+                    out int bytesRead,
+                    out int written
+                )
+            )
             {
                 unusedBitCount = localUbc;
                 bytesConsumed = headerLength + bytesRead;
@@ -276,18 +291,22 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             out int unusedBitCount,
             out int bytesConsumed,
-            Asn1Tag? expectedTag = null)
+            Asn1Tag? expectedTag = null
+        )
         {
-            if (TryReadPrimitiveBitStringCore(
-                source,
-                ruleSet,
-                expectedTag ?? Asn1Tag.PrimitiveBitString,
-                out int? contentsLength,
-                out int headerLength,
-                out int localUbc,
-                out ReadOnlySpan<byte> localValue,
-                out int consumed,
-                out byte normalizedLastByte))
+            if (
+                TryReadPrimitiveBitStringCore(
+                    source,
+                    ruleSet,
+                    expectedTag ?? Asn1Tag.PrimitiveBitString,
+                    out int? contentsLength,
+                    out int headerLength,
+                    out int localUbc,
+                    out ReadOnlySpan<byte> localValue,
+                    out int consumed,
+                    out byte normalizedLastByte
+                )
+            )
             {
                 byte[] ret = localValue.ToArray();
 
@@ -309,14 +328,17 @@ namespace System.Formats.Asn1
 
             byte[] rented = CryptoPool.Rent(tooBig);
 
-            if (TryCopyConstructedBitStringValue(
-                Slice(source, headerLength, contentsLength),
-                ruleSet,
-                rented,
-                contentsLength == null,
-                out localUbc,
-                out int bytesRead,
-                out int written))
+            if (
+                TryCopyConstructedBitStringValue(
+                    Slice(source, headerLength, contentsLength),
+                    ruleSet,
+                    rented,
+                    contentsLength == null,
+                    out localUbc,
+                    out int bytesRead,
+                    out int written
+                )
+            )
             {
                 byte[] ret = rented.AsSpan(0, written).ToArray();
                 CryptoPool.Return(rented, written);
@@ -334,7 +356,8 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             out int unusedBitCount,
             out ReadOnlySpan<byte> value,
-            out byte normalizedLastByte)
+            out byte normalizedLastByte
+        )
         {
             // T-REC-X.690-201508 sec 9.2
             if (ruleSet == AsnEncodingRules.CER && source.Length > MaxCERSegmentSize)
@@ -394,12 +417,14 @@ namespace System.Formats.Asn1
         private delegate void BitStringCopyAction(
             ReadOnlySpan<byte> value,
             byte normalizedLastByte,
-            Span<byte> destination);
+            Span<byte> destination
+        );
 
         private static void CopyBitStringValue(
             ReadOnlySpan<byte> value,
             byte normalizedLastByte,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             if (value.Length == 0)
             {
@@ -414,7 +439,8 @@ namespace System.Formats.Asn1
         private static int CountConstructedBitString(
             ReadOnlySpan<byte> source,
             AsnEncodingRules ruleSet,
-            bool isIndefinite)
+            bool isIndefinite
+        )
         {
             Span<byte> destination = Span<byte>.Empty;
 
@@ -425,7 +451,8 @@ namespace System.Formats.Asn1
                 null,
                 isIndefinite,
                 out _,
-                out _);
+                out _
+            );
         }
 
         private static void CopyConstructedBitString(
@@ -435,7 +462,8 @@ namespace System.Formats.Asn1
             bool isIndefinite,
             out int unusedBitCount,
             out int bytesRead,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             Span<byte> tmpDest = destination;
 
@@ -446,7 +474,8 @@ namespace System.Formats.Asn1
                 CopyBitStringValue,
                 isIndefinite,
                 out unusedBitCount,
-                out bytesRead);
+                out bytesRead
+            );
         }
 
         private static int ProcessConstructedBitString(
@@ -456,7 +485,8 @@ namespace System.Formats.Asn1
             BitStringCopyAction? copyAction,
             bool isIndefinite,
             out int lastUnusedBitCount,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             lastUnusedBitCount = 0;
             bytesRead = 0;
@@ -483,10 +513,15 @@ namespace System.Formats.Asn1
                             throw new AsnContentException();
                         }
 
-                        if (ruleSet == AsnEncodingRules.CER && lastSegmentLength != MaxCERSegmentSize)
+                        if (
+                            ruleSet == AsnEncodingRules.CER
+                            && lastSegmentLength != MaxCERSegmentSize
+                        )
                         {
                             // T-REC-X.690-201508 sec 9.2
-                            throw new AsnContentException(SR.ContentException_InvalidUnderCer_TryBerOrDer);
+                            throw new AsnContentException(
+                                SR.ContentException_InvalidUnderCer_TryBerOrDer
+                            );
                         }
 
                         Debug.Assert(length != null);
@@ -497,7 +532,8 @@ namespace System.Formats.Asn1
                             ruleSet,
                             out lastUnusedBitCount,
                             out ReadOnlySpan<byte> contents,
-                            out byte normalizedLastByte);
+                            out byte normalizedLastByte
+                        );
 
                         int localLen = headerLength + encodedValue.Length;
                         cur = cur.Slice(localLen);
@@ -520,7 +556,12 @@ namespace System.Formats.Asn1
 
                         if (readerStack?.Count > 0)
                         {
-                            (int topOffset, int topLength, bool wasIndefinite, int pushedBytesRead) = readerStack.Pop();
+                            (
+                                int topOffset,
+                                int topLength,
+                                bool wasIndefinite,
+                                int pushedBytesRead
+                            ) = readerStack.Pop();
                             ReadOnlySpan<byte> topSpan = source.Slice(topOffset, topLength);
                             cur = topSpan.Slice(bytesRead);
 
@@ -538,7 +579,9 @@ namespace System.Formats.Asn1
                         if (ruleSet == AsnEncodingRules.CER)
                         {
                             // T-REC-X.690-201508 sec 9.2
-                            throw new AsnContentException(SR.ContentException_InvalidUnderCerOrDer_TryBer);
+                            throw new AsnContentException(
+                                SR.ContentException_InvalidUnderCerOrDer_TryBer
+                            );
                         }
 
                         readerStack ??= new Stack<(int, int, bool, int)>();
@@ -569,7 +612,8 @@ namespace System.Formats.Asn1
 
                 if (readerStack?.Count > 0)
                 {
-                    (int topOffset, int topLength, bool wasIndefinite, int pushedBytesRead) = readerStack.Pop();
+                    (int topOffset, int topLength, bool wasIndefinite, int pushedBytesRead) =
+                        readerStack.Pop();
 
                     ReadOnlySpan<byte> tmpSpan = source.Slice(topOffset, topLength);
                     cur = tmpSpan.Slice(bytesRead);
@@ -591,7 +635,8 @@ namespace System.Formats.Asn1
             bool isIndefinite,
             out int unusedBitCount,
             out int bytesRead,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             // Call CountConstructedBitString to get the required byte and to verify that the
             // data is well-formed before copying into dest.
@@ -621,7 +666,8 @@ namespace System.Formats.Asn1
                 isIndefinite,
                 out unusedBitCount,
                 out bytesRead,
-                out bytesWritten);
+                out bytesWritten
+            );
 
             Debug.Assert(bytesWritten == contentLength);
             return true;
@@ -636,10 +682,15 @@ namespace System.Formats.Asn1
             out int unusedBitCount,
             out ReadOnlySpan<byte> value,
             out int bytesConsumed,
-            out byte normalizedLastByte)
+            out byte normalizedLastByte
+        )
         {
-            Asn1Tag actualTag =
-                ReadTagAndLength(source, ruleSet, out contentsLength, out headerLength);
+            Asn1Tag actualTag = ReadTagAndLength(
+                source,
+                ruleSet,
+                out contentsLength,
+                out headerLength
+            );
 
             CheckExpectedTag(actualTag, expectedTag, UniversalTagNumber.BitString);
 
@@ -667,7 +718,8 @@ namespace System.Formats.Asn1
                 ruleSet,
                 out unusedBitCount,
                 out value,
-                out normalizedLastByte);
+                out normalizedLastByte
+            );
 
             bytesConsumed = headerLength + encodedValue.Length;
             return true;
@@ -716,7 +768,8 @@ namespace System.Formats.Asn1
         public bool TryReadPrimitiveBitString(
             out int unusedBitCount,
             out ReadOnlyMemory<byte> value,
-            Asn1Tag? expectedTag = null)
+            Asn1Tag? expectedTag = null
+        )
         {
             bool ret = AsnDecoder.TryReadPrimitiveBitString(
                 _data.Span,
@@ -724,7 +777,8 @@ namespace System.Formats.Asn1
                 out unusedBitCount,
                 out ReadOnlySpan<byte> span,
                 out int consumed,
-                expectedTag);
+                expectedTag
+            );
 
             if (ret)
             {
@@ -782,7 +836,8 @@ namespace System.Formats.Asn1
             Span<byte> destination,
             out int unusedBitCount,
             out int bytesWritten,
-            Asn1Tag? expectedTag = null)
+            Asn1Tag? expectedTag = null
+        )
         {
             bool ret = AsnDecoder.TryReadBitString(
                 _data.Span,
@@ -791,7 +846,8 @@ namespace System.Formats.Asn1
                 out unusedBitCount,
                 out int consumed,
                 out bytesWritten,
-                expectedTag);
+                expectedTag
+            );
 
             if (ret)
             {
@@ -841,7 +897,8 @@ namespace System.Formats.Asn1
                 RuleSet,
                 out unusedBitCount,
                 out int consumed,
-                expectedTag);
+                expectedTag
+            );
 
             _data = _data.Slice(consumed);
             return ret;

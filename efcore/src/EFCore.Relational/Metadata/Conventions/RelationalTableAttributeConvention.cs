@@ -20,8 +20,8 @@ public class RelationalTableAttributeConvention : EntityTypeAttributeConventionB
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public RelationalTableAttributeConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
-        : base(dependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    ) : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
     }
@@ -40,7 +40,8 @@ public class RelationalTableAttributeConvention : EntityTypeAttributeConventionB
     protected override void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
         TableAttribute attribute,
-        IConventionContext<IConventionEntityTypeBuilder> context)
+        IConventionContext<IConventionEntityTypeBuilder> context
+    )
     {
         if (!string.IsNullOrWhiteSpace(attribute.Schema))
         {

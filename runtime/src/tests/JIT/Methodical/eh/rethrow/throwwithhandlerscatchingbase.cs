@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // 119053
-// throw in a handler will not work properly if the protected block is protected by other 
+// throw in a handler will not work properly if the protected block is protected by other
 // clauses that catch the base class of the exception being thrown
 
 using System;
@@ -78,4 +78,3 @@ namespace hello_throwwithhandlerscatchingbase_rethrow_cs
         }
     }
 }
-

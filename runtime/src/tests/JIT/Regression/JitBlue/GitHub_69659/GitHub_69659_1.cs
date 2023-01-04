@@ -8,9 +8,10 @@ public class Program
 {
     public static ulong[] s_14;
     public static uint s_34;
+
     public static int Main()
     {
-        var vr2 = new ulong[][]{new ulong[]{0}};
+        var vr2 = new ulong[][] { new ulong[] { 0 } };
         M27(s_34, vr2);
         return 100;
     }

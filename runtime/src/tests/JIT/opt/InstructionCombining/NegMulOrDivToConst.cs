@@ -41,19 +41,16 @@ namespace TestIntLimits
                 fail = true;
             }
 
-
             try
             {
                 CheckedMulNenIntMin(1);
                 fail = true;
             }
-            catch
-            { }
+            catch { }
 
             try
             {
                 CheckedMulNenIntMin(0);
-
             }
             catch
             {
@@ -78,9 +75,7 @@ namespace TestIntLimits
                 CheckedMulNeg0(int.MinValue);
                 fail = true;
             }
-            catch
-            { }
-
+            catch { }
 
             if (fail)
             {
@@ -138,19 +133,16 @@ namespace TestIntLimits
                 fail = true;
             }
 
-
             try
             {
                 CheckedNegMulIntMinValue(1);
                 fail = true;
             }
-            catch
-            { }
+            catch { }
 
             try
             {
                 CheckedNegMulIntMinValue(0);
-
             }
             catch
             {
@@ -269,16 +261,14 @@ namespace TestIntLimits
                 NegDivMinus1(int.MinValue);
                 fail = true;
             }
-            catch
-            { }
+            catch { }
 
             try
             {
                 LongNegDivMinus1(long.MinValue);
                 fail = true;
             }
-            catch
-            { }
+            catch { }
 
             if (fail)
             {

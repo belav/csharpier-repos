@@ -30,10 +30,7 @@ namespace Microsoft.Win32.SafeHandles
 
         public override bool IsInvalid
         {
-            get
-            {
-                return handle == IntPtr.Zero;
-            }
+            get { return handle == IntPtr.Zero; }
         }
     }
 }

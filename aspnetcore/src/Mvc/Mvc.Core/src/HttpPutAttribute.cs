@@ -16,10 +16,7 @@ public class HttpPutAttribute : HttpMethodAttribute
     /// <summary>
     /// Creates a new <see cref="HttpPutAttribute"/>.
     /// </summary>
-    public HttpPutAttribute()
-        : base(_supportedMethods)
-    {
-    }
+    public HttpPutAttribute() : base(_supportedMethods) { }
 
     /// <summary>
     /// Creates a new <see cref="HttpPutAttribute"/> with the given route template.

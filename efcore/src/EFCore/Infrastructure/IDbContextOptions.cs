@@ -33,6 +33,5 @@ public interface IDbContextOptions
     /// </summary>
     /// <typeparam name="TExtension">The type of the extension to get.</typeparam>
     /// <returns>The extension, or <see langword="null" /> if none was found.</returns>
-    TExtension? FindExtension<TExtension>()
-        where TExtension : class, IDbContextOptionsExtension;
+    TExtension? FindExtension<TExtension>() where TExtension : class, IDbContextOptionsExtension;
 }

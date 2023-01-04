@@ -15,8 +15,7 @@ namespace System.Reflection.TypeLoading.Ecma
     /// The "T" type is the value type (e.g. RoTypeDefinition objects)
     /// The "C" type is an optional context value passed through the factory methods (so we don't to allocate a closure each time.)
     /// </summary>
-    internal sealed class MetadataTable<T, C>
-        where T : class
+    internal sealed class MetadataTable<T, C> where T : class
     {
         private readonly T?[] _table;
 

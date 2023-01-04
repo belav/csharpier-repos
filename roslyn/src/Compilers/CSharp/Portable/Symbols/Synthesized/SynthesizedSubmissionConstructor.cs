@@ -13,20 +13,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         private readonly ImmutableArray<ParameterSymbol> _parameters;
 
-        internal SynthesizedSubmissionConstructor(NamedTypeSymbol containingType, BindingDiagnosticBag diagnostics)
-            : base(containingType)
+        internal SynthesizedSubmissionConstructor(
+            NamedTypeSymbol containingType,
+            BindingDiagnosticBag diagnostics
+        ) : base(containingType)
         {
             Debug.Assert(containingType.TypeKind == TypeKind.Submission);
             Debug.Assert(diagnostics != null);
 
             var compilation = containingType.DeclaringCompilation;
 
-            var submissionArrayType = compilation.CreateArrayTypeSymbol(compilation.GetSpecialType(SpecialType.System_Object));
+            var submissionArrayType = compilation.CreateArrayTypeSymbol(
+                compilation.GetSpecialType(SpecialType.System_Object)
+            );
             var useSiteInfo = submissionArrayType.GetUseSiteInfo();
             diagnostics.Add(useSiteInfo, NoLocation.Singleton);
 
             _parameters = ImmutableArray.Create<ParameterSymbol>(
-                SynthesizedParameterSymbol.Create(this, TypeWithAnnotations.Create(submissionArrayType), 0, RefKind.None, "submissionArray"));
+                SynthesizedParameterSymbol.Create(
+                    this,
+                    TypeWithAnnotations.Create(submissionArrayType),
+                    0,
+                    RefKind.None,
+                    "submissionArray"
+                )
+            );
         }
 
         public override ImmutableArray<ParameterSymbol> Parameters

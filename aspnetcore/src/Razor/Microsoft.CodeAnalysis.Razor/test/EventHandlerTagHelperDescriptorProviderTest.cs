@@ -15,7 +15,9 @@ public class EventHandlerTagHelperDescriptorProviderTest : TagHelperDescriptorPr
     public void Execute_EventHandler_CreatesDescriptor()
     {
         // Arrange
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using System;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -27,7 +29,9 @@ namespace Test
     {
     }
 }
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -53,17 +57,24 @@ namespace Test
         Assert.Empty(item.Diagnostics);
         Assert.False(item.HasErrors);
         Assert.Equal(ComponentMetadata.EventHandler.TagHelperKind, item.Kind);
-        Assert.Equal(bool.TrueString, item.Metadata[TagHelperMetadata.Common.ClassifyAttributesOnly]);
-        Assert.Equal(ComponentMetadata.EventHandler.RuntimeName, item.Metadata[TagHelperMetadata.Runtime.Name]);
+        Assert.Equal(
+            bool.TrueString,
+            item.Metadata[TagHelperMetadata.Common.ClassifyAttributesOnly]
+        );
+        Assert.Equal(
+            ComponentMetadata.EventHandler.RuntimeName,
+            item.Metadata[TagHelperMetadata.Runtime.Name]
+        );
         Assert.False(item.IsDefaultKind());
         Assert.False(item.KindUsesDefaultTagHelperRuntime());
         Assert.False(item.IsComponentOrChildContentTagHelper());
         Assert.True(item.CaseSensitive);
 
         Assert.Equal(
-            "Sets the '@onclick' attribute to the provided string or delegate value. " +
-            "A delegate value should be of type 'System.Action<Microsoft.AspNetCore.Components.Web.MouseEventArgs>'.",
-            item.Documentation);
+            "Sets the '@onclick' attribute to the provided string or delegate value. "
+                + "A delegate value should be of type 'System.Action<Microsoft.AspNetCore.Components.Web.MouseEventArgs>'.",
+            item.Documentation
+        );
 
         // These are all trivially derived from the assembly/namespace/type name
         Assert.Equal("Microsoft.AspNetCore.Components", item.AssemblyName);
@@ -83,9 +94,15 @@ namespace Test
         Assert.Empty(requiredAttribute.Diagnostics);
         Assert.Equal("@onclick", requiredAttribute.DisplayName);
         Assert.Equal("@onclick", requiredAttribute.Name);
-        Assert.Equal(RequiredAttributeDescriptor.NameComparisonMode.FullMatch, requiredAttribute.NameComparison);
+        Assert.Equal(
+            RequiredAttributeDescriptor.NameComparisonMode.FullMatch,
+            requiredAttribute.NameComparison
+        );
         Assert.Null(requiredAttribute.Value);
-        Assert.Equal(RequiredAttributeDescriptor.ValueComparisonMode.None, requiredAttribute.ValueComparison);
+        Assert.Equal(
+            RequiredAttributeDescriptor.ValueComparisonMode.None,
+            requiredAttribute.ValueComparison
+        );
 
         var attribute = Assert.Single(item.BoundAttributes);
 
@@ -102,27 +119,55 @@ namespace Test
 
         Assert.Collection(
             attribute.Metadata.OrderBy(kvp => kvp.Key),
-            kvp => Assert.Equal(kvp, new KeyValuePair<string, string>(ComponentMetadata.Common.DirectiveAttribute, bool.TrueString)),
-            kvp => Assert.Equal(kvp, new KeyValuePair<string, string>("Common.PropertyName", "onclick")),
-            kvp => Assert.Equal(kvp, new KeyValuePair<string, string>(ComponentMetadata.Component.WeaklyTypedKey, bool.TrueString)));
+            kvp =>
+                Assert.Equal(
+                    kvp,
+                    new KeyValuePair<string, string>(
+                        ComponentMetadata.Common.DirectiveAttribute,
+                        bool.TrueString
+                    )
+                ),
+            kvp =>
+                Assert.Equal(
+                    kvp,
+                    new KeyValuePair<string, string>("Common.PropertyName", "onclick")
+                ),
+            kvp =>
+                Assert.Equal(
+                    kvp,
+                    new KeyValuePair<string, string>(
+                        ComponentMetadata.Component.WeaklyTypedKey,
+                        bool.TrueString
+                    )
+                )
+        );
 
         Assert.Equal(
-            "Sets the '@onclick' attribute to the provided string or delegate value. " +
-            "A delegate value should be of type 'System.Action<Microsoft.AspNetCore.Components.Web.MouseEventArgs>'.",
-            attribute.Documentation);
+            "Sets the '@onclick' attribute to the provided string or delegate value. "
+                + "A delegate value should be of type 'System.Action<Microsoft.AspNetCore.Components.Web.MouseEventArgs>'.",
+            attribute.Documentation
+        );
 
         Assert.Equal("@onclick", attribute.Name);
         Assert.Equal("onclick", attribute.GetPropertyName());
-        Assert.Equal("Microsoft.AspNetCore.Components.EventCallback<System.Action<Microsoft.AspNetCore.Components.Web.MouseEventArgs>> Test.EventHandlers.onclick", attribute.DisplayName);
+        Assert.Equal(
+            "Microsoft.AspNetCore.Components.EventCallback<System.Action<Microsoft.AspNetCore.Components.Web.MouseEventArgs>> Test.EventHandlers.onclick",
+            attribute.DisplayName
+        );
 
         // Defined from the property type
-        Assert.Equal("Microsoft.AspNetCore.Components.EventCallback<System.Action<Microsoft.AspNetCore.Components.Web.MouseEventArgs>>", attribute.TypeName);
+        Assert.Equal(
+            "Microsoft.AspNetCore.Components.EventCallback<System.Action<Microsoft.AspNetCore.Components.Web.MouseEventArgs>>",
+            attribute.TypeName
+        );
         Assert.False(attribute.IsStringProperty);
         Assert.False(attribute.IsBooleanProperty);
         Assert.False(attribute.IsEnum);
     }
 
-    private static TagHelperDescriptor[] GetEventHandlerTagHelpers(TagHelperDescriptorProviderContext context)
+    private static TagHelperDescriptor[] GetEventHandlerTagHelpers(
+        TagHelperDescriptorProviderContext context
+    )
     {
         return ExcludeBuiltInComponents(context).Where(t => t.IsEventHandlerTagHelper()).ToArray();
     }

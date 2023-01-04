@@ -14,24 +14,23 @@ public class SectionDirectivePassTest
     {
         // Arrange
         var projectEngine = CreateProjectEngine();
-        var pass = new SectionDirectivePass()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var pass = new SectionDirectivePass() { Engine = projectEngine.Engine, };
 
-        var sourceDocument = TestRazorSourceDocument.Create("@section Header { <p>Hello World</p> }");
+        var sourceDocument = TestRazorSourceDocument.Create(
+            "@section Header { <p>Hello World</p> }"
+        );
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
 
         var irDocument = new DocumentIntermediateNode();
-        irDocument.Children.Add(new DirectiveIntermediateNode() { Directive = SectionDirective.Directive, });
+        irDocument.Children.Add(
+            new DirectiveIntermediateNode() { Directive = SectionDirective.Directive, }
+        );
 
         // Act
         pass.Execute(codeDocument, irDocument);
 
         // Assert
-        Children(
-            irDocument,
-            node => Assert.IsType<DirectiveIntermediateNode>(node));
+        Children(irDocument, node => Assert.IsType<DirectiveIntermediateNode>(node));
     }
 
     [Fact]
@@ -39,10 +38,7 @@ public class SectionDirectivePassTest
     {
         // Arrange
         var projectEngine = CreateProjectEngine();
-        var pass = new SectionDirectivePass()
-        {
-            Engine = projectEngine.Engine,
-        };
+        var pass = new SectionDirectivePass() { Engine = projectEngine.Engine, };
 
         var content = "@section Header { <p>Hello World</p> }";
         var sourceDocument = TestRazorSourceDocument.Create(content);
@@ -54,14 +50,10 @@ public class SectionDirectivePassTest
         pass.Execute(codeDocument, irDocument);
 
         // Assert
-        Children(
-            irDocument,
-            node => Assert.IsType<NamespaceDeclarationIntermediateNode>(node));
+        Children(irDocument, node => Assert.IsType<NamespaceDeclarationIntermediateNode>(node));
 
         var @namespace = irDocument.Children[0];
-        Children(
-            @namespace,
-            node => Assert.IsType<ClassDeclarationIntermediateNode>(node));
+        Children(@namespace, node => Assert.IsType<ClassDeclarationIntermediateNode>(node));
 
         var @class = @namespace.Children[0];
         var method = SingleChild<MethodDeclarationIntermediateNode>(@class);
@@ -69,7 +61,8 @@ public class SectionDirectivePassTest
         Children(
             method,
             node => Assert.IsType<DirectiveIntermediateNode>(node),
-            node => Assert.IsType<SectionIntermediateNode>(node));
+            node => Assert.IsType<SectionIntermediateNode>(node)
+        );
 
         var section = method.Children[1] as SectionIntermediateNode;
         Assert.Equal("Header", section.SectionName);
@@ -84,7 +77,10 @@ public class SectionDirectivePassTest
         });
     }
 
-    private static DocumentIntermediateNode Lower(RazorCodeDocument codeDocument, RazorProjectEngine projectEngine)
+    private static DocumentIntermediateNode Lower(
+        RazorCodeDocument codeDocument,
+        RazorProjectEngine projectEngine
+    )
     {
         for (var i = 0; i < projectEngine.Phases.Count; i++)
         {

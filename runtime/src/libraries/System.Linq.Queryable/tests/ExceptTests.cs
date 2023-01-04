@@ -43,7 +43,10 @@ namespace System.Linq.Tests
             IQueryable<string> first = null;
             string[] second = { "bBo", "shriC" };
 
-            AssertExtensions.Throws<ArgumentNullException>("source1", () => first.Except(second.AsQueryable(), new AnagramEqualityComparer()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source1",
+                () => first.Except(second.AsQueryable(), new AnagramEqualityComparer())
+            );
         }
 
         [Fact]
@@ -52,7 +55,10 @@ namespace System.Linq.Tests
             string[] first = { "Bob", "Tim", "Robert", "Chris" };
             IQueryable<string> second = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("source2", () => first.AsQueryable().Except(second, new AnagramEqualityComparer()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source2",
+                () => first.AsQueryable().Except(second, new AnagramEqualityComparer())
+            );
         }
 
         [Fact]
@@ -61,7 +67,10 @@ namespace System.Linq.Tests
             IQueryable<string> first = null;
             string[] second = { "bBo", "shriC" };
 
-            AssertExtensions.Throws<ArgumentNullException>("source1", () => first.Except(second.AsQueryable()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source1",
+                () => first.Except(second.AsQueryable())
+            );
         }
 
         [Fact]
@@ -70,20 +79,29 @@ namespace System.Linq.Tests
             string[] first = { "Bob", "Tim", "Robert", "Chris" };
             IQueryable<string> second = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("source2", () => first.AsQueryable().Except(second));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source2",
+                () => first.AsQueryable().Except(second)
+            );
         }
 
         [Fact]
         public void Except1()
         {
-            var count = new[] { 0, 1, 2 }.AsQueryable().Except(new[] { 1, 2, 3 }.AsQueryable()).Count();
+            var count = new[] { 0, 1, 2 }
+                .AsQueryable()
+                .Except(new[] { 1, 2, 3 }.AsQueryable())
+                .Count();
             Assert.Equal(1, count);
         }
 
         [Fact]
         public void Except2()
         {
-            var count = new[] { 0, 1, 2 }.AsQueryable().Except(new[] { 1, 2, 3 }.AsQueryable(), EqualityComparer<int>.Default).Count();
+            var count = new[] { 0, 1, 2 }
+                .AsQueryable()
+                .Except(new[] { 1, 2, 3 }.AsQueryable(), EqualityComparer<int>.Default)
+                .Count();
             Assert.Equal(1, count);
         }
 
@@ -92,8 +110,15 @@ namespace System.Linq.Tests
         {
             IQueryable<int> source1 = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("source1", () => source1.ExceptBy(Enumerable.Empty<int>(), x => x));
-            AssertExtensions.Throws<ArgumentNullException>("source1", () => source1.ExceptBy(Enumerable.Empty<int>(), x => x, EqualityComparer<int>.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source1",
+                () => source1.ExceptBy(Enumerable.Empty<int>(), x => x)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source1",
+                () =>
+                    source1.ExceptBy(Enumerable.Empty<int>(), x => x, EqualityComparer<int>.Default)
+            );
         }
 
         [Fact]
@@ -102,8 +127,14 @@ namespace System.Linq.Tests
             IQueryable<int> source1 = Enumerable.Empty<int>().AsQueryable();
             IQueryable<int> source2 = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("source2", () => source1.ExceptBy(source2, x => x));
-            AssertExtensions.Throws<ArgumentNullException>("source2", () => source1.ExceptBy(source2, x => x, EqualityComparer<int>.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source2",
+                () => source1.ExceptBy(source2, x => x)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source2",
+                () => source1.ExceptBy(source2, x => x, EqualityComparer<int>.Default)
+            );
         }
 
         [Fact]
@@ -112,15 +143,25 @@ namespace System.Linq.Tests
             IQueryable<int> source = Enumerable.Empty<int>().AsQueryable();
             Expression<Func<int, int>> keySelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("keySelector", () => source.ExceptBy(source, keySelector));
-            AssertExtensions.Throws<ArgumentNullException>("keySelector", () => source.ExceptBy(source, keySelector, EqualityComparer<int>.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keySelector",
+                () => source.ExceptBy(source, keySelector)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keySelector",
+                () => source.ExceptBy(source, keySelector, EqualityComparer<int>.Default)
+            );
         }
 
         [Fact]
         public void ExceptBy()
         {
             var expected = Enumerable.Range(5, 5);
-            var actual = Enumerable.Range(0, 10).AsQueryable().ExceptBy(Enumerable.Range(0, 5), x => x).ToArray();
+            var actual = Enumerable
+                .Range(0, 10)
+                .AsQueryable()
+                .ExceptBy(Enumerable.Range(0, 5), x => x)
+                .ToArray();
             Assert.Equal(expected, actual);
         }
 
@@ -128,7 +169,11 @@ namespace System.Linq.Tests
         public void ExceptBy_CustomComparison()
         {
             var expected = Enumerable.Range(5, 5);
-            var actual = Enumerable.Range(0, 10).AsQueryable().ExceptBy(Enumerable.Range(0, 5), x => x, EqualityComparer<int>.Default).ToArray();
+            var actual = Enumerable
+                .Range(0, 10)
+                .AsQueryable()
+                .ExceptBy(Enumerable.Range(0, 5), x => x, EqualityComparer<int>.Default)
+                .ToArray();
             Assert.Equal(expected, actual);
         }
     }

@@ -75,20 +75,26 @@ public class RenderTreeDiffBuilderBenchmark
         modified.CloseElement();
     }
 
-    [Benchmark(Description = "RenderTreeDiffBuilder: Input and validation on a single form field.", Baseline = true)]
+    [Benchmark(
+        Description = "RenderTreeDiffBuilder: Input and validation on a single form field.",
+        Baseline = true
+    )]
     public void ComputeDiff_SingleFormField()
     {
         builder.ClearStateForCurrentBatch();
-        var diff = RenderTreeDiffBuilder.ComputeDiff(renderer, builder, 0, original.GetFrames(), modified.GetFrames());
+        var diff = RenderTreeDiffBuilder.ComputeDiff(
+            renderer,
+            builder,
+            0,
+            original.GetFrames(),
+            modified.GetFrames()
+        );
         GC.KeepAlive(diff);
     }
 
     private sealed class FakeRenderer : Renderer
     {
-        public FakeRenderer()
-            : base(new TestServiceProvider(), NullLoggerFactory.Instance)
-        {
-        }
+        public FakeRenderer() : base(new TestServiceProvider(), NullLoggerFactory.Instance) { }
 
         public override Dispatcher Dispatcher { get; } = Dispatcher.CreateDefault();
 
@@ -97,8 +103,8 @@ public class RenderTreeDiffBuilderBenchmark
             throw new NotImplementedException();
         }
 
-        protected override Task UpdateDisplayAsync(in RenderBatch renderBatch)
-            => Task.CompletedTask;
+        protected override Task UpdateDisplayAsync(in RenderBatch renderBatch) =>
+            Task.CompletedTask;
     }
 
     private sealed class TestServiceProvider : IServiceProvider

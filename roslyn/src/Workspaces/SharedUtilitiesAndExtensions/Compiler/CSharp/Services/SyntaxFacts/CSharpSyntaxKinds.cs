@@ -10,13 +10,11 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
     {
         public static readonly CSharpSyntaxKinds Instance = new();
 
-        protected CSharpSyntaxKinds()
-        {
-        }
+        protected CSharpSyntaxKinds() { }
 
         // Boxing/Unboxing casts from Object to TSyntaxKind will be erased by jit.
-        public TSyntaxKind Convert<TSyntaxKind>(int kind) where TSyntaxKind : struct
-            => (TSyntaxKind)(object)(SyntaxKind)kind;
+        public TSyntaxKind Convert<TSyntaxKind>(int kind) where TSyntaxKind : struct =>
+            (TSyntaxKind)(object)(SyntaxKind)kind;
 
         public int ConflictMarkerTrivia => (int)SyntaxKind.ConflictMarkerTrivia;
         public int DisabledTextTrivia => (int)SyntaxKind.DisabledTextTrivia;
@@ -25,8 +23,10 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
         public int WhitespaceTrivia => (int)SyntaxKind.WhitespaceTrivia;
         public int SingleLineCommentTrivia => (int)SyntaxKind.SingleLineCommentTrivia;
         public int? MultiLineCommentTrivia => (int)SyntaxKind.MultiLineCommentTrivia;
-        public int SingleLineDocCommentTrivia => (int)SyntaxKind.SingleLineDocumentationCommentTrivia;
-        public int? MultiLineDocCommentTrivia => (int)SyntaxKind.MultiLineDocumentationCommentTrivia;
+        public int SingleLineDocCommentTrivia =>
+            (int)SyntaxKind.SingleLineDocumentationCommentTrivia;
+        public int? MultiLineDocCommentTrivia =>
+            (int)SyntaxKind.MultiLineDocumentationCommentTrivia;
         public int? ShebangDirectiveTrivia => (int)SyntaxKind.ShebangDirectiveTrivia;
         public int IfDirectiveTrivia => (int)SyntaxKind.IfDirectiveTrivia;
 
@@ -37,11 +37,15 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
         public int InterpolatedStringTextToken => (int)SyntaxKind.InterpolatedStringTextToken;
         public int QuestionToken => (int)SyntaxKind.QuestionToken;
         public int StringLiteralToken => (int)SyntaxKind.StringLiteralToken;
-        public int? SingleLineRawStringLiteralToken => (int)SyntaxKind.SingleLineRawStringLiteralToken;
-        public int? MultiLineRawStringLiteralToken => (int)SyntaxKind.MultiLineRawStringLiteralToken;
+        public int? SingleLineRawStringLiteralToken =>
+            (int)SyntaxKind.SingleLineRawStringLiteralToken;
+        public int? MultiLineRawStringLiteralToken =>
+            (int)SyntaxKind.MultiLineRawStringLiteralToken;
         public int? Utf8StringLiteralToken => (int)SyntaxKind.Utf8StringLiteralToken;
-        public int? Utf8SingleLineRawStringLiteralToken => (int)SyntaxKind.Utf8SingleLineRawStringLiteralToken;
-        public int? Utf8MultiLineRawStringLiteralToken => (int)SyntaxKind.Utf8MultiLineRawStringLiteralToken;
+        public int? Utf8SingleLineRawStringLiteralToken =>
+            (int)SyntaxKind.Utf8SingleLineRawStringLiteralToken;
+        public int? Utf8MultiLineRawStringLiteralToken =>
+            (int)SyntaxKind.Utf8MultiLineRawStringLiteralToken;
 
         public int XmlTextLiteralToken => (int)SyntaxKind.XmlTextLiteralToken;
 
@@ -64,14 +68,17 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
         public int StringLiteralExpression => (int)SyntaxKind.StringLiteralExpression;
         public int TrueLiteralExpression => (int)SyntaxKind.TrueLiteralExpression;
 
-        public int AnonymousObjectCreationExpression => (int)SyntaxKind.AnonymousObjectCreationExpression;
+        public int AnonymousObjectCreationExpression =>
+            (int)SyntaxKind.AnonymousObjectCreationExpression;
         public int ArrayCreationExpression => (int)SyntaxKind.ArrayCreationExpression;
         public int AwaitExpression => (int)SyntaxKind.AwaitExpression;
         public int BaseExpression => (int)SyntaxKind.BaseExpression;
         public int ConditionalAccessExpression => (int)SyntaxKind.ConditionalAccessExpression;
         public int ConditionalExpression => (int)SyntaxKind.ConditionalExpression;
-        public int? ImplicitArrayCreationExpression => (int)SyntaxKind.ImplicitArrayCreationExpression;
-        public int? ImplicitObjectCreationExpression => (int)SyntaxKind.ImplicitObjectCreationExpression;
+        public int? ImplicitArrayCreationExpression =>
+            (int)SyntaxKind.ImplicitArrayCreationExpression;
+        public int? ImplicitObjectCreationExpression =>
+            (int)SyntaxKind.ImplicitObjectCreationExpression;
         public int? IndexExpression => (int)SyntaxKind.IndexExpression;
         public int InvocationExpression => (int)SyntaxKind.InvocationExpression;
         public int? IsPatternExpression => (int)SyntaxKind.IsPatternExpression;

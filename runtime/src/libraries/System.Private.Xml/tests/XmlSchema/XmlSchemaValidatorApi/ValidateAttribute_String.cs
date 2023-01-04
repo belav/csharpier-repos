@@ -83,7 +83,9 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         [InlineData("DefaultAttribute")]
         [InlineData("FixedAttribute")]
         [InlineData("FixedRequiredAttribute")]
-        public void Validate_Required_Optional_Default_Fixed_FixedRequired_Attribute(string attrType)
+        public void Validate_Required_Optional_Default_Fixed_FixedRequired_Attribute(
+            string attrType
+        )
         {
             XmlSchemaValidator val = CreateValidator(XSDFILE_VALIDATE_ATTRIBUTE);
             XmlSchemaInfo info = new XmlSchemaInfo();
@@ -109,7 +111,10 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             val.ValidateElement("NamespaceAttributeElement", "", null);
             val.ValidateAttribute("attr1", "uri:tempuri", "123", info);
 
-            Assert.Equal(info.SchemaAttribute.QualifiedName, new XmlQualifiedName("attr1", "uri:tempuri"));
+            Assert.Equal(
+                info.SchemaAttribute.QualifiedName,
+                new XmlQualifiedName("attr1", "uri:tempuri")
+            );
             Assert.Equal(XmlSchemaValidity.Valid, info.Validity);
             Assert.Equal(XmlTypeCode.Int, info.SchemaType.TypeCode);
 
@@ -144,7 +149,12 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
             foreach (XmlSchemaAttribute a in atts)
             {
-                val.ValidateAttribute(a.QualifiedName.Name, a.QualifiedName.Namespace, a.DefaultValue, info);
+                val.ValidateAttribute(
+                    a.QualifiedName.Name,
+                    a.QualifiedName.Namespace,
+                    a.DefaultValue,
+                    info
+                );
                 Assert.Equal(info.SchemaAttribute, a);
             }
 
@@ -169,7 +179,10 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             val.Initialize();
             val.ValidateAttribute("BasicAttribute", "", "foo", info);
 
-            Assert.Equal(info.SchemaAttribute, schemas.GlobalAttributes[new XmlQualifiedName("BasicAttribute")]);
+            Assert.Equal(
+                info.SchemaAttribute,
+                schemas.GlobalAttributes[new XmlQualifiedName("BasicAttribute")]
+            );
 
             return;
         }
@@ -190,7 +203,11 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             }
             catch (XmlSchemaValidationException e)
             {
-                _exVerifier.IsExceptionOk(e, "Sch_DuplicateAttribute", new string[] { "RequiredAttribute" });
+                _exVerifier.IsExceptionOk(
+                    e,
+                    "Sch_DuplicateAttribute",
+                    new string[] { "RequiredAttribute" }
+                );
                 return;
             }
 

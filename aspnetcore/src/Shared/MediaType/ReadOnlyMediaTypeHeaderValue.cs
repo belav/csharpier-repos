@@ -15,19 +15,14 @@ internal readonly struct ReadOnlyMediaTypeHeaderValue
     /// Initializes a <see cref="ReadOnlyMediaTypeHeaderValue"/> instance.
     /// </summary>
     /// <param name="mediaType">The <see cref="string"/> with the media type.</param>
-    public ReadOnlyMediaTypeHeaderValue(string mediaType)
-        : this(mediaType, 0, mediaType.Length)
-    {
-    }
+    public ReadOnlyMediaTypeHeaderValue(string mediaType) : this(mediaType, 0, mediaType.Length) { }
 
     /// <summary>
     /// Initializes a <see cref="ReadOnlyMediaTypeHeaderValue"/> instance.
     /// </summary>
     /// <param name="mediaType">The <see cref="StringSegment"/> with the media type.</param>
     public ReadOnlyMediaTypeHeaderValue(StringSegment mediaType)
-        : this(mediaType.Buffer ?? string.Empty, mediaType.Offset, mediaType.Length)
-    {
-    }
+        : this(mediaType.Buffer ?? string.Empty, mediaType.Offset, mediaType.Length) { }
 
     /// <summary>
     /// Initializes a <see cref="MediaTypeParameterParser"/> instance.
@@ -67,8 +62,14 @@ internal readonly struct ReadOnlyMediaTypeHeaderValue
 
             if (TryGetSuffixLength(subType, out var subtypeSuffixLength))
             {
-                SubTypeWithoutSuffix = subType.Subsegment(0, subType.Length - subtypeSuffixLength - 1);
-                SubTypeSuffix = subType.Subsegment(subType.Length - subtypeSuffixLength, subtypeSuffixLength);
+                SubTypeWithoutSuffix = subType.Subsegment(
+                    0,
+                    subType.Length - subtypeSuffixLength - 1
+                );
+                SubTypeSuffix = subType.Subsegment(
+                    subType.Length - subtypeSuffixLength,
+                    subtypeSuffixLength
+                );
             }
             else
             {
@@ -77,7 +78,11 @@ internal readonly struct ReadOnlyMediaTypeHeaderValue
             }
         }
 
-        ParameterParser = new MediaTypeParameterParser(mediaType, offset + typeLength + subTypeLength, length);
+        ParameterParser = new MediaTypeParameterParser(
+            mediaType,
+            offset + typeLength + subTypeLength,
+            length
+        );
     }
 
     // All GetXXXLength methods work in the same way. They expect to be on the right position for
@@ -217,7 +222,8 @@ internal readonly struct ReadOnlyMediaTypeHeaderValue
     /// <example>
     /// For the media type <c>"application/vnd.example+json"</c>, this property is <c>false</c>.
     /// </example>
-    public bool MatchesAllSubTypesWithoutSuffix => SubTypeWithoutSuffix.Equals("*", StringComparison.OrdinalIgnoreCase);
+    public bool MatchesAllSubTypesWithoutSuffix =>
+        SubTypeWithoutSuffix.Equals("*", StringComparison.OrdinalIgnoreCase);
 
     /// <summary>
     /// Gets the <see cref="System.Text.Encoding"/> of the <see cref="ReadOnlyMediaTypeHeaderValue"/> if it has one.
@@ -239,9 +245,9 @@ internal readonly struct ReadOnlyMediaTypeHeaderValue
     {
         get
         {
-            return MatchesAllTypes ||
-                MatchesAllSubTypesWithoutSuffix ||
-                GetParameter("*").Equals("*", StringComparison.OrdinalIgnoreCase);
+            return MatchesAllTypes
+                || MatchesAllSubTypesWithoutSuffix
+                || GetParameter("*").Equals("*", StringComparison.OrdinalIgnoreCase);
         }
     }
 
@@ -257,9 +263,9 @@ internal readonly struct ReadOnlyMediaTypeHeaderValue
     /// </returns>
     public bool IsSubsetOf(ReadOnlyMediaTypeHeaderValue set)
     {
-        return MatchesType(set) &&
-            MatchesSubtype(set) &&
-            ContainsAllParameters(set.ParameterParser);
+        return MatchesType(set)
+            && MatchesSubtype(set)
+            && ContainsAllParameters(set.ParameterParser);
     }
 
     /// <summary>
@@ -367,8 +373,7 @@ internal readonly struct ReadOnlyMediaTypeHeaderValue
 
     private bool MatchesType(ReadOnlyMediaTypeHeaderValue set)
     {
-        return set.MatchesAllTypes ||
-            set.Type.Equals(Type, StringComparison.OrdinalIgnoreCase);
+        return set.MatchesAllTypes || set.Type.Equals(Type, StringComparison.OrdinalIgnoreCase);
     }
 
     private bool MatchesSubtype(ReadOnlyMediaTypeHeaderValue set)
@@ -402,8 +407,11 @@ internal readonly struct ReadOnlyMediaTypeHeaderValue
 
     private bool MatchesSubtypeWithoutSuffix(ReadOnlyMediaTypeHeaderValue set)
     {
-        return set.MatchesAllSubTypesWithoutSuffix ||
-            set.SubTypeWithoutSuffix.Equals(SubTypeWithoutSuffix, StringComparison.OrdinalIgnoreCase);
+        return set.MatchesAllSubTypesWithoutSuffix
+            || set.SubTypeWithoutSuffix.Equals(
+                SubTypeWithoutSuffix,
+                StringComparison.OrdinalIgnoreCase
+            );
     }
 
     private bool MatchesSubtypeSuffix(ReadOnlyMediaTypeHeaderValue set)
@@ -415,8 +423,8 @@ internal readonly struct ReadOnlyMediaTypeHeaderValue
 
     private bool MatchesEitherSubtypeOrSuffix(ReadOnlyMediaTypeHeaderValue set)
     {
-        return set.SubType.Equals(SubType, StringComparison.OrdinalIgnoreCase) ||
-            set.SubType.Equals(SubTypeSuffix, StringComparison.OrdinalIgnoreCase);
+        return set.SubType.Equals(SubType, StringComparison.OrdinalIgnoreCase)
+            || set.SubType.Equals(SubTypeSuffix, StringComparison.OrdinalIgnoreCase);
     }
 
     private bool ContainsAllParameters(MediaTypeParameterParser setParameters)
@@ -489,7 +497,11 @@ internal readonly struct ReadOnlyMediaTypeHeaderValue
             return true;
         }
 
-        private static int GetParameterLength(string input, int startIndex, out MediaTypeParameter parsedValue)
+        private static int GetParameterLength(
+            string input,
+            int startIndex,
+            out MediaTypeParameter parsedValue
+        )
         {
             if (OffsetIsOutOfRange(startIndex, input.Length) || input[startIndex] != ';')
             {
@@ -501,7 +513,11 @@ internal readonly struct ReadOnlyMediaTypeHeaderValue
 
             var current = startIndex + nameLength;
 
-            if (nameLength == 0 || OffsetIsOutOfRange(current, input.Length) || input[current] != '=')
+            if (
+                nameLength == 0
+                || OffsetIsOutOfRange(current, input.Length)
+                || input[current] != '='
+            )
             {
                 if (current == input.Length && name.Equals("*", StringComparison.OrdinalIgnoreCase))
                 {
@@ -560,7 +576,11 @@ internal readonly struct ReadOnlyMediaTypeHeaderValue
             if (valueLength == 0)
             {
                 // A value can either be a token or a quoted string. Check if it is a quoted string.
-                var result = HttpTokenParsingRules.GetQuotedStringLength(input, current, out valueLength);
+                var result = HttpTokenParsingRules.GetQuotedStringLength(
+                    input,
+                    current,
+                    out valueLength
+                );
                 if (result != HttpParseResult.Parsed)
                 {
                     // We have an invalid value. Reset the name and return.
@@ -612,7 +632,8 @@ internal readonly struct ReadOnlyMediaTypeHeaderValue
 
         public bool Equals(MediaTypeParameter other)
         {
-            return HasName(other.Name) && Value.Equals(other.Value, StringComparison.OrdinalIgnoreCase);
+            return HasName(other.Name)
+                && Value.Equals(other.Value, StringComparison.OrdinalIgnoreCase);
         }
 
         public override string ToString() => $"{Name}={Value}";

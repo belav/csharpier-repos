@@ -23,34 +23,49 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
 {
     internal abstract class CSharpTypeSnippetProvider : AbstractTypeSnippetProvider
     {
-        private static readonly ISet<SyntaxKind> s_validModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
-            {
-                SyntaxKind.NewKeyword,
-                SyntaxKind.PublicKeyword,
-                SyntaxKind.ProtectedKeyword,
-                SyntaxKind.InternalKeyword,
-                SyntaxKind.PrivateKeyword,
-                SyntaxKind.AbstractKeyword,
-                SyntaxKind.SealedKeyword,
-                SyntaxKind.StaticKeyword,
-                SyntaxKind.UnsafeKeyword
-            };
-
-        protected override async Task<bool> IsValidSnippetLocationAsync(Document document, int position, CancellationToken cancellationToken)
+        private static readonly ISet<SyntaxKind> s_validModifiers = new HashSet<SyntaxKind>(
+            SyntaxFacts.EqualityComparer
+        )
         {
-            var semanticModel = await document.ReuseExistingSpeculativeModelAsync(position, cancellationToken).ConfigureAwait(false);
-            var syntaxContext = (CSharpSyntaxContext)document.GetRequiredLanguageService<ISyntaxContextService>().CreateContext(document, semanticModel, position, cancellationToken);
+            SyntaxKind.NewKeyword,
+            SyntaxKind.PublicKeyword,
+            SyntaxKind.ProtectedKeyword,
+            SyntaxKind.InternalKeyword,
+            SyntaxKind.PrivateKeyword,
+            SyntaxKind.AbstractKeyword,
+            SyntaxKind.SealedKeyword,
+            SyntaxKind.StaticKeyword,
+            SyntaxKind.UnsafeKeyword
+        };
 
-            return
-                syntaxContext.IsGlobalStatementContext ||
-                syntaxContext.IsTypeDeclarationContext(
+        protected override async Task<bool> IsValidSnippetLocationAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
+        {
+            var semanticModel = await document
+                .ReuseExistingSpeculativeModelAsync(position, cancellationToken)
+                .ConfigureAwait(false);
+            var syntaxContext = (CSharpSyntaxContext)
+                document
+                    .GetRequiredLanguageService<ISyntaxContextService>()
+                    .CreateContext(document, semanticModel, position, cancellationToken);
+
+            return syntaxContext.IsGlobalStatementContext
+                || syntaxContext.IsTypeDeclarationContext(
                     validModifiers: s_validModifiers,
                     validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
                     canBePartial: true,
-                    cancellationToken: cancellationToken);
+                    cancellationToken: cancellationToken
+                );
         }
 
-        protected override int GetTargetCaretPosition(ISyntaxFactsService syntaxFacts, SyntaxNode caretTarget, SourceText sourceText)
+        protected override int GetTargetCaretPosition(
+            ISyntaxFactsService syntaxFacts,
+            SyntaxNode caretTarget,
+            SourceText sourceText
+        )
         {
             var typeDeclaration = (TypeDeclarationSyntax)caretTarget;
             var triviaSpan = typeDeclaration.CloseBraceToken.LeadingTrivia.Span;
@@ -59,40 +74,86 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
             return line.Span.End;
         }
 
-        private static string GetIndentation(Document document, SyntaxNode node, SyntaxFormattingOptions syntaxFormattingOptions, CancellationToken cancellationToken)
+        private static string GetIndentation(
+            Document document,
+            SyntaxNode node,
+            SyntaxFormattingOptions syntaxFormattingOptions,
+            CancellationToken cancellationToken
+        )
         {
             var parsedDocument = ParsedDocument.CreateSynchronously(document, cancellationToken);
             var typeDelcaration = (TypeDeclarationSyntax)node;
-            var openBraceLine = parsedDocument.Text.Lines.GetLineFromPosition(typeDelcaration.OpenBraceToken.SpanStart).LineNumber;
+            var openBraceLine = parsedDocument.Text.Lines
+                .GetLineFromPosition(typeDelcaration.OpenBraceToken.SpanStart)
+                .LineNumber;
 
             var indentationOptions = new IndentationOptions(syntaxFormattingOptions);
             var newLine = indentationOptions.FormattingOptions.NewLine;
 
-            var indentationService = parsedDocument.LanguageServices.GetRequiredService<IIndentationService>();
-            var indentation = indentationService.GetIndentation(parsedDocument, openBraceLine + 1, indentationOptions, cancellationToken);
+            var indentationService =
+                parsedDocument.LanguageServices.GetRequiredService<IIndentationService>();
+            var indentation = indentationService.GetIndentation(
+                parsedDocument,
+                openBraceLine + 1,
+                indentationOptions,
+                cancellationToken
+            );
 
             // Adding the offset calculated with one tab so that it is indented once past the line containing the opening brace
-            var newIndentation = new IndentationResult(indentation.BasePosition, indentation.Offset + syntaxFormattingOptions.TabSize);
-            return newIndentation.GetIndentationString(parsedDocument.Text, syntaxFormattingOptions.UseTabs, syntaxFormattingOptions.TabSize) + newLine;
+            var newIndentation = new IndentationResult(
+                indentation.BasePosition,
+                indentation.Offset + syntaxFormattingOptions.TabSize
+            );
+            return newIndentation.GetIndentationString(
+                    parsedDocument.Text,
+                    syntaxFormattingOptions.UseTabs,
+                    syntaxFormattingOptions.TabSize
+                ) + newLine;
         }
 
-        protected override async Task<Document> AddIndentationToDocumentAsync(Document document, int position, ISyntaxFacts syntaxFacts, CancellationToken cancellationToken)
+        protected override async Task<Document> AddIndentationToDocumentAsync(
+            Document document,
+            int position,
+            ISyntaxFacts syntaxFacts,
+            CancellationToken cancellationToken
+        )
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var snippet = root.GetAnnotatedNodes(_findSnippetAnnotation).FirstOrDefault();
 
-            var syntaxFormattingOptions = await document.GetSyntaxFormattingOptionsAsync(fallbackOptions: null, cancellationToken).ConfigureAwait(false);
-            var indentationString = GetIndentation(document, snippet, syntaxFormattingOptions, cancellationToken);
+            var syntaxFormattingOptions = await document
+                .GetSyntaxFormattingOptionsAsync(fallbackOptions: null, cancellationToken)
+                .ConfigureAwait(false);
+            var indentationString = GetIndentation(
+                document,
+                snippet,
+                syntaxFormattingOptions,
+                cancellationToken
+            );
 
             var originalTypeDeclaration = (TypeDeclarationSyntax)snippet;
             var newTypeDeclaration = originalTypeDeclaration.WithCloseBraceToken(
-                originalTypeDeclaration.CloseBraceToken.WithPrependedLeadingTrivia(SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, indentationString)));
+                originalTypeDeclaration.CloseBraceToken.WithPrependedLeadingTrivia(
+                    SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, indentationString)
+                )
+            );
 
-            var newRoot = root.ReplaceNode(originalTypeDeclaration, newTypeDeclaration.WithAdditionalAnnotations(_cursorAnnotation, _findSnippetAnnotation));
+            var newRoot = root.ReplaceNode(
+                originalTypeDeclaration,
+                newTypeDeclaration.WithAdditionalAnnotations(
+                    _cursorAnnotation,
+                    _findSnippetAnnotation
+                )
+            );
             return document.WithSyntaxRoot(newRoot);
         }
 
-        protected override void GetTypeDeclarationIdentifier(SyntaxNode node, out SyntaxToken identifier)
+        protected override void GetTypeDeclarationIdentifier(
+            SyntaxNode node,
+            out SyntaxToken identifier
+        )
         {
             var typeDeclaration = (TypeDeclarationSyntax)node;
             identifier = typeDeclaration.Identifier;

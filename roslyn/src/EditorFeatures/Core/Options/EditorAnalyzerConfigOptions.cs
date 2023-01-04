@@ -19,13 +19,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public EditorAnalyzerConfigOptions(IEditorOptions editorOptions)
         {
-            _configOptions = (editorOptions.GetOptionValue(DefaultOptions.RawCodingConventionsSnapshotOptionName) as IDictionary<string, object>) ??
-                SpecializedCollections.EmptyDictionary<string, object>();
+            _configOptions =
+                (
+                    editorOptions.GetOptionValue(
+                        DefaultOptions.RawCodingConventionsSnapshotOptionName
+                    ) as IDictionary<string, object>
+                ) ?? SpecializedCollections.EmptyDictionary<string, object>();
         }
 
         public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value)
         {
-            // TODO: the editor currently seems to store both lower-cased keys and original casing, the comparer is case-sensitive 
+            // TODO: the editor currently seems to store both lower-cased keys and original casing, the comparer is case-sensitive
             // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1556206
 
             if (_configOptions.TryGetValue(key.ToLowerInvariant(), out var objectValue))
@@ -45,8 +49,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return false;
         }
 
-        public override IEnumerable<string> Keys
-            => _configOptions.Keys.Where(IsLowercase);
+        public override IEnumerable<string> Keys => _configOptions.Keys.Where(IsLowercase);
 
         private static bool IsLowercase(string str)
         {

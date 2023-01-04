@@ -13,7 +13,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQueryableMethodTranslatingExpressionVisitor
+public class SqlServerQueryableMethodTranslatingExpressionVisitor
+    : RelationalQueryableMethodTranslatingExpressionVisitor
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -24,10 +25,8 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     public SqlServerQueryableMethodTranslatingExpressionVisitor(
         QueryableMethodTranslatingExpressionVisitorDependencies dependencies,
         RelationalQueryableMethodTranslatingExpressionVisitorDependencies relationalDependencies,
-        QueryCompilationContext queryCompilationContext)
-        : base(dependencies, relationalDependencies, queryCompilationContext)
-    {
-    }
+        QueryCompilationContext queryCompilationContext
+    ) : base(dependencies, relationalDependencies, queryCompilationContext) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -36,10 +35,8 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqlServerQueryableMethodTranslatingExpressionVisitor(
-        SqlServerQueryableMethodTranslatingExpressionVisitor parentVisitor)
-        : base(parentVisitor)
-    {
-    }
+        SqlServerQueryableMethodTranslatingExpressionVisitor parentVisitor
+    ) : base(parentVisitor) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -47,8 +44,8 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override QueryableMethodTranslatingExpressionVisitor CreateSubqueryVisitor()
-        => new SqlServerQueryableMethodTranslatingExpressionVisitor(this);
+    protected override QueryableMethodTranslatingExpressionVisitor CreateSubqueryVisitor() =>
+        new SqlServerQueryableMethodTranslatingExpressionVisitor(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -60,31 +57,77 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     {
         if (extensionExpression is TemporalQueryRootExpression queryRootExpression)
         {
-            var selectExpression = RelationalDependencies.SqlExpressionFactory.Select(queryRootExpression.EntityType);
-            Func<TableExpression, TableExpressionBase> annotationApplyingFunc = queryRootExpression switch
-            {
-                TemporalAllQueryRootExpression => te => te
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalOperationType, TemporalOperationType.All),
-                TemporalAsOfQueryRootExpression asOf => te => te
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalOperationType, TemporalOperationType.AsOf)
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalAsOfPointInTime, asOf.PointInTime),
-                TemporalBetweenQueryRootExpression between => te => te
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalOperationType, TemporalOperationType.Between)
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalRangeOperationFrom, between.From)
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalRangeOperationTo, between.To),
-                TemporalContainedInQueryRootExpression containedIn => te => te
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalOperationType, TemporalOperationType.ContainedIn)
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalRangeOperationFrom, containedIn.From)
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalRangeOperationTo, containedIn.To),
-                TemporalFromToQueryRootExpression fromTo => te => te
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalOperationType, TemporalOperationType.FromTo)
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalRangeOperationFrom, fromTo.From)
-                    .AddAnnotation(SqlServerAnnotationNames.TemporalRangeOperationTo, fromTo.To),
-                _ => throw new InvalidOperationException(queryRootExpression.Print()),
-            };
+            var selectExpression = RelationalDependencies.SqlExpressionFactory.Select(
+                queryRootExpression.EntityType
+            );
+            Func<TableExpression, TableExpressionBase> annotationApplyingFunc =
+                queryRootExpression switch
+                {
+                    TemporalAllQueryRootExpression
+                        => te =>
+                            te.AddAnnotation(
+                                SqlServerAnnotationNames.TemporalOperationType,
+                                TemporalOperationType.All
+                            ),
+                    TemporalAsOfQueryRootExpression asOf
+                        => te =>
+                            te.AddAnnotation(
+                                    SqlServerAnnotationNames.TemporalOperationType,
+                                    TemporalOperationType.AsOf
+                                )
+                                .AddAnnotation(
+                                    SqlServerAnnotationNames.TemporalAsOfPointInTime,
+                                    asOf.PointInTime
+                                ),
+                    TemporalBetweenQueryRootExpression between
+                        => te =>
+                            te.AddAnnotation(
+                                    SqlServerAnnotationNames.TemporalOperationType,
+                                    TemporalOperationType.Between
+                                )
+                                .AddAnnotation(
+                                    SqlServerAnnotationNames.TemporalRangeOperationFrom,
+                                    between.From
+                                )
+                                .AddAnnotation(
+                                    SqlServerAnnotationNames.TemporalRangeOperationTo,
+                                    between.To
+                                ),
+                    TemporalContainedInQueryRootExpression containedIn
+                        => te =>
+                            te.AddAnnotation(
+                                    SqlServerAnnotationNames.TemporalOperationType,
+                                    TemporalOperationType.ContainedIn
+                                )
+                                .AddAnnotation(
+                                    SqlServerAnnotationNames.TemporalRangeOperationFrom,
+                                    containedIn.From
+                                )
+                                .AddAnnotation(
+                                    SqlServerAnnotationNames.TemporalRangeOperationTo,
+                                    containedIn.To
+                                ),
+                    TemporalFromToQueryRootExpression fromTo
+                        => te =>
+                            te.AddAnnotation(
+                                    SqlServerAnnotationNames.TemporalOperationType,
+                                    TemporalOperationType.FromTo
+                                )
+                                .AddAnnotation(
+                                    SqlServerAnnotationNames.TemporalRangeOperationFrom,
+                                    fromTo.From
+                                )
+                                .AddAnnotation(
+                                    SqlServerAnnotationNames.TemporalRangeOperationTo,
+                                    fromTo.To
+                                ),
+                    _ => throw new InvalidOperationException(queryRootExpression.Print()),
+                };
 
-            selectExpression = (SelectExpression)new TemporalAnnotationApplyingExpressionVisitor(annotationApplyingFunc)
-                .Visit(selectExpression);
+            selectExpression = (SelectExpression)
+                new TemporalAnnotationApplyingExpressionVisitor(annotationApplyingFunc).Visit(
+                    selectExpression
+                );
 
             return new ShapedQueryExpression(
                 selectExpression,
@@ -93,8 +136,11 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
                     new ProjectionBindingExpression(
                         selectExpression,
                         new ProjectionMember(),
-                        typeof(ValueBuffer)),
-                    false));
+                        typeof(ValueBuffer)
+                    ),
+                    false
+                )
+            );
         }
 
         return base.VisitExtension(extensionExpression);
@@ -109,13 +155,19 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     protected override bool IsValidSelectExpressionForExecuteDelete(
         SelectExpression selectExpression,
         EntityShaperExpression entityShaperExpression,
-        [NotNullWhen(true)] out TableExpression? tableExpression)
+        [NotNullWhen(true)] out TableExpression? tableExpression
+    )
     {
-        if (selectExpression.Offset == null
-            && (!selectExpression.IsDistinct || entityShaperExpression.EntityType.FindPrimaryKey() != null)
+        if (
+            selectExpression.Offset == null
+            && (
+                !selectExpression.IsDistinct
+                || entityShaperExpression.EntityType.FindPrimaryKey() != null
+            )
             && selectExpression.GroupBy.Count == 0
             && selectExpression.Having == null
-            && selectExpression.Orderings.Count == 0)
+            && selectExpression.Orderings.Count == 0
+        )
         {
             TableExpressionBase table;
             if (selectExpression.Tables.Count == 1)
@@ -124,9 +176,13 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
             }
             else
             {
-                var projectionBindingExpression = (ProjectionBindingExpression)entityShaperExpression.ValueBufferExpression;
-                var entityProjectionExpression = (EntityProjectionExpression)selectExpression.GetProjection(projectionBindingExpression);
-                var column = entityProjectionExpression.BindProperty(entityShaperExpression.EntityType.GetProperties().First());
+                var projectionBindingExpression = (ProjectionBindingExpression)
+                    entityShaperExpression.ValueBufferExpression;
+                var entityProjectionExpression = (EntityProjectionExpression)
+                    selectExpression.GetProjection(projectionBindingExpression);
+                var column = entityProjectionExpression.BindProperty(
+                    entityShaperExpression.EntityType.GetProperties().First()
+                );
                 table = column.Table;
                 if (table is JoinExpressionBase joinExpressionBase)
                 {
@@ -154,14 +210,20 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     protected override bool IsValidSelectExpressionForExecuteUpdate(
         SelectExpression selectExpression,
         EntityShaperExpression entityShaperExpression,
-        [NotNullWhen(true)] out TableExpression? tableExpression)
+        [NotNullWhen(true)] out TableExpression? tableExpression
+    )
     {
-        if (selectExpression.Offset == null
+        if (
+            selectExpression.Offset == null
             // If entity type has primary key then Distinct is no-op
-            && (!selectExpression.IsDistinct || entityShaperExpression.EntityType.FindPrimaryKey() != null)
+            && (
+                !selectExpression.IsDistinct
+                || entityShaperExpression.EntityType.FindPrimaryKey() != null
+            )
             && selectExpression.GroupBy.Count == 0
             && selectExpression.Having == null
-            && selectExpression.Orderings.Count == 0)
+            && selectExpression.Orderings.Count == 0
+        )
         {
             TableExpressionBase table;
             if (selectExpression.Tables.Count == 1)
@@ -170,9 +232,13 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
             }
             else
             {
-                var projectionBindingExpression = (ProjectionBindingExpression)entityShaperExpression.ValueBufferExpression;
-                var entityProjectionExpression = (EntityProjectionExpression)selectExpression.GetProjection(projectionBindingExpression);
-                var column = entityProjectionExpression.BindProperty(entityShaperExpression.EntityType.GetProperties().First());
+                var projectionBindingExpression = (ProjectionBindingExpression)
+                    entityShaperExpression.ValueBufferExpression;
+                var entityProjectionExpression = (EntityProjectionExpression)
+                    selectExpression.GetProjection(projectionBindingExpression);
+                var column = entityProjectionExpression.BindProperty(
+                    entityShaperExpression.EntityType.GetProperties().First()
+                );
                 table = column.Table;
                 if (table is JoinExpressionBase joinExpressionBase)
                 {
@@ -195,14 +261,16 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     {
         private readonly Func<TableExpression, TableExpressionBase> _annotationApplyingFunc;
 
-        public TemporalAnnotationApplyingExpressionVisitor(Func<TableExpression, TableExpressionBase> annotationApplyingFunc)
+        public TemporalAnnotationApplyingExpressionVisitor(
+            Func<TableExpression, TableExpressionBase> annotationApplyingFunc
+        )
         {
             _annotationApplyingFunc = annotationApplyingFunc;
         }
 
         [return: NotNullIfNotNull("expression")]
-        public override Expression? Visit(Expression? expression)
-            => expression is TableExpression tableExpression
+        public override Expression? Visit(Expression? expression) =>
+            expression is TableExpression tableExpression
                 ? _annotationApplyingFunc(tableExpression)
                 : base.Visit(expression);
     }

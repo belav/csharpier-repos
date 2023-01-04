@@ -11,7 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class CompositeRowIndexValueFactory : CompositeRowValueFactory, IRowIndexValueFactory<object?[]>
+public class CompositeRowIndexValueFactory
+    : CompositeRowValueFactory,
+        IRowIndexValueFactory<object?[]>
 {
     private readonly ITableIndex _index;
 
@@ -21,8 +23,7 @@ public class CompositeRowIndexValueFactory : CompositeRowValueFactory, IRowIndex
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public CompositeRowIndexValueFactory(ITableIndex index)
-        : base(index.Columns)
+    public CompositeRowIndexValueFactory(ITableIndex index) : base(index.Columns)
     {
         _index = index;
 
@@ -38,8 +39,8 @@ public class CompositeRowIndexValueFactory : CompositeRowValueFactory, IRowIndex
     public virtual bool TryCreateIndexValue(
         object?[] keyValues,
         out object?[]? key,
-        out bool hasNullValue)
-        => TryCreateDependentKeyValue(keyValues, out key, out hasNullValue);
+        out bool hasNullValue
+    ) => TryCreateDependentKeyValue(keyValues, out key, out hasNullValue);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -50,8 +51,8 @@ public class CompositeRowIndexValueFactory : CompositeRowValueFactory, IRowIndex
     public virtual bool TryCreateIndexValue(
         IDictionary<string, object?> keyValues,
         out object?[]? key,
-        out bool hasNullValue)
-        => TryCreateDependentKeyValue(keyValues, out key, out hasNullValue);
+        out bool hasNullValue
+    ) => TryCreateDependentKeyValue(keyValues, out key, out hasNullValue);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -63,8 +64,8 @@ public class CompositeRowIndexValueFactory : CompositeRowValueFactory, IRowIndex
         IReadOnlyModificationCommand command,
         bool fromOriginalValues,
         out object?[]? keyValue,
-        out bool hasNullValue)
-        => TryCreateDependentKeyValue(command, fromOriginalValues, out keyValue, out hasNullValue);
+        out bool hasNullValue
+    ) => TryCreateDependentKeyValue(command, fromOriginalValues, out keyValue, out hasNullValue);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -73,8 +74,10 @@ public class CompositeRowIndexValueFactory : CompositeRowValueFactory, IRowIndex
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual (object? Value, bool HasNullValue) CreateEquatableIndexValue(
-        IReadOnlyModificationCommand command, bool fromOriginalValues = false)
-        => TryCreateIndexValue(command, fromOriginalValues, out var keyValue, out var hasNullValue)
+        IReadOnlyModificationCommand command,
+        bool fromOriginalValues = false
+    ) =>
+        TryCreateIndexValue(command, fromOriginalValues, out var keyValue, out var hasNullValue)
             ? (new EquatableKeyValue<object?[]>(_index, keyValue, EqualityComparer), hasNullValue)
             : (null, true);
 
@@ -85,8 +88,10 @@ public class CompositeRowIndexValueFactory : CompositeRowValueFactory, IRowIndex
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual (object?[]? Value, bool HasNullValue) CreateIndexValue(
-        IReadOnlyModificationCommand command, bool fromOriginalValues = false)
-        => TryCreateIndexValue(command, fromOriginalValues, out var keyValue, out bool hasNullValue)
+        IReadOnlyModificationCommand command,
+        bool fromOriginalValues = false
+    ) =>
+        TryCreateIndexValue(command, fromOriginalValues, out var keyValue, out bool hasNullValue)
             ? (keyValue, hasNullValue)
             : (null, true);
 }

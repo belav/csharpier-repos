@@ -34,17 +34,16 @@ public class StartupWithHostingStartup
 
     public static void Main(string[] args)
     {
-        var host = CreateWebHostBuilder(args)
-            .Build();
+        var host = CreateWebHostBuilder(args).Build();
 
         host.Run();
     }
 
     public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         new WebHostBuilder()
-        .UseContentRoot(Directory.GetCurrentDirectory())
-        .UseStartup<Startup>()
-        .UseKestrel();
+            .UseContentRoot(Directory.GetCurrentDirectory())
+            .UseStartup<Startup>()
+            .UseKestrel();
 
     private class MockMvcBuilder : IMvcBuilder
     {

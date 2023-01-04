@@ -14,8 +14,10 @@ namespace System.Net.Security
     internal static class SslSessionsCache
     {
         private const int CheckExpiredModulo = 32;
-        private static readonly ConcurrentDictionary<SslCredKey, SafeCredentialReference> s_cachedCreds =
-            new ConcurrentDictionary<SslCredKey, SafeCredentialReference>();
+        private static readonly ConcurrentDictionary<
+            SslCredKey,
+            SafeCredentialReference
+        > s_cachedCreds = new ConcurrentDictionary<SslCredKey, SafeCredentialReference>();
 
         //
         // Uses certificate thumb-print comparison.
@@ -40,7 +42,8 @@ namespace System.Net.Security
                 bool isServerMode,
                 EncryptionPolicy encryptionPolicy,
                 bool sendTrustList,
-                bool checkRevocation)
+                bool checkRevocation
+            )
             {
                 _thumbPrint = thumbPrint ?? Array.Empty<byte>();
                 _allowedProtocols = allowedProtocols;
@@ -90,14 +93,13 @@ namespace System.Net.Security
                 byte[] thumbPrint = _thumbPrint;
                 byte[] otherThumbPrint = other._thumbPrint;
 
-                return
-                    thumbPrint.Length == otherThumbPrint.Length &&
-                    _encryptionPolicy == other._encryptionPolicy &&
-                    _allowedProtocols == other._allowedProtocols &&
-                    _isServerMode == other._isServerMode &&
-                    _sendTrustList == other._sendTrustList &&
-                    _checkRevocation == other._checkRevocation &&
-                    thumbPrint.AsSpan().SequenceEqual(otherThumbPrint);
+                return thumbPrint.Length == otherThumbPrint.Length
+                    && _encryptionPolicy == other._encryptionPolicy
+                    && _allowedProtocols == other._allowedProtocols
+                    && _isServerMode == other._isServerMode
+                    && _sendTrustList == other._sendTrustList
+                    && _checkRevocation == other._checkRevocation
+                    && thumbPrint.AsSpan().SequenceEqual(otherThumbPrint);
             }
         }
 
@@ -113,32 +115,56 @@ namespace System.Net.Security
             bool isServer,
             EncryptionPolicy encryptionPolicy,
             bool checkRevocation,
-            bool sendTrustList = false)
+            bool sendTrustList = false
+        )
         {
             if (s_cachedCreds.IsEmpty)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, $"Not found, Current Cache Count = {s_cachedCreds.Count}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(
+                        null,
+                        $"Not found, Current Cache Count = {s_cachedCreds.Count}"
+                    );
                 return null;
             }
 
-            var key = new SslCredKey(thumbPrint, (int)sslProtocols, isServer, encryptionPolicy, sendTrustList, checkRevocation);
+            var key = new SslCredKey(
+                thumbPrint,
+                (int)sslProtocols,
+                isServer,
+                encryptionPolicy,
+                sendTrustList,
+                checkRevocation
+            );
 
             //SafeCredentialReference? cached;
             SafeFreeCredentials? credentials = GetCachedCredential(key);
-            if (credentials == null || credentials.IsClosed || credentials.IsInvalid || credentials.Expiry < DateTime.UtcNow)
+            if (
+                credentials == null
+                || credentials.IsClosed
+                || credentials.IsInvalid
+                || credentials.Expiry < DateTime.UtcNow
+            )
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, $"Not found or invalid, Current Cache Count = {s_cachedCreds.Count}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(
+                        null,
+                        $"Not found or invalid, Current Cache Count = {s_cachedCreds.Count}"
+                    );
                 return null;
             }
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, $"Found a cached Handle = {credentials}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(null, $"Found a cached Handle = {credentials}");
 
             return credentials;
         }
 
         private static SafeFreeCredentials? GetCachedCredential(SslCredKey key)
         {
-            return s_cachedCreds.TryGetValue(key, out SafeCredentialReference? cached) ? cached.Target : null;
+            return s_cachedCreds.TryGetValue(key, out SafeCredentialReference? cached)
+                ? cached.Target
+                : null;
         }
 
         //
@@ -153,29 +179,53 @@ namespace System.Net.Security
             bool isServer,
             EncryptionPolicy encryptionPolicy,
             bool checkRevocation,
-            bool sendTrustList = false)
+            bool sendTrustList = false
+        )
         {
             Debug.Assert(creds != null, "creds == null");
 
             if (creds.IsInvalid)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, $"Refused to cache an Invalid Handle {creds}, Current Cache Count = {s_cachedCreds.Count}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(
+                        null,
+                        $"Refused to cache an Invalid Handle {creds}, Current Cache Count = {s_cachedCreds.Count}"
+                    );
                 return;
             }
 
-            SslCredKey key = new SslCredKey(thumbPrint, (int)sslProtocols, isServer, encryptionPolicy, sendTrustList, checkRevocation);
+            SslCredKey key = new SslCredKey(
+                thumbPrint,
+                (int)sslProtocols,
+                isServer,
+                encryptionPolicy,
+                sendTrustList,
+                checkRevocation
+            );
 
             SafeFreeCredentials? credentials = GetCachedCredential(key);
 
             DateTime utcNow = DateTime.UtcNow;
-            if (credentials == null || credentials.IsClosed || credentials.IsInvalid || credentials.Expiry < utcNow)
+            if (
+                credentials == null
+                || credentials.IsClosed
+                || credentials.IsInvalid
+                || credentials.Expiry < utcNow
+            )
             {
                 lock (s_cachedCreds)
                 {
                     credentials = GetCachedCredential(key);
-                    if (credentials == null || credentials.IsClosed || credentials.IsInvalid || credentials.Expiry < utcNow)
+                    if (
+                        credentials == null
+                        || credentials.IsClosed
+                        || credentials.IsInvalid
+                        || credentials.Expiry < utcNow
+                    )
                     {
-                        SafeCredentialReference? cached = SafeCredentialReference.CreateReference(creds);
+                        SafeCredentialReference? cached = SafeCredentialReference.CreateReference(
+                            creds
+                        );
 
                         if (cached == null)
                         {
@@ -184,25 +234,35 @@ namespace System.Net.Security
                         }
 
                         s_cachedCreds[key] = cached;
-                        if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, $"Caching New Handle = {creds}, Current Cache Count = {s_cachedCreds.Count}");
+                        if (NetEventSource.Log.IsEnabled())
+                            NetEventSource.Info(
+                                null,
+                                $"Caching New Handle = {creds}, Current Cache Count = {s_cachedCreds.Count}"
+                            );
 
                         ShrinkCredentialCache();
-
                     }
                     else
                     {
-                        if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, $"CacheCredential() (locked retry) Found already cached Handle = {credentials}");
+                        if (NetEventSource.Log.IsEnabled())
+                            NetEventSource.Info(
+                                null,
+                                $"CacheCredential() (locked retry) Found already cached Handle = {credentials}"
+                            );
                     }
                 }
             }
             else
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, $"CacheCredential() Ignoring incoming handle = {creds} since found already cached Handle = {credentials}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(
+                        null,
+                        $"CacheCredential() Ignoring incoming handle = {creds} since found already cached Handle = {credentials}"
+                    );
             }
 
             static void ShrinkCredentialCache()
             {
-
                 //
                 // A simplest way of preventing infinite cache grows.
                 //
@@ -215,7 +275,8 @@ namespace System.Net.Security
                 //
                 if ((s_cachedCreds.Count % CheckExpiredModulo) == 0)
                 {
-                    KeyValuePair<SslCredKey, SafeCredentialReference>[] toRemoveAttempt = s_cachedCreds.ToArray();
+                    KeyValuePair<SslCredKey, SafeCredentialReference>[] toRemoveAttempt =
+                        s_cachedCreds.ToArray();
 
                     for (int i = 0; i < toRemoveAttempt.Length; ++i)
                     {
@@ -238,9 +299,12 @@ namespace System.Net.Security
                         {
                             s_cachedCreds.TryRemove(toRemoveAttempt[i].Key, out _);
                         }
-
                     }
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, $"Scavenged cache, New Cache Count = {s_cachedCreds.Count}");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(
+                            null,
+                            $"Scavenged cache, New Cache Count = {s_cachedCreds.Count}"
+                        );
                 }
             }
         }

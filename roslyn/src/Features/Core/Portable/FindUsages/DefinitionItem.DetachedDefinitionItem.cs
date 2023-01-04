@@ -16,18 +16,25 @@ namespace Microsoft.CodeAnalysis.FindUsages
     {
         [DataMember(Order = 0)]
         public readonly ImmutableArray<string> Tags;
+
         [DataMember(Order = 1)]
         public readonly ImmutableArray<TaggedText> DisplayParts;
+
         [DataMember(Order = 2)]
         public readonly ImmutableArray<TaggedText> NameDisplayParts;
+
         [DataMember(Order = 3)]
         public readonly ImmutableArray<TaggedText> OriginationParts;
+
         [DataMember(Order = 4)]
         public readonly ImmutableArray<DocumentIdSpan> SourceSpans;
+
         [DataMember(Order = 5)]
         public readonly ImmutableDictionary<string, string> Properties;
+
         [DataMember(Order = 6)]
         public readonly ImmutableDictionary<string, string> DisplayableProperties;
+
         [DataMember(Order = 7)]
         public readonly bool DisplayIfNoReferences;
 
@@ -39,7 +46,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
             ImmutableArray<DocumentIdSpan> sourceSpans,
             ImmutableDictionary<string, string> properties,
             ImmutableDictionary<string, string> displayableProperties,
-            bool displayIfNoReferences)
+            bool displayIfNoReferences
+        )
         {
             Tags = tags;
             DisplayParts = displayParts;
@@ -51,12 +59,16 @@ namespace Microsoft.CodeAnalysis.FindUsages
             SourceSpans = sourceSpans;
         }
 
-        public async Task<DefaultDefinitionItem?> TryRehydrateAsync(Solution solution, CancellationToken cancellationToken)
+        public async Task<DefaultDefinitionItem?> TryRehydrateAsync(
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
             using var converted = TemporaryArray<DocumentSpan>.Empty;
             foreach (var ss in SourceSpans)
             {
-                var documentSpan = await ss.TryRehydrateAsync(solution, cancellationToken).ConfigureAwait(false);
+                var documentSpan = await ss.TryRehydrateAsync(solution, cancellationToken)
+                    .ConfigureAwait(false);
                 if (documentSpan == null)
                     return null;
 
@@ -64,9 +76,15 @@ namespace Microsoft.CodeAnalysis.FindUsages
             }
 
             return new DefaultDefinitionItem(
-                Tags, DisplayParts, NameDisplayParts, OriginationParts,
+                Tags,
+                DisplayParts,
+                NameDisplayParts,
+                OriginationParts,
                 converted.ToImmutableAndClear(),
-                Properties, DisplayableProperties, DisplayIfNoReferences);
+                Properties,
+                DisplayableProperties,
+                DisplayIfNoReferences
+            );
         }
     }
 }

@@ -36,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             VisualStudioProjectFactory projectFactory,
             VisualStudioWorkspaceImpl workspace,
             IProjectCodeModelFactory projectCodeModelFactory,
-            SVsServiceProvider serviceProvider)
+            SVsServiceProvider serviceProvider
+        )
         {
             _threadingContext = threadingContext;
             _projectFactory = projectFactory;
@@ -45,21 +46,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             _serviceProvider = (IAsyncServiceProvider)serviceProvider;
         }
 
-        public ImmutableArray<string> EvaluationPropertyNames
-            => BuildPropertyNames.InitialEvaluationPropertyNames;
+        public ImmutableArray<string> EvaluationPropertyNames =>
+            BuildPropertyNames.InitialEvaluationPropertyNames;
 
-        public Task<IWorkspaceProjectContext> CreateProjectContextAsync(Guid id, string uniqueName, string languageName, EvaluationData data, object? hostObject, CancellationToken cancellationToken)
-            => CreateProjectContextAsync(
+        public Task<IWorkspaceProjectContext> CreateProjectContextAsync(
+            Guid id,
+            string uniqueName,
+            string languageName,
+            EvaluationData data,
+            object? hostObject,
+            CancellationToken cancellationToken
+        ) =>
+            CreateProjectContextAsync(
                 languageName: languageName,
                 projectUniqueName: uniqueName,
-                projectFilePath: data.GetRequiredPropertyAbsolutePathValue(BuildPropertyNames.MSBuildProjectFullPath),
+                projectFilePath: data.GetRequiredPropertyAbsolutePathValue(
+                    BuildPropertyNames.MSBuildProjectFullPath
+                ),
                 projectGuid: id,
                 hierarchy: hostObject,
-                binOutputPath: (languageName is LanguageNames.CSharp or LanguageNames.VisualBasic) ?
-                    data.GetRequiredPropertyAbsolutePathValue(BuildPropertyNames.TargetPath) :
-                    data.GetPropertyValue(BuildPropertyNames.TargetPath),
+                binOutputPath: (languageName is LanguageNames.CSharp or LanguageNames.VisualBasic)
+                    ? data.GetRequiredPropertyAbsolutePathValue(BuildPropertyNames.TargetPath)
+                    : data.GetPropertyValue(BuildPropertyNames.TargetPath),
                 assemblyName: data.GetPropertyValue(BuildPropertyNames.AssemblyName),
-                cancellationToken);
+                cancellationToken
+            );
 
         public async Task<IWorkspaceProjectContext> CreateProjectContextAsync(
             string languageName,
@@ -69,7 +80,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             object? hierarchy,
             string? binOutputPath,
             string? assemblyName,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var creationInfo = new VisualStudioProjectCreationInfo
             {
@@ -79,19 +91,29 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
                 ProjectGuid = projectGuid,
             };
 
-            var visualStudioProject = await _projectFactory.CreateAndAddToWorkspaceAsync(
-                projectUniqueName, languageName, creationInfo, cancellationToken).ConfigureAwait(false);
+            var visualStudioProject = await _projectFactory
+                .CreateAndAddToWorkspaceAsync(
+                    projectUniqueName,
+                    languageName,
+                    creationInfo,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // At this point we've mutated the workspace.  So we're no longer cancellable.
             cancellationToken = CancellationToken.None;
 
             if (languageName == LanguageNames.FSharp)
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
-                var shell = await _serviceProvider.GetServiceAsync<SVsShell, IVsShell7>(_threadingContext.JoinableTaskFactory).ConfigureAwait(true);
+                var shell = await _serviceProvider
+                    .GetServiceAsync<SVsShell, IVsShell7>(_threadingContext.JoinableTaskFactory)
+                    .ConfigureAwait(true);
 
-                // Force the F# package to load; this is necessary because the F# package listens to WorkspaceChanged to 
+                // Force the F# package to load; this is necessary because the F# package listens to WorkspaceChanged to
                 // set up some items, and the F# project system doesn't guarantee that the F# package has been loaded itself
                 // so we're caught in the middle doing this.
                 var packageId = Guids.FSharpPackageId;
@@ -100,7 +122,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
                 await TaskScheduler.Default;
             }
 
-            var project = new CPSProject(visualStudioProject, _workspace, _projectCodeModelFactory, projectGuid);
+            var project = new CPSProject(
+                visualStudioProject,
+                _workspace,
+                _projectCodeModelFactory,
+                projectGuid
+            );
 
             // Set the output path in a batch; if we set the property directly we'll be taking a synchronous lock here and
             // potentially block up thread pool threads. Doing this in a batch means the global lock will be acquired asynchronously.

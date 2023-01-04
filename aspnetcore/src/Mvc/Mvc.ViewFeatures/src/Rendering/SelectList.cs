@@ -16,8 +16,7 @@ public class SelectList : MultiSelectList
     /// Initialize a new instance of <see cref="SelectList"/>.
     /// </summary>
     /// <param name="items">The items.</param>
-    public SelectList(IEnumerable items)
-        : this(items, selectedValue: null)
+    public SelectList(IEnumerable items) : this(items, selectedValue: null)
     {
         if (items == null)
         {
@@ -65,8 +64,8 @@ public class SelectList : MultiSelectList
         IEnumerable items,
         string dataValueField,
         string dataTextField,
-        object selectedValue)
-        : base(items, dataValueField, dataTextField, ToEnumerable(selectedValue))
+        object selectedValue
+    ) : base(items, dataValueField, dataTextField, ToEnumerable(selectedValue))
     {
         if (items == null)
         {
@@ -94,8 +93,8 @@ public class SelectList : MultiSelectList
         string dataValueField,
         string dataTextField,
         object selectedValue,
-        string dataGroupField)
-        : base(items, dataValueField, dataTextField, ToEnumerable(selectedValue), dataGroupField)
+        string dataGroupField
+    ) : base(items, dataValueField, dataTextField, ToEnumerable(selectedValue), dataGroupField)
     {
         if (items == null)
         {

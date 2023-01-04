@@ -21,33 +21,57 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         private static readonly char[] s_splitCharacters = { '.', '+' };
 
         public static async Task<ImmutableArray<UnitTestingDocumentSpan>> GetSourceLocationsAsync(
-            Project project, UnitTestingSearchQuery query, CancellationToken cancellationToken)
+            Project project,
+            UnitTestingSearchQuery query,
+            CancellationToken cancellationToken
+        )
         {
             if (!project.SupportsCompilation)
                 return ImmutableArray<UnitTestingDocumentSpan>.Empty;
 
-            var client = await RemoteHostClient.TryGetClientAsync(project.Solution.Services, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(project.Solution.Services, cancellationToken)
+                .ConfigureAwait(false);
 
             if (client != null)
             {
-                var locations = await client.TryInvokeAsync<IRemoteUnitTestingSearchService, ImmutableArray<UnitTestingSourceLocation>>(
-                    project,
-                    (service, solutionChecksum, cancellationToken) => service.GetSourceLocationsAsync(solutionChecksum, project.Id, query, cancellationToken),
-                    cancellationToken).ConfigureAwait(false);
+                var locations = await client
+                    .TryInvokeAsync<
+                        IRemoteUnitTestingSearchService,
+                        ImmutableArray<UnitTestingSourceLocation>
+                    >(
+                        project,
+                        (service, solutionChecksum, cancellationToken) =>
+                            service.GetSourceLocationsAsync(
+                                solutionChecksum,
+                                project.Id,
+                                query,
+                                cancellationToken
+                            ),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (!locations.HasValue)
                     return ImmutableArray<UnitTestingDocumentSpan>.Empty;
 
                 using var _ = ArrayBuilder<UnitTestingDocumentSpan>.GetInstance(out var result);
                 foreach (var location in locations.Value)
-                    result.AddIfNotNull(await location.TryRehydrateAsync(project.Solution, cancellationToken).ConfigureAwait(false));
+                    result.AddIfNotNull(
+                        await location
+                            .TryRehydrateAsync(project.Solution, cancellationToken)
+                            .ConfigureAwait(false)
+                    );
 
                 return result.ToImmutable();
             }
 
-            return await GetSourceLocationsInProcessAsync(project, query, cancellationToken).ConfigureAwait(false);
+            return await GetSourceLocationsInProcessAsync(project, query, cancellationToken)
+                .ConfigureAwait(false);
         }
 
-        private static (string containerName, string symbolName, int symbolArity) ExtractQueryData(UnitTestingSearchQuery query)
+        private static (string containerName, string symbolName, int symbolArity) ExtractQueryData(
+            UnitTestingSearchQuery query
+        )
         {
             if (query.MethodName == null)
             {
@@ -59,9 +83,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
                 var lastDot = fullyQualifiedTypeName.LastIndexOf('.');
 
                 var (container, type) =
-                    lastPlus >= 0 ? (fullyQualifiedTypeName[..lastPlus], fullyQualifiedTypeName[(lastPlus + 1)..]) :
-                    lastDot >= 0 ? (fullyQualifiedTypeName[..lastDot], fullyQualifiedTypeName[(lastDot + 1)..]) :
-                    ("", fullyQualifiedTypeName);
+                    lastPlus >= 0
+                        ? (
+                            fullyQualifiedTypeName[..lastPlus],
+                            fullyQualifiedTypeName[(lastPlus + 1)..]
+                        )
+                        : lastDot >= 0
+                            ? (
+                                fullyQualifiedTypeName[..lastDot],
+                                fullyQualifiedTypeName[(lastDot + 1)..]
+                            )
+                            : ("", fullyQualifiedTypeName);
 
                 GetNameAndArity(type, out type, out var typeArity);
 
@@ -71,7 +103,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             {
                 // If we have a method name, then that's the name we'll search in the index for. The fully qualified
                 // type name is what we'll use to check the container of any methods we find.
-                return (ConvertFromMetadataTypeName(query.FullyQualifiedTypeName), query.MethodName, query.MethodArity);
+                return (
+                    ConvertFromMetadataTypeName(query.FullyQualifiedTypeName),
+                    query.MethodName,
+                    query.MethodArity
+                );
             }
         }
 
@@ -97,7 +133,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             return result.ToString();
         }
 
-        private static void GetNameAndArity(string typeName, out string typeNameWithoutArity, out int typeArity)
+        private static void GetNameAndArity(
+            string typeName,
+            out string typeNameWithoutArity,
+            out int typeArity
+        )
         {
             var backtickIndex = typeName.LastIndexOf('`');
             if (backtickIndex < 0)
@@ -108,39 +148,63 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             else
             {
                 typeNameWithoutArity = typeName[0..backtickIndex];
-                int.TryParse(typeName[(backtickIndex + 1)..], NumberStyles.None, CultureInfo.InvariantCulture, out typeArity);
+                int.TryParse(
+                    typeName[(backtickIndex + 1)..],
+                    NumberStyles.None,
+                    CultureInfo.InvariantCulture,
+                    out typeArity
+                );
             }
         }
 
-        private static async Task<ImmutableArray<UnitTestingDocumentSpan>> GetSourceLocationsInProcessAsync(
+        private static async Task<
+            ImmutableArray<UnitTestingDocumentSpan>
+        > GetSourceLocationsInProcessAsync(
             Project project,
             UnitTestingSearchQuery query,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var (container, symbolName, symbolArity) = ExtractQueryData(query);
             var syntaxFacts = project.GetRequiredLanguageService<ISyntaxFactsService>();
             var comparer = syntaxFacts.StringComparer;
 
-            var tasks = project.Documents.Select(d => GetSourceLocationsInProcessAsync(d, comparer, container, symbolName, symbolArity, query, cancellationToken));
+            var tasks = project.Documents.Select(
+                d =>
+                    GetSourceLocationsInProcessAsync(
+                        d,
+                        comparer,
+                        container,
+                        symbolName,
+                        symbolArity,
+                        query,
+                        cancellationToken
+                    )
+            );
             var result = await Task.WhenAll(tasks).ConfigureAwait(false);
             return result.SelectMany(r => r).ToImmutableArray();
         }
 
-        private static async Task<ImmutableArray<UnitTestingDocumentSpan>> GetSourceLocationsInProcessAsync(
+        private static async Task<
+            ImmutableArray<UnitTestingDocumentSpan>
+        > GetSourceLocationsInProcessAsync(
             Document document,
             StringComparer comparer,
             string container,
             string symbolName,
             int symbolArity,
             UnitTestingSearchQuery query,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<UnitTestingDocumentSpan>.GetInstance(out var result);
 
             SyntaxTree? tree = null;
 
             // Walk each of the top-level-index infos we've got for this tree.
-            var index = await TopLevelSyntaxTreeIndex.GetRequiredIndexAsync(document, cancellationToken).ConfigureAwait(false);
+            var index = await TopLevelSyntaxTreeIndex
+                .GetRequiredIndexAsync(document, cancellationToken)
+                .ConfigureAwait(false);
             foreach (var info in index.DeclaredSymbolInfos)
             {
                 // Fast checks first to see if this looks like a candidate.
@@ -156,7 +220,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
                         continue;
 
                     // Has to actually be a method.
-                    if (info.Kind is not (DeclaredSymbolInfoKind.Method or DeclaredSymbolInfoKind.ExtensionMethod))
+                    if (
+                        info.Kind
+                        is not (
+                            DeclaredSymbolInfoKind.Method
+                            or DeclaredSymbolInfoKind.ExtensionMethod
+                        )
+                    )
                         continue;
 
                     // In non-strict mode, allow the parameter count to be mismatched.
@@ -173,10 +243,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
 
                 // Unit testing needs to know the final span a location may be mapped to (e.g. with `#line` taken
                 // into consideration).  So map that information here for them.
-                tree ??= await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+                tree ??= await document
+                    .GetRequiredSyntaxTreeAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var mappedSpan = tree.GetMappedLineSpan(info.Span, cancellationToken);
 
-                result.Add(new UnitTestingDocumentSpan(new DocumentSpan(document, info.Span), mappedSpan));
+                result.Add(
+                    new UnitTestingDocumentSpan(new DocumentSpan(document, info.Span), mappedSpan)
+                );
             }
 
             return result.ToImmutable();

@@ -20,12 +20,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 {
     internal sealed partial class ItemManager : IAsyncCompletionItemManager2
     {
-        public const string AggressiveDefaultsMatchingOptionName = "AggressiveDefaultsMatchingOption";
+        public const string AggressiveDefaultsMatchingOptionName =
+            "AggressiveDefaultsMatchingOption";
 
         private readonly RecentItemsManager _recentItemsManager;
         private readonly IGlobalOptionService _globalOptions;
 
-        internal ItemManager(RecentItemsManager recentItemsManager, IGlobalOptionService globalOptions)
+        internal ItemManager(
+            RecentItemsManager recentItemsManager,
+            IGlobalOptionService globalOptions
+        )
         {
             _recentItemsManager = recentItemsManager;
             _globalOptions = globalOptions;
@@ -34,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         public Task<ImmutableArray<VSCompletionItem>> SortCompletionListAsync(
             IAsyncCompletionSession session,
             AsyncCompletionSessionInitialDataSnapshot data,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var stopwatch = SharedStopwatch.StartNew();
             var items = SortCompletionitems(data, cancellationToken).ToImmutableArray();
@@ -46,16 +51,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         public Task<CompletionList<VSCompletionItem>> SortCompletionItemListAsync(
             IAsyncCompletionSession session,
             AsyncCompletionSessionInitialDataSnapshot data,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var stopwatch = SharedStopwatch.StartNew();
-            var itemList = session.CreateCompletionList(SortCompletionitems(data, cancellationToken));
+            var itemList = session.CreateCompletionList(
+                SortCompletionitems(data, cancellationToken)
+            );
 
             AsyncCompletionLogger.LogItemManagerSortTicksDataPoint(stopwatch.Elapsed);
             return Task.FromResult(itemList);
         }
 
-        private static SegmentedList<VSCompletionItem> SortCompletionitems(AsyncCompletionSessionInitialDataSnapshot data, CancellationToken cancellationToken)
+        private static SegmentedList<VSCompletionItem> SortCompletionitems(
+            AsyncCompletionSessionInitialDataSnapshot data,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
             var items = new SegmentedList<VSCompletionItem>(data.InitialItemList.Count);
@@ -72,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         public async Task<FilteredCompletionModel?> UpdateCompletionListAsync(
             IAsyncCompletionSession session,
             AsyncCompletionSessionDataSnapshot data,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var stopwatch = SharedStopwatch.StartNew();
             try
@@ -92,8 +104,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 if (sessionData.CombinedSortedList is not null)
                 {
                     // Always use the previously saved combined list if available.
-                    data = new AsyncCompletionSessionDataSnapshot(sessionData.CombinedSortedList, data.Snapshot, data.Trigger, data.InitialTrigger, data.SelectedFilters,
-                        data.IsSoftSelected, data.DisplaySuggestionItem, data.Defaults);
+                    data = new AsyncCompletionSessionDataSnapshot(
+                        sessionData.CombinedSortedList,
+                        data.Snapshot,
+                        data.Trigger,
+                        data.InitialTrigger,
+                        data.SelectedFilters,
+                        data.IsSoftSelected,
+                        data.DisplaySuggestionItem,
+                        data.Defaults
+                    );
                 }
                 else if (sessionData.ExpandedItemsTask != null)
                 {
@@ -108,26 +128,50 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                         if (expandedContext.ItemList.Count > 0)
                         {
                             // Here we rely on the implementation detail of `CompletionItem.CompareTo`, which always put expand items after regular ones.
-                            var combinedItemList = session.CreateCompletionList(data.InitialSortedItemList.Concat(expandedContext.ItemList));
+                            var combinedItemList = session.CreateCompletionList(
+                                data.InitialSortedItemList.Concat(expandedContext.ItemList)
+                            );
 
                             // Add expanded items into a combined list, and save it to be used for future updates during the same session.
                             sessionData.CombinedSortedList = combinedItemList;
-                            var combinedFilterStates = FilterSet.CombineFilterStates(expandedContext.Filters, data.SelectedFilters);
+                            var combinedFilterStates = FilterSet.CombineFilterStates(
+                                expandedContext.Filters,
+                                data.SelectedFilters
+                            );
 
-                            data = new AsyncCompletionSessionDataSnapshot(combinedItemList, data.Snapshot, data.Trigger, data.InitialTrigger, combinedFilterStates,
-                                data.IsSoftSelected, data.DisplaySuggestionItem, data.Defaults);
+                            data = new AsyncCompletionSessionDataSnapshot(
+                                combinedItemList,
+                                data.Snapshot,
+                                data.Trigger,
+                                data.InitialTrigger,
+                                combinedFilterStates,
+                                data.IsSoftSelected,
+                                data.DisplaySuggestionItem,
+                                data.Defaults
+                            );
                         }
 
                         AsyncCompletionLogger.LogSessionWithDelayedImportCompletionIncludedInUpdate();
                     }
                 }
 
-                var updater = new CompletionListUpdater(session.ApplicableToSpan, sessionData, data, _recentItemsManager, _globalOptions);
-                return await updater.UpdateCompletionListAsync(session, cancellationToken).ConfigureAwait(false);
+                var updater = new CompletionListUpdater(
+                    session.ApplicableToSpan,
+                    sessionData,
+                    data,
+                    _recentItemsManager,
+                    _globalOptions
+                );
+                return await updater
+                    .UpdateCompletionListAsync(session, cancellationToken)
+                    .ConfigureAwait(false);
             }
             finally
             {
-                AsyncCompletionLogger.LogItemManagerUpdateDataPoint(stopwatch.Elapsed, isCanceled: cancellationToken.IsCancellationRequested);
+                AsyncCompletionLogger.LogItemManagerUpdateDataPoint(
+                    stopwatch.Elapsed,
+                    isCanceled: cancellationToken.IsCancellationRequested
+                );
             }
         }
 
@@ -135,9 +179,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         {
             public static VSItemComparer Instance { get; } = new();
 
-            private VSItemComparer()
-            {
-            }
+            private VSItemComparer() { }
 
             public int Compare(VSCompletionItem? x, VSCompletionItem? y)
             {

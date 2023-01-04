@@ -8,17 +8,17 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class SqlServerTestHelpers : RelationalTestHelpers
 {
-    protected SqlServerTestHelpers()
-    {
-    }
+    protected SqlServerTestHelpers() { }
 
     public static SqlServerTestHelpers Instance { get; } = new();
 
-    public override IServiceCollection AddProviderServices(IServiceCollection services)
-        => services.AddEntityFrameworkSqlServer();
+    public override IServiceCollection AddProviderServices(IServiceCollection services) =>
+        services.AddEntityFrameworkSqlServer();
 
-    public override DbContextOptionsBuilder UseProviderOptions(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer(new SqlConnection("Database=DummyDatabase"));
+    public override DbContextOptionsBuilder UseProviderOptions(
+        DbContextOptionsBuilder optionsBuilder
+    ) => optionsBuilder.UseSqlServer(new SqlConnection("Database=DummyDatabase"));
 
-    public override LoggingDefinitions LoggingDefinitions { get; } = new SqlServerLoggingDefinitions();
+    public override LoggingDefinitions LoggingDefinitions { get; } =
+        new SqlServerLoggingDefinitions();
 }

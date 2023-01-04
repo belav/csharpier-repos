@@ -48,7 +48,15 @@ namespace System.IO
                     if (remaining > 0)
                     {
                         int toCopy = Math.Min(remaining, buffer.Length);
-                        buffer.Slice(0, toCopy).CopyTo(new Span<byte>(_currentChunk._buffer, _currentChunk._freeOffset, toCopy));
+                        buffer
+                            .Slice(0, toCopy)
+                            .CopyTo(
+                                new Span<byte>(
+                                    _currentChunk._buffer,
+                                    _currentChunk._freeOffset,
+                                    toCopy
+                                )
+                            );
                         buffer = buffer.Slice(toCopy);
                         _totalLength += toCopy;
                         _currentChunk._freeOffset += toCopy;
@@ -60,7 +68,12 @@ namespace System.IO
             }
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -71,7 +84,10 @@ namespace System.IO
             return Task.CompletedTask;
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -84,7 +100,8 @@ namespace System.IO
 
         private void AppendChunk(long count)
         {
-            int nextChunkLength = _currentChunk != null ? _currentChunk._buffer.Length * 2 : InitialChunkDefaultSize;
+            int nextChunkLength =
+                _currentChunk != null ? _currentChunk._buffer.Length * 2 : InitialChunkDefaultSize;
             if (count > nextChunkLength)
             {
                 nextChunkLength = (int)Math.Min(count, MaxChunkSize);
@@ -109,14 +126,31 @@ namespace System.IO
         public override bool CanSeek => false;
         public override bool CanWrite => true;
         public override long Length => _totalLength;
+
         public override void Flush() { }
+
         public override Task FlushAsync(CancellationToken cancellationToken) => Task.CompletedTask;
-        public override long Position { get { throw new NotSupportedException(); } set { throw new NotSupportedException(); } }
-        public override int Read(byte[] buffer, int offset, int count) { throw new NotSupportedException(); }
-        public override long Seek(long offset, SeekOrigin origin) { throw new NotSupportedException(); }
+
+        public override long Position
+        {
+            get { throw new NotSupportedException(); }
+            set { throw new NotSupportedException(); }
+        }
+
+        public override int Read(byte[] buffer, int offset, int count)
+        {
+            throw new NotSupportedException();
+        }
+
+        public override long Seek(long offset, SeekOrigin origin)
+        {
+            throw new NotSupportedException();
+        }
+
         public override void SetLength(long value)
         {
-            if (_currentChunk != null) throw new NotSupportedException();
+            if (_currentChunk != null)
+                throw new NotSupportedException();
             AppendChunk(value);
         }
 
@@ -126,8 +160,10 @@ namespace System.IO
             internal int _freeOffset;
             internal MemoryChunk? _next;
 
-            internal MemoryChunk(int bufferSize) { _buffer = new byte[bufferSize]; }
+            internal MemoryChunk(int bufferSize)
+            {
+                _buffer = new byte[bufferSize];
+            }
         }
     }
-
 }

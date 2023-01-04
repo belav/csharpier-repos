@@ -6,8 +6,10 @@ using System;
 
 namespace ApplyUpdateReferencedAssembly
 {
-    public class MethodBodyUnchangedAssembly {
-        public static string StaticMethod1 () {
+    public class MethodBodyUnchangedAssembly
+    {
+        public static string StaticMethod1()
+        {
             Console.WriteLine("original");
             return "ok";
         }

@@ -8,8 +8,7 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
 {
     public class RawSqlQuerySqliteTests : RawSqlQueryTests
     {
-        protected override string StoredProcedureCreationScript
-            => @"";
+        protected override string StoredProcedureCreationScript => @"";
 
         // TODO: Define stored procedure creation script
         public override Task StoredProcedure()

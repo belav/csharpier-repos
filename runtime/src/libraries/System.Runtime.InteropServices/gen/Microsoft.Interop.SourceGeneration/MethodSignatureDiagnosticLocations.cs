@@ -9,12 +9,20 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.Interop
 {
-    public sealed record MethodSignatureDiagnosticLocations(string MethodIdentifier, ImmutableArray<Location> ManagedParameterLocations, Location FallbackLocation)
+    public sealed record MethodSignatureDiagnosticLocations(
+        string MethodIdentifier,
+        ImmutableArray<Location> ManagedParameterLocations,
+        Location FallbackLocation
+    )
     {
         public MethodSignatureDiagnosticLocations(MethodDeclarationSyntax syntax)
-            : this(syntax.Identifier.Text, syntax.ParameterList.Parameters.Select(p => p.Identifier.GetLocation()).ToImmutableArray(), syntax.Identifier.GetLocation())
-        {
-        }
+            : this(
+                syntax.Identifier.Text,
+                syntax.ParameterList.Parameters
+                    .Select(p => p.Identifier.GetLocation())
+                    .ToImmutableArray(),
+                syntax.Identifier.GetLocation()
+            ) { }
 
         public bool Equals(MethodSignatureDiagnosticLocations other)
         {

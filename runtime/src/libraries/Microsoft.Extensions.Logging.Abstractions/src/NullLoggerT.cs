@@ -31,9 +31,8 @@ namespace Microsoft.Extensions.Logging.Abstractions
             EventId eventId,
             TState state,
             Exception? exception,
-            Func<TState, Exception?, string> formatter)
-        {
-        }
+            Func<TState, Exception?, string> formatter
+        ) { }
 
         /// <inheritdoc />
         public bool IsEnabled(LogLevel logLevel)

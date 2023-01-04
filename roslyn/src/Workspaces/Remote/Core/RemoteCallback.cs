@@ -19,8 +19,7 @@ namespace Microsoft.CodeAnalysis.Remote
     /// The purpose of this type is to handle exceptions thrown by the underlying remoting infrastructure
     /// in manner that's compatible with our exception handling policies.
     /// </summary>
-    internal readonly struct RemoteCallback<T>
-        where T : class
+    internal readonly struct RemoteCallback<T> where T : class
     {
         private readonly T _callback;
 
@@ -36,12 +35,15 @@ namespace Microsoft.CodeAnalysis.Remote
             ServiceBrokerClient client,
             ServiceRpcDescriptor serviceDescriptor,
             Func<RemoteCallback<T>, CancellationToken, ValueTask<TResult>> invocation,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             ServiceBrokerClient.Rental<T> rental;
             try
             {
-                rental = await client.GetProxyAsync<T>(serviceDescriptor, cancellationToken).ConfigureAwait(false);
+                rental = await client
+                    .GetProxyAsync<T>(serviceDescriptor, cancellationToken)
+                    .ConfigureAwait(false);
             }
             catch (ObjectDisposedException e)
             {
@@ -59,13 +61,17 @@ namespace Microsoft.CodeAnalysis.Remote
         /// <summary>
         /// Invokes API on the callback object hosted in the original process (usually devenv) associated with the currently executing brokered service hosted in ServiceHub process.
         /// </summary>
-        public async ValueTask InvokeAsync(Func<T, CancellationToken, ValueTask> invocation, CancellationToken cancellationToken)
+        public async ValueTask InvokeAsync(
+            Func<T, CancellationToken, ValueTask> invocation,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
                 await invocation(_callback, cancellationToken).ConfigureAwait(false);
             }
-            catch (Exception exception) when (ReportUnexpectedException(exception, cancellationToken))
+            catch (Exception exception)
+                when (ReportUnexpectedException(exception, cancellationToken))
             {
                 throw OnUnexpectedException(exception, cancellationToken);
             }
@@ -74,13 +80,17 @@ namespace Microsoft.CodeAnalysis.Remote
         /// <summary>
         /// Invokes API on the callback object hosted in the original process (usually devenv) associated with the currently executing brokered service hosted in ServiceHub process.
         /// </summary>
-        public async ValueTask<TResult> InvokeAsync<TResult>(Func<T, CancellationToken, ValueTask<TResult>> invocation, CancellationToken cancellationToken)
+        public async ValueTask<TResult> InvokeAsync<TResult>(
+            Func<T, CancellationToken, ValueTask<TResult>> invocation,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
                 return await invocation(_callback, cancellationToken).ConfigureAwait(false);
             }
-            catch (Exception exception) when (ReportUnexpectedException(exception, cancellationToken))
+            catch (Exception exception)
+                when (ReportUnexpectedException(exception, cancellationToken))
             {
                 throw OnUnexpectedException(exception, cancellationToken);
             }
@@ -94,13 +104,17 @@ namespace Microsoft.CodeAnalysis.Remote
         public async ValueTask<TResult> InvokeAsync<TResult>(
             Func<T, PipeWriter, CancellationToken, ValueTask> invocation,
             Func<PipeReader, CancellationToken, ValueTask<TResult>> reader,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             try
             {
-                return await BrokeredServiceConnection<T>.InvokeStreamingServiceAsync(_callback, invocation, reader, cancellationToken).ConfigureAwait(false);
+                return await BrokeredServiceConnection<T>
+                    .InvokeStreamingServiceAsync(_callback, invocation, reader, cancellationToken)
+                    .ConfigureAwait(false);
             }
-            catch (Exception exception) when (ReportUnexpectedException(exception, cancellationToken))
+            catch (Exception exception)
+                when (ReportUnexpectedException(exception, cancellationToken))
             {
                 throw OnUnexpectedException(exception, cancellationToken);
             }
@@ -113,7 +127,10 @@ namespace Microsoft.CodeAnalysis.Remote
         //   3) Remote exception - an exception was thrown by the callee
         //   4) Cancelation
         //
-        private static bool ReportUnexpectedException(Exception exception, CancellationToken cancellationToken)
+        private static bool ReportUnexpectedException(
+            Exception exception,
+            CancellationToken cancellationToken
+        )
         {
             if (exception is IOException)
             {
@@ -145,7 +162,10 @@ namespace Microsoft.CodeAnalysis.Remote
             return FatalError.ReportAndPropagate(exception);
         }
 
-        private static Exception OnUnexpectedException(Exception exception, CancellationToken cancellationToken)
+        private static Exception OnUnexpectedException(
+            Exception exception,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 

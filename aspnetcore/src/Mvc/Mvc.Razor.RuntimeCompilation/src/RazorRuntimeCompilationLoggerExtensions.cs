@@ -12,97 +12,142 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
 internal static class MvcRazorLoggerExtensions
 {
-    private static readonly double TimestampToTicks = TimeSpan.TicksPerSecond / (double)Stopwatch.Frequency;
+    private static readonly double TimestampToTicks =
+        TimeSpan.TicksPerSecond / (double)Stopwatch.Frequency;
 
-    private static readonly Action<ILogger, string, Exception?> _generatedCodeToAssemblyCompilationStart;
-    private static readonly Action<ILogger, string, double, Exception?> _generatedCodeToAssemblyCompilationEnd;
+    private static readonly Action<
+        ILogger,
+        string,
+        Exception?
+    > _generatedCodeToAssemblyCompilationStart;
+    private static readonly Action<
+        ILogger,
+        string,
+        double,
+        Exception?
+    > _generatedCodeToAssemblyCompilationEnd;
     private static readonly Action<ILogger, string, string[], Exception?> _malformedPageDirective;
     private static readonly Action<ILogger, string, Exception?> _viewCompilerLocatedCompiledView;
     private static readonly Action<ILogger, Exception?> _viewCompilerNoCompiledViewsFound;
-    private static readonly Action<ILogger, string, Exception?> _viewCompilerLocatedCompiledViewForPath;
-    private static readonly Action<ILogger, string, Exception?> _viewCompilerRecompilingCompiledView;
-    private static readonly Action<ILogger, string, Exception?> _viewCompilerCouldNotFindFileToCompileForPath;
-    private static readonly Action<ILogger, string, Exception?> _viewCompilerFoundFileToCompileForPath;
-    private static readonly Action<ILogger, string, Exception?> _viewCompilerInvalidatingCompiledFile;
+    private static readonly Action<
+        ILogger,
+        string,
+        Exception?
+    > _viewCompilerLocatedCompiledViewForPath;
+    private static readonly Action<
+        ILogger,
+        string,
+        Exception?
+    > _viewCompilerRecompilingCompiledView;
+    private static readonly Action<
+        ILogger,
+        string,
+        Exception?
+    > _viewCompilerCouldNotFindFileToCompileForPath;
+    private static readonly Action<
+        ILogger,
+        string,
+        Exception?
+    > _viewCompilerFoundFileToCompileForPath;
+    private static readonly Action<
+        ILogger,
+        string,
+        Exception?
+    > _viewCompilerInvalidatingCompiledFile;
 
     private static readonly Action<ILogger, string, string, Exception?> _viewLookupCacheMiss;
     private static readonly Action<ILogger, string, string, Exception?> _viewLookupCacheHit;
     private static readonly Action<ILogger, string, Exception?> _precompiledViewFound;
 
-    private static readonly LogDefineOptions SkipEnabledCheckLogOptions = new() { SkipEnabledCheck = true };
+    private static readonly LogDefineOptions SkipEnabledCheckLogOptions =
+        new() { SkipEnabledCheck = true };
 
     static MvcRazorLoggerExtensions()
     {
         _viewCompilerLocatedCompiledView = LoggerMessage.Define<string>(
             LogLevel.Debug,
             3,
-            "Initializing Razor view compiler with compiled view: '{ViewName}'.");
+            "Initializing Razor view compiler with compiled view: '{ViewName}'."
+        );
 
         _viewCompilerNoCompiledViewsFound = LoggerMessage.Define(
             LogLevel.Debug,
             4,
-            "Initializing Razor view compiler with no compiled views.");
+            "Initializing Razor view compiler with no compiled views."
+        );
 
         _viewCompilerLocatedCompiledViewForPath = LoggerMessage.Define<string>(
             LogLevel.Trace,
             5,
-            "Located compiled view for view at path '{Path}'.");
+            "Located compiled view for view at path '{Path}'."
+        );
 
         _viewCompilerLocatedCompiledViewForPath = LoggerMessage.Define<string>(
             LogLevel.Trace,
             5,
-            "Located compiled view for view at path '{Path}'.");
+            "Located compiled view for view at path '{Path}'."
+        );
 
         _viewCompilerRecompilingCompiledView = LoggerMessage.Define<string>(
             LogLevel.Trace,
             6,
-            "Invalidating compiled view for view at path '{Path}'.");
+            "Invalidating compiled view for view at path '{Path}'."
+        );
 
         _viewCompilerCouldNotFindFileToCompileForPath = LoggerMessage.Define<string>(
             LogLevel.Trace,
             7,
-            "Could not find a file for view at path '{Path}'.");
+            "Could not find a file for view at path '{Path}'."
+        );
 
         _viewCompilerFoundFileToCompileForPath = LoggerMessage.Define<string>(
             LogLevel.Trace,
             8,
-            "Found file at path '{Path}'.");
+            "Found file at path '{Path}'."
+        );
 
         _viewCompilerInvalidatingCompiledFile = LoggerMessage.Define<string>(
             LogLevel.Trace,
             9,
-            "Invalidating compiled view at path '{Path}' with a file since the checksum did not match.");
+            "Invalidating compiled view at path '{Path}' with a file since the checksum did not match."
+        );
 
         _viewLookupCacheMiss = LoggerMessage.Define<string, string>(
             LogLevel.Debug,
             1,
-            "View lookup cache miss for view '{ViewName}' in controller '{ControllerName}'.");
+            "View lookup cache miss for view '{ViewName}' in controller '{ControllerName}'."
+        );
 
         _viewLookupCacheHit = LoggerMessage.Define<string, string>(
             LogLevel.Debug,
             2,
-            "View lookup cache hit for view '{ViewName}' in controller '{ControllerName}'.");
+            "View lookup cache hit for view '{ViewName}' in controller '{ControllerName}'."
+        );
 
         _precompiledViewFound = LoggerMessage.Define<string>(
             LogLevel.Debug,
             3,
-            "Using precompiled view for '{RelativePath}'.");
+            "Using precompiled view for '{RelativePath}'."
+        );
 
         _generatedCodeToAssemblyCompilationStart = LoggerMessage.Define<string>(
             LogLevel.Debug,
             1,
-            "Compilation of the generated code for the Razor file at '{FilePath}' started.");
+            "Compilation of the generated code for the Razor file at '{FilePath}' started."
+        );
 
         _generatedCodeToAssemblyCompilationEnd = LoggerMessage.Define<string, double>(
             LogLevel.Debug,
             2,
-            "Compilation of the generated code for the Razor file at '{FilePath}' completed in {ElapsedMilliseconds}ms.");
+            "Compilation of the generated code for the Razor file at '{FilePath}' completed in {ElapsedMilliseconds}ms."
+        );
 
         _malformedPageDirective = LoggerMessage.Define<string, string[]>(
             LogLevel.Warning,
             new EventId(104, "MalformedPageDirective"),
             "The page directive at '{FilePath}' is malformed. Please fix the following issues: {Diagnostics}",
-            SkipEnabledCheckLogOptions);
+            SkipEnabledCheckLogOptions
+        );
     }
 
     public static void ViewCompilerLocatedCompiledView(this ILogger logger, string view)
@@ -135,12 +180,20 @@ internal static class MvcRazorLoggerExtensions
         _viewCompilerInvalidatingCompiledFile(logger, path, null);
     }
 
-    public static void ViewLookupCacheMiss(this ILogger logger, string viewName, string controllerName)
+    public static void ViewLookupCacheMiss(
+        this ILogger logger,
+        string viewName,
+        string controllerName
+    )
     {
         _viewLookupCacheMiss(logger, viewName, controllerName, null);
     }
 
-    public static void ViewLookupCacheHit(this ILogger logger, string viewName, string controllerName)
+    public static void ViewLookupCacheHit(
+        this ILogger logger,
+        string viewName,
+        string controllerName
+    )
     {
         _viewLookupCacheHit(logger, viewName, controllerName, null);
     }
@@ -155,18 +208,33 @@ internal static class MvcRazorLoggerExtensions
         _generatedCodeToAssemblyCompilationStart(logger, filePath, null);
     }
 
-    public static void GeneratedCodeToAssemblyCompilationEnd(this ILogger logger, string filePath, long startTimestamp)
+    public static void GeneratedCodeToAssemblyCompilationEnd(
+        this ILogger logger,
+        string filePath,
+        long startTimestamp
+    )
     {
         // Don't log if logging wasn't enabled at start of request as time will be wildly wrong.
         if (startTimestamp != 0)
         {
             var currentTimestamp = Stopwatch.GetTimestamp();
-            var elapsed = new TimeSpan((long)(TimestampToTicks * (currentTimestamp - startTimestamp)));
-            _generatedCodeToAssemblyCompilationEnd(logger, filePath, elapsed.TotalMilliseconds, null);
+            var elapsed = new TimeSpan(
+                (long)(TimestampToTicks * (currentTimestamp - startTimestamp))
+            );
+            _generatedCodeToAssemblyCompilationEnd(
+                logger,
+                filePath,
+                elapsed.TotalMilliseconds,
+                null
+            );
         }
     }
 
-    public static void MalformedPageDirective(this ILogger logger, string filePath, IList<RazorDiagnostic> diagnostics)
+    public static void MalformedPageDirective(
+        this ILogger logger,
+        string filePath,
+        IList<RazorDiagnostic> diagnostics
+    )
     {
         if (logger.IsEnabled(LogLevel.Warning))
         {

@@ -17,7 +17,6 @@ namespace Microsoft.CodeAnalysis.Debugging
             Text = text;
         }
 
-        public bool IsDefault
-            => Span.Length == 0 && Span.Start == 0 && Text == null;
+        public bool IsDefault => Span.Length == 0 && Span.Start == 0 && Text == null;
     }
 }

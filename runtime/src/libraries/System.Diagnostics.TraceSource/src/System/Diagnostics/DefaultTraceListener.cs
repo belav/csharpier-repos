@@ -24,21 +24,20 @@ namespace System.Diagnostics
         /// <para>Initializes a new instance of the <see cref='System.Diagnostics.DefaultTraceListener'/> class with
         ///    Default as its <see cref='System.Diagnostics.TraceListener.Name'/>.</para>
         /// </devdoc>
-        public DefaultTraceListener()
-            : base("Default")
-        {
-        }
+        public DefaultTraceListener() : base("Default") { }
 
         public bool AssertUiEnabled
         {
             get
             {
-                if (!_settingsInitialized) InitializeSettings();
+                if (!_settingsInitialized)
+                    InitializeSettings();
                 return _assertUIEnabled;
             }
             set
             {
-                if (!_settingsInitialized) InitializeSettings();
+                if (!_settingsInitialized)
+                    InitializeSettings();
                 _assertUIEnabled = value;
             }
         }
@@ -47,12 +46,14 @@ namespace System.Diagnostics
         {
             get
             {
-                if (!_settingsInitialized) InitializeSettings();
+                if (!_settingsInitialized)
+                    InitializeSettings();
                 return _logFileName;
             }
             set
             {
-                if (!_settingsInitialized) InitializeSettings();
+                if (!_settingsInitialized)
+                    InitializeSettings();
                 _logFileName = value;
             }
         }
@@ -103,12 +104,19 @@ namespace System.Diagnostics
 
         private void WriteAssert(string stackTrace, string? message, string? detailMessage)
         {
-            WriteLine(SR.DebugAssertBanner + Environment.NewLine
-                   + SR.DebugAssertShortMessage + Environment.NewLine
-                   + message + Environment.NewLine
-                   + SR.DebugAssertLongMessage + Environment.NewLine
-                   + detailMessage + Environment.NewLine
-                   + stackTrace);
+            WriteLine(
+                SR.DebugAssertBanner
+                    + Environment.NewLine
+                    + SR.DebugAssertShortMessage
+                    + Environment.NewLine
+                    + message
+                    + Environment.NewLine
+                    + SR.DebugAssertLongMessage
+                    + Environment.NewLine
+                    + detailMessage
+                    + Environment.NewLine
+                    + stackTrace
+            );
         }
 
         /// <devdoc>

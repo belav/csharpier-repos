@@ -19,8 +19,8 @@ public class SidecarValuesFactoryFactory : SnapshotFactoryFactory<InternalEntity
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override int GetPropertyIndex(IPropertyBase propertyBase)
-        => propertyBase.GetStoreGeneratedIndex();
+    protected override int GetPropertyIndex(IPropertyBase propertyBase) =>
+        propertyBase.GetStoreGeneratedIndex();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -28,8 +28,8 @@ public class SidecarValuesFactoryFactory : SnapshotFactoryFactory<InternalEntity
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override int GetPropertyCount(IEntityType entityType)
-        => entityType.StoreGeneratedCount();
+    protected override int GetPropertyCount(IEntityType entityType) =>
+        entityType.StoreGeneratedCount();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -37,6 +37,6 @@ public class SidecarValuesFactoryFactory : SnapshotFactoryFactory<InternalEntity
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override ValueComparer? GetValueComparer(IProperty property)
-        => property.GetValueComparer();
+    protected override ValueComparer? GetValueComparer(IProperty property) =>
+        property.GetValueComparer();
 }

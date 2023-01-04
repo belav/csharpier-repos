@@ -12,19 +12,38 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
     internal readonly struct SolutionUpdate
     {
         public readonly ModuleUpdates ModuleUpdates;
-        public readonly ImmutableArray<(Guid ModuleId, ImmutableArray<(ManagedModuleMethodId Method, NonRemappableRegion Region)>)> NonRemappableRegions;
+        public readonly ImmutableArray<(
+            Guid ModuleId,
+            ImmutableArray<(ManagedModuleMethodId Method, NonRemappableRegion Region)>
+        )> NonRemappableRegions;
         public readonly ImmutableArray<(ProjectId ProjectId, EmitBaseline Baseline)> EmitBaselines;
-        public readonly ImmutableArray<(ProjectId ProjectId, ImmutableArray<Diagnostic> Diagnostics)> Diagnostics;
-        public readonly ImmutableArray<(DocumentId DocumentId, ImmutableArray<RudeEditDiagnostic> Diagnostics)> DocumentsWithRudeEdits;
+        public readonly ImmutableArray<(
+            ProjectId ProjectId,
+            ImmutableArray<Diagnostic> Diagnostics
+        )> Diagnostics;
+        public readonly ImmutableArray<(
+            DocumentId DocumentId,
+            ImmutableArray<RudeEditDiagnostic> Diagnostics
+        )> DocumentsWithRudeEdits;
         public readonly Diagnostic? SyntaxError;
 
         public SolutionUpdate(
             ModuleUpdates moduleUpdates,
-            ImmutableArray<(Guid ModuleId, ImmutableArray<(ManagedModuleMethodId Method, NonRemappableRegion Region)>)> nonRemappableRegions,
+            ImmutableArray<(
+                Guid ModuleId,
+                ImmutableArray<(ManagedModuleMethodId Method, NonRemappableRegion Region)>
+            )> nonRemappableRegions,
             ImmutableArray<(ProjectId ProjectId, EmitBaseline Baseline)> emitBaselines,
-            ImmutableArray<(ProjectId ProjectId, ImmutableArray<Diagnostic> Diagnostics)> diagnostics,
-            ImmutableArray<(DocumentId DocumentId, ImmutableArray<RudeEditDiagnostic> Diagnostics)> documentsWithRudeEdits,
-            Diagnostic? syntaxError)
+            ImmutableArray<(
+                ProjectId ProjectId,
+                ImmutableArray<Diagnostic> Diagnostics
+            )> diagnostics,
+            ImmutableArray<(
+                DocumentId DocumentId,
+                ImmutableArray<RudeEditDiagnostic> Diagnostics
+            )> documentsWithRudeEdits,
+            Diagnostic? syntaxError
+        )
         {
             ModuleUpdates = moduleUpdates;
             NonRemappableRegions = nonRemappableRegions;
@@ -38,13 +57,23 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ImmutableArray<(ProjectId, ImmutableArray<Diagnostic>)> diagnostics,
             ImmutableArray<(DocumentId, ImmutableArray<RudeEditDiagnostic>)> documentsWithRudeEdits,
             Diagnostic? syntaxError,
-            bool hasEmitErrors)
-            => new(
-                new(syntaxError != null || hasEmitErrors ? ModuleUpdateStatus.Blocked : ModuleUpdateStatus.RestartRequired, ImmutableArray<ModuleUpdate>.Empty),
-                ImmutableArray<(Guid, ImmutableArray<(ManagedModuleMethodId, NonRemappableRegion)>)>.Empty,
+            bool hasEmitErrors
+        ) =>
+            new(
+                new(
+                    syntaxError != null || hasEmitErrors
+                        ? ModuleUpdateStatus.Blocked
+                        : ModuleUpdateStatus.RestartRequired,
+                    ImmutableArray<ModuleUpdate>.Empty
+                ),
+                ImmutableArray<(
+                    Guid,
+                    ImmutableArray<(ManagedModuleMethodId, NonRemappableRegion)>
+                )>.Empty,
                 ImmutableArray<(ProjectId, EmitBaseline)>.Empty,
                 diagnostics,
                 documentsWithRudeEdits,
-                syntaxError);
+                syntaxError
+            );
     }
 }

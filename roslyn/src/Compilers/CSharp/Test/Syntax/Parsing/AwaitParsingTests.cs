@@ -18,7 +18,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return SyntaxFactory.ParseSyntaxTree(text);
         }
 
-        protected override CSharpSyntaxNode ParseNode(string text, CSharpParseOptions options = null)
+        protected override CSharpSyntaxNode ParseNode(
+            string text,
+            CSharpParseOptions options = null
+        )
         {
             return SyntaxFactory.ParseExpression(text);
         }
@@ -26,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void AwaitOnIdentifierInAsynchronousContext()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void f()
@@ -34,7 +38,8 @@ class C
         await goo();
     }
 }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -91,7 +96,8 @@ class C
         [Fact]
         public void AwaitOnIdentifierInSynchronousContext()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void f()
@@ -99,7 +105,8 @@ class C
         await goo();
     }
 }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -155,7 +162,8 @@ class C
         [Fact]
         public void AwaitStatement()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void f()
@@ -163,7 +171,8 @@ class C
         await 1;
     }
 }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -212,7 +221,8 @@ class C
         [Fact]
         public void NestedLambdaAwait()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void f()
@@ -228,7 +238,8 @@ class C
 ",
                 // (9,21): error CS4003: 'await' cannot be used as an identifier within an async method or lambda expression
                 //                 int await;
-                Diagnostic(ErrorCode.ERR_BadAwaitAsIdentifier, "await").WithLocation(9, 21));
+                Diagnostic(ErrorCode.ERR_BadAwaitAsIdentifier, "await").WithLocation(9, 21)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -328,7 +339,8 @@ class C
         [Fact]
         public void AwaitExpr()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void f()
@@ -336,7 +348,8 @@ class C
         int c = await g() || await g();
     }
 }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -428,9 +441,11 @@ class C
         [Fact]
         public void AwaitMemberAccessExpression()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 async () => await base.g();
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -472,9 +487,11 @@ async () => await base.g();
         [Fact]
         public void AwaitInvocationExpression()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 async () => await this.g();
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -516,9 +533,11 @@ async () => await this.g();
         [Fact]
         public void AwaitDefaultExpression()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 async () => await default(Task);
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -550,9 +569,11 @@ async () => await default(Task);
         [Fact]
         public void AwaitIdentifierName()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 async () => await goo;
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -578,9 +599,11 @@ async () => await goo;
         [Fact]
         public void AwaitCheckedExpression()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 async () => await checked { };
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -612,9 +635,11 @@ async () => await checked { };
         [Fact]
         public void AwaitUncheckedExpression()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 async () => await unchecked { };
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -646,9 +671,11 @@ async () => await unchecked { };
         [Fact]
         public void AwaitParenthesizedExpression()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 async () => await (goo());
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -687,9 +714,11 @@ async () => await (goo());
         [Fact]
         public void AwaitObjectCreationExpression()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 async () => await new Goo();
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -724,9 +753,11 @@ async () => await new Goo();
         [Fact]
         public void AwaitAwaitExpression()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 async () => await await goo;
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -755,9 +786,11 @@ async () => await await goo;
         [Fact]
         public void PreIncrementAwait()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 async () => ++ await x;
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -786,9 +819,11 @@ async () => ++ await x;
         [Fact]
         public void AwaitExpressionWithHigherPrecedence()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 async () => await x ++;
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -817,9 +852,11 @@ async () => await x ++;
         [Fact]
         public void AwaitExpressionWithLowerPrecedence()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 async () => await x * x;
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -852,9 +889,11 @@ async () => await x * x;
         [Fact]
         public void PreIncrementNonAsyncAwait()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => ++ await x;
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -882,9 +921,11 @@ async () => await x * x;
         [Fact]
         public void AwaitTernary()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 async () => await a ? b : c;
-");
+"
+            );
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
                 N(SyntaxKind.AsyncKeyword);
@@ -921,7 +962,8 @@ async () => await a ? b : c;
         [Fact]
         public void ToggleIsAsyncOnOffTest()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 async () => {
     await 1;
     () => {
@@ -929,7 +971,8 @@ async () => {
     };
     await 1;
 };
-");
+"
+            );
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
                 N(SyntaxKind.AsyncKeyword);
@@ -1007,7 +1050,8 @@ async () => {
         [Fact]
         public void ToggleIsAsyncOffOnTest()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => {
     int await;
     async () => {
@@ -1015,7 +1059,8 @@ async () => {
     };
     int await;
 };
-");
+"
+            );
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
                 N(SyntaxKind.ParameterList);
@@ -1096,13 +1141,15 @@ async () => {
         [Fact]
         public void AwaitUsingTest()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 async () => {
     using (await goo())
     {
     }
 };
-");
+"
+            );
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
                 N(SyntaxKind.AsyncKeyword);
@@ -1152,9 +1199,11 @@ async () => {
         [Fact]
         public void AwaitIdentifierExpressionInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => await goo;
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1178,9 +1227,11 @@ async () => {
         [Fact]
         public void AwaitAwaitExpressionInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => await await goo;
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1208,9 +1259,11 @@ async () => {
         [Fact]
         public void AwaitNewExpressionInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => await new int[];
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1250,9 +1303,11 @@ async () => {
         [Fact]
         public void AwaitThisExpressionInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => await this.goo();
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1292,9 +1347,11 @@ async () => {
         [Fact]
         public void AwaitBaseExpressionInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => await base.goo();
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1334,9 +1391,11 @@ async () => {
         [Fact]
         public void AwaitDelegateExpressionInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => await delegate { };
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1365,9 +1424,11 @@ async () => {
         [Fact]
         public void AwaitCheckedExpressionInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => await checked ( );
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1397,9 +1458,11 @@ async () => {
         [Fact]
         public void AwaitUncheckedExpressionInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => await unchecked ( );
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1429,9 +1492,11 @@ async () => {
         [Fact]
         public void AwaitDefaultExpressionInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => await default(Goo);
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1461,9 +1526,11 @@ async () => {
         [Fact]
         public void AwaitTrueLiteralExpressionInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => await true;
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1487,9 +1554,11 @@ async () => {
         [Fact]
         public void AwaitFalseLiteralExpressionInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => await false;
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1513,9 +1582,11 @@ async () => {
         [Fact]
         public void AwaitStringLiteralExpressionInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => await ""goo"";
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1539,9 +1610,11 @@ async () => {
         [Fact]
         public void AwaitRealLiteralExpressionInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => await 3.14;
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1565,9 +1638,11 @@ async () => {
         [Fact]
         public void AwaitIntegerLiteralExpressionInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => await 42;
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1591,9 +1666,11 @@ async () => {
         [Fact]
         public void AwaitNullLiteralExpressionInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => await null;
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1617,9 +1694,11 @@ async () => {
         [Fact]
         public void AwaitCharacterLiteralExpressionInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => await 'a';
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1643,13 +1722,15 @@ async () => {
         [Fact]
         public void AwaitUsingExpressionInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => {
     using (await goo())
     {
     }
 };
-");
+"
+            );
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
                 N(SyntaxKind.ParameterList);
@@ -1700,11 +1781,13 @@ async () => {
         [Fact]
         public void AwaitIdentifierExpressionStatementInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => {
     await goo;
 }
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1740,11 +1823,13 @@ async () => {
         [Fact]
         public void AwaitInvocationExpressionStatementInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => {
     await goo();
 }
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1785,11 +1870,13 @@ async () => {
         [Fact]
         public void BadConstAwaitInvocationExpressionStatementInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => {
     const await goo();
 }
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1832,11 +1919,13 @@ async () => {
         [Fact]
         public void BadStaticAwaitInvocationExpressionStatementInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => {
     static await goo();
 }
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1878,11 +1967,13 @@ async () => {
         [Fact]
         public void BadLocalDeclarationAndAwaitExpressionInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => {
     await goo(];
 }
-");
+"
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1924,12 +2015,14 @@ async () => {
         [Fact]
         public void BadStatementInSyncContext()
         {
-            UsingNode(@"
+            UsingNode(
+                @"
 () => {
     await goo(];
     int x = 2;
 }
-");
+"
+            );
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
                 N(SyntaxKind.ParameterList);

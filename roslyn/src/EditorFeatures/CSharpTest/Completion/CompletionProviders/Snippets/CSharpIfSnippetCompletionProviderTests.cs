@@ -18,7 +18,8 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class CSharpIfSnippetCompletionProviderTests : AbstractCSharpSnippetCompletionProviderTests
+    public class CSharpIfSnippetCompletionProviderTests
+        : AbstractCSharpSnippetCompletionProviderTests
     {
         protected override string ItemToCommit => "if";
 
@@ -26,7 +27,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InsertIfSnippetInMethodTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -35,7 +36,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 }";
 
             var expectedCodeAfterCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -45,30 +46,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         }
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertIfSnippetInGlobalContextTest()
         {
             var markupBeforeCommit =
-@"Ins$$
+                @"Ins$$
 ";
 
             var expectedCodeAfterCommit =
-@"if (true)
+                @"if (true)
 {
     $$
 }
 ";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task NoIfSnippetInBlockNamespaceTest()
         {
             var markupBeforeCommit =
-@"
+                @"
 namespace Namespace
 {
     $$
@@ -86,7 +95,7 @@ namespace Namespace
         public async Task NoIfSnippetInFileScopedNamespaceTest()
         {
             var markupBeforeCommit =
-@"
+                @"
 namespace Namespace;
 $$
 class Program
@@ -103,7 +112,7 @@ class Program
         public async Task InsertIfSnippetInConstructorTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public Program()
     {
@@ -113,7 +122,7 @@ class Program
 }";
 
             var expectedCodeAfterCommit =
-@"class Program
+                @"class Program
 {
     public Program()
     {
@@ -124,14 +133,18 @@ class Program
         }
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertIfSnippettInLocalFunctionTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -144,7 +157,7 @@ class Program
 }";
 
             var expectedCodeAfterCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -158,14 +171,18 @@ class Program
         }
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertIfSnippetInAnonymousFunctionTest()
         {
             var markupBeforeCommit =
-@"public delegate void Print(int value);
+                @"public delegate void Print(int value);
 
 static void Main(string[] args)
 {
@@ -176,7 +193,7 @@ static void Main(string[] args)
 }";
 
             var expectedCodeAfterCommit =
-@"public delegate void Print(int value);
+                @"public delegate void Print(int value);
 
 static void Main(string[] args)
 {
@@ -188,21 +205,25 @@ static void Main(string[] args)
     };
 
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertIfSnippetInParenthesizedLambdaExpressionTest()
         {
             var markupBeforeCommit =
-@"Func<int, int, bool> testForEquality = (x, y) =>
+                @"Func<int, int, bool> testForEquality = (x, y) =>
 {
     $$
     return x == y;
 };";
 
             var expectedCodeAfterCommit =
-@"Func<int, int, bool> testForEquality = (x, y) =>
+                @"Func<int, int, bool> testForEquality = (x, y) =>
 {
     if (true)
     {
@@ -211,14 +232,18 @@ static void Main(string[] args)
 
     return x == y;
 };";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task NoIfSnippetInSwitchExpression()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -241,7 +266,7 @@ static void Main(string[] args)
         public async Task NoIfSnippetInSingleLambdaExpression()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -255,7 +280,7 @@ static void Main(string[] args)
         public async Task NoIfSnippetInStringTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -270,7 +295,7 @@ static void Main(string[] args)
         public async Task NoIfSnippetInObjectInitializerTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -295,7 +320,7 @@ class Test
         public async Task NoIfSnippetInParameterListTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method(int x, $$)
     {
@@ -309,7 +334,7 @@ class Test
         public async Task NoIfSnippetInRecordDeclarationTest()
         {
             var markupBeforeCommit =
-@"public record Person
+                @"public record Person
 {
     $$
     public string FirstName { get; init; } = default!;
@@ -323,7 +348,7 @@ class Test
         public async Task NoIfSnippetInVariableDeclarationTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -338,7 +363,7 @@ class Test
         public async Task InsertIfSnippetWithInvocationBeforeAndAfterCursorTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -347,7 +372,7 @@ class Test
 }";
 
             var expectedCodeAfterCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -357,14 +382,18 @@ class Test
         }
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertIfSnippetWithInvocationUnderscoreBeforeAndAfterCursorTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -373,7 +402,7 @@ class Test
 }";
 
             var expectedCodeAfterCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -383,7 +412,11 @@ class Test
         }
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
     }
 }

@@ -8,8 +8,10 @@ namespace System.ComponentModel.DataAnnotations
     /// <summary>
     ///     Validation attribute to assert a string property, field or parameter does not exceed a maximum length
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
     public class StringLengthAttribute : ValidationAttribute
     {
         /// <summary>
@@ -75,7 +77,13 @@ namespace System.ComponentModel.DataAnnotations
 
             // it's ok to pass in the minLength even for the error message without a {2} param since string.Format will just
             // ignore extra arguments
-            return string.Format(CultureInfo.CurrentCulture, errorMessage, name, MaximumLength, MinimumLength);
+            return string.Format(
+                CultureInfo.CurrentCulture,
+                errorMessage,
+                name,
+                MaximumLength,
+                MinimumLength
+            );
         }
 
         /// <summary>
@@ -90,7 +98,9 @@ namespace System.ComponentModel.DataAnnotations
 
             if (MaximumLength < MinimumLength)
             {
-                throw new InvalidOperationException(SR.Format(SR.RangeAttribute_MinGreaterThanMax, MaximumLength, MinimumLength));
+                throw new InvalidOperationException(
+                    SR.Format(SR.RangeAttribute_MinGreaterThanMax, MaximumLength, MinimumLength)
+                );
             }
         }
     }

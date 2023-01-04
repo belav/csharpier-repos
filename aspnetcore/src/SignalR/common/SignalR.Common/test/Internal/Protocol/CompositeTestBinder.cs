@@ -32,10 +32,10 @@ public class CompositeTestBinder : IInvocationBinder
 
     private bool IsBindableMessage(HubMessage arg)
     {
-        return arg is CompletionMessage ||
-            arg is InvocationMessage ||
-            arg is StreamItemMessage ||
-            arg is StreamInvocationMessage;
+        return arg is CompletionMessage
+            || arg is InvocationMessage
+            || arg is StreamItemMessage
+            || arg is StreamInvocationMessage;
     }
 
     public Type GetStreamItemType(string streamId)

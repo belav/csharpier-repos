@@ -17,7 +17,9 @@ namespace System.Runtime.InteropServices
             {
                 if (s_frameworkDescription == null)
                 {
-                    ReadOnlySpan<char> versionString = typeof(object).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+                    ReadOnlySpan<char> versionString = typeof(object).Assembly
+                        .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                        ?.InformationalVersion;
 
                     // Strip the git hash if there is one
                     int plusIndex = versionString.IndexOf('+');
@@ -26,7 +28,9 @@ namespace System.Runtime.InteropServices
                         versionString = versionString.Slice(0, plusIndex);
                     }
 
-                    s_frameworkDescription = !versionString.Trim().IsEmpty ? $"{FrameworkName} {versionString}" : FrameworkName;
+                    s_frameworkDescription = !versionString.Trim().IsEmpty
+                        ? $"{FrameworkName} {versionString}"
+                        : FrameworkName;
                 }
 
                 return s_frameworkDescription;
@@ -49,29 +53,40 @@ namespace System.Runtime.InteropServices
         /// <summary>
         /// Indicates whether the current application is running on the specified platform.
         /// </summary>
-        public static bool IsOSPlatform(OSPlatform osPlatform) => OperatingSystem.IsOSPlatform(osPlatform.Name);
+        public static bool IsOSPlatform(OSPlatform osPlatform) =>
+            OperatingSystem.IsOSPlatform(osPlatform.Name);
 
         public static Architecture ProcessArchitecture
 #if TARGET_X86
-            => Architecture.X86
+            =>
+            Architecture.X86
 #elif TARGET_AMD64
-            => Architecture.X64
+            =>
+            Architecture.X64
 #elif TARGET_ARMV6
-            => Architecture.Armv6
+            =>
+            Architecture.Armv6
 #elif TARGET_ARM
-            => Architecture.Arm
+            =>
+            Architecture.Arm
 #elif TARGET_ARM64
-            => Architecture.Arm64
+            =>
+            Architecture.Arm64
 #elif TARGET_WASM
-            => Architecture.Wasm
+            =>
+            Architecture.Wasm
 #elif TARGET_S390X
-            => Architecture.S390x
+            =>
+            Architecture.S390x
 #elif TARGET_LOONGARCH64
-            => Architecture.LoongArch64
+            =>
+            Architecture.LoongArch64
 #elif TARGET_POWERPC64
-            => Architecture.Ppc64le
+            =>
+            Architecture.Ppc64le
 #elif TARGET_RISCV64
-            => (Architecture)9 // TODO-RISCV64: go though API review for RiscV64
+            =>
+            (Architecture)9 // TODO-RISCV64: go though API review for RiscV64
 #else
 #error Unknown Architecture
 #endif

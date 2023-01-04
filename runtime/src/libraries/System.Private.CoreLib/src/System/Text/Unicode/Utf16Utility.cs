@@ -291,7 +291,10 @@ namespace System.Text.Unicode
         /// the two inputs are equal using an ordinal case-insensitive comparison.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool Vector128OrdinalIgnoreCaseAscii(Vector128<ushort> vec1, Vector128<ushort> vec2)
+        internal static bool Vector128OrdinalIgnoreCaseAscii(
+            Vector128<ushort> vec1,
+            Vector128<ushort> vec2
+        )
         {
             // ASSUMPTION: Caller has validated that input values are ASCII.
 
@@ -300,10 +303,14 @@ namespace System.Text.Unicode
             Vector128<sbyte> lowIndicator2 = Vector128.Create((sbyte)(0x80 - 'A')) + vec2.AsSByte();
 
             // the 0x80 bit of each word of 'combinedIndicator' will be set iff the word has value >= 'A' and <= 'Z'
-            Vector128<sbyte> combIndicator1 =
-                Vector128.LessThan(Vector128.Create(unchecked((sbyte)(('Z' - 'A') - 0x80))), lowIndicator1);
-            Vector128<sbyte> combIndicator2 =
-                Vector128.LessThan(Vector128.Create(unchecked((sbyte)(('Z' - 'A') - 0x80))), lowIndicator2);
+            Vector128<sbyte> combIndicator1 = Vector128.LessThan(
+                Vector128.Create(unchecked((sbyte)(('Z' - 'A') - 0x80))),
+                lowIndicator1
+            );
+            Vector128<sbyte> combIndicator2 = Vector128.LessThan(
+                Vector128.Create(unchecked((sbyte)(('Z' - 'A') - 0x80))),
+                lowIndicator2
+            );
 
             // Convert both vectors to lower case by adding 0x20 bit for all [A-Z][a-z] characters
             Vector128<sbyte> lcVec1 =

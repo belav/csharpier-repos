@@ -22,8 +22,8 @@ public class PageHandlerSelectedContext : FilterContext
     public PageHandlerSelectedContext(
         PageContext pageContext,
         IList<IFilterMetadata> filters,
-        object handlerInstance)
-        : base(pageContext, filters)
+        object handlerInstance
+    ) : base(pageContext, filters)
     {
         if (handlerInstance == null)
         {

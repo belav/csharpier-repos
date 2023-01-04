@@ -25,9 +25,7 @@ namespace System.Web.Http.Filters
         /// Initializes a new instance of the <see cref="HttpActionExecutedContext"/> class.
         /// </summary>
         /// <remarks>The default constructor is intended for use by unit testing only.</remarks>
-        public HttpActionExecutedContext()
-        {
-        }
+        public HttpActionExecutedContext() { }
 
         public HttpActionContext ActionContext
         {
@@ -46,15 +44,8 @@ namespace System.Web.Http.Filters
 
         public HttpResponseMessage Response
         {
-            get
-            {
-                return ActionContext != null ? ActionContext.Response : null;
-            }
-
-            set
-            {
-                ActionContext.Response = value;
-            }
+            get { return ActionContext != null ? ActionContext.Response : null; }
+            set { ActionContext.Response = value; }
         }
 
         /// <summary>
@@ -65,8 +56,8 @@ namespace System.Web.Http.Filters
             get
             {
                 return (ActionContext != null && ActionContext.ControllerContext != null)
-                           ? ActionContext.ControllerContext.Request
-                           : null;
+                    ? ActionContext.ControllerContext.Request
+                    : null;
             }
         }
     }

@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Options
         private SolutionOptionSet(
             ILegacyWorkspaceOptionService globalOptions,
             ImmutableDictionary<OptionKey, object?> values,
-            ImmutableHashSet<OptionKey> changedOptionKeys)
+            ImmutableHashSet<OptionKey> changedOptionKeys
+        )
         {
             _globalOptions = globalOptions;
             _values = values;
@@ -47,16 +48,20 @@ namespace Microsoft.CodeAnalysis.Options
         }
 
         internal SolutionOptionSet(ILegacyWorkspaceOptionService globalOptions)
-            : this(globalOptions, values: ImmutableDictionary<OptionKey, object?>.Empty, changedOptionKeys: ImmutableHashSet<OptionKey>.Empty)
-        {
-        }
+            : this(
+                globalOptions,
+                values: ImmutableDictionary<OptionKey, object?>.Empty,
+                changedOptionKeys: ImmutableHashSet<OptionKey>.Empty
+            ) { }
 
         [PerformanceSensitive("https://github.com/dotnet/roslyn/issues/30819", AllowLocks = false)]
         private protected override object? GetOptionCore(OptionKey optionKey)
         {
             if (_values.TryGetValue(optionKey, out var value))
             {
-                return value is ICodeStyleOption codeStyleOption ? codeStyleOption.AsPublicCodeStyleOption() : value;
+                return value is ICodeStyleOption codeStyleOption
+                    ? codeStyleOption.AsPublicCodeStyleOption()
+                    : value;
             }
 
             value = _globalOptions.GetOption(optionKey);
@@ -78,14 +83,14 @@ namespace Microsoft.CodeAnalysis.Options
             return new SolutionOptionSet(
                 _globalOptions,
                 _values.SetItem(optionKey, value),
-                _changedOptionKeys.Add(optionKey));
+                _changedOptionKeys.Add(optionKey)
+            );
         }
 
         /// <summary>
         /// Gets a list of all the options that were changed.
         /// </summary>
-        internal IEnumerable<OptionKey> GetChangedOptions()
-            => _changedOptionKeys;
+        internal IEnumerable<OptionKey> GetChangedOptions() => _changedOptionKeys;
 
         internal override IEnumerable<OptionKey> GetChangedOptions(OptionSet? optionSet)
         {

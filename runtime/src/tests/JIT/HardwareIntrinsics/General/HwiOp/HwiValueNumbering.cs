@@ -113,7 +113,6 @@ unsafe class HwiValueNumbering
         }
     }
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void ProblemWithLoadHigh_Sse2()
     {

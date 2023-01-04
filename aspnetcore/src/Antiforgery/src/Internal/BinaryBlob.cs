@@ -17,10 +17,7 @@ internal sealed class BinaryBlob : IEquatable<BinaryBlob>
     private readonly byte[] _data;
 
     // Generates a new token using a specified bit length.
-    public BinaryBlob(int bitLength)
-        : this(bitLength, GenerateNewToken(bitLength))
-    {
-    }
+    public BinaryBlob(int bitLength) : this(bitLength, GenerateNewToken(bitLength)) { }
 
     // Generates a token using an existing binary value.
     public BinaryBlob(int bitLength, byte[] data)
@@ -39,10 +36,7 @@ internal sealed class BinaryBlob : IEquatable<BinaryBlob>
 
     public int BitLength
     {
-        get
-        {
-            return checked(_data.Length * 8);
-        }
+        get { return checked(_data.Length * 8); }
     }
 
     private string DebuggerString

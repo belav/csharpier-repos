@@ -11,17 +11,17 @@ namespace Microsoft.CodeAnalysis.Completion
         Default,
 
         /// <summary>
-        /// If no text has been typed, the item should be soft selected. This is appropriate for 
-        /// completion providers that want to provide suggestions that shouldn't interfere with 
+        /// If no text has been typed, the item should be soft selected. This is appropriate for
+        /// completion providers that want to provide suggestions that shouldn't interfere with
         /// typing.  For example a provider that comes up on space might offer items that are soft
-        /// selected so that an additional space (or other puntuation character) will not then 
+        /// selected so that an additional space (or other puntuation character) will not then
         /// commit that item.
         /// </summary>
         SoftSelection,
 
         /// <summary>
         /// If no text has been typed, the item should be hard selected.  This is appropriate for
-        /// completion providers that are providing suggestions the user is nearly certain to 
+        /// completion providers that are providing suggestions the user is nearly certain to
         /// select.  Because the item is hard selected, any commit characters typed after it will
         /// cause it to be committed.
         /// </summary>
@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 enterKeyRule: EnterKeyRule.Default,
                 formatOnCommit: false,
                 matchPriority: Completion.MatchPriority.Default,
-                selectionBehavior: CompletionItemSelectionBehavior.Default);
+                selectionBehavior: CompletionItemSelectionBehavior.Default
+            );
 
         /// <summary>
         /// Rules that modify the set of characters that can be typed to filter the list of completion items.
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Completion
             EnterKeyRule enterKeyRule,
             bool formatOnCommit,
             int matchPriority,
-            CompletionItemSelectionBehavior selectionBehavior)
+            CompletionItemSelectionBehavior selectionBehavior
+        )
         {
             FilterCharacterRules = filterCharacterRules.NullToEmpty();
             CommitCharacterRules = commitCharacterRules.NullToEmpty();
@@ -106,12 +108,17 @@ namespace Microsoft.CodeAnalysis.Completion
             ImmutableArray<CharacterSetModificationRule> commitCharacterRules,
             EnterKeyRule enterKeyRule,
             bool formatOnCommit,
-            int? matchPriority)
+            int? matchPriority
+        )
         {
             return Create(
-                filterCharacterRules, commitCharacterRules,
-                enterKeyRule, formatOnCommit, matchPriority,
-                selectionBehavior: CompletionItemSelectionBehavior.Default);
+                filterCharacterRules,
+                commitCharacterRules,
+                enterKeyRule,
+                formatOnCommit,
+                matchPriority,
+                selectionBehavior: CompletionItemSelectionBehavior.Default
+            );
         }
 
         /// <summary>
@@ -130,22 +137,31 @@ namespace Microsoft.CodeAnalysis.Completion
             EnterKeyRule enterKeyRule = EnterKeyRule.Default,
             bool formatOnCommit = false,
             int? matchPriority = null,
-            CompletionItemSelectionBehavior selectionBehavior = CompletionItemSelectionBehavior.Default)
+            CompletionItemSelectionBehavior selectionBehavior =
+                CompletionItemSelectionBehavior.Default
+        )
         {
-            if (filterCharacterRules.IsDefaultOrEmpty &&
-                commitCharacterRules.IsDefaultOrEmpty &&
-                enterKeyRule == Default.EnterKeyRule &&
-                formatOnCommit == Default.FormatOnCommit &&
-                matchPriority.GetValueOrDefault() == Default.MatchPriority &&
-                selectionBehavior == Default.SelectionBehavior)
+            if (
+                filterCharacterRules.IsDefaultOrEmpty
+                && commitCharacterRules.IsDefaultOrEmpty
+                && enterKeyRule == Default.EnterKeyRule
+                && formatOnCommit == Default.FormatOnCommit
+                && matchPriority.GetValueOrDefault() == Default.MatchPriority
+                && selectionBehavior == Default.SelectionBehavior
+            )
             {
                 return Default;
             }
             else
             {
                 return new CompletionItemRules(
-                    filterCharacterRules, commitCharacterRules, enterKeyRule, formatOnCommit,
-                    matchPriority.GetValueOrDefault(), selectionBehavior);
+                    filterCharacterRules,
+                    commitCharacterRules,
+                    enterKeyRule,
+                    formatOnCommit,
+                    matchPriority.GetValueOrDefault(),
+                    selectionBehavior
+                );
             }
         }
 
@@ -163,10 +179,19 @@ namespace Microsoft.CodeAnalysis.Completion
             ImmutableArray<CharacterSetModificationRule> commitCharacterRules,
             EnterKeyRule enterKeyRule,
             bool formatOnCommit,
-            bool preselect)
+            bool preselect
+        )
         {
-            var matchPriority = preselect ? Completion.MatchPriority.Preselect : Completion.MatchPriority.Default;
-            return CompletionItemRules.Create(filterCharacterRules, commitCharacterRules, enterKeyRule, formatOnCommit, matchPriority);
+            var matchPriority = preselect
+                ? Completion.MatchPriority.Preselect
+                : Completion.MatchPriority.Default;
+            return CompletionItemRules.Create(
+                filterCharacterRules,
+                commitCharacterRules,
+                enterKeyRule,
+                formatOnCommit,
+                matchPriority
+            );
         }
 
         private CompletionItemRules With(
@@ -175,73 +200,85 @@ namespace Microsoft.CodeAnalysis.Completion
             Optional<EnterKeyRule> enterKeyRule = default,
             Optional<bool> formatOnCommit = default,
             Optional<int> matchPriority = default,
-            Optional<CompletionItemSelectionBehavior> selectionBehavior = default)
+            Optional<CompletionItemSelectionBehavior> selectionBehavior = default
+        )
         {
             var newFilterRules = filterRules.HasValue ? filterRules.Value : FilterCharacterRules;
             var newCommitRules = commitRules.HasValue ? commitRules.Value : CommitCharacterRules;
             var newEnterKeyRule = enterKeyRule.HasValue ? enterKeyRule.Value : EnterKeyRule;
             var newFormatOnCommit = formatOnCommit.HasValue ? formatOnCommit.Value : FormatOnCommit;
             var newMatchPriority = matchPriority.HasValue ? matchPriority.Value : MatchPriority;
-            var newSelectionBehavior = selectionBehavior.HasValue ? selectionBehavior.Value : SelectionBehavior;
+            var newSelectionBehavior = selectionBehavior.HasValue
+                ? selectionBehavior.Value
+                : SelectionBehavior;
 
-            if (newFilterRules == FilterCharacterRules &&
-                newCommitRules == CommitCharacterRules &&
-                newEnterKeyRule == EnterKeyRule &&
-                newFormatOnCommit == FormatOnCommit &&
-                newMatchPriority == MatchPriority &&
-                newSelectionBehavior == SelectionBehavior)
+            if (
+                newFilterRules == FilterCharacterRules
+                && newCommitRules == CommitCharacterRules
+                && newEnterKeyRule == EnterKeyRule
+                && newFormatOnCommit == FormatOnCommit
+                && newMatchPriority == MatchPriority
+                && newSelectionBehavior == SelectionBehavior
+            )
             {
                 return this;
             }
             else
             {
                 return Create(
-                    newFilterRules, newCommitRules,
-                    newEnterKeyRule, newFormatOnCommit,
-                    newMatchPriority, newSelectionBehavior);
+                    newFilterRules,
+                    newCommitRules,
+                    newEnterKeyRule,
+                    newFormatOnCommit,
+                    newMatchPriority,
+                    newSelectionBehavior
+                );
             }
         }
 
         /// <summary>
         /// Creates a copy of this <see cref="CompletionItemRules"/> with the <see cref="FilterCharacterRules"/> property changed.
         /// </summary>
-        public CompletionItemRules WithFilterCharacterRules(ImmutableArray<CharacterSetModificationRule> filterCharacterRules)
-            => With(filterRules: filterCharacterRules);
+        public CompletionItemRules WithFilterCharacterRules(
+            ImmutableArray<CharacterSetModificationRule> filterCharacterRules
+        ) => With(filterRules: filterCharacterRules);
 
-        internal CompletionItemRules WithFilterCharacterRule(CharacterSetModificationRule rule)
-            => With(filterRules: ImmutableArray.Create(rule));
+        internal CompletionItemRules WithFilterCharacterRule(CharacterSetModificationRule rule) =>
+            With(filterRules: ImmutableArray.Create(rule));
 
-        internal CompletionItemRules WithCommitCharacterRule(CharacterSetModificationRule rule)
-            => With(commitRules: ImmutableArray.Create(rule));
+        internal CompletionItemRules WithCommitCharacterRule(CharacterSetModificationRule rule) =>
+            With(commitRules: ImmutableArray.Create(rule));
 
         /// <summary>
         /// Creates a copy of this <see cref="CompletionItemRules"/> with the <see cref="CommitCharacterRules"/> property changed.
         /// </summary>
-        public CompletionItemRules WithCommitCharacterRules(ImmutableArray<CharacterSetModificationRule> commitCharacterRules)
-            => With(commitRules: commitCharacterRules);
+        public CompletionItemRules WithCommitCharacterRules(
+            ImmutableArray<CharacterSetModificationRule> commitCharacterRules
+        ) => With(commitRules: commitCharacterRules);
 
         /// <summary>
         /// Creates a copy of this <see cref="CompletionItemRules"/> with the <see cref="EnterKeyRule"/> property changed.
         /// </summary>
-        public CompletionItemRules WithEnterKeyRule(EnterKeyRule enterKeyRule)
-            => With(enterKeyRule: enterKeyRule);
+        public CompletionItemRules WithEnterKeyRule(EnterKeyRule enterKeyRule) =>
+            With(enterKeyRule: enterKeyRule);
 
         /// <summary>
         /// Creates a copy of this <see cref="CompletionItemRules"/> with the <see cref="FormatOnCommit"/> property changed.
         /// </summary>
-        public CompletionItemRules WithFormatOnCommit(bool formatOnCommit)
-            => With(formatOnCommit: formatOnCommit);
+        public CompletionItemRules WithFormatOnCommit(bool formatOnCommit) =>
+            With(formatOnCommit: formatOnCommit);
 
         /// <summary>
         /// Creates a copy of this <see cref="CompletionItemRules"/> with the <see cref="MatchPriority"/> property changed.
         /// </summary>
-        public CompletionItemRules WithMatchPriority(int matchPriority)
-            => With(matchPriority: matchPriority);
+        public CompletionItemRules WithMatchPriority(int matchPriority) =>
+            With(matchPriority: matchPriority);
 
         /// <summary>
         /// Creates a copy of this <see cref="CompletionItemRules"/> with the <see cref="SelectionBehavior"/> property changed.
         /// </summary>
-        public CompletionItemRules WithSelectionBehavior(CompletionItemSelectionBehavior selectionBehavior)
-            => With(selectionBehavior: selectionBehavior);
+        public CompletionItemRules WithSelectionBehavior(
+            CompletionItemSelectionBehavior selectionBehavior
+        ) => With(selectionBehavior: selectionBehavior);
     }
 }

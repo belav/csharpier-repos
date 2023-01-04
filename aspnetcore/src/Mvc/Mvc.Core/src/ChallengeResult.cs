@@ -16,20 +16,14 @@ public partial class ChallengeResult : ActionResult
     /// <summary>
     /// Initializes a new instance of <see cref="ChallengeResult"/>.
     /// </summary>
-    public ChallengeResult()
-        : this(Array.Empty<string>())
-    {
-    }
+    public ChallengeResult() : this(Array.Empty<string>()) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ChallengeResult"/> with the
     /// specified authentication scheme.
     /// </summary>
     /// <param name="authenticationScheme">The authentication scheme to challenge.</param>
-    public ChallengeResult(string authenticationScheme)
-        : this(new[] { authenticationScheme })
-    {
-    }
+    public ChallengeResult(string authenticationScheme) : this(new[] { authenticationScheme }) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ChallengeResult"/> with the
@@ -37,9 +31,7 @@ public partial class ChallengeResult : ActionResult
     /// </summary>
     /// <param name="authenticationSchemes">The authentication schemes to challenge.</param>
     public ChallengeResult(IList<string> authenticationSchemes)
-        : this(authenticationSchemes, properties: null)
-    {
-    }
+        : this(authenticationSchemes, properties: null) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ChallengeResult"/> with the
@@ -48,9 +40,7 @@ public partial class ChallengeResult : ActionResult
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
     /// challenge.</param>
     public ChallengeResult(AuthenticationProperties? properties)
-        : this(Array.Empty<string>(), properties)
-    {
-    }
+        : this(Array.Empty<string>(), properties) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ChallengeResult"/> with the
@@ -60,9 +50,7 @@ public partial class ChallengeResult : ActionResult
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
     /// challenge.</param>
     public ChallengeResult(string authenticationScheme, AuthenticationProperties? properties)
-        : this(new[] { authenticationScheme }, properties)
-    {
-    }
+        : this(new[] { authenticationScheme }, properties) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ChallengeResult"/> with the
@@ -71,7 +59,10 @@ public partial class ChallengeResult : ActionResult
     /// <param name="authenticationSchemes">The authentication scheme to challenge.</param>
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
     /// challenge.</param>
-    public ChallengeResult(IList<string> authenticationSchemes, AuthenticationProperties? properties)
+    public ChallengeResult(
+        IList<string> authenticationSchemes,
+        AuthenticationProperties? properties
+    )
     {
         AuthenticationSchemes = authenticationSchemes;
         Properties = properties;
@@ -123,7 +114,13 @@ public partial class ChallengeResult : ActionResult
             }
         }
 
-        [LoggerMessage(1, LogLevel.Information, "Executing ChallengeResult with authentication schemes ({Schemes}).", EventName = "ChallengeResultExecuting", SkipEnabledCheck = true)]
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Executing ChallengeResult with authentication schemes ({Schemes}).",
+            EventName = "ChallengeResultExecuting",
+            SkipEnabledCheck = true
+        )]
         private static partial void ChallengeResultExecuting(ILogger logger, string[] schemes);
     }
 }

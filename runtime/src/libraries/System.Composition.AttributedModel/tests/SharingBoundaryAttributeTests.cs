@@ -25,7 +25,10 @@ namespace System.Composition.AttributeModel.Tests
         [Fact]
         public void Ctor_NullSharingBoundaryNames_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("sharingBoundaryNames", () => new SharingBoundaryAttribute(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "sharingBoundaryNames",
+                () => new SharingBoundaryAttribute(null)
+            );
         }
     }
 }

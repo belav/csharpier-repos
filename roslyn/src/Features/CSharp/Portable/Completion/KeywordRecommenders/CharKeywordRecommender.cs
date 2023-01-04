@@ -13,43 +13,61 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class CharKeywordRecommender : AbstractSpecialTypePreselectingKeywordRecommender
     {
-        public CharKeywordRecommender()
-            : base(SyntaxKind.CharKeyword)
-        {
-        }
+        public CharKeywordRecommender() : base(SyntaxKind.CharKeyword) { }
 
-        protected override bool IsValidContextWorker(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContextWorker(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxTree = context.SyntaxTree;
-            return
-                context.IsAnyExpressionContext ||
-                context.IsDefiniteCastTypeContext ||
-                context.IsStatementContext ||
-                context.IsGlobalStatementContext ||
-                context.IsObjectCreationTypeContext ||
-                (context.IsGenericTypeArgumentContext && !context.TargetToken.GetRequiredParent().HasAncestor<XmlCrefAttributeSyntax>()) ||
-                context.IsFunctionPointerTypeArgumentContext ||
-                context.IsIsOrAsTypeContext ||
-                context.IsLocalVariableDeclarationContext ||
-                context.IsFixedVariableDeclarationContext ||
-                context.IsParameterTypeContext ||
-                context.IsPossibleLambdaOrAnonymousMethodParameterTypeContext ||
-                context.IsLocalFunctionDeclarationContext ||
-                context.IsImplicitOrExplicitOperatorTypeContext ||
-                context.IsPrimaryFunctionExpressionContext ||
-                context.IsCrefContext ||
-                syntaxTree.IsAfterKeyword(position, SyntaxKind.ConstKeyword, cancellationToken) ||
-                syntaxTree.IsAfterKeyword(position, SyntaxKind.RefKeyword, cancellationToken) ||
-                syntaxTree.IsAfterKeyword(position, SyntaxKind.ReadOnlyKeyword, cancellationToken) ||
-                syntaxTree.IsAfterKeyword(position, SyntaxKind.StackAllocKeyword, cancellationToken) ||
-                context.IsDelegateReturnTypeContext ||
-                syntaxTree.IsGlobalMemberDeclarationContext(position, SyntaxKindSet.AllGlobalMemberModifiers, cancellationToken) ||
-                context.IsPossibleTupleContext ||
-                context.IsMemberDeclarationContext(
+            return context.IsAnyExpressionContext
+                || context.IsDefiniteCastTypeContext
+                || context.IsStatementContext
+                || context.IsGlobalStatementContext
+                || context.IsObjectCreationTypeContext
+                || (
+                    context.IsGenericTypeArgumentContext
+                    && !context.TargetToken
+                        .GetRequiredParent()
+                        .HasAncestor<XmlCrefAttributeSyntax>()
+                )
+                || context.IsFunctionPointerTypeArgumentContext
+                || context.IsIsOrAsTypeContext
+                || context.IsLocalVariableDeclarationContext
+                || context.IsFixedVariableDeclarationContext
+                || context.IsParameterTypeContext
+                || context.IsPossibleLambdaOrAnonymousMethodParameterTypeContext
+                || context.IsLocalFunctionDeclarationContext
+                || context.IsImplicitOrExplicitOperatorTypeContext
+                || context.IsPrimaryFunctionExpressionContext
+                || context.IsCrefContext
+                || syntaxTree.IsAfterKeyword(position, SyntaxKind.ConstKeyword, cancellationToken)
+                || syntaxTree.IsAfterKeyword(position, SyntaxKind.RefKeyword, cancellationToken)
+                || syntaxTree.IsAfterKeyword(
+                    position,
+                    SyntaxKind.ReadOnlyKeyword,
+                    cancellationToken
+                )
+                || syntaxTree.IsAfterKeyword(
+                    position,
+                    SyntaxKind.StackAllocKeyword,
+                    cancellationToken
+                )
+                || context.IsDelegateReturnTypeContext
+                || syntaxTree.IsGlobalMemberDeclarationContext(
+                    position,
+                    SyntaxKindSet.AllGlobalMemberModifiers,
+                    cancellationToken
+                )
+                || context.IsPossibleTupleContext
+                || context.IsMemberDeclarationContext(
                     validModifiers: SyntaxKindSet.AllMemberModifiers,
                     validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
                     canBePartial: false,
-                    cancellationToken: cancellationToken);
+                    cancellationToken: cancellationToken
+                );
         }
 
         protected override SpecialType SpecialType => SpecialType.System_Char;

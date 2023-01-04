@@ -46,32 +46,52 @@ public partial class Program
     {
         int returnVal = Pass;
 
-        if (Vector128UnusedTest<float>.VectorUnused(3f, 2f) != Pass) returnVal = Fail;
-        if (Vector128UnusedTest<double>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (Vector128UnusedTest<int>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (Vector128UnusedTest<uint>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (Vector128UnusedTest<ushort>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (Vector128UnusedTest<byte>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (Vector128UnusedTest<short>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (Vector128UnusedTest<sbyte>.VectorUnused(3, 2) != Pass) returnVal = Fail;
+        if (Vector128UnusedTest<float>.VectorUnused(3f, 2f) != Pass)
+            returnVal = Fail;
+        if (Vector128UnusedTest<double>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (Vector128UnusedTest<int>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (Vector128UnusedTest<uint>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (Vector128UnusedTest<ushort>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (Vector128UnusedTest<byte>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (Vector128UnusedTest<short>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (Vector128UnusedTest<sbyte>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
         if (Environment.Is64BitProcess)
         {
-            if (Vector128UnusedTest<long>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-            if (Vector128UnusedTest<ulong>.VectorUnused(3, 2) != Pass) returnVal = Fail;
+            if (Vector128UnusedTest<long>.VectorUnused(3, 2) != Pass)
+                returnVal = Fail;
+            if (Vector128UnusedTest<ulong>.VectorUnused(3, 2) != Pass)
+                returnVal = Fail;
         }
 
-        if (Vector256UnusedTest<float>.VectorUnused(3f, 2f) != Pass) returnVal = Fail;
-        if (Vector256UnusedTest<double>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (Vector256UnusedTest<int>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (Vector256UnusedTest<uint>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (Vector256UnusedTest<ushort>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (Vector256UnusedTest<byte>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (Vector256UnusedTest<short>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (Vector256UnusedTest<sbyte>.VectorUnused(3, 2) != Pass) returnVal = Fail;
+        if (Vector256UnusedTest<float>.VectorUnused(3f, 2f) != Pass)
+            returnVal = Fail;
+        if (Vector256UnusedTest<double>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (Vector256UnusedTest<int>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (Vector256UnusedTest<uint>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (Vector256UnusedTest<ushort>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (Vector256UnusedTest<byte>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (Vector256UnusedTest<short>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (Vector256UnusedTest<sbyte>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
         if (Environment.Is64BitProcess)
         {
-            if (Vector256UnusedTest<long>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-            if (Vector256UnusedTest<ulong>.VectorUnused(3, 2) != Pass) returnVal = Fail;
+            if (Vector256UnusedTest<long>.VectorUnused(3, 2) != Pass)
+                returnVal = Fail;
+            if (Vector256UnusedTest<ulong>.VectorUnused(3, 2) != Pass)
+                returnVal = Fail;
         }
         Assert.Equal(Pass, returnVal);
     }

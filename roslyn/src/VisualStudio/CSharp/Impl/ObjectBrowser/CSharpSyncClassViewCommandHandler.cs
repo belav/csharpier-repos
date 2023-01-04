@@ -22,9 +22,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSyncClassViewCommandHandler(IThreadingContext threadingContext, SVsServiceProvider serviceProvider)
-            : base(threadingContext, serviceProvider)
-        {
-        }
+        public CSharpSyncClassViewCommandHandler(
+            IThreadingContext threadingContext,
+            SVsServiceProvider serviceProvider
+        ) : base(threadingContext, serviceProvider) { }
     }
 }

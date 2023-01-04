@@ -24,9 +24,7 @@ namespace System.Threading
         private long _scheduledDueTimeMs;
 
 #pragma warning disable IDE0060
-        private TimerQueue(int id)
-        {
-        }
+        private TimerQueue(int id) { }
 #pragma warning restore IDE0060
 
         private static List<TimerQueue> InitializeScheduledTimerManager_Locked()
@@ -59,7 +57,8 @@ namespace System.Threading
             {
                 if (!_isScheduled)
                 {
-                    List<TimerQueue> timers = s_scheduledTimers ?? InitializeScheduledTimerManager_Locked();
+                    List<TimerQueue> timers =
+                        s_scheduledTimers ?? InitializeScheduledTimerManager_Locked();
 
                     timers.Add(this);
                     _isScheduled = true;

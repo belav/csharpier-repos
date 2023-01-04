@@ -25,14 +25,24 @@ internal sealed class SpaHostingStartup : IHostingStartup
                     .Build();
 
                 services.AddSingleton<SpaProxyLaunchManager>();
-                ConfigureOptions<SpaDevelopmentServerOptions>(services, configuration.GetSection("SpaProxyServer"));
-                services.TryAddEnumerable(ServiceDescriptor.Singleton<IStartupFilter, SpaProxyStartupFilter>());
+                ConfigureOptions<SpaDevelopmentServerOptions>(
+                    services,
+                    configuration.GetSection("SpaProxyServer")
+                );
+                services.TryAddEnumerable(
+                    ServiceDescriptor.Singleton<IStartupFilter, SpaProxyStartupFilter>()
+                );
             }
         });
 
-        [UnconditionalSuppressMessageAttribute("Trimming", "IL2026", Justification = "Configuration object's public properties are preserved.")]
-        static void ConfigureOptions<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(IServiceCollection services, IConfigurationSection section)
-            where T : class
+        [UnconditionalSuppressMessageAttribute(
+            "Trimming",
+            "IL2026",
+            Justification = "Configuration object's public properties are preserved."
+        )]
+        static void ConfigureOptions<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T
+        >(IServiceCollection services, IConfigurationSection section) where T : class
         {
             services.Configure<T>(section);
         }

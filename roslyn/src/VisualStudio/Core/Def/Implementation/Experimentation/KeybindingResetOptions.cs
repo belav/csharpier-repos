@@ -12,16 +12,34 @@ namespace Microsoft.CodeAnalysis.Experimentation
     {
         private const string LocalRegistryPath = @"Roslyn\Internal\KeybindingsStatus\";
 
-        public static readonly Option<ReSharperStatus> ReSharperStatus = new(nameof(KeybindingResetOptions),
-            nameof(ReSharperStatus), defaultValue: Experimentation.ReSharperStatus.NotInstalledOrDisabled,
-            storageLocations: new LocalUserProfileStorageLocation(LocalRegistryPath + nameof(ReSharperStatus)));
+        public static readonly Option<ReSharperStatus> ReSharperStatus =
+            new(
+                nameof(KeybindingResetOptions),
+                nameof(ReSharperStatus),
+                defaultValue: Experimentation.ReSharperStatus.NotInstalledOrDisabled,
+                storageLocations: new LocalUserProfileStorageLocation(
+                    LocalRegistryPath + nameof(ReSharperStatus)
+                )
+            );
 
-        public static readonly Option<bool> NeedsReset = new(nameof(KeybindingResetOptions),
-            nameof(NeedsReset), defaultValue: false,
-            storageLocations: new LocalUserProfileStorageLocation(LocalRegistryPath + nameof(NeedsReset)));
+        public static readonly Option<bool> NeedsReset =
+            new(
+                nameof(KeybindingResetOptions),
+                nameof(NeedsReset),
+                defaultValue: false,
+                storageLocations: new LocalUserProfileStorageLocation(
+                    LocalRegistryPath + nameof(NeedsReset)
+                )
+            );
 
-        public static readonly Option<bool> NeverShowAgain = new(nameof(KeybindingResetOptions),
-            nameof(NeverShowAgain), defaultValue: false,
-            storageLocations: new LocalUserProfileStorageLocation(LocalRegistryPath + nameof(NeverShowAgain)));
+        public static readonly Option<bool> NeverShowAgain =
+            new(
+                nameof(KeybindingResetOptions),
+                nameof(NeverShowAgain),
+                defaultValue: false,
+                storageLocations: new LocalUserProfileStorageLocation(
+                    LocalRegistryPath + nameof(NeverShowAgain)
+                )
+            );
     }
 }

@@ -5,9 +5,6 @@ namespace System.Text.Json
 {
     internal sealed class JsonKebabCaseLowerNamingPolicy : JsonSeparatorNamingPolicy
     {
-        public JsonKebabCaseLowerNamingPolicy()
-            : base(lowercase: true, separator: '-')
-        {
-        }
+        public JsonKebabCaseLowerNamingPolicy() : base(lowercase: true, separator: '-') { }
     }
 }

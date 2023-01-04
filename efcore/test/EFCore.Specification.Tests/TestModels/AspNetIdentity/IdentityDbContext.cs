@@ -5,12 +5,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity;
 
 public class IdentityDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
 {
-    public IdentityDbContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+    public IdentityDbContext(DbContextOptions options) : base(options) { }
 
-    protected IdentityDbContext()
-    {
-    }
+    protected IdentityDbContext() { }
 }

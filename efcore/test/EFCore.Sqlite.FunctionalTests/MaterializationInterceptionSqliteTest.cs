@@ -5,25 +5,26 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class MaterializationInterceptionSqliteTest : MaterializationInterceptionTestBase,
-    IClassFixture<MaterializationInterceptionSqliteTest.MaterializationInterceptionSqliteFixture>
+public class MaterializationInterceptionSqliteTest
+    : MaterializationInterceptionTestBase,
+        IClassFixture<MaterializationInterceptionSqliteTest.MaterializationInterceptionSqliteFixture>
 {
     public MaterializationInterceptionSqliteTest(MaterializationInterceptionSqliteFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class MaterializationInterceptionSqliteFixture : SingletonInterceptorsFixtureBase
     {
-        protected override string StoreName
-            => "MaterializationInterception";
+        protected override string StoreName => "MaterializationInterception";
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
         protected override IServiceCollection InjectInterceptors(
             IServiceCollection serviceCollection,
-            IEnumerable<ISingletonInterceptor> injectedInterceptors)
-            => base.InjectInterceptors(serviceCollection.AddEntityFrameworkSqlite(), injectedInterceptors);
+            IEnumerable<ISingletonInterceptor> injectedInterceptors
+        ) =>
+            base.InjectInterceptors(
+                serviceCollection.AddEntityFrameworkSqlite(),
+                injectedInterceptors
+            );
     }
 }

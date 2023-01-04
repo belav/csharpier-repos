@@ -16,12 +16,15 @@ namespace Precise
         {
             RuntimeHelpers.RunClassConstructor(typeof(test).TypeHandle);
         }
+
         [Fact]
         public static int TestEntryPoint()
         {
             try
             {
-                Console.WriteLine("Testing .cctor() invocation by accessing static field across assembly");
+                Console.WriteLine(
+                    "Testing .cctor() invocation by accessing static field across assembly"
+                );
                 Console.WriteLine();
                 Console.WriteLine("Before calling static field");
                 // .cctor should not run yet
@@ -44,7 +47,7 @@ namespace Precise
                 foreach (Thread _thread in tasks)
                     _thread.Start();
 
-                // Wait for tasks to finish	
+                // Wait for tasks to finish
                 foreach (Thread _thread in tasks)
                     _thread.Join();
 

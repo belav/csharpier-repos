@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         public sealed class DotNetSdkAvailable : ExecutionCondition
         {
             public override bool ShouldSkip => s_dotnetSdkPath == null;
-            public override string SkipReason => "The location of dotnet SDK can't be determined (DOTNET_INSTALL_DIR environment variable is unset)";
+            public override string SkipReason =>
+                "The location of dotnet SDK can't be determined (DOTNET_INSTALL_DIR environment variable is unset)";
         }
 
         private static readonly string s_dotnetExeName;
@@ -28,14 +29,14 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         private static readonly string? s_dotnetSdkPath;
 
         private static readonly string s_projectSource =
-@"<Project Sdk='Microsoft.NET.Sdk'>
+            @"<Project Sdk='Microsoft.NET.Sdk'>
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 </Project>
 ";
         private static readonly string s_classSource =
-@"using System;
+            @"using System;
 
 public class TestClass 
 {
@@ -59,22 +60,32 @@ public class TestClass
 
         private int _logIndex;
 
-        private static string GetSdkPath(string dotnetInstallDir, string version)
-            => Path.Combine(dotnetInstallDir, "sdk", version);
+        private static string GetSdkPath(string dotnetInstallDir, string version) =>
+            Path.Combine(dotnetInstallDir, "sdk", version);
 
         static DotNetSdkTestBase()
         {
             s_dotnetExeName = "dotnet" + (Path.DirectorySeparatorChar == '/' ? "" : ".exe");
-            s_dotnetSdkVersion = typeof(DotNetSdkTests).Assembly.GetCustomAttribute<DotNetSdkVersionAttribute>()?.Version
-                ?? throw new InvalidOperationException($"Couldn't find {nameof(DotNetSdkVersionAttribute)}");
+            s_dotnetSdkVersion =
+                typeof(DotNetSdkTests).Assembly
+                    .GetCustomAttribute<DotNetSdkVersionAttribute>()
+                    ?.Version
+                ?? throw new InvalidOperationException(
+                    $"Couldn't find {nameof(DotNetSdkVersionAttribute)}"
+                );
 
-            static bool isMatchingDotNetInstance(string? dotnetDir)
-                => dotnetDir != null && File.Exists(Path.Combine(dotnetDir, s_dotnetExeName)) && Directory.Exists(GetSdkPath(dotnetDir, s_dotnetSdkVersion));
+            static bool isMatchingDotNetInstance(string? dotnetDir) =>
+                dotnetDir != null
+                && File.Exists(Path.Combine(dotnetDir, s_dotnetExeName))
+                && Directory.Exists(GetSdkPath(dotnetDir, s_dotnetSdkVersion));
 
             var dotnetInstallDir = Environment.GetEnvironmentVariable("DOTNET_INSTALL_DIR");
             if (!isMatchingDotNetInstance(dotnetInstallDir))
             {
-                dotnetInstallDir = Environment.GetEnvironmentVariable("PATH")?.Split(Path.PathSeparator).FirstOrDefault(isMatchingDotNetInstance);
+                dotnetInstallDir = Environment
+                    .GetEnvironmentVariable("PATH")
+                    ?.Split(Path.PathSeparator)
+                    .FirstOrDefault(isMatchingDotNetInstance);
             }
 
             if (dotnetInstallDir != null)
@@ -89,14 +100,17 @@ public class TestClass
         private static void EmitTestHelperProps(
             string objDirectory,
             string projectFileName,
-            string? content)
+            string? content
+        )
         {
-            // Common.props automatically import {project-name}.*.props files from MSBuildProjectExtensionsPath directory, 
+            // Common.props automatically import {project-name}.*.props files from MSBuildProjectExtensionsPath directory,
             // which is by default set to the IntermediateOutputPath:
-            File.WriteAllText(Path.Combine(objDirectory, projectFileName + ".TestHelpers.g.props"),
-$@"<Project>
+            File.WriteAllText(
+                Path.Combine(objDirectory, projectFileName + ".TestHelpers.g.props"),
+                $@"<Project>
 {content}
-</Project>");
+</Project>"
+            );
         }
 
         private static void EmitTestHelperTargets(
@@ -104,12 +118,14 @@ $@"<Project>
             string outputFile,
             string projectFileName,
             IEnumerable<string> expressions,
-            string? additionalContent)
+            string? additionalContent
+        )
         {
-            // Common.targets automatically import {project-name}.*.targets files from MSBuildProjectExtensionsPath directory, 
+            // Common.targets automatically import {project-name}.*.targets files from MSBuildProjectExtensionsPath directory,
             // which is by defautl set to the IntermediateOutputPath:
-            File.WriteAllText(Path.Combine(objDirectory, projectFileName + ".TestHelpers.g.targets"),
-$@"<Project>      
+            File.WriteAllText(
+                Path.Combine(objDirectory, projectFileName + ".TestHelpers.g.targets"),
+                $@"<Project>      
   <Target Name=""Test_EvaluateExpressions"">
     <PropertyGroup>
       {string.Join(Environment.NewLine + "      ", expressions.SelectWithIndex((e, i) => $@"<_Value{i}>{e}</_Value{i}><_Value{i} Condition=""'$(_Value{i})' == ''"">{EmptyValueMarker}</_Value{i}>"))}
@@ -132,16 +148,21 @@ $@"<Project>
   <Target Name=""InitializeSourceControlInformation""/>
 
 {additionalContent}
-</Project>");
+</Project>"
+            );
         }
 
         public DotNetSdkTestBase()
         {
-            Assert.True(s_dotnetInstallDir is object, $"SDK not found. Use {nameof(ConditionalFactAttribute)}(typeof({nameof(DotNetSdkAvailable)})) to skip the test if the SDK is not found.");
+            Assert.True(
+                s_dotnetInstallDir is object,
+                $"SDK not found. Use {nameof(ConditionalFactAttribute)}(typeof({nameof(DotNetSdkAvailable)})) to skip the test if the SDK is not found."
+            );
             Debug.Assert(s_dotnetInstallDir is object);
 
             DotNetPath = Path.Combine(s_dotnetInstallDir, s_dotnetExeName);
-            var testBinDirectory = Path.GetDirectoryName(typeof(DotNetSdkTests).Assembly.Location) ?? string.Empty;
+            var testBinDirectory =
+                Path.GetDirectoryName(typeof(DotNetSdkTests).Assembly.Location) ?? string.Empty;
             var sdksDir = Path.Combine(s_dotnetSdkPath ?? string.Empty, "Sdks");
 
             ProjectName = "test";
@@ -151,7 +172,10 @@ $@"<Project>
 
             ProjectDir = Temp.CreateDirectory();
             ObjDir = ProjectDir.CreateDirectory("obj");
-            OutDir = ProjectDir.CreateDirectory("bin").CreateDirectory(Configuration).CreateDirectory(TargetFramework);
+            OutDir = ProjectDir
+                .CreateDirectory("bin")
+                .CreateDirectory(Configuration)
+                .CreateDirectory(TargetFramework);
 
             Project = ProjectDir.CreateFile(ProjectFileName).WriteAllText(s_projectSource);
             ProjectDir.CreateFile("TestClass.cs").WriteAllText(s_classSource);
@@ -162,7 +186,10 @@ $@"<Project>
             ProjectDir.CreateFile(".editorconfig").WriteAllText("root = true");
 
             var csharpCoreTargets = Path.Combine(testBinDirectory, "Microsoft.CSharp.Core.targets");
-            var visualBasicCoreTargets = Path.Combine(testBinDirectory, "Microsoft.VisualBasic.Core.targets");
+            var visualBasicCoreTargets = Path.Combine(
+                testBinDirectory,
+                "Microsoft.VisualBasic.Core.targets"
+            );
 
             Assert.True(File.Exists(csharpCoreTargets));
             Assert.True(File.Exists(visualBasicCoreTargets));
@@ -175,21 +202,41 @@ $@"<Project>
                 { "DOTNET_MSBUILD_SDK_RESOLVER_SDKS_DIR", sdksDir }
             };
 
-            var restoreResult = ProcessUtilities.Run(DotNetPath, $@"msbuild ""{Project.Path}"" /t:restore /bl:{Path.Combine(ProjectDir.Path, "restore.binlog")}",
-                additionalEnvironmentVars: EnvironmentVariables);
-            Assert.True(restoreResult.ExitCode == 0, $"Failed with exit code {restoreResult.ExitCode}: {restoreResult.Output}");
+            var restoreResult = ProcessUtilities.Run(
+                DotNetPath,
+                $@"msbuild ""{Project.Path}"" /t:restore /bl:{Path.Combine(ProjectDir.Path, "restore.binlog")}",
+                additionalEnvironmentVars: EnvironmentVariables
+            );
+            Assert.True(
+                restoreResult.ExitCode == 0,
+                $"Failed with exit code {restoreResult.ExitCode}: {restoreResult.Output}"
+            );
 
             Assert.True(File.Exists(Path.Combine(ObjDir.Path, "project.assets.json")));
             Assert.True(File.Exists(Path.Combine(ObjDir.Path, ProjectFileName + ".nuget.g.props")));
-            Assert.True(File.Exists(Path.Combine(ObjDir.Path, ProjectFileName + ".nuget.g.targets")));
+            Assert.True(
+                File.Exists(Path.Combine(ObjDir.Path, ProjectFileName + ".nuget.g.targets"))
+            );
         }
 
-        protected void VerifyValues(string? customProps, string? customTargets, string[] targets, string[] expressions, string[] expectedResults)
+        protected void VerifyValues(
+            string? customProps,
+            string? customTargets,
+            string[] targets,
+            string[] expressions,
+            string[] expectedResults
+        )
         {
             var evaluationResultsFile = Path.Combine(OutDir.Path, "EvaluationResult.txt");
 
             EmitTestHelperProps(ObjDir.Path, ProjectFileName, customProps);
-            EmitTestHelperTargets(ObjDir.Path, evaluationResultsFile, ProjectFileName, expressions, customTargets);
+            EmitTestHelperTargets(
+                ObjDir.Path,
+                evaluationResultsFile,
+                ProjectFileName,
+                expressions,
+                customTargets
+            );
 
             var targetsArg = string.Join(";", targets.Concat(new[] { "Test_EvaluateExpressions" }));
             var testBinDirectory = Path.GetDirectoryName(typeof(DotNetSdkTests).Assembly.Location);
@@ -198,11 +245,18 @@ $@"<Project>
             // RoslynTargetsPath is a path to the built-in Roslyn compilers in the .NET SDK.
             // For testing we are using compilers from custom location (this emulates usage of Microsoft.Net.Compilers package.
             // The core targets should be imported from CSharpCoreTargetsPath and VisualBasicCoreTargetsPath and the compiler tasks from the same location.
-            var buildResult = ProcessUtilities.Run(DotNetPath, $@"msbuild ""{Project.Path}"" /t:{targetsArg} /p:RoslynTargetsPath=""<nonexistent directory>"" /p:Configuration={Configuration} /bl:""{binLog}""",
-                additionalEnvironmentVars: EnvironmentVariables);
-            Assert.True(buildResult.ExitCode == 0, $"Failed with exit code {buildResult.ExitCode}: {buildResult.Output}");
+            var buildResult = ProcessUtilities.Run(
+                DotNetPath,
+                $@"msbuild ""{Project.Path}"" /t:{targetsArg} /p:RoslynTargetsPath=""<nonexistent directory>"" /p:Configuration={Configuration} /bl:""{binLog}""",
+                additionalEnvironmentVars: EnvironmentVariables
+            );
+            Assert.True(
+                buildResult.ExitCode == 0,
+                $"Failed with exit code {buildResult.ExitCode}: {buildResult.Output}"
+            );
 
-            var evaluationResult = File.ReadAllLines(evaluationResultsFile).Select(l => (l != EmptyValueMarker) ? l : "");
+            var evaluationResult = File.ReadAllLines(evaluationResultsFile)
+                .Select(l => (l != EmptyValueMarker) ? l : "");
             AssertEx.Equal(expectedResults, evaluationResult);
         }
     }

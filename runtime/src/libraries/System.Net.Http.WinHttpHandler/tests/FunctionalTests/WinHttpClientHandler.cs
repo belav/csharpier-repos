@@ -53,7 +53,10 @@ namespace System.Net.Http
         public bool UseCookies
         {
             get => CookieUsePolicy == CookieUsePolicy.UseSpecifiedCookieContainer;
-            set => CookieUsePolicy = value ? CookieUsePolicy.UseSpecifiedCookieContainer : CookieUsePolicy.IgnoreCookies;
+            set =>
+                CookieUsePolicy = value
+                    ? CookieUsePolicy.UseSpecifiedCookieContainer
+                    : CookieUsePolicy.IgnoreCookies;
         }
 
         public new CookieContainer CookieContainer
@@ -124,7 +127,6 @@ namespace System.Net.Http
             {
                 return 0; // Returning zero is appropriate since in .NET Framework it means no limit.
             }
-
             set
             {
                 if (value < 0 || value > int.MaxValue)
@@ -142,15 +144,34 @@ namespace System.Net.Http
             set => ClientCertificateOption = value;
         }
 
-        public Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> ServerCertificateCustomValidationCallback
+        public Func<
+            HttpRequestMessage,
+            X509Certificate2,
+            X509Chain,
+            SslPolicyErrors,
+            bool
+        > ServerCertificateCustomValidationCallback
         {
             get => ServerCertificateValidationCallback;
             set => ServerCertificateValidationCallback = value;
         }
 
-        public static Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> DangerousAcceptAnyServerCertificateValidator { get; } = delegate { return true; };
+        public static Func<
+            HttpRequestMessage,
+            X509Certificate2,
+            X509Chain,
+            SslPolicyErrors,
+            bool
+        > DangerousAcceptAnyServerCertificateValidator { get; } =
+            delegate
+            {
+                return true;
+            };
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             // Get current value of WindowsProxyUsePolicy.  Only call its WinHttpHandler
             // property setter if the value needs to change.
@@ -181,7 +202,7 @@ namespace System.Net.Http
                 }
             }
 
-            if(_requestVersion >= HttpVersion20.Value)
+            if (_requestVersion >= HttpVersion20.Value)
             {
                 request.Version = _requestVersion;
             }

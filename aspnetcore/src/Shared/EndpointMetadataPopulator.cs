@@ -11,13 +11,29 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Http;
 
-[UnconditionalSuppressMessage("Trimmer", "IL2060", Justification = "Trimmer warnings are presented in RequestDelegateFactory.")]
+[UnconditionalSuppressMessage(
+    "Trimmer",
+    "IL2060",
+    Justification = "Trimmer warnings are presented in RequestDelegateFactory."
+)]
 internal static class EndpointMetadataPopulator
 {
-    private static readonly MethodInfo PopulateMetadataForParameterMethod = typeof(EndpointMetadataPopulator).GetMethod(nameof(PopulateMetadataForParameter), BindingFlags.NonPublic | BindingFlags.Static)!;
-    private static readonly MethodInfo PopulateMetadataForEndpointMethod = typeof(EndpointMetadataPopulator).GetMethod(nameof(PopulateMetadataForEndpoint), BindingFlags.NonPublic | BindingFlags.Static)!;
+    private static readonly MethodInfo PopulateMetadataForParameterMethod =
+        typeof(EndpointMetadataPopulator).GetMethod(
+            nameof(PopulateMetadataForParameter),
+            BindingFlags.NonPublic | BindingFlags.Static
+        )!;
+    private static readonly MethodInfo PopulateMetadataForEndpointMethod =
+        typeof(EndpointMetadataPopulator).GetMethod(
+            nameof(PopulateMetadataForEndpoint),
+            BindingFlags.NonPublic | BindingFlags.Static
+        )!;
 
-    public static void PopulateMetadata(MethodInfo methodInfo, EndpointBuilder builder, IEnumerable<ParameterInfo>? parameters = null)
+    public static void PopulateMetadata(
+        MethodInfo methodInfo,
+        EndpointBuilder builder,
+        IEnumerable<ParameterInfo>? parameters = null
+    )
     {
         object?[]? invokeArgs = null;
         parameters ??= methodInfo.GetParameters();
@@ -25,13 +41,17 @@ internal static class EndpointMetadataPopulator
         // Get metadata from parameter types
         foreach (var parameter in parameters)
         {
-            if (typeof(IEndpointParameterMetadataProvider).IsAssignableFrom(parameter.ParameterType))
+            if (
+                typeof(IEndpointParameterMetadataProvider).IsAssignableFrom(parameter.ParameterType)
+            )
             {
                 // Parameter type implements IEndpointParameterMetadataProvider
                 invokeArgs ??= new object[2];
                 invokeArgs[0] = parameter;
                 invokeArgs[1] = builder;
-                PopulateMetadataForParameterMethod.MakeGenericMethod(parameter.ParameterType).Invoke(null, invokeArgs);
+                PopulateMetadataForParameterMethod
+                    .MakeGenericMethod(parameter.ParameterType)
+                    .Invoke(null, invokeArgs);
             }
 
             if (typeof(IEndpointMetadataProvider).IsAssignableFrom(parameter.ParameterType))
@@ -40,7 +60,9 @@ internal static class EndpointMetadataPopulator
                 invokeArgs ??= new object[2];
                 invokeArgs[0] = methodInfo;
                 invokeArgs[1] = builder;
-                PopulateMetadataForEndpointMethod.MakeGenericMethod(parameter.ParameterType).Invoke(null, invokeArgs);
+                PopulateMetadataForEndpointMethod
+                    .MakeGenericMethod(parameter.ParameterType)
+                    .Invoke(null, invokeArgs);
             }
         }
 
@@ -51,18 +73,24 @@ internal static class EndpointMetadataPopulator
             returnType = awaitableInfo.ResultType;
         }
 
-        if (returnType is not null && typeof(IEndpointMetadataProvider).IsAssignableFrom(returnType))
+        if (
+            returnType is not null && typeof(IEndpointMetadataProvider).IsAssignableFrom(returnType)
+        )
         {
             // Return type implements IEndpointMetadataProvider
             invokeArgs ??= new object[2];
             invokeArgs[0] = methodInfo;
             invokeArgs[1] = builder;
-            PopulateMetadataForEndpointMethod.MakeGenericMethod(returnType).Invoke(null, invokeArgs);
+            PopulateMetadataForEndpointMethod
+                .MakeGenericMethod(returnType)
+                .Invoke(null, invokeArgs);
         }
     }
 
-    private static void PopulateMetadataForParameter<T>(ParameterInfo parameter, EndpointBuilder builder)
-        where T : IEndpointParameterMetadataProvider
+    private static void PopulateMetadataForParameter<T>(
+        ParameterInfo parameter,
+        EndpointBuilder builder
+    ) where T : IEndpointParameterMetadataProvider
     {
         T.PopulateMetadata(parameter, builder);
     }

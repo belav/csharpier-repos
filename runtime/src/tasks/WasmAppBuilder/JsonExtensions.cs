@@ -8,7 +8,8 @@ using System.Text.Json.Nodes;
 
 internal static class JsonExtensions
 {
-    public static T GetOrCreate<T>(this JsonObject json, string name, Func<JsonNode> creator) where T : JsonNode
+    public static T GetOrCreate<T>(this JsonObject json, string name, Func<JsonNode> creator)
+        where T : JsonNode
     {
         if (json.TryGetPropertyValue(name, out JsonNode? node) && (node is T found))
             return found;

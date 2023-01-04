@@ -30,21 +30,19 @@ namespace System.CommandLine.Tests
             var command = new Command("child");
             var rootCommand = new RootCommand { command };
             command.SetHandler(() => { });
-            var requiredOption = new Option<bool>("--i-must-be-set")
-            {
-                IsRequired = true
-            };
+            var requiredOption = new Option<bool>("--i-must-be-set") { IsRequired = true };
             rootCommand.AddGlobalOption(requiredOption);
 
             var result = rootCommand.Parse("child");
 
             result.Errors
-                  .Should()
-                  .ContainSingle()
-                  .Which.Message.Should().Be("Option '--i-must-be-set' is required.");
+                .Should()
+                .ContainSingle()
+                .Which.Message.Should()
+                .Be("Option '--i-must-be-set' is required.");
         }
 
-        [Fact] 
+        [Fact]
         public void When_a_required_global_option_has_multiple_aliases_the_error_message_uses_longest()
         {
             var rootCommand = new RootCommand();
@@ -57,9 +55,10 @@ namespace System.CommandLine.Tests
             var result = rootCommand.Parse("");
 
             result.Errors
-                  .Should()
-                  .ContainSingle()
-                  .Which.Message.Should().Be("Option '--i-must-be-set' is required.");
+                .Should()
+                .ContainSingle()
+                .Which.Message.Should()
+                .Be("Option '--i-must-be-set' is required.");
         }
 
         [Fact]
@@ -68,10 +67,7 @@ namespace System.CommandLine.Tests
             var command = new Command("child");
             var rootCommand = new RootCommand { command };
             command.SetHandler(() => { });
-            var requiredOption = new Option<bool>("--i-must-be-set")
-            {
-                IsRequired = true
-            };
+            var requiredOption = new Option<bool>("--i-must-be-set") { IsRequired = true };
             rootCommand.AddGlobalOption(requiredOption);
 
             var result = rootCommand.Parse("child --i-must-be-set");
@@ -101,23 +97,23 @@ namespace System.CommandLine.Tests
         public void Subcommands_with_global_option_should_propagate_option_to_children()
         {
             var root = new Command("parent");
-            
+
             var firstChild = new Command("first");
-            
+
             root.Subcommands.Add(firstChild);
-            
+
             var option = new Option<int>("--global");
-            
+
             firstChild.AddGlobalOption(option);
-            
+
             var secondChild = new Command("second");
-            
+
             firstChild.Subcommands.Add(secondChild);
-            
+
             root.Parse("first second --global 123").GetValue(option).Should().Be(123);
-            
+
             firstChild.Parse("second --global 123").GetValue(option).Should().Be(123);
-            
+
             secondChild.Parse("--global 123").GetValue(option).Should().Be(123);
         }
     }

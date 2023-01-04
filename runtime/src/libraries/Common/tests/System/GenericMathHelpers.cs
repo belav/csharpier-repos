@@ -20,60 +20,89 @@ namespace System
         public static TResult AdditiveIdentity => TSelf.AdditiveIdentity;
     }
 
-    public static class BinaryIntegerHelper<TSelf>
-        where TSelf : IBinaryInteger<TSelf>
+    public static class BinaryIntegerHelper<TSelf> where TSelf : IBinaryInteger<TSelf>
     {
-        public static (TSelf Quotient, TSelf Remainder) DivRem(TSelf left, TSelf right) => TSelf.DivRem(left, right);
+        public static (TSelf Quotient, TSelf Remainder) DivRem(TSelf left, TSelf right) =>
+            TSelf.DivRem(left, right);
 
         public static TSelf LeadingZeroCount(TSelf value) => TSelf.LeadingZeroCount(value);
 
         public static TSelf PopCount(TSelf value) => TSelf.PopCount(value);
 
-        public static TSelf ReadBigEndian(byte[] source, bool isUnsigned) => TSelf.ReadBigEndian(source, isUnsigned);
+        public static TSelf ReadBigEndian(byte[] source, bool isUnsigned) =>
+            TSelf.ReadBigEndian(source, isUnsigned);
 
-        public static TSelf ReadBigEndian(byte[] source, int startIndex, bool isUnsigned) => TSelf.ReadBigEndian(source, startIndex, isUnsigned);
+        public static TSelf ReadBigEndian(byte[] source, int startIndex, bool isUnsigned) =>
+            TSelf.ReadBigEndian(source, startIndex, isUnsigned);
 
-        public static TSelf ReadBigEndian(ReadOnlySpan<byte> source, bool isUnsigned) => TSelf.ReadBigEndian(source, isUnsigned);
+        public static TSelf ReadBigEndian(ReadOnlySpan<byte> source, bool isUnsigned) =>
+            TSelf.ReadBigEndian(source, isUnsigned);
 
-        public static TSelf ReadLittleEndian(byte[] source, bool isUnsigned) => TSelf.ReadLittleEndian(source, isUnsigned);
+        public static TSelf ReadLittleEndian(byte[] source, bool isUnsigned) =>
+            TSelf.ReadLittleEndian(source, isUnsigned);
 
-        public static TSelf ReadLittleEndian(byte[] source, int startIndex, bool isUnsigned) => TSelf.ReadLittleEndian(source, startIndex, isUnsigned);
+        public static TSelf ReadLittleEndian(byte[] source, int startIndex, bool isUnsigned) =>
+            TSelf.ReadLittleEndian(source, startIndex, isUnsigned);
 
-        public static TSelf ReadLittleEndian(ReadOnlySpan<byte> source, bool isUnsigned) => TSelf.ReadLittleEndian(source, isUnsigned);
+        public static TSelf ReadLittleEndian(ReadOnlySpan<byte> source, bool isUnsigned) =>
+            TSelf.ReadLittleEndian(source, isUnsigned);
 
-        public static TSelf RotateLeft(TSelf value, int rotateAmount) => TSelf.RotateLeft(value, rotateAmount);
+        public static TSelf RotateLeft(TSelf value, int rotateAmount) =>
+            TSelf.RotateLeft(value, rotateAmount);
 
-        public static TSelf RotateRight(TSelf value, int rotateAmount) => TSelf.RotateRight(value, rotateAmount);
+        public static TSelf RotateRight(TSelf value, int rotateAmount) =>
+            TSelf.RotateRight(value, rotateAmount);
 
         public static TSelf TrailingZeroCount(TSelf value) => TSelf.TrailingZeroCount(value);
 
-        public static bool TryReadBigEndian(ReadOnlySpan<byte> source, bool isUnsigned, out TSelf value) => TSelf.TryReadBigEndian(source, isUnsigned, out value);
+        public static bool TryReadBigEndian(
+            ReadOnlySpan<byte> source,
+            bool isUnsigned,
+            out TSelf value
+        ) => TSelf.TryReadBigEndian(source, isUnsigned, out value);
 
-        public static bool TryReadLittleEndian(ReadOnlySpan<byte> source, bool isUnsigned, out TSelf value) => TSelf.TryReadLittleEndian(source, isUnsigned, out value);
+        public static bool TryReadLittleEndian(
+            ReadOnlySpan<byte> source,
+            bool isUnsigned,
+            out TSelf value
+        ) => TSelf.TryReadLittleEndian(source, isUnsigned, out value);
 
         public static int GetByteCount(TSelf value) => value.GetByteCount();
 
         public static int GetShortestBitLength(TSelf value) => value.GetShortestBitLength();
 
-        public static bool TryWriteBigEndian(TSelf value, Span<byte> destination, out int bytesWritten) => value.TryWriteBigEndian(destination, out bytesWritten);
+        public static bool TryWriteBigEndian(
+            TSelf value,
+            Span<byte> destination,
+            out int bytesWritten
+        ) => value.TryWriteBigEndian(destination, out bytesWritten);
 
-        public static bool TryWriteLittleEndian(TSelf value, Span<byte> destination, out int bytesWritten) => value.TryWriteLittleEndian(destination, out bytesWritten);
+        public static bool TryWriteLittleEndian(
+            TSelf value,
+            Span<byte> destination,
+            out int bytesWritten
+        ) => value.TryWriteLittleEndian(destination, out bytesWritten);
 
-        public static int WriteBigEndian(TSelf value, byte[] destination) => value.WriteBigEndian(destination);
+        public static int WriteBigEndian(TSelf value, byte[] destination) =>
+            value.WriteBigEndian(destination);
 
-        public static int WriteBigEndian(TSelf value, byte[] destination, int startIndex) => value.WriteBigEndian(destination, startIndex);
+        public static int WriteBigEndian(TSelf value, byte[] destination, int startIndex) =>
+            value.WriteBigEndian(destination, startIndex);
 
-        public static int WriteBigEndian(TSelf value, Span<byte> destination) => value.WriteBigEndian(destination);
+        public static int WriteBigEndian(TSelf value, Span<byte> destination) =>
+            value.WriteBigEndian(destination);
 
-        public static int WriteLittleEndian(TSelf value, byte[] destination) => value.WriteLittleEndian(destination);
+        public static int WriteLittleEndian(TSelf value, byte[] destination) =>
+            value.WriteLittleEndian(destination);
 
-        public static int WriteLittleEndian(TSelf value, byte[] destination, int startIndex) => value.WriteLittleEndian(destination, startIndex);
+        public static int WriteLittleEndian(TSelf value, byte[] destination, int startIndex) =>
+            value.WriteLittleEndian(destination, startIndex);
 
-        public static int WriteLittleEndian(TSelf value, Span<byte> destination) => value.WriteLittleEndian(destination);
+        public static int WriteLittleEndian(TSelf value, Span<byte> destination) =>
+            value.WriteLittleEndian(destination);
     }
 
-    public static class BinaryNumberHelper<TSelf>
-        where TSelf : IBinaryNumber<TSelf>
+    public static class BinaryNumberHelper<TSelf> where TSelf : IBinaryNumber<TSelf>
     {
         public static TSelf AllBitsSet => TSelf.AllBitsSet;
 
@@ -106,9 +135,8 @@ namespace System
         public static TResult op_LessThanOrEqual(TSelf left, TOther right) => left <= right;
     }
 
-    public static class DecrementOperatorsHelper<TSelf>
-        where TSelf : IDecrementOperators<TSelf>
-{
+    public static class DecrementOperatorsHelper<TSelf> where TSelf : IDecrementOperators<TSelf>
+    {
         public static TSelf op_Decrement(TSelf value) => --value;
 
         public static TSelf op_CheckedDecrement(TSelf value) => checked(--value);
@@ -130,8 +158,7 @@ namespace System
         public static TResult op_Inequality(TSelf left, TOther right) => left != right;
     }
 
-    public static class ExponentialFunctionsHelper<TSelf>
-        where TSelf : IExponentialFunctions<TSelf>
+    public static class ExponentialFunctionsHelper<TSelf> where TSelf : IExponentialFunctions<TSelf>
     {
         public static TSelf Exp(TSelf x) => TSelf.Exp(x);
 
@@ -146,8 +173,7 @@ namespace System
         public static TSelf Exp10M1(TSelf x) => TSelf.Exp10M1(x);
     }
 
-    public static class FloatingPointHelper<TSelf>
-        where TSelf : IFloatingPoint<TSelf>
+    public static class FloatingPointHelper<TSelf> where TSelf : IFloatingPoint<TSelf>
     {
         public static TSelf Ceiling(TSelf x) => TSelf.Ceiling(x);
 
@@ -159,49 +185,88 @@ namespace System
 
         public static TSelf Round(TSelf x, MidpointRounding mode) => TSelf.Round(x, mode);
 
-        public static TSelf Round(TSelf x, int digits, MidpointRounding mode) => TSelf.Round(x, digits, mode);
+        public static TSelf Round(TSelf x, int digits, MidpointRounding mode) =>
+            TSelf.Round(x, digits, mode);
 
         public static TSelf Truncate(TSelf x) => TSelf.Truncate(x);
 
         public static int GetExponentByteCount(TSelf value) => value.GetExponentByteCount();
 
-        public static int GetExponentShortestBitLength(TSelf value) => value.GetExponentShortestBitLength();
+        public static int GetExponentShortestBitLength(TSelf value) =>
+            value.GetExponentShortestBitLength();
 
         public static int GetSignificandByteCount(TSelf value) => value.GetSignificandByteCount();
 
         public static int GetSignificandBitLength(TSelf value) => value.GetSignificandBitLength();
 
-        public static bool TryWriteExponentBigEndian(TSelf value, Span<byte> destination, out int bytesWritten) => value.TryWriteExponentBigEndian(destination, out bytesWritten);
+        public static bool TryWriteExponentBigEndian(
+            TSelf value,
+            Span<byte> destination,
+            out int bytesWritten
+        ) => value.TryWriteExponentBigEndian(destination, out bytesWritten);
 
-        public static bool TryWriteExponentLittleEndian(TSelf value, Span<byte> destination, out int bytesWritten) => value.TryWriteExponentLittleEndian(destination, out bytesWritten);
+        public static bool TryWriteExponentLittleEndian(
+            TSelf value,
+            Span<byte> destination,
+            out int bytesWritten
+        ) => value.TryWriteExponentLittleEndian(destination, out bytesWritten);
 
-        public static bool TryWriteSignificandBigEndian(TSelf value, Span<byte> destination, out int bytesWritten) => value.TryWriteSignificandBigEndian(destination, out bytesWritten);
+        public static bool TryWriteSignificandBigEndian(
+            TSelf value,
+            Span<byte> destination,
+            out int bytesWritten
+        ) => value.TryWriteSignificandBigEndian(destination, out bytesWritten);
 
-        public static bool TryWriteSignificandLittleEndian(TSelf value, Span<byte> destination, out int bytesWritten) => value.TryWriteSignificandLittleEndian(destination, out bytesWritten);
+        public static bool TryWriteSignificandLittleEndian(
+            TSelf value,
+            Span<byte> destination,
+            out int bytesWritten
+        ) => value.TryWriteSignificandLittleEndian(destination, out bytesWritten);
 
-        public static int WriteExponentBigEndian(TSelf value, byte[] destination) => value.WriteExponentBigEndian(destination);
+        public static int WriteExponentBigEndian(TSelf value, byte[] destination) =>
+            value.WriteExponentBigEndian(destination);
 
-        public static int WriteExponentBigEndian(TSelf value, byte[] destination, int startIndex) => value.WriteExponentBigEndian(destination, startIndex);
+        public static int WriteExponentBigEndian(TSelf value, byte[] destination, int startIndex) =>
+            value.WriteExponentBigEndian(destination, startIndex);
 
-        public static int WriteExponentBigEndian(TSelf value, Span<byte> destination) => value.WriteExponentBigEndian(destination);
+        public static int WriteExponentBigEndian(TSelf value, Span<byte> destination) =>
+            value.WriteExponentBigEndian(destination);
 
-        public static int WriteExponentLittleEndian(TSelf value, byte[] destination) => value.WriteExponentLittleEndian(destination);
+        public static int WriteExponentLittleEndian(TSelf value, byte[] destination) =>
+            value.WriteExponentLittleEndian(destination);
 
-        public static int WriteExponentLittleEndian(TSelf value, byte[] destination, int startIndex) => value.WriteExponentLittleEndian(destination, startIndex);
+        public static int WriteExponentLittleEndian(
+            TSelf value,
+            byte[] destination,
+            int startIndex
+        ) => value.WriteExponentLittleEndian(destination, startIndex);
 
-        public static int WriteExponentLittleEndian(TSelf value, Span<byte> destination) => value.WriteExponentLittleEndian(destination);
+        public static int WriteExponentLittleEndian(TSelf value, Span<byte> destination) =>
+            value.WriteExponentLittleEndian(destination);
 
-        public static int WriteSignificandBigEndian(TSelf value, byte[] destination) => value.WriteSignificandBigEndian(destination);
+        public static int WriteSignificandBigEndian(TSelf value, byte[] destination) =>
+            value.WriteSignificandBigEndian(destination);
 
-        public static int WriteSignificandBigEndian(TSelf value, byte[] destination, int startIndex) => value.WriteSignificandBigEndian(destination, startIndex);
+        public static int WriteSignificandBigEndian(
+            TSelf value,
+            byte[] destination,
+            int startIndex
+        ) => value.WriteSignificandBigEndian(destination, startIndex);
 
-        public static int WriteSignificandBigEndian(TSelf value, Span<byte> destination) => value.WriteSignificandBigEndian(destination);
+        public static int WriteSignificandBigEndian(TSelf value, Span<byte> destination) =>
+            value.WriteSignificandBigEndian(destination);
 
-        public static int WriteSignificandLittleEndian(TSelf value, byte[] destination) => value.WriteSignificandLittleEndian(destination);
+        public static int WriteSignificandLittleEndian(TSelf value, byte[] destination) =>
+            value.WriteSignificandLittleEndian(destination);
 
-        public static int WriteSignificandLittleEndian(TSelf value, byte[] destination, int startIndex) => value.WriteSignificandLittleEndian(destination, startIndex);
+        public static int WriteSignificandLittleEndian(
+            TSelf value,
+            byte[] destination,
+            int startIndex
+        ) => value.WriteSignificandLittleEndian(destination, startIndex);
 
-        public static int WriteSignificandLittleEndian(TSelf value, Span<byte> destination) => value.WriteSignificandLittleEndian(destination);
+        public static int WriteSignificandLittleEndian(TSelf value, Span<byte> destination) =>
+            value.WriteSignificandLittleEndian(destination);
     }
 
     public static class FloatingPointConstantsHelper<TSelf>
@@ -214,8 +279,7 @@ namespace System
         public static TSelf Tau => TSelf.Tau;
     }
 
-    public static class FloatingPointIeee754Helper<TSelf>
-        where TSelf : IFloatingPointIeee754<TSelf>
+    public static class FloatingPointIeee754Helper<TSelf> where TSelf : IFloatingPointIeee754<TSelf>
     {
         public static TSelf Epsilon => TSelf.Epsilon;
 
@@ -235,9 +299,11 @@ namespace System
 
         public static TSelf BitIncrement(TSelf x) => TSelf.BitIncrement(x);
 
-        public static TSelf FusedMultiplyAdd(TSelf left, TSelf right, TSelf addend) => TSelf.FusedMultiplyAdd(left, right, addend);
+        public static TSelf FusedMultiplyAdd(TSelf left, TSelf right, TSelf addend) =>
+            TSelf.FusedMultiplyAdd(left, right, addend);
 
-        public static TSelf Ieee754Remainder(TSelf left, TSelf right) => TSelf.Ieee754Remainder(left, right);
+        public static TSelf Ieee754Remainder(TSelf left, TSelf right) =>
+            TSelf.Ieee754Remainder(left, right);
 
         public static int ILogB(TSelf x) => TSelf.ILogB(x);
 
@@ -248,8 +314,7 @@ namespace System
         public static TSelf ScaleB(TSelf x, int n) => TSelf.ScaleB(x, n);
     }
 
-    public static class HyperbolicFunctionsHelper<TSelf>
-        where TSelf : IHyperbolicFunctions<TSelf>
+    public static class HyperbolicFunctionsHelper<TSelf> where TSelf : IHyperbolicFunctions<TSelf>
     {
         public static TSelf Acosh(TSelf x) => TSelf.Acosh(x);
 
@@ -264,16 +329,14 @@ namespace System
         public static TSelf Tanh(TSelf x) => TSelf.Tanh(x);
     }
 
-    public static class IncrementOperatorsHelper<TSelf>
-        where TSelf : IIncrementOperators<TSelf>
+    public static class IncrementOperatorsHelper<TSelf> where TSelf : IIncrementOperators<TSelf>
     {
         public static TSelf op_Increment(TSelf value) => ++value;
 
         public static TSelf op_CheckedIncrement(TSelf value) => checked(++value);
     }
 
-    public static class LogarithmicFunctionsHelper<TSelf>
-        where TSelf : ILogarithmicFunctions<TSelf>
+    public static class LogarithmicFunctionsHelper<TSelf> where TSelf : ILogarithmicFunctions<TSelf>
     {
         public static TSelf Log(TSelf x) => TSelf.Log(x);
 
@@ -290,8 +353,7 @@ namespace System
         public static TSelf Log10P1(TSelf x) => TSelf.Log10P1(x);
     }
 
-    public static class MinMaxValueHelper<TSelf>
-        where TSelf : IMinMaxValue<TSelf>
+    public static class MinMaxValueHelper<TSelf> where TSelf : IMinMaxValue<TSelf>
     {
         public static TSelf MaxValue => TSelf.MaxValue;
 
@@ -318,8 +380,7 @@ namespace System
         public static TResult op_CheckedMultiply(TSelf left, TOther right) => checked(left * right);
     }
 
-    public static class NumberBaseHelper<TSelf>
-        where TSelf : INumberBase<TSelf>
+    public static class NumberBaseHelper<TSelf> where TSelf : INumberBase<TSelf>
     {
         public static TSelf One => TSelf.One;
 
@@ -380,19 +441,34 @@ namespace System
 
         public static TSelf MinMagnitudeNumber(TSelf x, TSelf y) => TSelf.MinMagnitudeNumber(x, y);
 
-        public static TSelf Parse(string s, NumberStyles style, IFormatProvider provider) => TSelf.Parse(s, style, provider);
+        public static TSelf Parse(string s, NumberStyles style, IFormatProvider provider) =>
+            TSelf.Parse(s, style, provider);
 
-        public static TSelf Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider provider) => TSelf.Parse(s, style, provider);
+        public static TSelf Parse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider provider
+        ) => TSelf.Parse(s, style, provider);
 
-        public static bool TryParse(string s, NumberStyles style, IFormatProvider provider, out TSelf result) => TSelf.TryParse(s, style, provider, out result);
+        public static bool TryParse(
+            string s,
+            NumberStyles style,
+            IFormatProvider provider,
+            out TSelf result
+        ) => TSelf.TryParse(s, style, provider, out result);
 
-        public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider provider, out TSelf result) => TSelf.TryParse(s, style, provider, out result);
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider provider,
+            out TSelf result
+        ) => TSelf.TryParse(s, style, provider, out result);
     }
 
-    public static class NumberHelper<TSelf>
-        where TSelf : INumber<TSelf>
+    public static class NumberHelper<TSelf> where TSelf : INumber<TSelf>
     {
-        public static TSelf Clamp(TSelf value, TSelf min, TSelf max) => TSelf.Clamp(value, min, max);
+        public static TSelf Clamp(TSelf value, TSelf min, TSelf max) =>
+            TSelf.Clamp(value, min, max);
 
         public static TSelf CopySign(TSelf value, TSelf sign) => TSelf.CopySign(value, sign);
 
@@ -407,22 +483,20 @@ namespace System
         public static int Sign(TSelf value) => TSelf.Sign(value);
     }
 
-    public static class ParsableHelper<TSelf>
-        where TSelf : IParsable<TSelf>
+    public static class ParsableHelper<TSelf> where TSelf : IParsable<TSelf>
     {
         public static TSelf Parse(string s, IFormatProvider provider) => TSelf.Parse(s, provider);
 
-        public static bool TryParse(string s, IFormatProvider provider, out TSelf result) => TSelf.TryParse(s, provider, out result);
+        public static bool TryParse(string s, IFormatProvider provider, out TSelf result) =>
+            TSelf.TryParse(s, provider, out result);
     }
 
-    public static class PowerFunctionsHelper<TSelf>
-        where TSelf : IPowerFunctions<TSelf>
+    public static class PowerFunctionsHelper<TSelf> where TSelf : IPowerFunctions<TSelf>
     {
         public static TSelf Pow(TSelf x, TSelf y) => TSelf.Pow(x, y);
     }
 
-    public static class RootFunctionsHelper<TSelf>
-        where TSelf : IRootFunctions<TSelf>
+    public static class RootFunctionsHelper<TSelf> where TSelf : IRootFunctions<TSelf>
     {
         public static TSelf Cbrt(TSelf x) => TSelf.Cbrt(x);
 
@@ -438,23 +512,28 @@ namespace System
     {
         public static TResult op_LeftShift(TSelf value, TOther shiftAmount) => value << shiftAmount;
 
-        public static TResult op_RightShift(TSelf value, TOther shiftAmount) => value >> shiftAmount;
+        public static TResult op_RightShift(TSelf value, TOther shiftAmount) =>
+            value >> shiftAmount;
 
-        public static TResult op_UnsignedRightShift(TSelf value, TOther shiftAmount) => value >>> shiftAmount;
+        public static TResult op_UnsignedRightShift(TSelf value, TOther shiftAmount) =>
+            value >>> shiftAmount;
     }
 
-    public static class SignedNumberHelper<TSelf>
-        where TSelf : ISignedNumber<TSelf>
+    public static class SignedNumberHelper<TSelf> where TSelf : ISignedNumber<TSelf>
     {
         public static TSelf NegativeOne => TSelf.NegativeOne;
     }
 
-    public static class SpanParsableHelper<TSelf>
-        where TSelf : ISpanParsable<TSelf>
+    public static class SpanParsableHelper<TSelf> where TSelf : ISpanParsable<TSelf>
     {
-        public static TSelf Parse(ReadOnlySpan<char> s, IFormatProvider provider) => TSelf.Parse(s, provider);
+        public static TSelf Parse(ReadOnlySpan<char> s, IFormatProvider provider) =>
+            TSelf.Parse(s, provider);
 
-        public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider provider, out TSelf result) => TSelf.TryParse(s, provider, out result);
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            IFormatProvider provider,
+            out TSelf result
+        ) => TSelf.TryParse(s, provider, out result);
     }
 
     public static class SubtractionOperatorsHelper<TSelf, TOther, TResult>
@@ -462,7 +541,8 @@ namespace System
     {
         public static TResult op_Subtraction(TSelf left, TOther right) => left - right;
 
-        public static TResult op_CheckedSubtraction(TSelf left, TOther right) => checked(left - right);
+        public static TResult op_CheckedSubtraction(TSelf left, TOther right) =>
+            checked(left - right);
     }
 
     public static class TrigonometricFunctionsHelper<TSelf>

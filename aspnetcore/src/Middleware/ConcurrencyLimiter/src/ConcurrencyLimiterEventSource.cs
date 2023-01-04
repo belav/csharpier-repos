@@ -9,7 +9,10 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter;
 internal sealed class ConcurrencyLimiterEventSource : EventSource
 {
     public static readonly ConcurrencyLimiterEventSource Log = new ConcurrencyLimiterEventSource();
-    private static readonly QueueFrame CachedNonTimerResult = new QueueFrame(timer: null, parent: Log);
+    private static readonly QueueFrame CachedNonTimerResult = new QueueFrame(
+        timer: null,
+        parent: Log
+    );
 
 #pragma warning disable IDE0052 // Remove unread private members (2021-02-02: These ARE set in OnEventCommand - the the IDE0052 analyzer is incorrect at this time)
     private PollingCounter? _rejectedRequestsCounter;
@@ -21,16 +24,11 @@ internal sealed class ConcurrencyLimiterEventSource : EventSource
     private long _rejectedRequests;
     private int _queueLength;
 
-    internal ConcurrencyLimiterEventSource()
-        : base("Microsoft.AspNetCore.ConcurrencyLimiter")
-    {
-    }
+    internal ConcurrencyLimiterEventSource() : base("Microsoft.AspNetCore.ConcurrencyLimiter") { }
 
     // Used for testing
     internal ConcurrencyLimiterEventSource(string eventSourceName)
-        : base(eventSourceName, EventSourceSettings.EtwManifestEventFormat)
-    {
-    }
+        : base(eventSourceName, EventSourceSettings.EtwManifestEventFormat) { }
 
     [Event(1, Level = EventLevel.Warning)]
     public void RequestRejected()
@@ -88,12 +86,20 @@ internal sealed class ConcurrencyLimiterEventSource : EventSource
     {
         if (command.Command == EventCommand.Enable)
         {
-            _rejectedRequestsCounter ??= new PollingCounter("requests-rejected", this, () => Volatile.Read(ref _rejectedRequests))
+            _rejectedRequestsCounter ??= new PollingCounter(
+                "requests-rejected",
+                this,
+                () => Volatile.Read(ref _rejectedRequests)
+            )
             {
                 DisplayName = "Rejected Requests",
             };
 
-            _queueLengthCounter ??= new PollingCounter("queue-length", this, () => Volatile.Read(ref _queueLength))
+            _queueLengthCounter ??= new PollingCounter(
+                "queue-length",
+                this,
+                () => Volatile.Read(ref _queueLength)
+            )
             {
                 DisplayName = "Queue Length",
             };

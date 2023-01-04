@@ -27,7 +27,7 @@ public class Runtime_69612
     static NewReference ToPython(object value, Type type)
     {
         TypeCode tc = Type.GetTypeCode(type);
-        
+
         switch (tc)
         {
             case TypeCode.Byte:
@@ -45,20 +45,20 @@ public class Runtime_69612
 
     static NewReference PyInt_FromInt32(int value) => PyLong_FromLongLong(value);
 
-    unsafe static NewReference PyLong_FromLongLong(long value) => Delegates.PyLong_FromLongLong(value);
+    unsafe static NewReference PyLong_FromLongLong(long value) =>
+        Delegates.PyLong_FromLongLong(value);
 
     [MethodImpl(MethodImplOptions.NoOptimization)]
     public static int Main()
     {
         for (int i = 0; i < 100; i++)
         {
-            _ =  ToPython(Delegates.z, typeof(long));
+            _ = ToPython(Delegates.z, typeof(long));
             Thread.Sleep(15);
         }
 
         Thread.Sleep(50);
         _ = ToPython(Delegates.z, typeof(long));
         return 100;
-
     }
 }

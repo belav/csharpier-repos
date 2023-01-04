@@ -38,20 +38,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             XamlLspServiceProvider lspServiceProvider,
             IGlobalOptionService globalOptions,
             ILspServiceLoggerFactory lspLoggerFactory,
-            IThreadingContext threadingContext)
-            : base(lspServiceProvider, globalOptions, lspLoggerFactory, threadingContext)
-        {
-        }
+            IThreadingContext threadingContext
+        ) : base(lspServiceProvider, globalOptions, lspLoggerFactory, threadingContext) { }
 
-        protected override ImmutableArray<string> SupportedLanguages => ImmutableArray.Create(StringConstants.XamlLanguageName);
+        protected override ImmutableArray<string> SupportedLanguages =>
+            ImmutableArray.Create(StringConstants.XamlLanguageName);
 
         public override ServerCapabilities GetCapabilities(ClientCapabilities clientCapabilities)
         {
-            var isLspExperimentEnabled = GlobalOptions.GetOption(XamlOptions.EnableLspIntelliSenseFeatureFlag);
-            var capabilities = isLspExperimentEnabled ? XamlCapabilities.None : XamlCapabilities.Current;
+            var isLspExperimentEnabled = GlobalOptions.GetOption(
+                XamlOptions.EnableLspIntelliSenseFeatureFlag
+            );
+            var capabilities = isLspExperimentEnabled
+                ? XamlCapabilities.None
+                : XamlCapabilities.Current;
 
             // Only turn on CodeAction support for client scenarios. Hosts will get non-LSP lightbulbs automatically.
-            capabilities.CodeActionProvider = new CodeActionOptions { CodeActionKinds = new[] { CodeActionKind.QuickFix, CodeActionKind.Refactor }, ResolveProvider = true };
+            capabilities.CodeActionProvider = new CodeActionOptions
+            {
+                CodeActionKinds = new[] { CodeActionKind.QuickFix, CodeActionKind.Refactor },
+                ResolveProvider = true
+            };
 
             return capabilities;
         }
@@ -61,6 +68,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
         /// </summary>
         public override bool ShowNotificationOnInitializeFailed => true;
 
-        public override WellKnownLspServerKinds ServerKind => WellKnownLspServerKinds.XamlLspServerDisableUX;
+        public override WellKnownLspServerKinds ServerKind =>
+            WellKnownLspServerKinds.XamlLspServerDisableUX;
     }
 }

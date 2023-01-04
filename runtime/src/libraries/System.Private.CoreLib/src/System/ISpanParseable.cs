@@ -12,8 +12,7 @@ namespace System
     /// <summary>Defines a mechanism for parsing a span of characters to a value.</summary>
     /// <typeparam name="TSelf">The type that implements this interface.</typeparam>
     [RequiresPreviewFeatures(Number.PreviewFeatureMessage, Url = Number.PreviewFeatureUrl)]
-    public interface ISpanParseable<TSelf> : IParseable<TSelf>
-        where TSelf : ISpanParseable<TSelf>
+    public interface ISpanParseable<TSelf> : IParseable<TSelf> where TSelf : ISpanParseable<TSelf>
     {
         /// <summary>Parses a span of characters into a value.</summary>
         /// <param name="s">The span of characters to parse.</param>
@@ -28,6 +27,10 @@ namespace System
         /// <param name="provider">An object that provides culture-specific formatting information about <paramref name="s" />.</param>
         /// <param name="result">On return, contains the result of succesfully parsing <paramref name="s" /> or an undefined value on failure.</param>
         /// <returns><c>true</c> if <paramref name="s" /> was successfully parsed; otherwise, <c>false</c>.</returns>
-        static abstract bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out TSelf result);
+        static abstract bool TryParse(
+            ReadOnlySpan<char> s,
+            IFormatProvider? provider,
+            out TSelf result
+        );
     }
 }

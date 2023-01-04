@@ -13,8 +13,7 @@ namespace System.Xml.Xsl.XsltOld
     {
         private TextWriter _writer;
 
-        internal TextOutput(Processor processor, Stream stream)
-            : base(processor)
+        internal TextOutput(Processor processor, Stream stream) : base(processor)
         {
             ArgumentNullException.ThrowIfNull(stream);
 
@@ -22,8 +21,7 @@ namespace System.Xml.Xsl.XsltOld
             _writer = new StreamWriter(stream, this.encoding);
         }
 
-        internal TextOutput(Processor processor, TextWriter writer)
-            : base(processor)
+        internal TextOutput(Processor processor, TextWriter writer) : base(processor)
         {
             ArgumentNullException.ThrowIfNull(writer);
 

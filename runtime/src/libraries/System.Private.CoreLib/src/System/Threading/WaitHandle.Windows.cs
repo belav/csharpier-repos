@@ -10,15 +10,29 @@ namespace System.Threading
 {
     public abstract partial class WaitHandle
     {
-        internal static unsafe int WaitMultipleIgnoringSyncContext(Span<IntPtr> handles, bool waitAll, int millisecondsTimeout)
+        internal static unsafe int WaitMultipleIgnoringSyncContext(
+            Span<IntPtr> handles,
+            bool waitAll,
+            int millisecondsTimeout
+        )
         {
             fixed (IntPtr* pHandles = &MemoryMarshal.GetReference(handles))
             {
-                return WaitForMultipleObjectsIgnoringSyncContext(pHandles, handles.Length, waitAll, millisecondsTimeout);
+                return WaitForMultipleObjectsIgnoringSyncContext(
+                    pHandles,
+                    handles.Length,
+                    waitAll,
+                    millisecondsTimeout
+                );
             }
         }
 
-        private static unsafe int WaitForMultipleObjectsIgnoringSyncContext(IntPtr* pHandles, int numHandles, bool waitAll, int millisecondsTimeout)
+        private static unsafe int WaitForMultipleObjectsIgnoringSyncContext(
+            IntPtr* pHandles,
+            int numHandles,
+            bool waitAll,
+            int millisecondsTimeout
+        )
         {
             Debug.Assert(millisecondsTimeout >= -1);
 
@@ -53,14 +67,33 @@ namespace System.Threading
             if (reentrantWait)
             {
                 Debug.Assert(!waitAll);
-                result = RuntimeImports.RhCompatibleReentrantWaitAny(false, millisecondsTimeout, numHandles, pHandles);
+                result = RuntimeImports.RhCompatibleReentrantWaitAny(
+                    false,
+                    millisecondsTimeout,
+                    numHandles,
+                    pHandles
+                );
             }
             else
             {
-                result = (int)Interop.Kernel32.WaitForMultipleObjectsEx((uint)numHandles, (IntPtr)pHandles, waitAll ? Interop.BOOL.TRUE : Interop.BOOL.FALSE, (uint)millisecondsTimeout, Interop.BOOL.FALSE);
+                result = (int)
+                    Interop.Kernel32.WaitForMultipleObjectsEx(
+                        (uint)numHandles,
+                        (IntPtr)pHandles,
+                        waitAll ? Interop.BOOL.TRUE : Interop.BOOL.FALSE,
+                        (uint)millisecondsTimeout,
+                        Interop.BOOL.FALSE
+                    );
             }
 #else
-            int result = (int)Interop.Kernel32.WaitForMultipleObjectsEx((uint)numHandles, (IntPtr)pHandles, waitAll ? Interop.BOOL.TRUE : Interop.BOOL.FALSE, (uint)millisecondsTimeout, Interop.BOOL.FALSE);
+            int result = (int)
+                Interop.Kernel32.WaitForMultipleObjectsEx(
+                    (uint)numHandles,
+                    (IntPtr)pHandles,
+                    waitAll ? Interop.BOOL.TRUE : Interop.BOOL.FALSE,
+                    (uint)millisecondsTimeout,
+                    Interop.BOOL.FALSE
+                );
 #endif
             currentThread.ClearWaitSleepJoinState();
 
@@ -94,14 +127,29 @@ namespace System.Threading
 
         internal static unsafe int WaitOneCore(IntPtr handle, int millisecondsTimeout)
         {
-            return WaitForMultipleObjectsIgnoringSyncContext(&handle, 1, false, millisecondsTimeout);
+            return WaitForMultipleObjectsIgnoringSyncContext(
+                &handle,
+                1,
+                false,
+                millisecondsTimeout
+            );
         }
 
-        private static int SignalAndWaitCore(IntPtr handleToSignal, IntPtr handleToWaitOn, int millisecondsTimeout)
+        private static int SignalAndWaitCore(
+            IntPtr handleToSignal,
+            IntPtr handleToWaitOn,
+            int millisecondsTimeout
+        )
         {
             Debug.Assert(millisecondsTimeout >= -1);
 
-            int ret = (int)Interop.Kernel32.SignalObjectAndWait(handleToSignal, handleToWaitOn, (uint)millisecondsTimeout, Interop.BOOL.FALSE);
+            int ret = (int)
+                Interop.Kernel32.SignalObjectAndWait(
+                    handleToSignal,
+                    handleToWaitOn,
+                    (uint)millisecondsTimeout,
+                    Interop.BOOL.FALSE
+                );
 
             if (ret == Interop.Kernel32.WAIT_FAILED)
             {
@@ -157,7 +205,9 @@ namespace System.Threading
                     return new IOException(SR.Format(SR.IO_PathNotFound_Path, path));
 
                 case Interop.Errors.ERROR_ACCESS_DENIED:
-                    return new UnauthorizedAccessException(SR.Format(SR.UnauthorizedAccess_IODenied_Path, path));
+                    return new UnauthorizedAccessException(
+                        SR.Format(SR.UnauthorizedAccess_IODenied_Path, path)
+                    );
 
                 case Interop.Errors.ERROR_ALREADY_EXISTS:
                     return new IOException(SR.Format(SR.IO_AlreadyExists_Name, path));

@@ -23,8 +23,7 @@ namespace Microsoft.CodeAnalysis.NamingStyles
                 _wordSeparator = wordSeparator;
             }
 
-            public WordSpanEnumerator GetEnumerator()
-                => new(_name, _nameSpan, _wordSeparator);
+            public WordSpanEnumerator GetEnumerator() => new(_name, _nameSpan, _wordSeparator);
         }
     }
 }

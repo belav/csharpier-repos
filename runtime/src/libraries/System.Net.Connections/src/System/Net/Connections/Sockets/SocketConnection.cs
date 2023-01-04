@@ -25,7 +25,10 @@ namespace System.Net.Connections
             _socket = socket;
         }
 
-        protected override ValueTask CloseAsyncCore(ConnectionCloseMethod method, CancellationToken cancellationToken)
+        protected override ValueTask CloseAsyncCore(
+            ConnectionCloseMethod method,
+            CancellationToken cancellationToken
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -46,7 +49,11 @@ namespace System.Net.Connections
             }
             catch (SocketException socketException)
             {
-                return ValueTask.FromException(ExceptionDispatchInfo.SetCurrentStackTrace(NetworkErrorHelper.MapSocketException(socketException)));
+                return ValueTask.FromException(
+                    ExceptionDispatchInfo.SetCurrentStackTrace(
+                        NetworkErrorHelper.MapSocketException(socketException)
+                    )
+                );
             }
             catch (Exception ex)
             {
@@ -56,7 +63,10 @@ namespace System.Net.Connections
             return default;
         }
 
-        bool IConnectionProperties.TryGet(Type propertyKey, [NotNullWhen(true)] out object? property)
+        bool IConnectionProperties.TryGet(
+            Type propertyKey,
+            [NotNullWhen(true)] out object? property
+        )
         {
             if (propertyKey == typeof(Socket))
             {

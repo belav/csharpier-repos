@@ -17,6 +17,7 @@ public class Arrayclass
         a3d = new double[size, size + 5, size + 10];
     }
 }
+
 public class class1
 {
     public static Random rand;
@@ -38,7 +39,8 @@ public class class1
 
     public static void Init2DMatrix(out double[,] m, out double[][] refm)
     {
-        int i, j;
+        int i,
+            j;
         i = 0;
         double temp;
 
@@ -99,7 +101,8 @@ public class class1
 
     public static void Init3DMatrix(double[,,] m, double[][] refm)
     {
-        int i, j;
+        int i,
+            j;
         i = 0;
         double temp;
 
@@ -164,7 +167,8 @@ public class class1
 
         int seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
-            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
+            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase)
+                => new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
             _ => DefaultSeed
         };
@@ -174,8 +178,14 @@ public class class1
 
         Console.WriteLine();
         Console.WriteLine("2D Array");
-        Console.WriteLine("Random seed: {0}; set environment variable CORECLR_SEED to this value to reproduce", seed);
-        Console.WriteLine("Element manipulation of {0} by {0} matrices with different arithmetic operations", size);
+        Console.WriteLine(
+            "Random seed: {0}; set environment variable CORECLR_SEED to this value to reproduce",
+            seed
+        );
+        Console.WriteLine(
+            "Element manipulation of {0} by {0} matrices with different arithmetic operations",
+            size
+        );
         Console.WriteLine("Matrix is member of class, element stores random double");
         Console.WriteLine("array set/get, ref/out param are used");
 
@@ -206,7 +216,13 @@ public class class1
                 if (ima.a2d[i, j] != refa2d[i][j])
                     if (!Double.IsNaN(ima.a2d[i, j]) || !Double.IsNaN(refa2d[i][j]))
                     {
-                        Console.WriteLine("i={0}, j={1}, ima.a2d[i,j] {2}!=refa2d[i][j] {3}", i, j, ima.a2d[i, j], refa2d[i][j]);
+                        Console.WriteLine(
+                            "i={0}, j={1}, ima.a2d[i,j] {2}!=refa2d[i][j] {3}",
+                            i,
+                            j,
+                            ima.a2d[i, j],
+                            refa2d[i][j]
+                        );
                         pass = false;
                     }
         }
@@ -218,13 +234,17 @@ public class class1
                 ima.a2d[size, 0] = 5;
                 pass = false;
             }
-            catch (IndexOutOfRangeException)
-            { }
+            catch (IndexOutOfRangeException) { }
         }
 
         Console.WriteLine();
         Console.WriteLine("3D Array");
-        Console.WriteLine("Element manipulation of {0} by {1} by {2} matrices with different arithmetic operations", size, size + 5, size + 10);
+        Console.WriteLine(
+            "Element manipulation of {0} by {1} by {2} matrices with different arithmetic operations",
+            size,
+            size + 5,
+            size + 10
+        );
         Console.WriteLine("Matrix is member of class, element stores random double");
 
         double[][] refa3d = new double[size][];
@@ -255,7 +275,13 @@ public class class1
                 if (ima.a3d[i, j, size] != refa3d[i][j])
                     if (!Double.IsNaN(ima.a3d[i, j, size]) || !Double.IsNaN(refa3d[i][j]))
                     {
-                        Console.WriteLine("i={0}, j={1}, ima.a3d[i,j,size] {2}!=refa3d[i][j] {3}", i, j, ima.a3d[i, j, size], refa3d[i][j]);
+                        Console.WriteLine(
+                            "i={0}, j={1}, ima.a3d[i,j,size] {2}!=refa3d[i][j] {3}",
+                            i,
+                            j,
+                            ima.a3d[i, j, size],
+                            refa3d[i][j]
+                        );
                         pass = false;
                     }
         }
@@ -267,8 +293,7 @@ public class class1
                 ima.a3d[-1, 0, 0] = 5;
                 pass = false;
             }
-            catch (IndexOutOfRangeException)
-            { }
+            catch (IndexOutOfRangeException) { }
         }
 
         Console.WriteLine();

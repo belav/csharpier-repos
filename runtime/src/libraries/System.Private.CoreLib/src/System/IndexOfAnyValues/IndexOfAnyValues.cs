@@ -56,11 +56,21 @@ namespace System.Buffers
 
             if (IndexOfAnyAsciiSearcher.IsVectorizationSupported && maxInclusive < 128)
             {
-                IndexOfAnyAsciiSearcher.ComputeBitmap(values, out Vector128<byte> bitmap, out BitVector256 lookup);
+                IndexOfAnyAsciiSearcher.ComputeBitmap(
+                    values,
+                    out Vector128<byte> bitmap,
+                    out BitVector256 lookup
+                );
 
                 return Ssse3.IsSupported && lookup.Contains(0)
-                    ? new IndexOfAnyAsciiByteValues<IndexOfAnyAsciiSearcher.Ssse3HandleZeroInNeedle>(bitmap, lookup)
-                    : new IndexOfAnyAsciiByteValues<IndexOfAnyAsciiSearcher.Default>(bitmap, lookup);
+                    ? new IndexOfAnyAsciiByteValues<IndexOfAnyAsciiSearcher.Ssse3HandleZeroInNeedle>(
+                        bitmap,
+                        lookup
+                    )
+                    : new IndexOfAnyAsciiByteValues<IndexOfAnyAsciiSearcher.Default>(
+                        bitmap,
+                        lookup
+                    );
             }
 
             return new IndexOfAnyByteValues(values);
@@ -86,7 +96,9 @@ namespace System.Buffers
             }
 
             // IndexOfAnyValuesInRange is slower than IndexOfAny1Value, but faster than IndexOfAny2Values
-            if (TryGetSingleRange(values, out char maxInclusive) is IndexOfAnyValues<char> charRange)
+            if (
+                TryGetSingleRange(values, out char maxInclusive) is IndexOfAnyValues<char> charRange
+            )
             {
                 return charRange;
             }
@@ -95,7 +107,9 @@ namespace System.Buffers
             {
                 char value0 = values[0];
                 char value1 = values[1];
-                return PackedSpanHelpers.CanUsePackedIndexOf(value0) && PackedSpanHelpers.CanUsePackedIndexOf(value1)
+                return
+                    PackedSpanHelpers.CanUsePackedIndexOf(value0)
+                    && PackedSpanHelpers.CanUsePackedIndexOf(value1)
                     ? new IndexOfAny2CharValue<TrueConst>(value0, value1)
                     : new IndexOfAny2CharValue<FalseConst>(value0, value1);
             }
@@ -105,7 +119,10 @@ namespace System.Buffers
                 char value0 = values[0];
                 char value1 = values[1];
                 char value2 = values[2];
-                return PackedSpanHelpers.CanUsePackedIndexOf(value0) && PackedSpanHelpers.CanUsePackedIndexOf(value1) && PackedSpanHelpers.CanUsePackedIndexOf(value2)
+                return
+                    PackedSpanHelpers.CanUsePackedIndexOf(value0)
+                    && PackedSpanHelpers.CanUsePackedIndexOf(value1)
+                    && PackedSpanHelpers.CanUsePackedIndexOf(value2)
                     ? new IndexOfAny3CharValue<TrueConst>(value0, value1, value2)
                     : new IndexOfAny3CharValue<FalseConst>(value0, value1, value2);
             }
@@ -113,17 +130,28 @@ namespace System.Buffers
             // IndexOfAnyAsciiSearcher for chars is slower than IndexOfAny3Values, but faster than IndexOfAny4Values
             if (IndexOfAnyAsciiSearcher.IsVectorizationSupported && maxInclusive < 128)
             {
-                IndexOfAnyAsciiSearcher.ComputeBitmap(values, out Vector128<byte> bitmap, out BitVector256 lookup);
+                IndexOfAnyAsciiSearcher.ComputeBitmap(
+                    values,
+                    out Vector128<byte> bitmap,
+                    out BitVector256 lookup
+                );
 
                 return Ssse3.IsSupported && lookup.Contains(0)
-                    ? new IndexOfAnyAsciiCharValues<IndexOfAnyAsciiSearcher.Ssse3HandleZeroInNeedle>(bitmap, lookup)
-                    : new IndexOfAnyAsciiCharValues<IndexOfAnyAsciiSearcher.Default>(bitmap, lookup);
+                    ? new IndexOfAnyAsciiCharValues<IndexOfAnyAsciiSearcher.Ssse3HandleZeroInNeedle>(
+                        bitmap,
+                        lookup
+                    )
+                    : new IndexOfAnyAsciiCharValues<IndexOfAnyAsciiSearcher.Default>(
+                        bitmap,
+                        lookup
+                    );
             }
 
             // Vector128<char> isn't valid. Treat the values as shorts instead.
             ReadOnlySpan<short> shortValues = MemoryMarshal.CreateReadOnlySpan(
                 ref Unsafe.As<char, short>(ref MemoryMarshal.GetReference(values)),
-                values.Length);
+                values.Length
+            );
 
             if (values.Length == 4)
             {
@@ -144,8 +172,10 @@ namespace System.Buffers
             return new IndexOfAnyCharValuesProbabilistic(values);
         }
 
-        private static unsafe IndexOfAnyValues<T>? TryGetSingleRange<T>(ReadOnlySpan<T> values, out T maxInclusive)
-            where T : struct, INumber<T>, IMinMaxValue<T>
+        private static unsafe IndexOfAnyValues<T>? TryGetSingleRange<T>(
+            ReadOnlySpan<T> values,
+            out T maxInclusive
+        ) where T : struct, INumber<T>, IMinMaxValue<T>
         {
             T min = T.MaxValue;
             T max = T.MinValue;
@@ -181,13 +211,22 @@ namespace System.Buffers
 
             if (typeof(T) == typeof(byte))
             {
-                return (IndexOfAnyValues<T>)(object)new IndexOfAnyByteValuesInRange(byte.CreateChecked(min), byte.CreateChecked(max));
+                return (IndexOfAnyValues<T>)
+                    (object)
+                        new IndexOfAnyByteValuesInRange(
+                            byte.CreateChecked(min),
+                            byte.CreateChecked(max)
+                        );
             }
 
             Debug.Assert(typeof(T) == typeof(char));
-            return (IndexOfAnyValues<T>)(object)(PackedSpanHelpers.CanUsePackedIndexOf(min) && PackedSpanHelpers.CanUsePackedIndexOf(max)
-                ? new IndexOfAnyCharValuesInRange<TrueConst>(*(char*)&min, *(char*)&max)
-                : new IndexOfAnyCharValuesInRange<FalseConst>(*(char*)&min, *(char*)&max));
+            return (IndexOfAnyValues<T>)
+                (object)(
+                    PackedSpanHelpers.CanUsePackedIndexOf(min)
+                    && PackedSpanHelpers.CanUsePackedIndexOf(max)
+                        ? new IndexOfAnyCharValuesInRange<TrueConst>(*(char*)&min, *(char*)&max)
+                        : new IndexOfAnyCharValuesInRange<FalseConst>(*(char*)&min, *(char*)&max)
+                );
         }
 
         internal interface IRuntimeConst

@@ -14,9 +14,12 @@ namespace System.Runtime.InteropServices.Marshalling
     /// Marshals an exception object to the value of its <see cref="Exception.HResult"/> converted to <typeparamref name="T"/>.
     /// </summary>
     /// <typeparam name="T">The unmanaged type to convert the HResult to.</typeparam>
-    [CustomMarshaller(typeof(Exception), MarshalMode.UnmanagedToManagedOut, typeof(ExceptionDefaultMarshaller<>))]
-    public static class ExceptionHResultMarshaller<T>
-        where T : unmanaged, INumber<T>
+    [CustomMarshaller(
+        typeof(Exception),
+        MarshalMode.UnmanagedToManagedOut,
+        typeof(ExceptionDefaultMarshaller<>)
+    )]
+    public static class ExceptionHResultMarshaller<T> where T : unmanaged, INumber<T>
     {
         /// <summary>
         /// Marshals an exception object to the value of its <see cref="Exception.HResult"/> converted to <typeparamref name="T"/>.

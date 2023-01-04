@@ -11,6 +11,7 @@ interface I<in T>
 class X<T> : I<T>
 {
     int c = 0;
+
     int I<T>.A(T t)
     {
         return ++c;
@@ -19,7 +20,7 @@ class X<T> : I<T>
 
 class T
 {
-    static int F(I<string> i) 
+    static int F(I<string> i)
     {
         return i.A("A");
     }

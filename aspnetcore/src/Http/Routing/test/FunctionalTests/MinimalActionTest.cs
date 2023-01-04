@@ -31,7 +31,9 @@ namespace Microsoft.AspNetCore.Routing.FunctionalTests
                         .Configure(app =>
                         {
                             app.UseRouting();
-                            app.UseEndpoints(b => b.MapPost("/EchoTodo/{id}", (Func<int, Todo, Todo>)EchoTodo));
+                            app.UseEndpoints(
+                                b => b.MapPost("/EchoTodo/{id}", (Func<int, Todo, Todo>)EchoTodo)
+                            );
                         })
                         .UseTestServer();
                 })
@@ -45,10 +47,7 @@ namespace Microsoft.AspNetCore.Routing.FunctionalTests
             await host.StartAsync();
             var client = server.CreateClient();
 
-            var todo = new Todo
-            {
-                Name = "Write tests!"
-            };
+            var todo = new Todo { Name = "Write tests!" };
 
             var response = await client.PostAsJsonAsync("/EchoTodo/42", todo);
             response.EnsureSuccessStatusCode();

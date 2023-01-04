@@ -60,9 +60,7 @@ namespace Microsoft.CodeAnalysis
 
         public bool Equals(TypeLayout other)
         {
-            return _size == other._size
-                && _alignment == other._alignment
-                && _kind == other._kind;
+            return _size == other._size && _alignment == other._alignment && _kind == other._kind;
         }
 
         public override bool Equals(object? obj)

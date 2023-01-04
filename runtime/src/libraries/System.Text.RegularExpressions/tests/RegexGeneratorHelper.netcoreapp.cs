@@ -21,10 +21,17 @@ namespace System.Text.RegularExpressions.Tests
 {
     public static class RegexGeneratorHelper
     {
-        private static readonly CSharpParseOptions s_previewParseOptions = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview);
+        private static readonly CSharpParseOptions s_previewParseOptions =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview);
         private static readonly MetadataReference[] s_refs = CreateReferences();
-        private static readonly EmitOptions s_emitOptions = new EmitOptions(debugInformationFormat: DebugInformationFormat.Embedded);
-        private static readonly CSharpGeneratorDriver s_generatorDriver = CSharpGeneratorDriver.Create(new[] { new RegexGenerator().AsSourceGenerator() }, parseOptions: s_previewParseOptions);
+        private static readonly EmitOptions s_emitOptions = new EmitOptions(
+            debugInformationFormat: DebugInformationFormat.Embedded
+        );
+        private static readonly CSharpGeneratorDriver s_generatorDriver =
+            CSharpGeneratorDriver.Create(
+                new[] { new RegexGenerator().AsSourceGenerator() },
+                parseOptions: s_previewParseOptions
+            );
         private static Compilation? s_compilation;
 
         private static MetadataReference[] CreateReferences()
@@ -41,21 +48,33 @@ namespace System.Text.RegularExpressions.Tests
             return new[]
             {
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
-                MetadataReference.CreateFromFile(Path.Combine(Path.GetDirectoryName(corelibPath), "System.Runtime.dll")),
+                MetadataReference.CreateFromFile(
+                    Path.Combine(Path.GetDirectoryName(corelibPath), "System.Runtime.dll")
+                ),
                 MetadataReference.CreateFromFile(typeof(Unsafe).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Regex).Assembly.Location),
             };
         }
 
         internal static async Task<Regex> SourceGenRegexAsync(
-            string pattern, RegexOptions? options = null, TimeSpan? matchTimeout = null, CancellationToken cancellationToken = default)
+            string pattern,
+            RegexOptions? options = null,
+            TimeSpan? matchTimeout = null,
+            CancellationToken cancellationToken = default
+        )
         {
-            Regex[] results = await SourceGenRegexAsync(new[] { (pattern, options, matchTimeout) }, cancellationToken).ConfigureAwait(false);
+            Regex[] results = await SourceGenRegexAsync(
+                    new[] { (pattern, options, matchTimeout) },
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return results[0];
         }
 
         internal static async Task<Regex[]> SourceGenRegexAsync(
-            (string pattern, RegexOptions? options, TimeSpan? matchTimeout)[] regexes, CancellationToken cancellationToken = default)
+            (string pattern, RegexOptions? options, TimeSpan? matchTimeout)[] regexes,
+            CancellationToken cancellationToken = default
+        )
         {
             Debug.Assert(regexes.Length > 0);
 
@@ -68,13 +87,22 @@ namespace System.Text.RegularExpressions.Tests
             foreach (var regex in regexes)
             {
                 Assert.True(regex.options is not null || regex.matchTimeout is null);
-                code.Append($"    [RegexGenerator({SymbolDisplay.FormatLiteral(regex.pattern, quote: true)}");
+                code.Append(
+                    $"    [RegexGenerator({SymbolDisplay.FormatLiteral(regex.pattern, quote: true)}"
+                );
                 if (regex.options is not null)
                 {
-                    code.Append($", {string.Join(" | ", regex.options.ToString().Split(',').Select(o => $"RegexOptions.{o.Trim()}"))}");
+                    code.Append(
+                        $", {string.Join(" | ", regex.options.ToString().Split(',').Select(o => $"RegexOptions.{o.Trim()}"))}"
+                    );
                     if (regex.matchTimeout is not null)
                     {
-                        code.Append(string.Create(CultureInfo.InvariantCulture, $", {(int)regex.matchTimeout.Value.TotalMilliseconds}"));
+                        code.Append(
+                            string.Create(
+                                CultureInfo.InvariantCulture,
+                                $", {(int)regex.matchTimeout.Value.TotalMilliseconds}"
+                            )
+                        );
                     }
                 }
                 code.AppendLine($")] public static partial Regex Get{count}();");
@@ -91,39 +119,72 @@ namespace System.Text.RegularExpressions.Tests
             {
                 // Create the project containing the source.
                 var proj = new AdhocWorkspace()
-                    .AddSolution(SolutionInfo.Create(SolutionId.CreateNewId(), VersionStamp.Create()))
+                    .AddSolution(
+                        SolutionInfo.Create(SolutionId.CreateNewId(), VersionStamp.Create())
+                    )
                     .AddProject("Test", "test.dll", "C#")
                     .WithMetadataReferences(s_refs)
-                    .WithCompilationOptions(new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
-                    .WithNullableContextOptions(NullableContextOptions.Enable))
+                    .WithCompilationOptions(
+                        new CSharpCompilationOptions(
+                            OutputKind.DynamicallyLinkedLibrary
+                        ).WithNullableContextOptions(NullableContextOptions.Enable)
+                    )
                     .WithParseOptions(new CSharpParseOptions(LanguageVersion.Preview))
-                    .AddDocument("RegexGenerator.g.cs", SourceText.From("// Empty", Encoding.UTF8)).Project;
+                    .AddDocument("RegexGenerator.g.cs", SourceText.From("// Empty", Encoding.UTF8))
+                    .Project;
                 Assert.True(proj.Solution.Workspace.TryApplyChanges(proj.Solution));
 
-                s_compilation = comp = await proj!.GetCompilationAsync(CancellationToken.None).ConfigureAwait(false);
+                s_compilation = comp = await proj!
+                    .GetCompilationAsync(CancellationToken.None)
+                    .ConfigureAwait(false);
                 Debug.Assert(comp is not null);
             }
 
-            comp = comp.ReplaceSyntaxTree(comp.SyntaxTrees.First(), CSharpSyntaxTree.ParseText(SourceText.From(code.ToString(), Encoding.UTF8), s_previewParseOptions));
+            comp = comp.ReplaceSyntaxTree(
+                comp.SyntaxTrees.First(),
+                CSharpSyntaxTree.ParseText(
+                    SourceText.From(code.ToString(), Encoding.UTF8),
+                    s_previewParseOptions
+                )
+            );
 
             // Run the generator
-            GeneratorDriverRunResult generatorResults = s_generatorDriver.RunGenerators(comp!, cancellationToken).GetRunResult();
+            GeneratorDriverRunResult generatorResults = s_generatorDriver
+                .RunGenerators(comp!, cancellationToken)
+                .GetRunResult();
             if (generatorResults.Diagnostics.Length != 0)
             {
                 throw new ArgumentException(
-                    string.Join(Environment.NewLine, generatorResults.Diagnostics) + Environment.NewLine +
-                    string.Join(Environment.NewLine, generatorResults.GeneratedTrees.Select(t => NumberLines(t.ToString()))));
+                    string.Join(Environment.NewLine, generatorResults.Diagnostics)
+                        + Environment.NewLine
+                        + string.Join(
+                            Environment.NewLine,
+                            generatorResults.GeneratedTrees.Select(t => NumberLines(t.ToString()))
+                        )
+                );
             }
 
             // Compile the assembly to a stream
             var dll = new MemoryStream();
             comp = comp.AddSyntaxTrees(generatorResults.GeneratedTrees.ToArray());
-            EmitResult results = comp.Emit(dll, options: s_emitOptions, cancellationToken: cancellationToken);
+            EmitResult results = comp.Emit(
+                dll,
+                options: s_emitOptions,
+                cancellationToken: cancellationToken
+            );
             if (!results.Success || results.Diagnostics.Length != 0)
             {
                 throw new ArgumentException(
-                    string.Join(Environment.NewLine, results.Diagnostics.Concat(generatorResults.Diagnostics)) + Environment.NewLine +
-                    string.Join(Environment.NewLine, generatorResults.GeneratedTrees.Select(t => NumberLines(t.ToString()))));
+                    string.Join(
+                        Environment.NewLine,
+                        results.Diagnostics.Concat(generatorResults.Diagnostics)
+                    )
+                        + Environment.NewLine
+                        + string.Join(
+                            Environment.NewLine,
+                            generatorResults.GeneratedTrees.Select(t => NumberLines(t.ToString()))
+                        )
+                );
             }
             dll.Position = 0;
 
@@ -147,7 +208,12 @@ namespace System.Text.RegularExpressions.Tests
 
         /// <summary>Number the lines in the source file.</summary>
         private static string NumberLines(string source) =>
-            string.Join(Environment.NewLine, source.Split(Environment.NewLine).Select((line, lineNumber) => $"{lineNumber,6}: {line}"));
+            string.Join(
+                Environment.NewLine,
+                source
+                    .Split(Environment.NewLine)
+                    .Select((line, lineNumber) => $"{lineNumber, 6}: {line}")
+            );
 
         /// <summary>Simple AssemblyLoadContext used to load source generated regex assemblies so they can be unloaded.</summary>
         private sealed class RegexLoadContext : AssemblyLoadContext

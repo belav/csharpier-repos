@@ -14,15 +14,9 @@ public class DummyApplication : IHttpApplication<HttpContext>
     private readonly RequestDelegate _requestDelegate;
     private readonly IHttpContextFactory _httpContextFactory;
 
-    public DummyApplication()
-        : this(_ => Task.CompletedTask)
-    {
-    }
+    public DummyApplication() : this(_ => Task.CompletedTask) { }
 
-    public DummyApplication(RequestDelegate requestDelegate)
-        : this(requestDelegate, null)
-    {
-    }
+    public DummyApplication(RequestDelegate requestDelegate) : this(requestDelegate, null) { }
 
     public DummyApplication(RequestDelegate requestDelegate, IHttpContextFactory httpContextFactory)
     {
@@ -32,7 +26,8 @@ public class DummyApplication : IHttpApplication<HttpContext>
 
     public HttpContext CreateContext(IFeatureCollection contextFeatures)
     {
-        return _httpContextFactory?.Create(contextFeatures) ?? new DefaultHttpContext(contextFeatures);
+        return _httpContextFactory?.Create(contextFeatures)
+            ?? new DefaultHttpContext(contextFeatures);
     }
 
     public void DisposeContext(HttpContext context, Exception exception)

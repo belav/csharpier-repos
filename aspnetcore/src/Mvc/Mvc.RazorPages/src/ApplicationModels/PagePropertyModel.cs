@@ -18,9 +18,7 @@ public class PagePropertyModel : ParameterModelBase, ICommonModel
     /// </summary>
     /// <param name="propertyInfo">The <see cref="PropertyInfo"/> for the underlying property.</param>
     /// <param name="attributes">Any attributes which are annotated on the property.</param>
-    public PagePropertyModel(
-        PropertyInfo propertyInfo,
-        IReadOnlyList<object> attributes)
+    public PagePropertyModel(PropertyInfo propertyInfo, IReadOnlyList<object> attributes)
         : base(propertyInfo.PropertyType, attributes)
     {
         PropertyInfo = propertyInfo ?? throw new ArgumentNullException(nameof(propertyInfo));
@@ -30,8 +28,7 @@ public class PagePropertyModel : ParameterModelBase, ICommonModel
     /// Creates a new instance of <see cref="PagePropertyModel"/> from a given <see cref="PagePropertyModel"/>.
     /// </summary>
     /// <param name="other">The <see cref="PagePropertyModel"/> which needs to be copied.</param>
-    public PagePropertyModel(PagePropertyModel other)
-        : base(other)
+    public PagePropertyModel(PagePropertyModel other) : base(other)
     {
         if (other == null)
         {

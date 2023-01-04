@@ -9,17 +9,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class SwitchKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public SwitchKeywordRecommender()
-            : base(SyntaxKind.SwitchKeyword)
-        {
-        }
+        public SwitchKeywordRecommender() : base(SyntaxKind.SwitchKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            return
-                context.IsStatementContext ||
-                context.IsGlobalStatementContext ||
-                context.IsIsOrAsOrSwitchOrWithExpressionContext;
+            return context.IsStatementContext
+                || context.IsGlobalStatementContext
+                || context.IsIsOrAsOrSwitchOrWithExpressionContext;
         }
     }
 }

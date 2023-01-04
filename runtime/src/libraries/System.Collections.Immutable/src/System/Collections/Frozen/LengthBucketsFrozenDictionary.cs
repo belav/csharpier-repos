@@ -13,6 +13,7 @@ namespace System.Collections.Frozen
     {
         /// <summary>Allowed ratio between buckets with values and total buckets.  Under this ratio, this implementation won't be used due to too much wasted space.</summary>
         private const double EmptyLengthsRatio = 0.2;
+
         /// <summary>The maximum number of items allowed per bucket.  The larger the value, the longer it can take to search a bucket, which is sequentially examined.</summary>
         private const int MaxPerLength = 5;
 
@@ -23,10 +24,18 @@ namespace System.Collections.Frozen
         private readonly bool _ignoreCase;
 
         private LengthBucketsFrozenDictionary(
-            string[] keys, TValue[] values, KeyValuePair<string, int>[][] lengthBuckets, int minLength, IEqualityComparer<string> comparer) :
-            base(comparer)
+            string[] keys,
+            TValue[] values,
+            KeyValuePair<string, int>[][] lengthBuckets,
+            int minLength,
+            IEqualityComparer<string> comparer
+        ) : base(comparer)
         {
-            Debug.Assert(comparer == EqualityComparer<string>.Default || comparer == StringComparer.Ordinal || comparer == StringComparer.OrdinalIgnoreCase);
+            Debug.Assert(
+                comparer == EqualityComparer<string>.Default
+                    || comparer == StringComparer.Ordinal
+                    || comparer == StringComparer.OrdinalIgnoreCase
+            );
 
             _keys = keys;
             _values = values;
@@ -35,24 +44,41 @@ namespace System.Collections.Frozen
             _ignoreCase = ReferenceEquals(comparer, StringComparer.OrdinalIgnoreCase);
         }
 
-        internal static LengthBucketsFrozenDictionary<TValue>? TryCreateLengthBucketsFrozenSet(Dictionary<string, TValue> source, IEqualityComparer<string> comparer)
+        internal static LengthBucketsFrozenDictionary<TValue>? TryCreateLengthBucketsFrozenSet(
+            Dictionary<string, TValue> source,
+            IEqualityComparer<string> comparer
+        )
         {
             Debug.Assert(source.Count != 0);
-            Debug.Assert(comparer == EqualityComparer<string>.Default || comparer == StringComparer.Ordinal || comparer == StringComparer.OrdinalIgnoreCase);
+            Debug.Assert(
+                comparer == EqualityComparer<string>.Default
+                    || comparer == StringComparer.Ordinal
+                    || comparer == StringComparer.OrdinalIgnoreCase
+            );
 
             // Iterate through all of the inputs, bucketing them based on the length of the string.
             var groupedByLength = new Dictionary<int, List<KeyValuePair<string, TValue>>>();
-            int minLength = int.MaxValue, maxLength = int.MinValue;
+            int minLength = int.MaxValue,
+                maxLength = int.MinValue;
             foreach (KeyValuePair<string, TValue> pair in source)
             {
                 string s = pair.Key;
 
-                if (s.Length < minLength) minLength = s.Length;
-                if (s.Length > maxLength) maxLength = s.Length;
+                if (s.Length < minLength)
+                    minLength = s.Length;
+                if (s.Length > maxLength)
+                    maxLength = s.Length;
 
-                if (!groupedByLength.TryGetValue(s.Length, out List<KeyValuePair<string, TValue>>? list))
+                if (
+                    !groupedByLength.TryGetValue(
+                        s.Length,
+                        out List<KeyValuePair<string, TValue>>? list
+                    )
+                )
                 {
-                    groupedByLength[s.Length] = list = new List<KeyValuePair<string, TValue>>(MaxPerLength);
+                    groupedByLength[s.Length] = list = new List<KeyValuePair<string, TValue>>(
+                        MaxPerLength
+                    );
                 }
 
                 // If we've already hit the max per-bucket limit, bail.
@@ -81,7 +107,8 @@ namespace System.Collections.Frozen
             int index = 0;
             foreach (KeyValuePair<int, List<KeyValuePair<string, TValue>>> group in groupedByLength)
             {
-                KeyValuePair<string, int>[] length = lengthBuckets[group.Key - minLength] = new KeyValuePair<string, int>[group.Value.Count];
+                KeyValuePair<string, int>[] length = lengthBuckets[group.Key - minLength] =
+                    new KeyValuePair<string, int>[group.Value.Count];
                 int i = 0;
                 foreach (KeyValuePair<string, TValue> pair in group.Value)
                 {
@@ -94,7 +121,13 @@ namespace System.Collections.Frozen
                 }
             }
 
-            return new LengthBucketsFrozenDictionary<TValue>(keys, values, lengthBuckets, minLength, comparer);
+            return new LengthBucketsFrozenDictionary<TValue>(
+                keys,
+                values,
+                lengthBuckets,
+                minLength,
+                comparer
+            );
         }
 
         /// <inheritdoc />
@@ -118,7 +151,10 @@ namespace System.Collections.Frozen
             {
                 // Get the bucket for this key's length.  If it's null, the key isn't in the dictionary.
                 KeyValuePair<string, int>[][] lengths = _lengthBuckets;
-                if ((uint)length < (uint)lengths.Length && lengths[length] is KeyValuePair<string, int>[] subset)
+                if (
+                    (uint)length < (uint)lengths.Length
+                    && lengths[length] is KeyValuePair<string, int>[] subset
+                )
                 {
                     // Now iterate through every key in the bucket to see whether this is a match.
                     if (_ignoreCase)

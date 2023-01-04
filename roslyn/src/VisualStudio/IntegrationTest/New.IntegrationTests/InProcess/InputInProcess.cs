@@ -20,8 +20,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
     [TestService]
     internal partial class InputInProcess
     {
-        internal Task SendAsync(InputKey key, CancellationToken cancellationToken)
-            => SendAsync(new InputKey[] { key }, cancellationToken);
+        internal Task SendAsync(InputKey key, CancellationToken cancellationToken) =>
+            SendAsync(new InputKey[] { key }, cancellationToken);
 
         internal Task SendAsync(InputKey[] keys, CancellationToken cancellationToken)
         {
@@ -32,10 +32,15 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                     {
                         key.Apply(simulator);
                     }
-                }, cancellationToken);
+                },
+                cancellationToken
+            );
         }
 
-        internal async Task SendAsync(Action<IInputSimulator> callback, CancellationToken cancellationToken)
+        internal async Task SendAsync(
+            Action<IInputSimulator> callback,
+            CancellationToken cancellationToken
+        )
         {
             // AbstractSendKeys runs synchronously, so switch to a background thread before the call
             await TaskScheduler.Default;
@@ -53,8 +58,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             });
         }
 
-        internal Task SendWithoutActivateAsync(InputKey key, CancellationToken cancellationToken)
-            => SendWithoutActivateAsync(new[] { key }, cancellationToken);
+        internal Task SendWithoutActivateAsync(InputKey key, CancellationToken cancellationToken) =>
+            SendWithoutActivateAsync(new[] { key }, cancellationToken);
 
         internal Task SendWithoutActivateAsync(InputKey[] keys, CancellationToken cancellationToken)
         {
@@ -65,10 +70,15 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                     {
                         key.Apply(simulator);
                     }
-                }, cancellationToken);
+                },
+                cancellationToken
+            );
         }
 
-        internal async Task SendWithoutActivateAsync(Action<IInputSimulator> callback, CancellationToken cancellationToken)
+        internal async Task SendWithoutActivateAsync(
+            Action<IInputSimulator> callback,
+            CancellationToken cancellationToken
+        )
         {
             // AbstractSendKeys runs synchronously, so switch to a background thread before the call
             await TaskScheduler.Default;
@@ -83,14 +93,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         internal Task SendToNavigateToAsync(params InputKey[] keys)
         {
-            return SendToNavigateToAsync(
-                simulator =>
+            return SendToNavigateToAsync(simulator =>
+            {
+                foreach (var key in keys)
                 {
-                    foreach (var key in keys)
-                    {
-                        key.Apply(simulator);
-                    }
-                });
+                    key.Apply(simulator);
+                }
+            });
         }
 
         internal async Task SendToNavigateToAsync(Action<IInputSimulator> callback)
@@ -118,14 +127,26 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         {
             var horizontalResolution = NativeMethods.GetSystemMetrics(NativeMethods.SM_CXSCREEN);
             var verticalResolution = NativeMethods.GetSystemMetrics(NativeMethods.SM_CYSCREEN);
-            var virtualPoint = new ScaleTransform(65535.0 / horizontalResolution, 65535.0 / verticalResolution).Transform(point);
+            var virtualPoint = new ScaleTransform(
+                65535.0 / horizontalResolution,
+                65535.0 / verticalResolution
+            ).Transform(point);
 
-            await SendAsync(simulator => simulator.Mouse.MoveMouseTo(virtualPoint.X, virtualPoint.Y), cancellationToken);
+            await SendAsync(
+                simulator => simulator.Mouse.MoveMouseTo(virtualPoint.X, virtualPoint.Y),
+                cancellationToken
+            );
 
             // ⚠ The call to GetCursorPos is required for correct behavior.
             var actualPoint = NativeMethods.GetCursorPos();
-            Assert.True(Math.Abs(actualPoint.X - point.X) <= 1, $"Expected '{Math.Abs(actualPoint.X - point.X)}' <= '1'. Move to '({point.X}, {point.Y})' produced '({actualPoint.X}, {actualPoint.Y})'.");
-            Assert.True(Math.Abs(actualPoint.Y - point.Y) <= 1, $"Expected '{Math.Abs(actualPoint.Y - point.Y)}' <= '1'. Move to '({point.X}, {point.Y})' produced '({actualPoint.X}, {actualPoint.Y})'.");
+            Assert.True(
+                Math.Abs(actualPoint.X - point.X) <= 1,
+                $"Expected '{Math.Abs(actualPoint.X - point.X)}' <= '1'. Move to '({point.X}, {point.Y})' produced '({actualPoint.X}, {actualPoint.Y})'."
+            );
+            Assert.True(
+                Math.Abs(actualPoint.Y - point.Y) <= 1,
+                $"Expected '{Math.Abs(actualPoint.Y - point.Y)}' <= '1'. Move to '({point.X}, {point.Y})' produced '({actualPoint.X}, {actualPoint.Y})'."
+            );
         }
     }
 }

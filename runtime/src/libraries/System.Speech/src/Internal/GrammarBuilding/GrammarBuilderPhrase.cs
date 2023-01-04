@@ -14,16 +14,16 @@ namespace System.Speech.Internal.GrammarBuilding
         #region Constructors
 
         internal GrammarBuilderPhrase(string phrase)
-            : this(phrase, false, SubsetMatchingMode.OrderedSubset)
-        {
-        }
+            : this(phrase, false, SubsetMatchingMode.OrderedSubset) { }
 
         internal GrammarBuilderPhrase(string phrase, SubsetMatchingMode subsetMatchingCriteria)
-            : this(phrase, true, subsetMatchingCriteria)
-        {
-        }
+            : this(phrase, true, subsetMatchingCriteria) { }
 
-        private GrammarBuilderPhrase(string phrase, bool subsetMatching, SubsetMatchingMode subsetMatchingCriteria)
+        private GrammarBuilderPhrase(
+            string phrase,
+            bool subsetMatching,
+            SubsetMatchingMode subsetMatchingCriteria
+        )
         {
             _phrase = phrase;
             _subsetMatching = subsetMatching;
@@ -61,8 +61,11 @@ namespace System.Speech.Internal.GrammarBuilding
             {
                 return false;
             }
-            return _phrase == refObj._phrase && _matchMode == refObj._matchMode && _subsetMatching == refObj._subsetMatching;
+            return _phrase == refObj._phrase
+                && _matchMode == refObj._matchMode
+                && _subsetMatching == refObj._subsetMatching;
         }
+
         public override int GetHashCode()
         {
             return _phrase.GetHashCode();
@@ -77,7 +80,12 @@ namespace System.Speech.Internal.GrammarBuilding
             return new GrammarBuilderPhrase(_phrase, _subsetMatching, _matchMode);
         }
 
-        internal override IElement CreateElement(IElementFactory elementFactory, IElement parent, IRule rule, IdentifierCollection ruleIds)
+        internal override IElement CreateElement(
+            IElementFactory elementFactory,
+            IElement parent,
+            IRule rule,
+            IdentifierCollection ruleIds
+        )
         {
             return CreatePhraseElement(elementFactory, parent);
         }
@@ -88,10 +96,7 @@ namespace System.Speech.Internal.GrammarBuilding
 
         internal override string DebugSummary
         {
-            get
-            {
-                return "'" + _phrase + "'";
-            }
+            get { return "'" + _phrase + "'"; }
         }
 
         #endregion
@@ -109,7 +114,14 @@ namespace System.Speech.Internal.GrammarBuilding
             {
                 if (elementFactory is SrgsElementCompilerFactory)
                 {
-                    XmlParser.ParseText(parent, _phrase, null, null, -1f, new CreateTokenCallback(elementFactory.CreateToken));
+                    XmlParser.ParseText(
+                        parent,
+                        _phrase,
+                        null,
+                        null,
+                        -1f,
+                        new CreateTokenCallback(elementFactory.CreateToken)
+                    );
                 }
                 else
                 {

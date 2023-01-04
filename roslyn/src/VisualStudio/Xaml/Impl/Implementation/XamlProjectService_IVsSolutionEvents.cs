@@ -12,7 +12,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
 {
     internal partial class XamlProjectService : IVsSolutionEvents
     {
-        int IVsSolutionEvents.OnAfterLoadProject(IVsHierarchy pStubHierarchy, IVsHierarchy pRealHierarchy)
+        int IVsSolutionEvents.OnAfterLoadProject(
+            IVsHierarchy pStubHierarchy,
+            IVsHierarchy pRealHierarchy
+        )
         {
             return VSConstants.E_NOTIMPL;
         }
@@ -27,7 +30,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             return VSConstants.E_NOTIMPL;
         }
 
-        int IVsSolutionEvents.OnQueryCloseProject(IVsHierarchy pHierarchy, int fRemoving, ref int pfCancel)
+        int IVsSolutionEvents.OnQueryCloseProject(
+            IVsHierarchy pHierarchy,
+            int fRemoving,
+            ref int pfCancel
+        )
         {
             return VSConstants.E_NOTIMPL;
         }
@@ -44,7 +51,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             return VSConstants.E_NOTIMPL;
         }
 
-        int IVsSolutionEvents.OnBeforeUnloadProject(IVsHierarchy pRealHierarchy, IVsHierarchy pStubHierarchy)
+        int IVsSolutionEvents.OnBeforeUnloadProject(
+            IVsHierarchy pRealHierarchy,
+            IVsHierarchy pStubHierarchy
+        )
         {
             return VSConstants.E_NOTIMPL;
         }

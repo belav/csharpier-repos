@@ -10,17 +10,23 @@ internal sealed class ColorSchemeOptions
 {
     internal const string ColorSchemeSettingKey = "TextEditor.Roslyn.ColorSchemeName";
 
-    public static readonly Option2<ColorSchemeName> ColorScheme = new(
-        "ColorSchemeOptions",
-        "ColorSchemeName",
-        defaultValue: ColorSchemeName.VisualStudio2019,
-        storageLocation: new RoamingProfileStorageLocation(ColorSchemeSettingKey));
+    public static readonly Option2<ColorSchemeName> ColorScheme =
+        new(
+            "ColorSchemeOptions",
+            "ColorSchemeName",
+            defaultValue: ColorSchemeName.VisualStudio2019,
+            storageLocation: new RoamingProfileStorageLocation(ColorSchemeSettingKey)
+        );
 
-    public static readonly Option2<UseEnhancedColors> LegacyUseEnhancedColors = new(
-        "ColorSchemeOptions",
-        "LegacyUseEnhancedColors",
-        defaultValue: UseEnhancedColors.Default,
-        storageLocation: new RoamingProfileStorageLocation("WindowManagement.Options.UseEnhancedColorsForManagedLanguages"));
+    public static readonly Option2<UseEnhancedColors> LegacyUseEnhancedColors =
+        new(
+            "ColorSchemeOptions",
+            "LegacyUseEnhancedColors",
+            defaultValue: UseEnhancedColors.Default,
+            storageLocation: new RoamingProfileStorageLocation(
+                "WindowManagement.Options.UseEnhancedColorsForManagedLanguages"
+            )
+        );
 
     public enum UseEnhancedColors
     {

@@ -16,13 +16,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
     internal sealed partial class VisualStudioMetadataReferenceManager
     {
-        private sealed class RecoverableMetadataValueSource : ValueSource<Optional<AssemblyMetadata>>
+        private sealed class RecoverableMetadataValueSource
+            : ValueSource<Optional<AssemblyMetadata>>
         {
             private readonly WeakReference<AssemblyMetadata> _weakValue;
             private readonly List<ITemporaryStreamStorage> _storages;
             private readonly ConditionalWeakTable<Metadata, object> _lifetimeMap;
 
-            public RecoverableMetadataValueSource(AssemblyMetadata value, List<ITemporaryStreamStorage> storages, ConditionalWeakTable<Metadata, object> lifetimeMap)
+            public RecoverableMetadataValueSource(
+                AssemblyMetadata value,
+                List<ITemporaryStreamStorage> storages,
+                ConditionalWeakTable<Metadata, object> lifetimeMap
+            )
             {
                 Contract.ThrowIfFalse(storages.Count > 0);
 
@@ -31,8 +36,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 _lifetimeMap = lifetimeMap;
             }
 
-            public IEnumerable<ITemporaryStreamStorage> GetStorages()
-                => _storages;
+            public IEnumerable<ITemporaryStreamStorage> GetStorages() => _storages;
 
             public override bool TryGetValue(out Optional<AssemblyMetadata> value)
             {
@@ -46,8 +50,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 return false;
             }
 
-            public override Task<Optional<AssemblyMetadata>> GetValueAsync(CancellationToken cancellationToken)
-                => Task.FromResult(GetValue(cancellationToken));
+            public override Task<Optional<AssemblyMetadata>> GetValueAsync(
+                CancellationToken cancellationToken
+            ) => Task.FromResult(GetValue(cancellationToken));
 
             public override Optional<AssemblyMetadata> GetValue(CancellationToken cancellationToken)
             {

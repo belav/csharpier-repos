@@ -21,9 +21,12 @@ namespace IntelHardwareIntrinsicTest
 
             if (Sse.IsSupported)
             {
-                using (TestTable<float> floatTable = new TestTable<float>(new float[4] { 1, -5, 100, 0 }))
+                using (
+                    TestTable<float> floatTable = new TestTable<float>(
+                        new float[4] { 1, -5, 100, 0 }
+                    )
+                )
                 {
-
                     var vf1 = Unsafe.Read<Vector128<float>>(floatTable.inArray1Ptr);
                     var res = Sse.MoveMask(vf1);
 
@@ -35,7 +38,6 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
             }
-
 
             return testResult;
         }
@@ -57,6 +59,5 @@ namespace IntelHardwareIntrinsicTest
                 inHandle1.Free();
             }
         }
-
     }
 }

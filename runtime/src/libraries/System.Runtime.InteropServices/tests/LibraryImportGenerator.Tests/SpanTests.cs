@@ -20,6 +20,7 @@ namespace LibraryImportGenerator.IntegrationTests
         {
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array")]
             public static partial int Sum(Span<int> values, int numValues);
+
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array")]
             public static partial int Sum(ReadOnlySpan<int> values, int numValues);
 
@@ -27,14 +28,22 @@ namespace LibraryImportGenerator.IntegrationTests
             public static partial int SumInArray(in Span<int> values, int numValues);
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "duplicate_int_array")]
-            public static partial void Duplicate([MarshalUsing(CountElementName = "numValues")] ref Span<int> values, int numValues);
+            public static partial void Duplicate(
+                [MarshalUsing(CountElementName = "numValues")] ref Span<int> values,
+                int numValues
+            );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "create_range_array")]
             [return: MarshalUsing(CountElementName = "numValues")]
             public static partial Span<int> CreateRange(int start, int end, out int numValues);
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "create_range_array_out")]
-            public static partial void CreateRange_Out(int start, int end, out int numValues, [MarshalUsing(CountElementName = "numValues")] out Span<int> res);
+            public static partial void CreateRange_Out(
+                int start,
+                int end,
+                out int numValues,
+                [MarshalUsing(CountElementName = "numValues")] out Span<int> res
+            );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "get_long_bytes")]
             [return: MarshalUsing(ConstantElementCount = sizeof(long))]
@@ -98,7 +107,10 @@ namespace LibraryImportGenerator.IntegrationTests
             int end = 20;
 
             IEnumerable<int> expected = Enumerable.Range(start, end - start);
-            Assert.Equal(expected, NativeExportsNE.Collections.Stateless.CreateRange(start, end, out _));
+            Assert.Equal(
+                expected,
+                NativeExportsNE.Collections.Stateless.CreateRange(start, end, out _)
+            );
 
             Span<int> res;
             NativeExportsNE.Span.CreateRange_Out(start, end, out _, out res);

@@ -17,13 +17,17 @@ namespace Microsoft.CodeAnalysis.Editor
     internal interface ITodoListProvider
     {
         /// <summary>
-        /// An event that is raised when the todo list has changed.  
-        /// 
+        /// An event that is raised when the todo list has changed.
+        ///
         /// When an event handler is newly added, this event will fire for the currently available todo items and then
         /// afterward for any changes since.
         /// </summary>
         event EventHandler<TodoItemsUpdatedArgs> TodoListUpdated;
 
-        ImmutableArray<TodoCommentData> GetTodoItems(Workspace workspace, DocumentId documentId, CancellationToken cancellationToken);
+        ImmutableArray<TodoCommentData> GetTodoItems(
+            Workspace workspace,
+            DocumentId documentId,
+            CancellationToken cancellationToken
+        );
     }
 }

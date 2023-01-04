@@ -10,7 +10,6 @@ using System.Runtime.CompilerServices;
 
 namespace Runtime_46239
 {
-
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     internal struct S1 // Marshal.SizeOf 12 bytes, EE getClassSize 12 (here and below for arm32).
     {
@@ -30,6 +29,7 @@ namespace Runtime_46239
     {
         [FieldOffset(0)]
         public ulong tmp1;
+
         [FieldOffset(8)]
         public Object tmp2;
     }
@@ -39,6 +39,7 @@ namespace Runtime_46239
     {
         [FieldOffset(0)]
         public ulong tmp1;
+
         [FieldOffset(8)]
         public int tmp2;
     }
@@ -58,49 +59,149 @@ namespace Runtime_46239
     public class Program
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static int test1<T>(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int num, T a, T b)
+        private static int test1<T>(
+            int i1,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            int num,
+            T a,
+            T b
+        )
         {
             return 100;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static int test2<T>(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int num, T a, T b, T c)
+        private static int test2<T>(
+            int i1,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            int num,
+            T a,
+            T b,
+            T c
+        )
         {
             return 100;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static int test3<T>(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, byte b1, T a, T b, T c)
+        private static int test3<T>(
+            int i1,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            byte b1,
+            T a,
+            T b,
+            T c
+        )
         {
             return 100;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static int test4<T>(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, T a, T b, T c)
+        private static int test4<T>(
+            int i1,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            T a,
+            T b,
+            T c
+        )
         {
             return 100;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static int test5<T>(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int num, T a, T b, int i)
+        private static int test5<T>(
+            int i1,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            int num,
+            T a,
+            T b,
+            int i
+        )
         {
             return 100;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static int test6<T>(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, T a, T b, int i)
+        private static int test6<T>(
+            int i1,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            T a,
+            T b,
+            int i
+        )
         {
             return 100;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static int test5<T>(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, byte b1, T a, T b, byte b2)
+        private static int test5<T>(
+            int i1,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            byte b1,
+            T a,
+            T b,
+            byte b2
+        )
         {
             return 100;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static int test6<T>(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, T a, T b, byte b1)
+        private static int test6<T>(
+            int i1,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            T a,
+            T b,
+            byte b1
+        )
         {
             return 100;
         }
@@ -108,8 +209,7 @@ namespace Runtime_46239
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static int test<T>() where T : struct
         {
-
-            // Marshal.SizeOf throws "System.ArgumentException: Type 'Runtime_46239.S1' cannot 
+            // Marshal.SizeOf throws "System.ArgumentException: Type 'Runtime_46239.S1' cannot
             // be marshaled as an unmanaged structure; no meaningful size or offset can be computed."
             // on non-Windows platforms.
             //
@@ -148,12 +248,10 @@ namespace Runtime_46239
                 return 101;
             }
             return 100;
-
         }
 
         public static int Main()
         {
-
             if (test<S1>() != 100)
             {
                 Console.WriteLine("test<S1>() failed.");

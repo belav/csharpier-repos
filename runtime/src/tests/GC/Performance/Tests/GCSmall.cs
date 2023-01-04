@@ -4,13 +4,12 @@
 using System;
 using System.Diagnostics;
 
-
 internal class GCSmall
 {
     internal int i;
     internal int j;
 
-    public static void Main() 
+    public static void Main()
     {
         long iterations = 200000000;
         GCSmall ns = new GCSmall();
@@ -32,11 +31,11 @@ internal class GCSmall
             ns = new GCSmall();
         }
 
-        if(ns == null)
-            Console.WriteLine("Shouldn't get here");            
-        
+        if (ns == null)
+            Console.WriteLine("Shouldn't get here");
+
         GC.KeepAlive(ns);
-        
+
         sw.Stop();
         Console.WriteLine("took {0} ms in total", sw.ElapsedMilliseconds);
     }

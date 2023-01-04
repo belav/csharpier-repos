@@ -8,10 +8,12 @@ using System.Diagnostics;
 namespace System.Collections.Frozen
 {
     /// <summary>Provides a frozen set implementation where strings are grouped by their lengths.</summary>
-    internal sealed class LengthBucketsFrozenSet : FrozenSetInternalBase<string, LengthBucketsFrozenSet.GSW>
+    internal sealed class LengthBucketsFrozenSet
+        : FrozenSetInternalBase<string, LengthBucketsFrozenSet.GSW>
     {
         /// <summary>Allowed ratio between buckets with values and total buckets.  Under this ratio, this implementation won't be used due to too much wasted space.</summary>
         private const double EmptyLengthsRatio = 0.2;
+
         /// <summary>The maximum number of items allowed per bucket.  The larger the value, the longer it can take to search a bucket, which is sequentially examined.</summary>
         private const int MaxPerLength = 5;
 
@@ -20,10 +22,18 @@ namespace System.Collections.Frozen
         private readonly string[] _items;
         private readonly bool _ignoreCase;
 
-        private LengthBucketsFrozenSet(string[] items, KeyValuePair<string, int>[][] lengthBuckets, int minLength, IEqualityComparer<string> comparer) :
-            base(comparer)
+        private LengthBucketsFrozenSet(
+            string[] items,
+            KeyValuePair<string, int>[][] lengthBuckets,
+            int minLength,
+            IEqualityComparer<string> comparer
+        ) : base(comparer)
         {
-            Debug.Assert(comparer == EqualityComparer<string>.Default || comparer == StringComparer.Ordinal || comparer == StringComparer.OrdinalIgnoreCase);
+            Debug.Assert(
+                comparer == EqualityComparer<string>.Default
+                    || comparer == StringComparer.Ordinal
+                    || comparer == StringComparer.OrdinalIgnoreCase
+            );
 
             _items = items;
             _lengthBuckets = lengthBuckets;
@@ -31,20 +41,33 @@ namespace System.Collections.Frozen
             _ignoreCase = ReferenceEquals(comparer, StringComparer.OrdinalIgnoreCase);
         }
 
-        internal static LengthBucketsFrozenSet? TryCreateLengthBucketsFrozenSet(HashSet<string> source, IEqualityComparer<string> comparer)
+        internal static LengthBucketsFrozenSet? TryCreateLengthBucketsFrozenSet(
+            HashSet<string> source,
+            IEqualityComparer<string> comparer
+        )
         {
             Debug.Assert(source.Count != 0);
-            Debug.Assert(comparer == EqualityComparer<string>.Default || comparer == StringComparer.Ordinal || comparer == StringComparer.OrdinalIgnoreCase);
+            Debug.Assert(
+                comparer == EqualityComparer<string>.Default
+                    || comparer == StringComparer.Ordinal
+                    || comparer == StringComparer.OrdinalIgnoreCase
+            );
 
             // Iterate through all of the inputs, bucketing them based on the length of the string.
             var groupedByLength = new Dictionary<int, List<string>>();
-            int minLength = int.MaxValue, maxLength = int.MinValue;
+            int minLength = int.MaxValue,
+                maxLength = int.MinValue;
             foreach (string s in source)
             {
-                Debug.Assert(s is not null, "This implementation should not be used with null source values.");
+                Debug.Assert(
+                    s is not null,
+                    "This implementation should not be used with null source values."
+                );
 
-                if (s.Length < minLength) minLength = s.Length;
-                if (s.Length > maxLength) maxLength = s.Length;
+                if (s.Length < minLength)
+                    minLength = s.Length;
+                if (s.Length > maxLength)
+                    maxLength = s.Length;
 
                 if (!groupedByLength.TryGetValue(s.Length, out List<string>? list))
                 {
@@ -76,7 +99,8 @@ namespace System.Collections.Frozen
             int index = 0;
             foreach (KeyValuePair<int, List<string>> group in groupedByLength)
             {
-                KeyValuePair<string, int>[] length = lengthBuckets[group.Key - minLength] = new KeyValuePair<string, int>[group.Value.Count];
+                KeyValuePair<string, int>[] length = lengthBuckets[group.Key - minLength] =
+                    new KeyValuePair<string, int>[group.Value.Count];
                 int i = 0;
                 foreach (string value in group.Value)
                 {
@@ -111,7 +135,10 @@ namespace System.Collections.Frozen
                 {
                     // Get the bucket for this key's length.  If it's null, the key isn't in the set.
                     KeyValuePair<string, int>[][] lengths = _lengthBuckets;
-                    if ((uint)length < (uint)lengths.Length && lengths[length] is KeyValuePair<string, int>[] subset)
+                    if (
+                        (uint)length < (uint)lengths.Length
+                        && lengths[length] is KeyValuePair<string, int>[] subset
+                    )
                     {
                         // Now iterate through every key in the bucket to see whether this is a match.
                         if (_ignoreCase)
@@ -144,11 +171,14 @@ namespace System.Collections.Frozen
         internal struct GSW : IGenericSpecializedWrapper
         {
             private LengthBucketsFrozenSet _set;
+
             public void Store(FrozenSet<string> set) => _set = (LengthBucketsFrozenSet)set;
 
             public int Count => _set.Count;
             public IEqualityComparer<string> Comparer => _set.Comparer;
+
             public int FindItemIndex(string item) => _set.FindItemIndex(item);
+
             public Enumerator GetEnumerator() => _set.GetEnumerator();
         }
     }

@@ -19,10 +19,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/19666")]
 public class ComponentHubInvalidEventTest : IgnitorTest<ServerStartup>
 {
-    public ComponentHubInvalidEventTest(BasicTestAppServerSiteFixture<ServerStartup> serverFixture, ITestOutputHelper output)
-        : base(serverFixture, output)
-    {
-    }
+    public ComponentHubInvalidEventTest(
+        BasicTestAppServerSiteFixture<ServerStartup> serverFixture,
+        ITestOutputHelper output
+    ) : base(serverFixture, output) { }
 
     protected override async Task InitializeAsync()
     {
@@ -37,40 +37,47 @@ public class ComponentHubInvalidEventTest : IgnitorTest<ServerStartup>
     public async Task DispatchingAnInvalidEventArgument_DoesNotProduceWarnings()
     {
         // Arrange
-        var expectedError = $"There was an unhandled exception on the current circuit, so this circuit will be terminated. For more details turn on " +
-            $"detailed exceptions by setting 'DetailedErrors: true' in 'appSettings.Development.json' or set 'CircuitOptions.DetailedErrors'. Bad input data.";
+        var expectedError =
+            $"There was an unhandled exception on the current circuit, so this circuit will be terminated. For more details turn on "
+            + $"detailed exceptions by setting 'DetailedErrors: true' in 'appSettings.Development.json' or set 'CircuitOptions.DetailedErrors'. Bad input data.";
 
-        var eventDescriptor = Serialize(new WebEventDescriptor()
-        {
-            EventHandlerId = 3,
-            EventName = "click",
-        });
+        var eventDescriptor = Serialize(
+            new WebEventDescriptor() { EventHandlerId = 3, EventName = "click", }
+        );
 
         // Act
-        await Client.ExpectCircuitError(() => Client.HubConnection.SendAsync(
-            "DispatchBrowserEvent",
-            eventDescriptor,
-            default(JsonElement)));
+        await Client.ExpectCircuitError(
+            () =>
+                Client.HubConnection.SendAsync(
+                    "DispatchBrowserEvent",
+                    eventDescriptor,
+                    default(JsonElement)
+                )
+        );
 
         // Assert
         var actualError = Assert.Single(Errors);
         Assert.Equal(expectedError, actualError);
         Assert.DoesNotContain(Logs, l => l.LogLevel > LogLevel.Information);
-        Assert.Contains(Logs, l => (l.LogLevel, l.Exception?.Message) == (LogLevel.Debug, "There was an error parsing the event arguments. EventId: '3'."));
+        Assert.Contains(
+            Logs,
+            l =>
+                (l.LogLevel, l.Exception?.Message)
+                == (LogLevel.Debug, "There was an error parsing the event arguments. EventId: '3'.")
+        );
     }
 
     [Fact(Skip = "https://github.com/dotnet/aspnetcore/issues/19666")]
     public async Task DispatchingAnInvalidEvent_DoesNotTriggerWarnings()
     {
         // Arrange
-        var expectedError = $"There was an unhandled exception on the current circuit, so this circuit will be terminated. For more details turn on " +
-            $"detailed exceptions by setting 'DetailedErrors: true' in 'appSettings.Development.json' or set 'CircuitOptions.DetailedErrors'. Failed to dispatch event.";
+        var expectedError =
+            $"There was an unhandled exception on the current circuit, so this circuit will be terminated. For more details turn on "
+            + $"detailed exceptions by setting 'DetailedErrors: true' in 'appSettings.Development.json' or set 'CircuitOptions.DetailedErrors'. Failed to dispatch event.";
 
-        var eventDescriptor = Serialize(new WebEventDescriptor()
-        {
-            EventHandlerId = 1990,
-            EventName = "click",
-        });
+        var eventDescriptor = Serialize(
+            new WebEventDescriptor() { EventHandlerId = 1990, EventName = "click", }
+        );
 
         var eventArgs = new MouseEventArgs
         {
@@ -83,37 +90,46 @@ public class ComponentHubInvalidEventTest : IgnitorTest<ServerStartup>
         };
 
         // Act
-        await Client.ExpectCircuitError(() => Client.HubConnection.SendAsync(
-            "DispatchBrowserEvent",
-            eventDescriptor,
-            Serialize(eventArgs)));
+        await Client.ExpectCircuitError(
+            () =>
+                Client.HubConnection.SendAsync(
+                    "DispatchBrowserEvent",
+                    eventDescriptor,
+                    Serialize(eventArgs)
+                )
+        );
 
         // Assert
         var actualError = Assert.Single(Errors);
         Assert.Equal(expectedError, actualError);
         Assert.DoesNotContain(Logs, l => l.LogLevel > LogLevel.Information);
-        Assert.Contains(Logs, l => (l.LogLevel, l.Message, l.Exception?.Message) ==
-            (LogLevel.Debug,
-            "There was an error dispatching the event '1990' to the application.",
-            "There is no event handler associated with this event. EventId: '1990'. (Parameter 'eventHandlerId')"));
+        Assert.Contains(
+            Logs,
+            l =>
+                (l.LogLevel, l.Message, l.Exception?.Message)
+                == (
+                    LogLevel.Debug,
+                    "There was an error dispatching the event '1990' to the application.",
+                    "There is no event handler associated with this event. EventId: '1990'. (Parameter 'eventHandlerId')"
+                )
+        );
     }
 
     [Fact(Skip = "https://github.com/dotnet/aspnetcore/issues/19666")]
     public async Task DispatchingAnInvalidRenderAcknowledgement_DoesNotTriggerWarnings()
     {
         // Arrange
-        var expectedError = $"There was an unhandled exception on the current circuit, so this circuit will be terminated. For more details turn on " +
-            $"detailed exceptions by setting 'DetailedErrors: true' in 'appSettings.Development.json' or set 'CircuitOptions.DetailedErrors'. Failed to complete render batch '1846'.";
-
+        var expectedError =
+            $"There was an unhandled exception on the current circuit, so this circuit will be terminated. For more details turn on "
+            + $"detailed exceptions by setting 'DetailedErrors: true' in 'appSettings.Development.json' or set 'CircuitOptions.DetailedErrors'. Failed to complete render batch '1846'.";
 
         Client.ConfirmRenderBatch = false;
         await Client.ClickAsync("counter");
 
         // Act
-        await Client.ExpectCircuitError(() => Client.HubConnection.SendAsync(
-            "OnRenderCompleted",
-            1846,
-            null));
+        await Client.ExpectCircuitError(
+            () => Client.HubConnection.SendAsync("OnRenderCompleted", 1846, null)
+        );
 
         // Assert
         var actualError = Assert.Single(Errors);
@@ -122,13 +138,22 @@ public class ComponentHubInvalidEventTest : IgnitorTest<ServerStartup>
 
         var entry = Assert.Single(Logs, l => l.EventId.Name == "OnRenderCompletedFailed");
         Assert.Equal(LogLevel.Debug, entry.LogLevel);
-        Assert.Matches("Failed to complete render batch '1846' in circuit host '.*'\\.", entry.Message);
-        Assert.Equal("Received an acknowledgement for batch with id '1846' when the last batch produced was '4'.", entry.Exception.Message);
+        Assert.Matches(
+            "Failed to complete render batch '1846' in circuit host '.*'\\.",
+            entry.Message
+        );
+        Assert.Equal(
+            "Received an acknowledgement for batch with id '1846' when the last batch produced was '4'.",
+            entry.Exception.Message
+        );
     }
 
     private JsonElement Serialize<T>(T browserEventDescriptor)
     {
-        var jsonBytes = JsonSerializer.SerializeToUtf8Bytes(browserEventDescriptor, TestJsonSerializerOptionsProvider.Options);
+        var jsonBytes = JsonSerializer.SerializeToUtf8Bytes(
+            browserEventDescriptor,
+            TestJsonSerializerOptionsProvider.Options
+        );
         var jsonDocument = JsonDocument.Parse(jsonBytes);
 
         return jsonDocument.RootElement;

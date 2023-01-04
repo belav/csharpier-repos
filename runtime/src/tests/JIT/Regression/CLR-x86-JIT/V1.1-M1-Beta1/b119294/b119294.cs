@@ -13,6 +13,7 @@ public class Test_b119294
     public int[,] m_nSourceDestMap;
     public static int m_coSourceLength = 100;
     public static int m_coDestLength = 100;
+
     static public int Main()
     {
         String testenv = Environment.GetEnvironmentVariable("URTBUILDENV");
@@ -43,5 +44,4 @@ public class Test_b119294
         }
         //MessageBox.Show("EstablishIdentityTransform() leave");
     }
-
 }

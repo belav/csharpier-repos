@@ -17,8 +17,21 @@
 
 namespace System.Runtime.ConstrainedExecution
 {
-    [Obsolete(Obsoletions.ConstrainedExecutionRegionMessage, DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Interface /* | AttributeTargets.Delegate*/, Inherited = false)]
+    [Obsolete(
+        Obsoletions.ConstrainedExecutionRegionMessage,
+        DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method
+            | AttributeTargets.Interface /* | AttributeTargets.Delegate*/
+        ,
+        Inherited = false
+    )]
     public sealed class ReliabilityContractAttribute : Attribute
     {
         public ReliabilityContractAttribute(Consistency consistencyGuarantee, Cer cer)

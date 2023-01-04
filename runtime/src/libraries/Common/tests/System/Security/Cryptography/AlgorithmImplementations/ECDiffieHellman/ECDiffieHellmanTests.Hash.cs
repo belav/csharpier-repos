@@ -15,7 +15,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create())
             {
                 Assert.Throws<ArgumentNullException>(
-                    () => ecdh.DeriveKeyFromHash(null, HashAlgorithmName.SHA512));
+                    () => ecdh.DeriveKeyFromHash(null, HashAlgorithmName.SHA512)
+                );
             }
         }
 
@@ -28,7 +29,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
                 Assert.ThrowsAny<ArgumentException>(
-                    () => alice.DeriveKeyFromHash(bobPublic, HashAlgorithmName.SHA512));
+                    () => alice.DeriveKeyFromHash(bobPublic, HashAlgorithmName.SHA512)
+                );
             }
         }
 
@@ -39,7 +41,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey publicKey = ecdh.PublicKey)
             {
                 Assert.Throws<ArgumentException>(
-                    () => ecdh.DeriveKeyFromHash(publicKey, new HashAlgorithmName("")));
+                    () => ecdh.DeriveKeyFromHash(publicKey, new HashAlgorithmName(""))
+                );
             }
         }
 
@@ -68,7 +71,10 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
                 byte[] aliceDerived = alice.DeriveKeyFromHash(bobPublic, HashAlgorithmName.SHA512);
-                byte[] aliceSelfDerived = alice.DeriveKeyFromHash(alicePublic, HashAlgorithmName.SHA512);
+                byte[] aliceSelfDerived = alice.DeriveKeyFromHash(
+                    alicePublic,
+                    HashAlgorithmName.SHA512
+                );
 
                 // Alice and Alice is HASH(aaG) != HASH(abG)
                 // (Except for the fantastically small chance that Alice == Bob)
@@ -102,8 +108,18 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey alicePublic = alice.PublicKey)
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
-                byte[] aliceDerived = alice.DeriveKeyFromHash(bobPublic, HashAlgorithmName.SHA512, prefix, null);
-                byte[] bobDerived = bob.DeriveKeyFromHash(alicePublic, HashAlgorithmName.SHA512, prefix, null);
+                byte[] aliceDerived = alice.DeriveKeyFromHash(
+                    bobPublic,
+                    HashAlgorithmName.SHA512,
+                    prefix,
+                    null
+                );
+                byte[] bobDerived = bob.DeriveKeyFromHash(
+                    alicePublic,
+                    HashAlgorithmName.SHA512,
+                    prefix,
+                    null
+                );
 
                 Assert.Equal(aliceDerived, bobDerived);
             }
@@ -121,8 +137,18 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey alicePublic = alice.PublicKey)
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
-                byte[] aliceDerived = alice.DeriveKeyFromHash(bobPublic, HashAlgorithmName.SHA512, alicePrefix, null);
-                byte[] bobDerived = alice.DeriveKeyFromHash(alicePublic, HashAlgorithmName.SHA512, bobPrefix, null);
+                byte[] aliceDerived = alice.DeriveKeyFromHash(
+                    bobPublic,
+                    HashAlgorithmName.SHA512,
+                    alicePrefix,
+                    null
+                );
+                byte[] bobDerived = alice.DeriveKeyFromHash(
+                    alicePublic,
+                    HashAlgorithmName.SHA512,
+                    bobPrefix,
+                    null
+                );
 
                 Assert.NotEqual(aliceDerived, bobDerived);
             }
@@ -139,8 +165,18 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey alicePublic = alice.PublicKey)
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
-                byte[] aliceDerived = alice.DeriveKeyFromHash(bobPublic, HashAlgorithmName.SHA512, null, suffix);
-                byte[] bobDerived = bob.DeriveKeyFromHash(alicePublic, HashAlgorithmName.SHA512, null, suffix);
+                byte[] aliceDerived = alice.DeriveKeyFromHash(
+                    bobPublic,
+                    HashAlgorithmName.SHA512,
+                    null,
+                    suffix
+                );
+                byte[] bobDerived = bob.DeriveKeyFromHash(
+                    alicePublic,
+                    HashAlgorithmName.SHA512,
+                    null,
+                    suffix
+                );
 
                 Assert.Equal(aliceDerived, bobDerived);
             }
@@ -158,8 +194,18 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey alicePublic = alice.PublicKey)
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
-                byte[] aliceDerived = alice.DeriveKeyFromHash(bobPublic, HashAlgorithmName.SHA512, null, aliceSuffix);
-                byte[] bobDerived = alice.DeriveKeyFromHash(alicePublic, HashAlgorithmName.SHA512, null, bobSuffix);
+                byte[] aliceDerived = alice.DeriveKeyFromHash(
+                    bobPublic,
+                    HashAlgorithmName.SHA512,
+                    null,
+                    aliceSuffix
+                );
+                byte[] bobDerived = alice.DeriveKeyFromHash(
+                    alicePublic,
+                    HashAlgorithmName.SHA512,
+                    null,
+                    bobSuffix
+                );
 
                 Assert.NotEqual(aliceDerived, bobDerived);
             }
@@ -173,7 +219,10 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
                 byte[] aliceDerived = alice.DeriveKeyFromHash(bobPublic, HashAlgorithmName.SHA512);
-                byte[] aliceDerivedAgain = alice.DeriveKeyFromHash(bobPublic, HashAlgorithmName.SHA512);
+                byte[] aliceDerivedAgain = alice.DeriveKeyFromHash(
+                    bobPublic,
+                    HashAlgorithmName.SHA512
+                );
 
                 Assert.Equal(aliceDerived, aliceDerivedAgain);
             }
@@ -186,7 +235,12 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey publicKey = ecdh.PublicKey)
             {
                 byte[] simple = ecdh.DeriveKeyFromHash(publicKey, HashAlgorithmName.SHA512);
-                byte[] nulls = ecdh.DeriveKeyFromHash(publicKey, HashAlgorithmName.SHA512, null, null);
+                byte[] nulls = ecdh.DeriveKeyFromHash(
+                    publicKey,
+                    HashAlgorithmName.SHA512,
+                    null,
+                    null
+                );
 
                 Assert.Equal(simple, nulls);
             }
@@ -199,7 +253,12 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey publicKey = ecdh.PublicKey)
             {
                 byte[] simple = ecdh.DeriveKeyMaterial(publicKey);
-                byte[] nulls = ecdh.DeriveKeyFromHash(publicKey, HashAlgorithmName.SHA256, null, null);
+                byte[] nulls = ecdh.DeriveKeyFromHash(
+                    publicKey,
+                    HashAlgorithmName.SHA256,
+                    null,
+                    null
+                );
 
                 Assert.Equal(simple, nulls);
             }
@@ -216,7 +275,6 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                     null,
                     "595B71C33D9D40ACD9CA847C47267DAEE7498EEF0B553482FAA45791418AC679",
                 },
-
                 new object[]
                 {
                     HashAlgorithmName.SHA1,
@@ -224,7 +282,6 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                     null,
                     "25E464FAC33F4A5F8786627FB3685F4C31B26327",
                 },
-
                 new object[]
                 {
                     HashAlgorithmName.SHA256,
@@ -232,7 +289,6 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                     null,
                     "D0F4C42D61E794E508A079822F3069C9F89D9E3385C8E090425FF38927798017",
                 },
-
                 new object[]
                 {
                     HashAlgorithmName.SHA256,
@@ -240,7 +296,6 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                     "010305",
                     "20DCB58E2AC4E70B1BF47362B0D1C8B728E27D6575EA9B85106CBE05E1F7D6DB",
                 },
-
                 new object[]
                 {
                     HashAlgorithmName.SHA256,
@@ -248,7 +303,6 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                     "010305",
                     "EFC758D39896E9DE96C120B0A74FB751F140BD7F3F4FC3777DC2A530145E01EC",
                 },
-
                 new object[]
                 {
                     HashAlgorithmName.SHA256,
@@ -266,7 +320,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             HashAlgorithmName hashAlgorithm,
             string prependBytes,
             string appendBytes,
-            string answerBytes)
+            string answerBytes
+        )
         {
             byte[] prepend = prependBytes?.HexToByteArray();
             byte[] append = appendBytes?.HexToByteArray();

@@ -25,9 +25,15 @@ namespace System.Reflection.Runtime.MethodInfos
             _declaringType = declaringType;
         }
 
-        public sealed override MethodAttributes Attributes => MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName;
-        public sealed override CallingConventions CallingConvention => CallingConventions.Standard | CallingConventions.HasThis;
-        public sealed override IEnumerable<CustomAttributeData> CustomAttributes => Array.Empty<CustomAttributeData>();
+        public sealed override MethodAttributes Attributes =>
+            MethodAttributes.Public
+            | MethodAttributes.HideBySig
+            | MethodAttributes.SpecialName
+            | MethodAttributes.RTSpecialName;
+        public sealed override CallingConventions CallingConvention =>
+            CallingConventions.Standard | CallingConventions.HasThis;
+        public sealed override IEnumerable<CustomAttributeData> CustomAttributes =>
+            Array.Empty<CustomAttributeData>();
         public sealed override Type DeclaringType => _declaringType;
 
         public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other)
@@ -50,28 +56,49 @@ namespace System.Reflection.Runtime.MethodInfos
 
         public sealed override int GetHashCode() => _declaringType.GetHashCode();
 
-        public sealed override object Invoke(BindingFlags invokeAttr, Binder binder, object?[]? parameters, CultureInfo culture)
+        public sealed override object Invoke(
+            BindingFlags invokeAttr,
+            Binder binder,
+            object?[]? parameters,
+            CultureInfo culture
+        )
         {
             throw new PlatformNotSupportedException();
         }
 
-        public sealed override MethodBase MetadataDefinitionMethod { get { throw new NotSupportedException(); } }
+        public sealed override MethodBase MetadataDefinitionMethod
+        {
+            get { throw new NotSupportedException(); }
+        }
 
-        public sealed override int MetadataToken { get { throw new InvalidOperationException(); } }
+        public sealed override int MetadataToken
+        {
+            get { throw new InvalidOperationException(); }
+        }
 
-        public sealed override RuntimeMethodHandle MethodHandle { get { throw new PlatformNotSupportedException(); } }
+        public sealed override RuntimeMethodHandle MethodHandle
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
 
-        public sealed override MethodImplAttributes MethodImplementationFlags => MethodImplAttributes.IL;
+        public sealed override MethodImplAttributes MethodImplementationFlags =>
+            MethodImplAttributes.IL;
 
         public sealed override string Name => ConstructorInfo.ConstructorName;
 
-        protected sealed override RuntimeParameterInfo[] RuntimeParameters => Array.Empty<RuntimeParameterInfo>();
+        protected sealed override RuntimeParameterInfo[] RuntimeParameters =>
+            Array.Empty<RuntimeParameterInfo>();
 
         public sealed override string ToString()
         {
             // A constructor's "return type" is always System.Void and we don't want to allocate a ParameterInfo object to record that revelation.
             // In deference to that, ComputeToString() lets us pass null as a synonym for "void."
-            return RuntimeMethodHelpers.ComputeToString(this, Array.Empty<RuntimeTypeInfo>(), RuntimeParameters, returnParameter: null);
+            return RuntimeMethodHelpers.ComputeToString(
+                this,
+                Array.Empty<RuntimeTypeInfo>(),
+                RuntimeParameters,
+                returnParameter: null
+            );
         }
 
         protected sealed override MethodInvoker UncachedMethodInvoker

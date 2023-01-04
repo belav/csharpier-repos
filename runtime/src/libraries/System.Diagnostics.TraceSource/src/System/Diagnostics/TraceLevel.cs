@@ -19,12 +19,14 @@ namespace System.Diagnostics
         ///    </para>
         /// </devdoc>
         Off = 0,
+
         /// <devdoc>
         ///    <para>
         ///       Output error-handling messages.
         ///    </para>
         /// </devdoc>
         Error = 1,
+
         /// <devdoc>
         ///    <para>
         ///       Output warnings and error-handling
@@ -32,12 +34,14 @@ namespace System.Diagnostics
         ///    </para>
         /// </devdoc>
         Warning = 2,
+
         /// <devdoc>
         ///    <para>
         ///       Output informational messages, warnings, and error-handling messages.
         ///    </para>
         /// </devdoc>
         Info = 3,
+
         /// <devdoc>
         ///    Output all debugging and tracing messages.
         /// </devdoc>

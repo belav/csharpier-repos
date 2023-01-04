@@ -18,9 +18,14 @@ public static class RouteHandlerFilterExtensions
     /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
     /// <param name="filter">The <see cref="IRouteHandlerFilter"/> to register.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route handler.</returns>
-    public static RouteHandlerBuilder AddFilter(this RouteHandlerBuilder builder, IRouteHandlerFilter filter)
+    public static RouteHandlerBuilder AddFilter(
+        this RouteHandlerBuilder builder,
+        IRouteHandlerFilter filter
+    )
     {
-        builder.RouteHandlerFilterFactories.Add((routeHandlerContext, next) => (context) => filter.InvokeAsync(context, next));
+        builder.RouteHandlerFilterFactories.Add(
+            (routeHandlerContext, next) => (context) => filter.InvokeAsync(context, next)
+        );
         return builder;
     }
 
@@ -30,29 +35,37 @@ public static class RouteHandlerFilterExtensions
     /// <typeparam name="TFilterType">The type of the <see cref="IRouteHandlerFilter"/> to register.</typeparam>
     /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route handler.</returns>
-    public static RouteHandlerBuilder AddFilter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFilterType>(this RouteHandlerBuilder builder) where TFilterType : IRouteHandlerFilter
+    public static RouteHandlerBuilder AddFilter<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFilterType
+    >(this RouteHandlerBuilder builder) where TFilterType : IRouteHandlerFilter
     {
         // We call `CreateFactory` twice here since the `CreateFactory` API does not support optional arguments.
         // See https://github.com/dotnet/runtime/issues/67309 for more info.
         ObjectFactory filterFactory;
         try
         {
-            filterFactory = ActivatorUtilities.CreateFactory(typeof(TFilterType), new[] { typeof(RouteHandlerContext) });
+            filterFactory = ActivatorUtilities.CreateFactory(
+                typeof(TFilterType),
+                new[] { typeof(RouteHandlerContext) }
+            );
         }
         catch (InvalidOperationException)
         {
             filterFactory = ActivatorUtilities.CreateFactory(typeof(TFilterType), Type.EmptyTypes);
         }
 
-        builder.RouteHandlerFilterFactories.Add((routeHandlerContext, next) =>
-        {
-            var invokeArguments = new[] { routeHandlerContext };
-            return (context) =>
+        builder.RouteHandlerFilterFactories.Add(
+            (routeHandlerContext, next) =>
             {
-                var filter = (IRouteHandlerFilter)filterFactory.Invoke(context.HttpContext.RequestServices, invokeArguments);
-                return filter.InvokeAsync(context, next);
-            };
-        });
+                var invokeArguments = new[] { routeHandlerContext };
+                return (context) =>
+                {
+                    var filter = (IRouteHandlerFilter)
+                        filterFactory.Invoke(context.HttpContext.RequestServices, invokeArguments);
+                    return filter.InvokeAsync(context, next);
+                };
+            }
+        );
         return builder;
     }
 
@@ -62,9 +75,18 @@ public static class RouteHandlerFilterExtensions
     /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
     /// <param name="routeHandlerFilter">A <see cref="Delegate"/> representing the core logic of the filter.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route handler.</returns>
-    public static RouteHandlerBuilder AddFilter(this RouteHandlerBuilder builder, Func<RouteHandlerInvocationContext, RouteHandlerFilterDelegate, ValueTask<object?>> routeHandlerFilter)
+    public static RouteHandlerBuilder AddFilter(
+        this RouteHandlerBuilder builder,
+        Func<
+            RouteHandlerInvocationContext,
+            RouteHandlerFilterDelegate,
+            ValueTask<object?>
+        > routeHandlerFilter
+    )
     {
-        builder.RouteHandlerFilterFactories.Add((routeHandlerContext, next) => (context) => routeHandlerFilter(context, next));
+        builder.RouteHandlerFilterFactories.Add(
+            (routeHandlerContext, next) => (context) => routeHandlerFilter(context, next)
+        );
         return builder;
     }
 
@@ -74,7 +96,14 @@ public static class RouteHandlerFilterExtensions
     /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
     /// <param name="filterFactory">A <see cref="Delegate"/> representing the logic for constructing the filter.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route handler.</returns>
-    public static RouteHandlerBuilder AddFilter(this RouteHandlerBuilder builder, Func<RouteHandlerContext, RouteHandlerFilterDelegate, RouteHandlerFilterDelegate> filterFactory)
+    public static RouteHandlerBuilder AddFilter(
+        this RouteHandlerBuilder builder,
+        Func<
+            RouteHandlerContext,
+            RouteHandlerFilterDelegate,
+            RouteHandlerFilterDelegate
+        > filterFactory
+    )
     {
         builder.RouteHandlerFilterFactories.Add(filterFactory);
         return builder;

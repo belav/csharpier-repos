@@ -8,11 +8,18 @@ namespace Microsoft.AspNetCore.Analyzers.RouteHandlers;
 
 internal sealed class WellKnownTypes
 {
-    public static bool TryCreate(Compilation compilation, [NotNullWhen(true)] out WellKnownTypes? wellKnownTypes)
+    public static bool TryCreate(
+        Compilation compilation,
+        [NotNullWhen(true)] out WellKnownTypes? wellKnownTypes
+    )
     {
         wellKnownTypes = default;
-        const string EndpointRouteBuilderExtensions = "Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions";
-        if (compilation.GetTypeByMetadataName(EndpointRouteBuilderExtensions) is not { } endpointRouteBuilderExtensions)
+        const string EndpointRouteBuilderExtensions =
+            "Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions";
+        if (
+            compilation.GetTypeByMetadataName(EndpointRouteBuilderExtensions)
+            is not { } endpointRouteBuilderExtensions
+        )
         {
             return false;
         }
@@ -23,8 +30,12 @@ internal sealed class WellKnownTypes
             return false;
         }
 
-        const string IBinderTypeProviderMetadata = "Microsoft.AspNetCore.Mvc.ModelBinding.IBinderTypeProviderMetadata";
-        if (compilation.GetTypeByMetadataName(IBinderTypeProviderMetadata) is not { } ibinderTypeProviderMetadata)
+        const string IBinderTypeProviderMetadata =
+            "Microsoft.AspNetCore.Mvc.ModelBinding.IBinderTypeProviderMetadata";
+        if (
+            compilation.GetTypeByMetadataName(IBinderTypeProviderMetadata)
+            is not { } ibinderTypeProviderMetadata
+        )
         {
             return false;
         }
@@ -49,8 +60,12 @@ internal sealed class WellKnownTypes
             return false;
         }
 
-        const string IConvertToActionResult = "Microsoft.AspNetCore.Mvc.Infrastructure.IConvertToActionResult";
-        if (compilation.GetTypeByMetadataName(IConvertToActionResult) is not { } iConvertToActionResult)
+        const string IConvertToActionResult =
+            "Microsoft.AspNetCore.Mvc.Infrastructure.IConvertToActionResult";
+        if (
+            compilation.GetTypeByMetadataName(IConvertToActionResult)
+            is not { } iConvertToActionResult
+        )
         {
             return false;
         }

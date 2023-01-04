@@ -23,7 +23,9 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMargin
 {
-    internal class InheritanceMarginViewMargin : ForegroundThreadAffinitizedObject, IWpfTextViewMargin
+    internal class InheritanceMarginViewMargin
+        : ForegroundThreadAffinitizedObject,
+            IWpfTextViewMargin
     {
         // 16 (width of the crisp image) + 2 * 1 (width of the border) = 18
         private const double HeightAndWidthOfMargin = 18;
@@ -53,7 +55,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             IEditorFormatMap editorFormatMap,
             IGlobalOptionService globalOptions,
             IAsynchronousOperationListener listener,
-            string languageName) : base(threadingContext)
+            string languageName
+        ) : base(threadingContext)
         {
             _textView = textView;
             _tagAggregator = tagAggregator;
@@ -71,7 +74,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                 editorFormatMap,
                 listener,
                 _mainCanvas,
-                HeightAndWidthOfMargin);
+                HeightAndWidthOfMargin
+            );
             _refreshAllGlyphs = true;
             _disposed = false;
 
@@ -108,9 +112,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             _glyphManager.SetSnapshotAndUpdate(
                 _textView.TextSnapshot,
                 e.NewOrReformattedLines,
-                e.VerticalTranslation ? _textView.TextViewLines : e.TranslatedLines);
+                e.VerticalTranslation ? _textView.TextViewLines : e.TranslatedLines
+            );
 
-            IList<ITextViewLine> lines = _refreshAllGlyphs ? _textView.TextViewLines : e.NewOrReformattedLines;
+            IList<ITextViewLine> lines = _refreshAllGlyphs
+                ? _textView.TextViewLines
+                : e.NewOrReformattedLines;
             foreach (var line in lines)
             {
                 _glyphManager.RemoveGlyphs(line.Extent);
@@ -122,8 +129,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
 
         private void OnGlobalOptionChanged(object sender, OptionChangedEventArgs e)
         {
-            if (e.Option.Equals(FeatureOnOffOptions.ShowInheritanceMargin) ||
-                e.Option.Equals(FeatureOnOffOptions.InheritanceMarginCombinedWithIndicatorMargin))
+            if (
+                e.Option.Equals(FeatureOnOffOptions.ShowInheritanceMargin)
+                || e.Option.Equals(FeatureOnOffOptions.InheritanceMarginCombinedWithIndicatorMargin)
+            )
             {
                 UpdateMarginVisibility();
             }
@@ -132,8 +141,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
         private void UpdateMarginVisibility()
         {
             _mainCanvas.Visibility =
-                (_globalOptions.GetOption(FeatureOnOffOptions.ShowInheritanceMargin, _languageName) ?? true) &&
-                !_globalOptions.GetOption(FeatureOnOffOptions.InheritanceMarginCombinedWithIndicatorMargin) ? Visibility.Visible : Visibility.Collapsed;
+                (
+                    _globalOptions.GetOption(
+                        FeatureOnOffOptions.ShowInheritanceMargin,
+                        _languageName
+                    ) ?? true
+                )
+                && !_globalOptions.GetOption(
+                    FeatureOnOffOptions.InheritanceMarginCombinedWithIndicatorMargin
+                )
+                    ? Visibility.Visible
+                    : Visibility.Collapsed;
         }
 
         private void OnTagsChanged(object sender, BatchedTagsChangedEventArgs e)
@@ -143,7 +161,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                 return;
             }
 
-            using var _ = CodeAnalysis.PooledObjects.ArrayBuilder<SnapshotSpan>.GetInstance(out var builder);
+            using var _ = CodeAnalysis.PooledObjects.ArrayBuilder<SnapshotSpan>.GetInstance(
+                out var builder
+            );
             foreach (var mappingSpan in e.Spans)
             {
                 var normalizedSpan = mappingSpan.GetSpans(_textView.TextSnapshot);
@@ -162,7 +182,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
 
             _glyphManager.RemoveGlyphs(changedSpan);
 
-            foreach (var line in _textView.TextViewLines.GetTextViewLinesIntersectingSpan(changedSpan))
+            foreach (
+                var line in _textView.TextViewLines.GetTextViewLinesIntersectingSpan(changedSpan)
+            )
             {
                 if (line.IsValid)
                 {
@@ -173,13 +195,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
 
         private void RefreshGlyphsOver(ITextViewLine textViewLine)
         {
-            if (!_globalOptions.GetOption(FeatureOnOffOptions.InheritanceMarginCombinedWithIndicatorMargin))
+            if (
+                !_globalOptions.GetOption(
+                    FeatureOnOffOptions.InheritanceMarginCombinedWithIndicatorMargin
+                )
+            )
             {
-                foreach (var mappingTagSpan in _tagAggregator.GetTags(textViewLine.ExtentAsMappingSpan))
+                foreach (
+                    var mappingTagSpan in _tagAggregator.GetTags(textViewLine.ExtentAsMappingSpan)
+                )
                 {
                     // Only take tag spans with a visible start point and that map to something
                     // in the edit buffer and *start* on this line
-                    if (mappingTagSpan.Span.Start.GetPoint(_textView.VisualSnapshot.TextBuffer, PositionAffinity.Predecessor) != null)
+                    if (
+                        mappingTagSpan.Span.Start.GetPoint(
+                            _textView.VisualSnapshot.TextBuffer,
+                            PositionAffinity.Predecessor
+                        ) != null
+                    )
                     {
                         var tagSpans = mappingTagSpan.Span.GetSpans(_textView.TextSnapshot);
                         if (tagSpans.Count > 0)
@@ -226,7 +259,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             }
         }
 
-        ITextViewMargin? ITextViewMargin.GetTextViewMargin(string marginName)
-            => marginName == nameof(InheritanceMarginViewMargin) ? this : null;
+        ITextViewMargin? ITextViewMargin.GetTextViewMargin(string marginName) =>
+            marginName == nameof(InheritanceMarginViewMargin) ? this : null;
     }
 }

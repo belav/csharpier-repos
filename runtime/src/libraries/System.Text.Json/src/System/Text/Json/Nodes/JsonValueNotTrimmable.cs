@@ -12,10 +12,14 @@ namespace System.Text.Json.Nodes
     internal sealed partial class JsonValueNotTrimmable<TValue> : JsonValue<TValue>
     {
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
-        public JsonValueNotTrimmable(TValue value, JsonNodeOptions? options = null) : base(value, options) { }
+        public JsonValueNotTrimmable(TValue value, JsonNodeOptions? options = null)
+            : base(value, options) { }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "The ctor is marked RequiresUnreferencedCode.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The ctor is marked RequiresUnreferencedCode."
+        )]
         public override void WriteTo(Utf8JsonWriter writer, JsonSerializerOptions? options = null)
         {
             if (writer is null)

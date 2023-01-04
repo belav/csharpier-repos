@@ -5,28 +5,31 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class MaterializationInterceptionInMemoryTest : MaterializationInterceptionTestBase,
-    IClassFixture<MaterializationInterceptionInMemoryTest.MaterializationInterceptionInMemoryFixture>
+public class MaterializationInterceptionInMemoryTest
+    : MaterializationInterceptionTestBase,
+        IClassFixture<MaterializationInterceptionInMemoryTest.MaterializationInterceptionInMemoryFixture>
 {
-    public MaterializationInterceptionInMemoryTest(MaterializationInterceptionInMemoryFixture fixture)
-        : base(fixture)
-    {
-    }
+    public MaterializationInterceptionInMemoryTest(
+        MaterializationInterceptionInMemoryFixture fixture
+    ) : base(fixture) { }
 
     public class MaterializationInterceptionInMemoryFixture : SingletonInterceptorsFixtureBase
     {
-        protected override string StoreName
-            => "MaterializationInterception";
+        protected override string StoreName => "MaterializationInterception";
 
-        protected override ITestStoreFactory TestStoreFactory
-            => InMemoryTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
 
         protected override IServiceCollection InjectInterceptors(
             IServiceCollection serviceCollection,
-            IEnumerable<ISingletonInterceptor> injectedInterceptors)
-            => base.InjectInterceptors(serviceCollection.AddEntityFrameworkInMemoryDatabase(), injectedInterceptors);
+            IEnumerable<ISingletonInterceptor> injectedInterceptors
+        ) =>
+            base.InjectInterceptors(
+                serviceCollection.AddEntityFrameworkInMemoryDatabase(),
+                injectedInterceptors
+            );
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder).ConfigureWarnings(c => c.Ignore(InMemoryEventId.TransactionIgnoredWarning));
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder)
+                .ConfigureWarnings(c => c.Ignore(InMemoryEventId.TransactionIgnoredWarning));
     }
 }

@@ -25,9 +25,7 @@ namespace Internal.NativeFormat
         internal const int Placed = -2;
         internal const int Unified = -3;
 
-        public Vertex()
-        {
-        }
+        public Vertex() { }
 
         internal abstract void Save(NativeWriter writer);
 
@@ -51,9 +49,7 @@ namespace Internal.NativeFormat
         internal List<Vertex> _items = new List<Vertex>();
         internal Dictionary<Vertex, Vertex> _placedMap = new Dictionary<Vertex, Vertex>();
 
-        public Section()
-        {
-        }
+        public Section() { }
 
         public Vertex Place(Vertex vertex)
         {
@@ -134,17 +130,60 @@ namespace Internal.NativeFormat
             return section;
         }
 
-        public void WriteByte(byte b) { _encoder.WriteByte(b); }
-        public void WriteUInt8(byte value) { _encoder.WriteUInt8(value); }
-        public void WriteUInt16(ushort value) { _encoder.WriteUInt16(value); }
-        public void WriteUInt32(uint value) { _encoder.WriteUInt32(value); }
-        public void WriteUInt64(ulong value) { _encoder.WriteUInt64(value); }
-        public void WriteUnsigned(uint d) { _encoder.WriteUnsigned(d); }
-        public void WriteSigned(int i) { _encoder.WriteSigned(i); }
-        public void WriteUnsignedLong(ulong i) { _encoder.WriteUnsignedLong(i); }
-        public void WriteSignedLong(long i) { _encoder.WriteSignedLong(i); }
-        public void WriteFloat(float value) { _encoder.WriteFloat(value); }
-        public void WriteDouble(double value) { _encoder.WriteDouble(value); }
+        public void WriteByte(byte b)
+        {
+            _encoder.WriteByte(b);
+        }
+
+        public void WriteUInt8(byte value)
+        {
+            _encoder.WriteUInt8(value);
+        }
+
+        public void WriteUInt16(ushort value)
+        {
+            _encoder.WriteUInt16(value);
+        }
+
+        public void WriteUInt32(uint value)
+        {
+            _encoder.WriteUInt32(value);
+        }
+
+        public void WriteUInt64(ulong value)
+        {
+            _encoder.WriteUInt64(value);
+        }
+
+        public void WriteUnsigned(uint d)
+        {
+            _encoder.WriteUnsigned(d);
+        }
+
+        public void WriteSigned(int i)
+        {
+            _encoder.WriteSigned(i);
+        }
+
+        public void WriteUnsignedLong(ulong i)
+        {
+            _encoder.WriteUnsignedLong(i);
+        }
+
+        public void WriteSignedLong(long i)
+        {
+            _encoder.WriteSignedLong(i);
+        }
+
+        public void WriteFloat(float value)
+        {
+            _encoder.WriteFloat(value);
+        }
+
+        public void WriteDouble(double value)
+        {
+            _encoder.WriteDouble(value);
+        }
 
         public void WritePad(int size)
         {
@@ -289,18 +328,19 @@ namespace Internal.NativeFormat
             _encoder.Clear();
 
             _phase = SavePhase.Initial;
-            foreach (var section in _sections) foreach (var vertex in section._items)
-            {
-                vertex._offset = GetCurrentOffset();
-                vertex._iteration = _iteration;
-                vertex.Save(this);
+            foreach (var section in _sections)
+                foreach (var vertex in section._items)
+                {
+                    vertex._offset = GetCurrentOffset();
+                    vertex._iteration = _iteration;
+                    vertex.Save(this);
 
 #if NATIVEFORMAT_COMPRESSION
-                // Ensure that the compressor state is fully flushed
-                Debug.Assert(_TentativelyWritten.Count == 0);
-                Debug.Assert(_compressionDepth == 0);
+                    // Ensure that the compressor state is fully flushed
+                    Debug.Assert(_TentativelyWritten.Count == 0);
+                    Debug.Assert(_compressionDepth == 0);
 #endif
-            }
+                }
 
             // Aggressive phase that only allows offsets to shrink.
             _phase = SavePhase.Shrinking;
@@ -311,33 +351,37 @@ namespace Internal.NativeFormat
 
                 _offsetAdjustment = 0;
 
-                foreach (var section in _sections) foreach (var vertex in section._items)
-                {
-                    int currentOffset = GetCurrentOffset();
-
-                    // Only allow the offsets to shrink.
-                    _offsetAdjustment = Math.Min(_offsetAdjustment, currentOffset - vertex._offset);
-
-                    vertex._offset += _offsetAdjustment;
-
-                    if (vertex._offset < currentOffset)
+                foreach (var section in _sections)
+                    foreach (var vertex in section._items)
                     {
-                        // It is possible for the encoding of relative offsets to grow during some iterations.
-                        // Ignore this growth because of it should disappear during next iteration.
-                        RollbackTo(vertex._offset);
-                    }
-                    Debug.Assert(vertex._offset == GetCurrentOffset());
+                        int currentOffset = GetCurrentOffset();
 
-                    vertex._iteration = _iteration;
+                        // Only allow the offsets to shrink.
+                        _offsetAdjustment = Math.Min(
+                            _offsetAdjustment,
+                            currentOffset - vertex._offset
+                        );
 
-                    vertex.Save(this);
+                        vertex._offset += _offsetAdjustment;
+
+                        if (vertex._offset < currentOffset)
+                        {
+                            // It is possible for the encoding of relative offsets to grow during some iterations.
+                            // Ignore this growth because of it should disappear during next iteration.
+                            RollbackTo(vertex._offset);
+                        }
+                        Debug.Assert(vertex._offset == GetCurrentOffset());
+
+                        vertex._iteration = _iteration;
+
+                        vertex.Save(this);
 
 #if NATIVEFORMAT_COMPRESSION
-                    // Ensure that the compressor state is fully flushed
-                    Debug.Assert(_tentativelyWritten.Count == 0);
-                    Debug.Assert(_compressionDepth == 0);
+                        // Ensure that the compressor state is fully flushed
+                        Debug.Assert(_tentativelyWritten.Count == 0);
+                        Debug.Assert(_compressionDepth == 0);
 #endif
-                }
+                    }
 
                 // We are not able to shrink anymore. We cannot just return here. It is possible that we have rolledback
                 // above because of we shrunk too much.
@@ -359,34 +403,38 @@ namespace Internal.NativeFormat
                 _offsetAdjustment = 0;
                 _paddingSize = 0;
 
-                foreach (var section in _sections) foreach (var vertex in section._items)
-                {
-                    int currentOffset = GetCurrentOffset();
-
-                    // Only allow the offsets to grow.
-                    _offsetAdjustment = Math.Max(_offsetAdjustment, currentOffset - vertex._offset);
-
-                    vertex._offset += _offsetAdjustment;
-
-                    if (vertex._offset > currentOffset)
+                foreach (var section in _sections)
+                    foreach (var vertex in section._items)
                     {
-                        // Padding
-                        int padding = vertex._offset - currentOffset;
-                        _paddingSize += padding;
-                        WritePad(padding);
-                    }
-                    Debug.Assert(vertex._offset == GetCurrentOffset());
+                        int currentOffset = GetCurrentOffset();
 
-                    vertex._iteration = _iteration;
+                        // Only allow the offsets to grow.
+                        _offsetAdjustment = Math.Max(
+                            _offsetAdjustment,
+                            currentOffset - vertex._offset
+                        );
 
-                    vertex.Save(this);
+                        vertex._offset += _offsetAdjustment;
+
+                        if (vertex._offset > currentOffset)
+                        {
+                            // Padding
+                            int padding = vertex._offset - currentOffset;
+                            _paddingSize += padding;
+                            WritePad(padding);
+                        }
+                        Debug.Assert(vertex._offset == GetCurrentOffset());
+
+                        vertex._iteration = _iteration;
+
+                        vertex.Save(this);
 
 #if NATIVEFORMAT_COMPRESSION
-                    // Ensure that the compressor state is fully flushed
-                    Debug.Assert(_tentativelyWritten.Count == 0);
-                    Debug.Assert(_compressionDepth == 0);
+                        // Ensure that the compressor state is fully flushed
+                        Debug.Assert(_tentativelyWritten.Count == 0);
+                        Debug.Assert(_compressionDepth == 0);
 #endif
-                }
+                    }
 
                 if (_offsetAdjustment == 0)
                 {
@@ -431,7 +479,8 @@ namespace Internal.NativeFormat
         {
             MethodNameAndSigSignature sig = new MethodNameAndSigSignature(
                 GetStringConstant(name),
-                GetRelativeOffsetSignature(signature));
+                GetRelativeOffsetSignature(signature)
+            );
             return Unify(sig);
         }
 
@@ -459,9 +508,21 @@ namespace Internal.NativeFormat
             return Unify(sig);
         }
 
-        public Vertex GetMethodSignature(uint flags, uint fptrReferenceId, Vertex containingType, Vertex methodNameAndSig, Vertex[] args)
+        public Vertex GetMethodSignature(
+            uint flags,
+            uint fptrReferenceId,
+            Vertex containingType,
+            Vertex methodNameAndSig,
+            Vertex[] args
+        )
         {
-            MethodSignature sig = new MethodSignature(flags, fptrReferenceId, containingType, methodNameAndSig, args);
+            MethodSignature sig = new MethodSignature(
+                flags,
+                fptrReferenceId,
+                containingType,
+                methodNameAndSig,
+                args
+            );
             return Unify(sig);
         }
 
@@ -489,9 +550,19 @@ namespace Internal.NativeFormat
             return Unify(sig);
         }
 
-        public Vertex GetMethodSigSignature(uint callingConvention, uint genericArgCount, Vertex returnType, Vertex[] parameters)
+        public Vertex GetMethodSigSignature(
+            uint callingConvention,
+            uint genericArgCount,
+            Vertex returnType,
+            Vertex[] parameters
+        )
         {
-            MethodSigSignature sig = new MethodSigSignature(callingConvention, genericArgCount, returnType, parameters);
+            MethodSigSignature sig = new MethodSigSignature(
+                callingConvention,
+                genericArgCount,
+                returnType,
+                parameters
+            );
             return Unify(sig);
         }
 
@@ -513,9 +584,19 @@ namespace Internal.NativeFormat
             return Unify(sig);
         }
 
-        public Vertex GetMDArrayTypeSignature(Vertex elementType, uint rank, uint[] bounds, uint[] lowerBounds)
+        public Vertex GetMDArrayTypeSignature(
+            Vertex elementType,
+            uint rank,
+            uint[] bounds,
+            uint[] lowerBounds
+        )
         {
-            MDArrayTypeSignature sig = new MDArrayTypeSignature(elementType, rank, bounds, lowerBounds);
+            MDArrayTypeSignature sig = new MDArrayTypeSignature(
+                elementType,
+                rank,
+                bounds,
+                lowerBounds
+            );
             return Unify(sig);
         }
     }
@@ -558,13 +639,15 @@ namespace Internal.NativeFormat
         {
             return 6659 + ((int)_value) * 19;
         }
+
         public override bool Equals(object other)
         {
             if (!(other is UnsignedConstant))
                 return false;
 
             UnsignedConstant p = (UnsignedConstant)other;
-            if (_value != p._value) return false;
+            if (_value != p._value)
+                return false;
             return true;
         }
     }
@@ -603,9 +686,9 @@ namespace Internal.NativeFormat
             if (other == null)
                 return false;
 
-            return Equals(_item1, other._item1) &&
-                Equals(_item2, other._item2) &&
-                Equals(_item3, other._item3);
+            return Equals(_item1, other._item1)
+                && Equals(_item2, other._item2)
+                && Equals(_item3, other._item3);
         }
     }
 
@@ -621,7 +704,12 @@ namespace Internal.NativeFormat
 #endif
     class VertexBag : Vertex
     {
-        private enum EntryType { Vertex, Unsigned, Signed }
+        private enum EntryType
+        {
+            Vertex,
+            Unsigned,
+            Signed
+        }
 
         private struct Entry
         {
@@ -692,7 +780,6 @@ namespace Internal.NativeFormat
                     case EntryType.Signed:
                         writer.WriteSigned((int)elem._value);
                         break;
-
                 }
             }
             writer.WriteUnsigned((uint)BagElementKind.End);
@@ -949,7 +1036,13 @@ namespace Internal.NativeFormat
         private Vertex _methodNameAndSig;
         private Vertex[] _args;
 
-        public MethodSignature(uint flags, uint fptrReferenceId, Vertex containingType, Vertex methodNameAndSig, Vertex[] args)
+        public MethodSignature(
+            uint flags,
+            uint fptrReferenceId,
+            Vertex containingType,
+            Vertex methodNameAndSig,
+            Vertex[] args
+        )
         {
             _flags = flags;
             _fptrReferenceId = fptrReferenceId;
@@ -996,19 +1089,24 @@ namespace Internal.NativeFormat
             if (other == null)
                 return false;
 
-            if (!(
-                _flags == other._flags &&
-                _fptrReferenceId == other._fptrReferenceId &&
-                Equals(_containingType, other._containingType) &&
-                Equals(_methodNameAndSig, other._methodNameAndSig)))
+            if (
+                !(
+                    _flags == other._flags
+                    && _fptrReferenceId == other._fptrReferenceId
+                    && Equals(_containingType, other._containingType)
+                    && Equals(_methodNameAndSig, other._methodNameAndSig)
+                )
+            )
             {
                 return false;
             }
 
             if (_args != null)
             {
-                if (other._args == null) return false;
-                if (other._args.Length != _args.Length) return false;
+                if (other._args == null)
+                    return false;
+                if (other._args.Length != _args.Length)
+                    return false;
                 for (uint iArg = 0; _args != null && iArg < _args.Length; iArg++)
                     if (!Equals(_args[iArg], other._args[iArg]))
                         return false;
@@ -1208,7 +1306,12 @@ namespace Internal.NativeFormat
         private Vertex _returnType;
         private Vertex[] _parameters;
 
-        public MethodSigSignature(uint callingConvention, uint genericArgCount, Vertex returnType, Vertex[] parameters)
+        public MethodSigSignature(
+            uint callingConvention,
+            uint genericArgCount,
+            Vertex returnType,
+            Vertex[] parameters
+        )
         {
             _callingConvention = callingConvention;
             _returnType = returnType;
@@ -1234,7 +1337,11 @@ namespace Internal.NativeFormat
 
         public override int GetHashCode()
         {
-            int hash = 317 + 709 * (int)_callingConvention + 953 * (int)_genericArgCount + 31 * _returnType.GetHashCode();
+            int hash =
+                317
+                + 709 * (int)_callingConvention
+                + 953 * (int)_genericArgCount
+                + 31 * _returnType.GetHashCode();
             foreach (var p in _parameters)
                 hash += (hash << 5) + p.GetHashCode();
             return hash;
@@ -1246,11 +1353,14 @@ namespace Internal.NativeFormat
             if (other == null)
                 return false;
 
-            if (!(
-                _callingConvention == other._callingConvention &&
-                _genericArgCount == other._genericArgCount &&
-                _parameters.Length == other._parameters.Length &&
-                Equals(_returnType, other._returnType)))
+            if (
+                !(
+                    _callingConvention == other._callingConvention
+                    && _genericArgCount == other._genericArgCount
+                    && _parameters.Length == other._parameters.Length
+                    && Equals(_returnType, other._returnType)
+                )
+            )
             {
                 return false;
             }
@@ -1397,7 +1507,12 @@ namespace Internal.NativeFormat
         private uint[] _bounds;
         private uint[] _lowerBounds;
 
-        public MDArrayTypeSignature(Vertex arrayElementType, uint rank, uint[] bounds, uint[] lowerBounds)
+        public MDArrayTypeSignature(
+            Vertex arrayElementType,
+            uint rank,
+            uint[] bounds,
+            uint[] lowerBounds
+        )
         {
             Debug.Assert(bounds != null && lowerBounds != null);
 
@@ -1440,10 +1555,12 @@ namespace Internal.NativeFormat
             if (other == null)
                 return false;
 
-            if (!Equals(_arrayElementType, other._arrayElementType) ||
-                _rank != other._rank ||
-                _bounds.Length != other._bounds.Length ||
-                _lowerBounds.Length != other._lowerBounds.Length)
+            if (
+                !Equals(_arrayElementType, other._arrayElementType)
+                || _rank != other._rank
+                || _bounds.Length != other._bounds.Length
+                || _lowerBounds.Length != other._lowerBounds.Length
+            )
             {
                 return false;
             }
@@ -1595,8 +1712,11 @@ namespace Internal.NativeFormat
     {
         private BlobVertex _signatureBlob;
 
-        public PgoInstrumentedDataWithSignatureBlobVertex(BlobVertex signaureBlob, uint version, BlobVertex instrumentationData)
-            : base(version, instrumentationData)
+        public PgoInstrumentedDataWithSignatureBlobVertex(
+            BlobVertex signaureBlob,
+            uint version,
+            BlobVertex instrumentationData
+        ) : base(version, instrumentationData)
         {
             _signatureBlob = signaureBlob;
         }
@@ -1745,7 +1865,8 @@ namespace Internal.NativeFormat
                 {
                     VertexLeaf leaf = new VertexLeaf(
                         first ?? second,
-                        (first == null ? index + 1 : index) & (BlockSize - 1));
+                        (first == null ? index + 1 : index) & (BlockSize - 1)
+                    );
 
                     if (place)
                     {
@@ -1775,7 +1896,12 @@ namespace Internal.NativeFormat
                 Vertex first = ExpandBlock(index, depth - 1, false, out firstIsLeaf);
 
                 bool secondIsLeaf;
-                Vertex second = ExpandBlock(index + (1 << (depth - 1)), depth - 1, true, out secondIsLeaf);
+                Vertex second = ExpandBlock(
+                    index + (1 << (depth - 1)),
+                    depth - 1,
+                    true,
+                    out secondIsLeaf
+                );
 
                 if (first == null && second == null)
                 {
@@ -1873,8 +1999,7 @@ namespace Internal.NativeFormat
                 {
                     writer.WriteByte((byte)offset);
                 }
-                else
-                if (_entryIndexSize == 1)
+                else if (_entryIndexSize == 1)
                 {
                     writer.WriteUInt16((ushort)offset);
                 }
@@ -1938,7 +2063,12 @@ namespace Internal.NativeFormat
 
             public static int Comparison(Entry a, Entry b)
             {
-                return (int)(a.Hashcode /*& mask*/) - (int)(b.Hashcode /*& mask*/);
+                return (int)(
+                        a.Hashcode /*& mask*/
+                    )
+                    - (int)(
+                        b.Hashcode /*& mask*/
+                    );
             }
         }
 
@@ -1984,7 +2114,12 @@ namespace Internal.NativeFormat
         }
 
         // Helper method to back patch entry index in the bucket table
-        private static void PatchEntryIndex(NativeWriter writer, int patchOffset, int entryIndexSize, int entryIndex)
+        private static void PatchEntryIndex(
+            NativeWriter writer,
+            int patchOffset,
+            int entryIndexSize,
+            int entryIndex
+        )
         {
             if (entryIndexSize == 0)
             {
@@ -2042,7 +2177,12 @@ namespace Internal.NativeFormat
 
             // For faster lookup at runtime, we store the first entry index even though it is redundant (the
             // value can be inferred from number of buckets)
-            PatchEntryIndex(writer, bucketsOffset, _entryIndexSize, writer.GetCurrentOffset() - bucketsOffset);
+            PatchEntryIndex(
+                writer,
+                bucketsOffset,
+                _entryIndexSize,
+                writer.GetCurrentOffset() - bucketsOffset
+            );
 
             int iEntry = 0;
 
@@ -2068,7 +2208,12 @@ namespace Internal.NativeFormat
 
                 int patchOffset = bucketsOffset + ((iBucket + 1) << _entryIndexSize);
 
-                PatchEntryIndex(writer, patchOffset, _entryIndexSize, writer.GetCurrentOffset() - bucketsOffset);
+                PatchEntryIndex(
+                    writer,
+                    patchOffset,
+                    _entryIndexSize,
+                    writer.GetCurrentOffset() - bucketsOffset
+                );
             }
             Debug.Assert(iEntry == nEntries);
 

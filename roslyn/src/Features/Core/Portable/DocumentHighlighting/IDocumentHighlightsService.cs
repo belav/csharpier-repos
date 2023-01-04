@@ -54,6 +54,11 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
     internal interface IDocumentHighlightsService : ILanguageService
     {
         Task<ImmutableArray<DocumentHighlights>> GetDocumentHighlightsAsync(
-            Document document, int position, IImmutableSet<Document> documentsToSearch, HighlightingOptions options, CancellationToken cancellationToken);
+            Document document,
+            int position,
+            IImmutableSet<Document> documentsToSearch,
+            HighlightingOptions options,
+            CancellationToken cancellationToken
+        );
     }
 }

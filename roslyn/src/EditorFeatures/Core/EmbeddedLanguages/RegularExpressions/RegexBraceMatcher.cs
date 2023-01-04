@@ -25,16 +25,21 @@ namespace Microsoft.CodeAnalysis.Editor.EmbeddedLanguages.RegularExpressions
     {
         private readonly RegexEmbeddedLanguage _language;
 
-        public RegexBraceMatcher(RegexEmbeddedLanguage language)
-            => _language = language;
+        public RegexBraceMatcher(RegexEmbeddedLanguage language) => _language = language;
 
         public async Task<BraceMatchingResult?> FindBracesAsync(
-            Document document, int position, BraceMatchingOptions options, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            BraceMatchingOptions options,
+            CancellationToken cancellationToken
+        )
         {
             if (!options.HighlightingOptions.HighlightRelatedRegexComponentsUnderCursor)
                 return null;
 
-            var tree = await _language.TryGetTreeAtPositionAsync(document, position, cancellationToken).ConfigureAwait(false);
+            var tree = await _language
+                .TryGetTreeAtPositionAsync(document, position, cancellationToken)
+                .ConfigureAwait(false);
             return tree == null ? null : GetMatchingBraces(tree, position);
         }
 
@@ -53,8 +58,8 @@ namespace Microsoft.CodeAnalysis.Editor.EmbeddedLanguages.RegularExpressions
             };
         }
 
-        private static BraceMatchingResult? CreateResult(RegexToken open, RegexToken close)
-            => open.IsMissing || close.IsMissing
+        private static BraceMatchingResult? CreateResult(RegexToken open, RegexToken close) =>
+            open.IsMissing || close.IsMissing
                 ? null
                 : new BraceMatchingResult(open.VirtualChars[0].Span, close.VirtualChars[0].Span);
 
@@ -80,19 +85,37 @@ namespace Microsoft.CodeAnalysis.Editor.EmbeddedLanguages.RegularExpressions
         private static BraceMatchingResult? FindCharacterClassBraces(RegexTree tree, VirtualChar ch)
         {
             var node = FindCharacterClassNode(tree.Root, ch);
-            return node == null ? null : CreateResult(node.OpenBracketToken, node.CloseBracketToken);
+            return node == null
+                ? null
+                : CreateResult(node.OpenBracketToken, node.CloseBracketToken);
         }
 
-        private static RegexGroupingNode FindGroupingNode(RegexNode node, VirtualChar ch)
-            => FindNode<RegexGroupingNode>(node, ch, (grouping, c) =>
-                    grouping.OpenParenToken.VirtualChars.Contains(c) || grouping.CloseParenToken.VirtualChars.Contains(c));
+        private static RegexGroupingNode FindGroupingNode(RegexNode node, VirtualChar ch) =>
+            FindNode<RegexGroupingNode>(
+                node,
+                ch,
+                (grouping, c) =>
+                    grouping.OpenParenToken.VirtualChars.Contains(c)
+                    || grouping.CloseParenToken.VirtualChars.Contains(c)
+            );
 
-        private static RegexBaseCharacterClassNode FindCharacterClassNode(RegexNode node, VirtualChar ch)
-            => FindNode<RegexBaseCharacterClassNode>(node, ch, (grouping, c) =>
-                    grouping.OpenBracketToken.VirtualChars.Contains(c) || grouping.CloseBracketToken.VirtualChars.Contains(c));
+        private static RegexBaseCharacterClassNode FindCharacterClassNode(
+            RegexNode node,
+            VirtualChar ch
+        ) =>
+            FindNode<RegexBaseCharacterClassNode>(
+                node,
+                ch,
+                (grouping, c) =>
+                    grouping.OpenBracketToken.VirtualChars.Contains(c)
+                    || grouping.CloseBracketToken.VirtualChars.Contains(c)
+            );
 
-        private static TNode FindNode<TNode>(RegexNode node, VirtualChar ch, Func<TNode, VirtualChar, bool> predicate)
-            where TNode : RegexNode
+        private static TNode FindNode<TNode>(
+            RegexNode node,
+            VirtualChar ch,
+            Func<TNode, VirtualChar, bool> predicate
+        ) where TNode : RegexNode
         {
             if (node is TNode nodeMatch && predicate(nodeMatch, ch))
                 return nodeMatch;
@@ -123,8 +146,9 @@ namespace Microsoft.CodeAnalysis.Editor.EmbeddedLanguages.RegularExpressions
                 else
                 {
                     var token = child.Token;
-                    var trivia = TryGetTrivia(token.LeadingTrivia, ch) ??
-                                 TryGetTrivia(token.TrailingTrivia, ch);
+                    var trivia =
+                        TryGetTrivia(token.LeadingTrivia, ch)
+                        ?? TryGetTrivia(token.TrailingTrivia, ch);
 
                     if (trivia != null)
                         return trivia;
@@ -134,7 +158,10 @@ namespace Microsoft.CodeAnalysis.Editor.EmbeddedLanguages.RegularExpressions
             return null;
         }
 
-        private static RegexTrivia? TryGetTrivia(ImmutableArray<RegexTrivia> triviaList, VirtualChar ch)
+        private static RegexTrivia? TryGetTrivia(
+            ImmutableArray<RegexTrivia> triviaList,
+            VirtualChar ch
+        )
         {
             foreach (var trivia in triviaList)
             {

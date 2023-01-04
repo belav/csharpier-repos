@@ -31,16 +31,19 @@ namespace System.IO
         private bool _canRead;
         private bool _canWrite;
 
-        protected UnmanagedMemoryAccessor()
-        {
-        }
+        protected UnmanagedMemoryAccessor() { }
 
         public UnmanagedMemoryAccessor(SafeBuffer buffer, long offset, long capacity)
         {
             Initialize(buffer, offset, capacity, FileAccess.Read);
         }
 
-        public UnmanagedMemoryAccessor(SafeBuffer buffer, long offset, long capacity, FileAccess access)
+        public UnmanagedMemoryAccessor(
+            SafeBuffer buffer,
+            long offset,
+            long capacity,
+            FileAccess access
+        )
         {
             Initialize(buffer, offset, capacity, access);
         }
@@ -64,7 +67,6 @@ namespace System.IO
             {
                 throw new InvalidOperationException(SR.InvalidOperation_CalledTwice);
             }
-
             unsafe
             {
                 byte* pointer = null;
@@ -227,8 +229,10 @@ namespace System.IO
 
             EnsureSafeToRead(position, sizeof(decimal));
 
-            int lo, mid, hi, flags;
-
+            int lo,
+                mid,
+                hi,
+                flags;
             unsafe
             {
                 byte* pointer = null;
@@ -263,9 +267,11 @@ namespace System.IO
             return new decimal(lo, mid, hi, isNegative, scale);
         }
 
-        public float ReadSingle(long position) => BitConverter.Int32BitsToSingle(ReadInt32(position));
+        public float ReadSingle(long position) =>
+            BitConverter.Int32BitsToSingle(ReadInt32(position));
 
-        public double ReadDouble(long position) => BitConverter.Int64BitsToDouble(ReadInt64(position));
+        public double ReadDouble(long position) =>
+            BitConverter.Int64BitsToDouble(ReadInt64(position));
 
         [CLSCompliant(false)]
         public sbyte ReadSByte(long position) => unchecked((sbyte)ReadByte(position));
@@ -292,7 +298,10 @@ namespace System.IO
 
             if (!_isOpen)
             {
-                throw new ObjectDisposedException(nameof(UnmanagedMemoryAccessor), SR.ObjectDisposed_ViewAccessorClosed);
+                throw new ObjectDisposedException(
+                    nameof(UnmanagedMemoryAccessor),
+                    SR.ObjectDisposed_ViewAccessorClosed
+                );
             }
             if (!_canRead)
             {
@@ -304,7 +313,10 @@ namespace System.IO
             {
                 if (position >= _capacity)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(position), SR.ArgumentOutOfRange_PositionLessThanCapacityRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(position),
+                        SR.ArgumentOutOfRange_PositionLessThanCapacityRequired
+                    );
                 }
                 else
                 {
@@ -330,7 +342,10 @@ namespace System.IO
             }
             if (!_isOpen)
             {
-                throw new ObjectDisposedException(nameof(UnmanagedMemoryAccessor), SR.ObjectDisposed_ViewAccessorClosed);
+                throw new ObjectDisposedException(
+                    nameof(UnmanagedMemoryAccessor),
+                    SR.ObjectDisposed_ViewAccessorClosed
+                );
             }
             if (!_canRead)
             {
@@ -343,7 +358,10 @@ namespace System.IO
             // only check position and ask for fewer Ts if count is too big
             if (position >= _capacity)
             {
-                throw new ArgumentOutOfRangeException(nameof(position), SR.ArgumentOutOfRange_PositionLessThanCapacityRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(position),
+                    SR.ArgumentOutOfRange_PositionLessThanCapacityRequired
+                );
             }
 
             int n = count;
@@ -373,7 +391,6 @@ namespace System.IO
         public void Write(long position, byte value)
         {
             EnsureSafeToWrite(position, sizeof(byte));
-
             unsafe
             {
                 byte* pointer = null;
@@ -398,7 +415,6 @@ namespace System.IO
         public void Write(long position, short value)
         {
             EnsureSafeToWrite(position, sizeof(short));
-
             unsafe
             {
                 byte* pointer = null;
@@ -421,7 +437,6 @@ namespace System.IO
         public void Write(long position, int value)
         {
             EnsureSafeToWrite(position, sizeof(int));
-
             unsafe
             {
                 byte* pointer = null;
@@ -444,7 +459,6 @@ namespace System.IO
         public void Write(long position, long value)
         {
             EnsureSafeToWrite(position, sizeof(long));
-
             unsafe
             {
                 byte* pointer = null;
@@ -471,7 +485,6 @@ namespace System.IO
             Span<int> bits = stackalloc int[4];
             decimal.TryGetBits(value, bits, out int intsWritten);
             Debug.Assert(intsWritten == 4);
-
             unsafe
             {
                 byte* pointer = null;
@@ -495,9 +508,11 @@ namespace System.IO
             }
         }
 
-        public void Write(long position, float value) => Write(position, BitConverter.SingleToInt32Bits(value));
+        public void Write(long position, float value) =>
+            Write(position, BitConverter.SingleToInt32Bits(value));
 
-        public void Write(long position, double value) => Write(position, BitConverter.DoubleToInt64Bits(value));
+        public void Write(long position, double value) =>
+            Write(position, BitConverter.DoubleToInt64Bits(value));
 
         [CLSCompliant(false)]
         public void Write(long position, sbyte value) => Write(position, unchecked((byte)value));
@@ -520,7 +535,10 @@ namespace System.IO
             ArgumentOutOfRangeException.ThrowIfNegative(position);
             if (!_isOpen)
             {
-                throw new ObjectDisposedException(nameof(UnmanagedMemoryAccessor), SR.ObjectDisposed_ViewAccessorClosed);
+                throw new ObjectDisposedException(
+                    nameof(UnmanagedMemoryAccessor),
+                    SR.ObjectDisposed_ViewAccessorClosed
+                );
             }
             if (!_canWrite)
             {
@@ -532,11 +550,17 @@ namespace System.IO
             {
                 if (position >= _capacity)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(position), SR.ArgumentOutOfRange_PositionLessThanCapacityRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(position),
+                        SR.ArgumentOutOfRange_PositionLessThanCapacityRequired
+                    );
                 }
                 else
                 {
-                    throw new ArgumentException(SR.Argument_NotEnoughBytesToWrite, nameof(position));
+                    throw new ArgumentException(
+                        SR.Argument_NotEnoughBytesToWrite,
+                        nameof(position)
+                    );
                 }
             }
 
@@ -557,12 +581,18 @@ namespace System.IO
             ArgumentOutOfRangeException.ThrowIfNegative(position);
             if (position >= Capacity)
             {
-                throw new ArgumentOutOfRangeException(nameof(position), SR.ArgumentOutOfRange_PositionLessThanCapacityRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(position),
+                    SR.ArgumentOutOfRange_PositionLessThanCapacityRequired
+                );
             }
 
             if (!_isOpen)
             {
-                throw new ObjectDisposedException(nameof(UnmanagedMemoryAccessor), SR.ObjectDisposed_ViewAccessorClosed);
+                throw new ObjectDisposedException(
+                    nameof(UnmanagedMemoryAccessor),
+                    SR.ObjectDisposed_ViewAccessorClosed
+                );
             }
             if (!_canWrite)
             {
@@ -576,7 +606,10 @@ namespace System.IO
         {
             if (!_isOpen)
             {
-                throw new ObjectDisposedException(nameof(UnmanagedMemoryAccessor), SR.ObjectDisposed_ViewAccessorClosed);
+                throw new ObjectDisposedException(
+                    nameof(UnmanagedMemoryAccessor),
+                    SR.ObjectDisposed_ViewAccessorClosed
+                );
             }
             if (!_canRead)
             {
@@ -587,7 +620,10 @@ namespace System.IO
             {
                 if (position >= _capacity)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(position), SR.ArgumentOutOfRange_PositionLessThanCapacityRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(position),
+                        SR.ArgumentOutOfRange_PositionLessThanCapacityRequired
+                    );
                 }
                 else
                 {
@@ -600,7 +636,10 @@ namespace System.IO
         {
             if (!_isOpen)
             {
-                throw new ObjectDisposedException(nameof(UnmanagedMemoryAccessor), SR.ObjectDisposed_ViewAccessorClosed);
+                throw new ObjectDisposedException(
+                    nameof(UnmanagedMemoryAccessor),
+                    SR.ObjectDisposed_ViewAccessorClosed
+                );
             }
             if (!_canWrite)
             {
@@ -611,11 +650,17 @@ namespace System.IO
             {
                 if (position >= _capacity)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(position), SR.ArgumentOutOfRange_PositionLessThanCapacityRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(position),
+                        SR.ArgumentOutOfRange_PositionLessThanCapacityRequired
+                    );
                 }
                 else
                 {
-                    throw new ArgumentException(SR.Argument_NotEnoughBytesToWrite, nameof(position));
+                    throw new ArgumentException(
+                        SR.Argument_NotEnoughBytesToWrite,
+                        nameof(position)
+                    );
                 }
             }
         }

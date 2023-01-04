@@ -36,8 +36,7 @@ public interface IReadOnlyNavigationBase : IReadOnlyPropertyBase
     /// <summary>
     ///     Gets a value indicating whether this navigation should be eager loaded by default.
     /// </summary>
-    bool IsEagerLoaded
-        => (bool?)this[CoreAnnotationNames.EagerLoaded] ?? false;
+    bool IsEagerLoaded => (bool?)this[CoreAnnotationNames.EagerLoaded] ?? false;
 
     /// <summary>
     ///     Determines whether or not this navigation should lazy-load if lazy-loading is enabled and a mechanism for lazy-loading
@@ -48,10 +47,8 @@ public interface IReadOnlyNavigationBase : IReadOnlyPropertyBase
     ///         See <see href="https://aka.ms/efcore-docs-lazy-loading">Lazy loading</see> for more information and examples.
     ///     </para>
     /// </remarks>
-    bool LazyLoadingEnabled
-        => (bool?)this[CoreAnnotationNames.LazyLoadingEnabled] ?? true;
+    bool LazyLoadingEnabled => (bool?)this[CoreAnnotationNames.LazyLoadingEnabled] ?? true;
 
     /// <inheritdoc />
-    bool IReadOnlyPropertyBase.IsShadowProperty()
-        => this.GetIdentifyingMemberInfo() == null;
+    bool IReadOnlyPropertyBase.IsShadowProperty() => this.GetIdentifyingMemberInfo() == null;
 }

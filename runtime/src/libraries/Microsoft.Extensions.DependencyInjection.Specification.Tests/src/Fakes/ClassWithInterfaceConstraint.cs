@@ -5,8 +5,7 @@ using System.Collections;
 
 namespace Microsoft.Extensions.DependencyInjection.Specification.Fakes
 {
-    public class ClassWithInterfaceConstraint<T> : IFakeOpenGenericService<T>
-        where T : IEnumerable
+    public class ClassWithInterfaceConstraint<T> : IFakeOpenGenericService<T> where T : IEnumerable
     {
         public ClassWithInterfaceConstraint(T value) => Value = value;
 

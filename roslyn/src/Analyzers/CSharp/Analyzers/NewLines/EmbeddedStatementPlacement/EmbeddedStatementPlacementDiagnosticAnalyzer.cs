@@ -14,22 +14,26 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class EmbeddedStatementPlacementDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal sealed class EmbeddedStatementPlacementDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public EmbeddedStatementPlacementDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.EmbeddedStatementPlacementDiagnosticId,
-                   EnforceOnBuildValues.EmbeddedStatementPlacement,
-                   CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
-                   new LocalizableResourceString(
-                       nameof(CSharpAnalyzersResources.Embedded_statements_must_be_on_their_own_line), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.EmbeddedStatementPlacementDiagnosticId,
+                EnforceOnBuildValues.EmbeddedStatementPlacement,
+                CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Embedded_statements_must_be_on_their_own_line),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxTreeAction(AnalyzeTree);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxTreeAction(AnalyzeTree);
 
         private void AnalyzeTree(SyntaxTreeAnalysisContext context)
         {
@@ -37,10 +41,18 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
             if (option.Value)
                 return;
 
-            Recurse(context, option.Notification.Severity, context.Tree.GetRoot(context.CancellationToken));
+            Recurse(
+                context,
+                option.Notification.Severity,
+                context.Tree.GetRoot(context.CancellationToken)
+            );
         }
 
-        private void Recurse(SyntaxTreeAnalysisContext context, ReportDiagnostic severity, SyntaxNode node)
+        private void Recurse(
+            SyntaxTreeAnalysisContext context,
+            ReportDiagnostic severity,
+            SyntaxNode node
+        )
         {
             context.CancellationToken.ThrowIfCancellationRequested();
 
@@ -51,8 +63,10 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
             // Report on the topmost statement that has an issue.  No need to recurse further at that point. Note: the
             // fixer will fix up all statements, but we don't want to clutter things with lots of diagnostics on the
             // same line.
-            if (node is StatementSyntax statement &&
-                CheckStatementSyntax(context, severity, statement))
+            if (
+                node is StatementSyntax statement
+                && CheckStatementSyntax(context, severity, statement)
+            )
             {
                 return;
             }
@@ -64,18 +78,25 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
             }
         }
 
-        private bool CheckStatementSyntax(SyntaxTreeAnalysisContext context, ReportDiagnostic severity, StatementSyntax statement)
+        private bool CheckStatementSyntax(
+            SyntaxTreeAnalysisContext context,
+            ReportDiagnostic severity,
+            StatementSyntax statement
+        )
         {
             if (!StatementNeedsWrapping(statement))
                 return false;
 
             var additionalLocations = ImmutableArray.Create(statement.GetLocation());
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                this.Descriptor,
-                statement.GetFirstToken().GetLocation(),
-                severity,
-                additionalLocations,
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    this.Descriptor,
+                    statement.GetFirstToken().GetLocation(),
+                    severity,
+                    additionalLocations,
+                    properties: null
+                )
+            );
             return true;
         }
 
@@ -95,7 +116,12 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
             var statementStartToken = statement.GetFirstToken();
 
             // we have to have a newline between the start of this statement and the previous statement.
-            if (ContainsEndOfLineBetween(statementStartToken.GetPreviousToken(), statementStartToken))
+            if (
+                ContainsEndOfLineBetween(
+                    statementStartToken.GetPreviousToken(),
+                    statementStartToken
+                )
+            )
                 return false;
 
             // Looks like a statement that might need wrapping.  However, we do suppress wrapping for a few well known
@@ -106,9 +132,12 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
                 // Blocks can be on a single line if parented by a member/accessor/lambda.
                 // And if they only contain a single statement at most within them.
                 var blockParent = parent.Parent;
-                if (blockParent is MemberDeclarationSyntax or
-                    AccessorDeclarationSyntax or
-                    AnonymousFunctionExpressionSyntax)
+                if (
+                    blockParent
+                    is MemberDeclarationSyntax
+                        or AccessorDeclarationSyntax
+                        or AnonymousFunctionExpressionSyntax
+                )
                 {
                     if (parent.DescendantNodes().OfType<StatementSyntax>().Count() <= 1)
                         return false;
@@ -118,8 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
             return true;
         }
 
-        public static bool ContainsEndOfLineBetween(SyntaxToken previous, SyntaxToken next)
-            => ContainsEndOfLine(previous.TrailingTrivia) || ContainsEndOfLine(next.LeadingTrivia);
+        public static bool ContainsEndOfLineBetween(SyntaxToken previous, SyntaxToken next) =>
+            ContainsEndOfLine(previous.TrailingTrivia) || ContainsEndOfLine(next.LeadingTrivia);
 
         private static bool ContainsEndOfLine(SyntaxTriviaList triviaList)
         {

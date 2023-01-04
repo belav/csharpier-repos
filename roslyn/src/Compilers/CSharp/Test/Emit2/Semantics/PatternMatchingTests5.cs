@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void ExtendedPropertyPatterns_01()
         {
-            var program = @"
+            var program =
+                @"
 using System;
 class C
 {
@@ -62,9 +63,14 @@ struct S0 { public A0 Prop1; }
 struct A0 { public B0 Prop2; }
 struct B0 { public int Prop3; }
 ";
-            var compilation = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns,
+                options: TestOptions.ReleaseExe
+            );
             compilation.VerifyDiagnostics();
-            var expectedOutput = @"
+            var expectedOutput =
+                @"
 True
 True
 True
@@ -81,7 +87,9 @@ False
 True
 ";
             var verifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            verifier.VerifyIL("C.Test1", @"
+            verifier.VerifyIL(
+                "C.Test1",
+                @"
 {
   // Code size       35 (0x23)
   .maxstack  2
@@ -106,8 +114,11 @@ True
   IL_0020:  ret
   IL_0021:  ldc.i4.0
   IL_0022:  ret
-}");
-            verifier.VerifyIL("C.Test2", @"
+}"
+            );
+            verifier.VerifyIL(
+                "C.Test2",
+                @"
 {
   // Code size       64 (0x40)
   .maxstack  2
@@ -138,8 +149,11 @@ True
   IL_003d:  ret
   IL_003e:  ldc.i4.0
   IL_003f:  ret
-}");
-            verifier.VerifyIL("C.Test4", @"
+}"
+            );
+            verifier.VerifyIL(
+                "C.Test4",
+                @"
 {
   // Code size       24 (0x18)
   .maxstack  2
@@ -150,13 +164,15 @@ True
   IL_0010:  ldc.i4     0x1a4
   IL_0015:  ceq
   IL_0017:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_02()
         {
-            var program = @"
+            var program =
+                @"
 class C
 {
     public C Prop1 { get; set; }
@@ -169,21 +185,36 @@ class C
     }
 }
 ";
-            var compilation = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns,
+                options: TestOptions.ReleaseExe
+            );
             compilation.VerifyDiagnostics(
                 // (9,13): error CS8518: An expression of type 'C' can never match the provided pattern.
                 //         _ = new C() is { Prop1: null } and { Prop1.Prop2: null };
-                Diagnostic(ErrorCode.ERR_IsPatternImpossible, "new C() is { Prop1: null } and { Prop1.Prop2: null }").WithArguments("C").WithLocation(9, 13),
+                Diagnostic(
+                        ErrorCode.ERR_IsPatternImpossible,
+                        "new C() is { Prop1: null } and { Prop1.Prop2: null }"
+                    )
+                    .WithArguments("C")
+                    .WithLocation(9, 13),
                 // (10,13): error CS8518: An expression of type 'C' can never match the provided pattern.
                 //         _ = new C() is { Prop1: null, Prop1.Prop2: null };
-                Diagnostic(ErrorCode.ERR_IsPatternImpossible, "new C() is { Prop1: null, Prop1.Prop2: null }").WithArguments("C").WithLocation(10, 13)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_IsPatternImpossible,
+                        "new C() is { Prop1: null, Prop1.Prop2: null }"
+                    )
+                    .WithArguments("C")
+                    .WithLocation(10, 13)
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_03()
         {
-            var program = @"
+            var program =
+                @"
 using System;
 class C
 {
@@ -221,9 +252,14 @@ class C
     }
 }
 ";
-            var compilation = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns,
+                options: TestOptions.ReleaseExe
+            );
             compilation.VerifyDiagnostics();
-            var expectedOutput = @"
+            var expectedOutput =
+                @"
 Test
 -1
 Test
@@ -238,7 +274,9 @@ Prop1
 Prop2
 -1";
             var verifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            verifier.VerifyIL("C.Test", @"
+            verifier.VerifyIL(
+                "C.Test",
+                @"
 {
   // Code size       50 (0x32)
   .maxstack  1
@@ -268,13 +306,15 @@ Prop2
   IL_002b:  ldloc.0
   IL_002c:  call       ""void System.Console.WriteLine(int)""
   IL_0031:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_04()
         {
-            var program = @"
+            var program =
+                @"
 class C
 {
     public static void Main()
@@ -288,44 +328,61 @@ class C
     }
 }
 ";
-            var compilation = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns,
+                options: TestOptions.ReleaseExe
+            );
             compilation.VerifyDiagnostics(
-                    // (6,26): error CS8918: Identifier or a simple member access expected.
-                    //         _ = new C() is { Prop1<int>.Prop2: {} };
-                    Diagnostic(ErrorCode.ERR_InvalidNameInSubpattern, "Prop1<int>").WithLocation(6, 26),
-                    // (7,26): error CS8918: Identifier or a simple member access expected.
-                    //         _ = new C() is { Prop1->Prop2: {} };
-                    Diagnostic(ErrorCode.ERR_InvalidNameInSubpattern, "Prop1->Prop2").WithLocation(7, 26),
-                    // (8,26): error CS8918: Identifier or a simple member access expected.
-                    //         _ = new C() is { Prop1!.Prop2: {} };
-                    Diagnostic(ErrorCode.ERR_InvalidNameInSubpattern, "Prop1!").WithLocation(8, 26),
-                    // (9,26): error CS8918: Identifier or a simple member access expected.
-                    //         _ = new C() is { Prop1?.Prop2: {} };
-                    Diagnostic(ErrorCode.ERR_InvalidNameInSubpattern, "Prop1?.Prop2").WithLocation(9, 26),
-                    // (10,26): error CS8503: A property subpattern requires a reference to the property or field to be matched, e.g. '{ Name: Prop1[0] }'
-                    //         _ = new C() is { Prop1[0]: {} };
-                    Diagnostic(ErrorCode.ERR_PropertyPatternNameMissing, "Prop1[0]").WithArguments("Prop1[0]").WithLocation(10, 26),
-                    // (10,26): error CS0246: The type or namespace name 'Prop1' could not be found (are you missing a using directive or an assembly reference?)
-                    //         _ = new C() is { Prop1[0]: {} };
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Prop1").WithArguments("Prop1").WithLocation(10, 26),
-                    // (10,31): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                    //         _ = new C() is { Prop1[0]: {} };
-                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[0]").WithLocation(10, 31),
-                    // (10,34): error CS1003: Syntax error, ',' expected
-                    //         _ = new C() is { Prop1[0]: {} };
-                    Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(10, 34),
-                    // (10,36): error CS1003: Syntax error, ',' expected
-                    //         _ = new C() is { Prop1[0]: {} };
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "{").WithArguments(",").WithLocation(10, 36),
-                    // (11,26): error CS8918: Identifier or a simple member access expected.
-                    //         _ = new C() is { 1: {} };
-                    Diagnostic(ErrorCode.ERR_InvalidNameInSubpattern, "1").WithLocation(11, 26));
+                // (6,26): error CS8918: Identifier or a simple member access expected.
+                //         _ = new C() is { Prop1<int>.Prop2: {} };
+                Diagnostic(ErrorCode.ERR_InvalidNameInSubpattern, "Prop1<int>")
+                    .WithLocation(6, 26),
+                // (7,26): error CS8918: Identifier or a simple member access expected.
+                //         _ = new C() is { Prop1->Prop2: {} };
+                Diagnostic(ErrorCode.ERR_InvalidNameInSubpattern, "Prop1->Prop2")
+                    .WithLocation(7, 26),
+                // (8,26): error CS8918: Identifier or a simple member access expected.
+                //         _ = new C() is { Prop1!.Prop2: {} };
+                Diagnostic(ErrorCode.ERR_InvalidNameInSubpattern, "Prop1!").WithLocation(8, 26),
+                // (9,26): error CS8918: Identifier or a simple member access expected.
+                //         _ = new C() is { Prop1?.Prop2: {} };
+                Diagnostic(ErrorCode.ERR_InvalidNameInSubpattern, "Prop1?.Prop2")
+                    .WithLocation(9, 26),
+                // (10,26): error CS8503: A property subpattern requires a reference to the property or field to be matched, e.g. '{ Name: Prop1[0] }'
+                //         _ = new C() is { Prop1[0]: {} };
+                Diagnostic(ErrorCode.ERR_PropertyPatternNameMissing, "Prop1[0]")
+                    .WithArguments("Prop1[0]")
+                    .WithLocation(10, 26),
+                // (10,26): error CS0246: The type or namespace name 'Prop1' could not be found (are you missing a using directive or an assembly reference?)
+                //         _ = new C() is { Prop1[0]: {} };
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Prop1")
+                    .WithArguments("Prop1")
+                    .WithLocation(10, 26),
+                // (10,31): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                //         _ = new C() is { Prop1[0]: {} };
+                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[0]").WithLocation(10, 31),
+                // (10,34): error CS1003: Syntax error, ',' expected
+                //         _ = new C() is { Prop1[0]: {} };
+                Diagnostic(ErrorCode.ERR_SyntaxError, ":")
+                    .WithArguments(",")
+                    .WithLocation(10, 34),
+                // (10,36): error CS1003: Syntax error, ',' expected
+                //         _ = new C() is { Prop1[0]: {} };
+                Diagnostic(ErrorCode.ERR_SyntaxError, "{")
+                    .WithArguments(",")
+                    .WithLocation(10, 36),
+                // (11,26): error CS8918: Identifier or a simple member access expected.
+                //         _ = new C() is { 1: {} };
+                Diagnostic(ErrorCode.ERR_InvalidNameInSubpattern, "1").WithLocation(11, 26)
+            );
         }
 
         [Fact, WorkItem(52956, "https://github.com/dotnet/roslyn/issues/52956")]
         public void ExtendedPropertyPatterns_05()
         {
-            var program = @"
+            var program =
+                @"
 class C
 {
     C Field1, Field2, Field3, Field4;
@@ -336,27 +393,39 @@ class C
     }
 }
 ";
-            var compilation = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var compilation = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             compilation.VerifyEmitDiagnostics(
                 // (4,7): warning CS0649: Field 'C.Field1' is never assigned to, and will always have its default value null
                 //     C Field1, Field2, Field3, Field4;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field1").WithArguments("C.Field1", "null").WithLocation(4, 7),
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field1")
+                    .WithArguments("C.Field1", "null")
+                    .WithLocation(4, 7),
                 // (4,15): warning CS0649: Field 'C.Field2' is never assigned to, and will always have its default value null
                 //     C Field1, Field2, Field3, Field4;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field2").WithArguments("C.Field2", "null").WithLocation(4, 15),
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field2")
+                    .WithArguments("C.Field2", "null")
+                    .WithLocation(4, 15),
                 // (4,23): warning CS0649: Field 'C.Field3' is never assigned to, and will always have its default value null
                 //     C Field1, Field2, Field3, Field4;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field3").WithArguments("C.Field3", "null").WithLocation(4, 23),
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field3")
+                    .WithArguments("C.Field3", "null")
+                    .WithLocation(4, 23),
                 // (4,31): warning CS0649: Field 'C.Field4' is never assigned to, and will always have its default value null
                 //     C Field1, Field2, Field3, Field4;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field4").WithArguments("C.Field4", "null").WithLocation(4, 31)
-                );
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field4")
+                    .WithArguments("C.Field4", "null")
+                    .WithLocation(4, 31)
+            );
         }
 
         [Fact, WorkItem(52956, "https://github.com/dotnet/roslyn/issues/52956")]
         public void ExtendedPropertyPatterns_05_NestedRecursivePattern()
         {
-            var program = @"
+            var program =
+                @"
 class C
 {
     C Field1, Field2, Field3, Field4;
@@ -366,27 +435,39 @@ class C
     }
 }
 ";
-            var compilation = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var compilation = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             compilation.VerifyEmitDiagnostics(
                 // (4,7): warning CS0649: Field 'C.Field1' is never assigned to, and will always have its default value null
                 //     C Field1, Field2, Field3, Field4;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field1").WithArguments("C.Field1", "null").WithLocation(4, 7),
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field1")
+                    .WithArguments("C.Field1", "null")
+                    .WithLocation(4, 7),
                 // (4,15): warning CS0649: Field 'C.Field2' is never assigned to, and will always have its default value null
                 //     C Field1, Field2, Field3, Field4;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field2").WithArguments("C.Field2", "null").WithLocation(4, 15),
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field2")
+                    .WithArguments("C.Field2", "null")
+                    .WithLocation(4, 15),
                 // (4,23): warning CS0649: Field 'C.Field3' is never assigned to, and will always have its default value null
                 //     C Field1, Field2, Field3, Field4;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field3").WithArguments("C.Field3", "null").WithLocation(4, 23),
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field3")
+                    .WithArguments("C.Field3", "null")
+                    .WithLocation(4, 23),
                 // (4,31): warning CS0649: Field 'C.Field4' is never assigned to, and will always have its default value null
                 //     C Field1, Field2, Field3, Field4;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field4").WithArguments("C.Field4", "null").WithLocation(4, 31)
-                );
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field4")
+                    .WithArguments("C.Field4", "null")
+                    .WithLocation(4, 31)
+            );
         }
 
         [Fact, WorkItem(52956, "https://github.com/dotnet/roslyn/issues/52956")]
         public void ExtendedPropertyPatterns_05_Properties()
         {
-            var program = @"
+            var program =
+                @"
 class C
 {
     C Prop1 { get; set; }
@@ -400,14 +481,18 @@ class C
     }
 }
 ";
-            var compilation = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var compilation = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             compilation.VerifyEmitDiagnostics();
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_IOperation_Properties()
         {
-            var src = @"
+            var src =
+                @"
 class Program
 {
     static void M(A a)
@@ -419,14 +504,23 @@ class A { public B Prop1 => null; }
 class B { public C Prop2 => null; }
 class C { public object Prop3 => null; }
 ";
-            var comp = CreateCompilation(src, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var comp = CreateCompilation(
+                src,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             comp.VerifyDiagnostics();
 
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
-            var isPattern = tree.GetRoot().DescendantNodes().OfType<IsPatternExpressionSyntax>().Single();
+            var isPattern = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IsPatternExpressionSyntax>()
+                .Single();
 
-            VerifyOperationTree(comp, model.GetOperation(isPattern), @"
+            VerifyOperationTree(
+                comp,
+                model.GetOperation(isPattern),
+                @"
 IIsPatternOperation (OperationKind.IsPattern, Type: System.Boolean) (Syntax: 'a is { Prop ... op3: null }')
   Value:
     IParameterReferenceOperation: a (OperationKind.ParameterReference, Type: A) (Syntax: 'a')
@@ -464,9 +558,11 @@ IIsPatternOperation (OperationKind.IsPattern, Type: System.Boolean) (Syntax: 'a 
                                         Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: True, IsUserDefined: False) (MethodSymbol: null)
                                         Operand:
                                           ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
-");
+"
+            );
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -523,13 +619,19 @@ Block[B2] - Exit
     Statements (0)
 ";
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, DiagnosticDescription.None, parseOptions: TestOptions.Regular10);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                DiagnosticDescription.None,
+                parseOptions: TestOptions.Regular10
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_IOperation_FieldsInStructs()
         {
-            var src = @"
+            var src =
+                @"
 class Program
 {
     static void M(A a)
@@ -545,25 +647,42 @@ struct C { public object Field3; }
             {
                 // (9,22): warning CS0649: Field 'A.Field1' is never assigned to, and will always have its default value
                 // struct A { public B? Field1; public B? Field4; }
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field1").WithArguments("A.Field1", "").WithLocation(9, 22),
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field1")
+                    .WithArguments("A.Field1", "")
+                    .WithLocation(9, 22),
                 // (9,40): warning CS0649: Field 'A.Field4' is never assigned to, and will always have its default value
                 // struct A { public B? Field1; public B? Field4; }
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field4").WithArguments("A.Field4", "").WithLocation(9, 40),
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field4")
+                    .WithArguments("A.Field4", "")
+                    .WithLocation(9, 40),
                 // (10,22): warning CS0649: Field 'B.Field2' is never assigned to, and will always have its default value
                 // struct B { public C? Field2; }
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field2").WithArguments("B.Field2", "").WithLocation(10, 22),
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field2")
+                    .WithArguments("B.Field2", "")
+                    .WithLocation(10, 22),
                 // (11,26): warning CS0649: Field 'C.Field3' is never assigned to, and will always have its default value null
                 // struct C { public object Field3; }
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field3").WithArguments("C.Field3", "null").WithLocation(11, 26)
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field3")
+                    .WithArguments("C.Field3", "null")
+                    .WithLocation(11, 26)
             };
-            var comp = CreateCompilation(src, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var comp = CreateCompilation(
+                src,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             comp.VerifyDiagnostics(expectedDiagnostics);
 
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
-            var isPattern = tree.GetRoot().DescendantNodes().OfType<IsPatternExpressionSyntax>().Single();
+            var isPattern = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IsPatternExpressionSyntax>()
+                .Single();
 
-            VerifyOperationTree(comp, model.GetOperation(isPattern), @"
+            VerifyOperationTree(
+                comp,
+                model.GetOperation(isPattern),
+                @"
 IIsPatternOperation (OperationKind.IsPattern, Type: System.Boolean) (Syntax: 'a is { Fiel ... ld4: null }')
   Value:
     IParameterReferenceOperation: a (OperationKind.ParameterReference, Type: A) (Syntax: 'a')
@@ -613,9 +732,11 @@ IIsPatternOperation (OperationKind.IsPattern, Type: System.Boolean) (Syntax: 'a 
                     Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                     Operand:
                       ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
-");
+"
+            );
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -685,13 +806,19 @@ Block[B2] - Exit
     Statements (0)
 ";
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(src, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.Regular10);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                src,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.Regular10
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_Explainer()
         {
-            var src = @"
+            var src =
+                @"
 class Program
 {
     void M(A a)
@@ -714,21 +841,29 @@ class B
     public int IntProp => 0;
 }
 ";
-            var comp = CreateCompilation(src, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var comp = CreateCompilation(
+                src,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             comp.VerifyDiagnostics(
                 // (6,15): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ BProp: { BoolProp: false } }' is not covered.
                 //         _ = a switch // 1
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch").WithArguments("{ BProp: { BoolProp: false } }").WithLocation(6, 15),
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
+                    .WithArguments("{ BProp: { BoolProp: false } }")
+                    .WithLocation(6, 15),
                 // (11,15): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ BProp: { IntProp: 1 } }' is not covered.
                 //         _ = a switch // 2
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch").WithArguments("{ BProp: { IntProp: 1 } }").WithLocation(11, 15)
-                );
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
+                    .WithArguments("{ BProp: { IntProp: 1 } }")
+                    .WithLocation(11, 15)
+            );
         }
 
         [Fact, WorkItem(52956, "https://github.com/dotnet/roslyn/issues/52956")]
         public void ExtendedPropertyPatterns_BadMemberAccess()
         {
-            var program = @"
+            var program =
+                @"
 class C
 {
     C Field1, Field2, Field3;
@@ -742,39 +877,56 @@ class C
     }
 }
 ";
-            var compilation = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var compilation = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             compilation.VerifyEmitDiagnostics(
                 // (4,7): warning CS0169: The field 'C.Field1' is never used
                 //     C Field1, Field2, Field3;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "Field1").WithArguments("C.Field1").WithLocation(4, 7),
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "Field1")
+                    .WithArguments("C.Field1")
+                    .WithLocation(4, 7),
                 // (4,15): warning CS0169: The field 'C.Field2' is never used
                 //     C Field1, Field2, Field3;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "Field2").WithArguments("C.Field2").WithLocation(4, 15),
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "Field2")
+                    .WithArguments("C.Field2")
+                    .WithLocation(4, 15),
                 // (4,23): warning CS0649: Field 'C.Field3' is never assigned to, and will always have its default value null
                 //     C Field1, Field2, Field3;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field3").WithArguments("C.Field3", "null").WithLocation(4, 23),
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field3")
+                    .WithArguments("C.Field3", "null")
+                    .WithLocation(4, 23),
                 // (7,26): error CS8918: Identifier or a simple member access expected.
                 //         _ = new C() is { Field1?.Field2: {} }; // 1
-                Diagnostic(ErrorCode.ERR_InvalidNameInSubpattern, "Field1?.Field2").WithLocation(7, 26),
+                Diagnostic(ErrorCode.ERR_InvalidNameInSubpattern, "Field1?.Field2")
+                    .WithLocation(7, 26),
                 // (8,26): error CS8918: Identifier or a simple member access expected.
                 //         _ = new C() is { Field1!.Field2: {} }; // 2
                 Diagnostic(ErrorCode.ERR_InvalidNameInSubpattern, "Field1!").WithLocation(8, 26),
                 // (9,26): error CS0117: 'C' does not contain a definition for 'Missing'
                 //         _ = new C() is { Missing: null }; // 3
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "Missing").WithArguments("C", "Missing").WithLocation(9, 26),
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "Missing")
+                    .WithArguments("C", "Missing")
+                    .WithLocation(9, 26),
                 // (10,33): error CS0117: 'C' does not contain a definition for 'Missing'
                 //         _ = new C() is { Field3.Missing: {} }; // 4
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "Missing").WithArguments("C", "Missing").WithLocation(10, 33),
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "Missing")
+                    .WithArguments("C", "Missing")
+                    .WithLocation(10, 33),
                 // (11,26): error CS0117: 'C' does not contain a definition for 'Missing1'
                 //         _ = new C() is { Missing1.Missing2: {} }; // 5
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "Missing1").WithArguments("C", "Missing1").WithLocation(11, 26)
-                );
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "Missing1")
+                    .WithArguments("C", "Missing1")
+                    .WithLocation(11, 26)
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_IOperationOnMissing()
         {
-            var program = @"
+            var program =
+                @"
 class C
 {
     public void M()
@@ -783,18 +935,29 @@ class C
     }
 }
 ";
-            var comp = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var comp = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,23): error CS0117: 'C' does not contain a definition for 'Missing'
                 //         _ = this is { Missing: null };
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "Missing").WithArguments("C", "Missing").WithLocation(6, 23)
-                );
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "Missing")
+                    .WithArguments("C", "Missing")
+                    .WithLocation(6, 23)
+            );
 
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
-            var isPattern = tree.GetRoot().DescendantNodes().OfType<IsPatternExpressionSyntax>().Single();
+            var isPattern = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IsPatternExpressionSyntax>()
+                .Single();
 
-            VerifyOperationTree(comp, model.GetOperation(isPattern), @"
+            VerifyOperationTree(
+                comp,
+                model.GetOperation(isPattern),
+                @"
 IIsPatternOperation (OperationKind.IsPattern, Type: System.Boolean, IsInvalid) (Syntax: 'this is { M ... ing: null }')
   Value:
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: C) (Syntax: 'this')
@@ -813,13 +976,15 @@ IIsPatternOperation (OperationKind.IsPattern, Type: System.Boolean, IsInvalid) (
                     Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: True, IsUserDefined: False) (MethodSymbol: null)
                     Operand:
                       ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
-");
+"
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_IOperationOnNestedMissing()
         {
-            var program = @"
+            var program =
+                @"
 class C
 {
     int Property { get; set; }
@@ -829,18 +994,29 @@ class C
     }
 }
 ";
-            var comp = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var comp = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             comp.VerifyEmitDiagnostics(
                 // (7,32): error CS0117: 'int' does not contain a definition for 'Missing'
                 //         _ = this is { Property.Missing: null };
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "Missing").WithArguments("int", "Missing").WithLocation(7, 32)
-                );
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "Missing")
+                    .WithArguments("int", "Missing")
+                    .WithLocation(7, 32)
+            );
 
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
-            var isPattern = tree.GetRoot().DescendantNodes().OfType<IsPatternExpressionSyntax>().Single();
+            var isPattern = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IsPatternExpressionSyntax>()
+                .Single();
 
-            VerifyOperationTree(comp, model.GetOperation(isPattern), @"
+            VerifyOperationTree(
+                comp,
+                model.GetOperation(isPattern),
+                @"
 IIsPatternOperation (OperationKind.IsPattern, Type: System.Boolean, IsInvalid) (Syntax: 'this is { P ... ing: null }')
   Value:
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: C) (Syntax: 'this')
@@ -868,13 +1044,15 @@ IIsPatternOperation (OperationKind.IsPattern, Type: System.Boolean, IsInvalid) (
                               Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: True, IsUserDefined: False) (MethodSymbol: null)
                               Operand:
                                 ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
-");
+"
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_IOperationOnTwoMissing()
         {
-            var program = @"
+            var program =
+                @"
 class C
 {
     public void M()
@@ -883,18 +1061,29 @@ class C
     }
 }
 ";
-            var comp = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var comp = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,23): error CS0117: 'C' does not contain a definition for 'Missing1'
                 //         _ = this is { Missing1.Missing2: null };
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "Missing1").WithArguments("C", "Missing1").WithLocation(6, 23)
-                );
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "Missing1")
+                    .WithArguments("C", "Missing1")
+                    .WithLocation(6, 23)
+            );
 
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
-            var isPattern = tree.GetRoot().DescendantNodes().OfType<IsPatternExpressionSyntax>().Single();
+            var isPattern = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IsPatternExpressionSyntax>()
+                .Single();
 
-            VerifyOperationTree(comp, model.GetOperation(isPattern), @"
+            VerifyOperationTree(
+                comp,
+                model.GetOperation(isPattern),
+                @"
 IIsPatternOperation (OperationKind.IsPattern, Type: System.Boolean, IsInvalid) (Syntax: 'this is { M ... ng2: null }')
   Value:
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: C) (Syntax: 'this')
@@ -921,13 +1110,15 @@ IIsPatternOperation (OperationKind.IsPattern, Type: System.Boolean, IsInvalid) (
                               Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: True, IsUserDefined: False) (MethodSymbol: null)
                               Operand:
                                 ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
-");
+"
+            );
         }
 
         [Fact, WorkItem(53484, "https://github.com/dotnet/roslyn/issues/53484")]
         public void ExtendedPropertyPatterns_SuppressionOnPattern()
         {
-            var program = @"
+            var program =
+                @"
 #nullable enable
 public class ContainerType
 {
@@ -972,7 +1163,10 @@ public class ContainerType
     }
 }
 ";
-            var compilation = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var compilation = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             compilation.VerifyEmitDiagnostics(
                 // (10,22): error CS8598: The suppression operator is not allowed in this context
                 //             if (o is c!) {}                      // a1
@@ -991,10 +1185,12 @@ public class ContainerType
                 Diagnostic(ErrorCode.ERR_IllegalSuppression, "Type!").WithLocation(14, 22),
                 // (15,22): error CS8598: The suppression operator is not allowed in this context
                 //             if (o is ContainerType!.Type) {}     // a6
-                Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType").WithLocation(15, 22),
+                Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType")
+                    .WithLocation(15, 22),
                 // (16,22): error CS8598: The suppression operator is not allowed in this context
                 //             if (o is ContainerType.Type!) {}     // a7
-                Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType.Type!").WithLocation(16, 22),
+                Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType.Type!")
+                    .WithLocation(16, 22),
                 // (17,24): error CS8598: The suppression operator is not allowed in this context
                 //             if (o is < c!) {}                    // a8
                 Diagnostic(ErrorCode.ERR_IllegalSuppression, "c!").WithLocation(17, 24),
@@ -1015,10 +1211,12 @@ public class ContainerType
                 Diagnostic(ErrorCode.ERR_IllegalSuppression, "Type!").WithLocation(25, 22),
                 // (26,22): error CS8598: The suppression operator is not allowed in this context
                 //                 case ContainerType!.Type: break; // b6
-                Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType").WithLocation(26, 22),
+                Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType")
+                    .WithLocation(26, 22),
                 // (27,22): error CS8598: The suppression operator is not allowed in this context
                 //                 case ContainerType.Type!: break; // b7
-                Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType.Type!").WithLocation(27, 22),
+                Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType.Type!")
+                    .WithLocation(27, 22),
                 // (28,24): error CS8598: The suppression operator is not allowed in this context
                 //                 case < c!: break;                // b8
                 Diagnostic(ErrorCode.ERR_IllegalSuppression, "c!").WithLocation(28, 24),
@@ -1039,20 +1237,23 @@ public class ContainerType
                 Diagnostic(ErrorCode.ERR_IllegalSuppression, "Type!").WithLocation(37, 17),
                 // (38,17): error CS8598: The suppression operator is not allowed in this context
                 //                 ContainerType!.Type => 0,        // c6
-                Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType").WithLocation(38, 17),
+                Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType")
+                    .WithLocation(38, 17),
                 // (39,17): error CS8598: The suppression operator is not allowed in this context
                 //                 ContainerType.Type! => 0,        // c7
-                Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType.Type!").WithLocation(39, 17),
+                Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType.Type!")
+                    .WithLocation(39, 17),
                 // (40,19): error CS8598: The suppression operator is not allowed in this context
                 //                 < c! => 0,                       // c8
                 Diagnostic(ErrorCode.ERR_IllegalSuppression, "c!").WithLocation(40, 19)
-                );
+            );
         }
 
         [Fact, WorkItem(53484, "https://github.com/dotnet/roslyn/issues/53484")]
         public void ExtendedPropertyPatterns_PointerAccessInPattern()
         {
-            var program = @"
+            var program =
+                @"
 public class Type
 {
     public unsafe void M(S* s)
@@ -1066,19 +1267,23 @@ public struct S
     public int X;
 }
 ";
-            var compilation = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns, options: TestOptions.UnsafeDebugDll);
+            var compilation = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns,
+                options: TestOptions.UnsafeDebugDll
+            );
             compilation.VerifyEmitDiagnostics(
                 // (6,18): error CS0150: A constant value is expected
                 //         if (0 is s->X) {}
                 Diagnostic(ErrorCode.ERR_ConstantExpected, "s->X").WithLocation(6, 18)
-                );
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_SymbolInfo_01()
         {
             var source =
-@"
+                @"
 using System;
 class Program
 {
@@ -1096,10 +1301,12 @@ class P
 ";
             var compilation = CreatePatternCompilation(source);
             compilation.VerifyEmitDiagnostics(
-                    // (14,14): warning CS0649: Field 'P.Y' is never assigned to, and will always have its default value null
-                    //     public P Y;
-                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Y").WithArguments("P.Y", "null").WithLocation(14, 14)
-                );
+                // (14,14): warning CS0649: Field 'P.Y' is never assigned to, and will always have its default value null
+                //     public P Y;
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Y")
+                    .WithArguments("P.Y", "null")
+                    .WithLocation(14, 14)
+            );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
 
@@ -1113,12 +1320,16 @@ class P
             Assert.Equal(CandidateReason.None, xySymbol.CandidateReason);
             Assert.Equal("P P.Y", xySymbol.Symbol.ToTestDisplayString());
 
-            var x = ((MemberAccessExpressionSyntax)subpatterns[0].ExpressionColon.Expression).Expression;
+            var x = (
+                (MemberAccessExpressionSyntax)subpatterns[0].ExpressionColon.Expression
+            ).Expression;
             var xSymbol = model.GetSymbolInfo(x);
             Assert.Equal(CandidateReason.None, xSymbol.CandidateReason);
             Assert.Equal("P P.X { get; }", xSymbol.Symbol.ToTestDisplayString());
 
-            var yName = ((MemberAccessExpressionSyntax)subpatterns[0].ExpressionColon.Expression).Name;
+            var yName = (
+                (MemberAccessExpressionSyntax)subpatterns[0].ExpressionColon.Expression
+            ).Name;
             var yNameSymbol = model.GetSymbolInfo(yName);
             Assert.Equal(CandidateReason.None, yNameSymbol.CandidateReason);
             Assert.Equal("P P.Y", yNameSymbol.Symbol.ToTestDisplayString());
@@ -1131,12 +1342,16 @@ class P
             Assert.Equal(CandidateReason.None, yxSymbol.CandidateReason);
             Assert.Equal("P P.X { get; }", yxSymbol.Symbol.ToTestDisplayString());
 
-            var y = ((MemberAccessExpressionSyntax)subpatterns[1].ExpressionColon.Expression).Expression;
+            var y = (
+                (MemberAccessExpressionSyntax)subpatterns[1].ExpressionColon.Expression
+            ).Expression;
             var ySymbol = model.GetSymbolInfo(y);
             Assert.Equal(CandidateReason.None, ySymbol.CandidateReason);
             Assert.Equal("P P.Y", ySymbol.Symbol.ToTestDisplayString());
 
-            var xName = ((MemberAccessExpressionSyntax)subpatterns[1].ExpressionColon.Expression).Name;
+            var xName = (
+                (MemberAccessExpressionSyntax)subpatterns[1].ExpressionColon.Expression
+            ).Name;
             var xNameSymbol = model.GetSymbolInfo(xName);
             Assert.Equal(CandidateReason.None, xNameSymbol.CandidateReason);
             Assert.Equal("P P.X { get; }", xNameSymbol.Symbol.ToTestDisplayString());
@@ -1146,7 +1361,7 @@ class P
         public void ExtendedPropertyPatterns_SymbolInfo_02()
         {
             var source =
-@"
+                @"
 using System;
 class Program
 {
@@ -1173,13 +1388,17 @@ interface P : I1, I2
 ";
             var compilation = CreatePatternCompilation(source);
             compilation.VerifyEmitDiagnostics(
-                    // (8,34): error CS0229: Ambiguity between 'I1.X' and 'I2.X'
-                    //         Console.WriteLine(p is { X.Y: {}, Y.X: {}, });
-                    Diagnostic(ErrorCode.ERR_AmbigMember, "X").WithArguments("I1.X", "I2.X").WithLocation(8, 34),
-                    // (8,43): error CS0229: Ambiguity between 'I1.Y' and 'I2.Y'
-                    //         Console.WriteLine(p is { X.Y: {}, Y.X: {}, });
-                    Diagnostic(ErrorCode.ERR_AmbigMember, "Y").WithArguments("I1.Y", "I2.Y").WithLocation(8, 43)
-                );
+                // (8,34): error CS0229: Ambiguity between 'I1.X' and 'I2.X'
+                //         Console.WriteLine(p is { X.Y: {}, Y.X: {}, });
+                Diagnostic(ErrorCode.ERR_AmbigMember, "X")
+                    .WithArguments("I1.X", "I2.X")
+                    .WithLocation(8, 34),
+                // (8,43): error CS0229: Ambiguity between 'I1.Y' and 'I2.Y'
+                //         Console.WriteLine(p is { X.Y: {}, Y.X: {}, });
+                Diagnostic(ErrorCode.ERR_AmbigMember, "Y")
+                    .WithArguments("I1.Y", "I2.Y")
+                    .WithLocation(8, 43)
+            );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
 
@@ -1188,7 +1407,9 @@ interface P : I1, I2
 
             AssertEmpty(model.GetSymbolInfo(subpatterns[0]));
             AssertEmpty(model.GetSymbolInfo(subpatterns[0].ExpressionColon));
-            var x = ((MemberAccessExpressionSyntax)subpatterns[0].ExpressionColon.Expression).Expression;
+            var x = (
+                (MemberAccessExpressionSyntax)subpatterns[0].ExpressionColon.Expression
+            ).Expression;
             var xSymbol = model.GetSymbolInfo(x);
             Assert.Equal(CandidateReason.Ambiguous, xSymbol.CandidateReason);
             Assert.Null(xSymbol.Symbol);
@@ -1198,7 +1419,9 @@ interface P : I1, I2
 
             AssertEmpty(model.GetSymbolInfo(subpatterns[1]));
             AssertEmpty(model.GetSymbolInfo(subpatterns[1].ExpressionColon));
-            var y = ((MemberAccessExpressionSyntax)subpatterns[1].ExpressionColon.Expression).Expression;
+            var y = (
+                (MemberAccessExpressionSyntax)subpatterns[1].ExpressionColon.Expression
+            ).Expression;
             var ySymbol = model.GetSymbolInfo(y);
             Assert.Equal(CandidateReason.Ambiguous, ySymbol.CandidateReason);
             Assert.Null(ySymbol.Symbol);
@@ -1211,7 +1434,7 @@ interface P : I1, I2
         public void ExtendedPropertyPatterns_SymbolInfo_03()
         {
             var source =
-@"
+                @"
 using System;
 class Program
 {
@@ -1229,8 +1452,10 @@ class P
             compilation.VerifyEmitDiagnostics(
                 // (8,34): error CS0117: 'P' does not contain a definition for 'X'
                 //         Console.WriteLine(p is { X: 3, Y: 4 });
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "X").WithArguments("P", "X").WithLocation(8, 34)
-                );
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "X")
+                    .WithArguments("P", "X")
+                    .WithLocation(8, 34)
+            );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
 
@@ -1258,7 +1483,7 @@ class P
         public void ExtendedPropertyPatterns_SymbolInfo_04()
         {
             var source =
-@"
+                @"
 using System;
 class Program
 {
@@ -1279,10 +1504,12 @@ struct S
 ";
             var compilation = CreatePatternCompilation(source);
             compilation.VerifyEmitDiagnostics(
-                    // (17,14): warning CS0649: Field 'S.Y' is never assigned to, and will always have its default value null
-                    //     public C Y;
-                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Y").WithArguments("S.Y", "null").WithLocation(17, 14)
-                );
+                // (17,14): warning CS0649: Field 'S.Y' is never assigned to, and will always have its default value null
+                //     public C Y;
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Y")
+                    .WithArguments("S.Y", "null")
+                    .WithLocation(17, 14)
+            );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
 
@@ -1299,7 +1526,9 @@ struct S
             Assert.Equal("C", xyType.Type.ToTestDisplayString());
             Assert.Equal("C", xyType.ConvertedType.ToTestDisplayString());
 
-            var x = ((MemberAccessExpressionSyntax)subpatterns[0].ExpressionColon.Expression).Expression;
+            var x = (
+                (MemberAccessExpressionSyntax)subpatterns[0].ExpressionColon.Expression
+            ).Expression;
             var xSymbol = model.GetSymbolInfo(x);
             Assert.Equal(CandidateReason.None, xSymbol.CandidateReason);
             Assert.Equal("S? C.X { get; }", xSymbol.Symbol.ToTestDisplayString());
@@ -1307,7 +1536,9 @@ struct S
             Assert.Equal("S?", xType.Type.ToTestDisplayString());
             Assert.Equal("S?", xType.ConvertedType.ToTestDisplayString());
 
-            var yName = ((MemberAccessExpressionSyntax)subpatterns[0].ExpressionColon.Expression).Name;
+            var yName = (
+                (MemberAccessExpressionSyntax)subpatterns[0].ExpressionColon.Expression
+            ).Name;
             var yNameSymbol = model.GetSymbolInfo(yName);
             Assert.Equal(CandidateReason.None, yNameSymbol.CandidateReason);
             Assert.Equal("C S.Y", yNameSymbol.Symbol.ToTestDisplayString());
@@ -1326,7 +1557,9 @@ struct S
             Assert.Equal("S?", yxType.Type.ToTestDisplayString());
             Assert.Equal("S?", yxType.ConvertedType.ToTestDisplayString());
 
-            var y = ((MemberAccessExpressionSyntax)subpatterns[1].ExpressionColon.Expression).Expression;
+            var y = (
+                (MemberAccessExpressionSyntax)subpatterns[1].ExpressionColon.Expression
+            ).Expression;
             var ySymbol = model.GetSymbolInfo(y);
             Assert.Equal(CandidateReason.None, ySymbol.CandidateReason);
             Assert.Equal("C S.Y", ySymbol.Symbol.ToTestDisplayString());
@@ -1334,7 +1567,9 @@ struct S
             Assert.Equal("C", yType.Type.ToTestDisplayString());
             Assert.Equal("C", yType.ConvertedType.ToTestDisplayString());
 
-            var xName = ((MemberAccessExpressionSyntax)subpatterns[1].ExpressionColon.Expression).Name;
+            var xName = (
+                (MemberAccessExpressionSyntax)subpatterns[1].ExpressionColon.Expression
+            ).Name;
             var xNameSymbol = model.GetSymbolInfo(xName);
             Assert.Equal(CandidateReason.None, xNameSymbol.CandidateReason);
             Assert.Equal("S? C.X { get; }", xNameSymbol.Symbol.ToTestDisplayString());
@@ -1343,7 +1578,9 @@ struct S
             Assert.Equal("S?", xNameType.ConvertedType.ToTestDisplayString());
 
             var verifier = CompileAndVerify(compilation);
-            verifier.VerifyIL("Program.Main", @"
+            verifier.VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       92 (0x5c)
   .maxstack  2
@@ -1388,13 +1625,15 @@ struct S
   IL_005a:  nop
   IL_005b:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_Nullability_Properties()
         {
-            var program = @"
+            var program =
+                @"
 #nullable enable
 class C {
     C? Prop { get; }
@@ -1424,26 +1663,34 @@ class C {
     }
 }
 ";
-            var compilation = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var compilation = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             compilation.VerifyEmitDiagnostics(
-                    // (9,13): warning CS8602: Dereference of a possibly null reference.
-                    //             this.Prop.Prop.ToString(); // 1
-                    Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "this.Prop.Prop").WithLocation(9, 13),
-                    // (20,13): warning CS8602: Dereference of a possibly null reference.
-                    //             this.Prop.Prop.ToString(); // 2
-                    Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "this.Prop.Prop").WithLocation(20, 13),
-                    // (25,13): warning CS8602: Dereference of a possibly null reference.
-                    //             this.Prop.ToString();      // 3
-                    Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "this.Prop").WithLocation(25, 13),
-                    // (26,13): warning CS8602: Dereference of a possibly null reference.
-                    //             this.Prop.Prop.ToString(); // 4
-                    Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "this.Prop.Prop").WithLocation(26, 13));
+                // (9,13): warning CS8602: Dereference of a possibly null reference.
+                //             this.Prop.Prop.ToString(); // 1
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "this.Prop.Prop")
+                    .WithLocation(9, 13),
+                // (20,13): warning CS8602: Dereference of a possibly null reference.
+                //             this.Prop.Prop.ToString(); // 2
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "this.Prop.Prop")
+                    .WithLocation(20, 13),
+                // (25,13): warning CS8602: Dereference of a possibly null reference.
+                //             this.Prop.ToString();      // 3
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "this.Prop").WithLocation(25, 13),
+                // (26,13): warning CS8602: Dereference of a possibly null reference.
+                //             this.Prop.Prop.ToString(); // 4
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "this.Prop.Prop")
+                    .WithLocation(26, 13)
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_Nullability_AnnotatedFields()
         {
-            var program = @"
+            var program =
+                @"
 #nullable enable
 class C {
     public void M(C1 c1) {
@@ -1474,27 +1721,34 @@ class C {
 class C1 { public C2? Prop1 = null; }
 class C2 { public object? Prop2 = null; }
 ";
-            var compilation = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var compilation = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             compilation.VerifyEmitDiagnostics(
                 // (8,13): warning CS8602: Dereference of a possibly null reference.
                 //             c1.Prop1.Prop2.ToString(); // 1
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c1.Prop1.Prop2").WithLocation(8, 13),
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c1.Prop1.Prop2")
+                    .WithLocation(8, 13),
                 // (19,13): warning CS8602: Dereference of a possibly null reference.
                 //             c1.Prop1.Prop2.ToString(); // 2
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c1.Prop1.Prop2").WithLocation(19, 13),
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c1.Prop1.Prop2")
+                    .WithLocation(19, 13),
                 // (24,13): warning CS8602: Dereference of a possibly null reference.
                 //             c1.Prop1.ToString();      // 3
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c1.Prop1").WithLocation(24, 13),
                 // (25,13): warning CS8602: Dereference of a possibly null reference.
                 //             c1.Prop1.Prop2.ToString(); // 4
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c1.Prop1.Prop2").WithLocation(25, 13)
-                );
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c1.Prop1.Prop2")
+                    .WithLocation(25, 13)
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_Nullability_UnannotatedFields()
         {
-            var program = @"
+            var program =
+                @"
 #nullable enable
 class C
 {
@@ -1555,14 +1809,19 @@ class C
 class C1 { public C2 Prop1 = null!; }
 class C2 { public object Prop2 = null!; }
 ";
-            var compilation = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var compilation = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             compilation.VerifyEmitDiagnostics(
                 // (10,13): warning CS8602: Dereference of a possibly null reference.
                 //             c1.Prop1.Prop2.ToString(); // 1
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c1.Prop1.Prop2").WithLocation(10, 13),
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c1.Prop1.Prop2")
+                    .WithLocation(10, 13),
                 // (34,13): warning CS8602: Dereference of a possibly null reference.
                 //             c1.Prop1.Prop2.ToString(); // 2
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c1.Prop1.Prop2").WithLocation(34, 13),
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c1.Prop1.Prop2")
+                    .WithLocation(34, 13),
                 // (38,13): warning CS8602: Dereference of a possibly null reference.
                 //             c1.Prop1.ToString(); // 3
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c1.Prop1").WithLocation(38, 13),
@@ -1571,14 +1830,16 @@ class C2 { public object Prop2 = null!; }
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c1.Prop1").WithLocation(48, 13),
                 // (49,13): warning CS8602: Dereference of a possibly null reference.
                 //             c1.Prop1.Prop2.ToString(); // 5
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c1.Prop1.Prop2").WithLocation(49, 13)
-                );
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c1.Prop1.Prop2")
+                    .WithLocation(49, 13)
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_ExpressionColonInPositionalPattern()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     C Property { get; set; }
@@ -1596,20 +1857,26 @@ class C
             compilation.VerifyEmitDiagnostics(
                 // (8,22): error CS8773: Feature 'extended property patterns' is not available in C# 9.0. Please use language version 10.0 or greater.
                 //         _ = this is (Property.Property: null, Property: null);
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "Property.Property").WithArguments("extended property patterns", "10.0").WithLocation(8, 22),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "Property.Property")
+                    .WithArguments("extended property patterns", "10.0")
+                    .WithLocation(8, 22),
                 // (8,22): error CS1001: Identifier expected
                 //         _ = this is (Property.Property: null, Property: null);
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "Property.Property").WithLocation(8, 22),
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "Property.Property")
+                    .WithLocation(8, 22),
                 // (8,47): error CS8517: The name 'Property' does not match the corresponding 'Deconstruct' parameter 'c2'.
                 //         _ = this is (Property.Property: null, Property: null);
-                Diagnostic(ErrorCode.ERR_DeconstructParameterNameMismatch, "Property").WithArguments("Property", "c2").WithLocation(8, 47)
-                );
+                Diagnostic(ErrorCode.ERR_DeconstructParameterNameMismatch, "Property")
+                    .WithArguments("Property", "c2")
+                    .WithLocation(8, 47)
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_ExpressionColonInITuplePattern()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M()
@@ -1627,7 +1894,10 @@ namespace System.Runtime.CompilerServices
     }
 }
 ";
-            var compilation = CreateCompilation(source, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var compilation = CreateCompilation(
+                source,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             compilation.VerifyEmitDiagnostics(
                 // (7,23): error CS1001: Identifier expected
                 //         var r = t is (X.Y: 3, Y.Z: 4);
@@ -1635,13 +1905,14 @@ namespace System.Runtime.CompilerServices
                 // (7,31): error CS1001: Identifier expected
                 //         var r = t is (X.Y: 3, Y.Z: 4);
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "Y.Z").WithLocation(7, 31)
-                );
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_ExpressionColonInValueTuplePattern()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M()
@@ -1658,7 +1929,10 @@ namespace System.Runtime.CompilerServices
     }
 }
 ";
-            var compilation = CreateCompilation(source, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var compilation = CreateCompilation(
+                source,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             compilation.VerifyEmitDiagnostics(
                 // (6,24): error CS1001: Identifier expected
                 //         _ = (1, 2) is (X.Y: 3, Y.Z: 4);
@@ -1666,13 +1940,14 @@ namespace System.Runtime.CompilerServices
                 // (6,32): error CS1001: Identifier expected
                 //         _ = (1, 2) is (X.Y: 3, Y.Z: 4);
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "Y.Z").WithLocation(6, 32)
-                );
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_ObsoleteProperty()
         {
-            var program = @"
+            var program =
+                @"
 using System;
 class C
 {
@@ -1693,21 +1968,29 @@ class C2
     public object Prop2 { get; set; }
 }
 ";
-            var compilation = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var compilation = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             compilation.VerifyEmitDiagnostics(
                 // (7,21): error CS0619: 'C1.Prop1' is obsolete: 'error Prop1'
                 //         _ = c1 is { Prop1.Prop2: null };
-                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop1").WithArguments("C1.Prop1", "error Prop1").WithLocation(7, 21),
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop1")
+                    .WithArguments("C1.Prop1", "error Prop1")
+                    .WithLocation(7, 21),
                 // (7,27): error CS0619: 'C2.Prop2' is obsolete: 'error Prop2'
                 //         _ = c1 is { Prop1.Prop2: null };
-                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop2").WithArguments("C2.Prop2", "error Prop2").WithLocation(7, 27)
-                );
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop2")
+                    .WithArguments("C2.Prop2", "error Prop2")
+                    .WithLocation(7, 27)
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_ObsoleteAccessor()
         {
-            var program = @"
+            var program =
+                @"
 using System;
 class C
 {
@@ -1736,18 +2019,24 @@ class C2
     }
 }
 ";
-            var compilation = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var compilation = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             compilation.VerifyEmitDiagnostics(
                 // (7,21): error CS0619: 'C1.Prop1.get' is obsolete: 'error Prop1'
                 //         _ = c1 is { Prop1.Prop2: null };
-                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop1.Prop2").WithArguments("C1.Prop1.get", "error Prop1").WithLocation(7, 21)
-                );
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "Prop1.Prop2")
+                    .WithArguments("C1.Prop1.get", "error Prop1")
+                    .WithLocation(7, 21)
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_InaccessibleProperty()
         {
-            var program = @"
+            var program =
+                @"
 using System;
 class C
 {
@@ -1766,18 +2055,24 @@ class C2
     private object Prop2 { get; set; }
 }
 ";
-            var compilation = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var compilation = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             compilation.VerifyEmitDiagnostics(
                 // (7,21): error CS0122: 'C1.Prop1' is inaccessible due to its protection level
                 //         _ = c1 is { Prop1.Prop2: null };
-                Diagnostic(ErrorCode.ERR_BadAccess, "Prop1").WithArguments("C1.Prop1").WithLocation(7, 21)
-                );
+                Diagnostic(ErrorCode.ERR_BadAccess, "Prop1")
+                    .WithArguments("C1.Prop1")
+                    .WithLocation(7, 21)
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_ExpressionTree()
         {
-            var program = @"
+            var program =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -1798,18 +2093,26 @@ class C2
     public object Prop2 { get; set; }
 }
 ";
-            var compilation = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var compilation = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             compilation.VerifyEmitDiagnostics(
                 // (9,48): error CS8122: An expression tree may not contain an 'is' pattern-matching operator.
                 //         Expression<Func<C1, bool>> f = (c1) => c1 is { Prop1.Prop2: null };
-                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsIsMatch, "c1 is { Prop1.Prop2: null }").WithLocation(9, 48)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_ExpressionTreeContainsIsMatch,
+                        "c1 is { Prop1.Prop2: null }"
+                    )
+                    .WithLocation(9, 48)
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_EvaluationOrder()
         {
-            var program = @"
+            var program =
+                @"
 if (new C() is { Prop1.True: true, Prop1.Prop2: not null })
 {
     System.Console.WriteLine(""matched1"");
@@ -1848,19 +2151,24 @@ class C
     public bool True { get { System.Console.Write(""True ""); return true; } }
 }
 ";
-            CompileAndVerify(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns, expectedOutput: @"
+            CompileAndVerify(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns,
+                expectedOutput: @"
 Prop1 True Prop2 matched1
 Prop1 Prop2 True matched2
 Prop1 Prop2 Prop2 True matched3
 Prop1 Prop2 Prop3 True matched3
 Prop1 Prop2 Prop3 True matched4
-Prop1 True");
+Prop1 True"
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_StaticMembers()
         {
-            var program = @"
+            var program =
+                @"
 _ = new C() is { Static: null }; // 1
 _ = new C() is { Instance.Static: null }; // 2
 _ = new C() is { Static.Instance: null }; // 3
@@ -1871,24 +2179,34 @@ class C
     public static C Static { get; set; }
 }
 ";
-            var comp = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var comp = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             comp.VerifyEmitDiagnostics(
                 // (2,18): error CS0176: Member 'C.Static' cannot be accessed with an instance reference; qualify it with a type name instead
                 // _ = new C() is { Static: null }; // 1
-                Diagnostic(ErrorCode.ERR_ObjectProhibited, "Static").WithArguments("C.Static").WithLocation(2, 18),
+                Diagnostic(ErrorCode.ERR_ObjectProhibited, "Static")
+                    .WithArguments("C.Static")
+                    .WithLocation(2, 18),
                 // (3,27): error CS0176: Member 'C.Static' cannot be accessed with an instance reference; qualify it with a type name instead
                 // _ = new C() is { Instance.Static: null }; // 2
-                Diagnostic(ErrorCode.ERR_ObjectProhibited, "Static").WithArguments("C.Static").WithLocation(3, 27),
+                Diagnostic(ErrorCode.ERR_ObjectProhibited, "Static")
+                    .WithArguments("C.Static")
+                    .WithLocation(3, 27),
                 // (4,18): error CS0176: Member 'C.Static' cannot be accessed with an instance reference; qualify it with a type name instead
                 // _ = new C() is { Static.Instance: null }; // 3
-                Diagnostic(ErrorCode.ERR_ObjectProhibited, "Static").WithArguments("C.Static").WithLocation(4, 18)
-                );
+                Diagnostic(ErrorCode.ERR_ObjectProhibited, "Static")
+                    .WithArguments("C.Static")
+                    .WithLocation(4, 18)
+            );
         }
 
         [Fact]
         public void ExtendedPropertyPatterns_Exhaustiveness()
         {
-            var program = @"
+            var program =
+                @"
 _ = new C() switch // 1
 {
     { Prop.True: true } => 0
@@ -1912,21 +2230,29 @@ class C
     public bool True { get => throw null!; }
 }
 ";
-            var comp = CreateCompilation(program, parseOptions: TestOptions.RegularWithExtendedPropertyPatterns);
+            var comp = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
+            );
             comp.VerifyEmitDiagnostics(
                 // (2,13): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ Prop: { True: false } }' is not covered.
                 // _ = new C() switch // 1
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch").WithArguments("{ Prop: { True: false } }").WithLocation(2, 13),
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
+                    .WithArguments("{ Prop: { True: false } }")
+                    .WithLocation(2, 13),
                 // (14,13): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ Prop: { Prop: not null } }' is not covered.
                 // _ = new C() switch // 2
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch").WithArguments("{ Prop: { Prop: not null } }").WithLocation(14, 13)
-                );
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
+                    .WithArguments("{ Prop: { Prop: not null } }")
+                    .WithLocation(14, 13)
+            );
         }
 
         [Fact, WorkItem(55184, "https://github.com/dotnet/roslyn/issues/55184")]
         public void Repro55184()
         {
-            var source = @"
+            var source =
+                @"
 var x = """";
 
 _ = x is { Error: { Length: > 0 } };
@@ -1938,17 +2264,25 @@ _ = x is { Length.Error: > 0 };
             comp.VerifyDiagnostics(
                 // (4,12): error CS0117: 'string' does not contain a definition for 'Error'
                 // _ = x is { Error: { Length: > 0 } };
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "Error").WithArguments("string", "Error").WithLocation(4, 12),
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "Error")
+                    .WithArguments("string", "Error")
+                    .WithLocation(4, 12),
                 // (5,12): error CS0117: 'string' does not contain a definition for 'Error'
                 // _ = x is { Error.Length: > 0 };
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "Error").WithArguments("string", "Error").WithLocation(5, 12),
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "Error")
+                    .WithArguments("string", "Error")
+                    .WithLocation(5, 12),
                 // (6,22): error CS0117: 'int' does not contain a definition for 'Error'
                 // _ = x is { Length: { Error: > 0 } };
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "Error").WithArguments("int", "Error").WithLocation(6, 22),
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "Error")
+                    .WithArguments("int", "Error")
+                    .WithLocation(6, 22),
                 // (7,19): error CS0117: 'int' does not contain a definition for 'Error'
                 // _ = x is { Length.Error: > 0 };
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "Error").WithArguments("int", "Error").WithLocation(7, 19)
-                );
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "Error")
+                    .WithArguments("int", "Error")
+                    .WithLocation(7, 19)
+            );
         }
 
         private const string INumberBaseDefinition = """
@@ -1984,16 +2318,24 @@ _ = x is { Length.Error: > 0 };
             comp.VerifyDiagnostics(
                 // (8,9): error CS9060: Cannot use a numeric constant or relational pattern on 'T' because it inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc numeric type.
                 //         1 => 1, // 1
-                Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "1").WithArguments("T").WithLocation(8, 9),
+                Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "1")
+                    .WithArguments("T")
+                    .WithLocation(8, 9),
                 // (9,9): error CS9060: Cannot use a numeric constant or relational pattern on 'T' because it inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc numeric type.
                 //         > 1 => 2, // 2
-                Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "> 1").WithArguments("T").WithLocation(9, 9),
+                Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "> 1")
+                    .WithArguments("T")
+                    .WithLocation(9, 9),
                 // (11,9): error CS8985: List patterns may not be used for a value of type 'T'. No suitable 'Length' or 'Count' property was found.
                 //         [] => 4, // 3
-                Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]").WithArguments("T").WithLocation(11, 9),
+                Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
+                    .WithArguments("T")
+                    .WithLocation(11, 9),
                 // (11,9): error CS0518: Predefined type 'System.Index' is not defined or imported
                 //         [] => 4, // 3
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[]").WithArguments("System.Index").WithLocation(11, 9),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[]")
+                    .WithArguments("System.Index")
+                    .WithLocation(11, 9),
                 // (11,9): error CS0021: Cannot apply indexing with [] to an expression of type 'T'
                 //         [] => 4, // 3
                 Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]").WithArguments("T").WithLocation(11, 9)
@@ -2028,22 +2370,34 @@ _ = x is { Length.Error: > 0 };
             comp.VerifyDiagnostics(
                 // (8,9): error CS9060: Cannot use a numeric constant or relational pattern on 'T' because it inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc numeric type.
                 //         1 => 1, // 1
-                Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "1").WithArguments("T").WithLocation(8, 9),
+                Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "1")
+                    .WithArguments("T")
+                    .WithLocation(8, 9),
                 // (9,9): error CS9060: Cannot use a numeric constant or relational pattern on 'T' because it inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc numeric type.
                 //         > 1 => 2, // 2
-                Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "> 1").WithArguments("T").WithLocation(9, 9),
+                Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "> 1")
+                    .WithArguments("T")
+                    .WithLocation(9, 9),
                 // (11,9): error CS8985: List patterns may not be used for a value of type 'T'. No suitable 'Length' or 'Count' property was found.
                 //         [] => 4, // 3
-                Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]").WithArguments("T").WithLocation(11, 9),
+                Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
+                    .WithArguments("T")
+                    .WithLocation(11, 9),
                 // (11,9): error CS0518: Predefined type 'System.Index' is not defined or imported
                 //         [] => 4, // 3
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[]").WithArguments("System.Index").WithLocation(11, 9),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[]")
+                    .WithArguments("System.Index")
+                    .WithLocation(11, 9),
                 // (11,9): error CS0021: Cannot apply indexing with [] to an expression of type 'T'
                 //         [] => 4, // 3
-                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]").WithArguments("T").WithLocation(11, 9),
+                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]")
+                    .WithArguments("T")
+                    .WithLocation(11, 9),
                 // (13,9): error CS8121: An expression of type 'T' cannot be handled by a pattern of type 'string'.
                 //         "" => 6, // 4
-                Diagnostic(ErrorCode.ERR_PatternWrongType, @"""""").WithArguments("T", "string").WithLocation(13, 9)
+                Diagnostic(ErrorCode.ERR_PatternWrongType, @"""""")
+                    .WithArguments("T", "string")
+                    .WithLocation(13, 9)
             );
         }
 
@@ -2071,26 +2425,42 @@ _ = x is { Length.Error: > 0 };
                 }
                 """;
 
-            var ref1 = CreateCompilation(INumberBaseDefinition, assemblyName: "A").EmitToImageReference();
-            var ref2 = CreateCompilation(INumberBaseDefinition, assemblyName: "B").EmitToImageReference();
+            var ref1 = CreateCompilation(INumberBaseDefinition, assemblyName: "A")
+                .EmitToImageReference();
+            var ref2 = CreateCompilation(INumberBaseDefinition, assemblyName: "B")
+                .EmitToImageReference();
 
             var comp = CreateCompilation(new[] { source }, references: new[] { ref1, ref2 });
             comp.VerifyDiagnostics(
                 // (4,34): error CS0433: The type 'INumberBase<T>' exists in both 'A, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' and 'B, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
                 // void M<T>(T t) where T : struct, INumberBase<T>
-                Diagnostic(ErrorCode.ERR_SameFullNameAggAgg, "INumberBase<T>").WithArguments("A, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null", "System.Numerics.INumberBase<T>", "B, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null").WithLocation(4, 34),
+                Diagnostic(ErrorCode.ERR_SameFullNameAggAgg, "INumberBase<T>")
+                    .WithArguments(
+                        "A, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                        "System.Numerics.INumberBase<T>",
+                        "B, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                    )
+                    .WithLocation(4, 34),
                 // (11,9): error CS8985: List patterns may not be used for a value of type 'T'. No suitable 'Length' or 'Count' property was found.
                 //         [] => 4, // 3
-                Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]").WithArguments("T").WithLocation(11, 9),
+                Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
+                    .WithArguments("T")
+                    .WithLocation(11, 9),
                 // (11,9): error CS0518: Predefined type 'System.Index' is not defined or imported
                 //         [] => 4, // 3
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[]").WithArguments("System.Index").WithLocation(11, 9),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[]")
+                    .WithArguments("System.Index")
+                    .WithLocation(11, 9),
                 // (11,9): error CS0021: Cannot apply indexing with [] to an expression of type 'T'
                 //         [] => 4, // 3
-                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]").WithArguments("T").WithLocation(11, 9),
+                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]")
+                    .WithArguments("T")
+                    .WithLocation(11, 9),
                 // (13,9): error CS8121: An expression of type 'T' cannot be handled by a pattern of type 'string'.
                 //         "" => 6, // 4
-                Diagnostic(ErrorCode.ERR_PatternWrongType, @"""""").WithArguments("T", "string").WithLocation(13, 9)
+                Diagnostic(ErrorCode.ERR_PatternWrongType, @"""""")
+                    .WithArguments("T", "string")
+                    .WithLocation(13, 9)
             );
         }
 
@@ -2118,29 +2488,43 @@ _ = x is { Length.Error: > 0 };
                 }
                 """;
 
-            var ref1 = CreateCompilation(INumberBaseDefinition, assemblyName: "A").EmitToImageReference(aliases: ImmutableArray.Create("A"));
-            var ref2 = CreateCompilation(INumberBaseDefinition, assemblyName: "B").EmitToImageReference();
+            var ref1 = CreateCompilation(INumberBaseDefinition, assemblyName: "A")
+                .EmitToImageReference(aliases: ImmutableArray.Create("A"));
+            var ref2 = CreateCompilation(INumberBaseDefinition, assemblyName: "B")
+                .EmitToImageReference();
 
             var comp = CreateCompilation(new[] { source }, references: new[] { ref1, ref2 });
             comp.VerifyDiagnostics(
                 // (8,9): error CS9060: Cannot use a numeric constant or relational pattern on 'T' because it inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc numeric type.
                 //         1 => 1, // 1
-                Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "1").WithArguments("T").WithLocation(8, 9),
+                Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "1")
+                    .WithArguments("T")
+                    .WithLocation(8, 9),
                 // (9,9): error CS9060: Cannot use a numeric constant or relational pattern on 'T' because it inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc numeric type.
                 //         > 1 => 2, // 2
-                Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "> 1").WithArguments("T").WithLocation(9, 9),
+                Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "> 1")
+                    .WithArguments("T")
+                    .WithLocation(9, 9),
                 // (11,9): error CS8985: List patterns may not be used for a value of type 'T'. No suitable 'Length' or 'Count' property was found.
                 //         [] => 4, // 3
-                Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]").WithArguments("T").WithLocation(11, 9),
+                Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
+                    .WithArguments("T")
+                    .WithLocation(11, 9),
                 // (11,9): error CS0518: Predefined type 'System.Index' is not defined or imported
                 //         [] => 4, // 3
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[]").WithArguments("System.Index").WithLocation(11, 9),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[]")
+                    .WithArguments("System.Index")
+                    .WithLocation(11, 9),
                 // (11,9): error CS0021: Cannot apply indexing with [] to an expression of type 'T'
                 //         [] => 4, // 3
-                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]").WithArguments("T").WithLocation(11, 9),
+                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]")
+                    .WithArguments("T")
+                    .WithLocation(11, 9),
                 // (13,9): error CS8121: An expression of type 'T' cannot be handled by a pattern of type 'string'.
                 //         "" => 6, // 4
-                Diagnostic(ErrorCode.ERR_PatternWrongType, @"""""").WithArguments("T", "string").WithLocation(13, 9)
+                Diagnostic(ErrorCode.ERR_PatternWrongType, @"""""")
+                    .WithArguments("T", "string")
+                    .WithLocation(13, 9)
             );
         }
 
@@ -2177,28 +2561,44 @@ _ = x is { Length.Error: > 0 };
             comp.VerifyDiagnostics(
                 // (7,5): error CS0029: Cannot implicitly convert type 'int' to 'C'
                 //     1 => 1, // 1
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1").WithArguments("int", "C").WithLocation(7, 5),
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
+                    .WithArguments("int", "C")
+                    .WithLocation(7, 5),
                 // (8,5): error CS8781: Relational patterns may not be used for a value of type 'C'.
                 //     > 1 => 2, // 2
-                Diagnostic(ErrorCode.ERR_UnsupportedTypeForRelationalPattern, "> 1").WithArguments("C").WithLocation(8, 5),
+                Diagnostic(ErrorCode.ERR_UnsupportedTypeForRelationalPattern, "> 1")
+                    .WithArguments("C")
+                    .WithLocation(8, 5),
                 // (8,7): error CS0029: Cannot implicitly convert type 'int' to 'C'
                 //     > 1 => 2, // 2
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1").WithArguments("int", "C").WithLocation(8, 7),
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
+                    .WithArguments("int", "C")
+                    .WithLocation(8, 7),
                 // (9,5): error CS8121: An expression of type 'C' cannot be handled by a pattern of type 'int'.
                 //     int => 3, // 3
-                Diagnostic(ErrorCode.ERR_PatternWrongType, "int").WithArguments("C", "int").WithLocation(9, 5),
+                Diagnostic(ErrorCode.ERR_PatternWrongType, "int")
+                    .WithArguments("C", "int")
+                    .WithLocation(9, 5),
                 // (10,5): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length' or 'Count' property was found.
                 //     [] => 4, // 4
-                Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]").WithArguments("C").WithLocation(10, 5),
+                Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
+                    .WithArguments("C")
+                    .WithLocation(10, 5),
                 // (10,5): error CS0518: Predefined type 'System.Index' is not defined or imported
                 //     [] => 4, // 4
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[]").WithArguments("System.Index").WithLocation(10, 5),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[]")
+                    .WithArguments("System.Index")
+                    .WithLocation(10, 5),
                 // (10,5): error CS0021: Cannot apply indexing with [] to an expression of type 'C'
                 //     [] => 4, // 4
-                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]").WithArguments("C").WithLocation(10, 5),
+                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]")
+                    .WithArguments("C")
+                    .WithLocation(10, 5),
                 // (12,5): error CS0029: Cannot implicitly convert type 'string' to 'C'
                 //     "" => 6, // 5
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""""").WithArguments("string", "C").WithLocation(12, 5)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""""")
+                    .WithArguments("string", "C")
+                    .WithLocation(12, 5)
             );
         }
 
@@ -2232,38 +2632,62 @@ _ = x is { Length.Error: > 0 };
                 }
                 """;
 
-            var ref1 = CreateCompilation(INumberBaseDefinition, assemblyName: "A").EmitToImageReference();
-            var ref2 = CreateCompilation(INumberBaseDefinition, assemblyName: "B").EmitToImageReference();
+            var ref1 = CreateCompilation(INumberBaseDefinition, assemblyName: "A")
+                .EmitToImageReference();
+            var ref2 = CreateCompilation(INumberBaseDefinition, assemblyName: "B")
+                .EmitToImageReference();
 
             var comp = CreateCompilation(new[] { source }, references: new[] { ref1, ref2 });
             comp.VerifyDiagnostics(
                 // (7,5): error CS0029: Cannot implicitly convert type 'int' to 'C'
                 //     1 => 1, // 1
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1").WithArguments("int", "C").WithLocation(7, 5),
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
+                    .WithArguments("int", "C")
+                    .WithLocation(7, 5),
                 // (8,5): error CS8781: Relational patterns may not be used for a value of type 'C'.
                 //     > 1 => 2, // 2
-                Diagnostic(ErrorCode.ERR_UnsupportedTypeForRelationalPattern, "> 1").WithArguments("C").WithLocation(8, 5),
+                Diagnostic(ErrorCode.ERR_UnsupportedTypeForRelationalPattern, "> 1")
+                    .WithArguments("C")
+                    .WithLocation(8, 5),
                 // (8,7): error CS0029: Cannot implicitly convert type 'int' to 'C'
                 //     > 1 => 2, // 2
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1").WithArguments("int", "C").WithLocation(8, 7),
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
+                    .WithArguments("int", "C")
+                    .WithLocation(8, 7),
                 // (9,5): error CS8121: An expression of type 'C' cannot be handled by a pattern of type 'int'.
                 //     int => 3, // 3
-                Diagnostic(ErrorCode.ERR_PatternWrongType, "int").WithArguments("C", "int").WithLocation(9, 5),
+                Diagnostic(ErrorCode.ERR_PatternWrongType, "int")
+                    .WithArguments("C", "int")
+                    .WithLocation(9, 5),
                 // (10,5): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length' or 'Count' property was found.
                 //     [] => 4, // 4
-                Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]").WithArguments("C").WithLocation(10, 5),
+                Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
+                    .WithArguments("C")
+                    .WithLocation(10, 5),
                 // (10,5): error CS0518: Predefined type 'System.Index' is not defined or imported
                 //     [] => 4, // 4
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[]").WithArguments("System.Index").WithLocation(10, 5),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[]")
+                    .WithArguments("System.Index")
+                    .WithLocation(10, 5),
                 // (10,5): error CS0021: Cannot apply indexing with [] to an expression of type 'C'
                 //     [] => 4, // 4
-                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]").WithArguments("C").WithLocation(10, 5),
+                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]")
+                    .WithArguments("C")
+                    .WithLocation(10, 5),
                 // (12,5): error CS0029: Cannot implicitly convert type 'string' to 'C'
                 //     "" => 6, // 5
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""""").WithArguments("string", "C").WithLocation(12, 5),
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""""")
+                    .WithArguments("string", "C")
+                    .WithLocation(12, 5),
                 // (19,5): error CS0433: The type 'INumberBase<T>' exists in both 'A, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' and 'B, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
                 //     INumberBase<C>
-                Diagnostic(ErrorCode.ERR_SameFullNameAggAgg, "INumberBase<C>").WithArguments("A, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null", "System.Numerics.INumberBase<T>", "B, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null").WithLocation(19, 5)
+                Diagnostic(ErrorCode.ERR_SameFullNameAggAgg, "INumberBase<C>")
+                    .WithArguments(
+                        "A, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                        "System.Numerics.INumberBase<T>",
+                        "B, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                    )
+                    .WithLocation(19, 5)
             );
         }
 
@@ -2271,7 +2695,9 @@ _ = x is { Length.Error: > 0 };
         [InlineData("class")]
         [InlineData("struct")]
         [InlineData("interface")]
-        public void ForbiddenOnTypeParametersInheritingFromINumberBase_MultipleReferences02(string type)
+        public void ForbiddenOnTypeParametersInheritingFromINumberBase_MultipleReferences02(
+            string type
+        )
         {
             var source = $$"""
                 extern alias A;
@@ -2296,35 +2722,52 @@ _ = x is { Length.Error: > 0 };
                 }
                 """;
 
-            var ref1 = CreateCompilation(INumberBaseDefinition).EmitToImageReference(aliases: ImmutableArray.Create("A"));
+            var ref1 = CreateCompilation(INumberBaseDefinition)
+                .EmitToImageReference(aliases: ImmutableArray.Create("A"));
             var ref2 = CreateCompilation(INumberBaseDefinition).EmitToImageReference();
 
             var comp = CreateCompilation(new[] { source }, references: new[] { ref1, ref2 });
             comp.VerifyDiagnostics(
                 // (7,5): error CS0029: Cannot implicitly convert type 'int' to 'C'
                 //     1 => 1, // 1
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1").WithArguments("int", "C").WithLocation(7, 5),
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
+                    .WithArguments("int", "C")
+                    .WithLocation(7, 5),
                 // (8,5): error CS8781: Relational patterns may not be used for a value of type 'C'.
                 //     > 1 => 2, // 2
-                Diagnostic(ErrorCode.ERR_UnsupportedTypeForRelationalPattern, "> 1").WithArguments("C").WithLocation(8, 5),
+                Diagnostic(ErrorCode.ERR_UnsupportedTypeForRelationalPattern, "> 1")
+                    .WithArguments("C")
+                    .WithLocation(8, 5),
                 // (8,7): error CS0029: Cannot implicitly convert type 'int' to 'C'
                 //     > 1 => 2, // 2
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1").WithArguments("int", "C").WithLocation(8, 7),
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
+                    .WithArguments("int", "C")
+                    .WithLocation(8, 7),
                 // (9,5): error CS8121: An expression of type 'C' cannot be handled by a pattern of type 'int'.
                 //     int => 3, // 3
-                Diagnostic(ErrorCode.ERR_PatternWrongType, "int").WithArguments("C", "int").WithLocation(9, 5),
+                Diagnostic(ErrorCode.ERR_PatternWrongType, "int")
+                    .WithArguments("C", "int")
+                    .WithLocation(9, 5),
                 // (10,5): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length' or 'Count' property was found.
                 //     [] => 4, // 4
-                Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]").WithArguments("C").WithLocation(10, 5),
+                Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
+                    .WithArguments("C")
+                    .WithLocation(10, 5),
                 // (10,5): error CS0518: Predefined type 'System.Index' is not defined or imported
                 //     [] => 4, // 4
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[]").WithArguments("System.Index").WithLocation(10, 5),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[]")
+                    .WithArguments("System.Index")
+                    .WithLocation(10, 5),
                 // (10,5): error CS0021: Cannot apply indexing with [] to an expression of type 'C'
                 //     [] => 4, // 4
-                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]").WithArguments("C").WithLocation(10, 5),
+                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]")
+                    .WithArguments("C")
+                    .WithLocation(10, 5),
                 // (12,5): error CS0029: Cannot implicitly convert type 'string' to 'C'
                 //     "" => 6, // 5
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""""").WithArguments("string", "C").WithLocation(12, 5)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""""")
+                    .WithArguments("string", "C")
+                    .WithLocation(12, 5)
             );
         }
 
@@ -2382,7 +2825,9 @@ _ = x is { Length.Error: > 0 };
                 };
                 """;
 
-            var comp = CreateEmptyCompilation(new[] { source, INumberBaseBCL, INumberBaseDefinition });
+            var comp = CreateEmptyCompilation(
+                new[] { source, INumberBaseBCL, INumberBaseDefinition }
+            );
             comp.VerifyDiagnostics();
         }
 
@@ -2412,7 +2857,9 @@ _ = x is { Length.Error: > 0 };
                 };
                 """;
 
-            var comp = CreateEmptyCompilation(new[] { source, INumberBaseBCL, INumberBaseDefinition });
+            var comp = CreateEmptyCompilation(
+                new[] { source, INumberBaseBCL, INumberBaseDefinition }
+            );
             comp.VerifyDiagnostics();
         }
 
@@ -2430,14 +2877,20 @@ _ = x is { Length.Error: > 0 };
                 };
                 """;
 
-            var comp = CreateEmptyCompilation(new[] { source, INumberBaseBCL, INumberBaseDefinition });
+            var comp = CreateEmptyCompilation(
+                new[] { source, INumberBaseBCL, INumberBaseDefinition }
+            );
             comp.VerifyDiagnostics(
                 // (5,5): error CS9060: Cannot use a numeric constant or relational pattern on 'INumberBase<int>' because it inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc numeric type.
                 //     1 => 1,
-                Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "1").WithArguments("System.Numerics.INumberBase<int>").WithLocation(5, 5),
+                Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "1")
+                    .WithArguments("System.Numerics.INumberBase<int>")
+                    .WithLocation(5, 5),
                 // (6,5): error CS9060: Cannot use a numeric constant or relational pattern on 'INumberBase<int>' because it inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc numeric type.
                 //     > 1 => 2,
-                Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "> 1").WithArguments("System.Numerics.INumberBase<int>").WithLocation(6, 5)
+                Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "> 1")
+                    .WithArguments("System.Numerics.INumberBase<int>")
+                    .WithLocation(6, 5)
             );
         }
 
@@ -2454,7 +2907,9 @@ _ = x is { Length.Error: > 0 };
         [InlineData("float")]
         [InlineData("double")]
         [InlineData("decimal")]
-        public void MatchingOnConstantConversionsWithINumberBaseIsAllowed_TypePatternToINumberBaseT(string inputType)
+        public void MatchingOnConstantConversionsWithINumberBaseIsAllowed_TypePatternToINumberBaseT(
+            string inputType
+        )
         {
             var source = $$"""
                 using System.Numerics;
@@ -2467,17 +2922,25 @@ _ = x is { Length.Error: > 0 };
                 };
                 """;
 
-            var comp = CreateEmptyCompilation(new[] { source, INumberBaseBCL, INumberBaseDefinition });
+            var comp = CreateEmptyCompilation(
+                new[] { source, INumberBaseBCL, INumberBaseDefinition }
+            );
             comp.VerifyDiagnostics(
                 // (5,5): error CS0029: Cannot implicitly convert type 'int' to 'System.Numerics.INumberBase<nint>'
                 //     1 => 1,
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1").WithArguments("int", $"System.Numerics.INumberBase<{inputType}>").WithLocation(5, 5),
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
+                    .WithArguments("int", $"System.Numerics.INumberBase<{inputType}>")
+                    .WithLocation(5, 5),
                 // (6,5): error CS8781: Relational patterns may not be used for a value of type 'System.Numerics.INumberBase<nint>'.
                 //     > 1 => 2,
-                Diagnostic(ErrorCode.ERR_UnsupportedTypeForRelationalPattern, "> 1").WithArguments($"System.Numerics.INumberBase<{inputType}>").WithLocation(6, 5),
+                Diagnostic(ErrorCode.ERR_UnsupportedTypeForRelationalPattern, "> 1")
+                    .WithArguments($"System.Numerics.INumberBase<{inputType}>")
+                    .WithLocation(6, 5),
                 // (6,7): error CS0029: Cannot implicitly convert type 'int' to 'System.Numerics.INumberBase<nint>'
                 //     > 1 => 2,
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1").WithArguments("int", $"System.Numerics.INumberBase<{inputType}>").WithLocation(6, 7)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
+                    .WithArguments("int", $"System.Numerics.INumberBase<{inputType}>")
+                    .WithLocation(6, 7)
             );
         }
 

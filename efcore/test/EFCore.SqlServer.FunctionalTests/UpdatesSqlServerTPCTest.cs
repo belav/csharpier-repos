@@ -7,13 +7,14 @@ using Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class UpdatesSqlServerTPCTest : UpdatesSqlServerTestBase<UpdatesSqlServerTPCTest.UpdatesSqlServerTPCFixture>
+public class UpdatesSqlServerTPCTest
+    : UpdatesSqlServerTestBase<UpdatesSqlServerTPCTest.UpdatesSqlServerTPCFixture>
 {
     // ReSharper disable once UnusedParameter.Local
-    public UpdatesSqlServerTPCTest(UpdatesSqlServerTPCFixture fixture, ITestOutputHelper testOutputHelper)
-        : base(fixture, testOutputHelper)
-    {
-    }
+    public UpdatesSqlServerTPCTest(
+        UpdatesSqlServerTPCFixture fixture,
+        ITestOutputHelper testOutputHelper
+    ) : base(fixture, testOutputHelper) { }
 
     public override void Save_with_shared_foreign_key()
     {
@@ -36,7 +37,8 @@ SET IMPLICIT_TRANSACTIONS OFF;
 SET NOCOUNT ON;
 INSERT INTO [SpecialCategory] ([Name], [PrincipalId])
 OUTPUT INSERTED.[Id]
-VALUES (@p0, @p1);");
+VALUES (@p0, @p1);"
+        );
     }
 
     public override void Save_replaced_principal()
@@ -44,7 +46,7 @@ VALUES (@p0, @p1);");
         base.Save_replaced_principal();
 
         AssertSql(
-"""
+            """
 SELECT TOP(2) [t].[Id], [t].[Name], [t].[PrincipalId], [t].[Discriminator]
 FROM (
     SELECT [c].[Id], [c].[Name], [c].[PrincipalId], N'Category' AS [Discriminator]
@@ -55,7 +57,7 @@ FROM (
 ) AS [t]
 """,
             //
-"""
+            """
 @__category_PrincipalId_0='778' (Nullable = true)
 
 SELECT [p].[Id], [p].[Discriminator], [p].[DependentId], [p].[Name], [p].[Price]
@@ -63,7 +65,7 @@ FROM [ProductBase] AS [p]
 WHERE [p].[Discriminator] = N'Product' AND [p].[DependentId] = @__category_PrincipalId_0
 """,
             //
-"""
+            """
 @p1='1'
 @p0='New Category' (Size = 4000)
 
@@ -74,7 +76,7 @@ OUTPUT 1
 WHERE [Id] = @p1;
 """,
             //
-"""
+            """
 SELECT TOP(2) [t].[Id], [t].[Name], [t].[PrincipalId], [t].[Discriminator]
 FROM (
     SELECT [c].[Id], [c].[Name], [c].[PrincipalId], N'Category' AS [Discriminator]
@@ -85,23 +87,23 @@ FROM (
 ) AS [t]
 """,
             //
-"""
+            """
 @__category_PrincipalId_0='778' (Nullable = true)
 
 SELECT [p].[Id], [p].[Discriminator], [p].[DependentId], [p].[Name], [p].[Price]
 FROM [ProductBase] AS [p]
 WHERE [p].[Discriminator] = N'Product' AND [p].[DependentId] = @__category_PrincipalId_0
-""");
+"""
+        );
     }
 
     public class UpdatesSqlServerTPCFixture : UpdatesSqlServerFixtureBase
     {
-        protected override string StoreName
-            => "UpdateTestTPC";
+        protected override string StoreName => "UpdateTestTPC";
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder).ConfigureWarnings(
-                w =>
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder)
+                .ConfigureWarnings(w =>
                 {
                     w.Log(RelationalEventId.ForeignKeyTpcPrincipalWarning);
                 });

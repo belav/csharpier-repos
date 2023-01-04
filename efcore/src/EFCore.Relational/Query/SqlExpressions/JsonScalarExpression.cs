@@ -25,18 +25,23 @@ public class JsonScalarExpression : SqlExpression
         ColumnExpression jsonColumn,
         IProperty property,
         IReadOnlyList<PathSegment> path,
-        bool nullable)
-        : this(jsonColumn, path, property.ClrType.UnwrapNullableType(), property.FindRelationalTypeMapping()!, nullable)
-    {
-    }
+        bool nullable
+    )
+        : this(
+            jsonColumn,
+            path,
+            property.ClrType.UnwrapNullableType(),
+            property.FindRelationalTypeMapping()!,
+            nullable
+        ) { }
 
     internal JsonScalarExpression(
         ColumnExpression jsonColumn,
         IReadOnlyList<PathSegment> path,
         Type type,
         RelationalTypeMapping typeMapping,
-        bool nullable)
-        : base(type, typeMapping)
+        bool nullable
+    ) : base(type, typeMapping)
     {
         JsonColumn = jsonColumn;
         Path = path;
@@ -71,7 +76,8 @@ public class JsonScalarExpression : SqlExpression
                 Path,
                 Type,
                 TypeMapping!,
-                IsNullable || jsonColumnMadeNullable)
+                IsNullable || jsonColumnMadeNullable
+            )
             : this;
     }
 
@@ -81,8 +87,8 @@ public class JsonScalarExpression : SqlExpression
     /// </summary>
     /// <param name="jsonColumn">The <see cref="JsonColumn" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public virtual JsonScalarExpression Update(ColumnExpression jsonColumn)
-        => jsonColumn != JsonColumn
+    public virtual JsonScalarExpression Update(ColumnExpression jsonColumn) =>
+        jsonColumn != JsonColumn
             ? new JsonScalarExpression(jsonColumn, Path, Type, TypeMapping!, IsNullable)
             : this;
 
@@ -95,12 +101,11 @@ public class JsonScalarExpression : SqlExpression
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj is JsonScalarExpression jsonScalarExpression
-            && JsonColumn.Equals(jsonScalarExpression.JsonColumn)
-            && Path.SequenceEqual(jsonScalarExpression.Path);
+    public override bool Equals(object? obj) =>
+        obj is JsonScalarExpression jsonScalarExpression
+        && JsonColumn.Equals(jsonScalarExpression.JsonColumn)
+        && Path.SequenceEqual(jsonScalarExpression.Path);
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), JsonColumn, Path);
+    public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), JsonColumn, Path);
 }

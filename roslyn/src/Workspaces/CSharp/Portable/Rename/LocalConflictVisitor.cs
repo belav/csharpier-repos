@@ -17,8 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
     {
         private readonly ConflictingIdentifierTracker _tracker;
 
-        public LocalConflictVisitor(SyntaxToken tokenBeingRenamed)
-            => _tracker = new ConflictingIdentifierTracker(tokenBeingRenamed, StringComparer.Ordinal);
+        public LocalConflictVisitor(SyntaxToken tokenBeingRenamed) =>
+            _tracker = new ConflictingIdentifierTracker(tokenBeingRenamed, StringComparer.Ordinal);
 
         public override void DefaultVisit(SyntaxNode node)
         {
@@ -36,8 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
             _tracker.RemoveIdentifiers(parameterTokens);
         }
 
-        public override void VisitBlock(BlockSyntax node)
-            => VisitBlockStatements(node, node.Statements);
+        public override void VisitBlock(BlockSyntax node) =>
+            VisitBlockStatements(node, node.Statements);
 
         private void VisitBlockStatements(SyntaxNode node, IEnumerable<SyntaxNode> statements)
         {
@@ -117,7 +117,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
             _tracker.RemoveIdentifier(node.Parameter.Identifier);
         }
 
-        public override void VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node)
+        public override void VisitParenthesizedLambdaExpression(
+            ParenthesizedLambdaExpressionSyntax node
+        )
         {
             var tokens = node.ParameterList.Parameters.Select(p => p.Identifier);
             _tracker.AddIdentifiers(tokens);
@@ -125,8 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
             _tracker.RemoveIdentifiers(tokens);
         }
 
-        public override void VisitQueryExpression(QueryExpressionSyntax node)
-            => VisitQueryInternal(node.FromClause, node.Body);
+        public override void VisitQueryExpression(QueryExpressionSyntax node) =>
+            VisitQueryInternal(node.FromClause, node.Body);
 
         private void VisitQueryInternal(FromClauseSyntax fromClause, QueryBodySyntax body)
         {
@@ -164,7 +166,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                 Visit(fromClause);
             }
 
-            foreach (var child in body.ChildNodes().Where(c => c.Kind() != SyntaxKind.QueryContinuation))
+            foreach (
+                var child in body.ChildNodes().Where(c => c.Kind() != SyntaxKind.QueryContinuation)
+            )
             {
                 Visit(child);
             }
@@ -184,17 +188,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
 
         public override void VisitSwitchStatement(SwitchStatementSyntax node)
         {
-            var statements = node.ChildNodes().Where(x => x.IsKind(SyntaxKind.SwitchSection)).SelectMany(x => x.ChildNodes());
+            var statements = node.ChildNodes()
+                .Where(x => x.IsKind(SyntaxKind.SwitchSection))
+                .SelectMany(x => x.ChildNodes());
 
             VisitBlockStatements(node, statements);
         }
 
         public IEnumerable<SyntaxToken> ConflictingTokens
         {
-            get
-            {
-                return _tracker.ConflictingTokens;
-            }
+            get { return _tracker.ConflictingTokens; }
         }
     }
 }

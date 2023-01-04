@@ -24,14 +24,17 @@ namespace Microsoft.CodeAnalysis
         // At that point the initial source is no longer referenced and can be garbage collected.
         private object _initialSourceOrRecoverableText;
 
-        public RecoverableTextAndVersion(ValueSource<TextAndVersion> initialSource, SolutionServices services)
+        public RecoverableTextAndVersion(
+            ValueSource<TextAndVersion> initialSource,
+            SolutionServices services
+        )
         {
             _initialSourceOrRecoverableText = initialSource;
             _services = services;
         }
 
-        public ITemporaryTextStorageInternal? Storage
-            => (_initialSourceOrRecoverableText as RecoverableText)?.Storage;
+        public ITemporaryTextStorageInternal? Storage =>
+            (_initialSourceOrRecoverableText as RecoverableText)?.Storage;
 
         public override bool TryGetValue([MaybeNullWhen(false)] out TextAndVersion value)
         {
@@ -42,13 +45,19 @@ namespace Microsoft.CodeAnalysis
             {
                 if (recoverableText.TryGetValue(out var text))
                 {
-                    value = TextAndVersion.Create(text, recoverableText.Version, recoverableText.LoadDiagnostic);
+                    value = TextAndVersion.Create(
+                        text,
+                        recoverableText.Version,
+                        recoverableText.LoadDiagnostic
+                    );
                     return true;
                 }
             }
             else
             {
-                return ((ValueSource<TextAndVersion>)sourceOrRecoverableText).TryGetValue(out value);
+                return ((ValueSource<TextAndVersion>)sourceOrRecoverableText).TryGetValue(
+                    out value
+                );
             }
 
             value = null;
@@ -80,29 +89,40 @@ namespace Microsoft.CodeAnalysis
                 Interlocked.CompareExchange(
                     ref _initialSourceOrRecoverableText,
                     value: new RecoverableText(source.GetValue(cancellationToken), _services),
-                    comparand: source);
+                    comparand: source
+                );
             }
 
             var recoverableText = (RecoverableText)_initialSourceOrRecoverableText;
             return recoverableText.ToTextAndVersion(recoverableText.GetValue(cancellationToken));
         }
 
-        public override async Task<TextAndVersion> GetValueAsync(CancellationToken cancellationToken = default)
+        public override async Task<TextAndVersion> GetValueAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             if (_initialSourceOrRecoverableText is ValueSource<TextAndVersion> source)
             {
                 // replace initial source with recovarable text if it hasn't been replaced already:
                 Interlocked.CompareExchange(
                     ref _initialSourceOrRecoverableText,
-                    value: new RecoverableText(await source.GetValueAsync(cancellationToken).ConfigureAwait(false), _services),
-                    comparand: source);
+                    value: new RecoverableText(
+                        await source.GetValueAsync(cancellationToken).ConfigureAwait(false),
+                        _services
+                    ),
+                    comparand: source
+                );
             }
 
             var recoverableText = (RecoverableText)_initialSourceOrRecoverableText;
-            return recoverableText.ToTextAndVersion(await recoverableText.GetValueAsync(cancellationToken).ConfigureAwait(false));
+            return recoverableText.ToTextAndVersion(
+                await recoverableText.GetValueAsync(cancellationToken).ConfigureAwait(false)
+            );
         }
 
-        private sealed class RecoverableText : WeaklyCachedRecoverableValueSource<SourceText>, ITextVersionable
+        private sealed class RecoverableText
+            : WeaklyCachedRecoverableValueSource<SourceText>,
+                ITextVersionable
         {
             private readonly ITemporaryStorageServiceInternal _storageService;
             public readonly VersionStamp Version;
@@ -119,16 +139,23 @@ namespace Microsoft.CodeAnalysis
                 LoadDiagnostic = textAndVersion.LoadDiagnostic;
             }
 
-            public TextAndVersion ToTextAndVersion(SourceText text)
-                => TextAndVersion.Create(text, Version, LoadDiagnostic);
+            public TextAndVersion ToTextAndVersion(SourceText text) =>
+                TextAndVersion.Create(text, Version, LoadDiagnostic);
 
             public ITemporaryTextStorageInternal? Storage => _storage;
 
-            protected override async Task<SourceText> RecoverAsync(CancellationToken cancellationToken)
+            protected override async Task<SourceText> RecoverAsync(
+                CancellationToken cancellationToken
+            )
             {
                 Contract.ThrowIfNull(_storage);
 
-                using (Logger.LogBlock(FunctionId.Workspace_Recoverable_RecoverTextAsync, cancellationToken))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.Workspace_Recoverable_RecoverTextAsync,
+                        cancellationToken
+                    )
+                )
                 {
                     return await _storage.ReadTextAsync(cancellationToken).ConfigureAwait(false);
                 }
@@ -138,13 +165,18 @@ namespace Microsoft.CodeAnalysis
             {
                 Contract.ThrowIfNull(_storage);
 
-                using (Logger.LogBlock(FunctionId.Workspace_Recoverable_RecoverText, cancellationToken))
+                using (
+                    Logger.LogBlock(FunctionId.Workspace_Recoverable_RecoverText, cancellationToken)
+                )
                 {
                     return _storage.ReadText(cancellationToken);
                 }
             }
 
-            protected override async Task SaveAsync(SourceText text, CancellationToken cancellationToken)
+            protected override async Task SaveAsync(
+                SourceText text,
+                CancellationToken cancellationToken
+            )
             {
                 Contract.ThrowIfFalse(_storage == null); // Cannot save more than once
 

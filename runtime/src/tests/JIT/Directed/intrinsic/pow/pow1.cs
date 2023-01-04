@@ -11,12 +11,15 @@ internal class pow1
 {
     public static int Main()
     {
-        double x, y, z;
+        double x,
+            y,
+            z;
         bool pass = true;
 
         //Check if the test is being executed on ARMARCH
-        bool isProcessorArmArch = RuntimeInformation.ProcessArchitecture == Architecture.Arm
-                                || RuntimeInformation.ProcessArchitecture == Architecture.Arm64;
+        bool isProcessorArmArch =
+            RuntimeInformation.ProcessArchitecture == Architecture.Arm
+            || RuntimeInformation.ProcessArchitecture == Architecture.Arm64;
 
         x = 0;
         y = 0;

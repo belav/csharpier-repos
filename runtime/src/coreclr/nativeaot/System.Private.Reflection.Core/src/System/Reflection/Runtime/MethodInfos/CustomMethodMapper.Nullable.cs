@@ -21,19 +21,26 @@ namespace System.Reflection.Runtime.MethodInfos
                 {
                     if (s_lazyMap == null)
                     {
-                        Dictionary<MethodBase, CustomMethodInvokerAction> map = new Dictionary<MethodBase, CustomMethodInvokerAction>();
+                        Dictionary<MethodBase, CustomMethodInvokerAction> map =
+                            new Dictionary<MethodBase, CustomMethodInvokerAction>();
 
                         Type type = typeof(Nullable<>);
                         Type theT = type.GetGenericTypeParameters()[0];
 
-                        map.AddMethod(type, nameof(Nullable<int>.ToString), Array.Empty<Type>(),
+                        map.AddMethod(
+                            type,
+                            nameof(Nullable<int>.ToString),
+                            Array.Empty<Type>(),
                             (object thisObject, object[] args, Type thisType) =>
                             {
                                 return thisObject == null ? string.Empty : thisObject.ToString();
                             }
                         );
 
-                        map.AddMethod(type, nameof(Nullable<int>.Equals), new Type[] { typeof(object) },
+                        map.AddMethod(
+                            type,
+                            nameof(Nullable<int>.Equals),
+                            new Type[] { typeof(object) },
                             (object thisObject, object[] args, Type thisType) =>
                             {
                                 object other = args[0];
@@ -45,41 +52,65 @@ namespace System.Reflection.Runtime.MethodInfos
                             }
                         );
 
-                        map.AddMethod(type, nameof(Nullable<int>.GetHashCode), Array.Empty<Type>(),
+                        map.AddMethod(
+                            type,
+                            nameof(Nullable<int>.GetHashCode),
+                            Array.Empty<Type>(),
                             (object thisObject, object[] args, Type thisType) =>
                             {
                                 return thisObject == null ? 0 : thisObject.GetHashCode();
                             }
                         );
 
-                        map.AddConstructor(type, new Type[] { theT },
+                        map.AddConstructor(
+                            type,
+                            new Type[] { theT },
                             (object thisObject, object[] args, Type thisType) =>
                             {
                                 return args[0];
                             }
-                         );
+                        );
 
-                        map.AddMethod(type, "get_" + nameof(Nullable<int>.HasValue), Array.Empty<Type>(),
+                        map.AddMethod(
+                            type,
+                            "get_" + nameof(Nullable<int>.HasValue),
+                            Array.Empty<Type>(),
                             (object thisObject, object[] args, Type thisType) =>
                             {
                                 return thisObject != null;
                             }
                         );
 
-                        map.AddMethod(type, "get_" + nameof(Nullable<int>.Value), Array.Empty<Type>(),
+                        map.AddMethod(
+                            type,
+                            "get_" + nameof(Nullable<int>.Value),
+                            Array.Empty<Type>(),
                             (object thisObject, object[] args, Type thisType) =>
                             {
                                 if (thisObject == null)
-                                    throw new InvalidOperationException(SR.InvalidOperation_NoValue);
+                                    throw new InvalidOperationException(
+                                        SR.InvalidOperation_NoValue
+                                    );
                                 return thisObject;
                             }
                         );
 
-                        map.AddMethod(type, nameof(Nullable<int>.GetValueOrDefault), Array.Empty<Type>(), NullableGetValueOrDefault);
+                        map.AddMethod(
+                            type,
+                            nameof(Nullable<int>.GetValueOrDefault),
+                            Array.Empty<Type>(),
+                            NullableGetValueOrDefault
+                        );
 
-                        static object NullableGetValueOrDefault(object thisObject, object[] args,
-                            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-                            Type thisType)
+                        static object NullableGetValueOrDefault(
+                            object thisObject,
+                            object[] args,
+                            [DynamicallyAccessedMembers(
+                                DynamicallyAccessedMemberTypes.PublicConstructors
+                                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+                            )]
+                                Type thisType
+                        )
                         {
                             if (thisObject == null)
                                 return RuntimeHelpers.GetUninitializedObject(thisType);
@@ -87,7 +118,10 @@ namespace System.Reflection.Runtime.MethodInfos
                             return thisObject;
                         }
 
-                        map.AddMethod(type, nameof(Nullable<int>.GetValueOrDefault), new Type[] { theT },
+                        map.AddMethod(
+                            type,
+                            nameof(Nullable<int>.GetValueOrDefault),
+                            new Type[] { theT },
                             (object thisObject, object[] args, Type thisType) =>
                             {
                                 if (thisObject == null)

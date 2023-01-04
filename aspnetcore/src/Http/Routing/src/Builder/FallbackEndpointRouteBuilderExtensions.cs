@@ -37,7 +37,10 @@ public static class FallbackEndpointRouteBuilderExtensions
     /// </para>
     /// </remarks>
     [RequiresUnreferencedCode(EndpointRouteBuilderExtensions.MapEndpointTrimmerWarning)]
-    public static IEndpointConventionBuilder MapFallback(this IEndpointRouteBuilder endpoints, RequestDelegate requestDelegate)
+    public static IEndpointConventionBuilder MapFallback(
+        this IEndpointRouteBuilder endpoints,
+        RequestDelegate requestDelegate
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoints);
         ArgumentNullException.ThrowIfNull(requestDelegate);
@@ -70,7 +73,8 @@ public static class FallbackEndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder MapFallback(
         this IEndpointRouteBuilder endpoints,
         [StringSyntax("Route")] string pattern,
-        RequestDelegate requestDelegate)
+        RequestDelegate requestDelegate
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoints);
         ArgumentNullException.ThrowIfNull(pattern);

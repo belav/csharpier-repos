@@ -19,11 +19,17 @@ using Microsoft.VisualStudio.LanguageServices.Xaml.Telemetry;
 
 namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
 {
-    internal interface ILSPServiceRequestExecutionQueue : IRequestExecutionQueue<RequestContext>, ILspService
-    {
-    }
+    internal interface ILSPServiceRequestExecutionQueue
+        : IRequestExecutionQueue<RequestContext>,
+            ILspService { }
 
-    [ExportLspServiceFactory(typeof(ILSPServiceRequestExecutionQueue), StringConstants.XamlLspLanguagesContract), Shared]
+    [
+        ExportLspServiceFactory(
+            typeof(ILSPServiceRequestExecutionQueue),
+            StringConstants.XamlLspLanguagesContract
+        ),
+        Shared
+    ]
     internal sealed class XamlRequestExecutionQueueFactory : ILspServiceFactory
     {
         private readonly XamlProjectService _projectService;
@@ -33,17 +39,26 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public XamlRequestExecutionQueueFactory(
             XamlProjectService projectService,
-            [Import(AllowDefault = true)] IXamlLanguageServerFeedbackService? feedbackService)
+            [Import(AllowDefault = true)] IXamlLanguageServerFeedbackService? feedbackService
+        )
         {
             _projectService = projectService;
             _feedbackService = feedbackService;
         }
 
-        public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
+        public ILspService CreateILspService(
+            LspServices lspServices,
+            WellKnownLspServerKinds serverKind
+        )
         {
             var handlerProvider = lspServices.GetRequiredService<IHandlerProvider>();
             var logger = lspServices.GetRequiredService<ILspLogger>();
-            return new XamlRequestExecutionQueue(_projectService, _feedbackService, logger, handlerProvider);
+            return new XamlRequestExecutionQueue(
+                _projectService,
+                _feedbackService,
+                logger,
+                handlerProvider
+            );
         }
 
         private class XamlRequestExecutionQueue : RequestExecutionQueue<RequestContext>, ILspService
@@ -55,7 +70,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
                 XamlProjectService projectService,
                 IXamlLanguageServerFeedbackService? feedbackService,
                 ILspLogger logger,
-                IHandlerProvider handlerProvider) : base(logger, handlerProvider)
+                IHandlerProvider handlerProvider
+            ) : base(logger, handlerProvider)
             {
                 _projectService = projectService;
                 _feedbackService = feedbackService;
@@ -65,13 +81,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
                 TRequestType request,
                 string methodName,
                 ILspServices lspServices,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var methodHandler = GetMethodHandler(lspServices, methodName);
                 TextDocumentIdentifier? textDocument = null;
                 if (methodHandler is ITextDocumentIdentifierHandler txtDocumentIdentifierHandler)
                 {
-                    if (txtDocumentIdentifierHandler is ITextDocumentIdentifierHandler<TRequestType, TextDocumentIdentifier> t)
+                    if (
+                        txtDocumentIdentifierHandler
+                        is ITextDocumentIdentifierHandler<TRequestType, TextDocumentIdentifier> t
+                    )
                     {
                         textDocument = t.GetTextDocumentIdentifier(request);
                     }
@@ -83,12 +103,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
                     documentId = _projectService.TrackOpenDocument(documentUri.LocalPath);
                 }
 
-                using (var requestScope = _feedbackService?.CreateRequestScope(documentId, methodName))
+                using (
+                    var requestScope = _feedbackService?.CreateRequestScope(documentId, methodName)
+                )
                 {
                     try
                     {
                         return await base.ExecuteAsync<TRequestType, TResponseType>(
-                            request, methodName, lspServices, cancellationToken).ConfigureAwait(false);
+                            request,
+                            methodName,
+                            lspServices,
+                            cancellationToken
+                        )
+                            .ConfigureAwait(false);
                     }
                     catch (Exception e) when (e is not OperationCanceledException)
                     {
@@ -105,7 +132,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
                     var requestType = typeof(TRequestType);
                     var responseType = typeof(TResponseType);
 
-                    var handler = handlerProvider.GetMethodHandler(methodName, requestType, responseType);
+                    var handler = handlerProvider.GetMethodHandler(
+                        methodName,
+                        requestType,
+                        responseType
+                    );
 
                     return handler;
                 }

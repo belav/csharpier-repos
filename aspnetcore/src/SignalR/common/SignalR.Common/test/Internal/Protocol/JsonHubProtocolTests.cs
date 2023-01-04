@@ -28,7 +28,9 @@ public class JsonHubProtocolTests : JsonHubProtocolTestsBase
         {
             PayloadSerializerOptions = new JsonSerializerOptions()
             {
-                DefaultIgnoreCondition = ignoreNullValues ? System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault : System.Text.Json.Serialization.JsonIgnoreCondition.Never,
+                DefaultIgnoreCondition = ignoreNullValues
+                    ? System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault
+                    : System.Text.Json.Serialization.JsonIgnoreCondition.Never,
                 PropertyNamingPolicy = useCamelCase ? JsonNamingPolicy.CamelCase : null,
                 Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
             }
@@ -48,7 +50,9 @@ public class JsonHubProtocolTests : JsonHubProtocolTestsBase
 
         var binder = new TestBinder(Array.Empty<Type>(), typeof(object));
         var data = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes(input));
-        var ex = Assert.Throws<InvalidDataException>(() => JsonHubProtocol.TryParseMessage(ref data, binder, out var _));
+        var ex = Assert.Throws<InvalidDataException>(
+            () => JsonHubProtocol.TryParseMessage(ref data, binder, out var _)
+        );
         Assert.Equal(expectedMessage, ex.Message);
     }
 
@@ -104,17 +108,51 @@ public class JsonHubProtocolTests : JsonHubProtocolTestsBase
         Assert.Equal(expectedMessage, message);
     }
 
-    public static IDictionary<string, JsonProtocolTestData> CustomProtocolTestData => new[]
-    {
-            new JsonProtocolTestData("InvocationMessage_HasFloatArgument", new InvocationMessage(null, "Target", new object[] { 1, "Foo", 2.0f }), true, true, "{\"type\":1,\"target\":\"Target\",\"arguments\":[1,\"Foo\",2]}"),
-            new JsonProtocolTestData("InvocationMessage_HasHeaders", AddHeaders(TestHeaders, new InvocationMessage("123", "Target", new object[] { 1, "Foo", 2.0f })), true, true, "{\"type\":1," + SerializedHeaders + ",\"invocationId\":\"123\",\"target\":\"Target\",\"arguments\":[1,\"Foo\",2]}"),
-
-            new JsonProtocolTestData("StreamItemMessage_HasFloatItem", new StreamItemMessage("123", 2.0f), true, true, "{\"type\":2,\"invocationId\":\"123\",\"item\":2}"),
-
-            new JsonProtocolTestData("CompletionMessage_HasFloatResult", CompletionMessage.WithResult("123", 2.0f), true, true, "{\"type\":3,\"invocationId\":\"123\",\"result\":2}"),
-
-            new JsonProtocolTestData("StreamInvocationMessage_HasFloatArgument", new StreamInvocationMessage("123", "Target", new object[] { 1, "Foo", 2.0f }), true, true, "{\"type\":4,\"invocationId\":\"123\",\"target\":\"Target\",\"arguments\":[1,\"Foo\",2]}"),
+    public static IDictionary<string, JsonProtocolTestData> CustomProtocolTestData =>
+        new[]
+        {
+            new JsonProtocolTestData(
+                "InvocationMessage_HasFloatArgument",
+                new InvocationMessage(null, "Target", new object[] { 1, "Foo", 2.0f }),
+                true,
+                true,
+                "{\"type\":1,\"target\":\"Target\",\"arguments\":[1,\"Foo\",2]}"
+            ),
+            new JsonProtocolTestData(
+                "InvocationMessage_HasHeaders",
+                AddHeaders(
+                    TestHeaders,
+                    new InvocationMessage("123", "Target", new object[] { 1, "Foo", 2.0f })
+                ),
+                true,
+                true,
+                "{\"type\":1,"
+                    + SerializedHeaders
+                    + ",\"invocationId\":\"123\",\"target\":\"Target\",\"arguments\":[1,\"Foo\",2]}"
+            ),
+            new JsonProtocolTestData(
+                "StreamItemMessage_HasFloatItem",
+                new StreamItemMessage("123", 2.0f),
+                true,
+                true,
+                "{\"type\":2,\"invocationId\":\"123\",\"item\":2}"
+            ),
+            new JsonProtocolTestData(
+                "CompletionMessage_HasFloatResult",
+                CompletionMessage.WithResult("123", 2.0f),
+                true,
+                true,
+                "{\"type\":3,\"invocationId\":\"123\",\"result\":2}"
+            ),
+            new JsonProtocolTestData(
+                "StreamInvocationMessage_HasFloatArgument",
+                new StreamInvocationMessage("123", "Target", new object[] { 1, "Foo", 2.0f }),
+                true,
+                true,
+                "{\"type\":4,\"invocationId\":\"123\",\"target\":\"Target\",\"arguments\":[1,\"Foo\",2]}"
+            ),
         }.ToDictionary(t => t.Name);
 
-    public static IEnumerable<object[]> CustomProtocolTestDataNames => CustomProtocolTestData.Keys.Select(name => new object[] { name });
+    public static IEnumerable<object[]> CustomProtocolTestDataNames =>
+        CustomProtocolTestData.Keys.Select(name => new object[] { name });
 }

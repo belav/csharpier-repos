@@ -25,20 +25,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringIndentation
         private static async Task TestAsync(string contents)
         {
             using var workspace = TestWorkspace.CreateWorkspace(
-                TestWorkspace.CreateWorkspaceElement(LanguageNames.CSharp,
+                TestWorkspace.CreateWorkspaceElement(
+                    LanguageNames.CSharp,
                     files: new[] { contents.Replace("|", " ") },
-                    isMarkup: false));
-            var document = workspace.CurrentSolution.GetRequiredDocument(workspace.Documents.First().Id);
+                    isMarkup: false
+                )
+            );
+            var document = workspace.CurrentSolution.GetRequiredDocument(
+                workspace.Documents.First().Id
+            );
             var root = await document.GetRequiredSyntaxRootAsync(default);
 
             var service = document.GetRequiredLanguageService<IStringIndentationService>();
-            var regions = await service.GetStringIndentationRegionsAsync(document, root.FullSpan, CancellationToken.None).ConfigureAwait(false);
+            var regions = await service
+                .GetStringIndentationRegionsAsync(document, root.FullSpan, CancellationToken.None)
+                .ConfigureAwait(false);
 
             var actual = ApplyRegions(contents.Replace("|", " "), regions);
             Assert.Equal(contents, actual);
         }
 
-        private static string ApplyRegions(string val, ImmutableArray<StringIndentationRegion> regions)
+        private static string ApplyRegions(
+            string val,
+            ImmutableArray<StringIndentationRegion> regions
+        )
         {
             var text = SourceText.From(val);
             using var _ = ArrayBuilder<TextChange>.GetInstance(out var changes);
@@ -64,15 +74,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringIndentation
         }
 
         [Fact]
-        public async Task TestEmptyFile()
-            => await TestAsync(string.Empty);
+        public async Task TestEmptyFile() => await TestAsync(string.Empty);
 
         [Theory]
         [InlineData("")]
         [InlineData("u8")]
         public async Task TestLiteralError1(string suffix)
         {
-            await TestAsync($@"class C
+            await TestAsync(
+                $@"class C
 {{
     void M()
     {{
@@ -80,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringIndentation
         var v = """"""
                 """"""{suffix};
     }}
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -88,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringIndentation
         [InlineData("u8")]
         public async Task TestLiteralError2(string suffix)
         {
-            await TestAsync($@"class C
+            await TestAsync(
+                $@"class C
 {{
     void M()
     {{
@@ -97,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringIndentation
             text too early
                 """"""{suffix};
     }}
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -105,7 +118,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringIndentation
         [InlineData("u8")]
         public async Task TestZeroColumn1(string suffix)
         {
-            await TestAsync($@"class C
+            await TestAsync(
+                $@"class C
 {{
     void M()
     {{
@@ -113,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringIndentation
 goo
 """"""{suffix};
     }}
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -121,7 +136,8 @@ goo
         [InlineData("u8")]
         public async Task TestZeroColumn2(string suffix)
         {
-            await TestAsync($@"class C
+            await TestAsync(
+                $@"class C
 {{
     void M()
     {{
@@ -129,7 +145,8 @@ goo
     goo
 """"""{suffix};
     }}
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -137,7 +154,8 @@ goo
         [InlineData("u8")]
         public async Task TestOneColumn1(string suffix)
         {
-            await TestAsync($@"class C
+            await TestAsync(
+                $@"class C
 {{
     void M()
     {{
@@ -145,7 +163,8 @@ goo
 |goo
  """"""{suffix};
     }}
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -153,7 +172,8 @@ goo
         [InlineData("u8")]
         public async Task TestOneColumn2(string suffix)
         {
-            await TestAsync($@"class C
+            await TestAsync(
+                $@"class C
 {{
     void M()
     {{
@@ -161,7 +181,8 @@ goo
 |   goo
  """"""{suffix};
     }}
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -169,7 +190,8 @@ goo
         [InlineData("u8")]
         public async Task TestCase1(string suffix)
         {
-            await TestAsync($@"class C
+            await TestAsync(
+                $@"class C
 {{
     void M()
     {{
@@ -177,7 +199,8 @@ goo
                |goo
                 """"""{suffix};
     }}
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -185,7 +208,8 @@ goo
         [InlineData("u8")]
         public async Task TestCase2(string suffix)
         {
-            await TestAsync($@"class C
+            await TestAsync(
+                $@"class C
 {{
     void M()
     {{
@@ -194,7 +218,8 @@ goo
                |bar
                 """"""{suffix};
     }}
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -202,7 +227,8 @@ goo
         [InlineData("u8")]
         public async Task TestCase3(string suffix)
         {
-            await TestAsync($@"class C
+            await TestAsync(
+                $@"class C
 {{
     void M()
     {{
@@ -212,7 +238,8 @@ goo
                |baz
                 """"""{suffix};
     }}
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -220,7 +247,8 @@ goo
         [InlineData("u8")]
         public async Task TestCase4(string suffix)
         {
-            await TestAsync($@"class C
+            await TestAsync(
+                $@"class C
 {{
     void M()
     {{
@@ -230,7 +258,8 @@ goo
                |baz
                 """"""{suffix};
     }}
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -238,7 +267,8 @@ goo
         [InlineData("u8")]
         public async Task TestCase5(string suffix)
         {
-            await TestAsync($@"class C
+            await TestAsync(
+                $@"class C
 {{
     void M()
     {{
@@ -248,7 +278,8 @@ goo
            |    baz
             """"""{suffix};
     }}
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -256,7 +287,8 @@ goo
         [InlineData("u8")]
         public async Task TestCase6(string suffix)
         {
-            await TestAsync($@"class C
+            await TestAsync(
+                $@"class C
 {{
     void M()
     {{
@@ -265,7 +297,8 @@ goo
            |goo
             """"""{suffix};
     }}
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -273,7 +306,8 @@ goo
         [InlineData("u8")]
         public async Task TestCase7(string suffix)
         {
-            await TestAsync($@"class C
+            await TestAsync(
+                $@"class C
 {{
     void M()
     {{
@@ -282,7 +316,8 @@ goo
             |goo
              """"""{suffix};
     }}
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -290,7 +325,8 @@ goo
         [InlineData("u8")]
         public async Task TestCase8(string suffix)
         {
-            await TestAsync($@"class C
+            await TestAsync(
+                $@"class C
 {{
     void M()
     {{
@@ -299,7 +335,8 @@ goo
             |goo
              """"""""{suffix};
     }}
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -307,7 +344,8 @@ goo
         [InlineData("u8")]
         public async Task TestCase9(string suffix)
         {
-            await TestAsync($@"class C
+            await TestAsync(
+                $@"class C
 {{
     void M()
     {{
@@ -316,13 +354,15 @@ goo
             |goo
              """"""""{suffix};
     }}
-}}");
+}}"
+            );
         }
 
         [Fact]
         public async Task TestCase10()
         {
-            await TestAsync(@"class C
+            await TestAsync(
+                @"class C
 {
     void M()
     {
@@ -331,13 +371,15 @@ goo
             |goo
              """""""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestCase11()
         {
-            await TestAsync(@"class C
+            await TestAsync(
+                @"class C
 {
     void M()
     {
@@ -346,13 +388,15 @@ goo
             |goo
              """""""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestCase12()
         {
-            await TestAsync(@"class C
+            await TestAsync(
+                @"class C
 {
     void M()
     {
@@ -361,13 +405,15 @@ goo
             |goo
              """""""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithHoles1()
         {
-            await TestAsync(@"class C
+            await TestAsync(
+                @"class C
 {
     void M()
     {
@@ -377,13 +423,15 @@ goo
            |    baz
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithHoles2()
         {
-            await TestAsync(@"class C
+            await TestAsync(
+                @"class C
 {
     void M()
     {
@@ -393,13 +441,15 @@ goo
            |    }baz
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithHoles3()
         {
-            await TestAsync(@"class C
+            await TestAsync(
+                @"class C
 {
     void M()
     {
@@ -409,13 +459,15 @@ goo
            |    }baz
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithHoles4()
         {
-            await TestAsync(@"class C
+            await TestAsync(
+                @"class C
 {
     void M()
     {
@@ -425,13 +477,15 @@ goo
                 }baz
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithHoles5()
         {
-            await TestAsync(@"class C
+            await TestAsync(
+                @"class C
 {
     void M()
     {
@@ -442,13 +496,15 @@ goo
            |    quux
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithHoles6()
         {
-            await TestAsync(@"class C
+            await TestAsync(
+                @"class C
 {
     void M()
     {
@@ -459,13 +515,15 @@ goo
            |    quux
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithHoles7()
         {
-            await TestAsync(@"class C
+            await TestAsync(
+                @"class C
 {
     void M()
     {
@@ -476,13 +534,15 @@ goo
            |quux
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithHoles8()
         {
-            await TestAsync(@"class C
+            await TestAsync(
+                @"class C
 {
     void M()
     {
@@ -491,13 +551,15 @@ goo
            |    baz
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithHoles9()
         {
-            await TestAsync(@"class C
+            await TestAsync(
+                @"class C
 {
     void M()
     {
@@ -508,13 +570,15 @@ goo
            |    baz
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithHoles10()
         {
-            await TestAsync(@"class C
+            await TestAsync(
+                @"class C
 {
     void M()
     {
@@ -525,13 +589,15 @@ goo
            |    baz
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithNestedHoles1()
         {
-            await TestAsync(@"class C
+            await TestAsync(
+                @"class C
 {
     void M()
     {
@@ -546,13 +612,15 @@ goo
             |baz
              """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithNestedHoles2()
         {
-            await TestAsync(@"class C
+            await TestAsync(
+                @"class C
 {
     void M()
     {
@@ -570,13 +638,15 @@ goo
             |baz
              """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithNestedHoles3()
         {
-            await TestAsync(@"class C
+            await TestAsync(
+                @"class C
 {
     void M()
     {
@@ -594,13 +664,15 @@ goo
             |baz
              """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithNestedHoles4()
         {
-            await TestAsync(@"class C
+            await TestAsync(
+                @"class C
 {
     void M()
     {
@@ -618,13 +690,15 @@ goo
             |baz
              """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithNestedHoles5()
         {
-            await TestAsync(@"class C
+            await TestAsync(
+                @"class C
 {
     void M()
     {
@@ -639,13 +713,15 @@ goo
             |baz
              """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithNestedHoles6()
         {
-            await TestAsync(@"class C
+            await TestAsync(
+                @"class C
 {
     void M()
     {
@@ -663,13 +739,15 @@ goo
             |baz
              """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithNestedHoles7()
         {
-            await TestAsync(@"class C
+            await TestAsync(
+                @"class C
 {
     void M()
     {
@@ -687,7 +765,8 @@ goo
             |baz
              """""";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(1542623, "https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1542623")]
@@ -700,14 +779,16 @@ goo
                     void M()
                     {
                         _ =
-                """);
+                """
+            );
 
             for (var i = 0; i < 2000; i++)
             {
                 input.AppendLine(
                     """
                             @"" + "" + @"" + "" + @"" + "" + @"" + "" + @"" + "" + @"" + "" + @"" +
-                    """);
+                    """
+                );
             }
 
             input.AppendLine(
@@ -715,7 +796,8 @@ goo
                         @"" + "" + @"" + "" + @"" + "" + @"" + "" + @"" + "" + @"" + "" + @"";
                     }
                 }
-                """);
+                """
+            );
 
             await TestAsync(input.ToString());
         }

@@ -8,11 +8,19 @@ namespace System.Reflection
 {
     public static partial class RuntimeReflectionExtensions
     {
-        private const BindingFlags Everything = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance;
+        private const BindingFlags Everything =
+            BindingFlags.NonPublic
+            | BindingFlags.Public
+            | BindingFlags.Static
+            | BindingFlags.Instance;
 
         public static IEnumerable<FieldInfo> GetRuntimeFields(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)]
-            this Type type)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicFields
+                    | DynamicallyAccessedMemberTypes.NonPublicFields
+            )]
+                this Type type
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -20,8 +28,12 @@ namespace System.Reflection
         }
 
         public static IEnumerable<MethodInfo> GetRuntimeMethods(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
-            this Type type)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
+                this Type type
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -29,8 +41,12 @@ namespace System.Reflection
         }
 
         public static IEnumerable<PropertyInfo> GetRuntimeProperties(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
-            this Type type)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.NonPublicProperties
+            )]
+                this Type type
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -38,8 +54,12 @@ namespace System.Reflection
         }
 
         public static IEnumerable<EventInfo> GetRuntimeEvents(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)]
-            this Type type)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicEvents
+                    | DynamicallyAccessedMemberTypes.NonPublicEvents
+            )]
+                this Type type
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -48,7 +68,9 @@ namespace System.Reflection
 
         public static FieldInfo? GetRuntimeField(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
-            this Type type, string name)
+                this Type type,
+            string name
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -57,7 +79,10 @@ namespace System.Reflection
 
         public static MethodInfo? GetRuntimeMethod(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-            this Type type, string name, Type[] parameters)
+                this Type type,
+            string name,
+            Type[] parameters
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -66,7 +91,9 @@ namespace System.Reflection
 
         public static PropertyInfo? GetRuntimeProperty(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
-            this Type type, string name)
+                this Type type,
+            string name
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -75,7 +102,9 @@ namespace System.Reflection
 
         public static EventInfo? GetRuntimeEvent(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-            this Type type, string name)
+                this Type type,
+            string name
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -89,7 +118,14 @@ namespace System.Reflection
             return method.GetBaseDefinition();
         }
 
-        public static InterfaceMapping GetRuntimeInterfaceMap(this TypeInfo typeInfo, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] Type interfaceType)
+        public static InterfaceMapping GetRuntimeInterfaceMap(
+            this TypeInfo typeInfo,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
+                Type interfaceType
+        )
         {
             ArgumentNullException.ThrowIfNull(typeInfo);
 

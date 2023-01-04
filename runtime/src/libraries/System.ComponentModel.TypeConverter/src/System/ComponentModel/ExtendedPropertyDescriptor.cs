@@ -12,15 +12,19 @@ namespace System.ComponentModel
     /// </summary>
     internal sealed class ExtendedPropertyDescriptor : PropertyDescriptor
     {
-        private readonly ReflectPropertyDescriptor _extenderInfo;       // the extender property
-        private readonly IExtenderProvider _provider;           // the object providing it
+        private readonly ReflectPropertyDescriptor _extenderInfo; // the extender property
+        private readonly IExtenderProvider _provider; // the object providing it
 
         /// <summary>
         /// Creates a new extended property info. Callers can then treat this as
         /// a standard property.
         /// </summary>
-        public ExtendedPropertyDescriptor(ReflectPropertyDescriptor extenderInfo, Type? receiverType, IExtenderProvider provider, Attribute[]? attributes)
-            : base(extenderInfo, attributes)
+        public ExtendedPropertyDescriptor(
+            ReflectPropertyDescriptor extenderInfo,
+            Type? receiverType,
+            IExtenderProvider provider,
+            Attribute[]? attributes
+        ) : base(extenderInfo, attributes)
         {
             Debug.Assert(extenderInfo != null, "ExtendedPropertyDescriptor must have extenderInfo");
             Debug.Assert(provider != null, "ExtendedPropertyDescriptor must have provider");
@@ -42,18 +46,27 @@ namespace System.ComponentModel
             _provider = provider;
         }
 
-        public ExtendedPropertyDescriptor(PropertyDescriptor extender, Attribute[] attributes) : base(extender, attributes)
+        public ExtendedPropertyDescriptor(PropertyDescriptor extender, Attribute[] attributes)
+            : base(extender, attributes)
         {
             Debug.Assert(extender != null, "The original PropertyDescriptor must be non-null");
 
-            ExtenderProvidedPropertyAttribute? attr = extender.Attributes[typeof(ExtenderProvidedPropertyAttribute)] as ExtenderProvidedPropertyAttribute;
+            ExtenderProvidedPropertyAttribute? attr =
+                extender.Attributes[typeof(ExtenderProvidedPropertyAttribute)]
+                as ExtenderProvidedPropertyAttribute;
 
-            Debug.Assert(attr != null, "The original PropertyDescriptor does not have an ExtenderProvidedPropertyAttribute");
+            Debug.Assert(
+                attr != null,
+                "The original PropertyDescriptor does not have an ExtenderProvidedPropertyAttribute"
+            );
 
+            ReflectPropertyDescriptor? reflectDesc =
+                attr.ExtenderProperty as ReflectPropertyDescriptor;
 
-            ReflectPropertyDescriptor? reflectDesc = attr.ExtenderProperty as ReflectPropertyDescriptor;
-
-            Debug.Assert(reflectDesc != null, "The original PropertyDescriptor has an invalid ExtenderProperty");
+            Debug.Assert(
+                reflectDesc != null,
+                "The original PropertyDescriptor has an invalid ExtenderProperty"
+            );
 
             _extenderInfo = reflectDesc;
             _provider = attr.Provider!;
@@ -75,7 +88,8 @@ namespace System.ComponentModel
         /// <summary>
         /// Determines if the property can be written to.
         /// </summary>
-        public override bool IsReadOnly => Attributes[typeof(ReadOnlyAttribute)]!.Equals(ReadOnlyAttribute.Yes);
+        public override bool IsReadOnly =>
+            Attributes[typeof(ReadOnlyAttribute)]!.Equals(ReadOnlyAttribute.Yes);
 
         /// <summary>
         /// Retrieves the data type of the property.
@@ -93,13 +107,22 @@ namespace System.ComponentModel
             {
                 string name = base.DisplayName;
 
-                if (!(Attributes[typeof(DisplayNameAttribute)] is DisplayNameAttribute displayNameAttr) || displayNameAttr.IsDefaultAttribute())
+                if (
+                    !(
+                        Attributes[typeof(DisplayNameAttribute)]
+                        is DisplayNameAttribute displayNameAttr
+                    ) || displayNameAttr.IsDefaultAttribute()
+                )
                 {
                     ISite? site = GetSite(_provider);
                     string? providerName = site?.Name;
                     if (providerName != null && providerName.Length > 0)
                     {
-                        name = SR.Format(SR.GetResourceString(nameof(SR.MetaExtenderName), "{0} on {1}"), name, providerName);
+                        name = SR.Format(
+                            SR.GetResourceString(nameof(SR.MetaExtenderName), "{0} on {1}"),
+                            name,
+                            providerName
+                        );
                     }
                 }
                 return name;
@@ -110,12 +133,14 @@ namespace System.ComponentModel
         /// Retrieves the value of the property for the given component. This will
         /// throw an exception if the component does not have this property.
         /// </summary>
-        public override object? GetValue(object? comp) => _extenderInfo.ExtenderGetValue(_provider, comp);
+        public override object? GetValue(object? comp) =>
+            _extenderInfo.ExtenderGetValue(_provider, comp);
 
         /// <summary>
         /// Resets the value of this property on comp to the default value.
         /// </summary>
-        public override void ResetValue(object comp) => _extenderInfo.ExtenderResetValue(_provider, comp, this);
+        public override void ResetValue(object comp) =>
+            _extenderInfo.ExtenderResetValue(_provider, comp, this);
 
         /// <summary>
         /// Sets the value of this property on the given component.

@@ -16,10 +16,7 @@ public class CookieContainerHandler : DelegatingHandler
     /// <summary>
     /// Creates a new instance of <see cref="CookieContainerHandler"/>.
     /// </summary>
-    public CookieContainerHandler()
-        : this(new CookieContainer())
-    {
-    }
+    public CookieContainerHandler() : this(new CookieContainer()) { }
 
     /// <summary>
     /// Creates a new instance of <see cref="CookieContainerHandler"/>.
@@ -38,7 +35,10 @@ public class CookieContainerHandler : DelegatingHandler
     public CookieContainer Container { get; }
 
     /// <inheritdoc />
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken
+    )
     {
         var cookieHeader = Container.GetCookieHeader(request.RequestUri!);
 

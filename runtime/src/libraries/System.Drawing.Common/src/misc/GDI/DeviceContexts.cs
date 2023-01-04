@@ -18,10 +18,8 @@ namespace System.Drawing.Internal
         /// </summary>
         internal static void AddDeviceContext(DeviceContext dc)
         {
-            ClientUtils.WeakRefCollection wrc = t_activeDeviceContexts ??= new ClientUtils.WeakRefCollection()
-            {
-                RefCheckThreshold = 20
-            };
+            ClientUtils.WeakRefCollection wrc = t_activeDeviceContexts ??=
+                new ClientUtils.WeakRefCollection() { RefCheckThreshold = 20 };
 
             if (!wrc.Contains(dc))
             {

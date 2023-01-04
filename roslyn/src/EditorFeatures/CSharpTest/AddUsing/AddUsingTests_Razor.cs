@@ -14,12 +14,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddUsing
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddImport)]
     public partial class AddUsingTests_Razor : AbstractAddUsingTests
     {
-        [ConditionalTheory(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue)]
+        [ConditionalTheory(
+            typeof(IsRelease),
+            Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+        )]
         [CombinatorialData]
         public async Task TestAddIntoHiddenRegionWithModernSpanMapper(TestHost host)
         {
             await TestAsync(
-    @"#line hidden
+                @"#line hidden
 using System.Collections.Generic;
 #line default
 
@@ -30,7 +33,7 @@ class Program
         [|DateTime|] d;
     }
 }",
-    @"#line hidden
+                @"#line hidden
 using System;
 using System.Collections.Generic;
 #line default
@@ -41,7 +44,9 @@ class Program
     {
         DateTime d;
     }
-}", host);
+}",
+                host
+            );
         }
 
         private protected override IDocumentServiceProvider GetDocumentServiceProvider()

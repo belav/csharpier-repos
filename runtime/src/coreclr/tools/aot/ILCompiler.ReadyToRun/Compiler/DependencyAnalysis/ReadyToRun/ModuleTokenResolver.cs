@@ -25,7 +25,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         /// Reverse lookup table mapping external types to reference tokens in the input modules. The table
         /// gets lazily initialized as various tokens are resolved in CorInfoImpl.
         /// </summary>
-        private readonly ConcurrentDictionary<EcmaType, ModuleToken> _typeToRefTokens = new ConcurrentDictionary<EcmaType, ModuleToken>();
+        private readonly ConcurrentDictionary<EcmaType, ModuleToken> _typeToRefTokens =
+            new ConcurrentDictionary<EcmaType, ModuleToken>();
 
         private readonly CompilationModuleGroup _compilationModuleGroup;
 
@@ -35,7 +36,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public CompilerTypeSystemContext CompilerContext { get; }
 
-        public ModuleTokenResolver(CompilationModuleGroup compilationModuleGroup, CompilerTypeSystemContext typeSystemContext)
+        public ModuleTokenResolver(
+            CompilationModuleGroup compilationModuleGroup,
+            CompilerTypeSystemContext typeSystemContext
+        )
         {
             _compilationModuleGroup = compilationModuleGroup;
             CompilerContext = typeSystemContext;
@@ -51,11 +55,18 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _manifestMutableModule = mutableModule;
         }
 
-        public ModuleToken GetModuleTokenForType(EcmaType type, bool allowDynamicallyCreatedReference, bool throwIfNotFound = true)
+        public ModuleToken GetModuleTokenForType(
+            EcmaType type,
+            bool allowDynamicallyCreatedReference,
+            bool throwIfNotFound = true
+        )
         {
             if (_compilationModuleGroup.VersionsWithType(type))
             {
-                return new ModuleToken(type.EcmaModule, (mdToken)MetadataTokens.GetToken(type.Handle));
+                return new ModuleToken(
+                    type.EcmaModule,
+                    (mdToken)MetadataTokens.GetToken(type.Handle)
+                );
             }
 
             ModuleToken token;
@@ -92,7 +103,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
         }
 
-        public ModuleToken GetModuleTokenForMethod(MethodDesc method, bool allowDynamicallyCreatedReference, bool throwIfNotFound)
+        public ModuleToken GetModuleTokenForMethod(
+            MethodDesc method,
+            bool allowDynamicallyCreatedReference,
+            bool throwIfNotFound
+        )
         {
             method = method.GetCanonMethodTarget(CanonicalFormKind.Specific);
 
@@ -129,32 +144,49 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             if (token.TokenType == CorTokenType.mdtMethodSpec)
             {
-                MethodSpecification methodSpec = token.MetadataReader.GetMethodSpecification((MethodSpecificationHandle)token.Handle);
-                DecodeMethodSpecificationSignatureToDiscoverUsedTypeTokens(methodSpec.Signature, token);
+                MethodSpecification methodSpec = token.MetadataReader.GetMethodSpecification(
+                    (MethodSpecificationHandle)token.Handle
+                );
+                DecodeMethodSpecificationSignatureToDiscoverUsedTypeTokens(
+                    methodSpec.Signature,
+                    token
+                );
                 token = new ModuleToken(token.Module, methodSpec.Method);
             }
 
             if (token.TokenType == CorTokenType.mdtMemberRef)
             {
-                MemberReference memberRef = token.MetadataReader.GetMemberReference((MemberReferenceHandle)token.Handle);
+                MemberReference memberRef = token.MetadataReader.GetMemberReference(
+                    (MemberReferenceHandle)token.Handle
+                );
                 EntityHandle owningTypeHandle = memberRef.Parent;
-                TypeDesc owningType = (TypeDesc)token.Module.GetObject(owningTypeHandle, NotFoundBehavior.Throw);
+                TypeDesc owningType = (TypeDesc)
+                    token.Module.GetObject(owningTypeHandle, NotFoundBehavior.Throw);
                 AddModuleTokenForType(owningType, new ModuleToken(token.Module, owningTypeHandle));
                 DecodeMethodSignatureToDiscoverUsedTypeTokens(memberRef.Signature, token);
             }
             if (token.TokenType == CorTokenType.mdtMethodDef)
             {
-                MethodDefinition methodDef = token.MetadataReader.GetMethodDefinition((MethodDefinitionHandle)token.Handle);
-                TokenResolverProvider rentedProvider = TokenResolverProvider.Rent(this, token.Module);
+                MethodDefinition methodDef = token.MetadataReader.GetMethodDefinition(
+                    (MethodDefinitionHandle)token.Handle
+                );
+                TokenResolverProvider rentedProvider = TokenResolverProvider.Rent(
+                    this,
+                    token.Module
+                );
                 DecodeMethodSignatureToDiscoverUsedTypeTokens(methodDef.Signature, token);
             }
         }
 
-        private void DecodeMethodSpecificationSignatureToDiscoverUsedTypeTokens(BlobHandle signatureHandle, ModuleToken token)
+        private void DecodeMethodSpecificationSignatureToDiscoverUsedTypeTokens(
+            BlobHandle signatureHandle,
+            ModuleToken token
+        )
         {
             MetadataReader metadataReader = token.MetadataReader;
             TokenResolverProvider rentedProvider = TokenResolverProvider.Rent(this, token.Module);
-            SignatureDecoder<DummyTypeInfo, ModuleTokenResolver> sigDecoder = new(rentedProvider, metadataReader, this);
+            SignatureDecoder<DummyTypeInfo, ModuleTokenResolver> sigDecoder =
+                new(rentedProvider, metadataReader, this);
 
             BlobReader signature = metadataReader.GetBlobReader(signatureHandle);
 
@@ -173,11 +205,15 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             TokenResolverProvider.ReturnRental(rentedProvider);
         }
 
-        private void DecodeMethodSignatureToDiscoverUsedTypeTokens(BlobHandle signatureHandle, ModuleToken token)
+        private void DecodeMethodSignatureToDiscoverUsedTypeTokens(
+            BlobHandle signatureHandle,
+            ModuleToken token
+        )
         {
             MetadataReader metadataReader = token.MetadataReader;
             TokenResolverProvider rentedProvider = TokenResolverProvider.Rent(this, token.Module);
-            SignatureDecoder<DummyTypeInfo, ModuleTokenResolver> sigDecoder = new (rentedProvider, metadataReader, this);
+            SignatureDecoder<DummyTypeInfo, ModuleTokenResolver> sigDecoder =
+                new(rentedProvider, metadataReader, this);
             BlobReader signature = metadataReader.GetBlobReader(signatureHandle);
 
             SignatureHeader header = signature.ReadSignatureHeader();
@@ -215,11 +251,15 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             TokenResolverProvider.ReturnRental(rentedProvider);
         }
 
-        private void DecodeFieldSignatureToDiscoverUsedTypeTokens(BlobHandle signatureHandle, ModuleToken token)
+        private void DecodeFieldSignatureToDiscoverUsedTypeTokens(
+            BlobHandle signatureHandle,
+            ModuleToken token
+        )
         {
             MetadataReader metadataReader = token.MetadataReader;
             TokenResolverProvider rentedProvider = TokenResolverProvider.Rent(this, token.Module);
-            SignatureDecoder<DummyTypeInfo, ModuleTokenResolver> sigDecoder = new(rentedProvider, metadataReader, this);
+            SignatureDecoder<DummyTypeInfo, ModuleTokenResolver> sigDecoder =
+                new(rentedProvider, metadataReader, this);
 
             BlobReader signature = metadataReader.GetBlobReader(signatureHandle);
 
@@ -236,7 +276,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         private void AddModuleTokenForFieldReference(TypeDesc owningType, ModuleToken token)
         {
-            MemberReference memberRef = token.MetadataReader.GetMemberReference((MemberReferenceHandle)token.Handle);
+            MemberReference memberRef = token.MetadataReader.GetMemberReference(
+                (MemberReferenceHandle)token.Handle
+            );
             EntityHandle owningTypeHandle = memberRef.Parent;
             AddModuleTokenForType(owningType, new ModuleToken(token.Module, owningTypeHandle));
             DecodeFieldSignatureToDiscoverUsedTypeTokens(memberRef.Signature, token);
@@ -244,7 +286,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         // Add TypeSystemEntity -> ModuleToken mapping to a ConcurrentDictionary. Using CompareTo sort the token used, so it will
         // be consistent in all runs of the compiler
-        void SetModuleTokenForTypeSystemEntity<T>(ConcurrentDictionary<T, ModuleToken> dictionary, T tse, ModuleToken token)
+        void SetModuleTokenForTypeSystemEntity<T>(
+            ConcurrentDictionary<T, ModuleToken> dictionary,
+            T tse,
+            ModuleToken token
+        )
         {
             if (!dictionary.TryAdd(tse, token))
             {
@@ -253,7 +299,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 {
                     // We will reach here, if the field already has a token
                     if (!dictionary.TryGetValue(tse, out oldToken))
-                        throw new InternalCompilerErrorException("TypeSystemEntity both present and not present in emission dictionary.");
+                        throw new InternalCompilerErrorException(
+                            "TypeSystemEntity both present and not present in emission dictionary."
+                        );
 
                     if (oldToken.CompareTo(token) <= 0)
                         break;
@@ -267,8 +315,13 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             // Collect underlying type tokens for type specifications
             if (token.TokenType == CorTokenType.mdtTypeSpec)
             {
-                TypeSpecification typeSpec = token.MetadataReader.GetTypeSpecification((TypeSpecificationHandle)token.Handle);
-                TokenResolverProvider rentedProvider = TokenResolverProvider.Rent(this, token.Module);
+                TypeSpecification typeSpec = token.MetadataReader.GetTypeSpecification(
+                    (TypeSpecificationHandle)token.Handle
+                );
+                TokenResolverProvider rentedProvider = TokenResolverProvider.Rent(
+                    this,
+                    token.Module
+                );
                 typeSpec.DecodeSignature(rentedProvider, this);
                 TokenResolverProvider.ReturnRental(rentedProvider);
                 specialTypeFound = true;
@@ -284,7 +337,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (type is EcmaType ecmaType)
             {
                 // Don't store typespec tokens where a generic parameter resolves to the type in question
-                if (token.TokenType == CorTokenType.mdtTypeDef || token.TokenType == CorTokenType.mdtTypeRef)
+                if (
+                    token.TokenType == CorTokenType.mdtTypeDef
+                    || token.TokenType == CorTokenType.mdtTypeRef
+                )
                 {
                     SetModuleTokenForTypeSystemEntity(_typeToRefTokens, ecmaType, token);
                 }
@@ -308,10 +364,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         /// </summary>
         private class DummyTypeInfo
         {
-            public static DummyTypeInfo Instance = new DummyTypeInfo(); 
+            public static DummyTypeInfo Instance = new DummyTypeInfo();
         }
 
-        private class TokenResolverProvider : ISignatureTypeProvider<DummyTypeInfo, ModuleTokenResolver>
+        private class TokenResolverProvider
+            : ISignatureTypeProvider<DummyTypeInfo, ModuleTokenResolver>
         {
             ModuleTokenResolver _resolver;
 
@@ -326,7 +383,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 _contextModule = contextModule;
             }
 
-            public static TokenResolverProvider Rent(ModuleTokenResolver resolver, IEcmaModule contextModule)
+            public static TokenResolverProvider Rent(
+                ModuleTokenResolver resolver,
+                IEcmaModule contextModule
+            )
             {
                 if (_rentalObject != null)
                 {
@@ -361,22 +421,35 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 return DummyTypeInfo.Instance;
             }
 
-            public DummyTypeInfo GetGenericInstantiation(DummyTypeInfo genericType, ImmutableArray<DummyTypeInfo> typeArguments)
+            public DummyTypeInfo GetGenericInstantiation(
+                DummyTypeInfo genericType,
+                ImmutableArray<DummyTypeInfo> typeArguments
+            )
             {
                 return DummyTypeInfo.Instance;
             }
 
-            public DummyTypeInfo GetGenericMethodParameter(ModuleTokenResolver genericContext, int index)
+            public DummyTypeInfo GetGenericMethodParameter(
+                ModuleTokenResolver genericContext,
+                int index
+            )
             {
                 return DummyTypeInfo.Instance;
             }
 
-            public DummyTypeInfo GetGenericTypeParameter(ModuleTokenResolver genericContext, int index)
+            public DummyTypeInfo GetGenericTypeParameter(
+                ModuleTokenResolver genericContext,
+                int index
+            )
             {
                 return DummyTypeInfo.Instance;
             }
 
-            public DummyTypeInfo GetModifiedType(DummyTypeInfo modifier, DummyTypeInfo unmodifiedType, bool isRequired)
+            public DummyTypeInfo GetModifiedType(
+                DummyTypeInfo modifier,
+                DummyTypeInfo unmodifiedType,
+                bool isRequired
+            )
             {
                 return DummyTypeInfo.Instance;
             }
@@ -401,19 +474,35 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 return DummyTypeInfo.Instance;
             }
 
-            public DummyTypeInfo GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte rawTypeKind)
+            public DummyTypeInfo GetTypeFromDefinition(
+                MetadataReader reader,
+                TypeDefinitionHandle handle,
+                byte rawTypeKind
+            )
             {
                 // Type definition tokens outside of the versioning bubble are useless.
                 return DummyTypeInfo.Instance;
             }
 
-            public DummyTypeInfo GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte rawTypeKind)
+            public DummyTypeInfo GetTypeFromReference(
+                MetadataReader reader,
+                TypeReferenceHandle handle,
+                byte rawTypeKind
+            )
             {
-                _resolver.AddModuleTokenForType((TypeDesc)_contextModule.GetObject(handle), new ModuleToken(_contextModule, handle));
+                _resolver.AddModuleTokenForType(
+                    (TypeDesc)_contextModule.GetObject(handle),
+                    new ModuleToken(_contextModule, handle)
+                );
                 return DummyTypeInfo.Instance;
             }
 
-            public DummyTypeInfo GetTypeFromSpecification(MetadataReader reader, ModuleTokenResolver genericContext, TypeSpecificationHandle handle, byte rawTypeKind)
+            public DummyTypeInfo GetTypeFromSpecification(
+                MetadataReader reader,
+                ModuleTokenResolver genericContext,
+                TypeSpecificationHandle handle,
+                byte rawTypeKind
+            )
             {
                 TypeSpecification typeSpec = reader.GetTypeSpecification(handle);
                 typeSpec.DecodeSignature(this, genericContext);
@@ -422,4 +511,3 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         }
     }
 }
-

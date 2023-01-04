@@ -39,7 +39,8 @@ public class OwnedFixupTest
             ThingId = Guid.NewGuid(),
             OwnedByThings = new List<OwnedByThing>
             {
-                new() { OwnedByThingId = Guid.NewGuid() }, new() { OwnedByThingId = Guid.NewGuid() }
+                new() { OwnedByThingId = Guid.NewGuid() },
+                new() { OwnedByThingId = Guid.NewGuid() }
             }
         };
 
@@ -88,14 +89,20 @@ public class OwnedFixupTest
         Assert.True(context.ChangeTracker.HasChanges());
 
         Assert.Equal(EntityState.Added, context.Entry(owner).State);
-        Assert.Equal(EntityState.Detached, context.Entry(owner).Reference(e => e.Child1).TargetEntry.State);
+        Assert.Equal(
+            EntityState.Detached,
+            context.Entry(owner).Reference(e => e.Child1).TargetEntry.State
+        );
 
         context.Entry(owner).State = EntityState.Detached;
 
         Assert.False(context.ChangeTracker.HasChanges());
 
         Assert.Equal(EntityState.Detached, context.Entry(owner).State);
-        Assert.Equal(EntityState.Detached, context.Entry(owner).Reference(e => e.Child1).TargetEntry.State);
+        Assert.Equal(
+            EntityState.Detached,
+            context.Entry(owner).Reference(e => e.Child1).TargetEntry.State
+        );
     }
 
     [ConditionalFact]
@@ -112,12 +119,17 @@ public class OwnedFixupTest
             CoreStrings.UntrackedDependentEntity(
                 nameof(ChildPN),
                 ".Reference().TargetEntry",
-                ".Collection().FindEntry()"),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(dependent)).Message);
+                ".Collection().FindEntry()"
+            ),
+            Assert.Throws<InvalidOperationException>(() => context.Entry(dependent)).Message
+        );
 
         var dependentEntry1 = context.Entry(principal).Reference(p => p.Child1).TargetEntry;
 
-        Assert.Same(dependentEntry1.GetInfrastructure(), context.Entry(dependent).GetInfrastructure());
+        Assert.Same(
+            dependentEntry1.GetInfrastructure(),
+            context.Entry(dependent).GetInfrastructure()
+        );
 
         var dependentEntry2 = context.Entry(principal).Reference(p => p.Child2).TargetEntry;
 
@@ -125,8 +137,10 @@ public class OwnedFixupTest
         Assert.Equal(
             CoreStrings.AmbiguousDependentEntity(
                 nameof(ChildPN),
-                "." + nameof(EntityEntry.Reference) + "()." + nameof(ReferenceEntry.TargetEntry)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(dependent)).Message);
+                "." + nameof(EntityEntry.Reference) + "()." + nameof(ReferenceEntry.TargetEntry)
+            ),
+            Assert.Throws<InvalidOperationException>(() => context.Entry(dependent)).Message
+        );
     }
 
     [ConditionalFact]
@@ -141,16 +155,38 @@ public class OwnedFixupTest
 
         var dependentEntry1 = context.Entry(principal).Reference(p => p.Child1).TargetEntry;
 
-        Assert.Same(dependentEntry1.GetInfrastructure(), context.Entry(dependent).GetInfrastructure());
+        Assert.Same(
+            dependentEntry1.GetInfrastructure(),
+            context.Entry(dependent).GetInfrastructure()
+        );
 
         Assert.Equal(
             CoreStrings.WarningAsErrorTemplate(
                 CoreEventId.DuplicateDependentEntityTypeInstanceWarning.ToString(),
-                CoreResources.LogDuplicateDependentEntityTypeInstance(new TestLogger<TestLoggingDefinitions>()).GenerateMessage(
-                    typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.Child2) + "#" + nameof(ChildPN),
-                    typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.Child1) + "#" + nameof(ChildPN)),
-                "CoreEventId.DuplicateDependentEntityTypeInstanceWarning"),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(principal).Reference(p => p.Child2).TargetEntry).Message);
+                CoreResources
+                    .LogDuplicateDependentEntityTypeInstance(
+                        new TestLogger<TestLoggingDefinitions>()
+                    )
+                    .GenerateMessage(
+                        typeof(ParentPN).ShortDisplayName()
+                            + "."
+                            + nameof(ParentPN.Child2)
+                            + "#"
+                            + nameof(ChildPN),
+                        typeof(ParentPN).ShortDisplayName()
+                            + "."
+                            + nameof(ParentPN.Child1)
+                            + "#"
+                            + nameof(ChildPN)
+                    ),
+                "CoreEventId.DuplicateDependentEntityTypeInstanceWarning"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(principal).Reference(p => p.Child2).TargetEntry
+                )
+                .Message
+        );
     }
 
     [ConditionalTheory]
@@ -163,7 +199,10 @@ public class OwnedFixupTest
     [InlineData(EntityState.Unchanged, true)]
     [InlineData(EntityState.Unchanged, false)]
     [InlineData(EntityState.Unchanged, null)]
-    public void Add_principal_with_dependent_unidirectional_nav(EntityState entityState, bool? useTrackGraph)
+    public void Add_principal_with_dependent_unidirectional_nav(
+        EntityState entityState,
+        bool? useTrackGraph
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentPN { Id = 77 };
@@ -203,9 +242,9 @@ public class OwnedFixupTest
         }
 
         Assert.Equal(
-            entityState != EntityState.Unchanged
-            || useTrackGraph == null,
-            context.ChangeTracker.HasChanges());
+            entityState != EntityState.Unchanged || useTrackGraph == null,
+            context.ChangeTracker.HasChanges()
+        );
 
         Assert.Equal(3, context.ChangeTracker.Entries().Count());
 
@@ -219,26 +258,40 @@ public class OwnedFixupTest
                 Assert.Null(principal.Child2);
                 var dependentEntry = context.Entry(dependent);
                 Assert.Equal(principal.Id, dependentEntry.Property("ParentId").CurrentValue);
-                Assert.Equal(useTrackGraph == null ? EntityState.Added : entityState, dependentEntry.State);
                 Assert.Equal(
-                    typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.Child1) + "#" + nameof(ChildPN),
-                    dependentEntry.Metadata.DisplayName());
+                    useTrackGraph == null ? EntityState.Added : entityState,
+                    dependentEntry.State
+                );
+                Assert.Equal(
+                    typeof(ParentPN).ShortDisplayName()
+                        + "."
+                        + nameof(ParentPN.Child1)
+                        + "#"
+                        + nameof(ChildPN),
+                    dependentEntry.Metadata.DisplayName()
+                );
 
                 Assert.Same(subDependent, dependent.SubChild);
                 var subDependentEntry = context.Entry(subDependent);
                 Assert.Equal(principal.Id, subDependentEntry.Property("ParentId").CurrentValue);
-                Assert.Equal(useTrackGraph == null ? EntityState.Added : entityState, subDependentEntry.State);
+                Assert.Equal(
+                    useTrackGraph == null ? EntityState.Added : entityState,
+                    subDependentEntry.State
+                );
                 Assert.Equal(
                     typeof(ParentPN).ShortDisplayName()
-                    + "."
-                    + nameof(ParentPN.Child1)
-                    + "#"
-                    + nameof(ChildPN)
-                    + "."
-                    + nameof(ChildPN.SubChild)
-                    + "#"
-                    + nameof(SubChildPN), subDependentEntry.Metadata.DisplayName());
-            });
+                        + "."
+                        + nameof(ParentPN.Child1)
+                        + "#"
+                        + nameof(ChildPN)
+                        + "."
+                        + nameof(ChildPN.SubChild)
+                        + "#"
+                        + nameof(SubChildPN),
+                    subDependentEntry.Metadata.DisplayName()
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -294,9 +347,9 @@ public class OwnedFixupTest
         }
 
         Assert.Equal(
-            entityState != EntityState.Unchanged
-            || useTrackGraph == null,
-            context.ChangeTracker.HasChanges());
+            entityState != EntityState.Unchanged || useTrackGraph == null,
+            context.ChangeTracker.HasChanges()
+        );
 
         Assert.Equal(4, context.ChangeTracker.Entries().Count());
 
@@ -304,46 +357,61 @@ public class OwnedFixupTest
             context,
             () =>
             {
-                Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+                Assert.Equal(
+                    principal.Id,
+                    context.Entry(dependent).Property("ParentId").CurrentValue
+                );
                 Assert.Same(dependent, principal.Child1);
                 Assert.Same(principal, dependent.Parent);
                 Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(useTrackGraph == null ? EntityState.Added : entityState, context.Entry(dependent).State);
+                Assert.Equal(
+                    useTrackGraph == null ? EntityState.Added : entityState,
+                    context.Entry(dependent).State
+                );
 
                 Assert.Same(subDependent1, dependent.SubChild1);
                 Assert.Same(dependent, subDependent1.Parent);
                 var subDependentEntry1 = context.Entry(subDependent1);
                 Assert.Equal(principal.Id, subDependentEntry1.Property("ParentId").CurrentValue);
-                Assert.Equal(useTrackGraph == null ? EntityState.Added : entityState, subDependentEntry1.State);
+                Assert.Equal(
+                    useTrackGraph == null ? EntityState.Added : entityState,
+                    subDependentEntry1.State
+                );
                 Assert.Equal(
                     typeof(Parent).ShortDisplayName()
-                    + "."
-                    + nameof(Parent.Child1)
-                    + "#"
-                    + nameof(Child)
-                    + "."
-                    + nameof(Child.SubChild1)
-                    + "#"
-                    + nameof(SubChild),
-                    subDependentEntry1.Metadata.DisplayName());
+                        + "."
+                        + nameof(Parent.Child1)
+                        + "#"
+                        + nameof(Child)
+                        + "."
+                        + nameof(Child.SubChild1)
+                        + "#"
+                        + nameof(SubChild),
+                    subDependentEntry1.Metadata.DisplayName()
+                );
 
                 Assert.Same(subDependent2, dependent.SubChild2);
                 Assert.Same(dependent, subDependent2.Parent);
                 var subDependentEntry2 = context.Entry(subDependent1);
                 Assert.Equal(principal.Id, subDependentEntry2.Property("ParentId").CurrentValue);
-                Assert.Equal(useTrackGraph == null ? EntityState.Added : entityState, subDependentEntry2.State);
+                Assert.Equal(
+                    useTrackGraph == null ? EntityState.Added : entityState,
+                    subDependentEntry2.State
+                );
                 Assert.Equal(
                     typeof(Parent).ShortDisplayName()
-                    + "."
-                    + nameof(Parent.Child1)
-                    + "#"
-                    + nameof(Child)
-                    + "."
-                    + nameof(Child.SubChild1)
-                    + "#"
-                    + nameof(SubChild),
-                    subDependentEntry2.Metadata.DisplayName());
-            });
+                        + "."
+                        + nameof(Parent.Child1)
+                        + "#"
+                        + nameof(Child)
+                        + "."
+                        + nameof(Child.SubChild1)
+                        + "#"
+                        + nameof(SubChild),
+                    subDependentEntry2.Metadata.DisplayName()
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -356,7 +424,10 @@ public class OwnedFixupTest
     [InlineData(EntityState.Unchanged, true)]
     [InlineData(EntityState.Unchanged, false)]
     [InlineData(EntityState.Unchanged, null)]
-    public void Add_principal_with_dependent_principal_nav(EntityState entityState, bool? useTrackGraph)
+    public void Add_principal_with_dependent_principal_nav(
+        EntityState entityState,
+        bool? useTrackGraph
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id = 77 };
@@ -398,9 +469,9 @@ public class OwnedFixupTest
         }
 
         Assert.Equal(
-            entityState != EntityState.Unchanged
-            || useTrackGraph == null,
-            context.ChangeTracker.HasChanges());
+            entityState != EntityState.Unchanged || useTrackGraph == null,
+            context.ChangeTracker.HasChanges()
+        );
 
         Assert.Equal(4, context.ChangeTracker.Entries().Count());
 
@@ -408,46 +479,61 @@ public class OwnedFixupTest
             context,
             () =>
             {
-                Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+                Assert.Equal(
+                    principal.Id,
+                    context.Entry(dependent).Property("ParentId").CurrentValue
+                );
                 Assert.Same(dependent, principal.Child1);
                 Assert.Same(principal, dependent.Parent);
                 Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(useTrackGraph == null ? EntityState.Added : entityState, context.Entry(dependent).State);
+                Assert.Equal(
+                    useTrackGraph == null ? EntityState.Added : entityState,
+                    context.Entry(dependent).State
+                );
 
                 Assert.Same(subDependent1, dependent.SubChild1);
                 Assert.Same(dependent, subDependent1.Parent);
                 var subDependentEntry1 = context.Entry(subDependent1);
                 Assert.Equal(principal.Id, subDependentEntry1.Property("ParentId").CurrentValue);
-                Assert.Equal(useTrackGraph == null ? EntityState.Added : entityState, subDependentEntry1.State);
+                Assert.Equal(
+                    useTrackGraph == null ? EntityState.Added : entityState,
+                    subDependentEntry1.State
+                );
                 Assert.Equal(
                     typeof(Parent).ShortDisplayName()
-                    + "."
-                    + nameof(Parent.Child1)
-                    + "#"
-                    + nameof(Child)
-                    + "."
-                    + nameof(Child.SubChild1)
-                    + "#"
-                    + nameof(SubChild),
-                    subDependentEntry1.Metadata.DisplayName());
+                        + "."
+                        + nameof(Parent.Child1)
+                        + "#"
+                        + nameof(Child)
+                        + "."
+                        + nameof(Child.SubChild1)
+                        + "#"
+                        + nameof(SubChild),
+                    subDependentEntry1.Metadata.DisplayName()
+                );
 
                 Assert.Same(subDependent2, dependent.SubChild2);
                 Assert.Same(dependent, subDependent2.Parent);
                 var subDependentEntry2 = context.Entry(subDependent2);
                 Assert.Equal(principal.Id, subDependentEntry1.Property("ParentId").CurrentValue);
-                Assert.Equal(useTrackGraph == null ? EntityState.Added : entityState, subDependentEntry2.State);
+                Assert.Equal(
+                    useTrackGraph == null ? EntityState.Added : entityState,
+                    subDependentEntry2.State
+                );
                 Assert.Equal(
                     typeof(Parent).ShortDisplayName()
-                    + "."
-                    + nameof(Parent.Child1)
-                    + "#"
-                    + nameof(Child)
-                    + "."
-                    + nameof(Child.SubChild2)
-                    + "#"
-                    + nameof(SubChild),
-                    subDependentEntry2.Metadata.DisplayName());
-            });
+                        + "."
+                        + nameof(Parent.Child1)
+                        + "#"
+                        + nameof(Child)
+                        + "."
+                        + nameof(Child.SubChild2)
+                        + "#"
+                        + nameof(SubChild),
+                    subDependentEntry2.Metadata.DisplayName()
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -508,7 +594,8 @@ public class OwnedFixupTest
     public void Add_principal_with_dependent_unidirectional_nav_collection(
         EntityState entityState,
         bool? useTrackGraph,
-        CollectionType collectionType)
+        CollectionType collectionType
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentPN { Id = 77 };
@@ -530,7 +617,8 @@ public class OwnedFixupTest
         else if (useTrackGraph == true)
         {
             context.ChangeTracker.TrackGraph(
-                principal, e =>
+                principal,
+                e =>
                 {
                     if (entityState != EntityState.Added)
                     {
@@ -545,7 +633,8 @@ public class OwnedFixupTest
                     }
 
                     e.Entry.State = entityState;
-                });
+                }
+            );
         }
         else
         {
@@ -564,9 +653,9 @@ public class OwnedFixupTest
         }
 
         Assert.Equal(
-            entityState != EntityState.Unchanged
-            || useTrackGraph == null,
-            context.ChangeTracker.HasChanges());
+            entityState != EntityState.Unchanged || useTrackGraph == null,
+            context.ChangeTracker.HasChanges()
+        );
 
         Assert.Equal(3, context.ChangeTracker.Entries().Count());
 
@@ -580,27 +669,43 @@ public class OwnedFixupTest
                 Assert.Null(principal.ChildCollection2);
                 var dependentEntry = context.Entry(dependent);
                 Assert.Equal(principal.Id, dependentEntry.Property("ParentId").CurrentValue);
-                Assert.Equal(useTrackGraph == null ? EntityState.Added : entityState, dependentEntry.State);
                 Assert.Equal(
-                    typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.ChildCollection1) + "#" + nameof(ChildPN),
-                    dependentEntry.Metadata.DisplayName());
-
-                Assert.Contains(dependent.SubChildCollection, e => ReferenceEquals(e, subDependent));
-                var subDependentEntry = context.Entry(subDependent);
-                Assert.Equal(principal.Id, subDependentEntry.Property("ParentId").CurrentValue);
-                Assert.Equal(useTrackGraph == null ? EntityState.Added : entityState, subDependentEntry.State);
+                    useTrackGraph == null ? EntityState.Added : entityState,
+                    dependentEntry.State
+                );
                 Assert.Equal(
                     typeof(ParentPN).ShortDisplayName()
-                    + "."
-                    + nameof(ParentPN.ChildCollection1)
-                    + "#"
-                    + nameof(ChildPN)
-                    + "."
-                    + nameof(ChildPN.SubChildCollection)
-                    + "#"
-                    + nameof(SubChildPN),
-                    subDependentEntry.Metadata.DisplayName());
-            });
+                        + "."
+                        + nameof(ParentPN.ChildCollection1)
+                        + "#"
+                        + nameof(ChildPN),
+                    dependentEntry.Metadata.DisplayName()
+                );
+
+                Assert.Contains(
+                    dependent.SubChildCollection,
+                    e => ReferenceEquals(e, subDependent)
+                );
+                var subDependentEntry = context.Entry(subDependent);
+                Assert.Equal(principal.Id, subDependentEntry.Property("ParentId").CurrentValue);
+                Assert.Equal(
+                    useTrackGraph == null ? EntityState.Added : entityState,
+                    subDependentEntry.State
+                );
+                Assert.Equal(
+                    typeof(ParentPN).ShortDisplayName()
+                        + "."
+                        + nameof(ParentPN.ChildCollection1)
+                        + "#"
+                        + nameof(ChildPN)
+                        + "."
+                        + nameof(ChildPN.SubChildCollection)
+                        + "#"
+                        + nameof(SubChildPN),
+                    subDependentEntry.Metadata.DisplayName()
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -661,7 +766,8 @@ public class OwnedFixupTest
     public void Add_principal_with_dependent_both_navs_collection(
         EntityState entityState,
         bool? useTrackGraph,
-        CollectionType collectionType)
+        CollectionType collectionType
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id = 77 };
@@ -683,7 +789,8 @@ public class OwnedFixupTest
         else if (useTrackGraph == true)
         {
             context.ChangeTracker.TrackGraph(
-                principal, e =>
+                principal,
+                e =>
                 {
                     if (entityState != EntityState.Added)
                     {
@@ -698,7 +805,8 @@ public class OwnedFixupTest
                     }
 
                     e.Entry.State = entityState;
-                });
+                }
+            );
         }
         else
         {
@@ -717,9 +825,9 @@ public class OwnedFixupTest
         }
 
         Assert.Equal(
-            entityState != EntityState.Unchanged
-            || useTrackGraph == null,
-            context.ChangeTracker.HasChanges());
+            entityState != EntityState.Unchanged || useTrackGraph == null,
+            context.ChangeTracker.HasChanges()
+        );
 
         Assert.Equal(3, context.ChangeTracker.Entries().Count());
 
@@ -727,30 +835,44 @@ public class OwnedFixupTest
             context,
             () =>
             {
-                Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+                Assert.Equal(
+                    principal.Id,
+                    context.Entry(dependent).Property("ParentId").CurrentValue
+                );
                 Assert.Contains(principal.ChildCollection1, e => ReferenceEquals(e, dependent));
                 Assert.Same(principal, dependent.Parent);
                 Assert.Null(principal.ChildCollection2);
                 Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(useTrackGraph == null ? EntityState.Added : entityState, context.Entry(dependent).State);
+                Assert.Equal(
+                    useTrackGraph == null ? EntityState.Added : entityState,
+                    context.Entry(dependent).State
+                );
 
-                Assert.Contains(dependent.SubChildCollection, e => ReferenceEquals(e, subDependent));
+                Assert.Contains(
+                    dependent.SubChildCollection,
+                    e => ReferenceEquals(e, subDependent)
+                );
                 Assert.Same(dependent, subDependent.Parent);
                 var subDependentEntry = context.Entry(subDependent);
                 Assert.Equal(principal.Id, subDependentEntry.Property("ParentId").CurrentValue);
-                Assert.Equal(useTrackGraph == null ? EntityState.Added : entityState, subDependentEntry.State);
+                Assert.Equal(
+                    useTrackGraph == null ? EntityState.Added : entityState,
+                    subDependentEntry.State
+                );
                 Assert.Equal(
                     typeof(Parent).ShortDisplayName()
-                    + "."
-                    + nameof(ParentPN.ChildCollection1)
-                    + "#"
-                    + nameof(Child)
-                    + "."
-                    + nameof(Child.SubChildCollection)
-                    + "#"
-                    + nameof(SubChild),
-                    subDependentEntry.Metadata.DisplayName());
-            });
+                        + "."
+                        + nameof(ParentPN.ChildCollection1)
+                        + "#"
+                        + nameof(Child)
+                        + "."
+                        + nameof(Child.SubChildCollection)
+                        + "#"
+                        + nameof(SubChild),
+                    subDependentEntry.Metadata.DisplayName()
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -811,7 +933,8 @@ public class OwnedFixupTest
     public void Add_principal_with_dependent_principal_nav_collection(
         EntityState entityState,
         bool? useTrackGraph,
-        CollectionType collectionType)
+        CollectionType collectionType
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id = 77 };
@@ -833,7 +956,8 @@ public class OwnedFixupTest
         else if (useTrackGraph == true)
         {
             context.ChangeTracker.TrackGraph(
-                principal, e =>
+                principal,
+                e =>
                 {
                     if (entityState != EntityState.Added)
                     {
@@ -848,7 +972,8 @@ public class OwnedFixupTest
                     }
 
                     e.Entry.State = entityState;
-                });
+                }
+            );
         }
         else
         {
@@ -867,9 +992,9 @@ public class OwnedFixupTest
         }
 
         Assert.Equal(
-            entityState != EntityState.Unchanged
-            || useTrackGraph == null,
-            context.ChangeTracker.HasChanges());
+            entityState != EntityState.Unchanged || useTrackGraph == null,
+            context.ChangeTracker.HasChanges()
+        );
 
         Assert.Equal(3, context.ChangeTracker.Entries().Count());
 
@@ -877,30 +1002,44 @@ public class OwnedFixupTest
             context,
             () =>
             {
-                Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+                Assert.Equal(
+                    principal.Id,
+                    context.Entry(dependent).Property("ParentId").CurrentValue
+                );
                 Assert.Contains(principal.ChildCollection1, e => ReferenceEquals(e, dependent));
                 Assert.Null(principal.ChildCollection2);
                 Assert.Same(principal, dependent.Parent);
                 Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(useTrackGraph == null ? EntityState.Added : entityState, context.Entry(dependent).State);
+                Assert.Equal(
+                    useTrackGraph == null ? EntityState.Added : entityState,
+                    context.Entry(dependent).State
+                );
 
-                Assert.Contains(dependent.SubChildCollection, e => ReferenceEquals(e, subDependent));
+                Assert.Contains(
+                    dependent.SubChildCollection,
+                    e => ReferenceEquals(e, subDependent)
+                );
                 Assert.Same(dependent, subDependent.Parent);
                 var subDependentEntry = context.Entry(subDependent);
                 Assert.Equal(principal.Id, subDependentEntry.Property("ParentId").CurrentValue);
-                Assert.Equal(useTrackGraph == null ? EntityState.Added : entityState, subDependentEntry.State);
+                Assert.Equal(
+                    useTrackGraph == null ? EntityState.Added : entityState,
+                    subDependentEntry.State
+                );
                 Assert.Equal(
                     typeof(Parent).ShortDisplayName()
-                    + "."
-                    + nameof(Parent.ChildCollection1)
-                    + "#"
-                    + nameof(Child)
-                    + "."
-                    + nameof(Child.SubChildCollection)
-                    + "#"
-                    + nameof(SubChild),
-                    subDependentEntry.Metadata.DisplayName());
-            });
+                        + "."
+                        + nameof(Parent.ChildCollection1)
+                        + "#"
+                        + nameof(Child)
+                        + "."
+                        + nameof(Child.SubChildCollection)
+                        + "#"
+                        + nameof(SubChild),
+                    subDependentEntry.Metadata.DisplayName()
+                );
+            }
+        );
     }
 
     [ConditionalFact]
@@ -921,11 +1060,15 @@ public class OwnedFixupTest
             context,
             () =>
             {
-                Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+                Assert.Equal(
+                    principal.Id,
+                    context.Entry(dependent).Property("ParentId").CurrentValue
+                );
                 Assert.Same(dependent, principal.Child1);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -957,17 +1100,28 @@ public class OwnedFixupTest
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 3 : 5, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 3 : 5,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Null(principal.Child1);
         Assert.Same(dependent2, principal.Child2);
         Assert.Equal(entityState, context.Entry(principal).State);
-        Assert.Equal(entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted, dependentEntry1.State);
+        Assert.Equal(
+            entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted,
+            dependentEntry1.State
+        );
         var dependentEntry2 = context.Entry(principal).Reference(p => p.Child2).TargetEntry;
         Assert.Equal(principal.Id, dependentEntry2.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, dependentEntry2.State);
         Assert.Equal(
-            typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.Child2) + "#" + nameof(ChildPN),
-            dependentEntry2.Metadata.DisplayName());
+            typeof(ParentPN).ShortDisplayName()
+                + "."
+                + nameof(ParentPN.Child2)
+                + "#"
+                + nameof(ChildPN),
+            dependentEntry2.Metadata.DisplayName()
+        );
 
         Assert.Same(subDependent2, dependent2.SubChild);
         var subDependentEntry = dependentEntry2.Reference(p => p.SubChild).TargetEntry;
@@ -975,20 +1129,25 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, subDependentEntry.State);
         Assert.Equal(
             typeof(ParentPN).ShortDisplayName()
-            + "."
-            + nameof(ParentPN.Child2)
-            + "#"
-            + nameof(ChildPN)
-            + "."
-            + nameof(ChildPN.SubChild)
-            + "#"
-            + nameof(SubChildPN), subDependentEntry.Metadata.DisplayName());
+                + "."
+                + nameof(ParentPN.Child2)
+                + "#"
+                + nameof(ChildPN)
+                + "."
+                + nameof(ChildPN.SubChild)
+                + "#"
+                + nameof(SubChildPN),
+            subDependentEntry.Metadata.DisplayName()
+        );
 
         context.ChangeTracker.CascadeChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 3 : 5, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 3 : 5,
+            context.ChangeTracker.Entries().Count()
+        );
 
         context.ChangeTracker.AcceptAllChanges();
 
@@ -1035,18 +1194,25 @@ public class OwnedFixupTest
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 4 : 7, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 4 : 7,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Null(principal.Child2);
         Assert.Same(principal, dependent2.Parent);
         Assert.Same(dependent2, principal.Child1);
         Assert.Equal(entityState, context.Entry(principal).State);
-        Assert.Equal(entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted, dependentEntry1.State);
+        Assert.Equal(
+            entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted,
+            dependentEntry1.State
+        );
         var dependentEntry2 = context.Entry(principal).Reference(p => p.Child1).TargetEntry;
         Assert.Equal(principal.Id, dependentEntry2.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, dependentEntry2.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName() + "." + nameof(Parent.Child1) + "#" + nameof(Child),
-            dependentEntry2.Metadata.DisplayName());
+            dependentEntry2.Metadata.DisplayName()
+        );
 
         Assert.Same(subDependent12, dependent2.SubChild1);
         Assert.Same(dependent2, subDependent12.Parent);
@@ -1055,14 +1221,16 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, subDependentEntry1.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName()
-            + "."
-            + nameof(Parent.Child1)
-            + "#"
-            + nameof(Child)
-            + "."
-            + nameof(Child.SubChild1)
-            + "#"
-            + nameof(SubChild), subDependentEntry1.Metadata.DisplayName());
+                + "."
+                + nameof(Parent.Child1)
+                + "#"
+                + nameof(Child)
+                + "."
+                + nameof(Child.SubChild1)
+                + "#"
+                + nameof(SubChild),
+            subDependentEntry1.Metadata.DisplayName()
+        );
 
         Assert.Same(subDependent22, dependent2.SubChild2);
         Assert.Same(dependent2, subDependent22.Parent);
@@ -1071,20 +1239,25 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, subDependentEntry2.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName()
-            + "."
-            + nameof(Parent.Child1)
-            + "#"
-            + nameof(Child)
-            + "."
-            + nameof(Child.SubChild2)
-            + "#"
-            + nameof(SubChild), subDependentEntry2.Metadata.DisplayName());
+                + "."
+                + nameof(Parent.Child1)
+                + "#"
+                + nameof(Child)
+                + "."
+                + nameof(Child.SubChild2)
+                + "#"
+                + nameof(SubChild),
+            subDependentEntry2.Metadata.DisplayName()
+        );
 
         context.ChangeTracker.CascadeChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 4 : 7, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 4 : 7,
+            context.ChangeTracker.Entries().Count()
+        );
 
         context.ChangeTracker.AcceptAllChanges();
 
@@ -1119,7 +1292,10 @@ public class OwnedFixupTest
     [InlineData(EntityState.Added, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Modified, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Unchanged, CollectionType.ObservableHashSet)]
-    public void Instance_changed_unidirectional_collection(EntityState entityState, CollectionType collectionType)
+    public void Instance_changed_unidirectional_collection(
+        EntityState entityState,
+        CollectionType collectionType
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentPN { Id = 77 };
@@ -1152,48 +1328,74 @@ public class OwnedFixupTest
         var subDependent2 = new SubChildPN { Name = "2S" };
         dependent2.SubChildCollection = CreateChildCollection(collectionType, subDependent2);
 
-        var dependentEntry2 = context.Entry(principal).Collection(p => p.ChildCollection2)
+        var dependentEntry2 = context
+            .Entry(principal)
+            .Collection(p => p.ChildCollection2)
             .FindEntry(dependent2);
-        dependentEntry2.Property<int>("Id").CurrentValue = dependentEntry1.Property<int>("Id").CurrentValue;
+        dependentEntry2.Property<int>("Id").CurrentValue = dependentEntry1
+            .Property<int>("Id")
+            .CurrentValue;
 
-        var subDependentEntry2 = dependentEntry2.Collection(p => p.SubChildCollection)
+        var subDependentEntry2 = dependentEntry2
+            .Collection(p => p.SubChildCollection)
             .FindEntry(subDependent2);
-        subDependentEntry2.Property<int>("Id").CurrentValue = subDependentEntry1.Property<int>("Id").CurrentValue;
+        subDependentEntry2.Property<int>("Id").CurrentValue = subDependentEntry1
+            .Property<int>("Id")
+            .CurrentValue;
 
         context.ChangeTracker.DetectChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 3 : 5, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 3 : 5,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Null(principal.ChildCollection1);
         Assert.Contains(principal.ChildCollection2, e => ReferenceEquals(e, dependent2));
         Assert.Equal(entityState, context.Entry(principal).State);
-        Assert.Equal(entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted, dependentEntry1.State);
-        Assert.Equal(principal.Id, dependentEntry2.Property("ParentId").CurrentValue);
-        Assert.Equal(entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, dependentEntry2.State);
         Assert.Equal(
-            typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.ChildCollection2) + "#" + nameof(ChildPN),
-            dependentEntry2.Metadata.DisplayName());
+            entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted,
+            dependentEntry1.State
+        );
+        Assert.Equal(principal.Id, dependentEntry2.Property("ParentId").CurrentValue);
+        Assert.Equal(
+            entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+            dependentEntry2.State
+        );
+        Assert.Equal(
+            typeof(ParentPN).ShortDisplayName()
+                + "."
+                + nameof(ParentPN.ChildCollection2)
+                + "#"
+                + nameof(ChildPN),
+            dependentEntry2.Metadata.DisplayName()
+        );
 
         Assert.Contains(dependent2.SubChildCollection, e => ReferenceEquals(e, subDependent2));
         Assert.Equal(principal.Id, subDependentEntry2.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, subDependentEntry2.State);
         Assert.Equal(
             typeof(ParentPN).ShortDisplayName()
-            + "."
-            + nameof(ParentPN.ChildCollection2)
-            + "#"
-            + nameof(ChildPN)
-            + "."
-            + nameof(ChildPN.SubChildCollection)
-            + "#"
-            + nameof(SubChildPN), subDependentEntry2.Metadata.DisplayName());
+                + "."
+                + nameof(ParentPN.ChildCollection2)
+                + "#"
+                + nameof(ChildPN)
+                + "."
+                + nameof(ChildPN.SubChildCollection)
+                + "#"
+                + nameof(SubChildPN),
+            subDependentEntry2.Metadata.DisplayName()
+        );
 
         context.ChangeTracker.CascadeChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 3 : 5, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 3 : 5,
+            context.ChangeTracker.Entries().Count()
+        );
 
         context.ChangeTracker.AcceptAllChanges();
 
@@ -1226,7 +1428,10 @@ public class OwnedFixupTest
     [InlineData(EntityState.Added, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Modified, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Unchanged, CollectionType.ObservableHashSet)]
-    public void Instance_changed_bidirectional_collection(EntityState entityState, CollectionType collectionType)
+    public void Instance_changed_bidirectional_collection(
+        EntityState entityState,
+        CollectionType collectionType
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id = 77 };
@@ -1259,29 +1464,50 @@ public class OwnedFixupTest
         var subDependent2 = new SubChild { Name = "2S" };
         dependent2.SubChildCollection = CreateChildCollection(collectionType, subDependent2);
 
-        var dependentEntry2 = context.Entry(principal).Collection(p => p.ChildCollection1)
+        var dependentEntry2 = context
+            .Entry(principal)
+            .Collection(p => p.ChildCollection1)
             .FindEntry(dependent2);
-        dependentEntry2.Property<int>("Id").CurrentValue = dependentEntry1.Property<int>("Id").CurrentValue;
+        dependentEntry2.Property<int>("Id").CurrentValue = dependentEntry1
+            .Property<int>("Id")
+            .CurrentValue;
 
-        var subDependentEntry2 = dependentEntry2.Collection(p => p.SubChildCollection)
+        var subDependentEntry2 = dependentEntry2
+            .Collection(p => p.SubChildCollection)
             .FindEntry(subDependent2);
-        subDependentEntry2.Property<int>("Id").CurrentValue = subDependentEntry1.Property<int>("Id").CurrentValue;
+        subDependentEntry2.Property<int>("Id").CurrentValue = subDependentEntry1
+            .Property<int>("Id")
+            .CurrentValue;
 
         context.ChangeTracker.DetectChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 3 : 5, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 3 : 5,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Null(principal.ChildCollection2);
         Assert.Same(principal, dependent2.Parent);
         Assert.Contains(principal.ChildCollection1, e => ReferenceEquals(e, dependent2));
         Assert.Equal(entityState, context.Entry(principal).State);
-        Assert.Equal(entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted, dependentEntry1.State);
-        Assert.Equal(principal.Id, dependentEntry2.Property("ParentId").CurrentValue);
-        Assert.Equal(entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, dependentEntry2.State);
         Assert.Equal(
-            typeof(Parent).ShortDisplayName() + "." + nameof(Parent.ChildCollection1) + "#" + nameof(Child),
-            dependentEntry2.Metadata.DisplayName());
+            entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted,
+            dependentEntry1.State
+        );
+        Assert.Equal(principal.Id, dependentEntry2.Property("ParentId").CurrentValue);
+        Assert.Equal(
+            entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+            dependentEntry2.State
+        );
+        Assert.Equal(
+            typeof(Parent).ShortDisplayName()
+                + "."
+                + nameof(Parent.ChildCollection1)
+                + "#"
+                + nameof(Child),
+            dependentEntry2.Metadata.DisplayName()
+        );
 
         Assert.Contains(dependent2.SubChildCollection, e => ReferenceEquals(e, subDependent2));
         Assert.Same(dependent2, subDependent2.Parent);
@@ -1289,20 +1515,25 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, subDependentEntry2.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName()
-            + "."
-            + nameof(Parent.ChildCollection1)
-            + "#"
-            + nameof(Child)
-            + "."
-            + nameof(Child.SubChildCollection)
-            + "#"
-            + nameof(SubChild), subDependentEntry2.Metadata.DisplayName());
+                + "."
+                + nameof(Parent.ChildCollection1)
+                + "#"
+                + nameof(Child)
+                + "."
+                + nameof(Child.SubChildCollection)
+                + "#"
+                + nameof(SubChild),
+            subDependentEntry2.Metadata.DisplayName()
+        );
 
         context.ChangeTracker.CascadeChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 3 : 5, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 3 : 5,
+            context.ChangeTracker.Entries().Count()
+        );
 
         context.ChangeTracker.AcceptAllChanges();
 
@@ -1353,17 +1584,28 @@ public class OwnedFixupTest
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 3 : 5, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 3 : 5,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Null(principal.Child1);
         Assert.Same(dependent, principal.Child2);
         Assert.Equal(entityState, context.Entry(principal).State);
-        Assert.Equal(entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted, dependentEntry1.State);
+        Assert.Equal(
+            entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted,
+            dependentEntry1.State
+        );
         var dependentEntry2 = context.Entry(principal).Reference(p => p.Child2).TargetEntry;
         Assert.Equal(principal.Id, dependentEntry2.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, dependentEntry2.State);
         Assert.Equal(
-            typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.Child2) + "#" + nameof(ChildPN),
-            dependentEntry2.Metadata.DisplayName());
+            typeof(ParentPN).ShortDisplayName()
+                + "."
+                + nameof(ParentPN.Child2)
+                + "#"
+                + nameof(ChildPN),
+            dependentEntry2.Metadata.DisplayName()
+        );
 
         Assert.Same(subDependent, dependent.SubChild);
         var subDependentEntry = dependentEntry2.Reference(p => p.SubChild).TargetEntry;
@@ -1371,21 +1613,25 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, subDependentEntry.State);
         Assert.Equal(
             typeof(ParentPN).ShortDisplayName()
-            + "."
-            + nameof(ParentPN.Child2)
-            + "#"
-            + nameof(ChildPN)
-            + "."
-            + nameof(ChildPN.SubChild)
-            + "#"
-            + nameof(SubChildPN),
-            subDependentEntry.Metadata.DisplayName());
+                + "."
+                + nameof(ParentPN.Child2)
+                + "#"
+                + nameof(ChildPN)
+                + "."
+                + nameof(ChildPN.SubChild)
+                + "#"
+                + nameof(SubChildPN),
+            subDependentEntry.Metadata.DisplayName()
+        );
 
         context.ChangeTracker.CascadeChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 3 : 5, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 3 : 5,
+            context.ChangeTracker.Entries().Count()
+        );
 
         context.ChangeTracker.AcceptAllChanges();
 
@@ -1426,18 +1672,25 @@ public class OwnedFixupTest
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 4 : 7, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 4 : 7,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Null(principal.Child2);
         Assert.Same(principal, dependent.Parent);
         Assert.Same(dependent, principal.Child1);
         Assert.Equal(entityState, context.Entry(principal).State);
-        Assert.Equal(entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted, dependentEntry1.State);
+        Assert.Equal(
+            entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted,
+            dependentEntry1.State
+        );
         var dependentEntry2 = context.Entry(principal).Reference(p => p.Child1).TargetEntry;
         Assert.Equal(principal.Id, dependentEntry2.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, dependentEntry2.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName() + "." + nameof(Parent.Child1) + "#" + nameof(Child),
-            dependentEntry2.Metadata.DisplayName());
+            dependentEntry2.Metadata.DisplayName()
+        );
 
         Assert.Same(subDependent1, dependent.SubChild1);
         Assert.Same(dependent, subDependent1.Parent);
@@ -1446,14 +1699,16 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, subDependentEntry1.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName()
-            + "."
-            + nameof(Parent.Child1)
-            + "#"
-            + nameof(Child)
-            + "."
-            + nameof(Child.SubChild1)
-            + "#"
-            + nameof(SubChild), subDependentEntry1.Metadata.DisplayName());
+                + "."
+                + nameof(Parent.Child1)
+                + "#"
+                + nameof(Child)
+                + "."
+                + nameof(Child.SubChild1)
+                + "#"
+                + nameof(SubChild),
+            subDependentEntry1.Metadata.DisplayName()
+        );
 
         Assert.Same(subDependent2, dependent.SubChild2);
         Assert.Same(dependent, subDependent1.Parent);
@@ -1462,20 +1717,25 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, subDependentEntry1.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName()
-            + "."
-            + nameof(Parent.Child1)
-            + "#"
-            + nameof(Child)
-            + "."
-            + nameof(Child.SubChild2)
-            + "#"
-            + nameof(SubChild), subDependentEntry2.Metadata.DisplayName());
+                + "."
+                + nameof(Parent.Child1)
+                + "#"
+                + nameof(Child)
+                + "."
+                + nameof(Child.SubChild2)
+                + "#"
+                + nameof(SubChild),
+            subDependentEntry2.Metadata.DisplayName()
+        );
 
         context.ChangeTracker.CascadeChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 4 : 7, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 4 : 7,
+            context.ChangeTracker.Entries().Count()
+        );
 
         context.ChangeTracker.AcceptAllChanges();
 
@@ -1510,7 +1770,10 @@ public class OwnedFixupTest
     [InlineData(EntityState.Added, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Modified, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Unchanged, CollectionType.ObservableHashSet)]
-    public void Identity_changed_unidirectional_collection(EntityState entityState, CollectionType collectionType)
+    public void Identity_changed_unidirectional_collection(
+        EntityState entityState,
+        CollectionType collectionType
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentPN { Id = 77 };
@@ -1534,7 +1797,10 @@ public class OwnedFixupTest
                 break;
         }
 
-        var dependentEntry1 = context.Entry(principal).Collection(p => p.ChildCollection1).FindEntry(dependent);
+        var dependentEntry1 = context
+            .Entry(principal)
+            .Collection(p => p.ChildCollection1)
+            .FindEntry(dependent);
 
         principal.ChildCollection2 = principal.ChildCollection1;
         principal.ChildCollection1 = null;
@@ -1543,39 +1809,59 @@ public class OwnedFixupTest
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 3 : 5, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 3 : 5,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Null(principal.ChildCollection1);
         Assert.Contains(principal.ChildCollection2, e => ReferenceEquals(e, dependent));
         Assert.Equal(entityState, context.Entry(principal).State);
-        Assert.Equal(entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted, dependentEntry1.State);
-        var dependentEntry2 = context.Entry(principal).Collection(p => p.ChildCollection2).FindEntry(dependent);
+        Assert.Equal(
+            entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted,
+            dependentEntry1.State
+        );
+        var dependentEntry2 = context
+            .Entry(principal)
+            .Collection(p => p.ChildCollection2)
+            .FindEntry(dependent);
         Assert.Equal(principal.Id, dependentEntry2.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, dependentEntry2.State);
         Assert.Equal(
-            typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.ChildCollection2) + "#" + nameof(ChildPN),
-            dependentEntry2.Metadata.DisplayName());
+            typeof(ParentPN).ShortDisplayName()
+                + "."
+                + nameof(ParentPN.ChildCollection2)
+                + "#"
+                + nameof(ChildPN),
+            dependentEntry2.Metadata.DisplayName()
+        );
 
         Assert.Contains(dependent.SubChildCollection, e => ReferenceEquals(e, subDependent));
-        var subDependentEntry = dependentEntry2.Collection(p => p.SubChildCollection).FindEntry(subDependent);
+        var subDependentEntry = dependentEntry2
+            .Collection(p => p.SubChildCollection)
+            .FindEntry(subDependent);
         Assert.Equal(principal.Id, subDependentEntry.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, subDependentEntry.State);
         Assert.Equal(
             typeof(ParentPN).ShortDisplayName()
-            + "."
-            + nameof(ParentPN.ChildCollection2)
-            + "#"
-            + nameof(ChildPN)
-            + "."
-            + nameof(ChildPN.SubChildCollection)
-            + "#"
-            + nameof(SubChildPN),
-            subDependentEntry.Metadata.DisplayName());
+                + "."
+                + nameof(ParentPN.ChildCollection2)
+                + "#"
+                + nameof(ChildPN)
+                + "."
+                + nameof(ChildPN.SubChildCollection)
+                + "#"
+                + nameof(SubChildPN),
+            subDependentEntry.Metadata.DisplayName()
+        );
 
         context.ChangeTracker.CascadeChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 3 : 5, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 3 : 5,
+            context.ChangeTracker.Entries().Count()
+        );
 
         context.ChangeTracker.AcceptAllChanges();
 
@@ -1607,7 +1893,10 @@ public class OwnedFixupTest
     [InlineData(EntityState.Added, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Modified, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Unchanged, CollectionType.ObservableHashSet)]
-    public void Identity_changed_bidirectional_collection(EntityState entityState, CollectionType collectionType)
+    public void Identity_changed_bidirectional_collection(
+        EntityState entityState,
+        CollectionType collectionType
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id = 77 };
@@ -1631,7 +1920,10 @@ public class OwnedFixupTest
                 break;
         }
 
-        var dependentEntry1 = context.Entry(principal).Collection(p => p.ChildCollection2).FindEntry(dependent);
+        var dependentEntry1 = context
+            .Entry(principal)
+            .Collection(p => p.ChildCollection2)
+            .FindEntry(dependent);
 
         principal.ChildCollection1 = principal.ChildCollection2;
         principal.ChildCollection2 = null;
@@ -1640,40 +1932,61 @@ public class OwnedFixupTest
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 3 : 5, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 3 : 5,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Null(principal.ChildCollection2);
         Assert.Same(principal, dependent.Parent);
         Assert.Contains(principal.ChildCollection1, e => ReferenceEquals(e, dependent));
         Assert.Equal(entityState, context.Entry(principal).State);
-        Assert.Equal(entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted, dependentEntry1.State);
-        var dependentEntry2 = context.Entry(principal).Collection(p => p.ChildCollection1).FindEntry(dependent);
+        Assert.Equal(
+            entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted,
+            dependentEntry1.State
+        );
+        var dependentEntry2 = context
+            .Entry(principal)
+            .Collection(p => p.ChildCollection1)
+            .FindEntry(dependent);
         Assert.Equal(principal.Id, dependentEntry2.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, dependentEntry2.State);
         Assert.Equal(
-            typeof(Parent).ShortDisplayName() + "." + nameof(Parent.ChildCollection1) + "#" + nameof(Child),
-            dependentEntry2.Metadata.DisplayName());
+            typeof(Parent).ShortDisplayName()
+                + "."
+                + nameof(Parent.ChildCollection1)
+                + "#"
+                + nameof(Child),
+            dependentEntry2.Metadata.DisplayName()
+        );
 
         Assert.Contains(dependent.SubChildCollection, e => ReferenceEquals(e, subDependent));
         Assert.Same(dependent, subDependent.Parent);
-        var subDependentEntry = dependentEntry2.Collection(p => p.SubChildCollection).FindEntry(subDependent);
+        var subDependentEntry = dependentEntry2
+            .Collection(p => p.SubChildCollection)
+            .FindEntry(subDependent);
         Assert.Equal(principal.Id, subDependentEntry.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, subDependentEntry.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName()
-            + "."
-            + nameof(Parent.ChildCollection1)
-            + "#"
-            + nameof(Child)
-            + "."
-            + nameof(Child.SubChildCollection)
-            + "#"
-            + nameof(SubChild), subDependentEntry.Metadata.DisplayName());
+                + "."
+                + nameof(Parent.ChildCollection1)
+                + "#"
+                + nameof(Child)
+                + "."
+                + nameof(Child.SubChildCollection)
+                + "#"
+                + nameof(SubChild),
+            subDependentEntry.Metadata.DisplayName()
+        );
 
         context.ChangeTracker.CascadeChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 3 : 5, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 3 : 5,
+            context.ChangeTracker.Entries().Count()
+        );
 
         context.ChangeTracker.AcceptAllChanges();
 
@@ -1719,7 +2032,10 @@ public class OwnedFixupTest
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 5 : 9, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 5 : 9,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Same(dependent1, principal.Child2);
         Assert.Same(dependent2, principal.Child1);
         Assert.Equal(entityState, context.Entry(principal).State);
@@ -1728,21 +2044,33 @@ public class OwnedFixupTest
         Assert.Equal(principal.Id, dependent1Entry.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, dependent1Entry.State);
         Assert.Equal(
-            typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.Child1) + "#" + nameof(ChildPN),
-            dependent1Entry.Metadata.DisplayName());
+            typeof(ParentPN).ShortDisplayName()
+                + "."
+                + nameof(ParentPN.Child1)
+                + "#"
+                + nameof(ChildPN),
+            dependent1Entry.Metadata.DisplayName()
+        );
         Assert.Equal(
             entityState == EntityState.Added ? null : EntityState.Deleted,
-            dependent1Entry.GetInfrastructure().SharedIdentityEntry?.EntityState);
+            dependent1Entry.GetInfrastructure().SharedIdentityEntry?.EntityState
+        );
 
         var dependent2Entry = context.Entry(principal).Reference(p => p.Child2).TargetEntry;
         Assert.Equal(principal.Id, dependent2Entry.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, dependent2Entry.State);
         Assert.Equal(
-            typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.Child2) + "#" + nameof(ChildPN),
-            dependent2Entry.Metadata.DisplayName());
+            typeof(ParentPN).ShortDisplayName()
+                + "."
+                + nameof(ParentPN.Child2)
+                + "#"
+                + nameof(ChildPN),
+            dependent2Entry.Metadata.DisplayName()
+        );
         Assert.Equal(
             entityState == EntityState.Added ? null : EntityState.Deleted,
-            dependent2Entry.GetInfrastructure().SharedIdentityEntry?.EntityState);
+            dependent2Entry.GetInfrastructure().SharedIdentityEntry?.EntityState
+        );
 
         Assert.Same(subDependent1, dependent1.SubChild);
         var subDependentEntry1 = dependent1Entry.Reference(p => p.SubChild).TargetEntry;
@@ -1750,14 +2078,16 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, subDependentEntry1.State);
         Assert.Equal(
             typeof(ParentPN).ShortDisplayName()
-            + "."
-            + nameof(ParentPN.Child1)
-            + "#"
-            + nameof(ChildPN)
-            + "."
-            + nameof(ChildPN.SubChild)
-            + "#"
-            + nameof(SubChildPN), subDependentEntry1.Metadata.DisplayName());
+                + "."
+                + nameof(ParentPN.Child1)
+                + "#"
+                + nameof(ChildPN)
+                + "."
+                + nameof(ChildPN.SubChild)
+                + "#"
+                + nameof(SubChildPN),
+            subDependentEntry1.Metadata.DisplayName()
+        );
 
         Assert.Same(subDependent2, dependent2.SubChild);
         var subDependentEntry2 = dependent2Entry.Reference(p => p.SubChild).TargetEntry;
@@ -1765,20 +2095,25 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, subDependentEntry2.State);
         Assert.Equal(
             typeof(ParentPN).ShortDisplayName()
-            + "."
-            + nameof(ParentPN.Child2)
-            + "#"
-            + nameof(ChildPN)
-            + "."
-            + nameof(ChildPN.SubChild)
-            + "#"
-            + nameof(SubChildPN), subDependentEntry2.Metadata.DisplayName());
+                + "."
+                + nameof(ParentPN.Child2)
+                + "#"
+                + nameof(ChildPN)
+                + "."
+                + nameof(ChildPN.SubChild)
+                + "#"
+                + nameof(SubChildPN),
+            subDependentEntry2.Metadata.DisplayName()
+        );
 
         context.ChangeTracker.CascadeChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 5 : 9, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 5 : 9,
+            context.ChangeTracker.Entries().Count()
+        );
 
         context.ChangeTracker.AcceptAllChanges();
 
@@ -1830,7 +2165,10 @@ public class OwnedFixupTest
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 7 : 13, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 7 : 13,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Same(principal, dependent1.Parent);
         Assert.Same(dependent1, principal.Child2);
         Assert.Same(principal, dependent2.Parent);
@@ -1842,20 +2180,24 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, dependent1Entry.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName() + "." + nameof(Parent.Child1) + "#" + nameof(Child),
-            dependent1Entry.Metadata.DisplayName());
+            dependent1Entry.Metadata.DisplayName()
+        );
         Assert.Equal(
             entityState == EntityState.Added ? null : EntityState.Deleted,
-            dependent1Entry.GetInfrastructure().SharedIdentityEntry?.EntityState);
+            dependent1Entry.GetInfrastructure().SharedIdentityEntry?.EntityState
+        );
 
         var dependent2Entry = context.Entry(principal).Reference(p => p.Child2).TargetEntry;
         Assert.Equal(principal.Id, dependent2Entry.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, dependent2Entry.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName() + "." + nameof(Parent.Child2) + "#" + nameof(Child),
-            dependent2Entry.Metadata.DisplayName());
+            dependent2Entry.Metadata.DisplayName()
+        );
         Assert.Equal(
             entityState == EntityState.Added ? null : EntityState.Deleted,
-            dependent2Entry.GetInfrastructure().SharedIdentityEntry?.EntityState);
+            dependent2Entry.GetInfrastructure().SharedIdentityEntry?.EntityState
+        );
 
         Assert.Same(subDependent11, dependent1.SubChild1);
         Assert.Same(dependent1, subDependent11.Parent);
@@ -1864,14 +2206,16 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, subDependentEntry11.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName()
-            + "."
-            + nameof(Parent.Child1)
-            + "#"
-            + nameof(Child)
-            + "."
-            + nameof(Child.SubChild1)
-            + "#"
-            + nameof(SubChild), subDependentEntry11.Metadata.DisplayName());
+                + "."
+                + nameof(Parent.Child1)
+                + "#"
+                + nameof(Child)
+                + "."
+                + nameof(Child.SubChild1)
+                + "#"
+                + nameof(SubChild),
+            subDependentEntry11.Metadata.DisplayName()
+        );
 
         Assert.Same(subDependent21, dependent1.SubChild2);
         Assert.Same(dependent1, subDependent21.Parent);
@@ -1880,14 +2224,16 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, subDependentEntry11.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName()
-            + "."
-            + nameof(Parent.Child1)
-            + "#"
-            + nameof(Child)
-            + "."
-            + nameof(Child.SubChild2)
-            + "#"
-            + nameof(SubChild), subDependentEntry21.Metadata.DisplayName());
+                + "."
+                + nameof(Parent.Child1)
+                + "#"
+                + nameof(Child)
+                + "."
+                + nameof(Child.SubChild2)
+                + "#"
+                + nameof(SubChild),
+            subDependentEntry21.Metadata.DisplayName()
+        );
 
         Assert.Same(subDependent12, dependent2.SubChild1);
         Assert.Same(dependent2, subDependent12.Parent);
@@ -1896,14 +2242,16 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, subDependentEntry12.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName()
-            + "."
-            + nameof(Parent.Child1)
-            + "#"
-            + nameof(Child)
-            + "."
-            + nameof(Child.SubChild1)
-            + "#"
-            + nameof(SubChild), subDependentEntry12.Metadata.DisplayName());
+                + "."
+                + nameof(Parent.Child1)
+                + "#"
+                + nameof(Child)
+                + "."
+                + nameof(Child.SubChild1)
+                + "#"
+                + nameof(SubChild),
+            subDependentEntry12.Metadata.DisplayName()
+        );
 
         Assert.Same(subDependent22, dependent2.SubChild2);
         Assert.Same(dependent2, subDependent22.Parent);
@@ -1912,20 +2260,25 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, subDependentEntry22.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName()
-            + "."
-            + nameof(Parent.Child1)
-            + "#"
-            + nameof(Child)
-            + "."
-            + nameof(Child.SubChild2)
-            + "#"
-            + nameof(SubChild), subDependentEntry22.Metadata.DisplayName());
+                + "."
+                + nameof(Parent.Child1)
+                + "#"
+                + nameof(Child)
+                + "."
+                + nameof(Child.SubChild2)
+                + "#"
+                + nameof(SubChild),
+            subDependentEntry22.Metadata.DisplayName()
+        );
 
         context.ChangeTracker.CascadeChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 7 : 13, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 7 : 13,
+            context.ChangeTracker.Entries().Count()
+        );
 
         context.ChangeTracker.AcceptAllChanges();
 
@@ -1962,7 +2315,10 @@ public class OwnedFixupTest
     [InlineData(EntityState.Added, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Modified, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Unchanged, CollectionType.ObservableHashSet)]
-    public void Identity_swapped_unidirectional_collection(EntityState entityState, CollectionType collectionType)
+    public void Identity_swapped_unidirectional_collection(
+        EntityState entityState,
+        CollectionType collectionType
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentPN { Id = 77 };
@@ -2003,82 +2359,124 @@ public class OwnedFixupTest
         principal.ChildCollection2 = principal.ChildCollection1;
         principal.ChildCollection1 = tempCollection;
 
-        var newDependentEntry1 = context.Entry(principal).Collection(p => p.ChildCollection1)
+        var newDependentEntry1 = context
+            .Entry(principal)
+            .Collection(p => p.ChildCollection1)
             .FindEntry(dependent2);
-        newDependentEntry1.Property<int>("Id").CurrentValue = dependentEntry2.Property<int>("Id").CurrentValue;
+        newDependentEntry1.Property<int>("Id").CurrentValue = dependentEntry2
+            .Property<int>("Id")
+            .CurrentValue;
 
-        var newDependentEntry2 = context.Entry(principal).Collection(p => p.ChildCollection2)
+        var newDependentEntry2 = context
+            .Entry(principal)
+            .Collection(p => p.ChildCollection2)
             .FindEntry(dependent1);
-        newDependentEntry2.Property<int>("Id").CurrentValue = dependentEntry1.Property<int>("Id").CurrentValue;
+        newDependentEntry2.Property<int>("Id").CurrentValue = dependentEntry1
+            .Property<int>("Id")
+            .CurrentValue;
 
-        var newSubDependentEntry1 = newDependentEntry1.Collection(p => p.SubChildCollection)
+        var newSubDependentEntry1 = newDependentEntry1
+            .Collection(p => p.SubChildCollection)
             .FindEntry(subDependent2);
-        newSubDependentEntry1.Property<int>("Id").CurrentValue = subDependentEntry2.Property<int>("Id").CurrentValue;
+        newSubDependentEntry1.Property<int>("Id").CurrentValue = subDependentEntry2
+            .Property<int>("Id")
+            .CurrentValue;
 
-        var newSubDependentEntry2 = newDependentEntry2.Collection(p => p.SubChildCollection)
+        var newSubDependentEntry2 = newDependentEntry2
+            .Collection(p => p.SubChildCollection)
             .FindEntry(subDependent1);
-        newSubDependentEntry2.Property<int>("Id").CurrentValue = subDependentEntry1.Property<int>("Id").CurrentValue;
+        newSubDependentEntry2.Property<int>("Id").CurrentValue = subDependentEntry1
+            .Property<int>("Id")
+            .CurrentValue;
 
         context.ChangeTracker.DetectChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 5 : 9, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 5 : 9,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Contains(principal.ChildCollection2, e => ReferenceEquals(e, dependent1));
         Assert.Contains(principal.ChildCollection1, e => ReferenceEquals(e, dependent2));
         Assert.Equal(entityState, context.Entry(principal).State);
 
         Assert.Equal(principal.Id, newDependentEntry1.Property("ParentId").CurrentValue);
-        Assert.Equal(entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, newDependentEntry1.State);
         Assert.Equal(
-            typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.ChildCollection1) + "#" + nameof(ChildPN),
-            newDependentEntry1.Metadata.DisplayName());
+            entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+            newDependentEntry1.State
+        );
+        Assert.Equal(
+            typeof(ParentPN).ShortDisplayName()
+                + "."
+                + nameof(ParentPN.ChildCollection1)
+                + "#"
+                + nameof(ChildPN),
+            newDependentEntry1.Metadata.DisplayName()
+        );
         Assert.Equal(
             entityState == EntityState.Added ? null : EntityState.Deleted,
-            newDependentEntry1.GetInfrastructure().SharedIdentityEntry?.EntityState);
+            newDependentEntry1.GetInfrastructure().SharedIdentityEntry?.EntityState
+        );
 
         Assert.Equal(principal.Id, newDependentEntry2.Property("ParentId").CurrentValue);
-        Assert.Equal(entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, newDependentEntry2.State);
         Assert.Equal(
-            typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.ChildCollection2) + "#" + nameof(ChildPN),
-            newDependentEntry2.Metadata.DisplayName());
+            entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+            newDependentEntry2.State
+        );
+        Assert.Equal(
+            typeof(ParentPN).ShortDisplayName()
+                + "."
+                + nameof(ParentPN.ChildCollection2)
+                + "#"
+                + nameof(ChildPN),
+            newDependentEntry2.Metadata.DisplayName()
+        );
         Assert.Equal(
             entityState == EntityState.Added ? null : EntityState.Deleted,
-            newDependentEntry2.GetInfrastructure().SharedIdentityEntry?.EntityState);
+            newDependentEntry2.GetInfrastructure().SharedIdentityEntry?.EntityState
+        );
 
         Assert.Contains(dependent1.SubChildCollection, e => ReferenceEquals(e, subDependent1));
         Assert.Equal(principal.Id, newSubDependentEntry2.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, newSubDependentEntry2.State);
         Assert.Equal(
             typeof(ParentPN).ShortDisplayName()
-            + "."
-            + nameof(ParentPN.ChildCollection2)
-            + "#"
-            + nameof(ChildPN)
-            + "."
-            + nameof(ChildPN.SubChildCollection)
-            + "#"
-            + nameof(SubChildPN), newSubDependentEntry2.Metadata.DisplayName());
+                + "."
+                + nameof(ParentPN.ChildCollection2)
+                + "#"
+                + nameof(ChildPN)
+                + "."
+                + nameof(ChildPN.SubChildCollection)
+                + "#"
+                + nameof(SubChildPN),
+            newSubDependentEntry2.Metadata.DisplayName()
+        );
 
         Assert.Contains(dependent2.SubChildCollection, e => ReferenceEquals(e, subDependent2));
         Assert.Equal(principal.Id, newSubDependentEntry1.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, newSubDependentEntry1.State);
         Assert.Equal(
             typeof(ParentPN).ShortDisplayName()
-            + "."
-            + nameof(ParentPN.ChildCollection1)
-            + "#"
-            + nameof(ChildPN)
-            + "."
-            + nameof(ChildPN.SubChildCollection)
-            + "#"
-            + nameof(SubChildPN), newSubDependentEntry1.Metadata.DisplayName());
+                + "."
+                + nameof(ParentPN.ChildCollection1)
+                + "#"
+                + nameof(ChildPN)
+                + "."
+                + nameof(ChildPN.SubChildCollection)
+                + "#"
+                + nameof(SubChildPN),
+            newSubDependentEntry1.Metadata.DisplayName()
+        );
 
         context.ChangeTracker.CascadeChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 5 : 9, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 5 : 9,
+            context.ChangeTracker.Entries().Count()
+        );
 
         context.ChangeTracker.AcceptAllChanges();
 
@@ -2113,7 +2511,10 @@ public class OwnedFixupTest
     [InlineData(EntityState.Added, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Modified, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Unchanged, CollectionType.ObservableHashSet)]
-    public void Identity_swapped_bidirectional_collection(EntityState entityState, CollectionType collectionType)
+    public void Identity_swapped_bidirectional_collection(
+        EntityState entityState,
+        CollectionType collectionType
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id = 77 };
@@ -2154,27 +2555,44 @@ public class OwnedFixupTest
         principal.ChildCollection2 = principal.ChildCollection1;
         principal.ChildCollection1 = tempCollection;
 
-        var newDependentEntry1 = context.Entry(principal).Collection(p => p.ChildCollection1)
+        var newDependentEntry1 = context
+            .Entry(principal)
+            .Collection(p => p.ChildCollection1)
             .FindEntry(dependent2);
-        newDependentEntry1.Property<int>("Id").CurrentValue = dependentEntry2.Property<int>("Id").CurrentValue;
+        newDependentEntry1.Property<int>("Id").CurrentValue = dependentEntry2
+            .Property<int>("Id")
+            .CurrentValue;
 
-        var newDependentEntry2 = context.Entry(principal).Collection(p => p.ChildCollection2)
+        var newDependentEntry2 = context
+            .Entry(principal)
+            .Collection(p => p.ChildCollection2)
             .FindEntry(dependent1);
-        newDependentEntry2.Property<int>("Id").CurrentValue = dependentEntry1.Property<int>("Id").CurrentValue;
+        newDependentEntry2.Property<int>("Id").CurrentValue = dependentEntry1
+            .Property<int>("Id")
+            .CurrentValue;
 
-        var newSubDependentEntry1 = newDependentEntry2.Collection(p => p.SubChildCollection)
+        var newSubDependentEntry1 = newDependentEntry2
+            .Collection(p => p.SubChildCollection)
             .FindEntry(subDependent1);
-        newSubDependentEntry1.Property<int>("Id").CurrentValue = subDependentEntry1.Property<int>("Id").CurrentValue;
+        newSubDependentEntry1.Property<int>("Id").CurrentValue = subDependentEntry1
+            .Property<int>("Id")
+            .CurrentValue;
 
-        var newSubDependentEntry2 = newDependentEntry1.Collection(p => p.SubChildCollection)
+        var newSubDependentEntry2 = newDependentEntry1
+            .Collection(p => p.SubChildCollection)
             .FindEntry(subDependent2);
-        newSubDependentEntry2.Property<int>("Id").CurrentValue = subDependentEntry2.Property<int>("Id").CurrentValue;
+        newSubDependentEntry2.Property<int>("Id").CurrentValue = subDependentEntry2
+            .Property<int>("Id")
+            .CurrentValue;
 
         context.ChangeTracker.DetectChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 5 : 9, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 5 : 9,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Same(principal, dependent1.Parent);
         Assert.Contains(principal.ChildCollection2, e => ReferenceEquals(e, dependent1));
         Assert.Same(principal, dependent2.Parent);
@@ -2182,22 +2600,40 @@ public class OwnedFixupTest
         Assert.Equal(entityState, context.Entry(principal).State);
 
         Assert.Equal(principal.Id, newDependentEntry1.Property("ParentId").CurrentValue);
-        Assert.Equal(entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, newDependentEntry1.State);
         Assert.Equal(
-            typeof(Parent).ShortDisplayName() + "." + nameof(Parent.ChildCollection1) + "#" + nameof(Child),
-            newDependentEntry1.Metadata.DisplayName());
+            entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+            newDependentEntry1.State
+        );
+        Assert.Equal(
+            typeof(Parent).ShortDisplayName()
+                + "."
+                + nameof(Parent.ChildCollection1)
+                + "#"
+                + nameof(Child),
+            newDependentEntry1.Metadata.DisplayName()
+        );
         Assert.Equal(
             entityState == EntityState.Added ? null : EntityState.Deleted,
-            newDependentEntry1.GetInfrastructure().SharedIdentityEntry?.EntityState);
+            newDependentEntry1.GetInfrastructure().SharedIdentityEntry?.EntityState
+        );
 
         Assert.Equal(principal.Id, newDependentEntry2.Property("ParentId").CurrentValue);
-        Assert.Equal(entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, newDependentEntry2.State);
         Assert.Equal(
-            typeof(Parent).ShortDisplayName() + "." + nameof(Parent.ChildCollection2) + "#" + nameof(Child),
-            newDependentEntry2.Metadata.DisplayName());
+            entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+            newDependentEntry2.State
+        );
+        Assert.Equal(
+            typeof(Parent).ShortDisplayName()
+                + "."
+                + nameof(Parent.ChildCollection2)
+                + "#"
+                + nameof(Child),
+            newDependentEntry2.Metadata.DisplayName()
+        );
         Assert.Equal(
             entityState == EntityState.Added ? null : EntityState.Deleted,
-            newDependentEntry2.GetInfrastructure().SharedIdentityEntry?.EntityState);
+            newDependentEntry2.GetInfrastructure().SharedIdentityEntry?.EntityState
+        );
 
         Assert.Contains(dependent1.SubChildCollection, e => ReferenceEquals(e, subDependent1));
         Assert.Same(dependent1, subDependent1.Parent);
@@ -2205,14 +2641,16 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, newSubDependentEntry1.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName()
-            + "."
-            + nameof(Parent.ChildCollection2)
-            + "#"
-            + nameof(Child)
-            + "."
-            + nameof(Child.SubChildCollection)
-            + "#"
-            + nameof(SubChild), newSubDependentEntry1.Metadata.DisplayName());
+                + "."
+                + nameof(Parent.ChildCollection2)
+                + "#"
+                + nameof(Child)
+                + "."
+                + nameof(Child.SubChildCollection)
+                + "#"
+                + nameof(SubChild),
+            newSubDependentEntry1.Metadata.DisplayName()
+        );
 
         Assert.Contains(dependent2.SubChildCollection, e => ReferenceEquals(e, subDependent2));
         Assert.Same(dependent2, subDependent2.Parent);
@@ -2220,20 +2658,25 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, newSubDependentEntry2.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName()
-            + "."
-            + nameof(Parent.ChildCollection1)
-            + "#"
-            + nameof(Child)
-            + "."
-            + nameof(Child.SubChildCollection)
-            + "#"
-            + nameof(SubChild), newSubDependentEntry2.Metadata.DisplayName());
+                + "."
+                + nameof(Parent.ChildCollection1)
+                + "#"
+                + nameof(Child)
+                + "."
+                + nameof(Child.SubChildCollection)
+                + "#"
+                + nameof(SubChild),
+            newSubDependentEntry2.Metadata.DisplayName()
+        );
 
         context.ChangeTracker.CascadeChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 5 : 9, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 5 : 9,
+            context.ChangeTracker.Entries().Count()
+        );
 
         context.ChangeTracker.AcceptAllChanges();
 
@@ -2280,7 +2723,10 @@ public class OwnedFixupTest
         {
             Assert.Equal(
                 CoreStrings.KeyReadOnly("ParentId", dependentEntry1.Metadata.DisplayName()),
-                Assert.Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges()).Message);
+                Assert
+                    .Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges())
+                    .Message
+            );
         }
         else
         {
@@ -2301,8 +2747,13 @@ public class OwnedFixupTest
             Assert.Equal(principal2.Id, dependentEntry2.Property("ParentId").CurrentValue);
             Assert.Equal(EntityState.Added, dependentEntry2.State);
             Assert.Equal(
-                typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.Child1) + "#" + nameof(ChildPN),
-                dependentEntry2.Metadata.DisplayName());
+                typeof(ParentPN).ShortDisplayName()
+                    + "."
+                    + nameof(ParentPN.Child1)
+                    + "#"
+                    + nameof(ChildPN),
+                dependentEntry2.Metadata.DisplayName()
+            );
 
             Assert.Same(subDependent, dependent.SubChild);
             var subDependentEntry = dependentEntry2.Reference(p => p.SubChild).TargetEntry;
@@ -2310,15 +2761,16 @@ public class OwnedFixupTest
             Assert.Equal(EntityState.Added, subDependentEntry.State);
             Assert.Equal(
                 typeof(ParentPN).ShortDisplayName()
-                + "."
-                + nameof(ParentPN.Child1)
-                + "#"
-                + nameof(ChildPN)
-                + "."
-                + nameof(ChildPN.SubChild)
-                + "#"
-                + nameof(SubChildPN),
-                subDependentEntry.Metadata.DisplayName());
+                    + "."
+                    + nameof(ParentPN.Child1)
+                    + "#"
+                    + nameof(ChildPN)
+                    + "."
+                    + nameof(ChildPN.SubChild)
+                    + "#"
+                    + nameof(SubChildPN),
+                subDependentEntry.Metadata.DisplayName()
+            );
 
             context.ChangeTracker.CascadeChanges();
 
@@ -2373,7 +2825,10 @@ public class OwnedFixupTest
         {
             Assert.Equal(
                 CoreStrings.KeyReadOnly("ParentId", dependentEntry1.Metadata.DisplayName()),
-                Assert.Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges()).Message);
+                Assert
+                    .Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges())
+                    .Message
+            );
         }
         else
         {
@@ -2394,8 +2849,13 @@ public class OwnedFixupTest
             Assert.Equal(EntityState.Added, dependentEntry2.State);
             Assert.Equal(principal2.Id, dependentEntry2.Property("ParentId").CurrentValue);
             Assert.Equal(
-                typeof(Parent).ShortDisplayName() + "." + nameof(Parent.Child1) + "#" + nameof(Child),
-                dependentEntry2.Metadata.DisplayName());
+                typeof(Parent).ShortDisplayName()
+                    + "."
+                    + nameof(Parent.Child1)
+                    + "#"
+                    + nameof(Child),
+                dependentEntry2.Metadata.DisplayName()
+            );
 
             Assert.Same(subDependent1, dependent.SubChild1);
             Assert.Same(dependent, subDependent1.Parent);
@@ -2404,15 +2864,16 @@ public class OwnedFixupTest
             Assert.Equal(EntityState.Added, subDependentEntry1.State);
             Assert.Equal(
                 typeof(Parent).ShortDisplayName()
-                + "."
-                + nameof(Parent.Child1)
-                + "#"
-                + nameof(Child)
-                + "."
-                + nameof(Child.SubChild1)
-                + "#"
-                + nameof(SubChild),
-                subDependentEntry1.Metadata.DisplayName());
+                    + "."
+                    + nameof(Parent.Child1)
+                    + "#"
+                    + nameof(Child)
+                    + "."
+                    + nameof(Child.SubChild1)
+                    + "#"
+                    + nameof(SubChild),
+                subDependentEntry1.Metadata.DisplayName()
+            );
 
             Assert.Same(subDependent2, dependent.SubChild2);
             Assert.Same(dependent, subDependent1.Parent);
@@ -2421,15 +2882,16 @@ public class OwnedFixupTest
             Assert.Equal(EntityState.Added, subDependentEntry2.State);
             Assert.Equal(
                 typeof(Parent).ShortDisplayName()
-                + "."
-                + nameof(Parent.Child1)
-                + "#"
-                + nameof(Child)
-                + "."
-                + nameof(Child.SubChild2)
-                + "#"
-                + nameof(SubChild),
-                subDependentEntry2.Metadata.DisplayName());
+                    + "."
+                    + nameof(Parent.Child1)
+                    + "#"
+                    + nameof(Child)
+                    + "."
+                    + nameof(Child.SubChild2)
+                    + "#"
+                    + nameof(SubChild),
+                subDependentEntry2.Metadata.DisplayName()
+            );
 
             context.ChangeTracker.CascadeChanges();
 
@@ -2473,7 +2935,10 @@ public class OwnedFixupTest
     [InlineData(EntityState.Added, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Modified, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Unchanged, CollectionType.ObservableHashSet)]
-    public void Parent_changed_unidirectional_collection(EntityState entityState, CollectionType collectionType)
+    public void Parent_changed_unidirectional_collection(
+        EntityState entityState,
+        CollectionType collectionType
+    )
     {
         using var context = new FixupContext();
         var principal1 = new ParentPN { Id = 77 };
@@ -2514,7 +2979,10 @@ public class OwnedFixupTest
         {
             Assert.Equal(
                 CoreStrings.KeyReadOnly("ParentId", dependentEntry1.Metadata.DisplayName()),
-                Assert.Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges()).Message);
+                Assert
+                    .Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges())
+                    .Message
+            );
         }
         else
         {
@@ -2531,30 +2999,39 @@ public class OwnedFixupTest
             Assert.Equal(entityState, context.Entry(principal2).State);
             Assert.Equal(EntityState.Detached, dependentEntry1.State);
 
-            var dependentEntry2 = context.Entry(principal2).Collection(p => p.ChildCollection1)
+            var dependentEntry2 = context
+                .Entry(principal2)
+                .Collection(p => p.ChildCollection1)
                 .FindEntry(dependent);
             Assert.Equal(principal2.Id, dependentEntry2.Property("ParentId").CurrentValue);
             Assert.Equal(EntityState.Added, dependentEntry2.State);
             Assert.Equal(
-                typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.ChildCollection1) + "#" + nameof(ChildPN),
-                dependentEntry2.Metadata.DisplayName());
+                typeof(ParentPN).ShortDisplayName()
+                    + "."
+                    + nameof(ParentPN.ChildCollection1)
+                    + "#"
+                    + nameof(ChildPN),
+                dependentEntry2.Metadata.DisplayName()
+            );
 
             Assert.Contains(dependent.SubChildCollection, e => ReferenceEquals(e, subDependent));
-            var subDependentEntry2 = dependentEntry2.Collection(p => p.SubChildCollection)
+            var subDependentEntry2 = dependentEntry2
+                .Collection(p => p.SubChildCollection)
                 .FindEntry(subDependent);
             Assert.Equal(principal2.Id, subDependentEntry2.Property("ParentId").CurrentValue);
             Assert.Equal(EntityState.Added, subDependentEntry2.State);
             Assert.Equal(
                 typeof(ParentPN).ShortDisplayName()
-                + "."
-                + nameof(ParentPN.ChildCollection1)
-                + "#"
-                + nameof(ChildPN)
-                + "."
-                + nameof(ChildPN.SubChildCollection)
-                + "#"
-                + nameof(SubChildPN),
-                subDependentEntry2.Metadata.DisplayName());
+                    + "."
+                    + nameof(ParentPN.ChildCollection1)
+                    + "#"
+                    + nameof(ChildPN)
+                    + "."
+                    + nameof(ChildPN.SubChildCollection)
+                    + "#"
+                    + nameof(SubChildPN),
+                subDependentEntry2.Metadata.DisplayName()
+            );
 
             context.ChangeTracker.CascadeChanges();
 
@@ -2595,7 +3072,10 @@ public class OwnedFixupTest
     [InlineData(EntityState.Added, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Modified, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Unchanged, CollectionType.ObservableHashSet)]
-    public void Parent_changed_bidirectional_collection(EntityState entityState, CollectionType collectionType)
+    public void Parent_changed_bidirectional_collection(
+        EntityState entityState,
+        CollectionType collectionType
+    )
     {
         using var context = new FixupContext();
         var principal1 = new Parent { Id = 77 };
@@ -2636,7 +3116,10 @@ public class OwnedFixupTest
         {
             Assert.Equal(
                 CoreStrings.KeyReadOnly("ParentId", dependentEntry1.Metadata.DisplayName()),
-                Assert.Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges()).Message);
+                Assert
+                    .Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges())
+                    .Message
+            );
         }
         else
         {
@@ -2654,30 +3137,40 @@ public class OwnedFixupTest
             Assert.Equal(entityState, context.Entry(principal2).State);
             Assert.Equal(EntityState.Detached, dependentEntry1.State);
 
-            var dependentEntry2 = context.Entry(principal2).Collection(p => p.ChildCollection1)
+            var dependentEntry2 = context
+                .Entry(principal2)
+                .Collection(p => p.ChildCollection1)
                 .FindEntry(dependent);
             Assert.Equal(EntityState.Added, dependentEntry2.State);
             Assert.Equal(principal2.Id, dependentEntry2.Property("ParentId").CurrentValue);
             Assert.Equal(
-                typeof(Parent).ShortDisplayName() + "." + nameof(Parent.ChildCollection1) + "#" + nameof(Child),
-                dependentEntry2.Metadata.DisplayName());
+                typeof(Parent).ShortDisplayName()
+                    + "."
+                    + nameof(Parent.ChildCollection1)
+                    + "#"
+                    + nameof(Child),
+                dependentEntry2.Metadata.DisplayName()
+            );
 
             Assert.Contains(dependent.SubChildCollection, e => ReferenceEquals(e, subDependent));
             Assert.Same(dependent, subDependent.Parent);
-            var subDependentEntry2 = dependentEntry2.Collection(p => p.SubChildCollection)
+            var subDependentEntry2 = dependentEntry2
+                .Collection(p => p.SubChildCollection)
                 .FindEntry(subDependent);
             Assert.Equal(principal2.Id, subDependentEntry2.Property("ParentId").CurrentValue);
             Assert.Equal(EntityState.Added, subDependentEntry2.State);
             Assert.Equal(
                 typeof(Parent).ShortDisplayName()
-                + "."
-                + nameof(Parent.ChildCollection1)
-                + "#"
-                + nameof(Child)
-                + "."
-                + nameof(Child.SubChildCollection)
-                + "#"
-                + nameof(SubChild), subDependentEntry2.Metadata.DisplayName());
+                    + "."
+                    + nameof(Parent.ChildCollection1)
+                    + "#"
+                    + nameof(Child)
+                    + "."
+                    + nameof(Child.SubChildCollection)
+                    + "#"
+                    + nameof(SubChild),
+                subDependentEntry2.Metadata.DisplayName()
+            );
 
             context.ChangeTracker.CascadeChanges();
 
@@ -2734,10 +3227,11 @@ public class OwnedFixupTest
         if (entityState != EntityState.Added)
         {
             Assert.Equal(
-                CoreStrings.KeyReadOnly(
-                    "ParentId",
-                    "ParentPN.Child1#ChildPN"),
-                Assert.Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges()).Message);
+                CoreStrings.KeyReadOnly("ParentId", "ParentPN.Child1#ChildPN"),
+                Assert
+                    .Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges())
+                    .Message
+            );
         }
         else
         {
@@ -2755,17 +3249,33 @@ public class OwnedFixupTest
 
             var dependent1Entry = context.Entry(principal1).Reference(p => p.Child1).TargetEntry;
             Assert.Equal(principal1.Id, dependent1Entry.Property("ParentId").CurrentValue);
-            Assert.Equal(entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, dependent1Entry.State);
             Assert.Equal(
-                typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.Child1) + "#" + nameof(ChildPN),
-                dependent1Entry.Metadata.DisplayName());
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                dependent1Entry.State
+            );
+            Assert.Equal(
+                typeof(ParentPN).ShortDisplayName()
+                    + "."
+                    + nameof(ParentPN.Child1)
+                    + "#"
+                    + nameof(ChildPN),
+                dependent1Entry.Metadata.DisplayName()
+            );
 
             var dependent2Entry = context.Entry(principal2).Reference(p => p.Child1).TargetEntry;
             Assert.Equal(principal2.Id, dependent2Entry.Property("ParentId").CurrentValue);
-            Assert.Equal(entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, dependent2Entry.State);
             Assert.Equal(
-                typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.Child1) + "#" + nameof(ChildPN),
-                dependent2Entry.Metadata.DisplayName());
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                dependent2Entry.State
+            );
+            Assert.Equal(
+                typeof(ParentPN).ShortDisplayName()
+                    + "."
+                    + nameof(ParentPN.Child1)
+                    + "#"
+                    + nameof(ChildPN),
+                dependent2Entry.Metadata.DisplayName()
+            );
 
             Assert.Same(subDependent1, dependent1.SubChild);
             var subDependentEntry1 = dependent1Entry.Reference(p => p.SubChild).TargetEntry;
@@ -2773,15 +3283,16 @@ public class OwnedFixupTest
             Assert.Equal(EntityState.Added, subDependentEntry1.State);
             Assert.Equal(
                 typeof(ParentPN).ShortDisplayName()
-                + "."
-                + nameof(ParentPN.Child1)
-                + "#"
-                + nameof(ChildPN)
-                + "."
-                + nameof(ChildPN.SubChild)
-                + "#"
-                + nameof(SubChildPN),
-                subDependentEntry1.Metadata.DisplayName());
+                    + "."
+                    + nameof(ParentPN.Child1)
+                    + "#"
+                    + nameof(ChildPN)
+                    + "."
+                    + nameof(ChildPN.SubChild)
+                    + "#"
+                    + nameof(SubChildPN),
+                subDependentEntry1.Metadata.DisplayName()
+            );
 
             Assert.Same(subDependent2, dependent2.SubChild);
             var subDependentEntry2 = dependent2Entry.Reference(p => p.SubChild).TargetEntry;
@@ -2789,15 +3300,16 @@ public class OwnedFixupTest
             Assert.Equal(EntityState.Added, subDependentEntry2.State);
             Assert.Equal(
                 typeof(ParentPN).ShortDisplayName()
-                + "."
-                + nameof(ParentPN.Child1)
-                + "#"
-                + nameof(ChildPN)
-                + "."
-                + nameof(ChildPN.SubChild)
-                + "#"
-                + nameof(SubChildPN),
-                subDependentEntry2.Metadata.DisplayName());
+                    + "."
+                    + nameof(ParentPN.Child1)
+                    + "#"
+                    + nameof(ChildPN)
+                    + "."
+                    + nameof(ChildPN.SubChild)
+                    + "#"
+                    + nameof(SubChildPN),
+                subDependentEntry2.Metadata.DisplayName()
+            );
 
             context.ChangeTracker.CascadeChanges();
 
@@ -2858,10 +3370,11 @@ public class OwnedFixupTest
         if (entityState != EntityState.Added)
         {
             Assert.Equal(
-                CoreStrings.KeyReadOnly(
-                    "ParentId",
-                    "Parent.Child1#Child"),
-                Assert.Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges()).Message);
+                CoreStrings.KeyReadOnly("ParentId", "Parent.Child1#Child"),
+                Assert
+                    .Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges())
+                    .Message
+            );
         }
         else
         {
@@ -2880,18 +3393,34 @@ public class OwnedFixupTest
             Assert.Equal(entityState, context.Entry(principal2).State);
 
             var dependent1Entry = context.Entry(principal1).Reference(p => p.Child1).TargetEntry;
-            Assert.Equal(entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, dependent1Entry.State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                dependent1Entry.State
+            );
             Assert.Equal(principal1.Id, dependent1Entry.Property("ParentId").CurrentValue);
             Assert.Equal(
-                typeof(Parent).ShortDisplayName() + "." + nameof(Parent.Child1) + "#" + nameof(Child),
-                dependent1Entry.Metadata.DisplayName());
+                typeof(Parent).ShortDisplayName()
+                    + "."
+                    + nameof(Parent.Child1)
+                    + "#"
+                    + nameof(Child),
+                dependent1Entry.Metadata.DisplayName()
+            );
 
             var dependent2Entry = context.Entry(principal2).Reference(p => p.Child1).TargetEntry;
             Assert.Equal(principal2.Id, dependent2Entry.Property("ParentId").CurrentValue);
-            Assert.Equal(entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, dependent2Entry.State);
             Assert.Equal(
-                typeof(Parent).ShortDisplayName() + "." + nameof(Parent.Child1) + "#" + nameof(Child),
-                dependent2Entry.Metadata.DisplayName());
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                dependent2Entry.State
+            );
+            Assert.Equal(
+                typeof(Parent).ShortDisplayName()
+                    + "."
+                    + nameof(Parent.Child1)
+                    + "#"
+                    + nameof(Child),
+                dependent2Entry.Metadata.DisplayName()
+            );
 
             Assert.Same(subDependent11, dependent1.SubChild1);
             Assert.Same(dependent1, subDependent11.Parent);
@@ -2900,15 +3429,16 @@ public class OwnedFixupTest
             Assert.Equal(EntityState.Added, subDependentEntry11.State);
             Assert.Equal(
                 typeof(Parent).ShortDisplayName()
-                + "."
-                + nameof(Parent.Child1)
-                + "#"
-                + nameof(Child)
-                + "."
-                + nameof(Child.SubChild1)
-                + "#"
-                + nameof(SubChild),
-                subDependentEntry11.Metadata.DisplayName());
+                    + "."
+                    + nameof(Parent.Child1)
+                    + "#"
+                    + nameof(Child)
+                    + "."
+                    + nameof(Child.SubChild1)
+                    + "#"
+                    + nameof(SubChild),
+                subDependentEntry11.Metadata.DisplayName()
+            );
 
             Assert.Same(subDependent21, dependent1.SubChild2);
             Assert.Same(dependent1, subDependent21.Parent);
@@ -2917,15 +3447,16 @@ public class OwnedFixupTest
             Assert.Equal(EntityState.Added, subDependentEntry21.State);
             Assert.Equal(
                 typeof(Parent).ShortDisplayName()
-                + "."
-                + nameof(Parent.Child1)
-                + "#"
-                + nameof(Child)
-                + "."
-                + nameof(Child.SubChild2)
-                + "#"
-                + nameof(SubChild),
-                subDependentEntry21.Metadata.DisplayName());
+                    + "."
+                    + nameof(Parent.Child1)
+                    + "#"
+                    + nameof(Child)
+                    + "."
+                    + nameof(Child.SubChild2)
+                    + "#"
+                    + nameof(SubChild),
+                subDependentEntry21.Metadata.DisplayName()
+            );
 
             Assert.Same(subDependent12, dependent2.SubChild1);
             Assert.Same(dependent2, subDependent12.Parent);
@@ -2934,15 +3465,16 @@ public class OwnedFixupTest
             Assert.Equal(EntityState.Added, subDependentEntry12.State);
             Assert.Equal(
                 typeof(Parent).ShortDisplayName()
-                + "."
-                + nameof(Parent.Child1)
-                + "#"
-                + nameof(Child)
-                + "."
-                + nameof(Child.SubChild1)
-                + "#"
-                + nameof(SubChild),
-                subDependentEntry12.Metadata.DisplayName());
+                    + "."
+                    + nameof(Parent.Child1)
+                    + "#"
+                    + nameof(Child)
+                    + "."
+                    + nameof(Child.SubChild1)
+                    + "#"
+                    + nameof(SubChild),
+                subDependentEntry12.Metadata.DisplayName()
+            );
 
             Assert.Same(subDependent22, dependent2.SubChild2);
             Assert.Same(dependent2, subDependent22.Parent);
@@ -2951,15 +3483,16 @@ public class OwnedFixupTest
             Assert.Equal(EntityState.Added, subDependentEntry22.State);
             Assert.Equal(
                 typeof(Parent).ShortDisplayName()
-                + "."
-                + nameof(Parent.Child1)
-                + "#"
-                + nameof(Child)
-                + "."
-                + nameof(Child.SubChild2)
-                + "#"
-                + nameof(SubChild),
-                subDependentEntry22.Metadata.DisplayName());
+                    + "."
+                    + nameof(Parent.Child1)
+                    + "#"
+                    + nameof(Child)
+                    + "."
+                    + nameof(Child.SubChild2)
+                    + "#"
+                    + nameof(SubChild),
+                subDependentEntry22.Metadata.DisplayName()
+            );
 
             context.ChangeTracker.CascadeChanges();
 
@@ -3007,7 +3540,10 @@ public class OwnedFixupTest
     [InlineData(EntityState.Added, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Modified, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Unchanged, CollectionType.ObservableHashSet)]
-    public void Parent_swapped_unidirectional_collection(EntityState entityState, CollectionType collectionType)
+    public void Parent_swapped_unidirectional_collection(
+        EntityState entityState,
+        CollectionType collectionType
+    )
     {
         using var context = new FixupContext();
         var principal1 = new ParentPN { Id = 77 };
@@ -3054,10 +3590,11 @@ public class OwnedFixupTest
         if (entityState != EntityState.Added)
         {
             Assert.Equal(
-                CoreStrings.KeyReadOnly(
-                    "ParentId",
-                    "ParentPN.ChildCollection1#ChildPN"),
-                Assert.Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges()).Message);
+                CoreStrings.KeyReadOnly("ParentId", "ParentPN.ChildCollection1#ChildPN"),
+                Assert
+                    .Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges())
+                    .Message
+            );
         }
         else
         {
@@ -3073,53 +3610,79 @@ public class OwnedFixupTest
             Assert.Equal(entityState, context.Entry(principal1).State);
             Assert.Equal(entityState, context.Entry(principal2).State);
 
-            var newDependentEntry2 = context.Entry(principal1).Collection(p => p.ChildCollection1)
+            var newDependentEntry2 = context
+                .Entry(principal1)
+                .Collection(p => p.ChildCollection1)
                 .FindEntry(dependent2);
             Assert.Equal(principal1.Id, newDependentEntry2.Property("ParentId").CurrentValue);
-            Assert.Equal(entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, newDependentEntry2.State);
             Assert.Equal(
-                typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.ChildCollection1) + "#" + nameof(ChildPN),
-                newDependentEntry2.Metadata.DisplayName());
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                newDependentEntry2.State
+            );
+            Assert.Equal(
+                typeof(ParentPN).ShortDisplayName()
+                    + "."
+                    + nameof(ParentPN.ChildCollection1)
+                    + "#"
+                    + nameof(ChildPN),
+                newDependentEntry2.Metadata.DisplayName()
+            );
 
-            var newDependentEntry1 = context.Entry(principal2).Collection(p => p.ChildCollection1)
+            var newDependentEntry1 = context
+                .Entry(principal2)
+                .Collection(p => p.ChildCollection1)
                 .FindEntry(dependent1);
             Assert.Equal(principal2.Id, newDependentEntry1.Property("ParentId").CurrentValue);
-            Assert.Equal(entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, newDependentEntry1.State);
             Assert.Equal(
-                typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.ChildCollection1) + "#" + nameof(ChildPN),
-                newDependentEntry1.Metadata.DisplayName());
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                newDependentEntry1.State
+            );
+            Assert.Equal(
+                typeof(ParentPN).ShortDisplayName()
+                    + "."
+                    + nameof(ParentPN.ChildCollection1)
+                    + "#"
+                    + nameof(ChildPN),
+                newDependentEntry1.Metadata.DisplayName()
+            );
 
             Assert.Contains(dependent1.SubChildCollection, e => ReferenceEquals(e, subDependent1));
-            var newSubDependentEntry1 = newDependentEntry1.Collection(p => p.SubChildCollection)
+            var newSubDependentEntry1 = newDependentEntry1
+                .Collection(p => p.SubChildCollection)
                 .FindEntry(subDependent1);
             Assert.Equal(principal2.Id, newSubDependentEntry1.Property("ParentId").CurrentValue);
             Assert.Equal(EntityState.Added, newSubDependentEntry1.State);
             Assert.Equal(
                 typeof(ParentPN).ShortDisplayName()
-                + "."
-                + nameof(ParentPN.ChildCollection1)
-                + "#"
-                + nameof(ChildPN)
-                + "."
-                + nameof(ChildPN.SubChildCollection)
-                + "#"
-                + nameof(SubChildPN), newSubDependentEntry1.Metadata.DisplayName());
+                    + "."
+                    + nameof(ParentPN.ChildCollection1)
+                    + "#"
+                    + nameof(ChildPN)
+                    + "."
+                    + nameof(ChildPN.SubChildCollection)
+                    + "#"
+                    + nameof(SubChildPN),
+                newSubDependentEntry1.Metadata.DisplayName()
+            );
 
             Assert.Contains(dependent2.SubChildCollection, e => ReferenceEquals(e, subDependent2));
-            var newSubDependentEntry2 = newDependentEntry2.Collection(p => p.SubChildCollection)
+            var newSubDependentEntry2 = newDependentEntry2
+                .Collection(p => p.SubChildCollection)
                 .FindEntry(subDependent2);
             Assert.Equal(principal1.Id, newSubDependentEntry2.Property("ParentId").CurrentValue);
             Assert.Equal(EntityState.Added, newSubDependentEntry2.State);
             Assert.Equal(
                 typeof(ParentPN).ShortDisplayName()
-                + "."
-                + nameof(ParentPN.ChildCollection1)
-                + "#"
-                + nameof(ChildPN)
-                + "."
-                + nameof(ChildPN.SubChildCollection)
-                + "#"
-                + nameof(SubChildPN), newSubDependentEntry2.Metadata.DisplayName());
+                    + "."
+                    + nameof(ParentPN.ChildCollection1)
+                    + "#"
+                    + nameof(ChildPN)
+                    + "."
+                    + nameof(ChildPN.SubChildCollection)
+                    + "#"
+                    + nameof(SubChildPN),
+                newSubDependentEntry2.Metadata.DisplayName()
+            );
 
             context.ChangeTracker.CascadeChanges();
 
@@ -3161,7 +3724,10 @@ public class OwnedFixupTest
     [InlineData(EntityState.Added, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Modified, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Unchanged, CollectionType.ObservableHashSet)]
-    public void Parent_swapped_bidirectional_collection(EntityState entityState, CollectionType collectionType)
+    public void Parent_swapped_bidirectional_collection(
+        EntityState entityState,
+        CollectionType collectionType
+    )
     {
         using var context = new FixupContext();
         var principal1 = new Parent { Id = 77 };
@@ -3208,10 +3774,11 @@ public class OwnedFixupTest
         if (entityState != EntityState.Added)
         {
             Assert.Equal(
-                CoreStrings.KeyReadOnly(
-                    "ParentId",
-                    "Parent.ChildCollection1#Child"),
-                Assert.Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges()).Message);
+                CoreStrings.KeyReadOnly("ParentId", "Parent.ChildCollection1#Child"),
+                Assert
+                    .Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges())
+                    .Message
+            );
         }
         else
         {
@@ -3229,57 +3796,81 @@ public class OwnedFixupTest
             Assert.Equal(entityState, context.Entry(principal1).State);
             Assert.Equal(entityState, context.Entry(principal2).State);
 
-            var newDependentEntry2 = context.Entry(principal1).Collection(p => p.ChildCollection1)
+            var newDependentEntry2 = context
+                .Entry(principal1)
+                .Collection(p => p.ChildCollection1)
                 .FindEntry(dependent2);
-            Assert.Equal(entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, newDependentEntry2.State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                newDependentEntry2.State
+            );
             Assert.Equal(principal1.Id, newDependentEntry2.Property("ParentId").CurrentValue);
             Assert.Equal(
-                typeof(Parent).ShortDisplayName() + "." + nameof(Parent.ChildCollection1) + "#" + nameof(Child),
-                newDependentEntry2.Metadata.DisplayName());
+                typeof(Parent).ShortDisplayName()
+                    + "."
+                    + nameof(Parent.ChildCollection1)
+                    + "#"
+                    + nameof(Child),
+                newDependentEntry2.Metadata.DisplayName()
+            );
 
-            var newDependentEntry1 = context.Entry(principal2).Collection(p => p.ChildCollection1)
+            var newDependentEntry1 = context
+                .Entry(principal2)
+                .Collection(p => p.ChildCollection1)
                 .FindEntry(dependent1);
             Assert.Equal(principal2.Id, newDependentEntry1.Property("ParentId").CurrentValue);
-            Assert.Equal(entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, newDependentEntry1.State);
             Assert.Equal(
-                typeof(Parent).ShortDisplayName() + "." + nameof(Parent.ChildCollection1) + "#" + nameof(Child),
-                newDependentEntry1.Metadata.DisplayName());
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                newDependentEntry1.State
+            );
+            Assert.Equal(
+                typeof(Parent).ShortDisplayName()
+                    + "."
+                    + nameof(Parent.ChildCollection1)
+                    + "#"
+                    + nameof(Child),
+                newDependentEntry1.Metadata.DisplayName()
+            );
 
             Assert.Contains(dependent1.SubChildCollection, e => ReferenceEquals(e, subDependent1));
             Assert.Same(dependent1, subDependent1.Parent);
-            var newSubDependentEntry1 = newDependentEntry1.Collection(p => p.SubChildCollection)
+            var newSubDependentEntry1 = newDependentEntry1
+                .Collection(p => p.SubChildCollection)
                 .FindEntry(subDependent1);
             Assert.Equal(principal2.Id, newSubDependentEntry1.Property("ParentId").CurrentValue);
             Assert.Equal(EntityState.Added, newSubDependentEntry1.State);
             Assert.Equal(
                 typeof(Parent).ShortDisplayName()
-                + "."
-                + nameof(Parent.ChildCollection1)
-                + "#"
-                + nameof(Child)
-                + "."
-                + nameof(Child.SubChildCollection)
-                + "#"
-                + nameof(SubChild),
-                newSubDependentEntry1.Metadata.DisplayName());
+                    + "."
+                    + nameof(Parent.ChildCollection1)
+                    + "#"
+                    + nameof(Child)
+                    + "."
+                    + nameof(Child.SubChildCollection)
+                    + "#"
+                    + nameof(SubChild),
+                newSubDependentEntry1.Metadata.DisplayName()
+            );
 
             Assert.Contains(dependent2.SubChildCollection, e => ReferenceEquals(e, subDependent2));
             Assert.Same(dependent2, subDependent2.Parent);
-            var newSubDependentEntry2 = newDependentEntry2.Collection(p => p.SubChildCollection)
+            var newSubDependentEntry2 = newDependentEntry2
+                .Collection(p => p.SubChildCollection)
                 .FindEntry(subDependent2);
             Assert.Equal(principal1.Id, newSubDependentEntry2.Property("ParentId").CurrentValue);
             Assert.Equal(EntityState.Added, newSubDependentEntry2.State);
             Assert.Equal(
                 typeof(Parent).ShortDisplayName()
-                + "."
-                + nameof(Parent.ChildCollection1)
-                + "#"
-                + nameof(Child)
-                + "."
-                + nameof(Child.SubChildCollection)
-                + "#"
-                + nameof(SubChild),
-                newSubDependentEntry2.Metadata.DisplayName());
+                    + "."
+                    + nameof(Parent.ChildCollection1)
+                    + "#"
+                    + nameof(Child)
+                    + "."
+                    + nameof(Child.SubChildCollection)
+                    + "#"
+                    + nameof(SubChild),
+                newSubDependentEntry2.Metadata.DisplayName()
+            );
 
             context.ChangeTracker.CascadeChanges();
 
@@ -3335,20 +3926,31 @@ public class OwnedFixupTest
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 4 : 6, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 4 : 6,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Null(principal1.Child1);
         Assert.Null(principal1.Child2);
         Assert.Same(dependent, principal2.Child1);
         Assert.Null(principal2.Child2);
         Assert.Equal(entityState, context.Entry(principal1).State);
         Assert.Equal(entityState, context.Entry(principal2).State);
-        Assert.Equal(entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted, dependentEntry1.State);
+        Assert.Equal(
+            entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted,
+            dependentEntry1.State
+        );
         var dependentEntry2 = context.Entry(principal2).Reference(p => p.Child1).TargetEntry;
         Assert.Equal(principal2.Id, dependentEntry2.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, dependentEntry2.State);
         Assert.Equal(
-            typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.Child1) + "#" + nameof(ChildPN),
-            dependentEntry2.Metadata.DisplayName());
+            typeof(ParentPN).ShortDisplayName()
+                + "."
+                + nameof(ParentPN.Child1)
+                + "#"
+                + nameof(ChildPN),
+            dependentEntry2.Metadata.DisplayName()
+        );
 
         Assert.Same(subDependent, dependent.SubChild);
         var subDependentEntry = dependentEntry2.Reference(p => p.SubChild).TargetEntry;
@@ -3356,21 +3958,25 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, subDependentEntry.State);
         Assert.Equal(
             typeof(ParentPN).ShortDisplayName()
-            + "."
-            + nameof(ParentPN.Child1)
-            + "#"
-            + nameof(ChildPN)
-            + "."
-            + nameof(ChildPN.SubChild)
-            + "#"
-            + nameof(SubChildPN),
-            subDependentEntry.Metadata.DisplayName());
+                + "."
+                + nameof(ParentPN.Child1)
+                + "#"
+                + nameof(ChildPN)
+                + "."
+                + nameof(ChildPN.SubChild)
+                + "#"
+                + nameof(SubChildPN),
+            subDependentEntry.Metadata.DisplayName()
+        );
 
         context.ChangeTracker.CascadeChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 4 : 6, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 4 : 6,
+            context.ChangeTracker.Entries().Count()
+        );
 
         context.ChangeTracker.AcceptAllChanges();
 
@@ -3419,7 +4025,10 @@ public class OwnedFixupTest
         {
             Assert.Equal(
                 CoreStrings.KeyReadOnly("ParentId", "Parent.Child2#Child"),
-                Assert.Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges()).Message);
+                Assert
+                    .Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges())
+                    .Message
+            );
             return;
         }
 
@@ -3441,7 +4050,8 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, dependentEntry2.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName() + "." + nameof(Parent.Child1) + "#" + nameof(Child),
-            dependentEntry2.Metadata.DisplayName());
+            dependentEntry2.Metadata.DisplayName()
+        );
 
         Assert.Same(subDependent1, dependent.SubChild1);
         Assert.Same(dependent, subDependent1.Parent);
@@ -3450,15 +4060,16 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, subDependentEntry1.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName()
-            + "."
-            + nameof(Parent.Child1)
-            + "#"
-            + nameof(Child)
-            + "."
-            + nameof(Child.SubChild1)
-            + "#"
-            + nameof(SubChild),
-            subDependentEntry1.Metadata.DisplayName());
+                + "."
+                + nameof(Parent.Child1)
+                + "#"
+                + nameof(Child)
+                + "."
+                + nameof(Child.SubChild1)
+                + "#"
+                + nameof(SubChild),
+            subDependentEntry1.Metadata.DisplayName()
+        );
 
         Assert.Same(subDependent2, dependent.SubChild2);
         Assert.Same(dependent, subDependent1.Parent);
@@ -3467,15 +4078,16 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, subDependentEntry2.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName()
-            + "."
-            + nameof(Parent.Child1)
-            + "#"
-            + nameof(Child)
-            + "."
-            + nameof(Child.SubChild2)
-            + "#"
-            + nameof(SubChild),
-            subDependentEntry2.Metadata.DisplayName());
+                + "."
+                + nameof(Parent.Child1)
+                + "#"
+                + nameof(Child)
+                + "."
+                + nameof(Child.SubChild2)
+                + "#"
+                + nameof(SubChild),
+            subDependentEntry2.Metadata.DisplayName()
+        );
 
         context.ChangeTracker.CascadeChanges();
 
@@ -3518,7 +4130,10 @@ public class OwnedFixupTest
     [InlineData(EntityState.Added, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Modified, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Unchanged, CollectionType.ObservableHashSet)]
-    public void Parent_and_identity_changed_unidirectional_collection(EntityState entityState, CollectionType collectionType)
+    public void Parent_and_identity_changed_unidirectional_collection(
+        EntityState entityState,
+        CollectionType collectionType
+    )
     {
         using var context = new FixupContext();
         var principal1 = new ParentPN { Id = 77 };
@@ -3549,7 +4164,10 @@ public class OwnedFixupTest
 
         Assert.Equal(entityState != EntityState.Unchanged, context.ChangeTracker.HasChanges());
 
-        var dependentEntry1 = context.Entry(principal1).Collection(p => p.ChildCollection2).FindEntry(dependent);
+        var dependentEntry1 = context
+            .Entry(principal1)
+            .Collection(p => p.ChildCollection2)
+            .FindEntry(dependent);
 
         principal2.ChildCollection1 = principal1.ChildCollection2;
         principal1.ChildCollection2 = null;
@@ -3558,42 +4176,62 @@ public class OwnedFixupTest
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 4 : 6, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 4 : 6,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Null(principal1.ChildCollection1);
         Assert.Null(principal1.ChildCollection2);
         Assert.Contains(principal2.ChildCollection1, e => ReferenceEquals(e, dependent));
         Assert.Null(principal2.ChildCollection2);
         Assert.Equal(entityState, context.Entry(principal1).State);
         Assert.Equal(entityState, context.Entry(principal2).State);
-        Assert.Equal(entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted, dependentEntry1.State);
-        var dependentEntry2 = context.Entry(principal2).Collection(p => p.ChildCollection1).FindEntry(dependent);
+        Assert.Equal(
+            entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted,
+            dependentEntry1.State
+        );
+        var dependentEntry2 = context
+            .Entry(principal2)
+            .Collection(p => p.ChildCollection1)
+            .FindEntry(dependent);
         Assert.Equal(principal2.Id, dependentEntry2.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, dependentEntry2.State);
         Assert.Equal(
-            typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.ChildCollection1) + "#" + nameof(ChildPN),
-            dependentEntry2.Metadata.DisplayName());
+            typeof(ParentPN).ShortDisplayName()
+                + "."
+                + nameof(ParentPN.ChildCollection1)
+                + "#"
+                + nameof(ChildPN),
+            dependentEntry2.Metadata.DisplayName()
+        );
 
         Assert.Contains(dependent.SubChildCollection, e => ReferenceEquals(e, subDependent));
-        var subDependentEntry = dependentEntry2.Collection(p => p.SubChildCollection).FindEntry(subDependent);
+        var subDependentEntry = dependentEntry2
+            .Collection(p => p.SubChildCollection)
+            .FindEntry(subDependent);
         Assert.Equal(principal2.Id, subDependentEntry.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, subDependentEntry.State);
         Assert.Equal(
             typeof(ParentPN).ShortDisplayName()
-            + "."
-            + nameof(ParentPN.ChildCollection1)
-            + "#"
-            + nameof(ChildPN)
-            + "."
-            + nameof(ChildPN.SubChildCollection)
-            + "#"
-            + nameof(SubChildPN),
-            subDependentEntry.Metadata.DisplayName());
+                + "."
+                + nameof(ParentPN.ChildCollection1)
+                + "#"
+                + nameof(ChildPN)
+                + "."
+                + nameof(ChildPN.SubChildCollection)
+                + "#"
+                + nameof(SubChildPN),
+            subDependentEntry.Metadata.DisplayName()
+        );
 
         context.ChangeTracker.CascadeChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 4 : 6, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 4 : 6,
+            context.ChangeTracker.Entries().Count()
+        );
 
         context.ChangeTracker.AcceptAllChanges();
 
@@ -3627,7 +4265,10 @@ public class OwnedFixupTest
     [InlineData(EntityState.Added, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Modified, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Unchanged, CollectionType.ObservableHashSet)]
-    public void Parent_and_identity_changed_bidirectional_collection(EntityState entityState, CollectionType collectionType)
+    public void Parent_and_identity_changed_bidirectional_collection(
+        EntityState entityState,
+        CollectionType collectionType
+    )
     {
         using var context = new FixupContext();
         var principal1 = new Parent { Id = 77 };
@@ -3658,7 +4299,10 @@ public class OwnedFixupTest
 
         Assert.Equal(entityState != EntityState.Unchanged, context.ChangeTracker.HasChanges());
 
-        var dependentEntry1 = context.Entry(principal1).Collection(p => p.ChildCollection2).FindEntry(dependent);
+        var dependentEntry1 = context
+            .Entry(principal1)
+            .Collection(p => p.ChildCollection2)
+            .FindEntry(dependent);
 
         principal2.ChildCollection1 = principal1.ChildCollection2;
         principal1.ChildCollection2 = null;
@@ -3667,7 +4311,10 @@ public class OwnedFixupTest
         {
             Assert.Equal(
                 CoreStrings.KeyReadOnly("ParentId", "Parent.ChildCollection2#Child"),
-                Assert.Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges()).Message);
+                Assert
+                    .Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges())
+                    .Message
+            );
             return;
         }
 
@@ -3675,7 +4322,10 @@ public class OwnedFixupTest
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 4 : 6, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 4 : 6,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Empty(principal1.ChildCollection1);
         Assert.Null(principal1.ChildCollection2);
         Assert.Contains(principal2.ChildCollection1, e => ReferenceEquals(e, dependent));
@@ -3683,35 +4333,53 @@ public class OwnedFixupTest
         Assert.Same(principal2, dependent.Parent);
         Assert.Equal(entityState, context.Entry(principal1).State);
         Assert.Equal(entityState, context.Entry(principal2).State);
-        Assert.Equal(entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted, dependentEntry1.State);
-        var dependentEntry2 = context.Entry(principal2).Collection(p => p.ChildCollection1).FindEntry(dependent);
+        Assert.Equal(
+            entityState == EntityState.Added ? EntityState.Detached : EntityState.Deleted,
+            dependentEntry1.State
+        );
+        var dependentEntry2 = context
+            .Entry(principal2)
+            .Collection(p => p.ChildCollection1)
+            .FindEntry(dependent);
         Assert.Equal(principal2.Id, dependentEntry2.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, dependentEntry2.State);
         Assert.Equal(
-            typeof(Parent).ShortDisplayName() + "." + nameof(Parent.ChildCollection1) + "#" + nameof(Child),
-            dependentEntry2.Metadata.DisplayName());
+            typeof(Parent).ShortDisplayName()
+                + "."
+                + nameof(Parent.ChildCollection1)
+                + "#"
+                + nameof(Child),
+            dependentEntry2.Metadata.DisplayName()
+        );
 
         Assert.Contains(dependent.SubChildCollection, e => ReferenceEquals(e, subDependent));
         Assert.Same(dependent, subDependent.Parent);
-        var subDependentEntry = dependentEntry2.Collection(p => p.SubChildCollection).FindEntry(subDependent);
+        var subDependentEntry = dependentEntry2
+            .Collection(p => p.SubChildCollection)
+            .FindEntry(subDependent);
         Assert.Equal(principal2.Id, subDependentEntry.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, subDependentEntry.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName()
-            + "."
-            + nameof(Parent.ChildCollection1)
-            + "#"
-            + nameof(Child)
-            + "."
-            + nameof(Child.SubChildCollection)
-            + "#"
-            + nameof(SubChild), subDependentEntry.Metadata.DisplayName());
+                + "."
+                + nameof(Parent.ChildCollection1)
+                + "#"
+                + nameof(Child)
+                + "."
+                + nameof(Child.SubChildCollection)
+                + "#"
+                + nameof(SubChild),
+            subDependentEntry.Metadata.DisplayName()
+        );
 
         context.ChangeTracker.CascadeChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 4 : 6, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 4 : 6,
+            context.ChangeTracker.Entries().Count()
+        );
 
         context.ChangeTracker.AcceptAllChanges();
 
@@ -3762,7 +4430,10 @@ public class OwnedFixupTest
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 6 : 10, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 6 : 10,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Null(principal1.Child1);
         Assert.Same(dependent2, principal1.Child2);
         Assert.Same(dependent1, principal2.Child1);
@@ -3774,21 +4445,33 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, dependent1Entry.State);
         Assert.Equal(principal1.Id, dependent1Entry.Property("ParentId").CurrentValue);
         Assert.Equal(
-            typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.Child2) + "#" + nameof(ChildPN),
-            dependent1Entry.Metadata.DisplayName());
+            typeof(ParentPN).ShortDisplayName()
+                + "."
+                + nameof(ParentPN.Child2)
+                + "#"
+                + nameof(ChildPN),
+            dependent1Entry.Metadata.DisplayName()
+        );
         Assert.Equal(
             entityState == EntityState.Added ? null : EntityState.Deleted,
-            dependent1Entry.GetInfrastructure().SharedIdentityEntry?.EntityState);
+            dependent1Entry.GetInfrastructure().SharedIdentityEntry?.EntityState
+        );
 
         var dependent2Entry = context.Entry(principal2).Reference(p => p.Child1).TargetEntry;
         Assert.Equal(principal2.Id, dependent2Entry.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, dependent2Entry.State);
         Assert.Equal(
-            typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.Child1) + "#" + nameof(ChildPN),
-            dependent2Entry.Metadata.DisplayName());
+            typeof(ParentPN).ShortDisplayName()
+                + "."
+                + nameof(ParentPN.Child1)
+                + "#"
+                + nameof(ChildPN),
+            dependent2Entry.Metadata.DisplayName()
+        );
         Assert.Equal(
             entityState == EntityState.Added ? null : EntityState.Deleted,
-            dependent2Entry.GetInfrastructure().SharedIdentityEntry?.EntityState);
+            dependent2Entry.GetInfrastructure().SharedIdentityEntry?.EntityState
+        );
 
         Assert.Same(subDependent1, dependent1.SubChild);
         var subDependentEntry1 = dependent1Entry.Reference(p => p.SubChild).TargetEntry;
@@ -3796,14 +4479,16 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, subDependentEntry1.State);
         Assert.Equal(
             typeof(ParentPN).ShortDisplayName()
-            + "."
-            + nameof(ParentPN.Child2)
-            + "#"
-            + nameof(ChildPN)
-            + "."
-            + nameof(ChildPN.SubChild)
-            + "#"
-            + nameof(SubChildPN), subDependentEntry1.Metadata.DisplayName());
+                + "."
+                + nameof(ParentPN.Child2)
+                + "#"
+                + nameof(ChildPN)
+                + "."
+                + nameof(ChildPN.SubChild)
+                + "#"
+                + nameof(SubChildPN),
+            subDependentEntry1.Metadata.DisplayName()
+        );
 
         Assert.Same(subDependent2, dependent2.SubChild);
         var subDependentEntry2 = dependent2Entry.Reference(p => p.SubChild).TargetEntry;
@@ -3811,20 +4496,25 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, subDependentEntry2.State);
         Assert.Equal(
             typeof(ParentPN).ShortDisplayName()
-            + "."
-            + nameof(ParentPN.Child1)
-            + "#"
-            + nameof(ChildPN)
-            + "."
-            + nameof(ChildPN.SubChild)
-            + "#"
-            + nameof(SubChildPN), subDependentEntry2.Metadata.DisplayName());
+                + "."
+                + nameof(ParentPN.Child1)
+                + "#"
+                + nameof(ChildPN)
+                + "."
+                + nameof(ChildPN.SubChild)
+                + "#"
+                + nameof(SubChildPN),
+            subDependentEntry2.Metadata.DisplayName()
+        );
 
         context.ChangeTracker.CascadeChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 6 : 10, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 6 : 10,
+            context.ChangeTracker.Entries().Count()
+        );
 
         context.ChangeTracker.AcceptAllChanges();
 
@@ -3877,7 +4567,10 @@ public class OwnedFixupTest
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 6 : 10, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 6 : 10,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Null(principal1.Child1);
         Assert.Same(dependent2, principal1.Child2);
         Assert.Same(dependent1, principal2.Child1);
@@ -3892,20 +4585,24 @@ public class OwnedFixupTest
         Assert.Equal(principal1.Id, dependent1Entry.Property("ParentId").CurrentValue);
         Assert.Equal(
             typeof(Parent).ShortDisplayName() + "." + nameof(Parent.Child2) + "#" + nameof(Child),
-            dependent1Entry.Metadata.DisplayName());
+            dependent1Entry.Metadata.DisplayName()
+        );
         Assert.Equal(
             entityState == EntityState.Added ? null : EntityState.Deleted,
-            dependent1Entry.GetInfrastructure().SharedIdentityEntry?.EntityState);
+            dependent1Entry.GetInfrastructure().SharedIdentityEntry?.EntityState
+        );
 
         var dependent2Entry = context.Entry(principal2).Reference(p => p.Child1).TargetEntry;
         Assert.Equal(principal2.Id, dependent2Entry.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, dependent2Entry.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName() + "." + nameof(Parent.Child1) + "#" + nameof(Child),
-            dependent2Entry.Metadata.DisplayName());
+            dependent2Entry.Metadata.DisplayName()
+        );
         Assert.Equal(
             entityState == EntityState.Added ? null : EntityState.Deleted,
-            dependent1Entry.GetInfrastructure().SharedIdentityEntry?.EntityState);
+            dependent1Entry.GetInfrastructure().SharedIdentityEntry?.EntityState
+        );
 
         Assert.Same(subDependent1, dependent1.SubChild1);
         Assert.Same(dependent1, subDependent1.Parent);
@@ -3914,14 +4611,16 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, subDependentEntry1.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName()
-            + "."
-            + nameof(Parent.Child2)
-            + "#"
-            + nameof(Child)
-            + "."
-            + nameof(Child.SubChild1)
-            + "#"
-            + nameof(SubChild), subDependentEntry1.Metadata.DisplayName());
+                + "."
+                + nameof(Parent.Child2)
+                + "#"
+                + nameof(Child)
+                + "."
+                + nameof(Child.SubChild1)
+                + "#"
+                + nameof(SubChild),
+            subDependentEntry1.Metadata.DisplayName()
+        );
 
         Assert.Same(subDependent2, dependent2.SubChild1);
         Assert.Same(dependent2, subDependent2.Parent);
@@ -3930,20 +4629,25 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, subDependentEntry2.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName()
-            + "."
-            + nameof(Parent.Child1)
-            + "#"
-            + nameof(Child)
-            + "."
-            + nameof(Child.SubChild1)
-            + "#"
-            + nameof(SubChild), subDependentEntry2.Metadata.DisplayName());
+                + "."
+                + nameof(Parent.Child1)
+                + "#"
+                + nameof(Child)
+                + "."
+                + nameof(Child.SubChild1)
+                + "#"
+                + nameof(SubChild),
+            subDependentEntry2.Metadata.DisplayName()
+        );
 
         context.ChangeTracker.CascadeChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 6 : 10, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 6 : 10,
+            context.ChangeTracker.Entries().Count()
+        );
 
         context.ChangeTracker.AcceptAllChanges();
 
@@ -3982,7 +4686,10 @@ public class OwnedFixupTest
     [InlineData(EntityState.Added, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Modified, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Unchanged, CollectionType.ObservableHashSet)]
-    public void Parent_and_identity_swapped_unidirectional_collection(EntityState entityState, CollectionType collectionType)
+    public void Parent_and_identity_swapped_unidirectional_collection(
+        EntityState entityState,
+        CollectionType collectionType
+    )
     {
         using var context = new FixupContext();
         var principal1 = new ParentPN { Id = 77 };
@@ -4028,27 +4735,44 @@ public class OwnedFixupTest
         principal2.ChildCollection1 = principal1.ChildCollection2;
         principal1.ChildCollection2 = tempCollection;
 
-        var newDependentEntry1 = context.Entry(principal2).Collection(p => p.ChildCollection1)
+        var newDependentEntry1 = context
+            .Entry(principal2)
+            .Collection(p => p.ChildCollection1)
             .FindEntry(dependent1);
-        newDependentEntry1.Property<int>("Id").CurrentValue = dependentEntry1.Property<int>("Id").CurrentValue;
+        newDependentEntry1.Property<int>("Id").CurrentValue = dependentEntry1
+            .Property<int>("Id")
+            .CurrentValue;
 
-        var newDependentEntry2 = context.Entry(principal1).Collection(p => p.ChildCollection2)
+        var newDependentEntry2 = context
+            .Entry(principal1)
+            .Collection(p => p.ChildCollection2)
             .FindEntry(dependent2);
-        newDependentEntry2.Property<int>("Id").CurrentValue = dependentEntry2.Property<int>("Id").CurrentValue;
+        newDependentEntry2.Property<int>("Id").CurrentValue = dependentEntry2
+            .Property<int>("Id")
+            .CurrentValue;
 
-        var newSubDependentEntry1 = newDependentEntry1.Collection(p => p.SubChildCollection)
+        var newSubDependentEntry1 = newDependentEntry1
+            .Collection(p => p.SubChildCollection)
             .FindEntry(subDependent1);
-        newSubDependentEntry1.Property<int>("Id").CurrentValue = subDependentEntry1.Property<int>("Id").CurrentValue;
+        newSubDependentEntry1.Property<int>("Id").CurrentValue = subDependentEntry1
+            .Property<int>("Id")
+            .CurrentValue;
 
-        var newSubDependentEntry2 = newDependentEntry2.Collection(p => p.SubChildCollection)
+        var newSubDependentEntry2 = newDependentEntry2
+            .Collection(p => p.SubChildCollection)
             .FindEntry(subDependent2);
-        newSubDependentEntry2.Property<int>("Id").CurrentValue = subDependentEntry2.Property<int>("Id").CurrentValue;
+        newSubDependentEntry2.Property<int>("Id").CurrentValue = subDependentEntry2
+            .Property<int>("Id")
+            .CurrentValue;
 
         Assert.Equal(entityState != EntityState.Unchanged, context.ChangeTracker.HasChanges());
 
         context.ChangeTracker.DetectChanges();
 
-        Assert.Equal(entityState == EntityState.Added ? 6 : 10, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 6 : 10,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Null(principal1.ChildCollection1);
         Assert.Contains(principal1.ChildCollection2, e => ReferenceEquals(e, dependent2));
         Assert.Contains(principal2.ChildCollection1, e => ReferenceEquals(e, dependent1));
@@ -4056,59 +4780,82 @@ public class OwnedFixupTest
         Assert.Equal(entityState, context.Entry(principal1).State);
         Assert.Equal(entityState, context.Entry(principal2).State);
 
-        Assert.Equal(entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, newDependentEntry2.State);
+        Assert.Equal(
+            entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+            newDependentEntry2.State
+        );
         Assert.Equal(principal1.Id, newDependentEntry2.Property("ParentId").CurrentValue);
         Assert.Equal(
-            typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.ChildCollection2) + "#" + nameof(ChildPN),
-            newDependentEntry2.Metadata.DisplayName());
+            typeof(ParentPN).ShortDisplayName()
+                + "."
+                + nameof(ParentPN.ChildCollection2)
+                + "#"
+                + nameof(ChildPN),
+            newDependentEntry2.Metadata.DisplayName()
+        );
         Assert.Equal(
             entityState == EntityState.Added ? null : EntityState.Deleted,
-            newDependentEntry2.GetInfrastructure().SharedIdentityEntry?.EntityState);
+            newDependentEntry2.GetInfrastructure().SharedIdentityEntry?.EntityState
+        );
 
         Assert.Equal(principal2.Id, newDependentEntry1.Property("ParentId").CurrentValue);
-        Assert.Equal(entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, newDependentEntry1.State);
         Assert.Equal(
-            typeof(ParentPN).ShortDisplayName() + "." + nameof(ParentPN.ChildCollection1) + "#" + nameof(ChildPN),
-            newDependentEntry1.Metadata.DisplayName());
+            entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+            newDependentEntry1.State
+        );
+        Assert.Equal(
+            typeof(ParentPN).ShortDisplayName()
+                + "."
+                + nameof(ParentPN.ChildCollection1)
+                + "#"
+                + nameof(ChildPN),
+            newDependentEntry1.Metadata.DisplayName()
+        );
         Assert.Equal(
             entityState == EntityState.Added ? null : EntityState.Deleted,
-            newDependentEntry1.GetInfrastructure().SharedIdentityEntry?.EntityState);
+            newDependentEntry1.GetInfrastructure().SharedIdentityEntry?.EntityState
+        );
 
         Assert.Contains(dependent1.SubChildCollection, e => ReferenceEquals(e, subDependent1));
         Assert.Equal(principal1.Id, newSubDependentEntry2.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, newSubDependentEntry2.State);
         Assert.Equal(
             typeof(ParentPN).ShortDisplayName()
-            + "."
-            + nameof(ParentPN.ChildCollection2)
-            + "#"
-            + nameof(ChildPN)
-            + "."
-            + nameof(ChildPN.SubChildCollection)
-            + "#"
-            + nameof(SubChildPN),
-            newSubDependentEntry2.Metadata.DisplayName());
+                + "."
+                + nameof(ParentPN.ChildCollection2)
+                + "#"
+                + nameof(ChildPN)
+                + "."
+                + nameof(ChildPN.SubChildCollection)
+                + "#"
+                + nameof(SubChildPN),
+            newSubDependentEntry2.Metadata.DisplayName()
+        );
 
         Assert.Contains(dependent2.SubChildCollection, e => ReferenceEquals(e, subDependent2));
         Assert.Equal(principal2.Id, newSubDependentEntry1.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, newSubDependentEntry1.State);
         Assert.Equal(
             typeof(ParentPN).ShortDisplayName()
-            + "."
-            + nameof(ParentPN.ChildCollection1)
-            + "#"
-            + nameof(ChildPN)
-            + "."
-            + nameof(ChildPN.SubChildCollection)
-            + "#"
-            + nameof(SubChildPN),
-            newSubDependentEntry1.Metadata.DisplayName());
+                + "."
+                + nameof(ParentPN.ChildCollection1)
+                + "#"
+                + nameof(ChildPN)
+                + "."
+                + nameof(ChildPN.SubChildCollection)
+                + "#"
+                + nameof(SubChildPN),
+            newSubDependentEntry1.Metadata.DisplayName()
+        );
 
         context.ChangeTracker.CascadeChanges();
 
         Assert.True(context.ChangeTracker.HasChanges());
 
-        Assert.Equal(entityState == EntityState.Added ? 6 : 10, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            entityState == EntityState.Added ? 6 : 10,
+            context.ChangeTracker.Entries().Count()
+        );
 
         context.ChangeTracker.AcceptAllChanges();
 
@@ -4145,7 +4892,10 @@ public class OwnedFixupTest
     [InlineData(EntityState.Added, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Modified, CollectionType.ObservableHashSet)]
     [InlineData(EntityState.Unchanged, CollectionType.ObservableHashSet)]
-    public void Parent_and_identity_swapped_bidirectional_collection(EntityState entityState, CollectionType collectionType)
+    public void Parent_and_identity_swapped_bidirectional_collection(
+        EntityState entityState,
+        CollectionType collectionType
+    )
     {
         using var context = new FixupContext();
         var principal1 = new Parent { Id = 77 };
@@ -4191,27 +4941,44 @@ public class OwnedFixupTest
         principal2.ChildCollection1 = principal1.ChildCollection2;
         principal1.ChildCollection2 = tempCollection;
 
-        var newDependentEntry1 = context.Entry(principal2).Collection(p => p.ChildCollection1)
+        var newDependentEntry1 = context
+            .Entry(principal2)
+            .Collection(p => p.ChildCollection1)
             .FindEntry(dependent1);
-        newDependentEntry1.Property<int>("Id").CurrentValue = dependentEntry1.Property<int>("Id").CurrentValue;
+        newDependentEntry1.Property<int>("Id").CurrentValue = dependentEntry1
+            .Property<int>("Id")
+            .CurrentValue;
 
-        var newDependentEntry2 = context.Entry(principal1).Collection(p => p.ChildCollection2)
+        var newDependentEntry2 = context
+            .Entry(principal1)
+            .Collection(p => p.ChildCollection2)
             .FindEntry(dependent2);
-        newDependentEntry2.Property<int>("Id").CurrentValue = dependentEntry2.Property<int>("Id").CurrentValue;
+        newDependentEntry2.Property<int>("Id").CurrentValue = dependentEntry2
+            .Property<int>("Id")
+            .CurrentValue;
 
-        var newSubDependentEntry1 = newDependentEntry1.Collection(p => p.SubChildCollection)
+        var newSubDependentEntry1 = newDependentEntry1
+            .Collection(p => p.SubChildCollection)
             .FindEntry(subDependent1);
-        newSubDependentEntry1.Property<int>("Id").CurrentValue = subDependentEntry1.Property<int>("Id").CurrentValue;
+        newSubDependentEntry1.Property<int>("Id").CurrentValue = subDependentEntry1
+            .Property<int>("Id")
+            .CurrentValue;
 
-        var newSubDependentEntry2 = newDependentEntry2.Collection(p => p.SubChildCollection)
+        var newSubDependentEntry2 = newDependentEntry2
+            .Collection(p => p.SubChildCollection)
             .FindEntry(subDependent2);
-        newSubDependentEntry2.Property<int>("Id").CurrentValue = subDependentEntry2.Property<int>("Id").CurrentValue;
+        newSubDependentEntry2.Property<int>("Id").CurrentValue = subDependentEntry2
+            .Property<int>("Id")
+            .CurrentValue;
 
         if (entityState != EntityState.Added)
         {
             Assert.Equal(
                 CoreStrings.KeyReadOnly("ParentId", "Parent.ChildCollection2#Child"),
-                Assert.Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges()).Message);
+                Assert
+                    .Throws<InvalidOperationException>(() => context.ChangeTracker.DetectChanges())
+                    .Message
+            );
             return;
         }
 
@@ -4232,20 +4999,32 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, newDependentEntry2.State);
         Assert.Equal(principal1.Id, newDependentEntry2.Property("ParentId").CurrentValue);
         Assert.Equal(
-            typeof(Parent).ShortDisplayName() + "." + nameof(Parent.ChildCollection2) + "#" + nameof(Child),
-            newDependentEntry2.Metadata.DisplayName());
+            typeof(Parent).ShortDisplayName()
+                + "."
+                + nameof(Parent.ChildCollection2)
+                + "#"
+                + nameof(Child),
+            newDependentEntry2.Metadata.DisplayName()
+        );
         Assert.Equal(
             entityState == EntityState.Added ? null : EntityState.Deleted,
-            newDependentEntry2.GetInfrastructure().SharedIdentityEntry?.EntityState);
+            newDependentEntry2.GetInfrastructure().SharedIdentityEntry?.EntityState
+        );
 
         Assert.Equal(principal2.Id, newDependentEntry1.Property("ParentId").CurrentValue);
         Assert.Equal(EntityState.Added, newDependentEntry1.State);
         Assert.Equal(
-            typeof(Parent).ShortDisplayName() + "." + nameof(Parent.ChildCollection1) + "#" + nameof(Child),
-            newDependentEntry1.Metadata.DisplayName());
+            typeof(Parent).ShortDisplayName()
+                + "."
+                + nameof(Parent.ChildCollection1)
+                + "#"
+                + nameof(Child),
+            newDependentEntry1.Metadata.DisplayName()
+        );
         Assert.Equal(
             entityState == EntityState.Added ? null : EntityState.Deleted,
-            newDependentEntry2.GetInfrastructure().SharedIdentityEntry?.EntityState);
+            newDependentEntry2.GetInfrastructure().SharedIdentityEntry?.EntityState
+        );
 
         Assert.Contains(dependent1.SubChildCollection, e => ReferenceEquals(e, subDependent1));
         Assert.Same(dependent1, subDependent1.Parent);
@@ -4253,14 +5032,16 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, newSubDependentEntry2.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName()
-            + "."
-            + nameof(Parent.ChildCollection2)
-            + "#"
-            + nameof(Child)
-            + "."
-            + nameof(Child.SubChildCollection)
-            + "#"
-            + nameof(SubChild), newSubDependentEntry2.Metadata.DisplayName());
+                + "."
+                + nameof(Parent.ChildCollection2)
+                + "#"
+                + nameof(Child)
+                + "."
+                + nameof(Child.SubChildCollection)
+                + "#"
+                + nameof(SubChild),
+            newSubDependentEntry2.Metadata.DisplayName()
+        );
 
         Assert.Contains(dependent2.SubChildCollection, e => ReferenceEquals(e, subDependent2));
         Assert.Same(dependent2, subDependent2.Parent);
@@ -4268,14 +5049,16 @@ public class OwnedFixupTest
         Assert.Equal(EntityState.Added, newSubDependentEntry1.State);
         Assert.Equal(
             typeof(Parent).ShortDisplayName()
-            + "."
-            + nameof(Parent.ChildCollection1)
-            + "#"
-            + nameof(Child)
-            + "."
-            + nameof(Child.SubChildCollection)
-            + "#"
-            + nameof(SubChild), newSubDependentEntry1.Metadata.DisplayName());
+                + "."
+                + nameof(Parent.ChildCollection1)
+                + "#"
+                + nameof(Child)
+                + "."
+                + nameof(Child.SubChildCollection)
+                + "#"
+                + nameof(SubChild),
+            newSubDependentEntry1.Metadata.DisplayName()
+        );
 
         context.ChangeTracker.CascadeChanges();
 
@@ -4300,7 +5083,6 @@ public class OwnedFixupTest
         Assert.Same(dependent1, subDependent1.Parent);
         Assert.Same(dependent2, subDependent2.Parent);
     }
-
 
     [ConditionalTheory]
     [InlineData(EntityState.Added, true, true, true)]
@@ -4327,7 +5109,12 @@ public class OwnedFixupTest
     [InlineData(EntityState.Added, false, false, false)]
     [InlineData(EntityState.Modified, false, false, false)]
     [InlineData(EntityState.Unchanged, false, false, false)]
-    public void Can_set_nested_dependent_to_null(EntityState entityState, bool null1, bool null2, bool nullC)
+    public void Can_set_nested_dependent_to_null(
+        EntityState entityState,
+        bool null1,
+        bool null2,
+        bool nullC
+    )
     {
         using var context = new FixupContext();
 
@@ -4384,7 +5171,10 @@ public class OwnedFixupTest
             Assert.Same(null1 ? null : newSubChild1, newChild.SubChild1);
             Assert.Same(null2 ? null : newSubChild2, newChild.SubChild2);
             Assert.Same(nullC ? null : newSubChildCollection, newChild.SubChildCollection);
-            Assert.Same(nullC ? null : newSubChildCollection.Single(), newChild.SubChildCollection?.Single());
+            Assert.Same(
+                nullC ? null : newSubChildCollection.Single(),
+                newChild.SubChildCollection?.Single()
+            );
         }
     }
 
@@ -4475,11 +5265,11 @@ public class OwnedFixupTest
             _databaseName = databaseName;
         }
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseInMemoryDatabase(_databaseName);
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseInMemoryDatabase(_databaseName);
 
-        protected internal override void OnModelCreating(ModelBuilder builder)
-            => builder.Entity<Product>().OwnsOne(x => x.Details);
+        protected internal override void OnModelCreating(ModelBuilder builder) =>
+            builder.Entity<Product>().OwnsOne(x => x.Details);
     }
 
     [ConditionalFact]
@@ -4490,7 +5280,10 @@ public class OwnedFixupTest
 
         var address2 = new StreetAddress { Street = "2", City = "City" };
 
-        var distributor = new Distributor { ShippingCenters = new List<StreetAddress> { address1, address2 } };
+        var distributor = new Distributor
+        {
+            ShippingCenters = new List<StreetAddress> { address1, address2 }
+        };
 
         context.Add(distributor);
 
@@ -4540,17 +5333,21 @@ public class OwnedFixupTest
             _databaseName = databaseName;
         }
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseInMemoryDatabase(_databaseName);
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseInMemoryDatabase(_databaseName);
 
-        protected internal override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Distributor>().OwnsMany(
-                rt => rt.ShippingCenters, image =>
-                {
-                    image.WithOwner().HasForeignKey("DistributorId");
-                    image.Property<int>("Id");
-                    image.HasKey("DistributorId", "Id");
-                });
+        protected internal override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder
+                .Entity<Distributor>()
+                .OwnsMany(
+                    rt => rt.ShippingCenters,
+                    image =>
+                    {
+                        image.WithOwner().HasForeignKey("DistributorId");
+                        image.Property<int>("Id");
+                        image.HasKey("DistributorId", "Id");
+                    }
+                );
     }
 
     [ConditionalFact]
@@ -4740,8 +5537,7 @@ public class OwnedFixupTest
         public string Title { get; set; }
 
         public static void OnModelCreating<T>(OwnedNavigationBuilder<T, Info> rob)
-            where T : class
-            => rob.Property(e => e.Title);
+            where T : class => rob.Property(e => e.Title);
     }
 
     private class BooksContext : DbContext
@@ -4755,11 +5551,11 @@ public class OwnedFixupTest
 
         public DbSet<Book> Books { get; set; }
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseInMemoryDatabase(_databaseName);
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseInMemoryDatabase(_databaseName);
 
-        protected internal override void OnModelCreating(ModelBuilder modelBuilder)
-            => Book.OnModelCreating(modelBuilder);
+        protected internal override void OnModelCreating(ModelBuilder modelBuilder) =>
+            Book.OnModelCreating(modelBuilder);
     }
 
     [ConditionalFact]
@@ -4768,31 +5564,57 @@ public class OwnedFixupTest
         using var context = new TestCurrencyContext(nameof(TestCurrencyContext));
         var items = new List<TestOrderItem>
         {
-            new() { ProductName = "Test Product 1", Price = new TestMoney { Amount = 99.99, Currency = TestCurrency.EUR } },
-            new() { ProductName = "Test Product 3", Price = new TestMoney { Amount = 8.95, Currency = TestCurrency.USD } }
+            new()
+            {
+                ProductName = "Test Product 1",
+                Price = new TestMoney { Amount = 99.99, Currency = TestCurrency.EUR }
+            },
+            new()
+            {
+                ProductName = "Test Product 3",
+                Price = new TestMoney { Amount = 8.95, Currency = TestCurrency.USD }
+            }
         };
 
         var order = new TestOrder { CustomerName = "Test Customer", TestOrderItems = items };
 
         Assert.Equal(2, order.TestOrderItems.Count);
-        Assert.Equal("EUR", order.TestOrderItems.Single(e => e.ProductName == "Test Product 1").Price.Currency.Code);
-        Assert.Equal("USD", order.TestOrderItems.Single(e => e.ProductName == "Test Product 3").Price.Currency.Code);
+        Assert.Equal(
+            "EUR",
+            order.TestOrderItems.Single(e => e.ProductName == "Test Product 1").Price.Currency.Code
+        );
+        Assert.Equal(
+            "USD",
+            order.TestOrderItems.Single(e => e.ProductName == "Test Product 3").Price.Currency.Code
+        );
 
         context.TestOrders.Add(order);
 
         Assert.True(context.ChangeTracker.HasChanges());
 
         Assert.Equal(2, order.TestOrderItems.Count);
-        Assert.Equal("EUR", order.TestOrderItems.Single(e => e.ProductName == "Test Product 1").Price.Currency.Code);
-        Assert.Equal("USD", order.TestOrderItems.Single(e => e.ProductName == "Test Product 3").Price.Currency.Code);
+        Assert.Equal(
+            "EUR",
+            order.TestOrderItems.Single(e => e.ProductName == "Test Product 1").Price.Currency.Code
+        );
+        Assert.Equal(
+            "USD",
+            order.TestOrderItems.Single(e => e.ProductName == "Test Product 3").Price.Currency.Code
+        );
 
         context.SaveChanges();
 
         Assert.False(context.ChangeTracker.HasChanges());
 
         Assert.Equal(2, order.TestOrderItems.Count);
-        Assert.Equal("EUR", order.TestOrderItems.Single(e => e.ProductName == "Test Product 1").Price.Currency.Code);
-        Assert.Equal("USD", order.TestOrderItems.Single(e => e.ProductName == "Test Product 3").Price.Currency.Code);
+        Assert.Equal(
+            "EUR",
+            order.TestOrderItems.Single(e => e.ProductName == "Test Product 1").Price.Currency.Code
+        );
+        Assert.Equal(
+            "USD",
+            order.TestOrderItems.Single(e => e.ProductName == "Test Product 3").Price.Currency.Code
+        );
     }
 
     private class TestOrder
@@ -4822,9 +5644,7 @@ public class OwnedFixupTest
         public static readonly TestCurrency EUR = new(49, "EUR", 978, "Euro");
         public static readonly TestCurrency USD = new(148, "USD", 840, "United States dollar");
 
-        private TestCurrency()
-        {
-        }
+        private TestCurrency() { }
 
         public TestCurrency(int id, string code, int numericCode, string name)
         {
@@ -4849,8 +5669,8 @@ public class OwnedFixupTest
             _databaseName = databaseName;
         }
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseInMemoryDatabase(_databaseName);
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseInMemoryDatabase(_databaseName);
 
         public DbSet<TestOrder> TestOrders { get; set; }
 
@@ -4858,20 +5678,26 @@ public class OwnedFixupTest
         {
             modelBuilder.Entity<TestOrder>().HasKey(o => o.Id);
 
-            modelBuilder.Entity<TestOrderItem>()
+            modelBuilder
+                .Entity<TestOrderItem>()
                 .OwnsOne(
-                    oi => oi.Price, ip =>
+                    oi => oi.Price,
+                    ip =>
                     {
                         ip.Property(p => p.Amount).IsRequired();
                         ip.OwnsOne(
-                            p => p.Currency, pc =>
+                            p => p.Currency,
+                            pc =>
                             {
                                 pc.Property(c => c.Code).IsRequired();
                                 pc.Ignore(c => c.Id);
                                 pc.Ignore(c => c.Name);
                                 pc.Ignore(c => c.NumericCode);
-                            });
-                    }).HasKey(oi => oi.Id);
+                            }
+                        );
+                    }
+                )
+                .HasKey(oi => oi.Id);
         }
     }
 
@@ -4884,39 +5710,91 @@ public class OwnedFixupTest
 
         var items = new List<TestOrderItem>
         {
-            new() { ProductName = "Test Product 1", Price = new TestMoney { Amount = 99.99, Currency = TestCurrency.EUR } },
-            new() { ProductName = "Test Product 2", Price = new TestMoney { Amount = 10, Currency = TestCurrency.EUR } },
-            new() { ProductName = "Test Product 3", Price = new TestMoney { Amount = 8.95, Currency = TestCurrency.USD } },
-            new() { ProductName = "Test Product 4", Price = new TestMoney { Amount = 2.99, Currency = TestCurrency.USD } }
+            new()
+            {
+                ProductName = "Test Product 1",
+                Price = new TestMoney { Amount = 99.99, Currency = TestCurrency.EUR }
+            },
+            new()
+            {
+                ProductName = "Test Product 2",
+                Price = new TestMoney { Amount = 10, Currency = TestCurrency.EUR }
+            },
+            new()
+            {
+                ProductName = "Test Product 3",
+                Price = new TestMoney { Amount = 8.95, Currency = TestCurrency.USD }
+            },
+            new()
+            {
+                ProductName = "Test Product 4",
+                Price = new TestMoney { Amount = 2.99, Currency = TestCurrency.USD }
+            }
         };
 
         var order = new TestOrder { CustomerName = "Test Customer", TestOrderItems = items };
 
         Assert.Equal(4, order.TestOrderItems.Count);
-        Assert.Equal("EUR", order.TestOrderItems.Single(e => e.ProductName == "Test Product 1").Price.Currency.Code);
-        Assert.Equal("EUR", order.TestOrderItems.Single(e => e.ProductName == "Test Product 2").Price.Currency.Code);
-        Assert.Equal("USD", order.TestOrderItems.Single(e => e.ProductName == "Test Product 3").Price.Currency.Code);
-        Assert.Equal("USD", order.TestOrderItems.Single(e => e.ProductName == "Test Product 4").Price.Currency.Code);
+        Assert.Equal(
+            "EUR",
+            order.TestOrderItems.Single(e => e.ProductName == "Test Product 1").Price.Currency.Code
+        );
+        Assert.Equal(
+            "EUR",
+            order.TestOrderItems.Single(e => e.ProductName == "Test Product 2").Price.Currency.Code
+        );
+        Assert.Equal(
+            "USD",
+            order.TestOrderItems.Single(e => e.ProductName == "Test Product 3").Price.Currency.Code
+        );
+        Assert.Equal(
+            "USD",
+            order.TestOrderItems.Single(e => e.ProductName == "Test Product 4").Price.Currency.Code
+        );
 
         context.Add(order);
 
         Assert.True(context.ChangeTracker.HasChanges());
 
         Assert.Equal(4, order.TestOrderItems.Count);
-        Assert.Equal("EUR", order.TestOrderItems.Single(e => e.ProductName == "Test Product 1").Price.Currency.Code);
-        Assert.Equal("EUR", order.TestOrderItems.Single(e => e.ProductName == "Test Product 2").Price.Currency.Code);
-        Assert.Equal("USD", order.TestOrderItems.Single(e => e.ProductName == "Test Product 3").Price.Currency.Code);
-        Assert.Equal("USD", order.TestOrderItems.Single(e => e.ProductName == "Test Product 4").Price.Currency.Code);
+        Assert.Equal(
+            "EUR",
+            order.TestOrderItems.Single(e => e.ProductName == "Test Product 1").Price.Currency.Code
+        );
+        Assert.Equal(
+            "EUR",
+            order.TestOrderItems.Single(e => e.ProductName == "Test Product 2").Price.Currency.Code
+        );
+        Assert.Equal(
+            "USD",
+            order.TestOrderItems.Single(e => e.ProductName == "Test Product 3").Price.Currency.Code
+        );
+        Assert.Equal(
+            "USD",
+            order.TestOrderItems.Single(e => e.ProductName == "Test Product 4").Price.Currency.Code
+        );
 
         context.SaveChanges();
 
         Assert.False(context.ChangeTracker.HasChanges());
 
         Assert.Equal(4, order.TestOrderItems.Count);
-        Assert.Equal("EUR", order.TestOrderItems.Single(e => e.ProductName == "Test Product 1").Price.Currency.Code);
-        Assert.Equal("EUR", order.TestOrderItems.Single(e => e.ProductName == "Test Product 2").Price.Currency.Code);
-        Assert.Equal("USD", order.TestOrderItems.Single(e => e.ProductName == "Test Product 3").Price.Currency.Code);
-        Assert.Equal("USD", order.TestOrderItems.Single(e => e.ProductName == "Test Product 4").Price.Currency.Code);
+        Assert.Equal(
+            "EUR",
+            order.TestOrderItems.Single(e => e.ProductName == "Test Product 1").Price.Currency.Code
+        );
+        Assert.Equal(
+            "EUR",
+            order.TestOrderItems.Single(e => e.ProductName == "Test Product 2").Price.Currency.Code
+        );
+        Assert.Equal(
+            "USD",
+            order.TestOrderItems.Single(e => e.ProductName == "Test Product 3").Price.Currency.Code
+        );
+        Assert.Equal(
+            "USD",
+            order.TestOrderItems.Single(e => e.ProductName == "Test Product 4").Price.Currency.Code
+        );
     }
 
     private class TestCurrencyContextRevisited : DbContext
@@ -4928,22 +5806,33 @@ public class OwnedFixupTest
             _databaseName = databaseName;
         }
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseInMemoryDatabase(_databaseName);
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseInMemoryDatabase(_databaseName);
 
         protected internal override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TestOrder>().HasKey(o => o.Id);
 
-            modelBuilder.Entity<TestOrderItem>()
+            modelBuilder
+                .Entity<TestOrderItem>()
                 .OwnsOne(
-                    oi => oi.Price, ip =>
+                    oi => oi.Price,
+                    ip =>
                     {
                         ip.Property(p => p.Amount).IsRequired();
-                        ip.Property(p => p.Currency).HasConversion(
-                            v => v.Code,
-                            v => v == "EUR" ? TestCurrency.EUR : v == "USD" ? TestCurrency.USD : null);
-                    }).HasKey(oi => oi.Id);
+                        ip.Property(p => p.Currency)
+                            .HasConversion(
+                                v => v.Code,
+                                v =>
+                                    v == "EUR"
+                                        ? TestCurrency.EUR
+                                        : v == "USD"
+                                            ? TestCurrency.USD
+                                            : null
+                            );
+                    }
+                )
+                .HasKey(oi => oi.Id);
         }
     }
 
@@ -4951,9 +5840,8 @@ public class OwnedFixupTest
     public void Equatable_entities_that_comply_are_tracked_correctly()
     {
         EntityState GetEntryState<TEntity>(EquatableEntitiesContext context, string role = null)
-            where TEntity : class
-            => context
-                .ChangeTracker
+            where TEntity : class =>
+            context.ChangeTracker
                 .Entries<TEntity>()
                 .Single(e => role == null || e.Property("Value").CurrentValue.Equals(role))
                 .State;
@@ -4963,7 +5851,13 @@ public class OwnedFixupTest
             var user = new User();
 
             user.SetRoles(
-                new[] { new Role { Value = "Pascal" }, new Role { Value = "Smalltalk" }, new Role { Value = "COBOL" } });
+                new[]
+                {
+                    new Role { Value = "Pascal" },
+                    new Role { Value = "Smalltalk" },
+                    new Role { Value = "COBOL" }
+                }
+            );
 
             context.Add(user);
 
@@ -4985,8 +5879,7 @@ public class OwnedFixupTest
             Assert.Contains("Smalltalk", roles);
             Assert.Contains("COBOL", roles);
 
-            user.SetRoles(
-                new List<Role> { new() { Value = "BASIC" } });
+            user.SetRoles(new List<Role> { new() { Value = "BASIC" } });
 
             Assert.Equal(5, context.ChangeTracker.Entries().Count());
             Assert.Equal(EntityState.Unchanged, GetEntryState<User>(context));
@@ -5022,18 +5915,14 @@ public class OwnedFixupTest
         {
             var blog = new Blog { Type = new OwnedType { Value = "A" } };
 
-            _ = async
-                ? await context.AddAsync(blog)
-                : context.Add(blog);
+            _ = async ? await context.AddAsync(blog) : context.Add(blog);
 
             Assert.Equal(EntityState.Added, context.Entry(blog).State);
             Assert.Equal(EntityState.Added, context.Entry(blog.Type).State);
             Assert.Equal(0, blog.Id);
             Assert.Equal(0, context.Entry(blog.Type).Property<int>("BlogId").CurrentValue);
 
-            _ = async
-                ? await context.SaveChangesAsync()
-                : context.SaveChanges();
+            _ = async ? await context.SaveChangesAsync() : context.SaveChanges();
 
             Assert.Equal(EntityState.Unchanged, context.Entry(blog).State);
             Assert.Equal(EntityState.Unchanged, context.Entry(blog.Type).State);
@@ -5059,8 +5948,8 @@ public class OwnedFixupTest
             _async = async;
         }
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseInMemoryDatabase(nameof(OneRowContext) + _async);
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseInMemoryDatabase(nameof(OneRowContext) + _async);
 
         public DbSet<Blog> Blogs { get; set; }
     }
@@ -5083,15 +5972,13 @@ public class OwnedFixupTest
     {
         public Guid UserId { get; set; }
 
-        public IReadOnlyList<Role> Roles
-            => _roles.AsReadOnly();
+        public IReadOnlyList<Role> Roles => _roles.AsReadOnly();
 
         private readonly List<Role> _roles = new();
 
         public void SetRoles(IList<Role> roles)
         {
-            if (_roles.Count == roles.Count
-                && !_roles.Except(roles).Any())
+            if (_roles.Count == roles.Count && !_roles.Except(roles).Any())
             {
                 return;
             }
@@ -5106,8 +5993,7 @@ public class OwnedFixupTest
         private Guid RoleAssignmentId { get; set; }
         public string Value { get; set; }
 
-        public bool Equals(Role other)
-            => Value == other.Value;
+        public bool Equals(Role other) => Value == other.Value;
     }
 
     private class EquatableEntitiesContext : DbContext
@@ -5119,15 +6005,14 @@ public class OwnedFixupTest
             _databaseName = databaseName;
         }
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseInMemoryDatabase(_databaseName);
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseInMemoryDatabase(_databaseName);
 
-        protected internal override void OnModelCreating(ModelBuilder builder)
-            => builder.Entity<User>(
-                m =>
-                {
-                    m.HasKey(x => x.UserId);
-                    m.OwnsMany(
+        protected internal override void OnModelCreating(ModelBuilder builder) =>
+            builder.Entity<User>(m =>
+            {
+                m.HasKey(x => x.UserId);
+                m.OwnsMany(
                         x => x.Roles,
                         b =>
                         {
@@ -5136,8 +6021,10 @@ public class OwnedFixupTest
                             b.Property(x => x.Value);
                             b.Property<Guid>("UserId");
                             b.WithOwner().HasForeignKey("UserId");
-                        }).UsePropertyAccessMode(PropertyAccessMode.Field);
-                });
+                        }
+                    )
+                    .UsePropertyAccessMode(PropertyAccessMode.Field);
+            });
     }
 
     private class Parent : IComparable<Parent>
@@ -5149,8 +6036,7 @@ public class OwnedFixupTest
         public ICollection<Child> ChildCollection1 { get; set; }
         public ICollection<Child> ChildCollection2 { get; set; }
 
-        public int CompareTo(Parent other)
-            => Id - other.Id;
+        public int CompareTo(Parent other) => Id - other.Id;
 
         public override bool Equals(object obj)
         {
@@ -5186,8 +6072,8 @@ public class OwnedFixupTest
         public SubChild SubChild2 { get; set; }
         public ICollection<SubChild> SubChildCollection { get; set; }
 
-        public int CompareTo(Child other)
-            => StringComparer.InvariantCulture.Compare(Name, other.Name);
+        public int CompareTo(Child other) =>
+            StringComparer.InvariantCulture.Compare(Name, other.Name);
 
         public override bool Equals(object obj)
         {
@@ -5222,8 +6108,8 @@ public class OwnedFixupTest
 
         public Child Parent { get; set; }
 
-        public int CompareTo(SubChild other)
-            => StringComparer.InvariantCulture.Compare(Name, other.Name);
+        public int CompareTo(SubChild other) =>
+            StringComparer.InvariantCulture.Compare(Name, other.Name);
 
         public override bool Equals(object obj)
         {
@@ -5259,8 +6145,7 @@ public class OwnedFixupTest
         public ICollection<ChildPN> ChildCollection1 { get; set; }
         public ICollection<ChildPN> ChildCollection2 { get; set; }
 
-        public int CompareTo(ParentPN other)
-            => Id - other.Id;
+        public int CompareTo(ParentPN other) => Id - other.Id;
     }
 
     private class ChildPN : IComparable<ChildPN>
@@ -5271,16 +6156,16 @@ public class OwnedFixupTest
         public SubChildPN SubChild { get; set; }
         public ICollection<SubChildPN> SubChildCollection { get; set; }
 
-        public int CompareTo(ChildPN other)
-            => StringComparer.InvariantCulture.Compare(Name, other.Name);
+        public int CompareTo(ChildPN other) =>
+            StringComparer.InvariantCulture.Compare(Name, other.Name);
     }
 
     private class SubChildPN : IComparable<SubChildPN>
     {
         public string Name { get; set; }
 
-        public int CompareTo(SubChildPN other)
-            => StringComparer.InvariantCulture.Compare(Name, other.Name);
+        public int CompareTo(SubChildPN other) =>
+            StringComparer.InvariantCulture.Compare(Name, other.Name);
     }
 
     private class FixupContext : DbContext
@@ -5297,257 +6182,287 @@ public class OwnedFixupTest
 
         protected internal override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Parent>(
-                pb =>
-                {
-                    pb.Property(p => p.Id).ValueGeneratedNever();
-                    pb.OwnsOne(
-                        p => p.Child1, cb =>
-                        {
-                            cb.Property<int?>("ParentId");
-                            cb.WithOwner(c => c.Parent)
-                                .HasForeignKey("ParentId");
+            modelBuilder.Entity<Parent>(pb =>
+            {
+                pb.Property(p => p.Id).ValueGeneratedNever();
+                pb.OwnsOne(
+                    p => p.Child1,
+                    cb =>
+                    {
+                        cb.Property<int?>("ParentId");
+                        cb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
 
-                            cb.OwnsOne(
-                                c => c.SubChild1, sb =>
-                                {
-                                    sb.Property<int>("ParentId");
-                                    sb.WithOwner(c => c.Parent)
-                                        .HasForeignKey("ParentId");
-                                });
+                        cb.OwnsOne(
+                            c => c.SubChild1,
+                            sb =>
+                            {
+                                sb.Property<int>("ParentId");
+                                sb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
+                            }
+                        );
 
-                            cb.OwnsOne(
-                                c => c.SubChild2, sb =>
-                                {
-                                    sb.Property<int>("ParentId");
-                                    sb.WithOwner(c => c.Parent)
-                                        .HasForeignKey("ParentId");
-                                });
+                        cb.OwnsOne(
+                            c => c.SubChild2,
+                            sb =>
+                            {
+                                sb.Property<int>("ParentId");
+                                sb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
+                            }
+                        );
 
-                            cb.OwnsMany(
-                                c => c.SubChildCollection, sb =>
-                                {
-                                    sb.Property<int>("ParentId");
-                                    sb.WithOwner(c => c.Parent)
-                                        .HasForeignKey("ParentId");
-                                });
-                        });
+                        cb.OwnsMany(
+                            c => c.SubChildCollection,
+                            sb =>
+                            {
+                                sb.Property<int>("ParentId");
+                                sb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
+                            }
+                        );
+                    }
+                );
 
-                    pb.OwnsOne(
-                        p => p.Child2, cb =>
-                        {
-                            cb.Property<int?>("ParentId");
-                            cb.WithOwner(c => c.Parent)
-                                .HasForeignKey("ParentId");
+                pb.OwnsOne(
+                    p => p.Child2,
+                    cb =>
+                    {
+                        cb.Property<int?>("ParentId");
+                        cb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
 
-                            cb.OwnsOne(
-                                c => c.SubChild1, sb =>
-                                {
-                                    sb.Property<int>("ParentId");
-                                    sb.WithOwner(c => c.Parent)
-                                        .HasForeignKey("ParentId");
-                                });
+                        cb.OwnsOne(
+                            c => c.SubChild1,
+                            sb =>
+                            {
+                                sb.Property<int>("ParentId");
+                                sb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
+                            }
+                        );
 
-                            cb.OwnsOne(
-                                c => c.SubChild2, sb =>
-                                {
-                                    sb.Property<int>("ParentId");
-                                    sb.WithOwner(c => c.Parent)
-                                        .HasForeignKey("ParentId");
-                                });
+                        cb.OwnsOne(
+                            c => c.SubChild2,
+                            sb =>
+                            {
+                                sb.Property<int>("ParentId");
+                                sb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
+                            }
+                        );
 
-                            cb.OwnsMany(
-                                c => c.SubChildCollection, sb =>
-                                {
-                                    sb.Property<int>("ParentId");
-                                    sb.WithOwner(c => c.Parent)
-                                        .HasForeignKey("ParentId");
-                                });
-                        });
+                        cb.OwnsMany(
+                            c => c.SubChildCollection,
+                            sb =>
+                            {
+                                sb.Property<int>("ParentId");
+                                sb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
+                            }
+                        );
+                    }
+                );
 
-                    pb.OwnsMany(
-                        p => p.ChildCollection1, cb =>
-                        {
-                            cb.Property<int?>("ParentId");
-                            cb.WithOwner(c => c.Parent)
-                                .HasForeignKey("ParentId");
+                pb.OwnsMany(
+                    p => p.ChildCollection1,
+                    cb =>
+                    {
+                        cb.Property<int?>("ParentId");
+                        cb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
 
-                            cb.OwnsOne(
-                                c => c.SubChild1, sb =>
-                                {
-                                    sb.Property<int>("ParentId");
-                                    sb.Property<int>("ChildId");
-                                    sb.WithOwner(c => c.Parent)
-                                        .HasForeignKey("ParentId", "ChildId");
-                                });
+                        cb.OwnsOne(
+                            c => c.SubChild1,
+                            sb =>
+                            {
+                                sb.Property<int>("ParentId");
+                                sb.Property<int>("ChildId");
+                                sb.WithOwner(c => c.Parent).HasForeignKey("ParentId", "ChildId");
+                            }
+                        );
 
-                            cb.OwnsOne(
-                                c => c.SubChild2, sb =>
-                                {
-                                    sb.Property<int>("ParentId");
-                                    sb.Property<int>("ChildId");
-                                    sb.WithOwner(c => c.Parent)
-                                        .HasForeignKey("ParentId", "ChildId");
-                                });
+                        cb.OwnsOne(
+                            c => c.SubChild2,
+                            sb =>
+                            {
+                                sb.Property<int>("ParentId");
+                                sb.Property<int>("ChildId");
+                                sb.WithOwner(c => c.Parent).HasForeignKey("ParentId", "ChildId");
+                            }
+                        );
 
-                            cb.OwnsMany(
-                                c => c.SubChildCollection, sb =>
-                                {
-                                    sb.Property<int>("ParentId");
-                                    sb.Property<int>("ChildId");
-                                    sb.WithOwner(c => c.Parent)
-                                        .HasForeignKey("ParentId", "ChildId");
-                                });
-                        });
+                        cb.OwnsMany(
+                            c => c.SubChildCollection,
+                            sb =>
+                            {
+                                sb.Property<int>("ParentId");
+                                sb.Property<int>("ChildId");
+                                sb.WithOwner(c => c.Parent).HasForeignKey("ParentId", "ChildId");
+                            }
+                        );
+                    }
+                );
 
-                    pb.OwnsMany(
-                        p => p.ChildCollection2, cb =>
-                        {
-                            cb.Property<int?>("ParentId");
-                            cb.WithOwner(c => c.Parent)
-                                .HasForeignKey("ParentId");
+                pb.OwnsMany(
+                    p => p.ChildCollection2,
+                    cb =>
+                    {
+                        cb.Property<int?>("ParentId");
+                        cb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
 
-                            cb.OwnsOne(
-                                c => c.SubChild1, sb =>
-                                {
-                                    sb.Property<int>("ParentId");
-                                    sb.Property<int>("ChildId");
-                                    sb.WithOwner(c => c.Parent)
-                                        .HasForeignKey("ParentId", "ChildId");
-                                });
+                        cb.OwnsOne(
+                            c => c.SubChild1,
+                            sb =>
+                            {
+                                sb.Property<int>("ParentId");
+                                sb.Property<int>("ChildId");
+                                sb.WithOwner(c => c.Parent).HasForeignKey("ParentId", "ChildId");
+                            }
+                        );
 
-                            cb.OwnsOne(
-                                c => c.SubChild2, sb =>
-                                {
-                                    sb.Property<int>("ParentId");
-                                    sb.Property<int>("ChildId");
-                                    sb.WithOwner(c => c.Parent)
-                                        .HasForeignKey("ParentId", "ChildId");
-                                });
+                        cb.OwnsOne(
+                            c => c.SubChild2,
+                            sb =>
+                            {
+                                sb.Property<int>("ParentId");
+                                sb.Property<int>("ChildId");
+                                sb.WithOwner(c => c.Parent).HasForeignKey("ParentId", "ChildId");
+                            }
+                        );
 
-                            cb.OwnsMany(
-                                c => c.SubChildCollection, sb =>
-                                {
-                                    sb.Property<int>("ParentId");
-                                    sb.Property<int>("ChildId");
-                                    sb.WithOwner(c => c.Parent)
-                                        .HasForeignKey("ParentId", "ChildId");
-                                });
-                        });
-                });
+                        cb.OwnsMany(
+                            c => c.SubChildCollection,
+                            sb =>
+                            {
+                                sb.Property<int>("ParentId");
+                                sb.Property<int>("ChildId");
+                                sb.WithOwner(c => c.Parent).HasForeignKey("ParentId", "ChildId");
+                            }
+                        );
+                    }
+                );
+            });
 
-            modelBuilder.Entity<ParentPN>(
-                pb =>
-                {
-                    pb.Property(p => p.Id).ValueGeneratedNever();
+            modelBuilder.Entity<ParentPN>(pb =>
+            {
+                pb.Property(p => p.Id).ValueGeneratedNever();
 
-                    pb.OwnsOne(
-                        p => p.Child1, cb =>
-                        {
-                            cb.Property<int?>("ParentId");
-                            cb.WithOwner()
-                                .HasForeignKey("ParentId");
+                pb.OwnsOne(
+                    p => p.Child1,
+                    cb =>
+                    {
+                        cb.Property<int?>("ParentId");
+                        cb.WithOwner().HasForeignKey("ParentId");
 
-                            cb.OwnsOne(
-                                c => c.SubChild, sb =>
-                                {
-                                    sb.Property<int>("ParentId");
-                                    sb.WithOwner()
-                                        .HasForeignKey("ParentId");
-                                });
+                        cb.OwnsOne(
+                            c => c.SubChild,
+                            sb =>
+                            {
+                                sb.Property<int>("ParentId");
+                                sb.WithOwner().HasForeignKey("ParentId");
+                            }
+                        );
 
-                            cb.OwnsMany(
-                                c => c.SubChildCollection, sb =>
-                                {
-                                    sb.Property<int>("ParentId");
-                                    sb.WithOwner()
-                                        .HasForeignKey("ParentId");
-                                });
-                        });
+                        cb.OwnsMany(
+                            c => c.SubChildCollection,
+                            sb =>
+                            {
+                                sb.Property<int>("ParentId");
+                                sb.WithOwner().HasForeignKey("ParentId");
+                            }
+                        );
+                    }
+                );
 
-                    pb.OwnsOne(
-                        p => p.Child2, cb =>
-                        {
-                            cb.Property<int?>("ParentId");
-                            cb.WithOwner()
-                                .HasForeignKey("ParentId");
+                pb.OwnsOne(
+                    p => p.Child2,
+                    cb =>
+                    {
+                        cb.Property<int?>("ParentId");
+                        cb.WithOwner().HasForeignKey("ParentId");
 
-                            cb.OwnsOne(
-                                c => c.SubChild, sb =>
-                                {
-                                    sb.Property<int>("ParentId");
-                                    sb.WithOwner()
-                                        .HasForeignKey("ParentId");
-                                });
+                        cb.OwnsOne(
+                            c => c.SubChild,
+                            sb =>
+                            {
+                                sb.Property<int>("ParentId");
+                                sb.WithOwner().HasForeignKey("ParentId");
+                            }
+                        );
 
-                            cb.OwnsMany(
-                                c => c.SubChildCollection, sb =>
-                                {
-                                    sb.Property<int>("ParentId");
-                                    sb.WithOwner()
-                                        .HasForeignKey("ParentId");
-                                });
-                        });
+                        cb.OwnsMany(
+                            c => c.SubChildCollection,
+                            sb =>
+                            {
+                                sb.Property<int>("ParentId");
+                                sb.WithOwner().HasForeignKey("ParentId");
+                            }
+                        );
+                    }
+                );
 
-                    pb.OwnsMany(
-                        p => p.ChildCollection1, cb =>
-                        {
-                            cb.Property<int?>("ParentId");
-                            cb.WithOwner()
-                                .HasForeignKey("ParentId");
+                pb.OwnsMany(
+                    p => p.ChildCollection1,
+                    cb =>
+                    {
+                        cb.Property<int?>("ParentId");
+                        cb.WithOwner().HasForeignKey("ParentId");
 
-                            cb.OwnsOne(
-                                c => c.SubChild, sb =>
-                                {
-                                    sb.Property<int>("ParentId");
-                                    sb.Property<int>("ChildId");
-                                    sb.WithOwner()
-                                        .HasForeignKey("ParentId", "ChildId");
-                                });
+                        cb.OwnsOne(
+                            c => c.SubChild,
+                            sb =>
+                            {
+                                sb.Property<int>("ParentId");
+                                sb.Property<int>("ChildId");
+                                sb.WithOwner().HasForeignKey("ParentId", "ChildId");
+                            }
+                        );
 
-                            cb.OwnsMany(
-                                c => c.SubChildCollection, sb =>
-                                {
-                                    sb.Property<int>("ParentId");
-                                    sb.Property<int>("ChildId");
-                                    sb.WithOwner()
-                                        .HasForeignKey("ParentId", "ChildId");
-                                });
-                        });
+                        cb.OwnsMany(
+                            c => c.SubChildCollection,
+                            sb =>
+                            {
+                                sb.Property<int>("ParentId");
+                                sb.Property<int>("ChildId");
+                                sb.WithOwner().HasForeignKey("ParentId", "ChildId");
+                            }
+                        );
+                    }
+                );
 
-                    pb.OwnsMany(
-                        p => p.ChildCollection2, cb =>
-                        {
-                            cb.Property<int?>("ParentId");
-                            cb.WithOwner()
-                                .HasForeignKey("ParentId");
+                pb.OwnsMany(
+                    p => p.ChildCollection2,
+                    cb =>
+                    {
+                        cb.Property<int?>("ParentId");
+                        cb.WithOwner().HasForeignKey("ParentId");
 
-                            cb.OwnsOne(
-                                c => c.SubChild, sb =>
-                                {
-                                    sb.Property<int>("ParentId");
-                                    sb.Property<int>("ChildId");
-                                    sb.WithOwner()
-                                        .HasForeignKey("ParentId", "ChildId");
-                                });
+                        cb.OwnsOne(
+                            c => c.SubChild,
+                            sb =>
+                            {
+                                sb.Property<int>("ParentId");
+                                sb.Property<int>("ChildId");
+                                sb.WithOwner().HasForeignKey("ParentId", "ChildId");
+                            }
+                        );
 
-                            cb.OwnsMany(
-                                c => c.SubChildCollection, sb =>
-                                {
-                                    sb.Property<int>("ParentId");
-                                    sb.Property<int>("ChildId");
-                                    sb.WithOwner()
-                                        .HasForeignKey("ParentId", "ChildId");
-                                });
-                        });
-                });
+                        cb.OwnsMany(
+                            c => c.SubChildCollection,
+                            sb =>
+                            {
+                                sb.Property<int>("ParentId");
+                                sb.Property<int>("ChildId");
+                                sb.WithOwner().HasForeignKey("ParentId", "ChildId");
+                            }
+                        );
+                    }
+                );
+            });
 
-            modelBuilder.Entity<Thing>().OwnsMany(
-                p => p.OwnedByThings, a =>
-                {
-                    a.WithOwner(e => e.Thing).HasForeignKey(e => e.ThingId);
-                    a.HasKey(e => e.OwnedByThingId);
-                });
+            modelBuilder
+                .Entity<Thing>()
+                .OwnsMany(
+                    p => p.OwnedByThings,
+                    a =>
+                    {
+                        a.WithOwner(e => e.Thing).HasForeignKey(e => e.ThingId);
+                        a.HasKey(e => e.OwnedByThingId);
+                    }
+                );
         }
 
         protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -5559,7 +6474,10 @@ public class OwnedFixupTest
             if (!_ignoreDuplicates)
             {
                 optionsBuilder.ConfigureWarnings(
-                    w => w.Default(WarningBehavior.Throw).Log(CoreEventId.ManyServiceProvidersCreatedWarning));
+                    w =>
+                        w.Default(WarningBehavior.Throw)
+                            .Log(CoreEventId.ManyServiceProvidersCreatedWarning)
+                );
             }
         }
     }
@@ -5575,15 +6493,18 @@ public class OwnedFixupTest
         ObservableHashSet
     }
 
-    private static ICollection<T> CreateChildCollection<T>(CollectionType collectionType, T dependent)
-        where T : class
-        => collectionType switch
+    private static ICollection<T> CreateChildCollection<T>(
+        CollectionType collectionType,
+        T dependent
+    ) where T : class =>
+        collectionType switch
         {
             CollectionType.List => new List<T> { dependent },
             CollectionType.SortedSet => new SortedSet<T> { dependent },
             CollectionType.Collection => new Collection<T> { dependent },
             CollectionType.ObservableCollection => new ObservableCollection<T> { dependent },
-            CollectionType.ObservableHashSet => new ObservableHashSet<T>(ReferenceEqualityComparer.Instance) { dependent },
+            CollectionType.ObservableHashSet
+                => new ObservableHashSet<T>(ReferenceEqualityComparer.Instance) { dependent },
             _ => new HashSet<T>(ReferenceEqualityComparer.Instance) { dependent }
         };
 

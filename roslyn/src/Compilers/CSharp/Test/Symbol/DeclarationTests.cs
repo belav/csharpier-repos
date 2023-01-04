@@ -17,6 +17,7 @@ using Microsoft.CodeAnalysis.Text;
 using Roslyn.Test.Utilities;
 using Roslyn.Utilities;
 using Xunit;
+
 //test
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
@@ -26,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestSimpleDeclarations()
         {
-            var text1 = @"
+            var text1 =
+                @"
 namespace NA.NB
 {
   partial class C<T>
@@ -39,7 +41,8 @@ namespace NA.NB
   class C { }
 }
 ";
-            var text2 = @"
+            var text2 =
+                @"
 namespace NA
 {
   namespace NB
@@ -58,8 +61,16 @@ namespace NA
             var tree2 = SyntaxFactory.ParseSyntaxTree(text2);
             Assert.NotNull(tree1);
             Assert.NotNull(tree2);
-            var decl1 = DeclarationTreeBuilder.ForTree(tree1, TestOptions.DebugExe.ScriptClassName, isSubmission: false);
-            var decl2 = DeclarationTreeBuilder.ForTree(tree2, TestOptions.DebugExe.ScriptClassName, isSubmission: false);
+            var decl1 = DeclarationTreeBuilder.ForTree(
+                tree1,
+                TestOptions.DebugExe.ScriptClassName,
+                isSubmission: false
+            );
+            var decl2 = DeclarationTreeBuilder.ForTree(
+                tree2,
+                TestOptions.DebugExe.ScriptClassName,
+                isSubmission: false
+            );
             Assert.NotNull(decl1);
             Assert.NotNull(decl2);
             Assert.Equal(string.Empty, decl1.Name);
@@ -157,7 +168,9 @@ namespace NA
             table = table.AddRootDeclaration(Lazy(decl2));
             mr = table.CalculateMergedRoot(null);
 
-            Assert.True(table.TypeNames.Distinct().OrderBy(s => s).SequenceEqual(new[] { "C", "D" }));
+            Assert.True(
+                table.TypeNames.Distinct().OrderBy(s => s).SequenceEqual(new[] { "C", "D" })
+            );
 
             Assert.Equal(mr.Declarations, new[] { decl1, decl2 });
 
@@ -196,7 +209,8 @@ namespace NA
         [Fact]
         public void TestTypeNames()
         {
-            var text1 = @"
+            var text1 =
+                @"
 namespace NA.NB
 {
   partial class A<T>
@@ -208,7 +222,8 @@ namespace NA.NB
   }
 }
 ";
-            var text2 = @"
+            var text2 =
+                @"
 namespace NA
 {
   namespace NB
@@ -227,8 +242,20 @@ namespace NA
             var tree2 = SyntaxFactory.ParseSyntaxTree(text2);
             Assert.NotNull(tree1);
             Assert.NotNull(tree2);
-            var decl1 = Lazy(DeclarationTreeBuilder.ForTree(tree1, TestOptions.DebugExe.ScriptClassName, isSubmission: false));
-            var decl2 = Lazy(DeclarationTreeBuilder.ForTree(tree2, TestOptions.DebugExe.ScriptClassName, isSubmission: false));
+            var decl1 = Lazy(
+                DeclarationTreeBuilder.ForTree(
+                    tree1,
+                    TestOptions.DebugExe.ScriptClassName,
+                    isSubmission: false
+                )
+            );
+            var decl2 = Lazy(
+                DeclarationTreeBuilder.ForTree(
+                    tree2,
+                    TestOptions.DebugExe.ScriptClassName,
+                    isSubmission: false
+                )
+            );
 
             var table = DeclarationTable.Empty;
             table = table.AddRootDeclaration(decl1);
@@ -236,13 +263,17 @@ namespace NA
             Assert.True(table.TypeNames.OrderBy(s => s).SequenceEqual(new[] { "A", "B" }));
 
             table = table.AddRootDeclaration(decl2);
-            Assert.True(table.TypeNames.OrderBy(s => s).SequenceEqual(new[] { "A", "B", "C", "D" }));
+            Assert.True(
+                table.TypeNames.OrderBy(s => s).SequenceEqual(new[] { "A", "B", "C", "D" })
+            );
 
             table = table.RemoveRootDeclaration(decl2);
             Assert.True(table.TypeNames.OrderBy(s => s).SequenceEqual(new[] { "A", "B" }));
 
             table = table.AddRootDeclaration(decl2);
-            Assert.True(table.TypeNames.OrderBy(s => s).SequenceEqual(new[] { "A", "B", "C", "D" }));
+            Assert.True(
+                table.TypeNames.OrderBy(s => s).SequenceEqual(new[] { "A", "B", "C", "D" })
+            );
 
             table = table.RemoveRootDeclaration(decl1);
             Assert.True(table.TypeNames.OrderBy(s => s).SequenceEqual(new[] { "C", "D" }));
@@ -251,17 +282,18 @@ namespace NA
             Assert.True(table.TypeNames.IsEmpty());
         }
 
-
         [Fact]
         public void Bug2038()
         {
-            string code = @"
+            string code =
+                @"
                     public public interface testiface {}";
 
             var comp = CSharpCompilation.Create(
                 "Test.dll",
                 new[] { SyntaxFactory.ParseSyntaxTree(code) },
-                options: TestOptions.ReleaseDll);
+                options: TestOptions.ReleaseDll
+            );
 
             Assert.Equal(SymbolKind.NamedType, comp.GlobalNamespace.GetMembers()[0].Kind);
         }
@@ -269,7 +301,8 @@ namespace NA
         [ConditionalFact(typeof(NoIOperationValidation), typeof(NoUsedAssembliesValidation))]
         public void OnlyOneParse()
         {
-            var underlyingTree = SyntaxFactory.ParseSyntaxTree(@"
+            var underlyingTree = SyntaxFactory.ParseSyntaxTree(
+                @"
 using System;
 
 class C
@@ -277,21 +310,28 @@ class C
     public B X(B b) { return b; }
     C(){}
 }
-");
-            var foreignType = SyntaxFactory.ParseSyntaxTree(@"
+"
+            );
+            var foreignType = SyntaxFactory.ParseSyntaxTree(
+                @"
 public class B
 {
   public int member(string s) { return s.Length; }
   B(){}
 }
-");
+"
+            );
 
             var countedTree = new CountedSyntaxTree(foreignType);
 
-            var compilation = CreateCompilation(new SyntaxTree[] { underlyingTree, countedTree }, skipUsesIsNullable: true, options: TestOptions.ReleaseDll);
+            var compilation = CreateCompilation(
+                new SyntaxTree[] { underlyingTree, countedTree },
+                skipUsesIsNullable: true,
+                options: TestOptions.ReleaseDll
+            );
 
             var type = compilation.Assembly.GlobalNamespace.GetTypeMembers().First();
-            Assert.Equal(1, countedTree.AccessCount);   // parse once to build the decl table
+            Assert.Equal(1, countedTree.AccessCount); // parse once to build the decl table
 
             // We shouldn't need to go back to syntax to get info about the member names.
             var memberNames = type.MemberNames;
@@ -316,7 +356,8 @@ public class B
         [ConditionalFact(typeof(NoIOperationValidation), typeof(NoUsedAssembliesValidation))]
         public void OnlyOneParse_WithReservedTypeName()
         {
-            var underlyingTree = SyntaxFactory.ParseSyntaxTree(@"
+            var underlyingTree = SyntaxFactory.ParseSyntaxTree(
+                @"
 using System;
 
 class c
@@ -324,18 +365,25 @@ class c
     public b X(b b1) { return b1; }
     c(){}
 }
-");
-            var foreignType = SyntaxFactory.ParseSyntaxTree(@"
+"
+            );
+            var foreignType = SyntaxFactory.ParseSyntaxTree(
+                @"
 public class b
 {
   public int member(string s) { return s.Length; }
   b(){}
 }
-");
+"
+            );
 
             var countedTree = new CountedSyntaxTree(foreignType);
 
-            var compilation = CreateCompilation(new SyntaxTree[] { underlyingTree, countedTree }, skipUsesIsNullable: true, options: TestOptions.ReleaseDll);
+            var compilation = CreateCompilation(
+                new SyntaxTree[] { underlyingTree, countedTree },
+                skipUsesIsNullable: true,
+                options: TestOptions.ReleaseDll
+            );
 
             var type = compilation.Assembly.GlobalNamespace.GetTypeMembers().First();
             Assert.Equal(1, countedTree.AccessCount);
@@ -367,7 +415,10 @@ public class b
                 private readonly CountedSyntaxTree _countedSyntaxTree;
                 private readonly SyntaxReference _underlyingSyntaxReference;
 
-                public Reference(CountedSyntaxTree countedSyntaxTree, SyntaxReference syntaxReference)
+                public Reference(
+                    CountedSyntaxTree countedSyntaxTree,
+                    SyntaxReference syntaxReference
+                )
                 {
                     _countedSyntaxTree = countedSyntaxTree;
                     _underlyingSyntaxReference = syntaxReference;
@@ -375,10 +426,7 @@ public class b
 
                 public override SyntaxTree SyntaxTree
                 {
-                    get
-                    {
-                        return _countedSyntaxTree;
-                    }
+                    get { return _countedSyntaxTree; }
                 }
 
                 public override TextSpan Span
@@ -393,10 +441,15 @@ public class b
                     var nodeInUnderlying = _underlyingSyntaxReference.GetSyntax(cancellationToken);
 
                     // Note: GetCompilationUnitRoot increments AccessCount
-                    var token = _countedSyntaxTree.GetCompilationUnitRoot(cancellationToken).FindToken(nodeInUnderlying.SpanStart);
+                    var token = _countedSyntaxTree
+                        .GetCompilationUnitRoot(cancellationToken)
+                        .FindToken(nodeInUnderlying.SpanStart);
                     for (var node = token.Parent; node != null; node = node.Parent)
                     {
-                        if (node.Span == nodeInUnderlying.Span && node.RawKind == nodeInUnderlying.RawKind)
+                        if (
+                            node.Span == nodeInUnderlying.Span
+                            && node.RawKind == nodeInUnderlying.RawKind
+                        )
                         {
                             return (CSharpSyntaxNode)node;
                         }
@@ -417,7 +470,9 @@ public class b
                 Debug.Assert(underlying.HasCompilationUnitRoot);
 
                 _underlyingTree = underlying;
-                _root = CloneNodeAsRoot(_underlyingTree.GetCompilationUnitRoot(CancellationToken.None));
+                _root = CloneNodeAsRoot(
+                    _underlyingTree.GetCompilationUnitRoot(CancellationToken.None)
+                );
             }
 
             public override string FilePath
@@ -430,7 +485,9 @@ public class b
                 get { return (CSharpParseOptions)_underlyingTree.Options; }
             }
 
-            public override CSharpSyntaxNode GetRoot(CancellationToken cancellationToken = default(CancellationToken))
+            public override CSharpSyntaxNode GetRoot(
+                CancellationToken cancellationToken = default(CancellationToken)
+            )
             {
                 AccessCount++;
                 return _root;
@@ -469,7 +526,8 @@ public class b
             }
 
             [Obsolete]
-            public override ImmutableDictionary<string, ReportDiagnostic> DiagnosticOptions => throw new NotImplementedException();
+            public override ImmutableDictionary<string, ReportDiagnostic> DiagnosticOptions =>
+                throw new NotImplementedException();
 
             public override SyntaxReference GetReference(SyntaxNode node)
             {

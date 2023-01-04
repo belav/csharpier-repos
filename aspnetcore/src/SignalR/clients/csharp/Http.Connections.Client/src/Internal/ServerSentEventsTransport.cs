@@ -20,6 +20,7 @@ internal sealed partial class ServerSentEventsTransport : ITransport
     private readonly HttpClient _httpClient;
     private readonly ILogger _logger;
     private readonly HttpConnectionOptions _httpConnectionOptions;
+
     // Volatile so that the SSE loop sees the updated value set from a different thread
     private volatile Exception? _error;
     private readonly CancellationTokenSource _transportCts = new CancellationTokenSource();
@@ -34,7 +35,11 @@ internal sealed partial class ServerSentEventsTransport : ITransport
 
     public PipeWriter Output => _transport!.Output;
 
-    public ServerSentEventsTransport(HttpClient httpClient, HttpConnectionOptions? httpConnectionOptions = null, ILoggerFactory? loggerFactory = null)
+    public ServerSentEventsTransport(
+        HttpClient httpClient,
+        HttpConnectionOptions? httpConnectionOptions = null,
+        ILoggerFactory? loggerFactory = null
+    )
     {
         if (httpClient == null)
         {
@@ -42,15 +47,24 @@ internal sealed partial class ServerSentEventsTransport : ITransport
         }
 
         _httpClient = httpClient;
-        _logger = (loggerFactory ?? NullLoggerFactory.Instance).CreateLogger<ServerSentEventsTransport>();
+        _logger = (
+            loggerFactory ?? NullLoggerFactory.Instance
+        ).CreateLogger<ServerSentEventsTransport>();
         _httpConnectionOptions = httpConnectionOptions ?? new();
     }
 
-    public async Task StartAsync(Uri url, TransferFormat transferFormat, CancellationToken cancellationToken = default)
+    public async Task StartAsync(
+        Uri url,
+        TransferFormat transferFormat,
+        CancellationToken cancellationToken = default
+    )
     {
         if (transferFormat != TransferFormat.Text)
         {
-            throw new ArgumentException($"The '{transferFormat}' transfer format is not supported by this transport.", nameof(transferFormat));
+            throw new ArgumentException(
+                $"The '{transferFormat}' transfer format is not supported by this transport.",
+                nameof(transferFormat)
+            );
         }
 
         Log.StartTransport(_logger, transferFormat);
@@ -67,7 +81,9 @@ internal sealed partial class ServerSentEventsTransport : ITransport
 
         try
         {
-            response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+            response = await _httpClient
+                .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
+                .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
         catch
@@ -80,7 +96,10 @@ internal sealed partial class ServerSentEventsTransport : ITransport
         }
 
         // Create the pipe pair (Application's writer is connected to Transport's reader, and vice versa)
-        var pair = DuplexPipe.CreateConnectionPair(_httpConnectionOptions.TransportPipeOptions, _httpConnectionOptions.AppPipeOptions);
+        var pair = DuplexPipe.CreateConnectionPair(
+            _httpConnectionOptions.TransportPipeOptions,
+            _httpConnectionOptions.AppPipeOptions
+        );
 
         _transport = pair.Transport;
         _application = pair.Application;
@@ -99,7 +118,13 @@ internal sealed partial class ServerSentEventsTransport : ITransport
 
         // Start sending and polling (ask for binary if the server supports it)
         var receiving = ProcessEventStream(response, _transportCts.Token);
-        var sending = SendUtils.SendMessages(url, _application, _httpClient, _logger, _inputCts.Token);
+        var sending = SendUtils.SendMessages(
+            url,
+            _application,
+            _httpClient,
+            _logger,
+            _inputCts.Token
+        );
 
         // Wait for send or receive to complete
         var trigger = await Task.WhenAny(receiving, sending).ConfigureAwait(false);
@@ -131,7 +156,10 @@ internal sealed partial class ServerSentEventsTransport : ITransport
         }
     }
 
-    private async Task ProcessEventStream(HttpResponseMessage response, CancellationToken cancellationToken)
+    private async Task ProcessEventStream(
+        HttpResponseMessage response,
+        CancellationToken cancellationToken
+    )
     {
         Debug.Assert(_application != null);
 
@@ -170,7 +198,12 @@ internal sealed partial class ServerSentEventsTransport : ITransport
                         {
                             Log.ParsingSSE(_logger, buffer.Length);
 
-                            var parseResult = _parser.ParseMessage(buffer, out consumed, out examined, out var message);
+                            var parseResult = _parser.ParseMessage(
+                                buffer,
+                                out consumed,
+                                out examined,
+                                out var message
+                            );
                             FlushResult flushResult = default;
 
                             switch (parseResult)
@@ -180,7 +213,9 @@ internal sealed partial class ServerSentEventsTransport : ITransport
 
                                     // When cancellationToken is canceled the next line will cancel pending flushes on the pipe unblocking the await.
                                     // Avoid passing the passed in context.
-                                    flushResult = await _application.Output.WriteAsync(message, default).ConfigureAwait(false);
+                                    flushResult = await _application.Output
+                                        .WriteAsync(message, default)
+                                        .ConfigureAwait(false);
 
                                     _parser.Reset();
                                     break;

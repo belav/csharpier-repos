@@ -25,42 +25,109 @@ namespace System
         // Not all values can benefit from packing the searchSpace. See comments in PackSources below.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe bool CanUsePackedIndexOf<T>(T value) =>
-            PackedIndexOfIsSupported &&
-            RuntimeHelpers.IsBitwiseEquatable<T>() &&
-            sizeof(T) == sizeof(ushort) &&
-            *(ushort*)&value - 1u < 254u;
+            PackedIndexOfIsSupported
+            && RuntimeHelpers.IsBitwiseEquatable<T>()
+            && sizeof(T) == sizeof(ushort)
+            && *(ushort*)&value - 1u < 254u;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int IndexOf(ref char searchSpace, char value, int length) =>
-            IndexOf<SpanHelpers.DontNegate<short>>(ref Unsafe.As<char, short>(ref searchSpace), (short)value, length);
+            IndexOf<SpanHelpers.DontNegate<short>>(
+                ref Unsafe.As<char, short>(ref searchSpace),
+                (short)value,
+                length
+            );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int IndexOfAnyExcept(ref char searchSpace, char value, int length) =>
-            IndexOf<SpanHelpers.Negate<short>>(ref Unsafe.As<char, short>(ref searchSpace), (short)value, length);
+            IndexOf<SpanHelpers.Negate<short>>(
+                ref Unsafe.As<char, short>(ref searchSpace),
+                (short)value,
+                length
+            );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int IndexOfAny(ref char searchSpace, char value0, char value1, int length) =>
-            IndexOfAny<SpanHelpers.DontNegate<short>>(ref Unsafe.As<char, short>(ref searchSpace), (short)value0, (short)value1, length);
+            IndexOfAny<SpanHelpers.DontNegate<short>>(
+                ref Unsafe.As<char, short>(ref searchSpace),
+                (short)value0,
+                (short)value1,
+                length
+            );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int IndexOfAnyExcept(ref char searchSpace, char value0, char value1, int length) =>
-            IndexOfAny<SpanHelpers.Negate<short>>(ref Unsafe.As<char, short>(ref searchSpace), (short)value0, (short)value1, length);
+        public static int IndexOfAnyExcept(
+            ref char searchSpace,
+            char value0,
+            char value1,
+            int length
+        ) =>
+            IndexOfAny<SpanHelpers.Negate<short>>(
+                ref Unsafe.As<char, short>(ref searchSpace),
+                (short)value0,
+                (short)value1,
+                length
+            );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int IndexOfAny(ref char searchSpace, char value0, char value1, char value2, int length) =>
-            IndexOfAny<SpanHelpers.DontNegate<short>>(ref Unsafe.As<char, short>(ref searchSpace), (short)value0, (short)value1, (short)value2, length);
+        public static int IndexOfAny(
+            ref char searchSpace,
+            char value0,
+            char value1,
+            char value2,
+            int length
+        ) =>
+            IndexOfAny<SpanHelpers.DontNegate<short>>(
+                ref Unsafe.As<char, short>(ref searchSpace),
+                (short)value0,
+                (short)value1,
+                (short)value2,
+                length
+            );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int IndexOfAnyExcept(ref char searchSpace, char value0, char value1, char value2, int length) =>
-            IndexOfAny<SpanHelpers.Negate<short>>(ref Unsafe.As<char, short>(ref searchSpace), (short)value0, (short)value1, (short)value2, length);
+        public static int IndexOfAnyExcept(
+            ref char searchSpace,
+            char value0,
+            char value1,
+            char value2,
+            int length
+        ) =>
+            IndexOfAny<SpanHelpers.Negate<short>>(
+                ref Unsafe.As<char, short>(ref searchSpace),
+                (short)value0,
+                (short)value1,
+                (short)value2,
+                length
+            );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int IndexOfAnyInRange(ref char searchSpace, char lowInclusive, char rangeInclusive, int length) =>
-            IndexOfAnyInRange<SpanHelpers.DontNegate<short>>(ref Unsafe.As<char, short>(ref searchSpace), (short)lowInclusive, (short)rangeInclusive, length);
+        public static int IndexOfAnyInRange(
+            ref char searchSpace,
+            char lowInclusive,
+            char rangeInclusive,
+            int length
+        ) =>
+            IndexOfAnyInRange<SpanHelpers.DontNegate<short>>(
+                ref Unsafe.As<char, short>(ref searchSpace),
+                (short)lowInclusive,
+                (short)rangeInclusive,
+                length
+            );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int IndexOfAnyExceptInRange(ref char searchSpace, char lowInclusive, char rangeInclusive, int length) =>
-            IndexOfAnyInRange<SpanHelpers.Negate<short>>(ref Unsafe.As<char, short>(ref searchSpace), (short)lowInclusive, (short)rangeInclusive, length);
+        public static int IndexOfAnyExceptInRange(
+            ref char searchSpace,
+            char lowInclusive,
+            char rangeInclusive,
+            int length
+        ) =>
+            IndexOfAnyInRange<SpanHelpers.Negate<short>>(
+                ref Unsafe.As<char, short>(ref searchSpace),
+                (short)lowInclusive,
+                (short)rangeInclusive,
+                length
+            );
 
         public static bool Contains(ref short searchSpace, short value, int length)
         {
@@ -74,10 +141,12 @@ namespace System
                 {
                     length -= 4;
 
-                    if (searchSpace == value ||
-                        Unsafe.Add(ref searchSpace, 1) == value ||
-                        Unsafe.Add(ref searchSpace, 2) == value ||
-                        Unsafe.Add(ref searchSpace, 3) == value)
+                    if (
+                        searchSpace == value
+                        || Unsafe.Add(ref searchSpace, 1) == value
+                        || Unsafe.Add(ref searchSpace, 2) == value
+                        || Unsafe.Add(ref searchSpace, 3) == value
+                    )
                     {
                         return true;
                     }
@@ -111,12 +180,18 @@ namespace System
                         // If the input length is a multiple of 32, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
                         // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
-                        ref short twoVectorsAwayFromEnd = ref Unsafe.Add(ref searchSpace, length - (2 * Vector256<short>.Count));
+                        ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
+                            ref searchSpace,
+                            length - (2 * Vector256<short>.Count)
+                        );
 
                         do
                         {
                             Vector256<short> source0 = Vector256.LoadUnsafe(ref currentSearchSpace);
-                            Vector256<short> source1 = Vector256.LoadUnsafe(ref currentSearchSpace, (nuint)Vector256<short>.Count);
+                            Vector256<short> source1 = Vector256.LoadUnsafe(
+                                ref currentSearchSpace,
+                                (nuint)Vector256<short>.Count
+                            );
                             Vector256<byte> packedSource = PackSources(source0, source1);
                             Vector256<byte> result = Vector256.Equals(packedValue, packedSource);
 
@@ -125,17 +200,30 @@ namespace System
                                 return true;
                             }
 
-                            currentSearchSpace = ref Unsafe.Add(ref currentSearchSpace, 2 * Vector256<short>.Count);
-                        }
-                        while (Unsafe.IsAddressLessThan(ref currentSearchSpace, ref twoVectorsAwayFromEnd));
+                            currentSearchSpace = ref Unsafe.Add(
+                                ref currentSearchSpace,
+                                2 * Vector256<short>.Count
+                            );
+                        } while (
+                            Unsafe.IsAddressLessThan(
+                                ref currentSearchSpace,
+                                ref twoVectorsAwayFromEnd
+                            )
+                        );
                     }
 
                     // We have 1-32 characters remaining. Process the first and last vector in the search space.
                     // They may overlap, but we're only interested in whether any value matched.
                     {
-                        ref short oneVectorAwayFromEnd = ref Unsafe.Add(ref searchSpace, length - Vector256<short>.Count);
+                        ref short oneVectorAwayFromEnd = ref Unsafe.Add(
+                            ref searchSpace,
+                            length - Vector256<short>.Count
+                        );
 
-                        ref short firstVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref oneVectorAwayFromEnd)
+                        ref short firstVector = ref Unsafe.IsAddressGreaterThan(
+                            ref currentSearchSpace,
+                            ref oneVectorAwayFromEnd
+                        )
                             ? ref oneVectorAwayFromEnd
                             : ref currentSearchSpace;
 
@@ -160,12 +248,18 @@ namespace System
                         // If the input length is a multiple of 16, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
                         // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
-                        ref short twoVectorsAwayFromEnd = ref Unsafe.Add(ref searchSpace, length - (2 * Vector128<short>.Count));
+                        ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
+                            ref searchSpace,
+                            length - (2 * Vector128<short>.Count)
+                        );
 
                         do
                         {
                             Vector128<short> source0 = Vector128.LoadUnsafe(ref currentSearchSpace);
-                            Vector128<short> source1 = Vector128.LoadUnsafe(ref currentSearchSpace, (nuint)Vector128<short>.Count);
+                            Vector128<short> source1 = Vector128.LoadUnsafe(
+                                ref currentSearchSpace,
+                                (nuint)Vector128<short>.Count
+                            );
                             Vector128<byte> packedSource = PackSources(source0, source1);
                             Vector128<byte> result = Vector128.Equals(packedValue, packedSource);
 
@@ -174,17 +268,30 @@ namespace System
                                 return true;
                             }
 
-                            currentSearchSpace = ref Unsafe.Add(ref currentSearchSpace, 2 * Vector128<short>.Count);
-                        }
-                        while (Unsafe.IsAddressLessThan(ref currentSearchSpace, ref twoVectorsAwayFromEnd));
+                            currentSearchSpace = ref Unsafe.Add(
+                                ref currentSearchSpace,
+                                2 * Vector128<short>.Count
+                            );
+                        } while (
+                            Unsafe.IsAddressLessThan(
+                                ref currentSearchSpace,
+                                ref twoVectorsAwayFromEnd
+                            )
+                        );
                     }
 
                     // We have 1-16 characters remaining. Process the first and last vector in the search space.
                     // They may overlap, but we're only interested in whether any value matched.
                     {
-                        ref short oneVectorAwayFromEnd = ref Unsafe.Add(ref searchSpace, length - Vector128<short>.Count);
+                        ref short oneVectorAwayFromEnd = ref Unsafe.Add(
+                            ref searchSpace,
+                            length - Vector128<short>.Count
+                        );
 
-                        ref short firstVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref oneVectorAwayFromEnd)
+                        ref short firstVector = ref Unsafe.IsAddressGreaterThan(
+                            ref currentSearchSpace,
+                            ref oneVectorAwayFromEnd
+                        )
                             ? ref oneVectorAwayFromEnd
                             : ref currentSearchSpace;
 
@@ -217,10 +324,14 @@ namespace System
                 {
                     length -= 4;
 
-                    if (TNegator.NegateIfNeeded(searchSpace == value)) return 0;
-                    if (TNegator.NegateIfNeeded(Unsafe.Add(ref searchSpace, 1) == value)) return 1;
-                    if (TNegator.NegateIfNeeded(Unsafe.Add(ref searchSpace, 2) == value)) return 2;
-                    if (TNegator.NegateIfNeeded(Unsafe.Add(ref searchSpace, 3) == value)) return 3;
+                    if (TNegator.NegateIfNeeded(searchSpace == value))
+                        return 0;
+                    if (TNegator.NegateIfNeeded(Unsafe.Add(ref searchSpace, 1) == value))
+                        return 1;
+                    if (TNegator.NegateIfNeeded(Unsafe.Add(ref searchSpace, 2) == value))
+                        return 2;
+                    if (TNegator.NegateIfNeeded(Unsafe.Add(ref searchSpace, 3) == value))
+                        return 3;
 
                     offset = 4;
                 }
@@ -229,7 +340,8 @@ namespace System
                 {
                     length -= 1;
 
-                    if (TNegator.NegateIfNeeded(Unsafe.Add(ref searchSpace, offset) == value)) return (int)offset;
+                    if (TNegator.NegateIfNeeded(Unsafe.Add(ref searchSpace, offset) == value))
+                        return (int)offset;
 
                     offset += 1;
                 }
@@ -248,32 +360,55 @@ namespace System
                         // If the input length is a multiple of 32, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
                         // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
-                        ref short twoVectorsAwayFromEnd = ref Unsafe.Add(ref searchSpace, length - (2 * Vector256<short>.Count));
+                        ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
+                            ref searchSpace,
+                            length - (2 * Vector256<short>.Count)
+                        );
 
                         do
                         {
                             Vector256<short> source0 = Vector256.LoadUnsafe(ref currentSearchSpace);
-                            Vector256<short> source1 = Vector256.LoadUnsafe(ref currentSearchSpace, (nuint)Vector256<short>.Count);
+                            Vector256<short> source1 = Vector256.LoadUnsafe(
+                                ref currentSearchSpace,
+                                (nuint)Vector256<short>.Count
+                            );
                             Vector256<byte> packedSource = PackSources(source0, source1);
                             Vector256<byte> result = Vector256.Equals(packedValue, packedSource);
                             result = NegateIfNeeded<TNegator>(result);
 
                             if (result != Vector256<byte>.Zero)
                             {
-                                return ComputeFirstIndex(ref searchSpace, ref currentSearchSpace, result);
+                                return ComputeFirstIndex(
+                                    ref searchSpace,
+                                    ref currentSearchSpace,
+                                    result
+                                );
                             }
 
-                            currentSearchSpace = ref Unsafe.Add(ref currentSearchSpace, 2 * Vector256<short>.Count);
-                        }
-                        while (Unsafe.IsAddressLessThan(ref currentSearchSpace, ref twoVectorsAwayFromEnd));
+                            currentSearchSpace = ref Unsafe.Add(
+                                ref currentSearchSpace,
+                                2 * Vector256<short>.Count
+                            );
+                        } while (
+                            Unsafe.IsAddressLessThan(
+                                ref currentSearchSpace,
+                                ref twoVectorsAwayFromEnd
+                            )
+                        );
                     }
 
                     // We have 1-32 characters remaining. Process the first and last vector in the search space.
                     // They may overlap, but we'll handle that in the index calculation if we do get a match.
                     {
-                        ref short oneVectorAwayFromEnd = ref Unsafe.Add(ref searchSpace, length - Vector256<short>.Count);
+                        ref short oneVectorAwayFromEnd = ref Unsafe.Add(
+                            ref searchSpace,
+                            length - Vector256<short>.Count
+                        );
 
-                        ref short firstVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref oneVectorAwayFromEnd)
+                        ref short firstVector = ref Unsafe.IsAddressGreaterThan(
+                            ref currentSearchSpace,
+                            ref oneVectorAwayFromEnd
+                        )
                             ? ref oneVectorAwayFromEnd
                             : ref currentSearchSpace;
 
@@ -285,7 +420,12 @@ namespace System
 
                         if (result != Vector256<byte>.Zero)
                         {
-                            return ComputeFirstIndexOverlapped(ref searchSpace, ref firstVector, ref oneVectorAwayFromEnd, result);
+                            return ComputeFirstIndexOverlapped(
+                                ref searchSpace,
+                                ref firstVector,
+                                ref oneVectorAwayFromEnd,
+                                result
+                            );
                         }
                     }
                 }
@@ -299,32 +439,55 @@ namespace System
                         // If the input length is a multiple of 16, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
                         // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
-                        ref short twoVectorsAwayFromEnd = ref Unsafe.Add(ref searchSpace, length - (2 * Vector128<short>.Count));
+                        ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
+                            ref searchSpace,
+                            length - (2 * Vector128<short>.Count)
+                        );
 
                         do
                         {
                             Vector128<short> source0 = Vector128.LoadUnsafe(ref currentSearchSpace);
-                            Vector128<short> source1 = Vector128.LoadUnsafe(ref currentSearchSpace, (nuint)Vector128<short>.Count);
+                            Vector128<short> source1 = Vector128.LoadUnsafe(
+                                ref currentSearchSpace,
+                                (nuint)Vector128<short>.Count
+                            );
                             Vector128<byte> packedSource = PackSources(source0, source1);
                             Vector128<byte> result = Vector128.Equals(packedValue, packedSource);
                             result = NegateIfNeeded<TNegator>(result);
 
                             if (result != Vector128<byte>.Zero)
                             {
-                                return ComputeFirstIndex(ref searchSpace, ref currentSearchSpace, result);
+                                return ComputeFirstIndex(
+                                    ref searchSpace,
+                                    ref currentSearchSpace,
+                                    result
+                                );
                             }
 
-                            currentSearchSpace = ref Unsafe.Add(ref currentSearchSpace, 2 * Vector128<short>.Count);
-                        }
-                        while (Unsafe.IsAddressLessThan(ref currentSearchSpace, ref twoVectorsAwayFromEnd));
+                            currentSearchSpace = ref Unsafe.Add(
+                                ref currentSearchSpace,
+                                2 * Vector128<short>.Count
+                            );
+                        } while (
+                            Unsafe.IsAddressLessThan(
+                                ref currentSearchSpace,
+                                ref twoVectorsAwayFromEnd
+                            )
+                        );
                     }
 
                     // We have 1-16 characters remaining. Process the first and last vector in the search space.
                     // They may overlap, but we'll handle that in the index calculation if we do get a match.
                     {
-                        ref short oneVectorAwayFromEnd = ref Unsafe.Add(ref searchSpace, length - Vector128<short>.Count);
+                        ref short oneVectorAwayFromEnd = ref Unsafe.Add(
+                            ref searchSpace,
+                            length - Vector128<short>.Count
+                        );
 
-                        ref short firstVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref oneVectorAwayFromEnd)
+                        ref short firstVector = ref Unsafe.IsAddressGreaterThan(
+                            ref currentSearchSpace,
+                            ref oneVectorAwayFromEnd
+                        )
                             ? ref oneVectorAwayFromEnd
                             : ref currentSearchSpace;
 
@@ -336,7 +499,12 @@ namespace System
 
                         if (result != Vector128<byte>.Zero)
                         {
-                            return ComputeFirstIndexOverlapped(ref searchSpace, ref firstVector, ref oneVectorAwayFromEnd, result);
+                            return ComputeFirstIndexOverlapped(
+                                ref searchSpace,
+                                ref firstVector,
+                                ref oneVectorAwayFromEnd,
+                                result
+                            );
                         }
                     }
                 }
@@ -345,8 +513,12 @@ namespace System
             return -1;
         }
 
-        private static int IndexOfAny<TNegator>(ref short searchSpace, short value0, short value1, int length)
-            where TNegator : struct, SpanHelpers.INegator<short>
+        private static int IndexOfAny<TNegator>(
+            ref short searchSpace,
+            short value0,
+            short value1,
+            int length
+        ) where TNegator : struct, SpanHelpers.INegator<short>
         {
             Debug.Assert(CanUsePackedIndexOf(value0));
             Debug.Assert(CanUsePackedIndexOf(value1));
@@ -361,13 +533,17 @@ namespace System
                     length -= 4;
 
                     lookUp = searchSpace;
-                    if (TNegator.NegateIfNeeded(lookUp == value0 || lookUp == value1)) return 0;
+                    if (TNegator.NegateIfNeeded(lookUp == value0 || lookUp == value1))
+                        return 0;
                     lookUp = Unsafe.Add(ref searchSpace, 1);
-                    if (TNegator.NegateIfNeeded(lookUp == value0 || lookUp == value1)) return 1;
+                    if (TNegator.NegateIfNeeded(lookUp == value0 || lookUp == value1))
+                        return 1;
                     lookUp = Unsafe.Add(ref searchSpace, 2);
-                    if (TNegator.NegateIfNeeded(lookUp == value0 || lookUp == value1)) return 2;
+                    if (TNegator.NegateIfNeeded(lookUp == value0 || lookUp == value1))
+                        return 2;
                     lookUp = Unsafe.Add(ref searchSpace, 3);
-                    if (TNegator.NegateIfNeeded(lookUp == value0 || lookUp == value1)) return 3;
+                    if (TNegator.NegateIfNeeded(lookUp == value0 || lookUp == value1))
+                        return 3;
 
                     offset = 4;
                 }
@@ -377,7 +553,8 @@ namespace System
                     length -= 1;
 
                     lookUp = Unsafe.Add(ref searchSpace, offset);
-                    if (TNegator.NegateIfNeeded(lookUp == value0 || lookUp == value1)) return (int)offset;
+                    if (TNegator.NegateIfNeeded(lookUp == value0 || lookUp == value1))
+                        return (int)offset;
 
                     offset += 1;
                 }
@@ -397,44 +574,76 @@ namespace System
                         // If the input length is a multiple of 32, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
                         // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
-                        ref short twoVectorsAwayFromEnd = ref Unsafe.Add(ref searchSpace, length - (2 * Vector256<short>.Count));
+                        ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
+                            ref searchSpace,
+                            length - (2 * Vector256<short>.Count)
+                        );
 
                         do
                         {
                             Vector256<short> source0 = Vector256.LoadUnsafe(ref currentSearchSpace);
-                            Vector256<short> source1 = Vector256.LoadUnsafe(ref currentSearchSpace, (nuint)Vector256<short>.Count);
+                            Vector256<short> source1 = Vector256.LoadUnsafe(
+                                ref currentSearchSpace,
+                                (nuint)Vector256<short>.Count
+                            );
                             Vector256<byte> packedSource = PackSources(source0, source1);
-                            Vector256<byte> result = Vector256.Equals(packedValue0, packedSource) | Vector256.Equals(packedValue1, packedSource);
+                            Vector256<byte> result =
+                                Vector256.Equals(packedValue0, packedSource)
+                                | Vector256.Equals(packedValue1, packedSource);
                             result = NegateIfNeeded<TNegator>(result);
 
                             if (result != Vector256<byte>.Zero)
                             {
-                                return ComputeFirstIndex(ref searchSpace, ref currentSearchSpace, result);
+                                return ComputeFirstIndex(
+                                    ref searchSpace,
+                                    ref currentSearchSpace,
+                                    result
+                                );
                             }
 
-                            currentSearchSpace = ref Unsafe.Add(ref currentSearchSpace, 2 * Vector256<short>.Count);
-                        }
-                        while (Unsafe.IsAddressLessThan(ref currentSearchSpace, ref twoVectorsAwayFromEnd));
+                            currentSearchSpace = ref Unsafe.Add(
+                                ref currentSearchSpace,
+                                2 * Vector256<short>.Count
+                            );
+                        } while (
+                            Unsafe.IsAddressLessThan(
+                                ref currentSearchSpace,
+                                ref twoVectorsAwayFromEnd
+                            )
+                        );
                     }
 
                     // We have 1-32 characters remaining. Process the first and last vector in the search space.
                     // They may overlap, but we'll handle that in the index calculation if we do get a match.
                     {
-                        ref short oneVectorAwayFromEnd = ref Unsafe.Add(ref searchSpace, length - Vector256<short>.Count);
+                        ref short oneVectorAwayFromEnd = ref Unsafe.Add(
+                            ref searchSpace,
+                            length - Vector256<short>.Count
+                        );
 
-                        ref short firstVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref oneVectorAwayFromEnd)
+                        ref short firstVector = ref Unsafe.IsAddressGreaterThan(
+                            ref currentSearchSpace,
+                            ref oneVectorAwayFromEnd
+                        )
                             ? ref oneVectorAwayFromEnd
                             : ref currentSearchSpace;
 
                         Vector256<short> source0 = Vector256.LoadUnsafe(ref firstVector);
                         Vector256<short> source1 = Vector256.LoadUnsafe(ref oneVectorAwayFromEnd);
                         Vector256<byte> packedSource = PackSources(source0, source1);
-                        Vector256<byte> result = Vector256.Equals(packedValue0, packedSource) | Vector256.Equals(packedValue1, packedSource);
+                        Vector256<byte> result =
+                            Vector256.Equals(packedValue0, packedSource)
+                            | Vector256.Equals(packedValue1, packedSource);
                         result = NegateIfNeeded<TNegator>(result);
 
                         if (result != Vector256<byte>.Zero)
                         {
-                            return ComputeFirstIndexOverlapped(ref searchSpace, ref firstVector, ref oneVectorAwayFromEnd, result);
+                            return ComputeFirstIndexOverlapped(
+                                ref searchSpace,
+                                ref firstVector,
+                                ref oneVectorAwayFromEnd,
+                                result
+                            );
                         }
                     }
                 }
@@ -449,44 +658,76 @@ namespace System
                         // If the input length is a multiple of 16, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
                         // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
-                        ref short twoVectorsAwayFromEnd = ref Unsafe.Add(ref searchSpace, length - (2 * Vector128<short>.Count));
+                        ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
+                            ref searchSpace,
+                            length - (2 * Vector128<short>.Count)
+                        );
 
                         do
                         {
                             Vector128<short> source0 = Vector128.LoadUnsafe(ref currentSearchSpace);
-                            Vector128<short> source1 = Vector128.LoadUnsafe(ref currentSearchSpace, (nuint)Vector128<short>.Count);
+                            Vector128<short> source1 = Vector128.LoadUnsafe(
+                                ref currentSearchSpace,
+                                (nuint)Vector128<short>.Count
+                            );
                             Vector128<byte> packedSource = PackSources(source0, source1);
-                            Vector128<byte> result = Vector128.Equals(packedValue0, packedSource) | Vector128.Equals(packedValue1, packedSource);
+                            Vector128<byte> result =
+                                Vector128.Equals(packedValue0, packedSource)
+                                | Vector128.Equals(packedValue1, packedSource);
                             result = NegateIfNeeded<TNegator>(result);
 
                             if (result != Vector128<byte>.Zero)
                             {
-                                return ComputeFirstIndex(ref searchSpace, ref currentSearchSpace, result);
+                                return ComputeFirstIndex(
+                                    ref searchSpace,
+                                    ref currentSearchSpace,
+                                    result
+                                );
                             }
 
-                            currentSearchSpace = ref Unsafe.Add(ref currentSearchSpace, 2 * Vector128<short>.Count);
-                        }
-                        while (Unsafe.IsAddressLessThan(ref currentSearchSpace, ref twoVectorsAwayFromEnd));
+                            currentSearchSpace = ref Unsafe.Add(
+                                ref currentSearchSpace,
+                                2 * Vector128<short>.Count
+                            );
+                        } while (
+                            Unsafe.IsAddressLessThan(
+                                ref currentSearchSpace,
+                                ref twoVectorsAwayFromEnd
+                            )
+                        );
                     }
 
                     // We have 1-16 characters remaining. Process the first and last vector in the search space.
                     // They may overlap, but we'll handle that in the index calculation if we do get a match.
                     {
-                        ref short oneVectorAwayFromEnd = ref Unsafe.Add(ref searchSpace, length - Vector128<short>.Count);
+                        ref short oneVectorAwayFromEnd = ref Unsafe.Add(
+                            ref searchSpace,
+                            length - Vector128<short>.Count
+                        );
 
-                        ref short firstVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref oneVectorAwayFromEnd)
+                        ref short firstVector = ref Unsafe.IsAddressGreaterThan(
+                            ref currentSearchSpace,
+                            ref oneVectorAwayFromEnd
+                        )
                             ? ref oneVectorAwayFromEnd
                             : ref currentSearchSpace;
 
                         Vector128<short> source0 = Vector128.LoadUnsafe(ref firstVector);
                         Vector128<short> source1 = Vector128.LoadUnsafe(ref oneVectorAwayFromEnd);
                         Vector128<byte> packedSource = PackSources(source0, source1);
-                        Vector128<byte> result = Vector128.Equals(packedValue0, packedSource) | Vector128.Equals(packedValue1, packedSource);
+                        Vector128<byte> result =
+                            Vector128.Equals(packedValue0, packedSource)
+                            | Vector128.Equals(packedValue1, packedSource);
                         result = NegateIfNeeded<TNegator>(result);
 
                         if (result != Vector128<byte>.Zero)
                         {
-                            return ComputeFirstIndexOverlapped(ref searchSpace, ref firstVector, ref oneVectorAwayFromEnd, result);
+                            return ComputeFirstIndexOverlapped(
+                                ref searchSpace,
+                                ref firstVector,
+                                ref oneVectorAwayFromEnd,
+                                result
+                            );
                         }
                     }
                 }
@@ -495,8 +736,13 @@ namespace System
             return -1;
         }
 
-        private static int IndexOfAny<TNegator>(ref short searchSpace, short value0, short value1, short value2, int length)
-            where TNegator : struct, SpanHelpers.INegator<short>
+        private static int IndexOfAny<TNegator>(
+            ref short searchSpace,
+            short value0,
+            short value1,
+            short value2,
+            int length
+        ) where TNegator : struct, SpanHelpers.INegator<short>
         {
             Debug.Assert(CanUsePackedIndexOf(value0));
             Debug.Assert(CanUsePackedIndexOf(value1));
@@ -512,13 +758,33 @@ namespace System
                     length -= 4;
 
                     lookUp = searchSpace;
-                    if (TNegator.NegateIfNeeded(lookUp == value0 || lookUp == value1 || lookUp == value2)) return 0;
+                    if (
+                        TNegator.NegateIfNeeded(
+                            lookUp == value0 || lookUp == value1 || lookUp == value2
+                        )
+                    )
+                        return 0;
                     lookUp = Unsafe.Add(ref searchSpace, 1);
-                    if (TNegator.NegateIfNeeded(lookUp == value0 || lookUp == value1 || lookUp == value2)) return 1;
+                    if (
+                        TNegator.NegateIfNeeded(
+                            lookUp == value0 || lookUp == value1 || lookUp == value2
+                        )
+                    )
+                        return 1;
                     lookUp = Unsafe.Add(ref searchSpace, 2);
-                    if (TNegator.NegateIfNeeded(lookUp == value0 || lookUp == value1 || lookUp == value2)) return 2;
+                    if (
+                        TNegator.NegateIfNeeded(
+                            lookUp == value0 || lookUp == value1 || lookUp == value2
+                        )
+                    )
+                        return 2;
                     lookUp = Unsafe.Add(ref searchSpace, 3);
-                    if (TNegator.NegateIfNeeded(lookUp == value0 || lookUp == value1 || lookUp == value2)) return 3;
+                    if (
+                        TNegator.NegateIfNeeded(
+                            lookUp == value0 || lookUp == value1 || lookUp == value2
+                        )
+                    )
+                        return 3;
 
                     offset = 4;
                 }
@@ -528,7 +794,12 @@ namespace System
                     length -= 1;
 
                     lookUp = Unsafe.Add(ref searchSpace, offset);
-                    if (TNegator.NegateIfNeeded(lookUp == value0 || lookUp == value1 || lookUp == value2)) return (int)offset;
+                    if (
+                        TNegator.NegateIfNeeded(
+                            lookUp == value0 || lookUp == value1 || lookUp == value2
+                        )
+                    )
+                        return (int)offset;
 
                     offset += 1;
                 }
@@ -549,44 +820,78 @@ namespace System
                         // If the input length is a multiple of 32, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
                         // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
-                        ref short twoVectorsAwayFromEnd = ref Unsafe.Add(ref searchSpace, length - (2 * Vector256<short>.Count));
+                        ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
+                            ref searchSpace,
+                            length - (2 * Vector256<short>.Count)
+                        );
 
                         do
                         {
                             Vector256<short> source0 = Vector256.LoadUnsafe(ref currentSearchSpace);
-                            Vector256<short> source1 = Vector256.LoadUnsafe(ref currentSearchSpace, (nuint)Vector256<short>.Count);
+                            Vector256<short> source1 = Vector256.LoadUnsafe(
+                                ref currentSearchSpace,
+                                (nuint)Vector256<short>.Count
+                            );
                             Vector256<byte> packedSource = PackSources(source0, source1);
-                            Vector256<byte> result = Vector256.Equals(packedValue0, packedSource) | Vector256.Equals(packedValue1, packedSource) | Vector256.Equals(packedValue2, packedSource);
+                            Vector256<byte> result =
+                                Vector256.Equals(packedValue0, packedSource)
+                                | Vector256.Equals(packedValue1, packedSource)
+                                | Vector256.Equals(packedValue2, packedSource);
                             result = NegateIfNeeded<TNegator>(result);
 
                             if (result != Vector256<byte>.Zero)
                             {
-                                return ComputeFirstIndex(ref searchSpace, ref currentSearchSpace, result);
+                                return ComputeFirstIndex(
+                                    ref searchSpace,
+                                    ref currentSearchSpace,
+                                    result
+                                );
                             }
 
-                            currentSearchSpace = ref Unsafe.Add(ref currentSearchSpace, 2 * Vector256<short>.Count);
-                        }
-                        while (Unsafe.IsAddressLessThan(ref currentSearchSpace, ref twoVectorsAwayFromEnd));
+                            currentSearchSpace = ref Unsafe.Add(
+                                ref currentSearchSpace,
+                                2 * Vector256<short>.Count
+                            );
+                        } while (
+                            Unsafe.IsAddressLessThan(
+                                ref currentSearchSpace,
+                                ref twoVectorsAwayFromEnd
+                            )
+                        );
                     }
 
                     // We have 1-32 characters remaining. Process the first and last vector in the search space.
                     // They may overlap, but we'll handle that in the index calculation if we do get a match.
                     {
-                        ref short oneVectorAwayFromEnd = ref Unsafe.Add(ref searchSpace, length - Vector256<short>.Count);
+                        ref short oneVectorAwayFromEnd = ref Unsafe.Add(
+                            ref searchSpace,
+                            length - Vector256<short>.Count
+                        );
 
-                        ref short firstVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref oneVectorAwayFromEnd)
+                        ref short firstVector = ref Unsafe.IsAddressGreaterThan(
+                            ref currentSearchSpace,
+                            ref oneVectorAwayFromEnd
+                        )
                             ? ref oneVectorAwayFromEnd
                             : ref currentSearchSpace;
 
                         Vector256<short> source0 = Vector256.LoadUnsafe(ref firstVector);
                         Vector256<short> source1 = Vector256.LoadUnsafe(ref oneVectorAwayFromEnd);
                         Vector256<byte> packedSource = PackSources(source0, source1);
-                        Vector256<byte> result = Vector256.Equals(packedValue0, packedSource) | Vector256.Equals(packedValue1, packedSource) | Vector256.Equals(packedValue2, packedSource);
+                        Vector256<byte> result =
+                            Vector256.Equals(packedValue0, packedSource)
+                            | Vector256.Equals(packedValue1, packedSource)
+                            | Vector256.Equals(packedValue2, packedSource);
                         result = NegateIfNeeded<TNegator>(result);
 
                         if (result != Vector256<byte>.Zero)
                         {
-                            return ComputeFirstIndexOverlapped(ref searchSpace, ref firstVector, ref oneVectorAwayFromEnd, result);
+                            return ComputeFirstIndexOverlapped(
+                                ref searchSpace,
+                                ref firstVector,
+                                ref oneVectorAwayFromEnd,
+                                result
+                            );
                         }
                     }
                 }
@@ -602,44 +907,78 @@ namespace System
                         // If the input length is a multiple of 16, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
                         // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
-                        ref short twoVectorsAwayFromEnd = ref Unsafe.Add(ref searchSpace, length - (2 * Vector128<short>.Count));
+                        ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
+                            ref searchSpace,
+                            length - (2 * Vector128<short>.Count)
+                        );
 
                         do
                         {
                             Vector128<short> source0 = Vector128.LoadUnsafe(ref currentSearchSpace);
-                            Vector128<short> source1 = Vector128.LoadUnsafe(ref currentSearchSpace, (nuint)Vector128<short>.Count);
+                            Vector128<short> source1 = Vector128.LoadUnsafe(
+                                ref currentSearchSpace,
+                                (nuint)Vector128<short>.Count
+                            );
                             Vector128<byte> packedSource = PackSources(source0, source1);
-                            Vector128<byte> result = Vector128.Equals(packedValue0, packedSource) | Vector128.Equals(packedValue1, packedSource) | Vector128.Equals(packedValue2, packedSource);
+                            Vector128<byte> result =
+                                Vector128.Equals(packedValue0, packedSource)
+                                | Vector128.Equals(packedValue1, packedSource)
+                                | Vector128.Equals(packedValue2, packedSource);
                             result = NegateIfNeeded<TNegator>(result);
 
                             if (result != Vector128<byte>.Zero)
                             {
-                                return ComputeFirstIndex(ref searchSpace, ref currentSearchSpace, result);
+                                return ComputeFirstIndex(
+                                    ref searchSpace,
+                                    ref currentSearchSpace,
+                                    result
+                                );
                             }
 
-                            currentSearchSpace = ref Unsafe.Add(ref currentSearchSpace, 2 * Vector128<short>.Count);
-                        }
-                        while (Unsafe.IsAddressLessThan(ref currentSearchSpace, ref twoVectorsAwayFromEnd));
+                            currentSearchSpace = ref Unsafe.Add(
+                                ref currentSearchSpace,
+                                2 * Vector128<short>.Count
+                            );
+                        } while (
+                            Unsafe.IsAddressLessThan(
+                                ref currentSearchSpace,
+                                ref twoVectorsAwayFromEnd
+                            )
+                        );
                     }
 
                     // We have 1-16 characters remaining. Process the first and last vector in the search space.
                     // They may overlap, but we'll handle that in the index calculation if we do get a match.
                     {
-                        ref short oneVectorAwayFromEnd = ref Unsafe.Add(ref searchSpace, length - Vector128<short>.Count);
+                        ref short oneVectorAwayFromEnd = ref Unsafe.Add(
+                            ref searchSpace,
+                            length - Vector128<short>.Count
+                        );
 
-                        ref short firstVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref oneVectorAwayFromEnd)
+                        ref short firstVector = ref Unsafe.IsAddressGreaterThan(
+                            ref currentSearchSpace,
+                            ref oneVectorAwayFromEnd
+                        )
                             ? ref oneVectorAwayFromEnd
                             : ref currentSearchSpace;
 
                         Vector128<short> source0 = Vector128.LoadUnsafe(ref firstVector);
                         Vector128<short> source1 = Vector128.LoadUnsafe(ref oneVectorAwayFromEnd);
                         Vector128<byte> packedSource = PackSources(source0, source1);
-                        Vector128<byte> result = Vector128.Equals(packedValue0, packedSource) | Vector128.Equals(packedValue1, packedSource) | Vector128.Equals(packedValue2, packedSource);
+                        Vector128<byte> result =
+                            Vector128.Equals(packedValue0, packedSource)
+                            | Vector128.Equals(packedValue1, packedSource)
+                            | Vector128.Equals(packedValue2, packedSource);
                         result = NegateIfNeeded<TNegator>(result);
 
                         if (result != Vector128<byte>.Zero)
                         {
-                            return ComputeFirstIndexOverlapped(ref searchSpace, ref firstVector, ref oneVectorAwayFromEnd, result);
+                            return ComputeFirstIndexOverlapped(
+                                ref searchSpace,
+                                ref firstVector,
+                                ref oneVectorAwayFromEnd,
+                                result
+                            );
                         }
                     }
                 }
@@ -648,8 +987,12 @@ namespace System
             return -1;
         }
 
-        private static int IndexOfAnyInRange<TNegator>(ref short searchSpace, short lowInclusive, short rangeInclusive, int length)
-            where TNegator : struct, SpanHelpers.INegator<short>
+        private static int IndexOfAnyInRange<TNegator>(
+            ref short searchSpace,
+            short lowInclusive,
+            short rangeInclusive,
+            int length
+        ) where TNegator : struct, SpanHelpers.INegator<short>
         {
             Debug.Assert(CanUsePackedIndexOf(lowInclusive));
             Debug.Assert(CanUsePackedIndexOf((short)(lowInclusive + rangeInclusive)));
@@ -683,44 +1026,78 @@ namespace System
                         // If the input length is a multiple of 32, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
                         // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
-                        ref short twoVectorsAwayFromEnd = ref Unsafe.Add(ref searchSpace, length - (2 * Vector256<short>.Count));
+                        ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
+                            ref searchSpace,
+                            length - (2 * Vector256<short>.Count)
+                        );
 
                         do
                         {
                             Vector256<short> source0 = Vector256.LoadUnsafe(ref currentSearchSpace);
-                            Vector256<short> source1 = Vector256.LoadUnsafe(ref currentSearchSpace, (nuint)Vector256<short>.Count);
+                            Vector256<short> source1 = Vector256.LoadUnsafe(
+                                ref currentSearchSpace,
+                                (nuint)Vector256<short>.Count
+                            );
                             Vector256<byte> packedSource = PackSources(source0, source1);
-                            Vector256<byte> result = Vector256.LessThanOrEqual(packedSource - lowVector, rangeVector);
+                            Vector256<byte> result = Vector256.LessThanOrEqual(
+                                packedSource - lowVector,
+                                rangeVector
+                            );
                             result = NegateIfNeeded<TNegator>(result);
 
                             if (result != Vector256<byte>.Zero)
                             {
-                                return ComputeFirstIndex(ref searchSpace, ref currentSearchSpace, result);
+                                return ComputeFirstIndex(
+                                    ref searchSpace,
+                                    ref currentSearchSpace,
+                                    result
+                                );
                             }
 
-                            currentSearchSpace = ref Unsafe.Add(ref currentSearchSpace, 2 * Vector256<short>.Count);
-                        }
-                        while (Unsafe.IsAddressLessThan(ref currentSearchSpace, ref twoVectorsAwayFromEnd));
+                            currentSearchSpace = ref Unsafe.Add(
+                                ref currentSearchSpace,
+                                2 * Vector256<short>.Count
+                            );
+                        } while (
+                            Unsafe.IsAddressLessThan(
+                                ref currentSearchSpace,
+                                ref twoVectorsAwayFromEnd
+                            )
+                        );
                     }
 
                     // We have 1-32 characters remaining. Process the first and last vector in the search space.
                     // They may overlap, but we'll handle that in the index calculation if we do get a match.
                     {
-                        ref short oneVectorAwayFromEnd = ref Unsafe.Add(ref searchSpace, length - Vector256<short>.Count);
+                        ref short oneVectorAwayFromEnd = ref Unsafe.Add(
+                            ref searchSpace,
+                            length - Vector256<short>.Count
+                        );
 
-                        ref short firstVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref oneVectorAwayFromEnd)
+                        ref short firstVector = ref Unsafe.IsAddressGreaterThan(
+                            ref currentSearchSpace,
+                            ref oneVectorAwayFromEnd
+                        )
                             ? ref oneVectorAwayFromEnd
                             : ref currentSearchSpace;
 
                         Vector256<short> source0 = Vector256.LoadUnsafe(ref firstVector);
                         Vector256<short> source1 = Vector256.LoadUnsafe(ref oneVectorAwayFromEnd);
                         Vector256<byte> packedSource = PackSources(source0, source1);
-                        Vector256<byte> result = Vector256.LessThanOrEqual(packedSource - lowVector, rangeVector);
+                        Vector256<byte> result = Vector256.LessThanOrEqual(
+                            packedSource - lowVector,
+                            rangeVector
+                        );
                         result = NegateIfNeeded<TNegator>(result);
 
                         if (result != Vector256<byte>.Zero)
                         {
-                            return ComputeFirstIndexOverlapped(ref searchSpace, ref firstVector, ref oneVectorAwayFromEnd, result);
+                            return ComputeFirstIndexOverlapped(
+                                ref searchSpace,
+                                ref firstVector,
+                                ref oneVectorAwayFromEnd,
+                                result
+                            );
                         }
                     }
                 }
@@ -735,44 +1112,78 @@ namespace System
                         // If the input length is a multiple of 16, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
                         // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
-                        ref short twoVectorsAwayFromEnd = ref Unsafe.Add(ref searchSpace, length - (2 * Vector128<short>.Count));
+                        ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
+                            ref searchSpace,
+                            length - (2 * Vector128<short>.Count)
+                        );
 
                         do
                         {
                             Vector128<short> source0 = Vector128.LoadUnsafe(ref currentSearchSpace);
-                            Vector128<short> source1 = Vector128.LoadUnsafe(ref currentSearchSpace, (nuint)Vector128<short>.Count);
+                            Vector128<short> source1 = Vector128.LoadUnsafe(
+                                ref currentSearchSpace,
+                                (nuint)Vector128<short>.Count
+                            );
                             Vector128<byte> packedSource = PackSources(source0, source1);
-                            Vector128<byte> result = Vector128.LessThanOrEqual(packedSource - lowVector, rangeVector);
+                            Vector128<byte> result = Vector128.LessThanOrEqual(
+                                packedSource - lowVector,
+                                rangeVector
+                            );
                             result = NegateIfNeeded<TNegator>(result);
 
                             if (result != Vector128<byte>.Zero)
                             {
-                                return ComputeFirstIndex(ref searchSpace, ref currentSearchSpace, result);
+                                return ComputeFirstIndex(
+                                    ref searchSpace,
+                                    ref currentSearchSpace,
+                                    result
+                                );
                             }
 
-                            currentSearchSpace = ref Unsafe.Add(ref currentSearchSpace, 2 * Vector128<short>.Count);
-                        }
-                        while (Unsafe.IsAddressLessThan(ref currentSearchSpace, ref twoVectorsAwayFromEnd));
+                            currentSearchSpace = ref Unsafe.Add(
+                                ref currentSearchSpace,
+                                2 * Vector128<short>.Count
+                            );
+                        } while (
+                            Unsafe.IsAddressLessThan(
+                                ref currentSearchSpace,
+                                ref twoVectorsAwayFromEnd
+                            )
+                        );
                     }
 
                     // We have 1-16 characters remaining. Process the first and last vector in the search space.
                     // They may overlap, but we'll handle that in the index calculation if we do get a match.
                     {
-                        ref short oneVectorAwayFromEnd = ref Unsafe.Add(ref searchSpace, length - Vector128<short>.Count);
+                        ref short oneVectorAwayFromEnd = ref Unsafe.Add(
+                            ref searchSpace,
+                            length - Vector128<short>.Count
+                        );
 
-                        ref short firstVector = ref Unsafe.IsAddressGreaterThan(ref currentSearchSpace, ref oneVectorAwayFromEnd)
+                        ref short firstVector = ref Unsafe.IsAddressGreaterThan(
+                            ref currentSearchSpace,
+                            ref oneVectorAwayFromEnd
+                        )
                             ? ref oneVectorAwayFromEnd
                             : ref currentSearchSpace;
 
                         Vector128<short> source0 = Vector128.LoadUnsafe(ref firstVector);
                         Vector128<short> source1 = Vector128.LoadUnsafe(ref oneVectorAwayFromEnd);
                         Vector128<byte> packedSource = PackSources(source0, source1);
-                        Vector128<byte> result = Vector128.LessThanOrEqual(packedSource - lowVector, rangeVector);
+                        Vector128<byte> result = Vector128.LessThanOrEqual(
+                            packedSource - lowVector,
+                            rangeVector
+                        );
                         result = NegateIfNeeded<TNegator>(result);
 
                         if (result != Vector128<byte>.Zero)
                         {
-                            return ComputeFirstIndexOverlapped(ref searchSpace, ref firstVector, ref oneVectorAwayFromEnd, result);
+                            return ComputeFirstIndexOverlapped(
+                                ref searchSpace,
+                                ref firstVector,
+                                ref oneVectorAwayFromEnd,
+                                result
+                            );
                         }
                     }
                 }
@@ -782,7 +1193,10 @@ namespace System
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static Vector256<byte> PackSources(Vector256<short> source0, Vector256<short> source1)
+        private static Vector256<byte> PackSources(
+            Vector256<short> source0,
+            Vector256<short> source1
+        )
         {
             Debug.Assert(Avx2.IsSupported);
             // Pack two vectors of characters into bytes. While the type is Vector256<short>, these are really UInt16 characters.
@@ -793,7 +1207,10 @@ namespace System
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static Vector128<byte> PackSources(Vector128<short> source0, Vector128<short> source1)
+        private static Vector128<byte> PackSources(
+            Vector128<short> source0,
+            Vector128<short> source1
+        )
         {
             Debug.Assert(Sse2.IsSupported);
             // Pack two vectors of characters into bytes. While the type is Vector128<short>, these are really UInt16 characters.
@@ -814,7 +1231,11 @@ namespace System
             typeof(TNegator) == typeof(SpanHelpers.DontNegate<short>) ? result : ~result;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static int ComputeFirstIndex(ref short searchSpace, ref short current, Vector128<byte> equals)
+        private static int ComputeFirstIndex(
+            ref short searchSpace,
+            ref short current,
+            Vector128<byte> equals
+        )
         {
             uint notEqualsElements = equals.ExtractMostSignificantBits();
             int index = BitOperations.TrailingZeroCount(notEqualsElements);
@@ -822,7 +1243,11 @@ namespace System
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static int ComputeFirstIndex(ref short searchSpace, ref short current, Vector256<byte> equals)
+        private static int ComputeFirstIndex(
+            ref short searchSpace,
+            ref short current,
+            Vector256<byte> equals
+        )
         {
             uint notEqualsElements = FixUpPackedVector256Mask(equals.ExtractMostSignificantBits());
             int index = BitOperations.TrailingZeroCount(notEqualsElements);
@@ -830,7 +1255,12 @@ namespace System
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static int ComputeFirstIndexOverlapped(ref short searchSpace, ref short current0, ref short current1, Vector128<byte> equals)
+        private static int ComputeFirstIndexOverlapped(
+            ref short searchSpace,
+            ref short current0,
+            ref short current1,
+            Vector128<byte> equals
+        )
         {
             uint notEqualsElements = equals.ExtractMostSignificantBits();
             int offsetInVector = BitOperations.TrailingZeroCount(notEqualsElements);
@@ -840,11 +1270,17 @@ namespace System
                 current0 = ref current1;
                 offsetInVector -= Vector128<short>.Count;
             }
-            return offsetInVector + (int)(Unsafe.ByteOffset(ref searchSpace, ref current0) / sizeof(short));
+            return offsetInVector
+                + (int)(Unsafe.ByteOffset(ref searchSpace, ref current0) / sizeof(short));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static int ComputeFirstIndexOverlapped(ref short searchSpace, ref short current0, ref short current1, Vector256<byte> equals)
+        private static int ComputeFirstIndexOverlapped(
+            ref short searchSpace,
+            ref short current0,
+            ref short current1,
+            Vector256<byte> equals
+        )
         {
             uint notEqualsElements = FixUpPackedVector256Mask(equals.ExtractMostSignificantBits());
             int offsetInVector = BitOperations.TrailingZeroCount(notEqualsElements);
@@ -854,7 +1290,8 @@ namespace System
                 current0 = ref current1;
                 offsetInVector -= Vector256<short>.Count;
             }
-            return offsetInVector + (int)(Unsafe.ByteOffset(ref searchSpace, ref current0) / sizeof(short));
+            return offsetInVector
+                + (int)(Unsafe.ByteOffset(ref searchSpace, ref current0) / sizeof(short));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -867,7 +1304,8 @@ namespace System
             // 1, 1, 1, 1, 1, 1, 1, 1, X, X, X, X, X, X, X, X, Y, Y, Y, Y, Y, Y, Y, Y, 2, 2, 2, 2, 2, 2, 2, 2
             const uint CorrectPositionsMask = 0xFF0000FF;
 
-            return (mask & CorrectPositionsMask) | BinaryPrimitives.ReverseEndianness(mask & ~CorrectPositionsMask);
+            return (mask & CorrectPositionsMask)
+                | BinaryPrimitives.ReverseEndianness(mask & ~CorrectPositionsMask);
         }
     }
 }

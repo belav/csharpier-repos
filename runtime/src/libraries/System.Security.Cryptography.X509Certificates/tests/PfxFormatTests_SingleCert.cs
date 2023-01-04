@@ -12,7 +12,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string correctPassword,
             X509Certificate2 expectedCert,
             X509KeyStorageFlags nonExportFlags,
-            Action<X509Certificate2> otherWork)
+            Action<X509Certificate2> otherWork
+        )
         {
             X509KeyStorageFlags exportFlags = nonExportFlags | X509KeyStorageFlags.Exportable;
 
@@ -26,11 +27,18 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             X509Certificate2 expectedSingleCert,
             X509Certificate2[] expectedOrder,
             X509KeyStorageFlags nonExportFlags,
-            Action<X509Certificate2> perCertOtherWork)
+            Action<X509Certificate2> perCertOtherWork
+        )
         {
             X509KeyStorageFlags exportFlags = nonExportFlags | X509KeyStorageFlags.Exportable;
 
-            ReadPfx(pfxBytes, correctPassword, expectedSingleCert, perCertOtherWork, nonExportFlags);
+            ReadPfx(
+                pfxBytes,
+                correctPassword,
+                expectedSingleCert,
+                perCertOtherWork,
+                nonExportFlags
+            );
             ReadPfx(pfxBytes, correctPassword, expectedSingleCert, perCertOtherWork, exportFlags);
         }
 
@@ -39,7 +47,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string correctPassword,
             X509Certificate2 expectedCert,
             Action<X509Certificate2> otherWork,
-            X509KeyStorageFlags flags)
+            X509KeyStorageFlags flags
+        )
         {
             using (X509Certificate2 cert = new X509Certificate2(pfxBytes, correctPassword, flags))
             {
@@ -51,7 +60,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         protected override void ReadEmptyPfx(byte[] pfxBytes, string correctPassword)
         {
             CryptographicException ex = Assert.Throws<CryptographicException>(
-                () => new X509Certificate2(pfxBytes, correctPassword, s_importFlags));
+                () => new X509Certificate2(pfxBytes, correctPassword, s_importFlags)
+            );
 
             AssertMessageContains("no certificates", ex);
         }
@@ -59,7 +69,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         protected override void ReadWrongPassword(byte[] pfxBytes, string wrongPassword)
         {
             CryptographicException ex = Assert.ThrowsAny<CryptographicException>(
-                () => new X509Certificate2(pfxBytes, wrongPassword, s_importFlags));
+                () => new X509Certificate2(pfxBytes, wrongPassword, s_importFlags)
+            );
 
             AssertMessageContains("password", ex);
             Assert.Equal(ErrorInvalidPasswordHResult, ex.HResult);
@@ -70,10 +81,12 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string bestPassword,
             X509KeyStorageFlags importFlags,
             int win32Error,
-            int altWin32Error)
+            int altWin32Error
+        )
         {
             CryptographicException ex = Assert.ThrowsAny<CryptographicException>(
-                () => new X509Certificate2(pfxBytes, bestPassword, importFlags));
+                () => new X509Certificate2(pfxBytes, bestPassword, importFlags)
+            );
 
             if (OperatingSystem.IsWindows())
             {
@@ -91,7 +104,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         private static void CheckBadKeyset(X509Certificate2 cert)
         {
             CryptographicException ex = Assert.ThrowsAny<CryptographicException>(
-                    () => cert.GetRSAPrivateKey());
+                () => cert.GetRSAPrivateKey()
+            );
 
             // NTE_BAD_KEYSET
             Assert.Equal(-2146893802, ex.HResult);

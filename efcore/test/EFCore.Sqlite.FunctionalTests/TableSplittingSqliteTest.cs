@@ -7,37 +7,37 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class TableSplittingSqliteTest : TableSplittingTestBase
 {
-    public TableSplittingSqliteTest(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
+    public TableSplittingSqliteTest(ITestOutputHelper testOutputHelper) : base(testOutputHelper) { }
 
     public override async Task ExecuteUpdate_works_for_table_sharing(bool async)
     {
         await base.ExecuteUpdate_works_for_table_sharing(async);
 
         AssertSql(
-"""
+            """
 UPDATE "Vehicles" AS "v"
 SET "SeatingCapacity" = 1
 """,
             //
-"""
+            """
 SELECT NOT EXISTS (
     SELECT 1
     FROM "Vehicles" AS "v"
     WHERE "v"."SeatingCapacity" <> 1)
-""");
+"""
+        );
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<Engine>().ToTable("Vehicles")
-            .Property(e => e.Computed).HasComputedColumnSql("1");
+        modelBuilder
+            .Entity<Engine>()
+            .ToTable("Vehicles")
+            .Property(e => e.Computed)
+            .HasComputedColumnSql("1");
     }
 
-    protected override ITestStoreFactory TestStoreFactory
-        => SqliteTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 }

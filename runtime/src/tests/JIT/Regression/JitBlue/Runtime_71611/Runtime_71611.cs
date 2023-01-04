@@ -12,7 +12,7 @@ public class Runtime_71611
         public int F(int x, int y);
     }
 
-    class Add : I 
+    class Add : I
     {
         int I.F(int x, int y) => x + y;
     }
@@ -21,7 +21,7 @@ public class Runtime_71611
     {
         int I.F(int x, int y) => x * y;
     }
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int Cloned(I m, int[] xs, int[] ys, int from, int to)
     {
@@ -34,7 +34,7 @@ public class Runtime_71611
         }
         return r;
     }
-    
+
     public static int Main()
     {
         int[] xs = new int[] { 1, 2, 3, 4 };
@@ -54,7 +54,7 @@ public class Runtime_71611
         {
             r += Cloned(m, xs, null, 0, 3);
         }
-        
+
         return r / 6;
     }
 }

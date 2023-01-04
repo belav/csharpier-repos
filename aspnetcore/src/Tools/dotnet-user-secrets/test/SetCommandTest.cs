@@ -22,7 +22,8 @@ public class SetCommandTest
     [Fact]
     public void SetsFromPipedInput()
     {
-        var input = @"
+        var input =
+            @"
 {
    ""Key1"": ""str value"",
 ""Key2"": 1234,
@@ -47,7 +48,8 @@ public class SetCommandTest
     [Fact]
     public void ParsesNestedObjects()
     {
-        var input = @"
+        var input =
+            @"
                 {
                    ""Key1"": {
                        ""nested"" : ""value""
@@ -86,10 +88,8 @@ public class SetCommandTest
 
     private class TestSecretsStore : SecretsStore
     {
-        public TestSecretsStore(ITestOutputHelper output)
-            : base("xyz", new TestReporter(output))
-        {
-        }
+        public TestSecretsStore(ITestOutputHelper output) : base("xyz", new TestReporter(output))
+        { }
 
         protected override IDictionary<string, string> Load(string userSecretsId)
         {

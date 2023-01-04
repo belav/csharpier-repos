@@ -20,19 +20,24 @@ internal class CSharpAddImportPlacementOptionsStorage
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public Service()
-        {
-        }
+        public Service() { }
 
-        public AddImportPlacementOptions GetOptions(IGlobalOptionService globalOptions)
-            => GetCSharpAddImportPlacementOptions(globalOptions);
+        public AddImportPlacementOptions GetOptions(IGlobalOptionService globalOptions) =>
+            GetCSharpAddImportPlacementOptions(globalOptions);
     }
 
-    internal static AddImportPlacementOptions GetCSharpAddImportPlacementOptions(IGlobalOptionService globalOptions)
-        => new()
+    internal static AddImportPlacementOptions GetCSharpAddImportPlacementOptions(
+        IGlobalOptionService globalOptions
+    ) =>
+        new()
         {
-            PlaceSystemNamespaceFirst = globalOptions.GetOption(GenerationOptions.PlaceSystemNamespaceFirst, LanguageNames.CSharp),
-            UsingDirectivePlacement = globalOptions.GetOption(CSharpCodeStyleOptions.PreferredUsingDirectivePlacement),
+            PlaceSystemNamespaceFirst = globalOptions.GetOption(
+                GenerationOptions.PlaceSystemNamespaceFirst,
+                LanguageNames.CSharp
+            ),
+            UsingDirectivePlacement = globalOptions.GetOption(
+                CSharpCodeStyleOptions.PreferredUsingDirectivePlacement
+            ),
             AllowInHiddenRegions = AddImportPlacementOptions.Default.AllowInHiddenRegions // no global option available);
         };
 }

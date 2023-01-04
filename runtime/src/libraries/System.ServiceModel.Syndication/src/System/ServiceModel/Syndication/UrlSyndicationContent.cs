@@ -37,7 +37,11 @@ namespace System.ServiceModel.Syndication
 
         protected override void WriteContentsTo(XmlWriter writer)
         {
-            writer.WriteAttributeString(Atom10Constants.SourceTag, string.Empty, FeedUtils.GetUriString(Url));
+            writer.WriteAttributeString(
+                Atom10Constants.SourceTag,
+                string.Empty,
+                FeedUtils.GetUriString(Url)
+            );
         }
     }
 }

@@ -8,6 +8,7 @@ namespace QQ
     public class AA
     {
         private static void Test(TypedReference arg, String result) { }
+
         public static int Main()
         {
             DateTime[] t = new DateTime[200];

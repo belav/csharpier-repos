@@ -72,15 +72,24 @@ namespace System.Drawing.Imaging.Tests
             {
                 yield return new object[] { null, typeof(NullReferenceException) };
                 yield return new object[] { new float[][] { }, typeof(IndexOutOfRangeException) };
-                yield return new object[] { new float[][] { new float[] { 0.0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f } }, typeof(IndexOutOfRangeException) };
-                yield return new object[] { new float[][] {
-                    new float[] { 0.0f },
-                    new float[] { 1.0f },
-                    new float[] { 2.0f },
-                    new float[] { 3.0f },
-                    new float[] { 4.0f },
-                    new float[] { 5.0f } }
-                , typeof(IndexOutOfRangeException) };
+                yield return new object[]
+                {
+                    new float[][] { new float[] { 0.0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f } },
+                    typeof(IndexOutOfRangeException)
+                };
+                yield return new object[]
+                {
+                    new float[][]
+                    {
+                        new float[] { 0.0f },
+                        new float[] { 1.0f },
+                        new float[] { 2.0f },
+                        new float[] { 3.0f },
+                        new float[] { 4.0f },
+                        new float[] { 5.0f }
+                    },
+                    typeof(IndexOutOfRangeException)
+                };
             }
         }
 
@@ -88,19 +97,23 @@ namespace System.Drawing.Imaging.Tests
         {
             get
             {
-                return new float[][] {
-                new float[] { 0.0f, 0.1f, 0.2f, 0.3f, 0.4f},
-                new float[] { 1.0f, 1.1f, 1.2f, 1.3f, 1.4f},
-                new float[] { 2.0f, 2.1f, 2.2f, 2.3f, 2.4f},
-                new float[] { 3.0f, 3.1f, 3.2f, 3.3f, 3.4f},
-                new float[] { 4.0f, 4.1f, 4.2f, 4.3f, 4.4f},
-            };
+                return new float[][]
+                {
+                    new float[] { 0.0f, 0.1f, 0.2f, 0.3f, 0.4f },
+                    new float[] { 1.0f, 1.1f, 1.2f, 1.3f, 1.4f },
+                    new float[] { 2.0f, 2.1f, 2.2f, 2.3f, 2.4f },
+                    new float[] { 3.0f, 3.1f, 3.2f, 3.3f, 3.4f },
+                    new float[] { 4.0f, 4.1f, 4.2f, 4.3f, 4.4f },
+                };
             }
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(BadCtorParams))]
-        public void Ctor_BadValues_ThrowsExpectedException(float[][] newColorMatrix, Type expectedException)
+        public void Ctor_BadValues_ThrowsExpectedException(
+            float[][] newColorMatrix,
+            Type expectedException
+        )
         {
             Assert.Throws(expectedException, () => new ColorMatrix(newColorMatrix));
         }
@@ -108,14 +121,17 @@ namespace System.Drawing.Imaging.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_TooBigArraySize_MapOnly4and4Elements()
         {
-            ColorMatrix cm = new ColorMatrix(new float[][] {
-                new float[] { 0.0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f },
-                new float[] { 1.0f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f },
-                new float[] { 2.0f, 2.1f, 2.2f, 2.3f, 2.4f, 2.5f },
-                new float[] { 3.0f, 3.1f, 3.2f, 3.3f, 3.4f, 3.5f },
-                new float[] { 4.0f, 4.1f, 4.2f, 4.3f, 4.4f, 4.5f },
-                new float[] { 5.0f, 5.1f, 5.2f, 5.3f, 5.4f, 5.5f }
-            });
+            ColorMatrix cm = new ColorMatrix(
+                new float[][]
+                {
+                    new float[] { 0.0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f },
+                    new float[] { 1.0f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f },
+                    new float[] { 2.0f, 2.1f, 2.2f, 2.3f, 2.4f, 2.5f },
+                    new float[] { 3.0f, 3.1f, 3.2f, 3.3f, 3.4f, 3.5f },
+                    new float[] { 4.0f, 4.1f, 4.2f, 4.3f, 4.4f, 4.5f },
+                    new float[] { 5.0f, 5.1f, 5.2f, 5.3f, 5.4f, 5.5f }
+                }
+            );
 
             Assert.Equal(0.0f, cm.Matrix00);
             Assert.Equal(0.1f, cm.Matrix01);
@@ -147,14 +163,17 @@ namespace System.Drawing.Imaging.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void AccessToNotExistingElement_ThrowsIndexOutOfRangeException()
         {
-            ColorMatrix cm = new ColorMatrix(new float[][] {
-                new float[] { 0.0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f },
-                new float[] { 1.0f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f },
-                new float[] { 2.0f, 2.1f, 2.2f, 2.3f, 2.4f, 2.5f },
-                new float[] { 3.0f, 3.1f, 3.2f, 3.3f, 3.4f, 3.5f },
-                new float[] { 4.0f, 4.1f, 4.2f, 4.3f, 4.4f, 4.5f },
-                new float[] { 5.0f, 5.1f, 5.2f, 5.3f, 5.4f, 5.5f }
-            });
+            ColorMatrix cm = new ColorMatrix(
+                new float[][]
+                {
+                    new float[] { 0.0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f },
+                    new float[] { 1.0f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f },
+                    new float[] { 2.0f, 2.1f, 2.2f, 2.3f, 2.4f, 2.5f },
+                    new float[] { 3.0f, 3.1f, 3.2f, 3.3f, 3.4f, 3.5f },
+                    new float[] { 4.0f, 4.1f, 4.2f, 4.3f, 4.4f, 4.5f },
+                    new float[] { 5.0f, 5.1f, 5.2f, 5.3f, 5.4f, 5.5f }
+                }
+            );
             Assert.Throws<IndexOutOfRangeException>(() => _ = cm[5, 5]);
         }
 

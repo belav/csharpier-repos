@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
         TStatementSyntax,
         TObjectCreationExpressionSyntax,
         TVariableDeclaratorSyntax,
-        TMatch>
+        TMatch
+    >
         where TExpressionSyntax : SyntaxNode
         where TStatementSyntax : SyntaxNode
         where TObjectCreationExpressionSyntax : TExpressionSyntax
@@ -33,15 +34,14 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
         private SyntaxNodeOrToken _valuePattern;
         private ISymbol _initializedSymbol;
 
-        protected AbstractObjectCreationExpressionAnalyzer()
-        {
-        }
+        protected AbstractObjectCreationExpressionAnalyzer() { }
 
         public void Initialize(
             SemanticModel semanticModel,
             ISyntaxFacts syntaxFacts,
             TObjectCreationExpressionSyntax objectCreationExpression,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             _semanticModel = semanticModel;
             _syntaxFacts = syntaxFacts;
@@ -68,12 +68,12 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
             if (!ShouldAnalyze())
                 return null;
 
-            _containingStatement = _objectCreationExpression.FirstAncestorOrSelf<TStatementSyntax>();
+            _containingStatement =
+                _objectCreationExpression.FirstAncestorOrSelf<TStatementSyntax>();
             if (_containingStatement == null)
                 return null;
 
-            if (!TryInitializeVariableDeclarationCase() &&
-                !TryInitializeAssignmentCase())
+            if (!TryInitializeVariableDeclarationCase() && !TryInitializeAssignmentCase())
             {
                 return null;
             }
@@ -90,21 +90,31 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
                 return false;
             }
 
-            if (_objectCreationExpression.Parent.Parent is not TVariableDeclaratorSyntax containingDeclarator)
+            if (
+                _objectCreationExpression.Parent.Parent
+                is not TVariableDeclaratorSyntax containingDeclarator
+            )
             {
                 return false;
             }
 
-            _initializedSymbol = _semanticModel.GetDeclaredSymbol(containingDeclarator, _cancellationToken);
-            if (_initializedSymbol is ILocalSymbol local &&
-                local.Type is IDynamicTypeSymbol)
+            _initializedSymbol = _semanticModel.GetDeclaredSymbol(
+                containingDeclarator,
+                _cancellationToken
+            );
+            if (_initializedSymbol is ILocalSymbol local && local.Type is IDynamicTypeSymbol)
             {
                 // Not supported if we're creating a dynamic local.  The object we're instantiating
                 // may not have the members that we're trying to access on the dynamic object.
                 return false;
             }
 
-            if (!_syntaxFacts.IsDeclaratorOfLocalDeclarationStatement(containingDeclarator, _containingStatement))
+            if (
+                !_syntaxFacts.IsDeclaratorOfLocalDeclarationStatement(
+                    containingDeclarator,
+                    _containingStatement
+                )
+            )
             {
                 return false;
             }
@@ -120,8 +130,11 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
                 return false;
             }
 
-            _syntaxFacts.GetPartsOfAssignmentStatement(_containingStatement,
-                out var left, out var right);
+            _syntaxFacts.GetPartsOfAssignmentStatement(
+                _containingStatement,
+                out var left,
+                out var right
+            );
             if (right != _objectCreationExpression)
             {
                 return false;
@@ -136,7 +149,9 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
             }
 
             _valuePattern = left;
-            _initializedSymbol = _semanticModel.GetSymbolInfo(left, _cancellationToken).GetAnySymbol();
+            _initializedSymbol = _semanticModel
+                .GetSymbolInfo(left, _cancellationToken)
+                .GetAnySymbol();
             return true;
         }
 
@@ -144,24 +159,30 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
         {
             if (_valuePattern.IsToken)
             {
-                return _syntaxFacts.IsIdentifierName(expression) &&
-                    _syntaxFacts.AreEquivalent(
+                return _syntaxFacts.IsIdentifierName(expression)
+                    && _syntaxFacts.AreEquivalent(
                         _valuePattern.AsToken(),
-                        _syntaxFacts.GetIdentifierOfSimpleName(expression));
+                        _syntaxFacts.GetIdentifierOfSimpleName(expression)
+                    );
             }
             else
             {
-                return _syntaxFacts.AreEquivalent(
-                    _valuePattern.AsNode(), expression);
+                return _syntaxFacts.AreEquivalent(_valuePattern.AsNode(), expression);
             }
         }
 
-        protected bool ExpressionContainsValuePatternOrReferencesInitializedSymbol(SyntaxNode expression)
+        protected bool ExpressionContainsValuePatternOrReferencesInitializedSymbol(
+            SyntaxNode expression
+        )
         {
-            foreach (var subExpression in expression.DescendantNodesAndSelf().OfType<TExpressionSyntax>())
+            foreach (
+                var subExpression in expression.DescendantNodesAndSelf().OfType<TExpressionSyntax>()
+            )
             {
-                if (!_syntaxFacts.IsNameOfSimpleMemberAccessExpression(subExpression) &&
-                    !_syntaxFacts.IsNameOfMemberBindingExpression(subExpression))
+                if (
+                    !_syntaxFacts.IsNameOfSimpleMemberAccessExpression(subExpression)
+                    && !_syntaxFacts.IsNameOfMemberBindingExpression(subExpression)
+                )
                 {
                     if (ValuePatternMatches(subExpression))
                     {
@@ -169,9 +190,14 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
                     }
                 }
 
-                if (_initializedSymbol != null &&
-                    _initializedSymbol.Equals(
-                        _semanticModel.GetSymbolInfo(subExpression, _cancellationToken).GetAnySymbol()))
+                if (
+                    _initializedSymbol != null
+                    && _initializedSymbol.Equals(
+                        _semanticModel
+                            .GetSymbolInfo(subExpression, _cancellationToken)
+                            .GetAnySymbol()
+                    )
+                )
                 {
                     return true;
                 }

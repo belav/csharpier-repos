@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class RelationalColumnCommentAttributeConvention : PropertyAttributeConventionBase<CommentAttribute>
+public class RelationalColumnCommentAttributeConvention
+    : PropertyAttributeConventionBase<CommentAttribute>
 {
     /// <summary>
     ///     Creates a new instance of <see cref="RelationalColumnCommentAttributeConvention" />.
@@ -18,8 +19,8 @@ public class RelationalColumnCommentAttributeConvention : PropertyAttributeConve
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public RelationalColumnCommentAttributeConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
-        : base(dependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    ) : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
     }
@@ -40,7 +41,8 @@ public class RelationalColumnCommentAttributeConvention : PropertyAttributeConve
         IConventionPropertyBuilder propertyBuilder,
         CommentAttribute attribute,
         MemberInfo clrMember,
-        IConventionContext context)
+        IConventionContext context
+    )
     {
         if (!string.IsNullOrWhiteSpace(attribute.Comment))
         {

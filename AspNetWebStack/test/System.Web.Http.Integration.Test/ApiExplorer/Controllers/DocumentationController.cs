@@ -16,21 +16,15 @@ namespace System.Web.Http.ApiExplorer
 
         [ApiDocumentation("Post action")]
         [ApiParameterDocumentation("value", "value parameter")]
-        public void Post(string value)
-        {
-        }
+        public void Post(string value) { }
 
         [ApiDocumentation("Put action")]
         [ApiParameterDocumentation("id", "id parameter")]
         [ApiParameterDocumentation("value", "value parameter")]
-        public void Put(int id, string value)
-        {
-        }
+        public void Put(int id, string value) { }
 
         [ApiDocumentation("Delete action")]
         [ApiParameterDocumentation("id", "id parameter")]
-        public void Delete(int id)
-        {
-        }
+        public void Delete(int id) { }
     }
 }

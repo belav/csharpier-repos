@@ -36,10 +36,7 @@ internal sealed class Sequence<T> : IBufferWriter<T>, IDisposable
     /// Initializes a new instance of the <see cref="Sequence{T}"/> class
     /// that uses a private <see cref="ArrayPool{T}"/> for recycling arrays.
     /// </summary>
-    public Sequence()
-        : this(ArrayPool<T>.Create())
-    {
-    }
+    public Sequence() : this(ArrayPool<T>.Create()) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Sequence{T}"/> class.
@@ -106,7 +103,12 @@ internal sealed class Sequence<T> : IBufferWriter<T>, IDisposable
     public static implicit operator ReadOnlySequence<T>(Sequence<T> sequence)
     {
         return sequence.first != null
-            ? new ReadOnlySequence<T>(sequence.first, sequence.first.Start, sequence.last, sequence.last.End)
+            ? new ReadOnlySequence<T>(
+                sequence.first,
+                sequence.first.Start,
+                sequence.last,
+                sequence.last.End
+            )
             : ReadOnlySequence<T>.Empty;
     }
 
@@ -130,10 +132,18 @@ internal sealed class Sequence<T> : IBufferWriter<T>, IDisposable
             current = current.Next;
         }
 
-        Requires.Argument(current != null, nameof(position), "Position does not represent a valid position in this sequence.");
+        Requires.Argument(
+            current != null,
+            nameof(position),
+            "Position does not represent a valid position in this sequence."
+        );
 
         // Also confirm that the position is not a prior position in the block.
-        Requires.Argument(firstIndex >= current.Start, nameof(position), "Position must not be earlier than current position.");
+        Requires.Argument(
+            firstIndex >= current.Start,
+            nameof(position),
+            "Position must not be earlier than current position."
+        );
 
         // Now repeat the loop, performing the mutations.
         current = this.first;
@@ -229,10 +239,15 @@ internal sealed class Sequence<T> : IBufferWriter<T>, IDisposable
 
         if (minBufferSize.HasValue)
         {
-            var segment = this.segmentPool.Count > 0 ? this.segmentPool.Pop() : new SequenceSegment();
+            var segment =
+                this.segmentPool.Count > 0 ? this.segmentPool.Pop() : new SequenceSegment();
             if (this.arrayPool != null)
             {
-                segment.Assign(this.arrayPool.Rent(minBufferSize.Value == -1 ? DefaultLengthFromArrayPool : minBufferSize.Value));
+                segment.Assign(
+                    this.arrayPool.Rent(
+                        minBufferSize.Value == -1 ? DefaultLengthFromArrayPool : minBufferSize.Value
+                    )
+                );
             }
             else
             {

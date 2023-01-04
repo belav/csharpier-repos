@@ -15,7 +15,7 @@ namespace Microsoft.Extensions.Logging
     internal sealed class LogValuesFormatter
     {
         private const string NullValue = "(null)";
-        private static readonly char[] FormatDelimiters = {',', ':'};
+        private static readonly char[] FormatDelimiters = { ',', ':' };
         private readonly string _format;
         private readonly List<string> _valueNames = new List<string>();
 
@@ -53,12 +53,27 @@ namespace Microsoft.Extensions.Logging
                 else
                 {
                     // Format item syntax : { index[,alignment][ :formatString] }.
-                    int formatDelimiterIndex = FindIndexOfAny(format, FormatDelimiters, openBraceIndex, closeBraceIndex);
+                    int formatDelimiterIndex = FindIndexOfAny(
+                        format,
+                        FormatDelimiters,
+                        openBraceIndex,
+                        closeBraceIndex
+                    );
 
                     vsb.Append(format.AsSpan(scanIndex, openBraceIndex - scanIndex + 1));
                     vsb.Append(_valueNames.Count.ToString());
-                    _valueNames.Add(format.Substring(openBraceIndex + 1, formatDelimiterIndex - openBraceIndex - 1));
-                    vsb.Append(format.AsSpan(formatDelimiterIndex, closeBraceIndex - formatDelimiterIndex + 1));
+                    _valueNames.Add(
+                        format.Substring(
+                            openBraceIndex + 1,
+                            formatDelimiterIndex - openBraceIndex - 1
+                        )
+                    );
+                    vsb.Append(
+                        format.AsSpan(
+                            formatDelimiterIndex,
+                            closeBraceIndex - formatDelimiterIndex + 1
+                        )
+                    );
 
                     scanIndex = closeBraceIndex + 1;
                 }
@@ -148,7 +163,11 @@ namespace Microsoft.Extensions.Logging
                 }
             }
 
-            return string.Format(CultureInfo.InvariantCulture, _format, formattedValues ?? Array.Empty<object>());
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                _format,
+                formattedValues ?? Array.Empty<object>()
+            );
         }
 
         // NOTE: This method mutates the items in the array if needed to avoid extra allocations, and should only be used when caller expects this to happen
@@ -162,7 +181,11 @@ namespace Microsoft.Extensions.Logging
                 }
             }
 
-            return string.Format(CultureInfo.InvariantCulture, _format, values ?? Array.Empty<object>());
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                _format,
+                values ?? Array.Empty<object>()
+            );
         }
 
         internal string Format()
@@ -177,12 +200,23 @@ namespace Microsoft.Extensions.Logging
 
         internal string Format(object? arg0, object? arg1)
         {
-            return string.Format(CultureInfo.InvariantCulture, _format, FormatArgument(arg0), FormatArgument(arg1));
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                _format,
+                FormatArgument(arg0),
+                FormatArgument(arg1)
+            );
         }
 
         internal string Format(object? arg0, object? arg1, object? arg2)
         {
-            return string.Format(CultureInfo.InvariantCulture, _format, FormatArgument(arg0), FormatArgument(arg1), FormatArgument(arg2));
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                _format,
+                FormatArgument(arg0),
+                FormatArgument(arg1),
+                FormatArgument(arg2)
+            );
         }
 
         public KeyValuePair<string, object?> GetValue(object?[] values, int index)
@@ -205,10 +239,16 @@ namespace Microsoft.Extensions.Logging
             var valueArray = new KeyValuePair<string, object?>[values.Length + 1];
             for (int index = 0; index != _valueNames.Count; ++index)
             {
-                valueArray[index] = new KeyValuePair<string, object?>(_valueNames[index], values[index]);
+                valueArray[index] = new KeyValuePair<string, object?>(
+                    _valueNames[index],
+                    values[index]
+                );
             }
 
-            valueArray[valueArray.Length - 1] = new KeyValuePair<string, object?>("{OriginalFormat}", OriginalFormat);
+            valueArray[valueArray.Length - 1] = new KeyValuePair<string, object?>(
+                "{OriginalFormat}",
+                OriginalFormat
+            );
             return valueArray;
         }
 
@@ -245,6 +285,5 @@ namespace Microsoft.Extensions.Logging
 
             return value;
         }
-
     }
 }

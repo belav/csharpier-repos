@@ -26,7 +26,16 @@ namespace System.Drawing
         internal static extern uint XDefaultDepth(IntPtr display, int screen);
 
         [DllImport("libX11", EntryPoint = "XGetImage")]
-        internal static extern IntPtr XGetImage(IntPtr display, IntPtr drawable, int src_x, int src_y, int width, int height, int pane, int format);
+        internal static extern IntPtr XGetImage(
+            IntPtr display,
+            IntPtr drawable,
+            int src_x,
+            int src_y,
+            int width,
+            int height,
+            int pane,
+            int format
+        );
 
         [DllImport("libX11", EntryPoint = "XGetPixel")]
         internal static extern int XGetPixel(IntPtr image, int x, int y);
@@ -38,7 +47,12 @@ namespace System.Drawing
         internal static extern IntPtr XDefaultVisual(IntPtr display, int screen);
 
         [DllImport("libX11", EntryPoint = "XGetVisualInfo")]
-        internal static extern IntPtr XGetVisualInfo(IntPtr display, int vinfo_mask, ref XVisualInfo vinfo_template, ref int nitems);
+        internal static extern IntPtr XGetVisualInfo(
+            IntPtr display,
+            int vinfo_mask,
+            ref XVisualInfo vinfo_template,
+            ref int nitems
+        );
 
         [DllImport("libX11", EntryPoint = "XVisualIDFromVisual")]
         internal static extern IntPtr XVisualIDFromVisual(IntPtr visual);

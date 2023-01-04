@@ -8,10 +8,13 @@ namespace Microsoft.EntityFrameworkCore.Update;
 // Old Sqlite versions don't support the RETURNING clause, so we use the INSERT/UPDATE+SELECT behavior for fetching back database-
 // generated values and rows affected.
 [SqliteVersionCondition(Max = "3.34.999")]
-public class StoreValueGenerationLegacySqliteTest : StoreValueGenerationTestBase<StoreValueGenerationSqliteFixture>
+public class StoreValueGenerationLegacySqliteTest
+    : StoreValueGenerationTestBase<StoreValueGenerationSqliteFixture>
 {
-    public StoreValueGenerationLegacySqliteTest(StoreValueGenerationSqliteFixture fixture, ITestOutputHelper testOutputHelper)
-        : base(fixture)
+    public StoreValueGenerationLegacySqliteTest(
+        StoreValueGenerationSqliteFixture fixture,
+        ITestOutputHelper testOutputHelper
+    ) : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
         // fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
@@ -22,17 +25,20 @@ public class StoreValueGenerationLegacySqliteTest : StoreValueGenerationTestBase
         EntityState firstOperationType,
         EntityState? secondOperationType,
         GeneratedValues generatedValues,
-        bool withDatabaseGenerated)
-        => secondOperationType is null ? 1 : 2;
+        bool withDatabaseGenerated
+    ) => secondOperationType is null ? 1 : 2;
 
     protected override bool ShouldCreateImplicitTransaction(
         EntityState firstOperationType,
         EntityState? secondOperationType,
         GeneratedValues generatedValues,
-        bool withSameEntityType)
-        => secondOperationType is not null
-            || (generatedValues is GeneratedValues.Some or GeneratedValues.All
-                && firstOperationType is EntityState.Added or EntityState.Modified);
+        bool withSameEntityType
+    ) =>
+        secondOperationType is not null
+        || (
+            generatedValues is GeneratedValues.Some or GeneratedValues.All
+            && firstOperationType is EntityState.Added or EntityState.Modified
+        );
 
     #region Single operation
 
@@ -41,7 +47,7 @@ public class StoreValueGenerationLegacySqliteTest : StoreValueGenerationTestBase
         await base.Add_with_generated_values(async);
 
         AssertSql(
-"""
+            """
 @p0='1000'
 
 INSERT INTO "WithSomeDatabaseGenerated" ("Data2")
@@ -49,7 +55,8 @@ VALUES (@p0);
 SELECT "Id", "Data1"
 FROM "WithSomeDatabaseGenerated"
 WHERE changes() = 1 AND "rowid" = last_insert_rowid();
-""");
+"""
+        );
     }
 
     public override async Task Add_with_no_generated_values(bool async)
@@ -57,7 +64,7 @@ WHERE changes() = 1 AND "rowid" = last_insert_rowid();
         await base.Add_with_no_generated_values(async);
 
         AssertSql(
-"""
+            """
 @p0='100'
 @p1='1000'
 @p2='1000'
@@ -65,7 +72,8 @@ WHERE changes() = 1 AND "rowid" = last_insert_rowid();
 INSERT INTO "WithNoDatabaseGenerated" ("Id", "Data1", "Data2")
 VALUES (@p0, @p1, @p2);
 SELECT changes();
-""");
+"""
+        );
     }
 
     public override async Task Add_with_all_generated_values(bool async)
@@ -73,13 +81,14 @@ SELECT changes();
         await base.Add_with_all_generated_values(async);
 
         AssertSql(
-"""
+            """
 INSERT INTO "WithAllDatabaseGenerated"
 DEFAULT VALUES;
 SELECT "Id", "Data1", "Data2"
 FROM "WithAllDatabaseGenerated"
 WHERE changes() = 1 AND "rowid" = last_insert_rowid();
-""");
+"""
+        );
     }
 
     public override async Task Modify_with_generated_values(bool async)
@@ -87,7 +96,7 @@ WHERE changes() = 1 AND "rowid" = last_insert_rowid();
         await base.Modify_with_generated_values(async);
 
         AssertSql(
-"""
+            """
 @p1='1'
 @p0='1000'
 
@@ -96,7 +105,8 @@ WHERE "Id" = @p1;
 SELECT "Data1"
 FROM "WithSomeDatabaseGenerated"
 WHERE changes() = 1 AND "Id" = @p1;
-""");
+"""
+        );
     }
 
     public override async Task Modify_with_no_generated_values(bool async)
@@ -104,7 +114,7 @@ WHERE changes() = 1 AND "Id" = @p1;
         await base.Modify_with_no_generated_values(async);
 
         AssertSql(
-"""
+            """
 @p2='1'
 @p0='1000'
 @p1='1000'
@@ -112,7 +122,8 @@ WHERE changes() = 1 AND "Id" = @p1;
 UPDATE "WithNoDatabaseGenerated" SET "Data1" = @p0, "Data2" = @p1
 WHERE "Id" = @p2;
 SELECT changes();
-""");
+"""
+        );
     }
 
     public override async Task Delete(bool async)
@@ -120,13 +131,14 @@ SELECT changes();
         await base.Delete(async);
 
         AssertSql(
-"""
+            """
 @p0='1'
 
 DELETE FROM "WithSomeDatabaseGenerated"
 WHERE "Id" = @p0;
 SELECT changes();
-""");
+"""
+        );
     }
 
     #endregion Single operation
@@ -138,7 +150,7 @@ SELECT changes();
         await base.Add_Add_with_same_entity_type_and_generated_values(async);
 
         AssertSql(
-"""
+            """
 @p0='1000'
 
 INSERT INTO "WithSomeDatabaseGenerated" ("Data2")
@@ -148,7 +160,7 @@ FROM "WithSomeDatabaseGenerated"
 WHERE changes() = 1 AND "rowid" = last_insert_rowid();
 """,
             //
-"""
+            """
 @p0='1001'
 
 INSERT INTO "WithSomeDatabaseGenerated" ("Data2")
@@ -156,7 +168,8 @@ VALUES (@p0);
 SELECT "Id", "Data1"
 FROM "WithSomeDatabaseGenerated"
 WHERE changes() = 1 AND "rowid" = last_insert_rowid();
-""");
+"""
+        );
     }
 
     public override async Task Add_Add_with_same_entity_type_and_no_generated_values(bool async)
@@ -164,7 +177,7 @@ WHERE changes() = 1 AND "rowid" = last_insert_rowid();
         await base.Add_Add_with_same_entity_type_and_no_generated_values(async);
 
         AssertSql(
-"""
+            """
 @p0='100'
 @p1='1000'
 @p2='1000'
@@ -174,7 +187,7 @@ VALUES (@p0, @p1, @p2);
 SELECT changes();
 """,
             //
-"""
+            """
 @p0='101'
 @p1='1001'
 @p2='1001'
@@ -182,7 +195,8 @@ SELECT changes();
 INSERT INTO "WithNoDatabaseGenerated" ("Id", "Data1", "Data2")
 VALUES (@p0, @p1, @p2);
 SELECT changes();
-""");
+"""
+        );
     }
 
     public override async Task Add_Add_with_same_entity_type_and_all_generated_values(bool async)
@@ -190,7 +204,7 @@ SELECT changes();
         await base.Add_Add_with_same_entity_type_and_all_generated_values(async);
 
         AssertSql(
-"""
+            """
 INSERT INTO "WithAllDatabaseGenerated"
 DEFAULT VALUES;
 SELECT "Id", "Data1", "Data2"
@@ -198,13 +212,14 @@ FROM "WithAllDatabaseGenerated"
 WHERE changes() = 1 AND "rowid" = last_insert_rowid();
 """,
             //
-"""
+            """
 INSERT INTO "WithAllDatabaseGenerated"
 DEFAULT VALUES;
 SELECT "Id", "Data1", "Data2"
 FROM "WithAllDatabaseGenerated"
 WHERE changes() = 1 AND "rowid" = last_insert_rowid();
-""");
+"""
+        );
     }
 
     public override async Task Modify_Modify_with_same_entity_type_and_generated_values(bool async)
@@ -212,7 +227,7 @@ WHERE changes() = 1 AND "rowid" = last_insert_rowid();
         await base.Modify_Modify_with_same_entity_type_and_generated_values(async);
 
         AssertSql(
-"""
+            """
 @p1='1'
 @p0='1000'
 
@@ -223,7 +238,7 @@ FROM "WithSomeDatabaseGenerated"
 WHERE changes() = 1 AND "Id" = @p1;
 """,
             //
-"""
+            """
 @p1='2'
 @p0='1001'
 
@@ -232,15 +247,18 @@ WHERE "Id" = @p1;
 SELECT "Data1"
 FROM "WithSomeDatabaseGenerated"
 WHERE changes() = 1 AND "Id" = @p1;
-""");
+"""
+        );
     }
 
-    public override async Task Modify_Modify_with_same_entity_type_and_no_generated_values(bool async)
+    public override async Task Modify_Modify_with_same_entity_type_and_no_generated_values(
+        bool async
+    )
     {
         await base.Modify_Modify_with_same_entity_type_and_no_generated_values(async);
 
         AssertSql(
-"""
+            """
 @p2='1'
 @p0='1000'
 @p1='1000'
@@ -250,7 +268,7 @@ WHERE "Id" = @p2;
 SELECT changes();
 """,
             //
-"""
+            """
 @p2='2'
 @p0='1001'
 @p1='1001'
@@ -258,7 +276,8 @@ SELECT changes();
 UPDATE "WithNoDatabaseGenerated" SET "Data1" = @p0, "Data2" = @p1
 WHERE "Id" = @p2;
 SELECT changes();
-""");
+"""
+        );
     }
 
     public override async Task Delete_Delete_with_same_entity_type(bool async)
@@ -266,7 +285,7 @@ SELECT changes();
         await base.Delete_Delete_with_same_entity_type(async);
 
         AssertSql(
-"""
+            """
 @p0='1'
 
 DELETE FROM "WithSomeDatabaseGenerated"
@@ -274,13 +293,14 @@ WHERE "Id" = @p0;
 SELECT changes();
 """,
             //
-"""
+            """
 @p0='2'
 
 DELETE FROM "WithSomeDatabaseGenerated"
 WHERE "Id" = @p0;
 SELECT changes();
-""");
+"""
+        );
     }
 
     #endregion Same two operations with same entity type
@@ -292,7 +312,7 @@ SELECT changes();
         await base.Add_Add_with_different_entity_types_and_generated_values(async);
 
         AssertSql(
-"""
+            """
 @p0='1000'
 
 INSERT INTO "WithSomeDatabaseGenerated" ("Data2")
@@ -302,7 +322,7 @@ FROM "WithSomeDatabaseGenerated"
 WHERE changes() = 1 AND "rowid" = last_insert_rowid();
 """,
             //
-"""
+            """
 @p0='1001'
 
 INSERT INTO "WithSomeDatabaseGenerated2" ("Data2")
@@ -310,15 +330,18 @@ VALUES (@p0);
 SELECT "Id", "Data1"
 FROM "WithSomeDatabaseGenerated2"
 WHERE changes() = 1 AND "rowid" = last_insert_rowid();
-""");
+"""
+        );
     }
 
-    public override async Task Add_Add_with_different_entity_types_and_no_generated_values(bool async)
+    public override async Task Add_Add_with_different_entity_types_and_no_generated_values(
+        bool async
+    )
     {
         await base.Add_Add_with_different_entity_types_and_no_generated_values(async);
 
         AssertSql(
-"""
+            """
 @p0='100'
 @p1='1000'
 @p2='1000'
@@ -328,7 +351,7 @@ VALUES (@p0, @p1, @p2);
 SELECT changes();
 """,
             //
-"""
+            """
 @p0='101'
 @p1='1001'
 @p2='1001'
@@ -336,15 +359,18 @@ SELECT changes();
 INSERT INTO "WithNoDatabaseGenerated2" ("Id", "Data1", "Data2")
 VALUES (@p0, @p1, @p2);
 SELECT changes();
-""");
+"""
+        );
     }
 
-    public override async Task Add_Add_with_different_entity_types_and_all_generated_values(bool async)
+    public override async Task Add_Add_with_different_entity_types_and_all_generated_values(
+        bool async
+    )
     {
         await base.Add_Add_with_different_entity_types_and_all_generated_values(async);
 
         AssertSql(
-"""
+            """
 INSERT INTO "WithAllDatabaseGenerated"
 DEFAULT VALUES;
 SELECT "Id", "Data1", "Data2"
@@ -352,21 +378,24 @@ FROM "WithAllDatabaseGenerated"
 WHERE changes() = 1 AND "rowid" = last_insert_rowid();
 """,
             //
-"""
+            """
 INSERT INTO "WithAllDatabaseGenerated2"
 DEFAULT VALUES;
 SELECT "Id", "Data1", "Data2"
 FROM "WithAllDatabaseGenerated2"
 WHERE changes() = 1 AND "rowid" = last_insert_rowid();
-""");
+"""
+        );
     }
 
-    public override async Task Modify_Modify_with_different_entity_types_and_generated_values(bool async)
+    public override async Task Modify_Modify_with_different_entity_types_and_generated_values(
+        bool async
+    )
     {
         await base.Modify_Modify_with_different_entity_types_and_generated_values(async);
 
         AssertSql(
-"""
+            """
 @p1='1'
 @p0='1000'
 
@@ -377,7 +406,7 @@ FROM "WithSomeDatabaseGenerated"
 WHERE changes() = 1 AND "Id" = @p1;
 """,
             //
-"""
+            """
 @p1='2'
 @p0='1001'
 
@@ -386,15 +415,18 @@ WHERE "Id" = @p1;
 SELECT "Data1"
 FROM "WithSomeDatabaseGenerated2"
 WHERE changes() = 1 AND "Id" = @p1;
-""");
+"""
+        );
     }
 
-    public override async Task Modify_Modify_with_different_entity_types_and_no_generated_values(bool async)
+    public override async Task Modify_Modify_with_different_entity_types_and_no_generated_values(
+        bool async
+    )
     {
         await base.Modify_Modify_with_different_entity_types_and_no_generated_values(async);
 
         AssertSql(
-"""
+            """
 @p2='1'
 @p0='1000'
 @p1='1000'
@@ -404,7 +436,7 @@ WHERE "Id" = @p2;
 SELECT changes();
 """,
             //
-"""
+            """
 @p2='2'
 @p0='1001'
 @p1='1001'
@@ -412,7 +444,8 @@ SELECT changes();
 UPDATE "WithNoDatabaseGenerated2" SET "Data1" = @p0, "Data2" = @p1
 WHERE "Id" = @p2;
 SELECT changes();
-""");
+"""
+        );
     }
 
     public override async Task Delete_Delete_with_different_entity_types(bool async)
@@ -420,7 +453,7 @@ SELECT changes();
         await base.Delete_Delete_with_different_entity_types(async);
 
         AssertSql(
-"""
+            """
 @p0='1'
 
 DELETE FROM "WithSomeDatabaseGenerated"
@@ -428,13 +461,14 @@ WHERE "Id" = @p0;
 SELECT changes();
 """,
             //
-"""
+            """
 @p0='2'
 
 DELETE FROM "WithSomeDatabaseGenerated2"
 WHERE "Id" = @p0;
 SELECT changes();
-""");
+"""
+        );
     }
 
     #endregion Same two operations with different entity types

@@ -6,17 +6,17 @@ using System.Runtime.Serialization;
 namespace System.Collections.Generic
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class KeyNotFoundException : SystemException
     {
-        public KeyNotFoundException()
-            : base(SR.Arg_KeyNotFound)
+        public KeyNotFoundException() : base(SR.Arg_KeyNotFound)
         {
             HResult = HResults.COR_E_KEYNOTFOUND;
         }
 
-        public KeyNotFoundException(string? message)
-            : base(message)
+        public KeyNotFoundException(string? message) : base(message)
         {
             HResult = HResults.COR_E_KEYNOTFOUND;
         }
@@ -27,8 +27,7 @@ namespace System.Collections.Generic
             HResult = HResults.COR_E_KEYNOTFOUND;
         }
 
-        protected KeyNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected KeyNotFoundException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

@@ -48,7 +48,9 @@ internal class TestLspServices : ILspServices
 
     public IEnumerable<T> GetRequiredServices<T>()
     {
-        var services = _services.Where(s => !_supportsGetRegisteredServices && s.Item2 is IMethodHandler).Select(s => (T)s.Item2);
+        var services = _services
+            .Where(s => !_supportsGetRegisteredServices && s.Item2 is IMethodHandler)
+            .Select(s => (T)s.Item2);
         return services;
     }
 
@@ -59,7 +61,9 @@ internal class TestLspServices : ILspServices
 
     public object? TryGetService(Type type)
     {
-        var service = _services.FirstOrDefault(s => (_supportsGetRegisteredServices ? s.Item2.GetType() : s.Item1) == type);
+        var service = _services.FirstOrDefault(
+            s => (_supportsGetRegisteredServices ? s.Item2.GetType() : s.Item1) == type
+        );
 
         return service.Item2;
     }

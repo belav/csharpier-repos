@@ -25,7 +25,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.AddImport
 {
-    internal abstract class AbstractAddImportsPasteCommandHandler : IChainedCommandHandler<PasteCommandArgs>
+    internal abstract class AbstractAddImportsPasteCommandHandler
+        : IChainedCommandHandler<PasteCommandArgs>
     {
         /// <summary>
         /// The command handler display name
@@ -44,20 +45,32 @@ namespace Microsoft.CodeAnalysis.AddImport
         public AbstractAddImportsPasteCommandHandler(
             IThreadingContext threadingContext,
             IGlobalOptionService globalOptions,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _threadingContext = threadingContext;
             _globalOptions = globalOptions;
             _listener = listenerProvider.GetListener(FeatureAttribute.AddImportsOnPaste);
         }
 
-        public CommandState GetCommandState(PasteCommandArgs args, Func<CommandState> nextCommandHandler)
-            => nextCommandHandler();
+        public CommandState GetCommandState(
+            PasteCommandArgs args,
+            Func<CommandState> nextCommandHandler
+        ) => nextCommandHandler();
 
-        public void ExecuteCommand(PasteCommandArgs args, Action nextCommandHandler, CommandExecutionContext executionContext)
+        public void ExecuteCommand(
+            PasteCommandArgs args,
+            Action nextCommandHandler,
+            CommandExecutionContext executionContext
+        )
         {
             // If the feature is not explicitly enabled we can exit early
-            if (!_globalOptions.GetOption(FeatureOnOffOptions.AddImportsOnPaste, args.SubjectBuffer.GetLanguageName()))
+            if (
+                !_globalOptions.GetOption(
+                    FeatureOnOffOptions.AddImportsOnPaste,
+                    args.SubjectBuffer.GetLanguageName()
+                )
+            )
             {
                 nextCommandHandler();
                 return;
@@ -72,7 +85,11 @@ namespace Microsoft.CodeAnalysis.AddImport
             }
 
             // Create a tracking span from the pre-paste caret position that will grow as text is inserted.
-            var trackingSpan = caretPosition.Value.Snapshot.CreateTrackingSpan(caretPosition.Value.Position, 0, SpanTrackingMode.EdgeInclusive);
+            var trackingSpan = caretPosition.Value.Snapshot.CreateTrackingSpan(
+                caretPosition.Value.Position,
+                0,
+                SpanTrackingMode.EdgeInclusive
+            );
 
             // Perform the paste command before adding imports
             nextCommandHandler();
@@ -97,7 +114,8 @@ namespace Microsoft.CodeAnalysis.AddImport
         private void ExecuteCommandWorker(
             PasteCommandArgs args,
             CommandExecutionContext executionContext,
-            ITrackingSpan trackingSpan)
+            ITrackingSpan trackingSpan
+        )
         {
             if (!args.SubjectBuffer.CanApplyChangeDocumentToWorkspace())
             {
@@ -135,34 +153,53 @@ namespace Microsoft.CodeAnalysis.AddImport
                 .CompletesAsyncOperation(token);
         }
 
-        private async Task ExecuteAsync(Document document, SnapshotSpan snapshotSpan, ITextView textView)
+        private async Task ExecuteAsync(
+            Document document,
+            SnapshotSpan snapshotSpan,
+            ITextView textView
+        )
         {
             _threadingContext.ThrowIfNotOnUIThread();
 
-            var indicatorFactory = document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
+            var indicatorFactory =
+                document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
             using var backgroundWorkContext = indicatorFactory.Create(
                 textView,
                 snapshotSpan,
                 DialogText,
                 cancelOnEdit: true,
-                cancelOnFocusLost: true);
+                cancelOnFocusLost: true
+            );
 
             var cancellationToken = backgroundWorkContext.UserCancellationToken;
 
-            // We're going to log the same thing on success or failure since this blocks the UI thread. This measurement is 
-            // intended to tell us how long we're blocking the user from typing with this action. 
-            using var blockLogger = Logger.LogBlock(FunctionId.CommandHandler_Paste_ImportsOnPaste, KeyValueLogMessage.Create(LogType.UserAction), cancellationToken);
+            // We're going to log the same thing on success or failure since this blocks the UI thread. This measurement is
+            // intended to tell us how long we're blocking the user from typing with this action.
+            using var blockLogger = Logger.LogBlock(
+                FunctionId.CommandHandler_Paste_ImportsOnPaste,
+                KeyValueLogMessage.Create(LogType.UserAction),
+                cancellationToken
+            );
 
-            var addMissingImportsService = document.GetRequiredLanguageService<IAddMissingImportsFeatureService>();
+            var addMissingImportsService =
+                document.GetRequiredLanguageService<IAddMissingImportsFeatureService>();
 
-            var cleanupOptions = await document.GetCodeCleanupOptionsAsync(_globalOptions, cancellationToken).ConfigureAwait(false);
+            var cleanupOptions = await document
+                .GetCodeCleanupOptionsAsync(_globalOptions, cancellationToken)
+                .ConfigureAwait(false);
 
             var options = new AddMissingImportsOptions(
                 CleanupOptions: cleanupOptions,
-                HideAdvancedMembers: _globalOptions.GetOption(CompletionOptionsStorage.HideAdvancedMembers, document.Project.Language));
+                HideAdvancedMembers: _globalOptions.GetOption(
+                    CompletionOptionsStorage.HideAdvancedMembers,
+                    document.Project.Language
+                )
+            );
 
             var textSpan = snapshotSpan.Span.ToTextSpan();
-            var updatedDocument = await addMissingImportsService.AddMissingImportsAsync(document, textSpan, options, cancellationToken).ConfigureAwait(false);
+            var updatedDocument = await addMissingImportsService
+                .AddMissingImportsAsync(document, textSpan, options, cancellationToken)
+                .ConfigureAwait(false);
 
             if (updatedDocument is null)
             {

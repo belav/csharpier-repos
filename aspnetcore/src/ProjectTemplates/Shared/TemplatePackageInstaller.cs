@@ -20,38 +20,42 @@ internal static class TemplatePackageInstaller
 
     private static readonly string[] _templatePackages = new[]
     {
-            "Microsoft.DotNet.Common.ItemTemplates",
-            "Microsoft.DotNet.Common.ProjectTemplates.2.1",
-            "Microsoft.DotNet.Test.ProjectTemplates.2.1",
-            "Microsoft.DotNet.Web.Client.ItemTemplates",
-            "Microsoft.DotNet.Web.ItemTemplates",
-            "Microsoft.DotNet.Web.ProjectTemplates.1.x",
-            "Microsoft.DotNet.Web.ProjectTemplates.2.0",
-            "Microsoft.DotNet.Web.ProjectTemplates.2.1",
-            "Microsoft.DotNet.Web.ProjectTemplates.2.2",
-            "Microsoft.DotNet.Web.ProjectTemplates.3.0",
-            "Microsoft.DotNet.Web.ProjectTemplates.3.1",
-            "Microsoft.DotNet.Web.ProjectTemplates.5.0",
-            "Microsoft.DotNet.Web.ProjectTemplates.6.0",
-            "Microsoft.DotNet.Web.ProjectTemplates.7.0",
-            "Microsoft.DotNet.Web.ProjectTemplates.8.0",
-            "Microsoft.DotNet.Web.Spa.ProjectTemplates.2.1",
-            "Microsoft.DotNet.Web.Spa.ProjectTemplates.2.2",
-            "Microsoft.DotNet.Web.Spa.ProjectTemplates.3.0",
-            "Microsoft.DotNet.Web.Spa.ProjectTemplates.3.1",
-            "Microsoft.DotNet.Web.Spa.ProjectTemplates.5.0",
-            "Microsoft.DotNet.Web.Spa.ProjectTemplates.6.0",
-            "Microsoft.DotNet.Web.Spa.ProjectTemplates.7.0",
-            "Microsoft.DotNet.Web.Spa.ProjectTemplates.8.0",
-            "Microsoft.DotNet.Web.Spa.ProjectTemplates",
-            "Microsoft.AspNetCore.Blazor.Templates",
-        };
+        "Microsoft.DotNet.Common.ItemTemplates",
+        "Microsoft.DotNet.Common.ProjectTemplates.2.1",
+        "Microsoft.DotNet.Test.ProjectTemplates.2.1",
+        "Microsoft.DotNet.Web.Client.ItemTemplates",
+        "Microsoft.DotNet.Web.ItemTemplates",
+        "Microsoft.DotNet.Web.ProjectTemplates.1.x",
+        "Microsoft.DotNet.Web.ProjectTemplates.2.0",
+        "Microsoft.DotNet.Web.ProjectTemplates.2.1",
+        "Microsoft.DotNet.Web.ProjectTemplates.2.2",
+        "Microsoft.DotNet.Web.ProjectTemplates.3.0",
+        "Microsoft.DotNet.Web.ProjectTemplates.3.1",
+        "Microsoft.DotNet.Web.ProjectTemplates.5.0",
+        "Microsoft.DotNet.Web.ProjectTemplates.6.0",
+        "Microsoft.DotNet.Web.ProjectTemplates.7.0",
+        "Microsoft.DotNet.Web.ProjectTemplates.8.0",
+        "Microsoft.DotNet.Web.Spa.ProjectTemplates.2.1",
+        "Microsoft.DotNet.Web.Spa.ProjectTemplates.2.2",
+        "Microsoft.DotNet.Web.Spa.ProjectTemplates.3.0",
+        "Microsoft.DotNet.Web.Spa.ProjectTemplates.3.1",
+        "Microsoft.DotNet.Web.Spa.ProjectTemplates.5.0",
+        "Microsoft.DotNet.Web.Spa.ProjectTemplates.6.0",
+        "Microsoft.DotNet.Web.Spa.ProjectTemplates.7.0",
+        "Microsoft.DotNet.Web.Spa.ProjectTemplates.8.0",
+        "Microsoft.DotNet.Web.Spa.ProjectTemplates",
+        "Microsoft.AspNetCore.Blazor.Templates",
+    };
 
-    public static string CustomHivePath { get; } = Path.GetFullPath((string.IsNullOrEmpty(Environment.GetEnvironmentVariable("helix")))
-                 ? typeof(TemplatePackageInstaller)
-                     .Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
-                     .Single(s => s.Key == "CustomTemplateHivePath").Value
-                 : Path.Combine("Hives", ".templateEngine"));
+    public static string CustomHivePath { get; } =
+        Path.GetFullPath(
+            (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("helix")))
+                ? typeof(TemplatePackageInstaller).Assembly
+                    .GetCustomAttributes<AssemblyMetadataAttribute>()
+                    .Single(s => s.Key == "CustomTemplateHivePath")
+                    .Value
+                : Path.Combine("Hives", ".templateEngine")
+        );
 
     public static async Task EnsureTemplatingEngineInitializedAsync(ITestOutputHelper output)
     {
@@ -74,7 +78,8 @@ internal static class TemplatePackageInstaller
             DotNetMuxer.MuxerPathOrDefault(),
             //--debug:disable-sdk-templates means, don't include C:\Program Files\dotnet\templates, aka. what comes with SDK, so we don't need to uninstall
             //--debug:custom-hive means, don't install templates on CI/developer machine, instead create new temporary instance
-            $"new {arguments} --debug:disable-sdk-templates --debug:custom-hive \"{CustomHivePath}\"");
+            $"new {arguments} --debug:disable-sdk-templates --debug:custom-hive \"{CustomHivePath}\""
+        );
 
         await proc.Exited;
 
@@ -92,11 +97,18 @@ internal static class TemplatePackageInstaller
         {
             packagesDir = typeof(TemplatePackageInstaller).Assembly
                 .GetCustomAttributes<AssemblyMetadataAttribute>()
-                .Single(a => a.Key == "ArtifactsShippingPackagesDir").Value;
+                .Single(a => a.Key == "ArtifactsShippingPackagesDir")
+                .Value;
         }
 
-        var builtPackages = Directory.EnumerateFiles(packagesDir, "*Templates*.nupkg")
-            .Where(p => _templatePackages.Any(t => Path.GetFileName(p).StartsWith(t, StringComparison.OrdinalIgnoreCase)))
+        var builtPackages = Directory
+            .EnumerateFiles(packagesDir, "*Templates*.nupkg")
+            .Where(
+                p =>
+                    _templatePackages.Any(
+                        t => Path.GetFileName(p).StartsWith(t, StringComparison.OrdinalIgnoreCase)
+                    )
+            )
             .ToArray();
 
         Assert.Equal(4, builtPackages.Length);
@@ -125,16 +137,31 @@ internal static class TemplatePackageInstaller
     private static async Task VerifyCanFindTemplate(ITestOutputHelper output, string templateName)
     {
         var proc = await RunDotNetNew(output, $"--list");
-        if (!(proc.Output.Contains($" {templateName} ") || proc.Output.Contains($",{templateName}") || proc.Output.Contains($"{templateName},")))
+        if (
+            !(
+                proc.Output.Contains($" {templateName} ")
+                || proc.Output.Contains($",{templateName}")
+                || proc.Output.Contains($"{templateName},")
+            )
+        )
         {
-            throw new InvalidOperationException($"Couldn't find {templateName} as an option in {proc.Output}.");
+            throw new InvalidOperationException(
+                $"Couldn't find {templateName} as an option in {proc.Output}."
+            );
         }
     }
 
-    private static async Task VerifyCannotFindTemplateAsync(ITestOutputHelper output, string templateName)
+    private static async Task VerifyCannotFindTemplateAsync(
+        ITestOutputHelper output,
+        string templateName
+    )
     {
         // Verify we really did remove the previous templates
-        var tempDir = Path.Combine(AppContext.BaseDirectory, Path.GetRandomFileName(), Guid.NewGuid().ToString("D"));
+        var tempDir = Path.Combine(
+            AppContext.BaseDirectory,
+            Path.GetRandomFileName(),
+            Guid.NewGuid().ToString("D")
+        );
         Directory.CreateDirectory(tempDir);
 
         try
@@ -143,7 +170,9 @@ internal static class TemplatePackageInstaller
 
             if (!proc.Error.Contains("No templates or subcommands found matching:"))
             {
-                throw new InvalidOperationException($"Failed to uninstall previous templates. The template '{templateName}' could still be found.");
+                throw new InvalidOperationException(
+                    $"Failed to uninstall previous templates. The template '{templateName}' could still be found."
+                );
             }
         }
         finally

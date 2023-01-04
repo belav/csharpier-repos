@@ -19,8 +19,8 @@ public class ClientModelValidationContext : ModelValidationContextBase
         ActionContext actionContext,
         ModelMetadata metadata,
         IModelMetadataProvider metadataProvider,
-        IDictionary<string, string> attributes)
-        : base(actionContext, metadata, metadataProvider)
+        IDictionary<string, string> attributes
+    ) : base(actionContext, metadata, metadataProvider)
     {
         Attributes = attributes;
     }

@@ -41,8 +41,8 @@ public class ViewExecutor
         ICompositeViewEngine viewEngine,
         ITempDataDictionaryFactory tempDataFactory,
         DiagnosticListener diagnosticListener,
-        IModelMetadataProvider modelMetadataProvider)
-        : this(writerFactory, viewEngine, diagnosticListener)
+        IModelMetadataProvider modelMetadataProvider
+    ) : this(writerFactory, viewEngine, diagnosticListener)
     {
         if (viewOptions == null)
         {
@@ -73,7 +73,8 @@ public class ViewExecutor
     protected ViewExecutor(
         IHttpResponseStreamWriterFactory writerFactory,
         ICompositeViewEngine viewEngine,
-        DiagnosticListener diagnosticListener)
+        DiagnosticListener diagnosticListener
+    )
     {
         if (writerFactory == null)
         {
@@ -146,7 +147,8 @@ public class ViewExecutor
         ViewDataDictionary viewData,
         ITempDataDictionary tempData,
         string? contentType,
-        int? statusCode)
+        int? statusCode
+    )
     {
         if (actionContext == null)
         {
@@ -160,17 +162,26 @@ public class ViewExecutor
 
         if (ViewOptions == null)
         {
-            throw new InvalidOperationException(Resources.FormatPropertyOfTypeCannotBeNull(nameof(ViewOptions), GetType().Name));
+            throw new InvalidOperationException(
+                Resources.FormatPropertyOfTypeCannotBeNull(nameof(ViewOptions), GetType().Name)
+            );
         }
 
         if (TempDataFactory == null)
         {
-            throw new InvalidOperationException(Resources.FormatPropertyOfTypeCannotBeNull(nameof(TempDataFactory), GetType().Name));
+            throw new InvalidOperationException(
+                Resources.FormatPropertyOfTypeCannotBeNull(nameof(TempDataFactory), GetType().Name)
+            );
         }
 
         if (ModelMetadataProvider == null)
         {
-            throw new InvalidOperationException(Resources.FormatPropertyOfTypeCannotBeNull(nameof(ModelMetadataProvider), GetType().Name));
+            throw new InvalidOperationException(
+                Resources.FormatPropertyOfTypeCannotBeNull(
+                    nameof(ModelMetadataProvider),
+                    GetType().Name
+                )
+            );
         }
 
         if (viewData == null)
@@ -189,7 +200,8 @@ public class ViewExecutor
             viewData,
             tempData,
             TextWriter.Null,
-            ViewOptions.HtmlHelperOptions);
+            ViewOptions.HtmlHelperOptions
+        );
 
         await ExecuteAsync(viewContext, contentType, statusCode);
     }
@@ -206,10 +218,7 @@ public class ViewExecutor
     /// The HTTP status code to set in the response. May be <c>null</c>.
     /// </param>
     /// <returns>A <see cref="Task"/> which will complete when view execution is completed.</returns>
-    protected async Task ExecuteAsync(
-        ViewContext viewContext,
-        string? contentType,
-        int? statusCode)
+    protected async Task ExecuteAsync(ViewContext viewContext, string? contentType, int? statusCode)
     {
         if (viewContext == null)
         {
@@ -224,7 +233,8 @@ public class ViewExecutor
             (DefaultContentType, Encoding.UTF8),
             MediaType.GetEncoding,
             out var resolvedContentType,
-            out var resolvedContentTypeEncoding);
+            out var resolvedContentTypeEncoding
+        );
 
         response.ContentType = resolvedContentType;
 
@@ -235,7 +245,9 @@ public class ViewExecutor
 
         OnExecuting(viewContext);
 
-        await using (var writer = WriterFactory.CreateWriter(response.Body, resolvedContentTypeEncoding))
+        await using (
+            var writer = WriterFactory.CreateWriter(response.Body, resolvedContentTypeEncoding)
+        )
         {
             var view = viewContext.View;
 
@@ -264,7 +276,8 @@ public class ViewExecutor
 
     private static void OnExecuting(ViewContext viewContext)
     {
-        var viewDataValuesProvider = viewContext.HttpContext.Features.Get<IViewDataValuesProviderFeature>();
+        var viewDataValuesProvider =
+            viewContext.HttpContext.Features.Get<IViewDataValuesProviderFeature>();
         viewDataValuesProvider?.ProvideViewDataValues(viewContext.ViewData);
     }
 }

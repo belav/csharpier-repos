@@ -30,8 +30,12 @@ public class FormValueProviderFactoryTest
     [InlineData("application/x-www-form-urlencoded")]
     [InlineData("application/x-www-form-urlencoded;charset=utf-8")]
     [InlineData("multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq")]
-    [InlineData("multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq; charset=utf-8")]
-    public async Task GetValueProviderAsync_ReturnsValueProvider_WithCurrentCulture(string contentType)
+    [InlineData(
+        "multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq; charset=utf-8"
+    )]
+    public async Task GetValueProviderAsync_ReturnsValueProvider_WithCurrentCulture(
+        string contentType
+    )
     {
         // Arrange
         var context = CreateContext(contentType);
@@ -55,7 +59,9 @@ public class FormValueProviderFactoryTest
         var factory = new FormValueProviderFactory();
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<ValueProviderException>(() => factory.CreateValueProviderAsync(valueProviderContext));
+        var ex = await Assert.ThrowsAsync<ValueProviderException>(
+            () => factory.CreateValueProviderAsync(valueProviderContext)
+        );
         Assert.Same(exception, ex.InnerException);
     }
 
@@ -69,7 +75,9 @@ public class FormValueProviderFactoryTest
         var factory = new FormValueProviderFactory();
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<ValueProviderException>(() => factory.CreateValueProviderAsync(valueProviderContext));
+        var ex = await Assert.ThrowsAsync<ValueProviderException>(
+            () => factory.CreateValueProviderAsync(valueProviderContext)
+        );
         Assert.Same(exception, ex.InnerException);
     }
 
@@ -83,7 +91,9 @@ public class FormValueProviderFactoryTest
         var factory = new FormValueProviderFactory();
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<TimeZoneNotFoundException>(() => factory.CreateValueProviderAsync(valueProviderContext));
+        var ex = await Assert.ThrowsAsync<TimeZoneNotFoundException>(
+            () => factory.CreateValueProviderAsync(valueProviderContext)
+        );
         Assert.Same(exception, ex);
     }
 
@@ -92,8 +102,14 @@ public class FormValueProviderFactoryTest
         var context = new Mock<HttpContext>();
         context.Setup(c => c.Request.ContentType).Returns("application/x-www-form-urlencoded");
         context.Setup(c => c.Request.HasFormContentType).Returns(true);
-        context.Setup(c => c.Request.ReadFormAsync(It.IsAny<CancellationToken>())).ThrowsAsync(exception);
-        var actionContext = new ActionContext(context.Object, new RouteData(), new ActionDescriptor());
+        context
+            .Setup(c => c.Request.ReadFormAsync(It.IsAny<CancellationToken>()))
+            .ThrowsAsync(exception);
+        var actionContext = new ActionContext(
+            context.Object,
+            new RouteData(),
+            new ActionDescriptor()
+        );
         var valueProviderContext = new ValueProviderFactoryContext(actionContext);
         return valueProviderContext;
     }

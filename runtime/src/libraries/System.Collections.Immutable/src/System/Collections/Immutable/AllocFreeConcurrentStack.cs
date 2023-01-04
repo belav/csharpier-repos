@@ -21,9 +21,9 @@ namespace System.Collections.Immutable
         {
             Stack<RefAsValueType<T>> localStack =
 #if NETCOREAPP
-                t_stack ??= new Stack<RefAsValueType<T>>(MaxSize);
+            t_stack ??= new Stack<RefAsValueType<T>>(MaxSize);
 #else
-                ThreadLocalStack;
+            ThreadLocalStack;
 #endif
 
             // Just in case we're in a scenario where an object is continually requested on one thread
@@ -39,7 +39,9 @@ namespace System.Collections.Immutable
 #if NETCOREAPP
             Stack<RefAsValueType<T>>? localStack = t_stack; // cache in a local to avoid unnecessary TLS hits on repeated accesses
 #else
-            Stack<RefAsValueType<T>> localStack = ThreadLocalStack;
+            Stack<
+                RefAsValueType<T>
+            > localStack = ThreadLocalStack;
 #endif
             if (localStack != null && localStack.Count > 0)
             {
@@ -57,7 +59,8 @@ namespace System.Collections.Immutable
             get
             {
                 // Ensure the [ThreadStatic] is initialized to a dictionary
-                Dictionary<Type, object>? typesToStacks = AllocFreeConcurrentStack.t_stacks ??= new Dictionary<Type, object>();
+                Dictionary<Type, object>? typesToStacks = AllocFreeConcurrentStack.t_stacks ??=
+                    new Dictionary<Type, object>();
 
                 // Get the stack that corresponds to the T
                 if (!typesToStacks.TryGetValue(s_typeOfT, out object? stackObj))

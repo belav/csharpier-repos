@@ -11,9 +11,15 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Options
 {
-    internal sealed class NamingStylePreferenceEditorConfigStorageLocation : OptionStorageLocation2, IEditorConfigStorageLocation
+    internal sealed class NamingStylePreferenceEditorConfigStorageLocation
+        : OptionStorageLocation2,
+            IEditorConfigStorageLocation
     {
-        public bool TryGetOption(StructuredAnalyzerConfigOptions options, Type type, out object result)
+        public bool TryGetOption(
+            StructuredAnalyzerConfigOptions options,
+            Type type,
+            out object result
+        )
         {
             if (type == typeof(NamingStylePreferences))
             {

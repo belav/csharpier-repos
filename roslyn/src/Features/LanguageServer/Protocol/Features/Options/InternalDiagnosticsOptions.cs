@@ -8,6 +8,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics;
 
 internal static class InternalDiagnosticsOptions
 {
-    public static readonly Option2<DiagnosticMode> NormalDiagnosticMode = new("InternalDiagnosticsOptions", "NormalDiagnosticMode", defaultValue: DiagnosticMode.Default,
-        storageLocation: new LocalUserProfileStorageLocation(@"Roslyn\Internal\Diagnostics\NormalDiagnosticMode"));
+    public static readonly Option2<DiagnosticMode> NormalDiagnosticMode =
+        new(
+            "InternalDiagnosticsOptions",
+            "NormalDiagnosticMode",
+            defaultValue: DiagnosticMode.Default,
+            storageLocation: new LocalUserProfileStorageLocation(
+                @"Roslyn\Internal\Diagnostics\NormalDiagnosticMode"
+            )
+        );
 }

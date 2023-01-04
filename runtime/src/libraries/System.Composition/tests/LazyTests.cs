@@ -32,7 +32,10 @@ namespace System.Composition.UnitTests
         [Export, ExportMetadata("Name", "Fred")]
         public class NamedFred { }
 
-        public class Named { public string Name { get; set; } }
+        public class Named
+        {
+            public string Name { get; set; }
+        }
 
         [Fact]
         public void ComposesLazily()

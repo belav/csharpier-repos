@@ -36,7 +36,11 @@ public class PasswordValidator<TUser> : IPasswordValidator<TUser> where TUser : 
     /// <param name="user">The user whose password should be validated.</param>
     /// <param name="password">The password supplied for validation</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
-    public virtual Task<IdentityResult> ValidateAsync(UserManager<TUser> manager, TUser user, string? password)
+    public virtual Task<IdentityResult> ValidateAsync(
+        UserManager<TUser> manager,
+        TUser user,
+        string? password
+    )
     {
         if (password == null)
         {
@@ -73,15 +77,17 @@ public class PasswordValidator<TUser> : IPasswordValidator<TUser> where TUser : 
             errors ??= new List<IdentityError>();
             errors.Add(Describer.PasswordRequiresUpper());
         }
-        if (options.RequiredUniqueChars >= 1 && password.Distinct().Count() < options.RequiredUniqueChars)
+        if (
+            options.RequiredUniqueChars >= 1
+            && password.Distinct().Count() < options.RequiredUniqueChars
+        )
         {
             errors ??= new List<IdentityError>();
             errors.Add(Describer.PasswordRequiresUniqueChars(options.RequiredUniqueChars));
         }
-        return
-            Task.FromResult(errors?.Count > 0
-                ? IdentityResult.Failed(errors)
-                : IdentityResult.Success);
+        return Task.FromResult(
+            errors?.Count > 0 ? IdentityResult.Failed(errors) : IdentityResult.Success
+        );
     }
 
     /// <summary>

@@ -43,16 +43,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
             string? expected,
             string looseDiagnostics,
             string strictDiagnostics,
-            bool runLooseSubTreeCheck = true)
+            bool runLooseSubTreeCheck = true
+        )
         {
             Test(stringText, JsonOptions.Loose, expected, looseDiagnostics, runLooseSubTreeCheck);
-            Test(stringText, JsonOptions.Strict, expected, strictDiagnostics, runSubTreeChecks: true);
+            Test(
+                stringText,
+                JsonOptions.Strict,
+                expected,
+                strictDiagnostics,
+                runSubTreeChecks: true
+            );
         }
 
         private void Test(
-            string stringText, JsonOptions options,
-            string? expectedTree, string expectedDiagnostics,
-            bool runSubTreeChecks)
+            string stringText,
+            JsonOptions options,
+            string? expectedTree,
+            string expectedDiagnostics,
+            bool runSubTreeChecks
+        )
         {
             var tree = TryParseTree(stringText, options, conversionFailureOk: false);
             if (tree == null)
@@ -78,7 +88,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         private protected static void ValidateDiagnostics(string expectedDiagnostics, JsonTree tree)
         {
             var actualDiagnostics = DiagnosticsToText(tree.Diagnostics).Replace("\"", "\"\"");
-            Assert.Equal(RemoveMessagesInNonSupportedLanguage(expectedDiagnostics).Replace("\"", "\"\""), actualDiagnostics);
+            Assert.Equal(
+                RemoveMessagesInNonSupportedLanguage(expectedDiagnostics).Replace("\"", "\"\""),
+                actualDiagnostics
+            );
         }
 
         private static string RemoveMessagesInNonSupportedLanguage(string value)
@@ -110,9 +123,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
             current = stringText;
             while (current != "@\"\"" && current != "\"\"")
             {
-                current = current[0] == '@'
-                    ? "@\"" + current[3..]
-                    : "\"" + current[2..];
+                current = current[0] == '@' ? "@\"" + current[3..] : "\"" + current[2..];
 
                 TryParseTree(current, options, conversionFailureOk: true);
             }
@@ -121,12 +132,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
             {
                 TryParseTree(
                     stringText[..start] + stringText[(start + 1)..],
-                    options, conversionFailureOk: true);
+                    options,
+                    conversionFailureOk: true
+                );
             }
         }
 
         private protected (SyntaxToken, JsonTree?, VirtualCharSequence) JustParseTree(
-            string stringText, JsonOptions options, bool conversionFailureOk)
+            string stringText,
+            JsonOptions options,
+            bool conversionFailureOk
+        )
         {
             var token = GetStringToken(stringText);
             if (token.ValueText == "")
@@ -144,7 +160,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         }
 
         private JsonTree? TryParseTree(
-            string stringText, JsonOptions options, bool conversionFailureOk)
+            string stringText,
+            JsonOptions options,
+            bool conversionFailureOk
+        )
         {
             var (token, tree, allChars) = JustParseTree(stringText, options, conversionFailureOk);
             if (tree == null)
@@ -171,7 +190,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
             {
                 try
                 {
-                    JsonDocument.Parse(token.ValueText, new JsonDocumentOptions { AllowTrailingCommas = false, CommentHandling = JsonCommentHandling.Disallow });
+                    JsonDocument.Parse(
+                        token.ValueText,
+                        new JsonDocumentOptions
+                        {
+                            AllowTrailingCommas = false,
+                            CommentHandling = JsonCommentHandling.Disallow
+                        }
+                    );
                 }
                 catch (Exception)
                 {
@@ -184,22 +210,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
             return tree;
         }
 
-        private protected static string TreeToText(JsonTree tree)
-            => new XElement("Tree",
-                NodeToElement(tree.Root)).ToString();
+        private protected static string TreeToText(JsonTree tree) =>
+            new XElement("Tree", NodeToElement(tree.Root)).ToString();
 
-        private protected static string DiagnosticsToText(ImmutableArray<EmbeddedDiagnostic> diagnostics)
+        private protected static string DiagnosticsToText(
+            ImmutableArray<EmbeddedDiagnostic> diagnostics
+        )
         {
             if (diagnostics.IsEmpty)
                 return "";
 
-            return new XElement("Diagnostics",
+            return new XElement(
+                "Diagnostics",
                 diagnostics.Select(d =>
                 {
                     var element = new XElement("Diagnostic");
                     // Ensure the diagnostic we emit is the same as the .NET one. Note: we can only
                     // do this in en-US as that's the only culture where we control the text exactly
-                    // and can ensure it exactly matches Regex.  We depend on localization to do a 
+                    // and can ensure it exactly matches Regex.  We depend on localization to do a
                     // good enough job here for other languages.
                     if (Thread.CurrentThread.CurrentCulture.Name == SupportedLanguage)
                         element.Add(new XAttribute("Message", d.Message));
@@ -208,7 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
                     element.Add(new XAttribute("Length", d.Span.Length));
 
                     return element;
-                })).ToString();
+                })
+            ).ToString();
         }
 
         private static XElement NodeToElement(JsonNode node)
@@ -232,7 +261,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
             return element;
         }
 
-        private static XElement NodeOrTokenToElement(EmbeddedSyntaxNodeOrToken<JsonKind, JsonNode> child)
+        private static XElement NodeOrTokenToElement(
+            EmbeddedSyntaxNodeOrToken<JsonKind, JsonNode> child
+        )
         {
             return child.IsNode ? NodeToElement(child.Node) : TokenToElement(child.Token);
         }
@@ -298,21 +329,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
                 element.Add(new XAttribute("value", token.Value));
 
             if (token.LeadingTrivia.Length > 0)
-                element.Add(new XElement("Trivia", token.LeadingTrivia.Select(t => TriviaToElement(t))));
+                element.Add(
+                    new XElement("Trivia", token.LeadingTrivia.Select(t => TriviaToElement(t)))
+                );
 
             if (token.VirtualChars.Length > 0)
                 element.Add(token.VirtualChars.CreateString());
 
             if (token.TrailingTrivia.Length > 0)
-                element.Add(new XElement("Trivia", token.TrailingTrivia.Select(t => TriviaToElement(t))));
+                element.Add(
+                    new XElement("Trivia", token.TrailingTrivia.Select(t => TriviaToElement(t)))
+                );
 
             return element;
         }
 
-        private static XElement TriviaToElement(JsonTrivia trivia)
-            => new(
-                trivia.Kind.ToString(),
-                trivia.VirtualChars.CreateString().Replace("\f", "\\f"));
+        private static XElement TriviaToElement(JsonTrivia trivia) =>
+            new(trivia.Kind.ToString(), trivia.VirtualChars.CreateString().Replace("\f", "\\f"));
 
         private protected static void CheckInvariants(JsonTree tree, VirtualCharSequence allChars)
         {
@@ -322,7 +355,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
             Assert.Equal(allChars.Length, position);
         }
 
-        private static void CheckInvariants(JsonNode node, ref int position, VirtualCharSequence allChars)
+        private static void CheckInvariants(
+            JsonNode node,
+            ref int position,
+            VirtualCharSequence allChars
+        )
         {
             foreach (var child in node)
             {
@@ -337,20 +374,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
             }
         }
 
-        private static void CheckInvariants(JsonToken token, ref int position, VirtualCharSequence allChars)
+        private static void CheckInvariants(
+            JsonToken token,
+            ref int position,
+            VirtualCharSequence allChars
+        )
         {
             CheckInvariants(token.LeadingTrivia, ref position, allChars);
             CheckCharacters(token.VirtualChars, ref position, allChars);
             CheckInvariants(token.TrailingTrivia, ref position, allChars);
         }
 
-        private static void CheckInvariants(ImmutableArray<JsonTrivia> leadingTrivia, ref int position, VirtualCharSequence allChars)
+        private static void CheckInvariants(
+            ImmutableArray<JsonTrivia> leadingTrivia,
+            ref int position,
+            VirtualCharSequence allChars
+        )
         {
             foreach (var trivia in leadingTrivia)
                 CheckInvariants(trivia, ref position, allChars);
         }
 
-        private static void CheckInvariants(JsonTrivia trivia, ref int position, VirtualCharSequence allChars)
+        private static void CheckInvariants(
+            JsonTrivia trivia,
+            ref int position,
+            VirtualCharSequence allChars
+        )
         {
             switch (trivia.Kind)
             {
@@ -367,7 +416,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
             CheckCharacters(trivia.VirtualChars, ref position, allChars);
         }
 
-        private static void CheckCharacters(VirtualCharSequence virtualChars, ref int position, VirtualCharSequence allChars)
+        private static void CheckCharacters(
+            VirtualCharSequence virtualChars,
+            ref int position,
+            VirtualCharSequence allChars
+        )
         {
             for (var i = 0; i < virtualChars.Length; i++)
                 Assert.Equal(allChars[position + i], virtualChars[i]);
@@ -390,9 +443,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
         [Fact]
         public void TestDeepRecursion()
         {
-            var (token, tree, chars) =
-                JustParseTree(
-@"@""[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
+            var (token, tree, chars) = JustParseTree(
+                @"@""[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
 [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
 [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
 [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
@@ -430,7 +482,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
 [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
 [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
 [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[""",
-JsonOptions.Loose, conversionFailureOk: false);
+                JsonOptions.Loose,
+                conversionFailureOk: false
+            );
             Assert.False(token.IsMissing);
             Assert.False(chars.IsDefaultOrEmpty);
             Assert.Null(tree);

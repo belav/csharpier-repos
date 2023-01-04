@@ -8,12 +8,18 @@ using System.Text;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal record struct SourceGeneratorIdentity(string AssemblyName, Version AssemblyVersion, string TypeName)
+    internal record struct SourceGeneratorIdentity(
+        string AssemblyName,
+        Version AssemblyVersion,
+        string TypeName
+    )
     {
         public SourceGeneratorIdentity(ISourceGenerator generator)
-            : this(GetGeneratorAssemblyName(generator), generator.GetGeneratorType().Assembly.GetName().Version!, GetGeneratorTypeName(generator))
-        {
-        }
+            : this(
+                GetGeneratorAssemblyName(generator),
+                generator.GetGeneratorType().Assembly.GetName().Version!,
+                GetGeneratorTypeName(generator)
+            ) { }
 
         public static string GetGeneratorAssemblyName(ISourceGenerator generator)
         {
