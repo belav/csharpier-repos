@@ -14,6 +14,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         public AbstractLanguageServer<RequestContext> Create(
             JsonRpc jsonRpc,
             ICapabilitiesProvider capabilitiesProvider,
-            ILspServiceLogger logger);
+            ILspServiceLogger logger
+        );
     }
 }

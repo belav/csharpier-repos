@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
         protected static void TryClassifyStaticSymbol(
             ISymbol symbol,
             TextSpan span,
-            ArrayBuilder<ClassifiedSpan> result)
+            ArrayBuilder<ClassifiedSpan> result
+        )
         {
             if (!IsStaticSymbol(symbol))
             {

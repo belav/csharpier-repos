@@ -21,7 +21,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
         private bool _needsLoadOnNextActivate = true;
 
-        protected abstract AbstractOptionPageControl CreateOptionPage(IServiceProvider serviceProvider, OptionStore optionStore);
+        protected abstract AbstractOptionPageControl CreateOptionPage(
+            IServiceProvider serviceProvider,
+            OptionStore optionStore
+        );
 
         protected AbstractOptionPageControl pageControl;
 
@@ -32,7 +35,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 var componentModel = (IComponentModel)this.Site.GetService(typeof(SComponentModel));
                 var workspace = componentModel.GetService<VisualStudioWorkspace>();
                 s_optionService = workspace.Services.GetService<ILegacyWorkspaceOptionService>();
-                s_optionStore = new OptionStore(new SolutionOptionSet(s_optionService), Enumerable.Empty<IOption>());
+                s_optionStore = new OptionStore(
+                    new SolutionOptionSet(s_optionService),
+                    Enumerable.Empty<IOption>()
+                );
             }
 
             // Use a single option store for all option pages so that changes are accumulated
@@ -81,7 +87,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             //    saved. The intent here is the settings get reloaded so the next time you open the
             //    page they are properly populated.
             //
-            // We need to ignore the first case since the option store is static and shared among 
+            // We need to ignore the first case since the option store is static and shared among
             // pages. Each page will get this same call so we should ensure that our page has been
             // created first.
             //

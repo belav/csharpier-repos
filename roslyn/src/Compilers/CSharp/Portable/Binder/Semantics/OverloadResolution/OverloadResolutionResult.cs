@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// Summarizes the results of an overload resolution analysis, as described in section 7.5 of
     /// the language specification. Describes whether overload resolution succeeded, and which
     /// method was selected if overload resolution succeeded, as well as detailed information about
-    /// each method that was considered. 
+    /// each method that was considered.
     /// </summary>
     internal class OverloadResolutionResult<TMember> where TMember : Symbol
     {
@@ -101,10 +101,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public ImmutableArray<MemberResolutionResult<TMember>> Results
         {
-            get
-            {
-                return this.ResultsBuilder.ToImmutable();
-            }
+            get { return this.ResultsBuilder.ToImmutable(); }
         }
 
         /// <summary>
@@ -145,7 +142,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return result.ToImmutableAndFree();
         }
 
-        private static ThreeState TryGetBestResult(ArrayBuilder<MemberResolutionResult<TMember>> allResults, out MemberResolutionResult<TMember> best)
+        private static ThreeState TryGetBestResult(
+            ArrayBuilder<MemberResolutionResult<TMember>> allResults,
+            out MemberResolutionResult<TMember> best
+        )
         {
             best = default(MemberResolutionResult<TMember>);
             ThreeState haveBest = ThreeState.False;
@@ -156,7 +156,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     if (haveBest == ThreeState.True)
                     {
-                        Debug.Assert(false, "How did we manage to get two methods in the overload resolution results that were both better than every other method?");
+                        Debug.Assert(
+                            false,
+                            "How did we manage to get two methods in the overload resolution results that were both better than every other method?"
+                        );
                         best = default(MemberResolutionResult<TMember>);
                         return ThreeState.False;
                     }
@@ -179,7 +182,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// gradually disqualifies them.  Therefore, our strategy will be to perform our checks in the
         /// reverse order - the farther a candidate got through the process without being flagged, the
         /// "better" it was.
-        /// 
+        ///
         /// Note that "final validation" is performed after overload resolution,
         /// so final validation errors are not seen here. Final validation errors include
         /// violations of constraints on method type parameters, static/instance mismatches,
@@ -200,9 +203,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpSyntaxNode queryClause = null,
             bool isMethodGroupConversion = false,
             RefKind? returnRefKind = null,
-            TypeSymbol delegateOrFunctionPointerType = null) where T : Symbol
+            TypeSymbol delegateOrFunctionPointerType = null
+        ) where T : Symbol
         {
-            Debug.Assert(!this.Succeeded, "Don't ask for diagnostic info on a successful overload resolution result.");
+            Debug.Assert(
+                !this.Succeeded,
+                "Don't ask for diagnostic info on a successful overload resolution result."
+            );
 
             // Each argument must have non-null Display in case it is used in a diagnostic.
             Debug.Assert(arguments.Arguments.All(a => a.Display != null));
@@ -233,16 +240,25 @@ namespace Microsoft.CodeAnalysis.CSharp
             // There are two ways that otherwise-applicable candidates can be ruled out by overload resolution:
             //   a) there is another applicable candidate that is strictly better, or
             //   b) there is another applicable candidate from a more derived type.
-            // There can't be exactly one such candidate, since that would the existence of some better 
+            // There can't be exactly one such candidate, since that would the existence of some better
             // applicable candidate, which would have either won or been detected above.  It is possible,
             // however, that there are multiple candidates that are worse than each other in a cycle.
             // This might sound like a paradox, but it is in fact possible. Because there are
             // intransitivities in convertibility (where A-->B, B-->C and C-->A but none of the
-            // opposite conversions are legal) there are also intransitivities in betterness. 
+            // opposite conversions are legal) there are also intransitivities in betterness.
             // (Obviously, there can't be a LessDerived cycle, since we break type hierarchy cycles during
             // symbol table construction.)
 
-            if (HadAmbiguousWorseMethods(diagnostics, symbols, location, queryClause != null, receiver, name))
+            if (
+                HadAmbiguousWorseMethods(
+                    diagnostics,
+                    symbols,
+                    location,
+                    queryClause != null,
+                    receiver,
+                    name
+                )
+            )
             {
                 return;
             }
@@ -270,7 +286,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             // type(or alternatively expression) then the first such method is the best bad method.
             // To retain existing behavior, we use the location of the invoked expression for the error.
 
-            if (HadStaticInstanceMismatch(diagnostics, symbols, invokedExpression?.GetLocation() ?? location, binder, receiver, nodeOpt, delegateOrFunctionPointerType))
+            if (
+                HadStaticInstanceMismatch(
+                    diagnostics,
+                    symbols,
+                    invokedExpression?.GetLocation() ?? location,
+                    binder,
+                    receiver,
+                    nodeOpt,
+                    delegateOrFunctionPointerType
+                )
+            )
             {
                 return;
             }
@@ -281,8 +307,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Otherwise if there is any method whose return type does not match the delegate, then the
             // first such method is the best bad method
 
-            if (isMethodGroupConversion && returnRefKind != null &&
-                HadReturnMismatch(location, diagnostics, returnRefKind.GetValueOrDefault(), delegateOrFunctionPointerType))
+            if (
+                isMethodGroupConversion
+                && returnRefKind != null
+                && HadReturnMismatch(
+                    location,
+                    diagnostics,
+                    returnRefKind.GetValueOrDefault(),
+                    delegateOrFunctionPointerType
+                )
+            )
             {
                 return;
             }
@@ -307,7 +341,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Otherwise, if there is any such method that has a bad argument conversion or out/ref mismatch
             // then the first such method found is the best bad method.
 
-            if (HadBadArguments(diagnostics, binder, name, arguments, symbols, location, binder.Flags, isMethodGroupConversion))
+            if (
+                HadBadArguments(
+                    diagnostics,
+                    binder,
+                    name,
+                    arguments,
+                    symbols,
+                    location,
+                    binder.Flags,
+                    isMethodGroupConversion
+                )
+            )
             {
                 return;
             }
@@ -316,10 +361,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             AssertNone(MemberResolutionKind.BadArgumentConversion);
 
             // Otherwise, if there is any such method where type inference succeeded but inferred
-            // a parameter type that violates its own constraints then the first such method is 
+            // a parameter type that violates its own constraints then the first such method is
             // the best bad method.
 
-            if (HadConstructedParameterFailedConstraintCheck(binder.Conversions, binder.Compilation, diagnostics, location))
+            if (
+                HadConstructedParameterFailedConstraintCheck(
+                    binder.Conversions,
+                    binder.Compilation,
+                    diagnostics,
+                    location
+                )
+            )
             {
                 return;
             }
@@ -341,7 +393,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Otherwise, if there is any such method where type inference failed then the
             // first such method is the best bad method.
 
-            if (TypeInferenceFailed(binder, diagnostics, symbols, receiver, arguments, location, queryClause))
+            if (
+                TypeInferenceFailed(
+                    binder,
+                    diagnostics,
+                    symbols,
+                    receiver,
+                    arguments,
+                    location,
+                    queryClause
+                )
+            )
             {
                 return;
             }
@@ -349,7 +411,6 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Since we didn't return...
             AssertNone(MemberResolutionKind.TypeInferenceFailed);
             AssertNone(MemberResolutionKind.TypeInferenceExtensionInstanceArgument);
-
 
             //// PHASE 3: Use site errors ////
 
@@ -366,7 +427,6 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Since we didn't return...
             AssertNone(MemberResolutionKind.UseSiteError);
 
-
             //// PHASE 4: Argument analysis failures and unsupported metadata ////
 
             // The first to checks in overload resolution are for unsupported metadata (Symbol.HasUnsupportedMetadata)
@@ -374,8 +434,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             // otherwise we'd report errors about losing candidates, effectively "pulling in" unnecessary assemblies.
 
             bool supportedRequiredParameterMissingConflicts = false;
-            MemberResolutionResult<TMember> firstSupported = default(MemberResolutionResult<TMember>);
-            MemberResolutionResult<TMember> firstUnsupported = default(MemberResolutionResult<TMember>);
+            MemberResolutionResult<TMember> firstSupported =
+                default(MemberResolutionResult<TMember>);
+            MemberResolutionResult<TMember> firstUnsupported =
+                default(MemberResolutionResult<TMember>);
 
             var supportedInPriorityOrder = new MemberResolutionResult<TMember>[7]; // from highest to lowest priority
             const int duplicateNamedArgumentPriority = 0;
@@ -397,10 +459,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
                         break;
                     case MemberResolutionKind.NoCorrespondingNamedParameter:
-                        if (supportedInPriorityOrder[noCorrespondingNamedParameterPriority].IsNull ||
-                            result.Result.BadArgumentsOpt[0] > supportedInPriorityOrder[noCorrespondingNamedParameterPriority].Result.BadArgumentsOpt[0])
+                        if (
+                            supportedInPriorityOrder[noCorrespondingNamedParameterPriority].IsNull
+                            || result.Result.BadArgumentsOpt[0]
+                                > supportedInPriorityOrder[noCorrespondingNamedParameterPriority]
+                                    .Result
+                                    .BadArgumentsOpt[0]
+                        )
                         {
-                            supportedInPriorityOrder[noCorrespondingNamedParameterPriority] = result;
+                            supportedInPriorityOrder[noCorrespondingNamedParameterPriority] =
+                                result;
                         }
                         break;
                     case MemberResolutionKind.NoCorrespondingParameter:
@@ -421,29 +489,46 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
                         break;
                     case MemberResolutionKind.NameUsedForPositional:
-                        if (supportedInPriorityOrder[nameUsedForPositionalPriority].IsNull ||
-                            result.Result.BadArgumentsOpt[0] > supportedInPriorityOrder[nameUsedForPositionalPriority].Result.BadArgumentsOpt[0])
+                        if (
+                            supportedInPriorityOrder[nameUsedForPositionalPriority].IsNull
+                            || result.Result.BadArgumentsOpt[0]
+                                > supportedInPriorityOrder[nameUsedForPositionalPriority]
+                                    .Result
+                                    .BadArgumentsOpt[0]
+                        )
                         {
                             supportedInPriorityOrder[nameUsedForPositionalPriority] = result;
                         }
                         break;
                     case MemberResolutionKind.BadNonTrailingNamedArgument:
-                        if (supportedInPriorityOrder[badNonTrailingNamedArgumentPriority].IsNull ||
-                            result.Result.BadArgumentsOpt[0] > supportedInPriorityOrder[badNonTrailingNamedArgumentPriority].Result.BadArgumentsOpt[0])
+                        if (
+                            supportedInPriorityOrder[badNonTrailingNamedArgumentPriority].IsNull
+                            || result.Result.BadArgumentsOpt[0]
+                                > supportedInPriorityOrder[badNonTrailingNamedArgumentPriority]
+                                    .Result
+                                    .BadArgumentsOpt[0]
+                        )
                         {
                             supportedInPriorityOrder[badNonTrailingNamedArgumentPriority] = result;
                         }
                         break;
                     case MemberResolutionKind.DuplicateNamedArgument:
+
                         {
-                            if (supportedInPriorityOrder[duplicateNamedArgumentPriority].IsNull ||
-                            result.Result.BadArgumentsOpt[0] > supportedInPriorityOrder[duplicateNamedArgumentPriority].Result.BadArgumentsOpt[0])
+                            if (
+                                supportedInPriorityOrder[duplicateNamedArgumentPriority].IsNull
+                                || result.Result.BadArgumentsOpt[0]
+                                    > supportedInPriorityOrder[duplicateNamedArgumentPriority]
+                                        .Result
+                                        .BadArgumentsOpt[0]
+                            )
                             {
                                 supportedInPriorityOrder[duplicateNamedArgumentPriority] = result;
                             }
                         }
                         break;
                     case MemberResolutionKind.WrongCallingConvention:
+
                         {
                             if (supportedInPriorityOrder[wrongCallingConventionPriority].IsNull)
                             {
@@ -471,43 +556,72 @@ namespace Microsoft.CodeAnalysis.CSharp
             // If there are any supported candidates, we don't care about unsupported candidates.
             if (firstSupported.IsNotNull)
             {
-                if (firstSupported.Member is FunctionPointerMethodSymbol
-                    && firstSupported.Result.Kind == MemberResolutionKind.NoCorrespondingNamedParameter)
+                if (
+                    firstSupported.Member is FunctionPointerMethodSymbol
+                    && firstSupported.Result.Kind
+                        == MemberResolutionKind.NoCorrespondingNamedParameter
+                )
                 {
                     int badArg = firstSupported.Result.BadArgumentsOpt[0];
                     Debug.Assert(arguments.Names[badArg].HasValue);
                     Location badName = arguments.Names[badArg].GetValueOrDefault().Location;
-                    diagnostics.Add(ErrorCode.ERR_FunctionPointersCannotBeCalledWithNamedArguments, badName);
+                    diagnostics.Add(
+                        ErrorCode.ERR_FunctionPointersCannotBeCalledWithNamedArguments,
+                        badName
+                    );
                     return;
                 }
                 // If there are multiple supported candidates, we don't have a good way to choose the best
                 // one so we report a general diagnostic (below).
-                else if (!(firstSupported.Result.Kind == MemberResolutionKind.RequiredParameterMissing && supportedRequiredParameterMissingConflicts)
+                else if (
+                    !(
+                        firstSupported.Result.Kind == MemberResolutionKind.RequiredParameterMissing
+                        && supportedRequiredParameterMissingConflicts
+                    )
                     && !isMethodGroupConversion
                     // Function pointer type symbols don't have named parameters, so we just want to report a general mismatched parameter
                     // count instead of name errors.
-                    && (firstSupported.Member is not FunctionPointerMethodSymbol))
+                    && (firstSupported.Member is not FunctionPointerMethodSymbol)
+                )
                 {
                     switch (firstSupported.Result.Kind)
                     {
-                        // Otherwise, if there is any such method that has a named argument and a positional 
+                        // Otherwise, if there is any such method that has a named argument and a positional
                         // argument for the same parameter then the first such method is the best bad method.
                         case MemberResolutionKind.NameUsedForPositional:
-                            ReportNameUsedForPositional(firstSupported, diagnostics, arguments, symbols);
+                            ReportNameUsedForPositional(
+                                firstSupported,
+                                diagnostics,
+                                arguments,
+                                symbols
+                            );
                             return;
 
                         // Otherwise, if there is any such method that has a named argument that corresponds
                         // to no parameter then the first such method is the best bad method.
                         case MemberResolutionKind.NoCorrespondingNamedParameter:
-                            ReportNoCorrespondingNamedParameter(firstSupported, name, diagnostics, arguments, delegateTypeBeingInvoked, symbols);
+                            ReportNoCorrespondingNamedParameter(
+                                firstSupported,
+                                name,
+                                diagnostics,
+                                arguments,
+                                delegateTypeBeingInvoked,
+                                symbols
+                            );
                             return;
 
                         // Otherwise, if there is any such method that has a required parameter
-                        // but no argument was supplied for it then the first such method is 
+                        // but no argument was supplied for it then the first such method is
                         // the best bad method.
                         case MemberResolutionKind.RequiredParameterMissing:
                             // CONSIDER: for consistency with dev12, we would goto default except in omitted ref cases.
-                            ReportMissingRequiredParameter(firstSupported, diagnostics, delegateTypeBeingInvoked, symbols, location);
+                            ReportMissingRequiredParameter(
+                                firstSupported,
+                                diagnostics,
+                                delegateTypeBeingInvoked,
+                                symbols,
+                                location
+                            );
                             return;
 
                         // NOTE: For some reason, there is no specific handling for this result kind.
@@ -517,7 +631,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // Otherwise, if there is any such method that has a named argument was used out-of-position
                         // and followed by unnamed arguments.
                         case MemberResolutionKind.BadNonTrailingNamedArgument:
-                            ReportBadNonTrailingNamedArgument(firstSupported, diagnostics, arguments, symbols);
+                            ReportBadNonTrailingNamedArgument(
+                                firstSupported,
+                                diagnostics,
+                                arguments,
+                                symbols
+                            );
                             return;
 
                         case MemberResolutionKind.DuplicateNamedArgument:
@@ -527,13 +646,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else if (firstSupported.Result.Kind == MemberResolutionKind.WrongCallingConvention)
                 {
-                    ReportWrongCallingConvention(location, diagnostics, symbols, firstSupported, ((FunctionPointerTypeSymbol)delegateOrFunctionPointerType).Signature);
+                    ReportWrongCallingConvention(
+                        location,
+                        diagnostics,
+                        symbols,
+                        firstSupported,
+                        ((FunctionPointerTypeSymbol)delegateOrFunctionPointerType).Signature
+                    );
                     return;
                 }
             }
             else if (firstUnsupported.IsNotNull)
             {
-                // Otherwise, if there is any such method that cannot be used because it is                
+                // Otherwise, if there is any such method that cannot be used because it is
                 // unsupported by the language then the first such method is the best bad method.
                 // This is the first kind of problem overload resolution checks for, so it should
                 // be the last MemberResolutionKind we check for.  Candidates with this kind
@@ -554,11 +679,24 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (!isMethodGroupConversion)
             {
-                ReportBadParameterCount(diagnostics, name, arguments, symbols, location, typeContainingConstructor, delegateTypeBeingInvoked);
+                ReportBadParameterCount(
+                    diagnostics,
+                    name,
+                    arguments,
+                    symbols,
+                    location,
+                    typeContainingConstructor,
+                    delegateTypeBeingInvoked
+                );
             }
         }
 
-        private static void ReportUnsupportedMetadata(Location location, BindingDiagnosticBag diagnostics, ImmutableArray<Symbol> symbols, MemberResolutionResult<TMember> firstUnsupported)
+        private static void ReportUnsupportedMetadata(
+            Location location,
+            BindingDiagnosticBag diagnostics,
+            ImmutableArray<Symbol> symbols,
+            MemberResolutionResult<TMember> firstUnsupported
+        )
         {
             DiagnosticInfo diagInfo = firstUnsupported.Member.GetUseSiteInfo().DiagnosticInfo;
             Debug.Assert(diagInfo != null);
@@ -568,18 +706,29 @@ namespace Microsoft.CodeAnalysis.CSharp
             diagInfo = new DiagnosticInfoWithSymbols(
                 (ErrorCode)diagInfo.Code,
                 diagInfo.Arguments,
-                symbols);
+                symbols
+            );
 
             Symbol.ReportUseSiteDiagnostic(diagInfo, diagnostics, location);
         }
 
-        private static void ReportWrongCallingConvention(Location location, BindingDiagnosticBag diagnostics, ImmutableArray<Symbol> symbols, MemberResolutionResult<TMember> firstSupported, MethodSymbol target)
+        private static void ReportWrongCallingConvention(
+            Location location,
+            BindingDiagnosticBag diagnostics,
+            ImmutableArray<Symbol> symbols,
+            MemberResolutionResult<TMember> firstSupported,
+            MethodSymbol target
+        )
         {
             Debug.Assert(firstSupported.Result.Kind == MemberResolutionKind.WrongCallingConvention);
-            diagnostics.Add(new DiagnosticInfoWithSymbols(
-                ErrorCode.ERR_WrongFuncPtrCallingConvention,
-                new object[] { firstSupported.Member, target.CallingConvention },
-                symbols), location);
+            diagnostics.Add(
+                new DiagnosticInfoWithSymbols(
+                    ErrorCode.ERR_WrongFuncPtrCallingConvention,
+                    new object[] { firstSupported.Member, target.CallingConvention },
+                    symbols
+                ),
+                location
+            );
         }
 
         private bool UseSiteError()
@@ -590,8 +739,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            Debug.Assert(bad.Member.GetUseSiteInfo().DiagnosticInfo.Severity == DiagnosticSeverity.Error,
-                "Why did we use MemberResolutionKind.UseSiteError if we didn't have a use site error?");
+            Debug.Assert(
+                bad.Member.GetUseSiteInfo().DiagnosticInfo.Severity == DiagnosticSeverity.Error,
+                "Why did we use MemberResolutionKind.UseSiteError if we didn't have a use site error?"
+            );
 
             // Use site errors are reported unconditionally in PerformMemberOverloadResolution/PerformObjectCreationOverloadResolution.
 
@@ -601,7 +752,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private bool InaccessibleTypeArgument(
             BindingDiagnosticBag diagnostics,
             ImmutableArray<Symbol> symbols,
-            Location location)
+            Location location
+        )
         {
             var inaccessible = GetFirstMemberKind(MemberResolutionKind.InaccessibleTypeArgument);
             if (inaccessible.IsNull)
@@ -610,10 +762,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // error CS0122: 'M<X>(I<X>)' is inaccessible due to its protection level
-            diagnostics.Add(new DiagnosticInfoWithSymbols(
-                ErrorCode.ERR_BadAccess,
-                new object[] { inaccessible.Member },
-                symbols), location);
+            diagnostics.Add(
+                new DiagnosticInfoWithSymbols(
+                    ErrorCode.ERR_BadAccess,
+                    new object[] { inaccessible.Member },
+                    symbols
+                ),
+                location
+            );
             return true;
         }
 
@@ -624,9 +780,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder binder,
             BoundExpression receiverOpt,
             SyntaxNode nodeOpt,
-            TypeSymbol delegateOrFunctionPointerType)
+            TypeSymbol delegateOrFunctionPointerType
+        )
         {
-            var staticInstanceMismatch = GetFirstMemberKind(MemberResolutionKind.StaticInstanceMismatch);
+            var staticInstanceMismatch = GetFirstMemberKind(
+                MemberResolutionKind.StaticInstanceMismatch
+            );
             if (staticInstanceMismatch.IsNull)
             {
                 return false;
@@ -638,13 +797,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (receiverOpt?.Kind == BoundKind.QueryClause)
             {
                 // Could not find an implementation of the query pattern for source type '{0}'.  '{1}' not found.
-                diagnostics.Add(ErrorCode.ERR_QueryNoProvider, location, receiverOpt.Type, symbol.Name);
+                diagnostics.Add(
+                    ErrorCode.ERR_QueryNoProvider,
+                    location,
+                    receiverOpt.Type,
+                    symbol.Name
+                );
             }
             else if (binder.Flags.Includes(BinderFlags.CollectionInitializerAddMethod))
             {
                 diagnostics.Add(ErrorCode.ERR_InitializerAddHasWrongSignature, location, symbol);
             }
-            else if (nodeOpt?.Kind() == SyntaxKind.AwaitExpression && symbol.Name == WellKnownMemberNames.GetAwaiter)
+            else if (
+                nodeOpt?.Kind() == SyntaxKind.AwaitExpression
+                && symbol.Name == WellKnownMemberNames.GetAwaiter
+            )
             {
                 diagnostics.Add(ErrorCode.ERR_BadAwaitArg, location, receiverOpt.Type);
             }
@@ -654,31 +821,43 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                ErrorCode errorCode =
-                    symbol.RequiresInstanceReceiver()
-                    ? Binder.WasImplicitReceiver(receiverOpt) && binder.InFieldInitializer && !binder.BindingTopLevelScriptCode
+                ErrorCode errorCode = symbol.RequiresInstanceReceiver()
+                    ? Binder.WasImplicitReceiver(receiverOpt)
+                    && binder.InFieldInitializer
+                    && !binder.BindingTopLevelScriptCode
                         ? ErrorCode.ERR_FieldInitRefNonstatic
                         : ErrorCode.ERR_ObjectRequired
                     : ErrorCode.ERR_ObjectProhibited;
                 // error CS0176: Member 'Program.M(B)' cannot be accessed with an instance reference; qualify it with a type name instead
                 //     -or-
                 // error CS0120: An object reference is required for the non-static field, method, or property 'Program.M(B)'
-                diagnostics.Add(new DiagnosticInfoWithSymbols(
-                    errorCode,
-                    new object[] { symbol },
-                    symbols), location);
+                diagnostics.Add(
+                    new DiagnosticInfoWithSymbols(errorCode, new object[] { symbol }, symbols),
+                    location
+                );
             }
 
             return true;
         }
 
-        private bool HadReturnMismatch(Location location, BindingDiagnosticBag diagnostics, RefKind refKind, TypeSymbol delegateOrFunctionPointerType)
+        private bool HadReturnMismatch(
+            Location location,
+            BindingDiagnosticBag diagnostics,
+            RefKind refKind,
+            TypeSymbol delegateOrFunctionPointerType
+        )
         {
             var mismatch = GetFirstMemberKind(MemberResolutionKind.WrongRefKind);
             if (!mismatch.IsNull)
             {
-                diagnostics.Add(delegateOrFunctionPointerType.IsFunctionPointer() ? ErrorCode.ERR_FuncPtrRefMismatch : ErrorCode.ERR_DelegateRefMismatch,
-                    location, mismatch.Member, delegateOrFunctionPointerType);
+                diagnostics.Add(
+                    delegateOrFunctionPointerType.IsFunctionPointer()
+                        ? ErrorCode.ERR_FuncPtrRefMismatch
+                        : ErrorCode.ERR_DelegateRefMismatch,
+                    location,
+                    mismatch.Member,
+                    delegateOrFunctionPointerType
+                );
                 return true;
             }
 
@@ -719,43 +898,67 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression receiver,
             AnalyzedArguments arguments,
             Location location,
-            CSharpSyntaxNode queryClause = null)
+            CSharpSyntaxNode queryClause = null
+        )
         {
             var inferenceFailed = GetFirstMemberKind(MemberResolutionKind.TypeInferenceFailed);
             if (inferenceFailed.IsNotNull)
             {
                 if (queryClause != null)
                 {
-                    Binder.ReportQueryInferenceFailed(queryClause, inferenceFailed.Member.Name, receiver, arguments, symbols, diagnostics);
+                    Binder.ReportQueryInferenceFailed(
+                        queryClause,
+                        inferenceFailed.Member.Name,
+                        receiver,
+                        arguments,
+                        symbols,
+                        diagnostics
+                    );
                 }
                 else
                 {
                     // error CS0411: The type arguments for method 'M<T>(T)' cannot be inferred
                     // from the usage. Try specifying the type arguments explicitly.
-                    diagnostics.Add(new DiagnosticInfoWithSymbols(
-                        ErrorCode.ERR_CantInferMethTypeArgs,
-                        new object[] { inferenceFailed.Member },
-                        symbols), location);
+                    diagnostics.Add(
+                        new DiagnosticInfoWithSymbols(
+                            ErrorCode.ERR_CantInferMethTypeArgs,
+                            new object[] { inferenceFailed.Member },
+                            symbols
+                        ),
+                        location
+                    );
                 }
 
                 return true;
             }
 
-            inferenceFailed = GetFirstMemberKind(MemberResolutionKind.TypeInferenceExtensionInstanceArgument);
+            inferenceFailed = GetFirstMemberKind(
+                MemberResolutionKind.TypeInferenceExtensionInstanceArgument
+            );
             if (inferenceFailed.IsNotNull)
             {
                 Debug.Assert(arguments.Arguments.Count > 0);
                 var instanceArgument = arguments.Arguments[0];
                 if (queryClause != null)
                 {
-                    binder.ReportQueryLookupFailed(queryClause, instanceArgument, inferenceFailed.Member.Name, symbols, diagnostics);
+                    binder.ReportQueryLookupFailed(
+                        queryClause,
+                        instanceArgument,
+                        inferenceFailed.Member.Name,
+                        symbols,
+                        diagnostics
+                    );
                 }
                 else
                 {
-                    diagnostics.Add(new DiagnosticInfoWithSymbols(
-                        ErrorCode.ERR_NoSuchMemberOrExtension,
-                        new object[] { instanceArgument.Type, inferenceFailed.Member.Name },
-                        symbols), location);
+                    diagnostics.Add(
+                        new DiagnosticInfoWithSymbols(
+                            ErrorCode.ERR_NoSuchMemberOrExtension,
+                            new object[] { instanceArgument.Type, inferenceFailed.Member.Name },
+                            symbols
+                        ),
+                        location
+                    );
                 }
 
                 return true;
@@ -768,7 +971,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MemberResolutionResult<TMember> bad,
             BindingDiagnosticBag diagnostics,
             AnalyzedArguments arguments,
-            ImmutableArray<Symbol> symbols)
+            ImmutableArray<Symbol> symbols
+        )
         {
             int badArg = bad.Result.BadArgumentsOpt[0];
             // We would not have gotten this error had there not been a named argument.
@@ -778,17 +982,22 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(badName != null);
 
             // Named argument 'x' specifies a parameter for which a positional argument has already been given
-            diagnostics.Add(new DiagnosticInfoWithSymbols(
-                ErrorCode.ERR_NamedArgumentUsedInPositional,
-                new object[] { badName },
-                symbols), location);
+            diagnostics.Add(
+                new DiagnosticInfoWithSymbols(
+                    ErrorCode.ERR_NamedArgumentUsedInPositional,
+                    new object[] { badName },
+                    symbols
+                ),
+                location
+            );
         }
 
         private static void ReportBadNonTrailingNamedArgument(
             MemberResolutionResult<TMember> bad,
             BindingDiagnosticBag diagnostics,
             AnalyzedArguments arguments,
-            ImmutableArray<Symbol> symbols)
+            ImmutableArray<Symbol> symbols
+        )
         {
             int badArg = bad.Result.BadArgumentsOpt[0];
             // We would not have gotten this error had there not been a named argument.
@@ -798,21 +1007,34 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(badName != null);
 
             // Named argument 'x' is used out-of-position but is followed by an unnamed argument.
-            diagnostics.Add(new DiagnosticInfoWithSymbols(
-                ErrorCode.ERR_BadNonTrailingNamedArgument,
-                new object[] { badName },
-                symbols), location);
+            diagnostics.Add(
+                new DiagnosticInfoWithSymbols(
+                    ErrorCode.ERR_BadNonTrailingNamedArgument,
+                    new object[] { badName },
+                    symbols
+                ),
+                location
+            );
         }
 
-        private static void ReportDuplicateNamedArgument(MemberResolutionResult<TMember> result, BindingDiagnosticBag diagnostics, AnalyzedArguments arguments)
+        private static void ReportDuplicateNamedArgument(
+            MemberResolutionResult<TMember> result,
+            BindingDiagnosticBag diagnostics,
+            AnalyzedArguments arguments
+        )
         {
             Debug.Assert(result.Result.BadArgumentsOpt.Length == 1);
             Debug.Assert(arguments.Names[result.Result.BadArgumentsOpt[0]].HasValue);
-            (string name, Location location) = arguments.Names[result.Result.BadArgumentsOpt[0]].GetValueOrDefault();
+            (string name, Location location) = arguments.Names[
+                result.Result.BadArgumentsOpt[0]
+            ].GetValueOrDefault();
             Debug.Assert(name != null);
 
             // CS: Named argument '{0}' cannot be specified multiple times
-            diagnostics.Add(new CSDiagnosticInfo(ErrorCode.ERR_DuplicateNamedArgument, name), location);
+            diagnostics.Add(
+                new CSDiagnosticInfo(ErrorCode.ERR_DuplicateNamedArgument, name),
+                location
+            );
         }
 
         private static void ReportNoCorrespondingNamedParameter(
@@ -821,7 +1043,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             AnalyzedArguments arguments,
             NamedTypeSymbol delegateTypeBeingInvoked,
-            ImmutableArray<Symbol> symbols)
+            ImmutableArray<Symbol> symbols
+        )
         {
             // We know that there is at least one method that had a number of arguments
             // passed that was valid for *some* method in the candidate set. Given that
@@ -840,16 +1063,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             // error CS1739: The best overload for 'M' does not have a parameter named 'x'
             // Error CS1746: The delegate 'D' does not have a parameter named 'x'
 
-            ErrorCode code = (object)delegateTypeBeingInvoked != null ?
-                ErrorCode.ERR_BadNamedArgumentForDelegateInvoke :
-                ErrorCode.ERR_BadNamedArgument;
+            ErrorCode code =
+                (object)delegateTypeBeingInvoked != null
+                    ? ErrorCode.ERR_BadNamedArgumentForDelegateInvoke
+                    : ErrorCode.ERR_BadNamedArgument;
 
             object obj = (object)delegateTypeBeingInvoked ?? methodName;
 
-            diagnostics.Add(new DiagnosticInfoWithSymbols(
-                code,
-                new object[] { obj, badName },
-                symbols), location);
+            diagnostics.Add(
+                new DiagnosticInfoWithSymbols(code, new object[] { obj, badName }, symbols),
+                location
+            );
         }
 
         private static void ReportMissingRequiredParameter(
@@ -857,13 +1081,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             NamedTypeSymbol delegateTypeBeingInvoked,
             ImmutableArray<Symbol> symbols,
-            Location location)
+            Location location
+        )
         {
             // We know that there is at least one method that had a number of arguments
             // passed that was valid for *some* method in the candidate set. Given that
             // fact, we seek the *best* method in the candidate set to report the error
             // on. If we have a method that has a valid number of arguments, but the
-            // call was inapplicable because a required parameter does not have a 
+            // call was inapplicable because a required parameter does not have a
             // corresponding argument then that's a candidate for the "best" overload.
             //
             // For example, you might have M(int x, int y, int z = 3) and a call
@@ -891,10 +1116,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             object obj = (object)delegateTypeBeingInvoked ?? badMember;
 
-            diagnostics.Add(new DiagnosticInfoWithSymbols(
-                ErrorCode.ERR_NoCorrespondingArgument,
-                new object[] { badParamName, obj },
-                symbols), location);
+            diagnostics.Add(
+                new DiagnosticInfoWithSymbols(
+                    ErrorCode.ERR_NoCorrespondingArgument,
+                    new object[] { badParamName, obj },
+                    symbols
+                ),
+                location
+            );
         }
 
         private static void ReportBadParameterCount(
@@ -904,18 +1133,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<Symbol> symbols,
             Location location,
             NamedTypeSymbol typeContainingConstructor,
-            NamedTypeSymbol delegateTypeBeingInvoked)
+            NamedTypeSymbol delegateTypeBeingInvoked
+        )
         {
             // error CS1501: No overload for method 'M' takes n arguments
             // error CS1729: 'M' does not contain a constructor that takes n arguments
             // error CS1593: Delegate 'M' does not take n arguments
             // error CS8757: Function pointer 'M' does not take n arguments
 
-            FunctionPointerMethodSymbol functionPointerMethodBeingInvoked = symbols.IsDefault || symbols.Length != 1
-                ? null
-                : symbols[0] as FunctionPointerMethodSymbol;
+            FunctionPointerMethodSymbol functionPointerMethodBeingInvoked =
+                symbols.IsDefault || symbols.Length != 1
+                    ? null
+                    : symbols[0] as FunctionPointerMethodSymbol;
 
-            (ErrorCode code, object target) = (typeContainingConstructor, delegateTypeBeingInvoked, functionPointerMethodBeingInvoked) switch
+            (ErrorCode code, object target) = (
+                typeContainingConstructor,
+                delegateTypeBeingInvoked,
+                functionPointerMethodBeingInvoked
+            ) switch
             {
                 (object t, _, _) => (ErrorCode.ERR_BadCtorArgCount, t),
                 (_, object t, _) => (ErrorCode.ERR_BadDelArgCount, t),
@@ -929,10 +1164,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 argCount--;
             }
 
-            diagnostics.Add(new DiagnosticInfoWithSymbols(
-                code,
-                new object[] { target, argCount },
-                symbols), location);
+            diagnostics.Add(
+                new DiagnosticInfoWithSymbols(code, new object[] { target, argCount }, symbols),
+                location
+            );
 
             return;
         }
@@ -941,7 +1176,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ConversionsBase conversions,
             CSharpCompilation compilation,
             BindingDiagnosticBag diagnostics,
-            Location location)
+            Location location
+        )
         {
             // We know that there is at least one method that had a number of arguments
             // passed that was valid for *some* method in the candidate set. Given that
@@ -959,7 +1195,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Every required parameter has a corresponding argument. Type inference succeeds and infers
             // that T is string. Each argument is convertible to the corresponding formal parameter type.
             // What makes this a not-applicable candidate is not that the constraint on T is violated, but
-            // rather that the constraint on *Nullable<T>* is violated; Nullable<string> is not a legal 
+            // rather that the constraint on *Nullable<T>* is violated; Nullable<string> is not a legal
             // type, and so this is not an applicable candidate.
             //
             // In language versions before the feature 'ImprovedOverloadCandidates' was added to the language,
@@ -969,27 +1205,27 @@ namespace Microsoft.CodeAnalysis.CSharp
             // occurs during candidate selection.
             //
             // Note that this failure need not involve type inference; Q<string>(null, null) would also be
-            // illegal for the same reason. 
-            // 
+            // illegal for the same reason.
+            //
             // The question then arises as to what error to report here. The native compiler reports that
-            // the constraint is violated on the method, even though the fact that precipitates the 
+            // the constraint is violated on the method, even though the fact that precipitates the
             // failure of overload resolution to classify this as an applicable candidate is the constraint
             // violation on Nullable<T>. Most of the time this is actually a pretty sensible error message;
             // if you say Q<string>(...) then it seems reasonable to give an error that says that string is
             // bad for Q, not that it is bad for its formal parameters under construction. Since the compiler
-            // will not allow Q<T> to be declared without a constraint that ensures that Nullable<T>'s 
-            // constraints are met, typically a failure to provide a type argument that works for the 
+            // will not allow Q<T> to be declared without a constraint that ensures that Nullable<T>'s
+            // constraints are met, typically a failure to provide a type argument that works for the
             // formal parameter type will also be a failure for the method type parameter.
             //
             // However, there could be error recovery scenarios. Suppose instead we had said
             //
-            // void Q<T>(T t1, Nullable<T> t2) 
+            // void Q<T>(T t1, Nullable<T> t2)
             //
             // with no constraint on T. We will give an error at declaration time, but if later we
             // are asked to provide an analysis of Q<string>("", null), the right thing to do is NOT
-            // to say "constraint is violated on T in Q<T>" because there is no constraint to be 
+            // to say "constraint is violated on T in Q<T>" because there is no constraint to be
             // violated here. The error is (1) that the constraint is violated on Nullable<T> and
-            // (2) that there is a constraint missing on Q<T>. 
+            // (2) that there is a constraint missing on Q<T>.
             //
             // Another error-recovery scenario in which the method's constraint is not violated:
             //
@@ -1007,7 +1243,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // See test case CS0310ERR_NewConstraintNotSatisfied02 for an even more complex version
             // of this flavor of error recovery.
 
-            var result = GetFirstMemberKind(MemberResolutionKind.ConstructedParameterFailedConstraintCheck);
+            var result = GetFirstMemberKind(
+                MemberResolutionKind.ConstructedParameterFailedConstraintCheck
+            );
             if (result.IsNull)
             {
                 return false;
@@ -1021,23 +1259,44 @@ namespace Microsoft.CodeAnalysis.CSharp
             // is, then just report that error.
 
             MethodSymbol method = (MethodSymbol)(Symbol)result.Member;
-            if (!method.CheckConstraints(new ConstraintsHelper.CheckConstraintsArgs(compilation, conversions, includeNullability: false, location, diagnostics)))
+            if (
+                !method.CheckConstraints(
+                    new ConstraintsHelper.CheckConstraintsArgs(
+                        compilation,
+                        conversions,
+                        includeNullability: false,
+                        location,
+                        diagnostics
+                    )
+                )
+            )
             {
                 // The error is already reported into the diagnostics bag.
                 return true;
             }
 
             // We are in the unusual position that a constraint has been violated on a formal parameter type
-            // without being violated on the method. Report that the constraint is violated on the 
+            // without being violated on the method. Report that the constraint is violated on the
             // formal parameter type.
 
             TypeSymbol formalParameterType = method.GetParameterType(result.Result.BadParameter);
-            formalParameterType.CheckAllConstraints(new ConstraintsHelper.CheckConstraintsArgsBoxed((CSharpCompilation)compilation, conversions, includeNullability: false, location, diagnostics));
+            formalParameterType.CheckAllConstraints(
+                new ConstraintsHelper.CheckConstraintsArgsBoxed(
+                    (CSharpCompilation)compilation,
+                    conversions,
+                    includeNullability: false,
+                    location,
+                    diagnostics
+                )
+            );
 
             return true;
         }
 
-        private static bool HadLambdaConversionError(BindingDiagnosticBag diagnostics, AnalyzedArguments arguments)
+        private static bool HadLambdaConversionError(
+            BindingDiagnosticBag diagnostics,
+            AnalyzedArguments arguments
+        )
         {
             bool hadError = false;
             foreach (var argument in arguments.Arguments)
@@ -1059,7 +1318,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<Symbol> symbols,
             Location location,
             BinderFlags flags,
-            bool isMethodGroupConversion)
+            bool isMethodGroupConversion
+        )
         {
             var badArg = GetFirstMemberKind(MemberResolutionKind.BadArgumentConversion);
             if (badArg.IsNull)
@@ -1093,18 +1353,38 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (parameter.RefKind != RefKind.None)
                     {
                         //  The best overloaded method match '{0}' for the collection initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
-                        diagnostics.Add(ErrorCode.ERR_InitializerAddHasParamModifiers, location, symbols, method);
+                        diagnostics.Add(
+                            ErrorCode.ERR_InitializerAddHasParamModifiers,
+                            location,
+                            symbols,
+                            method
+                        );
                         return true;
                     }
                 }
 
                 //  The best overloaded Add method '{0}' for the collection initializer has some invalid arguments
-                diagnostics.Add(ErrorCode.ERR_BadArgTypesForCollectionAdd, location, symbols, method);
+                diagnostics.Add(
+                    ErrorCode.ERR_BadArgTypesForCollectionAdd,
+                    location,
+                    symbols,
+                    method
+                );
             }
 
             foreach (var arg in badArg.Result.BadArgumentsOpt)
             {
-                ReportBadArgumentError(diagnostics, binder, name, arguments, symbols, location, badArg, method, arg);
+                ReportBadArgumentError(
+                    diagnostics,
+                    binder,
+                    name,
+                    arguments,
+                    symbols,
+                    location,
+                    badArg,
+                    method,
+                    arg
+                );
             }
 
             return true;
@@ -1119,12 +1399,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             Location location,
             MemberResolutionResult<TMember> badArg,
             TMember method,
-            int arg)
+            int arg
+        )
         {
             BoundExpression argument = arguments.Argument(arg);
             if (argument.HasAnyErrors)
             {
-                // If the argument had an error reported then do not report further errors for 
+                // If the argument had an error reported then do not report further errors for
                 // overload resolution failure.
                 return;
             }
@@ -1145,7 +1426,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     symbols,
                     arg + 1,
                     argument.Display,
-                    "__arglist");
+                    "__arglist"
+                );
                 return;
             }
 
@@ -1161,7 +1443,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     // For ref and ref-readonly extension methods, we omit the "ref" modifier on receiver arguments.
                     // Setting the correct RefKind for finding the correct diagnostics message.
-                    // For other ref kinds, keeping it as it is to find mismatch errors. 
+                    // For other ref kinds, keeping it as it is to find mismatch errors.
                     refArg = refParameter;
                 }
             }
@@ -1169,30 +1451,56 @@ namespace Microsoft.CodeAnalysis.CSharp
             // If the expression is untyped because it is a lambda, anonymous method, method group or null
             // then we never want to report the error "you need a ref on that thing". Rather, we want to
             // say that you can't convert "null" to "ref int".
-            if (!argument.HasExpressionType() &&
-                argument.Kind != BoundKind.OutDeconstructVarPendingInference &&
-                argument.Kind != BoundKind.OutVariablePendingInference &&
-                argument.Kind != BoundKind.DiscardExpression)
+            if (
+                !argument.HasExpressionType()
+                && argument.Kind != BoundKind.OutDeconstructVarPendingInference
+                && argument.Kind != BoundKind.OutVariablePendingInference
+                && argument.Kind != BoundKind.DiscardExpression
+            )
             {
-                TypeSymbol parameterType = UnwrapIfParamsArray(parameter, isLastParameter) is TypeSymbol t ? t : parameter.Type;
+                TypeSymbol parameterType = UnwrapIfParamsArray(parameter, isLastParameter)
+                    is TypeSymbol t
+                    ? t
+                    : parameter.Type;
 
                 // If the problem is that a lambda isn't convertible to the given type, also report why.
                 // The argument and parameter type might match, but may not have same in/out modifiers
                 if (argument.Kind == BoundKind.UnboundLambda && refArg == refParameter)
                 {
-                    ((UnboundLambda)argument).GenerateAnonymousFunctionConversionError(diagnostics, parameterType);
+                    ((UnboundLambda)argument).GenerateAnonymousFunctionConversionError(
+                        diagnostics,
+                        parameterType
+                    );
                 }
-                else if (argument.Kind == BoundKind.MethodGroup && parameterType.TypeKind == TypeKind.Delegate &&
-                        Conversions.ReportDelegateOrFunctionPointerMethodGroupDiagnostics(binder, (BoundMethodGroup)argument, parameterType, diagnostics))
+                else if (
+                    argument.Kind == BoundKind.MethodGroup
+                    && parameterType.TypeKind == TypeKind.Delegate
+                    && Conversions.ReportDelegateOrFunctionPointerMethodGroupDiagnostics(
+                        binder,
+                        (BoundMethodGroup)argument,
+                        parameterType,
+                        diagnostics
+                    )
+                )
                 {
                     // a diagnostic has been reported by ReportDelegateOrFunctionPointerMethodGroupDiagnostics
                 }
-                else if (argument.Kind == BoundKind.MethodGroup && parameterType.TypeKind == TypeKind.FunctionPointer)
+                else if (
+                    argument.Kind == BoundKind.MethodGroup
+                    && parameterType.TypeKind == TypeKind.FunctionPointer
+                )
                 {
                     diagnostics.Add(ErrorCode.ERR_MissingAddressOf, sourceLocation);
                 }
-                else if (argument.Kind == BoundKind.UnconvertedAddressOfOperator &&
-                        Conversions.ReportDelegateOrFunctionPointerMethodGroupDiagnostics(binder, ((BoundUnconvertedAddressOfOperator)argument).Operand, parameterType, diagnostics))
+                else if (
+                    argument.Kind == BoundKind.UnconvertedAddressOfOperator
+                    && Conversions.ReportDelegateOrFunctionPointerMethodGroupDiagnostics(
+                        binder,
+                        ((BoundUnconvertedAddressOfOperator)argument).Operand,
+                        parameterType,
+                        diagnostics
+                    )
+                )
                 {
                     // a diagnostic has been reported by ReportDelegateOrFunctionPointerMethodGroupDiagnostics
                 }
@@ -1207,10 +1515,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                         symbols,
                         arg + 1,
                         argument.Display, //'<null>' doesn't need refkind
-                        UnwrapIfParamsArray(parameter, isLastParameter));
+                        UnwrapIfParamsArray(parameter, isLastParameter)
+                    );
                 }
             }
-            else if (refArg != refParameter && !(refArg == RefKind.None && refParameter == RefKind.In))
+            else if (
+                refArg != refParameter && !(refArg == RefKind.None && refParameter == RefKind.In)
+            )
             {
                 if (refParameter == RefKind.None || refParameter == RefKind.In)
                 {
@@ -1220,7 +1531,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         sourceLocation,
                         symbols,
                         arg + 1,
-                        refArg.ToArgumentDisplayString());
+                        refArg.ToArgumentDisplayString()
+                    );
                 }
                 else
                 {
@@ -1230,14 +1542,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                         sourceLocation,
                         symbols,
                         arg + 1,
-                        refParameter.ToParameterDisplayString());
+                        refParameter.ToParameterDisplayString()
+                    );
                 }
             }
             else
             {
                 Debug.Assert(argument.Kind != BoundKind.OutDeconstructVarPendingInference);
                 Debug.Assert(argument.Kind != BoundKind.OutVariablePendingInference);
-                Debug.Assert(argument.Kind != BoundKind.DiscardExpression || argument.HasExpressionType());
+                Debug.Assert(
+                    argument.Kind != BoundKind.DiscardExpression || argument.HasExpressionType()
+                );
                 Debug.Assert(argument.Display != null);
 
                 if (arguments.IsExtensionMethodThisArgument(arg))
@@ -1253,8 +1568,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                         argument.Display,
                         name,
                         method,
-                        parameter);
-                    Debug.Assert((object)parameter == UnwrapIfParamsArray(parameter, isLastParameter), "If they ever differ, just call the method when constructing the diagnostic.");
+                        parameter
+                    );
+                    Debug.Assert(
+                        (object)parameter == UnwrapIfParamsArray(parameter, isLastParameter),
+                        "If they ever differ, just call the method when constructing the diagnostic."
+                    );
                 }
                 else
                 {
@@ -1268,9 +1587,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                             TypeWithAnnotations.Create(argType),
                             ImmutableArray<CustomModifier>.Empty,
                             isParams: false,
-                            refKind: refArg);
+                            refKind: refArg
+                        );
 
-                        SymbolDistinguisher distinguisher = new SymbolDistinguisher(binder.Compilation, displayArg, UnwrapIfParamsArray(parameter, isLastParameter));
+                        SymbolDistinguisher distinguisher = new SymbolDistinguisher(
+                            binder.Compilation,
+                            displayArg,
+                            UnwrapIfParamsArray(parameter, isLastParameter)
+                        );
 
                         // CS1503: Argument {0}: cannot convert from '{1}' to '{2}'
                         diagnostics.Add(
@@ -1279,7 +1603,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             symbols,
                             arg + 1,
                             distinguisher.First,
-                            distinguisher.Second);
+                            distinguisher.Second
+                        );
                     }
                     else
                     {
@@ -1289,7 +1614,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             symbols,
                             arg + 1,
                             argument.Display,
-                            UnwrapIfParamsArray(parameter, isLastParameter));
+                            UnwrapIfParamsArray(parameter, isLastParameter)
+                        );
                     }
                 }
             }
@@ -1314,26 +1640,41 @@ namespace Microsoft.CodeAnalysis.CSharp
             return parameter;
         }
 
-        private bool HadAmbiguousWorseMethods(BindingDiagnosticBag diagnostics, ImmutableArray<Symbol> symbols, Location location, bool isQuery, BoundExpression receiver, string name)
+        private bool HadAmbiguousWorseMethods(
+            BindingDiagnosticBag diagnostics,
+            ImmutableArray<Symbol> symbols,
+            Location location,
+            bool isQuery,
+            BoundExpression receiver,
+            string name
+        )
         {
             MemberResolutionResult<TMember> worseResult1;
             MemberResolutionResult<TMember> worseResult2;
 
-            // UNDONE: It is unfortunate that we simply choose the first two methods as the 
+            // UNDONE: It is unfortunate that we simply choose the first two methods as the
             // UNDONE: two to say that are ambiguous; they might not actually be ambiguous
             // UNDONE: with each other. We might consider building a better heuristic here.
 
             int nWorse = TryGetFirstTwoWorseResults(out worseResult1, out worseResult2);
             if (nWorse <= 1)
             {
-                Debug.Assert(nWorse == 0, "How is it that there is exactly one applicable but worse method, and exactly zero applicable best methods?  What was better than this thing?");
+                Debug.Assert(
+                    nWorse == 0,
+                    "How is it that there is exactly one applicable but worse method, and exactly zero applicable best methods?  What was better than this thing?"
+                );
                 return false;
             }
 
             if (isQuery)
             {
                 // Multiple implementations of the query pattern were found for source type '{0}'.  Ambiguous call to '{1}'.
-                diagnostics.Add(ErrorCode.ERR_QueryMultipleProviders, location, receiver.Type, name);
+                diagnostics.Add(
+                    ErrorCode.ERR_QueryMultipleProviders,
+                    location,
+                    receiver.Type,
+                    name
+                );
             }
             else
             {
@@ -1342,14 +1683,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                     CreateAmbiguousCallDiagnosticInfo(
                         worseResult1.LeastOverriddenMember.OriginalDefinition,
                         worseResult2.LeastOverriddenMember.OriginalDefinition,
-                        symbols),
-                    location);
+                        symbols
+                    ),
+                    location
+                );
             }
 
             return true;
         }
 
-        private int TryGetFirstTwoWorseResults(out MemberResolutionResult<TMember> first, out MemberResolutionResult<TMember> second)
+        private int TryGetFirstTwoWorseResults(
+            out MemberResolutionResult<TMember> first,
+            out MemberResolutionResult<TMember> second
+        )
         {
             int count = 0;
             bool foundFirst = false;
@@ -1378,14 +1724,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             return count;
         }
 
-        private bool HadAmbiguousBestMethods(BindingDiagnosticBag diagnostics, ImmutableArray<Symbol> symbols, Location location)
+        private bool HadAmbiguousBestMethods(
+            BindingDiagnosticBag diagnostics,
+            ImmutableArray<Symbol> symbols,
+            Location location
+        )
         {
             MemberResolutionResult<TMember> validResult1;
             MemberResolutionResult<TMember> validResult2;
             var nValid = TryGetFirstTwoValidResults(out validResult1, out validResult2);
             if (nValid <= 1)
             {
-                Debug.Assert(nValid == 0, "Why are we doing error reporting on an overload resolution problem that had one valid result?");
+                Debug.Assert(
+                    nValid == 0,
+                    "Why are we doing error reporting on an overload resolution problem that had one valid result?"
+                );
                 return false;
             }
 
@@ -1395,13 +1748,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 CreateAmbiguousCallDiagnosticInfo(
                     validResult1.LeastOverriddenMember.OriginalDefinition,
                     validResult2.LeastOverriddenMember.OriginalDefinition,
-                    symbols),
-                location);
+                    symbols
+                ),
+                location
+            );
 
             return true;
         }
 
-        private int TryGetFirstTwoValidResults(out MemberResolutionResult<TMember> first, out MemberResolutionResult<TMember> second)
+        private int TryGetFirstTwoValidResults(
+            out MemberResolutionResult<TMember> first,
+            out MemberResolutionResult<TMember> second
+        )
         {
             int count = 0;
             bool foundFirst = false;
@@ -1430,19 +1788,20 @@ namespace Microsoft.CodeAnalysis.CSharp
             return count;
         }
 
-        private static DiagnosticInfoWithSymbols CreateAmbiguousCallDiagnosticInfo(Symbol first, Symbol second, ImmutableArray<Symbol> symbols)
+        private static DiagnosticInfoWithSymbols CreateAmbiguousCallDiagnosticInfo(
+            Symbol first,
+            Symbol second,
+            ImmutableArray<Symbol> symbols
+        )
         {
-            var arguments = (first.ContainingNamespace != second.ContainingNamespace) ?
-                new object[]
+            var arguments =
+                (first.ContainingNamespace != second.ContainingNamespace)
+                    ? new object[]
                     {
-                            new FormattedSymbol(first, SymbolDisplayFormat.CSharpErrorMessageFormat),
-                            new FormattedSymbol(second, SymbolDisplayFormat.CSharpErrorMessageFormat)
-                    } :
-                new object[]
-                    {
-                            first,
-                            second
-                    };
+                        new FormattedSymbol(first, SymbolDisplayFormat.CSharpErrorMessageFormat),
+                        new FormattedSymbol(second, SymbolDisplayFormat.CSharpErrorMessageFormat)
+                    }
+                    : new object[] { first, second };
             return new DiagnosticInfoWithSymbols(ErrorCode.ERR_AmbigCall, arguments, symbols);
         }
 
@@ -1482,21 +1841,41 @@ namespace Microsoft.CodeAnalysis.CSharp
             var sb = new StringBuilder();
             if (this.Succeeded)
             {
-                sb.AppendLine("Overload resolution succeeded and chose " + this.ValidResult.Member.ToString());
+                sb.AppendLine(
+                    "Overload resolution succeeded and chose " + this.ValidResult.Member.ToString()
+                );
             }
             else if (System.Linq.Enumerable.Count(ResultsBuilder, x => x.Result.IsValid) > 1)
             {
-                sb.AppendLine("Overload resolution failed because of ambiguous possible best methods.");
+                sb.AppendLine(
+                    "Overload resolution failed because of ambiguous possible best methods."
+                );
             }
-            else if (System.Linq.Enumerable.Any(ResultsBuilder, x => (x.Result.Kind == MemberResolutionKind.TypeInferenceFailed) || (x.Result.Kind == MemberResolutionKind.TypeInferenceExtensionInstanceArgument)))
+            else if (
+                System.Linq.Enumerable.Any(
+                    ResultsBuilder,
+                    x =>
+                        (x.Result.Kind == MemberResolutionKind.TypeInferenceFailed)
+                        || (
+                            x.Result.Kind
+                            == MemberResolutionKind.TypeInferenceExtensionInstanceArgument
+                        )
+                )
+            )
             {
-                sb.AppendLine("Overload resolution failed (possibly) because type inference was unable to infer type parameters.");
+                sb.AppendLine(
+                    "Overload resolution failed (possibly) because type inference was unable to infer type parameters."
+                );
             }
 
             sb.AppendLine("Detailed results:");
             foreach (var result in ResultsBuilder)
             {
-                sb.AppendFormat("method: {0} reason: {1}\n", result.Member.ToString(), result.Result.Kind.ToString());
+                sb.AppendFormat(
+                    "method: {0} reason: {1}\n",
+                    result.Member.ToString(),
+                    result.Result.Kind.ToString()
+                );
             }
 
             return sb.ToString();
@@ -1523,7 +1902,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static ObjectPool<OverloadResolutionResult<TMember>> CreatePool()
         {
             ObjectPool<OverloadResolutionResult<TMember>> pool = null;
-            pool = new ObjectPool<OverloadResolutionResult<TMember>>(() => new OverloadResolutionResult<TMember>(), 10);
+            pool = new ObjectPool<OverloadResolutionResult<TMember>>(
+                () => new OverloadResolutionResult<TMember>(),
+                10
+            );
             return pool;
         }
 

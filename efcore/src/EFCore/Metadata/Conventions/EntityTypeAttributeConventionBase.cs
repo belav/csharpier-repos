@@ -19,7 +19,9 @@ public abstract class EntityTypeAttributeConventionBase<TAttribute> : IEntityTyp
     ///     Creates a new instance of <see cref="EntityTypeAttributeConventionBase{TAttribute}" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    protected EntityTypeAttributeConventionBase(ProviderConventionSetBuilderDependencies dependencies)
+    protected EntityTypeAttributeConventionBase(
+        ProviderConventionSetBuilderDependencies dependencies
+    )
     {
         Dependencies = dependencies;
     }
@@ -36,7 +38,8 @@ public abstract class EntityTypeAttributeConventionBase<TAttribute> : IEntityTyp
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
-        IConventionContext<IConventionEntityTypeBuilder> context)
+        IConventionContext<IConventionEntityTypeBuilder> context
+    )
     {
         Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
 
@@ -67,5 +70,6 @@ public abstract class EntityTypeAttributeConventionBase<TAttribute> : IEntityTyp
     protected abstract void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
         TAttribute attribute,
-        IConventionContext<IConventionEntityTypeBuilder> context);
+        IConventionContext<IConventionEntityTypeBuilder> context
+    );
 }

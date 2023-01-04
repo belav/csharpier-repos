@@ -20,9 +20,7 @@ internal sealed class TimingPipeFlusher
     private readonly ITimeoutControl? _timeoutControl;
     private readonly KestrelTrace _log;
 
-    public TimingPipeFlusher(
-        ITimeoutControl? timeoutControl,
-        KestrelTrace log)
+    public TimingPipeFlusher(ITimeoutControl? timeoutControl, KestrelTrace log)
     {
         _timeoutControl = timeoutControl;
         _log = log;
@@ -38,9 +36,17 @@ internal sealed class TimingPipeFlusher
         return FlushAsync(outputAborter: null, cancellationToken: default);
     }
 
-    public ValueTask<FlushResult> FlushAsync(IHttpOutputAborter? outputAborter, CancellationToken cancellationToken)
+    public ValueTask<FlushResult> FlushAsync(
+        IHttpOutputAborter? outputAborter,
+        CancellationToken cancellationToken
+    )
     {
-        return FlushAsync(minRate: null, count: 0, outputAborter: outputAborter, cancellationToken: cancellationToken);
+        return FlushAsync(
+            minRate: null,
+            count: 0,
+            outputAborter: outputAborter,
+            cancellationToken: cancellationToken
+        );
     }
 
     public ValueTask<FlushResult> FlushAsync(MinDataRate? minRate, long count)
@@ -48,7 +54,12 @@ internal sealed class TimingPipeFlusher
         return FlushAsync(minRate, count, outputAborter: null, cancellationToken: default);
     }
 
-    public ValueTask<FlushResult> FlushAsync(MinDataRate? minRate, long count, IHttpOutputAborter? outputAborter, CancellationToken cancellationToken)
+    public ValueTask<FlushResult> FlushAsync(
+        MinDataRate? minRate,
+        long count,
+        IHttpOutputAborter? outputAborter,
+        CancellationToken cancellationToken
+    )
     {
         if (minRate is object)
         {
@@ -74,7 +85,12 @@ internal sealed class TimingPipeFlusher
         return TimeFlushAsyncAwaited(pipeFlushTask, minRate, outputAborter, cancellationToken);
     }
 
-    private async ValueTask<FlushResult> TimeFlushAsyncAwaited(ValueTask<FlushResult> pipeFlushTask, MinDataRate? minRate, IHttpOutputAborter? outputAborter, CancellationToken cancellationToken)
+    private async ValueTask<FlushResult> TimeFlushAsyncAwaited(
+        ValueTask<FlushResult> pipeFlushTask,
+        MinDataRate? minRate,
+        IHttpOutputAborter? outputAborter,
+        CancellationToken cancellationToken
+    )
     {
         if (minRate is object)
         {
@@ -92,12 +108,21 @@ internal sealed class TimingPipeFlusher
         }
         catch (OperationCanceledException ex) when (outputAborter is object)
         {
-            outputAborter.Abort(new ConnectionAbortedException(CoreStrings.ConnectionOrStreamAbortedByCancellationToken, ex));
+            outputAborter.Abort(
+                new ConnectionAbortedException(
+                    CoreStrings.ConnectionOrStreamAbortedByCancellationToken,
+                    ex
+                )
+            );
         }
         catch (Exception ex)
         {
             // A canceled token is the only reason flush should ever throw.
-            _log.LogError(0, ex, $"Unexpected exception in {nameof(TimingPipeFlusher)}.{nameof(FlushAsync)}.");
+            _log.LogError(
+                0,
+                ex,
+                $"Unexpected exception in {nameof(TimingPipeFlusher)}.{nameof(FlushAsync)}."
+            );
         }
         finally
         {

@@ -47,21 +47,32 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public CompletionHandler(
             IGlobalOptionService globalOptions,
             IEnumerable<Lazy<CompletionProvider, CompletionProviderMetadata>> completionProviders,
-            CompletionListCache completionListCache)
+            CompletionListCache completionListCache
+        )
         {
             _globalOptions = globalOptions;
 
-            _csharpTriggerCharacters = completionProviders.Where(lz => lz.Metadata.Language == LanguageNames.CSharp).SelectMany(
-                lz => CommonCompletionUtilities.GetTriggerCharacters(lz.Value)).ToImmutableHashSet();
-            _vbTriggerCharacters = completionProviders.Where(lz => lz.Metadata.Language == LanguageNames.VisualBasic).SelectMany(
-                lz => CommonCompletionUtilities.GetTriggerCharacters(lz.Value)).ToImmutableHashSet();
+            _csharpTriggerCharacters = completionProviders
+                .Where(lz => lz.Metadata.Language == LanguageNames.CSharp)
+                .SelectMany(lz => CommonCompletionUtilities.GetTriggerCharacters(lz.Value))
+                .ToImmutableHashSet();
+            _vbTriggerCharacters = completionProviders
+                .Where(lz => lz.Metadata.Language == LanguageNames.VisualBasic)
+                .SelectMany(lz => CommonCompletionUtilities.GetTriggerCharacters(lz.Value))
+                .ToImmutableHashSet();
 
             _completionListCache = completionListCache;
         }
 
-        public LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(LSP.CompletionParams request) => request.TextDocument;
+        public LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(
+            LSP.CompletionParams request
+        ) => request.TextDocument;
 
-        public async Task<LSP.CompletionList?> HandleRequestAsync(LSP.CompletionParams request, RequestContext context, CancellationToken cancellationToken)
+        public async Task<LSP.CompletionList?> HandleRequestAsync(
+            LSP.CompletionParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.Document;
             Contract.ThrowIfNull(document);
@@ -69,11 +80,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             // C# and VB share the same LSP language server, and thus share the same default trigger characters.
             // We need to ensure the trigger character is valid in the document's language. For example, the '{'
             // character, while a trigger character in VB, is not a trigger character in C#.
-            if (request.Context != null &&
-                request.Context.TriggerKind == LSP.CompletionTriggerKind.TriggerCharacter &&
-                !char.TryParse(request.Context.TriggerCharacter, out var triggerCharacter) &&
-                !char.IsLetterOrDigit(triggerCharacter) &&
-                !IsValidTriggerCharacterForDocument(document, triggerCharacter))
+            if (
+                request.Context != null
+                && request.Context.TriggerKind == LSP.CompletionTriggerKind.TriggerCharacter
+                && !char.TryParse(request.Context.TriggerCharacter, out var triggerCharacter)
+                && !char.IsLetterOrDigit(triggerCharacter)
+                && !IsValidTriggerCharacterForDocument(document, triggerCharacter)
+            )
             {
                 return null;
             }
@@ -82,7 +95,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var completionService = document.GetRequiredLanguageService<CompletionService>();
             var documentText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
-            var completionListResult = await GetFilteredCompletionListAsync(request, documentText, document, completionOptions, completionService, cancellationToken).ConfigureAwait(false);
+            var completionListResult = await GetFilteredCompletionListAsync(
+                    request,
+                    documentText,
+                    document,
+                    completionOptions,
+                    completionService,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (completionListResult == null)
             {
                 return null;
@@ -90,9 +111,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             var (list, isIncomplete, resultId) = completionListResult.Value;
 
-            var lspVSClientCapability = context.ClientCapabilities.HasVisualStudioLspCapability() == true;
-            var snippetsSupported = context.ClientCapabilities.TextDocument?.Completion?.CompletionItem?.SnippetSupport ?? false;
-            var commitCharactersRuleCache = new Dictionary<ImmutableArray<CharacterSetModificationRule>, string[]>(CommitCharacterArrayComparer.Instance);
+            var lspVSClientCapability =
+                context.ClientCapabilities.HasVisualStudioLspCapability() == true;
+            var snippetsSupported =
+                context.ClientCapabilities.TextDocument?.Completion?.CompletionItem?.SnippetSupport
+                ?? false;
+            var commitCharactersRuleCache = new Dictionary<
+                ImmutableArray<CharacterSetModificationRule>,
+                string[]
+            >(CommitCharacterArrayComparer.Instance);
 
             // Feature flag to enable the return of TextEdits instead of InsertTexts (will increase payload size).
             Contract.ThrowIfNull(context.Solution);
@@ -107,8 +134,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
                 // We use the first item in the completion list as our comparison point for span
                 // and range for optimization when generating the TextEdits later on.
-                var completionChange = await completionService.GetChangeAsync(
-                    document, list.Items.First(), cancellationToken: cancellationToken).ConfigureAwait(false);
+                var completionChange = await completionService
+                    .GetChangeAsync(
+                        document,
+                        list.Items.First(),
+                        cancellationToken: cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 // If possible, we want to compute the item's span and range just once.
                 // Individual items can override this range later.
@@ -116,20 +148,34 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 defaultRange = ProtocolConversions.TextSpanToRange(defaultSpan.Value, documentText);
             }
 
-            var supportsCompletionListData = context.ClientCapabilities.HasCompletionListDataCapability();
-            var completionResolveData = new CompletionResolveData()
-            {
-                ResultId = resultId,
-            };
+            var supportsCompletionListData =
+                context.ClientCapabilities.HasCompletionListDataCapability();
+            var completionResolveData = new CompletionResolveData() { ResultId = resultId, };
             var stringBuilder = new StringBuilder();
             using var _ = ArrayBuilder<LSP.CompletionItem>.GetInstance(out var lspCompletionItems);
             foreach (var item in list.Items)
             {
-                var completionItemResolveData = supportsCompletionListData ? null : completionResolveData;
+                var completionItemResolveData = supportsCompletionListData
+                    ? null
+                    : completionResolveData;
                 var lspCompletionItem = await CreateLSPCompletionItemAsync(
-                    request, document, item, completionItemResolveData, lspVSClientCapability, commitCharactersRuleCache,
-                    completionService, context.ClientName, returnTextEdits, snippetsSupported, stringBuilder, documentText,
-                    defaultSpan, defaultRange, cancellationToken).ConfigureAwait(false);
+                        request,
+                        document,
+                        item,
+                        completionItemResolveData,
+                        lspVSClientCapability,
+                        commitCharactersRuleCache,
+                        completionService,
+                        context.ClientName,
+                        returnTextEdits,
+                        snippetsSupported,
+                        stringBuilder,
+                        documentText,
+                        defaultSpan,
+                        defaultRange,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 lspCompletionItems.Add(lspCompletionItem);
             }
 
@@ -176,7 +222,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 CompletionItem item,
                 CompletionResolveData? completionResolveData,
                 bool supportsVSExtensions,
-                Dictionary<ImmutableArray<CharacterSetModificationRule>, string[]> commitCharacterRulesCache,
+                Dictionary<
+                    ImmutableArray<CharacterSetModificationRule>,
+                    string[]
+                > commitCharacterRulesCache,
                 CompletionService completionService,
                 string? clientName,
                 bool returnTextEdits,
@@ -185,23 +234,55 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 SourceText? documentText,
                 TextSpan? defaultSpan,
                 LSP.Range? defaultRange,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 if (supportsVSExtensions)
                 {
-                    var vsCompletionItem = await CreateCompletionItemAsync<LSP.VSInternalCompletionItem>(
-                        request, document, item, completionResolveData, supportsVSExtensions, commitCharacterRulesCache,
-                        completionService, clientName, returnTextEdits, snippetsSupported, stringBuilder,
-                        documentText, defaultSpan, defaultRange, cancellationToken).ConfigureAwait(false);
-                    vsCompletionItem.Icon = new ImageElement(item.Tags.GetFirstGlyph().GetImageId());
+                    var vsCompletionItem =
+                        await CreateCompletionItemAsync<LSP.VSInternalCompletionItem>(
+                                request,
+                                document,
+                                item,
+                                completionResolveData,
+                                supportsVSExtensions,
+                                commitCharacterRulesCache,
+                                completionService,
+                                clientName,
+                                returnTextEdits,
+                                snippetsSupported,
+                                stringBuilder,
+                                documentText,
+                                defaultSpan,
+                                defaultRange,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
+                    vsCompletionItem.Icon = new ImageElement(
+                        item.Tags.GetFirstGlyph().GetImageId()
+                    );
                     return vsCompletionItem;
                 }
                 else
                 {
                     var roslynCompletionItem = await CreateCompletionItemAsync<LSP.CompletionItem>(
-                        request, document, item, completionResolveData, supportsVSExtensions, commitCharacterRulesCache,
-                        completionService, clientName, returnTextEdits, snippetsSupported, stringBuilder,
-                        documentText, defaultSpan, defaultRange, cancellationToken).ConfigureAwait(false);
+                            request,
+                            document,
+                            item,
+                            completionResolveData,
+                            supportsVSExtensions,
+                            commitCharacterRulesCache,
+                            completionService,
+                            clientName,
+                            returnTextEdits,
+                            snippetsSupported,
+                            stringBuilder,
+                            documentText,
+                            defaultSpan,
+                            defaultRange,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     return roslynCompletionItem;
                 }
             }
@@ -212,7 +293,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 CompletionItem item,
                 CompletionResolveData? completionResolveData,
                 bool supportsVSExtensions,
-                Dictionary<ImmutableArray<CharacterSetModificationRule>, string[]> commitCharacterRulesCache,
+                Dictionary<
+                    ImmutableArray<CharacterSetModificationRule>,
+                    string[]
+                > commitCharacterRulesCache,
                 CompletionService completionService,
                 string? clientName,
                 bool returnTextEdits,
@@ -221,7 +305,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 SourceText? documentText,
                 TextSpan? defaultSpan,
                 LSP.Range? defaultRange,
-                CancellationToken cancellationToken) where TCompletionItem : LSP.CompletionItem, new()
+                CancellationToken cancellationToken
+            ) where TCompletionItem : LSP.CompletionItem, new()
             {
                 // Generate display text
                 stringBuilder.Append(item.DisplayTextPrefix);
@@ -255,16 +340,30 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 else if (returnTextEdits)
                 {
                     var textEdit = await GenerateTextEdit(
-                        document, item, completionService, documentText, defaultSpan, defaultRange, cancellationToken).ConfigureAwait(false);
+                            document,
+                            item,
+                            completionService,
+                            documentText,
+                            defaultSpan,
+                            defaultRange,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     completionItem.TextEdit = textEdit;
                 }
                 // If the feature flag is off, return an InsertText.
                 else
                 {
-                    completionItem.InsertText = item.Properties.ContainsKey("InsertionText") ? item.Properties["InsertionText"] : completeDisplayText;
+                    completionItem.InsertText = item.Properties.ContainsKey("InsertionText")
+                        ? item.Properties["InsertionText"]
+                        : completeDisplayText;
                 }
 
-                var commitCharacters = GetCommitCharacters(item, commitCharacterRulesCache, supportsVSExtensions);
+                var commitCharacters = GetCommitCharacters(
+                    item,
+                    commitCharacterRulesCache,
+                    supportsVSExtensions
+                );
                 if (commitCharacters != null)
                 {
                     completionItem.CommitCharacters = commitCharacters;
@@ -279,22 +378,28 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     SourceText? documentText,
                     TextSpan? defaultSpan,
                     LSP.Range? defaultRange,
-                    CancellationToken cancellationToken)
+                    CancellationToken cancellationToken
+                )
                 {
                     Contract.ThrowIfNull(documentText);
                     Contract.ThrowIfNull(defaultSpan);
                     Contract.ThrowIfNull(defaultRange);
 
-                    var completionChange = await completionService.GetChangeAsync(
-                        document, item, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var completionChange = await completionService
+                        .GetChangeAsync(document, item, cancellationToken: cancellationToken)
+                        .ConfigureAwait(false);
                     var completionChangeSpan = completionChange.TextChange.Span;
 
                     var textEdit = new LSP.TextEdit()
                     {
                         NewText = completionChange.TextChange.NewText ?? "",
-                        Range = completionChangeSpan == defaultSpan.Value
-                            ? defaultRange
-                            : ProtocolConversions.TextSpanToRange(completionChangeSpan, documentText),
+                        Range =
+                            completionChangeSpan == defaultSpan.Value
+                                ? defaultRange
+                                : ProtocolConversions.TextSpanToRange(
+                                    completionChangeSpan,
+                                    documentText
+                                ),
                     };
 
                     return textEdit;
@@ -304,13 +409,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             static string[]? GetCommitCharacters(
                 CompletionItem item,
                 Dictionary<ImmutableArray<CharacterSetModificationRule>, string[]> currentRuleCache,
-                bool supportsVSExtensions)
+                bool supportsVSExtensions
+            )
             {
                 // VSCode does not have the concept of soft selection, the list is always hard selected.
                 // In order to emulate soft selection behavior for things like argument completion, regex completion, datetime completion, etc
                 // we create a completion item without any specific commit characters.  This means only tab / enter will commit.
                 // VS supports soft selection, so we only do this for non-VS clients.
-                if (!supportsVSExtensions && item.Rules.SelectionBehavior == CompletionItemSelectionBehavior.SoftSelection)
+                if (
+                    !supportsVSExtensions
+                    && item.Rules.SelectionBehavior == CompletionItemSelectionBehavior.SoftSelection
+                )
                 {
                     return Array.Empty<string>();
                 }
@@ -325,7 +434,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     return null;
                 }
 
-                if (currentRuleCache.TryGetValue(commitCharacterRules, out var cachedCommitCharacters))
+                if (
+                    currentRuleCache.TryGetValue(
+                        commitCharacterRules,
+                        out var cachedCommitCharacters
+                    )
+                )
                 {
                     return cachedCommitCharacters;
                 }
@@ -354,14 +468,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 return lspCommitCharacters;
             }
 
-            static void PromoteCommonCommitCharactersOntoList(LSP.VSInternalCompletionList completionList)
+            static void PromoteCommonCommitCharactersOntoList(
+                LSP.VSInternalCompletionList completionList
+            )
             {
                 if (completionList.Items.IsEmpty())
                 {
                     return;
                 }
 
-                var defaultCommitCharacters = CompletionRules.Default.DefaultCommitCharacters.Select(c => c.ToString()).ToArray();
+                var defaultCommitCharacters = CompletionRules.Default.DefaultCommitCharacters
+                    .Select(c => c.ToString())
+                    .ToArray();
                 var commitCharacterReferences = new Dictionary<object, int>();
                 var mostUsedCount = 0;
                 string[]? mostUsedCommitCharacters = null;
@@ -404,18 +522,40 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             }
         }
 
-        private async Task<(CompletionList CompletionList, bool IsIncomplete, long ResultId)?> GetFilteredCompletionListAsync(
+        private async Task<(
+            CompletionList CompletionList,
+            bool IsIncomplete,
+            long ResultId
+        )?> GetFilteredCompletionListAsync(
             LSP.CompletionParams request,
             SourceText sourceText,
             Document document,
             CompletionOptions completionOptions,
             CompletionService completionService,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var position = await document.GetPositionFromLinePositionAsync(ProtocolConversions.PositionToLinePosition(request.Position), cancellationToken).ConfigureAwait(false);
-            var completionListSpan = completionService.GetDefaultCompletionListSpan(sourceText, position);
-            var completionTrigger = await ProtocolConversions.LSPToRoslynCompletionTriggerAsync(request.Context, document, position, cancellationToken).ConfigureAwait(false);
-            var isTriggerForIncompleteCompletions = request.Context?.TriggerKind == LSP.CompletionTriggerKind.TriggerForIncompleteCompletions;
+            var position = await document
+                .GetPositionFromLinePositionAsync(
+                    ProtocolConversions.PositionToLinePosition(request.Position),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            var completionListSpan = completionService.GetDefaultCompletionListSpan(
+                sourceText,
+                position
+            );
+            var completionTrigger = await ProtocolConversions
+                .LSPToRoslynCompletionTriggerAsync(
+                    request.Context,
+                    document,
+                    position,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            var isTriggerForIncompleteCompletions =
+                request.Context?.TriggerKind
+                == LSP.CompletionTriggerKind.TriggerForIncompleteCompletions;
 
             (CompletionList List, long ResultId)? result;
             if (isTriggerForIncompleteCompletions)
@@ -423,12 +563,32 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 // We don't have access to the original trigger, but we know the completion list is already present.
                 // It is safe to recompute with the invoked trigger as we will get all the items and filter down based on the current trigger.
                 var originalTrigger = new CompletionTrigger(CompletionTriggerKind.Invoke);
-                result = await CalculateListAsync(request, document, position, originalTrigger, completionOptions, completionService, _completionListCache, cancellationToken).ConfigureAwait(false);
+                result = await CalculateListAsync(
+                        request,
+                        document,
+                        position,
+                        originalTrigger,
+                        completionOptions,
+                        completionService,
+                        _completionListCache,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
             else
             {
                 // This is a new completion request, clear out the last result Id for incomplete results.
-                result = await CalculateListAsync(request, document, position, completionTrigger, completionOptions, completionService, _completionListCache, cancellationToken).ConfigureAwait(false);
+                result = await CalculateListAsync(
+                        request,
+                        document,
+                        position,
+                        completionTrigger,
+                        completionOptions,
+                        completionService,
+                        _completionListCache,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             if (result == null)
@@ -439,12 +599,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var resultId = result.Value.ResultId;
 
             var completionListMaxSize = _globalOptions.GetOption(LspOptions.MaxCompletionListSize);
-            var (completionList, isIncomplete) = FilterCompletionList(result.Value.List, completionListMaxSize, completionListSpan, completionTrigger, sourceText, document);
+            var (completionList, isIncomplete) = FilterCompletionList(
+                result.Value.List,
+                completionListMaxSize,
+                completionListSpan,
+                completionTrigger,
+                sourceText,
+                document
+            );
 
             return (completionList, isIncomplete, resultId);
         }
 
-        private static async Task<(CompletionList CompletionList, long ResultId)?> CalculateListAsync(
+        private static async Task<(
+            CompletionList CompletionList,
+            long ResultId
+        )?> CalculateListAsync(
             LSP.CompletionParams request,
             Document document,
             int position,
@@ -452,9 +622,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             CompletionOptions completionOptions,
             CompletionService completionService,
             CompletionListCache completionListCache,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var (completionList, _) = await completionService.GetCompletionsInternalAsync(document, position, completionOptions, completionTrigger, cancellationToken: cancellationToken).ConfigureAwait(false);
+            var (completionList, _) = await completionService
+                .GetCompletionsInternalAsync(
+                    document,
+                    position,
+                    completionOptions,
+                    completionTrigger,
+                    cancellationToken: cancellationToken
+                )
+                .ConfigureAwait(false);
             cancellationToken.ThrowIfCancellationRequested();
             if (completionList == null || completionList.Items.IsEmpty)
             {
@@ -473,27 +652,33 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             TextSpan completionListSpan,
             CompletionTrigger completionTrigger,
             SourceText sourceText,
-            Document document)
+            Document document
+        )
         {
             var filterText = sourceText.GetSubText(completionListSpan).ToString();
 
             // Use pattern matching to determine which items are most relevant out of the calculated items.
-            using var _ = ArrayBuilder<MatchResult<CompletionItem?>>.GetInstance(out var matchResultsBuilder);
+            using var _ = ArrayBuilder<MatchResult<CompletionItem?>>.GetInstance(
+                out var matchResultsBuilder
+            );
             var index = 0;
             var completionHelper = CompletionHelper.GetHelper(document);
             foreach (var item in completionList.Items)
             {
-                if (CompletionHelper.TryCreateMatchResult<CompletionItem?>(
-                    completionHelper,
-                    item,
-                    editorCompletionItem: null,
-                    filterText,
-                    completionTrigger.Kind,
-                    GetFilterReason(completionTrigger),
-                    recentItems: ImmutableArray<string>.Empty,
-                    includeMatchSpans: false,
-                    index,
-                    out var matchResult))
+                if (
+                    CompletionHelper.TryCreateMatchResult<CompletionItem?>(
+                        completionHelper,
+                        item,
+                        editorCompletionItem: null,
+                        filterText,
+                        completionTrigger.Kind,
+                        GetFilterReason(completionTrigger),
+                        recentItems: ImmutableArray<string>.Empty,
+                        includeMatchSpans: false,
+                        index,
+                        out var matchResult
+                    )
+                )
                 {
                     matchResultsBuilder.Add(matchResult);
                     index++;
@@ -506,7 +691,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             // Finally, truncate the list to 1000 items plus any preselected items that occur after the first 1000.
             var filteredList = matchResultsBuilder
                 .Take(completionListMaxSize)
-                .Concat(matchResultsBuilder.Skip(completionListMaxSize).Where(match => ShouldItemBePreselected(match.RoslynCompletionItem)))
+                .Concat(
+                    matchResultsBuilder
+                        .Skip(completionListMaxSize)
+                        .Where(match => ShouldItemBePreselected(match.RoslynCompletionItem))
+                )
                 .Select(matchResult => matchResult.RoslynCompletionItem)
                 .ToImmutableArray();
             var newCompletionList = completionList.WithItems(filteredList);
@@ -542,7 +731,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         {
             // An item should be preselcted for LSP when the match priority is preselect and the item is hard selected.
             // LSP does not support soft preselection, so we do not preselect in that scenario to avoid interfering with typing.
-            return completionItem.Rules.MatchPriority == MatchPriority.Preselect && completionItem.Rules.SelectionBehavior == CompletionItemSelectionBehavior.HardSelection;
+            return completionItem.Rules.MatchPriority == MatchPriority.Preselect
+                && completionItem.Rules.SelectionBehavior
+                    == CompletionItemSelectionBehavior.HardSelection;
         }
 
         internal static CompletionOptions GetCompletionOptions(Document document)
@@ -567,7 +758,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         {
             foreach (var tag in tags)
             {
-                if (ProtocolConversions.RoslynTagToCompletionItemKind.TryGetValue(tag, out var completionItemKind))
+                if (
+                    ProtocolConversions.RoslynTagToCompletionItemKind.TryGetValue(
+                        tag,
+                        out var completionItemKind
+                    )
+                )
                 {
                     return completionItemKind;
                 }
@@ -576,29 +772,29 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             return LSP.CompletionItemKind.Text;
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new TestAccessor(this);
+        internal TestAccessor GetTestAccessor() => new TestAccessor(this);
 
         internal readonly struct TestAccessor
         {
             private readonly CompletionHandler _completionHandler;
 
-            public TestAccessor(CompletionHandler completionHandler)
-                => _completionHandler = completionHandler;
+            public TestAccessor(CompletionHandler completionHandler) =>
+                _completionHandler = completionHandler;
 
-            public CompletionListCache GetCache()
-                => _completionHandler._completionListCache;
+            public CompletionListCache GetCache() => _completionHandler._completionListCache;
         }
 
-        private class CommitCharacterArrayComparer : IEqualityComparer<ImmutableArray<CharacterSetModificationRule>>
+        private class CommitCharacterArrayComparer
+            : IEqualityComparer<ImmutableArray<CharacterSetModificationRule>>
         {
             public static readonly CommitCharacterArrayComparer Instance = new();
 
-            private CommitCharacterArrayComparer()
-            {
-            }
+            private CommitCharacterArrayComparer() { }
 
-            public bool Equals([AllowNull] ImmutableArray<CharacterSetModificationRule> x, [AllowNull] ImmutableArray<CharacterSetModificationRule> y)
+            public bool Equals(
+                [AllowNull] ImmutableArray<CharacterSetModificationRule> x,
+                [AllowNull] ImmutableArray<CharacterSetModificationRule> y
+            )
             {
                 for (var i = 0; i < x.Length; i++)
                 {

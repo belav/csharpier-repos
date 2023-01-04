@@ -8,8 +8,10 @@ namespace Microsoft.CodeAnalysis.CodeStyle
 {
     internal readonly partial record struct NotificationOption2
     {
-        public static explicit operator NotificationOption(NotificationOption2 notificationOption)
-            => notificationOption.Severity switch
+        public static explicit operator NotificationOption(
+            NotificationOption2 notificationOption
+        ) =>
+            notificationOption.Severity switch
             {
                 ReportDiagnostic.Suppress => NotificationOption.None,
                 ReportDiagnostic.Hidden => NotificationOption.Silent,

@@ -12,8 +12,10 @@ namespace Microsoft.Net.Http.Headers;
 internal sealed class ObjectCollection<T> : Collection<T>
 {
     internal static readonly Action<T> DefaultValidator = CheckNotNull;
-    internal static readonly ObjectCollection<T> EmptyReadOnlyCollection
-        = new ObjectCollection<T>(DefaultValidator, isReadOnly: true);
+    internal static readonly ObjectCollection<T> EmptyReadOnlyCollection = new ObjectCollection<T>(
+        DefaultValidator,
+        isReadOnly: true
+    );
 
     private readonly Action<T> _validator;
 
@@ -32,10 +34,7 @@ internal sealed class ObjectCollection<T> : Collection<T>
         }
     }
 
-    public ObjectCollection()
-        : this(DefaultValidator)
-    {
-    }
+    public ObjectCollection() : this(DefaultValidator) { }
 
     public ObjectCollection(Action<T> validator, bool isReadOnly = false)
         : base(CreateInnerList(isReadOnly))

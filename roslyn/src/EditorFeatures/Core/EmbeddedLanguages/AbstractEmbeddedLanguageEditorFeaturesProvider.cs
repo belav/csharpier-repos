@@ -19,12 +19,14 @@ namespace Microsoft.CodeAnalysis.Editor.EmbeddedLanguages
     {
         public override ImmutableArray<IEmbeddedLanguage> Languages { get; }
 
-        protected AbstractEmbeddedLanguageEditorFeaturesProvider(EmbeddedLanguageInfo info) : base(info)
+        protected AbstractEmbeddedLanguageEditorFeaturesProvider(EmbeddedLanguageInfo info)
+            : base(info)
         {
             Languages = ImmutableArray.Create<IEmbeddedLanguage>(
                 new DateAndTimeEmbeddedLanguageEditorFeatures(info),
                 new JsonEmbeddedLanguageEditorFeatures(info),
-                new RegexEmbeddedLanguageEditorFeatures(this, info));
+                new RegexEmbeddedLanguageEditorFeatures(this, info)
+            );
         }
     }
 }

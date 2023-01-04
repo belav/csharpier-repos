@@ -27,10 +27,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         //we want to compute this lazily since it may be expensive for the underlying symbol
         private ImmutableArray<EventSymbol> _lazyExplicitInterfaceImplementations;
 
-        private CachedUseSiteInfo<AssemblySymbol> _lazyCachedUseSiteInfo = CachedUseSiteInfo<AssemblySymbol>.Uninitialized;
+        private CachedUseSiteInfo<AssemblySymbol> _lazyCachedUseSiteInfo =
+            CachedUseSiteInfo<AssemblySymbol>.Uninitialized;
 
-        public RetargetingEventSymbol(RetargetingModuleSymbol retargetingModule, EventSymbol underlyingEvent)
-            : base(underlyingEvent)
+        public RetargetingEventSymbol(
+            RetargetingModuleSymbol retargetingModule,
+            EventSymbol underlyingEvent
+        ) : base(underlyingEvent)
         {
             RoslynDebug.Assert((object)retargetingModule != null);
             Debug.Assert(!(underlyingEvent is RetargetingEventSymbol));
@@ -40,17 +43,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         private RetargetingModuleSymbol.RetargetingSymbolTranslator RetargetingTranslator
         {
-            get
-            {
-                return _retargetingModule.RetargetingTranslator;
-            }
+            get { return _retargetingModule.RetargetingTranslator; }
         }
 
         public override TypeWithAnnotations TypeWithAnnotations
         {
             get
             {
-                return this.RetargetingTranslator.Retarget(_underlyingEvent.TypeWithAnnotations, RetargetOptions.RetargetPrimitiveTypesByTypeCode);
+                return this.RetargetingTranslator.Retarget(
+                    _underlyingEvent.TypeWithAnnotations,
+                    RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                );
             }
         }
 
@@ -98,7 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     ImmutableInterlocked.InterlockedCompareExchange(
                         ref _lazyExplicitInterfaceImplementations,
                         this.RetargetExplicitInterfaceImplementations(),
-                        default(ImmutableArray<EventSymbol>));
+                        default(ImmutableArray<EventSymbol>)
+                    );
                 }
                 return _lazyExplicitInterfaceImplementations;
             }
@@ -131,26 +135,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         public override Symbol? ContainingSymbol
         {
-            get
-            {
-                return this.RetargetingTranslator.Retarget(_underlyingEvent.ContainingSymbol);
-            }
+            get { return this.RetargetingTranslator.Retarget(_underlyingEvent.ContainingSymbol); }
         }
 
         public override AssemblySymbol ContainingAssembly
         {
-            get
-            {
-                return _retargetingModule.ContainingAssembly;
-            }
+            get { return _retargetingModule.ContainingAssembly; }
         }
 
         internal override ModuleSymbol ContainingModule
         {
-            get
-            {
-                return _retargetingModule;
-            }
+            get { return _retargetingModule; }
         }
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
@@ -158,17 +153,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             return _underlyingEvent.GetAttributes();
         }
 
-        internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(PEModuleBuilder moduleBuilder)
+        internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
+            PEModuleBuilder moduleBuilder
+        )
         {
-            return this.RetargetingTranslator.RetargetAttributes(_underlyingEvent.GetCustomAttributesToEmit(moduleBuilder));
+            return this.RetargetingTranslator.RetargetAttributes(
+                _underlyingEvent.GetCustomAttributesToEmit(moduleBuilder)
+            );
         }
 
         internal override bool MustCallMethodsDirectly
         {
-            get
-            {
-                return _underlyingEvent.MustCallMethodsDirectly;
-            }
+            get { return _underlyingEvent.MustCallMethodsDirectly; }
         }
 
         internal override UseSiteInfo<AssemblySymbol> GetUseSiteInfo()

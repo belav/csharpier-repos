@@ -20,8 +20,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 /// </remarks>
 /// <typeparam name="TEntity">The type of the entity the property belongs to.</typeparam>
 /// <typeparam name="TProperty">The type of the property.</typeparam>
-public class PropertyEntry<TEntity, TProperty> : PropertyEntry
-    where TEntity : class
+public class PropertyEntry<TEntity, TProperty> : PropertyEntry where TEntity : class
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -30,10 +29,8 @@ public class PropertyEntry<TEntity, TProperty> : PropertyEntry
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public PropertyEntry(InternalEntityEntry internalEntry, string name)
-        : base(internalEntry, name)
-    {
-    }
+    public PropertyEntry(InternalEntityEntry internalEntry, string name) : base(internalEntry, name)
+    { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -43,9 +40,7 @@ public class PropertyEntry<TEntity, TProperty> : PropertyEntry
     /// </summary>
     [EntityFrameworkInternal]
     public PropertyEntry(InternalEntityEntry internalEntry, IProperty property)
-        : base(internalEntry, property)
-    {
-    }
+        : base(internalEntry, property) { }
 
     /// <summary>
     ///     The <see cref="EntityEntry{TEntity}" /> to which this member belongs.
@@ -55,8 +50,7 @@ public class PropertyEntry<TEntity, TProperty> : PropertyEntry
     ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
     ///     examples.
     /// </remarks>
-    public new virtual EntityEntry<TEntity> EntityEntry
-        => new(InternalEntry);
+    public new virtual EntityEntry<TEntity> EntityEntry => new(InternalEntry);
 
     /// <summary>
     ///     Gets or sets the value currently assigned to this property. If the current value is set using this property,

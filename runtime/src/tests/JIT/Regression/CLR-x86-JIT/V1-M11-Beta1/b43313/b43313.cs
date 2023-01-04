@@ -44,6 +44,7 @@ namespace Test
             }
             catch (NullReferenceException) { }
         }
+
         public static int Main()
         {
             try

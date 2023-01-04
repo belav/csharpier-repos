@@ -17,19 +17,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
     [Trait(Traits.Feature, Traits.Features.CodeActionsChangeToYield)]
     public class AddYieldTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public AddYieldTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        public AddYieldTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpAddYieldCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpAddYieldCodeFixProvider());
 
         [Fact]
         public async Task TestAddYieldIEnumerableReturnNull()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections;
 
 class Program
@@ -46,7 +44,7 @@ class Program
         public async Task TestAddYieldIEnumerableReturnObject()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections;
 
 class Program
@@ -57,7 +55,7 @@ class Program
     }
 }";
             var expected =
-@"using System;
+                @"using System;
 using System.Collections;
 
 class Program
@@ -74,7 +72,7 @@ class Program
         public async Task TestAddYieldIEnumeratorReturnObject()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections;
 
 class Program
@@ -85,7 +83,7 @@ class Program
     }
 }";
             var expected =
-@"using System;
+                @"using System;
 using System.Collections;
 
 class Program
@@ -102,7 +100,7 @@ class Program
         public async Task TestAddYieldIEnumeratorReturnGenericList()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -114,7 +112,7 @@ class Program
     }
 }";
             var expected =
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -132,7 +130,7 @@ class Program
         public async Task TestAddYieldGenericIEnumeratorReturnObject()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -144,7 +142,7 @@ class Program
     }
 }";
             var expected =
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -162,7 +160,7 @@ class Program
         public async Task TestAddYieldGenericIEnumerableReturnObject()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -174,7 +172,7 @@ class Program
     }
 }";
             var expected =
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -192,7 +190,7 @@ class Program
         public async Task TestAddYieldIEnumerableReturnGenericList()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -210,7 +208,7 @@ class Program
         public async Task TestAddYieldGenericIEnumeratorReturnDefault()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -222,7 +220,7 @@ class Program
     }
 }";
             var expected =
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -240,7 +238,7 @@ class Program
         public async Task TestAddYieldGenericIEnumerableReturnConvertibleToObject()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -252,7 +250,7 @@ class Program
     }
 }";
             var expected =
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -270,7 +268,7 @@ class Program
         public async Task TestAddYieldGenericIEnumerableReturnConvertibleToFloat()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -282,7 +280,7 @@ class Program
     }
 }";
             var expected =
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -300,7 +298,7 @@ class Program
         public async Task TestAddYieldGenericIEnumeratorNonConvertableType()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -318,7 +316,7 @@ class Program
         public async Task TestAddYieldGenericIEnumeratorConvertableTypeDateTime()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -330,7 +328,7 @@ class Program
     }
 }";
             var expected =
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -348,7 +346,7 @@ class Program
         public async Task TestAddYieldNoTypeArguments()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;

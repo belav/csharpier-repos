@@ -9,7 +9,8 @@ namespace System.Configuration
 {
     public sealed class PropertyInformationCollection : NameObjectCollectionBase
     {
-        internal PropertyInformationCollection(ConfigurationElement thisElement) : base(StringComparer.Ordinal)
+        internal PropertyInformationCollection(ConfigurationElement thisElement)
+            : base(StringComparer.Ordinal)
         {
             ConfigurationElement thisElement1 = thisElement;
             foreach (ConfigurationProperty prop in thisElement1.Properties)
@@ -27,17 +28,19 @@ namespace System.Configuration
                 // check for default collection name
                 if (result == null)
                 {
-                    PropertyInformation defaultColl =
-                        (PropertyInformation)BaseGet(ConfigurationProperty.DefaultCollectionPropertyName);
+                    PropertyInformation defaultColl = (PropertyInformation)BaseGet(
+                        ConfigurationProperty.DefaultCollectionPropertyName
+                    );
 
-                    if ((defaultColl != null) && (defaultColl.ProvidedName == propertyName)) result = defaultColl;
+                    if ((defaultColl != null) && (defaultColl.ProvidedName == propertyName))
+                        result = defaultColl;
                 }
                 return result;
             }
         }
 
-        internal PropertyInformation this[int index] => (PropertyInformation)BaseGet(BaseGetKey(index));
-
+        internal PropertyInformation this[int index] =>
+            (PropertyInformation)BaseGet(BaseGetKey(index));
 
         public void CopyTo(PropertyInformation[] array, int index)
         {
@@ -46,16 +49,18 @@ namespace System.Configuration
                 throw new ArgumentNullException(nameof(array));
             }
 
-            if (array.Length < Count + index) throw new ArgumentOutOfRangeException(nameof(index));
+            if (array.Length < Count + index)
+                throw new ArgumentOutOfRangeException(nameof(index));
 
-            foreach (PropertyInformation pi in this) array[index++] = pi;
+            foreach (PropertyInformation pi in this)
+                array[index++] = pi;
         }
-
 
         public override IEnumerator GetEnumerator()
         {
             int c = Count;
-            for (int i = 0; i < c; i++) yield return this[i];
+            for (int i = 0; i < c; i++)
+                yield return this[i];
         }
     }
 }

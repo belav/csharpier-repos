@@ -13,9 +13,7 @@ namespace System.Runtime.InteropServices
 #else
     internal
 #endif
-    sealed class GeneratedMarshallingAttribute : Attribute
-    {
-    }
+    sealed class GeneratedMarshallingAttribute : Attribute { }
 
     [AttributeUsage(AttributeTargets.Struct)]
 #if DLLIMPORT_GENERATOR_TEST
@@ -23,9 +21,7 @@ namespace System.Runtime.InteropServices
 #else
     internal
 #endif
-    sealed class BlittableTypeAttribute : Attribute
-    {
-    }
+    sealed class BlittableTypeAttribute : Attribute { }
 
     [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class)]
 #if DLLIMPORT_GENERATOR_TEST
@@ -43,7 +39,10 @@ namespace System.Runtime.InteropServices
         public Type NativeType { get; }
     }
 
-    [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.ReturnValue | AttributeTargets.Field, AllowMultiple = true)]
+    [AttributeUsage(
+        AttributeTargets.Parameter | AttributeTargets.ReturnValue | AttributeTargets.Field,
+        AllowMultiple = true
+    )]
 #if DLLIMPORT_GENERATOR_TEST
     public
 #else
@@ -56,8 +55,7 @@ namespace System.Runtime.InteropServices
             CountElementName = string.Empty;
         }
 
-        public MarshalUsingAttribute(Type nativeType)
-            : this()
+        public MarshalUsingAttribute(Type nativeType) : this()
         {
             NativeType = nativeType;
         }
@@ -81,8 +79,6 @@ namespace System.Runtime.InteropServices
 #endif
     sealed class GenericContiguousCollectionMarshallerAttribute : Attribute
     {
-        public GenericContiguousCollectionMarshallerAttribute()
-        {
-        }
+        public GenericContiguousCollectionMarshallerAttribute() { }
     }
 }

@@ -23,8 +23,8 @@ public class BinaryExpressionEventData : EventData
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         Expression left,
-        Expression right)
-        : base(eventDefinition, messageGenerator)
+        Expression right
+    ) : base(eventDefinition, messageGenerator)
     {
         Left = left;
         Right = right;

@@ -11,9 +11,14 @@ public class TestWebViewManager : WebViewManager
     private readonly List<string> _sentIpcMessages = new();
 
     public TestWebViewManager(IServiceProvider provider, IFileProvider fileProvider)
-        : base(provider, Dispatcher.CreateDefault(), AppBaseUri, fileProvider, new(), hostPageRelativePath: "index.html")
-    {
-    }
+        : base(
+            provider,
+            Dispatcher.CreateDefault(),
+            AppBaseUri,
+            fileProvider,
+            new(),
+            hostPageRelativePath: "index.html"
+        ) { }
 
     public IReadOnlyList<string> SentIpcMessages => _sentIpcMessages;
 
@@ -35,6 +40,10 @@ public class TestWebViewManager : WebViewManager
 
     public void ReceiveAttachPageMessage()
     {
-        ReceiveIpcMessage(IpcCommon.IncomingMessageType.AttachPage, "http://example/", "http://example/testStartUrl");
+        ReceiveIpcMessage(
+            IpcCommon.IncomingMessageType.AttachPage,
+            "http://example/",
+            "http://example/testStartUrl"
+        );
     }
 }

@@ -26,8 +26,8 @@ public sealed class RouteEndpoint : Endpoint
         RoutePattern routePattern,
         int order,
         EndpointMetadataCollection? metadata,
-        string? displayName)
-        : base(requestDelegate, metadata, displayName)
+        string? displayName
+    ) : base(requestDelegate, metadata, displayName)
     {
         if (requestDelegate == null)
         {

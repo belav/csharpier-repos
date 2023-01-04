@@ -47,7 +47,8 @@ public sealed record TypeMappingSourceDependencies
     [EntityFrameworkInternal]
     public TypeMappingSourceDependencies(
         IValueConverterSelector valueConverterSelector,
-        IEnumerable<ITypeMappingSourcePlugin> plugins)
+        IEnumerable<ITypeMappingSourcePlugin> plugins
+    )
     {
         ValueConverterSelector = valueConverterSelector;
         Plugins = plugins;

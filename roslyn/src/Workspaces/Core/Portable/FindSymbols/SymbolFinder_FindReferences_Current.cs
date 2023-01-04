@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    // This file contains the current FindReferences APIs.  The current APIs allow for OOP 
+    // This file contains the current FindReferences APIs.  The current APIs allow for OOP
     // implementation and will defer to the oop server if it is available.  If not, it will
     // compute the results in process.
 
@@ -25,26 +25,47 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             IStreamingFindReferencesProgress progress,
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using (Logger.LogBlock(FunctionId.FindReference, cancellationToken))
             {
-                if (SerializableSymbolAndProjectId.TryCreate(symbol, solution, cancellationToken, out var serializedSymbol))
+                if (
+                    SerializableSymbolAndProjectId.TryCreate(
+                        symbol,
+                        solution,
+                        cancellationToken,
+                        out var serializedSymbol
+                    )
+                )
                 {
-                    var client = await RemoteHostClient.TryGetClientAsync(solution.Services, cancellationToken).ConfigureAwait(false);
+                    var client = await RemoteHostClient
+                        .TryGetClientAsync(solution.Services, cancellationToken)
+                        .ConfigureAwait(false);
                     if (client != null)
                     {
-                        // Create a callback that we can pass to the server process to hear about the 
+                        // Create a callback that we can pass to the server process to hear about the
                         // results as it finds them.  When we hear about results we'll forward them to
                         // the 'progress' parameter which will then update the UI.
                         var serverCallback = new FindReferencesServerCallback(solution, progress);
                         var documentIds = documents?.SelectAsArray(d => d.Id) ?? default;
 
-                        await client.TryInvokeAsync<IRemoteSymbolFinderService>(
-                            solution,
-                            (service, solutionInfo, callbackId, cancellationToken) => service.FindReferencesAsync(solutionInfo, callbackId, serializedSymbol, documentIds, options, cancellationToken),
-                            serverCallback,
-                            cancellationToken).ConfigureAwait(false);
+                        await client
+                            .TryInvokeAsync<IRemoteSymbolFinderService>(
+                                solution,
+                                (service, solutionInfo, callbackId, cancellationToken) =>
+                                    service.FindReferencesAsync(
+                                        solutionInfo,
+                                        callbackId,
+                                        serializedSymbol,
+                                        documentIds,
+                                        options,
+                                        cancellationToken
+                                    ),
+                                serverCallback,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
 
                         return;
                     }
@@ -52,8 +73,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                 // Couldn't effectively search in OOP. Perform the search in-proc.
                 await FindReferencesInCurrentProcessAsync(
-                    symbol, solution, progress,
-                    documents, options, cancellationToken).ConfigureAwait(false);
+                        symbol,
+                        solution,
+                        progress,
+                        documents,
+                        options,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
@@ -63,12 +90,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             IStreamingFindReferencesProgress progress,
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var finders = ReferenceFinders.DefaultReferenceFinders;
             progress ??= NoOpStreamingFindReferencesProgress.Instance;
             var engine = new FindReferencesSearchEngine(
-                solution, documents, finders, progress, options);
+                solution,
+                documents,
+                finders,
+                progress,
+                options
+            );
             return engine.FindReferencesAsync(symbol, cancellationToken);
         }
     }

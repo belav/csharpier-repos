@@ -10,8 +10,13 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.SolutionCrawler
 {
-    [ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.MiscellaneousFiles), Shared]
-    internal sealed class MiscSolutionCrawlerWorkspaceEventListener : IEventListener<object>, IEventListenerStoppable
+    [
+        ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.MiscellaneousFiles),
+        Shared
+    ]
+    internal sealed class MiscSolutionCrawlerWorkspaceEventListener
+        : IEventListener<object>,
+            IEventListenerStoppable
     {
         private readonly IGlobalOptionService _globalOptions;
 
@@ -28,11 +33,13 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             {
                 // misc workspace will enable syntax errors and semantic errors for script files for
                 // all participating projects in the workspace
-                DiagnosticProvider.Enable(workspace, DiagnosticProvider.Options.Syntax | DiagnosticProvider.Options.ScriptSemantic);
+                DiagnosticProvider.Enable(
+                    workspace,
+                    DiagnosticProvider.Options.Syntax | DiagnosticProvider.Options.ScriptSemantic
+                );
             }
         }
 
-        public void StopListening(Workspace workspace)
-            => DiagnosticProvider.Disable(workspace);
+        public void StopListening(Workspace workspace) => DiagnosticProvider.Disable(workspace);
     }
 }

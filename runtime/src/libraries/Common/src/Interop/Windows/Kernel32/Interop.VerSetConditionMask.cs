@@ -8,6 +8,10 @@ internal static partial class Interop
     internal static partial class Kernel32
     {
         [LibraryImport(Libraries.Kernel32)]
-        internal static partial ulong VerSetConditionMask(ulong ConditionMask, uint TypeMask, byte Condition);
+        internal static partial ulong VerSetConditionMask(
+            ulong ConditionMask,
+            uint TypeMask,
+            byte Condition
+        );
     }
 }

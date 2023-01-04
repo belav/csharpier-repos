@@ -47,7 +47,11 @@ public class ElementReferenceJsonConverterTest
         reader.Read();
 
         // Act
-        var elementReference = Converter.Read(ref reader, typeof(ElementReference), new JsonSerializerOptions());
+        var elementReference = Converter.Read(
+            ref reader,
+            typeof(ElementReference),
+            new JsonSerializerOptions()
+        );
 
         // Assert
         Assert.Equal(id, elementReference.Id);
@@ -59,7 +63,7 @@ public class ElementReferenceJsonConverterTest
         // Arrange
         var id = ElementReference.CreateWithUniqueId(ElementReferenceContext).Id;
         var json =
-@$"{{
+            @$"{{
     ""__internalId"": ""{id}""
 }}";
         var bytes = Encoding.UTF8.GetBytes(json);
@@ -67,7 +71,11 @@ public class ElementReferenceJsonConverterTest
         reader.Read();
 
         // Act
-        var elementReference = Converter.Read(ref reader, typeof(ElementReference), new JsonSerializerOptions());
+        var elementReference = Converter.Read(
+            ref reader,
+            typeof(ElementReference),
+            new JsonSerializerOptions()
+        );
 
         // Assert
         Assert.Equal(id, elementReference.Id);

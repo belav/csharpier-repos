@@ -8,7 +8,9 @@ namespace System.Net.Sockets
 {
     /// <summary>Provides socket exceptions to the application.</summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public partial class SocketException : Win32Exception
     {
         /// <summary>The SocketError or Int32 specified when constructing the exception.</summary>
@@ -31,18 +33,19 @@ namespace System.Net.Sockets
         }
 
         /// <summary>Initializes a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with the specified error code and optional message.</summary>
-        public SocketException(int errorCode, string? message) : this((SocketError)errorCode, message)
-        {
-        }
+        public SocketException(int errorCode, string? message)
+            : this((SocketError)errorCode, message) { }
 
         /// <summary>Creates a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with the specified error code as SocketError.</summary>
-        internal SocketException(SocketError socketError) : base(GetNativeErrorForSocketError(socketError))
+        internal SocketException(SocketError socketError)
+            : base(GetNativeErrorForSocketError(socketError))
         {
             _errorCode = socketError;
         }
 
         /// <summary>Initializes a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with the specified error code as SocketError and optional message.</summary>
-        internal SocketException(SocketError socketError, string? message) : base(GetNativeErrorForSocketError(socketError), message)
+        internal SocketException(SocketError socketError, string? message)
+            : base(GetNativeErrorForSocketError(socketError), message)
         {
             _errorCode = socketError;
         }
@@ -51,10 +54,13 @@ namespace System.Net.Sockets
 
         public SocketError SocketErrorCode => _errorCode;
 
-        protected SocketException(SerializationInfo serializationInfo, StreamingContext streamingContext)
-            : base(serializationInfo, streamingContext)
+        protected SocketException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) : base(serializationInfo, streamingContext)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"{NativeErrorCode}:{Message}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"{NativeErrorCode}:{Message}");
         }
 
         public override int ErrorCode => base.NativeErrorCode;

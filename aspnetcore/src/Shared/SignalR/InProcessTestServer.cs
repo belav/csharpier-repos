@@ -30,8 +30,7 @@ public abstract class InProcessTestServer : IAsyncDisposable
     public abstract ValueTask DisposeAsync();
 }
 
-public class InProcessTestServer<TStartup> : InProcessTestServer
-    where TStartup : class
+public class InProcessTestServer<TStartup> : InProcessTestServer where TStartup : class
 {
     private readonly ILoggerFactory _loggerFactory;
     private readonly ILogger _logger;
@@ -54,18 +53,28 @@ public class InProcessTestServer<TStartup> : InProcessTestServer
 
     public override string Url => _url;
 
-    public static async Task<InProcessTestServer<TStartup>> StartServer(ILoggerFactory loggerFactory, Action<KestrelServerOptions> configureKestrelServerOptions = null, IDisposable disposable = null)
+    public static async Task<InProcessTestServer<TStartup>> StartServer(
+        ILoggerFactory loggerFactory,
+        Action<KestrelServerOptions> configureKestrelServerOptions = null,
+        IDisposable disposable = null
+    )
     {
-        var server = new InProcessTestServer<TStartup>(loggerFactory, configureKestrelServerOptions, disposable);
+        var server = new InProcessTestServer<TStartup>(
+            loggerFactory,
+            configureKestrelServerOptions,
+            disposable
+        );
         await server.StartServerInner();
         return server;
     }
 
-    private InProcessTestServer() : this(loggerFactory: null, null, null)
-    {
-    }
+    private InProcessTestServer() : this(loggerFactory: null, null, null) { }
 
-    private InProcessTestServer(ILoggerFactory loggerFactory, Action<KestrelServerOptions> configureKestrelServerOptions, IDisposable disposable)
+    private InProcessTestServer(
+        ILoggerFactory loggerFactory,
+        Action<KestrelServerOptions> configureKestrelServerOptions,
+        IDisposable disposable
+    )
     {
         _configureKestrelServerOptions = configureKestrelServerOptions;
         _extraDisposable = disposable;
@@ -74,8 +83,12 @@ public class InProcessTestServer<TStartup> : InProcessTestServer
         if (loggerFactory == null)
         {
             var testLog = AssemblyTestLog.ForAssembly(typeof(TStartup).Assembly);
-            _logToken = testLog.StartTestLog(null, $"{nameof(InProcessTestServer<TStartup>)}_{typeof(TStartup).Name}",
-                out _loggerFactory, nameof(InProcessTestServer));
+            _logToken = testLog.StartTestLog(
+                null,
+                $"{nameof(InProcessTestServer<TStartup>)}_{typeof(TStartup).Name}",
+                out _loggerFactory,
+                nameof(InProcessTestServer)
+            );
         }
         else
         {
@@ -98,14 +111,18 @@ public class InProcessTestServer<TStartup> : InProcessTestServer
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .ConfigureLogging(builder => builder
-                .SetMinimumLevel(LogLevel.Trace)
-                .AddProvider(new ForwardingLoggerProvider(_loggerFactory)))
-                .UseStartup(typeof(TStartup))
-                .UseKestrel(o => _configureKestrelServerOptions?.Invoke(o))
-                .UseUrls(url)
-                .UseContentRoot(Directory.GetCurrentDirectory());
-            }).Build();
+                    .ConfigureLogging(
+                        builder =>
+                            builder
+                                .SetMinimumLevel(LogLevel.Trace)
+                                .AddProvider(new ForwardingLoggerProvider(_loggerFactory))
+                    )
+                    .UseStartup(typeof(TStartup))
+                    .UseKestrel(o => _configureKestrelServerOptions?.Invoke(o))
+                    .UseUrls(url)
+                    .UseContentRoot(Directory.GetCurrentDirectory());
+            })
+            .Build();
 
         _logger.LogInformation("Starting test server...");
         var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
@@ -116,13 +133,18 @@ public class InProcessTestServer<TStartup> : InProcessTestServer
         catch (OperationCanceledException)
         {
             var logs = _logSinkProvider.GetLogs();
-            throw new TimeoutException($"Timed out waiting for application to start.{Environment.NewLine}Startup Logs:{Environment.NewLine}{RenderLogs(logs)}");
+            throw new TimeoutException(
+                $"Timed out waiting for application to start.{Environment.NewLine}Startup Logs:{Environment.NewLine}{RenderLogs(logs)}"
+            );
         }
 
         _logger.LogInformation("Test Server started");
 
         // Get the URL from the server
-        _url = _host.Services.GetService<IServer>().Features.Get<IServerAddressesFeature>().Addresses.Single();
+        _url = _host.Services
+            .GetService<IServer>()
+            .Features.Get<IServerAddressesFeature>()
+            .Addresses.Single();
 
         _lifetime = _host.Services.GetRequiredService<IHostApplicationLifetime>();
         _lifetime.ApplicationStopped.Register(() =>
@@ -137,11 +159,20 @@ public class InProcessTestServer<TStartup> : InProcessTestServer
         var builder = new StringBuilder();
         foreach (var log in logs)
         {
-            builder.AppendLine(FormattableString.Invariant($"{log.Timestamp:O} {log.Write.LoggerName} {log.Write.LogLevel}: {log.Write.Formatter(log.Write.State, log.Write.Exception)}"));
+            builder.AppendLine(
+                FormattableString.Invariant(
+                    $"{log.Timestamp:O} {log.Write.LoggerName} {log.Write.LogLevel}: {log.Write.Formatter(log.Write.State, log.Write.Exception)}"
+                )
+            );
             if (log.Write.Exception != null)
             {
                 var message = log.Write.Exception.ToString();
-                foreach (var line in message.Split(new[] { Environment.NewLine }, StringSplitOptions.None))
+                foreach (
+                    var line in message.Split(
+                        new[] { Environment.NewLine },
+                        StringSplitOptions.None
+                    )
+                )
                 {
                     builder.AppendLine(FormattableString.Invariant($"| {line}"));
                 }
@@ -174,9 +205,7 @@ public class InProcessTestServer<TStartup> : InProcessTestServer
             _loggerFactory = loggerFactory;
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public ILogger CreateLogger(string categoryName)
         {

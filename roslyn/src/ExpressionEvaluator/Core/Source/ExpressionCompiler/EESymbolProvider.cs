@@ -25,7 +25,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         /// </summary>
         /// <exception cref="BadImageFormatException"></exception>
         /// <exception cref="UnsupportedSignatureContent"></exception>
-        public abstract void DecodeLocalConstant(ref BlobReader reader, out TTypeSymbol type, out ConstantValue value);
+        public abstract void DecodeLocalConstant(
+            ref BlobReader reader,
+            out TTypeSymbol type,
+            out ConstantValue value
+        );
 
         public abstract TTypeSymbol GetTypeSymbolForSerializedType(string typeName);
 
@@ -34,17 +38,21 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int slotIndex,
             LocalInfo<TTypeSymbol> info,
             ImmutableArray<bool> dynamicFlagsOpt,
-            ImmutableArray<string?> tupleElementNamesOpt);
+            ImmutableArray<string?> tupleElementNamesOpt
+        );
 
         public abstract TLocalSymbol GetLocalConstant(
             string name,
             TTypeSymbol type,
             ConstantValue value,
             ImmutableArray<bool> dynamicFlagsOpt,
-            ImmutableArray<string?> tupleElementNamesOpt);
+            ImmutableArray<string?> tupleElementNamesOpt
+        );
 
         /// <exception cref="BadImageFormatException"></exception>
-        public abstract IAssemblySymbolInternal GetReferencedAssembly(AssemblyReferenceHandle handle);
+        public abstract IAssemblySymbolInternal GetReferencedAssembly(
+            AssemblyReferenceHandle handle
+        );
 
         /// <exception cref="BadImageFormatException"></exception>
         public abstract TTypeSymbol GetType(EntityHandle handle);

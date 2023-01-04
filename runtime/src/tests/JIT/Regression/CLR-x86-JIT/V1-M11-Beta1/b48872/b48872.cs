@@ -9,6 +9,7 @@ namespace Test
     public class AA
     {
         static uint m_u;
+
         public static int Main()
         {
             bool[] ab = new bool[4];

@@ -10,12 +10,11 @@ public class Operator
     public Vehicle Vehicle { get; set; }
     public OperatorDetails Details { get; set; }
 
-    public override bool Equals(object obj)
-        => obj is Operator other
-            && VehicleName == other.VehicleName
-            && Name == other.Name
-            && Equals(Details, other.Details);
+    public override bool Equals(object obj) =>
+        obj is Operator other
+        && VehicleName == other.VehicleName
+        && Name == other.Name
+        && Equals(Details, other.Details);
 
-    public override int GetHashCode()
-        => HashCode.Combine(VehicleName, Name, Details);
+    public override int GetHashCode() => HashCode.Combine(VehicleName, Name, Details);
 }

@@ -22,10 +22,22 @@ namespace ILCompiler
         protected readonly StackTraceEmissionPolicy _stackTraceEmissionPolicy;
         private readonly ModuleDesc _generatedAssembly;
 
-        public GeneratingMetadataManager(CompilerTypeSystemContext typeSystemContext, MetadataBlockingPolicy blockingPolicy,
-            ManifestResourceBlockingPolicy resourceBlockingPolicy, string logFile, StackTraceEmissionPolicy stackTracePolicy,
-            DynamicInvokeThunkGenerationPolicy invokeThunkGenerationPolicy, MetadataManagerOptions options)
-            : base(typeSystemContext, blockingPolicy, resourceBlockingPolicy, invokeThunkGenerationPolicy, options)
+        public GeneratingMetadataManager(
+            CompilerTypeSystemContext typeSystemContext,
+            MetadataBlockingPolicy blockingPolicy,
+            ManifestResourceBlockingPolicy resourceBlockingPolicy,
+            string logFile,
+            StackTraceEmissionPolicy stackTracePolicy,
+            DynamicInvokeThunkGenerationPolicy invokeThunkGenerationPolicy,
+            MetadataManagerOptions options
+        )
+            : base(
+                typeSystemContext,
+                blockingPolicy,
+                resourceBlockingPolicy,
+                invokeThunkGenerationPolicy,
+                options
+            )
         {
             _metadataLogFile = logFile;
             _stackTraceEmissionPolicy = stackTracePolicy;
@@ -49,7 +61,8 @@ namespace ILCompiler
             out List<MetadataMapping<MetadataType>> typeMappings,
             out List<MetadataMapping<MethodDesc>> methodMappings,
             out List<MetadataMapping<FieldDesc>> fieldMappings,
-            out List<MetadataMapping<MethodDesc>> stackTraceMapping) where TPolicy : struct, IMetadataPolicy
+            out List<MetadataMapping<MethodDesc>> stackTraceMapping
+        ) where TPolicy : struct, IMetadataPolicy
         {
             var transformed = MetadataTransform.Run(policy, GetCompilationModulesWithMetadata());
             MetadataTransform transform = transformed.Transform;
@@ -72,9 +85,11 @@ namespace ILCompiler
 
                 // Methods that will end up in the reflection invoke table should not have an entry in stack trace table
                 // We'll try looking them up in reflection data at runtime.
-                if (transformed.GetTransformedMethodDefinition(typicalMethod) != null &&
-                    ShouldMethodBeInInvokeMap(method) &&
-                    (GetMetadataCategory(method) & MetadataCategory.RuntimeMapping) != 0)
+                if (
+                    transformed.GetTransformedMethodDefinition(typicalMethod) != null
+                    && ShouldMethodBeInInvokeMap(method)
+                    && (GetMetadataCategory(method) & MetadataCategory.RuntimeMapping) != 0
+                )
                     continue;
 
                 if (!_stackTraceEmissionPolicy.ShouldIncludeMethod(method))
@@ -82,9 +97,7 @@ namespace ILCompiler
 
                 MetadataRecord record = CreateStackTraceRecord(transform, method);
 
-                stackTraceRecords.Add(new KeyValuePair<MethodDesc, MetadataRecord>(
-                    method,
-                    record));
+                stackTraceRecords.Add(new KeyValuePair<MethodDesc, MetadataRecord>(method, record));
 
                 writer.AdditionalRootRecords.Add(record);
             }
@@ -94,7 +107,20 @@ namespace ILCompiler
             // .NET metadata is UTF-16 and UTF-16 contains code points that don't translate to UTF-8.
             var noThrowUtf8Encoding = new UTF8Encoding(false, false);
 
-            using (var logWriter = _metadataLogFile != null ? new StreamWriter(File.Open(_metadataLogFile, FileMode.Create, FileAccess.Write, FileShare.Read), noThrowUtf8Encoding) : null)
+            using (
+                var logWriter =
+                    _metadataLogFile != null
+                        ? new StreamWriter(
+                            File.Open(
+                                _metadataLogFile,
+                                FileMode.Create,
+                                FileAccess.Write,
+                                FileShare.Read
+                            ),
+                            noThrowUtf8Encoding
+                        )
+                        : null
+            )
             {
                 writer.LogWriter = logWriter;
                 writer.Write(ms);
@@ -106,7 +132,9 @@ namespace ILCompiler
             if (metadataBlob.Length > MaxAllowedMetadataOffset)
             {
                 // Offset portion of metadata handles is limited to 16 MB.
-                throw new InvalidOperationException($"Metadata blob exceeded the addressing range (allowed: {MaxAllowedMetadataOffset}, actual: {metadataBlob.Length})");
+                throw new InvalidOperationException(
+                    $"Metadata blob exceeded the addressing range (allowed: {MaxAllowedMetadataOffset}, actual: {metadataBlob.Length})"
+                );
             }
 
             typeMappings = new List<MetadataMapping<MetadataType>>();
@@ -128,7 +156,12 @@ namespace ILCompiler
                 record ??= transformed.GetTransformedTypeReference(definition);
 
                 if (record != null)
-                    typeMappings.Add(new MetadataMapping<MetadataType>(definition, writer.GetRecordHandle(record)));
+                    typeMappings.Add(
+                        new MetadataMapping<MetadataType>(
+                            definition,
+                            writer.GetRecordHandle(record)
+                        )
+                    );
             }
 
             HashSet<MethodDesc> canonicalGenericMethods = new HashSet<MethodDesc>();
@@ -140,28 +173,48 @@ namespace ILCompiler
                     continue;
                 }
 
-                if ((method.HasInstantiation && method.IsCanonicalMethod(CanonicalFormKind.Specific))
-                    || (!method.HasInstantiation && method.GetCanonMethodTarget(CanonicalFormKind.Specific) != method))
+                if (
+                    (
+                        method.HasInstantiation
+                        && method.IsCanonicalMethod(CanonicalFormKind.Specific)
+                    )
+                    || (
+                        !method.HasInstantiation
+                        && method.GetCanonMethodTarget(CanonicalFormKind.Specific) != method
+                    )
+                )
                 {
                     // Methods that are not in their canonical form are not interesting with the exception
                     // of generic methods: their dictionaries convey their identity.
                     continue;
                 }
 
-                if (IsReflectionBlocked(method.Instantiation) || IsReflectionBlocked(method.OwningType.Instantiation))
+                if (
+                    IsReflectionBlocked(method.Instantiation)
+                    || IsReflectionBlocked(method.OwningType.Instantiation)
+                )
                     continue;
 
                 if ((GetMetadataCategory(method) & MetadataCategory.RuntimeMapping) == 0)
                     continue;
 
                 // If we already added a canonically equivalent generic method, skip this one.
-                if (method.HasInstantiation && !canonicalGenericMethods.Add(method.GetCanonMethodTarget(CanonicalFormKind.Specific)))
+                if (
+                    method.HasInstantiation
+                    && !canonicalGenericMethods.Add(
+                        method.GetCanonMethodTarget(CanonicalFormKind.Specific)
+                    )
+                )
                     continue;
 
-                MetadataRecord record = transformed.GetTransformedMethodDefinition(method.GetTypicalMethodDefinition());
+                MetadataRecord record = transformed.GetTransformedMethodDefinition(
+                    method.GetTypicalMethodDefinition()
+                );
 
                 if (record != null)
-                    methodMappings.Add(new MetadataMapping<MethodDesc>(method, writer.GetRecordHandle(record)));
+                    methodMappings.Add(
+                        new MetadataMapping<MethodDesc>(method, writer.GetRecordHandle(record))
+                    );
             }
 
             HashSet<FieldDesc> canonicalFields = new HashSet<FieldDesc>();
@@ -170,10 +223,15 @@ namespace ILCompiler
                 FieldDesc fieldToAdd = field;
                 if (!field.IsStatic)
                 {
-                    TypeDesc canonOwningType = field.OwningType.ConvertToCanonForm(CanonicalFormKind.Specific);
+                    TypeDesc canonOwningType = field.OwningType.ConvertToCanonForm(
+                        CanonicalFormKind.Specific
+                    );
                     if (canonOwningType != field.OwningType)
                     {
-                        FieldDesc canonField = _typeSystemContext.GetFieldForInstantiatedType(field.GetTypicalFieldDefinition(), (InstantiatedType)canonOwningType);
+                        FieldDesc canonField = _typeSystemContext.GetFieldForInstantiatedType(
+                            field.GetTypicalFieldDefinition(),
+                            (InstantiatedType)canonOwningType
+                        );
 
                         // If we already added a canonically equivalent field, skip this one.
                         if (!canonicalFields.Add(canonField))
@@ -183,15 +241,24 @@ namespace ILCompiler
                     }
                 }
 
-                Field record = transformed.GetTransformedFieldDefinition(fieldToAdd.GetTypicalFieldDefinition());
+                Field record = transformed.GetTransformedFieldDefinition(
+                    fieldToAdd.GetTypicalFieldDefinition()
+                );
                 if (record != null)
-                    fieldMappings.Add(new MetadataMapping<FieldDesc>(fieldToAdd, writer.GetRecordHandle(record)));
+                    fieldMappings.Add(
+                        new MetadataMapping<FieldDesc>(fieldToAdd, writer.GetRecordHandle(record))
+                    );
             }
 
             // Generate stack trace metadata mapping
             foreach (var stackTraceRecord in stackTraceRecords)
             {
-                stackTraceMapping.Add(new MetadataMapping<MethodDesc>(stackTraceRecord.Key, writer.GetRecordHandle(stackTraceRecord.Value)));
+                stackTraceMapping.Add(
+                    new MetadataMapping<MethodDesc>(
+                        stackTraceRecord.Key,
+                        writer.GetRecordHandle(stackTraceRecord.Value)
+                    )
+                );
             }
         }
 
@@ -206,8 +273,10 @@ namespace ILCompiler
         /// </summary>
         public sealed override MethodDesc GetReflectionInvokeStub(MethodDesc method)
         {
-            return _typeSystemContext.GetDynamicInvokeThunk(method.Signature,
-                !method.Signature.IsStatic && method.OwningType.IsValueType);
+            return _typeSystemContext.GetDynamicInvokeThunk(
+                method.Signature,
+                !method.Signature.IsStatic && method.OwningType.IsValueType
+            );
         }
     }
 }

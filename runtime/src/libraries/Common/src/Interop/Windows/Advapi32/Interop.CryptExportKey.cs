@@ -16,6 +16,7 @@ internal static partial class Interop
             int dwBlobType,
             int dwFlags,
             byte[]? pbData,
-            ref int dwDataLen);
+            ref int dwDataLen
+        );
     }
 }

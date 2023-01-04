@@ -27,12 +27,21 @@ namespace System.Security.Cryptography
         [SupportedOSPlatform("windows")]
         public static CngKey Import(byte[] keyBlob, CngKeyBlobFormat format)
         {
-            return Import(keyBlob, format, provider: CngProvider.MicrosoftSoftwareKeyStorageProvider);
+            return Import(
+                keyBlob,
+                format,
+                provider: CngProvider.MicrosoftSoftwareKeyStorageProvider
+            );
         }
 
         internal static CngKey Import(byte[] keyBlob, string? curveName, CngKeyBlobFormat format)
         {
-            return Import(keyBlob, curveName, format, provider: CngProvider.MicrosoftSoftwareKeyStorageProvider);
+            return Import(
+                keyBlob,
+                curveName,
+                format,
+                provider: CngProvider.MicrosoftSoftwareKeyStorageProvider
+            );
         }
 
         [SupportedOSPlatform("windows")]
@@ -43,15 +52,21 @@ namespace System.Security.Cryptography
 
         internal static CngKey ImportEncryptedPkcs8(
             ReadOnlySpan<byte> keyBlob,
-            ReadOnlySpan<char> password)
+            ReadOnlySpan<char> password
+        )
         {
-            return ImportEncryptedPkcs8(keyBlob, password, CngProvider.MicrosoftSoftwareKeyStorageProvider);
+            return ImportEncryptedPkcs8(
+                keyBlob,
+                password,
+                CngProvider.MicrosoftSoftwareKeyStorageProvider
+            );
         }
 
         internal static unsafe CngKey ImportEncryptedPkcs8(
             ReadOnlySpan<byte> keyBlob,
             ReadOnlySpan<char> password,
-            CngProvider provider)
+            CngProvider provider
+        )
         {
             SafeNCryptProviderHandle providerHandle = provider.OpenStorageProvider();
             SafeNCryptKeyHandle keyHandle;
@@ -87,7 +102,8 @@ namespace System.Security.Cryptography
                     out keyHandle,
                     ref MemoryMarshal.GetReference(keyBlob),
                     keyBlob.Length,
-                    0);
+                    0
+                );
 
                 if (errorCode != ErrorCode.ERROR_SUCCESS)
                 {
@@ -106,7 +122,8 @@ namespace System.Security.Cryptography
             byte[] keyBlob,
             string? curveName,
             CngKeyBlobFormat format,
-            CngProvider provider)
+            CngProvider provider
+        )
         {
             ArgumentNullException.ThrowIfNull(keyBlob);
 
@@ -117,7 +134,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> keyBlob,
             string? curveName,
             CngKeyBlobFormat format,
-            CngProvider provider)
+            CngProvider provider
+        )
         {
             ArgumentNullException.ThrowIfNull(format);
             ArgumentNullException.ThrowIfNull(provider);
@@ -138,7 +156,8 @@ namespace System.Security.Cryptography
                         out keyHandle,
                         ref MemoryMarshal.GetReference(keyBlob),
                         keyBlob.Length,
-                        0);
+                        0
+                    );
 
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                     {
@@ -149,7 +168,12 @@ namespace System.Security.Cryptography
                 }
                 else
                 {
-                    keyHandle = ECCng.ImportKeyBlob(format.Format, keyBlob, curveName, providerHandle);
+                    keyHandle = ECCng.ImportKeyBlob(
+                        format.Format,
+                        keyBlob,
+                        curveName,
+                        providerHandle
+                    );
                 }
 
                 CngKey key = new CngKey(providerHandle, keyHandle);

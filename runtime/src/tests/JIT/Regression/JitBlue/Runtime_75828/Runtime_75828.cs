@@ -11,20 +11,19 @@ public class Runtime_75828
     public static int Main()
     {
         Marshal.SetLastSystemError(42);
-        
+
         int expected = 5_000_000 + 42;
-        
+
         int result = 0;
         for (int i = 0; i < 10_000_000; i++)
         {
             result += i % 2;
         }
-        
+
         result += Marshal.GetLastSystemError();
-        
+
         Console.WriteLine($"got {result} expected {expected}");
-        
+
         return result == expected ? 100 : -1;
     }
 }
-

@@ -26,4 +26,4 @@ public unsafe class Runtime_58373
     {
         return *(short*)&h;
     }
-}  
+}

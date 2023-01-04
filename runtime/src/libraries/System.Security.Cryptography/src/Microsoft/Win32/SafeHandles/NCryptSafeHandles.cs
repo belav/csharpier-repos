@@ -11,7 +11,6 @@ using ErrorCode = Interop.NCrypt.ErrorCode;
 
 namespace Microsoft.Win32.SafeHandles
 {
-
     /// <summary>
     ///     Base class for NCrypt handles which need to support being pseudo-duplicated. This class is not for
     ///     external use (instead applications should consume the concrete subclasses of this class).
@@ -67,18 +66,18 @@ namespace Microsoft.Win32.SafeHandles
         private SafeHandle? _parentHandle;
 
         [SupportedOSPlatform("windows")]
-        protected SafeNCryptHandle() : base(true)
-        {
-        }
+        protected SafeNCryptHandle() : base(true) { }
 
         [SupportedOSPlatform("windows")]
-        protected SafeNCryptHandle(IntPtr handle, SafeHandle parentHandle)
-            : base(true)
+        protected SafeNCryptHandle(IntPtr handle, SafeHandle parentHandle) : base(true)
         {
             ArgumentNullException.ThrowIfNull(parentHandle);
 
             if (parentHandle.IsClosed || parentHandle.IsInvalid)
-                throw new ArgumentException(SR.Argument_Invalid_SafeHandleInvalidOrClosed, nameof(parentHandle));
+                throw new ArgumentException(
+                    SR.Argument_Invalid_SafeHandleInvalidOrClosed,
+                    nameof(parentHandle)
+                );
 
             bool success = false;
             parentHandle.DangerousAddRef(ref success);
@@ -105,13 +104,14 @@ namespace Microsoft.Win32.SafeHandles
         {
             get
             {
-                Debug.Assert((_ownershipState == OwnershipState.Duplicate && _holder != null) ||
-                             (_ownershipState != OwnershipState.Duplicate && _holder == null));
+                Debug.Assert(
+                    (_ownershipState == OwnershipState.Duplicate && _holder != null)
+                        || (_ownershipState != OwnershipState.Duplicate && _holder == null)
+                );
                 Debug.Assert(_holder == null || _holder._ownershipState == OwnershipState.Holder);
 
                 return _holder;
             }
-
             set
             {
 #if DEBUG
@@ -119,7 +119,6 @@ namespace Microsoft.Win32.SafeHandles
 #endif
                 Debug.Assert(_ownershipState != OwnershipState.Duplicate);
                 Debug.Assert(value._ownershipState == OwnershipState.Holder);
-
 
                 _holder = value;
                 _ownershipState = OwnershipState.Duplicate;
@@ -155,13 +154,13 @@ namespace Microsoft.Win32.SafeHandles
                                 holderRawHandle = Holder.DangerousGetHandle();
                             }
 
-
-                            bool holderValid = Holder != null &&
-                                               !Holder.IsInvalid &&
-                                               !Holder.IsClosed &&
-                                               holderRawHandle != IntPtr.Zero &&
-                                               holderRawHandle == handle &&
-                                               _parentHandle == null;
+                            bool holderValid =
+                                Holder != null
+                                && !Holder.IsInvalid
+                                && !Holder.IsClosed
+                                && holderRawHandle != IntPtr.Zero
+                                && holderRawHandle == handle
+                                && _parentHandle == null;
 
                             return holderValid && !IsInvalid && !IsClosed;
                         }
@@ -244,7 +243,7 @@ namespace Microsoft.Win32.SafeHandles
 
             Holder!.DangerousAddRef(ref addedRef);
             duplicate.SetHandle(Holder.DangerousGetHandle());
-            duplicate.Holder = Holder;              // Transitions to OwnershipState.Duplicate
+            duplicate.Holder = Holder; // Transitions to OwnershipState.Duplicate
 
             return duplicate;
         }
@@ -273,7 +272,6 @@ namespace Microsoft.Win32.SafeHandles
             holder.SetHandle(DangerousGetHandle());
             GC.SuppressFinalize(holder);
 
-
             // Move the parent handle to the Holder
             if (_parentHandle != null)
             {
@@ -283,12 +281,12 @@ namespace Microsoft.Win32.SafeHandles
 
             // Transition into the duplicate state, referencing the holder. The initial reference count
             // on the holder will refer to the original handle so there is no need to AddRef here.
-            Holder = holder;        // Transitions to OwnershipState.Duplicate
+            Holder = holder; // Transitions to OwnershipState.Duplicate
 
             // The duplicate handle will also reference the holder
             holder.DangerousAddRef(ref addRef);
             duplicate.SetHandle(holder.DangerousGetHandle());
-            duplicate.Holder = holder;  // Transitions to OwnershipState.Duplicate
+            duplicate.Holder = holder; // Transitions to OwnershipState.Duplicate
 
             return duplicate;
         }
@@ -349,15 +347,11 @@ namespace Microsoft.Win32.SafeHandles
     public sealed class SafeNCryptKeyHandle : SafeNCryptHandle
     {
         [SupportedOSPlatform("windows")]
-        public SafeNCryptKeyHandle()
-        {
-        }
+        public SafeNCryptKeyHandle() { }
 
         [SupportedOSPlatform("windows")]
         public SafeNCryptKeyHandle(IntPtr handle, SafeHandle parentHandle)
-            : base(handle, parentHandle)
-        {
-        }
+            : base(handle, parentHandle) { }
 
         internal SafeNCryptKeyHandle Duplicate()
         {

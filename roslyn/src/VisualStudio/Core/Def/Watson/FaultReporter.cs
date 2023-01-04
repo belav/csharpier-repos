@@ -20,14 +20,16 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
     internal static class FaultReporter
     {
         private static readonly object _guard = new();
-        private static ImmutableArray<TelemetrySession> s_telemetrySessions = ImmutableArray<TelemetrySession>.Empty;
+        private static ImmutableArray<TelemetrySession> s_telemetrySessions =
+            ImmutableArray<TelemetrySession>.Empty;
         private static ImmutableArray<TraceSource> s_loggers = ImmutableArray<TraceSource>.Empty;
 
         private static int s_dumpsSubmitted;
 
         public static void InitializeFatalErrorHandlers()
         {
-            FatalError.Handler = static (exception, severity, forceDump) => ReportFault(exception, ConvertSeverity(severity), forceDump);
+            FatalError.Handler = static (exception, severity, forceDump) =>
+                ReportFault(exception, ConvertSeverity(severity), forceDump);
             FatalError.CopyHandlerTo(typeof(Compilation).Assembly);
         }
 
@@ -85,7 +87,12 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         {
             try
             {
-                if (exception is OperationCanceledException { InnerException: { } oceInnerException })
+                if (
+                    exception is OperationCanceledException
+                    {
+                        InnerException: { } oceInnerException
+                    }
+                )
                 {
                     ReportFault(oceInnerException, severity, forceDump);
                     return;
@@ -103,7 +110,8 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                 var currentProcess = Process.GetCurrentProcess();
 
                 // write the exception to a log file:
-                var logMessage = $"[{currentProcess.ProcessName}:{currentProcess.Id}] Unexpected exception: {exception}";
+                var logMessage =
+                    $"[{currentProcess.ProcessName}:{currentProcess.Id}] Unexpected exception: {exception}";
                 foreach (var logger in s_loggers)
                 {
                     logger.TraceEvent(TraceEventType.Error, 1, logMessage);
@@ -132,12 +140,13 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                             }
                         }
 
-                        // Returning "0" signals that, if sampled, we should send data to Watson. 
-                        // Any other value will cancel the Watson report. We never want to trigger a process dump manually, 
+                        // Returning "0" signals that, if sampled, we should send data to Watson.
+                        // Any other value will cancel the Watson report. We never want to trigger a process dump manually,
                         // we'll let TargetedNotifications determine if a dump should be collected.
                         // See https://aka.ms/roslynnfwdocs for more details
                         return 0;
-                    });
+                    }
+                );
 
                 foreach (var session in s_telemetrySessions)
                 {
@@ -187,9 +196,7 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                     }
                 }
             }
-            catch
-            {
-            }
+            catch { }
 
             // If we couldn't get a stack, do this
             return exception.Message;
@@ -217,14 +224,16 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                     {
                         var name = Path.GetFileNameWithoutExtension(path);
 
-                        // TODO: https://github.com/dotnet/roslyn/issues/42582 
+                        // TODO: https://github.com/dotnet/roslyn/issues/42582
                         // name our services more consistently to simplify filtering
 
                         // filter logs that are not relevant to Roslyn investigation
-                        if (!name.Contains("-" + ServiceDescriptor.ServiceNameTopLevelPrefix) &&
-                            !name.Contains("-CodeLens") &&
-                            !name.Contains("-ManagedLanguage.IDE.RemoteHostClient") &&
-                            !name.Contains("-hub"))
+                        if (
+                            !name.Contains("-" + ServiceDescriptor.ServiceNameTopLevelPrefix)
+                            && !name.Contains("-CodeLens")
+                            && !name.Contains("-ManagedLanguage.IDE.RemoteHostClient")
+                            && !name.Contains("-hub")
+                        )
                         {
                             continue;
                         }

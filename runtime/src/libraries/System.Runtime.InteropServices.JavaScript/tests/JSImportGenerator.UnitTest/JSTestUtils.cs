@@ -21,7 +21,10 @@ namespace JSImportGenerator.Unit.Tests
             return MetadataReference.CreateFromFile(attrAssem.Location);
         }
 
-        public static void AssertMessages(ImmutableArray<Diagnostic> diagnostics, string[] additionalAllowedDiagnostics)
+        public static void AssertMessages(
+            ImmutableArray<Diagnostic> diagnostics,
+            string[] additionalAllowedDiagnostics
+        )
         {
             var allowedDiagnostics = new HashSet<string>(additionalAllowedDiagnostics);
             foreach (Diagnostic diagnostic in diagnostics)
@@ -31,7 +34,11 @@ namespace JSImportGenerator.Unit.Tests
             }
         }
 
-        public static void DumpCode(string source, Compilation compilation, ImmutableArray<Diagnostic> generatorDiags)
+        public static void DumpCode(
+            string source,
+            Compilation compilation,
+            ImmutableArray<Diagnostic> generatorDiags
+        )
         {
             string prefix = Guid.NewGuid().ToString();
             ImmutableArray<Diagnostic> compDiag = compilation.GetDiagnostics();

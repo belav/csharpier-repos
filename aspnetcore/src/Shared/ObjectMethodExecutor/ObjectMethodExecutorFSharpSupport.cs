@@ -30,11 +30,16 @@ internal static class ObjectMethodExecutorFSharpSupport
     private static PropertyInfo _fsharpOptionOfTaskCreationOptionsNoneProperty;
     private static PropertyInfo _fsharpOptionOfCancellationTokenNoneProperty;
 
-    [UnconditionalSuppressMessage("Trimmer", "IL2060", Justification = "Reflecting over the async FSharpAsync<> contract")]
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2060",
+        Justification = "Reflecting over the async FSharpAsync<> contract"
+    )]
     public static bool TryBuildCoercerFromFSharpAsyncToAwaitable(
         Type possibleFSharpAsyncType,
         out Expression coerceToAwaitableExpression,
-        out Type awaitableType)
+        out Type awaitableType
+    )
     {
         var methodReturnGenericType = possibleFSharpAsyncType.IsGenericType
             ? possibleFSharpAsyncType.GetGenericTypeDefinition()
@@ -57,18 +62,25 @@ internal static class ObjectMethodExecutorFSharpSupport
         //         FSharpOption<TaskCreationOptions>.None,
         //         FSharpOption<CancellationToken>.None);
         // };
-        var startAsTaskClosedMethod = _fsharpAsyncStartAsTaskGenericMethod
-            .MakeGenericMethod(awaiterResultType);
+        var startAsTaskClosedMethod = _fsharpAsyncStartAsTaskGenericMethod.MakeGenericMethod(
+            awaiterResultType
+        );
         var coerceToAwaitableParam = Expression.Parameter(typeof(object));
         coerceToAwaitableExpression = Expression.Lambda(
             Expression.Convert(
                 Expression.Call(
                     startAsTaskClosedMethod,
                     Expression.Convert(coerceToAwaitableParam, possibleFSharpAsyncType),
-                    Expression.MakeMemberAccess(null, _fsharpOptionOfTaskCreationOptionsNoneProperty),
-                    Expression.MakeMemberAccess(null, _fsharpOptionOfCancellationTokenNoneProperty)),
-                typeof(object)),
-            coerceToAwaitableParam);
+                    Expression.MakeMemberAccess(
+                        null,
+                        _fsharpOptionOfTaskCreationOptionsNoneProperty
+                    ),
+                    Expression.MakeMemberAccess(null, _fsharpOptionOfCancellationTokenNoneProperty)
+                ),
+                typeof(object)
+            ),
+            coerceToAwaitableParam
+        );
 
         return true;
     }
@@ -76,7 +88,13 @@ internal static class ObjectMethodExecutorFSharpSupport
     private static bool IsFSharpAsyncOpenGenericType(Type possibleFSharpAsyncGenericType)
     {
         var typeFullName = possibleFSharpAsyncGenericType?.FullName;
-        if (!string.Equals(typeFullName, "Microsoft.FSharp.Control.FSharpAsync`1", StringComparison.Ordinal))
+        if (
+            !string.Equals(
+                typeFullName,
+                "Microsoft.FSharp.Control.FSharpAsync`1",
+                StringComparison.Ordinal
+            )
+        )
         {
             return false;
         }
@@ -98,9 +116,21 @@ internal static class ObjectMethodExecutorFSharpSupport
         }
     }
 
-    [UnconditionalSuppressMessage("Trimmer", "IL2026", Justification = "Reflecting over the async FSharpAsync<> contract")]
-    [UnconditionalSuppressMessage("Trimmer", "IL2055", Justification = "Reflecting over the async FSharpAsync<> contract")]
-    [UnconditionalSuppressMessage("Trimmer", "IL2072", Justification = "Reflecting over the async FSharpAsync<> contract")]
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2026",
+        Justification = "Reflecting over the async FSharpAsync<> contract"
+    )]
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2055",
+        Justification = "Reflecting over the async FSharpAsync<> contract"
+    )]
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2072",
+        Justification = "Reflecting over the async FSharpAsync<> contract"
+    )]
     private static bool TryPopulateFSharpValueCaches(Type possibleFSharpAsyncGenericType)
     {
         var assembly = possibleFSharpAsyncGenericType.Assembly;
@@ -113,16 +143,18 @@ internal static class ObjectMethodExecutorFSharpSupport
         }
 
         // Get a reference to FSharpOption<TaskCreationOptions>.None
-        var fsharpOptionOfTaskCreationOptionsType = fsharpOptionType
-            .MakeGenericType(typeof(TaskCreationOptions));
-        _fsharpOptionOfTaskCreationOptionsNoneProperty = fsharpOptionOfTaskCreationOptionsType
-            .GetRuntimeProperty("None");
+        var fsharpOptionOfTaskCreationOptionsType = fsharpOptionType.MakeGenericType(
+            typeof(TaskCreationOptions)
+        );
+        _fsharpOptionOfTaskCreationOptionsNoneProperty =
+            fsharpOptionOfTaskCreationOptionsType.GetRuntimeProperty("None");
 
         // Get a reference to FSharpOption<CancellationToken>.None
-        var fsharpOptionOfCancellationTokenType = fsharpOptionType
-            .MakeGenericType(typeof(CancellationToken));
-        _fsharpOptionOfCancellationTokenNoneProperty = fsharpOptionOfCancellationTokenType
-            .GetRuntimeProperty("None");
+        var fsharpOptionOfCancellationTokenType = fsharpOptionType.MakeGenericType(
+            typeof(CancellationToken)
+        );
+        _fsharpOptionOfCancellationTokenNoneProperty =
+            fsharpOptionOfCancellationTokenType.GetRuntimeProperty("None");
 
         // Get a reference to FSharpAsync.StartAsTask<>
         var fsharpAsyncMethods = fsharpAsyncType
@@ -131,10 +163,15 @@ internal static class ObjectMethodExecutorFSharpSupport
         foreach (var candidateMethodInfo in fsharpAsyncMethods)
         {
             var parameters = candidateMethodInfo.GetParameters();
-            if (parameters.Length == 3
-                && TypesHaveSameIdentity(parameters[0].ParameterType, possibleFSharpAsyncGenericType)
+            if (
+                parameters.Length == 3
+                && TypesHaveSameIdentity(
+                    parameters[0].ParameterType,
+                    possibleFSharpAsyncGenericType
+                )
                 && parameters[1].ParameterType == fsharpOptionOfTaskCreationOptionsType
-                && parameters[2].ParameterType == fsharpOptionOfCancellationTokenType)
+                && parameters[2].ParameterType == fsharpOptionOfCancellationTokenType
+            )
             {
                 // This really does look like the correct method (and hence assembly).
                 _fsharpAsyncStartAsTaskGenericMethod = candidateMethodInfo;

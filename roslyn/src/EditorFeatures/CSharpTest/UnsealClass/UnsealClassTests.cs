@@ -18,138 +18,158 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UnsealClass
     [Trait(Traits.Feature, Traits.Features.CodeActionsUnsealClass)]
     public sealed class UnsealClassTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UnsealClassTests(ITestOutputHelper logger)
-            : base(logger)
-        {
-        }
+        public UnsealClassTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpUnsealClassCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpUnsealClassCodeFixProvider());
 
         [Fact]
         public async Task RemovedFromSealedClass()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 sealed class C
 {
 }
 class D : [|C|]
 {
-}", @"
+}",
+                @"
 class C
 {
 }
 class D : C
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task RemovedFromSealedClassWithOtherModifiersPreserved()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 public sealed unsafe class C
 {
 }
 class D : [|C|]
 {
-}", @"
+}",
+                @"
 public unsafe class C
 {
 }
 class D : C
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task RemovedFromSealedClassWithConstructedGeneric()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 sealed class C<T>
 {
 }
 class D : [|C<int>|]
 {
-}", @"
+}",
+                @"
 class C<T>
 {
 }
 class D : C<int>
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotOfferedForNonSealedClass()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 class C
 {
 }
 class D : [|C|]
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotOfferedForStaticClass()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 static class C
 {
 }
 class D : [|C|]
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotOfferedForStruct()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 struct S
 {
 }
 class D : [|S|]
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotOfferedForDelegate()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 delegate void F();
 {
 }
 class D : [|F|]
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotOfferedForSealedClassFromMetadata1()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 class D : [|string|]
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotOfferedForSealedClassFromMetadata2()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 class D : [|System.ApplicationId|]
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task RemovedFromAllPartialClassDeclarationsInSameFile()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 public sealed partial class C
 {
 }
@@ -161,7 +181,8 @@ sealed partial class C
 }
 class D : [|C|]
 {
-}", @"
+}",
+                @"
 public partial class C
 {
 }
@@ -173,13 +194,15 @@ partial class C
 }
 class D : C
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task RemovedFromAllPartialClassDeclarationsAcrossFiles()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document>
@@ -201,7 +224,8 @@ class D : [|C|]
 }
         </Document>
     </Project>
-</Workspace>", @"
+</Workspace>",
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document>
@@ -223,13 +247,15 @@ class D : C
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact]
         public async Task RemovedFromClassInVisualBasicProject()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 <Workspace>
     <Project Language=""C#"" CommonReferences=""true"" AssemblyName=""Project1"">
         <ProjectReference>Project2</ProjectReference>
@@ -245,7 +271,8 @@ public notinheritable class C
 end class
         </Document>
     </Project>
-</Workspace>", @"
+</Workspace>",
+                @"
 <Workspace>
     <Project Language=""C#"" CommonReferences=""true"" AssemblyName=""Project1"">
         <ProjectReference>Project2</ProjectReference>
@@ -261,7 +288,8 @@ public class C
 end class
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
     }
 }

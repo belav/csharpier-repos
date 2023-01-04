@@ -11,7 +11,9 @@ internal class pow0
     public static int Main()
     {
         bool pass = true;
-        double x, y, z;
+        double x,
+            y,
+            z;
         double n;
 
         y = 0;
@@ -29,7 +31,7 @@ internal class pow0
         }
 
         x = 1;
-        for (n = 1; n < 100000;)
+        for (n = 1; n < 100000; )
         {
             n += Math.Pow(n, 0);
             if (n != ++x)
@@ -61,4 +63,3 @@ internal class pow0
         }
     }
 }
-

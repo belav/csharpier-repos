@@ -59,7 +59,11 @@ namespace System
 
         [DoesNotReturn]
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void FailFast(string? message, Exception? exception, string? errorMessage);
+        internal static extern void FailFast(
+            string? message,
+            Exception? exception,
+            string? errorMessage
+        );
 
         private static string[]? s_commandLineArgs;
 
@@ -78,12 +82,16 @@ namespace System
             // So our best bet is to simply use the commandLine that was used to invoke the process.
             // in case it is present.
 
-            return s_commandLineArgs != null ?
-                (string[])s_commandLineArgs.Clone() :
-                GetCommandLineArgsNative();
+            return s_commandLineArgs != null
+                ? (string[])s_commandLineArgs.Clone()
+                : GetCommandLineArgsNative();
         }
 
-        private static unsafe string[] InitializeCommandLineArgs(char* exePath, int argc, char** argv) // invoked from VM
+        private static unsafe string[] InitializeCommandLineArgs(
+            char* exePath,
+            int argc,
+            char** argv
+        ) // invoked from VM
         {
             string[] commandLineArgs = new string[argc + 1];
             string[] mainMethodArgs = new string[argc];
@@ -92,7 +100,7 @@ namespace System
 
             for (int i = 0; i < mainMethodArgs.Length; i++)
             {
-                 commandLineArgs[i + 1] = mainMethodArgs[i] = new string(argv[i]);
+                commandLineArgs[i + 1] = mainMethodArgs[i] = new string(argv[i]);
             }
 
             s_commandLineArgs = commandLineArgs;

@@ -27,7 +27,9 @@ internal class KeyTagHelperDescriptorProvider : ITagHelperDescriptorProvider
             return;
         }
 
-        var renderTreeBuilderType = compilation.GetTypeByMetadataName(ComponentsApi.RenderTreeBuilder.FullTypeName);
+        var renderTreeBuilderType = compilation.GetTypeByMetadataName(
+            ComponentsApi.RenderTreeBuilder.FullTypeName
+        );
         if (renderTreeBuilderType == null)
         {
             // If we can't find RenderTreeBuilder, then just bail. We won't be able to compile the
@@ -36,7 +38,13 @@ internal class KeyTagHelperDescriptorProvider : ITagHelperDescriptorProvider
         }
 
         var targetAssembly = context.Items.GetTargetAssembly();
-        if (targetAssembly is not null && !SymbolEqualityComparer.Default.Equals(targetAssembly, renderTreeBuilderType.ContainingAssembly))
+        if (
+            targetAssembly is not null
+            && !SymbolEqualityComparer.Default.Equals(
+                targetAssembly,
+                renderTreeBuilderType.ContainingAssembly
+            )
+        )
         {
             return;
         }
@@ -46,7 +54,11 @@ internal class KeyTagHelperDescriptorProvider : ITagHelperDescriptorProvider
 
     private TagHelperDescriptor CreateKeyTagHelper()
     {
-        var builder = TagHelperDescriptorBuilder.Create(ComponentMetadata.Key.TagHelperKind, "Key", ComponentsApi.AssemblyName);
+        var builder = TagHelperDescriptorBuilder.Create(
+            ComponentMetadata.Key.TagHelperKind,
+            "Key",
+            ComponentsApi.AssemblyName
+        );
         builder.CaseSensitive = true;
         builder.Documentation = ComponentResources.KeyTagHelper_Documentation;
 
@@ -73,9 +85,9 @@ internal class KeyTagHelperDescriptorProvider : ITagHelperDescriptorProvider
             attribute.Documentation = ComponentResources.KeyTagHelper_Documentation;
             attribute.Name = "@key";
 
-                // WTE has a bug 15.7p1 where a Tag Helper without a display-name that looks like
-                // a C# property will crash trying to create the tooltips.
-                attribute.SetPropertyName("Key");
+            // WTE has a bug 15.7p1 where a Tag Helper without a display-name that looks like
+            // a C# property will crash trying to create the tooltips.
+            attribute.SetPropertyName("Key");
             attribute.TypeName = typeof(object).FullName;
             attribute.Metadata[ComponentMetadata.Common.DirectiveAttribute] = bool.TrueString;
         });

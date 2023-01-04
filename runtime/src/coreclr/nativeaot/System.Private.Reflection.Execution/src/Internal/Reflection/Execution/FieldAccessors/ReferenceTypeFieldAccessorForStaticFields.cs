@@ -11,10 +11,13 @@ namespace Internal.Reflection.Execution.FieldAccessors
 {
     internal sealed class ReferenceTypeFieldAccessorForStaticFields : RegularStaticFieldAccessor
     {
-        public ReferenceTypeFieldAccessorForStaticFields(IntPtr cctorContext, IntPtr staticsBase, int fieldOffset, FieldTableFlags fieldBase, RuntimeTypeHandle fieldTypeHandle)
-            : base(cctorContext, staticsBase, fieldOffset, fieldBase, fieldTypeHandle)
-        {
-        }
+        public ReferenceTypeFieldAccessorForStaticFields(
+            IntPtr cctorContext,
+            IntPtr staticsBase,
+            int fieldOffset,
+            FieldTableFlags fieldBase,
+            RuntimeTypeHandle fieldTypeHandle
+        ) : base(cctorContext, staticsBase, fieldOffset, fieldBase, fieldTypeHandle) { }
 
         protected sealed override unsafe object GetFieldBypassCctor()
         {

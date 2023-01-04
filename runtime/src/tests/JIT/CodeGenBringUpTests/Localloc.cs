@@ -5,6 +5,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 public class BringUpTest_Localloc
 {
     const int Pass = 100;
@@ -15,17 +16,16 @@ public class BringUpTest_Localloc
     {
         byte* a = stackalloc byte[5];
         byte i;
-        for (i=1; i < 5; ++i)
+        for (i = 1; i < 5; ++i)
         {
-           a[i] = i;
+            a[i] = i;
         }
 
-        for (i=1; i < 5; ++i)
+        for (i = 1; i < 5; ++i)
         {
-           Console.WriteLine(a[i]);
-        }        
+            Console.WriteLine(a[i]);
+        }
     }
-
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static unsafe void Localloc(byte n)
@@ -34,17 +34,16 @@ public class BringUpTest_Localloc
         *a = 0;
 
         byte i;
-        for (i=1; i < n; ++i)
+        for (i = 1; i < n; ++i)
         {
-           a[i] = i;
+            a[i] = i;
         }
 
-        for (i=1; i < n; ++i)
+        for (i = 1; i < n; ++i)
         {
-           Console.WriteLine(a[i]);
+            Console.WriteLine(a[i]);
         }
     }
-
 
     public static int Main()
     {
@@ -53,7 +52,19 @@ public class BringUpTest_Localloc
         Localloc(25);
 
         bool flag = false;
-        try { Localloc(0); } catch (Exception) { flag = true; } finally { if(!flag) ret = Fail; }
-        return ret;        
+        try
+        {
+            Localloc(0);
+        }
+        catch (Exception)
+        {
+            flag = true;
+        }
+        finally
+        {
+            if (!flag)
+                ret = Fail;
+        }
+        return ret;
     }
 }

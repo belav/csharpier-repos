@@ -12,10 +12,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsNotSerialized
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
     }
 
@@ -23,10 +20,7 @@ namespace Internal.TypeSystem
     {
         public override bool IsNotSerialized
         {
-            get
-            {
-                return _fieldDef.IsNotSerialized;
-            }
+            get { return _fieldDef.IsNotSerialized; }
         }
     }
 }

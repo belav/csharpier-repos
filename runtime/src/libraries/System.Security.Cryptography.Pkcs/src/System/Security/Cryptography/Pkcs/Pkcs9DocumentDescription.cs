@@ -14,10 +14,7 @@ namespace System.Security.Cryptography.Pkcs
         // Constructors.
         //
 
-        public Pkcs9DocumentDescription()
-            : base(Oids.DocumentDescriptionOid.CopyOid())
-        {
-        }
+        public Pkcs9DocumentDescription() : base(Oids.DocumentDescriptionOid.CopyOid()) { }
 
         public Pkcs9DocumentDescription(string documentDescription)
             : base(Oids.DocumentDescriptionOid.CopyOid(), Encode(documentDescription))
@@ -26,14 +23,10 @@ namespace System.Security.Cryptography.Pkcs
         }
 
         public Pkcs9DocumentDescription(byte[] encodedDocumentDescription)
-            : base(Oids.DocumentDescriptionOid.CopyOid(), encodedDocumentDescription)
-        {
-        }
+            : base(Oids.DocumentDescriptionOid.CopyOid(), encodedDocumentDescription) { }
 
         internal Pkcs9DocumentDescription(ReadOnlySpan<byte> encodedDocumentDescription)
-            : base(Oids.DocumentDescriptionOid.CopyOid(), encodedDocumentDescription)
-        {
-        }
+            : base(Oids.DocumentDescriptionOid.CopyOid(), encodedDocumentDescription) { }
 
         //
         // Public methods.
@@ -41,10 +34,7 @@ namespace System.Security.Cryptography.Pkcs
 
         public string DocumentDescription
         {
-            get
-            {
-                return _lazyDocumentDescription ??= Decode(RawData);
-            }
+            get { return _lazyDocumentDescription ??= Decode(RawData); }
         }
 
         public override void CopyFrom(AsnEncodedData asnEncodedData)

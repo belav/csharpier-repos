@@ -13,11 +13,12 @@ internal sealed class SocketSender : SocketAwaitableEventArgs
 {
     private List<ArraySegment<byte>>? _bufferList;
 
-    public SocketSender(PipeScheduler scheduler) : base(scheduler)
-    {
-    }
+    public SocketSender(PipeScheduler scheduler) : base(scheduler) { }
 
-    public ValueTask<SocketOperationResult> SendAsync(Socket socket, in ReadOnlySequence<byte> buffers)
+    public ValueTask<SocketOperationResult> SendAsync(
+        Socket socket,
+        in ReadOnlySequence<byte> buffers
+    )
     {
         if (buffers.IsSingleSegment)
         {
@@ -36,7 +37,9 @@ internal sealed class SocketSender : SocketAwaitableEventArgs
 
         return error == SocketError.Success
             ? new ValueTask<SocketOperationResult>(new SocketOperationResult(bytesTransferred))
-            : new ValueTask<SocketOperationResult>(new SocketOperationResult(CreateException(error)));
+            : new ValueTask<SocketOperationResult>(
+                new SocketOperationResult(CreateException(error))
+            );
     }
 
     public void Reset()
@@ -70,7 +73,9 @@ internal sealed class SocketSender : SocketAwaitableEventArgs
 
         return error == SocketError.Success
             ? new ValueTask<SocketOperationResult>(new SocketOperationResult(bytesTransferred))
-            : new ValueTask<SocketOperationResult>(new SocketOperationResult(CreateException(error)));
+            : new ValueTask<SocketOperationResult>(
+                new SocketOperationResult(CreateException(error))
+            );
     }
 
     private void SetBufferList(in ReadOnlySequence<byte> buffer)

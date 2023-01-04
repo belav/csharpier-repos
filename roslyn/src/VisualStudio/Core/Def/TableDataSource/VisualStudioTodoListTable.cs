@@ -14,7 +14,8 @@ using Microsoft.VisualStudio.Shell.TableManager;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 {
     [ExportEventListener(WellKnownEventListeners.TodoListProvider, WorkspaceKind.Host), Shared]
-    internal class VisualStudioTodoListTableWorkspaceEventListener : IEventListener<ITodoListProvider>
+    internal class VisualStudioTodoListTableWorkspaceEventListener
+        : IEventListener<ITodoListProvider>
     {
         internal const string IdentifierString = nameof(VisualStudioTodoListTable);
 
@@ -23,20 +24,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioTodoListTableWorkspaceEventListener(IThreadingContext threadingContext, ITableManagerProvider tableManagerProvider)
+        public VisualStudioTodoListTableWorkspaceEventListener(
+            IThreadingContext threadingContext,
+            ITableManagerProvider tableManagerProvider
+        )
         {
             _threadingContext = threadingContext;
             _tableManagerProvider = tableManagerProvider;
         }
 
-        public void StartListening(Workspace workspace, ITodoListProvider service)
-            => _ = new VisualStudioTodoListTable(workspace, _threadingContext, service, _tableManagerProvider);
+        public void StartListening(Workspace workspace, ITodoListProvider service) =>
+            _ = new VisualStudioTodoListTable(
+                workspace,
+                _threadingContext,
+                service,
+                _tableManagerProvider
+            );
 
         internal class VisualStudioTodoListTable : VisualStudioBaseTodoListTable
         {
             // internal for testing
-            internal VisualStudioTodoListTable(Workspace workspace, IThreadingContext threadingContext, ITodoListProvider todoListProvider, ITableManagerProvider provider)
-                : base(workspace, threadingContext, todoListProvider, IdentifierString, provider)
+            internal VisualStudioTodoListTable(
+                Workspace workspace,
+                IThreadingContext threadingContext,
+                ITodoListProvider todoListProvider,
+                ITableManagerProvider provider
+            ) : base(workspace, threadingContext, todoListProvider, IdentifierString, provider)
             {
                 ConnectWorkspaceEvents();
             }

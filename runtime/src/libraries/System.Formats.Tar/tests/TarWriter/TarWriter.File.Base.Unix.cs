@@ -26,7 +26,11 @@ namespace System.Formats.Tar.Tests
                 Assert.Equal(gname, posix.GroupName);
                 Assert.Equal(uname, posix.UserName);
 
-                if (entry.EntryType is not TarEntryType.BlockDevice and not TarEntryType.CharacterDevice)
+                if (
+                    entry.EntryType
+                    is not TarEntryType.BlockDevice
+                        and not TarEntryType.CharacterDevice
+                )
                 {
                     Assert.Equal(DefaultDeviceMajor, posix.DeviceMajor);
                     Assert.Equal(DefaultDeviceMinor, posix.DeviceMinor);

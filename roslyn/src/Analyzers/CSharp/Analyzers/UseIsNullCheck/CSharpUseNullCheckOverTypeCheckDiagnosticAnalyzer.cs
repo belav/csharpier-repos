@@ -13,19 +13,28 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class CSharpUseNullCheckOverTypeCheckDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal sealed class CSharpUseNullCheckOverTypeCheckDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public CSharpUseNullCheckOverTypeCheckDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseNullCheckOverTypeCheckDiagnosticId,
-                   EnforceOnBuildValues.UseNullCheckOverTypeCheck,
-                   CSharpCodeStyleOptions.PreferNullCheckOverTypeCheck,
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Prefer_null_check_over_type_check), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Null_check_can_be_clarified), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseNullCheckOverTypeCheckDiagnosticId,
+                EnforceOnBuildValues.UseNullCheckOverTypeCheck,
+                CSharpCodeStyleOptions.PreferNullCheckOverTypeCheck,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Prefer_null_check_over_type_check),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Null_check_can_be_clarified),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context)
         {
@@ -36,12 +45,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
                     return;
 
                 var expressionType = compilation.ExpressionOfTType();
-                context.RegisterOperationAction(c => AnalyzeIsTypeOperation(c, expressionType), OperationKind.IsType);
-                context.RegisterOperationAction(c => AnalyzeNegatedPatternOperation(c), OperationKind.NegatedPattern);
+                context.RegisterOperationAction(
+                    c => AnalyzeIsTypeOperation(c, expressionType),
+                    OperationKind.IsType
+                );
+                context.RegisterOperationAction(
+                    c => AnalyzeNegatedPatternOperation(c),
+                    OperationKind.NegatedPattern
+                );
             });
         }
 
-        private static bool ShouldAnalyze(OperationAnalysisContext context, out ReportDiagnostic severity)
+        private static bool ShouldAnalyze(
+            OperationAnalysisContext context,
+            out ReportDiagnostic severity
+        )
         {
             var option = context.GetCSharpAnalyzerOptions().PreferNullCheckOverTypeCheck;
             if (!option.Value)
@@ -56,8 +74,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
 
         private void AnalyzeNegatedPatternOperation(OperationAnalysisContext context)
         {
-            if (!ShouldAnalyze(context, out var severity) ||
-                context.Operation.Syntax is not UnaryPatternSyntax)
+            if (
+                !ShouldAnalyze(context, out var severity)
+                || context.Operation.Syntax is not UnaryPatternSyntax
+            )
             {
                 return;
             }
@@ -72,16 +92,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             // 3. str is string (where str is a string, this is also equivalent to 'is null' check).
             // This doesn't match `x is not MyType y` because in such case, negatedPattern.Pattern will
             // be `DeclarationPattern`, not `TypePattern`.
-            if (negatedPattern.Pattern is ITypePatternOperation typePatternOperation &&
-                typePatternOperation.InputType.InheritsFromOrEquals(typePatternOperation.MatchedType))
+            if (
+                negatedPattern.Pattern is ITypePatternOperation typePatternOperation
+                && typePatternOperation.InputType.InheritsFromOrEquals(
+                    typePatternOperation.MatchedType
+                )
+            )
             {
                 context.ReportDiagnostic(
                     DiagnosticHelper.Create(
-                        Descriptor, context.Operation.Syntax.GetLocation(), severity, additionalLocations: null, properties: null));
+                        Descriptor,
+                        context.Operation.Syntax.GetLocation(),
+                        severity,
+                        additionalLocations: null,
+                        properties: null
+                    )
+                );
             }
         }
 
-        private void AnalyzeIsTypeOperation(OperationAnalysisContext context, INamedTypeSymbol? expressionType)
+        private void AnalyzeIsTypeOperation(
+            OperationAnalysisContext context,
+            INamedTypeSymbol? expressionType
+        )
         {
             var operation = context.Operation;
             var syntax = operation.Syntax;
@@ -89,7 +122,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             if (!ShouldAnalyze(context, out var severity) || syntax is not BinaryExpressionSyntax)
                 return;
 
-            if (CSharpSemanticFacts.Instance.IsInExpressionTree(operation.SemanticModel, syntax, expressionType, context.CancellationToken))
+            if (
+                CSharpSemanticFacts.Instance.IsInExpressionTree(
+                    operation.SemanticModel,
+                    syntax,
+                    expressionType,
+                    context.CancellationToken
+                )
+            )
                 return;
 
             var isTypeOperation = (IIsTypeOperation)operation;
@@ -99,12 +139,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             // isTypeOperation.ValueOperand.Type is the type of 'x'.
             // We check InheritsFromOrEquals for the same reason as stated in AnalyzeNegatedPatternOperation.
             // This doesn't match `x is MyType y` because in such case, we have an IsPattern instead of IsType operation.
-            if (isTypeOperation.ValueOperand.Type is not null &&
-                isTypeOperation.ValueOperand.Type.InheritsFromOrEquals(isTypeOperation.TypeOperand))
+            if (
+                isTypeOperation.ValueOperand.Type is not null
+                && isTypeOperation.ValueOperand.Type.InheritsFromOrEquals(
+                    isTypeOperation.TypeOperand
+                )
+            )
             {
                 context.ReportDiagnostic(
                     DiagnosticHelper.Create(
-                        Descriptor, syntax.GetLocation(), severity, additionalLocations: null, properties: null));
+                        Descriptor,
+                        syntax.GetLocation(),
+                        severity,
+                        additionalLocations: null,
+                        properties: null
+                    )
+                );
             }
         }
     }

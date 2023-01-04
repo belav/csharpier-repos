@@ -16,11 +16,29 @@ namespace ILCompiler
     internal class Crossgen2RootCommand : RootCommand
     {
         public Argument<Dictionary<string, string>> InputFilePaths { get; } =
-            new("input-file-path", result => Helpers.BuildPathDictionary(result.Tokens, true), false, "Input file(s)") { Arity = ArgumentArity.OneOrMore };
+            new(
+                "input-file-path",
+                result => Helpers.BuildPathDictionary(result.Tokens, true),
+                false,
+                "Input file(s)"
+            )
+            {
+                Arity = ArgumentArity.OneOrMore
+            };
         public Option<Dictionary<string, string>> UnrootedInputFilePaths { get; } =
-            new(new[] { "--unrooted-input-file-paths", "-u" }, result => Helpers.BuildPathDictionary(result.Tokens, true), true, SR.UnrootedInputFilesToCompile);
+            new(
+                new[] { "--unrooted-input-file-paths", "-u" },
+                result => Helpers.BuildPathDictionary(result.Tokens, true),
+                true,
+                SR.UnrootedInputFilesToCompile
+            );
         public Option<Dictionary<string, string>> ReferenceFilePaths { get; } =
-            new(new[] { "--reference", "-r" }, result => Helpers.BuildPathDictionary(result.Tokens, false), true, SR.ReferenceFiles);
+            new(
+                new[] { "--reference", "-r" },
+                result => Helpers.BuildPathDictionary(result.Tokens, false),
+                true,
+                SR.ReferenceFiles
+            );
         public Option<string> InstructionSet { get; } =
             new(new[] { "--instruction-set" }, SR.InstructionSets);
         public Option<string[]> MibcFilePaths { get; } =
@@ -40,7 +58,12 @@ namespace ILCompiler
         public Option<bool> InputBubble { get; } =
             new(new[] { "--inputbubble" }, SR.InputBubbleOption);
         public Option<Dictionary<string, string>> InputBubbleReferenceFilePaths { get; } =
-            new(new[] { "--inputbubbleref" }, result => Helpers.BuildPathDictionary(result.Tokens, false), true, SR.InputBubbleReferenceFiles);
+            new(
+                new[] { "--inputbubbleref" },
+                result => Helpers.BuildPathDictionary(result.Tokens, false),
+                true,
+                SR.InputBubbleReferenceFiles
+            );
         public Option<bool> Composite { get; } =
             new(new[] { "--composite" }, SR.CompositeBuildMode);
         public Option<string> CompositeKeyFile { get; } =
@@ -51,8 +74,7 @@ namespace ILCompiler
             new(new[] { "--out-near-input" }, SR.OutNearInputOption);
         public Option<bool> SingleFileCompilation { get; } =
             new(new[] { "--single-file-compilation" }, SR.SingleFileCompilationOption);
-        public Option<bool> Partial { get; } =
-            new(new[] { "--partial" }, SR.PartialImageOption);
+        public Option<bool> Partial { get; } = new(new[] { "--partial" }, SR.PartialImageOption);
         public Option<bool> CompileBubbleGenerics { get; } =
             new(new[] { "--compilebubblegenerics" }, SR.BubbleGenericsOption);
         public Option<bool> EmbedPgoData { get; } =
@@ -64,33 +86,50 @@ namespace ILCompiler
         public Option<bool> IsVerbose { get; } =
             new(new[] { "--verbose" }, SR.VerboseLoggingOption);
         public Option<string> SystemModuleName { get; } =
-            new(new[] { "--systemmodule" }, () => Helpers.DefaultSystemModule, SR.SystemModuleOverrideOption);
+            new(
+                new[] { "--systemmodule" },
+                () => Helpers.DefaultSystemModule,
+                SR.SystemModuleOverrideOption
+            );
         public Option<bool> WaitForDebugger { get; } =
             new(new[] { "--waitfordebugger" }, SR.WaitForDebuggerOption);
         public Option<string[]> CodegenOptions { get; } =
             new(new[] { "--codegenopt" }, Array.Empty<string>, SR.CodeGenOptions);
-        public Option<bool> SupportIbc { get; } =
-            new(new[] { "--support-ibc" }, SR.SupportIbc);
-        public Option<bool> Resilient { get; } =
-            new(new[] { "--resilient" }, SR.ResilientOption);
-        public Option<string> ImageBase { get; } =
-            new(new[] { "--imagebase" }, SR.ImageBase);
+        public Option<bool> SupportIbc { get; } = new(new[] { "--support-ibc" }, SR.SupportIbc);
+        public Option<bool> Resilient { get; } = new(new[] { "--resilient" }, SR.ResilientOption);
+        public Option<string> ImageBase { get; } = new(new[] { "--imagebase" }, SR.ImageBase);
         public Option<TargetArchitecture> TargetArchitecture { get; } =
-            new(new[] { "--targetarch" }, result =>
-            {
-                string firstToken = result.Tokens.Count > 0 ? result.Tokens[0].Value : null;
-                if (firstToken != null && firstToken.Equals("armel", StringComparison.OrdinalIgnoreCase))
+            new(
+                new[] { "--targetarch" },
+                result =>
                 {
-                    IsArmel = true;
-                    return Internal.TypeSystem.TargetArchitecture.ARM;
-                }
+                    string firstToken = result.Tokens.Count > 0 ? result.Tokens[0].Value : null;
+                    if (
+                        firstToken != null
+                        && firstToken.Equals("armel", StringComparison.OrdinalIgnoreCase)
+                    )
+                    {
+                        IsArmel = true;
+                        return Internal.TypeSystem.TargetArchitecture.ARM;
+                    }
 
-                return Helpers.GetTargetArchitecture(firstToken);
-            }, true, SR.TargetArchOption) { Arity = ArgumentArity.OneOrMore };
+                    return Helpers.GetTargetArchitecture(firstToken);
+                },
+                true,
+                SR.TargetArchOption
+            )
+            {
+                Arity = ArgumentArity.OneOrMore
+            };
         public Option<TargetOS> TargetOS { get; } =
-            new(new[] { "--targetos" }, result => Helpers.GetTargetOS(result.Tokens.Count > 0 ? result.Tokens[0].Value : null), true, SR.TargetOSOption);
-        public Option<string> JitPath { get; } =
-            new(new[] { "--jitpath" }, SR.JitPathOption);
+            new(
+                new[] { "--targetos" },
+                result =>
+                    Helpers.GetTargetOS(result.Tokens.Count > 0 ? result.Tokens[0].Value : null),
+                true,
+                SR.TargetOSOption
+            );
+        public Option<string> JitPath { get; } = new(new[] { "--jitpath" }, SR.JitPathOption);
         public Option<bool> PrintReproInstructions { get; } =
             new(new[] { "--print-repro-instructions" }, SR.PrintReproInstructionsOption);
         public Option<string> SingleMethodTypeName { get; } =
@@ -102,33 +141,33 @@ namespace ILCompiler
         public Option<string[]> SingleMethodGenericArgs { get; } =
             new(new[] { "--singlemethodgenericarg" }, SR.SingleMethodGenericArgs);
         public Option<int> Parallelism { get; } =
-            new(new[] { "--parallelism" }, result =>
-            {
-                if (result.Tokens.Count > 0)
-                    return int.Parse(result.Tokens[0].Value);
+            new(
+                new[] { "--parallelism" },
+                result =>
+                {
+                    if (result.Tokens.Count > 0)
+                        return int.Parse(result.Tokens[0].Value);
 
-                // Limit parallelism to 24 wide at most by default, more parallelism is unlikely to improve compilation speed
-                // as many portions of the process are single threaded, and is known to use excessive memory.
-                var parallelism = Math.Min(24, Environment.ProcessorCount);
+                    // Limit parallelism to 24 wide at most by default, more parallelism is unlikely to improve compilation speed
+                    // as many portions of the process are single threaded, and is known to use excessive memory.
+                    var parallelism = Math.Min(24, Environment.ProcessorCount);
 
-                // On 32bit platforms restrict it more, as virtual address space is quite limited
-                if (!Environment.Is64BitProcess)
-                    parallelism = Math.Min(4, parallelism);
+                    // On 32bit platforms restrict it more, as virtual address space is quite limited
+                    if (!Environment.Is64BitProcess)
+                        parallelism = Math.Min(4, parallelism);
 
-                return parallelism;
-            }, true, SR.ParalellismOption);
+                    return parallelism;
+                },
+                true,
+                SR.ParalellismOption
+            );
         public Option<int> CustomPESectionAlignment { get; } =
             new(new[] { "--custom-pe-section-alignment" }, SR.CustomPESectionAlignmentOption);
-        public Option<bool> Map { get; } =
-            new(new[] { "--map" }, SR.MapFileOption);
-        public Option<bool> MapCsv { get; } =
-            new(new[] { "--mapcsv" }, SR.MapCsvFileOption);
-        public Option<bool> Pdb { get; } =
-            new(new[] { "--pdb" }, SR.PdbFileOption);
-        public Option<string> PdbPath { get; } =
-            new(new[] { "--pdb-path" }, SR.PdbFilePathOption);
-        public Option<bool> PerfMap { get; } =
-            new(new[] { "--perfmap" }, SR.PerfMapFileOption);
+        public Option<bool> Map { get; } = new(new[] { "--map" }, SR.MapFileOption);
+        public Option<bool> MapCsv { get; } = new(new[] { "--mapcsv" }, SR.MapCsvFileOption);
+        public Option<bool> Pdb { get; } = new(new[] { "--pdb" }, SR.PdbFileOption);
+        public Option<string> PdbPath { get; } = new(new[] { "--pdb-path" }, SR.PdbFilePathOption);
+        public Option<bool> PerfMap { get; } = new(new[] { "--perfmap" }, SR.PerfMapFileOption);
         public Option<string> PerfMapPath { get; } =
             new(new[] { "--perfmap-path" }, SR.PerfMapFilePathOption);
         public Option<int> PerfMapFormatVersion { get; } =
@@ -138,38 +177,52 @@ namespace ILCompiler
         public Option<bool> AsyncMethodOptimization { get; } =
             new(new[] { "--opt-async-methods" }, SR.AsyncModuleOptimization);
         public Option<string> NonLocalGenericsModule { get; } =
-            new(new[] { "--non-local-generics-module" }, () => string.Empty, SR.NonLocalGenericsModule);
+            new(
+                new[] { "--non-local-generics-module" },
+                () => string.Empty,
+                SR.NonLocalGenericsModule
+            );
         public Option<ReadyToRunMethodLayoutAlgorithm> MethodLayout { get; } =
-            new(new[] { "--method-layout" }, result =>
-            {
-                if (result.Tokens.Count == 0 )
-                    return ReadyToRunMethodLayoutAlgorithm.DefaultSort;
-
-                return result.Tokens[0].Value.ToLowerInvariant() switch
+            new(
+                new[] { "--method-layout" },
+                result =>
                 {
-                    "defaultsort" => ReadyToRunMethodLayoutAlgorithm.DefaultSort,
-                    "exclusiveweight" => ReadyToRunMethodLayoutAlgorithm.ExclusiveWeight,
-                    "hotcold" => ReadyToRunMethodLayoutAlgorithm.HotCold,
-                    "hotwarmcold" => ReadyToRunMethodLayoutAlgorithm.HotWarmCold,
-                    "callfrequency" => ReadyToRunMethodLayoutAlgorithm.CallFrequency,
-                    "pettishansen" => ReadyToRunMethodLayoutAlgorithm.PettisHansen,
-                    "random" => ReadyToRunMethodLayoutAlgorithm.Random,
-                    _ => throw new CommandLineException(SR.InvalidMethodLayout)
-                };
-            }, true, SR.MethodLayoutOption);
+                    if (result.Tokens.Count == 0)
+                        return ReadyToRunMethodLayoutAlgorithm.DefaultSort;
+
+                    return result.Tokens[0].Value.ToLowerInvariant() switch
+                    {
+                        "defaultsort" => ReadyToRunMethodLayoutAlgorithm.DefaultSort,
+                        "exclusiveweight" => ReadyToRunMethodLayoutAlgorithm.ExclusiveWeight,
+                        "hotcold" => ReadyToRunMethodLayoutAlgorithm.HotCold,
+                        "hotwarmcold" => ReadyToRunMethodLayoutAlgorithm.HotWarmCold,
+                        "callfrequency" => ReadyToRunMethodLayoutAlgorithm.CallFrequency,
+                        "pettishansen" => ReadyToRunMethodLayoutAlgorithm.PettisHansen,
+                        "random" => ReadyToRunMethodLayoutAlgorithm.Random,
+                        _ => throw new CommandLineException(SR.InvalidMethodLayout)
+                    };
+                },
+                true,
+                SR.MethodLayoutOption
+            );
         public Option<ReadyToRunFileLayoutAlgorithm> FileLayout { get; } =
-            new(new[] { "--file-layout" }, result =>
-            {
-                if (result.Tokens.Count == 0 )
-                    return ReadyToRunFileLayoutAlgorithm.DefaultSort;
-
-                return result.Tokens[0].Value.ToLowerInvariant() switch
+            new(
+                new[] { "--file-layout" },
+                result =>
                 {
-                    "defaultsort" => ReadyToRunFileLayoutAlgorithm.DefaultSort,
-                    "methodorder" => ReadyToRunFileLayoutAlgorithm.MethodOrder,
-                    _ => throw new CommandLineException(SR.InvalidFileLayout)
-                };
-            }, true, SR.FileLayoutOption);
+                    if (result.Tokens.Count == 0)
+                        return ReadyToRunFileLayoutAlgorithm.DefaultSort;
+
+                    return result.Tokens[0].Value.ToLowerInvariant() switch
+                    {
+                        "defaultsort" => ReadyToRunFileLayoutAlgorithm.DefaultSort,
+                        "methodorder" => ReadyToRunFileLayoutAlgorithm.MethodOrder,
+                        _ => throw new CommandLineException(SR.InvalidFileLayout)
+                    };
+                },
+                true,
+                SR.FileLayoutOption
+            );
         public Option<bool> VerifyTypeAndFieldLayout { get; } =
             new(new[] { "--verify-type-and-field-layout" }, SR.VerifyTypeAndFieldLayoutOption);
         public Option<string> CallChainProfileFile { get; } =
@@ -250,7 +303,9 @@ namespace ILCompiler
             this.SetHandler(context =>
             {
                 Result = context.ParseResult;
-                CompositeOrInputBubble = context.ParseResult.GetValue(Composite) | context.ParseResult.GetValue(InputBubble);
+                CompositeOrInputBubble =
+                    context.ParseResult.GetValue(Composite)
+                    | context.ParseResult.GetValue(InputBubble);
                 if (context.ParseResult.GetValue(OptimizeSpace))
                 {
                     OptimizationMode = OptimizationMode.PreferSize;
@@ -286,8 +341,22 @@ namespace ILCompiler
                         // + the original command line arguments
                         // + a rsp file that should work to directly run out of the zip file
 
-                        Helpers.MakeReproPackage(makeReproPath, context.ParseResult.GetValue(OutputFilePath), args,
-                            context.ParseResult, new[] { "r", "reference", "u", "unrooted-input-file-paths", "m", "mibc", "inputbubbleref" });
+                        Helpers.MakeReproPackage(
+                            makeReproPath,
+                            context.ParseResult.GetValue(OutputFilePath),
+                            args,
+                            context.ParseResult,
+                            new[]
+                            {
+                                "r",
+                                "reference",
+                                "u",
+                                "unrooted-input-file-paths",
+                                "m",
+                                "mibc",
+                                "inputbubbleref"
+                            }
+                        );
                     }
 
                     context.ExitCode = new Program(this).Run();
@@ -326,12 +395,33 @@ namespace ILCompiler
                 Console.WriteLine(SR.DashDashHelp);
                 Console.WriteLine();
 
-                string[] ValidArchitectures = new string[] {"arm", "armel", "arm64", "x86", "x64"};
-                string[] ValidOS = new string[] {"windows", "linux", "osx"};
+                string[] ValidArchitectures = new string[]
+                {
+                    "arm",
+                    "armel",
+                    "arm64",
+                    "x86",
+                    "x64"
+                };
+                string[] ValidOS = new string[] { "windows", "linux", "osx" };
 
-                Console.WriteLine(String.Format(SR.SwitchWithDefaultHelp, "--targetos", String.Join("', '", ValidOS), Helpers.GetTargetOS(null).ToString().ToLowerInvariant()));
+                Console.WriteLine(
+                    String.Format(
+                        SR.SwitchWithDefaultHelp,
+                        "--targetos",
+                        String.Join("', '", ValidOS),
+                        Helpers.GetTargetOS(null).ToString().ToLowerInvariant()
+                    )
+                );
                 Console.WriteLine();
-                Console.WriteLine(String.Format(SR.SwitchWithDefaultHelp, "--targetarch", String.Join("', '", ValidArchitectures), Helpers.GetTargetArchitecture(null).ToString().ToLowerInvariant()));
+                Console.WriteLine(
+                    String.Format(
+                        SR.SwitchWithDefaultHelp,
+                        "--targetarch",
+                        String.Join("', '", ValidArchitectures),
+                        Helpers.GetTargetArchitecture(null).ToString().ToLowerInvariant()
+                    )
+                );
                 Console.WriteLine();
 
                 Console.WriteLine(SR.InstructionSetHelp);
@@ -342,7 +432,11 @@ namespace ILCompiler
 
                     TargetArchitecture targetArch = Helpers.GetTargetArchitecture(arch);
                     bool first = true;
-                    foreach (var instructionSet in Internal.JitInterface.InstructionSetFlags.ArchitectureToValidInstructionSets(targetArch))
+                    foreach (
+                        var instructionSet in Internal.JitInterface.InstructionSetFlags.ArchitectureToValidInstructionSets(
+                            targetArch
+                        )
+                    )
                     {
                         // Only instruction sets with are specifiable should be printed to the help text
                         if (instructionSet.Specifiable)
@@ -364,7 +458,9 @@ namespace ILCompiler
 
                 Console.WriteLine();
                 Console.WriteLine(SR.CpuFamilies);
-                Console.WriteLine(string.Join(", ", Internal.JitInterface.InstructionSetFlags.AllCpuNames));
+                Console.WriteLine(
+                    string.Join(", ", Internal.JitInterface.InstructionSetFlags.AllCpuNames)
+                );
             };
         }
 

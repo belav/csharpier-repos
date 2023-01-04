@@ -22,9 +22,7 @@ namespace Microsoft.Extensions.Hosting
         [Fact]
         public void DefaultsToOffOutsideOfService()
         {
-            using IHost host = new HostBuilder()
-                .UseWindowsService()
-                .Build();
+            using IHost host = new HostBuilder().UseWindowsService().Build();
 
             var lifetime = host.Services.GetRequiredService<IHostLifetime>();
             Assert.IsType<ConsoleLifetime>(lifetime);
@@ -53,9 +51,12 @@ namespace Microsoft.Extensions.Hosting
             // Emulate calling builder.Services.AddWindowsService() from inside a Windows service.
             AddWindowsServiceLifetime(builder.Services);
 
-            Assert.Single(builder.Services, serviceDescriptor =>
-                serviceDescriptor.ServiceType == typeof(IHostLifetime) &&
-                serviceDescriptor.ImplementationType == typeof(WindowsServiceLifetime));
+            Assert.Single(
+                builder.Services,
+                serviceDescriptor =>
+                    serviceDescriptor.ServiceType == typeof(IHostLifetime)
+                    && serviceDescriptor.ImplementationType == typeof(WindowsServiceLifetime)
+            );
         }
 
         [Fact]
@@ -63,10 +64,9 @@ namespace Microsoft.Extensions.Hosting
         {
             string appName = Guid.NewGuid().ToString();
 
-            var builder = new HostApplicationBuilder(new HostApplicationBuilderSettings
-            {
-                ApplicationName = appName,
-            }); 
+            var builder = new HostApplicationBuilder(
+                new HostApplicationBuilderSettings { ApplicationName = appName, }
+            );
 
             // Emulate calling builder.Services.AddWindowsService() from inside a Windows service.
             AddWindowsServiceLifetime(builder.Services);
@@ -75,14 +75,16 @@ namespace Microsoft.Extensions.Hosting
 
             using IHost host = builder.Build();
 
-            var eventLogSettings = host.Services.GetRequiredService<IOptions<EventLogSettings>>().Value;
+            var eventLogSettings = host.Services
+                .GetRequiredService<IOptions<EventLogSettings>>()
+                .Value;
             Assert.Same(appName, eventLogSettings.SourceName);
         }
 
         [Fact]
         public void ServiceCollectionExtensionMethodCanBeCalledOnDefaultConfiguration()
         {
-            var builder = new HostApplicationBuilder(); 
+            var builder = new HostApplicationBuilder();
 
             // Emulate calling builder.Services.AddWindowsService() from inside a Windows service.
             AddWindowsServiceLifetime(builder.Services);
@@ -95,11 +97,23 @@ namespace Microsoft.Extensions.Hosting
             Assert.IsType<WindowsServiceLifetime>(lifetime);
         }
 
-        private void AddWindowsServiceLifetime(IServiceCollection services, Action<WindowsServiceLifetimeOptions> configure = null)
+        private void AddWindowsServiceLifetime(
+            IServiceCollection services,
+            Action<WindowsServiceLifetimeOptions> configure = null
+        )
         {
-            _addWindowsServiceLifetimeMethod ??= typeof(WindowsServiceLifetimeHostBuilderExtensions).GetMethod("AddWindowsServiceLifetime",
-                BindingFlags.Static | BindingFlags.NonPublic, null, new[] { typeof(IServiceCollection), typeof(Action<WindowsServiceLifetimeOptions>) }, null)
-                ?? throw new MissingMethodException();
+            _addWindowsServiceLifetimeMethod ??=
+                typeof(WindowsServiceLifetimeHostBuilderExtensions).GetMethod(
+                    "AddWindowsServiceLifetime",
+                    BindingFlags.Static | BindingFlags.NonPublic,
+                    null,
+                    new[]
+                    {
+                        typeof(IServiceCollection),
+                        typeof(Action<WindowsServiceLifetimeOptions>)
+                    },
+                    null
+                ) ?? throw new MissingMethodException();
 
             configure ??= _ => { };
             _addWindowsServiceLifetimeMethod.Invoke(null, new object[] { services, configure });

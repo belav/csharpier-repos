@@ -21,9 +21,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         private const string FileName = "Program.cs";
 
         public CSharpSendToInteractive(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory)
-        {
-        }
+            : base(instanceFactory) { }
 
         public override async Task InitializeAsync()
         {
@@ -31,9 +29,14 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 
             VisualStudio.SolutionExplorer.CreateSolution(SolutionName);
             var project = new Project(ProjectName);
-            VisualStudio.SolutionExplorer.AddProject(project, WellKnownProjectTemplates.ConsoleApplication, Microsoft.CodeAnalysis.LanguageNames.CSharp);
+            VisualStudio.SolutionExplorer.AddProject(
+                project,
+                WellKnownProjectTemplates.ConsoleApplication,
+                Microsoft.CodeAnalysis.LanguageNames.CSharp
+            );
 
-            VisualStudio.Editor.SetText(@"using System;
+            VisualStudio.Editor.SetText(
+                @"using System;
 
  namespace TestProj
  {
@@ -61,7 +64,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
          }
      }
  }
-");
+"
+            );
             VisualStudio.Editor.Activate();
 
             VisualStudio.InteractiveWindow.SubmitText("using System;");
@@ -75,7 +79,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             VisualStudio.SolutionExplorer.OpenFile(project, FileName);
             VisualStudio.Editor.PlaceCaret("/* 1 */", charsOffset: 1);
             VisualStudio.Editor.PlaceCaret("/* 2 */", charsOffset: -1, extendSelection: true);
-            VisualStudio.ExecuteCommand(WellKnownCommandNames.InteractiveConsole_ExecuteInInteractive);
+            VisualStudio.ExecuteCommand(
+                WellKnownCommandNames.InteractiveConsole_ExecuteInInteractive
+            );
             VisualStudio.InteractiveWindow.WaitForLastReplOutput("int x = 1;");
 
             VisualStudio.InteractiveWindow.ClearReplText();
@@ -91,7 +97,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             VisualStudio.SolutionExplorer.OpenFile(project, FileName);
             VisualStudio.Editor.PlaceCaret("/* 3 */", charsOffset: 1);
             VisualStudio.Editor.PlaceCaret("/* 4 */", charsOffset: -1, extendSelection: true);
-            VisualStudio.ExecuteCommand(WellKnownCommandNames.InteractiveConsole_ExecuteInInteractive);
+            VisualStudio.ExecuteCommand(
+                WellKnownCommandNames.InteractiveConsole_ExecuteInInteractive
+            );
             VisualStudio.InteractiveWindow.WaitForLastReplOutput("int z = 3;");
 
             VisualStudio.InteractiveWindow.ClearReplText();
@@ -109,8 +117,15 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             var project = new Project(ProjectName);
             VisualStudio.SolutionExplorer.OpenFile(project, FileName);
             VisualStudio.Editor.PlaceCaret("/* 5 */", charsOffset: 6);
-            VisualStudio.Editor.PlaceCaret("/* 6 */", charsOffset: -3, extendSelection: true, selectBlock: true);
-            VisualStudio.ExecuteCommand(WellKnownCommandNames.InteractiveConsole_ExecuteInInteractive);
+            VisualStudio.Editor.PlaceCaret(
+                "/* 6 */",
+                charsOffset: -3,
+                extendSelection: true,
+                selectBlock: true
+            );
+            VisualStudio.ExecuteCommand(
+                WellKnownCommandNames.InteractiveConsole_ExecuteInInteractive
+            );
             VisualStudio.InteractiveWindow.WaitForLastReplOutput(". x *= 4;");
 
             VisualStudio.InteractiveWindow.ClearReplText();
@@ -146,7 +161,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             VisualStudio.SolutionExplorer.OpenFile(project, FileName);
             VisualStudio.Editor.PlaceCaret("/* 1 */", charsOffset: 1);
             VisualStudio.Editor.PlaceCaret("/* 2 */", charsOffset: -1, extendSelection: true);
-            VisualStudio.ExecuteCommand(WellKnownCommandNames.InteractiveConsole_ExecuteInInteractive);
+            VisualStudio.ExecuteCommand(
+                WellKnownCommandNames.InteractiveConsole_ExecuteInInteractive
+            );
             VisualStudio.InteractiveWindow.WaitForLastReplInputContains("// scenario 5");
 
             VisualStudio.InteractiveWindow.ClearReplText();
@@ -162,7 +179,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             VisualStudio.SolutionExplorer.OpenFile(project, FileName);
             VisualStudio.Editor.PlaceCaret("/* 3 */", charsOffset: 1);
             VisualStudio.Editor.PlaceCaret("/* 4 */", charsOffset: -1, extendSelection: true);
-            VisualStudio.ExecuteCommand(WellKnownCommandNames.InteractiveConsole_ExecuteInInteractive);
+            VisualStudio.ExecuteCommand(
+                WellKnownCommandNames.InteractiveConsole_ExecuteInInteractive
+            );
             VisualStudio.InteractiveWindow.WaitForLastReplInputContains("// scenario 6");
 
             VisualStudio.InteractiveWindow.ClearReplText();
@@ -180,8 +199,15 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             var project = new Project(ProjectName);
             VisualStudio.SolutionExplorer.OpenFile(project, FileName);
             VisualStudio.Editor.PlaceCaret("/* 5 */", charsOffset: 6);
-            VisualStudio.Editor.PlaceCaret("/* 6 */", charsOffset: -3, extendSelection: true, selectBlock: true);
-            VisualStudio.ExecuteCommand(WellKnownCommandNames.InteractiveConsole_ExecuteInInteractive);
+            VisualStudio.Editor.PlaceCaret(
+                "/* 6 */",
+                charsOffset: -3,
+                extendSelection: true,
+                selectBlock: true
+            );
+            VisualStudio.ExecuteCommand(
+                WellKnownCommandNames.InteractiveConsole_ExecuteInInteractive
+            );
             VisualStudio.InteractiveWindow.WaitForLastReplInputContains("// scenario 7");
 
             VisualStudio.InteractiveWindow.ClearReplText();
@@ -216,24 +242,35 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         {
             VisualStudio.InteractiveWindow.ClearReplText();
             VisualStudio.InteractiveWindow.SubmitText("#r \"System.Numerics\"");
-            VisualStudio.InteractiveWindow.SubmitText("Console.WriteLine(new System.Numerics.BigInteger(42));");
+            VisualStudio.InteractiveWindow.SubmitText(
+                "Console.WriteLine(new System.Numerics.BigInteger(42));"
+            );
             VisualStudio.InteractiveWindow.WaitForLastReplOutput("42");
 
-            VisualStudio.InteractiveWindow.SubmitText("public class MyClass { public string MyFunc() { return \"MyClass.MyFunc()\"; } }");
+            VisualStudio.InteractiveWindow.SubmitText(
+                "public class MyClass { public string MyFunc() { return \"MyClass.MyFunc()\"; } }"
+            );
             VisualStudio.InteractiveWindow.SubmitText("(new MyClass()).MyFunc()");
             VisualStudio.InteractiveWindow.WaitForLastReplOutput("\"MyClass.MyFunc()\"");
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.SolutionCrawlerLegacy);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SolutionCrawlerLegacy
+            );
         }
 
         [WpfFact]
         public void ResetInteractiveFromProjectAndVerify()
         {
-            var assembly = new ProjectUtils.AssemblyReference("System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089");
+            var assembly = new ProjectUtils.AssemblyReference(
+                "System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+            );
             var project = new ProjectUtils.Project(ProjectName);
             VisualStudio.SolutionExplorer.AddMetadataReference(assembly, project);
 
             VisualStudio.SolutionExplorer.SelectItem(ProjectName);
-            VisualStudio.ExecuteCommand(WellKnownCommandNames.ProjectAndSolutionContextMenus_Project_ResetCSharpInteractiveFromProject);
+            VisualStudio.ExecuteCommand(
+                WellKnownCommandNames.ProjectAndSolutionContextMenus_Project_ResetCSharpInteractiveFromProject
+            );
 
             // Waiting for a long operation: build + reset from project
             VisualStudio.InteractiveWindow.WaitForReplOutput("using TestProj;");
@@ -244,10 +281,15 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             VisualStudio.InteractiveWindow.SubmitText("(new TestProj.C()).M()");
             VisualStudio.InteractiveWindow.WaitForLastReplOutput("\"C.M()\"");
 
-            VisualStudio.InteractiveWindow.SubmitText("System.Windows.Forms.Form f = new System.Windows.Forms.Form(); f.Text = \"goo\";");
+            VisualStudio.InteractiveWindow.SubmitText(
+                "System.Windows.Forms.Form f = new System.Windows.Forms.Form(); f.Text = \"goo\";"
+            );
             VisualStudio.InteractiveWindow.SubmitText("f.Text");
             VisualStudio.InteractiveWindow.WaitForLastReplOutput("\"goo\"");
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.SolutionCrawlerLegacy);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SolutionCrawlerLegacy
+            );
         }
     }
 }

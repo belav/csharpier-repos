@@ -17,12 +17,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
     internal sealed partial class VisualStudioMetadataReferenceManager
     {
-        private sealed class RecoverableMetadataValueSource : ValueSource<Optional<AssemblyMetadata>>
+        private sealed class RecoverableMetadataValueSource
+            : ValueSource<Optional<AssemblyMetadata>>
         {
             private readonly WeakReference<AssemblyMetadata> _weakValue;
             private readonly List<TemporaryStorageService.TemporaryStreamStorage> _storages;
 
-            public RecoverableMetadataValueSource(AssemblyMetadata value, List<TemporaryStorageService.TemporaryStreamStorage> storages)
+            public RecoverableMetadataValueSource(
+                AssemblyMetadata value,
+                List<TemporaryStorageService.TemporaryStreamStorage> storages
+            )
             {
                 Contract.ThrowIfFalse(storages.Count > 0);
 
@@ -30,8 +34,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 _storages = storages;
             }
 
-            public IEnumerable<ITemporaryStreamStorageInternal> GetStorages()
-                => _storages;
+            public IEnumerable<ITemporaryStreamStorageInternal> GetStorages() => _storages;
 
             public override bool TryGetValue(out Optional<AssemblyMetadata> value)
             {
@@ -45,8 +48,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 return false;
             }
 
-            public override Task<Optional<AssemblyMetadata>> GetValueAsync(CancellationToken cancellationToken)
-                => Task.FromResult(GetValue(cancellationToken));
+            public override Task<Optional<AssemblyMetadata>> GetValueAsync(
+                CancellationToken cancellationToken
+            ) => Task.FromResult(GetValue(cancellationToken));
 
             public override Optional<AssemblyMetadata> GetValue(CancellationToken cancellationToken)
             {
@@ -74,13 +78,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             }
 
             private static ModuleMetadata GetModuleMetadata(
-                TemporaryStorageService.TemporaryStreamStorage storage)
+                TemporaryStorageService.TemporaryStreamStorage storage
+            )
             {
                 // For an unmanaged memory stream, ModuleMetadata can take ownership directly.
                 var stream = storage.ReadStream(CancellationToken.None);
                 unsafe
                 {
-                    return ModuleMetadata.CreateFromMetadata((IntPtr)stream.PositionPointer, (int)stream.Length, stream.Dispose);
+                    return ModuleMetadata.CreateFromMetadata(
+                        (IntPtr)stream.PositionPointer,
+                        (int)stream.Length,
+                        stream.Dispose
+                    );
                 }
             }
         }

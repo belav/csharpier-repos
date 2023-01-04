@@ -57,24 +57,20 @@ public sealed class PropertyNameComparer : IComparer<string>
 
         // Neither property is part of the Primary Key
         // Compare the property names
-        if (xIndex == -1
-            && yIndex == -1)
+        if (xIndex == -1 && yIndex == -1)
         {
             return StringComparer.Ordinal.Compare(x, y);
         }
 
         // Both properties are part of the Primary Key
         // Compare the indices
-        if (xIndex > -1
-            && yIndex > -1)
+        if (xIndex > -1 && yIndex > -1)
         {
             return xIndex - yIndex;
         }
 
         // One property is part of the Primary Key
         // The primary key property is first
-        return xIndex > yIndex
-            ? -1
-            : 1;
+        return xIndex > yIndex ? -1 : 1;
     }
 }

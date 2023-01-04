@@ -83,7 +83,9 @@ namespace System.Text.Json.Nodes
                 return new JsonArray(element, options);
             }
 
-            throw new InvalidOperationException(SR.Format(SR.NodeElementWrongType, nameof(JsonValueKind.Array)));
+            throw new InvalidOperationException(
+                SR.Format(SR.NodeElementWrongType, nameof(JsonValueKind.Array))
+            );
         }
 
         internal JsonArray(JsonElement element, JsonNodeOptions? options = null) : base(options)

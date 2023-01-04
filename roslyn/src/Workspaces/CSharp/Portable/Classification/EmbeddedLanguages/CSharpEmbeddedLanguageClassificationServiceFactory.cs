@@ -13,15 +13,25 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.CSharp.Classification
 {
-    [ExportLanguageService(typeof(IEmbeddedLanguageClassificationService), LanguageNames.CSharp), Shared]
-    internal class CSharpEmbeddedLanguageClassificationService : AbstractEmbeddedLanguageClassificationService
+    [
+        ExportLanguageService(typeof(IEmbeddedLanguageClassificationService), LanguageNames.CSharp),
+        Shared
+    ]
+    internal class CSharpEmbeddedLanguageClassificationService
+        : AbstractEmbeddedLanguageClassificationService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpEmbeddedLanguageClassificationService(
-            [ImportMany] IEnumerable<Lazy<IEmbeddedLanguageClassifier, EmbeddedLanguageMetadata>> classifiers)
-            : base(LanguageNames.CSharp, CSharpEmbeddedLanguagesProvider.Info, CSharpSyntaxKinds.Instance, CSharpFallbackEmbeddedLanguageClassifier.Instance, classifiers)
-        {
-        }
+            [ImportMany]
+                IEnumerable<Lazy<IEmbeddedLanguageClassifier, EmbeddedLanguageMetadata>> classifiers
+        )
+            : base(
+                LanguageNames.CSharp,
+                CSharpEmbeddedLanguagesProvider.Info,
+                CSharpSyntaxKinds.Instance,
+                CSharpFallbackEmbeddedLanguageClassifier.Instance,
+                classifiers
+            ) { }
     }
 }

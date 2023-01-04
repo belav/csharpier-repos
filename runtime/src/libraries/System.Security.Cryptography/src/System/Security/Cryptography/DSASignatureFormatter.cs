@@ -28,7 +28,9 @@ namespace System.Security.Cryptography
             if (strName.ToUpperInvariant() != HashAlgorithmNames.SHA1)
             {
                 // To match desktop, throw here
-                throw new CryptographicUnexpectedOperationException(SR.Cryptography_InvalidOperation);
+                throw new CryptographicUnexpectedOperationException(
+                    SR.Cryptography_InvalidOperation
+                );
             }
         }
 
@@ -37,7 +39,9 @@ namespace System.Security.Cryptography
             ArgumentNullException.ThrowIfNull(rgbHash);
 
             if (_dsaKey == null)
-                throw new CryptographicUnexpectedOperationException(SR.Cryptography_FormatterMissingKey);
+                throw new CryptographicUnexpectedOperationException(
+                    SR.Cryptography_FormatterMissingKey
+                );
 
             return _dsaKey.CreateSignature(rgbHash);
         }

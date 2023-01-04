@@ -13,14 +13,13 @@ namespace Microsoft.AspNetCore.Builder;
 public class StaticFileOptions : SharedOptionsBase
 {
     internal static readonly Action<StaticFileResponseContext> _defaultOnPrepareResponse = _ => { };
-    internal static readonly Func<StaticFileResponseContext, Task> _defaultOnPrepareResponseAsync = _ => Task.CompletedTask;
+    internal static readonly Func<StaticFileResponseContext, Task> _defaultOnPrepareResponseAsync =
+        _ => Task.CompletedTask;
 
     /// <summary>
     /// Defaults to all request paths
     /// </summary>
-    public StaticFileOptions() : this(new SharedOptions())
-    {
-    }
+    public StaticFileOptions() : this(new SharedOptions()) { }
 
     /// <summary>
     /// Defaults to all request paths

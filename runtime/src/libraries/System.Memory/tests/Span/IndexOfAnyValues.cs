@@ -16,10 +16,14 @@ namespace System.SpanTests
     public static partial class SpanTests
     {
         private static readonly Func<IndexOfAnyValues<byte>, byte[]> s_getValuesByteMethod =
-            typeof(IndexOfAnyValues<byte>).GetMethod("GetValues", BindingFlags.NonPublic | BindingFlags.Instance).CreateDelegate<Func<IndexOfAnyValues<byte>, byte[]>>();
+            typeof(IndexOfAnyValues<byte>)
+                .GetMethod("GetValues", BindingFlags.NonPublic | BindingFlags.Instance)
+                .CreateDelegate<Func<IndexOfAnyValues<byte>, byte[]>>();
 
         private static readonly Func<IndexOfAnyValues<char>, char[]> s_getValuesCharMethod =
-            typeof(IndexOfAnyValues<char>).GetMethod("GetValues", BindingFlags.NonPublic | BindingFlags.Instance).CreateDelegate<Func<IndexOfAnyValues<char>, char[]>>();
+            typeof(IndexOfAnyValues<char>)
+                .GetMethod("GetValues", BindingFlags.NonPublic | BindingFlags.Instance)
+                .CreateDelegate<Func<IndexOfAnyValues<char>, char[]>>();
 
         public static IEnumerable<object[]> Values_MemberData()
         {
@@ -88,7 +92,10 @@ namespace System.SpanTests
             Assert.Equal(0, haystackWithZeroes.IndexOfAny(needle));
             Assert.Equal(1, haystackWithZeroes.IndexOfAnyExcept(needle));
             Assert.Equal(needleContainsZero ? 8 : 6, haystackWithZeroes.LastIndexOfAny(needle));
-            Assert.Equal(needleContainsZero ? 7 : 8, haystackWithZeroes.LastIndexOfAnyExcept(needle));
+            Assert.Equal(
+                needleContainsZero ? 7 : 8,
+                haystackWithZeroes.LastIndexOfAnyExcept(needle)
+            );
 
             Span<char> haystackWithOffsetNeedle = new char[100];
             for (int i = 0; i < haystackWithOffsetNeedle.Length; i++)
@@ -99,7 +106,10 @@ namespace System.SpanTests
             Assert.Equal(-1, haystackWithOffsetNeedle.IndexOfAny(needle));
             Assert.Equal(0, haystackWithOffsetNeedle.IndexOfAnyExcept(needle));
             Assert.Equal(-1, haystackWithOffsetNeedle.LastIndexOfAny(needle));
-            Assert.Equal(haystackWithOffsetNeedle.Length - 1, haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle));
+            Assert.Equal(
+                haystackWithOffsetNeedle.Length - 1,
+                haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle)
+            );
 
             // Mix matching characters back in
             for (int i = 0; i < haystackWithOffsetNeedle.Length; i += 3)
@@ -109,19 +119,30 @@ namespace System.SpanTests
 
             Assert.Equal(0, haystackWithOffsetNeedle.IndexOfAny(needle));
             Assert.Equal(1, haystackWithOffsetNeedle.IndexOfAnyExcept(needle));
-            Assert.Equal(haystackWithOffsetNeedle.Length - 1, haystackWithOffsetNeedle.LastIndexOfAny(needle));
-            Assert.Equal(haystackWithOffsetNeedle.Length - 2, haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle));
+            Assert.Equal(
+                haystackWithOffsetNeedle.Length - 1,
+                haystackWithOffsetNeedle.LastIndexOfAny(needle)
+            );
+            Assert.Equal(
+                haystackWithOffsetNeedle.Length - 2,
+                haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle)
+            );
 
             // With chars, the lower byte could be matching, but we have to check that the higher byte is also 0
             for (int i = 0; i < haystackWithOffsetNeedle.Length; i++)
             {
-                haystackWithOffsetNeedle[i] = (char)(((i + 1) * 256) + needleValues[i % needleValues.Length]);
+                haystackWithOffsetNeedle[i] = (char)(
+                    ((i + 1) * 256) + needleValues[i % needleValues.Length]
+                );
             }
 
             Assert.Equal(-1, haystackWithOffsetNeedle.IndexOfAny(needle));
             Assert.Equal(0, haystackWithOffsetNeedle.IndexOfAnyExcept(needle));
             Assert.Equal(-1, haystackWithOffsetNeedle.LastIndexOfAny(needle));
-            Assert.Equal(haystackWithOffsetNeedle.Length - 1, haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle));
+            Assert.Equal(
+                haystackWithOffsetNeedle.Length - 1,
+                haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle)
+            );
 
             // Mix matching characters back in
             for (int i = 0; i < haystackWithOffsetNeedle.Length; i += 3)
@@ -131,8 +152,14 @@ namespace System.SpanTests
 
             Assert.Equal(0, haystackWithOffsetNeedle.IndexOfAny(needle));
             Assert.Equal(1, haystackWithOffsetNeedle.IndexOfAnyExcept(needle));
-            Assert.Equal(haystackWithOffsetNeedle.Length - 1, haystackWithOffsetNeedle.LastIndexOfAny(needle));
-            Assert.Equal(haystackWithOffsetNeedle.Length - 2, haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle));
+            Assert.Equal(
+                haystackWithOffsetNeedle.Length - 1,
+                haystackWithOffsetNeedle.LastIndexOfAny(needle)
+            );
+            Assert.Equal(
+                haystackWithOffsetNeedle.Length - 2,
+                haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle)
+            );
         }
 
         [Theory]
@@ -154,7 +181,10 @@ namespace System.SpanTests
             Assert.Equal(0, haystackWithZeroes.IndexOfAny(needle));
             Assert.Equal(1, haystackWithZeroes.IndexOfAnyExcept(needle));
             Assert.Equal(needleContainsZero ? 8 : 6, haystackWithZeroes.LastIndexOfAny(needle));
-            Assert.Equal(needleContainsZero ? 7 : 8, haystackWithZeroes.LastIndexOfAnyExcept(needle));
+            Assert.Equal(
+                needleContainsZero ? 7 : 8,
+                haystackWithZeroes.LastIndexOfAnyExcept(needle)
+            );
 
             Span<byte> haystackWithOffsetNeedle = new byte[100];
             for (int i = 0; i < haystackWithOffsetNeedle.Length; i++)
@@ -165,7 +195,10 @@ namespace System.SpanTests
             Assert.Equal(-1, haystackWithOffsetNeedle.IndexOfAny(needle));
             Assert.Equal(0, haystackWithOffsetNeedle.IndexOfAnyExcept(needle));
             Assert.Equal(-1, haystackWithOffsetNeedle.LastIndexOfAny(needle));
-            Assert.Equal(haystackWithOffsetNeedle.Length - 1, haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle));
+            Assert.Equal(
+                haystackWithOffsetNeedle.Length - 1,
+                haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle)
+            );
 
             // Mix matching characters back in
             for (int i = 0; i < haystackWithOffsetNeedle.Length; i += 3)
@@ -175,8 +208,14 @@ namespace System.SpanTests
 
             Assert.Equal(0, haystackWithOffsetNeedle.IndexOfAny(needle));
             Assert.Equal(1, haystackWithOffsetNeedle.IndexOfAnyExcept(needle));
-            Assert.Equal(haystackWithOffsetNeedle.Length - 1, haystackWithOffsetNeedle.LastIndexOfAny(needle));
-            Assert.Equal(haystackWithOffsetNeedle.Length - 2, haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle));
+            Assert.Equal(
+                haystackWithOffsetNeedle.Length - 1,
+                haystackWithOffsetNeedle.LastIndexOfAny(needle)
+            );
+            Assert.Equal(
+                haystackWithOffsetNeedle.Length - 2,
+                haystackWithOffsetNeedle.LastIndexOfAnyExcept(needle)
+            );
         }
 
         [Theory]
@@ -186,7 +225,8 @@ namespace System.SpanTests
             Test(needle, IndexOfAnyValues.Create(needle));
             Test(byteNeedle, IndexOfAnyValues.Create(byteNeedle));
 
-            static void Test<T>(ReadOnlySpan<T> needle, IndexOfAnyValues<T> values) where T : struct, INumber<T>, IMinMaxValue<T>
+            static void Test<T>(ReadOnlySpan<T> needle, IndexOfAnyValues<T> values)
+                where T : struct, INumber<T>, IMinMaxValue<T>
             {
                 for (int i = int.CreateChecked(T.MaxValue); i >= 0; i--)
                 {
@@ -203,8 +243,14 @@ namespace System.SpanTests
             char[] charValuesActual = s_getValuesCharMethod(IndexOfAnyValues.Create(needle));
             byte[] byteValuesActual = s_getValuesByteMethod(IndexOfAnyValues.Create(byteNeedle));
 
-            Assert.Equal(new HashSet<char>(needle).Order().ToArray(), new HashSet<char>(charValuesActual).Order().ToArray());
-            Assert.Equal(new HashSet<byte>(byteNeedle).Order().ToArray(), new HashSet<byte>(byteValuesActual).Order().ToArray());
+            Assert.Equal(
+                new HashSet<char>(needle).Order().ToArray(),
+                new HashSet<char>(charValuesActual).Order().ToArray()
+            );
+            Assert.Equal(
+                new HashSet<byte>(byteNeedle).Order().ToArray(),
+                new HashSet<byte>(byteValuesActual).Order().ToArray()
+            );
         }
 
         [Fact]
@@ -214,9 +260,13 @@ namespace System.SpanTests
             IndexOfAnyValuesTestHelper.TestRandomInputs(
                 expected: IndexOfAnyReferenceImpl,
                 indexOfAny: (searchSpace, values) => searchSpace.IndexOfAny(values),
-                indexOfAnyValues: (searchSpace, values) => searchSpace.IndexOfAny(values));
+                indexOfAnyValues: (searchSpace, values) => searchSpace.IndexOfAny(values)
+            );
 
-            static int IndexOfAnyReferenceImpl(ReadOnlySpan<byte> searchSpace, ReadOnlySpan<byte> values)
+            static int IndexOfAnyReferenceImpl(
+                ReadOnlySpan<byte> searchSpace,
+                ReadOnlySpan<byte> values
+            )
             {
                 for (int i = 0; i < searchSpace.Length; i++)
                 {
@@ -237,9 +287,13 @@ namespace System.SpanTests
             IndexOfAnyValuesTestHelper.TestRandomInputs(
                 expected: IndexOfAnyReferenceImpl,
                 indexOfAny: (searchSpace, values) => searchSpace.IndexOfAny(values),
-                indexOfAnyValues: (searchSpace, values) => searchSpace.IndexOfAny(values));
+                indexOfAnyValues: (searchSpace, values) => searchSpace.IndexOfAny(values)
+            );
 
-            static int IndexOfAnyReferenceImpl(ReadOnlySpan<char> searchSpace, ReadOnlySpan<char> values)
+            static int IndexOfAnyReferenceImpl(
+                ReadOnlySpan<char> searchSpace,
+                ReadOnlySpan<char> values
+            )
             {
                 for (int i = 0; i < searchSpace.Length; i++)
                 {
@@ -260,9 +314,13 @@ namespace System.SpanTests
             IndexOfAnyValuesTestHelper.TestRandomInputs(
                 expected: LastIndexOfAnyReferenceImpl,
                 indexOfAny: (searchSpace, values) => searchSpace.LastIndexOfAny(values),
-                indexOfAnyValues: (searchSpace, values) => searchSpace.LastIndexOfAny(values));
+                indexOfAnyValues: (searchSpace, values) => searchSpace.LastIndexOfAny(values)
+            );
 
-            static int LastIndexOfAnyReferenceImpl(ReadOnlySpan<byte> searchSpace, ReadOnlySpan<byte> values)
+            static int LastIndexOfAnyReferenceImpl(
+                ReadOnlySpan<byte> searchSpace,
+                ReadOnlySpan<byte> values
+            )
             {
                 for (int i = searchSpace.Length - 1; i >= 0; i--)
                 {
@@ -283,9 +341,13 @@ namespace System.SpanTests
             IndexOfAnyValuesTestHelper.TestRandomInputs(
                 expected: LastIndexOfAnyReferenceImpl,
                 indexOfAny: (searchSpace, values) => searchSpace.LastIndexOfAny(values),
-                indexOfAnyValues: (searchSpace, values) => searchSpace.LastIndexOfAny(values));
+                indexOfAnyValues: (searchSpace, values) => searchSpace.LastIndexOfAny(values)
+            );
 
-            static int LastIndexOfAnyReferenceImpl(ReadOnlySpan<char> searchSpace, ReadOnlySpan<char> values)
+            static int LastIndexOfAnyReferenceImpl(
+                ReadOnlySpan<char> searchSpace,
+                ReadOnlySpan<char> values
+            )
             {
                 for (int i = searchSpace.Length - 1; i >= 0; i--)
                 {
@@ -306,9 +368,13 @@ namespace System.SpanTests
             IndexOfAnyValuesTestHelper.TestRandomInputs(
                 expected: IndexOfAnyExceptReferenceImpl,
                 indexOfAny: (searchSpace, values) => searchSpace.IndexOfAnyExcept(values),
-                indexOfAnyValues: (searchSpace, values) => searchSpace.IndexOfAnyExcept(values));
+                indexOfAnyValues: (searchSpace, values) => searchSpace.IndexOfAnyExcept(values)
+            );
 
-            static int IndexOfAnyExceptReferenceImpl(ReadOnlySpan<byte> searchSpace, ReadOnlySpan<byte> values)
+            static int IndexOfAnyExceptReferenceImpl(
+                ReadOnlySpan<byte> searchSpace,
+                ReadOnlySpan<byte> values
+            )
             {
                 for (int i = 0; i < searchSpace.Length; i++)
                 {
@@ -329,9 +395,13 @@ namespace System.SpanTests
             IndexOfAnyValuesTestHelper.TestRandomInputs(
                 expected: IndexOfAnyExceptReferenceImpl,
                 indexOfAny: (searchSpace, values) => searchSpace.IndexOfAnyExcept(values),
-                indexOfAnyValues: (searchSpace, values) => searchSpace.IndexOfAnyExcept(values));
+                indexOfAnyValues: (searchSpace, values) => searchSpace.IndexOfAnyExcept(values)
+            );
 
-            static int IndexOfAnyExceptReferenceImpl(ReadOnlySpan<char> searchSpace, ReadOnlySpan<char> values)
+            static int IndexOfAnyExceptReferenceImpl(
+                ReadOnlySpan<char> searchSpace,
+                ReadOnlySpan<char> values
+            )
             {
                 for (int i = 0; i < searchSpace.Length; i++)
                 {
@@ -352,9 +422,13 @@ namespace System.SpanTests
             IndexOfAnyValuesTestHelper.TestRandomInputs(
                 expected: LastIndexOfAnyExceptReferenceImpl,
                 indexOfAny: (searchSpace, values) => searchSpace.LastIndexOfAnyExcept(values),
-                indexOfAnyValues: (searchSpace, values) => searchSpace.LastIndexOfAnyExcept(values));
+                indexOfAnyValues: (searchSpace, values) => searchSpace.LastIndexOfAnyExcept(values)
+            );
 
-            static int LastIndexOfAnyExceptReferenceImpl(ReadOnlySpan<byte> searchSpace, ReadOnlySpan<byte> values)
+            static int LastIndexOfAnyExceptReferenceImpl(
+                ReadOnlySpan<byte> searchSpace,
+                ReadOnlySpan<byte> values
+            )
             {
                 for (int i = searchSpace.Length - 1; i >= 0; i--)
                 {
@@ -375,9 +449,13 @@ namespace System.SpanTests
             IndexOfAnyValuesTestHelper.TestRandomInputs(
                 expected: LastIndexOfAnyExceptReferenceImpl,
                 indexOfAny: (searchSpace, values) => searchSpace.LastIndexOfAnyExcept(values),
-                indexOfAnyValues: (searchSpace, values) => searchSpace.LastIndexOfAnyExcept(values));
+                indexOfAnyValues: (searchSpace, values) => searchSpace.LastIndexOfAnyExcept(values)
+            );
 
-            static int LastIndexOfAnyExceptReferenceImpl(ReadOnlySpan<char> searchSpace, ReadOnlySpan<char> values)
+            static int LastIndexOfAnyExceptReferenceImpl(
+                ReadOnlySpan<char> searchSpace,
+                ReadOnlySpan<char> values
+            )
             {
                 for (int i = searchSpace.Length - 1; i >= 0; i--)
                 {
@@ -428,48 +506,106 @@ namespace System.SpanTests
                 rng.NextBytes(s_randomBytes);
             }
 
-            public delegate int IndexOfAnySearchDelegate<T>(ReadOnlySpan<T> searchSpace, ReadOnlySpan<T> values) where T : IEquatable<T>?;
+            public delegate int IndexOfAnySearchDelegate<T>(
+                ReadOnlySpan<T> searchSpace,
+                ReadOnlySpan<T> values
+            ) where T : IEquatable<T>?;
 
-            public delegate int IndexOfAnyValuesSearchDelegate<T>(ReadOnlySpan<T> searchSpace, IndexOfAnyValues<T> values) where T : IEquatable<T>?;
+            public delegate int IndexOfAnyValuesSearchDelegate<T>(
+                ReadOnlySpan<T> searchSpace,
+                IndexOfAnyValues<T> values
+            ) where T : IEquatable<T>?;
 
-            public static void TestRandomInputs(IndexOfAnySearchDelegate<byte> expected, IndexOfAnySearchDelegate<byte> indexOfAny, IndexOfAnyValuesSearchDelegate<byte> indexOfAnyValues)
+            public static void TestRandomInputs(
+                IndexOfAnySearchDelegate<byte> expected,
+                IndexOfAnySearchDelegate<byte> indexOfAny,
+                IndexOfAnyValuesSearchDelegate<byte> indexOfAnyValues
+            )
             {
                 var rng = new Random(42);
 
                 for (int iterations = 0; iterations < 1_000_000; iterations++)
                 {
                     // There are more interesting corner cases with ASCII needles, test those more.
-                    Test(rng, s_randomBytes, s_randomAsciiBytes, expected, indexOfAny, indexOfAnyValues);
+                    Test(
+                        rng,
+                        s_randomBytes,
+                        s_randomAsciiBytes,
+                        expected,
+                        indexOfAny,
+                        indexOfAnyValues
+                    );
 
                     Test(rng, s_randomBytes, s_randomBytes, expected, indexOfAny, indexOfAnyValues);
                 }
             }
 
-            public static void TestRandomInputs(IndexOfAnySearchDelegate<char> expected, IndexOfAnySearchDelegate<char> indexOfAny, IndexOfAnyValuesSearchDelegate<char> indexOfAnyValues)
+            public static void TestRandomInputs(
+                IndexOfAnySearchDelegate<char> expected,
+                IndexOfAnySearchDelegate<char> indexOfAny,
+                IndexOfAnyValuesSearchDelegate<char> indexOfAnyValues
+            )
             {
                 var rng = new Random(42);
 
                 for (int iterations = 0; iterations < 1_000_000; iterations++)
                 {
                     // There are more interesting corner cases with ASCII needles, test those more.
-                    Test(rng, s_randomChars, s_randomAsciiChars, expected, indexOfAny, indexOfAnyValues);
+                    Test(
+                        rng,
+                        s_randomChars,
+                        s_randomAsciiChars,
+                        expected,
+                        indexOfAny,
+                        indexOfAnyValues
+                    );
 
-                    Test(rng, s_randomChars, s_randomLatin1Chars, expected, indexOfAny, indexOfAnyValues);
+                    Test(
+                        rng,
+                        s_randomChars,
+                        s_randomLatin1Chars,
+                        expected,
+                        indexOfAny,
+                        indexOfAnyValues
+                    );
 
                     Test(rng, s_randomChars, s_randomChars, expected, indexOfAny, indexOfAnyValues);
                 }
             }
 
-            private static void Test<T>(Random rng, ReadOnlySpan<T> haystackRandom, ReadOnlySpan<T> needleRandom,
-                IndexOfAnySearchDelegate<T> expected, IndexOfAnySearchDelegate<T> indexOfAny, IndexOfAnyValuesSearchDelegate<T> indexOfAnyValues)
-                where T : struct, INumber<T>, IMinMaxValue<T>
+            private static void Test<T>(
+                Random rng,
+                ReadOnlySpan<T> haystackRandom,
+                ReadOnlySpan<T> needleRandom,
+                IndexOfAnySearchDelegate<T> expected,
+                IndexOfAnySearchDelegate<T> indexOfAny,
+                IndexOfAnyValuesSearchDelegate<T> indexOfAnyValues
+            ) where T : struct, INumber<T>, IMinMaxValue<T>
             {
                 ReadOnlySpan<T> haystack = GetRandomSlice(rng, haystackRandom, MaxHaystackLength);
                 ReadOnlySpan<T> needle = GetRandomSlice(rng, needleRandom, MaxNeedleLength);
 
-                IndexOfAnyValues<T> indexOfAnyValuesInstance = (IndexOfAnyValues<T>)(object)(typeof(T) == typeof(byte)
-                    ? IndexOfAnyValues.Create(MemoryMarshal.CreateReadOnlySpan(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(needle)), needle.Length))
-                    : IndexOfAnyValues.Create(MemoryMarshal.CreateReadOnlySpan(ref Unsafe.As<T, char>(ref MemoryMarshal.GetReference(needle)), needle.Length)));
+                IndexOfAnyValues<T> indexOfAnyValuesInstance =
+                    (IndexOfAnyValues<T>)
+                        (object)(
+                            typeof(T) == typeof(byte)
+                                ? IndexOfAnyValues.Create(
+                                    MemoryMarshal.CreateReadOnlySpan(
+                                        ref Unsafe.As<T, byte>(
+                                            ref MemoryMarshal.GetReference(needle)
+                                        ),
+                                        needle.Length
+                                    )
+                                )
+                                : IndexOfAnyValues.Create(
+                                    MemoryMarshal.CreateReadOnlySpan(
+                                        ref Unsafe.As<T, char>(
+                                            ref MemoryMarshal.GetReference(needle)
+                                        ),
+                                        needle.Length
+                                    )
+                                )
+                        );
 
                 int expectedIndex = expected(haystack, needle);
                 int indexOfAnyIndex = indexOfAny(haystack, needle);
@@ -477,28 +613,58 @@ namespace System.SpanTests
 
                 if (expectedIndex != indexOfAnyIndex)
                 {
-                    AssertionFailed(haystack, needle, expectedIndex, indexOfAnyIndex, nameof(indexOfAny));
+                    AssertionFailed(
+                        haystack,
+                        needle,
+                        expectedIndex,
+                        indexOfAnyIndex,
+                        nameof(indexOfAny)
+                    );
                 }
 
                 if (expectedIndex != indexOfAnyValuesIndex)
                 {
-                    AssertionFailed(haystack, needle, expectedIndex, indexOfAnyValuesIndex, nameof(indexOfAnyValues));
+                    AssertionFailed(
+                        haystack,
+                        needle,
+                        expectedIndex,
+                        indexOfAnyValuesIndex,
+                        nameof(indexOfAnyValues)
+                    );
                 }
             }
 
-            private static ReadOnlySpan<T> GetRandomSlice<T>(Random rng, ReadOnlySpan<T> span, int maxLength)
+            private static ReadOnlySpan<T> GetRandomSlice<T>(
+                Random rng,
+                ReadOnlySpan<T> span,
+                int maxLength
+            )
             {
                 ReadOnlySpan<T> slice = span.Slice(rng.Next(span.Length + 1));
                 return slice.Slice(0, Math.Min(slice.Length, rng.Next(maxLength + 1)));
             }
 
-            private static void AssertionFailed<T>(ReadOnlySpan<T> haystack, ReadOnlySpan<T> needle, int expected, int actual, string approach)
-                where T : INumber<T>
+            private static void AssertionFailed<T>(
+                ReadOnlySpan<T> haystack,
+                ReadOnlySpan<T> needle,
+                int expected,
+                int actual,
+                string approach
+            ) where T : INumber<T>
             {
-                string readableHaystack = string.Join(", ", haystack.ToString().Select(c => int.CreateChecked(c)));
-                string readableNeedle = string.Join(", ", needle.ToString().Select(c => int.CreateChecked(c)));
+                string readableHaystack = string.Join(
+                    ", ",
+                    haystack.ToString().Select(c => int.CreateChecked(c))
+                );
+                string readableNeedle = string.Join(
+                    ", ",
+                    needle.ToString().Select(c => int.CreateChecked(c))
+                );
 
-                Assert.True(false, $"Expected {expected}, got {approach}={actual} for needle='{readableNeedle}', haystack='{readableHaystack}'");
+                Assert.True(
+                    false,
+                    $"Expected {expected}, got {approach}={actual} for needle='{readableNeedle}', haystack='{readableHaystack}'"
+                );
             }
         }
     }

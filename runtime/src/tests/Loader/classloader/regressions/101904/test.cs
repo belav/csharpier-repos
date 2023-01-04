@@ -7,18 +7,17 @@
 // In the end, a MyType<string,int> should be assignable to an IFoo<string> or an IFoo<int>.
 using System;
 
-public interface IFoo<T>{
-}
+public interface IFoo<T> { }
 
-public class MyBaseType<T> : IFoo<T>{
-}
+public class MyBaseType<T> : IFoo<T> { }
 
-public class MyType<S,T> : MyBaseType<S>, IFoo<T>{
-}
+public class MyType<S, T> : MyBaseType<S>, IFoo<T> { }
 
-public class CMain{
-    public static int Main(){
-        MyType<string,int> mt = new MyType<string,int>();
+public class CMain
+{
+    public static int Main()
+    {
+        MyType<string, int> mt = new MyType<string, int>();
         IFoo<int> f = mt;
         Console.WriteLine("PASS"); // if we make this far, we passed.
         return 100;

@@ -141,7 +141,9 @@ namespace System.Buffers.Tests
             {
                 var output = new ArrayBufferWriter<T>();
                 WriteData(output, 100);
-                Assert.Throws<InvalidOperationException>(() => output.Advance(output.FreeCapacity + 1));
+                Assert.Throws<InvalidOperationException>(
+                    () => output.Advance(output.FreeCapacity + 1)
+                );
             }
         }
 
@@ -251,7 +253,9 @@ namespace System.Buffers.Tests
                     var output = new ArrayBufferWriter<T>(2_000_000_000);
                     WriteData(output, 1_000);
                     Assert.Throws<InvalidOperationException>(() => output.Advance(int.MaxValue));
-                    Assert.Throws<InvalidOperationException>(() => output.Advance(2_000_000_000 - 1_000 + 1));
+                    Assert.Throws<InvalidOperationException>(
+                        () => output.Advance(2_000_000_000 - 1_000 + 1)
+                    );
                 }
             }
             catch (OutOfMemoryException) { }
@@ -386,7 +390,6 @@ namespace System.Buffers.Tests
                 Assert.True(span.Length >= 256);
                 Span<T> newSpan = output.GetSpan();
                 Assert.Equal(span.Length, newSpan.Length);
-
                 unsafe
                 {
                     void* pSpan = Unsafe.AsPointer(ref MemoryMarshal.GetReference(span));

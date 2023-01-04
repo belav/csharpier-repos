@@ -10,8 +10,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 {
     internal sealed class DateTimeArgBuilder : SimpleArgBuilder
     {
-        internal DateTimeArgBuilder(Type parameterType)
-            : base(parameterType)
+        internal DateTimeArgBuilder(Type parameterType) : base(parameterType)
         {
             Debug.Assert(parameterType == typeof(DateTime));
         }
@@ -30,10 +29,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         {
             // DateTime.FromOADate(value)
             return base.UnmarshalFromRef(
-                Expression.Call(
-                    typeof(DateTime).GetMethod(nameof(DateTime.FromOADate)),
-                    value
-                )
+                Expression.Call(typeof(DateTime).GetMethod(nameof(DateTime.FromOADate)), value)
             );
         }
     }

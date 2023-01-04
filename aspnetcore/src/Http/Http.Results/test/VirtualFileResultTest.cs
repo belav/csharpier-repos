@@ -10,7 +10,14 @@ namespace Microsoft.AspNetCore.Http.Result;
 
 public class VirtualFileResultTest : VirtualFileResultTestBase
 {
-    protected override Task ExecuteAsync(HttpContext httpContext, string path, string contentType, DateTimeOffset? lastModified = null, EntityTagHeaderValue entityTag = null, bool enableRangeProcessing = false)
+    protected override Task ExecuteAsync(
+        HttpContext httpContext,
+        string path,
+        string contentType,
+        DateTimeOffset? lastModified = null,
+        EntityTagHeaderValue entityTag = null,
+        bool enableRangeProcessing = false
+    )
     {
         var result = new VirtualFileResult(path, contentType)
         {

@@ -11,9 +11,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class RefFieldParsingTests : ParsingTests
     {
-        public RefFieldParsingTests(ITestOutputHelper output) : base(output)
-        {
-        }
+        public RefFieldParsingTests(ITestOutputHelper output) : base(output) { }
 
         [Theory]
         [InlineData(LanguageVersion.CSharp10)]
@@ -96,10 +94,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void FieldDeclaration_03(LanguageVersion languageVersion)
         {
             string source = "struct S { out T F; }";
-            UsingDeclaration(source, TestOptions.Regular.WithLanguageVersion(languageVersion),
+            UsingDeclaration(
+                source,
+                TestOptions.Regular.WithLanguageVersion(languageVersion),
                 // (1,12): error CS1519: Invalid token 'out' in class, record, struct, or interface member declaration
                 // struct S { out T F; }
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "out").WithArguments("out").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "out")
+                    .WithArguments("out")
+                    .WithLocation(1, 12)
+            );
 
             N(SyntaxKind.StructDeclaration);
             {
@@ -132,10 +135,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void FieldDeclaration_04(LanguageVersion languageVersion)
         {
             string source = "struct S { in T F; }";
-            UsingDeclaration(source, TestOptions.Regular.WithLanguageVersion(languageVersion),
+            UsingDeclaration(
+                source,
+                TestOptions.Regular.WithLanguageVersion(languageVersion),
                 // (1,12): error CS1519: Invalid token 'in' in class, record, struct, or interface member declaration
                 // struct S { in T F; }
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "in").WithArguments("in").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "in")
+                    .WithArguments("in")
+                    .WithLocation(1, 12)
+            );
 
             N(SyntaxKind.StructDeclaration);
             {
@@ -251,13 +259,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void Fixed_02(LanguageVersion languageVersion)
         {
             string source = "struct S {  ref fixed int F1[1]; ref readonly fixed int F2[2]; }";
-            UsingDeclaration(source, TestOptions.Regular.WithLanguageVersion(languageVersion),
+            UsingDeclaration(
+                source,
+                TestOptions.Regular.WithLanguageVersion(languageVersion),
                 // (1,17): error CS1031: Type expected
                 // struct S {  ref fixed int F1[1]; ref readonly fixed int F2[2]; }
                 Diagnostic(ErrorCode.ERR_TypeExpected, "fixed").WithLocation(1, 17),
                 // (1,47): error CS1031: Type expected
                 // struct S {  ref fixed int F1[1]; ref readonly fixed int F2[2]; }
-                Diagnostic(ErrorCode.ERR_TypeExpected, "fixed").WithLocation(1, 47));
+                Diagnostic(ErrorCode.ERR_TypeExpected, "fixed").WithLocation(1, 47)
+            );
 
             N(SyntaxKind.StructDeclaration);
             {
@@ -440,11 +451,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void ObjectInitializer_CompoundAssignment(LanguageVersion languageVersion)
         {
             string source = "new S { F += ref t }";
-            UsingExpression(source, TestOptions.Regular.WithLanguageVersion(languageVersion),
+            UsingExpression(
+                source,
+                TestOptions.Regular.WithLanguageVersion(languageVersion),
                 // (1,14): error CS1525: Invalid expression term 'ref'
                 // new S { F += ref t }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref t").WithArguments("ref").WithLocation(1, 14)
-                );
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref t")
+                    .WithArguments("ref")
+                    .WithLocation(1, 14)
+            );
 
             N(SyntaxKind.ObjectCreationExpression);
             {
@@ -484,14 +499,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void RefObjectInitializer_NestedInitializer(LanguageVersion languageVersion)
         {
             string source = "new S { F = ref { F2 = t } }";
-            UsingExpression(source, TestOptions.Regular.WithLanguageVersion(languageVersion),
+            UsingExpression(
+                source,
+                TestOptions.Regular.WithLanguageVersion(languageVersion),
                 // (1,17): error CS1525: Invalid expression term '{'
                 // new S { F = ref { F2 = t } }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "{").WithArguments("{").WithLocation(1, 17),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "{")
+                    .WithArguments("{")
+                    .WithLocation(1, 17),
                 // (1,17): error CS1003: Syntax error, ',' expected
                 // new S { F = ref { F2 = t } }
                 Diagnostic(ErrorCode.ERR_SyntaxError, "{").WithArguments(",").WithLocation(1, 17)
-                );
+            );
 
             N(SyntaxKind.ObjectCreationExpression);
             {
@@ -632,14 +651,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void RefComplexElementInitializer(LanguageVersion languageVersion)
         {
             string source = "new S { ref { 1, 2 } }";
-            UsingExpression(source, TestOptions.Regular.WithLanguageVersion(languageVersion),
+            UsingExpression(
+                source,
+                TestOptions.Regular.WithLanguageVersion(languageVersion),
                 // (1,13): error CS1525: Invalid expression term '{'
                 // new S { ref { 1, 2 } }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "{").WithArguments("{").WithLocation(1, 13),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "{")
+                    .WithArguments("{")
+                    .WithLocation(1, 13),
                 // (1,13): error CS1003: Syntax error, ',' expected
                 // new S { ref { 1, 2 } }
                 Diagnostic(ErrorCode.ERR_SyntaxError, "{").WithArguments(",").WithLocation(1, 13)
-                );
+            );
 
             N(SyntaxKind.ObjectCreationExpression);
             {

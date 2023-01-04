@@ -15,302 +15,342 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestAtRoot_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyKeywordAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestAfterClass_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
-@"class C { }
-$$");
+            await VerifyKeywordAsync(
+                SourceCodeKind.Script,
+                @"class C { }
+$$"
+            );
         }
 
         [Fact]
         public async Task TestAfterGlobalStatement_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
-@"System.Console.WriteLine();
-$$");
+            await VerifyKeywordAsync(
+                SourceCodeKind.Script,
+                @"System.Console.WriteLine();
+$$"
+            );
         }
 
         [Fact]
         public async Task TestAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
-@"int i = 0;
-$$");
+            await VerifyKeywordAsync(
+                SourceCodeKind.Script,
+                @"int i = 0;
+$$"
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInPreprocessor1()
         {
             await VerifyAbsenceAsync(
-@"class C {
-#$$");
+                @"class C {
+#$$"
+            );
         }
 
         [Fact]
         public async Task TestNotInPreprocessor2()
         {
             await VerifyAbsenceAsync(
-@"class C {
-#if $$");
+                @"class C {
+#if $$"
+            );
         }
 
         [Fact]
         public async Task TestAfterHash()
         {
-            await VerifyKeywordAsync(
-@"#line $$");
+            await VerifyKeywordAsync(@"#line $$");
         }
 
         [Fact]
         public async Task TestAfterHashAndSpace()
         {
-            await VerifyKeywordAsync(
-@"# line $$");
+            await VerifyKeywordAsync(@"# line $$");
         }
 
         [Fact]
         public async Task TestInEmptyStatement()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"$$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
         public async Task TestInExpression()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"var q = $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"var q = $$"));
         }
 
         [Fact]
         public async Task TestAfterSwitch()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"switch (expr) {
-    $$"));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"switch (expr) {
+    $$"
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterCase()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"switch (expr) {
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"switch (expr) {
     case 0:
-    $$"));
+    $$"
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterDefault()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"switch (expr) {
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"switch (expr) {
     default:
-    $$"));
+    $$"
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterOneStatement()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"switch (expr) {
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"switch (expr) {
     default:
       Console.WriteLine();
-    $$"));
+    $$"
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterTwoStatements()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"switch (expr) {
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"switch (expr) {
     default:
       Console.WriteLine();
       Console.WriteLine();
-    $$"));
+    $$"
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterBlock()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"switch (expr) {
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"switch (expr) {
     default: {
     }
-    $$"));
+    $$"
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterIfElse()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"switch (expr) {
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"switch (expr) {
     default:
       if (goo) {
       } else {
       }
-    $$"));
+    $$"
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterIncompleteStatement()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"switch (expr) {
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"switch (expr) {
     default:
        Console.WriteLine(
-    $$"));
+    $$"
+                )
+            );
         }
 
         [Fact]
         public async Task TestInsideBlock()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"switch (expr) {
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"switch (expr) {
     default: {
-      $$"));
+      $$"
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterCompleteIf()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"switch (expr) {
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"switch (expr) {
     default:
       if (goo)
         Console.WriteLine();
-    $$"));
+    $$"
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterIncompleteIf()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"switch (expr) {
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"switch (expr) {
     default:
       if (goo)
-        $$"));
+        $$"
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterWhile()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"switch (expr) {
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"switch (expr) {
     default:
       while (true) {
       }
-    $$"));
+    $$"
+                )
+            );
         }
 
         [Fact, WorkItem(552717, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/552717")]
         public async Task TestNotAfterGotoInSwitch()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"switch (expr) {
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    @"switch (expr) {
     default:
-      goto $$"));
+      goto $$"
+                )
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGotoOutsideSwitch()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"goto $$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"goto $$"));
         }
 
         [Fact, WorkItem(538804, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538804")]
         public async Task TestNotInTypeOf()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"typeof($$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"typeof($$"));
         }
 
         [Fact, WorkItem(538804, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538804")]
         public async Task TestNotInDefault()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"default($$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"default($$"));
         }
 
         [Fact, WorkItem(538804, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538804")]
         public async Task TestNotInSizeOf()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"sizeof($$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"sizeof($$"));
         }
 
         [Fact, WorkItem(544219, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544219")]
         public async Task TestNotInObjectInitializerMemberContext()
         {
-            await VerifyAbsenceAsync(@"
+            await VerifyAbsenceAsync(
+                @"
 class C
 {
     public int x, y;
     void M()
     {
-        var c = new C { x = 2, y = 3, $$");
+        var c = new C { x = 2, y = 3, $$"
+            );
         }
 
         [Fact]
         public async Task TestAfterRefExpression()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"ref int x = ref $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"ref int x = ref $$"));
         }
 
         [Fact, WorkItem(46283, "https://github.com/dotnet/roslyn/issues/46283")]
         public async Task TestInTypeParameterConstraint()
         {
             await VerifyKeywordAsync(
-@"class C
+                @"class C
 {
     void M<T>() where T : $$
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(46283, "https://github.com/dotnet/roslyn/issues/46283")]
         public async Task TestInTypeParameterConstraint_InOverride()
         {
             await VerifyKeywordAsync(
-@"class C : Base
+                @"class C : Base
 {
     public override void M<T>() where T : $$
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(46283, "https://github.com/dotnet/roslyn/issues/46283")]
         public async Task TestInTypeParameterConstraint_InExplicitInterfaceImplementation()
         {
             await VerifyKeywordAsync(
-@"class C : I
+                @"class C : I
 {
     public void I.M<T>() where T : $$
     {
     }
-}");
+}"
+            );
         }
     }
 }

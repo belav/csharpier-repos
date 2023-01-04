@@ -12,8 +12,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     /// For source files, <see cref="SourceTree"/> is non-null and <see cref="AdditionalFile"/> is null.
     /// For additional files, <see cref="AdditionalFile"/> is non-null and <see cref="SourceTree"/> is null.
     /// </summary>
-    internal readonly struct SourceOrAdditionalFile
-        : IEquatable<SourceOrAdditionalFile>
+    internal readonly struct SourceOrAdditionalFile : IEquatable<SourceOrAdditionalFile>
     {
         public SyntaxTree? SourceTree { get; }
         public AdditionalText? AdditionalFile { get; }
@@ -30,17 +29,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             SourceTree = null;
         }
 
-        public override bool Equals(object? obj)
-            => obj is SourceOrAdditionalFile file && Equals(file);
+        public override bool Equals(object? obj) =>
+            obj is SourceOrAdditionalFile file && Equals(file);
 
-        public bool Equals(SourceOrAdditionalFile other)
-            => SourceTree == other.SourceTree && AdditionalFile == other.AdditionalFile;
+        public bool Equals(SourceOrAdditionalFile other) =>
+            SourceTree == other.SourceTree && AdditionalFile == other.AdditionalFile;
 
-        public static bool operator ==(SourceOrAdditionalFile left, SourceOrAdditionalFile right)
-            => Equals(left, right);
+        public static bool operator ==(SourceOrAdditionalFile left, SourceOrAdditionalFile right) =>
+            Equals(left, right);
 
-        public static bool operator !=(SourceOrAdditionalFile left, SourceOrAdditionalFile right)
-            => !Equals(left, right);
+        public static bool operator !=(SourceOrAdditionalFile left, SourceOrAdditionalFile right) =>
+            !Equals(left, right);
 
         public override int GetHashCode()
         {

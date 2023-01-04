@@ -5,22 +5,36 @@
 using System;
 
 public struct ValX0 { }
-public struct ValY0 { }
-public struct ValX1<T> { }
-public struct ValY1<T> { }
-public struct ValX2<T, U> { }
-public struct ValY2<T, U> { }
-public struct ValX3<T, U, V> { }
-public struct ValY3<T, U, V> { }
-public class RefX0 { }
-public class RefY0 { }
-public class RefX1<T> { }
-public class RefY1<T> { }
-public class RefX2<T, U> { }
-public class RefY2<T, U> { }
-public class RefX3<T, U, V> { }
-public class RefY3<T, U, V> { }
 
+public struct ValY0 { }
+
+public struct ValX1<T> { }
+
+public struct ValY1<T> { }
+
+public struct ValX2<T, U> { }
+
+public struct ValY2<T, U> { }
+
+public struct ValX3<T, U, V> { }
+
+public struct ValY3<T, U, V> { }
+
+public class RefX0 { }
+
+public class RefY0 { }
+
+public class RefX1<T> { }
+
+public class RefY1<T> { }
+
+public class RefX2<T, U> { }
+
+public class RefY2<T, U> { }
+
+public class RefX3<T, U, V> { }
+
+public class RefY3<T, U, V> { }
 
 public interface IGen<T>
 {
@@ -28,18 +42,25 @@ public interface IGen<T>
     bool InstVerify(System.Type t1);
 }
 
-
 public interface IGenSubInt : IGen<int> { }
-public interface IGenSubDouble : IGen<double> { }
-public interface IGenSubString : IGen<string> { }
-public interface IGenSubObject : IGen<object> { }
-public interface IGenSubGuid : IGen<Guid> { }
-public interface IGenSubConstructedReference : IGen<RefX1<int>> { }
-public interface IGenSubConstructedValue : IGen<ValX1<string>> { }
-public interface IGenSub1DIntArray : IGen<int[]> { }
-public interface IGenSub2DStringArray : IGen<string[,]> { }
-public interface IGenSubJaggedObjectArray : IGen<object[][]> { }
 
+public interface IGenSubDouble : IGen<double> { }
+
+public interface IGenSubString : IGen<string> { }
+
+public interface IGenSubObject : IGen<object> { }
+
+public interface IGenSubGuid : IGen<Guid> { }
+
+public interface IGenSubConstructedReference : IGen<RefX1<int>> { }
+
+public interface IGenSubConstructedValue : IGen<ValX1<string>> { }
+
+public interface IGenSub1DIntArray : IGen<int[]> { }
+
+public interface IGenSub2DStringArray : IGen<string[,]> { }
+
+public interface IGenSubJaggedObjectArray : IGen<object[][]> { }
 
 public struct GenInt : IGenSubInt
 {
@@ -73,7 +94,6 @@ public struct GenDouble : IGenSubDouble
         Fld1 = fld1;
     }
 
-
     public bool InstVerify(System.Type t1)
     {
         bool result = true;
@@ -96,7 +116,6 @@ public struct GenString : IGenSubString
     {
         Fld1 = fld1;
     }
-
 
     public bool InstVerify(System.Type t1)
     {
@@ -144,7 +163,6 @@ public struct GenGuid : IGenSubGuid
         Fld1 = fld1;
     }
 
-
     public bool InstVerify(System.Type t1)
     {
         bool result = true;
@@ -167,7 +185,6 @@ public struct GenConstructedReference : IGenSubConstructedReference
     {
         Fld1 = fld1;
     }
-
 
     public bool InstVerify(System.Type t1)
     {
@@ -192,7 +209,6 @@ public struct GenConstructedValue : IGenSubConstructedValue
         Fld1 = fld1;
     }
 
-
     public bool InstVerify(System.Type t1)
     {
         bool result = true;
@@ -206,7 +222,6 @@ public struct GenConstructedValue : IGenSubConstructedValue
         return result;
     }
 }
-
 
 public struct Gen1DIntArray : IGenSub1DIntArray
 {
@@ -240,7 +255,6 @@ public struct Gen2DStringArray : IGenSub2DStringArray
         Fld1 = fld1;
     }
 
-
     public bool InstVerify(System.Type t1)
     {
         bool result = true;
@@ -264,7 +278,6 @@ public struct GenJaggedObjectArray : IGenSubJaggedObjectArray
         Fld1 = fld1;
     }
 
-
     public bool InstVerify(System.Type t1)
     {
         bool result = true;
@@ -279,11 +292,11 @@ public struct GenJaggedObjectArray : IGenSubJaggedObjectArray
     }
 }
 
-
 public class Test_Struct05
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -292,7 +305,6 @@ public class Test_Struct05
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
@@ -348,5 +360,4 @@ public class Test_Struct05
             return 1;
         }
     }
-
 }

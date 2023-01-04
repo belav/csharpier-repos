@@ -44,12 +44,15 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               'href': '/account/login.aspx',
               'target': '_blank'
             }";
 
-            Dictionary<string, string> htmlAttributes = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            Dictionary<string, string> htmlAttributes = JsonConvert.DeserializeObject<
+                Dictionary<string, string>
+            >(json);
 
             Console.WriteLine(htmlAttributes["href"]);
             // /account/login.aspx

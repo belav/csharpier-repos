@@ -20,7 +20,7 @@ namespace LibraryImportGenerator.UnitTests
             GlobalOptions = new GlobalGeneratorOptions(useMarshalType, generateForwarders);
         }
 
-        public override AnalyzerConfigOptions GlobalOptions  { get; }
+        public override AnalyzerConfigOptions GlobalOptions { get; }
 
         public override AnalyzerConfigOptions GetOptions(SyntaxTree tree)
         {
@@ -36,6 +36,7 @@ namespace LibraryImportGenerator.UnitTests
         {
             private readonly bool _useMarshalType = false;
             private readonly bool _generateForwarders = false;
+
             public GlobalGeneratorOptions(bool useMarshalType, bool generateForwarders)
             {
                 _useMarshalType = useMarshalType;

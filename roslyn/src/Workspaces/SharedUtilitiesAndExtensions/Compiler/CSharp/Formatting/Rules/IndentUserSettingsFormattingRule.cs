@@ -15,10 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
     {
         private readonly CSharpSyntaxFormattingOptions _options;
 
-        public IndentUserSettingsFormattingRule()
-            : this(CSharpSyntaxFormattingOptions.Default)
-        {
-        }
+        public IndentUserSettingsFormattingRule() : this(CSharpSyntaxFormattingOptions.Default) { }
 
         private IndentUserSettingsFormattingRule(CSharpSyntaxFormattingOptions options)
         {
@@ -27,9 +24,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
         public override AbstractFormattingRule WithOptions(SyntaxFormattingOptions options)
         {
-            var newOptions = options as CSharpSyntaxFormattingOptions ?? CSharpSyntaxFormattingOptions.Default;
+            var newOptions =
+                options as CSharpSyntaxFormattingOptions ?? CSharpSyntaxFormattingOptions.Default;
 
-            if (_options.Indentation.HasFlag(IndentationPlacement.Braces) == newOptions.Indentation.HasFlag(IndentationPlacement.Braces))
+            if (
+                _options.Indentation.HasFlag(IndentationPlacement.Braces)
+                == newOptions.Indentation.HasFlag(IndentationPlacement.Braces)
+            )
             {
                 return this;
             }
@@ -37,7 +38,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             return new IndentUserSettingsFormattingRule(newOptions);
         }
 
-        public override void AddIndentBlockOperations(List<IndentBlockOperation> list, SyntaxNode node, in NextIndentBlockOperationAction nextOperation)
+        public override void AddIndentBlockOperations(
+            List<IndentBlockOperation> list,
+            SyntaxNode node,
+            in NextIndentBlockOperationAction nextOperation
+        )
         {
             nextOperation.Invoke();
 
@@ -51,8 +56,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
             if (_options.Indentation.HasFlag(IndentationPlacement.Braces))
             {
-                AddIndentBlockOperation(list, bracePair.openBrace, bracePair.openBrace, bracePair.openBrace.Span);
-                AddIndentBlockOperation(list, bracePair.closeBrace, bracePair.closeBrace, bracePair.closeBrace.Span);
+                AddIndentBlockOperation(
+                    list,
+                    bracePair.openBrace,
+                    bracePair.openBrace,
+                    bracePair.openBrace.Span
+                );
+                AddIndentBlockOperation(
+                    list,
+                    bracePair.closeBrace,
+                    bracePair.closeBrace,
+                    bracePair.closeBrace.Span
+                );
             }
         }
     }

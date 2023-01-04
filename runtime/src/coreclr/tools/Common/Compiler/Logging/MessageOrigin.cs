@@ -28,7 +28,12 @@ namespace ILCompiler.Logging
             MemberDefinition = null;
         }
 
-        public MessageOrigin(TypeSystemEntity memberDefinition, string fileName = null, int? sourceLine = 0, int? sourceColumn = 0)
+        public MessageOrigin(
+            TypeSystemEntity memberDefinition,
+            string fileName = null,
+            int? sourceLine = 0,
+            int? sourceColumn = 0
+        )
         {
             FileName = fileName;
             MemberDefinition = memberDefinition;
@@ -41,7 +46,9 @@ namespace ILCompiler.Logging
             string document = null;
             int? lineNumber = null;
 
-            IEnumerable<ILSequencePoint> sequencePoints = origin.GetDebugInfo()?.GetSequencePoints();
+            IEnumerable<ILSequencePoint> sequencePoints = origin
+                .GetDebugInfo()
+                ?.GetSequencePoints();
             if (sequencePoints != null)
             {
                 foreach (var sequencePoint in sequencePoints)

@@ -4,6 +4,12 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.TopLevelParameterNameAnalyzerTestFi
 {
     public class IsProblematicParameter_ReturnsFalse_ForSimpleTypes
     {
-        public void ActionMethod(DateTime date, DateTime? day, Uri absoluteUri, Version majorRevision, DayOfWeek sunday) { }
+        public void ActionMethod(
+            DateTime date,
+            DateTime? day,
+            Uri absoluteUri,
+            Version majorRevision,
+            DayOfWeek sunday
+        ) { }
     }
 }

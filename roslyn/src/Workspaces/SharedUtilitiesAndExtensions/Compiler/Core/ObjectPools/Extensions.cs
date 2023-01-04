@@ -13,34 +13,42 @@ namespace Microsoft.CodeAnalysis
     {
         private const int Threshold = 512;
 
-        public static PooledObject<StringBuilder> GetPooledObject(this ObjectPool<StringBuilder> pool)
-            => PooledObject<StringBuilder>.Create(pool);
+        public static PooledObject<StringBuilder> GetPooledObject(
+            this ObjectPool<StringBuilder> pool
+        ) => PooledObject<StringBuilder>.Create(pool);
 
-        public static PooledObject<Stack<TItem>> GetPooledObject<TItem>(this ObjectPool<Stack<TItem>> pool)
-            => PooledObject<Stack<TItem>>.Create(pool);
+        public static PooledObject<Stack<TItem>> GetPooledObject<TItem>(
+            this ObjectPool<Stack<TItem>> pool
+        ) => PooledObject<Stack<TItem>>.Create(pool);
 
-        public static PooledObject<Queue<TItem>> GetPooledObject<TItem>(this ObjectPool<Queue<TItem>> pool)
-            => PooledObject<Queue<TItem>>.Create(pool);
+        public static PooledObject<Queue<TItem>> GetPooledObject<TItem>(
+            this ObjectPool<Queue<TItem>> pool
+        ) => PooledObject<Queue<TItem>>.Create(pool);
 
-        public static PooledObject<HashSet<TItem>> GetPooledObject<TItem>(this ObjectPool<HashSet<TItem>> pool)
-            => PooledObject<HashSet<TItem>>.Create(pool);
+        public static PooledObject<HashSet<TItem>> GetPooledObject<TItem>(
+            this ObjectPool<HashSet<TItem>> pool
+        ) => PooledObject<HashSet<TItem>>.Create(pool);
 
-        public static PooledObject<Dictionary<TKey, TValue>> GetPooledObject<TKey, TValue>(this ObjectPool<Dictionary<TKey, TValue>> pool)
-            where TKey : notnull
-            => PooledObject<Dictionary<TKey, TValue>>.Create(pool);
+        public static PooledObject<Dictionary<TKey, TValue>> GetPooledObject<TKey, TValue>(
+            this ObjectPool<Dictionary<TKey, TValue>> pool
+        ) where TKey : notnull => PooledObject<Dictionary<TKey, TValue>>.Create(pool);
 
-        public static PooledObject<List<TItem>> GetPooledObject<TItem>(this ObjectPool<List<TItem>> pool)
-            => PooledObject<List<TItem>>.Create(pool);
+        public static PooledObject<List<TItem>> GetPooledObject<TItem>(
+            this ObjectPool<List<TItem>> pool
+        ) => PooledObject<List<TItem>>.Create(pool);
 
-        public static PooledObject<List<TItem>> GetPooledObject<TItem>(this ObjectPool<List<TItem>> pool, out List<TItem> list)
+        public static PooledObject<List<TItem>> GetPooledObject<TItem>(
+            this ObjectPool<List<TItem>> pool,
+            out List<TItem> list
+        )
         {
             var pooledObject = PooledObject<List<TItem>>.Create(pool);
             list = pooledObject.Object;
             return pooledObject;
         }
 
-        public static PooledObject<T> GetPooledObject<T>(this ObjectPool<T> pool) where T : class
-            => new(pool, p => p.Allocate(), (p, o) => p.Free(o));
+        public static PooledObject<T> GetPooledObject<T>(this ObjectPool<T> pool) where T : class =>
+            new(pool, p => p.Allocate(), (p, o) => p.Free(o));
 
         public static StringBuilder AllocateAndClear(this ObjectPool<StringBuilder> pool)
         {
@@ -74,8 +82,9 @@ namespace Microsoft.CodeAnalysis
             return set;
         }
 
-        public static Dictionary<TKey, TValue> AllocateAndClear<TKey, TValue>(this ObjectPool<Dictionary<TKey, TValue>> pool)
-            where TKey : notnull
+        public static Dictionary<TKey, TValue> AllocateAndClear<TKey, TValue>(
+            this ObjectPool<Dictionary<TKey, TValue>> pool
+        ) where TKey : notnull
         {
             var map = pool.Allocate();
             map.Clear();
@@ -126,7 +135,10 @@ namespace Microsoft.CodeAnalysis
             pool.Free(set);
         }
 
-        public static void ClearAndFree<T>(this ObjectPool<ConcurrentSet<T>> pool, ConcurrentSet<T> set) where T : notnull
+        public static void ClearAndFree<T>(
+            this ObjectPool<ConcurrentSet<T>> pool,
+            ConcurrentSet<T> set
+        ) where T : notnull
         {
             if (set == null)
                 return;
@@ -178,8 +190,10 @@ namespace Microsoft.CodeAnalysis
             pool.Free(set);
         }
 
-        public static void ClearAndFree<TKey, TValue>(this ObjectPool<Dictionary<TKey, TValue>> pool, Dictionary<TKey, TValue> map)
-            where TKey : notnull
+        public static void ClearAndFree<TKey, TValue>(
+            this ObjectPool<Dictionary<TKey, TValue>> pool,
+            Dictionary<TKey, TValue> map
+        ) where TKey : notnull
         {
             if (map == null)
             {

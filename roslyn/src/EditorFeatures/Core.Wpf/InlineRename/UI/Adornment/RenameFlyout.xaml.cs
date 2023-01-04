@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             IWpfTextView textView,
             IWpfThemeService? themeService,
             IAsyncQuickInfoBroker asyncQuickInfoBroker,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             DataContext = _viewModel = viewModel;
             _textView = textView;
@@ -47,7 +48,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             Loaded += (s, e) =>
             {
                 IdentifierTextBox.Focus();
-                IdentifierTextBox.Select(_viewModel.StartingSelection.Start, _viewModel.StartingSelection.Length);
+                IdentifierTextBox.Select(
+                    _viewModel.StartingSelection.Start,
+                    _viewModel.StartingSelection.Length
+                );
 
                 // Don't hook up our close events until we're done loading and have focused within the textbox
                 _textView.LostAggregateFocus += TextView_LostFocus;
@@ -59,8 +63,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
             if (themeService is not null)
             {
-                Outline.BorderBrush = new SolidColorBrush(themeService.GetThemeColor(EnvironmentColors.AccentBorderColorKey));
-                Background = new SolidColorBrush(themeService.GetThemeColor(EnvironmentColors.ToolWindowBackgroundColorKey));
+                Outline.BorderBrush = new SolidColorBrush(
+                    themeService.GetThemeColor(EnvironmentColors.AccentBorderColorKey)
+                );
+                Background = new SolidColorBrush(
+                    themeService.GetThemeColor(EnvironmentColors.ToolWindowBackgroundColorKey)
+                );
             }
 
             // Dismiss any current tooltips. Note that this does not disable tooltips
@@ -89,15 +97,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         public string ApplyRename => EditorFeaturesResources.Apply1;
         public string CancelRename => EditorFeaturesResources.Cancel;
         public string PreviewChanges => EditorFeaturesResources.Preview_changes1;
-        public string SubmitText => EditorFeaturesWpfResources.Enter_to_rename_shift_enter_to_preview;
+        public string SubmitText =>
+            EditorFeaturesWpfResources.Enter_to_rename_shift_enter_to_preview;
 #pragma warning restore CA1822 // Mark members as static
 
-        private void RenameFlyout_IsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void RenameFlyout_IsKeyboardFocusWithinChanged(
+            object sender,
+            DependencyPropertyChangedEventArgs e
+        )
         {
-            // When previewing changes, focus will be lost and put 
+            // When previewing changes, focus will be lost and put
             // into a preview changes window. If we're returning back
             // to this UI, reset the flag to false. Otherwise, just ignore
-            // this focus change. No need to cancel in that case 
+            // this focus change. No need to cancel in that case
             if (_viewModel.PreviewChangesFlag)
             {
                 if (IsKeyboardFocused)
@@ -125,8 +137,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             _viewModel.Cancel();
         }
 
-        private void TextView_ViewPortChanged(object sender, EventArgs e)
-            => PositionAdornment();
+        private void TextView_ViewPortChanged(object sender, EventArgs e) => PositionAdornment();
 
         private void TextView_LayoutChanged(object sender, TextViewLayoutChangedEventArgs e)
         {
@@ -182,7 +193,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     break;
 
                 case Key.Tab:
-                    // We don't want tab to lose focus for the adornment, so manually 
+                    // We don't want tab to lose focus for the adornment, so manually
                     // loop focus back to the first item that is focusable.
                     FrameworkElement lastItem = _viewModel.IsExpanded
                         ? FileRenameCheckbox

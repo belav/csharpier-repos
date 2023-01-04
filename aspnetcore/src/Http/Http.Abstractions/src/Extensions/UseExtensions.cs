@@ -26,7 +26,10 @@ public static class UseExtensions
     /// <param name="app">The <see cref="IApplicationBuilder"/> instance.</param>
     /// <param name="middleware">A function that handles the request and calls the given next function.</param>
     /// <returns>The <see cref="IApplicationBuilder"/> instance.</returns>
-    public static IApplicationBuilder Use(this IApplicationBuilder app, Func<HttpContext, Func<Task>, Task> middleware)
+    public static IApplicationBuilder Use(
+        this IApplicationBuilder app,
+        Func<HttpContext, Func<Task>, Task> middleware
+    )
     {
         return app.Use(next =>
         {
@@ -45,7 +48,10 @@ public static class UseExtensions
     /// <param name="app">The <see cref="IApplicationBuilder"/> instance.</param>
     /// <param name="middleware">A function that handles the request and calls the given next function.</param>
     /// <returns>The <see cref="IApplicationBuilder"/> instance.</returns>
-    public static IApplicationBuilder Use(this IApplicationBuilder app, Func<HttpContext, RequestDelegate, Task> middleware)
+    public static IApplicationBuilder Use(
+        this IApplicationBuilder app,
+        Func<HttpContext, RequestDelegate, Task> middleware
+    )
     {
         return app.Use(next => context => middleware(context, next));
     }

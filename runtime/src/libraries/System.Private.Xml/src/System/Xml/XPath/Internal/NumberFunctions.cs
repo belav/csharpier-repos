@@ -20,6 +20,7 @@ namespace MS.Internal.Xml.XPath
             _arg = arg;
             _ftype = ftype;
         }
+
         private NumberFunctions(NumberFunctions other) : base(other)
         {
             _arg = Clone(other._arg);
@@ -35,6 +36,7 @@ namespace MS.Internal.Xml.XPath
         {
             return arg ? 1.0 : 0.0;
         }
+
         internal static double Number(string arg)
         {
             return XmlConvert.ToXPathDouble(arg);
@@ -112,8 +114,14 @@ namespace MS.Internal.Xml.XPath
             return XmlConvert.XPathRound(n);
         }
 
-        public override XPathResultType StaticType { get { return XPathResultType.Number; } }
+        public override XPathResultType StaticType
+        {
+            get { return XPathResultType.Number; }
+        }
 
-        public override XPathNodeIterator Clone() { return new NumberFunctions(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new NumberFunctions(this);
+        }
     }
 }

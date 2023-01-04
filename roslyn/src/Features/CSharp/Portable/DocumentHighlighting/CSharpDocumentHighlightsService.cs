@@ -27,16 +27,23 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentHighlighting
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpDocumentHighlightsService(
-            [ImportMany] IEnumerable<Lazy<IEmbeddedLanguageDocumentHighlighter, EmbeddedLanguageMetadata>> services)
-            : base(LanguageNames.CSharp,
-                  CSharpEmbeddedLanguagesProvider.Info,
-                  CSharpSyntaxKinds.Instance,
-                  services)
-        {
-        }
+            [ImportMany]
+                IEnumerable<
+                Lazy<IEmbeddedLanguageDocumentHighlighter, EmbeddedLanguageMetadata>
+            > services
+        )
+            : base(
+                LanguageNames.CSharp,
+                CSharpEmbeddedLanguagesProvider.Info,
+                CSharpSyntaxKinds.Instance,
+                services
+            ) { }
 
         protected override async Task<ImmutableArray<Location>> GetAdditionalReferencesAsync(
-            Document document, ISymbol symbol, CancellationToken cancellationToken)
+            Document document,
+            ISymbol symbol,
+            CancellationToken cancellationToken
+        )
         {
             // The FindRefs engine won't find references through 'var' for performance reasons.
             // Also, they are not needed for things like rename/sig change, and the normal find refs
@@ -51,7 +58,9 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentHighlighting
             if (symbol is INamedTypeSymbol && symbol.Name != "var")
             {
                 var originalSymbol = symbol.OriginalDefinition;
-                var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+                var root = await document
+                    .GetSyntaxRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 var descendents = root.DescendantNodes();
                 var semanticModel = (SemanticModel)null;
@@ -62,9 +71,13 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentHighlighting
 
                     if (type.IsVar)
                     {
-                        semanticModel ??= await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+                        semanticModel ??= await document
+                            .GetSemanticModelAsync(cancellationToken)
+                            .ConfigureAwait(false);
 
-                        var boundSymbol = semanticModel.GetSymbolInfo(type, cancellationToken).Symbol;
+                        var boundSymbol = semanticModel
+                            .GetSymbolInfo(type, cancellationToken)
+                            .Symbol;
                         boundSymbol = boundSymbol?.OriginalDefinition;
 
                         if (originalSymbol.Equals(boundSymbol))

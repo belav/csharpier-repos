@@ -8,7 +8,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 {
     internal struct ResultCache
     {
-        public static ResultCache None { get; } = new ResultCache(CallSiteResultCacheLocation.None, ServiceCacheKey.Empty);
+        public static ResultCache None { get; } =
+            new ResultCache(CallSiteResultCacheLocation.None, ServiceCacheKey.Empty);
 
         internal ResultCache(CallSiteResultCacheLocation lifetime, ServiceCacheKey cacheKey)
         {

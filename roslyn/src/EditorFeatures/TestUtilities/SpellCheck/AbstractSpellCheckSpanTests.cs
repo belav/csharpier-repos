@@ -16,7 +16,6 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.SpellCheck
 {
-
     public abstract class AbstractSpellCheckSpanTests
     {
         protected abstract TestWorkspace CreateWorkspace(string content);
@@ -38,9 +37,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SpellCheck
             Assert.Equal<SpellCheckSpan>(expected, actual);
         }
 
-        private static ImmutableArray<SpellCheckSpan> Flatten(IDictionary<string, ImmutableArray<TextSpan>> annotations)
+        private static ImmutableArray<SpellCheckSpan> Flatten(
+            IDictionary<string, ImmutableArray<TextSpan>> annotations
+        )
         {
-            return annotations.SelectMany(kvp => kvp.Value.Select(span => new SpellCheckSpan(span, ConvertKind(kvp.Key)))).ToImmutableArray();
+            return annotations
+                .SelectMany(
+                    kvp => kvp.Value.Select(span => new SpellCheckSpan(span, ConvertKind(kvp.Key)))
+                )
+                .ToImmutableArray();
         }
 
         private static SpellCheckKind ConvertKind(string key)

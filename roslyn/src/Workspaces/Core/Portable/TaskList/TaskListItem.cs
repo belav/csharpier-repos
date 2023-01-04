@@ -29,7 +29,13 @@ namespace Microsoft.CodeAnalysis.TaskList
         [DataMember(Order = 4)]
         public readonly FileLinePositionSpan MappedSpan;
 
-        public TaskListItem(int priority, string message, DocumentId documentId, FileLinePositionSpan span, FileLinePositionSpan mappedSpan)
+        public TaskListItem(
+            int priority,
+            string message,
+            DocumentId documentId,
+            FileLinePositionSpan span,
+            FileLinePositionSpan mappedSpan
+        )
         {
             Priority = priority;
             Message = message;
@@ -38,21 +44,24 @@ namespace Microsoft.CodeAnalysis.TaskList
             MappedSpan = mappedSpan;
         }
 
-        public override bool Equals(object? obj)
-            => obj is TaskListItem other && Equals(other);
+        public override bool Equals(object? obj) => obj is TaskListItem other && Equals(other);
 
-        public override int GetHashCode()
-            => Hash.Combine(this.DocumentId,
-               Hash.Combine(this.Priority,
-               Hash.Combine(this.Message, this.Span.Span.GetHashCode())));
+        public override int GetHashCode() =>
+            Hash.Combine(
+                this.DocumentId,
+                Hash.Combine(
+                    this.Priority,
+                    Hash.Combine(this.Message, this.Span.Span.GetHashCode())
+                )
+            );
 
-        public override string ToString()
-            => $"{Priority} {Message} {MappedSpan.Path ?? ""} ({MappedSpan.StartLinePosition.Line}, {MappedSpan.StartLinePosition.Character}) [original: {Span.Path ?? ""} ({Span.StartLinePosition.Line}, {Span.StartLinePosition.Character})";
+        public override string ToString() =>
+            $"{Priority} {Message} {MappedSpan.Path ?? ""} ({MappedSpan.StartLinePosition.Line}, {MappedSpan.StartLinePosition.Character}) [original: {Span.Path ?? ""} ({Span.StartLinePosition.Line}, {Span.StartLinePosition.Character})";
 
-        public bool Equals(TaskListItem right)
-            => DocumentId == right.DocumentId &&
-               Priority == right.Priority &&
-               Message == right.Message &&
-               Span.Span == right.Span.Span;
+        public bool Equals(TaskListItem right) =>
+            DocumentId == right.DocumentId
+            && Priority == right.Priority
+            && Message == right.Message
+            && Span.Span == right.Span.Span;
     }
 }

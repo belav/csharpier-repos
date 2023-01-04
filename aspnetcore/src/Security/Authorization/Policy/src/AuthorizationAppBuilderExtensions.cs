@@ -42,9 +42,12 @@ public static class AuthorizationAppBuilderExtensions
         // We use the AuthorizationPolicyMarkerService to ensure all the services were added.
         if (app.ApplicationServices.GetService(typeof(AuthorizationPolicyMarkerService)) == null)
         {
-            throw new InvalidOperationException(Resources.FormatException_UnableToFindServices(
-                nameof(IServiceCollection),
-                nameof(PolicyServiceCollectionExtensions.AddAuthorization)));
+            throw new InvalidOperationException(
+                Resources.FormatException_UnableToFindServices(
+                    nameof(IServiceCollection),
+                    nameof(PolicyServiceCollectionExtensions.AddAuthorization)
+                )
+            );
         }
     }
 }

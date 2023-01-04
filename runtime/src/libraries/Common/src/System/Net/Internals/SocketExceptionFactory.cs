@@ -11,8 +11,7 @@ namespace System.Net.Internals
         {
             private readonly EndPoint? _endPoint;
 
-            public ExtendedSocketException(int errorCode, EndPoint? endPoint)
-                : base(errorCode)
+            public ExtendedSocketException(int errorCode, EndPoint? endPoint) : base(errorCode)
             {
                 _endPoint = endPoint;
             }

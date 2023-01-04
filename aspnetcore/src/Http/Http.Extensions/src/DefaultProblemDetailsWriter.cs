@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Http;
 internal sealed partial class DefaultProblemDetailsWriter : IProblemDetailsWriter
 {
     private static readonly MediaTypeHeaderValue _jsonMediaType = new("application/json");
-    private static readonly MediaTypeHeaderValue _problemDetailsJsonMediaType = new("application/problem+json");
+    private static readonly MediaTypeHeaderValue _problemDetailsJsonMediaType =
+        new("application/problem+json");
     private readonly ProblemDetailsOptions _options;
 
     public DefaultProblemDetailsWriter(IOptions<ProblemDetailsOptions> options)
@@ -37,8 +38,10 @@ internal sealed partial class DefaultProblemDetailsWriter : IProblemDetailsWrite
         {
             var acceptHeaderValue = acceptHeader[i];
 
-            if (_jsonMediaType.IsSubsetOf(acceptHeaderValue) ||
-                _problemDetailsJsonMediaType.IsSubsetOf(acceptHeaderValue))
+            if (
+                _jsonMediaType.IsSubsetOf(acceptHeaderValue)
+                || _problemDetailsJsonMediaType.IsSubsetOf(acceptHeaderValue)
+            )
             {
                 return true;
             }
@@ -47,9 +50,12 @@ internal sealed partial class DefaultProblemDetailsWriter : IProblemDetailsWrite
         return false;
     }
 
-    [UnconditionalSuppressMessage("Trimming", "IL2026",
-        Justification = "JSON serialization of ProblemDetails.Extensions might require types that cannot be statically analyzed and we need to fallback" +
-        "to reflection-based. The ProblemDetailsConverter is marked as RequiresUnreferencedCode already.")]
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2026",
+        Justification = "JSON serialization of ProblemDetails.Extensions might require types that cannot be statically analyzed and we need to fallback"
+            + "to reflection-based. The ProblemDetailsConverter is marked as RequiresUnreferencedCode already."
+    )]
     public ValueTask WriteAsync(ProblemDetailsContext context)
     {
         var httpContext = context.HttpContext;
@@ -59,19 +65,24 @@ internal sealed partial class DefaultProblemDetailsWriter : IProblemDetailsWrite
         if (context.ProblemDetails.Extensions is { Count: 0 })
         {
             // We can use the source generation in this case
-            return new ValueTask(httpContext.Response.WriteAsJsonAsync(
-                context.ProblemDetails,
-                ProblemDetailsJsonContext.Default.ProblemDetails,
-                contentType: "application/problem+json"));
+            return new ValueTask(
+                httpContext.Response.WriteAsJsonAsync(
+                    context.ProblemDetails,
+                    ProblemDetailsJsonContext.Default.ProblemDetails,
+                    contentType: "application/problem+json"
+                )
+            );
         }
 
-        return new ValueTask(httpContext.Response.WriteAsJsonAsync(
-                        context.ProblemDetails,
-                        options: null,
-                        contentType: "application/problem+json"));
+        return new ValueTask(
+            httpContext.Response.WriteAsJsonAsync(
+                context.ProblemDetails,
+                options: null,
+                contentType: "application/problem+json"
+            )
+        );
     }
 
     [JsonSerializable(typeof(ProblemDetails))]
-    internal sealed partial class ProblemDetailsJsonContext : JsonSerializerContext
-    { }
+    internal sealed partial class ProblemDetailsJsonContext : JsonSerializerContext { }
 }

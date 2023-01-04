@@ -32,10 +32,7 @@ namespace System.IO.Hashing
         ///   The XxHash64 algorithm supports an optional seed value.
         ///   Instances created with this constructor use the default seed, zero.
         /// </remarks>
-        public XxHash64()
-            : this(0)
-        {
-        }
+        public XxHash64() : this(0) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="XxHash64"/> class with
@@ -44,8 +41,7 @@ namespace System.IO.Hashing
         /// <param name="seed">
         ///   The hash seed value for computations from this instance.
         /// </param>
-        public XxHash64(long seed)
-            : base(HashSize)
+        public XxHash64(long seed) : base(HashSize)
         {
             _seed = (ulong)seed;
             Reset();
@@ -198,7 +194,12 @@ namespace System.IO.Hashing
         ///   <see langword="true"/> if <paramref name="destination"/> is long enough to receive
         ///   the computed hash value (4 bytes); otherwise, <see langword="false"/>.
         /// </returns>
-        public static bool TryHash(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten, long seed = 0)
+        public static bool TryHash(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten,
+            long seed = 0
+        )
         {
             if (destination.Length < HashSize)
             {

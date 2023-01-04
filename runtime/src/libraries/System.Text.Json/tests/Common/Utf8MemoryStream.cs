@@ -16,16 +16,31 @@ namespace System.Text.Json.Serialization.Tests
             _ignoreCancellationTokenOnWriteAsync = ignoreCancellationTokenOnWriteAsync;
         }
 
-        public Utf8MemoryStream(string text) : base(Encoding.UTF8.GetBytes(text))
-        {
-        }
+        public Utf8MemoryStream(string text) : base(Encoding.UTF8.GetBytes(text)) { }
 
 #if NETCOREAPP
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
-            => base.WriteAsync(buffer, _ignoreCancellationTokenOnWriteAsync ? default : cancellationToken);
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        ) =>
+            base.WriteAsync(
+                buffer,
+                _ignoreCancellationTokenOnWriteAsync ? default : cancellationToken
+            );
 #endif
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-            => base.WriteAsync(buffer, offset, count, _ignoreCancellationTokenOnWriteAsync ? default : cancellationToken);
+
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) =>
+            base.WriteAsync(
+                buffer,
+                offset,
+                count,
+                _ignoreCancellationTokenOnWriteAsync ? default : cancellationToken
+            );
 
         public string AsString() => Encoding.UTF8.GetString(ToArray());
     }

@@ -9,9 +9,7 @@ public class Test_test
     {
         int rc;
 
-        try
-        {
-        }
+        try { }
         finally
         {
             switch (type)
@@ -41,7 +39,6 @@ public class Test_test
     {
         return _counter++;
     }
-
 
     public static int Main()
     {

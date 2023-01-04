@@ -12,32 +12,51 @@ namespace Mono.Linker.Steps
     {
         SubstitutionInfo? _substitutionInfo;
 
-        public BodySubstitutionParser(LinkContext context, Stream documentStream, string xmlDocumentLocation)
-            : base(context, documentStream, xmlDocumentLocation)
-        {
-        }
+        public BodySubstitutionParser(
+            LinkContext context,
+            Stream documentStream,
+            string xmlDocumentLocation
+        ) : base(context, documentStream, xmlDocumentLocation) { }
 
-        public BodySubstitutionParser(LinkContext context, Stream documentStream, EmbeddedResource resource, AssemblyDefinition resourceAssembly, string xmlDocumentLocation = "")
-            : base(context, documentStream, resource, resourceAssembly, xmlDocumentLocation)
-        {
-        }
+        public BodySubstitutionParser(
+            LinkContext context,
+            Stream documentStream,
+            EmbeddedResource resource,
+            AssemblyDefinition resourceAssembly,
+            string xmlDocumentLocation = ""
+        ) : base(context, documentStream, resource, resourceAssembly, xmlDocumentLocation) { }
 
         public void Parse(SubstitutionInfo xmlInfo)
         {
             _substitutionInfo = xmlInfo;
-            bool stripSubstitutions = _context.IsOptimizationEnabled(CodeOptimizations.RemoveSubstitutions, _resource?.Assembly);
+            bool stripSubstitutions = _context.IsOptimizationEnabled(
+                CodeOptimizations.RemoveSubstitutions,
+                _resource?.Assembly
+            );
             ProcessXml(stripSubstitutions, _context.IgnoreSubstitutions);
         }
 
-        protected override void ProcessAssembly(AssemblyDefinition assembly, XPathNavigator nav, bool warnOnUnresolvedTypes)
+        protected override void ProcessAssembly(
+            AssemblyDefinition assembly,
+            XPathNavigator nav,
+            bool warnOnUnresolvedTypes
+        )
         {
             ProcessTypes(assembly, nav, warnOnUnresolvedTypes);
             ProcessResources(assembly, nav);
         }
 
-        protected override TypeDefinition? ProcessExportedType(ExportedType exported, AssemblyDefinition assembly, XPathNavigator nav) => null;
+        protected override TypeDefinition? ProcessExportedType(
+            ExportedType exported,
+            AssemblyDefinition assembly,
+            XPathNavigator nav
+        ) => null;
 
-        protected override bool ProcessTypePattern(string fullname, AssemblyDefinition assembly, XPathNavigator nav) => false;
+        protected override bool ProcessTypePattern(
+            string fullname,
+            AssemblyDefinition assembly,
+            XPathNavigator nav
+        ) => false;
 
         protected override void ProcessType(TypeDefinition type, XPathNavigator nav)
         {
@@ -45,7 +64,11 @@ namespace Mono.Linker.Steps
             ProcessTypeChildren(type, nav);
         }
 
-        protected override void ProcessMethod(TypeDefinition type, XPathNavigator methodNav, object? _customData)
+        protected override void ProcessMethod(
+            TypeDefinition type,
+            XPathNavigator methodNav,
+            object? _customData
+        )
         {
             Debug.Assert(_substitutionInfo != null);
             string signature = GetSignature(methodNav);
@@ -55,7 +78,12 @@ namespace Mono.Linker.Steps
             MethodDefinition? method = FindMethod(type, signature);
             if (method == null)
             {
-                LogWarning(methodNav, DiagnosticId.XmlCouldNotFindMethodOnType, signature, type.GetDisplayName());
+                LogWarning(
+                    methodNav,
+                    DiagnosticId.XmlCouldNotFindMethodOnType,
+                    signature,
+                    type.GetDisplayName()
+                );
                 return;
             }
 
@@ -71,7 +99,11 @@ namespace Mono.Linker.Steps
                     {
                         if (!TryConvertValue(value, method.ReturnType, out object? res))
                         {
-                            LogWarning(methodNav, DiagnosticId.XmlInvalidValueForStub, method.GetDisplayName());
+                            LogWarning(
+                                methodNav,
+                                DiagnosticId.XmlInvalidValueForStub,
+                                method.GetDisplayName()
+                            );
                             return;
                         }
 
@@ -81,7 +113,12 @@ namespace Mono.Linker.Steps
                     _substitutionInfo.SetMethodAction(method, MethodAction.ConvertToStub);
                     return;
                 default:
-                    LogWarning(methodNav, DiagnosticId.XmlUnkownBodyModification, action, method.GetDisplayName());
+                    LogWarning(
+                        methodNav,
+                        DiagnosticId.XmlUnkownBodyModification,
+                        action,
+                        method.GetDisplayName()
+                    );
                     return;
             }
         }
@@ -96,25 +133,43 @@ namespace Mono.Linker.Steps
             var field = type.Fields.FirstOrDefault(f => f.Name == name);
             if (field == null)
             {
-                LogWarning(fieldNav, DiagnosticId.XmlCouldNotFindFieldOnType, name, type.GetDisplayName());
+                LogWarning(
+                    fieldNav,
+                    DiagnosticId.XmlCouldNotFindFieldOnType,
+                    name,
+                    type.GetDisplayName()
+                );
                 return;
             }
 
             if (!field.IsStatic || field.IsLiteral)
             {
-                LogWarning(fieldNav, DiagnosticId.XmlSubstitutedFieldNeedsToBeStatic, field.GetDisplayName());
+                LogWarning(
+                    fieldNav,
+                    DiagnosticId.XmlSubstitutedFieldNeedsToBeStatic,
+                    field.GetDisplayName()
+                );
                 return;
             }
 
             string value = GetAttribute(fieldNav, "value");
             if (string.IsNullOrEmpty(value))
             {
-                LogWarning(fieldNav, DiagnosticId.XmlMissingSubstitutionValueForField, field.GetDisplayName());
+                LogWarning(
+                    fieldNav,
+                    DiagnosticId.XmlMissingSubstitutionValueForField,
+                    field.GetDisplayName()
+                );
                 return;
             }
             if (!TryConvertValue(value, field.FieldType, out object? res))
             {
-                LogWarning(fieldNav, DiagnosticId.XmlInvalidSubstitutionValueForField, value, field.GetDisplayName());
+                LogWarning(
+                    fieldNav,
+                    DiagnosticId.XmlInvalidSubstitutionValueForField,
+                    value,
+                    field.GetDisplayName()
+                );
                 return;
             }
 
@@ -144,14 +199,24 @@ namespace Mono.Linker.Steps
                 string action = GetAttribute(resourceNav, "action");
                 if (action != "remove")
                 {
-                    LogWarning(resourceNav, DiagnosticId.XmlInvalidValueForAttributeActionForResource, action, name);
+                    LogWarning(
+                        resourceNav,
+                        DiagnosticId.XmlInvalidValueForAttributeActionForResource,
+                        action,
+                        name
+                    );
                     continue;
                 }
 
                 EmbeddedResource? resource = assembly.FindEmbeddedResource(name);
                 if (resource == null)
                 {
-                    LogWarning(resourceNav, DiagnosticId.XmlCouldNotFindResourceToRemoveInAssembly, name, assembly.Name.Name);
+                    LogWarning(
+                        resourceNav,
+                        DiagnosticId.XmlCouldNotFindResourceToRemoveInAssembly,
+                        name,
+                        assembly.Name.Name
+                    );
                     continue;
                 }
 
@@ -165,7 +230,10 @@ namespace Mono.Linker.Steps
                 return null;
 
             foreach (MethodDefinition meth in type.Methods)
-                if (signature == DescriptorMarker.GetMethodSignature(meth, includeGenericParameters: true))
+                if (
+                    signature
+                    == DescriptorMarker.GetMethodSignature(meth, includeGenericParameters: true)
+                )
                     return meth;
 
             return null;

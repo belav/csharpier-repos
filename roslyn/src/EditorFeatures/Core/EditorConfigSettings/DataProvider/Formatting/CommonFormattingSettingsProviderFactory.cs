@@ -7,14 +7,19 @@ using Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Formatting
 {
-    internal class CommonFormattingSettingsProviderFactory : IWorkspaceSettingsProviderFactory<FormattingSetting>
+    internal class CommonFormattingSettingsProviderFactory
+        : IWorkspaceSettingsProviderFactory<FormattingSetting>
     {
         private readonly Workspace _workspace;
 
-        public CommonFormattingSettingsProviderFactory(Workspace workspace) => _workspace = workspace;
+        public CommonFormattingSettingsProviderFactory(Workspace workspace) =>
+            _workspace = workspace;
 
-        public ISettingsProvider<FormattingSetting> GetForFile(string filePath)
-            => new CommonFormattingSettingsProvider(filePath, new OptionUpdater(_workspace, filePath), _workspace);
-
+        public ISettingsProvider<FormattingSetting> GetForFile(string filePath) =>
+            new CommonFormattingSettingsProvider(
+                filePath,
+                new OptionUpdater(_workspace, filePath),
+                _workspace
+            );
     }
 }

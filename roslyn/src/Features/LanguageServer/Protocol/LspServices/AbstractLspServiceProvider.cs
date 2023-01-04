@@ -12,19 +12,32 @@ namespace Microsoft.CodeAnalysis.LanguageServer;
 internal class AbstractLspServiceProvider
 {
     private readonly ImmutableArray<Lazy<ILspService, LspServiceMetadataView>> _lspServices;
-    private readonly ImmutableArray<Lazy<ILspServiceFactory, LspServiceMetadataView>> _lspServiceFactories;
+    private readonly ImmutableArray<
+        Lazy<ILspServiceFactory, LspServiceMetadataView>
+    > _lspServiceFactories;
 
     public AbstractLspServiceProvider(
         IEnumerable<Lazy<ILspService, LspServiceMetadataView>> specificLspServices,
-        IEnumerable<Lazy<ILspServiceFactory, LspServiceMetadataView>> specificLspServiceFactories)
+        IEnumerable<Lazy<ILspServiceFactory, LspServiceMetadataView>> specificLspServiceFactories
+    )
     {
         _lspServices = specificLspServices.ToImmutableArray();
         _lspServiceFactories = specificLspServiceFactories.ToImmutableArray();
     }
 
-    public LspServices CreateServices(WellKnownLspServerKinds serverKind, ImmutableArray<Lazy<ILspService, LspServiceMetadataView>> baseServices, IServiceCollection serviceCollection)
+    public LspServices CreateServices(
+        WellKnownLspServerKinds serverKind,
+        ImmutableArray<Lazy<ILspService, LspServiceMetadataView>> baseServices,
+        IServiceCollection serviceCollection
+    )
     {
-        var lspServices = new LspServices(_lspServices, _lspServiceFactories, serverKind, baseServices, serviceCollection);
+        var lspServices = new LspServices(
+            _lspServices,
+            _lspServiceFactories,
+            serverKind,
+            baseServices,
+            serviceCollection
+        );
 
         return lspServices;
     }

@@ -21,19 +21,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpStructSnippetProvider()
-        {
-        }
+        public CSharpStructSnippetProvider() { }
+
         public override string SnippetIdentifier => "struct";
 
         public override string SnippetDescription => FeaturesResources.struct_;
 
-        protected override async Task<SyntaxNode> GenerateTypeDeclarationAsync(Document document, int position, bool useAccessibility, CancellationToken cancellationToken)
+        protected override async Task<SyntaxNode> GenerateTypeDeclarationAsync(
+            Document document,
+            int position,
+            bool useAccessibility,
+            CancellationToken cancellationToken
+        )
         {
             var generator = SyntaxGenerator.GetGenerator(document);
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            var name = NameGenerator.GenerateUniqueName("MyStruct", name => semanticModel.LookupSymbols(position, name: name).IsEmpty);
+            var name = NameGenerator.GenerateUniqueName(
+                "MyStruct",
+                name => semanticModel.LookupSymbols(position, name: name).IsEmpty
+            );
             var classDeclaration = useAccessibility is true
                 ? generator.StructDeclaration(name, accessibility: Accessibility.Public)
                 : generator.StructDeclaration(name);
@@ -41,7 +50,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
             return classDeclaration;
         }
 
-        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(ISyntaxFacts syntaxFacts)
+        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(
+            ISyntaxFacts syntaxFacts
+        )
         {
             return syntaxFacts.IsStructDeclaration;
         }

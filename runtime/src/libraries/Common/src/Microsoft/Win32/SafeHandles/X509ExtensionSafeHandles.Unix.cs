@@ -9,10 +9,7 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeX509ExtensionHandle : SafeHandle
     {
-        public SafeX509ExtensionHandle() :
-            base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeX509ExtensionHandle() : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -29,10 +26,7 @@ namespace Microsoft.Win32.SafeHandles
 
     internal sealed class SafeEkuExtensionHandle : SafeHandle
     {
-        public SafeEkuExtensionHandle() :
-            base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeEkuExtensionHandle() : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {

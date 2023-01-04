@@ -12,6 +12,7 @@ using Roslyn.Test.Utilities;
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Workspaces;
+
 public class LspWorkspaceRegistrationServiceTests : AbstractLanguageServerProtocolTests
 {
     [Fact]
@@ -21,7 +22,8 @@ public class LspWorkspaceRegistrationServiceTests : AbstractLanguageServerProtoc
         TestWorkspaceRegistrationService registrationService;
         await using (var testLspServer = await CreateTestLspServerAsync(markup))
         {
-            registrationService = (TestWorkspaceRegistrationService)testLspServer.TestWorkspace.ExportProvider.GetExportedValue<LspWorkspaceRegistrationService>();
+            registrationService = (TestWorkspaceRegistrationService)
+                testLspServer.TestWorkspace.ExportProvider.GetExportedValue<LspWorkspaceRegistrationService>();
         }
 
         Assert.Empty(registrationService.GetAllRegistrations());

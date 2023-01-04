@@ -16,7 +16,8 @@ namespace System.Security.Cryptography.X509Certificates
             bool quoteIfNeeded,
             string dnSeparator,
             string multiValueSeparator,
-            bool addTrailingDelimiter)
+            bool addTrailingDelimiter
+        )
         {
             try
             {

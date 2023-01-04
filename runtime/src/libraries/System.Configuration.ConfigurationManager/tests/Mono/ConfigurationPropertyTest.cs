@@ -39,7 +39,9 @@ namespace MonoTests.System.Configuration
         [Fact]
         public void CostructorTest()
         {
-            Assert.Throws<ConfigurationErrorsException>(() => new ConfigurationProperty("Name", typeof(char), 5));
+            Assert.Throws<ConfigurationErrorsException>(
+                () => new ConfigurationProperty("Name", typeof(char), 5)
+            );
         }
 
         [Fact]
@@ -56,7 +58,10 @@ namespace MonoTests.System.Configuration
             ConfigurationProperty poker = new ConfigurationProperty("Name", typeof(char));
             Assert.Equal(typeof(char), poker.DefaultValue.GetType());
 
-            ConfigurationProperty poker1 = new ConfigurationProperty("Name", typeof(ConfigurationProperty));
+            ConfigurationProperty poker1 = new ConfigurationProperty(
+                "Name",
+                typeof(ConfigurationProperty)
+            );
             Assert.Null(poker1.DefaultValue);
 
             ConfigurationProperty poker2 = new ConfigurationProperty("Name", typeof(string));

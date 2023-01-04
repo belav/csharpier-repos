@@ -4,7 +4,6 @@
 
 using System;
 
-
 struct Big10DW
 {
 #pragma warning disable 0414
@@ -13,6 +12,7 @@ struct Big10DW
     public Int64 i3;
     public Int64 i4;
     public Int64 i5;
+
     public void Zero()
     {
         i1 = 0;
@@ -36,6 +36,7 @@ struct Big100DW
     public Big10DW b8;
     public Big10DW b9;
     public Big10DW b10;
+
     public void Zero()
     {
         b1.Zero();
@@ -63,6 +64,7 @@ struct Big1000DW
     public Big100DW b8;
     public Big100DW b9;
     public Big100DW b10;
+
     public void Zero()
     {
         b1.Zero();
@@ -90,6 +92,7 @@ struct Big10000DW
     public Big1000DW b8;
     public Big1000DW b9;
     public Big1000DW b10;
+
     public void Zero()
     {
         b1.Zero();
@@ -117,6 +120,7 @@ struct Big100000DW
     public Big10000DW b8;
     public Big10000DW b9;
     public Big10000DW b10;
+
     public void Zero()
     {
         b1.Zero();
@@ -131,7 +135,6 @@ struct Big100000DW
         b10.Zero();
     }
 }
-
 
 public class Test_hugestruct
 {

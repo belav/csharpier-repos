@@ -111,18 +111,22 @@ namespace System.ComponentModel.Design.Tests
             protected override void Dispose(bool disposing) { }
 
             protected override void OnCancel() { }
+
             protected override void OnCommit() { }
         }
 
         private class TestDesignerTransaction : DesignerTransaction
         {
             public TestDesignerTransaction() : base() { }
+
             public TestDesignerTransaction(string description) : base(description) { }
 
             public int CancelCount { get; set; }
+
             protected override void OnCancel() => CancelCount++;
 
             public int CommitCount { get; set; }
+
             protected override void OnCommit() => CommitCount++;
         }
     }

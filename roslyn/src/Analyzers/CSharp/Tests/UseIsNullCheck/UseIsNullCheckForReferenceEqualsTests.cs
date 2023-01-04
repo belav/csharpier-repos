@@ -18,25 +18,31 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseIsNullCheck)]
-    public partial class UseIsNullCheckForReferenceEqualsTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class UseIsNullCheckForReferenceEqualsTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseIsNullCheckForReferenceEqualsTests(ITestOutputHelper logger)
-            : base(logger)
-        {
-        }
+        public UseIsNullCheckForReferenceEqualsTests(ITestOutputHelper logger) : base(logger) { }
 
-        private static readonly ParseOptions CSharp7 = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7);
-        private static readonly ParseOptions CSharp8 = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8);
-        private static readonly ParseOptions CSharp9 = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9);
+        private static readonly ParseOptions CSharp7 =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7);
+        private static readonly ParseOptions CSharp8 =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8);
+        private static readonly ParseOptions CSharp9 =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9);
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUseIsNullCheckForReferenceEqualsDiagnosticAnalyzer(), new CSharpUseIsNullCheckForReferenceEqualsCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUseIsNullCheckForReferenceEqualsDiagnosticAnalyzer(),
+                new CSharpUseIsNullCheckForReferenceEqualsCodeFixProvider()
+            );
 
         [Fact]
         public async Task TestIdentifierName()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -46,7 +52,7 @@ class C
             return;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -55,14 +61,15 @@ class C
         if (s is null)
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(58483, "https://github.com/dotnet/roslyn/issues/58483")]
         public async Task TestIsNullTitle()
         {
             await TestExactActionSetOfferedAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -72,14 +79,15 @@ class C
             return;
     }
 }",
-new[] { CSharpAnalyzersResources.Use_is_null_check });
+                new[] { CSharpAnalyzersResources.Use_is_null_check }
+            );
         }
 
         [Fact, WorkItem(58483, "https://github.com/dotnet/roslyn/issues/58483")]
         public async Task TestIsObjectTitle()
         {
             await TestExactActionSetOfferedAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -89,15 +97,20 @@ class C
             return;
     }
 }",
-new[] { CSharpAnalyzersResources.Use_is_object_check },
-new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)));
+                new[] { CSharpAnalyzersResources.Use_is_object_check },
+                new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp8
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem(58483, "https://github.com/dotnet/roslyn/issues/58483")]
         public async Task TestIsNotNullTitle()
         {
             await TestExactActionSetOfferedAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -107,15 +120,20 @@ class C
             return;
     }
 }",
-new[] { CSharpAnalyzersResources.Use_is_not_null_check },
-new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9)));
+                new[] { CSharpAnalyzersResources.Use_is_not_null_check },
+                new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp9
+                    )
+                )
+            );
         }
 
         [Fact]
         public async Task TestBuiltInType()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -125,7 +143,7 @@ class C
             return;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -134,14 +152,15 @@ class C
         if (s is null)
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNamedType()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -151,7 +170,7 @@ class C
             return;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -160,14 +179,15 @@ class C
         if (s is null)
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestReversed()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -177,7 +197,7 @@ class C
             return;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -186,14 +206,15 @@ class C
         if (s is null)
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNegated_CSharp7()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -203,7 +224,7 @@ class C
             return;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -212,14 +233,16 @@ class C
         if (s is object)
             return;
     }
-}", new TestParameters(parseOptions: CSharp7));
+}",
+                new TestParameters(parseOptions: CSharp7)
+            );
         }
 
         [Fact, WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestNegated_CSharp9()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -229,7 +252,7 @@ class C
             return;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -238,14 +261,16 @@ class C
         if (s is not null)
             return;
     }
-}", new TestParameters(parseOptions: CSharp9));
+}",
+                new TestParameters(parseOptions: CSharp9)
+            );
         }
 
         [Fact]
         public async Task TestNotInCSharp6()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -254,14 +279,20 @@ class C
         if ([||]ReferenceEquals(null, s))
             return;
     }
-}", parameters: new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)));
+}",
+                parameters: new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp6
+                    )
+                )
+            );
         }
 
         [Fact]
         public async Task TestFixAll1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -272,7 +303,7 @@ class C
             return;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -282,14 +313,15 @@ class C
             s2 is null)
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixAll2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -300,7 +332,7 @@ class C
             return;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -310,14 +342,15 @@ class C
             s2 is null)
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(23581, "https://github.com/dotnet/roslyn/issues/23581")]
         public async Task TestValueParameterTypeIsUnconstrainedGeneric_CSharp7()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     public static void NotNull<T>(T value)
@@ -328,7 +361,8 @@ class C
         }
     }
 }
-", @"
+",
+                @"
 class C
 {
     public static void NotNull<T>(T value)
@@ -339,14 +373,16 @@ class C
         }
     }
 }
-", new TestParameters(parseOptions: CSharp7));
+",
+                new TestParameters(parseOptions: CSharp7)
+            );
         }
 
         [Fact, WorkItem(23581, "https://github.com/dotnet/roslyn/issues/47972")]
         public async Task TestValueParameterTypeIsUnconstrainedGeneric_CSharp8()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -358,7 +394,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -369,14 +405,16 @@ class C
             return;
         }
     }
-}", new TestParameters(parseOptions: CSharp8));
+}",
+                new TestParameters(parseOptions: CSharp8)
+            );
         }
 
         [Fact]
         public async Task TestValueParameterTypeIsUnconstrainedGenericNegated_CSharp7()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     public static void NotNull<T>(T value)
@@ -387,7 +425,8 @@ class C
         }
     }
 }
-", @"
+",
+                @"
 class C
 {
     public static void NotNull<T>(T value)
@@ -398,14 +437,16 @@ class C
         }
     }
 }
-", new TestParameters(parseOptions: CSharp7));
+",
+                new TestParameters(parseOptions: CSharp7)
+            );
         }
 
         [Fact]
         public async Task TestValueParameterTypeIsUnconstrainedGenericNegated_CSharp9()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     public static void NotNull<T>(T value)
@@ -416,7 +457,8 @@ class C
         }
     }
 }
-", @"
+",
+                @"
 class C
 {
     public static void NotNull<T>(T value)
@@ -427,14 +469,16 @@ class C
         }
     }
 }
-", new TestParameters(parseOptions: CSharp9));
+",
+                new TestParameters(parseOptions: CSharp9)
+            );
         }
 
         [Fact, WorkItem(23581, "https://github.com/dotnet/roslyn/issues/23581")]
         public async Task TestValueParameterTypeIsRefConstraintGeneric()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     public static void NotNull<T>(T value) where T:class
@@ -446,7 +490,7 @@ class C
     }
 }
 ",
-@"
+                @"
 class C
 {
     public static void NotNull<T>(T value) where T:class
@@ -457,14 +501,15 @@ class C
         }
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task TestValueParameterTypeIsRefConstraintGenericNegated_CSharp7()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     public static void NotNull<T>(T value) where T:class
@@ -476,7 +521,7 @@ class C
     }
 }
 ",
-@"
+                @"
 class C
 {
     public static void NotNull<T>(T value) where T:class
@@ -487,14 +532,16 @@ class C
         }
     }
 }
-", new TestParameters(parseOptions: CSharp7));
+",
+                new TestParameters(parseOptions: CSharp7)
+            );
         }
 
         [Fact]
         public async Task TestValueParameterTypeIsRefConstraintGenericNegated_CSharp9()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     public static void NotNull<T>(T value) where T:class
@@ -506,7 +553,7 @@ class C
     }
 }
 ",
-@"
+                @"
 class C
 {
     public static void NotNull<T>(T value) where T:class
@@ -517,14 +564,16 @@ class C
         }
     }
 }
-", new TestParameters(parseOptions: CSharp9));
+",
+                new TestParameters(parseOptions: CSharp9)
+            );
         }
 
         [Fact, WorkItem(23581, "https://github.com/dotnet/roslyn/issues/23581")]
         public async Task TestValueParameterTypeIsValueConstraintGeneric()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     public static void NotNull<T>(T value) where T:struct
@@ -535,14 +584,15 @@ class C
         }
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task TestValueParameterTypeIsValueConstraintGenericNegated()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     public static void NotNull<T>(T value) where T:struct
@@ -553,14 +603,15 @@ class C
         }
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task TestFixAllNested1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -570,7 +621,7 @@ class C
             return;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -579,14 +630,15 @@ class C
         if (ReferenceEquals(s2, null) is null)
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(23581, "https://github.com/dotnet/roslyn/issues/47972")]
         public async Task TestValueParameterTypeIsBaseTypeConstraintGeneric()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -598,7 +650,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -609,7 +661,9 @@ class C
             return;
         }
     }
-}", new TestParameters(parseOptions: CSharp7));
+}",
+                new TestParameters(parseOptions: CSharp7)
+            );
         }
     }
 }

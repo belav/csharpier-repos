@@ -6,7 +6,8 @@ namespace Microsoft.CodeAnalysis.Formatting
 {
     internal readonly struct LineColumnDelta
     {
-        public static LineColumnDelta Default = new(lines: 0, spaces: 0, whitespaceOnly: true, forceUpdate: false);
+        public static LineColumnDelta Default =
+            new(lines: 0, spaces: 0, whitespaceOnly: true, forceUpdate: false);
 
         /// <summary>
         /// relative line number between calls
@@ -37,8 +38,7 @@ namespace Microsoft.CodeAnalysis.Formatting
             this.ForceUpdate = false;
         }
 
-        public LineColumnDelta(int lines, int spaces, bool whitespaceOnly)
-            : this(lines, spaces)
+        public LineColumnDelta(int lines, int spaces, bool whitespaceOnly) : this(lines, spaces)
         {
             this.WhitespaceOnly = whitespaceOnly;
             this.ForceUpdate = false;
@@ -58,14 +58,16 @@ namespace Microsoft.CodeAnalysis.Formatting
                     Lines,
                     Spaces + delta.Spaces,
                     WhitespaceOnly && delta.WhitespaceOnly,
-                    ForceUpdate || delta.ForceUpdate);
+                    ForceUpdate || delta.ForceUpdate
+                );
             }
 
             return new LineColumnDelta(
                 Lines + delta.Lines,
                 delta.Spaces,
                 delta.WhitespaceOnly,
-                ForceUpdate || delta.ForceUpdate || Spaces > 0);
+                ForceUpdate || delta.ForceUpdate || Spaces > 0
+            );
         }
     }
 }

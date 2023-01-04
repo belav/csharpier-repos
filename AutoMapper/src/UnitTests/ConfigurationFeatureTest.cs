@@ -50,8 +50,10 @@ public class ConfigurationFeatureTest
         Validate<ConfigurationFeatureB>(featureB, config);
     }
 
-    private void Validate<TFeature>(ConfigurationExpressionFeatureBase feature, MapperConfiguration config)
-        where TFeature : ConfigurationFeatureBase
+    private void Validate<TFeature>(
+        ConfigurationExpressionFeatureBase feature,
+        MapperConfiguration config
+    ) where TFeature : ConfigurationFeatureBase
     {
         feature.ConfigurationProviders.ShouldBeOfLength(1);
 
@@ -61,27 +63,26 @@ public class ConfigurationFeatureTest
         configurationFeature.SealedCount.ShouldBe(1);
     }
 
-    public class ConfigurationExpressionFeatureA : ConfigurationExpressionFeatureBase<ConfigurationFeatureA>
+    public class ConfigurationExpressionFeatureA
+        : ConfigurationExpressionFeatureBase<ConfigurationFeatureA>
     {
-        public ConfigurationExpressionFeatureA(int value) : base(value, new ConfigurationFeatureA(value))
-        {
-        }
+        public ConfigurationExpressionFeatureA(int value)
+            : base(value, new ConfigurationFeatureA(value)) { }
     }
 
-    public class ConfigurationExpressionFeatureB : ConfigurationExpressionFeatureBase<ConfigurationFeatureB>
+    public class ConfigurationExpressionFeatureB
+        : ConfigurationExpressionFeatureBase<ConfigurationFeatureB>
     {
-        public ConfigurationExpressionFeatureB(int value) : base(value, new ConfigurationFeatureB(value))
-        {
-        }
+        public ConfigurationExpressionFeatureB(int value)
+            : base(value, new ConfigurationFeatureB(value)) { }
     }
 
-    public abstract class ConfigurationExpressionFeatureBase<TFeature> : ConfigurationExpressionFeatureBase
-        where TFeature : IRuntimeFeature
+    public abstract class ConfigurationExpressionFeatureBase<TFeature>
+        : ConfigurationExpressionFeatureBase where TFeature : IRuntimeFeature
     {
         private readonly TFeature _feature;
 
-        protected ConfigurationExpressionFeatureBase(int value, TFeature feature)
-            : base(value)
+        protected ConfigurationExpressionFeatureBase(int value, TFeature feature) : base(value)
         {
             _feature = feature;
         }
@@ -96,7 +97,8 @@ public class ConfigurationFeatureTest
     public abstract class ConfigurationExpressionFeatureBase : IGlobalFeature
     {
         public int Value { get; }
-        public List<IConfigurationProvider> ConfigurationProviders { get; } = new List<IConfigurationProvider>();
+        public List<IConfigurationProvider> ConfigurationProviders { get; } =
+            new List<IConfigurationProvider>();
 
         protected ConfigurationExpressionFeatureBase(int value)
         {
@@ -108,16 +110,12 @@ public class ConfigurationFeatureTest
 
     public class ConfigurationFeatureA : ConfigurationFeatureBase
     {
-        public ConfigurationFeatureA(int value) : base(value)
-        {
-        }
+        public ConfigurationFeatureA(int value) : base(value) { }
     }
 
     public class ConfigurationFeatureB : ConfigurationFeatureBase
     {
-        public ConfigurationFeatureB(int value) : base(value)
-        {
-        }
+        public ConfigurationFeatureB(int value) : base(value) { }
     }
 
     public abstract class ConfigurationFeatureBase : IRuntimeFeature

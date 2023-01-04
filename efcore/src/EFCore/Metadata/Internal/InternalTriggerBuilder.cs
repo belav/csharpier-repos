@@ -9,7 +9,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class InternalTriggerBuilder : AnnotatableBuilder<Trigger, IConventionModelBuilder>, IConventionTriggerBuilder
+public class InternalTriggerBuilder
+    : AnnotatableBuilder<Trigger, IConventionModelBuilder>,
+        IConventionTriggerBuilder
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -18,9 +20,7 @@ public class InternalTriggerBuilder : AnnotatableBuilder<Trigger, IConventionMod
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public InternalTriggerBuilder(Trigger trigger, IConventionModelBuilder modelBuilder)
-        : base(trigger, modelBuilder)
-    {
-    }
+        : base(trigger, modelBuilder) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -33,7 +33,8 @@ public class InternalTriggerBuilder : AnnotatableBuilder<Trigger, IConventionMod
         var detachedTrigger = Metadata;
         var newTriggerBuilder = entityTypeBuilder.HasTrigger(
             detachedTrigger.ModelName,
-            detachedTrigger.GetConfigurationSource());
+            detachedTrigger.GetConfigurationSource()
+        );
 
         newTriggerBuilder?.MergeAnnotationsFrom(detachedTrigger);
 

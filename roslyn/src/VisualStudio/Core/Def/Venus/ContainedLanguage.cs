@@ -73,7 +73,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             ProjectId projectId,
             VisualStudioProject? project,
             Guid languageServiceGuid,
-            AbstractFormattingRule? vbHelperFormattingRule = null)
+            AbstractFormattingRule? vbHelperFormattingRule = null
+        )
         {
             BufferCoordinator = bufferCoordinator;
             ComponentModel = componentModel;
@@ -82,20 +83,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
             Workspace = workspace;
 
-            _editorAdaptersFactoryService = componentModel.GetService<IVsEditorAdaptersFactoryService>();
+            _editorAdaptersFactoryService =
+                componentModel.GetService<IVsEditorAdaptersFactoryService>();
             _diagnosticAnalyzerService = componentModel.GetService<IDiagnosticAnalyzerService>();
 
             // Get the ITextBuffer for the secondary buffer
-            Marshal.ThrowExceptionForHR(bufferCoordinator.GetSecondaryBuffer(out var secondaryTextLines));
+            Marshal.ThrowExceptionForHR(
+                bufferCoordinator.GetSecondaryBuffer(out var secondaryTextLines)
+            );
             SubjectBuffer = _editorAdaptersFactoryService.GetDocumentBuffer(secondaryTextLines)!;
 
             // Get the ITextBuffer for the primary buffer
-            Marshal.ThrowExceptionForHR(bufferCoordinator.GetPrimaryBuffer(out var primaryTextLines));
+            Marshal.ThrowExceptionForHR(
+                bufferCoordinator.GetPrimaryBuffer(out var primaryTextLines)
+            );
             DataBuffer = _editorAdaptersFactoryService.GetDataBuffer(primaryTextLines)!;
 
             // Create our tagger
-            var bufferTagAggregatorFactory = ComponentModel.GetService<IBufferTagAggregatorFactoryService>();
-            _bufferTagAggregator = bufferTagAggregatorFactory.CreateTagAggregator<ITag>(SubjectBuffer);
+            var bufferTagAggregatorFactory =
+                ComponentModel.GetService<IBufferTagAggregatorFactoryService>();
+            _bufferTagAggregator = bufferTagAggregatorFactory.CreateTagAggregator<ITag>(
+                SubjectBuffer
+            );
 
             var filePath = GetFilePathFromBuffers();
             DocumentId documentId;
@@ -108,14 +117,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                     sourceCodeKind: SourceCodeKind.Regular,
                     folders: default,
                     designTimeOnly: true,
-                    documentServiceProvider: new ContainedDocument.DocumentServiceProvider(DataBuffer));
+                    documentServiceProvider: new ContainedDocument.DocumentServiceProvider(
+                        DataBuffer
+                    )
+                );
             }
             else
             {
-                documentId = DocumentId.CreateNewId(projectId, $"{nameof(ContainedDocument)}: {filePath}");
+                documentId = DocumentId.CreateNewId(
+                    projectId,
+                    $"{nameof(ContainedDocument)}: {filePath}"
+                );
 
                 // We must jam a document into an existing workspace, which we'll assume is safe to do with OnDocumentAdded
-                Workspace.OnDocumentAdded(DocumentInfo.Create(documentId, filePath, filePath: filePath));
+                Workspace.OnDocumentAdded(
+                    DocumentInfo.Create(documentId, filePath, filePath: filePath)
+                );
                 Workspace.OnDocumentOpened(documentId, SubjectBuffer.AsTextContainer());
             }
 
@@ -128,7 +145,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 Workspace,
                 Project,
                 ComponentModel,
-                vbHelperFormattingRule);
+                vbHelperFormattingRule
+            );
 
             // link subject buffer back to the ContainedDocument, so that we can find it given just the buffer:
             SubjectBuffer.Properties.AddProperty(typeof(IContainedDocument), ContainedDocument);
@@ -165,12 +183,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         {
             // we don't actually care what has changed in primary buffer. we just want to re-analyze secondary buffer
             // when primary buffer has changed to update diagnostic positions.
-            _diagnosticAnalyzerService.Reanalyze(this.Workspace, documentIds: SpecializedCollections.SingletonEnumerable(this.ContainedDocument.Id));
+            _diagnosticAnalyzerService.Reanalyze(
+                this.Workspace,
+                documentIds: SpecializedCollections.SingletonEnumerable(this.ContainedDocument.Id)
+            );
         }
 
         public string GetFilePathFromBuffers()
         {
-            var textDocumentFactoryService = ComponentModel.GetService<ITextDocumentFactoryService>();
+            var textDocumentFactoryService =
+                ComponentModel.GetService<ITextDocumentFactoryService>();
 
             // Try to get the file path from the secondary buffer
             if (!textDocumentFactoryService.TryGetTextDocument(SubjectBuffer, out var document))
@@ -181,7 +203,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
             if (document == null)
             {
-                FatalError.ReportAndPropagate(new InvalidOperationException("Failed to get an ITextDocument for a contained document"));
+                FatalError.ReportAndPropagate(
+                    new InvalidOperationException(
+                        "Failed to get an ITextDocument for a contained document"
+                    )
+                );
             }
 
             return document?.FilePath ?? string.Empty;

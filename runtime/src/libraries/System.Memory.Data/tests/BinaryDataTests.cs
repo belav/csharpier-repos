@@ -89,7 +89,9 @@ namespace System.Tests
             BinaryData data = BinaryData.FromStream(payload);
             Stream stream = data.ToStream();
             Assert.Throws<NotSupportedException>(() => stream.Write(buffer, 0, buffer.Length));
-            await Assert.ThrowsAsync<NotSupportedException>(() => stream.WriteAsync(buffer, 0, buffer.Length));
+            await Assert.ThrowsAsync<NotSupportedException>(
+                () => stream.WriteAsync(buffer, 0, buffer.Length)
+            );
             Assert.Throws<NotSupportedException>(() => stream.WriteByte(1));
             Assert.False(stream.CanWrite);
             StreamReader sr = new StreamReader(stream);
@@ -128,7 +130,7 @@ namespace System.Tests
 
             byte[] output = new byte[buffer.Length];
             var outputStream = data.ToStream();
-            outputStream.Read(output, 0, (int) outputStream.Length);
+            outputStream.Read(output, 0, (int)outputStream.Length);
             Assert.Equal(buffer, output);
 
             stream.Position = 0;
@@ -265,9 +267,15 @@ namespace System.Tests
         public async Task StartPositionOfStreamRespected(int bufferOffset, long streamStart)
         {
             var input = "some data";
-            ArraySegment<byte> buffer = new ArraySegment<byte>("some data"u8.ToArray(), bufferOffset, input.Length - bufferOffset);
+            ArraySegment<byte> buffer = new ArraySegment<byte>(
+                "some data"u8.ToArray(),
+                bufferOffset,
+                input.Length - bufferOffset
+            );
             MemoryStream stream = new MemoryStream(buffer.Array, buffer.Offset, buffer.Count);
-            var payload = new ReadOnlyMemory<byte>(buffer.Array, buffer.Offset, buffer.Count).Slice((int)streamStart);
+            var payload = new ReadOnlyMemory<byte>(buffer.Array, buffer.Offset, buffer.Count).Slice(
+                (int)streamStart
+            );
 
             stream.Position = streamStart;
             BinaryData data = BinaryData.FromStream(stream);
@@ -285,14 +293,23 @@ namespace System.Tests
         [InlineData(0, 4)]
         [InlineData(4, 1)]
         [InlineData(4, 0)]
-        public async Task StartPositionOfStreamRespectedBackingBuffer(int bufferOffset, long streamStart)
+        public async Task StartPositionOfStreamRespectedBackingBuffer(
+            int bufferOffset,
+            long streamStart
+        )
         {
             var input = "some data";
-            ArraySegment<byte> buffer = new ArraySegment<byte>("some data"u8.ToArray(), bufferOffset, input.Length - bufferOffset);
+            ArraySegment<byte> buffer = new ArraySegment<byte>(
+                "some data"u8.ToArray(),
+                bufferOffset,
+                input.Length - bufferOffset
+            );
             MemoryStream stream = new MemoryStream();
             stream.Write(buffer.Array, buffer.Offset, buffer.Count);
 
-            var payload = new ReadOnlyMemory<byte>(buffer.Array, buffer.Offset, buffer.Count).Slice((int)streamStart);
+            var payload = new ReadOnlyMemory<byte>(buffer.Array, buffer.Offset, buffer.Count).Slice(
+                (int)streamStart
+            );
 
             stream.Position = streamStart;
             BinaryData data = BinaryData.FromStream(stream);
@@ -308,29 +325,53 @@ namespace System.Tests
         [Fact]
         public void MaxStreamLengthRespected()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => BinaryData.FromStream(new OverFlowStream(offset: 0)));
-            Assert.Throws<ArgumentOutOfRangeException>(() => BinaryData.FromStream(new OverFlowStream(offset: int.MaxValue + 2L)));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => BinaryData.FromStream(new OverFlowStream(offset: 0))
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => BinaryData.FromStream(new OverFlowStream(offset: int.MaxValue + 2L))
+            );
 
             // should not throw
 
             var data = BinaryData.FromStream(new OverFlowStream(offset: int.MaxValue - 1000));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBuiltWithAggressiveTrimming))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotBuiltWithAggressiveTrimming)
+        )]
         public void CanCreateBinaryDataFromCustomType()
         {
-            TestModel payload = new TestModel { A = "value", B = 5, C = true, D = null };
-            JsonSerializerOptions options = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
+            TestModel payload = new TestModel
+            {
+                A = "value",
+                B = 5,
+                C = true,
+                D = null
+            };
+            JsonSerializerOptions options = new JsonSerializerOptions
+            {
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            };
 
             AssertData(BinaryData.FromObjectAsJson(payload));
             AssertData(BinaryData.FromObjectAsJson(payload, options));
-            AssertData(BinaryData.FromObjectAsJson(payload, TestModelJsonContext.Default.TestModel));
+            AssertData(
+                BinaryData.FromObjectAsJson(payload, TestModelJsonContext.Default.TestModel)
+            );
             AssertData(new BinaryData(payload, type: typeof(TestModel)));
             AssertData(new BinaryData(payload));
             AssertData(new BinaryData(payload, type: null));
             AssertData(new BinaryData(payload, options: null, typeof(TestModel)));
             AssertData(new BinaryData(payload, options, typeof(TestModel)));
-            AssertData(new BinaryData(payload, context: TestModelJsonContext.Default, type: typeof(TestModel)));
+            AssertData(
+                new BinaryData(
+                    payload,
+                    context: TestModelJsonContext.Default,
+                    type: typeof(TestModel)
+                )
+            );
 
             void AssertData(BinaryData data)
             {
@@ -342,7 +383,10 @@ namespace System.Tests
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBuiltWithAggressiveTrimming))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotBuiltWithAggressiveTrimming)
+        )]
         public void CanSerializeNullData()
         {
             BinaryData data = new BinaryData(jsonSerializable: null);
@@ -362,7 +406,10 @@ namespace System.Tests
             data = BinaryData.FromObjectAsJson<TestModel>(null);
             Assert.Null(data.ToObjectFromJson<TestModel>());
 
-            data = BinaryData.FromObjectAsJson<TestModel>(null, TestModelJsonContext.Default.TestModel as JsonTypeInfo<TestModel>);
+            data = BinaryData.FromObjectAsJson<TestModel>(
+                null,
+                TestModelJsonContext.Default.TestModel as JsonTypeInfo<TestModel>
+            );
             Assert.Null(data.ToObjectFromJson<TestModel>(TestModelJsonContext.Default.TestModel));
         }
 
@@ -372,9 +419,10 @@ namespace System.Tests
             var ex = Assert.Throws<ArgumentNullException>(() => BinaryData.FromStream(null));
             Assert.Contains("stream", ex.Message);
 
-            ex = await Assert.ThrowsAsync<ArgumentNullException>(() => BinaryData.FromStreamAsync(null));
+            ex = await Assert.ThrowsAsync<ArgumentNullException>(
+                () => BinaryData.FromStreamAsync(null)
+            );
             Assert.Contains("stream", ex.Message);
-
         }
 
         [Fact]
@@ -399,12 +447,23 @@ namespace System.Tests
             Assert.Contains("data", ex.Message);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBuiltWithAggressiveTrimming))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotBuiltWithAggressiveTrimming)
+        )]
         public void ToObjectHandlesBOM()
         {
-            TestModel payload = new TestModel { A = "string", B = 42, C = true };
+            TestModel payload = new TestModel
+            {
+                A = "string",
+                B = 42,
+                C = true
+            };
             using var buffer = new MemoryStream();
-            using var writer = new StreamWriter(buffer, new UTF8Encoding(encoderShouldEmitUTF8Identifier: true));
+            using var writer = new StreamWriter(
+                buffer,
+                new UTF8Encoding(encoderShouldEmitUTF8Identifier: true)
+            );
             writer.Write(JsonSerializer.Serialize(payload));
             writer.Flush();
 
@@ -415,13 +474,26 @@ namespace System.Tests
             Assert.Equal(payload.C, model.C);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBuiltWithAggressiveTrimming))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotBuiltWithAggressiveTrimming)
+        )]
         public void ToObjectThrowsExceptionOnIncompatibleType()
         {
-            TestModel payload = new TestModel { A = "value", B = 5, C = true };
+            TestModel payload = new TestModel
+            {
+                A = "value",
+                B = 5,
+                C = true
+            };
             BinaryData data = BinaryData.FromObjectAsJson(payload);
             Assert.ThrowsAny<Exception>(() => data.ToObjectFromJson<string>());
-            Assert.ThrowsAny<Exception>(() => data.ToObjectFromJson<MismatchedTestModel>(jsonTypeInfo: MismatchedTestModelJsonContext.Default.MismatchedTestModel));
+            Assert.ThrowsAny<Exception>(
+                () =>
+                    data.ToObjectFromJson<MismatchedTestModel>(
+                        jsonTypeInfo: MismatchedTestModelJsonContext.Default.MismatchedTestModel
+                    )
+            );
         }
 
         [Fact]
@@ -444,10 +516,7 @@ namespace System.Tests
             byte[] payload = "some data"u8.ToArray();
             BinaryData a = BinaryData.FromBytes(payload);
             BinaryData b = BinaryData.FromBytes(payload);
-            HashSet<BinaryData> set = new HashSet<BinaryData>
-            {
-                a
-            };
+            HashSet<BinaryData> set = new HashSet<BinaryData> { a };
             // hashcodes of a and b should not match since instances are different.
             Assert.DoesNotContain(b, set);
 
@@ -534,9 +603,7 @@ namespace System.Tests
             stream.Seek(-2, SeekOrigin.End);
             var read = new byte[buffer.Length - stream.Position];
             await stream.ReadAsync(read, 0, read.Length);
-            Assert.Equal(
-                new ReadOnlyMemory<byte>(buffer, buffer.Length - 2, 2).ToArray(),
-                read);
+            Assert.Equal(new ReadOnlyMemory<byte>(buffer, buffer.Length - 2, 2).ToArray(), read);
         }
 
         [Fact]
@@ -547,10 +614,11 @@ namespace System.Tests
 
             Assert.Throws<IOException>(() => stream.Seek(-1, SeekOrigin.Begin));
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => stream.Seek((long)int.MaxValue + 1, SeekOrigin.Begin));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => stream.Seek((long)int.MaxValue + 1, SeekOrigin.Begin)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => stream.Seek(0, (SeekOrigin)3));
         }
-
 
         [Fact]
         public async Task ValidatesReadArguments()
@@ -559,14 +627,20 @@ namespace System.Tests
             var stream = new BinaryData(buffer).ToStream();
             stream.Seek(3, SeekOrigin.Begin);
             var read = new byte[buffer.Length - stream.Position];
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => stream.ReadAsync(read, 0, buffer.Length));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => stream.ReadAsync(null, 0, buffer.Length));
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => stream.ReadAsync(read, -1, read.Length));
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => stream.ReadAsync(read, 0, -1));
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+                () => stream.ReadAsync(read, 0, buffer.Length)
+            );
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                () => stream.ReadAsync(null, 0, buffer.Length)
+            );
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+                () => stream.ReadAsync(read, -1, read.Length)
+            );
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+                () => stream.ReadAsync(read, 0, -1)
+            );
             await stream.ReadAsync(read, 0, read.Length);
-            Assert.Equal(
-                new ReadOnlyMemory<byte>(buffer, 3, buffer.Length - 3).ToArray(),
-                read);
+            Assert.Equal(new ReadOnlyMemory<byte>(buffer, 3, buffer.Length - 3).ToArray(), read);
         }
 
         [Fact]
@@ -575,7 +649,9 @@ namespace System.Tests
             byte[] buffer = "some data"u8.ToArray();
             var stream = new BinaryData(buffer).ToStream();
             Assert.Throws<ArgumentOutOfRangeException>(() => stream.Position = -1);
-            Assert.Throws<ArgumentOutOfRangeException>(() => stream.Position = (long)int.MaxValue + 1);
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => stream.Position = (long)int.MaxValue + 1
+            );
         }
 
         [Fact]
@@ -588,12 +664,13 @@ namespace System.Tests
             Assert.Throws<ObjectDisposedException>(() => stream.Position);
             Assert.Throws<ObjectDisposedException>(() => stream.Seek(0, SeekOrigin.Begin));
             Assert.Throws<ObjectDisposedException>(() => stream.Read(buffer, 0, buffer.Length));
-            Assert.ThrowsAsync<ObjectDisposedException>(() => stream.ReadAsync(buffer, 0, buffer.Length));
+            Assert.ThrowsAsync<ObjectDisposedException>(
+                () => stream.ReadAsync(buffer, 0, buffer.Length)
+            );
             Assert.Throws<ObjectDisposedException>(() => stream.ReadByte());
             Assert.Throws<ObjectDisposedException>(() => stream.Length);
             Assert.False(stream.CanRead);
             Assert.False(stream.CanSeek);
-
         }
 
         [Fact]
@@ -620,11 +697,14 @@ namespace System.Tests
             var data = new BinaryData("A test value");
             var dataBase64 = Convert.ToBase64String(data.ToArray());
             var jsonTestModel = $"{{\"A\":\"{dataBase64}\"}}";
-            TestModelWithBinaryDataProperty testModel = new TestModelWithBinaryDataProperty { A = data };
+            TestModelWithBinaryDataProperty testModel = new TestModelWithBinaryDataProperty
+            {
+                A = data
+            };
 
             var serializedTestModel = JsonSerializer.Serialize(testModel);
 
-            Assert.Equal(jsonTestModel, serializedTestModel);           
+            Assert.Equal(jsonTestModel, serializedTestModel);
         }
 
         [Fact]
@@ -634,7 +714,8 @@ namespace System.Tests
             var dataBase64 = Convert.ToBase64String(data.ToArray());
             var jsonTestModel = $"{{\"A\":\"{dataBase64}\"}}";
 
-            TestModelWithBinaryDataProperty deserializedModel = JsonSerializer.Deserialize<TestModelWithBinaryDataProperty>(jsonTestModel);
+            TestModelWithBinaryDataProperty deserializedModel =
+                JsonSerializer.Deserialize<TestModelWithBinaryDataProperty>(jsonTestModel);
 
             Assert.Equal(data.ToString(), deserializedModel.A.ToString());
         }
@@ -647,20 +728,16 @@ namespace System.Tests
             public object D { get; set; }
         }
 
-        internal class MismatchedTestModel 
+        internal class MismatchedTestModel
         {
             public int A { get; set; }
         }
 
         [JsonSerializable(typeof(TestModel))]
-        internal partial class TestModelJsonContext : JsonSerializerContext
-        {
-        }
+        internal partial class TestModelJsonContext : JsonSerializerContext { }
 
         [JsonSerializable(typeof(MismatchedTestModel))]
-        internal partial class MismatchedTestModelJsonContext: JsonSerializerContext 
-        {
-        }
+        internal partial class MismatchedTestModelJsonContext : JsonSerializerContext { }
 
         private class OverFlowStream : MemoryStream
         {
@@ -684,6 +761,7 @@ namespace System.Tests
         private class NonSeekableStream : MemoryStream
         {
             public NonSeekableStream(byte[] buffer) : base(buffer) { }
+
             public override bool CanSeek => false;
         }
 

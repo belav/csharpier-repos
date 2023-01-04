@@ -33,9 +33,15 @@ namespace System.Buffers
         internal virtual bool ContainsCore(T value) => throw new UnreachableException();
 
         internal virtual int IndexOfAny(ReadOnlySpan<T> span) => throw new UnreachableException();
-        internal virtual int IndexOfAnyExcept(ReadOnlySpan<T> span) => throw new UnreachableException();
-        internal virtual int LastIndexOfAny(ReadOnlySpan<T> span) => throw new UnreachableException();
-        internal virtual int LastIndexOfAnyExcept(ReadOnlySpan<T> span) => throw new UnreachableException();
+
+        internal virtual int IndexOfAnyExcept(ReadOnlySpan<T> span) =>
+            throw new UnreachableException();
+
+        internal virtual int LastIndexOfAny(ReadOnlySpan<T> span) =>
+            throw new UnreachableException();
+
+        internal virtual int LastIndexOfAnyExcept(ReadOnlySpan<T> span) =>
+            throw new UnreachableException();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static int IndexOfAny(ReadOnlySpan<T> span, IndexOfAnyValues<T> values)

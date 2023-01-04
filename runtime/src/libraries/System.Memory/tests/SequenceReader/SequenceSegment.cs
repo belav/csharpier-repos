@@ -55,7 +55,12 @@ namespace System.Memory.Tests.SequenceReader
             SetMemory(buffer, 0, 0);
         }
 
-        public void SetMemory(IMemoryOwner<T> ownedMemory, int start, int end, bool readOnly = false)
+        public void SetMemory(
+            IMemoryOwner<T> ownedMemory,
+            int start,
+            int end,
+            bool readOnly = false
+        )
         {
             _ownedMemory = ownedMemory;
 

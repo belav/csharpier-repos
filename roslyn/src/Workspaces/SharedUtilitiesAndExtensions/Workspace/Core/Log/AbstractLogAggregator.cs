@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
     {
         private static int s_globalId;
 
-        private readonly ConcurrentDictionary<object, T> _map = new(concurrencyLevel: 2, capacity: 2);
+        private readonly ConcurrentDictionary<object, T> _map =
+            new(concurrencyLevel: 2, capacity: 2);
         private readonly Func<object, T> _createCounter;
 
         protected AbstractLogAggregator()
@@ -31,8 +32,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
 
         protected abstract T CreateCounter();
 
-        public static int GetNextId()
-            => Interlocked.Increment(ref s_globalId);
+        public static int GetNextId() => Interlocked.Increment(ref s_globalId);
 
         public static StatisticResult GetStatistics(List<int> values)
         {
@@ -58,22 +58,26 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             var median = values[values.Count / 2];
 
             var range = max - min;
-            var mode = values.GroupBy(i => i).OrderByDescending(g => g.Count()).FirstOrDefault().Key;
+            var mode = values
+                .GroupBy(i => i)
+                .OrderByDescending(g => g.Count())
+                .FirstOrDefault()
+                .Key;
 
             return new StatisticResult(max, min, median, mean, range, mode, values.Count);
         }
 
         public bool IsEmpty => _map.IsEmpty;
 
-        public IEnumerator<KeyValuePair<object, T>> GetEnumerator()
-            => _map.GetEnumerator();
+        public IEnumerator<KeyValuePair<object, T>> GetEnumerator() => _map.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => this.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 
-        [PerformanceSensitive("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1279909", AllowCaptures = false)]
-        protected T GetCounter(object key)
-            => _map.GetOrAdd(key, _createCounter);
+        [PerformanceSensitive(
+            "https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1279909",
+            AllowCaptures = false
+        )]
+        protected T GetCounter(object key) => _map.GetOrAdd(key, _createCounter);
 
         protected bool TryGetCounter(object key, out T counter)
         {
@@ -123,7 +127,15 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         /// </summary>
         public readonly int Count;
 
-        public StatisticResult(int max, int min, int? median, int mean, int range, int? mode, int count)
+        public StatisticResult(
+            int max,
+            int min,
+            int? median,
+            int mean,
+            int range,
+            int? mode,
+            int count
+        )
         {
             this.Maximum = max;
             this.Minimum = min;

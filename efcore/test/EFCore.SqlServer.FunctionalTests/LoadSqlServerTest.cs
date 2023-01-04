@@ -5,13 +5,16 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class LoadSqlServerTest : LoadTestBase<LoadSqlServerTest.LoadSqlServerFixture>
 {
-    public LoadSqlServerTest(LoadSqlServerFixture fixture)
-        : base(fixture)
+    public LoadSqlServerTest(LoadSqlServerFixture fixture) : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
     }
 
-    public override async Task Lazy_load_collection(EntityState state, QueryTrackingBehavior queryTrackingBehavior, bool async)
+    public override async Task Lazy_load_collection(
+        EntityState state,
+        QueryTrackingBehavior queryTrackingBehavior,
+        bool async
+    )
     {
         await base.Lazy_load_collection(state, queryTrackingBehavior, async);
 
@@ -24,15 +27,21 @@ public class LoadSqlServerTest : LoadTestBase<LoadSqlServerTest.LoadSqlServerFix
 SELECT [c].[Id], [c].[ParentId]
 FROM [Child] AS [c]
 WHERE [c].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
     public override async Task Lazy_load_many_to_one_reference_to_principal(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
-        await base.Lazy_load_many_to_one_reference_to_principal(state, queryTrackingBehavior, async);
+        await base.Lazy_load_many_to_one_reference_to_principal(
+            state,
+            queryTrackingBehavior,
+            async
+        );
 
         AssertSql(
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
@@ -43,13 +52,15 @@ WHERE [c].[ParentId] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
     public override async Task Lazy_load_one_to_one_reference_to_principal(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         await base.Lazy_load_one_to_one_reference_to_principal(state, queryTrackingBehavior, async);
 
@@ -62,13 +73,15 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
     public override async Task Lazy_load_one_to_one_reference_to_dependent(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         await base.Lazy_load_one_to_one_reference_to_dependent(state, queryTrackingBehavior, async);
 
@@ -81,12 +94,14 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(1) [s].[Id], [s].[ParentId]
 FROM [Single] AS [s]
 WHERE [s].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
     public override void Lazy_load_one_to_one_PK_to_PK_reference_to_principal(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         base.Lazy_load_one_to_one_PK_to_PK_reference_to_principal(state, queryTrackingBehavior);
 
@@ -99,12 +114,14 @@ WHERE [s].[ParentId] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
     public override void Lazy_load_one_to_one_PK_to_PK_reference_to_dependent(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         base.Lazy_load_one_to_one_PK_to_PK_reference_to_dependent(state, queryTrackingBehavior);
 
@@ -117,15 +134,21 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(1) [s].[Id]
 FROM [SinglePkToPk] AS [s]
 WHERE [s].[Id] = @__p_0
-""");
+"""
+        );
     }
 
     public override async Task Lazy_load_many_to_one_reference_to_principal_null_FK(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
-        await base.Lazy_load_many_to_one_reference_to_principal_null_FK(state, queryTrackingBehavior, async);
+        await base.Lazy_load_many_to_one_reference_to_principal_null_FK(
+            state,
+            queryTrackingBehavior,
+            async
+        );
 
         AssertSql();
     }
@@ -133,14 +156,23 @@ WHERE [s].[Id] = @__p_0
     public override async Task Lazy_load_one_to_one_reference_to_principal_null_FK(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
-        await base.Lazy_load_one_to_one_reference_to_principal_null_FK(state, queryTrackingBehavior, async);
+        await base.Lazy_load_one_to_one_reference_to_principal_null_FK(
+            state,
+            queryTrackingBehavior,
+            async
+        );
 
         AssertSql();
     }
 
-    public override async Task Lazy_load_collection_not_found(EntityState state, QueryTrackingBehavior queryTrackingBehavior, bool async)
+    public override async Task Lazy_load_collection_not_found(
+        EntityState state,
+        QueryTrackingBehavior queryTrackingBehavior,
+        bool async
+    )
     {
         await base.Lazy_load_collection_not_found(state, queryTrackingBehavior, async);
 
@@ -153,15 +185,21 @@ WHERE [s].[Id] = @__p_0
 SELECT [c].[Id], [c].[ParentId]
 FROM [Child] AS [c]
 WHERE [c].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
     public override async Task Lazy_load_many_to_one_reference_to_principal_not_found(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
-        await base.Lazy_load_many_to_one_reference_to_principal_not_found(state, queryTrackingBehavior, async);
+        await base.Lazy_load_many_to_one_reference_to_principal_not_found(
+            state,
+            queryTrackingBehavior,
+            async
+        );
 
         AssertSql(
             state == EntityState.Detached
@@ -172,15 +210,21 @@ WHERE [c].[ParentId] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
     public override async Task Lazy_load_one_to_one_reference_to_principal_not_found(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
-        await base.Lazy_load_one_to_one_reference_to_principal_not_found(state, queryTrackingBehavior, async);
+        await base.Lazy_load_one_to_one_reference_to_principal_not_found(
+            state,
+            queryTrackingBehavior,
+            async
+        );
 
         AssertSql(
             state == EntityState.Detached
@@ -191,15 +235,21 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
     public override async Task Lazy_load_one_to_one_reference_to_dependent_not_found(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
-        await base.Lazy_load_one_to_one_reference_to_dependent_not_found(state, queryTrackingBehavior, async);
+        await base.Lazy_load_one_to_one_reference_to_dependent_not_found(
+            state,
+            queryTrackingBehavior,
+            async
+        );
 
         AssertSql(
             state == EntityState.Detached
@@ -210,16 +260,23 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(1) [s].[Id], [s].[ParentId]
 FROM [Single] AS [s]
 WHERE [s].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
     public override async Task Lazy_load_collection_already_loaded(
         EntityState state,
         CascadeTiming cascadeDeleteTiming,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
-        await base.Lazy_load_collection_already_loaded(state, cascadeDeleteTiming, queryTrackingBehavior, async);
+        await base.Lazy_load_collection_already_loaded(
+            state,
+            cascadeDeleteTiming,
+            queryTrackingBehavior,
+            async
+        );
 
         AssertSql();
     }
@@ -227,9 +284,14 @@ WHERE [s].[ParentId] = @__p_0
     public override async Task Lazy_load_many_to_one_reference_to_principal_already_loaded(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
-        await base.Lazy_load_many_to_one_reference_to_principal_already_loaded(state, queryTrackingBehavior, async);
+        await base.Lazy_load_many_to_one_reference_to_principal_already_loaded(
+            state,
+            queryTrackingBehavior,
+            async
+        );
 
         AssertSql();
     }
@@ -237,9 +299,14 @@ WHERE [s].[ParentId] = @__p_0
     public override async Task Lazy_load_one_to_one_reference_to_principal_already_loaded(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
-        await base.Lazy_load_one_to_one_reference_to_principal_already_loaded(state, queryTrackingBehavior, async);
+        await base.Lazy_load_one_to_one_reference_to_principal_already_loaded(
+            state,
+            queryTrackingBehavior,
+            async
+        );
 
         AssertSql();
     }
@@ -248,36 +315,54 @@ WHERE [s].[ParentId] = @__p_0
         EntityState state,
         CascadeTiming cascadeDeleteTiming,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
-        await base.Lazy_load_one_to_one_reference_to_dependent_already_loaded(state, cascadeDeleteTiming, queryTrackingBehavior, async);
+        await base.Lazy_load_one_to_one_reference_to_dependent_already_loaded(
+            state,
+            cascadeDeleteTiming,
+            queryTrackingBehavior,
+            async
+        );
 
         AssertSql();
     }
 
     public override void Lazy_load_one_to_one_PK_to_PK_reference_to_principal_already_loaded(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
-        base.Lazy_load_one_to_one_PK_to_PK_reference_to_principal_already_loaded(state, queryTrackingBehavior);
+        base.Lazy_load_one_to_one_PK_to_PK_reference_to_principal_already_loaded(
+            state,
+            queryTrackingBehavior
+        );
 
         AssertSql();
     }
 
     public override void Lazy_load_one_to_one_PK_to_PK_reference_to_dependent_already_loaded(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
-        base.Lazy_load_one_to_one_PK_to_PK_reference_to_dependent_already_loaded(state, queryTrackingBehavior);
+        base.Lazy_load_one_to_one_PK_to_PK_reference_to_dependent_already_loaded(
+            state,
+            queryTrackingBehavior
+        );
 
         AssertSql();
     }
 
     public override void Lazy_load_many_to_one_reference_to_principal_alternate_key(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
-        base.Lazy_load_many_to_one_reference_to_principal_alternate_key(state, queryTrackingBehavior);
+        base.Lazy_load_many_to_one_reference_to_principal_alternate_key(
+            state,
+            queryTrackingBehavior
+        );
 
         AssertSql(
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
@@ -288,14 +373,19 @@ WHERE [s].[ParentId] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[AlternateId] = @__p_0
-""");
+"""
+        );
     }
 
     public override void Lazy_load_one_to_one_reference_to_principal_alternate_key(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
-        base.Lazy_load_one_to_one_reference_to_principal_alternate_key(state, queryTrackingBehavior);
+        base.Lazy_load_one_to_one_reference_to_principal_alternate_key(
+            state,
+            queryTrackingBehavior
+        );
 
         AssertSql(
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
@@ -306,14 +396,19 @@ WHERE [p].[AlternateId] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[AlternateId] = @__p_0
-""");
+"""
+        );
     }
 
     public override void Lazy_load_one_to_one_reference_to_dependent_alternate_key(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
-        base.Lazy_load_one_to_one_reference_to_dependent_alternate_key(state, queryTrackingBehavior);
+        base.Lazy_load_one_to_one_reference_to_dependent_alternate_key(
+            state,
+            queryTrackingBehavior
+        );
 
         AssertSql(
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
@@ -324,28 +419,40 @@ WHERE [p].[AlternateId] = @__p_0
 SELECT TOP(1) [s].[Id], [s].[ParentId]
 FROM [SingleAk] AS [s]
 WHERE [s].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
     public override void Lazy_load_many_to_one_reference_to_principal_null_FK_alternate_key(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
-        base.Lazy_load_many_to_one_reference_to_principal_null_FK_alternate_key(state, queryTrackingBehavior);
+        base.Lazy_load_many_to_one_reference_to_principal_null_FK_alternate_key(
+            state,
+            queryTrackingBehavior
+        );
 
         AssertSql();
     }
 
     public override void Lazy_load_one_to_one_reference_to_principal_null_FK_alternate_key(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
-        base.Lazy_load_one_to_one_reference_to_principal_null_FK_alternate_key(state, queryTrackingBehavior);
+        base.Lazy_load_one_to_one_reference_to_principal_null_FK_alternate_key(
+            state,
+            queryTrackingBehavior
+        );
 
         AssertSql();
     }
 
-    public override void Lazy_load_collection_shadow_fk(EntityState state, QueryTrackingBehavior queryTrackingBehavior)
+    public override void Lazy_load_collection_shadow_fk(
+        EntityState state,
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         base.Lazy_load_collection_shadow_fk(state, queryTrackingBehavior);
 
@@ -358,12 +465,14 @@ WHERE [s].[ParentId] = @__p_0
 SELECT [c].[Id], [c].[ParentId]
 FROM [ChildShadowFk] AS [c]
 WHERE [c].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
     public override void Lazy_load_many_to_one_reference_to_principal_shadow_fk(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         base.Lazy_load_many_to_one_reference_to_principal_shadow_fk(state, queryTrackingBehavior);
 
@@ -376,12 +485,14 @@ WHERE [c].[ParentId] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
     public override void Lazy_load_one_to_one_reference_to_principal_shadow_fk(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         base.Lazy_load_one_to_one_reference_to_principal_shadow_fk(state, queryTrackingBehavior);
 
@@ -394,12 +505,14 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
     public override void Lazy_load_one_to_one_reference_to_dependent_shadow_fk(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         base.Lazy_load_one_to_one_reference_to_dependent_shadow_fk(state, queryTrackingBehavior);
 
@@ -412,28 +525,40 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(1) [s].[Id], [s].[ParentId]
 FROM [SingleShadowFk] AS [s]
 WHERE [s].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
     public override void Lazy_load_many_to_one_reference_to_principal_null_FK_shadow_fk(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
-        base.Lazy_load_many_to_one_reference_to_principal_null_FK_shadow_fk(state, queryTrackingBehavior);
+        base.Lazy_load_many_to_one_reference_to_principal_null_FK_shadow_fk(
+            state,
+            queryTrackingBehavior
+        );
 
         AssertSql();
     }
 
     public override void Lazy_load_one_to_one_reference_to_principal_null_FK_shadow_fk(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
-        base.Lazy_load_one_to_one_reference_to_principal_null_FK_shadow_fk(state, queryTrackingBehavior);
+        base.Lazy_load_one_to_one_reference_to_principal_null_FK_shadow_fk(
+            state,
+            queryTrackingBehavior
+        );
 
         AssertSql();
     }
 
-    public override void Lazy_load_collection_composite_key(EntityState state, QueryTrackingBehavior queryTrackingBehavior)
+    public override void Lazy_load_collection_composite_key(
+        EntityState state,
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         base.Lazy_load_collection_composite_key(state, queryTrackingBehavior);
 
@@ -447,14 +572,19 @@ WHERE [s].[ParentId] = @__p_0
 SELECT [c].[Id], [c].[ParentAlternateId], [c].[ParentId]
 FROM [ChildCompositeKey] AS [c]
 WHERE [c].[ParentAlternateId] = @__p_0 AND [c].[ParentId] = @__p_1
-""");
+"""
+        );
     }
 
     public override void Lazy_load_many_to_one_reference_to_principal_composite_key(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
-        base.Lazy_load_many_to_one_reference_to_principal_composite_key(state, queryTrackingBehavior);
+        base.Lazy_load_many_to_one_reference_to_principal_composite_key(
+            state,
+            queryTrackingBehavior
+        );
 
         AssertSql(
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
@@ -466,14 +596,19 @@ WHERE [c].[ParentAlternateId] = @__p_0 AND [c].[ParentId] = @__p_1
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
-""");
+"""
+        );
     }
 
     public override void Lazy_load_one_to_one_reference_to_principal_composite_key(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
-        base.Lazy_load_one_to_one_reference_to_principal_composite_key(state, queryTrackingBehavior);
+        base.Lazy_load_one_to_one_reference_to_principal_composite_key(
+            state,
+            queryTrackingBehavior
+        );
 
         AssertSql(
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
@@ -485,14 +620,19 @@ WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
-""");
+"""
+        );
     }
 
     public override void Lazy_load_one_to_one_reference_to_dependent_composite_key(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
-        base.Lazy_load_one_to_one_reference_to_dependent_composite_key(state, queryTrackingBehavior);
+        base.Lazy_load_one_to_one_reference_to_dependent_composite_key(
+            state,
+            queryTrackingBehavior
+        );
 
         AssertSql(
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
@@ -504,28 +644,41 @@ WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
 SELECT TOP(1) [s].[Id], [s].[ParentAlternateId], [s].[ParentId]
 FROM [SingleCompositeKey] AS [s]
 WHERE [s].[ParentAlternateId] = @__p_0 AND [s].[ParentId] = @__p_1
-""");
+"""
+        );
     }
 
     public override void Lazy_load_many_to_one_reference_to_principal_null_FK_composite_key(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
-        base.Lazy_load_many_to_one_reference_to_principal_null_FK_composite_key(state, queryTrackingBehavior);
+        base.Lazy_load_many_to_one_reference_to_principal_null_FK_composite_key(
+            state,
+            queryTrackingBehavior
+        );
 
         AssertSql();
     }
 
     public override void Lazy_load_one_to_one_reference_to_principal_null_FK_composite_key(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
-        base.Lazy_load_one_to_one_reference_to_principal_null_FK_composite_key(state, queryTrackingBehavior);
+        base.Lazy_load_one_to_one_reference_to_principal_null_FK_composite_key(
+            state,
+            queryTrackingBehavior
+        );
 
         AssertSql();
     }
 
-    public override async Task Load_collection(EntityState state, QueryTrackingBehavior queryTrackingBehavior, bool async)
+    public override async Task Load_collection(
+        EntityState state,
+        QueryTrackingBehavior queryTrackingBehavior,
+        bool async
+    )
     {
         await base.Load_collection(state, queryTrackingBehavior, async);
 
@@ -536,10 +689,14 @@ WHERE [s].[ParentAlternateId] = @__p_0 AND [s].[ParentId] = @__p_1
 SELECT [c].[Id], [c].[ParentId]
 FROM [Child] AS [c]
 WHERE [c].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_many_to_one_reference_to_principal(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal(state, async);
 
@@ -550,7 +707,8 @@ WHERE [c].[ParentId] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
     public override async Task Load_one_to_one_reference_to_principal(EntityState state, bool async)
@@ -564,7 +722,8 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
     public override async Task Load_one_to_one_reference_to_dependent(EntityState state, bool async)
@@ -578,10 +737,14 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(1) [s].[Id], [s].[ParentId]
 FROM [Single] AS [s]
 WHERE [s].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_PK_to_PK_reference_to_principal(EntityState state, bool async)
+    public override async Task Load_one_to_one_PK_to_PK_reference_to_principal(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_PK_to_PK_reference_to_principal(state, async);
 
@@ -592,10 +755,14 @@ WHERE [s].[ParentId] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_PK_to_PK_reference_to_dependent(EntityState state, bool async)
+    public override async Task Load_one_to_one_PK_to_PK_reference_to_dependent(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_PK_to_PK_reference_to_dependent(state, async);
 
@@ -606,7 +773,8 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(1) [s].[Id]
 FROM [SinglePkToPk] AS [s]
 WHERE [s].[Id] = @__p_0
-""");
+"""
+        );
     }
 
     public override async Task Load_collection_using_Query(EntityState state, bool async)
@@ -620,10 +788,14 @@ WHERE [s].[Id] = @__p_0
 SELECT [c].[Id], [c].[ParentId]
 FROM [Child] AS [c]
 WHERE [c].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_using_Query(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_using_Query(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal_using_Query(state, async);
 
@@ -634,10 +806,14 @@ WHERE [c].[ParentId] = @__p_0
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_using_Query(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_using_Query(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_principal_using_Query(state, async);
 
@@ -648,10 +824,14 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_dependent_using_Query(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_dependent_using_Query(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_dependent_using_Query(state, async);
 
@@ -664,10 +844,14 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(2) [s].[Id], [s].[ParentId]
 FROM [Single] AS [s]
 WHERE [s].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_PK_to_PK_reference_to_principal_using_Query(EntityState state, bool async)
+    public override async Task Load_one_to_one_PK_to_PK_reference_to_principal_using_Query(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_PK_to_PK_reference_to_principal_using_Query(state, async);
 
@@ -678,10 +862,14 @@ WHERE [s].[ParentId] = @__p_0
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_PK_to_PK_reference_to_dependent_using_Query(EntityState state, bool async)
+    public override async Task Load_one_to_one_PK_to_PK_reference_to_dependent_using_Query(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_PK_to_PK_reference_to_dependent_using_Query(state, async);
 
@@ -694,24 +882,34 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(2) [s].[Id]
 FROM [SinglePkToPk] AS [s]
 WHERE [s].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_null_FK(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_null_FK(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal_null_FK(state, async);
 
         AssertSql();
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_null_FK(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_null_FK(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_principal_null_FK(state, async);
 
         AssertSql();
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_using_Query_null_FK(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_using_Query_null_FK(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal_using_Query_null_FK(state, async);
 
@@ -720,10 +918,14 @@ WHERE [s].[Id] = @__p_0
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE 0 = 1
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_using_Query_null_FK(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_using_Query_null_FK(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_principal_using_Query_null_FK(state, async);
 
@@ -732,7 +934,8 @@ WHERE 0 = 1
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE 0 = 1
-""");
+"""
+        );
     }
 
     public override async Task Load_collection_not_found(EntityState state, bool async)
@@ -746,10 +949,14 @@ WHERE 0 = 1
 SELECT [c].[Id], [c].[ParentId]
 FROM [Child] AS [c]
 WHERE [c].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_not_found(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_not_found(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal_not_found(state, async);
 
@@ -760,10 +967,14 @@ WHERE [c].[ParentId] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_not_found(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_not_found(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_principal_not_found(state, async);
 
@@ -774,10 +985,14 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_dependent_not_found(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_dependent_not_found(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_dependent_not_found(state, async);
 
@@ -788,7 +1003,8 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(1) [s].[Id], [s].[ParentId]
 FROM [Single] AS [s]
 WHERE [s].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
     public override async Task Load_collection_using_Query_not_found(EntityState state, bool async)
@@ -802,10 +1018,14 @@ WHERE [s].[ParentId] = @__p_0
 SELECT [c].[Id], [c].[ParentId]
 FROM [Child] AS [c]
 WHERE [c].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_using_Query_not_found(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_using_Query_not_found(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal_using_Query_not_found(state, async);
 
@@ -816,10 +1036,14 @@ WHERE [c].[ParentId] = @__p_0
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_using_Query_not_found(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_using_Query_not_found(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_principal_using_Query_not_found(state, async);
 
@@ -830,10 +1054,14 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_dependent_using_Query_not_found(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_dependent_using_Query_not_found(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_dependent_using_Query_not_found(state, async);
 
@@ -844,17 +1072,25 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(2) [s].[Id], [s].[ParentId]
 FROM [Single] AS [s]
 WHERE [s].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_collection_already_loaded(EntityState state, bool async, CascadeTiming cascadeDeleteTiming)
+    public override async Task Load_collection_already_loaded(
+        EntityState state,
+        bool async,
+        CascadeTiming cascadeDeleteTiming
+    )
     {
         await base.Load_collection_already_loaded(state, async, cascadeDeleteTiming);
 
         AssertSql();
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_already_loaded(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal_already_loaded(state, async);
 
@@ -864,9 +1100,14 @@ WHERE [s].[ParentId] = @__p_0
     public override async Task Load_one_to_one_reference_to_principal_already_loaded(
         EntityState state,
         bool async,
-        CascadeTiming cascadeDeleteTiming)
+        CascadeTiming cascadeDeleteTiming
+    )
     {
-        await base.Load_one_to_one_reference_to_principal_already_loaded(state, async, cascadeDeleteTiming);
+        await base.Load_one_to_one_reference_to_principal_already_loaded(
+            state,
+            async,
+            cascadeDeleteTiming
+        );
 
         AssertSql();
     }
@@ -874,21 +1115,32 @@ WHERE [s].[ParentId] = @__p_0
     public override async Task Load_one_to_one_reference_to_dependent_already_loaded(
         EntityState state,
         bool async,
-        CascadeTiming cascadeDeleteTiming)
+        CascadeTiming cascadeDeleteTiming
+    )
     {
-        await base.Load_one_to_one_reference_to_dependent_already_loaded(state, async, cascadeDeleteTiming);
+        await base.Load_one_to_one_reference_to_dependent_already_loaded(
+            state,
+            async,
+            cascadeDeleteTiming
+        );
 
         AssertSql();
     }
 
-    public override async Task Load_one_to_one_PK_to_PK_reference_to_principal_already_loaded(EntityState state, bool async)
+    public override async Task Load_one_to_one_PK_to_PK_reference_to_principal_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_PK_to_PK_reference_to_principal_already_loaded(state, async);
 
         AssertSql();
     }
 
-    public override async Task Load_one_to_one_PK_to_PK_reference_to_dependent_already_loaded(EntityState state, bool async)
+    public override async Task Load_one_to_one_PK_to_PK_reference_to_dependent_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_PK_to_PK_reference_to_dependent_already_loaded(state, async);
 
@@ -898,7 +1150,8 @@ WHERE [s].[ParentId] = @__p_0
     public override async Task Load_collection_using_Query_already_loaded(
         EntityState state,
         bool async,
-        CascadeTiming cascadeDeleteTiming)
+        CascadeTiming cascadeDeleteTiming
+    )
     {
         await base.Load_collection_using_Query_already_loaded(state, async, cascadeDeleteTiming);
 
@@ -909,10 +1162,14 @@ WHERE [s].[ParentId] = @__p_0
 SELECT [c].[Id], [c].[ParentId]
 FROM [Child] AS [c]
 WHERE [c].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_using_Query_already_loaded(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_using_Query_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal_using_Query_already_loaded(state, async);
 
@@ -925,10 +1182,14 @@ WHERE [c].[ParentId] = @__p_0
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_using_Query_already_loaded(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_using_Query_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_principal_using_Query_already_loaded(state, async);
 
@@ -941,15 +1202,21 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
     public override async Task Load_one_to_one_reference_to_dependent_using_Query_already_loaded(
         EntityState state,
         bool async,
-        CascadeTiming cascadeDeleteTiming)
+        CascadeTiming cascadeDeleteTiming
+    )
     {
-        await base.Load_one_to_one_reference_to_dependent_using_Query_already_loaded(state, async, cascadeDeleteTiming);
+        await base.Load_one_to_one_reference_to_dependent_using_Query_already_loaded(
+            state,
+            async,
+            cascadeDeleteTiming
+        );
 
         AssertSql(
             """
@@ -958,12 +1225,19 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(2) [s].[Id], [s].[ParentId]
 FROM [Single] AS [s]
 WHERE [s].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_PK_to_PK_reference_to_principal_using_Query_already_loaded(EntityState state, bool async)
+    public override async Task Load_one_to_one_PK_to_PK_reference_to_principal_using_Query_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
-        await base.Load_one_to_one_PK_to_PK_reference_to_principal_using_Query_already_loaded(state, async);
+        await base.Load_one_to_one_PK_to_PK_reference_to_principal_using_Query_already_loaded(
+            state,
+            async
+        );
 
         AssertSql(
             """
@@ -972,12 +1246,19 @@ WHERE [s].[ParentId] = @__p_0
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_PK_to_PK_reference_to_dependent_using_Query_already_loaded(EntityState state, bool async)
+    public override async Task Load_one_to_one_PK_to_PK_reference_to_dependent_using_Query_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
-        await base.Load_one_to_one_PK_to_PK_reference_to_dependent_using_Query_already_loaded(state, async);
+        await base.Load_one_to_one_PK_to_PK_reference_to_dependent_using_Query_already_loaded(
+            state,
+            async
+        );
 
         AssertSql(
             """
@@ -986,7 +1267,8 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(2) [s].[Id]
 FROM [SinglePkToPk] AS [s]
 WHERE [s].[Id] = @__p_0
-""");
+"""
+        );
     }
 
     public override async Task Load_collection_untyped(EntityState state, bool async)
@@ -1000,10 +1282,14 @@ WHERE [s].[Id] = @__p_0
 SELECT [c].[Id], [c].[ParentId]
 FROM [Child] AS [c]
 WHERE [c].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_untyped(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_untyped(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal_untyped(state, async);
 
@@ -1014,10 +1300,14 @@ WHERE [c].[ParentId] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_untyped(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_untyped(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_principal_untyped(state, async);
 
@@ -1028,10 +1318,14 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_dependent_untyped(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_dependent_untyped(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_dependent_untyped(state, async);
 
@@ -1042,7 +1336,8 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(1) [s].[Id], [s].[ParentId]
 FROM [Single] AS [s]
 WHERE [s].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
     public override async Task Load_collection_using_Query_untyped(EntityState state, bool async)
@@ -1056,10 +1351,14 @@ WHERE [s].[ParentId] = @__p_0
 SELECT [c].[Id], [c].[ParentId]
 FROM [Child] AS [c]
 WHERE [c].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_using_Query_untyped(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_using_Query_untyped(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal_using_Query_untyped(state, async);
 
@@ -1070,10 +1369,14 @@ WHERE [c].[ParentId] = @__p_0
 SELECT [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_using_Query_untyped(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_using_Query_untyped(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_principal_using_Query_untyped(state, async);
 
@@ -1084,10 +1387,14 @@ WHERE [p].[Id] = @__p_0
 SELECT [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_dependent_using_Query_untyped(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_dependent_using_Query_untyped(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_dependent_using_Query_untyped(state, async);
 
@@ -1100,7 +1407,8 @@ WHERE [p].[Id] = @__p_0
 SELECT [s].[Id], [s].[ParentId]
 FROM [Single] AS [s]
 WHERE [s].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
     public override async Task Load_collection_not_found_untyped(EntityState state, bool async)
@@ -1114,10 +1422,14 @@ WHERE [s].[ParentId] = @__p_0
 SELECT [c].[Id], [c].[ParentId]
 FROM [Child] AS [c]
 WHERE [c].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_not_found_untyped(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal_not_found_untyped(state, async);
 
@@ -1128,10 +1440,14 @@ WHERE [c].[ParentId] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_not_found_untyped(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_principal_not_found_untyped(state, async);
 
@@ -1142,10 +1458,14 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_dependent_not_found_untyped(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_dependent_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_dependent_not_found_untyped(state, async);
 
@@ -1156,10 +1476,14 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(1) [s].[Id], [s].[ParentId]
 FROM [Single] AS [s]
 WHERE [s].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_collection_using_Query_not_found_untyped(EntityState state, bool async)
+    public override async Task Load_collection_using_Query_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_collection_using_Query_not_found_untyped(state, async);
 
@@ -1170,12 +1494,19 @@ WHERE [s].[ParentId] = @__p_0
 SELECT [c].[Id], [c].[ParentId]
 FROM [Child] AS [c]
 WHERE [c].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_using_Query_not_found_untyped(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_using_Query_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
-        await base.Load_many_to_one_reference_to_principal_using_Query_not_found_untyped(state, async);
+        await base.Load_many_to_one_reference_to_principal_using_Query_not_found_untyped(
+            state,
+            async
+        );
 
         AssertSql(
             """
@@ -1184,12 +1515,19 @@ WHERE [c].[ParentId] = @__p_0
 SELECT [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_using_Query_not_found_untyped(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_using_Query_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
-        await base.Load_one_to_one_reference_to_principal_using_Query_not_found_untyped(state, async);
+        await base.Load_one_to_one_reference_to_principal_using_Query_not_found_untyped(
+            state,
+            async
+        );
 
         AssertSql(
             """
@@ -1198,12 +1536,19 @@ WHERE [p].[Id] = @__p_0
 SELECT [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_dependent_using_Query_not_found_untyped(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_dependent_using_Query_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
-        await base.Load_one_to_one_reference_to_dependent_using_Query_not_found_untyped(state, async);
+        await base.Load_one_to_one_reference_to_dependent_using_Query_not_found_untyped(
+            state,
+            async
+        );
 
         AssertSql(
             """
@@ -1212,24 +1557,35 @@ WHERE [p].[Id] = @__p_0
 SELECT [s].[Id], [s].[ParentId]
 FROM [Single] AS [s]
 WHERE [s].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_collection_already_loaded_untyped(EntityState state, bool async, CascadeTiming cascadeDeleteTiming)
+    public override async Task Load_collection_already_loaded_untyped(
+        EntityState state,
+        bool async,
+        CascadeTiming cascadeDeleteTiming
+    )
     {
         await base.Load_collection_already_loaded_untyped(state, async, cascadeDeleteTiming);
 
         AssertSql();
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_already_loaded_untyped(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_already_loaded_untyped(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal_already_loaded_untyped(state, async);
 
         AssertSql();
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_already_loaded_untyped(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_already_loaded_untyped(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_principal_already_loaded_untyped(state, async);
 
@@ -1239,9 +1595,14 @@ WHERE [s].[ParentId] = @__p_0
     public override async Task Load_one_to_one_reference_to_dependent_already_loaded_untyped(
         EntityState state,
         bool async,
-        CascadeTiming cascadeDeleteTiming)
+        CascadeTiming cascadeDeleteTiming
+    )
     {
-        await base.Load_one_to_one_reference_to_dependent_already_loaded_untyped(state, async, cascadeDeleteTiming);
+        await base.Load_one_to_one_reference_to_dependent_already_loaded_untyped(
+            state,
+            async,
+            cascadeDeleteTiming
+        );
 
         AssertSql();
     }
@@ -1249,9 +1610,14 @@ WHERE [s].[ParentId] = @__p_0
     public override async Task Load_collection_using_Query_already_loaded_untyped(
         EntityState state,
         bool async,
-        CascadeTiming cascadeDeleteTiming)
+        CascadeTiming cascadeDeleteTiming
+    )
     {
-        await base.Load_collection_using_Query_already_loaded_untyped(state, async, cascadeDeleteTiming);
+        await base.Load_collection_using_Query_already_loaded_untyped(
+            state,
+            async,
+            cascadeDeleteTiming
+        );
 
         AssertSql(
             """
@@ -1260,12 +1626,19 @@ WHERE [s].[ParentId] = @__p_0
 SELECT [c].[Id], [c].[ParentId]
 FROM [Child] AS [c]
 WHERE [c].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_using_Query_already_loaded_untyped(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_using_Query_already_loaded_untyped(
+        EntityState state,
+        bool async
+    )
     {
-        await base.Load_many_to_one_reference_to_principal_using_Query_already_loaded_untyped(state, async);
+        await base.Load_many_to_one_reference_to_principal_using_Query_already_loaded_untyped(
+            state,
+            async
+        );
 
         AssertSql(
             state == EntityState.Deleted
@@ -1276,12 +1649,19 @@ WHERE [c].[ParentId] = @__p_0
 SELECT [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_using_Query_already_loaded_untyped(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_using_Query_already_loaded_untyped(
+        EntityState state,
+        bool async
+    )
     {
-        await base.Load_one_to_one_reference_to_principal_using_Query_already_loaded_untyped(state, async);
+        await base.Load_one_to_one_reference_to_principal_using_Query_already_loaded_untyped(
+            state,
+            async
+        );
 
         AssertSql(
             state == EntityState.Deleted
@@ -1292,15 +1672,21 @@ WHERE [p].[Id] = @__p_0
 SELECT [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
     public override async Task Load_one_to_one_reference_to_dependent_using_Query_already_loaded_untyped(
         EntityState state,
         bool async,
-        CascadeTiming cascadeDeleteTiming)
+        CascadeTiming cascadeDeleteTiming
+    )
     {
-        await base.Load_one_to_one_reference_to_dependent_using_Query_already_loaded_untyped(state, async, cascadeDeleteTiming);
+        await base.Load_one_to_one_reference_to_dependent_using_Query_already_loaded_untyped(
+            state,
+            async,
+            cascadeDeleteTiming
+        );
 
         AssertSql(
             """
@@ -1309,7 +1695,8 @@ WHERE [p].[Id] = @__p_0
 SELECT [s].[Id], [s].[ParentId]
 FROM [Single] AS [s]
 WHERE [s].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
     public override async Task Load_collection_alternate_key(EntityState state, bool async)
@@ -1323,10 +1710,14 @@ WHERE [s].[ParentId] = @__p_0
 SELECT [c].[Id], [c].[ParentId]
 FROM [ChildAk] AS [c]
 WHERE [c].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_alternate_key(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal_alternate_key(state, async);
 
@@ -1337,10 +1728,14 @@ WHERE [c].[ParentId] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[AlternateId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_alternate_key(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_principal_alternate_key(state, async);
 
@@ -1351,10 +1746,14 @@ WHERE [p].[AlternateId] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[AlternateId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_dependent_alternate_key(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_dependent_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_dependent_alternate_key(state, async);
 
@@ -1365,10 +1764,14 @@ WHERE [p].[AlternateId] = @__p_0
 SELECT TOP(1) [s].[Id], [s].[ParentId]
 FROM [SingleAk] AS [s]
 WHERE [s].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_collection_using_Query_alternate_key(EntityState state, bool async)
+    public override async Task Load_collection_using_Query_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_collection_using_Query_alternate_key(state, async);
 
@@ -1379,10 +1782,14 @@ WHERE [s].[ParentId] = @__p_0
 SELECT [c].[Id], [c].[ParentId]
 FROM [ChildAk] AS [c]
 WHERE [c].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_using_Query_alternate_key(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_using_Query_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal_using_Query_alternate_key(state, async);
 
@@ -1393,10 +1800,14 @@ WHERE [c].[ParentId] = @__p_0
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[AlternateId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_using_Query_alternate_key(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_using_Query_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_principal_using_Query_alternate_key(state, async);
 
@@ -1407,10 +1818,14 @@ WHERE [p].[AlternateId] = @__p_0
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[AlternateId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_dependent_using_Query_alternate_key(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_dependent_using_Query_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_dependent_using_Query_alternate_key(state, async);
 
@@ -1423,45 +1838,66 @@ WHERE [p].[AlternateId] = @__p_0
 SELECT TOP(2) [s].[Id], [s].[ParentId]
 FROM [SingleAk] AS [s]
 WHERE [s].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_null_FK_alternate_key(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_null_FK_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal_null_FK_alternate_key(state, async);
 
         AssertSql();
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_null_FK_alternate_key(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_null_FK_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_principal_null_FK_alternate_key(state, async);
 
         AssertSql();
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_using_Query_null_FK_alternate_key(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_using_Query_null_FK_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
-        await base.Load_many_to_one_reference_to_principal_using_Query_null_FK_alternate_key(state, async);
+        await base.Load_many_to_one_reference_to_principal_using_Query_null_FK_alternate_key(
+            state,
+            async
+        );
 
         AssertSql(
             """
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE 0 = 1
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_using_Query_null_FK_alternate_key(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_using_Query_null_FK_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
-        await base.Load_one_to_one_reference_to_principal_using_Query_null_FK_alternate_key(state, async);
+        await base.Load_one_to_one_reference_to_principal_using_Query_null_FK_alternate_key(
+            state,
+            async
+        );
 
         AssertSql(
             """
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE 0 = 1
-""");
+"""
+        );
     }
 
     public override async Task Load_collection_shadow_fk(EntityState state, bool async)
@@ -1475,10 +1911,14 @@ WHERE 0 = 1
 SELECT [c].[Id], [c].[ParentId]
 FROM [ChildShadowFk] AS [c]
 WHERE [c].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_shadow_fk(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal_shadow_fk(state, async);
 
@@ -1491,10 +1931,14 @@ WHERE [c].[ParentId] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_shadow_fk(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_principal_shadow_fk(state, async);
 
@@ -1507,10 +1951,14 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_dependent_shadow_fk(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_dependent_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_dependent_shadow_fk(state, async);
 
@@ -1521,7 +1969,8 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(1) [s].[Id], [s].[ParentId]
 FROM [SingleShadowFk] AS [s]
 WHERE [s].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
     public override async Task Load_collection_using_Query_shadow_fk(EntityState state, bool async)
@@ -1535,10 +1984,14 @@ WHERE [s].[ParentId] = @__p_0
 SELECT [c].[Id], [c].[ParentId]
 FROM [ChildShadowFk] AS [c]
 WHERE [c].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_using_Query_shadow_fk(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_using_Query_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal_using_Query_shadow_fk(state, async);
 
@@ -1551,10 +2004,14 @@ WHERE [c].[ParentId] = @__p_0
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_using_Query_shadow_fk(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_using_Query_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_principal_using_Query_shadow_fk(state, async);
 
@@ -1567,10 +2024,14 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_dependent_using_Query_shadow_fk(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_dependent_using_Query_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_dependent_using_Query_shadow_fk(state, async);
 
@@ -1583,26 +2044,39 @@ WHERE [p].[Id] = @__p_0
 SELECT TOP(2) [s].[Id], [s].[ParentId]
 FROM [SingleShadowFk] AS [s]
 WHERE [s].[ParentId] = @__p_0
-""");
+"""
+        );
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_null_FK_shadow_fk(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_null_FK_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal_null_FK_shadow_fk(state, async);
 
         AssertSql();
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_null_FK_shadow_fk(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_null_FK_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_principal_null_FK_shadow_fk(state, async);
 
         AssertSql();
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_using_Query_null_FK_shadow_fk(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_using_Query_null_FK_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
-        await base.Load_many_to_one_reference_to_principal_using_Query_null_FK_shadow_fk(state, async);
+        await base.Load_many_to_one_reference_to_principal_using_Query_null_FK_shadow_fk(
+            state,
+            async
+        );
 
         AssertSql(
             state == EntityState.Detached
@@ -1611,12 +2085,19 @@ WHERE [s].[ParentId] = @__p_0
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE 0 = 1
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_using_Query_null_FK_shadow_fk(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_using_Query_null_FK_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
-        await base.Load_one_to_one_reference_to_principal_using_Query_null_FK_shadow_fk(state, async);
+        await base.Load_one_to_one_reference_to_principal_using_Query_null_FK_shadow_fk(
+            state,
+            async
+        );
 
         AssertSql(
             state == EntityState.Detached
@@ -1625,7 +2106,8 @@ WHERE 0 = 1
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE 0 = 1
-""");
+"""
+        );
     }
 
     public override async Task Load_collection_composite_key(EntityState state, bool async)
@@ -1640,10 +2122,14 @@ WHERE 0 = 1
 SELECT [c].[Id], [c].[ParentAlternateId], [c].[ParentId]
 FROM [ChildCompositeKey] AS [c]
 WHERE [c].[ParentAlternateId] = @__p_0 AND [c].[ParentId] = @__p_1
-""");
+"""
+        );
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_composite_key(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal_composite_key(state, async);
 
@@ -1655,10 +2141,14 @@ WHERE [c].[ParentAlternateId] = @__p_0 AND [c].[ParentId] = @__p_1
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_composite_key(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_principal_composite_key(state, async);
 
@@ -1670,10 +2160,14 @@ WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
 SELECT TOP(1) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_dependent_composite_key(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_dependent_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_dependent_composite_key(state, async);
 
@@ -1685,10 +2179,14 @@ WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
 SELECT TOP(1) [s].[Id], [s].[ParentAlternateId], [s].[ParentId]
 FROM [SingleCompositeKey] AS [s]
 WHERE [s].[ParentAlternateId] = @__p_0 AND [s].[ParentId] = @__p_1
-""");
+"""
+        );
     }
 
-    public override async Task Load_collection_using_Query_composite_key(EntityState state, bool async)
+    public override async Task Load_collection_using_Query_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_collection_using_Query_composite_key(state, async);
 
@@ -1700,10 +2198,14 @@ WHERE [s].[ParentAlternateId] = @__p_0 AND [s].[ParentId] = @__p_1
 SELECT [c].[Id], [c].[ParentAlternateId], [c].[ParentId]
 FROM [ChildCompositeKey] AS [c]
 WHERE [c].[ParentAlternateId] = @__p_0 AND [c].[ParentId] = @__p_1
-""");
+"""
+        );
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_using_Query_composite_key(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_using_Query_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal_using_Query_composite_key(state, async);
 
@@ -1715,10 +2217,14 @@ WHERE [c].[ParentAlternateId] = @__p_0 AND [c].[ParentId] = @__p_1
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_using_Query_composite_key(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_using_Query_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_principal_using_Query_composite_key(state, async);
 
@@ -1730,10 +2236,14 @@ WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_dependent_using_Query_composite_key(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_dependent_using_Query_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_dependent_using_Query_composite_key(state, async);
 
@@ -1747,54 +2257,74 @@ WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
 SELECT TOP(2) [s].[Id], [s].[ParentAlternateId], [s].[ParentId]
 FROM [SingleCompositeKey] AS [s]
 WHERE [s].[ParentAlternateId] = @__p_0 AND [s].[ParentId] = @__p_1
-""");
+"""
+        );
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_null_FK_composite_key(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_null_FK_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_many_to_one_reference_to_principal_null_FK_composite_key(state, async);
 
         AssertSql();
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_null_FK_composite_key(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_null_FK_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         await base.Load_one_to_one_reference_to_principal_null_FK_composite_key(state, async);
 
         AssertSql();
     }
 
-    public override async Task Load_many_to_one_reference_to_principal_using_Query_null_FK_composite_key(EntityState state, bool async)
+    public override async Task Load_many_to_one_reference_to_principal_using_Query_null_FK_composite_key(
+        EntityState state,
+        bool async
+    )
     {
-        await base.Load_many_to_one_reference_to_principal_using_Query_null_FK_composite_key(state, async);
+        await base.Load_many_to_one_reference_to_principal_using_Query_null_FK_composite_key(
+            state,
+            async
+        );
 
         AssertSql(
             """
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE 0 = 1
-""");
+"""
+        );
     }
 
-    public override async Task Load_one_to_one_reference_to_principal_using_Query_null_FK_composite_key(EntityState state, bool async)
+    public override async Task Load_one_to_one_reference_to_principal_using_Query_null_FK_composite_key(
+        EntityState state,
+        bool async
+    )
     {
-        await base.Load_one_to_one_reference_to_principal_using_Query_null_FK_composite_key(state, async);
+        await base.Load_one_to_one_reference_to_principal_using_Query_null_FK_composite_key(
+            state,
+            async
+        );
 
         AssertSql(
             """
 SELECT TOP(2) [p].[Id], [p].[AlternateId]
 FROM [Parent] AS [p]
 WHERE 0 = 1
-""");
+"""
+        );
     }
 
-    protected override void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 
-    protected override void RecordLog()
-        => Sql = Fixture.TestSqlLoggerFactory.Sql;
+    protected override void RecordLog() => Sql = Fixture.TestSqlLoggerFactory.Sql;
 
-    private const string FileNewLine = @"
+    private const string FileNewLine =
+        @"
 ";
 
     private void AssertSql(string expected = null)
@@ -1803,37 +2333,43 @@ WHERE 0 = 1
         expected ??= "";
         try
         {
-            Assert.Equal(
-                expected, sql, ignoreLineEndingDifferences: true);
+            Assert.Equal(expected, sql, ignoreLineEndingDifferences: true);
         }
         catch
         {
             var methodCallLine = Environment.StackTrace.Split(
                 new[] { Environment.NewLine },
-                StringSplitOptions.RemoveEmptyEntries)[2][6..];
+                StringSplitOptions.RemoveEmptyEntries
+            )[2][6..];
 
             var indexMethodEnding = methodCallLine.IndexOf(')') + 1;
             var testName = methodCallLine.Substring(0, indexMethodEnding);
-            var parts = methodCallLine[indexMethodEnding..].Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            var parts = methodCallLine[indexMethodEnding..].Split(
+                " ",
+                StringSplitOptions.RemoveEmptyEntries
+            );
             var fileName = parts[1][..^5];
             var lineNumber = int.Parse(parts[2]);
 
             var currentDirectory = Directory.GetCurrentDirectory();
-            var logFile = currentDirectory.Substring(
+            var logFile =
+                currentDirectory.Substring(
                     0,
                     currentDirectory.LastIndexOf(
                         $"{Path.DirectorySeparatorChar}artifacts{Path.DirectorySeparatorChar}",
-                        StringComparison.Ordinal)
-                    + 1)
-                + "QueryBaseline.txt";
+                        StringComparison.Ordinal
+                    ) + 1
+                ) + "QueryBaseline.txt";
 
             var testInfo = testName + " : " + lineNumber + FileNewLine;
-            var newBaseLine = $@"            AssertSql(
+            var newBaseLine =
+                $@"            AssertSql(
                 {"@\"" + sql.Replace("\"", "\"\"") + "\""});
 
 ";
 
-            var contents = testInfo + newBaseLine + FileNewLine + "--------------------" + FileNewLine;
+            var contents =
+                testInfo + newBaseLine + FileNewLine + "--------------------" + FileNewLine;
 
             File.AppendAllText(logFile, contents);
 
@@ -1845,10 +2381,8 @@ WHERE 0 = 1
 
     public class LoadSqlServerFixture : LoadFixtureBase
     {
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
     }
 }

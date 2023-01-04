@@ -18,9 +18,7 @@ namespace System.CommandLine.Parsing
         }
 
         /// <param name="command">The root command for the parser.</param>
-        public Parser(Command command) : this(new CommandLineConfiguration(command))
-        {
-        }
+        public Parser(Command command) : this(new CommandLineConfiguration(command)) { }
 
         /// <summary>
         /// Gets the configuration on which the parser's grammar and behaviors are based.
@@ -33,9 +31,7 @@ namespace System.CommandLine.Parsing
         /// <param name="arguments">The string array typically passed to a program's <c>Main</c> method.</param>
         /// <param name="rawInput">The complete command line input prior to splitting and tokenization. This input is not typically available when the parser is called from <c>Program.Main</c>. It is primarily used when calculating completions via the <c>dotnet-suggest</c> tool.</param>
         /// <returns>A <see cref="ParseResult"/> providing details about the parse operation.</returns>
-        public ParseResult Parse(
-            IReadOnlyList<string>? arguments,
-            string? rawInput = null)
+        public ParseResult Parse(IReadOnlyList<string>? arguments, string? rawInput = null)
         {
             arguments ??= Array.Empty<string>();
 
@@ -43,11 +39,10 @@ namespace System.CommandLine.Parsing
                 Configuration,
                 inferRootCommand: rawInput is not null,
                 out List<Token> tokens,
-                out List<string>? tokenizationErrors);
+                out List<string>? tokenizationErrors
+            );
 
-            var operation = new ParseOperation(
-                tokens,
-                Configuration);
+            var operation = new ParseOperation(tokens, Configuration);
 
             operation.Parse();
 
@@ -56,7 +51,8 @@ namespace System.CommandLine.Parsing
                 tokens,
                 tokenizationErrors,
                 operation.UnmatchedTokens,
-                rawInput);
+                rawInput
+            );
 
             visitor.Visit(operation.RootCommandNode!);
 

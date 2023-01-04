@@ -60,9 +60,7 @@ namespace Microsoft.Win32.SafeHandles
             }
             else
             {
-                return (long)handle >= 0 ?
-                    Interop.Sys.Close(handle) == 0 :
-                    true;
+                return (long)handle >= 0 ? Interop.Sys.Close(handle) == 0 : true;
             }
         }
 
@@ -81,7 +79,10 @@ namespace Microsoft.Win32.SafeHandles
                 {
                     DangerousAddRef(ref refAdded);
 
-                    socket = SetPipeSocketInterlocked(new Socket(new SafeSocketHandle(handle, ownsHandle)), ownsHandle);
+                    socket = SetPipeSocketInterlocked(
+                        new Socket(new SafeSocketHandle(handle, ownsHandle)),
+                        ownsHandle
+                    );
 
                     // Double check if we haven't Disposed in the meanwhile, and ensure
                     // the Socket is disposed, in case Dispose() missed the _pipeSocket assignment.

@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         /// <summary>
         /// Event to get notified as new diagnostics are discovered by IDiagnosticUpdateSource
-        /// 
+        ///
         /// Notifications for this event are serialized to preserve order.
         /// However, individual event notifications may occur on any thread.
         /// </summary>
@@ -31,8 +31,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// If the caller's desired purpose doesn't match the option value, then this will return nothing, otherwise it
         /// will return the requested diagnostics.</param>
         ValueTask<ImmutableArray<DiagnosticData>> GetPushDiagnosticsAsync(
-            Workspace workspace, ProjectId? projectId, DocumentId? documentId, object? id, bool includeSuppressedDiagnostics,
-            DiagnosticMode diagnosticMode, CancellationToken cancellationToken);
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId,
+            object? id,
+            bool includeSuppressedDiagnostics,
+            DiagnosticMode diagnosticMode,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Get current buckets storing our grouped diagnostics.
@@ -42,7 +48,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// the caller's desired purpose doesn't match the option value, then this will return nothing, otherwise it
         /// will return the requested buckets.</param>
         ImmutableArray<DiagnosticBucket> GetPushDiagnosticBuckets(
-            Workspace workspace, ProjectId? projectId, DocumentId? documentId,
-            DiagnosticMode diagnosticMode, CancellationToken cancellationToken);
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId,
+            DiagnosticMode diagnosticMode,
+            CancellationToken cancellationToken
+        );
     }
 }

@@ -12,7 +12,8 @@ namespace System.CommandLine.Parsing
         public RootCommandResult(
             Command command,
             Token token,
-            Dictionary<Symbol, SymbolResult> symbolResults) : base(command, token)
+            Dictionary<Symbol, SymbolResult> symbolResults
+        ) : base(command, token)
         {
             _symbolResults = symbolResults;
         }
@@ -21,8 +22,10 @@ namespace System.CommandLine.Parsing
 
         public override ArgumentResult? FindResultFor(Argument argument)
         {
-            if (_symbolResults.TryGetValue(argument, out var result) &&
-                result is ArgumentResult argumentResult)
+            if (
+                _symbolResults.TryGetValue(argument, out var result)
+                && result is ArgumentResult argumentResult
+            )
             {
                 return argumentResult;
             }
@@ -32,8 +35,10 @@ namespace System.CommandLine.Parsing
 
         public override CommandResult? FindResultFor(Command command)
         {
-            if (_symbolResults.TryGetValue(command, out var result) &&
-                result is CommandResult commandResult)
+            if (
+                _symbolResults.TryGetValue(command, out var result)
+                && result is CommandResult commandResult
+            )
             {
                 return commandResult;
             }
@@ -43,8 +48,10 @@ namespace System.CommandLine.Parsing
 
         public override OptionResult? FindResultFor(Option option)
         {
-            if (_symbolResults.TryGetValue(option, out var result) &&
-                result is OptionResult optionResult)
+            if (
+                _symbolResults.TryGetValue(option, out var result)
+                && result is OptionResult optionResult
+            )
             {
                 return optionResult;
             }

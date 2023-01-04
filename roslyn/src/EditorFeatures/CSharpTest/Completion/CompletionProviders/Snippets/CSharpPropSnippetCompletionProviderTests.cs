@@ -13,7 +13,8 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
-    public class CSharpPropSnippetCompletionProviderTests : AbstractCSharpSnippetCompletionProviderTests
+    public class CSharpPropSnippetCompletionProviderTests
+        : AbstractCSharpSnippetCompletionProviderTests
     {
         protected override string ItemToCommit => "prop";
 
@@ -21,7 +22,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task PropSnippetMissingInNamespace()
         {
             var markupBeforeCommit =
-@"namespace Namespace
+                @"namespace Namespace
 {
     $$
 }";
@@ -33,7 +34,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task PropSnippetMissingInFilescopedNamespace()
         {
             var markupBeforeCommit =
-@"namespace Namespace;
+                @"namespace Namespace;
 
 $$";
 
@@ -44,7 +45,7 @@ $$";
         public async Task PropSnippetMissingInTopLevelContext()
         {
             var markupBeforeCommit =
-@"System.Console.WriteLine();
+                @"System.Console.WriteLine();
 $$";
 
             await VerifyItemIsAbsentAsync(markupBeforeCommit, ItemToCommit);
@@ -54,94 +55,114 @@ $$";
         public async Task InsertPropSnippetInClassTest()
         {
             var markupBeforeCommit =
-@"class MyClass
+                @"class MyClass
 {
     $$
 }";
 
             var expectedCodeAfterCommit =
-@"class MyClass
+                @"class MyClass
 {
     public int MyProperty {$$ get; set; }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InsertPropSnippetInRecordTest()
         {
             var markupBeforeCommit =
-@"record MyRecord
+                @"record MyRecord
 {
     $$
 }";
 
             var expectedCodeAfterCommit =
-@"record MyRecord
+                @"record MyRecord
 {
     public int MyProperty {$$ get; set; }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InsertPropSnippetInStructTest()
         {
             var markupBeforeCommit =
-@"struct MyStruct
+                @"struct MyStruct
 {
     $$
 }";
 
             var expectedCodeAfterCommit =
-@"struct MyStruct
+                @"struct MyStruct
 {
     public int MyProperty {$$ get; set; }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InsertPropSnippetInInterfaceTest()
         {
             var markupBeforeCommit =
-@"interface MyInterface
+                @"interface MyInterface
 {
     $$
 }";
 
             var expectedCodeAfterCommit =
-@"interface MyInterface
+                @"interface MyInterface
 {
     public int MyProperty {$$ get; set; }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InsertPropSnippetNamingTest()
         {
             var markupBeforeCommit =
-@"class MyClass
+                @"class MyClass
 {
     public int MyProperty { get; set; }
     $$
 }";
 
             var expectedCodeAfterCommit =
-@"class MyClass
+                @"class MyClass
 {
     public int MyProperty { get; set; }
     public int MyProperty1 {$$ get; set; }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NoPropSnippetInEnumTest()
         {
             var markupBeforeCommit =
-@"enum MyEnum
+                @"enum MyEnum
 {
     $$
 }";
@@ -153,7 +174,7 @@ $$";
         public async Task NoPropSnippetInMethodTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -167,7 +188,7 @@ $$";
         public async Task NoPropSnippetInConstructorTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public Program()
     {

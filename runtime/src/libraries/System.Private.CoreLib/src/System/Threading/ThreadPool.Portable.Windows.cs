@@ -26,7 +26,9 @@ namespace System.Threading
             return true;
         }
 
-        [Obsolete("ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead.")]
+        [Obsolete(
+            "ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead."
+        )]
         [SupportedOSPlatform("windows")]
         public static bool BindHandle(IntPtr osHandle)
         {
@@ -43,7 +45,9 @@ namespace System.Threading
             try
             {
                 osHandle.DangerousAddRef(ref mustReleaseSafeHandle);
-                PortableThreadPool.ThreadPoolInstance.RegisterForIOCompletionNotifications(osHandle.DangerousGetHandle());
+                PortableThreadPool.ThreadPoolInstance.RegisterForIOCompletionNotifications(
+                    osHandle.DangerousGetHandle()
+                );
                 return true;
             }
             finally

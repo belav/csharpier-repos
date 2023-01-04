@@ -26,21 +26,46 @@ namespace Microsoft.Interop
             TargetFramework targetFramework,
             Version targetFrameworkVersion,
             ImmutableArray<TypePositionInfo> argTypes,
-            Action<TypePositionInfo, MarshallingNotSupportedException> marshallingNotSupportedCallback,
-            IMarshallingGeneratorFactory generatorFactory)
+            Action<
+                TypePositionInfo,
+                MarshallingNotSupportedException
+            > marshallingNotSupportedCallback,
+            IMarshallingGeneratorFactory generatorFactory
+        )
         {
-            _context = new NativeToManagedStubCodeContext(targetFramework, targetFrameworkVersion, ReturnIdentifier, ReturnIdentifier);
-            _marshallers = BoundGenerators.Create(argTypes, generatorFactory, _context, new Forwarder(), out var bindingFailures);
+            _context = new NativeToManagedStubCodeContext(
+                targetFramework,
+                targetFrameworkVersion,
+                ReturnIdentifier,
+                ReturnIdentifier
+            );
+            _marshallers = BoundGenerators.Create(
+                argTypes,
+                generatorFactory,
+                _context,
+                new Forwarder(),
+                out var bindingFailures
+            );
 
             foreach (var failure in bindingFailures)
             {
                 marshallingNotSupportedCallback(failure.Info, failure.Exception);
             }
 
-            if (_marshallers.ManagedReturnMarshaller.Generator.UsesNativeIdentifier(_marshallers.ManagedReturnMarshaller.TypeInfo, _context))
+            if (
+                _marshallers.ManagedReturnMarshaller.Generator.UsesNativeIdentifier(
+                    _marshallers.ManagedReturnMarshaller.TypeInfo,
+                    _context
+                )
+            )
             {
                 // If we need a different native return identifier, then recreate the context with the correct identifier before we generate any code.
-                _context = new NativeToManagedStubCodeContext(targetFramework, targetFrameworkVersion, ReturnIdentifier, $"{ReturnIdentifier}{StubCodeContext.GeneratedNativeIdentifierSuffix}");
+                _context = new NativeToManagedStubCodeContext(
+                    targetFramework,
+                    targetFrameworkVersion,
+                    ReturnIdentifier,
+                    $"{ReturnIdentifier}{StubCodeContext.GeneratedNativeIdentifierSuffix}"
+                );
             }
         }
 
@@ -58,16 +83,28 @@ namespace Microsoft.Interop
             GeneratedStatements statements = GeneratedStatements.Create(
                 _marshallers,
                 _context,
-                methodToInvoke);
+                methodToInvoke
+            );
             bool shouldInitializeVariables =
                 !statements.GuaranteedUnmarshal.IsEmpty
                 || !statements.Cleanup.IsEmpty
                 || !statements.ManagedExceptionCatchClauses.IsEmpty;
-            VariableDeclarations declarations = VariableDeclarations.GenerateDeclarationsForUnmanagedToManaged(_marshallers, _context, shouldInitializeVariables);
+            VariableDeclarations declarations =
+                VariableDeclarations.GenerateDeclarationsForUnmanagedToManaged(
+                    _marshallers,
+                    _context,
+                    shouldInitializeVariables
+                );
 
             if (!statements.GuaranteedUnmarshal.IsEmpty)
             {
-                setupStatements.Add(MarshallerHelpers.Declare(PredefinedType(Token(SyntaxKind.BoolKeyword)), InvokeSucceededIdentifier, initializeToDefault: true));
+                setupStatements.Add(
+                    MarshallerHelpers.Declare(
+                        PredefinedType(Token(SyntaxKind.BoolKeyword)),
+                        InvokeSucceededIdentifier,
+                        initializeToDefault: true
+                    )
+                );
             }
 
             setupStatements.AddRange(declarations.Initializations);
@@ -81,9 +118,15 @@ namespace Microsoft.Interop
 
             if (!statements.GuaranteedUnmarshal.IsEmpty)
             {
-                tryStatements.Add(ExpressionStatement(AssignmentExpression(SyntaxKind.SimpleAssignmentExpression,
-                    IdentifierName(InvokeSucceededIdentifier),
-                    LiteralExpression(SyntaxKind.TrueLiteralExpression))));
+                tryStatements.Add(
+                    ExpressionStatement(
+                        AssignmentExpression(
+                            SyntaxKind.SimpleAssignmentExpression,
+                            IdentifierName(InvokeSucceededIdentifier),
+                            LiteralExpression(SyntaxKind.TrueLiteralExpression)
+                        )
+                    )
+                );
             }
 
             tryStatements.AddRange(statements.NotifyForSuccessfulInvoke);
@@ -94,21 +137,32 @@ namespace Microsoft.Interop
             List<StatementSyntax> finallyStatements = new();
             if (!statements.GuaranteedUnmarshal.IsEmpty)
             {
-                finallyStatements.Add(IfStatement(IdentifierName(InvokeSucceededIdentifier), Block(statements.GuaranteedUnmarshal)));
+                finallyStatements.Add(
+                    IfStatement(
+                        IdentifierName(InvokeSucceededIdentifier),
+                        Block(statements.GuaranteedUnmarshal)
+                    )
+                );
             }
 
-            SyntaxList<CatchClauseSyntax> catchClauses = List(statements.ManagedExceptionCatchClauses);
+            SyntaxList<CatchClauseSyntax> catchClauses = List(
+                statements.ManagedExceptionCatchClauses
+            );
 
             finallyStatements.AddRange(statements.Cleanup);
             if (finallyStatements.Count > 0)
             {
                 allStatements.Add(
-                    TryStatement(Block(tryStatements), catchClauses, FinallyClause(Block(finallyStatements))));
+                    TryStatement(
+                        Block(tryStatements),
+                        catchClauses,
+                        FinallyClause(Block(finallyStatements))
+                    )
+                );
             }
             else if (catchClauses.Count > 0)
             {
-                allStatements.Add(
-                    TryStatement(Block(tryStatements), catchClauses, @finally: null));
+                allStatements.Add(TryStatement(Block(tryStatements), catchClauses, @finally: null));
             }
             else
             {
@@ -117,12 +171,24 @@ namespace Microsoft.Interop
 
             // Return
             if (!_marshallers.IsUnmanagedVoidReturn)
-                allStatements.Add(ReturnStatement(IdentifierName(_context.GetIdentifiers(_marshallers.NativeReturnMarshaller.TypeInfo).native)));
+                allStatements.Add(
+                    ReturnStatement(
+                        IdentifierName(
+                            _context
+                                .GetIdentifiers(_marshallers.NativeReturnMarshaller.TypeInfo)
+                                .native
+                        )
+                    )
+                );
 
             return Block(allStatements);
         }
 
-        public (ParameterListSyntax ParameterList, TypeSyntax ReturnType, AttributeListSyntax? ReturnTypeAttributes) GenerateAbiMethodSignatureData()
+        public (
+            ParameterListSyntax ParameterList,
+            TypeSyntax ReturnType,
+            AttributeListSyntax? ReturnTypeAttributes
+        ) GenerateAbiMethodSignatureData()
         {
             return _marshallers.GenerateTargetMethodSignatureData(_context);
         }

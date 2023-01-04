@@ -9,6 +9,7 @@ namespace Test
     class AA
     {
         public static uint[] m_auForward3 = new uint[16];
+
         public static void Static1(double param1, uint param4) { }
     }
 

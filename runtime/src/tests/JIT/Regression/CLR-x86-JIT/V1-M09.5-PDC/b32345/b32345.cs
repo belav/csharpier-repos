@@ -5,6 +5,7 @@
 namespace Test
 {
     using System;
+
     public class BB
     {
         public static uint m_uStatic3 = 205u;
@@ -25,13 +26,17 @@ namespace Test
                 }
             }
         }
+
         public static int Main()
         {
             try
             {
                 Static1();
             }
-            catch (Exception) { return 100; }
+            catch (Exception)
+            {
+                return 100;
+            }
             return 1;
         }
     }

@@ -23,6 +23,7 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
         {
             public byte* pBuf;
             public IntPtr cbBuf; // SIZE_T, so different size on x86/x64
+
             [MarshalAs(UnmanagedType.Bool)]
             public bool editable;
 
@@ -53,10 +54,11 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
         [return: MarshalAs(UnmanagedType.Bool)]
         [DllImport("msdelta.dll", SetLastError = true)]
         private static extern bool ApplyDeltaB(
-                DeltaApplyFlag applyFlags,
-                DeltaInput source,
-                DeltaInput delta,
-                out DeltaOutput target);
+            DeltaApplyFlag applyFlags,
+            DeltaInput source,
+            DeltaInput delta,
+            out DeltaOutput target
+        );
 
         [return: MarshalAs(UnmanagedType.Bool)]
         [DllImport("msdelta.dll", SetLastError = true)]
@@ -69,10 +71,7 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             {
                 var ds = new DeltaInput(pSourceBuf, sourceBytes.Length, true);
                 var dp = new DeltaInput(pPatchBuf, patchBytes.Length, true);
-                if (!ApplyDeltaB(DeltaApplyFlag.None,
-                                  ds,
-                                  dp,
-                                  out var output))
+                if (!ApplyDeltaB(DeltaApplyFlag.None, ds, dp, out var output))
                 {
                     throw new Win32Exception();
                 }

@@ -31,16 +31,30 @@ namespace System.Net.Security.Tests
             _output = output;
         }
 
-        private async Task DoHandshakeWithOptions(SslStream clientSslStream, SslStream serverSslStream, SslClientAuthenticationOptions clientOptions, SslServerAuthenticationOptions serverOptions)
+        private async Task DoHandshakeWithOptions(
+            SslStream clientSslStream,
+            SslStream serverSslStream,
+            SslClientAuthenticationOptions clientOptions,
+            SslServerAuthenticationOptions serverOptions
+        )
         {
             using (X509Certificate2 certificate = Configuration.Certificates.GetServerCertificate())
             {
                 clientOptions.RemoteCertificateValidationCallback = AllowAnyServerCertificate;
                 clientOptions.TargetHost = certificate.GetNameInfo(X509NameType.SimpleName, false);
-                serverOptions.ServerCertificateContext = SslStreamCertificateContext.Create(certificate, null);
+                serverOptions.ServerCertificateContext = SslStreamCertificateContext.Create(
+                    certificate,
+                    null
+                );
 
-                Task t1 = clientSslStream.AuthenticateAsClientAsync(TestAuthenticateAsync, clientOptions);
-                Task t2 = serverSslStream.AuthenticateAsServerAsync(TestAuthenticateAsync, serverOptions);
+                Task t1 = clientSslStream.AuthenticateAsClientAsync(
+                    TestAuthenticateAsync,
+                    clientOptions
+                );
+                Task t2 = serverSslStream.AuthenticateAsServerAsync(
+                    TestAuthenticateAsync,
+                    serverOptions
+                );
 
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(t1, t2);
             }
@@ -50,7 +64,8 @@ namespace System.Net.Security.Tests
             object sender,
             X509Certificate certificate,
             X509Chain chain,
-            SslPolicyErrors sslPolicyErrors)
+            SslPolicyErrors sslPolicyErrors
+        )
         {
             SslPolicyErrors expectedSslPolicyErrors = SslPolicyErrors.None;
 
@@ -74,13 +89,33 @@ namespace System.Net.Security.Tests
         [Fact]
         public async Task SslStream_StreamToStream_DuplicateOptions_Throws()
         {
-            RemoteCertificateValidationCallback rCallback = (sender, certificate, chain, errors) => { return true; };
-            LocalCertificateSelectionCallback lCallback = (sender, host, localCertificates, remoteCertificate, issuers) => { return null; };
+            RemoteCertificateValidationCallback rCallback = (sender, certificate, chain, errors) =>
+            {
+                return true;
+            };
+            LocalCertificateSelectionCallback lCallback = (
+                sender,
+                host,
+                localCertificates,
+                remoteCertificate,
+                issuers
+            ) =>
+            {
+                return null;
+            };
 
             (Stream clientStream, Stream serverStream) = TestHelper.GetConnectedStreams();
             using (clientStream)
             using (serverStream)
-            using (var client = new SslStream(clientStream, false, rCallback, lCallback, EncryptionPolicy.RequireEncryption))
+            using (
+                var client = new SslStream(
+                    clientStream,
+                    false,
+                    rCallback,
+                    lCallback,
+                    EncryptionPolicy.RequireEncryption
+                )
+            )
             using (var server = new SslStream(serverStream, false, rCallback))
             using (X509Certificate2 certificate = Configuration.Certificates.GetServerCertificate())
             {
@@ -92,8 +127,12 @@ namespace System.Net.Security.Tests
                 serverOptions.ServerCertificate = certificate;
                 serverOptions.RemoteCertificateValidationCallback = AllowAnyServerCertificate;
 
-                Task t1 = Assert.ThrowsAsync<InvalidOperationException>(() => client.AuthenticateAsClientAsync(TestAuthenticateAsync, clientOptions));
-                Task t2 = Assert.ThrowsAsync<InvalidOperationException>(() => server.AuthenticateAsServerAsync(TestAuthenticateAsync, serverOptions));
+                Task t1 = Assert.ThrowsAsync<InvalidOperationException>(
+                    () => client.AuthenticateAsClientAsync(TestAuthenticateAsync, clientOptions)
+                );
+                Task t2 = Assert.ThrowsAsync<InvalidOperationException>(
+                    () => server.AuthenticateAsServerAsync(TestAuthenticateAsync, serverOptions)
+                );
 
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(t1, t2);
             }
@@ -101,7 +140,11 @@ namespace System.Net.Security.Tests
 
         [Theory]
         [MemberData(nameof(Alpn_TestData))]
-        public async Task SslStream_StreamToStream_Alpn_Success(List<SslApplicationProtocol> clientProtocols, List<SslApplicationProtocol> serverProtocols, SslApplicationProtocol expected)
+        public async Task SslStream_StreamToStream_Alpn_Success(
+            List<SslApplicationProtocol> clientProtocols,
+            List<SslApplicationProtocol> serverProtocols,
+            SslApplicationProtocol expected
+        )
         {
             (Stream clientStream, Stream serverStream) = TestHelper.GetConnectedStreams();
             using (clientStream)
@@ -138,12 +181,18 @@ namespace System.Net.Security.Tests
             {
                 SslServerAuthenticationOptions serverOptions = new SslServerAuthenticationOptions
                 {
-                    ApplicationProtocols = new List<SslApplicationProtocol> { SslApplicationProtocol.Http2 },
+                    ApplicationProtocols = new List<SslApplicationProtocol>
+                    {
+                        SslApplicationProtocol.Http2
+                    },
                     ServerCertificate = certificate,
                 };
                 SslClientAuthenticationOptions clientOptions = new SslClientAuthenticationOptions
                 {
-                    ApplicationProtocols = new List<SslApplicationProtocol> { SslApplicationProtocol.Http11 },
+                    ApplicationProtocols = new List<SslApplicationProtocol>
+                    {
+                        SslApplicationProtocol.Http11
+                    },
                     RemoteCertificateValidationCallback = AllowAnyServerCertificate,
                     TargetHost = certificate.GetNameInfo(X509NameType.SimpleName, false),
                 };
@@ -151,21 +200,44 @@ namespace System.Net.Security.Tests
                 // Test ALPN failure only on platforms that supports ALPN.
                 if (BackendSupportsAlpn)
                 {
-                    Task t1 = Assert.ThrowsAsync<AuthenticationException>(() => clientStream.AuthenticateAsClientAsync(TestAuthenticateAsync, clientOptions));
-                    await Assert.ThrowsAsync<AuthenticationException>(() => serverStream.AuthenticateAsServerAsync(TestAuthenticateAsync, serverOptions).WaitAsync(TestConfiguration.PassingTestTimeout));
+                    Task t1 = Assert.ThrowsAsync<AuthenticationException>(
+                        () =>
+                            clientStream.AuthenticateAsClientAsync(
+                                TestAuthenticateAsync,
+                                clientOptions
+                            )
+                    );
+                    await Assert.ThrowsAsync<AuthenticationException>(
+                        () =>
+                            serverStream
+                                .AuthenticateAsServerAsync(TestAuthenticateAsync, serverOptions)
+                                .WaitAsync(TestConfiguration.PassingTestTimeout)
+                    );
                     serverStream.Dispose();
 
                     await t1.WaitAsync(TestConfiguration.PassingTestTimeout);
                 }
                 else
                 {
-                    Task t1 = clientStream.AuthenticateAsClientAsync(TestAuthenticateAsync, clientOptions);
-                    Task t2 = serverStream.AuthenticateAsServerAsync(TestAuthenticateAsync, serverOptions);
+                    Task t1 = clientStream.AuthenticateAsClientAsync(
+                        TestAuthenticateAsync,
+                        clientOptions
+                    );
+                    Task t2 = serverStream.AuthenticateAsServerAsync(
+                        TestAuthenticateAsync,
+                        serverOptions
+                    );
 
                     await TestConfiguration.WhenAllOrAnyFailedWithTimeout(t1, t2);
 
-                    Assert.Equal(default(SslApplicationProtocol), clientStream.NegotiatedApplicationProtocol);
-                    Assert.Equal(default(SslApplicationProtocol), serverStream.NegotiatedApplicationProtocol);
+                    Assert.Equal(
+                        default(SslApplicationProtocol),
+                        clientStream.NegotiatedApplicationProtocol
+                    );
+                    Assert.Equal(
+                        default(SslApplicationProtocol),
+                        serverStream.NegotiatedApplicationProtocol
+                    );
                 }
             }
         }
@@ -180,15 +252,28 @@ namespace System.Net.Security.Tests
                 try
                 {
                     await client.ConnectAsync(server.Host, server.Port);
-                    using (SslStream clientStream = new SslStream(client.GetStream(), leaveInnerStreamOpen: false))
+                    using (
+                        SslStream clientStream = new SslStream(
+                            client.GetStream(),
+                            leaveInnerStreamOpen: false
+                        )
+                    )
                     {
-                        SslClientAuthenticationOptions clientOptions = new SslClientAuthenticationOptions
-                        {
-                            ApplicationProtocols = new List<SslApplicationProtocol> { SslApplicationProtocol.Http2 , SslApplicationProtocol.Http11 },
-                            TargetHost = server.Host
-                        };
+                        SslClientAuthenticationOptions clientOptions =
+                            new SslClientAuthenticationOptions
+                            {
+                                ApplicationProtocols = new List<SslApplicationProtocol>
+                                {
+                                    SslApplicationProtocol.Http2,
+                                    SslApplicationProtocol.Http11
+                                },
+                                TargetHost = server.Host
+                            };
 
-                        await clientStream.AuthenticateAsClientAsync(TestAuthenticateAsync, clientOptions);
+                        await clientStream.AuthenticateAsClientAsync(
+                            TestAuthenticateAsync,
+                            clientOptions
+                        );
                         Assert.Equal("h2", clientStream.NegotiatedApplicationProtocol.ToString());
                     }
                 }
@@ -202,15 +287,88 @@ namespace System.Net.Security.Tests
 
         public static IEnumerable<object[]> Alpn_TestData()
         {
-            yield return new object[] { new List<SslApplicationProtocol> { SslApplicationProtocol.Http11, SslApplicationProtocol.Http2 }, new List<SslApplicationProtocol> { SslApplicationProtocol.Http2 }, BackendSupportsAlpn ? SslApplicationProtocol.Http2 : default };
-            yield return new object[] { new List<SslApplicationProtocol> { SslApplicationProtocol.Http11 }, new List<SslApplicationProtocol> { SslApplicationProtocol.Http11, SslApplicationProtocol.Http2 }, BackendSupportsAlpn ? SslApplicationProtocol.Http11 : default };
-            yield return new object[] { new List<SslApplicationProtocol> { SslApplicationProtocol.Http11, SslApplicationProtocol.Http2 }, new List<SslApplicationProtocol> { SslApplicationProtocol.Http11, SslApplicationProtocol.Http2 }, BackendSupportsAlpn ? SslApplicationProtocol.Http11 : default };
-            yield return new object[] { null, new List<SslApplicationProtocol> { SslApplicationProtocol.Http11, SslApplicationProtocol.Http2 }, default(SslApplicationProtocol) };
-            yield return new object[] { new List<SslApplicationProtocol> { SslApplicationProtocol.Http11, SslApplicationProtocol.Http2 }, new List<SslApplicationProtocol>(), default(SslApplicationProtocol) };
-            yield return new object[] { new List<SslApplicationProtocol> { SslApplicationProtocol.Http11, SslApplicationProtocol.Http2 }, null, default(SslApplicationProtocol) };
-            yield return new object[] { new List<SslApplicationProtocol>(), new List<SslApplicationProtocol>(), default(SslApplicationProtocol) };
-            yield return new object[] { null, new List<SslApplicationProtocol>(), default(SslApplicationProtocol) };
-            yield return new object[] { new List<SslApplicationProtocol>(), null, default(SslApplicationProtocol) };
+            yield return new object[]
+            {
+                new List<SslApplicationProtocol>
+                {
+                    SslApplicationProtocol.Http11,
+                    SslApplicationProtocol.Http2
+                },
+                new List<SslApplicationProtocol> { SslApplicationProtocol.Http2 },
+                BackendSupportsAlpn ? SslApplicationProtocol.Http2 : default
+            };
+            yield return new object[]
+            {
+                new List<SslApplicationProtocol> { SslApplicationProtocol.Http11 },
+                new List<SslApplicationProtocol>
+                {
+                    SslApplicationProtocol.Http11,
+                    SslApplicationProtocol.Http2
+                },
+                BackendSupportsAlpn ? SslApplicationProtocol.Http11 : default
+            };
+            yield return new object[]
+            {
+                new List<SslApplicationProtocol>
+                {
+                    SslApplicationProtocol.Http11,
+                    SslApplicationProtocol.Http2
+                },
+                new List<SslApplicationProtocol>
+                {
+                    SslApplicationProtocol.Http11,
+                    SslApplicationProtocol.Http2
+                },
+                BackendSupportsAlpn ? SslApplicationProtocol.Http11 : default
+            };
+            yield return new object[]
+            {
+                null,
+                new List<SslApplicationProtocol>
+                {
+                    SslApplicationProtocol.Http11,
+                    SslApplicationProtocol.Http2
+                },
+                default(SslApplicationProtocol)
+            };
+            yield return new object[]
+            {
+                new List<SslApplicationProtocol>
+                {
+                    SslApplicationProtocol.Http11,
+                    SslApplicationProtocol.Http2
+                },
+                new List<SslApplicationProtocol>(),
+                default(SslApplicationProtocol)
+            };
+            yield return new object[]
+            {
+                new List<SslApplicationProtocol>
+                {
+                    SslApplicationProtocol.Http11,
+                    SslApplicationProtocol.Http2
+                },
+                null,
+                default(SslApplicationProtocol)
+            };
+            yield return new object[]
+            {
+                new List<SslApplicationProtocol>(),
+                new List<SslApplicationProtocol>(),
+                default(SslApplicationProtocol)
+            };
+            yield return new object[]
+            {
+                null,
+                new List<SslApplicationProtocol>(),
+                default(SslApplicationProtocol)
+            };
+            yield return new object[]
+            {
+                new List<SslApplicationProtocol>(),
+                null,
+                default(SslApplicationProtocol)
+            };
             yield return new object[] { null, null, default(SslApplicationProtocol) };
         }
     }
@@ -219,15 +377,13 @@ namespace System.Net.Security.Tests
     {
         public override bool TestAuthenticateAsync => true;
 
-        public SslStreamAlpnTest_Async(ITestOutputHelper output)
-            : base (output) { }
+        public SslStreamAlpnTest_Async(ITestOutputHelper output) : base(output) { }
     }
 
     public sealed class SslStreamAlpnTest_Sync : SslStreamAlpnTestBase
     {
         public override bool TestAuthenticateAsync => false;
 
-        public SslStreamAlpnTest_Sync(ITestOutputHelper output)
-            : base(output) { }
+        public SslStreamAlpnTest_Sync(ITestOutputHelper output) : base(output) { }
     }
 }

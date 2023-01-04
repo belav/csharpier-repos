@@ -5,14 +5,11 @@ namespace GcInfoTransitions
 {
     class GcInfoTransitions
     {
-        static void abc(string a)
-        {
-
-        }
+        static void abc(string a) { }
 
         static void Main(string[] args)
         {
-            abc(new string('1',1));
+            abc(new string('1', 1));
             abc(new string('2', 1));
             abc(new string('3', 1));
             abc(new string('4', 1));

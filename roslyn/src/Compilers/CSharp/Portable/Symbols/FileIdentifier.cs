@@ -11,14 +11,16 @@ namespace Microsoft.CodeAnalysis.CSharp;
 
 internal struct FileIdentifier
 {
-    private static readonly Encoding s_encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+    private static readonly Encoding s_encoding = new UTF8Encoding(
+        encoderShouldEmitUTF8Identifier: false,
+        throwOnInvalidBytes: true
+    );
 
     public string? EncoderFallbackErrorMessage { get; init; }
     public ImmutableArray<byte> FilePathChecksumOpt { get; init; }
     public string DisplayFilePath { get; init; }
 
-    public static FileIdentifier Create(SyntaxTree tree)
-        => Create(tree.FilePath);
+    public static FileIdentifier Create(SyntaxTree tree) => Create(tree.FilePath);
 
     public static FileIdentifier Create(string filePath)
     {
@@ -36,6 +38,11 @@ internal struct FileIdentifier
         }
 
         var displayFilePath = GeneratedNames.GetDisplayFilePath(filePath);
-        return new FileIdentifier { EncoderFallbackErrorMessage = encoderFallbackErrorMessage, FilePathChecksumOpt = hash, DisplayFilePath = displayFilePath };
+        return new FileIdentifier
+        {
+            EncoderFallbackErrorMessage = encoderFallbackErrorMessage,
+            FilePathChecksumOpt = hash,
+            DisplayFilePath = displayFilePath
+        };
     }
 }

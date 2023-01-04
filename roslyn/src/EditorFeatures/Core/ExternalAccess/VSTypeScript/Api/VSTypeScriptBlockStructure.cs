@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
     {
         public ImmutableArray<VSTypeScriptBlockSpan> Spans { get; }
 
-        public VSTypeScriptBlockStructure(ImmutableArray<VSTypeScriptBlockSpan> spans)
-            => Spans = spans;
+        public VSTypeScriptBlockStructure(ImmutableArray<VSTypeScriptBlockSpan> spans) =>
+            Spans = spans;
     }
 }

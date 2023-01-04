@@ -49,7 +49,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               'name': 'James Newton-King',
               'blog': 'http://james.newtonking.com'
             }";

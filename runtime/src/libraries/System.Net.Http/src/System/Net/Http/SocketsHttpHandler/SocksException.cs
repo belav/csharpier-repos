@@ -9,6 +9,7 @@ namespace System.Net.Http
     {
         public SocksException(string message) : base(message) { }
 
-        public SocksException(string message, Exception innerException) : base(message, innerException) { }
+        public SocksException(string message, Exception innerException)
+            : base(message, innerException) { }
     }
 }

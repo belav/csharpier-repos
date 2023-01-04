@@ -34,10 +34,7 @@ namespace System.IO.Hashing
         /// <summary>
         ///   Initializes a new instance of the <see cref="Crc32"/> class.
         /// </summary>
-        public Crc32()
-            : base(Size)
-        {
-        }
+        public Crc32() : base(Size) { }
 
         /// <summary>
         ///   Appends the contents of <paramref name="source"/> to the data already
@@ -126,7 +123,11 @@ namespace System.IO.Hashing
         ///   <see langword="true"/> if <paramref name="destination"/> is long enough to receive
         ///   the computed hash value (4 bytes); otherwise, <see langword="false"/>.
         /// </returns>
-        public static bool TryHash(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
+        public static bool TryHash(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length < Size)
             {
@@ -164,8 +165,7 @@ namespace System.IO.Hashing
         /// <param name="source">The data to hash.</param>
         /// <returns>The computed CRC-32 hash.</returns>
         [CLSCompliant(false)]
-        public static uint HashToUInt32(ReadOnlySpan<byte> source) =>
-            ~Update(InitialState, source);
+        public static uint HashToUInt32(ReadOnlySpan<byte> source) => ~Update(InitialState, source);
 
         private static uint Update(uint crc, ReadOnlySpan<byte> source)
         {

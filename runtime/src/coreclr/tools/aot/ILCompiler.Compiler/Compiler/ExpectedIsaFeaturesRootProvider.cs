@@ -18,13 +18,20 @@ namespace ILCompiler
 
         void ICompilationRootProvider.AddCompilationRoots(IRootingServiceProvider rootProvider)
         {
-            if (_isaSupport.Architecture == TargetArchitecture.X64
+            if (
+                _isaSupport.Architecture == TargetArchitecture.X64
                 || _isaSupport.Architecture == TargetArchitecture.X86
-                || _isaSupport.Architecture == TargetArchitecture.ARM64)
+                || _isaSupport.Architecture == TargetArchitecture.ARM64
+            )
             {
                 int isaFlags = HardwareIntrinsicHelpers.GetRuntimeRequiredIsaFlags(_isaSupport);
                 byte[] bytes = BitConverter.GetBytes(isaFlags);
-                rootProvider.RootReadOnlyDataBlob(bytes, 4, "ISA support flags", "g_requiredCpuFeatures");
+                rootProvider.RootReadOnlyDataBlob(
+                    bytes,
+                    4,
+                    "ISA support flags",
+                    "g_requiredCpuFeatures"
+                );
             }
         }
     }

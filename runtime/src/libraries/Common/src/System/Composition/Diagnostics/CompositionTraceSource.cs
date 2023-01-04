@@ -22,21 +22,33 @@ namespace System.Composition.Diagnostics
             get { return s_source.CanWriteError; }
         }
 
-        public static void WriteInformation(CompositionTraceId traceId, string format, params object[] arguments)
+        public static void WriteInformation(
+            CompositionTraceId traceId,
+            string format,
+            params object[] arguments
+        )
         {
             EnsureEnabled(CanWriteInformation);
 
             s_source.WriteInformation(traceId, format, arguments);
         }
 
-        public static void WriteWarning(CompositionTraceId traceId, string format, params object[] arguments)
+        public static void WriteWarning(
+            CompositionTraceId traceId,
+            string format,
+            params object[] arguments
+        )
         {
             EnsureEnabled(CanWriteWarning);
 
             s_source.WriteWarning(traceId, format, arguments);
         }
 
-        public static void WriteError(CompositionTraceId traceId, string format, params object[] arguments)
+        public static void WriteError(
+            CompositionTraceId traceId,
+            string format,
+            params object[] arguments
+        )
         {
             EnsureEnabled(CanWriteError);
 
@@ -47,7 +59,12 @@ namespace System.Composition.Diagnostics
         {
             if (!condition)
             {
-                throw new Exception(SR.Format(SR.Diagnostic_InternalExceptionMessage, SR.Diagnostic_TraceUnnecessaryWork));
+                throw new Exception(
+                    SR.Format(
+                        SR.Diagnostic_InternalExceptionMessage,
+                        SR.Diagnostic_TraceUnnecessaryWork
+                    )
+                );
             }
         }
     }

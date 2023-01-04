@@ -28,9 +28,14 @@ public class OpenApiAddURLTests : OpenApiTestBase
         using (var reader = new StreamReader(csprojStream))
         {
             var content = await reader.ReadToEndAsync();
-            Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
             Assert.Contains(
-$@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}"" />", content);
+                "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+                content
+            );
+            Assert.Contains(
+                $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}"" />",
+                content
+            );
         }
 
         var jsonFile = Path.Combine(_tempDir.Root, expectedJsonName);
@@ -61,9 +66,14 @@ $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}
         using (var reader = new StreamReader(csprojStream))
         {
             var content = await reader.ReadToEndAsync();
-            Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
             Assert.Contains(
-$@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{url}"" />", content);
+                "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+                content
+            );
+            Assert.Contains(
+                $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{url}"" />",
+                content
+            );
         }
 
         var jsonFile = Path.Combine(_tempDir.Root, expectedJsonName);
@@ -94,9 +104,14 @@ $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{url}"" />", con
         using (var reader = new StreamReader(csprojStream))
         {
             var content = await reader.ReadToEndAsync();
-            Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
             Assert.Contains(
-$@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{url}"" />", content);
+                "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+                content
+            );
+            Assert.Contains(
+                $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{url}"" />",
+                content
+            );
         }
 
         var jsonFile = Path.Combine(_tempDir.Root, expectedJsonName);
@@ -127,9 +142,14 @@ $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{url}"" />", con
         using (var reader = new StreamReader(csprojStream))
         {
             var content = await reader.ReadToEndAsync();
-            Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
             Assert.Contains(
-$@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{url}"" />", content);
+                "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+                content
+            );
+            Assert.Contains(
+                $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{url}"" />",
+                content
+            );
         }
 
         var jsonFile = Path.Combine(_tempDir.Root, expectedJsonName);
@@ -159,9 +179,14 @@ $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{url}"" />", con
         using (var reader = new StreamReader(csprojStream))
         {
             var content = await reader.ReadToEndAsync();
-            Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
             Assert.Contains(
-$@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}"" />", content);
+                "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+                content
+            );
+            Assert.Contains(
+                $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}"" />",
+                content
+            );
         }
 
         var jsonFile = Path.Combine(_tempDir.Root, expectedJsonName);
@@ -191,9 +216,14 @@ $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}
         using (var reader = new StreamReader(csprojStream))
         {
             var content = await reader.ReadToEndAsync();
-            Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
             Assert.Contains(
-$@"<OpenApiReference Include=""{firstExpectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}"" />", content);
+                "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+                content
+            );
+            Assert.Contains(
+                $@"<OpenApiReference Include=""{firstExpectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}"" />",
+                content
+            );
         }
 
         var firstJsonFile = Path.Combine(_tempDir.Root, firstExpectedJsonName);
@@ -217,11 +247,18 @@ $@"<OpenApiReference Include=""{firstExpectedJsonName}"" SourceUrl=""{FakeOpenAp
         using (var reader = new StreamReader(csprojStream))
         {
             var content = await reader.ReadToEndAsync();
-            Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
             Assert.Contains(
-$@"<OpenApiReference Include=""{firstExpectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}"" />", content);
+                "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+                content
+            );
             Assert.Contains(
-$@"<OpenApiReference Include=""{secondExpectedJsonName}"" SourceUrl=""{NoExtensionUrl}"" />", content);
+                $@"<OpenApiReference Include=""{firstExpectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}"" />",
+                content
+            );
+            Assert.Contains(
+                $@"<OpenApiReference Include=""{secondExpectedJsonName}"" SourceUrl=""{NoExtensionUrl}"" />",
+                content
+            );
         }
 
         var secondJsonFile = Path.Combine(_tempDir.Root, secondExpectedJsonName);
@@ -240,7 +277,9 @@ $@"<OpenApiReference Include=""{secondExpectedJsonName}"" SourceUrl=""{NoExtensi
         var project = CreateBasicProject(withOpenApi: false);
 
         var app = GetApplication();
-        var run = app.Execute(new[] { "add", "url", FakeOpenApiUrl, "--code-generator", "NSwagCSharp" });
+        var run = app.Execute(
+            new[] { "add", "url", FakeOpenApiUrl, "--code-generator", "NSwagCSharp" }
+        );
 
         AssertNoErrors(run);
 
@@ -251,9 +290,14 @@ $@"<OpenApiReference Include=""{secondExpectedJsonName}"" SourceUrl=""{NoExtensi
         using (var reader = new StreamReader(csprojStream))
         {
             var content = await reader.ReadToEndAsync();
-            Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
             Assert.Contains(
-$@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}"" CodeGenerator=""NSwagCSharp"" />", content);
+                "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+                content
+            );
+            Assert.Contains(
+                $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}"" CodeGenerator=""NSwagCSharp"" />",
+                content
+            );
         }
 
         var resultFile = Path.Combine(_tempDir.Root, expectedJsonName);
@@ -272,7 +316,9 @@ $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}
         var project = CreateBasicProject(withOpenApi: false);
 
         var app = GetApplication();
-        var run = app.Execute(new[] { "add", "url", FakeOpenApiUrl, "--code-generator", "NSwagTypeScript" });
+        var run = app.Execute(
+            new[] { "add", "url", FakeOpenApiUrl, "--code-generator", "NSwagTypeScript" }
+        );
 
         AssertNoErrors(run);
 
@@ -283,9 +329,14 @@ $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}
         using (var reader = new StreamReader(csprojStream))
         {
             var content = await reader.ReadToEndAsync();
-            Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
             Assert.Contains(
-$@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}"" CodeGenerator=""NSwagTypeScript"" />", content);
+                "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+                content
+            );
+            Assert.Contains(
+                $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}"" CodeGenerator=""NSwagTypeScript"" />",
+                content
+            );
         }
 
         var resultFile = Path.Combine(_tempDir.Root, expectedJsonName);
@@ -304,7 +355,16 @@ $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}
         var project = CreateBasicProject(withOpenApi: false);
 
         var app = GetApplication();
-        var run = app.Execute(new[] { "add", "url", FakeOpenApiUrl, "--output-file", Path.Combine("outputdir", "file.yaml") });
+        var run = app.Execute(
+            new[]
+            {
+                "add",
+                "url",
+                FakeOpenApiUrl,
+                "--output-file",
+                Path.Combine("outputdir", "file.yaml")
+            }
+        );
 
         AssertNoErrors(run);
 
@@ -315,9 +375,14 @@ $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}
         using (var reader = new StreamReader(csprojStream))
         {
             var content = await reader.ReadToEndAsync();
-            Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
             Assert.Contains(
-$@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}"" />", content);
+                "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+                content
+            );
+            Assert.Contains(
+                $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}"" />",
+                content
+            );
         }
 
         var resultFile = Path.Combine(_tempDir.Root, expectedJsonName);
@@ -337,7 +402,9 @@ $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}
 
         var app = GetApplication();
         var outputFile = Path.Combine("outputdir", "file.yaml");
-        var appExitCode = app.Execute(new[] { "add", "url", FakeOpenApiUrl, "--output-file", outputFile });
+        var appExitCode = app.Execute(
+            new[] { "add", "url", FakeOpenApiUrl, "--output-file", outputFile }
+        );
 
         AssertNoErrors(appExitCode);
 
@@ -348,9 +415,14 @@ $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}
         using (var reader = new StreamReader(csprojStream))
         {
             var content = await reader.ReadToEndAsync();
-            Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
             Assert.Contains(
-$@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}"" />", content);
+                "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+                content
+            );
+            Assert.Contains(
+                $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}"" />",
+                content
+            );
         }
 
         var resultFile = Path.Combine(_tempDir.Root, expectedJsonName);
@@ -364,20 +436,32 @@ $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}
 
         // Second reference, same output
         app = GetApplication();
-        appExitCode = app.Execute(new[] { "add", "url", DifferentUrl, "--output-file", outputFile });
+        appExitCode = app.Execute(
+            new[] { "add", "url", DifferentUrl, "--output-file", outputFile }
+        );
         Assert.Equal(1, appExitCode);
-        Assert.True(_error.ToString().Contains("Aborting to avoid conflicts."), "Should have aborted to avoid conflicts");
+        Assert.True(
+            _error.ToString().Contains("Aborting to avoid conflicts."),
+            "Should have aborted to avoid conflicts"
+        );
 
         // csproj contents
         using (var csprojStream = new FileInfo(project.Project.Path).OpenRead())
         using (var reader = new StreamReader(csprojStream))
         {
             var content = await reader.ReadToEndAsync();
-            Assert.Contains("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
             Assert.Contains(
-$@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}"" />", content);
+                "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+                content
+            );
+            Assert.Contains(
+                $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}"" />",
+                content
+            );
             Assert.DoesNotContain(
-                $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{DifferentUrl}"" CodeGenerator=""NSwagCSharp"" />", content);
+                $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{DifferentUrl}"" CodeGenerator=""NSwagCSharp"" />",
+                content
+            );
         }
 
         using (var jsonStream = new FileInfo(resultFile).OpenRead())
@@ -408,7 +492,9 @@ $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}
         using var csprojStream = csproj.OpenRead();
         using var reader = new StreamReader(csprojStream);
         var content = reader.ReadToEnd();
-        var escapedPkgRef = Regex.Escape("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"");
+        var escapedPkgRef = Regex.Escape(
+            "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\""
+        );
         Assert.Single(Regex.Matches(content, escapedPkgRef));
         var escapedApiRef = Regex.Escape($"SourceUrl=\"{FakeOpenApiUrl}\"");
         Assert.Single(Regex.Matches(content, escapedApiRef));
@@ -423,8 +509,12 @@ $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}
         var url = BrokenUrl;
         var run = app.Execute(new[] { "add", "url", url });
 
-        Assert.Equal($"The given url returned 'NotFound', " +
-"indicating failure. The url might be wrong, or there might be a networking issue." + Environment.NewLine, _error.ToString());
+        Assert.Equal(
+            $"The given url returned 'NotFound', "
+                + "indicating failure. The url might be wrong, or there might be a networking issue."
+                + Environment.NewLine,
+            _error.ToString()
+        );
         Assert.Equal(1, run);
 
         var expectedJsonName = "dingos.json";
@@ -434,7 +524,10 @@ $@"<OpenApiReference Include=""{expectedJsonName}"" SourceUrl=""{FakeOpenApiUrl}
         using (var reader = new StreamReader(csprojStream))
         {
             var content = await reader.ReadToEndAsync();
-            Assert.DoesNotContain("<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"", content);
+            Assert.DoesNotContain(
+                "<PackageReference Include=\"NSwag.ApiDescription.Client\" Version=\"",
+                content
+            );
             Assert.DoesNotContain($@"<OpenApiReference", content);
         }
 

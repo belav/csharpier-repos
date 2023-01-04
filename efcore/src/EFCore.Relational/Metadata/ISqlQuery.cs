@@ -51,22 +51,21 @@ public interface ISqlQuery : ITableBase
     /// <param name="options">Options for generating the string.</param>
     /// <param name="indent">The number of indent spaces to use before each new line.</param>
     /// <returns>A human-readable representation.</returns>
-    string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
+    string ToDebugString(
+        MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+        int indent = 0
+    )
     {
         var builder = new StringBuilder();
         var indentString = new string(' ', indent);
 
         try
         {
-            builder
-                .Append(indentString)
-                .Append("SqlQuery: ");
+            builder.Append(indentString).Append("SqlQuery: ");
 
             if (Schema != null)
             {
-                builder
-                    .Append(Schema)
-                    .Append('.');
+                builder.Append(Schema).Append('.');
             }
 
             builder.Append(Name);
@@ -76,7 +75,11 @@ public interface ISqlQuery : ITableBase
                 if (Sql != null)
                 {
                     builder.AppendLine().Append(indentString).Append("  Sql: ");
-                    builder.AppendLine().Append(indentString).Append(new string(' ', 4)).Append(Sql);
+                    builder
+                        .AppendLine()
+                        .Append(indentString)
+                        .Append(new string(' ', 4))
+                        .Append(Sql);
                 }
 
                 var mappings = EntityTypeMappings.ToList();

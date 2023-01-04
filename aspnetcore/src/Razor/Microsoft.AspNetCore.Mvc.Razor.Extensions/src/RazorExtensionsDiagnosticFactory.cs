@@ -15,7 +15,8 @@ internal class RazorExtensionsDiagnosticFactory
         new RazorDiagnosticDescriptor(
             $"{DiagnosticPrefix}3900",
             () => RazorExtensionsResources.ViewComponent_CannotFindMethod,
-            RazorDiagnosticSeverity.Error);
+            RazorDiagnosticSeverity.Error
+        );
 
     public static RazorDiagnostic CreateViewComponent_CannotFindMethod(string tagHelperType)
     {
@@ -24,7 +25,8 @@ internal class RazorExtensionsDiagnosticFactory
             new SourceSpan(SourceLocation.Undefined, contentLength: 0),
             ViewComponentTypes.SyncMethodName,
             ViewComponentTypes.AsyncMethodName,
-            tagHelperType);
+            tagHelperType
+        );
 
         return diagnostic;
     }
@@ -33,7 +35,8 @@ internal class RazorExtensionsDiagnosticFactory
         new RazorDiagnosticDescriptor(
             $"{DiagnosticPrefix}3901",
             () => RazorExtensionsResources.ViewComponent_AmbiguousMethods,
-            RazorDiagnosticSeverity.Error);
+            RazorDiagnosticSeverity.Error
+        );
 
     public static RazorDiagnostic CreateViewComponent_AmbiguousMethods(string tagHelperType)
     {
@@ -42,7 +45,8 @@ internal class RazorExtensionsDiagnosticFactory
             new SourceSpan(SourceLocation.Undefined, contentLength: 0),
             tagHelperType,
             ViewComponentTypes.SyncMethodName,
-            ViewComponentTypes.AsyncMethodName);
+            ViewComponentTypes.AsyncMethodName
+        );
 
         return diagnostic;
     }
@@ -51,16 +55,20 @@ internal class RazorExtensionsDiagnosticFactory
         new RazorDiagnosticDescriptor(
             $"{DiagnosticPrefix}3902",
             () => RazorExtensionsResources.ViewComponent_AsyncMethod_ShouldReturnTask,
-            RazorDiagnosticSeverity.Error);
+            RazorDiagnosticSeverity.Error
+        );
 
-    public static RazorDiagnostic CreateViewComponent_AsyncMethod_ShouldReturnTask(string tagHelperType)
+    public static RazorDiagnostic CreateViewComponent_AsyncMethod_ShouldReturnTask(
+        string tagHelperType
+    )
     {
         var diagnostic = RazorDiagnostic.Create(
             ViewComponent_AsyncMethod_ShouldReturnTask,
             new SourceSpan(SourceLocation.Undefined, contentLength: 0),
             ViewComponentTypes.AsyncMethodName,
             tagHelperType,
-            nameof(Task));
+            nameof(Task)
+        );
 
         return diagnostic;
     }
@@ -69,15 +77,19 @@ internal class RazorExtensionsDiagnosticFactory
         new RazorDiagnosticDescriptor(
             $"{DiagnosticPrefix}3903",
             () => RazorExtensionsResources.ViewComponent_SyncMethod_ShouldReturnValue,
-            RazorDiagnosticSeverity.Error);
+            RazorDiagnosticSeverity.Error
+        );
 
-    public static RazorDiagnostic CreateViewComponent_SyncMethod_ShouldReturnValue(string tagHelperType)
+    public static RazorDiagnostic CreateViewComponent_SyncMethod_ShouldReturnValue(
+        string tagHelperType
+    )
     {
         var diagnostic = RazorDiagnostic.Create(
             ViewComponent_SyncMethod_ShouldReturnValue,
             new SourceSpan(SourceLocation.Undefined, contentLength: 0),
             ViewComponentTypes.SyncMethodName,
-            tagHelperType);
+            tagHelperType
+        );
 
         return diagnostic;
     }
@@ -86,16 +98,20 @@ internal class RazorExtensionsDiagnosticFactory
         new RazorDiagnosticDescriptor(
             $"{DiagnosticPrefix}3904",
             () => RazorExtensionsResources.ViewComponent_SyncMethod_CannotReturnTask,
-            RazorDiagnosticSeverity.Error);
+            RazorDiagnosticSeverity.Error
+        );
 
-    public static RazorDiagnostic CreateViewComponent_SyncMethod_CannotReturnTask(string tagHelperType)
+    public static RazorDiagnostic CreateViewComponent_SyncMethod_CannotReturnTask(
+        string tagHelperType
+    )
     {
         var diagnostic = RazorDiagnostic.Create(
             ViewComponent_SyncMethod_CannotReturnTask,
             new SourceSpan(SourceLocation.Undefined, contentLength: 0),
             ViewComponentTypes.SyncMethodName,
             tagHelperType,
-            nameof(Task));
+            nameof(Task)
+        );
 
         return diagnostic;
     }
@@ -104,12 +120,18 @@ internal class RazorExtensionsDiagnosticFactory
         new RazorDiagnosticDescriptor(
             $"{DiagnosticPrefix}3905",
             () => RazorExtensionsResources.PageDirectiveCannotBeImported,
-            RazorDiagnosticSeverity.Error);
+            RazorDiagnosticSeverity.Error
+        );
 
     public static RazorDiagnostic CreatePageDirective_CannotBeImported(SourceSpan source)
     {
         var fileName = Path.GetFileName(source.FilePath);
-        var diagnostic = RazorDiagnostic.Create(PageDirective_CannotBeImported, source, PageDirective.Directive.Directive, fileName);
+        var diagnostic = RazorDiagnostic.Create(
+            PageDirective_CannotBeImported,
+            source,
+            PageDirective.Directive.Directive,
+            fileName
+        );
 
         return diagnostic;
     }
@@ -118,11 +140,16 @@ internal class RazorExtensionsDiagnosticFactory
         new RazorDiagnosticDescriptor(
             $"{DiagnosticPrefix}3906",
             () => RazorExtensionsResources.PageDirectiveMustExistAtTheTopOfFile,
-            RazorDiagnosticSeverity.Error);
+            RazorDiagnosticSeverity.Error
+        );
 
     public static RazorDiagnostic CreatePageDirective_MustExistAtTheTopOfFile(SourceSpan source)
     {
-        var diagnostic = RazorDiagnostic.Create(PageDirective_MustExistAtTheTopOfFile, source, PageDirective.Directive.Directive);
+        var diagnostic = RazorDiagnostic.Create(
+            PageDirective_MustExistAtTheTopOfFile,
+            source,
+            PageDirective.Directive.Directive
+        );
         return diagnostic;
     }
 }

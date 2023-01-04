@@ -19,19 +19,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.GenerateMet
     [Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
     public class GenerateConversionTest : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public GenerateConversionTest(ITestOutputHelper logger)
-             : base(logger)
-        {
-        }
+        public GenerateConversionTest(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new GenerateConversionCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new GenerateConversionCodeFixProvider());
 
         [Fact, WorkItem(774321, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/774321")]
         public async Task TestGenerateImplicitConversionGenericClass()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Test(int[] a)
     {
@@ -42,7 +40,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.GenerateMet
 class C<T>
 {
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -58,14 +56,15 @@ class C<T>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(774321, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/774321")]
         public async Task TestGenerateImplicitConversionClass()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Test(int[] a)
     {
@@ -76,7 +75,7 @@ class C<T>
 class C
 {
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -92,14 +91,15 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestGenerateImplicitConversionClass_CodeStyle()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Test(int[] a)
     {
@@ -110,7 +110,7 @@ class C
 class C
 {
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -124,14 +124,18 @@ class C
 {
     public static implicit operator C(int v) => throw new NotImplementedException();
 }",
-options: Option(CSharpCodeStyleOptions.PreferExpressionBodiedOperators, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement));
+                options: Option(
+                    CSharpCodeStyleOptions.PreferExpressionBodiedOperators,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                )
+            );
         }
 
         [Fact, WorkItem(774321, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/774321")]
         public async Task TestGenerateImplicitConversionAwaitExpression()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -142,7 +146,7 @@ class Program
         Program x1 = [|await a|];
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -157,14 +161,15 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(774321, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/774321")]
         public async Task TestGenerateImplicitConversionTargetTypeNotInSource()
         {
             await TestInRegularAndScriptAsync(
-@"class Digit
+                @"class Digit
 {
     public Digit(double d)
     {
@@ -182,7 +187,7 @@ class Program
         double num = [|dig|];
     }
 }",
-@"using System;
+                @"using System;
 
 class Digit
 {
@@ -206,14 +211,15 @@ class Program
         Digit dig = new Digit(7);
         double num = dig;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(774321, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/774321")]
         public async Task TestGenerateExplicitConversionGenericClass()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Test(int[] a)
     {
@@ -224,7 +230,7 @@ class Program
 class C<T>
 {
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -240,14 +246,15 @@ class C<T>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(774321, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/774321")]
         public async Task TestGenerateExplicitConversionClass()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Test(int[] a)
     {
@@ -258,7 +265,7 @@ class C<T>
 class C
 {
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -274,14 +281,15 @@ class C
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(774321, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/774321")]
         public async Task TestGenerateExplicitConversionAwaitExpression()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -292,7 +300,7 @@ class Program
         Program x1 = [|(Program)await a|];
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -307,14 +315,15 @@ class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(774321, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/774321")]
         public async Task TestGenerateExplicitConversionTargetTypeNotInSource()
         {
             await TestInRegularAndScriptAsync(
-@"class Digit
+                @"class Digit
 {
     public Digit(double d)
     {
@@ -332,7 +341,7 @@ class Program
         double num = [|(double)dig|];
     }
 }",
-@"using System;
+                @"using System;
 
 class Digit
 {
@@ -356,7 +365,8 @@ class Program
         Digit dig = new Digit(7);
         double num = (double)dig;
     }
-}");
+}"
+            );
         }
     }
 }

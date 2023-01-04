@@ -17,11 +17,13 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             HelperMarshal._functionResultValue = 0;
             HelperMarshal._i32Value = 0;
 
-            Runtime.InvokeJS(@"
+            Runtime.InvokeJS(
+                @"
                 var funcDelegate = App.call_test_method (""CreateFunctionDelegate"", [  ]);
                 var res = funcDelegate (10, 20);
                 App.call_test_method (""InvokeI32"", [ res, res ]);
-            ");
+            "
+            );
 
             Assert.Equal(30, HelperMarshal._functionResultValue);
             Assert.Equal(60, HelperMarshal._i32Value);
@@ -33,7 +35,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             HelperMarshal._functionResultValue = 0;
             HelperMarshal._i32Value = 0;
 
-            Runtime.InvokeJS(@"
+            Runtime.InvokeJS(
+                @"
                 var funcDelegate = App.call_test_method (""CreateFunctionDelegate"", [  ]);
                 var res = funcDelegate (10, 20);
                 for (let x = 0; x < 1000; x++)
@@ -41,7 +44,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                     res = funcDelegate (10, 20);
                 }
                 App.call_test_method (""InvokeI32"", [ res, res ]);
-            ");
+            "
+            );
 
             Assert.Equal(30, HelperMarshal._functionResultValue);
             Assert.Equal(60, HelperMarshal._i32Value);
@@ -52,7 +56,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             HelperMarshal._functionResultValue = 0;
             HelperMarshal._i32Value = 0;
-            Runtime.InvokeJS(@"
+            Runtime.InvokeJS(
+                @"
                 var funcDelegate = App.call_test_method (""CreateFunctionDelegate"", [  ]);
                 var res = funcDelegate (10, 20);
                 for (let x = 0; x < 1000; x++)
@@ -60,7 +65,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                     res = funcDelegate (x, x);
                 }
                 App.call_test_method (""InvokeI32"", [ res, res ]);
-            ");
+            "
+            );
 
             Assert.Equal(1998, HelperMarshal._functionResultValue);
             Assert.Equal(3996, HelperMarshal._i32Value);
@@ -72,11 +78,13 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             HelperMarshal._functionActionResultValue = 0;
             HelperMarshal._functionActionResultValueOfAction = 0;
 
-            Runtime.InvokeJS(@"
+            Runtime.InvokeJS(
+                @"
                 var funcDelegate = App.call_test_method (""CreateFunctionDelegateWithAction"", [  ]);
                 var actionDelegate = funcDelegate (10, 20);
                 actionDelegate(30,40);
-            ");
+            "
+            );
 
             Assert.Equal(30, HelperMarshal._functionActionResultValue);
             Assert.Equal(70, HelperMarshal._functionActionResultValueOfAction);
@@ -87,10 +95,12 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             HelperMarshal._actionResultValue = 0;
 
-            Runtime.InvokeJS(@"
+            Runtime.InvokeJS(
+                @"
                 var actionDelegate = App.call_test_method (""CreateActionDelegate"", [  ]);
                 actionDelegate(30,40);
-            ");
+            "
+            );
 
             Assert.Equal(70, HelperMarshal._actionResultValue);
         }
@@ -99,10 +109,15 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public static void InvokeActionFloatIntToIntInt()
         {
             HelperMarshal._actionResultValue = 0;
-            var ex = Assert.Throws<JSException>(()=>Runtime.InvokeJS(@"
+            var ex = Assert.Throws<JSException>(
+                () =>
+                    Runtime.InvokeJS(
+                        @"
                 var actionDelegate = App.call_test_method (""CreateActionDelegate"", [  ]);
                 actionDelegate(3.14,40);
-            "));
+            "
+                    )
+            );
 
             Assert.Contains("Value is not an integer: 3.14 (number)", ex.Message);
             Assert.Equal(0, HelperMarshal._actionResultValue);
@@ -112,10 +127,12 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public static void InvokeDelegateMethod()
         {
             HelperMarshal._delMethodResultValue = string.Empty;
-            Runtime.InvokeJS(@"
+            Runtime.InvokeJS(
+                @"
                 var del = App.call_test_method (""CreateDelegateMethod"", [  ]);
                 del(""Hic sunt dracones"");
-            ");
+            "
+            );
 
             Assert.Equal("Hic sunt dracones", HelperMarshal._delMethodResultValue);
         }
@@ -124,11 +141,13 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public static void InvokeDelegateMethodReturnString()
         {
             HelperMarshal._delMethodStringResultValue = string.Empty;
-            Runtime.InvokeJS(@"
+            Runtime.InvokeJS(
+                @"
                 var del = App.call_test_method (""CreateDelegateMethodReturnString"", [  ]);
                 var res = del(""Hic sunt dracones"");
                 App.call_test_method (""SetTestString1"", [ res ]);
-            ");
+            "
+            );
 
             Assert.Equal("Received: Hic sunt dracones", HelperMarshal._delMethodStringResultValue);
         }
@@ -139,11 +158,16 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public static void InvokeMultiCastDelegate_VoidString(string creator, string testStr)
         {
             HelperMarshal._delegateCallResult = string.Empty;
-            Runtime.InvokeJS($@"
+            Runtime.InvokeJS(
+                $@"
                 var del = App.call_test_method (""{creator}"", [  ]);
                 del(""{testStr}"");
-            ");
-            Assert.Equal($"  Hello, {testStr}!  GoodMorning, {testStr}!", HelperMarshal._delegateCallResult);
+            "
+            );
+            Assert.Equal(
+                $"  Hello, {testStr}!  GoodMorning, {testStr}!",
+                HelperMarshal._delegateCallResult
+            );
         }
 
         [Theory]
@@ -154,45 +178,77 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public static void InvokeDelegate_VoidString(string creator)
         {
             HelperMarshal._delegateCallResult = string.Empty;
-            var s = Runtime.InvokeJS($@"
+            var s = Runtime.InvokeJS(
+                $@"
                 var del = App.call_test_method (""{creator}"", [  ]);
                 del(""Hic sunt dracones"");
-            ");
+            "
+            );
 
-            Assert.Equal("Notification received for: Hic sunt dracones", HelperMarshal._delegateCallResult);
+            Assert.Equal(
+                "Notification received for: Hic sunt dracones",
+                HelperMarshal._delegateCallResult
+            );
         }
 
         public static IEnumerable<object[]> ArrayType_TestData()
         {
             _objectPrototype ??= new Function("return Object.prototype.toString;");
-            yield return new object[] { _objectPrototype.Call(), "Uint8Array", Uint8Array.From(new byte[10]) };
+            yield return new object[]
+            {
+                _objectPrototype.Call(),
+                "Uint8Array",
+                Uint8Array.From(new byte[10])
+            };
             yield return new object[] { _objectPrototype.Call(), "Array", new Array(10) };
         }
 
         [Theory]
         [MemberData(nameof(ArrayType_TestData))]
-        public static void InvokeFunctionAcceptingArrayTypes(Function objectPrototype, string creator, JSObject arrayType)
+        public static void InvokeFunctionAcceptingArrayTypes(
+            Function objectPrototype,
+            string creator,
+            JSObject arrayType
+        )
         {
             HelperMarshal._funcActionBufferObjectResultValue = arrayType;
-            Assert.Equal(10, HelperMarshal._funcActionBufferObjectResultValue.GetObjectProperty("length"));
-            Assert.Equal($"[object {creator}]", objectPrototype.Call(HelperMarshal._funcActionBufferObjectResultValue));
+            Assert.Equal(
+                10,
+                HelperMarshal._funcActionBufferObjectResultValue.GetObjectProperty("length")
+            );
+            Assert.Equal(
+                $"[object {creator}]",
+                objectPrototype.Call(HelperMarshal._funcActionBufferObjectResultValue)
+            );
 
-            Runtime.InvokeJS($@"
+            Runtime.InvokeJS(
+                $@"
                 var buffer = new {creator}(50);
                 var del = App.call_test_method (""CreateFunctionAccepting{creator}"", [  ]);
                 var setAction = del(buffer);
                 setAction(buffer);
-            ");
+            "
+            );
 
-            Assert.Equal(50, HelperMarshal._funcActionBufferObjectResultValue.GetObjectProperty("length"));
-            Assert.Equal(HelperMarshal._funcActionBufferObjectResultValue.GetObjectProperty("length"), HelperMarshal._funcActionBufferResultLengthValue);
-            Assert.Equal($"[object {creator}]", objectPrototype.Call(HelperMarshal._funcActionBufferObjectResultValue));
+            Assert.Equal(
+                50,
+                HelperMarshal._funcActionBufferObjectResultValue.GetObjectProperty("length")
+            );
+            Assert.Equal(
+                HelperMarshal._funcActionBufferObjectResultValue.GetObjectProperty("length"),
+                HelperMarshal._funcActionBufferResultLengthValue
+            );
+            Assert.Equal(
+                $"[object {creator}]",
+                objectPrototype.Call(HelperMarshal._funcActionBufferObjectResultValue)
+            );
         }
 
         [Fact]
         public static void DispatchToDelegate()
         {
-            var factory = new Function(@"return {
+            var factory = new Function(
+                @"return {
                 callback: null,
                 eventFactory:function(data){
                     return {
@@ -202,7 +258,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 fireEvent: function (evt) {
                     this.callback(evt);
                 }
-            };");
+            };"
+            );
             var dispatcher = (JSObject)factory.Call();
             var temp = new bool[2];
             Action<JSObject> cb = (JSObject envt) =>
@@ -224,7 +281,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public static void EventsAreNotCollected()
         {
             const int attempts = 100; // we fire 100 events in a loop, to try that it's GC same
-            var factory = new Function(@"return {
+            var factory = new Function(
+                @"return {
                 callback: null,
                 eventFactory:function(data){
                     return {
@@ -234,7 +292,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 fireEvent: function (evt) {
                     this.callback(evt);
                 }
-            };");
+            };"
+            );
             var dispatcher = (JSObject)factory.Call();
             var temp = new bool[attempts];
             Action<JSObject> cb = (JSObject envt) =>
@@ -254,17 +313,20 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 var evnti = dispatcher.Invoke("eventFactory", i);
                 dispatcher.Invoke("fireEvent", evnti);
                 dispatcher.Invoke("fireEvent", evnt);
-                Runtime.InvokeJS("if (globalThis.gc) globalThis.gc();");// needs v8 flag --expose-gc
+                Runtime.InvokeJS("if (globalThis.gc) globalThis.gc();"); // needs v8 flag --expose-gc
             }
         }
-
 
         [Fact]
         public static void NullDelegate()
         {
-            var factory = new Function("delegate", "callback", @"
+            var factory = new Function(
+                "delegate",
+                "callback",
+                @"
                 callback(delegate);
-            ");
+            "
+            );
 
             Delegate check = null;
             Action<Delegate> callback = (Delegate data) =>
@@ -278,18 +340,19 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public static async Task ResolveStringPromise()
         {
-            var factory = new Function(@"
+            var factory = new Function(
+                @"
                 return new Promise((resolve, reject) => {
                   setTimeout(() => {
                     resolve('foo');
                   }, 10);
-                });");
+                });"
+            );
 
             var promise = (Task<object>)factory.Call();
             var value = await promise;
 
             Assert.Equal("foo", (string)value);
-
         }
 
         [Fact]
@@ -297,30 +360,34 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             for (int i = 0; i < 10; i++)
             {
-                var factory = new Function(@"
+                var factory = new Function(
+                    @"
                 return new Promise((resolve, reject) => {
                   setTimeout(() => {
                     resolve({foo:'bar'});
                   }, 10);
-                });");
+                });"
+                );
 
                 var promise = (Task<object>)factory.Call();
                 var value = (JSObject)await promise;
 
                 Assert.Equal("bar", value.GetObjectProperty("foo"));
-                Runtime.InvokeJS("if (globalThis.gc) globalThis.gc();");// needs v8 flag --expose-gc
+                Runtime.InvokeJS("if (globalThis.gc) globalThis.gc();"); // needs v8 flag --expose-gc
             }
         }
 
         [Fact]
         public static async Task RejectPromise()
         {
-            var factory = new Function(@"
+            var factory = new Function(
+                @"
                 return new Promise((resolve, reject) => {
                   setTimeout(() => {
                     reject('fail');
                   }, 10);
-                });");
+                });"
+            );
 
             var promise = (Task<object>)factory.Call();
 
@@ -331,12 +398,14 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public static async Task RejectPromiseError()
         {
-            var factory = new Function(@"
+            var factory = new Function(
+                @"
                 return new Promise((resolve, reject) => {
                   setTimeout(() => {
                     reject(new Error('fail'));
                   }, 10);
-                });");
+                });"
+            );
 
             var promise = (Task<object>)factory.Call();
 
@@ -344,19 +413,20 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             Assert.Equal("Error: fail", ex.Message);
         }
 
-
         [ActiveIssue("https://github.com/dotnet/runtime/issues/56963")]
         [Fact]
         public static void RoundtripPromise()
         {
-            var factory = new Function(@"
+            var factory = new Function(
+                @"
                 var dummy=new Promise((resolve, reject) => {});
                 return {
                     dummy:dummy,
                     check:(promise)=>{
                         return promise===dummy ? 1:0;
                     }
-                }");
+                }"
+            );
 
             var obj = (JSObject)factory.Call();
             var dummy = obj.GetObjectProperty("dummy");
@@ -365,16 +435,19 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             Assert.Equal(1, check);
         }
 
-
         [Fact]
         public static async Task ResolveTask()
         {
             var tcs = new TaskCompletionSource<int>();
-            var factory = new Function("task", "callback", @"
+            var factory = new Function(
+                "task",
+                "callback",
+                @"
                 return task.then((data)=>{
                     callback(data);
                 })
-            ");
+            "
+            );
 
             int check = 0;
             Action<int> callback = (int data) =>
@@ -396,11 +469,15 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public static async Task RejectTask()
         {
             var tcs = new TaskCompletionSource<int>();
-            var factory = new Function("task", "callback", @"
+            var factory = new Function(
+                "task",
+                "callback",
+                @"
                 return task.catch((reason)=>{
                     callback(reason);
                 })
-            ");
+            "
+            );
 
             string check = null;
             Action<string> callback = (string data) =>
@@ -419,9 +496,13 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public static void NullTask()
         {
             var tcs = new TaskCompletionSource<int>();
-            var factory = new Function("task", "callback", @"
+            var factory = new Function(
+                "task",
+                "callback",
+                @"
                 callback(task);
-            ");
+            "
+            );
 
             Task check = Task.FromResult(1);
             Action<Task> callback = (Task data) =>
@@ -437,10 +518,13 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public static void RoundtripTask()
         {
             var tcs = new TaskCompletionSource<int>();
-            var factory = new Function("dummy", @"
+            var factory = new Function(
+                "dummy",
+                @"
                 return {
                     dummy:dummy,
-                }");
+                }"
+            );
 
             var obj = (JSObject)factory.Call(null, tcs.Task);
             var dummy = obj.GetObjectProperty("dummy");

@@ -25,9 +25,7 @@ namespace System.Runtime.CompilerServices
         /// <summary>
         /// Initializes a new instance of the <see cref="CallSiteBinder"/> class.
         /// </summary>
-        protected CallSiteBinder()
-        {
-        }
+        protected CallSiteBinder() { }
 
         /// <summary>
         /// Gets a label that can be used to cause the binding to be updated. It
@@ -35,7 +33,8 @@ namespace System.Runtime.CompilerServices
         /// This is typically used when the "version" of a dynamic object has
         /// changed.
         /// </summary>
-        public static LabelTarget UpdateLabel { get; } = Expression.Label("CallSiteBinder.UpdateLabel");
+        public static LabelTarget UpdateLabel { get; } =
+            Expression.Label("CallSiteBinder.UpdateLabel");
 
         private sealed class LambdaSignature<T> where T : class
         {
@@ -84,7 +83,11 @@ namespace System.Runtime.CompilerServices
         /// subsequent occurrences of the dynamic operation, Bind will be called again
         /// to produce a new <see cref="Expression"/> for the new argument types.
         /// </returns>
-        public abstract Expression Bind(object[] args, ReadOnlyCollection<ParameterExpression> parameters, LabelTarget returnLabel);
+        public abstract Expression Bind(
+            object[] args,
+            ReadOnlyCollection<ParameterExpression> parameters,
+            LabelTarget returnLabel
+        );
 
         /// <summary>
         /// Provides low-level runtime binding support.  Classes can override this and provide a direct
@@ -148,7 +151,8 @@ namespace System.Runtime.CompilerServices
             GetRuleCache<T>().AddRule(target);
         }
 
-        private static Expression<T> Stitch<T>(Expression binding, LambdaSignature<T> signature) where T : class
+        private static Expression<T> Stitch<T>(Expression binding, LambdaSignature<T> signature)
+            where T : class
         {
             Type siteType = typeof(CallSite<T>);
 
@@ -162,10 +166,7 @@ namespace System.Runtime.CompilerServices
 
 #if DEBUG
             // put the AST into the constant pool for debugging purposes
-            updLabel = Expression.Block(
-                Expression.Constant(binding, typeof(Expression)),
-                updLabel
-            );
+            updLabel = Expression.Block(Expression.Constant(binding, typeof(Expression)), updLabel);
 #endif
 
             body.Add(updLabel);
@@ -173,10 +174,7 @@ namespace System.Runtime.CompilerServices
                 Expression.Label(
                     signature.ReturnLabel,
                     Expression.Condition(
-                        Expression.Call(
-                            CallSiteOps_SetNotMatched,
-                            site
-                        ),
+                        Expression.Call(CallSiteOps_SetNotMatched, site),
                         Expression.Default(signature.ReturnLabel.Type),
                         Expression.Invoke(
                             Expression.Property(

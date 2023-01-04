@@ -8,7 +8,11 @@ namespace Test
 
     public class AA
     {
-        static void DoAnything() { throw new Exception(); }
+        static void DoAnything()
+        {
+            throw new Exception();
+        }
+
         public static int Main()
         {
             bool FALSE = true;
@@ -16,19 +20,36 @@ namespace Test
             {
 #pragma warning disable 1718
                 while (FALSE == FALSE)
-                {	//Stupid loop to optimize
+                { //Stupid loop to optimize
 #pragma warning restore 1718
-                    try { DoAnything(); }
+                    try
+                    {
+                        DoAnything();
+                    }
                     catch (DivideByZeroException) { }
                 }
-                try { DoAnything(); }
-                catch (Exception) { return 1; }
-                try { DoAnything(); }
-                catch (Exception) { return 2; }
+                try
+                {
+                    DoAnything();
+                }
+                catch (Exception)
+                {
+                    return 1;
+                }
+                try
+                {
+                    DoAnything();
+                }
+                catch (Exception)
+                {
+                    return 2;
+                }
             }
-            catch (Exception) { return 100; }
+            catch (Exception)
+            {
+                return 100;
+            }
             return 3;
         }
-
     }
 }

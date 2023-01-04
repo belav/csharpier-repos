@@ -21,8 +21,11 @@ namespace Microsoft.CodeAnalysis.Editor.TaskList
         public ImmutableArray<TaskListItem> TaskListItems { get; }
 
         public TaskListUpdatedArgs(
-            object id, Solution solution, DocumentId documentId, ImmutableArray<TaskListItem> items)
-            : base(id, solution.Workspace, documentId.ProjectId, documentId)
+            object id,
+            Solution solution,
+            DocumentId documentId,
+            ImmutableArray<TaskListItem> items
+        ) : base(id, solution.Workspace, documentId.ProjectId, documentId)
         {
             Solution = solution;
             TaskListItems = items;

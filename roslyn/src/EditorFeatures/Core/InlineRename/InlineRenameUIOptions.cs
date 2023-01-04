@@ -12,16 +12,22 @@ namespace Microsoft.CodeAnalysis.Editor.InlineRename
     {
         private const string FeatureName = "InlineRename";
 
-        public static readonly Option2<bool> UseInlineAdornment = new(
-            FeatureName,
-            name: "UseInlineAdornment",
-            defaultValue: true,
-            storageLocation: new RoamingProfileStorageLocation("TextEditor.RenameUseInlineAdornment"));
+        public static readonly Option2<bool> UseInlineAdornment =
+            new(
+                FeatureName,
+                name: "UseInlineAdornment",
+                defaultValue: true,
+                storageLocation: new RoamingProfileStorageLocation(
+                    "TextEditor.RenameUseInlineAdornment"
+                )
+            );
 
-        public static readonly Option2<bool> CollapseUI = new(
-            FeatureName,
-            name: "CollapseRenameUI",
-            defaultValue: false,
-            storageLocation: new RoamingProfileStorageLocation("TextEditor.CollapseRenameUI"));
+        public static readonly Option2<bool> CollapseUI =
+            new(
+                FeatureName,
+                name: "CollapseRenameUI",
+                defaultValue: false,
+                storageLocation: new RoamingProfileStorageLocation("TextEditor.CollapseRenameUI")
+            );
     }
 }

@@ -13,7 +13,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
 {
     public class CodeGenDisplayClassOptimizationTests : CSharpTestBase
     {
-        private static void VerifyTypeIL(CompilationVerifier compilation, string typeName, string expected)
+        private static void VerifyTypeIL(
+            CompilationVerifier compilation,
+            string typeName,
+            string expected
+        )
         {
             // .Net Core has different assemblies for the same standard library types as .Net Framework, meaning that that the emitted output will be different to the expected if we run them .Net Core
             // Since we do not expect there to be any meaningful differences between output for .Net Core and .Net Framework, we will skip these tests on .Net Core
@@ -42,9 +46,17 @@ public static class Program
         }
     }
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"3", options: TestOptions.ReleaseExe);
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"3",
+                options: TestOptions.ReleaseExe
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -104,7 +116,8 @@ public static class Program
 		IL_0023: call void [mscorlib]System.Console::WriteLine(int32)
 		IL_0028: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -126,9 +139,17 @@ public static class Program
         }
     }
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"3", options: TestOptions.DebugExe);
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"3",
+                options: TestOptions.DebugExe
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -229,7 +250,8 @@ public static class Program
 		IL_003c: nop
 		IL_003d: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -257,11 +279,18 @@ public static class Program
         actions[2]();
     }
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"three
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"three
 two
-one");
+one"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -408,7 +437,8 @@ one");
 		IL_00b3: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_00b8: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -432,9 +462,15 @@ class C
         }
     }
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute());
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute()
+            );
 
-            VerifyTypeIL(compilation, "C", @"
+            VerifyTypeIL(
+                compilation,
+                "C",
+                @"
 .class private auto ansi beforefieldinit C
 	extends [mscorlib]System.Object
 {
@@ -559,7 +595,8 @@ class C
 		IL_0001: call instance void [mscorlib]System.Object::.ctor()
 		IL_0006: ret
 	} // end of method C::.ctor
-} // end of class C");
+} // end of class C"
+            );
         }
 
         [Fact]
@@ -584,9 +621,15 @@ class C
         }
     }
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute());
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute()
+            );
 
-            VerifyTypeIL(compilation, "C", @"
+            VerifyTypeIL(
+                compilation,
+                "C",
+                @"
 .class private auto ansi beforefieldinit C
 	extends [mscorlib]System.Object
 {
@@ -705,7 +748,8 @@ class C
 		IL_0001: call instance void [mscorlib]System.Object::.ctor()
 		IL_0006: ret
 	} // end of method C::.ctor
-} // end of class C");
+} // end of class C"
+            );
         }
 
         [Fact]
@@ -730,11 +774,18 @@ public static class Program
 		actions[2]();
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"three
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"three
 two
-one");
+one"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -920,7 +971,8 @@ one");
 		IL_00b3: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_00b8: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -949,11 +1001,18 @@ public static class Program
 		actions[2]();
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"one
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"one
 one
-one");
+one"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -1103,7 +1162,8 @@ one");
 		IL_00b1: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_00b6: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -1129,11 +1189,18 @@ public static class Program
 		actions[2]();
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"one
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"one
 one
-one");
+one"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -1322,7 +1389,8 @@ one");
 		IL_00b1: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_00b6: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [CompilerTrait(CompilerFeature.AsyncStreams)]
@@ -1364,9 +1432,15 @@ public class Program
 		actions[2]();
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute());
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute()
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -1704,7 +1778,8 @@ public class Program
 		IL_0001: call instance void [mscorlib]System.Object::.ctor()
 		IL_0006: ret
 	} // end of method Program::.ctor
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -1730,10 +1805,16 @@ public static class Program
 		actions[0]();
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: "one");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: "one"
+            );
 
-
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -1817,7 +1898,8 @@ public static class Program
 		IL_004e: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_0053: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -1840,9 +1922,16 @@ public static class Program
 		actions[0]();
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: "one");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: "one"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -1966,7 +2055,8 @@ public static class Program
 		IL_0053: ret
 	} // end of method Program::Main
 } // end of class Program
-");
+"
+            );
         }
 
         [Fact]
@@ -1992,9 +2082,16 @@ public static class Program
 		actions[0]();
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: "one");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: "one"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -2126,7 +2223,8 @@ public static class Program
 		IL_006c: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_0071: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -2157,10 +2255,17 @@ public static class Program
 		public void Dispose(){}
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"Program+Disposable
-one");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"Program+Disposable
+one"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -2282,7 +2387,8 @@ one");
 		IL_0063: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_0068: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -2311,10 +2417,17 @@ public static class Program
 		public void Dispose(){}
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"Program+Disposable
-one");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"Program+Disposable
+one"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -2475,14 +2588,15 @@ one");
 		IL_0063: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_0068: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
         public void IfInUsingInForeachInForCorrectDisplayClassesAreCreated()
         {
             var source =
-    @"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2514,14 +2628,21 @@ public static class Program
 		public void Dispose() { }
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"Program+Disposable
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"Program+Disposable
 three
 Program+Disposable
 two
 Program+Disposable
-one");
+one"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -2821,7 +2942,8 @@ one");
 		IL_0130: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_0135: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -2847,11 +2969,18 @@ public static class Program
 		actions[2]();
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"one
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"one
 two
-three");
+three"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -3027,7 +3156,8 @@ three");
 		IL_0090: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_0095: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -3050,10 +3180,17 @@ public static class Program
 		actions[1]();
     }
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"two
-one");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"two
+one"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -3232,7 +3369,8 @@ one");
 		IL_0098: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_009d: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -3253,9 +3391,16 @@ public static class Program
         action();
     }
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"one");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"one"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -3427,7 +3572,8 @@ public static class Program
 		IL_007d: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_0082: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -3449,9 +3595,16 @@ public static class Program
             action();
         }
     }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"one");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"one"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -3563,7 +3716,8 @@ public static class Program
 		IL_0053: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_0058: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -3586,9 +3740,16 @@ public static class Program
             action();
         }
     }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"one");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"one"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -3701,7 +3862,8 @@ public static class Program
 		IL_0058: ret
 	} // end of method Program::Main
 } // end of class Program
-");
+"
+            );
         }
 
         [Fact]
@@ -3730,11 +3892,18 @@ public static class Program
             actions[2]();
         }
     }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"three
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"three
 two
-one");
+one"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -3916,14 +4085,15 @@ one");
 		IL_00a2: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_00a7: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
         public void ScopeContainsBackwardsGoToMergeDisplayClasses()
         {
             var source =
-               @"using System;
+                @"using System;
 
 public static class Program
 {
@@ -3941,9 +4111,16 @@ public static class Program
         
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"1");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"1"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -4008,7 +4185,8 @@ public static class Program
 		IL_0020: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_0025: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -4031,9 +4209,16 @@ public static class Program
 		}
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @""
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -4091,7 +4276,8 @@ public static class Program
 		IL_0008: stfld int32 Program/'<>c__DisplayClass0_0'::a
 		IL_000d: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -4119,9 +4305,16 @@ public static class Program
         }
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"1");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"1"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -4196,7 +4389,8 @@ public static class Program
 		IL_002e: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_0033: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -4223,9 +4417,16 @@ public static class Program
         }
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"1");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"1"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -4300,7 +4501,8 @@ public static class Program
 		IL_002e: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_0033: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -4326,9 +4528,16 @@ public static class Program
         }
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"1");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"1"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -4396,7 +4605,8 @@ public static class Program
 		IL_0027: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_002c: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -4422,9 +4632,16 @@ public static class Program
         }
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"1");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"1"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -4492,7 +4709,8 @@ public static class Program
 		IL_0028: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_002d: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -4522,9 +4740,16 @@ public static class Program
 
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"1");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"1"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -4589,7 +4814,8 @@ public static class Program
 		IL_0020: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_0025: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -4615,9 +4841,16 @@ public static class Program
 		goto target;
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"1");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"1"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -4706,7 +4939,8 @@ public static class Program
 		IL_002b: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_0030: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -4733,9 +4967,16 @@ public static class Program
         }
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"1");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"1"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -4824,7 +5065,8 @@ public static class Program
 		IL_002b: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_0030: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -4850,9 +5092,16 @@ public static class Program
 		}
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"1");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"1"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -4941,7 +5190,8 @@ public static class Program
 		IL_002b: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_0030: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -4969,9 +5219,16 @@ public static class Program
 		}
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"1");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"1"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -5060,7 +5317,8 @@ public static class Program
 		IL_002b: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_0030: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -5089,9 +5347,16 @@ public static class Program
         }
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"1");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"1"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -5190,7 +5455,8 @@ public static class Program
 		IL_0039: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_003e: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -5219,9 +5485,16 @@ public static class Program
         }
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"1");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"1"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -5313,7 +5586,8 @@ public static class Program
 		IL_0032: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_0037: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -5336,9 +5610,16 @@ public static class Program
 		Action _ = () => Console.WriteLine(a);
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"1");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"1"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -5438,7 +5719,8 @@ public static class Program
 		IL_002b: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_0030: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -5465,9 +5747,16 @@ public static class Program
 		}
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"1");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"1"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -5543,7 +5832,8 @@ public static class Program
 		IL_0024: pop
 		IL_0025: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -5565,9 +5855,16 @@ public static class Program
 		}
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"1");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"1"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -5640,7 +5937,8 @@ public static class Program
 		IL_0024: pop
 		IL_0025: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -5662,9 +5960,16 @@ public static class Program
 		}
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"1");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"1"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -5767,7 +6072,8 @@ public static class Program
 		IL_0036: pop
 		IL_0037: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -5796,9 +6102,16 @@ public static class Program
 		}
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"4");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"4"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -5912,7 +6225,8 @@ public static class Program
 		IL_0044: pop
 		IL_0045: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -5939,9 +6253,16 @@ public static class Program
 		}
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"2");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"2"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -6066,7 +6387,8 @@ public static class Program
 		IL_0038: pop
 		IL_0039: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -6092,9 +6414,16 @@ public static class Program
 		}
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"3");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"3"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -6201,7 +6530,8 @@ public static class Program
 		IL_0032: callvirt instance void [mscorlib]System.Action::Invoke()
 		IL_0037: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -6227,9 +6557,16 @@ public static class Program
 		}
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"3");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"3"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi abstract sealed beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -6325,7 +6662,8 @@ public static class Program
 		IL_002f: pop
 		IL_0030: ret
 	} // end of method Program::Main
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -6359,10 +6697,17 @@ public class Program
 		actions[3]();
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"1
-1");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"1
+1"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -6517,7 +6862,8 @@ public class Program
 		IL_0001: call instance void [mscorlib]System.Object::.ctor()
 		IL_0006: ret
 	} // end of method Program::.ctor
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -6551,10 +6897,17 @@ public class Program
         actions[3]();
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"1
-1");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"1
+1"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -6711,7 +7064,8 @@ public class Program
 		IL_0001: call instance void [mscorlib]System.Object::.ctor()
 		IL_0006: ret
 	} // end of method Program::.ctor
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -6749,10 +7103,17 @@ public class Program
 		}
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"3
-3");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"3
+3"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -6877,7 +7238,8 @@ public class Program
 		IL_0001: call instance void [mscorlib]System.Object::.ctor()
 		IL_0006: ret
 	} // end of method Program::.ctor
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -6917,10 +7279,17 @@ target:
 		}
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"3
-3");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"3
+3"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -7045,7 +7414,8 @@ target:
 		IL_0001: call instance void [mscorlib]System.Object::.ctor()
 		IL_0006: ret
 	} // end of method Program::.ctor
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -7085,10 +7455,17 @@ target:
 		}
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), expectedOutput: @"3
-3");
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                expectedOutput: @"3
+3"
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -7240,7 +7617,8 @@ target:
 		IL_0001: call instance void [mscorlib]System.Object::.ctor()
 		IL_0006: ret
 	} // end of method Program::.ctor
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -7263,9 +7641,15 @@ public class Program
         }
 	}
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute());
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute()
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -7372,7 +7756,8 @@ public class Program
 		IL_000b: stfld int32 Program/'<>c__DisplayClass0_1'::y
 		IL_0010: ret
 	} // end of method Program::'<M>g__M|0_0'
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -7399,9 +7784,15 @@ public class Program
         }
     }
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute());
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute()
+            );
 
-            VerifyTypeIL(compilation, "Program", @"
+            VerifyTypeIL(
+                compilation,
+                "Program",
+                @"
 .class public auto ansi beforefieldinit Program
 	extends [mscorlib]System.Object
 {
@@ -7566,7 +7957,8 @@ public class Program
 		IL_0001: call instance void [mscorlib]System.Object::.ctor()
 		IL_0006: ret
 	} // end of method Program::.ctor
-} // end of class Program");
+} // end of class Program"
+            );
         }
 
         [Fact]
@@ -7601,9 +7993,15 @@ public class C {
         }
     }
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute());
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute()
+            );
 
-            VerifyTypeIL(compilation, "C", @"
+            VerifyTypeIL(
+                compilation,
+                "C",
+                @"
 .class public auto ansi beforefieldinit C
 	extends [mscorlib]System.Object
 {
@@ -8006,7 +8404,8 @@ public class C {
 		IL_0001: call instance void [mscorlib]System.Object::.ctor()
 		IL_0006: ret
 	} // end of method C::.ctor
-} // end of class C");
+} // end of class C"
+            );
         }
 
         [Fact]
@@ -8041,9 +8440,15 @@ public class C {
         }
     }
 }";
-            var compilation = CompileAndVerify(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute());
+            var compilation = CompileAndVerify(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute()
+            );
 
-            VerifyTypeIL(compilation, "C", @"
+            VerifyTypeIL(
+                compilation,
+                "C",
+                @"
 .class public auto ansi beforefieldinit C
 	extends [mscorlib]System.Object
 {
@@ -8504,7 +8909,8 @@ public class C {
 		IL_0001: call instance void [mscorlib]System.Object::.ctor()
 		IL_0006: ret
 	} // end of method C::.ctor
-} // end of class C");
+} // end of class C"
+            );
         }
     }
 }

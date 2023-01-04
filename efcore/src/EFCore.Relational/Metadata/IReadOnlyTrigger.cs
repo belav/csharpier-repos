@@ -58,8 +58,8 @@ public interface IReadOnlyTrigger : IReadOnlyAnnotatable
     /// </summary>
     /// <param name="storeObject">The identifier of the store object.</param>
     /// <returns>The default name that would be used for this trigger.</returns>
-    string? GetDefaultName(in StoreObjectIdentifier storeObject)
-        => storeObject.StoreObjectType == StoreObjectType.Table
+    string? GetDefaultName(in StoreObjectIdentifier storeObject) =>
+        storeObject.StoreObjectType == StoreObjectType.Table
             ? Uniquifier.Truncate(ModelName, EntityType.Model.GetMaxIdentifierLength())
             : null;
 

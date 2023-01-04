@@ -36,7 +36,11 @@ namespace NativeExports
         }
 
         [UnmanagedCallersOnly(EntryPoint = "set_error_return_string")]
-        public static ushort* SetErrorReturnString(int error, byte shouldSetError, ushort* errorString)
+        public static ushort* SetErrorReturnString(
+            int error,
+            byte shouldSetError,
+            ushort* errorString
+        )
         {
             ushort* ret = (ushort*)Marshal.StringToCoTaskMemUni(new string((char*)errorString));
 

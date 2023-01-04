@@ -39,7 +39,8 @@ namespace System.Buffers.Binary
         /// </summary>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static short ReverseEndianness(short value) => (short)ReverseEndianness((ushort)value);
+        public static short ReverseEndianness(short value) =>
+            (short)ReverseEndianness((ushort)value);
 
         /// <summary>
         /// Reverses a primitive value - performs an endianness swap
@@ -67,10 +68,7 @@ namespace System.Buffers.Binary
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int128 ReverseEndianness(Int128 value)
         {
-            return new Int128(
-                ReverseEndianness(value.Lower),
-                ReverseEndianness(value.Upper)
-            );
+            return new Int128(ReverseEndianness(value.Lower), ReverseEndianness(value.Upper));
         }
 
         /// <summary>
@@ -103,7 +101,8 @@ namespace System.Buffers.Binary
         /// Reverses a 16-bit character value - performs an endianness swap
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static char ReverseEndianness(char value) => (char)ReverseEndianness((ushort)value);
+        internal static char ReverseEndianness(char value) =>
+            (char)ReverseEndianness((ushort)value);
 
         /// <summary>
         /// Reverses a primitive value - performs an endianness swap
@@ -157,7 +156,8 @@ namespace System.Buffers.Binary
         /// <returns>The reversed value.</returns>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static nuint ReverseEndianness(nuint value) => (nuint)ReverseEndianness((nuint_t)value);
+        public static nuint ReverseEndianness(nuint value) =>
+            (nuint)ReverseEndianness((nuint_t)value);
 
         /// <summary>Reverses a primitive value by performing an endianness swap of the specified <see cref="UInt128"/> value.</summary>
         /// <param name="value">The value to reverse.</param>
@@ -166,10 +166,7 @@ namespace System.Buffers.Binary
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static UInt128 ReverseEndianness(UInt128 value)
         {
-            return new UInt128(
-                ReverseEndianness(value.Lower),
-                ReverseEndianness(value.Upper)
-            );
+            return new UInt128(ReverseEndianness(value.Lower), ReverseEndianness(value.Upper));
         }
     }
 }

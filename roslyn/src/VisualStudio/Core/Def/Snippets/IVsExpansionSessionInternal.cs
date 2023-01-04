@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 {
     /// <summary>
-    /// This allows us to get pNode as an IntPtr instead of a via a RCW. Otherwise, a second 
+    /// This allows us to get pNode as an IntPtr instead of a via a RCW. Otherwise, a second
     /// invocation of the same snippet may cause an AccessViolationException.
     /// </summary>
     [Guid("3DFA7603-3B51-4484-81CD-FF1470123C7C")]

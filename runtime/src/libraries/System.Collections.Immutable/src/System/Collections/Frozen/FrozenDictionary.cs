@@ -33,23 +33,29 @@ namespace System.Collections.Frozen
         /// with which multiple duplicate keys will result in an exception.
         /// </remarks>
         /// <returns>A <see cref="FrozenDictionary{TKey, TValue}"/> that contains the specified keys and values.</returns>
-        public static FrozenDictionary<TKey, TValue> ToFrozenDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> source, IEqualityComparer<TKey>? comparer = null)
-            where TKey : notnull
+        public static FrozenDictionary<TKey, TValue> ToFrozenDictionary<TKey, TValue>(
+            this IEnumerable<KeyValuePair<TKey, TValue>> source,
+            IEqualityComparer<TKey>? comparer = null
+        ) where TKey : notnull
         {
             ThrowHelper.ThrowIfNull(source);
             comparer ??= EqualityComparer<TKey>.Default;
 
             // If the source is already frozen with the same comparer, it can simply be returned.
-            if (source is FrozenDictionary<TKey, TValue> existing &&
-                existing.Comparer.Equals(comparer))
+            if (
+                source is FrozenDictionary<TKey, TValue> existing
+                && existing.Comparer.Equals(comparer)
+            )
             {
                 return existing;
             }
 
             // Ensure we have a Dictionary<,> using the specified comparer such that all keys
             // are non-null and unique according to that comparer.
-            if (source is not Dictionary<TKey, TValue> uniqueValues ||
-                (uniqueValues.Count != 0 && !uniqueValues.Comparer.Equals(comparer)))
+            if (
+                source is not Dictionary<TKey, TValue> uniqueValues
+                || (uniqueValues.Count != 0 && !uniqueValues.Comparer.Equals(comparer))
+            )
             {
                 uniqueValues = new Dictionary<TKey, TValue>(comparer);
                 foreach (KeyValuePair<TKey, TValue> pair in source)
@@ -69,9 +75,10 @@ namespace System.Collections.Frozen
         /// <param name="comparer">An <see cref="IEqualityComparer{TKey}"/> to compare keys.</param>
         /// <returns>A <see cref="FrozenDictionary{TKey, TElement}"/> that contains the keys and values selected from the input sequence.</returns>
         public static FrozenDictionary<TKey, TSource> ToFrozenDictionary<TSource, TKey>(
-            this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer = null)
-            where TKey : notnull =>
-            Freeze(source.ToDictionary(keySelector, comparer));
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer = null
+        ) where TKey : notnull => Freeze(source.ToDictionary(keySelector, comparer));
 
         /// <summary>Creates a <see cref="FrozenDictionary{TKey, TElement}"/> from an <see cref="IEnumerable{TSource}"/> according to specified key selector and element selector functions.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
@@ -83,12 +90,16 @@ namespace System.Collections.Frozen
         /// <param name="comparer">An <see cref="IEqualityComparer{TKey}"/> to compare keys.</param>
         /// <returns>A <see cref="FrozenDictionary{TKey, TElement}"/> that contains the keys and values selected from the input sequence.</returns>
         public static FrozenDictionary<TKey, TElement> ToFrozenDictionary<TSource, TKey, TElement>(
-            this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector, IEqualityComparer<TKey>? comparer = null)
-            where TKey : notnull =>
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector,
+            IEqualityComparer<TKey>? comparer = null
+        ) where TKey : notnull =>
             Freeze(source.ToDictionary(keySelector, elementSelector, comparer));
 
-        private static FrozenDictionary<TKey, TValue> Freeze<TKey, TValue>(Dictionary<TKey, TValue> source)
-            where TKey : notnull
+        private static FrozenDictionary<TKey, TValue> Freeze<TKey, TValue>(
+            Dictionary<TKey, TValue> source
+        ) where TKey : notnull
         {
             // If the input was empty, simply return the empty frozen dictionary singleton. The comparer is ignored.
             if (source.Count == 0)
@@ -108,25 +119,40 @@ namespace System.Collections.Frozen
                     // In the specific case of Int32 keys, we can optimize further to reduce memory consumption by using
                     // the underlying FrozenHashtable's Int32 index as the keys themselves, avoiding the need to store the
                     // same keys yet again.
-                    return typeof(TKey) == typeof(int) ?
-                        (FrozenDictionary<TKey, TValue>)(object)new Int32FrozenDictionary<TValue>((Dictionary<int, TValue>)(object)source) :
-                        new ValueTypeDefaultComparerFrozenDictionary<TKey, TValue>(source);
+                    return typeof(TKey) == typeof(int)
+                        ? (FrozenDictionary<TKey, TValue>)
+                            (object)
+                                new Int32FrozenDictionary<TValue>(
+                                    (Dictionary<int, TValue>)(object)source
+                                )
+                        : new ValueTypeDefaultComparerFrozenDictionary<TKey, TValue>(source);
                 }
             }
             else if (typeof(TKey) == typeof(string))
             {
                 // If the key is a string and the comparer is known to provide ordinal (case-sensitive or case-insensitive) semantics,
                 // we can use an implementation that's able to examine and optimize based on lengths and/or subsequences within those strings.
-                if (ReferenceEquals(comparer, EqualityComparer<TKey>.Default) ||
-                    ReferenceEquals(comparer, StringComparer.Ordinal) ||
-                    ReferenceEquals(comparer, StringComparer.OrdinalIgnoreCase))
+                if (
+                    ReferenceEquals(comparer, EqualityComparer<TKey>.Default)
+                    || ReferenceEquals(comparer, StringComparer.Ordinal)
+                    || ReferenceEquals(comparer, StringComparer.OrdinalIgnoreCase)
+                )
                 {
-                    Dictionary<string, TValue> stringEntries = (Dictionary<string, TValue>)(object)source;
-                    IEqualityComparer<string> stringComparer = (IEqualityComparer<string>)(object)comparer;
+                    Dictionary<string, TValue> stringEntries =
+                        (Dictionary<string, TValue>)(object)source;
+                    IEqualityComparer<string> stringComparer =
+                        (IEqualityComparer<string>)(object)comparer;
 
                     FrozenDictionary<string, TValue> frozenDictionary =
-                        LengthBucketsFrozenDictionary<TValue>.TryCreateLengthBucketsFrozenSet(stringEntries, stringComparer) ??
-                        (FrozenDictionary<string, TValue>)new OrdinalStringFrozenDictionary<TValue>(stringEntries, stringComparer);
+                        LengthBucketsFrozenDictionary<TValue>.TryCreateLengthBucketsFrozenSet(
+                            stringEntries,
+                            stringComparer
+                        )
+                        ?? (FrozenDictionary<string, TValue>)
+                            new OrdinalStringFrozenDictionary<TValue>(
+                                stringEntries,
+                                stringComparer
+                            );
 
                     return (FrozenDictionary<TKey, TValue>)(object)frozenDictionary;
                 }
@@ -150,15 +176,18 @@ namespace System.Collections.Frozen
     /// </remarks>
     [DebuggerTypeProxy(typeof(ImmutableDictionaryDebuggerProxy<,>))]
     [DebuggerDisplay("Count = {Count}")]
-    public abstract class FrozenDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue>, IDictionary
-        where TKey : notnull
+    public abstract class FrozenDictionary<TKey, TValue>
+        : IDictionary<TKey, TValue>,
+            IReadOnlyDictionary<TKey, TValue>,
+            IDictionary where TKey : notnull
     {
         /// <summary>Initialize the dictionary.</summary>
         /// <param name="comparer">The comparer to use and to expose from <see cref="Comparer"/>.</param>
         private protected FrozenDictionary(IEqualityComparer<TKey> comparer) => Comparer = comparer;
 
         /// <summary>Gets an empty <see cref="FrozenDictionary{TKey, TValue}"/>.</summary>
-        public static FrozenDictionary<TKey, TValue> Empty { get; } = new EmptyFrozenDictionary<TKey, TValue>();
+        public static FrozenDictionary<TKey, TValue> Empty { get; } =
+            new EmptyFrozenDictionary<TKey, TValue>();
 
         /// <summary>Gets the comparer used by this dictionary.</summary>
         public IEqualityComparer<TKey> Comparer { get; }
@@ -257,7 +286,10 @@ namespace System.Collections.Frozen
 
             if ((uint)index > (uint)array.Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (array.Length - index < Count)
@@ -321,9 +353,9 @@ namespace System.Collections.Frozen
             get
             {
                 ThrowHelper.ThrowIfNull(key);
-                return key is TKey tkey && TryGetValue(tkey, out TValue? value) ?
-                    value :
-                    (object?)null;
+                return key is TKey tkey && TryGetValue(tkey, out TValue? value)
+                    ? value
+                    : (object?)null;
             }
             set => throw new NotSupportedException();
         }
@@ -372,8 +404,7 @@ namespace System.Collections.Frozen
         }
 
         /// <inheritdoc />
-        TValue IReadOnlyDictionary<TKey, TValue>.this[TKey key] =>
-            this[key];
+        TValue IReadOnlyDictionary<TKey, TValue>.this[TKey key] => this[key];
 
         /// <summary>Determines whether the dictionary contains the specified key.</summary>
         /// <param name="key">The key to locate in the dictionary.</param>
@@ -390,8 +421,8 @@ namespace System.Collections.Frozen
 
         /// <inheritdoc />
         bool ICollection<KeyValuePair<TKey, TValue>>.Contains(KeyValuePair<TKey, TValue> item) =>
-            TryGetValue(item.Key, out TValue? value) &&
-            EqualityComparer<TValue>.Default.Equals(value, item.Value);
+            TryGetValue(item.Key, out TValue? value)
+            && EqualityComparer<TValue>.Default.Equals(value, item.Value);
 
         /// <summary>Gets the value associated with the specified key.</summary>
         /// <param name="key">The key of the value to get.</param>
@@ -422,24 +453,32 @@ namespace System.Collections.Frozen
         private protected abstract Enumerator GetEnumeratorCore();
 
         /// <inheritdoc />
-        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator() =>
-            Count == 0 ? ((IList<KeyValuePair<TKey, TValue>>)Array.Empty<KeyValuePair<TKey, TValue>>()).GetEnumerator() :
-            GetEnumerator();
+        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<
+            KeyValuePair<TKey, TValue>
+        >.GetEnumerator() =>
+            Count == 0
+                ? (
+                    (IList<KeyValuePair<TKey, TValue>>)Array.Empty<KeyValuePair<TKey, TValue>>()
+                ).GetEnumerator()
+                : GetEnumerator();
 
         /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() =>
-            Count == 0 ? Array.Empty<KeyValuePair<TKey, TValue>>().GetEnumerator() :
-            GetEnumerator();
+            Count == 0
+                ? Array.Empty<KeyValuePair<TKey, TValue>>().GetEnumerator()
+                : GetEnumerator();
 
         /// <inheritdoc />
         IDictionaryEnumerator IDictionary.GetEnumerator() =>
             new DictionaryEnumerator<TKey, TValue>(GetEnumerator());
 
         /// <inheritdoc />
-        void IDictionary<TKey, TValue>.Add(TKey key, TValue value) => throw new NotSupportedException();
+        void IDictionary<TKey, TValue>.Add(TKey key, TValue value) =>
+            throw new NotSupportedException();
 
         /// <inheritdoc />
-        void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item) => throw new NotSupportedException();
+        void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item) =>
+            throw new NotSupportedException();
 
         /// <inheritdoc />
         void IDictionary.Add(object key, object? value) => throw new NotSupportedException();
@@ -448,7 +487,8 @@ namespace System.Collections.Frozen
         bool IDictionary<TKey, TValue>.Remove(TKey key) => throw new NotSupportedException();
 
         /// <inheritdoc />
-        bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item) => throw new NotSupportedException();
+        bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item) =>
+            throw new NotSupportedException();
 
         /// <inheritdoc />
         void IDictionary.Remove(object key) => throw new NotSupportedException();

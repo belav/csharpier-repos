@@ -18,7 +18,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 /// <summary>
 /// Finds and executes an <see cref="IView"/> for a <see cref="PartialViewResult"/>.
 /// </summary>
-public partial class PartialViewResultExecutor : ViewExecutor, IActionResultExecutor<PartialViewResult>
+public partial class PartialViewResultExecutor
+    : ViewExecutor,
+        IActionResultExecutor<PartialViewResult>
 {
     private const string ActionNameKey = "action";
 
@@ -39,8 +41,16 @@ public partial class PartialViewResultExecutor : ViewExecutor, IActionResultExec
         ITempDataDictionaryFactory tempDataFactory,
         DiagnosticListener diagnosticListener,
         ILoggerFactory loggerFactory,
-        IModelMetadataProvider modelMetadataProvider)
-        : base(viewOptions, writerFactory, viewEngine, tempDataFactory, diagnosticListener, modelMetadataProvider)
+        IModelMetadataProvider modelMetadataProvider
+    )
+        : base(
+            viewOptions,
+            writerFactory,
+            viewEngine,
+            tempDataFactory,
+            diagnosticListener,
+            modelMetadataProvider
+        )
     {
         if (loggerFactory == null)
         {
@@ -61,7 +71,10 @@ public partial class PartialViewResultExecutor : ViewExecutor, IActionResultExec
     /// <param name="actionContext">The <see cref="ActionContext"/> associated with the current request.</param>
     /// <param name="viewResult">The <see cref="PartialViewResult"/>.</param>
     /// <returns>A <see cref="ViewEngineResult"/>.</returns>
-    public virtual ViewEngineResult FindView(ActionContext actionContext, PartialViewResult viewResult)
+    public virtual ViewEngineResult FindView(
+        ActionContext actionContext,
+        PartialViewResult viewResult
+    )
     {
         if (actionContext == null)
         {
@@ -78,7 +91,11 @@ public partial class PartialViewResultExecutor : ViewExecutor, IActionResultExec
 
         var stopwatch = ValueStopwatch.StartNew();
 
-        var result = viewEngine.GetView(executingFilePath: null, viewPath: viewName, isMainPage: false);
+        var result = viewEngine.GetView(
+            executingFilePath: null,
+            viewPath: viewName,
+            isMainPage: false
+        );
         var originalResult = result;
         if (!result.Success)
         {
@@ -112,7 +129,8 @@ public partial class PartialViewResultExecutor : ViewExecutor, IActionResultExec
                 isMainPage: false,
                 viewResult: viewResult,
                 viewName: viewName,
-                view: result.View);
+                view: result.View
+            );
             Log.PartialViewFound(Logger, result.View, stopwatch.GetElapsedTime());
         }
         else
@@ -122,7 +140,8 @@ public partial class PartialViewResultExecutor : ViewExecutor, IActionResultExec
                 isMainPage: false,
                 viewResult: viewResult,
                 viewName: viewName,
-                searchedLocations: result.SearchedLocations);
+                searchedLocations: result.SearchedLocations
+            );
             Log.PartialViewNotFound(Logger, viewName, result.SearchedLocations);
         }
 
@@ -136,7 +155,11 @@ public partial class PartialViewResultExecutor : ViewExecutor, IActionResultExec
     /// <param name="view">The <see cref="IView"/>.</param>
     /// <param name="viewResult">The <see cref="PartialViewResult"/>.</param>
     /// <returns>A <see cref="Task"/> which will complete when view execution is completed.</returns>
-    public virtual Task ExecuteAsync(ActionContext actionContext, IView view, PartialViewResult viewResult)
+    public virtual Task ExecuteAsync(
+        ActionContext actionContext,
+        IView view,
+        PartialViewResult viewResult
+    )
     {
         if (actionContext == null)
         {
@@ -159,7 +182,8 @@ public partial class PartialViewResultExecutor : ViewExecutor, IActionResultExec
             viewResult.ViewData,
             viewResult.TempData,
             viewResult.ContentType,
-            viewResult.StatusCode);
+            viewResult.StatusCode
+        );
     }
 
     /// <inheritdoc />
@@ -203,8 +227,10 @@ public partial class PartialViewResultExecutor : ViewExecutor, IActionResultExec
 
         var actionDescriptor = context.ActionDescriptor;
         string? normalizedValue = null;
-        if (actionDescriptor.RouteValues.TryGetValue(ActionNameKey, out var value) &&
-            !string.IsNullOrEmpty(value))
+        if (
+            actionDescriptor.RouteValues.TryGetValue(ActionNameKey, out var value)
+            && !string.IsNullOrEmpty(value)
+        )
         {
             normalizedValue = value;
         }
@@ -220,24 +246,63 @@ public partial class PartialViewResultExecutor : ViewExecutor, IActionResultExec
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information, "Executing PartialViewResult, running view {PartialViewName}.", EventName = "PartialViewResultExecuting")]
-        public static partial void PartialViewResultExecuting(ILogger logger, string partialViewName);
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Executing PartialViewResult, running view {PartialViewName}.",
+            EventName = "PartialViewResultExecuting"
+        )]
+        public static partial void PartialViewResultExecuting(
+            ILogger logger,
+            string partialViewName
+        );
 
-        [LoggerMessage(2, LogLevel.Debug, "The partial view path '{PartialViewFilePath}' was found in {ElapsedMilliseconds}ms.", EventName = "PartialViewFound")]
-        private static partial void PartialViewFound(ILogger logger, string partialViewFilePath, double elapsedMilliseconds);
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "The partial view path '{PartialViewFilePath}' was found in {ElapsedMilliseconds}ms.",
+            EventName = "PartialViewFound"
+        )]
+        private static partial void PartialViewFound(
+            ILogger logger,
+            string partialViewFilePath,
+            double elapsedMilliseconds
+        );
 
         public static void PartialViewFound(ILogger logger, IView view, TimeSpan timespan)
         {
             PartialViewFound(logger, view.Path, timespan.TotalMilliseconds);
         }
 
-        [LoggerMessage(3, LogLevel.Error, "The partial view '{PartialViewName}' was not found. Searched locations: {SearchedViewLocations}", EventName = "PartialViewNotFound")]
-        public static partial void PartialViewNotFound(ILogger logger, string partialViewName, IEnumerable<string> searchedViewLocations);
+        [LoggerMessage(
+            3,
+            LogLevel.Error,
+            "The partial view '{PartialViewName}' was not found. Searched locations: {SearchedViewLocations}",
+            EventName = "PartialViewNotFound"
+        )]
+        public static partial void PartialViewNotFound(
+            ILogger logger,
+            string partialViewName,
+            IEnumerable<string> searchedViewLocations
+        );
 
-        [LoggerMessage(4, LogLevel.Information, "Executed PartialViewResult - view {PartialViewName} executed in {ElapsedMilliseconds}ms.", EventName = "PartialViewResultExecuted")]
-        private static partial void PartialViewResultExecuted(ILogger logger, string? partialViewName, double elapsedMilliseconds);
+        [LoggerMessage(
+            4,
+            LogLevel.Information,
+            "Executed PartialViewResult - view {PartialViewName} executed in {ElapsedMilliseconds}ms.",
+            EventName = "PartialViewResultExecuted"
+        )]
+        private static partial void PartialViewResultExecuted(
+            ILogger logger,
+            string? partialViewName,
+            double elapsedMilliseconds
+        );
 
-        public static void PartialViewResultExecuted(ILogger logger, string? partialViewName, TimeSpan timespan)
+        public static void PartialViewResultExecuted(
+            ILogger logger,
+            string? partialViewName,
+            TimeSpan timespan
+        )
         {
             PartialViewResultExecuted(logger, partialViewName, timespan.TotalMilliseconds);
         }

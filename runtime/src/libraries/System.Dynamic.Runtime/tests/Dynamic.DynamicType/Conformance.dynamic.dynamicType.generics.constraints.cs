@@ -13,8 +13,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // <Code>
     using System.Collections.Generic;
 
-    public class MyClass<T>
-        where T : List<object>
+    public class MyClass<T> where T : List<object>
     {
         public void Foo()
         {
@@ -25,6 +24,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -43,8 +43,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.complex002.complex002
 {
     // <Title>Derived generic types</Title>
@@ -55,8 +53,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // <Code>
     using System.Collections.Generic;
 
-    public class MyClass<T>
-        where T : List<object>
+    public class MyClass<T> where T : List<object>
     {
         public void Foo()
         {
@@ -67,6 +64,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -84,8 +82,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.complex008.complex008
 {
@@ -140,8 +136,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.complex009.complex009
 {
     // <Title>Derived generic types</Title>
@@ -170,26 +164,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
 
     public class C
     {
-        public void NakedGen1<T, U>() where T : U
-        {
-        }
+        public void NakedGen1<T, U>() where T : U { }
     }
 
-    public struct Struct
-    {
-    }
+    public struct Struct { }
 
-    public class GenBaseClass<T>
-    {
-    }
+    public class GenBaseClass<T> { }
 
-    public class GenDerClass<T> : GenBaseClass<T>
-    {
-    }
+    public class GenDerClass<T> : GenBaseClass<T> { }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.complex010.complex010
 {
@@ -202,9 +186,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
 
     public class Base<T>
     {
-        public virtual void Foo<G>() where G : T, new()
-        {
-        }
+        public virtual void Foo<G>() where G : T, new() { }
     }
 
     public class DerivedNullableOfInt : Base<int?>
@@ -221,6 +203,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     public class Program
     {
         public static int Status = 0;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -238,8 +221,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.complex011.complex011
 {
@@ -284,8 +265,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.complex012.complex012
 {
@@ -335,8 +314,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.simple001.simple001
 {
     // <Title>Generic constraints</Title>
@@ -345,8 +322,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class MyClass<T>
-        where T : class
+    public class MyClass<T> where T : class
     {
         public void Foo()
         {
@@ -357,6 +333,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -375,8 +352,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.simple002.simple002
 {
     // <Title>Generic constraints</Title>
@@ -385,8 +360,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class MyClass<T>
-        where T : class
+    public class MyClass<T> where T : class
     {
         public void Foo()
         {
@@ -397,6 +371,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -414,8 +389,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.simple006.simple006
 {
@@ -436,6 +409,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -454,8 +428,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.simple008.simple008
 {
     // <Title>Generic constraints</Title>
@@ -464,8 +436,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class MyClass<T, U>
-        where T : U
+    public class MyClass<T, U> where T : U
     {
         public void Foo()
         {
@@ -476,6 +447,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -494,8 +466,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.simple009.simple009
 {
     // <Title>Generic constraints</Title>
@@ -504,8 +474,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class MyClass<T>
-        where T : class
+    public class MyClass<T> where T : class
     {
         public void Foo()
         {
@@ -516,6 +485,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -534,8 +504,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.simple012.simple012
 {
     // <Title>Generic constraints</Title>
@@ -544,8 +512,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
     // <Code>
-    public class MyClass<T, U>
-        where T : U
+    public class MyClass<T, U> where T : U
     {
         public void Foo()
         {
@@ -556,6 +523,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -574,8 +542,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.simple013.simple013
 {
     // <Title>Generic constraints</Title>
@@ -584,8 +550,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class MyClass<T, U>
-        where T : U
+    public class MyClass<T, U> where T : U
     {
         public void Foo()
         {
@@ -596,6 +561,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -614,8 +580,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.simple015.simple015
 {
     // <Title>Generic constraints</Title>
@@ -624,8 +588,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class MyClass<T>
-        where T : new()
+    public class MyClass<T> where T : new()
     {
         public void Foo()
         {
@@ -636,6 +599,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -654,8 +618,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.simple016.simple016
 {
     // <Title>Generic constraints</Title>
@@ -664,8 +626,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class MyClass<T>
-        where T : new()
+    public class MyClass<T> where T : new()
     {
         public void Foo()
         {
@@ -676,6 +637,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -693,8 +655,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.simple018.simple018
 {
@@ -723,14 +683,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             return 0;
         }
 
-        public void Bar<T, S>() where T : S
-        {
-        }
+        public void Bar<T, S>() where T : S { }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.simple019.simple019
 {
@@ -744,6 +700,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     public class B
     {
         public static int Status = 1;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -769,8 +726,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.simple020.simple020
 {
@@ -798,21 +753,23 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.CantInferMethTypeArgs, e.Message, "B.Foo<T>()"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.CantInferMethTypeArgs,
+                        e.Message,
+                        "B.Foo<T>()"
+                    )
+                )
                     return 0;
             }
 
             return 1;
         }
 
-        public void Foo<T>()
-        {
-        }
+        public void Foo<T>() { }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.simple021.simple021
 {
@@ -826,6 +783,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     public class B
     {
         public static int Status = 1;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -847,8 +805,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.simple022.simple022
 {
     // <Title>Generic constraints</Title>
@@ -861,6 +817,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     public class B
     {
         public static int Status = 1;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -876,7 +833,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadArity, e.Message, "B.Foo<T,S>()", ErrorVerifier.GetErrorElement(ErrorElementId.SK_METHOD), "2"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadArity,
+                        e.Message,
+                        "B.Foo<T,S>()",
+                        ErrorVerifier.GetErrorElement(ErrorElementId.SK_METHOD),
+                        "2"
+                    )
+                )
                     B.Status = 0;
             }
 
@@ -891,8 +856,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.typeinference001.typeinference001
 {
     // <Title>Generic Type Inference</Title>
@@ -904,9 +867,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
 
     public class C
     {
-        public static void M<T>(T x, T y)
-        {
-        }
+        public static void M<T>(T x, T y) { }
     }
 
     public class Test
@@ -927,7 +888,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.CantInferMethTypeArgs, e.Message, "C.M<T>(T, T)"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.CantInferMethTypeArgs,
+                        e.Message,
+                        "C.M<T>(T, T)"
+                    )
+                )
                     return 0;
             }
 
@@ -936,8 +903,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.typeinference002.typeinference002
 {
@@ -950,9 +915,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
 
     public class A
     {
-        public void M<T>(T x, T y)
-        {
-        }
+        public void M<T>(T x, T y) { }
     }
 
     public class TestClass
@@ -1051,8 +1014,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.typeinference003.typeinference003
 {
     // <Title>Generic Type Inference</Title>
@@ -1064,14 +1025,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
 
     public struct S
     {
-        public void M<T>(T x, T y)
-        {
-        }
+        public void M<T>(T x, T y) { }
     }
 
     public struct Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -1091,7 +1049,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.CantInferMethTypeArgs, e.Message, "S.M<T>(T, T)"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.CantInferMethTypeArgs,
+                        e.Message,
+                        "S.M<T>(T, T)"
+                    )
+                )
                     ret--; // Pass
             }
 
@@ -1101,7 +1065,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.CantInferMethTypeArgs, e.Message, "S.M<T>(T, T)"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.CantInferMethTypeArgs,
+                        e.Message,
+                        "S.M<T>(T, T)"
+                    )
+                )
                     ret--; // Pass
             }
 
@@ -1115,7 +1085,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadArgTypes, e.Message, "S.M<int>(int, int)"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadArgTypes,
+                        e.Message,
+                        "S.M<int>(int, int)"
+                    )
+                )
                     ret--; // Pass
             }
 
@@ -1126,7 +1102,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadArgTypes, e.Message, "S.M<int>(int, int)"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadArgTypes,
+                        e.Message,
+                        "S.M<int>(int, int)"
+                    )
+                )
                     ret--; // Pass
             }
 
@@ -1140,7 +1122,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadArgTypes, e.Message, "S.M<Test>(Test, Test)"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadArgTypes,
+                        e.Message,
+                        "S.M<Test>(Test, Test)"
+                    )
+                )
                     ret--; // Pass
             }
 
@@ -1151,7 +1139,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadArgTypes, e.Message, "S.M<Test>(Test, Test)"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadArgTypes,
+                        e.Message,
+                        "S.M<Test>(Test, Test)"
+                    )
+                )
                     ret--; // Pass
             }
 
@@ -1160,8 +1154,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.typeinference004.typeinference004
 {
@@ -1174,9 +1166,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
 
     public class Test
     {
-        public void M<T>(T x, T y, T z)
-        {
-        }
+        public void M<T>(T x, T y, T z) { }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -1291,8 +1281,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.typeinference005.typeinference005
 {
     // <Title>Generic Type Inference</Title>
@@ -1304,10 +1292,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
 
     public struct Test
     {
-        public void M<T>(T x, T y, T z)
-        {
-        }
-
+        public void M<T>(T x, T y, T z) { }
 
         public static void DynamicCSharpRunTest()
         {
@@ -1328,7 +1313,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.CantInferMethTypeArgs, e.Message, "Test.M<T>(T, T, T)"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.CantInferMethTypeArgs,
+                        e.Message,
+                        "Test.M<T>(T, T, T)"
+                    )
+                )
                     ret--; // Pass
             }
 
@@ -1338,7 +1329,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.CantInferMethTypeArgs, e.Message, "Test.M<T>(T, T, T)"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.CantInferMethTypeArgs,
+                        e.Message,
+                        "Test.M<T>(T, T, T)"
+                    )
+                )
                     ret--; // Pass
             }
 
@@ -1351,7 +1348,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.CantInferMethTypeArgs, e.Message, "Test.M<T>(T, T, T)"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.CantInferMethTypeArgs,
+                        e.Message,
+                        "Test.M<T>(T, T, T)"
+                    )
+                )
                     ret--; // Pass
             }
 
@@ -1361,7 +1364,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.CantInferMethTypeArgs, e.Message, "Test.M<T>(T, T, T)"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.CantInferMethTypeArgs,
+                        e.Message,
+                        "Test.M<T>(T, T, T)"
+                    )
+                )
                     ret--; // Pass
             }
 
@@ -1373,7 +1382,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadArgTypes, e.Message, "Test.M<int>(int, int, int)"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadArgTypes,
+                        e.Message,
+                        "Test.M<int>(int, int, int)"
+                    )
+                )
                     ret--; // Pass
             }
 
@@ -1383,7 +1398,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadArgTypes, e.Message, "Test.M<int>(int, int, int)"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadArgTypes,
+                        e.Message,
+                        "Test.M<int>(int, int, int)"
+                    )
+                )
                     ret--; // Pass
             }
 
@@ -1392,8 +1413,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cnstraintegeregers.typeinference006.typeinference006
 {
@@ -1445,7 +1464,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             return 0;
         }
 
-        public static int Bar3<T, U, V>(T t, U u, V v) where T : U where U : IComparable<V>
+        public static int Bar3<T, U, V>(T t, U u, V v)
+            where T : U
+            where U : IComparable<V>
         {
             return 0;
         }

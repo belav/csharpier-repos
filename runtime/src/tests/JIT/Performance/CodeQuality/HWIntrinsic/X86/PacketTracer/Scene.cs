@@ -16,7 +16,12 @@ internal class Scene
     public LightPacket256[] Lights;
     public Camera Camera;
 
-    public Scene(ObjectPacket256[] things, LightPacket256[] lights, Camera camera) { Things = things; Lights = lights; Camera = camera; }
+    public Scene(ObjectPacket256[] things, LightPacket256[] lights, Camera camera)
+    {
+        Things = things;
+        Lights = lights;
+        Camera = camera;
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VectorPacket256 Normals(Vector256<int> things, VectorPacket256 pos)
@@ -46,5 +51,4 @@ internal class Scene
         }
         return rfl;
     }
-
 }

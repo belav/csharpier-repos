@@ -7,10 +7,7 @@ namespace Microsoft.EntityFrameworkCore;
 
 public abstract class TransactionInterceptionTestBase : InterceptionTestBase
 {
-    protected TransactionInterceptionTestBase(InterceptionFixtureBase fixture)
-        : base(fixture)
-    {
-    }
+    protected TransactionInterceptionTestBase(InterceptionFixtureBase fixture) : base(fixture) { }
 
     [ConditionalTheory]
     [InlineData(false)]
@@ -19,9 +16,11 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
     {
         using var context = CreateContext(Enumerable.Empty<IInterceptor>());
         using var listener = Fixture.SubscribeToDiagnosticListener(context.ContextId);
-        using (var transaction = async
-                   ? await context.Database.BeginTransactionAsync()
-                   : context.Database.BeginTransaction())
+        using (
+            var transaction = async
+                ? await context.Database.BeginTransactionAsync()
+                : context.Database.BeginTransaction()
+        )
         {
             Assert.NotNull(transaction.GetDbTransaction());
         }
@@ -58,9 +57,11 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         using (context)
         {
             using var listener = Fixture.SubscribeToDiagnosticListener(context.ContextId);
-            using (var _ = async
-                       ? await context.Database.BeginTransactionAsync()
-                       : context.Database.BeginTransaction())
+            using (
+                var _ = async
+                    ? await context.Database.BeginTransactionAsync()
+                    : context.Database.BeginTransaction()
+            )
             {
                 AssertBeginTransaction(context, interceptor, async);
             }
@@ -78,9 +79,11 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         using (context)
         {
             using var listener = Fixture.SubscribeToDiagnosticListener(context.ContextId);
-            using (var _ = async
-                       ? await context.Database.BeginTransactionAsync(IsolationLevel.ReadUncommitted)
-                       : context.Database.BeginTransaction(IsolationLevel.ReadUncommitted))
+            using (
+                var _ = async
+                    ? await context.Database.BeginTransactionAsync(IsolationLevel.ReadUncommitted)
+                    : context.Database.BeginTransaction(IsolationLevel.ReadUncommitted)
+            )
             {
                 AssertBeginTransaction(context, interceptor, async);
             }
@@ -104,9 +107,7 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
             AssertBeginTransaction(context, interceptor, async);
 
             // Throws if a real transaction has been created
-            using (context.Database.GetDbConnection().BeginTransaction())
-            {
-            }
+            using (context.Database.GetDbConnection().BeginTransaction()) { }
 
             AssertBeginTransactionEvents(listener);
         }
@@ -117,22 +118,28 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         public override InterceptionResult<DbTransaction> TransactionStarting(
             DbConnection connection,
             TransactionStartingEventData eventData,
-            InterceptionResult<DbTransaction> result)
+            InterceptionResult<DbTransaction> result
+        )
         {
             base.TransactionStarting(connection, eventData, result);
 
-            return InterceptionResult<DbTransaction>.SuppressWithResult(new FakeDbTransaction(connection, eventData.IsolationLevel));
+            return InterceptionResult<DbTransaction>.SuppressWithResult(
+                new FakeDbTransaction(connection, eventData.IsolationLevel)
+            );
         }
 
         public override async ValueTask<InterceptionResult<DbTransaction>> TransactionStartingAsync(
             DbConnection connection,
             TransactionStartingEventData eventData,
             InterceptionResult<DbTransaction> result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             await base.TransactionStartingAsync(connection, eventData, result, cancellationToken);
 
-            return InterceptionResult<DbTransaction>.SuppressWithResult(new FakeDbTransaction(connection, eventData.IsolationLevel));
+            return InterceptionResult<DbTransaction>.SuppressWithResult(
+                new FakeDbTransaction(connection, eventData.IsolationLevel)
+            );
         }
     }
 
@@ -161,7 +168,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         public override DbTransaction TransactionStarted(
             DbConnection connection,
             TransactionEndEventData eventData,
-            DbTransaction result)
+            DbTransaction result
+        )
         {
             result = base.TransactionStarted(connection, eventData, result);
 
@@ -172,9 +180,15 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
             DbConnection connection,
             TransactionEndEventData eventData,
             DbTransaction result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
-            result = await base.TransactionStartedAsync(connection, eventData, result, cancellationToken);
+            result = await base.TransactionStartedAsync(
+                connection,
+                eventData,
+                result,
+                cancellationToken
+            );
 
             return new WrappedDbTransaction(result);
         }
@@ -182,7 +196,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         public override DbTransaction TransactionUsed(
             DbConnection connection,
             TransactionEventData eventData,
-            DbTransaction result)
+            DbTransaction result
+        )
         {
             result = base.TransactionUsed(connection, eventData, result);
 
@@ -193,9 +208,15 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
             DbConnection connection,
             TransactionEventData eventData,
             DbTransaction result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
-            result = await base.TransactionUsedAsync(connection, eventData, result, cancellationToken);
+            result = await base.TransactionUsedAsync(
+                connection,
+                eventData,
+                result,
+                cancellationToken
+            );
 
             return new WrappedDbTransaction(result);
         }
@@ -477,7 +498,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         public override InterceptionResult TransactionCommitting(
             DbTransaction transaction,
             TransactionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             base.TransactionCommitting(transaction, eventData, result);
 
@@ -488,9 +510,15 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
             DbTransaction transaction,
             TransactionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
-            await base.TransactionCommittingAsync(transaction, eventData, result, cancellationToken);
+            await base.TransactionCommittingAsync(
+                transaction,
+                eventData,
+                result,
+                cancellationToken
+            );
 
             return InterceptionResult.Suppress();
         }
@@ -498,7 +526,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         public override InterceptionResult TransactionRollingBack(
             DbTransaction transaction,
             TransactionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             base.TransactionRollingBack(transaction, eventData, result);
 
@@ -509,9 +538,15 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
             DbTransaction transaction,
             TransactionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
-            await base.TransactionRollingBackAsync(transaction, eventData, result, cancellationToken);
+            await base.TransactionRollingBackAsync(
+                transaction,
+                eventData,
+                result,
+                cancellationToken
+            );
 
             return InterceptionResult.Suppress();
         }
@@ -581,7 +616,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         var interceptor4 = new WrappingTransactionInterceptor();
         using var context = CreateContext(
             new IInterceptor[] { new NoOpTransactionInterceptor(), interceptor1, interceptor2 },
-            new IInterceptor[] { interceptor3, interceptor4, new NoOpTransactionInterceptor() });
+            new IInterceptor[] { interceptor3, interceptor4, new NoOpTransactionInterceptor() }
+        );
         using var listener = Fixture.SubscribeToDiagnosticListener(context.ContextId);
         using var contextTransaction = async
             ? await context.Database.BeginTransactionAsync()
@@ -596,9 +632,7 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         AssertBeginTransactionEvents(listener);
     }
 
-    protected class NoOpTransactionInterceptor : DbConnectionInterceptor
-    {
-    }
+    protected class NoOpTransactionInterceptor : DbConnectionInterceptor { }
 
     private class WrappedDbTransaction : DbTransaction
     {
@@ -609,20 +643,15 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
             _transaction = transaction;
         }
 
-        public override void Commit()
-            => _transaction.Commit();
+        public override void Commit() => _transaction.Commit();
 
-        public override void Rollback()
-            => _transaction.Rollback();
+        public override void Rollback() => _transaction.Rollback();
 
-        protected override DbConnection DbConnection
-            => _transaction.Connection;
+        protected override DbConnection DbConnection => _transaction.Connection;
 
-        public override IsolationLevel IsolationLevel
-            => _transaction.IsolationLevel;
+        public override IsolationLevel IsolationLevel => _transaction.IsolationLevel;
 
-        protected override void Dispose(bool disposing)
-            => _transaction.Dispose();
+        protected override void Dispose(bool disposing) => _transaction.Dispose();
     }
 
     private class FakeDbTransaction : DbTransaction
@@ -630,25 +659,26 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         public FakeDbTransaction(DbConnection dbConnection, IsolationLevel isolationLevel)
         {
             DbConnection = dbConnection;
-            IsolationLevel = isolationLevel == IsolationLevel.Unspecified
-                ? IsolationLevel.Snapshot
-                : isolationLevel;
+            IsolationLevel =
+                isolationLevel == IsolationLevel.Unspecified
+                    ? IsolationLevel.Snapshot
+                    : isolationLevel;
         }
 
-        public override void Commit()
-        {
-        }
+        public override void Commit() { }
 
-        public override void Rollback()
-        {
-        }
+        public override void Rollback() { }
 
         protected override DbConnection DbConnection { get; }
 
         public override IsolationLevel IsolationLevel { get; }
     }
 
-    private static void AssertBeginTransaction(DbContext context, TransactionInterceptor interceptor, bool async)
+    private static void AssertBeginTransaction(
+        DbContext context,
+        TransactionInterceptor interceptor,
+        bool async
+    )
     {
         Assert.Equal(async, interceptor.AsyncCalled);
         Assert.NotEqual(async, interceptor.SyncCalled);
@@ -674,7 +704,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         DbContext context,
         IDbContextTransaction contextTransaction,
         TransactionInterceptor interceptor,
-        bool async)
+        bool async
+    )
     {
         Assert.Equal(async, interceptor.AsyncCalled);
         Assert.NotEqual(async, interceptor.SyncCalled);
@@ -701,7 +732,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         DbContext context,
         IDbContextTransaction contextTransaction,
         TransactionInterceptor interceptor,
-        bool async)
+        bool async
+    )
     {
         Assert.Equal(async, interceptor.AsyncCalled);
         Assert.NotEqual(async, interceptor.SyncCalled);
@@ -728,7 +760,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         DbContext context,
         IDbContextTransaction contextTransaction,
         TransactionInterceptor interceptor,
-        bool async)
+        bool async
+    )
     {
         Assert.Equal(async, interceptor.AsyncCalled);
         Assert.NotEqual(async, interceptor.SyncCalled);
@@ -755,7 +788,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         DbContext context,
         IDbContextTransaction contextTransaction,
         TransactionInterceptor interceptor,
-        bool async)
+        bool async
+    )
     {
         Assert.Equal(async, interceptor.AsyncCalled);
         Assert.NotEqual(async, interceptor.SyncCalled);
@@ -782,7 +816,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         DbContext context,
         IDbContextTransaction contextTransaction,
         TransactionInterceptor interceptor,
-        bool async)
+        bool async
+    )
     {
         Assert.Equal(async, interceptor.AsyncCalled);
         Assert.NotEqual(async, interceptor.SyncCalled);
@@ -809,7 +844,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         DbContext context,
         IDbContextTransaction contextTransaction,
         TransactionInterceptor interceptor,
-        bool async)
+        bool async
+    )
     {
         Assert.Equal(async, interceptor.AsyncCalled);
         Assert.NotEqual(async, interceptor.SyncCalled);
@@ -835,7 +871,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
     private static void AssertError(
         DbContext context,
         TransactionInterceptor interceptor,
-        bool async)
+        bool async
+    )
     {
         Assert.Equal(async, interceptor.AsyncCalled);
         Assert.NotEqual(async, interceptor.SyncCalled);
@@ -844,38 +881,44 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         Assert.Same(context, interceptor.Context);
     }
 
-    private static void AssertBeginTransactionEvents(ITestDiagnosticListener listener)
-        => listener.AssertEventsInOrder(
+    private static void AssertBeginTransactionEvents(ITestDiagnosticListener listener) =>
+        listener.AssertEventsInOrder(
             RelationalEventId.TransactionStarting.Name,
-            RelationalEventId.TransactionStarted.Name);
+            RelationalEventId.TransactionStarted.Name
+        );
 
-    private static void AssertUseTransactionEvents(ITestDiagnosticListener listener)
-        => listener.AssertEventsInOrder(RelationalEventId.TransactionUsed.Name);
+    private static void AssertUseTransactionEvents(ITestDiagnosticListener listener) =>
+        listener.AssertEventsInOrder(RelationalEventId.TransactionUsed.Name);
 
-    private static void AssertCommitEvents(ITestDiagnosticListener listener)
-        => listener.AssertEventsInOrder(
+    private static void AssertCommitEvents(ITestDiagnosticListener listener) =>
+        listener.AssertEventsInOrder(
             RelationalEventId.TransactionCommitting.Name,
-            RelationalEventId.TransactionCommitted.Name);
+            RelationalEventId.TransactionCommitted.Name
+        );
 
-    private static void AssertRollBackEvents(ITestDiagnosticListener listener)
-        => listener.AssertEventsInOrder(
+    private static void AssertRollBackEvents(ITestDiagnosticListener listener) =>
+        listener.AssertEventsInOrder(
             RelationalEventId.TransactionRollingBack.Name,
-            RelationalEventId.TransactionRolledBack.Name);
+            RelationalEventId.TransactionRolledBack.Name
+        );
 
-    private static void AssertCreateSavepointEvents(ITestDiagnosticListener listener)
-        => listener.AssertEventsInOrder(
+    private static void AssertCreateSavepointEvents(ITestDiagnosticListener listener) =>
+        listener.AssertEventsInOrder(
             RelationalEventId.CreatingTransactionSavepoint.Name,
-            RelationalEventId.CreatedTransactionSavepoint.Name);
+            RelationalEventId.CreatedTransactionSavepoint.Name
+        );
 
-    private static void AssertRollbackToSavepointEvents(ITestDiagnosticListener listener)
-        => listener.AssertEventsInOrder(
+    private static void AssertRollbackToSavepointEvents(ITestDiagnosticListener listener) =>
+        listener.AssertEventsInOrder(
             RelationalEventId.RollingBackToTransactionSavepoint.Name,
-            RelationalEventId.RolledBackToTransactionSavepoint.Name);
+            RelationalEventId.RolledBackToTransactionSavepoint.Name
+        );
 
-    private static void AssertReleaseSavepointEvents(ITestDiagnosticListener listener)
-        => listener.AssertEventsInOrder(
+    private static void AssertReleaseSavepointEvents(ITestDiagnosticListener listener) =>
+        listener.AssertEventsInOrder(
             RelationalEventId.ReleasingTransactionSavepoint.Name,
-            RelationalEventId.ReleasedTransactionSavepoint.Name);
+            RelationalEventId.ReleasedTransactionSavepoint.Name
+        );
 
     protected class TransactionInterceptor : IDbTransactionInterceptor
     {
@@ -924,7 +967,10 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
             FailedCalled = false;
         }
 
-        protected virtual void AssertStarting(DbConnection connection, TransactionStartingEventData eventData)
+        protected virtual void AssertStarting(
+            DbConnection connection,
+            TransactionStartingEventData eventData
+        )
         {
             Assert.NotNull(eventData.Context);
             Assert.NotEqual(default, eventData.ConnectionId);
@@ -938,7 +984,10 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
             StartingCalled = true;
         }
 
-        protected virtual void AssertStarted(DbConnection connection, TransactionEndEventData eventData)
+        protected virtual void AssertStarted(
+            DbConnection connection,
+            TransactionEndEventData eventData
+        )
         {
             Assert.Same(Context, eventData.Context);
             Assert.Equal(TransactionId, eventData.TransactionId);
@@ -1092,7 +1141,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         public virtual InterceptionResult<DbTransaction> TransactionStarting(
             DbConnection connection,
             TransactionStartingEventData eventData,
-            InterceptionResult<DbTransaction> result)
+            InterceptionResult<DbTransaction> result
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -1104,7 +1154,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         public virtual DbTransaction TransactionStarted(
             DbConnection connection,
             TransactionEndEventData eventData,
-            DbTransaction result)
+            DbTransaction result
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -1117,7 +1168,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
             DbConnection connection,
             TransactionStartingEventData eventData,
             InterceptionResult<DbTransaction> result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;
@@ -1130,7 +1182,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
             DbConnection connection,
             TransactionEndEventData eventData,
             DbTransaction result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;
@@ -1142,7 +1195,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         public virtual DbTransaction TransactionUsed(
             DbConnection connection,
             TransactionEventData eventData,
-            DbTransaction result)
+            DbTransaction result
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -1155,7 +1209,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
             DbConnection connection,
             TransactionEventData eventData,
             DbTransaction result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;
@@ -1167,7 +1222,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         public virtual InterceptionResult TransactionCommitting(
             DbTransaction transaction,
             TransactionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -1178,7 +1234,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
 
         public virtual void TransactionCommitted(
             DbTransaction transaction,
-            TransactionEndEventData eventData)
+            TransactionEndEventData eventData
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -1189,7 +1246,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
             DbTransaction transaction,
             TransactionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;
@@ -1201,7 +1259,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         public virtual Task TransactionCommittedAsync(
             DbTransaction transaction,
             TransactionEndEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;
@@ -1213,7 +1272,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         public virtual InterceptionResult TransactionRollingBack(
             DbTransaction transaction,
             TransactionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -1224,7 +1284,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
 
         public virtual void TransactionRolledBack(
             DbTransaction transaction,
-            TransactionEndEventData eventData)
+            TransactionEndEventData eventData
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -1235,7 +1296,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
             DbTransaction transaction,
             TransactionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;
@@ -1247,7 +1309,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         public virtual Task TransactionRolledBackAsync(
             DbTransaction transaction,
             TransactionEndEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;
@@ -1259,7 +1322,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         public virtual InterceptionResult CreatingSavepoint(
             DbTransaction transaction,
             TransactionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -1270,7 +1334,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
 
         public virtual void CreatedSavepoint(
             DbTransaction transaction,
-            TransactionEventData eventData)
+            TransactionEventData eventData
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -1281,7 +1346,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
             DbTransaction transaction,
             TransactionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;
@@ -1293,7 +1359,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         public virtual Task CreatedSavepointAsync(
             DbTransaction transaction,
             TransactionEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;
@@ -1305,7 +1372,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         public virtual InterceptionResult RollingBackToSavepoint(
             DbTransaction transaction,
             TransactionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -1316,7 +1384,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
 
         public virtual void RolledBackToSavepoint(
             DbTransaction transaction,
-            TransactionEventData eventData)
+            TransactionEventData eventData
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -1327,7 +1396,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
             DbTransaction transaction,
             TransactionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;
@@ -1339,7 +1409,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         public virtual Task RolledBackToSavepointAsync(
             DbTransaction transaction,
             TransactionEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;
@@ -1351,7 +1422,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         public virtual InterceptionResult ReleasingSavepoint(
             DbTransaction transaction,
             TransactionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -1362,7 +1434,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
 
         public virtual void ReleasedSavepoint(
             DbTransaction transaction,
-            TransactionEventData eventData)
+            TransactionEventData eventData
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -1373,7 +1446,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
             DbTransaction transaction,
             TransactionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;
@@ -1385,7 +1459,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         public virtual Task ReleasedSavepointAsync(
             DbTransaction transaction,
             TransactionEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;
@@ -1396,7 +1471,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
 
         public virtual void TransactionFailed(
             DbTransaction transaction,
-            TransactionErrorEventData eventData)
+            TransactionErrorEventData eventData
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -1406,7 +1482,8 @@ public abstract class TransactionInterceptionTestBase : InterceptionTestBase
         public virtual Task TransactionFailedAsync(
             DbTransaction transaction,
             TransactionErrorEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;

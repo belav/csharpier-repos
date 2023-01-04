@@ -26,12 +26,8 @@ namespace System.ComponentModel
 
                 return SynchronizationContext.Current!;
             }
-
             // a thread should set this to null  when it is done, else the context will never be disposed/GC'd
-            set
-            {
-                SynchronizationContext.SetSynchronizationContext(value);
-            }
+            set { SynchronizationContext.SetSynchronizationContext(value); }
         }
     }
 }

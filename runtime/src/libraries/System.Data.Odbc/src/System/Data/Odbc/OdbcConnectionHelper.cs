@@ -10,13 +10,13 @@ namespace System.Data.Odbc
 {
     public sealed partial class OdbcConnection : DbConnection
     {
-        private static readonly DbConnectionFactory s_connectionFactory = OdbcConnectionFactory.SingletonInstance;
+        private static readonly DbConnectionFactory s_connectionFactory =
+            OdbcConnectionFactory.SingletonInstance;
 
         private DbConnectionOptions? _userConnectionOptions;
         private DbConnectionPoolGroup? _poolGroup;
         private DbConnectionInternal _innerConnection;
         private int _closeCount;
-
 
         public OdbcConnection() : base()
         {
@@ -46,18 +46,12 @@ namespace System.Data.Odbc
 
         internal int CloseCount
         {
-            get
-            {
-                return _closeCount;
-            }
+            get { return _closeCount; }
         }
 
         internal static DbConnectionFactory ConnectionFactory
         {
-            get
-            {
-                return s_connectionFactory;
-            }
+            get { return s_connectionFactory; }
         }
 
         internal DbConnectionOptions? ConnectionOptions
@@ -73,7 +67,11 @@ namespace System.Data.Odbc
         {
             bool hidePassword = InnerConnection.ShouldHidePassword;
             DbConnectionOptions? connectionOptions = UserConnectionOptions;
-            return ((null != connectionOptions) ? connectionOptions.UsersConnectionString(hidePassword) : "");
+            return (
+                (null != connectionOptions)
+                    ? connectionOptions.UsersConnectionString(hidePassword)
+                    : ""
+            );
         }
 
         private void ConnectionString_Set(string? value)
@@ -86,12 +84,16 @@ namespace System.Data.Odbc
         private void ConnectionString_Set(DbConnectionPoolKey key)
         {
             DbConnectionOptions? connectionOptions = null;
-            System.Data.ProviderBase.DbConnectionPoolGroup? poolGroup = ConnectionFactory.GetConnectionPoolGroup(key, null, ref connectionOptions);
+            System.Data.ProviderBase.DbConnectionPoolGroup? poolGroup =
+                ConnectionFactory.GetConnectionPoolGroup(key, null, ref connectionOptions);
             DbConnectionInternal connectionInternal = InnerConnection;
             bool flag = connectionInternal.AllowSetConnectionString;
             if (flag)
             {
-                flag = SetInnerConnectionFrom(DbConnectionClosedBusy.SingletonInstance, connectionInternal);
+                flag = SetInnerConnectionFrom(
+                    DbConnectionClosedBusy.SingletonInstance,
+                    connectionInternal
+                );
                 if (flag)
                 {
                     _userConnectionOptions = connectionOptions;
@@ -101,24 +103,21 @@ namespace System.Data.Odbc
             }
             if (!flag)
             {
-                throw ADP.OpenConnectionPropertySet(nameof(ConnectionString), connectionInternal.State);
+                throw ADP.OpenConnectionPropertySet(
+                    nameof(ConnectionString),
+                    connectionInternal.State
+                );
             }
         }
 
         internal DbConnectionInternal InnerConnection
         {
-            get
-            {
-                return _innerConnection;
-            }
+            get { return _innerConnection; }
         }
 
         internal System.Data.ProviderBase.DbConnectionPoolGroup? PoolGroup
         {
-            get
-            {
-                return _poolGroup;
-            }
+            get { return _poolGroup; }
             set
             {
                 Debug.Assert(null != value, "null poolGroup");
@@ -126,13 +125,9 @@ namespace System.Data.Odbc
             }
         }
 
-
         internal DbConnectionOptions? UserConnectionOptions
         {
-            get
-            {
-                return _userConnectionOptions;
-            }
+            get { return _userConnectionOptions; }
         }
 
         internal void Abort()
@@ -140,7 +135,11 @@ namespace System.Data.Odbc
             DbConnectionInternal innerConnection = _innerConnection;
             if (ConnectionState.Open == innerConnection.State)
             {
-                Interlocked.CompareExchange(ref _innerConnection, DbConnectionClosedPreviouslyOpened.SingletonInstance, innerConnection);
+                Interlocked.CompareExchange(
+                    ref _innerConnection,
+                    DbConnectionClosedPreviouslyOpened.SingletonInstance,
+                    innerConnection
+                );
                 innerConnection.DoomThisConnection();
             }
         }
@@ -157,7 +156,6 @@ namespace System.Data.Odbc
             command.Connection = this;
             return command;
         }
-
 
         protected override void Dispose(bool disposing)
         {
@@ -186,7 +184,13 @@ namespace System.Data.Odbc
         {
             // NOTE: This is virtual because not all providers may choose to support
             //       returning schema data
-            return InnerConnection.GetSchema(ConnectionFactory, PoolGroup!, this, collectionName, restrictionValues);
+            return InnerConnection.GetSchema(
+                ConnectionFactory,
+                PoolGroup!,
+                this,
+                collectionName,
+                restrictionValues
+            );
         }
 
         internal void NotifyWeakReference(int message)
@@ -196,7 +200,10 @@ namespace System.Data.Odbc
 
         internal void PermissionDemand()
         {
-            Debug.Assert(DbConnectionClosedConnecting.SingletonInstance == _innerConnection, "not connecting");
+            Debug.Assert(
+                DbConnectionClosedConnecting.SingletonInstance == _innerConnection,
+                "not connecting"
+            );
             System.Data.ProviderBase.DbConnectionPoolGroup? poolGroup = PoolGroup;
             DbConnectionOptions? connectionOptions = poolGroup?.ConnectionOptions;
             if ((null == connectionOptions) || connectionOptions.IsEmpty)
@@ -221,7 +228,10 @@ namespace System.Data.Odbc
             ConnectionState currentState = to.State & ConnectionState.Open;
             if ((originalState != currentState) && (ConnectionState.Closed == currentState))
             {
-                unchecked { _closeCount++; }
+                unchecked
+                {
+                    _closeCount++;
+                }
             }
 
             _innerConnection = to;
@@ -229,7 +239,9 @@ namespace System.Data.Odbc
             {
                 OnStateChange(DbConnectionInternal.StateChangeOpen);
             }
-            else if (ConnectionState.Open == originalState && ConnectionState.Closed == currentState)
+            else if (
+                ConnectionState.Open == originalState && ConnectionState.Closed == currentState
+            )
             {
                 OnStateChange(DbConnectionInternal.StateChangeClosed);
             }
@@ -248,7 +260,10 @@ namespace System.Data.Odbc
             Debug.Assert(null != _innerConnection, "null InnerConnection");
             Debug.Assert(null != from, "from null InnerConnection");
             Debug.Assert(null != to, "to null InnerConnection");
-            bool result = (from == Interlocked.CompareExchange<DbConnectionInternal>(ref _innerConnection, to, from));
+            bool result = (
+                from
+                == Interlocked.CompareExchange<DbConnectionInternal>(ref _innerConnection, to, from)
+            );
             return result;
         }
 

@@ -22,22 +22,35 @@ namespace Microsoft.CodeAnalysis.Remote
     /// </summary>
     internal sealed class MessagePackFormatters
     {
-        internal static readonly ImmutableArray<IMessagePackFormatter> Formatters = ImmutableArray.Create<IMessagePackFormatter>(
-            ProjectIdFormatter.Instance,
-            // ForceTypelessFormatter<T> needs to be listed here for each Roslyn abstract type T that is being serialized OOP.
-            // TODO: add a resolver that provides these https://github.com/dotnet/roslyn/issues/60724
-            new ForceTypelessFormatter<SimplifierOptions>(),
-            new ForceTypelessFormatter<SyntaxFormattingOptions>(),
-            new ForceTypelessFormatter<CodeGenerationOptions>(),
-            new ForceTypelessFormatter<IdeCodeStyleOptions>());
+        internal static readonly ImmutableArray<IMessagePackFormatter> Formatters =
+            ImmutableArray.Create<IMessagePackFormatter>(
+                ProjectIdFormatter.Instance,
+                // ForceTypelessFormatter<T> needs to be listed here for each Roslyn abstract type T that is being serialized OOP.
+                // TODO: add a resolver that provides these https://github.com/dotnet/roslyn/issues/60724
+                new ForceTypelessFormatter<SimplifierOptions>(),
+                new ForceTypelessFormatter<SyntaxFormattingOptions>(),
+                new ForceTypelessFormatter<CodeGenerationOptions>(),
+                new ForceTypelessFormatter<IdeCodeStyleOptions>()
+            );
 
-        private static readonly ImmutableArray<IFormatterResolver> s_resolvers = ImmutableArray.Create<IFormatterResolver>(
-            StandardResolverAllowPrivate.Instance);
+        private static readonly ImmutableArray<IFormatterResolver> s_resolvers =
+            ImmutableArray.Create<IFormatterResolver>(StandardResolverAllowPrivate.Instance);
 
-        internal static readonly IFormatterResolver DefaultResolver = CompositeResolver.Create(Formatters, s_resolvers);
+        internal static readonly IFormatterResolver DefaultResolver = CompositeResolver.Create(
+            Formatters,
+            s_resolvers
+        );
 
-        internal static IFormatterResolver CreateResolver(ImmutableArray<IMessagePackFormatter> additionalFormatters, ImmutableArray<IFormatterResolver> additionalResolvers)
-            => (additionalFormatters.IsEmpty && additionalResolvers.IsEmpty) ? DefaultResolver : CompositeResolver.Create(Formatters.AddRange(additionalFormatters), s_resolvers.AddRange(additionalResolvers));
+        internal static IFormatterResolver CreateResolver(
+            ImmutableArray<IMessagePackFormatter> additionalFormatters,
+            ImmutableArray<IFormatterResolver> additionalResolvers
+        ) =>
+            (additionalFormatters.IsEmpty && additionalResolvers.IsEmpty)
+                ? DefaultResolver
+                : CompositeResolver.Create(
+                    Formatters.AddRange(additionalFormatters),
+                    s_resolvers.AddRange(additionalResolvers)
+                );
 
         /// <summary>
         /// Specialized formatter used so we can cache and reuse <see cref="ProjectId"/> instances.  This is valuable as
@@ -59,7 +72,10 @@ namespace Microsoft.CodeAnalysis.Remote
             /// </remarks>
             private ProjectId? _previousProjectId;
 
-            public ProjectId? Deserialize(ref MessagePackReader reader, MessagePackSerializerOptions options)
+            public ProjectId? Deserialize(
+                ref MessagePackReader reader,
+                MessagePackSerializerOptions options
+            )
             {
                 try
                 {
@@ -73,7 +89,11 @@ namespace Microsoft.CodeAnalysis.Remote
                     var debugName = reader.ReadString();
 
                     var previousId = _previousProjectId;
-                    if (previousId is not null && previousId.Id == id && previousId.DebugName == debugName)
+                    if (
+                        previousId is not null
+                        && previousId.Id == id
+                        && previousId.DebugName == debugName
+                    )
                         return previousId;
 
                     var currentId = ProjectId.CreateFromSerialized(id, debugName);
@@ -86,7 +106,11 @@ namespace Microsoft.CodeAnalysis.Remote
                 }
             }
 
-            public void Serialize(ref MessagePackWriter writer, ProjectId? value, MessagePackSerializerOptions options)
+            public void Serialize(
+                ref MessagePackWriter writer,
+                ProjectId? value,
+                MessagePackSerializerOptions options
+            )
             {
                 try
                 {

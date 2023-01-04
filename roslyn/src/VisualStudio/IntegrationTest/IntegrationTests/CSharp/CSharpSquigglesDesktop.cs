@@ -18,9 +18,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override bool SupportsGlobalUsings => false;
 
         public CSharpSquigglesDesktop(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, WellKnownProjectTemplates.ClassLibrary)
-        {
-        }
+            : base(instanceFactory, WellKnownProjectTemplates.ClassLibrary) { }
 
         [ConditionalWpfFact(typeof(DesktopServiceHubHostOnly))]
         [Trait(Traits.Feature, Traits.Features.ErrorSquiggles)]

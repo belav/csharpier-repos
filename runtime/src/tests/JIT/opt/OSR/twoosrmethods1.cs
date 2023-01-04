@@ -24,9 +24,8 @@ class X
         {
             for (int i = to; i > from; i--)
             {
-                result += (i-1);
+                result += (i - 1);
             }
-
         }
         return result;
     }

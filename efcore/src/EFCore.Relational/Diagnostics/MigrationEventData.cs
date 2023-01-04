@@ -27,8 +27,8 @@ public class MigrationEventData : MigratorEventData
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         IMigrator migrator,
-        Migration migration)
-        : base(eventDefinition, messageGenerator, migrator)
+        Migration migration
+    ) : base(eventDefinition, messageGenerator, migrator)
     {
         Migration = migration;
     }

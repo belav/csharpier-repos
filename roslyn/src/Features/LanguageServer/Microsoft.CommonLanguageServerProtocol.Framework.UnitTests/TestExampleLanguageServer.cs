@@ -18,9 +18,16 @@ internal class TestExampleLanguageServer : ExampleLanguageServer
 {
     private readonly JsonRpc _clientRpc;
 
-    public TestExampleLanguageServer(Stream clientSteam, JsonRpc jsonRpc, ILspLogger logger) : base(jsonRpc, logger)
+    public TestExampleLanguageServer(Stream clientSteam, JsonRpc jsonRpc, ILspLogger logger)
+        : base(jsonRpc, logger)
     {
-        _clientRpc = new JsonRpc(new HeaderDelimitedMessageHandler(clientSteam, clientSteam, CreateJsonMessageFormatter()))
+        _clientRpc = new JsonRpc(
+            new HeaderDelimitedMessageHandler(
+                clientSteam,
+                clientSteam,
+                CreateJsonMessageFormatter()
+            )
+        )
         {
             ExceptionStrategy = ExceptionProcessing.ISerializable,
         };
@@ -31,9 +38,17 @@ internal class TestExampleLanguageServer : ExampleLanguageServer
         Initialize();
     }
 
-    public async Task<TResponse> ExecuteRequestAsync<TRequest, TResponse>(string methodName, TRequest request, CancellationToken cancellationToken)
+    public async Task<TResponse> ExecuteRequestAsync<TRequest, TResponse>(
+        string methodName,
+        TRequest request,
+        CancellationToken cancellationToken
+    )
     {
-        var result = await _clientRpc.InvokeWithParameterObjectAsync<TResponse>(methodName, request, cancellationToken);
+        var result = await _clientRpc.InvokeWithParameterObjectAsync<TResponse>(
+            methodName,
+            request,
+            cancellationToken
+        );
 
         return result;
     }
@@ -54,7 +69,11 @@ internal class TestExampleLanguageServer : ExampleLanguageServer
         private readonly TaskCompletionSource<int> _shuttingDownSource;
         private readonly TaskCompletionSource<int> _exitingSource;
 
-        public TestLifeCycleManager(ILifeCycleManager lifeCycleManager, TaskCompletionSource<int> shuttingDownSource, TaskCompletionSource<int> exitingSource)
+        public TestLifeCycleManager(
+            ILifeCycleManager lifeCycleManager,
+            TaskCompletionSource<int> shuttingDownSource,
+            TaskCompletionSource<int> exitingSource
+        )
         {
             _lifeCycleManager = lifeCycleManager;
             _shuttingDownSource = shuttingDownSource;
@@ -119,7 +138,13 @@ internal class TestExampleLanguageServer : ExampleLanguageServer
     {
         var (clientStream, serverStream) = FullDuplexStream.CreatePair();
 
-        var jsonRpc = new JsonRpc(new HeaderDelimitedMessageHandler(serverStream, serverStream, CreateJsonMessageFormatter()));
+        var jsonRpc = new JsonRpc(
+            new HeaderDelimitedMessageHandler(
+                serverStream,
+                serverStream,
+                CreateJsonMessageFormatter()
+            )
+        );
 
         var server = new TestExampleLanguageServer(clientStream, jsonRpc, logger);
 
@@ -135,15 +160,13 @@ internal class TestExampleLanguageServer : ExampleLanguageServer
 
     internal async Task<InitializeResult> InitializeServerAsync()
     {
-        var request = new InitializeParams
-        {
-            Capabilities = new ClientCapabilities
-            {
+        var request = new InitializeParams { Capabilities = new ClientCapabilities { }, };
 
-            },
-        };
-
-        var result = await ExecuteRequestAsync<InitializeParams, InitializeResult>(Methods.InitializeName, request, CancellationToken.None);
+        var result = await ExecuteRequestAsync<InitializeParams, InitializeResult>(
+            Methods.InitializeName,
+            request,
+            CancellationToken.None
+        );
 
         return result;
     }

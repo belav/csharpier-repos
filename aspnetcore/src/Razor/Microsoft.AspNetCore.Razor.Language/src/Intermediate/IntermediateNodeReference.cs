@@ -48,15 +48,17 @@ public struct IntermediateNodeReference
 
         if (Parent.Children.IsReadOnly)
         {
-            throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent));
+            throw new InvalidOperationException(
+                Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent)
+            );
         }
 
         var index = Parent.Children.IndexOf(Node);
         if (index == -1)
         {
-            throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_NodeNotFound(
-                Node,
-                Parent));
+            throw new InvalidOperationException(
+                Resources.FormatIntermediateNodeReference_NodeNotFound(Node, Parent)
+            );
         }
 
         Parent.Children.Insert(index + 1, node);
@@ -77,15 +79,17 @@ public struct IntermediateNodeReference
 
         if (Parent.Children.IsReadOnly)
         {
-            throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent));
+            throw new InvalidOperationException(
+                Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent)
+            );
         }
 
         var index = Parent.Children.IndexOf(Node);
         if (index == -1)
         {
-            throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_NodeNotFound(
-                Node,
-                Parent));
+            throw new InvalidOperationException(
+                Resources.FormatIntermediateNodeReference_NodeNotFound(Node, Parent)
+            );
         }
 
         foreach (var node in nodes)
@@ -108,15 +112,17 @@ public struct IntermediateNodeReference
 
         if (Parent.Children.IsReadOnly)
         {
-            throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent));
+            throw new InvalidOperationException(
+                Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent)
+            );
         }
 
         var index = Parent.Children.IndexOf(Node);
         if (index == -1)
         {
-            throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_NodeNotFound(
-                Node,
-                Parent));
+            throw new InvalidOperationException(
+                Resources.FormatIntermediateNodeReference_NodeNotFound(Node, Parent)
+            );
         }
 
         Parent.Children.Insert(index, node);
@@ -137,15 +143,17 @@ public struct IntermediateNodeReference
 
         if (Parent.Children.IsReadOnly)
         {
-            throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent));
+            throw new InvalidOperationException(
+                Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent)
+            );
         }
 
         var index = Parent.Children.IndexOf(Node);
         if (index == -1)
         {
-            throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_NodeNotFound(
-                Node,
-                Parent));
+            throw new InvalidOperationException(
+                Resources.FormatIntermediateNodeReference_NodeNotFound(Node, Parent)
+            );
         }
 
         foreach (var node in nodes)
@@ -163,15 +171,17 @@ public struct IntermediateNodeReference
 
         if (Parent.Children.IsReadOnly)
         {
-            throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent));
+            throw new InvalidOperationException(
+                Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent)
+            );
         }
 
         var index = Parent.Children.IndexOf(Node);
         if (index == -1)
         {
-            throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_NodeNotFound(
-                Node,
-                Parent));
+            throw new InvalidOperationException(
+                Resources.FormatIntermediateNodeReference_NodeNotFound(Node, Parent)
+            );
         }
 
         Parent.Children.RemoveAt(index);
@@ -191,15 +201,17 @@ public struct IntermediateNodeReference
 
         if (Parent.Children.IsReadOnly)
         {
-            throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent));
+            throw new InvalidOperationException(
+                Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent)
+            );
         }
 
         var index = Parent.Children.IndexOf(Node);
         if (index == -1)
         {
-            throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_NodeNotFound(
-                Node,
-                Parent));
+            throw new InvalidOperationException(
+                Resources.FormatIntermediateNodeReference_NodeNotFound(Node, Parent)
+            );
         }
 
         Parent.Children[index] = node;

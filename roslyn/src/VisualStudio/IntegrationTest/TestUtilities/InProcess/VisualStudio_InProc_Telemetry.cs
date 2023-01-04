@@ -33,8 +33,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             });
         }
 
-        public bool TryWaitForTelemetryEvents(string[] names)
-            => LoggerTestChannel.Instance.TryWaitForEvents(names);
+        public bool TryWaitForTelemetryEvents(string[] names) =>
+            LoggerTestChannel.Instance.TryWaitForEvents(names);
 
         private sealed class LoggerTestChannel : ITelemetryTestChannel
         {
@@ -52,7 +52,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 if (!TelemetryService.DefaultSession.IsOptedIn)
                     return false;
 
-                using var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout);
+                using var cancellationTokenSource = new CancellationTokenSource(
+                    Helper.HangMitigatingTimeout
+                );
                 var set = new HashSet<string>(events);
                 while (set.Count > 0)
                 {

@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 namespace System.Net.Http
 {
     /// <summary>
-    /// A <see cref="MultipartStreamProvider"/> implementation suited for use with HTML file uploads for writing file 
-    /// content to a <see cref="FileStream"/>. The stream provider looks at the <b>Content-Disposition</b> header 
+    /// A <see cref="MultipartStreamProvider"/> implementation suited for use with HTML file uploads for writing file
+    /// content to a <see cref="FileStream"/>. The stream provider looks at the <b>Content-Disposition</b> header
     /// field and determines an output <see cref="Stream"/> based on the presence of a <b>filename</b> parameter.
-    /// If a <b>filename</b> parameter is present in the <b>Content-Disposition</b> header field then the body 
+    /// If a <b>filename</b> parameter is present in the <b>Content-Disposition</b> header field then the body
     /// part is written to a <see cref="FileStream"/>, otherwise it is written to a <see cref="MemoryStream"/>.
-    /// This makes it convenient to process MIME Multipart HTML Form data which is a combination of form 
+    /// This makes it convenient to process MIME Multipart HTML Form data which is a combination of form
     /// data and file content.
     /// </summary>
     public class MultipartFormDataStreamProvider : MultipartFileStreamProvider
@@ -28,8 +28,7 @@ namespace System.Net.Http
         /// Initializes a new instance of the <see cref="MultipartFormDataStreamProvider"/> class.
         /// </summary>
         /// <param name="rootPath">The root path where the content of MIME multipart body parts are written to.</param>
-        public MultipartFormDataStreamProvider(string rootPath)
-            : base(rootPath)
+        public MultipartFormDataStreamProvider(string rootPath) : base(rootPath)
         {
             FormData = HttpValueCollection.Create();
         }
@@ -52,7 +51,7 @@ namespace System.Net.Http
 
         /// <summary>
         /// This body part stream provider examines the headers provided by the MIME multipart parser
-        /// and decides whether it should return a file stream or a memory stream for the body part to be 
+        /// and decides whether it should return a file stream or a memory stream for the body part to be
         /// written to.
         /// </summary>
         /// <param name="parent">The parent MIME multipart HttpContent instance.</param>
@@ -76,8 +75,11 @@ namespace System.Net.Http
         {
             // This method predates support for cancellation, and we need to make sure it is always invoked when
             // ExecutePostProcessingAsync is called for compatability.
-            return MultipartFormDataStreamProviderHelper.ReadFormDataAsync(Contents, FormData,
-                _cancellationToken);
+            return MultipartFormDataStreamProviderHelper.ReadFormDataAsync(
+                Contents,
+                FormData,
+                _cancellationToken
+            );
         }
 
         /// <summary>

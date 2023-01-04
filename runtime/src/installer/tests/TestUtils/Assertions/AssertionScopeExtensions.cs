@@ -7,7 +7,10 @@ namespace Microsoft.DotNet.CoreSetup.Test
 {
     public static class AssertionScopeExtensions
     {
-        public static Continuation FailWithPreformatted(this AssertionScope assertionScope, string message)
+        public static Continuation FailWithPreformatted(
+            this AssertionScope assertionScope,
+            string message
+        )
         {
             if (!assertionScope.Succeeded)
             {

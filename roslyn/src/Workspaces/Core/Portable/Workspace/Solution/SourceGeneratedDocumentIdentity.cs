@@ -15,13 +15,21 @@ namespace Microsoft.CodeAnalysis
     /// A small struct that holds the values that define the identity of a source generated document, and don't change
     /// as new generations happen. This is mostly for convenience as we are reguarly working with this combination of values.
     /// </summary>
-    internal readonly record struct SourceGeneratedDocumentIdentity
-        (DocumentId DocumentId, string HintName, SourceGeneratorIdentity Generator, string FilePath)
-        : IObjectWritable, IEquatable<SourceGeneratedDocumentIdentity>
+    internal readonly record struct SourceGeneratedDocumentIdentity(
+        DocumentId DocumentId,
+        string HintName,
+        SourceGeneratorIdentity Generator,
+        string FilePath
+    ) : IObjectWritable, IEquatable<SourceGeneratedDocumentIdentity>
     {
         public bool ShouldReuseInSerialization => true;
 
-        public static SourceGeneratedDocumentIdentity Generate(ProjectId projectId, string hintName, ISourceGenerator generator, string filePath)
+        public static SourceGeneratedDocumentIdentity Generate(
+            ProjectId projectId,
+            string hintName,
+            ISourceGenerator generator,
+            string filePath
+        )
         {
             // We want the DocumentId generated for a generated output to be stable between Compilations; this is so features that track
             // a document by DocumentId can find it after some change has happened that requires generators to run again.
@@ -32,7 +40,17 @@ namespace Microsoft.CodeAnalysis
             // Combine the strings together; we'll use Encoding.Unicode since that'll match the underlying format; this can be made much
             // faster once we're on .NET Core since we could directly treat the strings as ReadOnlySpan<char>.
             var projectIdBytes = projectId.Id.ToByteArray();
-            using var _ = ArrayBuilder<byte>.GetInstance(capacity: (generatorIdentity.AssemblyName.Length + 1 + generatorIdentity.TypeName.Length + 1 + hintName.Length) * 2 + projectIdBytes.Length, out var hashInput);
+            using var _ = ArrayBuilder<byte>.GetInstance(
+                capacity: (
+                    generatorIdentity.AssemblyName.Length
+                    + 1
+                    + generatorIdentity.TypeName.Length
+                    + 1
+                    + hintName.Length
+                ) * 2
+                    + projectIdBytes.Length,
+                out var hashInput
+            );
             hashInput.AddRange(projectIdBytes);
 
             // Add a null to separate the generator name and hint name; since this is effectively a joining of UTF-16 bytes
@@ -52,7 +70,12 @@ namespace Microsoft.CodeAnalysis
 
             var documentId = DocumentId.CreateFromSerialized(projectId, guid, hintName);
 
-            return new SourceGeneratedDocumentIdentity(documentId, hintName, generatorIdentity, filePath);
+            return new SourceGeneratedDocumentIdentity(
+                documentId,
+                hintName,
+                generatorIdentity,
+                filePath
+            );
         }
 
         public void WriteTo(ObjectWriter writer)
@@ -79,8 +102,13 @@ namespace Microsoft.CodeAnalysis
             return new SourceGeneratedDocumentIdentity(
                 documentId,
                 hintName,
-                new SourceGeneratorIdentity(generatorAssemblyName, generatorAssemblyVersion, generatorTypeName),
-                filePath);
+                new SourceGeneratorIdentity(
+                    generatorAssemblyName,
+                    generatorAssemblyVersion,
+                    generatorTypeName
+                ),
+                filePath
+            );
         }
     }
 }

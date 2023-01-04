@@ -38,19 +38,13 @@ namespace Newtonsoft.Json.Tests.TestObjects
         // These empty methods exist to make sure we're not covering up the base
         // methods
         [OnSerializing]
-        internal void OnDerivedSerializingMethod(StreamingContext context)
-        {
-        }
+        internal void OnDerivedSerializingMethod(StreamingContext context) { }
 
         [OnSerialized]
-        internal void OnDerivedSerializedMethod(StreamingContext context)
-        {
-        }
+        internal void OnDerivedSerializedMethod(StreamingContext context) { }
 
         [OnDeserializing]
-        internal void OnDerivedDeserializingMethod(StreamingContext context)
-        {
-        }
+        internal void OnDerivedDeserializingMethod(StreamingContext context) { }
 
         [OnDeserialized]
         internal void OnDerivedDeserializedMethod(StreamingContext context)
@@ -59,8 +53,6 @@ namespace Newtonsoft.Json.Tests.TestObjects
         }
 
         [OnError]
-        internal void OnDerivedErrorMethod(StreamingContext context, ErrorContext errorContext)
-        {
-        }
+        internal void OnDerivedErrorMethod(StreamingContext context, ErrorContext errorContext) { }
     }
 }

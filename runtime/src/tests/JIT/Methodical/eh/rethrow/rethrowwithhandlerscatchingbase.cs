@@ -3,7 +3,7 @@
 
 
 // 119053
-// rethrow in a handler will not work properly if the protected block is protected by other 
+// rethrow in a handler will not work properly if the protected block is protected by other
 // clauses that catch the base class of the exception being rethrown
 using System;
 using System.IO;
@@ -77,6 +77,4 @@ namespace hello_rethrowwithhandlerscatchingbase_rethrow_cs
             return testLog.VerifyOutput();
         }
     }
-
 }
-

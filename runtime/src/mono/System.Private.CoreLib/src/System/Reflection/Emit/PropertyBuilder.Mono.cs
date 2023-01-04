@@ -61,7 +61,18 @@ namespace System.Reflection.Emit
         private CallingConventions callingConvention;
 #endregion
 
-        internal PropertyBuilder(TypeBuilder tb, string name, PropertyAttributes attributes, CallingConventions callingConvention, Type returnType, Type[]? returnModReq, Type[]? returnModOpt, Type[]? parameterTypes, Type[][]? paramModReq, Type[][]? paramModOpt)
+        internal PropertyBuilder(
+            TypeBuilder tb,
+            string name,
+            PropertyAttributes attributes,
+            CallingConventions callingConvention,
+            Type returnType,
+            Type[]? returnModReq,
+            Type[]? returnModOpt,
+            Type[]? parameterTypes,
+            Type[][]? paramModReq,
+            Type[][]? paramModOpt
+        )
         {
             this.name = name;
             this.attrs = attributes;
@@ -119,22 +130,27 @@ namespace System.Reflection.Emit
         {
             return null!; // FIXME: coreclr throws
         }
+
         public override object[] GetCustomAttributes(bool inherit)
         {
             throw not_supported();
         }
+
         public override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             throw not_supported();
         }
+
         public override MethodInfo? GetGetMethod(bool nonPublic)
         {
             return get_method;
         }
+
         public override ParameterInfo[] GetIndexParameters()
         {
             throw not_supported();
         }
+
         public override MethodInfo? GetSetMethod(bool nonPublic)
         {
             return set_method;
@@ -145,14 +161,22 @@ namespace System.Reflection.Emit
             throw not_supported();
         }
 
-        public override object? GetValue(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture)
+        public override object? GetValue(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo? culture
+        )
         {
             throw not_supported();
         }
+
         public override bool IsDefined(Type attributeType, bool inherit)
         {
             throw not_supported();
         }
+
         public void SetConstant(object? defaultValue)
         {
             typeb.check_not_created();
@@ -207,17 +231,21 @@ namespace System.Reflection.Emit
             throw not_supported();
         }
 
-        public override void SetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture)
+        public override void SetValue(
+            object? obj,
+            object? value,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo? culture
+        )
         {
             throw not_supported();
         }
 
         public override Module Module
         {
-            get
-            {
-                return base.Module;
-            }
+            get { return base.Module; }
         }
 
         private static Exception not_supported()

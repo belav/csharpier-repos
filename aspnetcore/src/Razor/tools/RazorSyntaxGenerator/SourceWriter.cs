@@ -12,16 +12,16 @@ namespace RazorSyntaxGenerator;
 
 internal class SourceWriter : AbstractFileWriter
 {
-    private SourceWriter(TextWriter writer, Tree tree)
-        : base(writer, tree)
-    {
-    }
+    private SourceWriter(TextWriter writer, Tree tree) : base(writer, tree) { }
 
-    public static void WriteMain(TextWriter writer, Tree tree) => new SourceWriter(writer, tree).WriteMain();
+    public static void WriteMain(TextWriter writer, Tree tree) =>
+        new SourceWriter(writer, tree).WriteMain();
 
-    public static void WriteInternal(TextWriter writer, Tree tree) => new SourceWriter(writer, tree).WriteInternal();
+    public static void WriteInternal(TextWriter writer, Tree tree) =>
+        new SourceWriter(writer, tree).WriteInternal();
 
-    public static void WriteSyntax(TextWriter writer, Tree tree) => new SourceWriter(writer, tree).WriteSyntax();
+    public static void WriteSyntax(TextWriter writer, Tree tree) =>
+        new SourceWriter(writer, tree).WriteSyntax();
 
     private void WriteFileHeader()
     {
@@ -94,11 +94,18 @@ internal class SourceWriter : AbstractFileWriter
         if (node is AbstractNode)
         {
             AbstractNode nd = (AbstractNode)node;
-            WriteLine("  internal abstract partial class {0} : {1}", node.Name, node.Base == "SyntaxNode" ? "GreenNode" : node.Base);
+            WriteLine(
+                "  internal abstract partial class {0} : {1}",
+                node.Name,
+                node.Base == "SyntaxNode" ? "GreenNode" : node.Base
+            );
             WriteLine("  {");
 
             // ctor with diagnostics and annotations
-            WriteLine("    internal {0}(SyntaxKind kind, RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations)", node.Name);
+            WriteLine(
+                "    internal {0}(SyntaxKind kind, RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations)",
+                node.Name
+            );
             WriteLine("      : base(kind, diagnostics, annotations)");
             WriteLine("    {");
             if (node.Name == "DirectiveTriviaSyntax")
@@ -140,16 +147,23 @@ internal class SourceWriter : AbstractFileWriter
                     WriteLine();
                     WriteComment(field.PropertyComment, "    ");
 
-                    if (IsSeparatedNodeList(field.Type) ||
-                        IsNodeList(field.Type))
+                    if (IsSeparatedNodeList(field.Type) || IsNodeList(field.Type))
                     {
-                        WriteLine("    public abstract {0}{1} {2} {{ get; }}",
-                            (IsNew(field) ? "new " : ""), field.Type, field.Name);
+                        WriteLine(
+                            "    public abstract {0}{1} {2} {{ get; }}",
+                            (IsNew(field) ? "new " : ""),
+                            field.Type,
+                            field.Name
+                        );
                     }
                     else
                     {
-                        WriteLine("    public abstract {0}{1} {2} {{ get; }}",
-                            (IsNew(field) ? "new " : ""), field.Type, field.Name);
+                        WriteLine(
+                            "    public abstract {0}{1} {2} {{ get; }}",
+                            (IsNew(field) ? "new " : ""),
+                            field.Type,
+                            field.Name
+                        );
                     }
                 }
             }
@@ -160,8 +174,12 @@ internal class SourceWriter : AbstractFileWriter
                 WriteLine();
                 WriteComment(field.PropertyComment, "    ");
 
-                WriteLine("   public abstract {0}{1} {2} {{ get; }}",
-                    (IsNew(field) ? "new " : ""), field.Type, field.Name);
+                WriteLine(
+                    "   public abstract {0}{1} {2} {{ get; }}",
+                    (IsNew(field) ? "new " : ""),
+                    field.Type,
+                    field.Name
+                );
             }
 
             WriteLine("  }");
@@ -186,7 +204,11 @@ internal class SourceWriter : AbstractFileWriter
             for (int i = 0, n = valueFields.Count; i < n; i++)
             {
                 var field = valueFields[i];
-                WriteLine("    private readonly {0} {1};", field.Type, UnderscoreCamelCase(field.Name));
+                WriteLine(
+                    "    private readonly {0} {1};",
+                    field.Type,
+                    UnderscoreCamelCase(field.Name)
+                );
             }
 
             // write constructor with diagnostics and annotations
@@ -237,27 +259,43 @@ internal class SourceWriter : AbstractFileWriter
                 WriteComment(field.PropertyComment, "    ");
                 if (IsNodeList(field.Type))
                 {
-                    WriteLine("    public {0}{1} {2} {{ get {{ return new {1}({3}); }} }}",
-                        OverrideOrNewModifier(field), field.Type, field.Name, UnderscoreCamelCase(field.Name)
-                        );
+                    WriteLine(
+                        "    public {0}{1} {2} {{ get {{ return new {1}({3}); }} }}",
+                        OverrideOrNewModifier(field),
+                        field.Type,
+                        field.Name,
+                        UnderscoreCamelCase(field.Name)
+                    );
                 }
                 else if (IsSeparatedNodeList(field.Type))
                 {
-                    WriteLine("    public {0}{1} {2} {{ get {{ return new {1}(new SyntaxList<GreenNode>({3})); }} }}",
-                        OverrideOrNewModifier(field), field.Type, field.Name, UnderscoreCamelCase(field.Name), i
-                        );
+                    WriteLine(
+                        "    public {0}{1} {2} {{ get {{ return new {1}(new SyntaxList<GreenNode>({3})); }} }}",
+                        OverrideOrNewModifier(field),
+                        field.Type,
+                        field.Name,
+                        UnderscoreCamelCase(field.Name),
+                        i
+                    );
                 }
                 else if (field.Type == "SyntaxNodeOrTokenList")
                 {
-                    WriteLine("    public {0}SyntaxList<GreenNode> {1} {{ get {{ return new SyntaxList<GreenNode>({2}); }} }}",
-                        OverrideOrNewModifier(field), field.Name, UnderscoreCamelCase(field.Name)
-                        );
+                    WriteLine(
+                        "    public {0}SyntaxList<GreenNode> {1} {{ get {{ return new SyntaxList<GreenNode>({2}); }} }}",
+                        OverrideOrNewModifier(field),
+                        field.Name,
+                        UnderscoreCamelCase(field.Name)
+                    );
                 }
                 else
                 {
-                    WriteLine("    public {0}{1} {2} {{ get {{ return {3}; }} }}",
-                        OverrideOrNewModifier(field), field.Type, field.Name, UnderscoreCamelCase(field.Name)
-                        );
+                    WriteLine(
+                        "    public {0}{1} {2} {{ get {{ return {3}; }} }}",
+                        OverrideOrNewModifier(field),
+                        field.Type,
+                        field.Name,
+                        UnderscoreCamelCase(field.Name)
+                    );
                 }
             }
 
@@ -265,9 +303,13 @@ internal class SourceWriter : AbstractFileWriter
             {
                 var field = valueFields[i];
                 WriteComment(field.PropertyComment, "    ");
-                WriteLine("    public {0}{1} {2} {{ get {{ return {3}; }} }}",
-                    OverrideOrNewModifier(field), field.Type, field.Name, UnderscoreCamelCase(field.Name)
-                    );
+                WriteLine(
+                    "    public {0}{1} {2} {{ get {{ return {3}; }} }}",
+                    OverrideOrNewModifier(field),
+                    field.Type,
+                    field.Name,
+                    UnderscoreCamelCase(field.Name)
+                );
             }
 
             // GetSlot
@@ -286,7 +328,9 @@ internal class SourceWriter : AbstractFileWriter
             WriteLine("    }");
 
             WriteLine();
-            WriteLine("    internal override SyntaxNode CreateRed(SyntaxNode parent, int position)");
+            WriteLine(
+                "    internal override SyntaxNode CreateRed(SyntaxNode parent, int position)"
+            );
             WriteLine("    {");
             WriteLine("      return new Syntax.{0}(this, parent, position);", node.Name);
             WriteLine("    }");
@@ -346,7 +390,12 @@ internal class SourceWriter : AbstractFileWriter
         {
             var field = valueFields[i];
             string type = GetFieldType(field, green: true);
-            WriteLine("      this.{0} = ({1})reader.{2}();", CamelCase(field.Name), type, GetReaderMethod(type));
+            WriteLine(
+                "      this.{0} = ({1})reader.{2}();",
+                CamelCase(field.Name),
+                type,
+                GetReaderMethod(type)
+            );
         }
 
         WriteLine("    }");
@@ -377,7 +426,10 @@ internal class SourceWriter : AbstractFileWriter
         WriteLine();
         WriteLine("    static {0}()", node.Name);
         WriteLine("    {");
-        WriteLine("       ObjectBinder.RegisterTypeReader(typeof({0}), r => new {0}(r));", node.Name);
+        WriteLine(
+            "       ObjectBinder.RegisterTypeReader(typeof({0}), r => new {0}(r));",
+            node.Name
+        );
         WriteLine("    }");
     }
 
@@ -388,7 +440,9 @@ internal class SourceWriter : AbstractFileWriter
             case "bool":
                 return "WriteBoolean";
             default:
-                throw new InvalidOperationException("Type 'type' not supported for object reader serialization.");
+                throw new InvalidOperationException(
+                    "Type 'type' not supported for object reader serialization."
+                );
         }
     }
 
@@ -399,7 +453,9 @@ internal class SourceWriter : AbstractFileWriter
             case "bool":
                 return "ReadBoolean";
             default:
-                throw new InvalidOperationException("Type 'type' not supported for object reader serialization.");
+                throw new InvalidOperationException(
+                    "Type 'type' not supported for object reader serialization."
+                );
         }
     }
 
@@ -416,13 +472,21 @@ internal class SourceWriter : AbstractFileWriter
                 WriteLine("        if ({0} != null)", CamelCase(field.Name));
                 WriteLine("        {");
                 WriteLine("            AdjustFlagsAndWidth({0});", CamelCase(field.Name));
-                WriteLine("            {0} = {1};", UnderscoreCamelCase(field.Name), CamelCase(field.Name));
+                WriteLine(
+                    "            {0} = {1};",
+                    UnderscoreCamelCase(field.Name),
+                    CamelCase(field.Name)
+                );
                 WriteLine("        }");
             }
             else
             {
                 WriteLine("        AdjustFlagsAndWidth({0});", CamelCase(field.Name));
-                WriteLine("        {0} = {1};", UnderscoreCamelCase(field.Name), CamelCase(field.Name));
+                WriteLine(
+                    "        {0} = {1};",
+                    UnderscoreCamelCase(field.Name),
+                    CamelCase(field.Name)
+                );
             }
         }
 
@@ -504,7 +568,10 @@ internal class SourceWriter : AbstractFileWriter
         var nodes = Tree.Types.Where(n => !(n is PredefinedNode)).ToList();
 
         WriteLine();
-        WriteLine("  internal partial class SyntaxVisitor" + (withResult ? "<" + (withArgument ? "TArgument, " : "") + "TResult>" : ""));
+        WriteLine(
+            "  internal partial class SyntaxVisitor"
+                + (withResult ? "<" + (withArgument ? "TArgument, " : "") + "TResult>" : "")
+        );
         WriteLine("  {");
         int nWritten = 0;
         for (int i = 0, n = nodes.Count; i < n; i++)
@@ -514,9 +581,19 @@ internal class SourceWriter : AbstractFileWriter
                 if (nWritten > 0)
                     WriteLine();
                 nWritten++;
-                WriteLine("    public virtual " + (withResult ? "TResult" : "void") + " Visit{0}({1} node{2})", StripPost(node.Name, "Syntax"), node.Name, withArgument ? ", TArgument argument" : "");
+                WriteLine(
+                    "    public virtual "
+                        + (withResult ? "TResult" : "void")
+                        + " Visit{0}({1} node{2})",
+                    StripPost(node.Name, "Syntax"),
+                    node.Name,
+                    withArgument ? ", TArgument argument" : ""
+                );
                 WriteLine("    {");
-                WriteLine("      " + (withResult ? "return " : "") + "DefaultVisit(node{0});", withArgument ? ", argument" : "");
+                WriteLine(
+                    "      " + (withResult ? "return " : "") + "DefaultVisit(node{0});",
+                    withArgument ? ", argument" : ""
+                );
                 WriteLine("    }");
             }
         }
@@ -536,11 +613,17 @@ internal class SourceWriter : AbstractFileWriter
                 Write(", ");
 
             var type =
-                field.Type == "SyntaxNodeOrTokenList" ? "Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax.SyntaxList<GreenNode>" :
-                field.Type == "SyntaxTokenList" ? "Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax.SyntaxList<SyntaxToken>" :
-                IsNodeList(field.Type) ? "Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax." + field.Type :
-                IsSeparatedNodeList(field.Type) ? "Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax." + field.Type :
-                field.Type;
+                field.Type == "SyntaxNodeOrTokenList"
+                    ? "Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax.SyntaxList<GreenNode>"
+                    : field.Type == "SyntaxTokenList"
+                        ? "Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax.SyntaxList<SyntaxToken>"
+                        : IsNodeList(field.Type)
+                            ? "Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax."
+                                + field.Type
+                            : IsSeparatedNodeList(field.Type)
+                                ? "Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax."
+                                    + field.Type
+                                : field.Type;
 
             Write("{0} {1}", type, CamelCase(field.Name));
         }
@@ -552,7 +635,11 @@ internal class SourceWriter : AbstractFileWriter
         for (int f = 0; f < node.Fields.Count; f++)
         {
             var field = node.Fields[f];
-            if (IsDerivedOrListOfDerived("SyntaxNode", field.Type) || IsDerivedOrListOfDerived("SyntaxToken", field.Type) || field.Type == "SyntaxNodeOrTokenList")
+            if (
+                IsDerivedOrListOfDerived("SyntaxNode", field.Type)
+                || IsDerivedOrListOfDerived("SyntaxToken", field.Type)
+                || field.Type == "SyntaxNodeOrTokenList"
+            )
             {
                 if (nCompared > 0)
                     Write(" || ");
@@ -609,18 +696,31 @@ internal class SourceWriter : AbstractFileWriter
                 if (nWritten > 0)
                     WriteLine();
                 nWritten++;
-                WriteLine("    public override GreenNode Visit{0}({1} node)", StripPost(node.Name, "Syntax"), node.Name);
+                WriteLine(
+                    "    public override GreenNode Visit{0}({1} node)",
+                    StripPost(node.Name, "Syntax"),
+                    node.Name
+                );
                 WriteLine("    {");
                 for (int f = 0; f < nodeFields.Count; f++)
                 {
                     var field = nodeFields[f];
                     if (IsAnyList(field.Type))
                     {
-                        WriteLine("      var {0} = VisitList(node.{1});", CamelCase(field.Name), field.Name);
+                        WriteLine(
+                            "      var {0} = VisitList(node.{1});",
+                            CamelCase(field.Name),
+                            field.Name
+                        );
                     }
                     else
                     {
-                        WriteLine("      var {0} = ({1})Visit(node.{2});", CamelCase(field.Name), field.Type, field.Name);
+                        WriteLine(
+                            "      var {0} = ({1})Visit(node.{2});",
+                            CamelCase(field.Name),
+                            field.Type,
+                            field.Name
+                        );
                     }
                 }
                 if (nodeFields.Count > 0)
@@ -720,13 +820,17 @@ internal class SourceWriter : AbstractFileWriter
         WriteLine("    }");
     }
 
-
     private void WriteGreenFactory(Node nd, bool withSyntaxFactoryContext = false)
     {
         var valueFields = nd.Fields.Where(n => !IsNodeOrNodeList(n.Type)).ToList();
         var nodeFields = nd.Fields.Where(n => IsNodeOrNodeList(n.Type)).ToList();
 
-        Write("    public {0}{1} {2}(", withSyntaxFactoryContext ? "" : "static ", nd.Name, StripPost(nd.Name, "Syntax"));
+        Write(
+            "    public {0}{1} {2}(",
+            withSyntaxFactoryContext ? "" : "static ",
+            nd.Name,
+            StripPost(nd.Name, "Syntax")
+        );
         WriteGreenFactoryParameters(nd);
         WriteLine(")");
         WriteLine("    {");
@@ -756,7 +860,10 @@ internal class SourceWriter : AbstractFileWriter
             if (!IsAnyList(field.Type) && !IsOptional(field))
             {
                 WriteLine("      if ({0} == null)", CamelCase(field.Name));
-                WriteLine("        throw new ArgumentNullException(nameof({0}));", CamelCase(field.Name));
+                WriteLine(
+                    "        throw new ArgumentNullException(nameof({0}));",
+                    CamelCase(field.Name)
+                );
             }
             if (field.Type == "SyntaxToken" && field.Kinds != null && field.Kinds.Count > 0)
             {
@@ -789,10 +896,12 @@ internal class SourceWriter : AbstractFileWriter
 
         //WriteLine("#endif");
 
-        if (nd.Name != "SkippedTokensTriviaSyntax" &&
-            nd.Name != "DocumentationCommentTriviaSyntax" &&
-            nd.Name != "IncompleteMemberSyntax" &&
-            valueFields.Count + nodeFields.Count <= 3)
+        if (
+            nd.Name != "SkippedTokensTriviaSyntax"
+            && nd.Name != "DocumentationCommentTriviaSyntax"
+            && nd.Name != "IncompleteMemberSyntax"
+            && valueFields.Count + nodeFields.Count <= 3
+        )
         {
             //int hash;
             //var cached = SyntaxNodeCache.TryGetNode((int)SyntaxKind.IdentifierName, identifier, this.context, out hash);
@@ -873,8 +982,7 @@ internal class SourceWriter : AbstractFileWriter
             {
                 type = "SyntaxList<GreenNode>";
             }
-            else if (IsSeparatedNodeList(field.Type) ||
-                     IsNodeList(field.Type))
+            else if (IsSeparatedNodeList(field.Type) || IsNodeList(field.Type))
             {
                 type = "Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax." + type;
             }
@@ -882,7 +990,12 @@ internal class SourceWriter : AbstractFileWriter
         }
     }
 
-    private void WriteCtorArgList(Node nd, bool withSyntaxFactoryContext, List<Field> valueFields, List<Field> nodeFields)
+    private void WriteCtorArgList(
+        Node nd,
+        bool withSyntaxFactoryContext,
+        List<Field> valueFields,
+        List<Field> nodeFields
+    )
     {
         if (nd.Kinds.Count == 1)
         {
@@ -930,8 +1043,8 @@ internal class SourceWriter : AbstractFileWriter
         }
     }
 
-    private List<Field> GetNodeOrNodeListFields(TreeType node)
-        => node is AbstractNode an
+    private List<Field> GetNodeOrNodeListFields(TreeType node) =>
+        node is AbstractNode an
             ? an.Fields.Where(n => IsNodeOrNodeList(n.Type)).ToList()
             : node is Node nd
                 ? nd.Fields.Where(n => IsNodeOrNodeList(n.Type)).ToList()
@@ -946,7 +1059,10 @@ internal class SourceWriter : AbstractFileWriter
             AbstractNode nd = (AbstractNode)node;
             WriteLine("  internal abstract partial class {0} : {1}", node.Name, node.Base);
             WriteLine("  {");
-            WriteLine("    internal {0}(GreenNode green, SyntaxNode parent, int position)", node.Name);
+            WriteLine(
+                "    internal {0}(GreenNode green, SyntaxNode parent, int position)",
+                node.Name
+            );
             WriteLine("      : base(green, parent, position)");
             WriteLine("    {");
             WriteLine("    }");
@@ -963,16 +1079,36 @@ internal class SourceWriter : AbstractFileWriter
                     var fieldType = GetRedFieldType(field);
                     WriteLine();
                     WriteComment(field.PropertyComment, "    ");
-                    WriteLine("    {0} abstract {1}{2} {3} {{ get; }}", "public", (IsNew(field) ? "new " : ""), fieldType, field.Name);
-                    WriteLine($"    public {node.Name} With{field.Name}({fieldType} {CamelCase(field.Name)}) => With{field.Name}Core({CamelCase(field.Name)});");
-                    WriteLine($"    internal abstract {node.Name} With{field.Name}Core({fieldType} {CamelCase(field.Name)});");
+                    WriteLine(
+                        "    {0} abstract {1}{2} {3} {{ get; }}",
+                        "public",
+                        (IsNew(field) ? "new " : ""),
+                        fieldType,
+                        field.Name
+                    );
+                    WriteLine(
+                        $"    public {node.Name} With{field.Name}({fieldType} {CamelCase(field.Name)}) => With{field.Name}Core({CamelCase(field.Name)});"
+                    );
+                    WriteLine(
+                        $"    internal abstract {node.Name} With{field.Name}Core({fieldType} {CamelCase(field.Name)});"
+                    );
 
                     if (IsAnyList(field.Type))
                     {
                         var argType = GetElementType(field.Type);
                         WriteLine();
-                        WriteLine("    public {0} Add{1}(params {2}[] items) => Add{1}Core(items);", node.Name, field.Name, argType);
-                        WriteLine("    internal abstract {0} Add{1}Core(params {2}[] items);", node.Name, field.Name, argType);
+                        WriteLine(
+                            "    public {0} Add{1}(params {2}[] items) => Add{1}Core(items);",
+                            node.Name,
+                            field.Name,
+                            argType
+                        );
+                        WriteLine(
+                            "    internal abstract {0} Add{1}Core(params {2}[] items);",
+                            node.Name,
+                            field.Name,
+                            argType
+                        );
                     }
                     else
                     {
@@ -987,8 +1123,20 @@ internal class SourceWriter : AbstractFileWriter
                                     var argType = GetElementType(referencedNodeField.Type);
 
                                     WriteLine();
-                                    WriteLine("    public {0} Add{1}{2}(params {3}[] items) => Add{1}{2}Core(items);", node.Name, StripPost(field.Name, "Opt"), referencedNodeField.Name, argType);
-                                    WriteLine("    internal abstract {0} Add{1}{2}Core(params {3}[] items);", node.Name, StripPost(field.Name, "Opt"), referencedNodeField.Name, argType);
+                                    WriteLine(
+                                        "    public {0} Add{1}{2}(params {3}[] items) => Add{1}{2}Core(items);",
+                                        node.Name,
+                                        StripPost(field.Name, "Opt"),
+                                        referencedNodeField.Name,
+                                        argType
+                                    );
+                                    WriteLine(
+                                        "    internal abstract {0} Add{1}{2}Core(params {3}[] items);",
+                                        node.Name,
+                                        StripPost(field.Name, "Opt"),
+                                        referencedNodeField.Name,
+                                        argType
+                                    );
                                 }
                             }
                         }
@@ -1001,7 +1149,13 @@ internal class SourceWriter : AbstractFileWriter
                 var field = valueFields[i];
                 WriteLine();
                 WriteComment(field.PropertyComment, "    ");
-                WriteLine("    {0} abstract {1}{2} {3} {{ get; }}", "public", (IsNew(field) ? "new " : ""), field.Type, field.Name);
+                WriteLine(
+                    "    {0} abstract {1}{2} {3} {{ get; }}",
+                    "public",
+                    (IsNew(field) ? "new " : ""),
+                    field.Type,
+                    field.Name
+                );
             }
 
             var baseType = GetTreeType(node.Base);
@@ -1015,7 +1169,9 @@ internal class SourceWriter : AbstractFileWriter
 
                 foreach (var baseField in baseNodeFields)
                 {
-                    WriteLine($"    public new {node.Name} With{baseField.Name}({GetRedFieldType(baseField)} {CamelCase(baseField.Name)}) => ({node.Name})With{baseField.Name}Core({CamelCase(baseField.Name)});");
+                    WriteLine(
+                        $"    public new {node.Name} With{baseField.Name}({GetRedFieldType(baseField)} {CamelCase(baseField.Name)}) => ({node.Name})With{baseField.Name}Core({CamelCase(baseField.Name)});"
+                    );
                 }
 
                 foreach (var baseField in baseNodeFields)
@@ -1024,7 +1180,12 @@ internal class SourceWriter : AbstractFileWriter
                     {
                         var argType = GetElementType(baseField.Type);
                         WriteLine();
-                        WriteLine("    public new {0} Add{1}(params {2}[] items) => ({0})Add{1}Core(items);", node.Name, baseField.Name, argType);
+                        WriteLine(
+                            "    public new {0} Add{1}(params {2}[] items) => ({0})Add{1}Core(items);",
+                            node.Name,
+                            baseField.Name,
+                            argType
+                        );
                     }
                     else
                     {
@@ -1040,7 +1201,13 @@ internal class SourceWriter : AbstractFileWriter
                                     var argType = GetElementType(referencedNodeField.Type);
 
                                     WriteLine();
-                                    WriteLine("    public new {0} Add{1}{2}(params {3}[] items) => Add{1}{2}Core(items);", baseType.Name, StripPost(baseField.Name, "Opt"), referencedNodeField.Name, argType);
+                                    WriteLine(
+                                        "    public new {0} Add{1}{2}(params {3}[] items) => Add{1}{2}Core(items);",
+                                        baseType.Name,
+                                        StripPost(baseField.Name, "Opt"),
+                                        referencedNodeField.Name,
+                                        argType
+                                    );
                                 }
                             }
                         }
@@ -1080,7 +1247,10 @@ internal class SourceWriter : AbstractFileWriter
 
             // write constructor
             WriteLine();
-            WriteLine("    internal {0}(GreenNode green, SyntaxNode parent, int position)", node.Name);
+            WriteLine(
+                "    internal {0}(GreenNode green, SyntaxNode parent, int position)",
+                node.Name
+            );
             WriteLine("        : base(green, parent, position)");
             WriteLine("    {");
             WriteLine("    }");
@@ -1131,36 +1301,64 @@ internal class SourceWriter : AbstractFileWriter
                 //else
                 //{
                 WriteComment(field.PropertyComment, "    ");
-                WriteLine("    {0} {1}{2} {3} ", "public", OverrideOrNewModifier(field), field.Type, field.Name);
+                WriteLine(
+                    "    {0} {1}{2} {3} ",
+                    "public",
+                    OverrideOrNewModifier(field),
+                    field.Type,
+                    field.Name
+                );
                 WriteLine("    {");
                 WriteLine("        get");
                 WriteLine("        {");
 
                 if (IsNodeList(field.Type))
                 {
-                    WriteLine("            return new {0}(GetRed(ref {1}, {2}));", field.Type, UnderscoreCamelCase(field.Name), i);
+                    WriteLine(
+                        "            return new {0}(GetRed(ref {1}, {2}));",
+                        field.Type,
+                        UnderscoreCamelCase(field.Name),
+                        i
+                    );
                 }
                 else if (IsSeparatedNodeList(field.Type))
                 {
-                    WriteLine("            var red = GetRed(ref {0}, {1});", UnderscoreCamelCase(field.Name), i);
+                    WriteLine(
+                        "            var red = GetRed(ref {0}, {1});",
+                        UnderscoreCamelCase(field.Name),
+                        i
+                    );
                     WriteLine("            if (red != null)", i);
-                    WriteLine("                return new {0}(red, {1});", field.Type, GetChildIndex(i));
+                    WriteLine(
+                        "                return new {0}(red, {1});",
+                        field.Type,
+                        GetChildIndex(i)
+                    );
                     WriteLine();
                     WriteLine("            return default({0});", field.Type);
                 }
                 else if (field.Type == "SyntaxNodeOrTokenList")
                 {
-                    throw new InvalidOperationException("field cannot be a random SyntaxNodeOrTokenList");
+                    throw new InvalidOperationException(
+                        "field cannot be a random SyntaxNodeOrTokenList"
+                    );
                 }
                 else
                 {
                     if (i == 0)
                     {
-                        WriteLine("            return GetRedAtZero(ref {0});", UnderscoreCamelCase(field.Name));
+                        WriteLine(
+                            "            return GetRedAtZero(ref {0});",
+                            UnderscoreCamelCase(field.Name)
+                        );
                     }
                     else
                     {
-                        WriteLine("            return GetRed(ref {0}, {1});", UnderscoreCamelCase(field.Name), i);
+                        WriteLine(
+                            "            return GetRed(ref {0}, {1});",
+                            UnderscoreCamelCase(field.Name),
+                            i
+                        );
                     }
                 }
                 WriteLine("        }");
@@ -1173,9 +1371,14 @@ internal class SourceWriter : AbstractFileWriter
             {
                 var field = valueFields[i];
                 WriteComment(field.PropertyComment, "    ");
-                WriteLine("    {0} {1}{2} {3} {{ get {{ return ((InternalSyntax.{4})Green).{3}; }} }}",
-                    "public", OverrideOrNewModifier(field), field.Type, field.Name, node.Name
-                    );
+                WriteLine(
+                    "    {0} {1}{2} {3} {{ get {{ return ((InternalSyntax.{4})Green).{3}; }} }}",
+                    "public",
+                    OverrideOrNewModifier(field),
+                    field.Type,
+                    field.Name,
+                    node.Name
+                );
                 WriteLine();
             }
 
@@ -1193,11 +1396,19 @@ internal class SourceWriter : AbstractFileWriter
                 {
                     if (i == 0)
                     {
-                        WriteLine("            case {0}: return GetRedAtZero(ref {1});", i, UnderscoreCamelCase(field.Name));
+                        WriteLine(
+                            "            case {0}: return GetRedAtZero(ref {1});",
+                            i,
+                            UnderscoreCamelCase(field.Name)
+                        );
                     }
                     else
                     {
-                        WriteLine("            case {0}: return GetRed(ref {1}, {0});", i, UnderscoreCamelCase(field.Name));
+                        WriteLine(
+                            "            case {0}: return GetRed(ref {1}, {0});",
+                            i,
+                            UnderscoreCamelCase(field.Name)
+                        );
                     }
                 }
             }
@@ -1216,13 +1427,16 @@ internal class SourceWriter : AbstractFileWriter
                 //if (field.Type != "SyntaxToken" && field.Type != "SyntaxList<SyntaxToken>")
                 if (true)
                 {
-                    WriteLine("            case {0}: return {1};", i, UnderscoreCamelCase(field.Name));
+                    WriteLine(
+                        "            case {0}: return {1};",
+                        i,
+                        UnderscoreCamelCase(field.Name)
+                    );
                 }
             }
             WriteLine("            default: return null;");
             WriteLine("        }");
             WriteLine("    }");
-
 
             WriteRedAcceptMethods(nd);
             WriteRedUpdateMethod(nd);
@@ -1273,12 +1487,28 @@ internal class SourceWriter : AbstractFileWriter
     private void WriteRedAcceptMethod(Node node, bool genericArgument, bool genericResult)
     {
         string genericArgs =
-            (genericResult && genericArgument) ? "<TArgument, TResult>" :
-            genericResult ? "<TResult>" : "";
+            (genericResult && genericArgument)
+                ? "<TArgument, TResult>"
+                : genericResult
+                    ? "<TResult>"
+                    : "";
         WriteLine();
-        WriteLine("    public override " + (genericResult ? "TResult" : "void") + " Accept" + genericArgs + "(SyntaxVisitor" + genericArgs + " visitor{0})", genericArgument ? ", TArgument argument" : "");
+        WriteLine(
+            "    public override "
+                + (genericResult ? "TResult" : "void")
+                + " Accept"
+                + genericArgs
+                + "(SyntaxVisitor"
+                + genericArgs
+                + " visitor{0})",
+            genericArgument ? ", TArgument argument" : ""
+        );
         WriteLine("    {");
-        WriteLine("        " + (genericResult ? "return " : "") + "visitor.Visit{0}(this{1});", StripPost(node.Name, "Syntax"), genericArgument ? ", argument" : "");
+        WriteLine(
+            "        " + (genericResult ? "return " : "") + "visitor.Visit{0}(this{1});",
+            StripPost(node.Name, "Syntax"),
+            genericArgument ? ", argument" : ""
+        );
         WriteLine("    }");
     }
 
@@ -1292,8 +1522,11 @@ internal class SourceWriter : AbstractFileWriter
     private void WriteRedVisitor(bool genericArgument, bool genericResult)
     {
         string genericArgs =
-            (genericResult && genericArgument) ? "<TArgument, TResult>" :
-            genericResult ? "<TResult>" : "";
+            (genericResult && genericArgument)
+                ? "<TArgument, TResult>"
+                : genericResult
+                    ? "<TResult>"
+                    : "";
         var nodes = Tree.Types.Where(n => !(n is PredefinedNode)).ToList();
 
         WriteLine();
@@ -1307,10 +1540,27 @@ internal class SourceWriter : AbstractFileWriter
                 if (nWritten > 0)
                     WriteLine();
                 nWritten++;
-                WriteComment(string.Format(CultureInfo.InvariantCulture, "<summary>Called when the visitor visits a {0} node.</summary>", node.Name), "    ");
-                WriteLine("    public virtual " + (genericResult ? "TResult" : "void") + " Visit{0}({1} node{2})", StripPost(node.Name, "Syntax"), node.Name, genericArgument ? ", TArgument argument" : "");
+                WriteComment(
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "<summary>Called when the visitor visits a {0} node.</summary>",
+                        node.Name
+                    ),
+                    "    "
+                );
+                WriteLine(
+                    "    public virtual "
+                        + (genericResult ? "TResult" : "void")
+                        + " Visit{0}({1} node{2})",
+                    StripPost(node.Name, "Syntax"),
+                    node.Name,
+                    genericArgument ? ", TArgument argument" : ""
+                );
                 WriteLine("    {");
-                WriteLine("      " + (genericResult ? "return " : "") + "DefaultVisit(node{0});", genericArgument ? ", argument" : "");
+                WriteLine(
+                    "      " + (genericResult ? "return " : "") + "DefaultVisit(node{0});",
+                    genericArgument ? ", argument" : ""
+                );
                 WriteLine("    }");
             }
         }
@@ -1340,7 +1590,11 @@ internal class SourceWriter : AbstractFileWriter
         for (int f = 0; f < node.Fields.Count; f++)
         {
             var field = node.Fields[f];
-            if (IsDerivedOrListOfDerived("SyntaxNode", field.Type) || IsDerivedOrListOfDerived("SyntaxToken", field.Type) || field.Type == "SyntaxNodeOrTokenList")
+            if (
+                IsDerivedOrListOfDerived("SyntaxNode", field.Type)
+                || IsDerivedOrListOfDerived("SyntaxToken", field.Type)
+                || field.Type == "SyntaxNodeOrTokenList"
+            )
             {
                 if (nCompared > 0)
                     Write(" || ");
@@ -1390,7 +1644,11 @@ internal class SourceWriter : AbstractFileWriter
         {
             var field = node.Fields[f];
             var type = GetRedPropertyType(field);
-            Write("Optional<{0}> {1} = default(Optional<{0}>)", type, UnderscoreCamelCase(field.Name));
+            Write(
+                "Optional<{0}> {1} = default(Optional<{0}>)",
+                type,
+                UnderscoreCamelCase(field.Name)
+            );
             if (f < node.Fields.Count - 1)
                 Write(", ");
         }
@@ -1430,12 +1688,16 @@ internal class SourceWriter : AbstractFileWriter
                 var baseType = GetHighestBaseTypeWithField(node, field.Name);
                 if (baseType != null)
                 {
-                    WriteLine($"    internal override {baseType.Name} With{field.Name}Core({type} {CamelCase(field.Name)}) => With{field.Name}({CamelCase(field.Name)});");
+                    WriteLine(
+                        $"    internal override {baseType.Name} With{field.Name}Core({type} {CamelCase(field.Name)}) => With{field.Name}({CamelCase(field.Name)});"
+                    );
                     isNew = true;
                 }
             }
 
-            WriteLine($"    public{(isNew ? " new " : " ")}{node.Name} With{StripPost(field.Name, "Opt")}({type} {CamelCase(field.Name)})");
+            WriteLine(
+                $"    public{(isNew ? " new " : " ")}{node.Name} With{StripPost(field.Name, "Opt")}({type} {CamelCase(field.Name)})"
+            );
             WriteLine("    {");
 
             // call update inside each setter
@@ -1477,8 +1739,8 @@ internal class SourceWriter : AbstractFileWriter
         return bestType;
     }
 
-    private TreeType TryGetBaseType(TreeType node)
-        => node is AbstractNode an
+    private TreeType TryGetBaseType(TreeType node) =>
+        node is AbstractNode an
             ? GetTreeType(an.Base)
             : node is Node n
                 ? GetTreeType(n.Base)
@@ -1506,7 +1768,12 @@ internal class SourceWriter : AbstractFileWriter
                         var referencedNodeField = referencedNode.Fields[rf];
                         if (IsAnyList(referencedNodeField.Type))
                         {
-                            WriteRedNestedListHelperMethods(node, field, referencedNode, referencedNodeField);
+                            WriteRedNestedListHelperMethods(
+                                node,
+                                field,
+                                referencedNode,
+                                referencedNodeField
+                            );
                         }
                     }
                 }
@@ -1517,7 +1784,10 @@ internal class SourceWriter : AbstractFileWriter
     private Node TryGetNodeForNestedList(Field field)
     {
         Node referencedNode = GetNode(field.Type);
-        if (referencedNode != null && (!IsOptional(field) || RequiredFactoryArgumentCount(referencedNode) == 0))
+        if (
+            referencedNode != null
+            && (!IsOptional(field) || RequiredFactoryArgumentCount(referencedNode) == 0)
+        )
         {
             return referencedNode;
         }
@@ -1535,19 +1805,35 @@ internal class SourceWriter : AbstractFileWriter
             var baseType = GetHighestBaseTypeWithField(node, field.Name);
             if (baseType != null)
             {
-                WriteLine("    internal override {0} Add{1}Core(params {2}[] items) => Add{1}(items);", baseType.Name, field.Name, argType);
+                WriteLine(
+                    "    internal override {0} Add{1}Core(params {2}[] items) => Add{1}(items);",
+                    baseType.Name,
+                    field.Name,
+                    argType
+                );
                 isNew = true;
             }
         }
 
         WriteLine();
-        WriteLine($"    public{(isNew ? " new " : " ")}{node.Name} Add{field.Name}(params {argType}[] items)");
+        WriteLine(
+            $"    public{(isNew ? " new " : " ")}{node.Name} Add{field.Name}(params {argType}[] items)"
+        );
         WriteLine("    {");
-        WriteLine("        return With{0}(this.{1}.AddRange(items));", StripPost(field.Name, "Opt"), field.Name);
+        WriteLine(
+            "        return With{0}(this.{1}.AddRange(items));",
+            StripPost(field.Name, "Opt"),
+            field.Name
+        );
         WriteLine("    }");
     }
 
-    private void WriteRedNestedListHelperMethods(Node node, Field field, Node referencedNode, Field referencedNodeField)
+    private void WriteRedNestedListHelperMethods(
+        Node node,
+        Field field,
+        Node referencedNode,
+        Field referencedNodeField
+    )
     {
         var argType = GetElementType(referencedNodeField.Type);
 
@@ -1557,26 +1843,51 @@ internal class SourceWriter : AbstractFileWriter
             var baseType = GetHighestBaseTypeWithField(node, field.Name);
             if (baseType != null)
             {
-                WriteLine("    internal override {0} Add{1}{2}Core(params {3}[] items) => Add{1}{2}(items);", baseType.Name, StripPost(field.Name, "Opt"), referencedNodeField.Name, argType);
+                WriteLine(
+                    "    internal override {0} Add{1}{2}Core(params {3}[] items) => Add{1}{2}(items);",
+                    baseType.Name,
+                    StripPost(field.Name, "Opt"),
+                    referencedNodeField.Name,
+                    argType
+                );
                 isNew = true;
             }
         }
 
         // AddBaseListTypes
         WriteLine();
-        WriteLine($"    public{(isNew ? " new " : " ")}{node.Name} Add{StripPost(field.Name, "Opt")}{referencedNodeField.Name}(params {argType}[] items)");
+        WriteLine(
+            $"    public{(isNew ? " new " : " ")}{node.Name} Add{StripPost(field.Name, "Opt")}{referencedNodeField.Name}(params {argType}[] items)"
+        );
         WriteLine("    {");
 
         if (IsOptional(field))
         {
             var factoryName = StripPost(referencedNode.Name, "Syntax");
             var varName = StripPost(UnderscoreCamelCase(field.Name), "Opt");
-            WriteLine("        var {0} = this.{1} ?? SyntaxFactory.{2}();", varName, field.Name, factoryName);
-            WriteLine("        return this.With{0}({1}.With{2}({1}.{3}.AddRange(items)));", StripPost(field.Name, "Opt"), varName, StripPost(referencedNodeField.Name, "Opt"), referencedNodeField.Name);
+            WriteLine(
+                "        var {0} = this.{1} ?? SyntaxFactory.{2}();",
+                varName,
+                field.Name,
+                factoryName
+            );
+            WriteLine(
+                "        return this.With{0}({1}.With{2}({1}.{3}.AddRange(items)));",
+                StripPost(field.Name, "Opt"),
+                varName,
+                StripPost(referencedNodeField.Name, "Opt"),
+                referencedNodeField.Name
+            );
         }
         else
         {
-            WriteLine("        return this.With{0}(this.{1}.With{2}(this.{1}.{3}.AddRange(items)));", StripPost(field.Name, "Opt"), field.Name, StripPost(referencedNodeField.Name, "Opt"), referencedNodeField.Name);
+            WriteLine(
+                "        return this.With{0}(this.{1}.With{2}(this.{1}.{3}.AddRange(items)));",
+                StripPost(field.Name, "Opt"),
+                field.Name,
+                StripPost(referencedNodeField.Name, "Opt"),
+                referencedNodeField.Name
+            );
         }
 
         WriteLine("    }");
@@ -1599,22 +1910,40 @@ internal class SourceWriter : AbstractFileWriter
                 if (nWritten > 0)
                     WriteLine();
                 nWritten++;
-                WriteLine("    public override SyntaxNode Visit{0}({1} node)", StripPost(node.Name, "Syntax"), node.Name);
+                WriteLine(
+                    "    public override SyntaxNode Visit{0}({1} node)",
+                    StripPost(node.Name, "Syntax"),
+                    node.Name
+                );
                 WriteLine("    {");
                 for (int f = 0; f < nodeFields.Count; f++)
                 {
                     var field = nodeFields[f];
                     if (IsAnyList(field.Type))
                     {
-                        WriteLine("      var {0} = VisitList(node.{1});", CamelCase(field.Name), field.Name);
+                        WriteLine(
+                            "      var {0} = VisitList(node.{1});",
+                            CamelCase(field.Name),
+                            field.Name
+                        );
                     }
                     else if (field.Type == "SyntaxToken")
                     {
-                        WriteLine("      var {0} = ({1})VisitToken(node.{2});", CamelCase(field.Name), field.Type, field.Name);
+                        WriteLine(
+                            "      var {0} = ({1})VisitToken(node.{2});",
+                            CamelCase(field.Name),
+                            field.Type,
+                            field.Name
+                        );
                     }
                     else
                     {
-                        WriteLine("      var {0} = ({1})Visit(node.{2});", CamelCase(field.Name), field.Type, field.Name);
+                        WriteLine(
+                            "      var {0} = ({1})Visit(node.{2});",
+                            CamelCase(field.Name),
+                            field.Type,
+                            field.Name
+                        );
                     }
                 }
                 if (nodeFields.Count > 0)
@@ -1648,7 +1977,10 @@ internal class SourceWriter : AbstractFileWriter
 
     private void WriteRedFactories()
     {
-        var nodes = Tree.Types.Where(n => !(n is PredefinedNode) && !(n is AbstractNode)).OfType<Node>().ToList();
+        var nodes = Tree.Types
+            .Where(n => !(n is PredefinedNode) && !(n is AbstractNode))
+            .OfType<Node>()
+            .ToList();
         WriteLine();
         WriteLine("  internal static partial class SyntaxFactory");
         WriteLine("  {");
@@ -1675,7 +2007,13 @@ internal class SourceWriter : AbstractFileWriter
     {
         return field.Type == "SyntaxToken"
             && field.Kinds != null
-            && ((field.Kinds.Count == 1 && field.Kinds[0].Name != "IdentifierToken" && !field.Kinds[0].Name.EndsWith("LiteralToken", StringComparison.Ordinal)) || (field.Kinds.Count > 1 && field.Kinds.Count == node.Kinds.Count));
+            && (
+                (
+                    field.Kinds.Count == 1
+                    && field.Kinds[0].Name != "IdentifierToken"
+                    && !field.Kinds[0].Name.EndsWith("LiteralToken", StringComparison.Ordinal)
+                ) || (field.Kinds.Count > 1 && field.Kinds.Count == node.Kinds.Count)
+            );
     }
 
     private bool IsAutoCreatableNode(Node node, Field field)
@@ -1686,7 +2024,8 @@ internal class SourceWriter : AbstractFileWriter
 
     private bool IsRequiredFactoryField(Node node, Field field)
     {
-        return (!IsOptional(field) && !IsAnyList(field.Type) && !CanBeAutoCreated(node, field)) || IsValueField(field);
+        return (!IsOptional(field) && !IsAnyList(field.Type) && !CanBeAutoCreated(node, field))
+            || IsValueField(field);
     }
 
     private bool IsValueField(Field field)
@@ -1739,7 +2078,14 @@ internal class SourceWriter : AbstractFileWriter
         var valueFields = nd.Fields.Where(n => IsValueField(n)).ToList();
         var nodeFields = nd.Fields.Where(n => !IsValueField(n)).ToList();
 
-        WriteComment(string.Format(CultureInfo.InvariantCulture, "<summary>Creates a new {0} instance.</summary>", nd.Name), "    ");
+        WriteComment(
+            string.Format(
+                CultureInfo.InvariantCulture,
+                "<summary>Creates a new {0} instance.</summary>",
+                nd.Name
+            ),
+            "    "
+        );
 
         Write("    {0} static {1} {2}(", "public", nd.Name, StripPost(nd.Name, "Syntax"));
         WriteRedFactoryParameters(nd);
@@ -1800,11 +2146,18 @@ internal class SourceWriter : AbstractFileWriter
             else if (!IsAnyList(field.Type) && !IsOptional(field))
             {
                 WriteLine("      if ({0} == null)", CamelCase(field.Name));
-                WriteLine("        throw new ArgumentNullException(nameof({0}));", CamelCase(field.Name));
+                WriteLine(
+                    "        throw new ArgumentNullException(nameof({0}));",
+                    CamelCase(field.Name)
+                );
             }
         }
 
-        Write("      return ({0})InternalSyntax.SyntaxFactory.{1}(", nd.Name, StripPost(nd.Name, "Syntax"));
+        Write(
+            "      return ({0})InternalSyntax.SyntaxFactory.{1}(",
+            nd.Name,
+            StripPost(nd.Name, "Syntax")
+        );
         if (nd.Kinds.Count > 1)
         {
             Write("kind, ");
@@ -1831,11 +2184,19 @@ internal class SourceWriter : AbstractFileWriter
             }
             else if (IsNodeList(field.Type))
             {
-                Write("{0}.Node.ToGreenList<InternalSyntax.{1}>()", CamelCase(field.Name), GetElementType(field.Type));
+                Write(
+                    "{0}.Node.ToGreenList<InternalSyntax.{1}>()",
+                    CamelCase(field.Name),
+                    GetElementType(field.Type)
+                );
             }
             else if (IsSeparatedNodeList(field.Type))
             {
-                Write("{0}.Node.ToGreenSeparatedList<InternalSyntax.{1}>()", CamelCase(field.Name), GetElementType(field.Type));
+                Write(
+                    "{0}.Node.ToGreenSeparatedList<InternalSyntax.{1}>()",
+                    CamelCase(field.Name),
+                    GetElementType(field.Type)
+                );
             }
             else if (field.Type == "SyntaxNodeOrTokenList")
             {
@@ -1843,7 +2204,11 @@ internal class SourceWriter : AbstractFileWriter
             }
             else
             {
-                Write("{0} == null ? null : (InternalSyntax.{1}){0}.Green", CamelCase(field.Name), field.Type);
+                Write(
+                    "{0} == null ? null : (InternalSyntax.{1}){0}.Green",
+                    CamelCase(field.Name),
+                    field.Type
+                );
             }
         }
 
@@ -1897,24 +2262,41 @@ internal class SourceWriter : AbstractFileWriter
 
         if (IsOptional(field) || IsAnyList(field.Type))
         {
-            return string.Format(CultureInfo.InvariantCulture, "default({0})", GetRedPropertyType(field));
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "default({0})",
+                GetRedPropertyType(field)
+            );
         }
         else if (field.Type == "SyntaxToken")
         {
             // auto construct token?
             if (field.Kinds.Count == 1)
             {
-                return string.Format(CultureInfo.InvariantCulture, "SyntaxFactory.Token(SyntaxKind.{0})", field.Kinds[0].Name);
+                return string.Format(
+                    CultureInfo.InvariantCulture,
+                    "SyntaxFactory.Token(SyntaxKind.{0})",
+                    field.Kinds[0].Name
+                );
             }
             else
             {
-                return string.Format(CultureInfo.InvariantCulture, "SyntaxFactory.Token(Get{0}{1}Kind(kind))", StripPost(nd.Name, "Syntax"), StripPost(field.Name, "Opt"));
+                return string.Format(
+                    CultureInfo.InvariantCulture,
+                    "SyntaxFactory.Token(Get{0}{1}Kind(kind))",
+                    StripPost(nd.Name, "Syntax"),
+                    StripPost(field.Name, "Opt")
+                );
             }
         }
         else
         {
             var referencedNode = GetNode(field.Type);
-            return string.Format(CultureInfo.InvariantCulture, "SyntaxFactory.{0}()", StripPost(referencedNode.Name, "Syntax"));
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "SyntaxFactory.{0}()",
+                StripPost(referencedNode.Name, "Syntax")
+            );
         }
     }
 
@@ -1928,7 +2310,11 @@ internal class SourceWriter : AbstractFileWriter
             if (field.Type == "SyntaxToken" && CanBeAutoCreated(nd, field) && field.Kinds.Count > 1)
             {
                 WriteLine();
-                WriteLine("    private static SyntaxKind Get{0}{1}Kind(SyntaxKind kind)", StripPost(nd.Name, "Syntax"), StripPost(field.Name, "Opt"));
+                WriteLine(
+                    "    private static SyntaxKind Get{0}{1}Kind(SyntaxKind kind)",
+                    StripPost(nd.Name, "Syntax"),
+                    StripPost(field.Name, "Opt")
+                );
                 WriteLine("    {");
 
                 WriteLine("      switch (kind)");
@@ -1962,16 +2348,28 @@ internal class SourceWriter : AbstractFileWriter
         if (nAutoCreatableTokens == 0)
             return; // already handled by general factory
 
-        var factoryWithNoAutoCreatableTokenFields = new HashSet<Field>(DetermineRedFactoryWithNoAutoCreatableTokenFields(nd));
+        var factoryWithNoAutoCreatableTokenFields = new HashSet<Field>(
+            DetermineRedFactoryWithNoAutoCreatableTokenFields(nd)
+        );
         var minimalFactoryFields = DetermineMinimalFactoryFields(nd);
-        if (minimalFactoryFields != null && factoryWithNoAutoCreatableTokenFields.SetEquals(minimalFactoryFields))
+        if (
+            minimalFactoryFields != null
+            && factoryWithNoAutoCreatableTokenFields.SetEquals(minimalFactoryFields)
+        )
         {
             return; // will be handled in minimal factory case
         }
 
         WriteLine();
 
-        WriteComment(string.Format(CultureInfo.InvariantCulture, "<summary>Creates a new {0} instance.</summary>", nd.Name), "    ");
+        WriteComment(
+            string.Format(
+                CultureInfo.InvariantCulture,
+                "<summary>Creates a new {0} instance.</summary>",
+                nd.Name
+            ),
+            "    "
+        );
         Write("    {0} static {1} {2}(", "public", nd.Name, StripPost(nd.Name, "Syntax"));
 
         bool hasPreviousParameter = false;
@@ -2087,12 +2485,24 @@ internal class SourceWriter : AbstractFileWriter
 
         var minimalFactoryfields = new HashSet<Field>(DetermineMinimalFactoryFields(nd));
 
-        if (withStringNames && !minimalFactoryfields.Any(f => IsRequiredFactoryField(nd, f) && CanAutoConvertFromString(f)))
+        if (
+            withStringNames
+            && !minimalFactoryfields.Any(
+                f => IsRequiredFactoryField(nd, f) && CanAutoConvertFromString(f)
+            )
+        )
             return; // no string-name overload necessary
 
         WriteLine();
 
-        WriteComment(string.Format(CultureInfo.InvariantCulture, "<summary>Creates a new {0} instance.</summary>", nd.Name), "    ");
+        WriteComment(
+            string.Format(
+                CultureInfo.InvariantCulture,
+                "<summary>Creates a new {0} instance.</summary>",
+                nd.Name
+            ),
+            "    "
+        );
         Write("    {0} static {1} {2}(", "public", nd.Name, StripPost(nd.Name, "Syntax"));
 
         bool hasPreviousParameter = false;
@@ -2201,7 +2611,10 @@ internal class SourceWriter : AbstractFileWriter
 
     private bool IsIdentifierToken(Field field)
     {
-        return field.Type == "SyntaxToken" && field.Kinds != null && field.Kinds.Count == 1 && field.Kinds[0].Name == "IdentifierToken";
+        return field.Type == "SyntaxToken"
+            && field.Kinds != null
+            && field.Kinds.Count == 1
+            && field.Kinds[0].Name == "IdentifierToken";
     }
 
     private bool IsIdentifierNameSyntax(Field field)
@@ -2233,7 +2646,10 @@ internal class SourceWriter : AbstractFileWriter
     {
         if (comment != null)
         {
-            var lines = comment.Split(new string[] { "\r", "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            var lines = comment.Split(
+                new string[] { "\r", "\n", "\r\n" },
+                StringSplitOptions.RemoveEmptyEntries
+            );
             foreach (var line in lines.Where(l => !string.IsNullOrWhiteSpace(l)))
             {
                 WriteLine("{0}/// {1}", indent, line.TrimStart());
@@ -2251,7 +2667,10 @@ internal class SourceWriter : AbstractFileWriter
         {
             foreach (XmlElement element in comment.Body)
             {
-                string[] lines = element.OuterXml.Split(new string[] { "\r", "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                string[] lines = element.OuterXml.Split(
+                    new string[] { "\r", "\n", "\r\n" },
+                    StringSplitOptions.RemoveEmptyEntries
+                );
                 foreach (string line in lines.Where(l => !string.IsNullOrWhiteSpace(l)))
                 {
                     WriteLine("{0}/// {1}", indent, line.TrimStart());

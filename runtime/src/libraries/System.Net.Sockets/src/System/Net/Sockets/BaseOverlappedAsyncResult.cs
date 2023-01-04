@@ -12,6 +12,7 @@ namespace System.Net.Sockets
         // Sentinel object passed to callers of PostCompletion to use as the
         // "result" of this operation, in order to avoid boxing the actual result.
         private static readonly object s_resultObjectSentinel = new object();
+
         // The actual result (number of bytes transferred)
         internal int _numBytes;
 

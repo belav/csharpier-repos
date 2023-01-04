@@ -28,7 +28,11 @@ namespace System.Data
             base.ResetRowViewCache();
         }
 
-        public RelatedView(DataRowView parentRowView, DataKey parentKey, DataColumn[] childKeyColumns) : base(childKeyColumns[0].Table, false)
+        public RelatedView(
+            DataRowView parentRowView,
+            DataKey parentKey,
+            DataColumn[] childKeyColumns
+        ) : base(childKeyColumns[0].Table, false)
         {
             _filterValues = null;
             _parentRowView = parentRowView;
@@ -51,7 +55,6 @@ namespace System.Data
             }
             return _parentKey!.Value.GetKeyValues(_parentRowView.GetRecord());
         }
-
 
         public bool Invoke(DataRow row, DataRowVersion version)
         {
@@ -84,7 +87,11 @@ namespace System.Data
             return addNewRowView;
         }
 
-        internal override void SetIndex(string newSort, DataViewRowState newRowStates, IFilter? newRowFilter)
+        internal override void SetIndex(
+            string newSort,
+            DataViewRowState newRowStates,
+            IFilter? newRowFilter
+        )
         {
             SetIndex2(newSort, newRowStates, newRowFilter, false);
             Reset();
@@ -103,7 +110,10 @@ namespace System.Data
             }
             if (_filterValues != null)
             {
-                return (CompareArray(_childKey.ColumnsReference, other._childKey.ColumnsReference) && CompareArray(_filterValues, other._filterValues));
+                return (
+                    CompareArray(_childKey.ColumnsReference, other._childKey.ColumnsReference)
+                    && CompareArray(_filterValues, other._filterValues)
+                );
             }
             else
             {
@@ -112,9 +122,14 @@ namespace System.Data
                     return false;
                 }
 
-                return (CompareArray(_childKey.ColumnsReference, other._childKey.ColumnsReference) &&
-                        CompareArray(_parentKey!.Value.ColumnsReference, _parentKey.Value.ColumnsReference) &&
-                        _parentRowView!.Equals(other._parentRowView));
+                return (
+                    CompareArray(_childKey.ColumnsReference, other._childKey.ColumnsReference)
+                    && CompareArray(
+                        _parentKey!.Value.ColumnsReference,
+                        _parentKey.Value.ColumnsReference
+                    )
+                    && _parentRowView!.Equals(other._parentRowView)
+                );
             }
         }
 

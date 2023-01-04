@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
             string? topLevelDisplayText,
             ImmutableArray<TaggedText> displayTexts,
             Glyph glyph,
-            ImmutableArray<InheritanceTargetItem> targetItems)
+            ImmutableArray<InheritanceTargetItem> targetItems
+        )
         {
             LineNumber = lineNumber;
             TopLevelDisplayText = topLevelDisplayText;
@@ -63,10 +64,19 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
             string? topLevelDisplayText,
             ImmutableArray<TaggedText> displayTexts,
             Glyph glyph,
-            ImmutableArray<InheritanceTargetItem> targetItems)
-            => targetItems.IsEmpty ? null : new(lineNumber, topLevelDisplayText, displayTexts, glyph, Order(targetItems));
+            ImmutableArray<InheritanceTargetItem> targetItems
+        ) =>
+            targetItems.IsEmpty
+                ? null
+                : new(lineNumber, topLevelDisplayText, displayTexts, glyph, Order(targetItems));
 
-        public static ImmutableArray<InheritanceTargetItem> Order(ImmutableArray<InheritanceTargetItem> targetItems)
-            => targetItems.OrderBy(t => t.DisplayName).ThenByDescending(t => t.LanguageGlyph).ThenBy(t => t.ProjectName ?? "").ToImmutableArray();
+        public static ImmutableArray<InheritanceTargetItem> Order(
+            ImmutableArray<InheritanceTargetItem> targetItems
+        ) =>
+            targetItems
+                .OrderBy(t => t.DisplayName)
+                .ThenByDescending(t => t.LanguageGlyph)
+                .ThenBy(t => t.ProjectName ?? "")
+                .ToImmutableArray();
     }
 }

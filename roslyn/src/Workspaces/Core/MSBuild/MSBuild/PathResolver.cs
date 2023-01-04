@@ -18,7 +18,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
             _diagnosticReporter = diagnosticReporter;
         }
 
-        public bool TryGetAbsoluteSolutionPath(string path, string baseDirectory, DiagnosticReportingMode reportingMode, [NotNullWhen(true)] out string? absolutePath)
+        public bool TryGetAbsoluteSolutionPath(
+            string path,
+            string baseDirectory,
+            DiagnosticReportingMode reportingMode,
+            [NotNullWhen(true)] out string? absolutePath
+        )
         {
             try
             {
@@ -26,7 +31,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
             }
             catch (Exception)
             {
-                _diagnosticReporter.Report(reportingMode, string.Format(WorkspacesResources.Invalid_solution_file_path_colon_0, path));
+                _diagnosticReporter.Report(
+                    reportingMode,
+                    string.Format(WorkspacesResources.Invalid_solution_file_path_colon_0, path)
+                );
                 absolutePath = null;
                 return false;
             }
@@ -35,15 +43,24 @@ namespace Microsoft.CodeAnalysis.MSBuild
             {
                 _diagnosticReporter.Report(
                     reportingMode,
-                    string.Format(WorkspacesResources.Solution_file_not_found_colon_0, absolutePath),
-                    msg => new FileNotFoundException(msg));
+                    string.Format(
+                        WorkspacesResources.Solution_file_not_found_colon_0,
+                        absolutePath
+                    ),
+                    msg => new FileNotFoundException(msg)
+                );
                 return false;
             }
 
             return true;
         }
 
-        public bool TryGetAbsoluteProjectPath(string path, string baseDirectory, DiagnosticReportingMode reportingMode, [NotNullWhen(true)] out string? absolutePath)
+        public bool TryGetAbsoluteProjectPath(
+            string path,
+            string baseDirectory,
+            DiagnosticReportingMode reportingMode,
+            [NotNullWhen(true)] out string? absolutePath
+        )
         {
             try
             {
@@ -51,7 +68,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
             }
             catch (Exception)
             {
-                _diagnosticReporter.Report(reportingMode, string.Format(WorkspacesResources.Invalid_project_file_path_colon_0, path));
+                _diagnosticReporter.Report(
+                    reportingMode,
+                    string.Format(WorkspacesResources.Invalid_project_file_path_colon_0, path)
+                );
                 absolutePath = null;
                 return false;
             }
@@ -61,14 +81,17 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 _diagnosticReporter.Report(
                     reportingMode,
                     string.Format(WorkspacesResources.Project_file_not_found_colon_0, absolutePath),
-                    msg => new FileNotFoundException(msg));
+                    msg => new FileNotFoundException(msg)
+                );
                 return false;
             }
 
             return true;
         }
 
-        private static string GetAbsolutePath(string path, string baseDirectory)
-            => FileUtilities.NormalizeAbsolutePath(FileUtilities.ResolveRelativePath(path, baseDirectory) ?? path);
+        private static string GetAbsolutePath(string path, string baseDirectory) =>
+            FileUtilities.NormalizeAbsolutePath(
+                FileUtilities.ResolveRelativePath(path, baseDirectory) ?? path
+            );
     }
 }

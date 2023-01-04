@@ -7,31 +7,34 @@ using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class MaterializationInterceptionSqlServerTest : MaterializationInterceptionTestBase,
-    IClassFixture<MaterializationInterceptionSqlServerTest.MaterializationInterceptionSqlServerFixture>
+public class MaterializationInterceptionSqlServerTest
+    : MaterializationInterceptionTestBase,
+        IClassFixture<MaterializationInterceptionSqlServerTest.MaterializationInterceptionSqlServerFixture>
 {
-    public MaterializationInterceptionSqlServerTest(MaterializationInterceptionSqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+    public MaterializationInterceptionSqlServerTest(
+        MaterializationInterceptionSqlServerFixture fixture
+    ) : base(fixture) { }
 
     public class MaterializationInterceptionSqlServerFixture : SingletonInterceptorsFixtureBase
     {
-        protected override string StoreName
-            => "MaterializationInterception";
+        protected override string StoreName => "MaterializationInterception";
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
         protected override IServiceCollection InjectInterceptors(
             IServiceCollection serviceCollection,
-            IEnumerable<ISingletonInterceptor> injectedInterceptors)
-            => base.InjectInterceptors(serviceCollection.AddEntityFrameworkSqlServer(), injectedInterceptors);
+            IEnumerable<ISingletonInterceptor> injectedInterceptors
+        ) =>
+            base.InjectInterceptors(
+                serviceCollection.AddEntityFrameworkSqlServer(),
+                injectedInterceptors
+            );
 
         public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
         {
-            new SqlServerDbContextOptionsBuilder(base.AddOptions(builder))
-                .ExecutionStrategy(d => new SqlServerExecutionStrategy(d));
+            new SqlServerDbContextOptionsBuilder(base.AddOptions(builder)).ExecutionStrategy(
+                d => new SqlServerExecutionStrategy(d)
+            );
             return builder;
         }
     }

@@ -16,16 +16,18 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
     public ComponentDuplicateAttributeDiagnosticPassTest()
     {
         Pass = new ComponentMarkupDiagnosticPass();
-        ProjectEngine = (DefaultRazorProjectEngine)RazorProjectEngine.Create(
-            RazorConfiguration.Default,
-            RazorProjectFileSystem.Create(Environment.CurrentDirectory),
-            b =>
-            {
+        ProjectEngine = (DefaultRazorProjectEngine)
+            RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                RazorProjectFileSystem.Create(Environment.CurrentDirectory),
+                b =>
+                {
                     // Don't run the markup mutating passes.
                     b.Features.Remove(b.Features.OfType<ComponentMarkupDiagnosticPass>().Single());
-                b.Features.Remove(b.Features.OfType<ComponentMarkupBlockPass>().Single());
-                b.Features.Remove(b.Features.OfType<ComponentMarkupEncodingPass>().Single());
-            });
+                    b.Features.Remove(b.Features.OfType<ComponentMarkupBlockPass>().Single());
+                    b.Features.Remove(b.Features.OfType<ComponentMarkupEncodingPass>().Single());
+                }
+            );
         Engine = ProjectEngine.Engine;
 
         Pass.Engine = Engine;
@@ -41,7 +43,8 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
     public void Execute_NoDuplicates()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <html>
   <head cool=""beans"">
     <div></div>
@@ -49,7 +52,8 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
       <li id=""15""></li>
     </ul>
   </head>
-</html>");
+</html>"
+        );
 
         var documentNode = Lower(document);
 
@@ -64,7 +68,8 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
     public void Execute_FindDuplicate()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <html>
   <head cool=""beans"">
     <div></div>
@@ -72,7 +77,8 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
       <li id=""15""></li>
     </ul>
   </head>
-</html>");
+</html>"
+        );
 
         var documentNode = Lower(document);
 
@@ -83,7 +89,10 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
         var diagnostic = Assert.Single(documentNode.GetAllDiagnostics());
         Assert.Equal(ComponentDiagnosticFactory.DuplicateMarkupAttribute.Id, diagnostic.Id);
 
-        var node = documentNode.FindDescendantNodes<HtmlAttributeIntermediateNode>().Where(n => n.HasDiagnostics).Single();
+        var node = documentNode
+            .FindDescendantNodes<HtmlAttributeIntermediateNode>()
+            .Where(n => n.HasDiagnostics)
+            .Single();
         Assert.Equal("a", node.AttributeName);
         Assert.Equal(node.Source, diagnostic.Span);
     }
@@ -92,7 +101,8 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
     public void Execute_FindDuplicate_CaseInsensitive()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <html>
   <head cool=""beans"">
     <div></div>
@@ -100,7 +110,8 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
       <li id=""15""></li>
     </ul>
   </head>
-</html>");
+</html>"
+        );
 
         var documentNode = Lower(document);
 
@@ -111,7 +122,10 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
         var diagnostic = Assert.Single(documentNode.GetAllDiagnostics());
         Assert.Equal(ComponentDiagnosticFactory.DuplicateMarkupAttribute.Id, diagnostic.Id);
 
-        var node = documentNode.FindDescendantNodes<HtmlAttributeIntermediateNode>().Where(n => n.HasDiagnostics).Single();
+        var node = documentNode
+            .FindDescendantNodes<HtmlAttributeIntermediateNode>()
+            .Where(n => n.HasDiagnostics)
+            .Single();
         Assert.Equal("attr", node.AttributeName);
         Assert.Equal(node.Source, diagnostic.Span);
     }
@@ -120,7 +134,8 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
     public void Execute_FindDuplicate_Multiple()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <html>
   <head cool=""beans"">
     <div></div>
@@ -128,7 +143,8 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
       <li id=""15""></li>
     </ul>
   </head>
-</html>");
+</html>"
+        );
 
         var documentNode = Lower(document);
 
@@ -137,7 +153,10 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
 
         // Assert
         var diagnostics = documentNode.GetAllDiagnostics();
-        var nodes = documentNode.FindDescendantNodes<HtmlAttributeIntermediateNode>().Where(n => n.HasDiagnostics).ToArray();
+        var nodes = documentNode
+            .FindDescendantNodes<HtmlAttributeIntermediateNode>()
+            .Where(n => n.HasDiagnostics)
+            .ToArray();
 
         Assert.Equal(2, diagnostics.Count);
         Assert.Equal(2, nodes.Length);
@@ -177,7 +196,10 @@ public class ComponentDuplicateAttributeDiagnosticPassTest
         }
 
         var document = codeDocument.GetDocumentIntermediateNode();
-        Engine.Features.OfType<ComponentDocumentClassifierPass>().Single().Execute(codeDocument, document);
+        Engine.Features
+            .OfType<ComponentDocumentClassifierPass>()
+            .Single()
+            .Execute(codeDocument, document);
         return document;
     }
 

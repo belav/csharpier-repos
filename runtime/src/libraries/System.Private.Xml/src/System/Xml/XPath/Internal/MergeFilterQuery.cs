@@ -16,6 +16,7 @@ namespace MS.Internal.Xml.XPath
         {
             _child = child;
         }
+
         private MergeFilterQuery(MergeFilterQuery other) : base(other)
         {
             _child = Clone(other._child);
@@ -55,7 +56,12 @@ namespace MS.Internal.Xml.XPath
             {
                 return null;
             }
-            Evaluate(new XPathSingletonIterator(context.Clone(), /*moved:*/true));
+            Evaluate(
+                new XPathSingletonIterator(
+                    context.Clone(), /*moved:*/
+                    true
+                )
+            );
             XPathNavigator? result = Advance();
             while (result != null)
             {
@@ -69,6 +75,9 @@ namespace MS.Internal.Xml.XPath
             return null;
         }
 
-        public override XPathNodeIterator Clone() { return new MergeFilterQuery(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new MergeFilterQuery(this);
+        }
     }
 }

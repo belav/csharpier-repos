@@ -25,7 +25,10 @@ public class RedirectResultTest : RedirectResultTestBase
     private static IServiceProvider GetServiceProvider()
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddSingleton<IActionResultExecutor<RedirectResult>, RedirectResultExecutor>();
+        serviceCollection.AddSingleton<
+            IActionResultExecutor<RedirectResult>,
+            RedirectResultExecutor
+        >();
         serviceCollection.AddSingleton<IUrlHelperFactory, UrlHelperFactory>();
         serviceCollection.AddTransient<ILoggerFactory, NullLoggerFactory>();
         return serviceCollection.BuildServiceProvider();

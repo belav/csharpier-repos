@@ -13,7 +13,5 @@ public class PingMessage : HubMessage
     /// </summary>
     public static readonly PingMessage Instance = new PingMessage();
 
-    private PingMessage()
-    {
-    }
+    private PingMessage() { }
 }

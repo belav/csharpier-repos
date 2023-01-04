@@ -18,12 +18,22 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 {
     internal static class EnumMemberGenerator
     {
-        internal static EnumDeclarationSyntax AddEnumMemberTo(EnumDeclarationSyntax destination, IFieldSymbol enumMember, CSharpCodeGenerationContextInfo info, CancellationToken cancellationToken)
+        internal static EnumDeclarationSyntax AddEnumMemberTo(
+            EnumDeclarationSyntax destination,
+            IFieldSymbol enumMember,
+            CSharpCodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
         {
             var members = new List<SyntaxNodeOrToken>();
             members.AddRange(destination.Members.GetWithSeparators());
 
-            var member = GenerateEnumMemberDeclaration(enumMember, destination, info, cancellationToken);
+            var member = GenerateEnumMemberDeclaration(
+                enumMember,
+                destination,
+                info,
+                cancellationToken
+            );
 
             if (members.Count == 0)
             {
@@ -39,11 +49,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 var lastMember = members.Last();
                 var trailingTrivia = lastMember.GetTrailingTrivia();
                 members[members.Count - 1] = lastMember.WithTrailingTrivia();
-                members.Add(SyntaxFactory.Token(SyntaxKind.CommaToken).WithTrailingTrivia(trailingTrivia));
+                members.Add(
+                    SyntaxFactory.Token(SyntaxKind.CommaToken).WithTrailingTrivia(trailingTrivia)
+                );
                 members.Add(member);
             }
 
-            return destination.EnsureOpenAndCloseBraceTokens()
+            return destination
+                .EnsureOpenAndCloseBraceTokens()
                 .WithMembers(SyntaxFactory.SeparatedList<EnumMemberDeclarationSyntax>(members));
         }
 
@@ -51,37 +64,51 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IFieldSymbol enumMember,
             EnumDeclarationSyntax? destination,
             CSharpCodeGenerationContextInfo info,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var reusableSyntax = GetReuseableSyntaxNodeForSymbol<EnumMemberDeclarationSyntax>(enumMember, info);
+            var reusableSyntax = GetReuseableSyntaxNodeForSymbol<EnumMemberDeclarationSyntax>(
+                enumMember,
+                info
+            );
             if (reusableSyntax != null)
             {
                 return reusableSyntax;
             }
 
             var value = CreateEnumMemberValue(destination, enumMember);
-            var member = SyntaxFactory.EnumMemberDeclaration(enumMember.Name.ToIdentifierToken())
-                .WithEqualsValue(value == null ? null : SyntaxFactory.EqualsValueClause(value: value));
+            var member = SyntaxFactory
+                .EnumMemberDeclaration(enumMember.Name.ToIdentifierToken())
+                .WithEqualsValue(
+                    value == null ? null : SyntaxFactory.EqualsValueClause(value: value)
+                );
 
             return AddFormatterAndCodeGeneratorAnnotationsTo(
-                ConditionallyAddDocumentationCommentTo(member, enumMember, info, cancellationToken));
+                ConditionallyAddDocumentationCommentTo(member, enumMember, info, cancellationToken)
+            );
         }
 
-        private static ExpressionSyntax? CreateEnumMemberValue(EnumDeclarationSyntax? destination, IFieldSymbol enumMember)
+        private static ExpressionSyntax? CreateEnumMemberValue(
+            EnumDeclarationSyntax? destination,
+            IFieldSymbol enumMember
+        )
         {
             if (!enumMember.HasConstantValue)
             {
                 return null;
             }
 
-            if (enumMember.ConstantValue is not byte and
-                not sbyte and
-                not ushort and
-                not short and
-                not int and
-                not uint and
-                not long and
-                not ulong)
+            if (
+                enumMember.ConstantValue
+                is not byte
+                    and not sbyte
+                    and not ushort
+                    and not short
+                    and not int
+                    and not uint
+                    and not long
+                    and not ulong
+            )
             {
                 return null;
             }
@@ -101,8 +128,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 {
                     // Don't generate an initializer if no other members have them, and our value
                     // would be correctly inferred from our position.
-                    if (destination.Members.Count == value &&
-                        destination.Members.All(m => m.EqualsValue == null))
+                    if (
+                        destination.Members.Count == value
+                        && destination.Members.All(m => m.EqualsValue == null)
+                    )
                     {
                         return null;
                     }
@@ -112,8 +141,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     if (lastMember != null)
                     {
                         var lastExpression = lastMember.EqualsValue!.Value;
-                        if (lastExpression.Kind() == SyntaxKind.LeftShiftExpression &&
-                            IntegerUtilities.HasOneBitSet(value))
+                        if (
+                            lastExpression.Kind() == SyntaxKind.LeftShiftExpression
+                            && IntegerUtilities.HasOneBitSet(value)
+                        )
                         {
                             var binaryExpression = (BinaryExpressionSyntax)lastExpression;
                             if (binaryExpression.Left.Kind() == SyntaxKind.NumericLiteralExpression)
@@ -127,12 +158,22 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                                     // Re-use the numericLiteral text so type suffixes match too
                                     return SyntaxFactory.BinaryExpression(
                                         SyntaxKind.LeftShiftExpression,
-                                        SyntaxFactory.LiteralExpression(SyntaxKind.NumericLiteralExpression, SyntaxFactory.Literal(numericLiteral.Token.Text, 1)),
-                                        SyntaxFactory.LiteralExpression(SyntaxKind.NumericLiteralExpression, SyntaxFactory.Literal(shiftValue.ToString(), shiftValue)));
+                                        SyntaxFactory.LiteralExpression(
+                                            SyntaxKind.NumericLiteralExpression,
+                                            SyntaxFactory.Literal(numericLiteral.Token.Text, 1)
+                                        ),
+                                        SyntaxFactory.LiteralExpression(
+                                            SyntaxKind.NumericLiteralExpression,
+                                            SyntaxFactory.Literal(shiftValue.ToString(), shiftValue)
+                                        )
+                                    );
                                 }
                             }
                         }
-                        else if (lastExpression is LiteralExpressionSyntax(SyntaxKind.NumericLiteralExpression) numericLiteral)
+                        else if (
+                            lastExpression is LiteralExpressionSyntax
+                            (SyntaxKind.NumericLiteralExpression) numericLiteral
+                        )
                         {
                             var numericToken = numericLiteral.Token;
                             var numericText = numericToken.ToString();
@@ -140,13 +181,25 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                             if (numericText.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
                             {
                                 // Hex
-                                return SyntaxFactory.LiteralExpression(SyntaxKind.NumericLiteralExpression,
-                                    SyntaxFactory.Literal(numericText.Substring(0, 2) + value.ToString("X"), value));
+                                return SyntaxFactory.LiteralExpression(
+                                    SyntaxKind.NumericLiteralExpression,
+                                    SyntaxFactory.Literal(
+                                        numericText.Substring(0, 2) + value.ToString("X"),
+                                        value
+                                    )
+                                );
                             }
-                            else if (numericText.StartsWith("0b", StringComparison.OrdinalIgnoreCase))
+                            else if (
+                                numericText.StartsWith("0b", StringComparison.OrdinalIgnoreCase)
+                            )
                             {
-                                return SyntaxFactory.LiteralExpression(SyntaxKind.NumericLiteralExpression,
-                                    SyntaxFactory.Literal(numericText.Substring(0, 2) + Convert.ToString(value, 2), value));
+                                return SyntaxFactory.LiteralExpression(
+                                    SyntaxKind.NumericLiteralExpression,
+                                    SyntaxFactory.Literal(
+                                        numericText.Substring(0, 2) + Convert.ToString(value, 2),
+                                        value
+                                    )
+                                );
                             }
                         }
                     }
@@ -159,7 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             return ExpressionGenerator.GenerateNonEnumValueExpression(
                 underlyingType,
                 enumMember.ConstantValue,
-                canUseFieldReference: true);
+                canUseFieldReference: true
+            );
         }
     }
 }

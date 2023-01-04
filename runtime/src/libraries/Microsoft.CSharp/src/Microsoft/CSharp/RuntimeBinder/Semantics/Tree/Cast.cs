@@ -8,8 +8,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 {
     internal sealed class ExprCast : ExprWithType
     {
-        public ExprCast(EXPRFLAG flags, CType type, Expr argument)
-            : base(ExpressionKind.Cast, type)
+        public ExprCast(EXPRFLAG flags, CType type, Expr argument) : base(ExpressionKind.Cast, type)
         {
             Debug.Assert(argument != null);
             Debug.Assert((flags & ~(EXPRFLAG.EXF_CAST_ALL | EXPRFLAG.EXF_MASK_ANY)) == 0);

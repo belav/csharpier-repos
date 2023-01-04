@@ -6,23 +6,22 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class MissingFieldException : MissingMemberException, ISerializable
     {
-        public MissingFieldException()
-            : base(SR.Arg_MissingFieldException)
+        public MissingFieldException() : base(SR.Arg_MissingFieldException)
         {
             HResult = HResults.COR_E_MISSINGFIELD;
         }
 
-        public MissingFieldException(string? message)
-            : base(message)
+        public MissingFieldException(string? message) : base(message)
         {
             HResult = HResults.COR_E_MISSINGFIELD;
         }
 
-        public MissingFieldException(string? message, Exception? inner)
-            : base(message, inner)
+        public MissingFieldException(string? message, Exception? inner) : base(message, inner)
         {
             HResult = HResults.COR_E_MISSINGFIELD;
         }
@@ -35,9 +34,7 @@ namespace System
         }
 
         protected MissingFieldException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
 
         public override string Message
         {

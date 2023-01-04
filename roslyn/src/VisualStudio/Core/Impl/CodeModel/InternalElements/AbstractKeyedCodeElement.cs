@@ -25,8 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
-            : base(state, fileCodeModel, nodeKind)
+            int? nodeKind
+        ) : base(state, fileCodeModel, nodeKind)
         {
             _nodeKey = nodeKey;
             _name = null;
@@ -37,8 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
-            : base(state, fileCodeModel, nodeKind)
+            string name
+        ) : base(state, fileCodeModel, nodeKind)
         {
             _nodeKey = new SyntaxNodeKey(name, -1);
             _name = name;
@@ -54,11 +54,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             get { return _nodeKey.Ordinal == -1; }
         }
 
-        internal override SyntaxNode LookupNode()
-            => CodeModelService.LookupNode(_nodeKey, GetSyntaxTree());
+        internal override SyntaxNode LookupNode() =>
+            CodeModelService.LookupNode(_nodeKey, GetSyntaxTree());
 
-        internal override bool TryLookupNode(out SyntaxNode node)
-            => CodeModelService.TryLookupNode(_nodeKey, GetSyntaxTree(), out node);
+        internal override bool TryLookupNode(out SyntaxNode node) =>
+            CodeModelService.TryLookupNode(_nodeKey, GetSyntaxTree(), out node);
 
         /// <summary>
         /// This function re-acquires the key for this code element using the given syntax path.
@@ -78,7 +78,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             _nodeKey = newNodeKey;
         }
 
-        protected void UpdateNodeAndReacquireNodeKey<T>(Action<SyntaxNode, T> updater, T value, bool trackKinds = true)
+        protected void UpdateNodeAndReacquireNodeKey<T>(
+            Action<SyntaxNode, T> updater,
+            T value,
+            bool trackKinds = true
+        )
         {
             FileCodeModel.EnsureEditor(() =>
             {

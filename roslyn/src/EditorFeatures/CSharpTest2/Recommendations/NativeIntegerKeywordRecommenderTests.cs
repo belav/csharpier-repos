@@ -18,360 +18,383 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
 
         protected NativeIntegerKeywordRecommenderTests()
         {
-            RecommendKeywordsAsync = (position, context) => Task.FromResult(Recommender.RecommendKeywords(position, context, CancellationToken.None));
+            RecommendKeywordsAsync = (position, context) =>
+                Task.FromResult(
+                    Recommender.RecommendKeywords(position, context, CancellationToken.None)
+                );
         }
 
         [Fact]
         public async Task TestInLocalDeclaration()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"$$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
         public async Task TestInParameterList()
         {
             await VerifyKeywordAsync(
-@"class C
+                @"class C
 {
-    void F($$");
+    void F($$"
+            );
         }
 
         [Fact]
         public async Task TestInLambdaParameterListFirst()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"F(($$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"F(($$"));
         }
 
         [Fact]
         public async Task TestInLambdaParameterListLater()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"F((int x, $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"F((int x, $$"));
         }
 
         [Fact]
         public async Task TestAfterConst()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"const $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"const $$"));
         }
 
         [Fact]
         public async Task TestInFixedStatement()
         {
-            await VerifyKeywordAsync(
-@"fixed ($$");
+            await VerifyKeywordAsync(@"fixed ($$");
         }
 
         [Fact]
         public async Task TestInRef()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"ref $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"ref $$"));
         }
 
         [Fact]
         public async Task TestInMemberType()
         {
             await VerifyKeywordAsync(
-@"class C
+                @"class C
 {
-    private $$");
+    private $$"
+            );
         }
 
         [Fact]
         public async Task TestInOperatorType()
         {
             await VerifyKeywordAsync(
-@"class C
+                @"class C
 {
-    static implicit operator $$");
+    static implicit operator $$"
+            );
         }
 
         [Fact]
         public async Task TestInEnumUnderlyingType()
         {
-            await VerifyAbsenceAsync(
-@"enum E : $$");
+            await VerifyAbsenceAsync(@"enum E : $$");
         }
 
         [Fact, WorkItem(30784, "https://github.com/dotnet/roslyn/issues/30784")]
         public async Task TestNotInTypeParameterConstraint_TypeDeclaration1()
         {
-            await VerifyAbsenceAsync(
-@"class C<T> where T : $$");
+            await VerifyAbsenceAsync(@"class C<T> where T : $$");
         }
 
         [Fact, WorkItem(30784, "https://github.com/dotnet/roslyn/issues/30784")]
         public async Task TestInTypeParameterConstraint_TypeDeclaration_WhenNotDirectlyInConstraint1()
         {
-            await VerifyKeywordAsync(
-@"class C<T> where T : IList<$$");
+            await VerifyKeywordAsync(@"class C<T> where T : IList<$$");
         }
 
         [Fact, WorkItem(30784, "https://github.com/dotnet/roslyn/issues/30784")]
         public async Task TestNotInTypeParameterConstraint_TypeDeclaration2()
         {
             await VerifyAbsenceAsync(
-@"class C<T>
+                @"class C<T>
         where T : $$
-        where U : U");
+        where U : U"
+            );
         }
 
         [Fact, WorkItem(30784, "https://github.com/dotnet/roslyn/issues/30784")]
         public async Task TestInTypeParameterConstraint_TypeDeclaration_WhenNotDirectlyInConstraint2()
         {
             await VerifyKeywordAsync(
-@"class C<T>
+                @"class C<T>
         where T : IList<$$
-        where U : U");
+        where U : U"
+            );
         }
 
         [Fact, WorkItem(30784, "https://github.com/dotnet/roslyn/issues/30784")]
         public async Task TestNotInTypeParameterConstraint_MethodDeclaration1()
         {
             await VerifyAbsenceAsync(
-@"class C
+                @"class C
 {
-    public void M<T>() where T : $$");
+    public void M<T>() where T : $$"
+            );
         }
 
         [Fact, WorkItem(30784, "https://github.com/dotnet/roslyn/issues/30784")]
         public async Task TestInTypeParameterConstraint_MethodDeclaration_WhenNotDirectlyInConstraint1()
         {
             await VerifyKeywordAsync(
-@"class C
+                @"class C
 {
-    public void M<T>() where T : IList<$$");
+    public void M<T>() where T : IList<$$"
+            );
         }
 
         [Fact, WorkItem(30784, "https://github.com/dotnet/roslyn/issues/30784")]
         public async Task TestNotInTypeParameterConstraint_MethodDeclaration2()
         {
             await VerifyAbsenceAsync(
-@"class C
+                @"class C
 {
     public void M<T>()
         where T : $$
-        where U : T");
+        where U : T"
+            );
         }
 
         [Fact, WorkItem(30784, "https://github.com/dotnet/roslyn/issues/30784")]
         public async Task TestNotInTypeParameterConstraint_MethodDeclaration_WhenNotDirectlyInConstraint2()
         {
             await VerifyKeywordAsync(
-@"class C
+                @"class C
 {
     public void M<T>()
         where T : IList<$$
-        where U : T");
+        where U : T"
+            );
         }
 
         [Fact]
         public async Task TestInExpression()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"var v = 1 + $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"var v = 1 + $$"));
         }
 
         [Fact]
         public async Task TestInDefault()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"_ = default($$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"_ = default($$"));
         }
 
         [Fact]
         public async Task TestInCastType()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"var v = (($$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"var v = (($$"));
         }
 
         [Fact]
         public async Task TestInNew()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"_ = new $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"_ = new $$"));
         }
 
         [Fact]
         public async Task TestAfterAs()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"object x = null;
-var y = x as $$"));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"object x = null;
+var y = x as $$"
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterIs()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"object x = null;
-if (x is $$"));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"object x = null;
+if (x is $$"
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterStackAlloc()
         {
             await VerifyKeywordAsync(
-@"class C
+                @"class C
 {
-    nint* p = stackalloc $$");
+    nint* p = stackalloc $$"
+            );
         }
 
         [Fact]
         public async Task TestInUsingAliasFirst()
         {
             // Ideally, keywords should not be recommended as first token in target.
-            await VerifyKeywordAsync(
-@"using A = $$");
+            await VerifyKeywordAsync(@"using A = $$");
         }
 
         [Fact]
         public async Task TestInGlobalUsingAliasFirst()
         {
             // Ideally, keywords should not be recommended as first token in target.
-            await VerifyKeywordAsync(
-@"global using A = $$");
+            await VerifyKeywordAsync(@"global using A = $$");
         }
 
         [Fact]
         public async Task TestInUsingAliasLater()
         {
-            await VerifyKeywordAsync(
-@"using A = List<$$");
+            await VerifyKeywordAsync(@"using A = List<$$");
         }
 
         [Fact]
         public async Task TestInGlobalUsingAliasLater()
         {
-            await VerifyKeywordAsync(
-@"global using A = List<$$");
+            await VerifyKeywordAsync(@"global using A = List<$$");
         }
 
         [Fact]
         public async Task TestInNameOf()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"_ = nameof($$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"_ = nameof($$"));
         }
 
         [Fact]
         public async Task TestInSizeOf()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"_ = sizeof($$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"_ = sizeof($$"));
         }
 
         [Fact]
         public async Task TestInCRef()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"/// <see cref=""$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"/// <see cref=""$$"));
         }
 
         [Fact]
         public async Task TestInTupleWithinType()
         {
-            await VerifyKeywordAsync(@"
+            await VerifyKeywordAsync(
+                @"
 class Program
 {
     ($$
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestInTupleWithinMember()
         {
-            await VerifyKeywordAsync(@"
+            await VerifyKeywordAsync(
+                @"
 class Program
 {
     void Method()
     {
         ($$
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestPatternInSwitch()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"switch(o)
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"switch(o)
 {
     case $$
-}"));
+}"
+                )
+            );
         }
 
         [Fact]
         public async Task TestInFunctionPointerType()
         {
-            await VerifyKeywordAsync(@"
+            await VerifyKeywordAsync(
+                @"
 class C
 {
-    delegate*<$$");
+    delegate*<$$"
+            );
         }
 
         [Fact]
         public async Task TestInFunctionPointerTypeAfterComma()
         {
-            await VerifyKeywordAsync(@"
+            await VerifyKeywordAsync(
+                @"
 class C
 {
-    delegate*<int, $$");
+    delegate*<int, $$"
+            );
         }
 
         [Fact]
         public async Task TestInFunctionPointerTypeAfterModifier()
         {
-            await VerifyKeywordAsync(@"
+            await VerifyKeywordAsync(
+                @"
 class C
 {
-    delegate*<ref $$");
+    delegate*<ref $$"
+            );
         }
 
         [Fact, WorkItem(60341, "https://github.com/dotnet/roslyn/issues/60341")]
         public async Task TestNotAfterAsync()
         {
-            await VerifyAbsenceAsync(@"
+            await VerifyAbsenceAsync(
+                @"
 class C
 {
-    async $$");
+    async $$"
+            );
         }
 
         [Fact]
         public async Task TestNotAfterDelegateAsterisk()
         {
-            await VerifyAbsenceAsync(@"
+            await VerifyAbsenceAsync(
+                @"
 class C
 {
-    delegate*$$");
+    delegate*$$"
+            );
         }
 
         [Theory, WorkItem(53585, "https://github.com/dotnet/roslyn/issues/53585")]
         [ClassData(typeof(TheoryDataKeywordsIndicatingLocalFunctionWithoutAsync))]
         public async Task TestAfterKeywordIndicatingLocalFunctionWithoutAsync(string keyword)
         {
-            await VerifyKeywordAsync(AddInsideMethod($@"
-{keyword} $$"));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    $@"
+{keyword} $$"
+                )
+            );
         }
 
         [Theory, WorkItem(60341, "https://github.com/dotnet/roslyn/issues/60341")]
         [ClassData(typeof(TheoryDataKeywordsIndicatingLocalFunctionWithAsync))]
         public async Task TestNotAfterKeywordIndicatingLocalFunctionWithAsync(string keyword)
         {
-            await VerifyAbsenceAsync(AddInsideMethod($@"
-{keyword} $$"));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    $@"
+{keyword} $$"
+                )
+            );
         }
 
         [Fact, WorkItem(49743, "https://github.com/dotnet/roslyn/issues/49743")]
         public async Task TestNotInPreprocessorDirective()
         {
-            await VerifyAbsenceAsync(
-@"#$$");
+            await VerifyAbsenceAsync(@"#$$");
         }
     }
 }

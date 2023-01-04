@@ -22,8 +22,10 @@ public partial class HeaderModelBinderProvider : IModelBinderProvider
         }
 
         var bindingInfo = context.BindingInfo;
-        if (bindingInfo.BindingSource == null ||
-            !bindingInfo.BindingSource.CanAcceptDataFrom(BindingSource.Header))
+        if (
+            bindingInfo.BindingSource == null
+            || !bindingInfo.BindingSource.CanAcceptDataFrom(BindingSource.Header)
+        )
         {
             return null;
         }
@@ -48,7 +50,8 @@ public partial class HeaderModelBinderProvider : IModelBinderProvider
 
         var innerModelBinder = context.CreateBinder(
             modelMetadata.GetMetadataForType(modelMetadata.ModelType),
-            nestedBindingInfo);
+            nestedBindingInfo
+        );
 
         if (innerModelBinder == null)
         {
@@ -67,7 +70,12 @@ public partial class HeaderModelBinderProvider : IModelBinderProvider
 
     private static partial class Log
     {
-        [LoggerMessage(20, LogLevel.Debug, "Could not create a binder for type '{ModelType}' as this binder only supports simple types (like string, int, bool, enum) or a collection of simple types.", EventName = "CannotCreateHeaderModelBinder")]
+        [LoggerMessage(
+            20,
+            LogLevel.Debug,
+            "Could not create a binder for type '{ModelType}' as this binder only supports simple types (like string, int, bool, enum) or a collection of simple types.",
+            EventName = "CannotCreateHeaderModelBinder"
+        )]
         public static partial void CannotCreateHeaderModelBinder(ILogger logger, Type modelType);
     }
 }

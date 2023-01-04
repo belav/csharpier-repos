@@ -28,7 +28,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 {
-    internal abstract partial class AbstractLanguageService<TPackage, TLanguageService> : AbstractLanguageService
+    internal abstract partial class AbstractLanguageService<TPackage, TLanguageService>
+        : AbstractLanguageService
         where TPackage : AbstractPackage<TPackage, TLanguageService>
         where TLanguageService : AbstractLanguageService<TPackage, TLanguageService>
     {
@@ -36,7 +37,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
         internal VsLanguageDebugInfo LanguageDebugInfo { get; private set; }
 
         // DevDiv 753309:
-        // We've redefined some VS interfaces that had incorrect PIAs. When 
+        // We've redefined some VS interfaces that had incorrect PIAs. When
         // we interop with native parts of VS, they always QI, so everything
         // works. However, Razor is now managed, but assumes that the C#
         // language service is native. When setting breakpoints, they
@@ -45,8 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
         // we've redefined IVsLanguageDebugInfo, the cast
         // fails. To work around this, we put the LS inside a ComAggregate object,
         // which always force a QueryInterface and allow their cast to succeed.
-        // 
-        // This also fixes 752331, which is a similar problem with the 
+        //
+        // This also fixes 752331, which is a similar problem with the
         // exception assistant.
         internal object ComAggregate { get; private set; }
 
@@ -68,18 +69,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
         /// </remarks>
         private bool _isSetUp;
 
-        protected AbstractLanguageService(
-            TPackage package)
+        protected AbstractLanguageService(TPackage package)
         {
             this.Package = package;
         }
 
         public override IServiceProvider SystemServiceProvider
         {
-            get
-            {
-                return this.Package;
-            }
+            get { return this.Package; }
         }
 
         /// <summary>
@@ -96,8 +93,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             _ = this.Package.ComponentModel;
 
             // Start off a background task to prime some components we'll need for editing
-            VsTaskLibraryHelper.CreateAndStartTask(VsTaskLibraryHelper.ServiceInstance, VsTaskRunContext.BackgroundThread,
-                () => PrimeLanguageServiceComponentsOnBackground());
+            VsTaskLibraryHelper.CreateAndStartTask(
+                VsTaskLibraryHelper.ServiceInstance,
+                VsTaskRunContext.BackgroundThread,
+                () => PrimeLanguageServiceComponentsOnBackground()
+            );
 
             // Finally, once our connections are established, set up any initial state that we need.
             // Note: we may be instantiated at any time (including when the IDE is already
@@ -108,8 +108,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             _isSetUp = true;
         }
 
-        private object CreateComAggregate()
-            => Interop.ComAggregate.CreateAggregatedObject(this);
+        private object CreateComAggregate() => Interop.ComAggregate.CreateAggregatedObject(this);
 
         internal void TearDown()
         {
@@ -139,9 +138,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             // or service providers.  Anything else which is more complicated should go in Initialize
             // instead.
             this.Workspace = this.Package.ComponentModel.GetService<VisualStudioWorkspaceImpl>();
-            this.EditorAdaptersFactoryService = this.Package.ComponentModel.GetService<IVsEditorAdaptersFactoryService>();
-            this.HostDiagnosticUpdateSource = this.Package.ComponentModel.GetService<HostDiagnosticUpdateSource>();
-            this.AnalyzerFileWatcherService = this.Package.ComponentModel.GetService<AnalyzerFileWatcherService>();
+            this.EditorAdaptersFactoryService =
+                this.Package.ComponentModel.GetService<IVsEditorAdaptersFactoryService>();
+            this.HostDiagnosticUpdateSource =
+                this.Package.ComponentModel.GetService<HostDiagnosticUpdateSource>();
+            this.AnalyzerFileWatcherService =
+                this.Package.ComponentModel.GetService<AnalyzerFileWatcherService>();
         }
 
         protected virtual void RemoveServices()
@@ -153,9 +155,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
         /// <summary>
         /// Called right after we instantiate the language service.  Used to set up any internal
         /// state we need.
-        /// 
+        ///
         /// Try to keep this method fairly clean.  Any complicated logic should go in methods called
-        /// from this one.  Initialize and Uninitialize go in reverse order 
+        /// from this one.  Initialize and Uninitialize go in reverse order
         /// </summary>
         protected virtual void Initialize()
         {
@@ -169,7 +171,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
         private void PrimeLanguageServiceComponentsOnBackground()
         {
-            var formatter = this.Workspace.Services.GetLanguageServices(RoslynLanguageName).GetService<ISyntaxFormattingService>();
+            var formatter = this.Workspace.Services
+                .GetLanguageServices(RoslynLanguageName)
+                .GetService<ISyntaxFormattingService>();
             if (formatter != null)
             {
                 formatter.GetDefaultFormattingRules();
@@ -187,44 +191,74 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             var wpfTextView = EditorAdaptersFactoryService.GetWpfTextView(textView);
             Contract.ThrowIfNull(wpfTextView, "Could not get IWpfTextView for IVsTextView");
 
-            Debug.Assert(!wpfTextView.Properties.ContainsProperty(typeof(AbstractVsTextViewFilter)));
+            Debug.Assert(
+                !wpfTextView.Properties.ContainsProperty(typeof(AbstractVsTextViewFilter))
+            );
 
             var workspace = Package.ComponentModel.GetService<VisualStudioWorkspace>();
 
             // The lifetime of CommandFilter is married to the view
-            wpfTextView.GetOrCreateAutoClosingProperty(v =>
-                new StandaloneCommandFilter(
-                    v, Package.ComponentModel).AttachToVsTextView());
+            wpfTextView.GetOrCreateAutoClosingProperty(
+                v => new StandaloneCommandFilter(v, Package.ComponentModel).AttachToVsTextView()
+            );
 
-            var openDocument = wpfTextView.TextBuffer.AsTextContainer().GetRelatedDocuments().FirstOrDefault();
-            var isOpenMetadataAsSource = openDocument != null && openDocument.Project.Solution.Workspace.Kind == WorkspaceKind.MetadataAsSource;
+            var openDocument = wpfTextView.TextBuffer
+                .AsTextContainer()
+                .GetRelatedDocuments()
+                .FirstOrDefault();
+            var isOpenMetadataAsSource =
+                openDocument != null
+                && openDocument.Project.Solution.Workspace.Kind == WorkspaceKind.MetadataAsSource;
 
-            ConditionallyCollapseOutliningRegions(textView, wpfTextView, workspace, isOpenMetadataAsSource);
+            ConditionallyCollapseOutliningRegions(
+                textView,
+                wpfTextView,
+                workspace,
+                isOpenMetadataAsSource
+            );
 
             // If this is a metadata-to-source view, we want to consider the file read-only
-            if (isOpenMetadataAsSource && ErrorHandler.Succeeded(textView.GetBuffer(out var vsTextLines)))
+            if (
+                isOpenMetadataAsSource
+                && ErrorHandler.Succeeded(textView.GetBuffer(out var vsTextLines))
+            )
             {
-                ((IVsTextBuffer)vsTextLines).SetStateFlags((uint)BUFFERSTATEFLAGS.BSF_USER_READONLY);
+                ((IVsTextBuffer)vsTextLines).SetStateFlags(
+                    (uint)BUFFERSTATEFLAGS.BSF_USER_READONLY
+                );
 
-                var runningDocumentTable = (IVsRunningDocumentTable)SystemServiceProvider.GetService(typeof(SVsRunningDocumentTable));
+                var runningDocumentTable = (IVsRunningDocumentTable)
+                    SystemServiceProvider.GetService(typeof(SVsRunningDocumentTable));
                 var runningDocumentTable4 = (IVsRunningDocumentTable4)runningDocumentTable;
 
                 if (runningDocumentTable4.IsMonikerValid(openDocument.FilePath))
                 {
                     var cookie = runningDocumentTable4.GetDocumentCookie(openDocument.FilePath);
-                    runningDocumentTable.ModifyDocumentFlags(cookie, (uint)_VSRDTFLAGS.RDT_DontAddToMRU | (uint)_VSRDTFLAGS.RDT_CantSave, fSet: 1);
+                    runningDocumentTable.ModifyDocumentFlags(
+                        cookie,
+                        (uint)_VSRDTFLAGS.RDT_DontAddToMRU | (uint)_VSRDTFLAGS.RDT_CantSave,
+                        fSet: 1
+                    );
                 }
             }
         }
 
-        private void ConditionallyCollapseOutliningRegions(IVsTextView textView, IWpfTextView wpfTextView, Microsoft.CodeAnalysis.Workspace workspace, bool isOpenMetadataAsSource)
+        private void ConditionallyCollapseOutliningRegions(
+            IVsTextView textView,
+            IWpfTextView wpfTextView,
+            Microsoft.CodeAnalysis.Workspace workspace,
+            bool isOpenMetadataAsSource
+        )
         {
-            var outliningManagerService = this.Package.ComponentModel.GetService<IOutliningManagerService>();
+            var outliningManagerService =
+                this.Package.ComponentModel.GetService<IOutliningManagerService>();
             var outliningManager = outliningManagerService.GetOutliningManager(wpfTextView);
             if (outliningManager == null)
                 return;
 
-            if (!workspace.Options.GetOption(FeatureOnOffOptions.Outlining, this.RoslynLanguageName))
+            if (
+                !workspace.Options.GetOption(FeatureOnOffOptions.Outlining, this.RoslynLanguageName)
+            )
             {
                 outliningManager.Enabled = false;
             }
@@ -236,7 +270,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     {
                         // If this file is a metadata-from-source file, we want to force-collapse any implementations
                         // to keep the display clean and condensed.
-                        outliningManager.CollapseAll(wpfTextView.TextBuffer.CurrentSnapshot.GetFullSpan(), c => c.Tag.IsImplementation);
+                        outliningManager.CollapseAll(
+                            wpfTextView.TextBuffer.CurrentSnapshot.GetFullSpan(),
+                            c => c.Tag.IsImplementation
+                        );
                     }
                     else
                     {
@@ -249,8 +286,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             }
         }
 
-        private void InitializeLanguageDebugInfo()
-            => this.LanguageDebugInfo = this.CreateLanguageDebugInfo();
+        private void InitializeLanguageDebugInfo() =>
+            this.LanguageDebugInfo = this.CreateLanguageDebugInfo();
 
         protected abstract Guid DebuggerLanguageId { get; }
 
@@ -263,15 +300,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 this.DebuggerLanguageId,
                 (TLanguageService)this,
                 languageServices,
-                this.Package.ComponentModel.GetService<IUIThreadOperationExecutor>());
+                this.Package.ComponentModel.GetService<IUIThreadOperationExecutor>()
+            );
         }
 
-        private void UninitializeLanguageDebugInfo()
-            => this.LanguageDebugInfo = null;
+        private void UninitializeLanguageDebugInfo() => this.LanguageDebugInfo = null;
 
         protected virtual IVsContainedLanguage CreateContainedLanguage(
-            IVsTextBufferCoordinator bufferCoordinator, VisualStudioProject project,
-            IVsHierarchy hierarchy, uint itemid)
+            IVsTextBufferCoordinator bufferCoordinator,
+            VisualStudioProject project,
+            IVsHierarchy hierarchy,
+            uint itemid
+        )
         {
             var filePath = ContainedLanguage.GetFilePathFromHierarchyAndItemId(hierarchy, itemid);
 
@@ -282,7 +322,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 project.Id,
                 project,
                 filePath,
-                this.LanguageServiceId);
+                this.LanguageServiceId
+            );
         }
     }
 }

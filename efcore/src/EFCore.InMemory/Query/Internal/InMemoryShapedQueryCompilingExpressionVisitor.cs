@@ -3,7 +3,8 @@
 
 namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal;
 
-public partial class InMemoryShapedQueryCompilingExpressionVisitor : ShapedQueryCompilingExpressionVisitor
+public partial class InMemoryShapedQueryCompilingExpressionVisitor
+    : ShapedQueryCompilingExpressionVisitor
 {
     private readonly Type _contextType;
     private readonly bool _threadSafetyChecksEnabled;
@@ -16,8 +17,8 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor : ShapedQuery
     /// </summary>
     public InMemoryShapedQueryCompilingExpressionVisitor(
         ShapedQueryCompilingExpressionVisitorDependencies dependencies,
-        QueryCompilationContext queryCompilationContext)
-        : base(dependencies, queryCompilationContext)
+        QueryCompilationContext queryCompilationContext
+    ) : base(dependencies, queryCompilationContext)
     {
         _contextType = queryCompilationContext.ContextType;
         _threadSafetyChecksEnabled = dependencies.CoreSingletonOptions.AreThreadSafetyChecksEnabled;
@@ -37,7 +38,8 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor : ShapedQuery
                 return Expression.Call(
                     TableMethodInfo,
                     QueryCompilationContext.QueryContextParameter,
-                    Expression.Constant(inMemoryTableExpression.EntityType));
+                    Expression.Constant(inMemoryTableExpression.EntityType)
+                );
         }
 
         return base.VisitExtension(extensionExpression);
@@ -51,30 +53,40 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor : ShapedQuery
     /// </summary>
     protected override Expression VisitShapedQuery(ShapedQueryExpression shapedQueryExpression)
     {
-        var inMemoryQueryExpression = (InMemoryQueryExpression)shapedQueryExpression.QueryExpression;
+        var inMemoryQueryExpression = (InMemoryQueryExpression)
+            shapedQueryExpression.QueryExpression;
         inMemoryQueryExpression.ApplyProjection();
 
         var shaperExpression = new ShaperExpressionProcessingExpressionVisitor(
-                this, inMemoryQueryExpression, QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.TrackAll)
-            .ProcessShaper(shapedQueryExpression.ShaperExpression);
+            this,
+            inMemoryQueryExpression,
+            QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.TrackAll
+        ).ProcessShaper(shapedQueryExpression.ShaperExpression);
         var innerEnumerable = Visit(inMemoryQueryExpression.ServerQueryExpression);
 
         return Expression.New(
-            typeof(QueryingEnumerable<>).MakeGenericType(shaperExpression.ReturnType).GetConstructors()[0],
+            typeof(QueryingEnumerable<>)
+                .MakeGenericType(shaperExpression.ReturnType)
+                .GetConstructors()[0],
             QueryCompilationContext.QueryContextParameter,
             innerEnumerable,
             Expression.Constant(shaperExpression.Compile()),
             Expression.Constant(_contextType),
             Expression.Constant(
-                QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.NoTrackingWithIdentityResolution),
-            Expression.Constant(_threadSafetyChecksEnabled));
+                QueryCompilationContext.QueryTrackingBehavior
+                    == QueryTrackingBehavior.NoTrackingWithIdentityResolution
+            ),
+            Expression.Constant(_threadSafetyChecksEnabled)
+        );
     }
 
-    private static readonly MethodInfo TableMethodInfo
-        = typeof(InMemoryShapedQueryCompilingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(Table))!;
+    private static readonly MethodInfo TableMethodInfo =
+        typeof(InMemoryShapedQueryCompilingExpressionVisitor)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(Table))!;
 
     private static IEnumerable<ValueBuffer> Table(
         QueryContext queryContext,
-        IEntityType entityType)
-        => ((InMemoryQueryContext)queryContext).GetValueBuffers(entityType);
+        IEntityType entityType
+    ) => ((InMemoryQueryContext)queryContext).GetValueBuffers(entityType);
 }

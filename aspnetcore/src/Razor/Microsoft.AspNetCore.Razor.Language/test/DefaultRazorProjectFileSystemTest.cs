@@ -11,10 +11,12 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public class DefaultRazorProjectFileSystemTest
 {
-    private static string TestFolder { get; } = Path.Combine(
-        TestProject.GetProjectDirectory(typeof(DefaultRazorProjectFileSystemTest)),
-        "TestFiles",
-        "DefaultRazorProjectFileSystem");
+    private static string TestFolder { get; } =
+        Path.Combine(
+            TestProject.GetProjectDirectory(typeof(DefaultRazorProjectFileSystemTest)),
+            "TestFiles",
+            "DefaultRazorProjectFileSystem"
+        );
 
     [Theory]
     [InlineData(null)]
@@ -25,7 +27,10 @@ public class DefaultRazorProjectFileSystemTest
         var fileSystem = new TestRazorProjectFileSystem("C:/some/test/path/root");
 
         // Act and Assert
-        ExceptionAssert.ThrowsArgumentNullOrEmptyString(() => fileSystem.NormalizeAndEnsureValidPath(path), "path");
+        ExceptionAssert.ThrowsArgumentNullOrEmptyString(
+            () => fileSystem.NormalizeAndEnsureValidPath(path),
+            "path"
+        );
     }
 
     [Fact]
@@ -48,7 +53,9 @@ public class DefaultRazorProjectFileSystemTest
         var fileSystem = new TestRazorProjectFileSystem("//some/network/share/root");
 
         // Act
-        var absolutePath = fileSystem.NormalizeAndEnsureValidPath("\\\\some\\network\\share\\root\\file.cshtml");
+        var absolutePath = fileSystem.NormalizeAndEnsureValidPath(
+            "\\\\some\\network\\share\\root\\file.cshtml"
+        );
 
         // Assert
         Assert.Equal("//some/network/share/root/file.cshtml", absolutePath);
@@ -61,7 +68,9 @@ public class DefaultRazorProjectFileSystemTest
         var fileSystem = new TestRazorProjectFileSystem("//some/network/share/root");
 
         // Act
-        var absolutePath = fileSystem.NormalizeAndEnsureValidPath("//some/network/share/root/file.cshtml");
+        var absolutePath = fileSystem.NormalizeAndEnsureValidPath(
+            "//some/network/share/root/file.cshtml"
+        );
 
         // Assert
         Assert.Equal("//some/network/share/root/file.cshtml", absolutePath);
@@ -111,35 +120,58 @@ public class DefaultRazorProjectFileSystemTest
                 Assert.Equal("/", item.BasePath);
                 Assert.Equal(Path.Combine(TestFolder, "Home.cshtml"), item.PhysicalPath);
                 Assert.Equal("Home.cshtml", item.RelativePhysicalPath);
-
             },
             item =>
             {
                 Assert.Equal("/Views/About/About.cshtml", item.FilePath);
                 Assert.Equal("/", item.BasePath);
-                Assert.Equal(Path.Combine(TestFolder, "Views", "About", "About.cshtml"), item.PhysicalPath);
-                Assert.Equal(Path.Combine("Views", "About", "About.cshtml"), item.RelativePhysicalPath);
+                Assert.Equal(
+                    Path.Combine(TestFolder, "Views", "About", "About.cshtml"),
+                    item.PhysicalPath
+                );
+                Assert.Equal(
+                    Path.Combine("Views", "About", "About.cshtml"),
+                    item.RelativePhysicalPath
+                );
             },
             item =>
             {
                 Assert.Equal("/Views/Home/Index.cshtml", item.FilePath);
                 Assert.Equal("/", item.BasePath);
-                Assert.Equal(Path.Combine(TestFolder, "Views", "Home", "Index.cshtml"), item.PhysicalPath);
-                Assert.Equal(Path.Combine("Views", "Home", "Index.cshtml"), item.RelativePhysicalPath);
+                Assert.Equal(
+                    Path.Combine(TestFolder, "Views", "Home", "Index.cshtml"),
+                    item.PhysicalPath
+                );
+                Assert.Equal(
+                    Path.Combine("Views", "Home", "Index.cshtml"),
+                    item.RelativePhysicalPath
+                );
             },
             item =>
             {
                 Assert.Equal("/Views/Home/_ViewImports.cshtml", item.FilePath);
                 Assert.Equal("/", item.BasePath);
-                Assert.Equal(Path.Combine(TestFolder, "Views", "Home", "_ViewImports.cshtml"), item.PhysicalPath);
-                Assert.Equal(Path.Combine("Views", "Home", "_ViewImports.cshtml"), item.RelativePhysicalPath);
+                Assert.Equal(
+                    Path.Combine(TestFolder, "Views", "Home", "_ViewImports.cshtml"),
+                    item.PhysicalPath
+                );
+                Assert.Equal(
+                    Path.Combine("Views", "Home", "_ViewImports.cshtml"),
+                    item.RelativePhysicalPath
+                );
             },
             item =>
             {
                 Assert.Equal("/Views/_ViewImports.cshtml", item.FilePath);
                 Assert.Equal("/", item.BasePath);
-                Assert.Equal(Path.Combine(TestFolder, "Views", "_ViewImports.cshtml"), item.PhysicalPath);
-                Assert.Equal(Path.Combine("Views", "_ViewImports.cshtml"), item.RelativePhysicalPath);
+                Assert.Equal(
+                    Path.Combine(TestFolder, "Views", "_ViewImports.cshtml"),
+                    item.PhysicalPath
+                );
+                Assert.Equal(
+                    Path.Combine("Views", "_ViewImports.cshtml"),
+                    item.RelativePhysicalPath
+                );
             },
             item =>
             {
@@ -147,7 +179,8 @@ public class DefaultRazorProjectFileSystemTest
                 Assert.Equal("/", item.BasePath);
                 Assert.Equal(Path.Combine(TestFolder, "_ViewImports.cshtml"), item.PhysicalPath);
                 Assert.Equal("_ViewImports.cshtml", item.RelativePhysicalPath);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -166,30 +199,46 @@ public class DefaultRazorProjectFileSystemTest
             {
                 Assert.Equal("/About/About.cshtml", item.FilePath);
                 Assert.Equal("/Views", item.BasePath);
-                Assert.Equal(Path.Combine(TestFolder, "Views", "About", "About.cshtml"), item.PhysicalPath);
+                Assert.Equal(
+                    Path.Combine(TestFolder, "Views", "About", "About.cshtml"),
+                    item.PhysicalPath
+                );
                 Assert.Equal(Path.Combine("About", "About.cshtml"), item.RelativePhysicalPath);
             },
             item =>
             {
                 Assert.Equal("/Home/Index.cshtml", item.FilePath);
                 Assert.Equal("/Views", item.BasePath);
-                Assert.Equal(Path.Combine(TestFolder, "Views", "Home", "Index.cshtml"), item.PhysicalPath);
+                Assert.Equal(
+                    Path.Combine(TestFolder, "Views", "Home", "Index.cshtml"),
+                    item.PhysicalPath
+                );
                 Assert.Equal(Path.Combine("Home", "Index.cshtml"), item.RelativePhysicalPath);
             },
             item =>
             {
                 Assert.Equal("/Home/_ViewImports.cshtml", item.FilePath);
                 Assert.Equal("/Views", item.BasePath);
-                Assert.Equal(Path.Combine(TestFolder, "Views", "Home", "_ViewImports.cshtml"), item.PhysicalPath);
-                Assert.Equal(Path.Combine("Home", "_ViewImports.cshtml"), item.RelativePhysicalPath);
+                Assert.Equal(
+                    Path.Combine(TestFolder, "Views", "Home", "_ViewImports.cshtml"),
+                    item.PhysicalPath
+                );
+                Assert.Equal(
+                    Path.Combine("Home", "_ViewImports.cshtml"),
+                    item.RelativePhysicalPath
+                );
             },
             item =>
             {
                 Assert.Equal("/_ViewImports.cshtml", item.FilePath);
                 Assert.Equal("/Views", item.BasePath);
-                Assert.Equal(Path.Combine(TestFolder, "Views", "_ViewImports.cshtml"), item.PhysicalPath);
+                Assert.Equal(
+                    Path.Combine(TestFolder, "Views", "_ViewImports.cshtml"),
+                    item.PhysicalPath
+                );
                 Assert.Equal(Path.Combine("_ViewImports.cshtml"), item.RelativePhysicalPath);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -212,7 +261,10 @@ public class DefaultRazorProjectFileSystemTest
         var fileSystem = new DefaultRazorProjectFileSystem(TestFolder);
 
         // Act
-        var items = fileSystem.FindHierarchicalItems("/Views/Home/Index.cshtml", "_ViewImports.cshtml");
+        var items = fileSystem.FindHierarchicalItems(
+            "/Views/Home/Index.cshtml",
+            "_ViewImports.cshtml"
+        );
 
         // Assert
         Assert.Collection(
@@ -221,15 +273,27 @@ public class DefaultRazorProjectFileSystemTest
             {
                 Assert.Equal("/Views/Home/_ViewImports.cshtml", item.FilePath);
                 Assert.Equal("/", item.BasePath);
-                Assert.Equal(Path.Combine(TestFolder, "Views", "Home", "_ViewImports.cshtml"), item.PhysicalPath);
-                Assert.Equal(Path.Combine("Views", "Home", "_ViewImports.cshtml"), item.RelativePhysicalPath);
+                Assert.Equal(
+                    Path.Combine(TestFolder, "Views", "Home", "_ViewImports.cshtml"),
+                    item.PhysicalPath
+                );
+                Assert.Equal(
+                    Path.Combine("Views", "Home", "_ViewImports.cshtml"),
+                    item.RelativePhysicalPath
+                );
             },
             item =>
             {
                 Assert.Equal("/Views/_ViewImports.cshtml", item.FilePath);
                 Assert.Equal("/", item.BasePath);
-                Assert.Equal(Path.Combine(TestFolder, "Views", "_ViewImports.cshtml"), item.PhysicalPath);
-                Assert.Equal(Path.Combine("Views", "_ViewImports.cshtml"), item.RelativePhysicalPath);
+                Assert.Equal(
+                    Path.Combine(TestFolder, "Views", "_ViewImports.cshtml"),
+                    item.PhysicalPath
+                );
+                Assert.Equal(
+                    Path.Combine("Views", "_ViewImports.cshtml"),
+                    item.RelativePhysicalPath
+                );
             },
             item =>
             {
@@ -237,7 +301,8 @@ public class DefaultRazorProjectFileSystemTest
                 Assert.Equal("/", item.BasePath);
                 Assert.Equal(Path.Combine(TestFolder, "_ViewImports.cshtml"), item.PhysicalPath);
                 Assert.Equal("_ViewImports.cshtml", item.RelativePhysicalPath);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -259,7 +324,10 @@ public class DefaultRazorProjectFileSystemTest
     }
 
     [ConditionalFact]
-    [OSSkipCondition(OperatingSystems.Linux, SkipReason = "This test does not makes sense for case sensitive Operating Systems.")]
+    [OSSkipCondition(
+        OperatingSystems.Linux,
+        SkipReason = "This test does not makes sense for case sensitive Operating Systems."
+    )]
     public void GetItem_MismatchedCase_ReturnsFileFromDisk()
     {
         // Arrange
@@ -274,7 +342,10 @@ public class DefaultRazorProjectFileSystemTest
         Assert.True(item.Exists);
         Assert.Equal(filePath, item.FilePath);
         Assert.Equal("/", item.BasePath);
-        Assert.Equal(Path.Combine(lowerCaseTestFolder, "Views", "About", "About.cshtml"), item.PhysicalPath);
+        Assert.Equal(
+            Path.Combine(lowerCaseTestFolder, "Views", "About", "About.cshtml"),
+            item.PhysicalPath
+        );
         Assert.Equal(Path.Combine("Views", "About", "About.cshtml"), item.RelativePhysicalPath);
     }
 
@@ -303,15 +374,15 @@ public class DefaultRazorProjectFileSystemTest
         // Act & Assert
         ExceptionAssert.Throws<InvalidOperationException>(
             () => fileSystem.GetItem(path, fileKind: null),
-            $"The file '{path.Replace('\\', '/')}' is not a descendent of the base path '{rootPath}'.");
+            $"The file '{path.Replace('\\', '/')}' is not a descendent of the base path '{rootPath}'."
+        );
     }
 
     private class TestRazorProjectFileSystem : DefaultRazorProjectFileSystem
     {
-        public TestRazorProjectFileSystem(string root) : base(root)
-        {
-        }
+        public TestRazorProjectFileSystem(string root) : base(root) { }
 
-        public new string NormalizeAndEnsureValidPath(string path) => base.NormalizeAndEnsureValidPath(path);
+        public new string NormalizeAndEnsureValidPath(string path) =>
+            base.NormalizeAndEnsureValidPath(path);
     }
 }

@@ -18,10 +18,19 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.NamingStyles
 {
-    internal class NamingStyleSettingsProvider : SettingsProviderBase<NamingStyleSetting, NamingStyleSettingsUpdater, (Action<(object, object?)>, NamingStyleSetting), object>
+    internal class NamingStyleSettingsProvider
+        : SettingsProviderBase<
+            NamingStyleSetting,
+            NamingStyleSettingsUpdater,
+            (Action<(object, object?)>, NamingStyleSetting),
+            object
+        >
     {
-        public NamingStyleSettingsProvider(string fileName, NamingStyleSettingsUpdater settingsUpdater, Workspace workspace)
-            : base(fileName, settingsUpdater, workspace)
+        public NamingStyleSettingsProvider(
+            string fileName,
+            NamingStyleSettingsUpdater settingsUpdater,
+            Workspace workspace
+        ) : base(fileName, settingsUpdater, workspace)
         {
             Update();
         }
@@ -43,16 +52,24 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Naming
             }
 
             var sourceTree = document.GetRequiredSyntaxTreeSynchronously(CancellationToken.None);
-            var configOptions = project.State.AnalyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(sourceTree);
+            var configOptions =
+                project.State.AnalyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(sourceTree);
 
-            if (configOptions.TryGetEditorConfigOption(NamingStyleOptions.NamingPreferences, out NamingStylePreferences? namingPreferences) &&
-                namingPreferences is not null)
+            if (
+                configOptions.TryGetEditorConfigOption(
+                    NamingStyleOptions.NamingPreferences,
+                    out NamingStylePreferences? namingPreferences
+                ) && namingPreferences is not null
+            )
             {
                 AddNamingStylePreferences(namingPreferences, isInEditorConfig: true);
             }
             else
             {
-                namingPreferences = optionSet.GetOption(NamingStyleOptions.NamingPreferences, project.Language);
+                namingPreferences = optionSet.GetOption(
+                    NamingStyleOptions.NamingPreferences,
+                    project.Language
+                );
                 if (namingPreferences is null)
                 {
                     return;
@@ -61,19 +78,23 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Naming
                 AddNamingStylePreferences(namingPreferences, isInEditorConfig: false);
             }
 
-            void AddNamingStylePreferences(NamingStylePreferences namingPreferences, bool isInEditorConfig)
+            void AddNamingStylePreferences(
+                NamingStylePreferences namingPreferences,
+                bool isInEditorConfig
+            )
             {
-                var namingRules = namingPreferences.NamingRules.Select(r => r.GetRule(namingPreferences));
+                var namingRules = namingPreferences.NamingRules.Select(
+                    r => r.GetRule(namingPreferences)
+                );
                 var allStyles = namingPreferences.NamingStyles.DistinctBy(s => s.Name).ToArray();
-                var namingStyles = namingRules
-                    .Select(namingRule =>
-                    {
-                        var style = namingRule.NamingStyle;
-                        var type = namingRule.SymbolSpecification;
-                        return isInEditorConfig
-                            ? new NamingStyleSetting(namingRule, allStyles, SettingsUpdater, FileName)
-                            : new NamingStyleSetting(namingRule, allStyles, SettingsUpdater);
-                    });
+                var namingStyles = namingRules.Select(namingRule =>
+                {
+                    var style = namingRule.NamingStyle;
+                    var type = namingRule.SymbolSpecification;
+                    return isInEditorConfig
+                        ? new NamingStyleSetting(namingRule, allStyles, SettingsUpdater, FileName)
+                        : new NamingStyleSetting(namingRule, allStyles, SettingsUpdater);
+                });
 
                 AddRange(namingStyles);
             }

@@ -57,12 +57,14 @@ namespace System.Runtime.Serialization
         /// <summary>
         /// Gets a dictionary that contains the mapping of data contract namespaces to the CLR namespaces that must be used to generate code during an import operation.
         /// </summary>
-        public IDictionary<string, string> Namespaces => _namespaces ??= new Dictionary<string, string>();
+        public IDictionary<string, string> Namespaces =>
+            _namespaces ??= new Dictionary<string, string>();
 
         /// <summary>
         /// Gets a collection of types that represents data contract collections that should be referenced when generating code for collections, such as lists or dictionaries of items.
         /// </summary>
-        public ICollection<Type> ReferencedCollectionTypes => _referencedCollectionTypes ??= new List<Type>();
+        public ICollection<Type> ReferencedCollectionTypes =>
+            _referencedCollectionTypes ??= new List<Type>();
 
         /// <summary>
         /// Gets a <see cref="IList{T}"/> containing types referenced in generated code.

@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis
 
         internal GeneratorSyntaxWalker(
             ISyntaxContextReceiver syntaxReceiver,
-            ISyntaxHelper syntaxHelper)
+            ISyntaxHelper syntaxHelper
+        )
         {
             _syntaxReceiver = syntaxReceiver;
             _syntaxHelper = syntaxHelper;
@@ -24,9 +25,11 @@ namespace Microsoft.CodeAnalysis
 
         public void VisitWithModel(Lazy<SemanticModel>? model, SyntaxNode node)
         {
-            Debug.Assert(_semanticModel is null
-                         && model is not null
-                         && model.Value.SyntaxTree == node.SyntaxTree);
+            Debug.Assert(
+                _semanticModel is null
+                    && model is not null
+                    && model.Value.SyntaxTree == node.SyntaxTree
+            );
 
             _semanticModel = model;
             Visit(node);
@@ -35,8 +38,12 @@ namespace Microsoft.CodeAnalysis
 
         public override void Visit(SyntaxNode node)
         {
-            Debug.Assert(_semanticModel is object && _semanticModel.Value.SyntaxTree == node.SyntaxTree);
-            _syntaxReceiver.OnVisitSyntaxNode(new GeneratorSyntaxContext(node, _semanticModel, _syntaxHelper));
+            Debug.Assert(
+                _semanticModel is object && _semanticModel.Value.SyntaxTree == node.SyntaxTree
+            );
+            _syntaxReceiver.OnVisitSyntaxNode(
+                new GeneratorSyntaxContext(node, _semanticModel, _syntaxHelper)
+            );
             base.Visit(node);
         }
     }

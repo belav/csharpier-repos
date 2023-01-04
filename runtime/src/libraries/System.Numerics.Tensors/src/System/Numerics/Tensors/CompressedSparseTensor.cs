@@ -36,8 +36,8 @@ namespace System.Numerics.Tensors
         /// </summary>
         /// <param name="dimensions">An span of integers that represent the size of each dimension of the CompressedSparseTensor to create.</param>
         /// <param name="reverseStride">False (default) to indicate that the first dimension is most major (farthest apart) and the last dimension is most minor (closest together): akin to row-major in a rank-2 tensor.  True to indicate that the last dimension is most major (farthest apart) and the first dimension is most minor (closest together): akin to column-major in a rank-2 tensor.</param>
-        public CompressedSparseTensor(ReadOnlySpan<int> dimensions, bool reverseStride = false) : this(dimensions, defaultCapacity, reverseStride)
-        { }
+        public CompressedSparseTensor(ReadOnlySpan<int> dimensions, bool reverseStride = false)
+            : this(dimensions, defaultCapacity, reverseStride) { }
 
         /// <summary>
         /// Constructs a new CompressedSparseTensor of the specified dimensions, initial capacity, and stride ordering.
@@ -45,7 +45,11 @@ namespace System.Numerics.Tensors
         /// <param name="dimensions">An span of integers that represent the size of each dimension of the CompressedSparseTensor to create.</param>
         /// <param name="capacity">The number of non-zero values this tensor can store without resizing.</param>
         /// <param name="reverseStride">False (default) to indicate that the first dimension is most major (farthest apart) and the last dimension is most minor (closest together): akin to row-major in a rank-2 tensor.  True to indicate that the last dimension is most major (farthest apart) and the first dimension is most minor (closest together): akin to column-major in a rank-2 tensor.</param>
-        public CompressedSparseTensor(ReadOnlySpan<int> dimensions, int capacity, bool reverseStride = false) : base(dimensions, reverseStride)
+        public CompressedSparseTensor(
+            ReadOnlySpan<int> dimensions,
+            int capacity,
+            bool reverseStride = false
+        ) : base(dimensions, reverseStride)
         {
             nonZeroCount = 0;
             compressedDimension = reverseStride ? Rank - 1 : 0;
@@ -67,7 +71,14 @@ namespace System.Numerics.Tensors
         /// <param name="nonZeroCount">The number of valid entries (eg: non-zero values) in <paramref name="values"/> and <paramref name="indices"/>.</param>
         /// <param name="dimensions">An span of integers that represent the size of each dimension of the CompressedSparseTensor to create.</param>
         /// <param name="reverseStride">False (default) to indicate that the first dimension is most major (farthest apart) and the last dimension is most minor (closest together): akin to row-major in a rank-2 tensor.  True to indicate that the last dimension is most major (farthest apart) and the first dimension is most minor (closest together): akin to column-major in a rank-2 tensor.</param>
-        public CompressedSparseTensor(Memory<T> values, Memory<int> compressedCounts, Memory<int> indices, int nonZeroCount, ReadOnlySpan<int> dimensions, bool reverseStride = false) : base(dimensions, reverseStride)
+        public CompressedSparseTensor(
+            Memory<T> values,
+            Memory<int> compressedCounts,
+            Memory<int> indices,
+            int nonZeroCount,
+            ReadOnlySpan<int> dimensions,
+            bool reverseStride = false
+        ) : base(dimensions, reverseStride)
         {
             compressedDimension = reverseStride ? Rank - 1 : 0;
             nonCompressedStrides = (int[])strides.Clone();
@@ -78,7 +89,8 @@ namespace System.Numerics.Tensors
             this.nonZeroCount = nonZeroCount;
         }
 
-        internal CompressedSparseTensor(Array fromArray, bool reverseStride = false) : base(fromArray, reverseStride)
+        internal CompressedSparseTensor(Array fromArray, bool reverseStride = false)
+            : base(fromArray, reverseStride)
         {
             nonZeroCount = 0;
             compressedDimension = reverseStride ? Rank - 1 : 0;
@@ -97,7 +109,12 @@ namespace System.Numerics.Tensors
                 {
                     if (!item!.Equals(Zero))
                     {
-                        var destIndex = ArrayUtilities.TransformIndexByStrides(index, sourceStrides, false, strides);
+                        var destIndex = ArrayUtilities.TransformIndexByStrides(
+                            index,
+                            sourceStrides,
+                            false,
+                            strides
+                        );
                         var compressedIndex = destIndex / strides[compressedDimension];
                         var nonCompressedIndex = destIndex % strides[compressedDimension];
 
@@ -136,7 +153,6 @@ namespace System.Numerics.Tensors
                 var compressedIndex = indices[compressedDimension];
                 var nonCompressedIndex = ArrayUtilities.GetIndex(nonCompressedStrides, indices);
 
-
                 if (TryFindIndex(compressedIndex, nonCompressedIndex, out int valueIndex))
                 {
                     return values.Span[valueIndex];
@@ -144,7 +160,6 @@ namespace System.Numerics.Tensors
 
                 return Zero;
             }
-
             set
             {
                 var compressedIndex = indices[compressedDimension];
@@ -166,7 +181,6 @@ namespace System.Numerics.Tensors
 
             var compressedIndex = index / compressedDimensionStride;
             var nonCompressedIndex = index % compressedDimensionStride;
-
 
             if (TryFindIndex(compressedIndex, nonCompressedIndex, out int valueIndex))
             {
@@ -190,7 +204,6 @@ namespace System.Numerics.Tensors
             var nonCompressedIndex = index % compressedDimensionStride;
 
             SetAt(value, compressedIndex, nonCompressedIndex);
-
         }
 
         /// <summary>
@@ -264,11 +277,23 @@ namespace System.Numerics.Tensors
 
                         if (allocateIndex < nonZeroCount)
                         {
-                            var valuesSpan = values.Span.Slice(allocateIndex, nonZeroCount - allocateIndex);
-                            var indicesSpan = indices.Span.Slice(allocateIndex, nonZeroCount - allocateIndex);
+                            var valuesSpan = values.Span.Slice(
+                                allocateIndex,
+                                nonZeroCount - allocateIndex
+                            );
+                            var indicesSpan = indices.Span.Slice(
+                                allocateIndex,
+                                nonZeroCount - allocateIndex
+                            );
 
-                            var newValuesSpan = newValues.Span.Slice(allocateIndex + 1, nonZeroCount - allocateIndex);
-                            var newIndicesSpan = newIndices.Span.Slice(allocateIndex + 1, nonZeroCount - allocateIndex);
+                            var newValuesSpan = newValues.Span.Slice(
+                                allocateIndex + 1,
+                                nonZeroCount - allocateIndex
+                            );
+                            var newIndicesSpan = newIndices.Span.Slice(
+                                allocateIndex + 1,
+                                nonZeroCount - allocateIndex
+                            );
 
                             valuesSpan.CopyTo(newValuesSpan);
                             indicesSpan.CopyTo(newIndicesSpan);
@@ -294,8 +319,12 @@ namespace System.Numerics.Tensors
             else if (nonZeroCount != valueIndex)
             {
                 // shift values to make a gap
-                values.Span.Slice(valueIndex, nonZeroCount - valueIndex).CopyTo(values.Span.Slice(valueIndex + 1));
-                indices.Span.Slice(valueIndex, nonZeroCount - valueIndex).CopyTo(indices.Span.Slice(valueIndex + 1));
+                values.Span
+                    .Slice(valueIndex, nonZeroCount - valueIndex)
+                    .CopyTo(values.Span.Slice(valueIndex + 1));
+                indices.Span
+                    .Slice(valueIndex, nonZeroCount - valueIndex)
+                    .CopyTo(indices.Span.Slice(valueIndex + 1));
             }
 
             values.Span[valueIndex] = value;
@@ -315,8 +344,12 @@ namespace System.Numerics.Tensors
             Debug.Assert(compressedIndex < compressedCounts.Length - 1);
 
             // shift values to close the gap
-            values.Span.Slice(valueIndex + 1, nonZeroCount - valueIndex - 1).CopyTo(values.Span.Slice(valueIndex));
-            indices.Span.Slice(valueIndex + 1, nonZeroCount - valueIndex - 1).CopyTo(indices.Span.Slice(valueIndex));
+            values.Span
+                .Slice(valueIndex + 1, nonZeroCount - valueIndex - 1)
+                .CopyTo(values.Span.Slice(valueIndex));
+            indices.Span
+                .Slice(valueIndex + 1, nonZeroCount - valueIndex - 1)
+                .CopyTo(indices.Span.Slice(valueIndex));
 
             var compressedCountsSpan = compressedCounts.Span.Slice(compressedIndex + 1);
             for (int i = 0; i < compressedCountsSpan.Length; i++)
@@ -388,7 +421,14 @@ namespace System.Numerics.Tensors
         /// <returns>A shallow copy of this tensor.</returns>
         public override Tensor<T> Clone()
         {
-            return new CompressedSparseTensor<T>(values.ToArray(), compressedCounts.ToArray(), indices.ToArray(), nonZeroCount, dimensions, IsReversedStride);
+            return new CompressedSparseTensor<T>(
+                values.ToArray(),
+                compressedCounts.ToArray(),
+                indices.ToArray(),
+                nonZeroCount,
+                dimensions,
+                IsReversedStride
+            );
         }
 
         /// <summary>
@@ -432,7 +472,8 @@ namespace System.Numerics.Tensors
                     Debug.Assert(compressedIndex < compressedCounts.Length);
                 }
 
-                var currentIndex = indicesSpan[valueIndex] + compressedIndex * strides[compressedDimension];
+                var currentIndex =
+                    indicesSpan[valueIndex] + compressedIndex * strides[compressedDimension];
 
                 newIndices[valueIndex] = currentIndex % newCompressedDimensionStride;
 
@@ -440,7 +481,14 @@ namespace System.Numerics.Tensors
                 newCompressedCounts[newCompressedIndex + 1] = valueIndex + 1;
             }
 
-            return new CompressedSparseTensor<T>(newValues, newCompressedCounts, newIndices, nonZeroCount, dimensions, IsReversedStride);
+            return new CompressedSparseTensor<T>(
+                newValues,
+                newCompressedCounts,
+                newIndices,
+                nonZeroCount,
+                dimensions,
+                IsReversedStride
+            );
         }
 
         /// <summary>
@@ -464,7 +512,8 @@ namespace System.Numerics.Tensors
                     Debug.Assert(compressedIndex < compressedCounts.Length);
                 }
 
-                var index = indicesSpan[valueIndex] + compressedIndex * strides[compressedDimension];
+                var index =
+                    indicesSpan[valueIndex] + compressedIndex * strides[compressedDimension];
 
                 denseTensor.SetValue(index, valuesSpan[valueIndex]);
             }
@@ -482,7 +531,14 @@ namespace System.Numerics.Tensors
             var newValues = values.Slice(0, nonZeroCount).ToArray();
             var newIndices = indices.Slice(0, nonZeroCount).ToArray();
 
-            return new CompressedSparseTensor<T>(newValues, compressedCounts.ToArray(), newIndices, nonZeroCount, dimensions, IsReversedStride);
+            return new CompressedSparseTensor<T>(
+                newValues,
+                compressedCounts.ToArray(),
+                newIndices,
+                nonZeroCount,
+                dimensions,
+                IsReversedStride
+            );
         }
 
         /// <summary>
@@ -491,7 +547,11 @@ namespace System.Numerics.Tensors
         /// <returns>A copy of this tensor as a SparseTensor&lt;T&gt;.</returns>
         public override SparseTensor<T> ToSparseTensor()
         {
-            var sparseTensor = new SparseTensor<T>(dimensions, capacity: NonZeroCount, reverseStride: IsReversedStride);
+            var sparseTensor = new SparseTensor<T>(
+                dimensions,
+                capacity: NonZeroCount,
+                reverseStride: IsReversedStride
+            );
 
             var compressedIndex = 0;
 
@@ -506,7 +566,8 @@ namespace System.Numerics.Tensors
                     Debug.Assert(compressedIndex < compressedCounts.Length);
                 }
 
-                var index = indicesSpan[valueIndex] + compressedIndex * strides[compressedDimension];
+                var index =
+                    indicesSpan[valueIndex] + compressedIndex * strides[compressedDimension];
 
                 sparseTensor.SetValue(index, valuesSpan[valueIndex]);
             }

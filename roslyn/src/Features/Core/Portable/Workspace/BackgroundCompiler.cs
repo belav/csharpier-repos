@@ -19,7 +19,11 @@ namespace Microsoft.CodeAnalysis.Host
         private Workspace? _workspace;
         private readonly AsyncBatchingWorkQueue _workQueue;
 
-        [SuppressMessage("CodeQuality", "IDE0052:Remove unread private members", Justification = "Used to keep a strong reference to the built compilations so they are not GC'd")]
+        [SuppressMessage(
+            "CodeQuality",
+            "IDE0052:Remove unread private members",
+            Justification = "Used to keep a strong reference to the built compilations so they are not GC'd"
+        )]
         private readonly ConcurrentSet<Compilation> _mostRecentCompilations = new();
 
         /// <summary>
@@ -32,13 +36,15 @@ namespace Microsoft.CodeAnalysis.Host
             _workspace = workspace;
 
             // make a scheduler that runs on the thread pool
-            var listenerProvider = workspace.Services.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
+            var listenerProvider =
+                workspace.Services.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
 
             _workQueue = new AsyncBatchingWorkQueue(
                 DelayTimeSpan.NearImmediate,
                 BuildCompilationsForVisibleDocumentsAsync,
                 listenerProvider.GetListener(),
-                _disposalCancellationSource.Token);
+                _disposalCancellationSource.Token
+            );
 
             _workspace.WorkspaceChanged += OnWorkspaceChanged;
             _workspace.DocumentOpened += OnDocumentOpened;
@@ -60,14 +66,11 @@ namespace Microsoft.CodeAnalysis.Host
             }
         }
 
-        private void OnDocumentOpened(object? sender, DocumentEventArgs args)
-            => Rebuild();
+        private void OnDocumentOpened(object? sender, DocumentEventArgs args) => Rebuild();
 
-        private void OnDocumentClosed(object? sender, DocumentEventArgs args)
-            => Rebuild();
+        private void OnDocumentClosed(object? sender, DocumentEventArgs args) => Rebuild();
 
-        private void OnWorkspaceChanged(object? sender, WorkspaceChangeEventArgs args)
-            => Rebuild();
+        private void OnWorkspaceChanged(object? sender, WorkspaceChangeEventArgs args) => Rebuild();
 
         private void Rebuild()
         {
@@ -75,7 +78,9 @@ namespace Microsoft.CodeAnalysis.Host
             _workQueue.AddWork(cancelExistingWork: true);
         }
 
-        private async ValueTask BuildCompilationsForVisibleDocumentsAsync(CancellationToken cancellationToken)
+        private async ValueTask BuildCompilationsForVisibleDocumentsAsync(
+            CancellationToken cancellationToken
+        )
         {
             var workspace = _workspace;
             if (workspace is null)
@@ -83,7 +88,12 @@ namespace Microsoft.CodeAnalysis.Host
 
             using var _ = ArrayBuilder<Compilation>.GetInstance(out var compilations);
 
-            await AddCompilationsForVisibleDocumentsAsync(workspace.CurrentSolution, compilations, cancellationToken).ConfigureAwait(false);
+            await AddCompilationsForVisibleDocumentsAsync(
+                    workspace.CurrentSolution,
+                    compilations,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             _mostRecentCompilations.Clear();
             _mostRecentCompilations.AddRange(compilations);
@@ -92,12 +102,16 @@ namespace Microsoft.CodeAnalysis.Host
         private static async ValueTask AddCompilationsForVisibleDocumentsAsync(
             Solution solution,
             ArrayBuilder<Compilation> compilations,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             var trackingService = solution.Services.GetRequiredService<IDocumentTrackingService>();
-            var visibleProjectIds = trackingService.GetVisibleDocuments().Select(d => d.ProjectId).ToSet();
+            var visibleProjectIds = trackingService
+                .GetVisibleDocuments()
+                .Select(d => d.ProjectId)
+                .ToSet();
             var activeProjectId = trackingService.TryGetActiveDocument()?.ProjectId;
 
             // Prioritize the project for the active document first.
@@ -120,7 +134,9 @@ namespace Microsoft.CodeAnalysis.Host
                 if (project is null)
                     return;
 
-                var compilation = await project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+                var compilation = await project
+                    .GetCompilationAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 compilations.AddIfNotNull(compilation);
             }
         }

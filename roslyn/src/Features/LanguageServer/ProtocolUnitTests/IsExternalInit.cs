@@ -5,7 +5,5 @@
 namespace System.Runtime.CompilerServices
 {
     // Used to compile against C# 9 in a netstandard2.0
-    internal class IsExternalInit
-    {
-    }
+    internal class IsExternalInit { }
 }

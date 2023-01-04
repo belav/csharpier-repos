@@ -14,14 +14,18 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
 {
-    using VerifyCS = CSharpCodeFixVerifier<ConvertToFileScopedNamespaceDiagnosticAnalyzer, ConvertNamespaceCodeFixProvider>;
+    using VerifyCS = CSharpCodeFixVerifier<
+        ConvertToFileScopedNamespaceDiagnosticAnalyzer,
+        ConvertNamespaceCodeFixProvider
+    >;
 
     public class ConvertToFileScopedNamespaceAnalyzerTests
     {
         [Fact]
         public async Task TestNoConvertToFileScopedInCSharp9()
         {
-            var code = @"
+            var code =
+                @"
 namespace N
 {
 }
@@ -33,7 +37,10 @@ namespace N
                 LanguageVersion = LanguageVersion.CSharp9,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -41,7 +48,8 @@ namespace N
         [Fact]
         public async Task TestNoConvertToFileScopedInCSharp10WithBlockScopedPreference()
         {
-            var code = @"
+            var code =
+                @"
 namespace N
 {
 }
@@ -53,7 +61,10 @@ namespace N
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.BlockScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.BlockScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -63,18 +74,23 @@ namespace N
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|]
 {
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N;
 ",
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -84,18 +100,24 @@ namespace $$N;
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 namespace [|N|]
 {
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N;
 ",
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped, NotificationOption2.Suggestion }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped,
+                        NotificationOption2.Suggestion
+                    }
                 }
             }.RunAsync();
         }
@@ -103,7 +125,8 @@ namespace $$N;
         [Fact]
         public async Task TestNoConvertWithMultipleNamespaces()
         {
-            var code = @"
+            var code =
+                @"
 namespace N
 {
 }
@@ -119,7 +142,10 @@ namespace N2
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -127,7 +153,8 @@ namespace N2
         [Fact]
         public async Task TestNoConvertWithNestedNamespaces1()
         {
-            var code = @"
+            var code =
+                @"
 namespace N
 {
     namespace N2
@@ -142,7 +169,10 @@ namespace N
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -150,7 +180,8 @@ namespace N
         [Fact]
         public async Task TestNoConvertWithTopLevelStatement1()
         {
-            var code = @"
+            var code =
+                @"
 {|CS8805:int i = 0;|}
 
 namespace N
@@ -164,7 +195,10 @@ namespace N
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -172,7 +206,8 @@ namespace N
         [Fact]
         public async Task TestNoConvertWithTopLevelStatement2()
         {
-            var code = @"
+            var code =
+                @"
 namespace N
 {
 }
@@ -193,7 +228,10 @@ int i = 0;
                 },
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -203,14 +241,16 @@ int i = 0;
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 [|namespace N|]
 {
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 namespace $$N;
@@ -218,7 +258,10 @@ namespace $$N;
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -228,13 +271,15 @@ namespace $$N;
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|]
 {
     using System;
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N;
 
 using System;
@@ -242,7 +287,10 @@ using System;
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -252,7 +300,8 @@ using System;
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|]
 {
     class C
@@ -260,7 +309,8 @@ using System;
     }
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N;
 
 class C
@@ -270,7 +320,10 @@ class C
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -280,7 +333,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|]
 {
     /// <summary/>
@@ -289,7 +343,8 @@ class C
     }
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N;
 
 /// <summary/>
@@ -300,7 +355,10 @@ class C
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -310,14 +368,16 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|]
 {
     /// <summary/>
     class C
     {
     }{|CS1513:|}",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace N;
 
 /// <summary/>
@@ -327,7 +387,10 @@ class C
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -337,7 +400,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|]
 { // comment
     class C
@@ -345,7 +409,8 @@ class C
     }
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N;
 // comment
 class C
@@ -355,7 +420,10 @@ class C
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -365,7 +433,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 // copyright
 [|namespace N|]
 {
@@ -374,7 +443,8 @@ class C
     }
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 // copyright
 namespace $$N;
 
@@ -385,7 +455,10 @@ class C
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -395,7 +468,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|]
 {
     /// <summary/>
@@ -404,7 +478,8 @@ class C
     }
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N;
 
 /// <summary/>
@@ -415,7 +490,10 @@ class C
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -425,7 +503,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|]
 {
 #if X
@@ -439,7 +518,8 @@ class C
 #endif
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N;
 
 #if X
@@ -455,7 +535,10 @@ class C
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -465,7 +548,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|]
 {
     /* x
@@ -476,7 +560,8 @@ class C
     }
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N;
 
 /* x
@@ -489,7 +574,10 @@ class C
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -499,7 +587,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|]
 {
     /* x
@@ -510,7 +599,8 @@ class C
     }
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N;
 
 /* x
@@ -523,7 +613,10 @@ class C
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -533,7 +626,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|]
 {
     class C
@@ -551,7 +645,8 @@ class C
     }
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N;
 
 class C
@@ -571,7 +666,10 @@ class C
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -581,7 +679,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|]
 {
     class C
@@ -599,7 +698,8 @@ class C
     }
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N;
 
 class C
@@ -619,7 +719,10 @@ class C
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -629,7 +732,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|]
 {
     class C
@@ -648,7 +752,8 @@ class C
     }
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N;
 
 class C
@@ -669,7 +774,10 @@ class C
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -679,7 +787,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|]
 {
     class C
@@ -697,7 +806,8 @@ class C
     }
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N;
 
 class C
@@ -717,7 +827,10 @@ class C
                 LanguageVersion = LanguageVersion.Preview,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -727,7 +840,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|]
 {
     class C
@@ -747,7 +861,8 @@ class C
     }
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N;
 
 class C
@@ -770,7 +885,10 @@ class C
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -780,16 +898,21 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|] { class C { } }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N; class C { } 
 ",
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -799,18 +922,23 @@ namespace $$N; class C { }
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|]
 { class C { } }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N;
 class C { } 
 ",
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -820,14 +948,16 @@ class C { }
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|]
 {
     class C
     {
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N;
 
 class C
@@ -836,7 +966,10 @@ class C
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -846,16 +979,21 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|]
 {
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N;",
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -865,7 +1003,8 @@ namespace $$N;",
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|]
 {
     class C
@@ -873,7 +1012,8 @@ namespace $$N;",
     }
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N;
 
 class C
@@ -883,7 +1023,10 @@ class C
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -893,18 +1036,23 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 [|namespace N|]
 {
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace $$N;
 ",
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -914,14 +1062,16 @@ namespace $$N;
         {
             await new VerifyCS.Test
             {
-                TestCode = @"[|namespace Goo|]
+                TestCode =
+                    @"[|namespace Goo|]
 {
 #if true
     class goobar { }
 #endif
 // There must be no CR, LF, or other character after the brace on the following line!
 }",
-                FixedCode = @"namespace $$Goo;
+                FixedCode =
+                    @"namespace $$Goo;
 
 #if true
 class goobar { }
@@ -930,7 +1080,10 @@ class goobar { }
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -940,7 +1093,8 @@ class goobar { }
         {
             await new VerifyCS.Test
             {
-                TestCode = @"[|namespace Goo|]
+                TestCode =
+                    @"[|namespace Goo|]
 {
 #if true
     class goobar { }
@@ -948,7 +1102,8 @@ class goobar { }
 // There must be no CR, LF, or other character after the brace on the following line!
 }
 ",
-                FixedCode = @"namespace $$Goo;
+                FixedCode =
+                    @"namespace $$Goo;
 
 #if true
 class goobar { }
@@ -958,7 +1113,10 @@ class goobar { }
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -968,13 +1126,15 @@ class goobar { }
         {
             await new VerifyCS.Test
             {
-                TestCode = @"[|namespace Goo|]
+                TestCode =
+                    @"[|namespace Goo|]
 {
 #if false
     class goobar { }
 #endif
 }",
-                FixedCode = @"namespace $$Goo;
+                FixedCode =
+                    @"namespace $$Goo;
 
 #if false
 class goobar { }
@@ -983,7 +1143,10 @@ class goobar { }
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }
@@ -993,14 +1156,16 @@ class goobar { }
         {
             await new VerifyCS.Test
             {
-                TestCode = @"[|namespace Goo|]
+                TestCode =
+                    @"[|namespace Goo|]
 {
 #if false
     class goobar { }
 #endif
 }
 ",
-                FixedCode = @"namespace $$Goo;
+                FixedCode =
+                    @"namespace $$Goo;
 
 #if false
 class goobar { }
@@ -1009,7 +1174,10 @@ class goobar { }
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.NamespaceDeclarations, NamespaceDeclarationPreference.FileScoped }
+                    {
+                        CSharpCodeStyleOptions.NamespaceDeclarations,
+                        NamespaceDeclarationPreference.FileScoped
+                    }
                 }
             }.RunAsync();
         }

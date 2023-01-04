@@ -24,9 +24,7 @@ namespace System.Text.Json.Serialization.Metadata
         /// </summary>
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]
-        public DefaultJsonTypeInfoResolver() : this(mutable: true)
-        {
-        }
+        public DefaultJsonTypeInfoResolver() : this(mutable: true) { }
 
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]
@@ -49,10 +47,16 @@ namespace System.Text.Json.Serialization.Metadata
         /// The base implementation of this method will produce a reflection-derived contract
         /// and apply any callbacks from the <see cref="Modifiers"/> list.
         /// </remarks>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "The ctor is marked RequiresUnreferencedCode.")]
-        [UnconditionalSuppressMessage("AotAnalysis", "IL3050:RequiresDynamicCode",
-            Justification = "The ctor is marked RequiresDynamicCode.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The ctor is marked RequiresUnreferencedCode."
+        )]
+        [UnconditionalSuppressMessage(
+            "AotAnalysis",
+            "IL3050:RequiresDynamicCode",
+            Justification = "The ctor is marked RequiresDynamicCode."
+        )]
         public virtual JsonTypeInfo GetTypeInfo(Type type, JsonSerializerOptions options)
         {
             if (type == null)
@@ -97,9 +101,15 @@ namespace System.Text.Json.Serialization.Metadata
             else
             {
                 Type jsonTypeInfoType = typeof(ReflectionJsonTypeInfo<>).MakeGenericType(type);
-                jsonTypeInfo = (JsonTypeInfo)jsonTypeInfoType.CreateInstanceNoWrapExceptions(
-                    parameterTypes: new Type[] { typeof(JsonConverter), typeof(JsonSerializerOptions) },
-                    parameters: new object[] { converter, options })!;
+                jsonTypeInfo = (JsonTypeInfo)
+                    jsonTypeInfoType.CreateInstanceNoWrapExceptions(
+                        parameterTypes: new Type[]
+                        {
+                            typeof(JsonConverter),
+                            typeof(JsonSerializerOptions)
+                        },
+                        parameters: new object[] { converter, options }
+                    )!;
             }
 
             Debug.Assert(jsonTypeInfo.Type == type);
@@ -127,6 +137,7 @@ namespace System.Text.Json.Serialization.Metadata
             }
 
             protected override bool IsImmutable => !_resolver._mutable;
+
             protected override void VerifyMutable()
             {
                 if (!_resolver._mutable)
@@ -149,7 +160,11 @@ namespace System.Text.Json.Serialization.Metadata
             }
 
             var newInstance = new DefaultJsonTypeInfoResolver(mutable: false);
-            DefaultJsonTypeInfoResolver? originalInstance = Interlocked.CompareExchange(ref s_defaultInstance, newInstance, comparand: null);
+            DefaultJsonTypeInfoResolver? originalInstance = Interlocked.CompareExchange(
+                ref s_defaultInstance,
+                newInstance,
+                comparand: null
+            );
             return originalInstance ?? newInstance;
         }
     }

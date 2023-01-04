@@ -27,64 +27,78 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
     [Trait(Traits.Feature, Traits.Features.Workspace)]
     public class GlobalOptionServiceTests
     {
-        private static IGlobalOptionService GetGlobalOptionService(HostWorkspaceServices services, IOptionPersisterProvider? optionPersisterProvider = null)
+        private static IGlobalOptionService GetGlobalOptionService(
+            HostWorkspaceServices services,
+            IOptionPersisterProvider? optionPersisterProvider = null
+        )
         {
             var mefHostServices = services.SolutionServices.ExportProvider;
-            var workspaceThreadingService = mefHostServices.GetExportedValues<IWorkspaceThreadingService>().SingleOrDefault();
+            var workspaceThreadingService = mefHostServices
+                .GetExportedValues<IWorkspaceThreadingService>()
+                .SingleOrDefault();
             return new GlobalOptionService(
                 workspaceThreadingService,
                 new[]
                 {
-                    new Lazy<IOptionPersisterProvider>(() => optionPersisterProvider ??= new TestOptionsPersisterProvider())
-                });
+                    new Lazy<IOptionPersisterProvider>(
+                        () => optionPersisterProvider ??= new TestOptionsPersisterProvider()
+                    )
+                }
+            );
         }
 
-        private static ILegacyWorkspaceOptionService GetOptionService(HostWorkspaceServices services, IOptionPersisterProvider? optionPersisterProvider = null)
-            => new TestService(GetGlobalOptionService(services, optionPersisterProvider));
+        private static ILegacyWorkspaceOptionService GetOptionService(
+            HostWorkspaceServices services,
+            IOptionPersisterProvider? optionPersisterProvider = null
+        ) => new TestService(GetGlobalOptionService(services, optionPersisterProvider));
 
         private sealed class TestService : ILegacyWorkspaceOptionService
         {
             public IGlobalOptionService GlobalOptions { get; }
 
-            public TestService(IGlobalOptionService globalOptions)
-                => GlobalOptions = globalOptions;
+            public TestService(IGlobalOptionService globalOptions) => GlobalOptions = globalOptions;
 
-            public object? GetOption(OptionKey key)
-                => GlobalOptions.GetOption(key);
+            public object? GetOption(OptionKey key) => GlobalOptions.GetOption(key);
 
-            public void SetOptions(OptionSet optionSet, IEnumerable<OptionKey> optionKeys)
-                => GlobalOptions.SetOptions(optionSet, optionKeys);
+            public void SetOptions(OptionSet optionSet, IEnumerable<OptionKey> optionKeys) =>
+                GlobalOptions.SetOptions(optionSet, optionKeys);
 
-            public void RegisterWorkspace(Workspace workspace)
-                => throw new NotImplementedException();
+            public void RegisterWorkspace(Workspace workspace) =>
+                throw new NotImplementedException();
 
-            public void UnregisterWorkspace(Workspace workspace)
-                => throw new NotImplementedException();
+            public void UnregisterWorkspace(Workspace workspace) =>
+                throw new NotImplementedException();
         }
 
         internal class TestOptionsProvider : IOptionProvider
         {
-            public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-                new Option<bool>("Test Feature", "Test Name", false));
+            public ImmutableArray<IOption> Options { get; } =
+                ImmutableArray.Create<IOption>(
+                    new Option<bool>("Test Feature", "Test Name", false)
+                );
         }
 
         internal sealed class TestOptionsPersisterProvider : IOptionPersisterProvider
         {
             private readonly ValueTask<IOptionPersister> _optionPersisterTask;
 
-            public TestOptionsPersisterProvider(IOptionPersister? optionPersister = null)
-                => _optionPersisterTask = new(optionPersister ?? new TestOptionsPersister());
+            public TestOptionsPersisterProvider(IOptionPersister? optionPersister = null) =>
+                _optionPersisterTask = new(optionPersister ?? new TestOptionsPersister());
 
-            public ValueTask<IOptionPersister> GetOrCreatePersisterAsync(CancellationToken cancellationToken)
-                => _optionPersisterTask;
+            public ValueTask<IOptionPersister> GetOrCreatePersisterAsync(
+                CancellationToken cancellationToken
+            ) => _optionPersisterTask;
         }
 
         internal sealed class TestOptionsPersister : IOptionPersister
         {
-            private ImmutableDictionary<OptionKey, object?> _options = ImmutableDictionary<OptionKey, object?>.Empty;
+            private ImmutableDictionary<OptionKey, object?> _options = ImmutableDictionary<
+                OptionKey,
+                object?
+            >.Empty;
 
-            public bool TryFetch(OptionKey optionKey, out object? value)
-                => _options.TryGetValue(optionKey, out value);
+            public bool TryFetch(OptionKey optionKey, out object? value) =>
+                _options.TryGetValue(optionKey, out value);
 
             public bool TryPersist(OptionKey optionKey, object? value)
             {
@@ -100,25 +114,33 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             var optionService = GetOptionService(workspace.Services);
             var optionSet = new SolutionOptionSet(optionService);
 
-            Assert.Throws<System.ArgumentException>(delegate
-            {
-                var option = new Option<bool>("Test Feature", "", false);
-            });
+            Assert.Throws<System.ArgumentException>(
+                delegate
+                {
+                    var option = new Option<bool>("Test Feature", "", false);
+                }
+            );
 
-            Assert.Throws<System.ArgumentException>(delegate
-            {
-                var option2 = new Option<bool>("Test Feature", null!, false);
-            });
+            Assert.Throws<System.ArgumentException>(
+                delegate
+                {
+                    var option2 = new Option<bool>("Test Feature", null!, false);
+                }
+            );
 
-            Assert.Throws<System.ArgumentNullException>(delegate
-            {
-                var option3 = new Option<bool>(" ", "Test Name", false);
-            });
+            Assert.Throws<System.ArgumentNullException>(
+                delegate
+                {
+                    var option3 = new Option<bool>(" ", "Test Name", false);
+                }
+            );
 
-            Assert.Throws<System.ArgumentNullException>(delegate
-            {
-                var option4 = new Option<bool>(null!, "Test Name", false);
-            });
+            Assert.Throws<System.ArgumentNullException>(
+                delegate
+                {
+                    var option4 = new Option<bool>(null!, "Test Name", false);
+                }
+            );
         }
 
         [Fact]
@@ -128,25 +150,33 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             var optionService = GetOptionService(workspace.Services);
             var optionSet = new SolutionOptionSet(optionService);
 
-            Assert.Throws<System.ArgumentException>(delegate
-            {
-                var option = new PerLanguageOption<bool>("Test Feature", "", false);
-            });
+            Assert.Throws<System.ArgumentException>(
+                delegate
+                {
+                    var option = new PerLanguageOption<bool>("Test Feature", "", false);
+                }
+            );
 
-            Assert.Throws<System.ArgumentException>(delegate
-            {
-                var option2 = new PerLanguageOption<bool>("Test Feature", null!, false);
-            });
+            Assert.Throws<System.ArgumentException>(
+                delegate
+                {
+                    var option2 = new PerLanguageOption<bool>("Test Feature", null!, false);
+                }
+            );
 
-            Assert.Throws<System.ArgumentNullException>(delegate
-            {
-                var option3 = new PerLanguageOption<bool>(" ", "Test Name", false);
-            });
+            Assert.Throws<System.ArgumentNullException>(
+                delegate
+                {
+                    var option3 = new PerLanguageOption<bool>(" ", "Test Name", false);
+                }
+            );
 
-            Assert.Throws<System.ArgumentNullException>(delegate
-            {
-                var option4 = new PerLanguageOption<bool>(null!, "Test Name", false);
-            });
+            Assert.Throws<System.ArgumentNullException>(
+                delegate
+                {
+                    var option4 = new PerLanguageOption<bool>(null!, "Test Name", false);
+                }
+            );
 
             var optionvalid = new PerLanguageOption<bool>("Test Feature", "Test Name", false);
             Assert.False(optionSet.GetOption(optionvalid, "CS"));
@@ -176,21 +206,33 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             var handler = new EventHandler<OptionChangedEventArgs>((_, e) => changedOptions.Add(e));
             globalOptions.OptionChanged += handler;
 
-            var values = globalOptions.GetOptions(ImmutableArray.Create(new OptionKey(option1), new OptionKey(option2)));
+            var values = globalOptions.GetOptions(
+                ImmutableArray.Create(new OptionKey(option1), new OptionKey(option2))
+            );
             Assert.Equal(1, values[0]);
             Assert.Equal(2, values[1]);
 
             globalOptions.SetGlobalOptions(
-                ImmutableArray.Create<OptionKey>(new OptionKey(option1), new OptionKey(option2), new OptionKey(option3)),
-                ImmutableArray.Create<object?>(5, 6, 3));
+                ImmutableArray.Create<OptionKey>(
+                    new OptionKey(option1),
+                    new OptionKey(option2),
+                    new OptionKey(option3)
+                ),
+                ImmutableArray.Create<object?>(5, 6, 3)
+            );
 
-            AssertEx.Equal(new[]
-            {
-                "Name1=5",
-                "Name2=6",
-            }, changedOptions.Select(e => $"{e.OptionKey.Option.Name}={e.Value}"));
+            AssertEx.Equal(
+                new[] { "Name1=5", "Name2=6", },
+                changedOptions.Select(e => $"{e.OptionKey.Option.Name}={e.Value}")
+            );
 
-            values = globalOptions.GetOptions(ImmutableArray.Create(new OptionKey(option1), new OptionKey(option2), new OptionKey(option3)));
+            values = globalOptions.GetOptions(
+                ImmutableArray.Create(
+                    new OptionKey(option1),
+                    new OptionKey(option2),
+                    new OptionKey(option3)
+                )
+            );
             Assert.Equal(5, values[0]);
             Assert.Equal(6, values[1]);
             Assert.Equal(3, values[2]);
@@ -272,7 +314,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             var option = new Option<bool>("Test Feature", "Test Name", defaultValue: true);
             var optionKey = new OptionKey(option);
             var newOptionSet = optionSet.WithChangedOption(optionKey, false);
-            optionService.GlobalOptions.SetOptions(newOptionSet, ((SolutionOptionSet)newOptionSet).GetChangedOptions());
+            optionService.GlobalOptions.SetOptions(
+                newOptionSet,
+                ((SolutionOptionSet)newOptionSet).GetChangedOptions()
+            );
             var isOptionSet = (bool?)new SolutionOptionSet(optionService).GetOption(optionKey);
             Assert.False(isOptionSet);
         }
@@ -295,24 +340,51 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
         public void TestPerLanguageCodeStyleOptions()
         {
             using var workspace = new AdhocWorkspace();
-            var perLanguageOption2 = new PerLanguageOption2<CodeStyleOption2<bool>>("test", "test", new CodeStyleOption2<bool>(false, NotificationOption2.Warning));
+            var perLanguageOption2 = new PerLanguageOption2<CodeStyleOption2<bool>>(
+                "test",
+                "test",
+                new CodeStyleOption2<bool>(false, NotificationOption2.Warning)
+            );
             var perLanguageOption = perLanguageOption2.ToPublicOption();
-            var newValueCodeStyleOption2 = new CodeStyleOption2<bool>(!perLanguageOption2.DefaultValue.Value, perLanguageOption2.DefaultValue.Notification);
+            var newValueCodeStyleOption2 = new CodeStyleOption2<bool>(
+                !perLanguageOption2.DefaultValue.Value,
+                perLanguageOption2.DefaultValue.Notification
+            );
             var newValueCodeStyleOption = (CodeStyleOption<bool>)newValueCodeStyleOption2!;
 
             // Test "OptionKey" based overloads for get/set options on OptionSet and OptionService using different public and internal type combinations.
 
             //  1. { PerLanguageOption, CodeStyleOption }
-            TestCodeStyleOptionsCommon(workspace, perLanguageOption, LanguageNames.CSharp, newValueCodeStyleOption);
+            TestCodeStyleOptionsCommon(
+                workspace,
+                perLanguageOption,
+                LanguageNames.CSharp,
+                newValueCodeStyleOption
+            );
 
             //  2. { PerLanguageOption2, CodeStyleOption }
-            TestCodeStyleOptionsCommon(workspace, perLanguageOption2, LanguageNames.CSharp, newValueCodeStyleOption);
+            TestCodeStyleOptionsCommon(
+                workspace,
+                perLanguageOption2,
+                LanguageNames.CSharp,
+                newValueCodeStyleOption
+            );
 
             //  3. { PerLanguageOption, CodeStyleOption2 }
-            TestCodeStyleOptionsCommon(workspace, perLanguageOption, LanguageNames.CSharp, newValueCodeStyleOption2);
+            TestCodeStyleOptionsCommon(
+                workspace,
+                perLanguageOption,
+                LanguageNames.CSharp,
+                newValueCodeStyleOption2
+            );
 
             //  4. { PerLanguageOption2, CodeStyleOption2 }
-            TestCodeStyleOptionsCommon(workspace, perLanguageOption2, LanguageNames.CSharp, newValueCodeStyleOption2);
+            TestCodeStyleOptionsCommon(
+                workspace,
+                perLanguageOption2,
+                LanguageNames.CSharp,
+                newValueCodeStyleOption2
+            );
 
             var optionService = GetOptionService(workspace.Services);
             var originalOptionSet = new SolutionOptionSet(optionService);
@@ -320,31 +392,70 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             // Test "PerLanguageOption" and "PerLanguageOption2" overloads for OptionSet and OptionService.
 
             //  1. Verify default value.
-            Assert.Equal(perLanguageOption.DefaultValue, originalOptionSet.GetOption(perLanguageOption, LanguageNames.CSharp));
-            Assert.Equal(perLanguageOption2.DefaultValue, originalOptionSet.GetOption(perLanguageOption2, LanguageNames.CSharp));
+            Assert.Equal(
+                perLanguageOption.DefaultValue,
+                originalOptionSet.GetOption(perLanguageOption, LanguageNames.CSharp)
+            );
+            Assert.Equal(
+                perLanguageOption2.DefaultValue,
+                originalOptionSet.GetOption(perLanguageOption2, LanguageNames.CSharp)
+            );
 
             //  2. OptionSet validations.
-            var newOptionSet = originalOptionSet.WithChangedOption(perLanguageOption, LanguageNames.CSharp, newValueCodeStyleOption);
-            Assert.Equal(newValueCodeStyleOption, newOptionSet.GetOption(perLanguageOption, LanguageNames.CSharp));
-            Assert.Equal(newValueCodeStyleOption2, newOptionSet.GetOption(perLanguageOption2, LanguageNames.CSharp));
+            var newOptionSet = originalOptionSet.WithChangedOption(
+                perLanguageOption,
+                LanguageNames.CSharp,
+                newValueCodeStyleOption
+            );
+            Assert.Equal(
+                newValueCodeStyleOption,
+                newOptionSet.GetOption(perLanguageOption, LanguageNames.CSharp)
+            );
+            Assert.Equal(
+                newValueCodeStyleOption2,
+                newOptionSet.GetOption(perLanguageOption2, LanguageNames.CSharp)
+            );
 
-            newOptionSet = originalOptionSet.WithChangedOption(perLanguageOption2, LanguageNames.CSharp, newValueCodeStyleOption2);
-            Assert.Equal(newValueCodeStyleOption, newOptionSet.GetOption(perLanguageOption, LanguageNames.CSharp));
-            Assert.Equal(newValueCodeStyleOption2, newOptionSet.GetOption(perLanguageOption2, LanguageNames.CSharp));
+            newOptionSet = originalOptionSet.WithChangedOption(
+                perLanguageOption2,
+                LanguageNames.CSharp,
+                newValueCodeStyleOption2
+            );
+            Assert.Equal(
+                newValueCodeStyleOption,
+                newOptionSet.GetOption(perLanguageOption, LanguageNames.CSharp)
+            );
+            Assert.Equal(
+                newValueCodeStyleOption2,
+                newOptionSet.GetOption(perLanguageOption2, LanguageNames.CSharp)
+            );
 
             //  3. IOptionService validation
 
-            optionService.GlobalOptions.SetOptions(newOptionSet, ((SolutionOptionSet)newOptionSet).GetChangedOptions());
-            Assert.Equal(newValueCodeStyleOption2, optionService.GlobalOptions.GetOption(perLanguageOption2, LanguageNames.CSharp));
+            optionService.GlobalOptions.SetOptions(
+                newOptionSet,
+                ((SolutionOptionSet)newOptionSet).GetChangedOptions()
+            );
+            Assert.Equal(
+                newValueCodeStyleOption2,
+                optionService.GlobalOptions.GetOption(perLanguageOption2, LanguageNames.CSharp)
+            );
         }
 
         [Fact]
         public void TestLanguageSpecificCodeStyleOptions()
         {
             using var workspace = new AdhocWorkspace();
-            var option2 = new Option2<CodeStyleOption2<bool>>("test", "test", new CodeStyleOption2<bool>(false, NotificationOption2.Warning));
+            var option2 = new Option2<CodeStyleOption2<bool>>(
+                "test",
+                "test",
+                new CodeStyleOption2<bool>(false, NotificationOption2.Warning)
+            );
             var option = option2.ToPublicOption();
-            var newValueCodeStyleOption2 = new CodeStyleOption2<bool>(!option2.DefaultValue.Value, option2.DefaultValue.Notification);
+            var newValueCodeStyleOption2 = new CodeStyleOption2<bool>(
+                !option2.DefaultValue.Value,
+                option2.DefaultValue.Notification
+            );
             var newValueCodeStyleOption = (CodeStyleOption<bool>)newValueCodeStyleOption2!;
 
             // Test "OptionKey" based overloads for get/set options on OptionSet and OptionService using different public and internal type combinations.
@@ -359,7 +470,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             TestCodeStyleOptionsCommon(workspace, option, language: null, newValueCodeStyleOption2);
 
             //  4. { Option2, CodeStyleOption2 }
-            TestCodeStyleOptionsCommon(workspace, option2, language: null, newValueCodeStyleOption2);
+            TestCodeStyleOptionsCommon(
+                workspace,
+                option2,
+                language: null,
+                newValueCodeStyleOption2
+            );
 
             var optionService = GetOptionService(workspace.Services);
             var originalOptionSet = new SolutionOptionSet(optionService);
@@ -380,12 +496,19 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             Assert.Equal(newValueCodeStyleOption2, newOptionSet.GetOption(option2));
 
             //  3. IOptionService validation
-            optionService.GlobalOptions.SetOptions(newOptionSet, ((SolutionOptionSet)newOptionSet).GetChangedOptions());
+            optionService.GlobalOptions.SetOptions(
+                newOptionSet,
+                ((SolutionOptionSet)newOptionSet).GetChangedOptions()
+            );
             Assert.Equal(newValueCodeStyleOption2, optionService.GlobalOptions.GetOption(option2));
         }
 
-        private static void TestCodeStyleOptionsCommon<TCodeStyleOption>(Workspace workspace, IOption2 option, string? language, TCodeStyleOption newValue)
-            where TCodeStyleOption : ICodeStyleOption
+        private static void TestCodeStyleOptionsCommon<TCodeStyleOption>(
+            Workspace workspace,
+            IOption2 option,
+            string? language,
+            TCodeStyleOption newValue
+        ) where TCodeStyleOption : ICodeStyleOption
         {
             var optionService = GetOptionService(workspace.Services);
             var originalOptionSet = new SolutionOptionSet(optionService);
@@ -394,7 +517,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             var optionKey = new OptionKey(option, language);
             var optionKey2 = option switch
             {
-                IPerLanguageValuedOption perLanguageValuedOption => new OptionKey2(perLanguageValuedOption, language!),
+                IPerLanguageValuedOption perLanguageValuedOption
+                    => new OptionKey2(perLanguageValuedOption, language!),
                 ISingleValuedOption singleValued => new OptionKey2(singleValued),
                 _ => throw ExceptionUtilities.Unreachable(),
             };
@@ -435,7 +559,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             Assert.Equal(newValue, newOptionSet.GetOption<TCodeStyleOption>(optionKey2));
 
             //  5. IOptionService.GetOption(OptionKey)
-            optionService.GlobalOptions.SetOptions(newOptionSet, ((SolutionOptionSet)newOptionSet).GetChangedOptions());
+            optionService.GlobalOptions.SetOptions(
+                newOptionSet,
+                ((SolutionOptionSet)newOptionSet).GetChangedOptions()
+            );
             Assert.Equal(newPublicValue, optionService.GetOption(optionKey));
         }
     }

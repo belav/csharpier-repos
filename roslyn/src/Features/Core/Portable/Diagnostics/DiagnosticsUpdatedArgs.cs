@@ -23,8 +23,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ProjectId? projectId,
             DocumentId? documentId,
             ImmutableArray<DiagnosticData> diagnostics,
-            DiagnosticsUpdatedKind kind)
-            : base(id, workspace, projectId, documentId)
+            DiagnosticsUpdatedKind kind
+        ) : base(id, workspace, projectId, documentId)
         {
             // TODO: This assert fails for EditAndContinueDiagnosticUpdateSource. See https://github.com/dotnet/roslyn/issues/36246.
             // Debug.Assert(diagnostics.All(d => d.ProjectId == projectId && d.DocumentId == documentId));
@@ -42,8 +42,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// and then forwarding on later on to other clients that will make this decision.
         /// </summary>
         /// <returns></returns>
-        public ImmutableArray<DiagnosticData> GetAllDiagnosticsRegardlessOfPushPullSetting()
-            => _diagnostics;
+        public ImmutableArray<DiagnosticData> GetAllDiagnosticsRegardlessOfPushPullSetting() =>
+            _diagnostics;
 
         public static DiagnosticsUpdatedArgs DiagnosticsCreated(
             object id,
@@ -51,9 +51,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Solution? solution,
             ProjectId? projectId,
             DocumentId? documentId,
-            ImmutableArray<DiagnosticData> diagnostics)
+            ImmutableArray<DiagnosticData> diagnostics
+        )
         {
-            return new DiagnosticsUpdatedArgs(id, workspace, solution, projectId, documentId, diagnostics, DiagnosticsUpdatedKind.DiagnosticsCreated);
+            return new DiagnosticsUpdatedArgs(
+                id,
+                workspace,
+                solution,
+                projectId,
+                documentId,
+                diagnostics,
+                DiagnosticsUpdatedKind.DiagnosticsCreated
+            );
         }
 
         public static DiagnosticsUpdatedArgs DiagnosticsRemoved(
@@ -61,9 +70,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Workspace workspace,
             Solution? solution,
             ProjectId? projectId,
-            DocumentId? documentId)
+            DocumentId? documentId
+        )
         {
-            return new DiagnosticsUpdatedArgs(id, workspace, solution, projectId, documentId, ImmutableArray<DiagnosticData>.Empty, DiagnosticsUpdatedKind.DiagnosticsRemoved);
+            return new DiagnosticsUpdatedArgs(
+                id,
+                workspace,
+                solution,
+                projectId,
+                documentId,
+                ImmutableArray<DiagnosticData>.Empty,
+                DiagnosticsUpdatedKind.DiagnosticsRemoved
+            );
         }
     }
 }

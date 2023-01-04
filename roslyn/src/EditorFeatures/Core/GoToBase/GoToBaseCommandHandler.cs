@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.GoToBase
     [Export(typeof(VSCommanding.ICommandHandler))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [Name(PredefinedCommandHandlerNames.GoToBase)]
-    internal sealed class GoToBaseCommandHandler : AbstractGoToCommandHandler<IGoToBaseService, GoToBaseCommandArgs>
+    internal sealed class GoToBaseCommandHandler
+        : AbstractGoToCommandHandler<IGoToBaseService, GoToBaseCommandArgs>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -34,22 +35,29 @@ namespace Microsoft.CodeAnalysis.GoToBase
             IStreamingFindUsagesPresenter streamingPresenter,
             IUIThreadOperationExecutor uiThreadOperationExecutor,
             IAsynchronousOperationListenerProvider listenerProvider,
-            IGlobalOptionService globalOptions)
-            : base(threadingContext,
-                   streamingPresenter,
-                   uiThreadOperationExecutor,
-                   listenerProvider.GetListener(FeatureAttribute.GoToBase),
-                   globalOptions)
-        {
-        }
+            IGlobalOptionService globalOptions
+        )
+            : base(
+                threadingContext,
+                streamingPresenter,
+                uiThreadOperationExecutor,
+                listenerProvider.GetListener(FeatureAttribute.GoToBase),
+                globalOptions
+            ) { }
 
         public override string DisplayName => EditorFeaturesResources.Go_To_Base;
 
         protected override string ScopeDescription => EditorFeaturesResources.Locating_bases;
         protected override FunctionId FunctionId => FunctionId.CommandHandler_GoToBase;
 
-        protected override Task FindActionAsync(IFindUsagesContext context, Document document, int caretPosition, CancellationToken cancellationToken)
-            => document.GetRequiredLanguageService<IGoToBaseService>()
-                       .FindBasesAsync(context, document, caretPosition, cancellationToken);
+        protected override Task FindActionAsync(
+            IFindUsagesContext context,
+            Document document,
+            int caretPosition,
+            CancellationToken cancellationToken
+        ) =>
+            document
+                .GetRequiredLanguageService<IGoToBaseService>()
+                .FindBasesAsync(context, document, caretPosition, cancellationToken);
     }
 }

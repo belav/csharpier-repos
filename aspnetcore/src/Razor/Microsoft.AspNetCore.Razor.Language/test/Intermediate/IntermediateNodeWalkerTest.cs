@@ -18,12 +18,12 @@ public class IntermediateNodeWalkerTest
 
         var nodes = new IntermediateNode[]
         {
-                new BasicIntermediateNode("Root"),
-                    new BasicIntermediateNode("Root->A"),
-                    new BasicIntermediateNode("Root->B"),
-                        new BasicIntermediateNode("Root->B->1"),
-                        new BasicIntermediateNode("Root->B->2"),
-                    new BasicIntermediateNode("Root->C"),
+            new BasicIntermediateNode("Root"),
+            new BasicIntermediateNode("Root->A"),
+            new BasicIntermediateNode("Root->B"),
+            new BasicIntermediateNode("Root->B->1"),
+            new BasicIntermediateNode("Root->B->2"),
+            new BasicIntermediateNode("Root->C"),
         };
 
         var builder = new DefaultRazorIntermediateNodeBuilder();
@@ -52,28 +52,34 @@ public class IntermediateNodeWalkerTest
 
         var nodes = new IntermediateNode[]
         {
-                new BasicIntermediateNode("Root"),
-                    new BasicIntermediateNode("Root->A"),
-                    new BasicIntermediateNode("Root->B"),
-                        new BasicIntermediateNode("Root->B->1"),
-                        new BasicIntermediateNode("Root->B->2"),
-                    new BasicIntermediateNode("Root->C"),
+            new BasicIntermediateNode("Root"),
+            new BasicIntermediateNode("Root->A"),
+            new BasicIntermediateNode("Root->B"),
+            new BasicIntermediateNode("Root->B->1"),
+            new BasicIntermediateNode("Root->B->2"),
+            new BasicIntermediateNode("Root->C"),
         };
 
         var ancestors = new Dictionary<string, string[]>()
-            {
-                { "Root", new string[]{ } },
-                { "Root->A", new string[] { "Root" } },
-                { "Root->B", new string[] { "Root" } },
-                { "Root->B->1", new string[] { "Root->B", "Root" } },
-                { "Root->B->2", new string[] { "Root->B", "Root" } },
-                { "Root->C", new string[] { "Root" } },
-            };
+        {
+            { "Root", new string[] { } },
+            { "Root->A", new string[] { "Root" } },
+            { "Root->B", new string[] { "Root" } },
+            { "Root->B->1", new string[] { "Root->B", "Root" } },
+            { "Root->B->2", new string[] { "Root->B", "Root" } },
+            { "Root->C", new string[] { "Root" } },
+        };
 
         walker.OnVisiting = (n) =>
         {
-            Assert.Equal(ancestors[((BasicIntermediateNode)n).Name], walker.Ancestors.Cast<BasicIntermediateNode>().Select(b => b.Name));
-            Assert.Equal(ancestors[((BasicIntermediateNode)n).Name].FirstOrDefault(), ((BasicIntermediateNode)walker.Parent)?.Name);
+            Assert.Equal(
+                ancestors[((BasicIntermediateNode)n).Name],
+                walker.Ancestors.Cast<BasicIntermediateNode>().Select(b => b.Name)
+            );
+            Assert.Equal(
+                ancestors[((BasicIntermediateNode)n).Name].FirstOrDefault(),
+                ((BasicIntermediateNode)walker.Parent)?.Name
+            );
         };
 
         var builder = new DefaultRazorIntermediateNodeBuilder();
@@ -124,7 +130,8 @@ public class IntermediateNodeWalkerTest
 
         public string Name { get; }
 
-        public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
+        public override IntermediateNodeCollection Children { get; } =
+            new IntermediateNodeCollection();
 
         public override void Accept(IntermediateNodeVisitor visitor)
         {

@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
+
 public class ProjectCollectionListTest
 {
     private MapperConfiguration _config;
@@ -17,7 +18,10 @@ public class ProjectCollectionListTest
     [Fact]
     public void ProjectWithAssignedCollectionSourceProperty()
     {
-        var customer = new Customer { Addresses = new List<Address> { new Address(Street1), new Address(Street2) } };
+        var customer = new Customer
+        {
+            Addresses = new List<Address> { new Address(Street1), new Address(Street2) }
+        };
 
         var customers = new[] { customer }.AsQueryable();
 
@@ -54,8 +58,10 @@ public class ProjectCollectionListTest
     {
         public bool Equals(AddressDto other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
+            if (ReferenceEquals(null, other))
+                return false;
+            if (ReferenceEquals(this, other))
+                return true;
             return string.Equals(Street, other.Street);
         }
 

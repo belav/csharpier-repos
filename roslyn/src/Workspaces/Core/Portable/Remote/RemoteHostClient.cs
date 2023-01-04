@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     /// <summary>
     /// This represents client in client/server model.
-    /// 
+    ///
     /// user can create a connection to communicate with the server (remote host) through this client
     /// </summary>
     internal abstract class RemoteHostClient : IDisposable
@@ -27,13 +27,14 @@ namespace Microsoft.CodeAnalysis.Remote
             OnStatusChanged(started: true);
         }
 
-        public virtual void Dispose()
-            => OnStatusChanged(started: false);
+        public virtual void Dispose() => OnStatusChanged(started: false);
 
-        private void OnStatusChanged(bool started)
-            => StatusChanged?.Invoke(this, started);
+        private void OnStatusChanged(bool started) => StatusChanged?.Invoke(this, started);
 
-        public static Task<RemoteHostClient?> TryGetClientAsync(Project project, CancellationToken cancellationToken)
+        public static Task<RemoteHostClient?> TryGetClientAsync(
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
             if (!RemoteSupportedLanguages.IsSupported(project.Language))
             {
@@ -43,10 +44,15 @@ namespace Microsoft.CodeAnalysis.Remote
             return TryGetClientAsync(project.Solution.Services, cancellationToken);
         }
 
-        public static Task<RemoteHostClient?> TryGetClientAsync(Workspace workspace, CancellationToken cancellationToken)
-            => TryGetClientAsync(workspace.Services.SolutionServices, cancellationToken);
+        public static Task<RemoteHostClient?> TryGetClientAsync(
+            Workspace workspace,
+            CancellationToken cancellationToken
+        ) => TryGetClientAsync(workspace.Services.SolutionServices, cancellationToken);
 
-        public static Task<RemoteHostClient?> TryGetClientAsync(SolutionServices services, CancellationToken cancellationToken)
+        public static Task<RemoteHostClient?> TryGetClientAsync(
+            SolutionServices services,
+            CancellationToken cancellationToken
+        )
         {
             var service = services.GetService<IRemoteHostClientProvider>();
             if (service == null)
@@ -64,20 +70,24 @@ namespace Microsoft.CodeAnalysis.Remote
 
         public async ValueTask<bool> TryInvokeAsync<TService>(
             Func<TService, CancellationToken, ValueTask> invocation,
-            CancellationToken cancellationToken)
-            where TService : class
+            CancellationToken cancellationToken
+        ) where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget: null);
-            return await connection.TryInvokeAsync(invocation, cancellationToken).ConfigureAwait(false);
+            return await connection
+                .TryInvokeAsync(invocation, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         public async ValueTask<Optional<TResult>> TryInvokeAsync<TService, TResult>(
             Func<TService, CancellationToken, ValueTask<TResult>> invocation,
-            CancellationToken cancellationToken)
-            where TService : class
+            CancellationToken cancellationToken
+        ) where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget: null);
-            return await connection.TryInvokeAsync(invocation, cancellationToken).ConfigureAwait(false);
+            return await connection
+                .TryInvokeAsync(invocation, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         // no solution, callback:
@@ -85,21 +95,30 @@ namespace Microsoft.CodeAnalysis.Remote
         public async ValueTask<bool> TryInvokeAsync<TService>(
             Func<TService, RemoteServiceCallbackId, CancellationToken, ValueTask> invocation,
             object callbackTarget,
-            CancellationToken cancellationToken)
-            where TService : class
+            CancellationToken cancellationToken
+        ) where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget);
-            return await connection.TryInvokeAsync(invocation, cancellationToken).ConfigureAwait(false);
+            return await connection
+                .TryInvokeAsync(invocation, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         public async ValueTask<Optional<TResult>> TryInvokeAsync<TService, TResult>(
-            Func<TService, RemoteServiceCallbackId, CancellationToken, ValueTask<TResult>> invocation,
+            Func<
+                TService,
+                RemoteServiceCallbackId,
+                CancellationToken,
+                ValueTask<TResult>
+            > invocation,
             object callbackTarget,
-            CancellationToken cancellationToken)
-            where TService : class
+            CancellationToken cancellationToken
+        ) where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget);
-            return await connection.TryInvokeAsync(invocation, cancellationToken).ConfigureAwait(false);
+            return await connection
+                .TryInvokeAsync(invocation, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         // solution, no callback:
@@ -107,21 +126,25 @@ namespace Microsoft.CodeAnalysis.Remote
         public async ValueTask<bool> TryInvokeAsync<TService>(
             Solution solution,
             Func<TService, Checksum, CancellationToken, ValueTask> invocation,
-            CancellationToken cancellationToken)
-            where TService : class
+            CancellationToken cancellationToken
+        ) where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget: null);
-            return await connection.TryInvokeAsync(solution, invocation, cancellationToken).ConfigureAwait(false);
+            return await connection
+                .TryInvokeAsync(solution, invocation, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         public async ValueTask<Optional<TResult>> TryInvokeAsync<TService, TResult>(
             Solution solution,
             Func<TService, Checksum, CancellationToken, ValueTask<TResult>> invocation,
-            CancellationToken cancellationToken)
-            where TService : class
+            CancellationToken cancellationToken
+        ) where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget: null);
-            return await connection.TryInvokeAsync(solution, invocation, cancellationToken).ConfigureAwait(false);
+            return await connection
+                .TryInvokeAsync(solution, invocation, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         // project, no callback.
@@ -135,11 +158,13 @@ namespace Microsoft.CodeAnalysis.Remote
         public async ValueTask<bool> TryInvokeAsync<TService>(
             Project project,
             Func<TService, Checksum, CancellationToken, ValueTask> invocation,
-            CancellationToken cancellationToken)
-            where TService : class
+            CancellationToken cancellationToken
+        ) where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget: null);
-            return await connection.TryInvokeAsync(project, invocation, cancellationToken).ConfigureAwait(false);
+            return await connection
+                .TryInvokeAsync(project, invocation, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -151,35 +176,53 @@ namespace Microsoft.CodeAnalysis.Remote
         public async ValueTask<Optional<TResult>> TryInvokeAsync<TService, TResult>(
             Project project,
             Func<TService, Checksum, CancellationToken, ValueTask<TResult>> invocation,
-            CancellationToken cancellationToken)
-            where TService : class
+            CancellationToken cancellationToken
+        ) where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget: null);
-            return await connection.TryInvokeAsync(project, invocation, cancellationToken).ConfigureAwait(false);
+            return await connection
+                .TryInvokeAsync(project, invocation, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         // solution, callback:
 
         public async ValueTask<bool> TryInvokeAsync<TService>(
             Solution solution,
-            Func<TService, Checksum, RemoteServiceCallbackId, CancellationToken, ValueTask> invocation,
+            Func<
+                TService,
+                Checksum,
+                RemoteServiceCallbackId,
+                CancellationToken,
+                ValueTask
+            > invocation,
             object callbackTarget,
-            CancellationToken cancellationToken)
-            where TService : class
+            CancellationToken cancellationToken
+        ) where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget);
-            return await connection.TryInvokeAsync(solution, invocation, cancellationToken).ConfigureAwait(false);
+            return await connection
+                .TryInvokeAsync(solution, invocation, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         public async ValueTask<Optional<TResult>> TryInvokeAsync<TService, TResult>(
             Solution solution,
-            Func<TService, Checksum, RemoteServiceCallbackId, CancellationToken, ValueTask<TResult>> invocation,
+            Func<
+                TService,
+                Checksum,
+                RemoteServiceCallbackId,
+                CancellationToken,
+                ValueTask<TResult>
+            > invocation,
             object callbackTarget,
-            CancellationToken cancellationToken)
-            where TService : class
+            CancellationToken cancellationToken
+        ) where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget);
-            return await connection.TryInvokeAsync(solution, invocation, cancellationToken).ConfigureAwait(false);
+            return await connection
+                .TryInvokeAsync(solution, invocation, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         // project, callback:
@@ -192,13 +235,21 @@ namespace Microsoft.CodeAnalysis.Remote
         /// </summary>
         public async ValueTask<bool> TryInvokeAsync<TService>(
             Project project,
-            Func<TService, Checksum, RemoteServiceCallbackId, CancellationToken, ValueTask> invocation,
+            Func<
+                TService,
+                Checksum,
+                RemoteServiceCallbackId,
+                CancellationToken,
+                ValueTask
+            > invocation,
             object callbackTarget,
-            CancellationToken cancellationToken)
-            where TService : class
+            CancellationToken cancellationToken
+        ) where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget);
-            return await connection.TryInvokeAsync(project, invocation, cancellationToken).ConfigureAwait(false);
+            return await connection
+                .TryInvokeAsync(project, invocation, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -209,13 +260,21 @@ namespace Microsoft.CodeAnalysis.Remote
         /// </summary>
         public async ValueTask<Optional<TResult>> TryInvokeAsync<TService, TResult>(
             Project project,
-            Func<TService, Checksum, RemoteServiceCallbackId, CancellationToken, ValueTask<TResult>> invocation,
+            Func<
+                TService,
+                Checksum,
+                RemoteServiceCallbackId,
+                CancellationToken,
+                ValueTask<TResult>
+            > invocation,
             object callbackTarget,
-            CancellationToken cancellationToken)
-            where TService : class
+            CancellationToken cancellationToken
+        ) where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget);
-            return await connection.TryInvokeAsync(project, invocation, cancellationToken).ConfigureAwait(false);
+            return await connection
+                .TryInvokeAsync(project, invocation, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 }

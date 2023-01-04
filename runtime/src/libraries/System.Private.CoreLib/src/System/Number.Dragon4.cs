@@ -10,7 +10,12 @@ namespace System
     // The backing algorithm and the proofs behind it are described in more detail here:  https://www.cs.indiana.edu/~dyb/pubs/FP-Printing-PLDI96.pdf
     internal static partial class Number
     {
-        public static void Dragon4Double(double value, int cutoffNumber, bool isSignificantDigits, ref NumberBuffer number)
+        public static void Dragon4Double(
+            double value,
+            int cutoffNumber,
+            bool isSignificantDigits,
+            ref NumberBuffer number
+        )
         {
             double v = double.IsNegative(value) ? -value : value;
 
@@ -33,14 +38,30 @@ namespace System
                 mantissaHighBitIdx = (uint)BitOperations.Log2(mantissa);
             }
 
-            int length = (int)(Dragon4(mantissa, exponent, mantissaHighBitIdx, hasUnequalMargins, cutoffNumber, isSignificantDigits, number.Digits, out int decimalExponent));
+            int length = (int)(
+                Dragon4(
+                    mantissa,
+                    exponent,
+                    mantissaHighBitIdx,
+                    hasUnequalMargins,
+                    cutoffNumber,
+                    isSignificantDigits,
+                    number.Digits,
+                    out int decimalExponent
+                )
+            );
 
             number.Scale = decimalExponent + 1;
             number.Digits[length] = (byte)('\0');
             number.DigitsCount = length;
         }
 
-        public static unsafe void Dragon4Half(Half value, int cutoffNumber, bool isSignificantDigits, ref NumberBuffer number)
+        public static unsafe void Dragon4Half(
+            Half value,
+            int cutoffNumber,
+            bool isSignificantDigits,
+            ref NumberBuffer number
+        )
         {
             Half v = Half.IsNegative(value) ? Half.Negate(value) : value;
 
@@ -63,14 +84,30 @@ namespace System
                 mantissaHighBitIdx = (uint)BitOperations.Log2(mantissa);
             }
 
-            int length = (int)(Dragon4(mantissa, exponent, mantissaHighBitIdx, hasUnequalMargins, cutoffNumber, isSignificantDigits, number.Digits, out int decimalExponent));
+            int length = (int)(
+                Dragon4(
+                    mantissa,
+                    exponent,
+                    mantissaHighBitIdx,
+                    hasUnequalMargins,
+                    cutoffNumber,
+                    isSignificantDigits,
+                    number.Digits,
+                    out int decimalExponent
+                )
+            );
 
             number.Scale = decimalExponent + 1;
             number.Digits[length] = (byte)('\0');
             number.DigitsCount = length;
         }
 
-        public static unsafe void Dragon4Single(float value, int cutoffNumber, bool isSignificantDigits, ref NumberBuffer number)
+        public static unsafe void Dragon4Single(
+            float value,
+            int cutoffNumber,
+            bool isSignificantDigits,
+            ref NumberBuffer number
+        )
         {
             float v = float.IsNegative(value) ? -value : value;
 
@@ -93,7 +130,18 @@ namespace System
                 mantissaHighBitIdx = (uint)BitOperations.Log2(mantissa);
             }
 
-            int length = (int)(Dragon4(mantissa, exponent, mantissaHighBitIdx, hasUnequalMargins, cutoffNumber, isSignificantDigits, number.Digits, out int decimalExponent));
+            int length = (int)(
+                Dragon4(
+                    mantissa,
+                    exponent,
+                    mantissaHighBitIdx,
+                    hasUnequalMargins,
+                    cutoffNumber,
+                    isSignificantDigits,
+                    number.Digits,
+                    out int decimalExponent
+                )
+            );
 
             number.Scale = decimalExponent + 1;
             number.Digits[length] = (byte)('\0');
@@ -112,7 +160,16 @@ namespace System
         //  "Printing Floating-Point Numbers Quickly and Accurately"
         //    Burger and Dybvig
         //    http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.72.4656&rep=rep1&type=pdf
-        private static unsafe uint Dragon4(ulong mantissa, int exponent, uint mantissaHighBitIdx, bool hasUnequalMargins, int cutoffNumber, bool isSignificantDigits, Span<byte> buffer, out int decimalExponent)
+        private static unsafe uint Dragon4(
+            ulong mantissa,
+            int exponent,
+            uint mantissaHighBitIdx,
+            bool hasUnequalMargins,
+            int cutoffNumber,
+            bool isSignificantDigits,
+            Span<byte> buffer,
+            out int decimalExponent
+        )
         {
             int curDigit = 0;
 
@@ -129,8 +186,8 @@ namespace System
             //      value     = scaledValue / scale
             //      marginLow = scaledMarginLow / scale
 
-            BigInteger scale;           // positive scale applied to value and margin such that they can be represented as whole numbers
-            BigInteger scaledValue;     // scale * mantissa
+            BigInteger scale; // positive scale applied to value and margin such that they can be represented as whole numbers
+            BigInteger scaledValue; // scale * mantissa
             BigInteger scaledMarginLow; // scale * 0.5 * (distance between this floating-point number and its immediate lower value)
 
             // For normalized IEEE floating-point values, each time the exponent is incremented the margin also doubles.
@@ -140,7 +197,7 @@ namespace System
 
             if (hasUnequalMargins)
             {
-                if (exponent > 0)   // We have no fractional component
+                if (exponent > 0) // We have no fractional component
                 {
                     // 1) Expand the input value by multiplying out the mantissa and exponent.
                     //    This represents the input value in its whole number representation.
@@ -160,7 +217,7 @@ namespace System
                     // scaledMarginHigh = 2 * 2 * 2^(exponent + 1)
                     BigInteger.Pow2((uint)(exponent + 1), out optionalMarginHigh);
                 }
-                else                // We have a fractional exponent
+                else // We have a fractional exponent
                 {
                     // In order to track the mantissa data as an integer, we store it as is with a large scale
 
@@ -182,7 +239,7 @@ namespace System
             }
             else
             {
-                if (exponent > 0)   // We have no fractional component
+                if (exponent > 0) // We have no fractional component
                 {
                     // 1) Expand the input value by multiplying out the mantissa and exponent.
                     //    This represents the input value in its whole number representation.
@@ -199,7 +256,7 @@ namespace System
                     // scaledMarginLow = 2 * 2^(exponent-1)
                     BigInteger.Pow2((uint)(exponent), out scaledMarginLow);
                 }
-                else                // We have a fractional exponent
+                else // We have a fractional exponent
                 {
                     // In order to track the mantissa data as an integer, we store it as is with a large scale
 
@@ -233,7 +290,9 @@ namespace System
             //      log10(v) < (mantissaHighBitIdx + exponent) * log10(2) + log10(2) <= log10(v) + log10(2)
             //      floor(log10(v)) < ceil((mantissaHighBitIdx + exponent) * log10(2)) <= floor(log10(v)) + 1
             const double Log10V2 = 0.30102999566398119521373889472449;
-            int digitExponent = (int)(Math.Ceiling(((int)(mantissaHighBitIdx) + exponent) * Log10V2 - 0.69));
+            int digitExponent = (int)(
+                Math.Ceiling(((int)(mantissaHighBitIdx) + exponent) * Log10V2 - 0.69)
+            );
 
             // Divide value by 10^digitExponent.
             if (digitExponent > 0)
@@ -265,7 +324,11 @@ namespace System
                 // take IEEE unbiased rounding into account so we can return
                 // shorter strings for various edge case values like 1.23E+22
 
-                BigInteger.Add(ref scaledValue, ref *pScaledMarginHigh, out BigInteger scaledValueHigh);
+                BigInteger.Add(
+                    ref scaledValue,
+                    ref *pScaledMarginHigh,
+                    out BigInteger scaledValueHigh
+                );
                 int cmpHigh = BigInteger.Compare(ref scaledValueHigh, ref scale);
                 estimateTooLow = isEven ? (cmpHigh >= 0) : (cmpHigh > 0);
             }
@@ -354,9 +417,9 @@ namespace System
             }
 
             // These values are used to inspect why the print loop terminated so we can properly round the final digit.
-            bool low;            // did the value get within marginLow distance from zero
-            bool high;           // did the value get within marginHigh distance from one
-            uint outputDigit;    // current digit being output
+            bool low; // did the value get within marginLow distance from zero
+            bool high; // did the value get within marginHigh distance from one
+            uint outputDigit; // current digit being output
 
             if (cutoffNumber == -1)
             {
@@ -373,7 +436,11 @@ namespace System
                     Debug.Assert(outputDigit < 10);
 
                     // update the high end of the value
-                    BigInteger.Add(ref scaledValue, ref *pScaledMarginHigh, out BigInteger scaledValueHigh);
+                    BigInteger.Add(
+                        ref scaledValue,
+                        ref *pScaledMarginHigh,
+                        out BigInteger scaledValueHigh
+                    );
 
                     // stop looping if we are far enough away from our neighboring values or if we have reached the cutoff digit
                     int cmpLow = BigInteger.Compare(ref scaledValue, ref scaledMarginLow);
@@ -470,7 +537,7 @@ namespace System
             // default to rounding down if value got too close to 0
             bool roundDown = low;
 
-            if (low == high)    // is it legal to round up and down
+            if (low == high) // is it legal to round up and down
             {
                 // round to the closest digit by comparing value with 0.5.
                 //
@@ -495,7 +562,7 @@ namespace System
                 buffer[curDigit] = (byte)('0' + outputDigit);
                 curDigit++;
             }
-            else if (outputDigit == 9)      // handle rounding up
+            else if (outputDigit == 9) // handle rounding up
             {
                 // find the first non-nine prior digit
                 while (true)

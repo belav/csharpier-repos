@@ -3,6 +3,7 @@
 //
 
 using System;
+
 namespace Test
 {
     public class ShiftTest
@@ -31,7 +32,4 @@ namespace Test
                 return 100;
         }
     }
-
 }
-
-

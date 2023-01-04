@@ -28,8 +28,7 @@ public static class WebHost
     /// </summary>
     /// <param name="app">A delegate that handles requests to the application.</param>
     /// <returns>A started <see cref="IWebHost"/> that hosts the application.</returns>
-    public static IWebHost Start(RequestDelegate app) =>
-        Start(url: null!, app: app);
+    public static IWebHost Start(RequestDelegate app) => Start(url: null!, app: app);
 
     /// <summary>
     /// Initializes and starts a new <see cref="IWebHost"/> with pre-configured defaults.
@@ -38,10 +37,18 @@ public static class WebHost
     /// <param name="url">The URL the hosted application will listen on.</param>
     /// <param name="app">A delegate that handles requests to the application.</param>
     /// <returns>A started <see cref="IWebHost"/> that hosts the application.</returns>
-    public static IWebHost Start([StringSyntax(StringSyntaxAttribute.Uri)] string url, RequestDelegate app)
+    public static IWebHost Start(
+        [StringSyntax(StringSyntaxAttribute.Uri)] string url,
+        RequestDelegate app
+    )
     {
         var startupAssemblyName = app.GetMethodInfo().DeclaringType!.Assembly.GetName().Name;
-        return StartWith(url: url, configureServices: null, app: appBuilder => appBuilder.Run(app), applicationName: startupAssemblyName);
+        return StartWith(
+            url: url,
+            configureServices: null,
+            app: appBuilder => appBuilder.Run(app),
+            applicationName: startupAssemblyName
+        );
     }
 
     /// <summary>
@@ -60,10 +67,21 @@ public static class WebHost
     /// <param name="url">The URL the hosted application will listen on.</param>
     /// <param name="routeBuilder">A delegate that configures the router for handling requests to the application.</param>
     /// <returns>A started <see cref="IWebHost"/> that hosts the application.</returns>
-    public static IWebHost Start([StringSyntax(StringSyntaxAttribute.Uri)] string url, Action<IRouteBuilder> routeBuilder)
+    public static IWebHost Start(
+        [StringSyntax(StringSyntaxAttribute.Uri)] string url,
+        Action<IRouteBuilder> routeBuilder
+    )
     {
-        var startupAssemblyName = routeBuilder.GetMethodInfo().DeclaringType!.Assembly.GetName().Name;
-        return StartWith(url, services => services.AddRouting(), appBuilder => appBuilder.UseRouter(routeBuilder), applicationName: startupAssemblyName);
+        var startupAssemblyName = routeBuilder
+            .GetMethodInfo()
+            .DeclaringType!.Assembly.GetName()
+            .Name;
+        return StartWith(
+            url,
+            services => services.AddRouting(),
+            appBuilder => appBuilder.UseRouter(routeBuilder),
+            applicationName: startupAssemblyName
+        );
     }
 
     /// <summary>
@@ -82,10 +100,17 @@ public static class WebHost
     /// <param name="url">The URL the hosted application will listen on.</param>
     /// <param name="app">The delegate that configures the <see cref="IApplicationBuilder"/>.</param>
     /// <returns>A started <see cref="IWebHost"/> that hosts the application.</returns>
-    public static IWebHost StartWith([StringSyntax(StringSyntaxAttribute.Uri)] string url, Action<IApplicationBuilder> app) =>
-        StartWith(url: url, configureServices: null, app: app, applicationName: null);
+    public static IWebHost StartWith(
+        [StringSyntax(StringSyntaxAttribute.Uri)] string url,
+        Action<IApplicationBuilder> app
+    ) => StartWith(url: url, configureServices: null, app: app, applicationName: null);
 
-    private static IWebHost StartWith(string? url, Action<IServiceCollection>? configureServices, Action<IApplicationBuilder> app, string? applicationName)
+    private static IWebHost StartWith(
+        string? url,
+        Action<IServiceCollection>? configureServices,
+        Action<IApplicationBuilder> app,
+        string? applicationName
+    )
     {
         var builder = CreateDefaultBuilder();
 
@@ -129,8 +154,7 @@ public static class WebHost
     ///     and enable IIS integration.
     /// </remarks>
     /// <returns>The initialized <see cref="IWebHostBuilder"/>.</returns>
-    public static IWebHostBuilder CreateDefaultBuilder() =>
-        CreateDefaultBuilder(args: null!);
+    public static IWebHostBuilder CreateDefaultBuilder() => CreateDefaultBuilder(args: null!);
 
     /// <summary>
     /// Initializes a new instance of the <see cref="WebHostBuilder"/> class with pre-configured defaults.
@@ -164,49 +188,64 @@ public static class WebHost
             builder.UseConfiguration(new ConfigurationBuilder().AddCommandLine(args).Build());
         }
 
-        builder.ConfigureAppConfiguration((hostingContext, config) =>
-        {
-            var env = hostingContext.HostingEnvironment;
-
-            config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                  .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
-
-            if (env.IsDevelopment())
-            {
-                if (!string.IsNullOrEmpty(env.ApplicationName))
+        builder
+            .ConfigureAppConfiguration(
+                (hostingContext, config) =>
                 {
-                    var appAssembly = Assembly.Load(new AssemblyName(env.ApplicationName));
-                    if (appAssembly != null)
+                    var env = hostingContext.HostingEnvironment;
+
+                    config
+                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                        .AddJsonFile(
+                            $"appsettings.{env.EnvironmentName}.json",
+                            optional: true,
+                            reloadOnChange: true
+                        );
+
+                    if (env.IsDevelopment())
                     {
-                        config.AddUserSecrets(appAssembly, optional: true);
+                        if (!string.IsNullOrEmpty(env.ApplicationName))
+                        {
+                            var appAssembly = Assembly.Load(new AssemblyName(env.ApplicationName));
+                            if (appAssembly != null)
+                            {
+                                config.AddUserSecrets(appAssembly, optional: true);
+                            }
+                        }
+                    }
+
+                    config.AddEnvironmentVariables();
+
+                    if (args != null)
+                    {
+                        config.AddCommandLine(args);
                     }
                 }
-            }
-
-            config.AddEnvironmentVariables();
-
-            if (args != null)
-            {
-                config.AddCommandLine(args);
-            }
-        })
-        .ConfigureLogging((hostingContext, loggingBuilder) =>
-        {
-            loggingBuilder.Configure(options =>
-            {
-                options.ActivityTrackingOptions = ActivityTrackingOptions.SpanId
-                                                    | ActivityTrackingOptions.TraceId
-                                                    | ActivityTrackingOptions.ParentId;
-            });
-            loggingBuilder.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
-            loggingBuilder.AddConsole();
-            loggingBuilder.AddDebug();
-            loggingBuilder.AddEventSourceLogger();
-        }).
-        UseDefaultServiceProvider((context, options) =>
-        {
-            options.ValidateScopes = context.HostingEnvironment.IsDevelopment();
-        });
+            )
+            .ConfigureLogging(
+                (hostingContext, loggingBuilder) =>
+                {
+                    loggingBuilder.Configure(options =>
+                    {
+                        options.ActivityTrackingOptions =
+                            ActivityTrackingOptions.SpanId
+                            | ActivityTrackingOptions.TraceId
+                            | ActivityTrackingOptions.ParentId;
+                    });
+                    loggingBuilder.AddConfiguration(
+                        hostingContext.Configuration.GetSection("Logging")
+                    );
+                    loggingBuilder.AddConsole();
+                    loggingBuilder.AddDebug();
+                    loggingBuilder.AddEventSourceLogger();
+                }
+            )
+            .UseDefaultServiceProvider(
+                (context, options) =>
+                {
+                    options.ValidateScopes = context.HostingEnvironment.IsDevelopment();
+                }
+            );
 
         ConfigureWebDefaults(builder);
 
@@ -215,42 +254,64 @@ public static class WebHost
 
     internal static void ConfigureWebDefaults(IWebHostBuilder builder)
     {
-        builder.ConfigureAppConfiguration((ctx, cb) =>
-        {
-            if (ctx.HostingEnvironment.IsDevelopment())
+        builder.ConfigureAppConfiguration(
+            (ctx, cb) =>
             {
-                StaticWebAssetsLoader.UseStaticWebAssets(ctx.HostingEnvironment, ctx.Configuration);
-            }
-        });
-        builder.UseKestrel((builderContext, options) =>
-        {
-            options.Configure(builderContext.Configuration.GetSection("Kestrel"), reloadOnChange: true);
-        })
-        .ConfigureServices((hostingContext, services) =>
-        {
-            // Fallback
-            services.PostConfigure<HostFilteringOptions>(options =>
-            {
-                if (options.AllowedHosts == null || options.AllowedHosts.Count == 0)
+                if (ctx.HostingEnvironment.IsDevelopment())
                 {
-                    // "AllowedHosts": "localhost;127.0.0.1;[::1]"
-                    var hosts = hostingContext.Configuration["AllowedHosts"]?.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-                    // Fall back to "*" to disable.
-                    options.AllowedHosts = (hosts?.Length > 0 ? hosts : new[] { "*" });
+                    StaticWebAssetsLoader.UseStaticWebAssets(
+                        ctx.HostingEnvironment,
+                        ctx.Configuration
+                    );
                 }
-            });
-            // Change notification
-            services.AddSingleton<IOptionsChangeTokenSource<HostFilteringOptions>>(
-                    new ConfigurationChangeTokenSource<HostFilteringOptions>(hostingContext.Configuration));
+            }
+        );
+        builder
+            .UseKestrel(
+                (builderContext, options) =>
+                {
+                    options.Configure(
+                        builderContext.Configuration.GetSection("Kestrel"),
+                        reloadOnChange: true
+                    );
+                }
+            )
+            .ConfigureServices(
+                (hostingContext, services) =>
+                {
+                    // Fallback
+                    services.PostConfigure<HostFilteringOptions>(options =>
+                    {
+                        if (options.AllowedHosts == null || options.AllowedHosts.Count == 0)
+                        {
+                            // "AllowedHosts": "localhost;127.0.0.1;[::1]"
+                            var hosts = hostingContext.Configuration["AllowedHosts"]?.Split(
+                                new[] { ';' },
+                                StringSplitOptions.RemoveEmptyEntries
+                            );
+                            // Fall back to "*" to disable.
+                            options.AllowedHosts = (hosts?.Length > 0 ? hosts : new[] { "*" });
+                        }
+                    });
+                    // Change notification
+                    services.AddSingleton<IOptionsChangeTokenSource<HostFilteringOptions>>(
+                        new ConfigurationChangeTokenSource<HostFilteringOptions>(
+                            hostingContext.Configuration
+                        )
+                    );
 
-            services.AddTransient<IStartupFilter, HostFilteringStartupFilter>();
-            services.AddTransient<IStartupFilter, ForwardedHeadersStartupFilter>();
-            services.AddTransient<IConfigureOptions<ForwardedHeadersOptions>, ForwardedHeadersOptionsSetup>();
+                    services.AddTransient<IStartupFilter, HostFilteringStartupFilter>();
+                    services.AddTransient<IStartupFilter, ForwardedHeadersStartupFilter>();
+                    services.AddTransient<
+                        IConfigureOptions<ForwardedHeadersOptions>,
+                        ForwardedHeadersOptionsSetup
+                    >();
 
-            services.AddRouting();
-        })
-        .UseIIS()
-        .UseIISIntegration();
+                    services.AddRouting();
+                }
+            )
+            .UseIIS()
+            .UseIISIntegration();
     }
 
     /// <summary>
@@ -270,6 +331,7 @@ public static class WebHost
     /// <typeparam name ="TStartup">The type containing the startup methods for the application.</typeparam>
     /// <param name="args">The command line args.</param>
     /// <returns>The initialized <see cref="IWebHostBuilder"/>.</returns>
-    public static IWebHostBuilder CreateDefaultBuilder<[DynamicallyAccessedMembers(StartupLinkerOptions.Accessibility)] TStartup>(string[] args) where TStartup : class =>
-        CreateDefaultBuilder(args).UseStartup<TStartup>();
+    public static IWebHostBuilder CreateDefaultBuilder<
+        [DynamicallyAccessedMembers(StartupLinkerOptions.Accessibility)] TStartup
+    >(string[] args) where TStartup : class => CreateDefaultBuilder(args).UseStartup<TStartup>();
 }

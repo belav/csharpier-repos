@@ -12,6 +12,10 @@ namespace Microsoft.CodeAnalysis.Interactive
 {
     internal interface ISendToInteractiveSubmissionProvider
     {
-        string GetSelectedText(IEditorOptions editorOptions, EditorCommandArgs args, CancellationToken cancellationToken);
+        string GetSelectedText(
+            IEditorOptions editorOptions,
+            EditorCommandArgs args,
+            CancellationToken cancellationToken
+        );
     }
 }

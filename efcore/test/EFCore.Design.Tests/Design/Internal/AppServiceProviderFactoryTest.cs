@@ -15,8 +15,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         [ConditionalFact]
         public void Create_works()
         {
-            var factory = new TestAppServiceProviderFactory(
-                MockAssembly.Create(typeof(Program)));
+            var factory = new TestAppServiceProviderFactory(MockAssembly.Create(typeof(Program)));
 
             Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", null);
             Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", null);
@@ -29,35 +28,39 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         {
             public static TestWebHost BuildWebHost(string[] args)
             {
-                Assert.Equal("Development", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"));
-                Assert.Equal("Development", Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT"));
+                Assert.Equal(
+                    "Development",
+                    Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")
+                );
+                Assert.Equal(
+                    "Development",
+                    Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")
+                );
                 Assert.Equal(args, new[] { "arg1" });
 
                 return new TestWebHost(
                     new ServiceCollection()
                         .AddScoped<TestService>()
-                        .BuildServiceProvider(validateScopes: true));
+                        .BuildServiceProvider(validateScopes: true)
+                );
             }
         }
 
-        private class TestService
-        {
-        }
+        private class TestService { }
 
         [ConditionalFact]
         public void Create_works_when_no_BuildWebHost()
         {
             var factory = new TestAppServiceProviderFactory(
-                MockAssembly.Create(typeof(ProgramWithoutBuildWebHost)));
+                MockAssembly.Create(typeof(ProgramWithoutBuildWebHost))
+            );
 
             var services = factory.Create(Array.Empty<string>());
 
             Assert.NotNull(services);
         }
 
-        private class ProgramWithoutBuildWebHost
-        {
-        }
+        private class ProgramWithoutBuildWebHost { }
 
         [ConditionalFact]
         public void Create_works_when_BuildWebHost_throws()
@@ -65,20 +68,22 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var reporter = new TestOperationReporter();
             var factory = new TestAppServiceProviderFactory(
                 MockAssembly.Create(typeof(ProgramWithThrowingBuildWebHost)),
-                reporter);
+                reporter
+            );
 
             var services = factory.Create(Array.Empty<string>());
 
             Assert.NotNull(services);
             Assert.Contains(
                 "warn: " + DesignStrings.InvokeCreateHostBuilderFailed("This is a test."),
-                reporter.Messages);
+                reporter.Messages
+            );
         }
 
         private static class ProgramWithThrowingBuildWebHost
         {
-            public static TestWebHost BuildWebHost(string[] args)
-                => throw new Exception("This is a test.");
+            public static TestWebHost BuildWebHost(string[] args) =>
+                throw new Exception("This is a test.");
         }
     }
 }

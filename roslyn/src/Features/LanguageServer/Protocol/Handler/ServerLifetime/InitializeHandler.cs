@@ -16,25 +16,30 @@ internal class InitializeHandler : ILspServiceRequestHandler<InitializeParams, I
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public InitializeHandler()
-    {
-    }
+    public InitializeHandler() { }
 
     public bool MutatesSolutionState => true;
     public bool RequiresLSPSolution => false;
 
-    public Task<InitializeResult> HandleRequestAsync(InitializeParams request, RequestContext context, CancellationToken cancellationToken)
+    public Task<InitializeResult> HandleRequestAsync(
+        InitializeParams request,
+        RequestContext context,
+        CancellationToken cancellationToken
+    )
     {
         var logger = context.GetRequiredLspService<ILspServiceLogger>();
         try
         {
             logger.LogStartContext("Initialize");
 
-            var clientCapabilitiesManager = context.GetRequiredLspService<IClientCapabilitiesManager>();
+            var clientCapabilitiesManager =
+                context.GetRequiredLspService<IClientCapabilitiesManager>();
             var clientCapabilities = clientCapabilitiesManager.TryGetClientCapabilities();
             if (clientCapabilities != null)
             {
-                throw new InvalidOperationException($"{nameof(Methods.InitializeName)} called multiple times");
+                throw new InvalidOperationException(
+                    $"{nameof(Methods.InitializeName)} called multiple times"
+                );
             }
 
             clientCapabilities = request.Capabilities;
@@ -43,10 +48,7 @@ internal class InitializeHandler : ILspServiceRequestHandler<InitializeParams, I
             var capabilitiesProvider = context.GetRequiredLspService<ICapabilitiesProvider>();
             var serverCapabilities = capabilitiesProvider.GetCapabilities(clientCapabilities);
 
-            return Task.FromResult(new InitializeResult
-            {
-                Capabilities = serverCapabilities,
-            });
+            return Task.FromResult(new InitializeResult { Capabilities = serverCapabilities, });
         }
         finally
         {

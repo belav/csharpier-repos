@@ -16,10 +16,8 @@ public class WebAssemblyLazyLoadTest : ServerTestBase<ToggleExecutionModeServerF
     public WebAssemblyLazyLoadTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    ) : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -116,7 +114,9 @@ public class WebAssemblyLazyLoadTest : ServerTestBase<ToggleExecutionModeServerF
         var errorUiElem = Browser.Exists(By.Id("blazor-error-ui"), TimeSpan.FromSeconds(10));
         Assert.NotNull(errorUiElem);
 
-        AssertLogContainsCriticalMessages("DoesNotExist.dll must be marked with 'BlazorWebAssemblyLazyLoad' item group in your project file to allow lazy-loading.");
+        AssertLogContainsCriticalMessages(
+            "DoesNotExist.dll must be marked with 'BlazorWebAssemblyLazyLoad' item group in your project file to allow lazy-loading."
+        );
     }
 
     [Fact]
@@ -157,14 +157,17 @@ public class WebAssemblyLazyLoadTest : ServerTestBase<ToggleExecutionModeServerF
         var pathBaseWithoutHash = ServerPathBase.Split('#')[0];
         var jsExecutor = (IJavaScriptExecutor)Browser;
         var absoluteUri = new Uri(_serverFixture.RootUri, $"{pathBaseWithoutHash}{relativeUri}");
-        jsExecutor.ExecuteScript($"Blazor.navigateTo('{absoluteUri.ToString().Replace("'", "\\'")}')");
+        jsExecutor.ExecuteScript(
+            $"Blazor.navigateTo('{absoluteUri.ToString().Replace("'", "\\'")}')"
+        );
 
         return absoluteUri.AbsoluteUri;
     }
 
     private bool HasLoadedAssembly(string name)
     {
-        var checkScript = $"return window.performance.getEntriesByType('resource').some(r => r.name.endsWith('{name}'));";
+        var checkScript =
+            $"return window.performance.getEntriesByType('resource').some(r => r.name.endsWith('{name}'));";
         var jsExecutor = (IJavaScriptExecutor)Browser;
         var nameRequested = jsExecutor.ExecuteScript(checkScript);
         if (nameRequested != null)
@@ -179,11 +182,13 @@ public class WebAssemblyLazyLoadTest : ServerTestBase<ToggleExecutionModeServerF
         var log = Browser.Manage().Logs.GetLog(LogType.Browser);
         foreach (var message in messages)
         {
-            Assert.DoesNotContain(log, entry =>
-            {
-                return entry.Level == LogLevel.Severe
-                && entry.Message.Contains(message);
-            });
+            Assert.DoesNotContain(
+                log,
+                entry =>
+                {
+                    return entry.Level == LogLevel.Severe && entry.Message.Contains(message);
+                }
+            );
         }
     }
 
@@ -192,11 +197,13 @@ public class WebAssemblyLazyLoadTest : ServerTestBase<ToggleExecutionModeServerF
         var log = Browser.Manage().Logs.GetLog(LogType.Browser);
         foreach (var message in messages)
         {
-            Assert.Contains(log, entry =>
-            {
-                return entry.Level == LogLevel.Severe
-                && entry.Message.Contains(message);
-            });
+            Assert.Contains(
+                log,
+                entry =>
+                {
+                    return entry.Level == LogLevel.Severe && entry.Message.Contains(message);
+                }
+            );
         }
     }
 }

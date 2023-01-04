@@ -29,7 +29,7 @@ namespace Microsoft.Extensions.Configuration.Ini
         /// Loads the INI data from a stream.
         /// </summary>
         /// <param name="stream">The stream to read.</param>
-        public override void Load(Stream stream)
-            => Data = IniStreamConfigurationProvider.Read(stream);
+        public override void Load(Stream stream) =>
+            Data = IniStreamConfigurationProvider.Read(stream);
     }
 }

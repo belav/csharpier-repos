@@ -21,19 +21,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpClassSnippetProvider()
-        {
-        }
+        public CSharpClassSnippetProvider() { }
+
         public override string SnippetIdentifier => "class";
 
         public override string SnippetDescription => FeaturesResources.class_;
 
-        protected override async Task<SyntaxNode> GenerateTypeDeclarationAsync(Document document, int position, bool useAccessibility, CancellationToken cancellationToken)
+        protected override async Task<SyntaxNode> GenerateTypeDeclarationAsync(
+            Document document,
+            int position,
+            bool useAccessibility,
+            CancellationToken cancellationToken
+        )
         {
             var generator = SyntaxGenerator.GetGenerator(document);
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            var name = NameGenerator.GenerateUniqueName("MyClass", name => semanticModel.LookupSymbols(position, name: name).IsEmpty);
+            var name = NameGenerator.GenerateUniqueName(
+                "MyClass",
+                name => semanticModel.LookupSymbols(position, name: name).IsEmpty
+            );
             var classDeclaration = useAccessibility is true
                 ? generator.ClassDeclaration(name, accessibility: Accessibility.Public)
                 : generator.ClassDeclaration(name);
@@ -41,7 +50,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
             return classDeclaration;
         }
 
-        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(ISyntaxFacts syntaxFacts)
+        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(
+            ISyntaxFacts syntaxFacts
+        )
         {
             return syntaxFacts.IsClassDeclaration;
         }

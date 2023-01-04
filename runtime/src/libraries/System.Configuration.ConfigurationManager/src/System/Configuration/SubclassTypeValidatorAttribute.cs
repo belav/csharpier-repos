@@ -11,7 +11,8 @@ namespace System.Configuration
             BaseClass = baseClass;
         }
 
-        public override ConfigurationValidatorBase ValidatorInstance => new SubclassTypeValidator(BaseClass);
+        public override ConfigurationValidatorBase ValidatorInstance =>
+            new SubclassTypeValidator(BaseClass);
 
         public Type BaseClass { get; }
     }

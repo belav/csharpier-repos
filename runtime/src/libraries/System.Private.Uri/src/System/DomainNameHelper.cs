@@ -33,14 +33,17 @@ namespace System
 
         // Takes into account the additional legal domain name characters '-' and '_'
         // Note that '_' char is formally invalid but is historically in use, especially on corpnets
-        private static readonly IndexOfAnyValues<char> s_validChars =
-            IndexOfAnyValues.Create("-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz.");
+        private static readonly IndexOfAnyValues<char> s_validChars = IndexOfAnyValues.Create(
+            "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz."
+        );
 
         // For IRI, we're accepting anything non-ascii, so invert the condition to just check for invalid ascii characters
-        private static readonly IndexOfAnyValues<char> s_iriInvalidAsciiChars = IndexOfAnyValues.Create(
-            "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u0009\u000A\u000B\u000C\u000D\u000E\u000F" +
-            "\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001A\u001B\u001C\u001D\u001E\u001F" +
-            " !\"#$%&'()*+,/:;<=>?@[\\]^`{|}~\u007F");
+        private static readonly IndexOfAnyValues<char> s_iriInvalidAsciiChars =
+            IndexOfAnyValues.Create(
+                "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u0009\u000A\u000B\u000C\u000D\u000E\u000F"
+                    + "\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001A\u001B\u001C\u001D\u001E\u001F"
+                    + " !\"#$%&'()*+,/:;<=>?@[\\]^`{|}~\u007F"
+            );
 
         private static readonly IndexOfAnyValues<char> s_asciiLetterUpperOrColonChars =
             IndexOfAnyValues.Create("ABCDEFGHIJKLMNOPQRSTUVWXYZ:");
@@ -53,11 +56,14 @@ namespace System
         internal static string ParseCanonicalName(string str, int start, int end, ref bool loopback)
         {
             // Do a quick search for the colon or uppercase letters
-            int index = str.AsSpan(start, end - start).LastIndexOfAny(s_asciiLetterUpperOrColonChars);
+            int index = str.AsSpan(start, end - start)
+                .LastIndexOfAny(s_asciiLetterUpperOrColonChars);
             if (index >= 0)
             {
-                Debug.Assert(!str.AsSpan(start, index).Contains(':'),
-                    "A colon should appear at most once, and must never be followed by letters.");
+                Debug.Assert(
+                    !str.AsSpan(start, index).Contains(':'),
+                    "A colon should appear at most once, and must never be followed by letters."
+                );
 
                 if (str[start + index] == ':')
                 {
@@ -75,11 +81,17 @@ namespace System
             if (index >= 0)
             {
                 // We saw uppercase letters. Avoid allocating both the substring and the lower-cased variant.
-                return string.Create(end - start, (str, start), static (buffer, state) =>
-                {
-                    int newLength = state.str.AsSpan(state.start, buffer.Length).ToLowerInvariant(buffer);
-                    Debug.Assert(newLength == buffer.Length);
-                });
+                return string.Create(
+                    end - start,
+                    (str, start),
+                    static (buffer, state) =>
+                    {
+                        int newLength = state.str
+                            .AsSpan(state.start, buffer.Length)
+                            .ToLowerInvariant(buffer);
+                        Debug.Assert(newLength == buffer.Length);
+                    }
+                );
             }
 
             string res = str.Substring(start, end - start);
@@ -93,7 +105,12 @@ namespace System
             return res;
         }
 
-        public static bool IsValid(ReadOnlySpan<char> hostname, bool iri, bool notImplicitFile, out int length)
+        public static bool IsValid(
+            ReadOnlySpan<char> hostname,
+            bool iri,
+            bool notImplicitFile,
+            out int length
+        )
         {
             int invalidCharOrDelimiterIndex = iri
                 ? hostname.IndexOfAny(s_iriInvalidAsciiChars)
@@ -137,9 +154,7 @@ namespace System
                     return false;
                 }
 
-                int dotIndex = iri
-                    ? hostname.IndexOfAny(IriDotCharacters)
-                    : hostname.IndexOf('.');
+                int dotIndex = iri ? hostname.IndexOfAny(IriDotCharacters) : hostname.IndexOf('.');
 
                 int labelLength = dotIndex < 0 ? hostname.Length : dotIndex;
 
@@ -220,7 +235,9 @@ namespace System
 
         public static bool TryGetUnicodeEquivalent(string hostname, ref ValueStringBuilder dest)
         {
-            Debug.Assert(ReferenceEquals(hostname, UriHelper.StripBidiControlCharacters(hostname, hostname)));
+            Debug.Assert(
+                ReferenceEquals(hostname, UriHelper.StripBidiControlCharacters(hostname, hostname))
+            );
 
             // We run a loop where for every label
             // a) if label is ascii and no ace then we lowercase it

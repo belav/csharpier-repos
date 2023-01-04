@@ -10,17 +10,21 @@ using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.MethodInfos;
 using System.Reflection.Runtime.TypeInfos;
 
-
 using Internal.Reflection.Tracing;
 
 using Internal.Metadata.NativeFormat;
 
 namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 {
-    internal sealed partial class NativeFormatRuntimeGenericParameterTypeInfoForMethods : NativeFormatRuntimeGenericParameterTypeInfo, IKeyedItem<NativeFormatRuntimeGenericParameterTypeInfoForMethods.UnificationKey>
+    internal sealed partial class NativeFormatRuntimeGenericParameterTypeInfoForMethods
+        : NativeFormatRuntimeGenericParameterTypeInfo,
+            IKeyedItem<NativeFormatRuntimeGenericParameterTypeInfoForMethods.UnificationKey>
     {
-        private NativeFormatRuntimeGenericParameterTypeInfoForMethods(MetadataReader reader, GenericParameterHandle genericParameterHandle, RuntimeNamedMethodInfo declaringRuntimeNamedMethodInfo)
-           : base(reader, genericParameterHandle, genericParameterHandle.GetGenericParameter(reader))
+        private NativeFormatRuntimeGenericParameterTypeInfoForMethods(
+            MetadataReader reader,
+            GenericParameterHandle genericParameterHandle,
+            RuntimeNamedMethodInfo declaringRuntimeNamedMethodInfo
+        ) : base(reader, genericParameterHandle, genericParameterHandle.GetGenericParameter(reader))
         {
             Debug.Assert(declaringRuntimeNamedMethodInfo.DeclaringType.IsTypeDefinition);
             _declaringRuntimeNamedMethodInfo = declaringRuntimeNamedMethodInfo;
@@ -50,9 +54,7 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
         //
         // PrepareKey() must be idempodent and thread-safe. It may be invoked multiple times and concurrently.
         //
-        public void PrepareKey()
-        {
-        }
+        public void PrepareKey() { }
 
         //
         // Implements IKeyedItem.Key.
@@ -65,16 +67,17 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
         {
             get
             {
-                return new UnificationKey(_declaringRuntimeNamedMethodInfo, Reader, GenericParameterHandle);
+                return new UnificationKey(
+                    _declaringRuntimeNamedMethodInfo,
+                    Reader,
+                    GenericParameterHandle
+                );
             }
         }
 
         internal sealed override Type InternalDeclaringType
         {
-            get
-            {
-                return _declaringRuntimeNamedMethodInfo.DeclaringType;
-            }
+            get { return _declaringRuntimeNamedMethodInfo.DeclaringType; }
         }
 
         internal sealed override TypeContext TypeContext
@@ -82,7 +85,10 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
             get
             {
                 TypeContext typeContext = this.DeclaringType.CastToRuntimeTypeInfo().TypeContext;
-                return new TypeContext(typeContext.GenericTypeArguments, _declaringRuntimeNamedMethodInfo.RuntimeGenericArgumentsOrParameters);
+                return new TypeContext(
+                    typeContext.GenericTypeArguments,
+                    _declaringRuntimeNamedMethodInfo.RuntimeGenericArgumentsOrParameters
+                );
             }
         }
 

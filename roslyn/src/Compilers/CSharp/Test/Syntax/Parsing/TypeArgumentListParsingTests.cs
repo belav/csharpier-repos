@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(19456, "https://github.com/dotnet/roslyn/issues/19456")]
         public void TestPredefinedType()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -35,7 +36,8 @@ class C
 ",
                 // (6,76): error CS1002: ; expected
                 //         var added = ImmutableDictionary<string, IImmutableDictionary<X, Y>>
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 76));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 76)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -74,7 +76,10 @@ class C
                                             N(SyntaxKind.EqualsToken);
                                             N(SyntaxKind.GenericName);
                                             {
-                                                N(SyntaxKind.IdentifierToken, "ImmutableDictionary");
+                                                N(
+                                                    SyntaxKind.IdentifierToken,
+                                                    "ImmutableDictionary"
+                                                );
                                                 N(SyntaxKind.TypeArgumentList);
                                                 {
                                                     N(SyntaxKind.LessThanToken);
@@ -85,7 +90,10 @@ class C
                                                     N(SyntaxKind.CommaToken);
                                                     N(SyntaxKind.GenericName);
                                                     {
-                                                        N(SyntaxKind.IdentifierToken, "IImmutableDictionary");
+                                                        N(
+                                                            SyntaxKind.IdentifierToken,
+                                                            "IImmutableDictionary"
+                                                        );
                                                         N(SyntaxKind.TypeArgumentList);
                                                         {
                                                             N(SyntaxKind.LessThanToken);
@@ -138,7 +146,8 @@ class C
         [Fact, WorkItem(19456, "https://github.com/dotnet/roslyn/issues/19456")]
         public void TestArrayType()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -151,7 +160,8 @@ class C
 ",
                 // (6,73): error CS1002: ; expected
                 //         var added = ImmutableDictionary<X[], IImmutableDictionary<X, Y>>
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 73));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 73)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -190,7 +200,10 @@ class C
                                             N(SyntaxKind.EqualsToken);
                                             N(SyntaxKind.GenericName);
                                             {
-                                                N(SyntaxKind.IdentifierToken, "ImmutableDictionary");
+                                                N(
+                                                    SyntaxKind.IdentifierToken,
+                                                    "ImmutableDictionary"
+                                                );
                                                 N(SyntaxKind.TypeArgumentList);
                                                 {
                                                     N(SyntaxKind.LessThanToken);
@@ -203,9 +216,13 @@ class C
                                                         N(SyntaxKind.ArrayRankSpecifier);
                                                         {
                                                             N(SyntaxKind.OpenBracketToken);
-                                                            N(SyntaxKind.OmittedArraySizeExpression);
+                                                            N(
+                                                                SyntaxKind.OmittedArraySizeExpression
+                                                            );
                                                             {
-                                                                N(SyntaxKind.OmittedArraySizeExpressionToken);
+                                                                N(
+                                                                    SyntaxKind.OmittedArraySizeExpressionToken
+                                                                );
                                                             }
                                                             N(SyntaxKind.CloseBracketToken);
                                                         }
@@ -213,7 +230,10 @@ class C
                                                     N(SyntaxKind.CommaToken);
                                                     N(SyntaxKind.GenericName);
                                                     {
-                                                        N(SyntaxKind.IdentifierToken, "IImmutableDictionary");
+                                                        N(
+                                                            SyntaxKind.IdentifierToken,
+                                                            "IImmutableDictionary"
+                                                        );
                                                         N(SyntaxKind.TypeArgumentList);
                                                         {
                                                             N(SyntaxKind.LessThanToken);
@@ -266,7 +286,8 @@ class C
         [Fact, WorkItem(19456, "https://github.com/dotnet/roslyn/issues/19456")]
         public void TestPredefinedPointerType()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -279,7 +300,8 @@ class C
 ",
                 // (6,74): error CS1002: ; expected
                 //         var added = ImmutableDictionary<int*, IImmutableDictionary<X, Y>>
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 74));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 74)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -318,7 +340,10 @@ class C
                                             N(SyntaxKind.EqualsToken);
                                             N(SyntaxKind.GenericName);
                                             {
-                                                N(SyntaxKind.IdentifierToken, "ImmutableDictionary");
+                                                N(
+                                                    SyntaxKind.IdentifierToken,
+                                                    "ImmutableDictionary"
+                                                );
                                                 N(SyntaxKind.TypeArgumentList);
                                                 {
                                                     N(SyntaxKind.LessThanToken);
@@ -333,7 +358,10 @@ class C
                                                     N(SyntaxKind.CommaToken);
                                                     N(SyntaxKind.GenericName);
                                                     {
-                                                        N(SyntaxKind.IdentifierToken, "IImmutableDictionary");
+                                                        N(
+                                                            SyntaxKind.IdentifierToken,
+                                                            "IImmutableDictionary"
+                                                        );
                                                         N(SyntaxKind.TypeArgumentList);
                                                         {
                                                             N(SyntaxKind.LessThanToken);
@@ -386,7 +414,8 @@ class C
         [Fact, WorkItem(19456, "https://github.com/dotnet/roslyn/issues/19456")]
         public void TestNonPredefinedPointerType()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -399,19 +428,24 @@ class C
 ",
                 // (6,43): error CS1525: Invalid expression term ','
                 //         var added = ImmutableDictionary<X*, IImmutableDictionary<X, Y>>
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(6, 43),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
+                    .WithArguments(",")
+                    .WithLocation(6, 43),
                 // (6,65): error CS1002: ; expected
                 //         var added = ImmutableDictionary<X*, IImmutableDictionary<X, Y>>
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "<").WithLocation(6, 65),
                 // (6,65): error CS1525: Invalid expression term '<'
                 //         var added = ImmutableDictionary<X*, IImmutableDictionary<X, Y>>
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "<").WithArguments("<").WithLocation(6, 65),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "<")
+                    .WithArguments("<")
+                    .WithLocation(6, 65),
                 // (6,67): error CS1002: ; expected
                 //         var added = ImmutableDictionary<X*, IImmutableDictionary<X, Y>>
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ",").WithLocation(6, 67),
                 // (6,67): error CS1513: } expected
                 //         var added = ImmutableDictionary<X*, IImmutableDictionary<X, Y>>
-                Diagnostic(ErrorCode.ERR_RbraceExpected, ",").WithLocation(6, 67));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, ",").WithLocation(6, 67)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -453,7 +487,10 @@ class C
                                             {
                                                 N(SyntaxKind.IdentifierName);
                                                 {
-                                                    N(SyntaxKind.IdentifierToken, "ImmutableDictionary");
+                                                    N(
+                                                        SyntaxKind.IdentifierToken,
+                                                        "ImmutableDictionary"
+                                                    );
                                                 }
                                                 N(SyntaxKind.LessThanToken);
                                                 N(SyntaxKind.MultiplyExpression);
@@ -532,7 +569,8 @@ class C
         [Fact, WorkItem(19456, "https://github.com/dotnet/roslyn/issues/19456")]
         public void TestTwoItemTupleType()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -545,22 +583,29 @@ class C
 ",
                 // (6,42): error CS1525: Invalid expression term 'int'
                 //         var added = ImmutableDictionary<(int, string), IImmutableDictionary<X, Y>>
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int").WithArguments("int").WithLocation(6, 42),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
+                    .WithArguments("int")
+                    .WithLocation(6, 42),
                 // (6,47): error CS1525: Invalid expression term 'string'
                 //         var added = ImmutableDictionary<(int, string), IImmutableDictionary<X, Y>>
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "string").WithArguments("string").WithLocation(6, 47),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "string")
+                    .WithArguments("string")
+                    .WithLocation(6, 47),
                 // (6,76): error CS1002: ; expected
                 //         var added = ImmutableDictionary<(int, string), IImmutableDictionary<X, Y>>
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "<").WithLocation(6, 76),
                 // (6,76): error CS1525: Invalid expression term '<'
                 //         var added = ImmutableDictionary<(int, string), IImmutableDictionary<X, Y>>
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "<").WithArguments("<").WithLocation(6, 76),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "<")
+                    .WithArguments("<")
+                    .WithLocation(6, 76),
                 // (6,78): error CS1002: ; expected
                 //         var added = ImmutableDictionary<(int, string), IImmutableDictionary<X, Y>>
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ",").WithLocation(6, 78),
                 // (6,78): error CS1513: } expected
                 //         var added = ImmutableDictionary<(int, string), IImmutableDictionary<X, Y>>
-                Diagnostic(ErrorCode.ERR_RbraceExpected, ",").WithLocation(6, 78));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, ",").WithLocation(6, 78)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -601,7 +646,10 @@ class C
                                             {
                                                 N(SyntaxKind.IdentifierName);
                                                 {
-                                                    N(SyntaxKind.IdentifierToken, "ImmutableDictionary");
+                                                    N(
+                                                        SyntaxKind.IdentifierToken,
+                                                        "ImmutableDictionary"
+                                                    );
                                                 }
                                                 N(SyntaxKind.LessThanToken);
                                                 N(SyntaxKind.TupleExpression);
@@ -688,7 +736,8 @@ class C
         [Fact, WorkItem(19456, "https://github.com/dotnet/roslyn/issues/19456")]
         public void TestComparisonToTuple()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 public class C
 {
     public static void Main()
@@ -703,7 +752,8 @@ struct XX
 {
     public static bool operator <(XX x, (int a, int b) arg) => true;
     public static bool operator >(XX x, (int a, int b) arg) => false;
-}");
+}"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -998,7 +1048,8 @@ struct XX
         [Fact, WorkItem(19456, "https://github.com/dotnet/roslyn/issues/19456")]
         public void TestOneItemTupleType()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -1014,13 +1065,16 @@ class C
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "<").WithLocation(6, 66),
                 // (6,66): error CS1525: Invalid expression term '<'
                 //         var added = ImmutableDictionary<(A), IImmutableDictionary<X, Y>>
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "<").WithArguments("<").WithLocation(6, 66),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "<")
+                    .WithArguments("<")
+                    .WithLocation(6, 66),
                 // (6,68): error CS1002: ; expected
                 //         var added = ImmutableDictionary<(A), IImmutableDictionary<X, Y>>
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ",").WithLocation(6, 68),
                 // (6,68): error CS1513: } expected
                 //         var added = ImmutableDictionary<(A), IImmutableDictionary<X, Y>>
-                Diagnostic(ErrorCode.ERR_RbraceExpected, ",").WithLocation(6, 68));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, ",").WithLocation(6, 68)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1061,7 +1115,10 @@ class C
                                             {
                                                 N(SyntaxKind.IdentifierName);
                                                 {
-                                                    N(SyntaxKind.IdentifierToken, "ImmutableDictionary");
+                                                    N(
+                                                        SyntaxKind.IdentifierToken,
+                                                        "ImmutableDictionary"
+                                                    );
                                                 }
                                                 N(SyntaxKind.LessThanToken);
                                                 N(SyntaxKind.ParenthesizedExpression);
@@ -1137,7 +1194,8 @@ class C
         [Fact, WorkItem(19456, "https://github.com/dotnet/roslyn/issues/19456")]
         public void TestQualifiedName()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -1153,13 +1211,16 @@ class C
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "<").WithLocation(6, 66),
                 // (6,66): error CS1525: Invalid expression term '<'
                 //         var added = ImmutableDictionary<A.B, IImmutableDictionary<X, Y>>
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "<").WithArguments("<").WithLocation(6, 66),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "<")
+                    .WithArguments("<")
+                    .WithLocation(6, 66),
                 // (6,68): error CS1002: ; expected
                 //         var added = ImmutableDictionary<A.B, IImmutableDictionary<X, Y>>
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ",").WithLocation(6, 68),
                 // (6,68): error CS1513: } expected
                 //         var added = ImmutableDictionary<A.B, IImmutableDictionary<X, Y>>
-                Diagnostic(ErrorCode.ERR_RbraceExpected, ",").WithLocation(6, 68));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, ",").WithLocation(6, 68)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1200,7 +1261,10 @@ class C
                                             {
                                                 N(SyntaxKind.IdentifierName);
                                                 {
-                                                    N(SyntaxKind.IdentifierToken, "ImmutableDictionary");
+                                                    N(
+                                                        SyntaxKind.IdentifierToken,
+                                                        "ImmutableDictionary"
+                                                    );
                                                 }
                                                 N(SyntaxKind.LessThanToken);
                                                 N(SyntaxKind.SimpleMemberAccessExpression);
@@ -1279,7 +1343,8 @@ class C
         [Fact, WorkItem(19456, "https://github.com/dotnet/roslyn/issues/19456")]
         public void TestAliasName()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -1295,13 +1360,16 @@ class C
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "<").WithLocation(6, 67),
                 // (6,67): error CS1525: Invalid expression term '<'
                 //         var added = ImmutableDictionary<A::B, IImmutableDictionary<X, Y>>
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "<").WithArguments("<").WithLocation(6, 67),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "<")
+                    .WithArguments("<")
+                    .WithLocation(6, 67),
                 // (6,69): error CS1002: ; expected
                 //         var added = ImmutableDictionary<A::B, IImmutableDictionary<X, Y>>
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ",").WithLocation(6, 69),
                 // (6,69): error CS1513: } expected
                 //         var added = ImmutableDictionary<A::B, IImmutableDictionary<X, Y>>
-                Diagnostic(ErrorCode.ERR_RbraceExpected, ",").WithLocation(6, 69));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, ",").WithLocation(6, 69)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1342,7 +1410,10 @@ class C
                                             {
                                                 N(SyntaxKind.IdentifierName);
                                                 {
-                                                    N(SyntaxKind.IdentifierToken, "ImmutableDictionary");
+                                                    N(
+                                                        SyntaxKind.IdentifierToken,
+                                                        "ImmutableDictionary"
+                                                    );
                                                 }
                                                 N(SyntaxKind.LessThanToken);
                                                 N(SyntaxKind.AliasQualifiedName);
@@ -1421,7 +1492,8 @@ class C
         [Fact, WorkItem(19456, "https://github.com/dotnet/roslyn/issues/19456")]
         public void TestNullableTypeWithComma()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -1434,7 +1506,8 @@ class C
 ",
                 // (6,72): error CS1002: ; expected
                 //         var added = ImmutableDictionary<A?, IImmutableDictionary<X, Y>>
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 72));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 72)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1473,7 +1546,10 @@ class C
                                             N(SyntaxKind.EqualsToken);
                                             N(SyntaxKind.GenericName);
                                             {
-                                                N(SyntaxKind.IdentifierToken, "ImmutableDictionary");
+                                                N(
+                                                    SyntaxKind.IdentifierToken,
+                                                    "ImmutableDictionary"
+                                                );
                                                 N(SyntaxKind.TypeArgumentList);
                                                 {
                                                     N(SyntaxKind.LessThanToken);
@@ -1488,7 +1564,10 @@ class C
                                                     N(SyntaxKind.CommaToken);
                                                     N(SyntaxKind.GenericName);
                                                     {
-                                                        N(SyntaxKind.IdentifierToken, "IImmutableDictionary");
+                                                        N(
+                                                            SyntaxKind.IdentifierToken,
+                                                            "IImmutableDictionary"
+                                                        );
                                                         N(SyntaxKind.TypeArgumentList);
                                                         {
                                                             N(SyntaxKind.LessThanToken);
@@ -1541,7 +1620,8 @@ class C
         [Fact, WorkItem(19456, "https://github.com/dotnet/roslyn/issues/19456")]
         public void TestNullableTypeWithGreaterThan()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -1554,7 +1634,8 @@ class C
 ",
                 // (6,44): error CS1002: ; expected
                 //         var added = ImmutableDictionary<A?>
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 44));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 44)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1593,7 +1674,10 @@ class C
                                             N(SyntaxKind.EqualsToken);
                                             N(SyntaxKind.GenericName);
                                             {
-                                                N(SyntaxKind.IdentifierToken, "ImmutableDictionary");
+                                                N(
+                                                    SyntaxKind.IdentifierToken,
+                                                    "ImmutableDictionary"
+                                                );
                                                 N(SyntaxKind.TypeArgumentList);
                                                 {
                                                     N(SyntaxKind.LessThanToken);
@@ -1642,7 +1726,8 @@ class C
         [Fact, WorkItem(19456, "https://github.com/dotnet/roslyn/issues/19456")]
         public void TestNotNullableType()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -1658,7 +1743,10 @@ class C
                 Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(":").WithLocation(8, 38),
                 // (8,38): error CS1525: Invalid expression term ';'
                 //         ProjectChange = projectChange;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(8, 38));
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(8, 38)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1701,7 +1789,10 @@ class C
                                                 {
                                                     N(SyntaxKind.IdentifierName);
                                                     {
-                                                        N(SyntaxKind.IdentifierToken, "ImmutableDictionary");
+                                                        N(
+                                                            SyntaxKind.IdentifierToken,
+                                                            "ImmutableDictionary"
+                                                        );
                                                     }
                                                     N(SyntaxKind.LessThanToken);
                                                     N(SyntaxKind.IdentifierName);
@@ -1714,12 +1805,18 @@ class C
                                                 {
                                                     N(SyntaxKind.IdentifierName);
                                                     {
-                                                        N(SyntaxKind.IdentifierToken, "ProjectChange");
+                                                        N(
+                                                            SyntaxKind.IdentifierToken,
+                                                            "ProjectChange"
+                                                        );
                                                     }
                                                     N(SyntaxKind.EqualsToken);
                                                     N(SyntaxKind.IdentifierName);
                                                     {
-                                                        N(SyntaxKind.IdentifierToken, "projectChange");
+                                                        N(
+                                                            SyntaxKind.IdentifierToken,
+                                                            "projectChange"
+                                                        );
                                                     }
                                                 }
                                                 M(SyntaxKind.ColonToken);
@@ -1746,7 +1843,8 @@ class C
         [Fact, WorkItem(19456, "https://github.com/dotnet/roslyn/issues/19456")]
         public void TestGenericArgWithComma_01()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -1759,7 +1857,8 @@ class C
 ",
                 // (6,74): error CS1002: ; expected
                 //         var added = ImmutableDictionary<T<S>, IImmutableDictionary<X, Y>>
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 74));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 74)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1798,7 +1897,10 @@ class C
                                             N(SyntaxKind.EqualsToken);
                                             N(SyntaxKind.GenericName);
                                             {
-                                                N(SyntaxKind.IdentifierToken, "ImmutableDictionary");
+                                                N(
+                                                    SyntaxKind.IdentifierToken,
+                                                    "ImmutableDictionary"
+                                                );
                                                 N(SyntaxKind.TypeArgumentList);
                                                 {
                                                     N(SyntaxKind.LessThanToken);
@@ -1818,7 +1920,10 @@ class C
                                                     N(SyntaxKind.CommaToken);
                                                     N(SyntaxKind.GenericName);
                                                     {
-                                                        N(SyntaxKind.IdentifierToken, "IImmutableDictionary");
+                                                        N(
+                                                            SyntaxKind.IdentifierToken,
+                                                            "IImmutableDictionary"
+                                                        );
                                                         N(SyntaxKind.TypeArgumentList);
                                                         {
                                                             N(SyntaxKind.LessThanToken);
@@ -1871,7 +1976,8 @@ class C
         [Fact]
         public void TestGenericArgWithComma_02()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -1881,7 +1987,8 @@ class C
         ProjectChange = projectChange;
     }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1931,40 +2038,68 @@ class C
                                                         N(SyntaxKind.LessThanToken);
                                                         N(SyntaxKind.GenericName);
                                                         {
-                                                            N(SyntaxKind.IdentifierToken, "ImmutableDictionary");
+                                                            N(
+                                                                SyntaxKind.IdentifierToken,
+                                                                "ImmutableDictionary"
+                                                            );
                                                             N(SyntaxKind.TypeArgumentList);
                                                             {
                                                                 N(SyntaxKind.LessThanToken);
                                                                 N(SyntaxKind.GenericName);
                                                                 {
-                                                                    N(SyntaxKind.IdentifierToken, "T");
+                                                                    N(
+                                                                        SyntaxKind.IdentifierToken,
+                                                                        "T"
+                                                                    );
                                                                     N(SyntaxKind.TypeArgumentList);
                                                                     {
                                                                         N(SyntaxKind.LessThanToken);
-                                                                        N(SyntaxKind.IdentifierName);
+                                                                        N(
+                                                                            SyntaxKind.IdentifierName
+                                                                        );
                                                                         {
-                                                                            N(SyntaxKind.IdentifierToken, "S");
+                                                                            N(
+                                                                                SyntaxKind.IdentifierToken,
+                                                                                "S"
+                                                                            );
                                                                         }
-                                                                        N(SyntaxKind.GreaterThanToken);
+                                                                        N(
+                                                                            SyntaxKind.GreaterThanToken
+                                                                        );
                                                                     }
                                                                 }
                                                                 N(SyntaxKind.CommaToken);
                                                                 N(SyntaxKind.GenericName);
                                                                 {
-                                                                    N(SyntaxKind.IdentifierToken, "IImmutableDictionary");
+                                                                    N(
+                                                                        SyntaxKind.IdentifierToken,
+                                                                        "IImmutableDictionary"
+                                                                    );
                                                                     N(SyntaxKind.TypeArgumentList);
                                                                     {
                                                                         N(SyntaxKind.LessThanToken);
-                                                                        N(SyntaxKind.IdentifierName);
+                                                                        N(
+                                                                            SyntaxKind.IdentifierName
+                                                                        );
                                                                         {
-                                                                            N(SyntaxKind.IdentifierToken, "X");
+                                                                            N(
+                                                                                SyntaxKind.IdentifierToken,
+                                                                                "X"
+                                                                            );
                                                                         }
                                                                         N(SyntaxKind.CommaToken);
-                                                                        N(SyntaxKind.IdentifierName);
+                                                                        N(
+                                                                            SyntaxKind.IdentifierName
+                                                                        );
                                                                         {
-                                                                            N(SyntaxKind.IdentifierToken, "Y");
+                                                                            N(
+                                                                                SyntaxKind.IdentifierToken,
+                                                                                "Y"
+                                                                            );
                                                                         }
-                                                                        N(SyntaxKind.GreaterThanToken);
+                                                                        N(
+                                                                            SyntaxKind.GreaterThanToken
+                                                                        );
                                                                     }
                                                                 }
                                                                 N(SyntaxKind.GreaterThanToken);
@@ -1974,7 +2109,10 @@ class C
                                                     N(SyntaxKind.GreaterThanToken);
                                                     N(SyntaxKind.IdentifierName);
                                                     {
-                                                        N(SyntaxKind.IdentifierToken, "ProjectChange");
+                                                        N(
+                                                            SyntaxKind.IdentifierToken,
+                                                            "ProjectChange"
+                                                        );
                                                     }
                                                 }
                                                 N(SyntaxKind.EqualsToken);
@@ -2001,7 +2139,8 @@ class C
         [Fact, WorkItem(19456, "https://github.com/dotnet/roslyn/issues/19456")]
         public void TestGenericArgWithComma_03()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -2014,7 +2153,8 @@ class C
 ",
                 // (6,77): error CS1002: ; expected
                 //         var added = ImmutableDictionary<T<S>, U<IImmutableDictionary<X, Y>>>
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 77));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 77)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -2053,7 +2193,10 @@ class C
                                             N(SyntaxKind.EqualsToken);
                                             N(SyntaxKind.GenericName);
                                             {
-                                                N(SyntaxKind.IdentifierToken, "ImmutableDictionary");
+                                                N(
+                                                    SyntaxKind.IdentifierToken,
+                                                    "ImmutableDictionary"
+                                                );
                                                 N(SyntaxKind.TypeArgumentList);
                                                 {
                                                     N(SyntaxKind.LessThanToken);
@@ -2079,18 +2222,27 @@ class C
                                                             N(SyntaxKind.LessThanToken);
                                                             N(SyntaxKind.GenericName);
                                                             {
-                                                                N(SyntaxKind.IdentifierToken, "IImmutableDictionary");
+                                                                N(
+                                                                    SyntaxKind.IdentifierToken,
+                                                                    "IImmutableDictionary"
+                                                                );
                                                                 N(SyntaxKind.TypeArgumentList);
                                                                 {
                                                                     N(SyntaxKind.LessThanToken);
                                                                     N(SyntaxKind.IdentifierName);
                                                                     {
-                                                                        N(SyntaxKind.IdentifierToken, "X");
+                                                                        N(
+                                                                            SyntaxKind.IdentifierToken,
+                                                                            "X"
+                                                                        );
                                                                     }
                                                                     N(SyntaxKind.CommaToken);
                                                                     N(SyntaxKind.IdentifierName);
                                                                     {
-                                                                        N(SyntaxKind.IdentifierToken, "Y");
+                                                                        N(
+                                                                            SyntaxKind.IdentifierToken,
+                                                                            "Y"
+                                                                        );
                                                                     }
                                                                     N(SyntaxKind.GreaterThanToken);
                                                                 }
@@ -2135,7 +2287,8 @@ class C
         [Fact, WorkItem(19456, "https://github.com/dotnet/roslyn/issues/19456")]
         public void TestGenericArgWithComma_04()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -2148,7 +2301,8 @@ class C
 ",
                 // (6,77): error CS1002: ; expected
                 //         var added = ImmutableDictionary<T<S>, IImmutableDictionary<X, U<Y>>>
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 77));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 77)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -2187,7 +2341,10 @@ class C
                                             N(SyntaxKind.EqualsToken);
                                             N(SyntaxKind.GenericName);
                                             {
-                                                N(SyntaxKind.IdentifierToken, "ImmutableDictionary");
+                                                N(
+                                                    SyntaxKind.IdentifierToken,
+                                                    "ImmutableDictionary"
+                                                );
                                                 N(SyntaxKind.TypeArgumentList);
                                                 {
                                                     N(SyntaxKind.LessThanToken);
@@ -2207,7 +2364,10 @@ class C
                                                     N(SyntaxKind.CommaToken);
                                                     N(SyntaxKind.GenericName);
                                                     {
-                                                        N(SyntaxKind.IdentifierToken, "IImmutableDictionary");
+                                                        N(
+                                                            SyntaxKind.IdentifierToken,
+                                                            "IImmutableDictionary"
+                                                        );
                                                         N(SyntaxKind.TypeArgumentList);
                                                         {
                                                             N(SyntaxKind.LessThanToken);
@@ -2224,7 +2384,10 @@ class C
                                                                     N(SyntaxKind.LessThanToken);
                                                                     N(SyntaxKind.IdentifierName);
                                                                     {
-                                                                        N(SyntaxKind.IdentifierToken, "Y");
+                                                                        N(
+                                                                            SyntaxKind.IdentifierToken,
+                                                                            "Y"
+                                                                        );
                                                                     }
                                                                     N(SyntaxKind.GreaterThanToken);
                                                                 }
@@ -2269,7 +2432,8 @@ class C
         [Fact, WorkItem(19456, "https://github.com/dotnet/roslyn/issues/19456")]
         public void TestGenericArgWithGreaterThan_01()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -2279,7 +2443,8 @@ class C
         ProjectChange = projectChange;
     }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -2324,7 +2489,10 @@ class C
                                                     {
                                                         N(SyntaxKind.IdentifierName);
                                                         {
-                                                            N(SyntaxKind.IdentifierToken, "ImmutableDictionary");
+                                                            N(
+                                                                SyntaxKind.IdentifierToken,
+                                                                "ImmutableDictionary"
+                                                            );
                                                         }
                                                         N(SyntaxKind.LessThanToken);
                                                         N(SyntaxKind.IdentifierName);
@@ -2342,7 +2510,10 @@ class C
                                                         N(SyntaxKind.GreaterThanGreaterThanToken);
                                                         N(SyntaxKind.IdentifierName);
                                                         {
-                                                            N(SyntaxKind.IdentifierToken, "ProjectChange");
+                                                            N(
+                                                                SyntaxKind.IdentifierToken,
+                                                                "ProjectChange"
+                                                            );
                                                         }
                                                     }
                                                 }
@@ -2370,7 +2541,8 @@ class C
         [Fact]
         public void TestGenericArgWithGreaterThan_02()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -2380,7 +2552,8 @@ class C
         ProjectChange = projectChange;
     }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -2427,7 +2600,10 @@ class C
                                                         {
                                                             N(SyntaxKind.IdentifierName);
                                                             {
-                                                                N(SyntaxKind.IdentifierToken, "ImmutableDictionary");
+                                                                N(
+                                                                    SyntaxKind.IdentifierToken,
+                                                                    "ImmutableDictionary"
+                                                                );
                                                             }
                                                             N(SyntaxKind.LessThanToken);
                                                             N(SyntaxKind.IdentifierName);
@@ -2448,10 +2624,15 @@ class C
                                                         {
                                                             N(SyntaxKind.IdentifierToken, "S");
                                                         }
-                                                        N(SyntaxKind.GreaterThanGreaterThanGreaterThanToken);
+                                                        N(
+                                                            SyntaxKind.GreaterThanGreaterThanGreaterThanToken
+                                                        );
                                                         N(SyntaxKind.IdentifierName);
                                                         {
-                                                            N(SyntaxKind.IdentifierToken, "ProjectChange");
+                                                            N(
+                                                                SyntaxKind.IdentifierToken,
+                                                                "ProjectChange"
+                                                            );
                                                         }
                                                     }
                                                 }
@@ -2479,7 +2660,8 @@ class C
         [Fact]
         public void TestGenericArgWithGreaterThan_03()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -2489,7 +2671,8 @@ class C
         ProjectChange = projectChange;
     }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -2534,7 +2717,10 @@ class C
                                                     {
                                                         N(SyntaxKind.IdentifierName);
                                                         {
-                                                            N(SyntaxKind.IdentifierToken, "ImmutableDictionary");
+                                                            N(
+                                                                SyntaxKind.IdentifierToken,
+                                                                "ImmutableDictionary"
+                                                            );
                                                         }
                                                         N(SyntaxKind.LessThanToken);
                                                         N(SyntaxKind.IdentifierName);
@@ -2549,10 +2735,15 @@ class C
                                                         {
                                                             N(SyntaxKind.IdentifierToken, "S");
                                                         }
-                                                        N(SyntaxKind.GreaterThanGreaterThanGreaterThanToken);
+                                                        N(
+                                                            SyntaxKind.GreaterThanGreaterThanGreaterThanToken
+                                                        );
                                                         N(SyntaxKind.IdentifierName);
                                                         {
-                                                            N(SyntaxKind.IdentifierToken, "ProjectChange");
+                                                            N(
+                                                                SyntaxKind.IdentifierToken,
+                                                                "ProjectChange"
+                                                            );
                                                         }
                                                     }
                                                 }
@@ -2580,7 +2771,8 @@ class C
         [Fact]
         public void TestGenericArgWithGreaterThan_04()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -2590,7 +2782,8 @@ class C
         ProjectChange = projectChange;
     }
 }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2636,7 +2829,10 @@ class C
                                                     {
                                                         N(SyntaxKind.IdentifierName);
                                                         {
-                                                            N(SyntaxKind.IdentifierToken, "ImmutableDictionary");
+                                                            N(
+                                                                SyntaxKind.IdentifierToken,
+                                                                "ImmutableDictionary"
+                                                            );
                                                         }
                                                         N(SyntaxKind.LessThanToken);
                                                         N(SyntaxKind.IdentifierName);
@@ -2654,7 +2850,10 @@ class C
                                                             {
                                                                 N(SyntaxKind.IdentifierName);
                                                                 {
-                                                                    N(SyntaxKind.IdentifierToken, "S");
+                                                                    N(
+                                                                        SyntaxKind.IdentifierToken,
+                                                                        "S"
+                                                                    );
                                                                 }
                                                             }
                                                             N(SyntaxKind.CommaToken);
@@ -2662,15 +2861,23 @@ class C
                                                             {
                                                                 N(SyntaxKind.IdentifierName);
                                                                 {
-                                                                    N(SyntaxKind.IdentifierToken, "U");
+                                                                    N(
+                                                                        SyntaxKind.IdentifierToken,
+                                                                        "U"
+                                                                    );
                                                                 }
                                                             }
                                                             N(SyntaxKind.CloseParenToken);
                                                         }
-                                                        N(SyntaxKind.GreaterThanGreaterThanGreaterThanToken);
+                                                        N(
+                                                            SyntaxKind.GreaterThanGreaterThanGreaterThanToken
+                                                        );
                                                         N(SyntaxKind.IdentifierName);
                                                         {
-                                                            N(SyntaxKind.IdentifierToken, "ProjectChange");
+                                                            N(
+                                                                SyntaxKind.IdentifierToken,
+                                                                "ProjectChange"
+                                                            );
                                                         }
                                                     }
                                                 }
@@ -2698,7 +2905,8 @@ class C
         [Fact]
         public void TestGenericArgWithGreaterThan_05()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -2708,7 +2916,8 @@ class C
         ProjectChange = projectChange;
     }
 }
-");
+"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2754,7 +2963,10 @@ class C
                                                     {
                                                         N(SyntaxKind.IdentifierName);
                                                         {
-                                                            N(SyntaxKind.IdentifierToken, "ImmutableDictionary");
+                                                            N(
+                                                                SyntaxKind.IdentifierToken,
+                                                                "ImmutableDictionary"
+                                                            );
                                                         }
                                                         N(SyntaxKind.LessThanToken);
                                                         N(SyntaxKind.IdentifierName);
@@ -2774,11 +2986,19 @@ class C
                                                                 {
                                                                     N(SyntaxKind.IdentifierName);
                                                                     {
-                                                                        N(SyntaxKind.IdentifierToken, "S");
+                                                                        N(
+                                                                            SyntaxKind.IdentifierToken,
+                                                                            "S"
+                                                                        );
                                                                     }
-                                                                    N(SyntaxKind.SingleVariableDesignation);
+                                                                    N(
+                                                                        SyntaxKind.SingleVariableDesignation
+                                                                    );
                                                                     {
-                                                                        N(SyntaxKind.IdentifierToken, "a");
+                                                                        N(
+                                                                            SyntaxKind.IdentifierToken,
+                                                                            "a"
+                                                                        );
                                                                     }
                                                                 }
                                                             }
@@ -2789,20 +3009,33 @@ class C
                                                                 {
                                                                     N(SyntaxKind.IdentifierName);
                                                                     {
-                                                                        N(SyntaxKind.IdentifierToken, "U");
+                                                                        N(
+                                                                            SyntaxKind.IdentifierToken,
+                                                                            "U"
+                                                                        );
                                                                     }
-                                                                    N(SyntaxKind.SingleVariableDesignation);
+                                                                    N(
+                                                                        SyntaxKind.SingleVariableDesignation
+                                                                    );
                                                                     {
-                                                                        N(SyntaxKind.IdentifierToken, "b");
+                                                                        N(
+                                                                            SyntaxKind.IdentifierToken,
+                                                                            "b"
+                                                                        );
                                                                     }
                                                                 }
                                                             }
                                                             N(SyntaxKind.CloseParenToken);
                                                         }
-                                                        N(SyntaxKind.GreaterThanGreaterThanGreaterThanToken);
+                                                        N(
+                                                            SyntaxKind.GreaterThanGreaterThanGreaterThanToken
+                                                        );
                                                         N(SyntaxKind.IdentifierName);
                                                         {
-                                                            N(SyntaxKind.IdentifierToken, "ProjectChange");
+                                                            N(
+                                                                SyntaxKind.IdentifierToken,
+                                                                "ProjectChange"
+                                                            );
                                                         }
                                                     }
                                                 }

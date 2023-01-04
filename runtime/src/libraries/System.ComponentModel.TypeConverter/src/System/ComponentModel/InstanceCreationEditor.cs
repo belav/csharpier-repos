@@ -11,7 +11,8 @@ namespace System.ComponentModel
     /// </summary>
     public abstract class InstanceCreationEditor
     {
-        public virtual string Text => SR.GetResourceString(nameof(SR.InstanceCreationEditorDefaultText), "(New...)");
+        public virtual string Text =>
+            SR.GetResourceString(nameof(SR.InstanceCreationEditorDefaultText), "(New...)");
 
         /// <summary>
         /// This method is invoked when you user chooses the link displayed by the PropertyGrid for the InstanceCreationEditor.

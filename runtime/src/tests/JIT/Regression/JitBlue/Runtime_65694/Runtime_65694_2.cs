@@ -20,7 +20,10 @@ public class Runtime_65694_2
         StructWithObj b = a;
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static void GcSafePoint() { GC.Collect(); }
+        static void GcSafePoint()
+        {
+            GC.Collect();
+        }
 
         GcSafePoint();
         GcSafePoint();
@@ -38,4 +41,3 @@ public class Runtime_65694_2
         public object Obj;
     }
 }
-

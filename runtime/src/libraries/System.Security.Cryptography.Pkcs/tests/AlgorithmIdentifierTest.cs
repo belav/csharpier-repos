@@ -74,10 +74,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [Fact]
         public static void KeyLength()
         {
-            AlgorithmIdentifier ai = new AlgorithmIdentifier
-            {
-                KeyLength = int.MaxValue
-            };
+            AlgorithmIdentifier ai = new AlgorithmIdentifier { KeyLength = int.MaxValue };
             Assert.Equal(int.MaxValue, ai.KeyLength);
             ai.KeyLength = 0;
             Assert.Equal(0, ai.KeyLength);
@@ -88,10 +85,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [Fact]
         public static void Oid()
         {
-            AlgorithmIdentifier ai = new AlgorithmIdentifier
-            {
-                Oid = new Oid(Oids.Rsa)
-            };
+            AlgorithmIdentifier ai = new AlgorithmIdentifier { Oid = new Oid(Oids.Rsa) };
             Assert.Equal(Oids.Rsa, ai.Oid.Value);
             ai.Oid = null;
             Assert.Null(ai.Oid);

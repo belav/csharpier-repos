@@ -7,7 +7,10 @@ namespace System.Web.Mvc
 {
     public class LinqBinaryModelBinder : ByteArrayModelBinder
     {
-        public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        public override object BindModel(
+            ControllerContext controllerContext,
+            ModelBindingContext bindingContext
+        )
         {
             byte[] byteValue = (byte[])base.BindModel(controllerContext, bindingContext);
             if (byteValue == null)

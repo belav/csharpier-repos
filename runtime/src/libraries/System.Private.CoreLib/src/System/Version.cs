@@ -15,8 +15,15 @@ namespace System
     // specified component.
 
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-    public sealed class Version : ICloneable, IComparable, IComparable<Version?>, IEquatable<Version?>, ISpanFormattable
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
+    public sealed class Version
+        : ICloneable,
+            IComparable,
+            IComparable<Version?>,
+            IEquatable<Version?>,
+            ISpanFormattable
     {
         // AssemblyName depends on the order staying the same
         private readonly int _Major; // Do not rename (binary serialization)
@@ -122,14 +129,19 @@ namespace System
 
         public int CompareTo(Version? value)
         {
-            return
-                object.ReferenceEquals(value, this) ? 0 :
-                value is null ? 1 :
-                _Major != value._Major ? (_Major > value._Major ? 1 : -1) :
-                _Minor != value._Minor ? (_Minor > value._Minor ? 1 : -1) :
-                _Build != value._Build ? (_Build > value._Build ? 1 : -1) :
-                _Revision != value._Revision ? (_Revision > value._Revision ? 1 : -1) :
-                0;
+            return object.ReferenceEquals(value, this)
+                ? 0
+                : value is null
+                    ? 1
+                    : _Major != value._Major
+                        ? (_Major > value._Major ? 1 : -1)
+                        : _Minor != value._Minor
+                            ? (_Minor > value._Minor ? 1 : -1)
+                            : _Build != value._Build
+                                ? (_Build > value._Build ? 1 : -1)
+                                : _Revision != value._Revision
+                                    ? (_Revision > value._Revision ? 1 : -1)
+                                    : 0;
         }
 
         public override bool Equals([NotNullWhen(true)] object? obj)
@@ -139,12 +151,14 @@ namespace System
 
         public bool Equals([NotNullWhen(true)] Version? obj)
         {
-            return object.ReferenceEquals(obj, this) ||
-                (!(obj is null) &&
-                _Major == obj._Major &&
-                _Minor == obj._Minor &&
-                _Build == obj._Build &&
-                _Revision == obj._Revision);
+            return object.ReferenceEquals(obj, this)
+                || (
+                    !(obj is null)
+                    && _Major == obj._Major
+                    && _Minor == obj._Minor
+                    && _Build == obj._Build
+                    && _Revision == obj._Revision
+                );
         }
 
         public override int GetHashCode()
@@ -162,8 +176,7 @@ namespace System
             return accumulator;
         }
 
-        public override string ToString() =>
-            ToString(DefaultFormatFieldCount);
+        public override string ToString() => ToString(DefaultFormatFieldCount);
 
         public string ToString(int fieldCount)
         {
@@ -173,8 +186,7 @@ namespace System
             return dest.Slice(0, charsWritten).ToString();
         }
 
-        string IFormattable.ToString(string? format, IFormatProvider? formatProvider) =>
-            ToString();
+        string IFormattable.ToString(string? format, IFormatProvider? formatProvider) => ToString();
 
         public bool TryFormat(Span<char> destination, out int charsWritten) =>
             TryFormat(destination, DefaultFormatFieldCount, out charsWritten);
@@ -195,8 +207,15 @@ namespace System
                     ThrowArgumentException("3");
                     break;
 
-                static void ThrowArgumentException(string failureUpperBound) =>
-                    throw new ArgumentException(SR.Format(SR.ArgumentOutOfRange_Bounds_Lower_Upper, "0", failureUpperBound), nameof(fieldCount));
+                    static void ThrowArgumentException(string failureUpperBound) =>
+                        throw new ArgumentException(
+                            SR.Format(
+                                SR.ArgumentOutOfRange_Bounds_Lower_Upper,
+                                "0",
+                                failureUpperBound
+                            ),
+                            nameof(fieldCount)
+                        );
             }
 
             int totalCharsWritten = 0;
@@ -238,14 +257,21 @@ namespace System
             return true;
         }
 
-        bool ISpanFormattable.TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider) =>
+        bool ISpanFormattable.TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            ReadOnlySpan<char> format,
+            IFormatProvider? provider
+        ) =>
             // format and provider are ignored.
             TryFormat(destination, DefaultFormatFieldCount, out charsWritten);
 
         private int DefaultFormatFieldCount =>
-            _Build == -1 ? 2 :
-            _Revision == -1 ? 3 :
-            4;
+            _Build == -1
+                ? 2
+                : _Revision == -1
+                    ? 3
+                    : 4;
 
         public static Version Parse(string input)
         {
@@ -257,7 +283,10 @@ namespace System
         public static Version Parse(ReadOnlySpan<char> input) =>
             ParseVersion(input, throwOnFailure: true)!;
 
-        public static bool TryParse([NotNullWhen(true)] string? input, [NotNullWhen(true)] out Version? result)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? input,
+            [NotNullWhen(true)] out Version? result
+        )
         {
             if (input == null)
             {
@@ -268,8 +297,10 @@ namespace System
             return (result = ParseVersion(input.AsSpan(), throwOnFailure: false)) != null;
         }
 
-        public static bool TryParse(ReadOnlySpan<char> input, [NotNullWhen(true)] out Version? result) =>
-            (result = ParseVersion(input, throwOnFailure: false)) != null;
+        public static bool TryParse(
+            ReadOnlySpan<char> input,
+            [NotNullWhen(true)] out Version? result
+        ) => (result = ParseVersion(input, throwOnFailure: false)) != null;
 
         private static Version? ParseVersion(ReadOnlySpan<char> input, bool throwOnFailure)
         {
@@ -277,7 +308,8 @@ namespace System
             int majorEnd = input.IndexOf('.');
             if (majorEnd < 0)
             {
-                if (throwOnFailure) throw new ArgumentException(SR.Arg_VersionString, nameof(input));
+                if (throwOnFailure)
+                    throw new ArgumentException(SR.Arg_VersionString, nameof(input));
                 return null;
             }
 
@@ -294,16 +326,26 @@ namespace System
                     buildEnd += (minorEnd + 1);
                     if (input.Slice(buildEnd + 1).Contains('.'))
                     {
-                        if (throwOnFailure) throw new ArgumentException(SR.Arg_VersionString, nameof(input));
+                        if (throwOnFailure)
+                            throw new ArgumentException(SR.Arg_VersionString, nameof(input));
                         return null;
                     }
                 }
             }
 
-            int minor, build, revision;
+            int minor,
+                build,
+                revision;
 
             // Parse the major version
-            if (!TryParseComponent(input.Slice(0, majorEnd), nameof(input), throwOnFailure, out int major))
+            if (
+                !TryParseComponent(
+                    input.Slice(0, majorEnd),
+                    nameof(input),
+                    throwOnFailure,
+                    out int major
+                )
+            )
             {
                 return null;
             }
@@ -311,7 +353,14 @@ namespace System
             if (minorEnd != -1)
             {
                 // If there's more than a major and minor, parse the minor, too.
-                if (!TryParseComponent(input.Slice(majorEnd + 1, minorEnd - majorEnd - 1), nameof(input), throwOnFailure, out minor))
+                if (
+                    !TryParseComponent(
+                        input.Slice(majorEnd + 1, minorEnd - majorEnd - 1),
+                        nameof(input),
+                        throwOnFailure,
+                        out minor
+                    )
+                )
                 {
                     return null;
                 }
@@ -320,38 +369,73 @@ namespace System
                 {
                     // major.minor.build.revision
                     return
-                        TryParseComponent(input.Slice(minorEnd + 1, buildEnd - minorEnd - 1), nameof(build), throwOnFailure, out build) &&
-                        TryParseComponent(input.Slice(buildEnd + 1), nameof(revision), throwOnFailure, out revision) ?
-                            new Version(major, minor, build, revision) :
-                            null;
+                        TryParseComponent(
+                            input.Slice(minorEnd + 1, buildEnd - minorEnd - 1),
+                            nameof(build),
+                            throwOnFailure,
+                            out build
+                        )
+                        && TryParseComponent(
+                            input.Slice(buildEnd + 1),
+                            nameof(revision),
+                            throwOnFailure,
+                            out revision
+                        )
+                        ? new Version(major, minor, build, revision)
+                        : null;
                 }
                 else
                 {
                     // major.minor.build
-                    return TryParseComponent(input.Slice(minorEnd + 1), nameof(build), throwOnFailure, out build) ?
-                        new Version(major, minor, build) :
-                        null;
+                    return TryParseComponent(
+                        input.Slice(minorEnd + 1),
+                        nameof(build),
+                        throwOnFailure,
+                        out build
+                    )
+                        ? new Version(major, minor, build)
+                        : null;
                 }
             }
             else
             {
                 // major.minor
-                return TryParseComponent(input.Slice(majorEnd + 1), nameof(input), throwOnFailure, out minor) ?
-                    new Version(major, minor) :
-                    null;
+                return TryParseComponent(
+                    input.Slice(majorEnd + 1),
+                    nameof(input),
+                    throwOnFailure,
+                    out minor
+                )
+                    ? new Version(major, minor)
+                    : null;
             }
         }
 
-        private static bool TryParseComponent(ReadOnlySpan<char> component, string componentName, bool throwOnFailure, out int parsedComponent)
+        private static bool TryParseComponent(
+            ReadOnlySpan<char> component,
+            string componentName,
+            bool throwOnFailure,
+            out int parsedComponent
+        )
         {
             if (throwOnFailure)
             {
-                parsedComponent = int.Parse(component, NumberStyles.Integer, CultureInfo.InvariantCulture);
+                parsedComponent = int.Parse(
+                    component,
+                    NumberStyles.Integer,
+                    CultureInfo.InvariantCulture
+                );
                 ArgumentOutOfRangeException.ThrowIfNegative(parsedComponent, componentName);
                 return true;
             }
 
-            return int.TryParse(component, NumberStyles.Integer, CultureInfo.InvariantCulture, out parsedComponent) && parsedComponent >= 0;
+            return int.TryParse(
+                    component,
+                    NumberStyles.Integer,
+                    CultureInfo.InvariantCulture,
+                    out parsedComponent
+                )
+                && parsedComponent >= 0;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

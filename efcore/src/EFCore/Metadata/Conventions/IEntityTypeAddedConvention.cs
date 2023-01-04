@@ -18,5 +18,6 @@ public interface IEntityTypeAddedConvention : IConvention
     /// <param name="context">Additional information associated with convention execution.</param>
     void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
-        IConventionContext<IConventionEntityTypeBuilder> context);
+        IConventionContext<IConventionEntityTypeBuilder> context
+    );
 }

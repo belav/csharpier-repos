@@ -13,25 +13,25 @@ class Runtime_61040_1
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void JitUse<T>(T arg) { }
-    
+
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.AggressiveOptimization)]
     static void Problem(ArrayWrapper a)
     {
         a = GetArrayLong();
-        
+
         JitUse(a);
         JitUse(a);
-        
+
         for (int i = 0; i < 10000; i++)
         {
             a = GetArray();
             JitUse(a.Array[i]);
         }
     }
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static ArrayWrapper GetArray() => new() { Array = new int[0] };
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static ArrayWrapper GetArrayLong() => new() { Array = new int[10000] };
 
@@ -50,4 +50,3 @@ class Runtime_61040_1
         return result;
     }
 }
-    

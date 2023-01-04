@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 namespace System.Net.NetworkInformation
 {
-    public class MulticastIPAddressInformationCollection : ICollection<MulticastIPAddressInformation>
+    public class MulticastIPAddressInformationCollection
+        : ICollection<MulticastIPAddressInformation>
     {
-        private readonly List<MulticastIPAddressInformation> _addresses = new List<MulticastIPAddressInformation>();
+        private readonly List<MulticastIPAddressInformation> _addresses =
+            new List<MulticastIPAddressInformation>();
 
-        protected internal MulticastIPAddressInformationCollection()
-        {
-        }
+        protected internal MulticastIPAddressInformationCollection() { }
 
         public virtual void CopyTo(MulticastIPAddressInformation[] array, int offset)
         {
@@ -20,18 +20,12 @@ namespace System.Net.NetworkInformation
 
         public virtual int Count
         {
-            get
-            {
-                return _addresses.Count;
-            }
+            get { return _addresses.Count; }
         }
 
         public virtual bool IsReadOnly
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public virtual void Add(MulticastIPAddressInformation address)
@@ -61,10 +55,7 @@ namespace System.Net.NetworkInformation
 
         public virtual MulticastIPAddressInformation this[int index]
         {
-            get
-            {
-                return _addresses[index];
-            }
+            get { return _addresses[index]; }
         }
 
         public virtual bool Remove(MulticastIPAddressInformation address)

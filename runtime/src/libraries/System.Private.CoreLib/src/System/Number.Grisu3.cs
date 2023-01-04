@@ -309,19 +309,23 @@ namespace System
 
             private static readonly uint[] s_SmallPowersOfTen = new uint[]
             {
-                1,          // 10^0
-                10,         // 10^1
-                100,        // 10^2
-                1000,       // 10^3
-                10000,      // 10^4
-                100000,     // 10^5
-                1000000,    // 10^6
-                10000000,   // 10^7
-                100000000,  // 10^8
+                1, // 10^0
+                10, // 10^1
+                100, // 10^2
+                1000, // 10^3
+                10000, // 10^4
+                100000, // 10^5
+                1000000, // 10^6
+                10000000, // 10^7
+                100000000, // 10^8
                 1000000000, // 10^9
             };
 
-            public static bool TryRunDouble(double value, int requestedDigits, ref NumberBuffer number)
+            public static bool TryRunDouble(
+                double value,
+                int requestedDigits,
+                ref NumberBuffer number
+            )
             {
                 double v = double.IsNegative(value) ? -value : value;
 
@@ -334,13 +338,28 @@ namespace System
 
                 if (requestedDigits == -1)
                 {
-                    DiyFp w = DiyFp.CreateAndGetBoundaries(v, out DiyFp boundaryMinus, out DiyFp boundaryPlus).Normalize();
-                    result = TryRunShortest(in boundaryMinus, in w, in boundaryPlus, number.Digits, out length, out decimalExponent);
+                    DiyFp w = DiyFp
+                        .CreateAndGetBoundaries(v, out DiyFp boundaryMinus, out DiyFp boundaryPlus)
+                        .Normalize();
+                    result = TryRunShortest(
+                        in boundaryMinus,
+                        in w,
+                        in boundaryPlus,
+                        number.Digits,
+                        out length,
+                        out decimalExponent
+                    );
                 }
                 else
                 {
                     DiyFp w = new DiyFp(v).Normalize();
-                    result = TryRunCounted(in w, requestedDigits, number.Digits, out length, out decimalExponent);
+                    result = TryRunCounted(
+                        in w,
+                        requestedDigits,
+                        number.Digits,
+                        out length,
+                        out decimalExponent
+                    );
                 }
 
                 if (result)
@@ -368,13 +387,28 @@ namespace System
 
                 if (requestedDigits == -1)
                 {
-                    DiyFp w = DiyFp.CreateAndGetBoundaries(v, out DiyFp boundaryMinus, out DiyFp boundaryPlus).Normalize();
-                    result = TryRunShortest(in boundaryMinus, in w, in boundaryPlus, number.Digits, out length, out decimalExponent);
+                    DiyFp w = DiyFp
+                        .CreateAndGetBoundaries(v, out DiyFp boundaryMinus, out DiyFp boundaryPlus)
+                        .Normalize();
+                    result = TryRunShortest(
+                        in boundaryMinus,
+                        in w,
+                        in boundaryPlus,
+                        number.Digits,
+                        out length,
+                        out decimalExponent
+                    );
                 }
                 else
                 {
                     DiyFp w = new DiyFp(v).Normalize();
-                    result = TryRunCounted(in w, requestedDigits, number.Digits, out length, out decimalExponent);
+                    result = TryRunCounted(
+                        in w,
+                        requestedDigits,
+                        number.Digits,
+                        out length,
+                        out decimalExponent
+                    );
                 }
 
                 if (result)
@@ -389,7 +423,11 @@ namespace System
                 return result;
             }
 
-            public static bool TryRunSingle(float value, int requestedDigits, ref NumberBuffer number)
+            public static bool TryRunSingle(
+                float value,
+                int requestedDigits,
+                ref NumberBuffer number
+            )
             {
                 float v = float.IsNegative(value) ? -value : value;
 
@@ -402,13 +440,28 @@ namespace System
 
                 if (requestedDigits == -1)
                 {
-                    DiyFp w = DiyFp.CreateAndGetBoundaries(v, out DiyFp boundaryMinus, out DiyFp boundaryPlus).Normalize();
-                    result = TryRunShortest(in boundaryMinus, in w, in boundaryPlus, number.Digits, out length, out decimalExponent);
+                    DiyFp w = DiyFp
+                        .CreateAndGetBoundaries(v, out DiyFp boundaryMinus, out DiyFp boundaryPlus)
+                        .Normalize();
+                    result = TryRunShortest(
+                        in boundaryMinus,
+                        in w,
+                        in boundaryPlus,
+                        number.Digits,
+                        out length,
+                        out decimalExponent
+                    );
                 }
                 else
                 {
                     DiyFp w = new DiyFp(v).Normalize();
-                    result = TryRunCounted(in w, requestedDigits, number.Digits, out length, out decimalExponent);
+                    result = TryRunCounted(
+                        in w,
+                        requestedDigits,
+                        number.Digits,
+                        out length,
+                        out decimalExponent
+                    );
                 }
 
                 if (result)
@@ -426,14 +479,26 @@ namespace System
             // The counted version of Grisu3 only generates requestedDigits number of digits.
             // This version does not generate the shortest representation, and with enough requested digits 0.1 will at some point print as 0.9999999...
             // Grisu3 is too imprecise for real halfway cases (1.5 will not work) and therefore the rounding strategy for halfway cases is irrelevant.
-            private static bool TryRunCounted(in DiyFp w, int requestedDigits, Span<byte> buffer, out int length, out int decimalExponent)
+            private static bool TryRunCounted(
+                in DiyFp w,
+                int requestedDigits,
+                Span<byte> buffer,
+                out int length,
+                out int decimalExponent
+            )
             {
                 Debug.Assert(requestedDigits > 0);
 
-                int tenMkMinimalBinaryExponent = MinimalTargetExponent - (w.e + DiyFp.SignificandSize);
-                int tenMkMaximalBinaryExponent = MaximalTargetExponent - (w.e + DiyFp.SignificandSize);
+                int tenMkMinimalBinaryExponent =
+                    MinimalTargetExponent - (w.e + DiyFp.SignificandSize);
+                int tenMkMaximalBinaryExponent =
+                    MaximalTargetExponent - (w.e + DiyFp.SignificandSize);
 
-                DiyFp tenMk = GetCachedPowerForBinaryExponentRange(tenMkMinimalBinaryExponent, tenMkMaximalBinaryExponent, out int mk);
+                DiyFp tenMk = GetCachedPowerForBinaryExponentRange(
+                    tenMkMinimalBinaryExponent,
+                    tenMkMaximalBinaryExponent,
+                    out int mk
+                );
 
                 Debug.Assert(MinimalTargetExponent <= (w.e + tenMk.e + DiyFp.SignificandSize));
                 Debug.Assert(MaximalTargetExponent >= (w.e + tenMk.e + DiyFp.SignificandSize));
@@ -457,7 +522,13 @@ namespace System
                 //
                 // It will not always be exactly the same since DigitGenCounted only produces a limited number of digits.
 
-                bool result = TryDigitGenCounted(in scaledW, requestedDigits, buffer, out length, out int kappa);
+                bool result = TryDigitGenCounted(
+                    in scaledW,
+                    requestedDigits,
+                    buffer,
+                    out length,
+                    out int kappa
+                );
                 decimalExponent = -mk + kappa;
                 return result;
             }
@@ -474,7 +545,14 @@ namespace System
             //
             // The last digit will be closest to the actual v.
             // That is, even if several digits might correctly yield 'v' when read again, the closest will be computed.
-            private static bool TryRunShortest(in DiyFp boundaryMinus, in DiyFp w, in DiyFp boundaryPlus, Span<byte> buffer, out int length, out int decimalExponent)
+            private static bool TryRunShortest(
+                in DiyFp boundaryMinus,
+                in DiyFp w,
+                in DiyFp boundaryPlus,
+                Span<byte> buffer,
+                out int length,
+                out int decimalExponent
+            )
             {
                 // boundaryMinus and boundaryPlus are the boundaries between v and its closest floating-point neighbors.
                 // Any number strictly between boundaryMinus and boundaryPlus will round to v when converted to a double.
@@ -482,10 +560,16 @@ namespace System
 
                 Debug.Assert(boundaryPlus.e == w.e);
 
-                int tenMkMinimalBinaryExponent = MinimalTargetExponent - (w.e + DiyFp.SignificandSize);
-                int tenMkMaximalBinaryExponent = MaximalTargetExponent - (w.e + DiyFp.SignificandSize);
+                int tenMkMinimalBinaryExponent =
+                    MinimalTargetExponent - (w.e + DiyFp.SignificandSize);
+                int tenMkMaximalBinaryExponent =
+                    MaximalTargetExponent - (w.e + DiyFp.SignificandSize);
 
-                DiyFp tenMk = GetCachedPowerForBinaryExponentRange(tenMkMinimalBinaryExponent, tenMkMaximalBinaryExponent, out int mk);
+                DiyFp tenMk = GetCachedPowerForBinaryExponentRange(
+                    tenMkMinimalBinaryExponent,
+                    tenMkMaximalBinaryExponent,
+                    out int mk
+                );
 
                 Debug.Assert(MinimalTargetExponent <= (w.e + tenMk.e + DiyFp.SignificandSize));
                 Debug.Assert(MaximalTargetExponent >= (w.e + tenMk.e + DiyFp.SignificandSize));
@@ -516,7 +600,14 @@ namespace System
                 // Set decimalExponent == -mk and pass it to DigitGen and if scaledW is not an integer than it will be updated.
                 // For instance, if scaledW == 1.23 then the buffer will be filled with "123" and the decimalExponent will be decreased by 2.
 
-                bool result = TryDigitGenShortest(in scaledBoundaryMinus, in scaledW, in scaledBoundaryPlus, buffer, out length, out int kappa);
+                bool result = TryDigitGenShortest(
+                    in scaledBoundaryMinus,
+                    in scaledW,
+                    in scaledBoundaryPlus,
+                    buffer,
+                    out length,
+                    out int kappa
+                );
                 decimalExponent = -mk + kappa;
                 return result;
             }
@@ -531,7 +622,11 @@ namespace System
             //
             // Preconditions:
             //      number < (1 << (numberBits + 1))
-            private static uint BiggestPowerTen(uint number, int numberBits, out int exponentPlusOne)
+            private static uint BiggestPowerTen(
+                uint number,
+                int numberBits,
+                out int exponentPlusOne
+            )
             {
                 // Inspired by the method for finding an integer log base 10 from here:
                 // http://graphics.stanford.edu/~seander/bithacks.html#IntegerLog10
@@ -577,7 +672,13 @@ namespace System
             // This procedure takes into account the imprecision of its input numbers.
             // If the precision is not enough to guarantee all the postconditions, then false is returned.
             // This usually happens rarely, but the failure-rate increases with higher requestedDigits
-            private static bool TryDigitGenCounted(in DiyFp w, int requestedDigits, Span<byte> buffer, out int length, out int kappa)
+            private static bool TryDigitGenCounted(
+                in DiyFp w,
+                int requestedDigits,
+                Span<byte> buffer,
+                out int length,
+                out int kappa
+            )
             {
                 Debug.Assert(MinimalTargetExponent <= w.e);
                 Debug.Assert(w.e <= MaximalTargetExponent);
@@ -606,7 +707,13 @@ namespace System
                 //      If requestedDigits >= 11, integrals is not able to exhaust the count by itself since 10^(11 -1) > uint.MaxValue >= integrals.
                 //      If integrals < 10^(requestedDigits - 1), integrals cannot exhaust the count.
                 //      Otherwise, integrals might be able to exhaust the count and we need to execute the rest of the code.
-                if ((fractionals == 0) && ((requestedDigits >= 11) || (integrals < s_SmallPowersOfTen[requestedDigits - 1])))
+                if (
+                    (fractionals == 0)
+                    && (
+                        (requestedDigits >= 11)
+                        || (integrals < s_SmallPowersOfTen[requestedDigits - 1])
+                    )
+                )
                 {
                     Debug.Assert(buffer[0] == '\0');
                     length = 0;
@@ -614,7 +721,11 @@ namespace System
                     return false;
                 }
 
-                uint divisor = BiggestPowerTen(integrals, DiyFp.SignificandSize - (-one.e), out kappa);
+                uint divisor = BiggestPowerTen(
+                    integrals,
+                    DiyFp.SignificandSize - (-one.e),
+                    out kappa
+                );
                 length = 0;
 
                 // Loop invariant:
@@ -746,7 +857,14 @@ namespace System
             //
             // Everything inside the interval low - high represents w.
             // However we have to pay attention to low, high and w's imprecision.
-            private static bool TryDigitGenShortest(in DiyFp low, in DiyFp w, in DiyFp high, Span<byte> buffer, out int length, out int kappa)
+            private static bool TryDigitGenShortest(
+                in DiyFp low,
+                in DiyFp w,
+                in DiyFp high,
+                Span<byte> buffer,
+                out int length,
+                out int kappa
+            )
             {
                 Debug.Assert(low.e == w.e);
                 Debug.Assert(w.e == high.e);
@@ -793,7 +911,11 @@ namespace System
                 // Modulo by one is an and.
                 ulong fractionals = tooHigh.f & (one.f - 1);
 
-                uint divisor = BiggestPowerTen(integrals, DiyFp.SignificandSize - (-one.e), out kappa);
+                uint divisor = BiggestPowerTen(
+                    integrals,
+                    DiyFp.SignificandSize - (-one.e),
+                    out kappa
+                );
                 length = 0;
 
                 // Loop invariant:
@@ -882,13 +1004,22 @@ namespace System
             }
 
             // Returns a cached power-of-ten with a binary exponent in the range [minExponent; maxExponent] (boundaries included).
-            private static DiyFp GetCachedPowerForBinaryExponentRange(int minExponent, int maxExponent, out int decimalExponent)
+            private static DiyFp GetCachedPowerForBinaryExponentRange(
+                int minExponent,
+                int maxExponent,
+                out int decimalExponent
+            )
             {
-                Debug.Assert(s_CachedPowersSignificand.Length == s_CachedPowersBinaryExponent.Length);
-                Debug.Assert(s_CachedPowersSignificand.Length == s_CachedPowersDecimalExponent.Length);
+                Debug.Assert(
+                    s_CachedPowersSignificand.Length == s_CachedPowersBinaryExponent.Length
+                );
+                Debug.Assert(
+                    s_CachedPowersSignificand.Length == s_CachedPowersDecimalExponent.Length
+                );
 
                 double k = Math.Ceiling((minExponent + DiyFp.SignificandSize - 1) * D1Log210);
-                int index = ((CachedPowersOffset + (int)(k) - 1) / CachedPowersDecimalExponentDistance) + 1;
+                int index =
+                    ((CachedPowersOffset + (int)(k) - 1) / CachedPowersDecimalExponentDistance) + 1;
 
                 Debug.Assert((uint)(index) < s_CachedPowersSignificand.Length);
 
@@ -896,7 +1027,10 @@ namespace System
                 Debug.Assert(s_CachedPowersBinaryExponent[index] <= maxExponent);
 
                 decimalExponent = s_CachedPowersDecimalExponent[index];
-                return new DiyFp(s_CachedPowersSignificand[index], s_CachedPowersBinaryExponent[index]);
+                return new DiyFp(
+                    s_CachedPowersSignificand[index],
+                    s_CachedPowersBinaryExponent[index]
+                );
             }
 
             // Rounds the buffer upwards if the result is closer to v by possibly adding 1 to the buffer.
@@ -911,7 +1045,14 @@ namespace System
             //
             // Preconditions:
             //      rest < tenKappa
-            private static bool TryRoundWeedCounted(Span<byte> buffer, int length, ulong rest, ulong tenKappa, ulong unit, ref int kappa)
+            private static bool TryRoundWeedCounted(
+                Span<byte> buffer,
+                int length,
+                ulong rest,
+                ulong tenKappa,
+                ulong unit,
+                ref int kappa
+            )
             {
                 Debug.Assert(rest < tenKappa);
 
@@ -936,7 +1077,10 @@ namespace System
                 }
 
                 // If 2 * (rest - unit) >= 10^kappa, we can safely round up.
-                if ((rest > unit) && (tenKappa <= (rest - unit) || ((tenKappa - (rest - unit)) <= (rest - unit))))
+                if (
+                    (rest > unit)
+                    && (tenKappa <= (rest - unit) || ((tenKappa - (rest - unit)) <= (rest - unit)))
+                )
                 {
                     // Increment the last digit recursively until we find a non '9' digit.
                     buffer[length - 1]++;
@@ -984,7 +1128,15 @@ namespace System
             //      Returns true if the buffer is guaranteed to contain the closest representable number to the input.
             //
             // Modifies the generated digits in the buffer to approach (round towards) w.
-            private static bool TryRoundWeedShortest(Span<byte> buffer, int length, ulong distanceTooHighW, ulong unsafeInterval, ulong rest, ulong tenKappa, ulong unit)
+            private static bool TryRoundWeedShortest(
+                Span<byte> buffer,
+                int length,
+                ulong distanceTooHighW,
+                ulong unsafeInterval,
+                ulong rest,
+                ulong tenKappa,
+                ulong unit
+            )
             {
                 ulong smallDistance = distanceTooHighW - unit;
                 ulong bigDistance = distanceTooHighW + unit;
@@ -1061,7 +1213,14 @@ namespace System
 
                 Debug.Assert(rest <= unsafeInterval);
 
-                while ((rest < smallDistance) && ((unsafeInterval - rest) >= tenKappa) && (((rest + tenKappa) < smallDistance) || ((smallDistance - rest) >= (rest + tenKappa - smallDistance))))
+                while (
+                    (rest < smallDistance)
+                    && ((unsafeInterval - rest) >= tenKappa)
+                    && (
+                        ((rest + tenKappa) < smallDistance)
+                        || ((smallDistance - rest) >= (rest + tenKappa - smallDistance))
+                    )
+                )
                 {
                     buffer[length - 1]--;
                     rest += tenKappa;
@@ -1070,7 +1229,14 @@ namespace System
                 // We have approached w+ as much as possible.
                 // We now test if approaching w- would require changing the buffer.
                 // If yes, then we have two possible representations close to w, but we cannot decide which one is closer.
-                if ((rest < bigDistance) && ((unsafeInterval - rest) >= tenKappa) && (((rest + tenKappa) < bigDistance) || ((bigDistance - rest) > (rest + tenKappa - bigDistance))))
+                if (
+                    (rest < bigDistance)
+                    && ((unsafeInterval - rest) >= tenKappa)
+                    && (
+                        ((rest + tenKappa) < bigDistance)
+                        || ((bigDistance - rest) > (rest + tenKappa - bigDistance))
+                    )
+                )
                 {
                     return false;
                 }

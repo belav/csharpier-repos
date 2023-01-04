@@ -17,19 +17,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateOverrides
 {
     public class GenerateOverridesTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new GenerateOverridesCodeRefactoringProvider((IPickMembersService)parameters.fixProviderData);
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) =>
+            new GenerateOverridesCodeRefactoringProvider(
+                (IPickMembersService)parameters.fixProviderData
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateOverrides)]
         public async Task Test1()
         {
             await TestWithPickMembersDialogAsync(
-@"
+                @"
 class C
 {
     [||]
 }",
-@"
+                @"
 class C
 {
     public override bool Equals(object obj)
@@ -46,7 +51,9 @@ class C
     {
         return base.ToString();
     }
-}", new[] { "Equals", "GetHashCode", "ToString" });
+}",
+                new[] { "Equals", "GetHashCode", "ToString" }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateOverrides)]
@@ -54,9 +61,9 @@ class C
         public async Task TestAtEndOfFile()
         {
             await TestWithPickMembersDialogAsync(
-@"
+                @"
 class C[||]",
-@"
+                @"
 class C
 {
     public override bool Equals(object obj)
@@ -74,16 +81,20 @@ class C
         return base.ToString();
     }
 }
-", new[] { "Equals", "GetHashCode", "ToString" });
+",
+                new[] { "Equals", "GetHashCode", "ToString" }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateOverrides)]
         [WorkItem(48295, "https://github.com/dotnet/roslyn/issues/48295")]
         public async Task TestOnRecordWithSemiColon()
         {
-            await TestWithPickMembersDialogAsync(@"
+            await TestWithPickMembersDialogAsync(
+                @"
 record C[||];
-", @"
+",
+                @"
 record C
 {
     public override int GetHashCode()
@@ -96,7 +107,9 @@ record C
         return base.ToString();
     }
 }
-", new[] { "GetHashCode", "ToString" });
+",
+                new[] { "GetHashCode", "ToString" }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateOverrides)]
@@ -104,7 +117,7 @@ record C
         public async Task TestRefReturns()
         {
             await TestWithPickMembersDialogAsync(
-@"
+                @"
 using System;
 
 class Base
@@ -120,7 +133,7 @@ class Derived : Base
 {
      [||]
 }",
-@"
+                @"
 using System;
 
 class Base
@@ -142,14 +155,16 @@ class Derived : Base
     {
         return ref base.X();
     }
-}", new[] { "X", "Y", "this[]" });
+}",
+                new[] { "X", "Y", "this[]" }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateOverrides)]
         public async Task TestInitOnlyProperty()
         {
             await TestWithPickMembersDialogAsync(
-@"
+                @"
 class Base
 {
     public virtual int Property { init => throw new NotImplementedException(); }
@@ -159,7 +174,7 @@ class Derived : Base
 {
      [||]
 }",
-@"
+                @"
 class Base
 {
     public virtual int Property { init => throw new NotImplementedException(); }
@@ -168,14 +183,16 @@ class Base
 class Derived : Base
 {
     public override int Property { init => base.Property = value; }
-}", new[] { "Property" });
+}",
+                new[] { "Property" }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateOverrides)]
         public async Task TestInitOnlyIndexer()
         {
             await TestWithPickMembersDialogAsync(
-@"
+                @"
 class Base
 {
     public virtual int this[int i] { init => throw new NotImplementedException(); }
@@ -185,7 +202,7 @@ class Derived : Base
 {
      [||]
 }",
-@"
+                @"
 class Base
 {
     public virtual int this[int i] { init => throw new NotImplementedException(); }
@@ -194,7 +211,9 @@ class Base
 class Derived : Base
 {
     public override int this[int i] { init => base[i] = value; }
-}", new[] { "this[]" });
+}",
+                new[] { "this[]" }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateOverrides)]
@@ -202,11 +221,12 @@ class Derived : Base
         public async Task TestMissingInStaticClass1()
         {
             await TestMissingAsync(
-@"
+                @"
 static class C
 {
     [||]
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateOverrides)]
@@ -214,11 +234,12 @@ static class C
         public async Task TestMissingInStaticClass2()
         {
             await TestMissingAsync(
-@"
+                @"
 static class [||]C
 {
     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
@@ -226,7 +247,7 @@ static class [||]C
         public async Task TestNullableTypeParameter()
         {
             await TestWithPickMembersDialogAsync(
-@"class C
+                @"class C
 {
     public virtual void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d) {}
 }
@@ -235,7 +256,7 @@ class D : C
 {
     [||]
 }",
-@"class C
+                @"class C
 {
     public virtual void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d) {}
 }
@@ -248,14 +269,16 @@ class D : C
     {
         base.M(a, b, c, d);
     }
-}", new[] { "M" });
+}",
+                new[] { "M" }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateOverrides)]
         public async Task TestRequiredProperty()
         {
             await TestWithPickMembersDialogAsync(
-@"
+                @"
 class Base
 {
     public virtual required int Property { get; set; }
@@ -265,7 +288,7 @@ class Derived : Base
 {
      [||]
 }",
-@"
+                @"
 class Base
 {
     public virtual required int Property { get; set; }
@@ -274,7 +297,9 @@ class Base
 class Derived : Base
 {
     public override required int Property { get => base.Property; set => base.Property = value; }
-}", new[] { "Property" });
+}",
+                new[] { "Property" }
+            );
         }
     }
 }

@@ -18,15 +18,18 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InferredMemberName
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseInferredMemberName)]
-    public class UseInferredMemberNameTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class UseInferredMemberNameTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseInferredMemberNameTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+        public UseInferredMemberNameTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUseInferredMemberNameDiagnosticAnalyzer(), new CSharpUseInferredMemberNameCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUseInferredMemberNameDiagnosticAnalyzer(),
+                new CSharpUseInferredMemberNameCodeFixProvider()
+            );
 
         private static readonly CSharpParseOptions s_parseOptions =
             CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Latest);
@@ -35,7 +38,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InferredMemberName
         public async Task TestInferredTupleName()
         {
             await TestAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -44,7 +47,7 @@ class C
         var t = ([||]a: a, 2);
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -52,14 +55,16 @@ class C
         int a = 1;
         var t = (a, 2);
     }
-}", parseOptions: s_parseOptions);
+}",
+                parseOptions: s_parseOptions
+            );
         }
 
         [Fact, WorkItem(24480, "https://github.com/dotnet/roslyn/issues/24480")]
         public async Task TestInferredTupleName_WithAmbiguity()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -67,14 +72,16 @@ class C
         int alice = 1;
         (int, int, string) t = ([||]alice: alice, alice, null);
     }
-}", parameters: new TestParameters(parseOptions: s_parseOptions));
+}",
+                parameters: new TestParameters(parseOptions: s_parseOptions)
+            );
         }
 
         [Fact]
         public async Task TestInferredTupleNameAfterCommaWithCSharp6()
         {
             await TestActionCountAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -82,14 +89,19 @@ class C
         int a = 2;
         var t = (1, [||]a: a);
     }
-}", count: 0, parameters: new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)));
+}",
+                count: 0,
+                parameters: new TestParameters(
+                    CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)
+                )
+            );
         }
 
         [Fact]
         public async Task TestInferredTupleNameAfterCommaWithCSharp7()
         {
             await TestActionCountAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -97,14 +109,19 @@ class C
         int a = 2;
         var t = (1, [||]a: a);
     }
-}", count: 0, parameters: new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7)));
+}",
+                count: 0,
+                parameters: new TestParameters(
+                    CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7)
+                )
+            );
         }
 
         [Fact]
         public async Task TestFixAllInferredTupleNameWithTrivia()
         {
             await TestAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -114,7 +131,7 @@ class C
         var t = ( /*before*/ {|FixAllInDocument:a:|} /*middle*/ a /*after*/, /*before*/ b: /*middle*/ b /*after*/);
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -123,14 +140,16 @@ class C
         int b = 2;
         var t = ( /*before*/  /*middle*/ a /*after*/, /*before*/  /*middle*/ b /*after*/);
     }
-}", parseOptions: s_parseOptions);
+}",
+                parseOptions: s_parseOptions
+            );
         }
 
         [Fact]
         public async Task TestInferredAnonymousTypeMemberName()
         {
             await TestAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -139,7 +158,7 @@ class C
         var t = new { [||]a= a, 2 };
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -147,14 +166,16 @@ class C
         int a = 1;
         var t = new { a, 2 };
     }
-}", parseOptions: s_parseOptions);
+}",
+                parseOptions: s_parseOptions
+            );
         }
 
         [Fact, WorkItem(24480, "https://github.com/dotnet/roslyn/issues/24480")]
         public async Task TestInferredAnonymousTypeMemberName_WithAmbiguity()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -162,14 +183,16 @@ class C
         int alice = 1;
         var t = new { [||]alice=alice, alice };
     }
-}", parameters: new TestParameters(parseOptions: s_parseOptions));
+}",
+                parameters: new TestParameters(parseOptions: s_parseOptions)
+            );
         }
 
         [Fact]
         public async Task TestFixAllInferredAnonymousTypeMemberNameWithTrivia()
         {
             await TestAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -179,7 +202,7 @@ class C
         var t = new { /*before*/ {|FixAllInDocument:a =|} /*middle*/ a /*after*/, /*before*/ b = /*middle*/ b /*after*/ };
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -188,7 +211,9 @@ class C
         int b = 2;
         var t = new { /*before*/  /*middle*/ a /*after*/, /*before*/  /*middle*/ b /*after*/ };
     }
-}", parseOptions: s_parseOptions);
+}",
+                parseOptions: s_parseOptions
+            );
         }
     }
 }

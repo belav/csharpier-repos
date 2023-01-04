@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Http.Extensions;
 
 public class HttpValidationProblemDetailsJsonConverterTest
 {
-    private static JsonSerializerOptions JsonSerializerOptions => new JsonOptions().SerializerOptions;
+    private static JsonSerializerOptions JsonSerializerOptions =>
+        new JsonOptions().SerializerOptions;
 
     [Fact]
     public void Read_Works()
@@ -21,14 +22,19 @@ public class HttpValidationProblemDetailsJsonConverterTest
         var detail = "Product not found";
         var instance = "http://example.com/products/14";
         var traceId = "|37dd3dd5-4a9619f953c40a16.";
-        var json = $"{{\"type\":\"{type}\",\"title\":\"{title}\",\"status\":{status},\"detail\":\"{detail}\", \"instance\":\"{instance}\",\"traceId\":\"{traceId}\"," +
-            "\"errors\":{\"key0\":[\"error0\"],\"key1\":[\"error1\",\"error2\"]}}";
+        var json =
+            $"{{\"type\":\"{type}\",\"title\":\"{title}\",\"status\":{status},\"detail\":\"{detail}\", \"instance\":\"{instance}\",\"traceId\":\"{traceId}\","
+            + "\"errors\":{\"key0\":[\"error0\"],\"key1\":[\"error1\",\"error2\"]}}";
         var converter = new HttpValidationProblemDetailsJsonConverter();
         var reader = new Utf8JsonReader(Encoding.UTF8.GetBytes(json));
         reader.Read();
 
         // Act
-        var problemDetails = converter.Read(ref reader, typeof(HttpValidationProblemDetails), JsonSerializerOptions);
+        var problemDetails = converter.Read(
+            ref reader,
+            typeof(HttpValidationProblemDetails),
+            JsonSerializerOptions
+        );
 
         Assert.Equal(type, problemDetails.Type);
         Assert.Equal(title, problemDetails.Title);
@@ -41,7 +47,8 @@ public class HttpValidationProblemDetailsJsonConverterTest
             {
                 Assert.Equal("traceId", kvp.Key);
                 Assert.Equal(traceId, kvp.Value.ToString());
-            });
+            }
+        );
         Assert.Collection(
             problemDetails.Errors.OrderBy(kvp => kvp.Key),
             kvp =>
@@ -53,7 +60,8 @@ public class HttpValidationProblemDetailsJsonConverterTest
             {
                 Assert.Equal("key1", kvp.Key);
                 Assert.Equal(new[] { "error1", "error2" }, kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -64,14 +72,19 @@ public class HttpValidationProblemDetailsJsonConverterTest
         var title = "Not found";
         var status = 404;
         var traceId = "|37dd3dd5-4a9619f953c40a16.";
-        var json = $"{{\"type\":\"{type}\",\"title\":\"{title}\",\"status\":{status},\"traceId\":\"{traceId}\"," +
-            "\"errors\":{\"key0\":[\"error0\"],\"key1\":[\"error1\",\"error2\"]}}";
+        var json =
+            $"{{\"type\":\"{type}\",\"title\":\"{title}\",\"status\":{status},\"traceId\":\"{traceId}\","
+            + "\"errors\":{\"key0\":[\"error0\"],\"key1\":[\"error1\",\"error2\"]}}";
         var converter = new HttpValidationProblemDetailsJsonConverter();
         var reader = new Utf8JsonReader(Encoding.UTF8.GetBytes(json));
         reader.Read();
 
         // Act
-        var problemDetails = converter.Read(ref reader, typeof(HttpValidationProblemDetails), JsonSerializerOptions);
+        var problemDetails = converter.Read(
+            ref reader,
+            typeof(HttpValidationProblemDetails),
+            JsonSerializerOptions
+        );
 
         Assert.Equal(type, problemDetails.Type);
         Assert.Equal(title, problemDetails.Title);
@@ -82,7 +95,8 @@ public class HttpValidationProblemDetailsJsonConverterTest
             {
                 Assert.Equal("traceId", kvp.Key);
                 Assert.Equal(traceId, kvp.Value.ToString());
-            });
+            }
+        );
         Assert.Collection(
             problemDetails.Errors.OrderBy(kvp => kvp.Key),
             kvp =>
@@ -94,7 +108,8 @@ public class HttpValidationProblemDetailsJsonConverterTest
             {
                 Assert.Equal("key1", kvp.Key);
                 Assert.Equal(new[] { "error1", "error2" }, kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -105,11 +120,15 @@ public class HttpValidationProblemDetailsJsonConverterTest
         var title = "Not found";
         var status = 404;
         var traceId = "|37dd3dd5-4a9619f953c40a16.";
-        var json = $"{{\"type\":\"{type}\",\"title\":\"{title}\",\"status\":{status},\"traceId\":\"{traceId}\"," +
-            "\"errors\":{\"key0\":[\"error0\"],\"key1\":[\"error1\",\"error2\"]}}";
+        var json =
+            $"{{\"type\":\"{type}\",\"title\":\"{title}\",\"status\":{status},\"traceId\":\"{traceId}\","
+            + "\"errors\":{\"key0\":[\"error0\"],\"key1\":[\"error1\",\"error2\"]}}";
 
         // Act
-        var problemDetails = JsonSerializer.Deserialize<HttpValidationProblemDetails>(json, JsonSerializerOptions);
+        var problemDetails = JsonSerializer.Deserialize<HttpValidationProblemDetails>(
+            json,
+            JsonSerializerOptions
+        );
 
         Assert.Equal(type, problemDetails.Type);
         Assert.Equal(title, problemDetails.Title);
@@ -120,7 +139,8 @@ public class HttpValidationProblemDetailsJsonConverterTest
             {
                 Assert.Equal("traceId", kvp.Key);
                 Assert.Equal(traceId, kvp.Value.ToString());
-            });
+            }
+        );
         Assert.Collection(
             problemDetails.Errors.OrderBy(kvp => kvp.Key),
             kvp =>
@@ -132,6 +152,7 @@ public class HttpValidationProblemDetailsJsonConverterTest
             {
                 Assert.Equal("key1", kvp.Key);
                 Assert.Equal(new[] { "error1", "error2" }, kvp.Value);
-            });
+            }
+        );
     }
 }

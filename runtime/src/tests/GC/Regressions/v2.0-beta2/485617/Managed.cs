@@ -14,4 +14,3 @@ public class Managed
         return count;
     }
 }
-

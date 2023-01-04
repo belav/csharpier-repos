@@ -3,10 +3,10 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class NorthwindAsNoTrackingQuerySqliteTest : NorthwindAsNoTrackingQueryTestBase<NorthwindQuerySqliteFixture<NoopModelCustomizer>>
+public class NorthwindAsNoTrackingQuerySqliteTest
+    : NorthwindAsNoTrackingQueryTestBase<NorthwindQuerySqliteFixture<NoopModelCustomizer>>
 {
-    public NorthwindAsNoTrackingQuerySqliteTest(NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture)
-        : base(fixture)
-    {
-    }
+    public NorthwindAsNoTrackingQuerySqliteTest(
+        NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture
+    ) : base(fixture) { }
 }

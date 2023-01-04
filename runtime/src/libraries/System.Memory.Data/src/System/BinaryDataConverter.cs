@@ -8,12 +8,20 @@ namespace System
 {
     internal sealed class BinaryDataConverter : JsonConverter<BinaryData>
     {
-        public sealed override BinaryData? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public sealed override BinaryData? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             return BinaryData.FromBytes(reader.GetBytesFromBase64());
         }
 
-        public sealed override void Write(Utf8JsonWriter writer, BinaryData value, JsonSerializerOptions options)
+        public sealed override void Write(
+            Utf8JsonWriter writer,
+            BinaryData value,
+            JsonSerializerOptions options
+        )
         {
             writer.WriteBase64StringValue(value.ToMemory().Span);
         }

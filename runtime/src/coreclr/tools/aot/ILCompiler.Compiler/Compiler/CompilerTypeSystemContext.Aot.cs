@@ -24,13 +24,12 @@ namespace ILCompiler
         // through various other generic code the deep code calls into.
         public const int DefaultGenericCycleCutoffPoint = 4;
 
-        public SharedGenericsConfiguration GenericsConfig
-        {
-            get;
-        }
+        public SharedGenericsConfiguration GenericsConfig { get; }
 
-        private readonly MetadataFieldLayoutAlgorithm _metadataFieldLayoutAlgorithm = new CompilerMetadataFieldLayoutAlgorithm();
-        private readonly RuntimeDeterminedFieldLayoutAlgorithm _runtimeDeterminedFieldLayoutAlgorithm = new RuntimeDeterminedFieldLayoutAlgorithm();
+        private readonly MetadataFieldLayoutAlgorithm _metadataFieldLayoutAlgorithm =
+            new CompilerMetadataFieldLayoutAlgorithm();
+        private readonly RuntimeDeterminedFieldLayoutAlgorithm _runtimeDeterminedFieldLayoutAlgorithm =
+            new RuntimeDeterminedFieldLayoutAlgorithm();
         private readonly VectorOfTFieldLayoutAlgorithm _vectorOfTFieldLayoutAlgorithm;
         private readonly VectorFieldLayoutAlgorithm _vectorFieldLayoutAlgorithm;
         private readonly Int128FieldLayoutAlgorithm _int128FieldLayoutAlgorithm;
@@ -39,25 +38,41 @@ namespace ILCompiler
         private ArrayOfTRuntimeInterfacesAlgorithm _arrayOfTRuntimeInterfacesAlgorithm;
         private MetadataType _arrayOfTType;
 
-        public CompilerTypeSystemContext(TargetDetails details, SharedGenericsMode genericsMode, DelegateFeature delegateFeatures, int genericCycleCutoffPoint = DefaultGenericCycleCutoffPoint)
-            : base(details)
+        public CompilerTypeSystemContext(
+            TargetDetails details,
+            SharedGenericsMode genericsMode,
+            DelegateFeature delegateFeatures,
+            int genericCycleCutoffPoint = DefaultGenericCycleCutoffPoint
+        ) : base(details)
         {
             _genericsMode = genericsMode;
 
-            _vectorOfTFieldLayoutAlgorithm = new VectorOfTFieldLayoutAlgorithm(_metadataFieldLayoutAlgorithm);
-            _vectorFieldLayoutAlgorithm = new VectorFieldLayoutAlgorithm(_metadataFieldLayoutAlgorithm);
-            _int128FieldLayoutAlgorithm = new Int128FieldLayoutAlgorithm(_metadataFieldLayoutAlgorithm);
+            _vectorOfTFieldLayoutAlgorithm = new VectorOfTFieldLayoutAlgorithm(
+                _metadataFieldLayoutAlgorithm
+            );
+            _vectorFieldLayoutAlgorithm = new VectorFieldLayoutAlgorithm(
+                _metadataFieldLayoutAlgorithm
+            );
+            _int128FieldLayoutAlgorithm = new Int128FieldLayoutAlgorithm(
+                _metadataFieldLayoutAlgorithm
+            );
 
             _delegateInfoHashtable = new DelegateInfoHashtable(delegateFeatures);
 
-            _genericCycleDetector = new LazyGenericsSupport.GenericCycleDetector(genericCycleCutoffPoint);
+            _genericCycleDetector = new LazyGenericsSupport.GenericCycleDetector(
+                genericCycleCutoffPoint
+            );
 
             GenericsConfig = new SharedGenericsConfiguration();
         }
 
-        protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForNonPointerArrayType(ArrayType type)
+        protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForNonPointerArrayType(
+            ArrayType type
+        )
         {
-            _arrayOfTRuntimeInterfacesAlgorithm ??= new ArrayOfTRuntimeInterfacesAlgorithm(SystemModule.GetKnownType("System", "Array`1"));
+            _arrayOfTRuntimeInterfacesAlgorithm ??= new ArrayOfTRuntimeInterfacesAlgorithm(
+                SystemModule.GetKnownType("System", "Array`1")
+            );
             return _arrayOfTRuntimeInterfacesAlgorithm;
         }
 
@@ -102,7 +117,9 @@ namespace ILCompiler
 
             if (_arrayOfTInterfaces == null)
             {
-                DefType[] implementedInterfaces = SystemModule.GetKnownType("System", "Array`1").ExplicitlyImplementedInterfaces;
+                DefType[] implementedInterfaces = SystemModule
+                    .GetKnownType("System", "Array`1")
+                    .ExplicitlyImplementedInterfaces;
                 TypeDesc[] interfaceDefinitions = new TypeDesc[implementedInterfaces.Length];
                 for (int i = 0; i < interfaceDefinitions.Length; i++)
                     interfaceDefinitions[i] = implementedInterfaces[i].GetTypeDefinition();
@@ -148,7 +165,10 @@ namespace ILCompiler
             return virtualOnly ? type.GetVirtualMethods() : type.GetMethods();
         }
 
-        protected virtual IEnumerable<MethodDesc> GetAllMethodsForDelegate(TypeDesc type, bool virtualOnly)
+        protected virtual IEnumerable<MethodDesc> GetAllMethodsForDelegate(
+            TypeDesc type,
+            bool virtualOnly
+        )
         {
             // Inject the synthetic methods that support the implementation of the delegate.
             InstantiatedType instantiatedType = type as InstantiatedType;
@@ -158,7 +178,10 @@ namespace ILCompiler
                 foreach (MethodDesc syntheticMethod in info.Methods)
                 {
                     if (!virtualOnly || syntheticMethod.IsVirtual)
-                        yield return GetMethodForInstantiatedType(syntheticMethod, instantiatedType);
+                        yield return GetMethodForInstantiatedType(
+                            syntheticMethod,
+                            instantiatedType
+                        );
                 }
             }
             else
@@ -172,7 +195,9 @@ namespace ILCompiler
             }
 
             // Append all the methods defined in metadata
-            IEnumerable<MethodDesc> metadataMethods = virtualOnly ? type.GetVirtualMethods() : type.GetMethods();
+            IEnumerable<MethodDesc> metadataMethods = virtualOnly
+                ? type.GetVirtualMethods()
+                : type.GetMethods();
             foreach (var m in metadataMethods)
                 yield return m;
         }
@@ -183,7 +208,10 @@ namespace ILCompiler
             {
                 if (!type.IsArrayTypeWithoutGenericInterfaces())
                 {
-                    MetadataType arrayShadowType = _arrayOfTType ??= SystemModule.GetType("System", "Array`1");
+                    MetadataType arrayShadowType = _arrayOfTType ??= SystemModule.GetType(
+                        "System",
+                        "Array`1"
+                    );
                     return arrayShadowType.MakeInstantiatedType(((ArrayType)type).ElementType);
                 }
 
