@@ -8,15 +8,6 @@ namespace Microsoft.AspNetCore.Analyzers;
 [System.Diagnostics.CodeAnalysis.SuppressMessage("MicrosoftCodeAnalysisReleaseTracking", "RS2008:Enable analyzer release tracking")]
 internal static class DiagnosticDescriptors
 {
-    internal static readonly DiagnosticDescriptor RoutePatternIssue = new(
-        "RP0001",
-        new LocalizableResourceString(nameof(Resources.Invalid_Route_pattern), Resources.ResourceManager, typeof(Resources)),
-        new LocalizableResourceString(nameof(Resources.Route_issue_0), Resources.ResourceManager, typeof(Resources)),
-        "Style",
-        DiagnosticSeverity.Warning,
-        isEnabledByDefault: true,
-        helpLinkUri: "https://aka.ms/aspnet/analyzers");
-
     internal static readonly DiagnosticDescriptor DoNotUseModelBindingAttributesOnRouteHandlerParameters = new(
         "ASP0003",
         "Do not use model binding attributes with route handlers",
@@ -97,7 +88,7 @@ internal static class DiagnosticDescriptors
         DiagnosticSeverity.Warning,
         isEnabledByDefault: true,
         helpLinkUri: "https://aka.ms/aspnet/analyzers");
-  
+
     internal static readonly DiagnosticDescriptor DoNotUseHostConfigureServices = new(
         "ASP0012",
         "Suggest using builder.Services over Host.ConfigureServices or WebHost.ConfigureServices",
@@ -127,8 +118,8 @@ internal static class DiagnosticDescriptors
 
     internal static readonly DiagnosticDescriptor UseHeaderDictionaryPropertiesInsteadOfIndexer = new(
         "ASP0015",
-        "Suggest using IHeaderDictionary properties",
-        "The header '{0}' can be accessed using the {1} property",
+        new LocalizableResourceString(nameof(Resources.Analyzer_HeaderDictionaryIndexer_Title), Resources.ResourceManager, typeof(Resources)),
+        new LocalizableResourceString(nameof(Resources.Analyzer_HeaderDictionaryIndexer_Message), Resources.ResourceManager, typeof(Resources)),
         "Usage",
         DiagnosticSeverity.Info,
         isEnabledByDefault: true,
@@ -136,10 +127,55 @@ internal static class DiagnosticDescriptors
 
     internal static readonly DiagnosticDescriptor DoNotReturnValueFromRequestDelegate = new(
         "ASP0016",
-        "Do not return a value from RequestDelegate",
-        "The method used to create a RequestDelegate returns Task<{0}>. RequestDelegate discards this value. If this isn't intended then don't return a value or change the method signature to not match RequestDelegate.",
+        new LocalizableResourceString(nameof(Resources.Analyzer_RequestDelegateReturnValue_Title), Resources.ResourceManager, typeof(Resources)),
+        new LocalizableResourceString(nameof(Resources.Analyzer_RequestDelegateReturnValue_Message), Resources.ResourceManager, typeof(Resources)),
         "Usage",
         DiagnosticSeverity.Warning,
+        isEnabledByDefault: true,
+        helpLinkUri: "https://aka.ms/aspnet/analyzers");
+
+    internal static readonly DiagnosticDescriptor RoutePatternIssue = new(
+        "ASP0017",
+        new LocalizableResourceString(nameof(Resources.Analyzer_RouteIssue_Title), Resources.ResourceManager, typeof(Resources)),
+        new LocalizableResourceString(nameof(Resources.Analyzer_RouteIssue_Message), Resources.ResourceManager, typeof(Resources)),
+        "Usage",
+        DiagnosticSeverity.Warning,
+        isEnabledByDefault: true,
+        helpLinkUri: "https://aka.ms/aspnet/analyzers");
+
+    internal static readonly DiagnosticDescriptor RoutePatternUnusedParameter = new(
+        "ASP0018",
+        new LocalizableResourceString(nameof(Resources.Analyzer_UnusedParameter_Title), Resources.ResourceManager, typeof(Resources)),
+        new LocalizableResourceString(nameof(Resources.Analyzer_UnusedParameter_Message), Resources.ResourceManager, typeof(Resources)),
+        "Usage",
+        DiagnosticSeverity.Info,
+        isEnabledByDefault: true,
+        helpLinkUri: "https://aka.ms/aspnet/analyzers");
+
+    internal static readonly DiagnosticDescriptor DoNotUseIHeaderDictionaryAdd = new(
+        "ASP0019",
+        new LocalizableResourceString(nameof(Resources.Analyzer_HeaderDictionaryAdd_Title), Resources.ResourceManager, typeof(Resources)),
+        new LocalizableResourceString(nameof(Resources.Analyzer_HeaderDictionaryAdd_Message), Resources.ResourceManager, typeof(Resources)),
+        "Usage",
+        DiagnosticSeverity.Warning,
+        isEnabledByDefault: true,
+        helpLinkUri: "https://aka.ms/aspnet/analyzers");
+
+    internal static readonly DiagnosticDescriptor RouteParameterComplexTypeIsNotParsableOrBindable = new(
+        "ASP0020",
+        "Complex types referenced by route parameters must be parsable",
+        "Parameter '{0}' of type {1} should define a bool TryParse(string, IFormatProvider, out {1}) method, or implement IParsable<{1}>, or define a ValueTask<{1}> BindAsync(HttpContext), or implement IBindableFromHttpContext<{1}>.",
+        "Usage",
+        DiagnosticSeverity.Error,
+        isEnabledByDefault: true,
+        helpLinkUri: "https://aka.ms/aspnet/analyzers");
+
+    internal static readonly DiagnosticDescriptor BindAsyncSignatureMustReturnValueTaskOfT = new(
+        "ASP0021",
+        "When implementing BindAsync(...) method, the return type must be ValueTask<T>.",
+        "Parameter '{0}' of type {1} has a BindAsync(...) method, but the return type is not ValueTask<{1}>. Consider implementing IBindFromHttpContext<{1}> to enforce implementation.",
+        "Usage",
+        DiagnosticSeverity.Error,
         isEnabledByDefault: true,
         helpLinkUri: "https://aka.ms/aspnet/analyzers");
 }

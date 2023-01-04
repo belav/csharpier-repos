@@ -1,6 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+
 namespace HelixTestRunner;
 
 public class TestRunner
@@ -36,7 +42,6 @@ public class TestRunner
             ProcessUtil.PrintMessage($"Set VSTEST_DUMP_PATH: {dumpPath}");
             EnvironmentVariables.Add("VSTEST_DUMP_PATH", dumpPath);
             EnvironmentVariables.Add("DOTNET_CLI_VSTEST_TRACE", "1");
-            EnvironmentVariables.Add("DOTNET_CLI_DO_NOT_USE_MSBUILD_SERVER", "1");
 
             if (Options.InstallPlaywright)
             {

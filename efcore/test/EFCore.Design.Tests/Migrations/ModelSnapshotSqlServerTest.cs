@@ -230,6 +230,11 @@ public class ModelSnapshotSqlServerTest
         public string Name { get; set; }
     }
 
+    private class DuplicateDerivedEntity : BaseEntity
+    {
+        public string Name { get; set; }
+    }
+
     private class AnotherDerivedEntity : BaseEntity
     {
         public string Title { get; set; }
@@ -579,7 +584,8 @@ public class ModelSnapshotSqlServerTest
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>(""Id""));
 
                     b.Property<string>(""Discriminator"")
-                        .HasColumnType(""nvarchar(max)"");
+                        .HasMaxLength(13)
+                        .HasColumnType(""nvarchar(13)"");
 
                     b.HasKey(""Id"");
 
@@ -1395,7 +1401,8 @@ public class ModelSnapshotSqlServerTest
 
                     b.Property<string>(""Discriminator"")
                         .IsRequired()
-                        .HasColumnType(""nvarchar(max)"");
+                        .HasMaxLength(13)
+                        .HasColumnType(""nvarchar(13)"");
 
                     b.HasKey(""Id"");
 
@@ -1706,7 +1713,8 @@ public class ModelSnapshotSqlServerTest
 
                     b.Property<string>(""Discriminator"")
                         .IsRequired()
-                        .HasColumnType(""nvarchar(max)"");
+                        .HasMaxLength(21)
+                        .HasColumnType(""nvarchar(21)"");
 
                     b.HasKey(""Id"");
 
@@ -1775,7 +1783,8 @@ public class ModelSnapshotSqlServerTest
 
                     b.Property<string>(""Discriminator"")
                         .IsRequired()
-                        .HasColumnType(""nvarchar(max)"");
+                        .HasMaxLength(21)
+                        .HasColumnType(""nvarchar(21)"");
 
                     b.HasKey(""Id"");
 
@@ -4213,6 +4222,83 @@ namespace RootNamespace
             o => Assert.Equal("CName", o.GetEntityTypes().First().FindProperty("AlternateId")["Relational:ColumnName"]));
 
     [ConditionalFact]
+    public virtual void Property_column_name_on_specific_table_is_stored_in_snapshot_as_fluent_api()
+        => Test(
+            builder =>
+            {
+                builder.Entity<DerivedEntity>().HasBaseType<BaseEntity>();
+                builder.Entity<DuplicateDerivedEntity>().HasBaseType<BaseEntity>();
+            },
+            AddBoilerPlate(
+                GetHeading()
+                + @"
+            modelBuilder.Entity(""Microsoft.EntityFrameworkCore.Migrations.ModelSnapshotSqlServerTest+BaseEntity"", b =>
+                {
+                    b.Property<int>(""Id"")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType(""int"");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>(""Id""));
+
+                    b.Property<string>(""Discriminator"")
+                        .IsRequired()
+                        .HasMaxLength(34)
+                        .HasColumnType(""nvarchar(34)"");
+
+                    b.HasKey(""Id"");
+
+                    b.ToTable(""BaseEntity"");
+
+                    b.HasDiscriminator<string>(""Discriminator"").HasValue(""BaseEntity"");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity(""Microsoft.EntityFrameworkCore.Migrations.ModelSnapshotSqlServerTest+DerivedEntity"", b =>
+                {
+                    b.HasBaseType(""Microsoft.EntityFrameworkCore.Migrations.ModelSnapshotSqlServerTest+BaseEntity"");
+
+                    b.Property<string>(""Name"")
+                        .HasColumnType(""nvarchar(max)"");
+
+                    b.HasDiscriminator().HasValue(""DerivedEntity"");
+                });
+
+            modelBuilder.Entity(""Microsoft.EntityFrameworkCore.Migrations.ModelSnapshotSqlServerTest+DuplicateDerivedEntity"", b =>
+                {
+                    b.HasBaseType(""Microsoft.EntityFrameworkCore.Migrations.ModelSnapshotSqlServerTest+BaseEntity"");
+
+                    b.Property<string>(""Name"")
+                        .HasColumnType(""nvarchar(max)"");
+
+                    b.ToTable(""BaseEntity"", t =>
+                        {
+                            t.Property(""Name"")
+                                .HasColumnName(""DuplicateDerivedEntity_Name"");
+                        });
+
+                    b.HasDiscriminator().HasValue(""DuplicateDerivedEntity"");
+                });"),
+            o =>
+            {
+                Assert.Equal(3, o.GetEntityTypes().Count());
+                Assert.Collection(
+                    o.GetEntityTypes(),
+                    t => Assert.Equal("Microsoft.EntityFrameworkCore.Migrations.ModelSnapshotSqlServerTest+BaseEntity", t.Name),
+                    t => Assert.Equal("Microsoft.EntityFrameworkCore.Migrations.ModelSnapshotSqlServerTest+DerivedEntity", t.Name),
+                    t =>
+                    {
+                        Assert.Equal(
+                            "Microsoft.EntityFrameworkCore.Migrations.ModelSnapshotSqlServerTest+DuplicateDerivedEntity", t.Name);
+                        Assert.Equal(
+                            "DuplicateDerivedEntity_Name",
+                            t.FindProperty(nameof(DuplicateDerivedEntity.Name))
+                                .GetColumnName(StoreObjectIdentifier.Table(nameof(BaseEntity))));
+                    }
+                );
+            });
+
+    [ConditionalFact]
     public virtual void Property_column_type_annotation_is_stored_in_snapshot_as_fluent_api()
         => Test(
             builder =>
@@ -6153,7 +6239,8 @@ namespace RootNamespace
 
                     b.Property<string>(""Discriminator"")
                         .IsRequired()
-                        .HasColumnType(""nvarchar(max)"");
+                        .HasMaxLength(13)
+                        .HasColumnType(""nvarchar(13)"");
 
                     b.Property<int?>(""NavigationId"")
                         .HasColumnType(""int"");

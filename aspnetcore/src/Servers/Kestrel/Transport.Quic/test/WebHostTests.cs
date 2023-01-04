@@ -36,6 +36,10 @@ public class WebHostTests : LoggedTest
                         {
                             listenOptions.Protocols = Core.HttpProtocols.Http3;
                         });
+                        o.ConfigureHttpsDefaults(httpsOptions =>
+                        {
+                            httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
+                        });
                     })
                     .UseUrls("https://127.0.0.1:0")
                     .Configure(app =>
@@ -386,7 +390,7 @@ public class WebHostTests : LoggedTest
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => host.StartAsync()).DefaultTimeout();
 
         // Assert
-        Assert.Equal("QUIC doesn't support listening on the configured endpoint type. Expected IPEndPoint but got UnixDomainSocketEndPoint.", ex.Message);
+        Assert.Equal("No registered IMultiplexedConnectionListenerFactory supports endpoint UnixDomainSocketEndPoint: /test-path", ex.Message);
     }
 
     private static HttpClient CreateClient()

@@ -101,7 +101,7 @@ public class ModelBinderTests
         var option = new Option<string>("--string-option", () => "the default");
 
         var command = new Command("the-command");
-        command.AddOption(option);
+        command.Options.Add(option);
         var binder = new ModelBinder(typeof(ClassWithMultiLetterCtorParameters));
 
         var parser = new Parser(command);
@@ -176,7 +176,7 @@ public class ModelBinderTests
         var option = new Option<DirectoryInfo>("--value");
 
         var command = new Command("the-command");
-        command.AddOption(option);
+        command.Options.Add(option);
         var binder = new ModelBinder(typeof(ClassWithCtorParameter<DirectoryInfo>));
         var bindingContext = new InvocationContext(command.Parse($"--value \"{tempPath}\"")).BindingContext;
 
@@ -191,7 +191,7 @@ public class ModelBinderTests
         var option = new Option<string>("--value", () => "the default");
 
         var command = new Command("the-command");
-        command.AddOption(option);
+        command.Options.Add(option);
         var binder = new ModelBinder(typeof(ClassWithSetter<string>));
 
         var parser = new Parser(command);
@@ -421,7 +421,7 @@ public class ModelBinderTests
     {
         var command = new Command("the-command");
         var argument = new Argument<int> { Arity = ArgumentArity.ExactlyOne };
-        command.AddArgument(argument);
+        command.Arguments.Add(argument);
 
         var type = typeof(ClassWithMultiLetterSetters);
         var binder = new ModelBinder(type);
@@ -441,7 +441,7 @@ public class ModelBinderTests
     {
         var command = new Command("the-command");
         var option = new Option<int>("--fred");
-        command.AddOption(option);
+        command.Options.Add(option);
 
         var binder = new ModelBinder<ClassWithMultiLetterSetters>();
 
@@ -461,7 +461,7 @@ public class ModelBinderTests
     {
         var command = new Command("the-command");
         var argument = new Argument<int> { Arity = ArgumentArity.ExactlyOne };
-        command.AddArgument(argument);
+        command.Arguments.Add(argument);
 
         var binder = new ModelBinder<ClassWithMultiLetterSetters>();
 
@@ -493,7 +493,7 @@ public class ModelBinderTests
     public void Command_argument_is_bound_to_longest_constructor()
     {
         var rootCommand = new RootCommand();
-        rootCommand.AddArgument(new Argument<int> { Name = nameof(ClassWithMultipleCtor.IntProperty) });
+        rootCommand.Arguments.Add(new Argument<int> { Name = nameof(ClassWithMultipleCtor.IntProperty) });
         var parser = new Parser(rootCommand);
 
         var bindingContext = new InvocationContext(parser.Parse("42")).BindingContext;
@@ -772,6 +772,70 @@ public class ModelBinderTests
 
         boundOptions.Bundle.Should().Be(null);
         boundOptions.BundleId.Should().Be("value");
+    }
+
+    [Fact]
+    public void InvocationContext_GetValue_with_generic_option_returns_value()
+    {
+        Option<int> option = new("--number");
+        Command command = new("the-command")
+        {
+            option
+        };
+
+        InvocationContext invocationContext = new(command.Parse("the-command --number 42"));
+
+        invocationContext.GetValue(option)
+            .Should()
+            .Be(42);
+    }
+
+    [Fact]
+    public void InvocationContext_GetValue_with_non_generic_option_returns_value()
+    {
+        Option option = new Option<int>("--number");
+        Command command = new("the-command")
+        {
+            option
+        };
+
+        InvocationContext invocationContext = new(command.Parse("the-command --number 42"));
+
+        invocationContext.GetValue(option)
+            .Should()
+            .Be(42);
+    }
+
+    [Fact]
+    public void InvocationContext_GetValue_with_generic_argument_returns_value()
+    {
+        Argument<int> option = new();
+        Command command = new("the-command")
+        {
+            option
+        };
+
+        InvocationContext invocationContext = new(command.Parse("the-command 42"));
+
+        invocationContext.GetValue(option)
+            .Should()
+            .Be(42);
+    }
+
+    [Fact]
+    public void InvocationContext_GetValue_with_non_generic_argument_returns_value()
+    {
+        Argument option = new Argument<int>();
+        Command command = new("the-command")
+        {
+            option
+        };
+
+        InvocationContext invocationContext = new(command.Parse("the-command 42"));
+
+        invocationContext.GetValue(option)
+            .Should()
+            .Be(42);
     }
 
     class DeployOptions

@@ -53,6 +53,7 @@ public class RuntimeEntityType : AnnotatableBase, IRuntimeEntityType
     private readonly PropertyInfo? _indexerPropertyInfo;
     private readonly bool _isPropertyBag;
     private readonly object? _discriminatorValue;
+    private bool _hasServiceProperties;
 
     // Warning: Never access these fields directly as access needs to be thread-safe
     private PropertyCounts? _counts;
@@ -364,6 +365,7 @@ public class RuntimeEntityType : AnnotatableBase, IRuntimeEntityType
     /// <param name="fieldInfo">The corresponding CLR field or <see langword="null" /> for a shadow navigation.</param>
     /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> used for this navigation.</param>
     /// <param name="eagerLoaded">A value indicating whether this navigation should be eager loaded by default.</param>
+    /// <param name="lazyLoadingEnabled">A value indicating whether this navigation should be enabled for lazy-loading.</param>
     /// <returns>The newly created navigation property.</returns>
     public virtual RuntimeNavigation AddNavigation(
         string name,
@@ -373,9 +375,10 @@ public class RuntimeEntityType : AnnotatableBase, IRuntimeEntityType
         PropertyInfo? propertyInfo = null,
         FieldInfo? fieldInfo = null,
         PropertyAccessMode propertyAccessMode = Internal.Model.DefaultPropertyAccessMode,
-        bool eagerLoaded = false)
+        bool eagerLoaded = false,
+        bool lazyLoadingEnabled = true)
     {
-        var navigation = new RuntimeNavigation(name, clrType, propertyInfo, fieldInfo, foreignKey, propertyAccessMode, eagerLoaded);
+        var navigation = new RuntimeNavigation(name, clrType, propertyInfo, fieldInfo, foreignKey, propertyAccessMode, eagerLoaded, lazyLoadingEnabled);
 
         _navigations.Add(name, navigation);
 
@@ -420,6 +423,7 @@ public class RuntimeEntityType : AnnotatableBase, IRuntimeEntityType
     /// <param name="fieldInfo">The corresponding CLR field or <see langword="null" /> for a shadow navigation.</param>
     /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> used for this navigation.</param>
     /// <param name="eagerLoaded">A value indicating whether this navigation should be eager loaded by default.</param>
+    /// <param name="lazyLoadingEnabled">A value indicating whether this navigation should be enabled for lazy-loading.</param>
     /// <returns>The newly created skip navigation property.</returns>
     public virtual RuntimeSkipNavigation AddSkipNavigation(
         string name,
@@ -431,7 +435,8 @@ public class RuntimeEntityType : AnnotatableBase, IRuntimeEntityType
         PropertyInfo? propertyInfo = null,
         FieldInfo? fieldInfo = null,
         PropertyAccessMode propertyAccessMode = Internal.Model.DefaultPropertyAccessMode,
-        bool eagerLoaded = false)
+        bool eagerLoaded = false,
+        bool lazyLoadingEnabled = true)
     {
         var skipNavigation = new RuntimeSkipNavigation(
             name,
@@ -444,7 +449,8 @@ public class RuntimeEntityType : AnnotatableBase, IRuntimeEntityType
             collection,
             onDependent,
             propertyAccessMode,
-            eagerLoaded);
+            eagerLoaded,
+            lazyLoadingEnabled);
 
         _skipNavigations.Add(name, skipNavigation);
 
@@ -715,15 +721,34 @@ public class RuntimeEntityType : AnnotatableBase, IRuntimeEntityType
         PropertyInfo? propertyInfo = null,
         FieldInfo? fieldInfo = null,
         PropertyAccessMode propertyAccessMode = Internal.Model.DefaultPropertyAccessMode)
+        => AddServiceProperty(name, (propertyInfo?.PropertyType ?? fieldInfo?.FieldType)!, propertyInfo, fieldInfo, propertyAccessMode);
+
+    /// <summary>
+    ///     Adds a service property to this entity type.
+    /// </summary>
+    /// <param name="name">The name of the property to add.</param>
+    /// <param name="serviceType">The type of the service.</param>
+    /// <param name="propertyInfo">The corresponding CLR property or <see langword="null" /> for a shadow property.</param>
+    /// <param name="fieldInfo">The corresponding CLR field or <see langword="null" /> for a shadow property.</param>
+    /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> used for this property.</param>
+    /// <returns>The newly created service property.</returns>
+    public virtual RuntimeServiceProperty AddServiceProperty(
+        string name,
+        Type serviceType,
+        PropertyInfo? propertyInfo = null,
+        FieldInfo? fieldInfo = null,
+        PropertyAccessMode propertyAccessMode = Internal.Model.DefaultPropertyAccessMode)
     {
         var serviceProperty = new RuntimeServiceProperty(
             name,
             propertyInfo,
             fieldInfo,
+            serviceType,
             this,
             propertyAccessMode);
 
         _serviceProperties[serviceProperty.Name] = serviceProperty;
+        _hasServiceProperties = true;
 
         return serviceProperty;
     }
@@ -745,11 +770,14 @@ public class RuntimeEntityType : AnnotatableBase, IRuntimeEntityType
             ? property
             : null;
 
+    private bool HasServiceProperties()
+        => _hasServiceProperties || _baseType != null && _baseType.HasServiceProperties();
+
     private IEnumerable<RuntimeServiceProperty> GetServiceProperties()
         => _baseType != null
-            ? _serviceProperties.Count == 0
-                ? _baseType.GetServiceProperties()
-                : _baseType.GetServiceProperties().Concat(_serviceProperties.Values)
+            ? _hasServiceProperties
+                ? _baseType.GetServiceProperties().Concat(_serviceProperties.Values)
+                : _baseType.GetServiceProperties()
             : _serviceProperties.Values;
 
     private IEnumerable<RuntimeServiceProperty> GetDeclaredServiceProperties()
@@ -1376,6 +1404,11 @@ public class RuntimeEntityType : AnnotatableBase, IRuntimeEntityType
     [DebuggerStepThrough]
     IEnumerable<IReadOnlyServiceProperty> IReadOnlyEntityType.GetDerivedServiceProperties()
         => GetDerivedServiceProperties();
+
+    /// <inheritdoc />
+    [DebuggerStepThrough]
+    bool IReadOnlyEntityType.HasServiceProperties()
+        => HasServiceProperties();
 
     /// <inheritdoc />
     [DebuggerStepThrough]

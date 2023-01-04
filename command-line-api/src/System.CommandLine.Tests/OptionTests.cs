@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using FluentAssertions;
+using System.CommandLine.Completions;
 using System.CommandLine.Parsing;
 using System.Linq;
 using Xunit;
@@ -63,7 +64,6 @@ namespace System.CommandLine.Tests
 
             option.AddAlias("-a");
 
-            option.HasAliasIgnoringPrefix("a").Should().BeTrue();
             option.HasAlias("-a").Should().BeTrue();
         }
 
@@ -84,27 +84,11 @@ namespace System.CommandLine.Tests
         }
 
         [Fact]
-        public void HasAliasIgnorePrefix_accepts_unprefixed_short_value()
-        {
-            var option = new Option<string>(new[] { "-o", "--option" });
-
-            option.HasAliasIgnoringPrefix("o").Should().BeTrue();
-        }
-
-        [Fact]
         public void HasAlias_accepts_prefixed_long_value()
         {
             var option = new Option<string>(new[] { "-o", "--option" });
 
             option.HasAlias("--option").Should().BeTrue();
-        }
-
-        [Fact]
-        public void HasAliasIgnorePrefix_accepts_unprefixed_long_value()
-        {
-            var option = new Option<string>(new[] { "-o", "--option" });
-
-            option.HasAliasIgnoringPrefix("option").Should().BeTrue();
         }
 
         [Fact]
@@ -218,9 +202,9 @@ namespace System.CommandLine.Tests
 
             var result = rootCommand.Parse(prefix + "c value-for-c " + prefix + "a value-for-a");
 
-            result.GetValueForOption(optionA).Should().Be("value-for-a");
+            result.GetValue(optionA).Should().Be("value-for-a");
             result.HasOption(optionB).Should().BeFalse();
-            result.GetValueForOption(optionC).Should().Be("value-for-c");
+            result.GetValue(optionC).Should().Be("value-for-c");
         }
 
         [Fact]
@@ -302,7 +286,7 @@ namespace System.CommandLine.Tests
         public void Option_T_default_value_is_validated()
         {
             var option = new Option<int>("-x", () => 123);
-            option.AddValidator(symbol =>
+            option.Validators.Add(symbol =>
                                     symbol.ErrorMessage = symbol.Tokens
                                                                 .Select(t => t.Value)
                                                                 .Where(v => v == "123")
@@ -326,7 +310,7 @@ namespace System.CommandLine.Tests
             result.HasOption(option)
                 .Should()
                 .BeFalse();
-            result.GetValueForOption(option)
+            result.GetValue(option)
                 .Should()
                 .BeNull();
         }
@@ -353,7 +337,7 @@ namespace System.CommandLine.Tests
 
             var parseResult = option.Parse(parseInput);
 
-            parseResult.GetValueForOption(option).Should().Be("value");
+            parseResult.GetValue(option).Should().Be("value");
         }
 
         [Fact]
@@ -366,7 +350,7 @@ namespace System.CommandLine.Tests
             result.HasOption(option)
                 .Should()
                 .BeFalse();
-            result.GetValueForOption(option)
+            result.GetValue(option)
                 .Should()
                 .BeFalse();
         }
@@ -374,8 +358,8 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Option_of_enum_can_limit_enum_members_as_valid_values()
         {
-            var option = new Option<ConsoleColor>("--color")
-                .FromAmong(ConsoleColor.Red.ToString(), ConsoleColor.Green.ToString());
+            Option<ConsoleColor> option = new("--color");
+            option.AcceptOnlyFromAmong(ConsoleColor.Red.ToString(), ConsoleColor.Green.ToString());
 
             var result = option.Parse("--color Fuschia");
 

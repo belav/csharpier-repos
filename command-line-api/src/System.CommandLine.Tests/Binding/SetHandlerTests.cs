@@ -63,8 +63,8 @@ namespace System.CommandLine.Tests.Binding
                 return new CustomType
                 {
                     Console = bindingContext.Console,
-                    IntValue = bindingContext.ParseResult.GetValueForOption(_intOption),
-                    StringValue = bindingContext.ParseResult.GetValueForArgument(_stringArg),
+                    IntValue = bindingContext.ParseResult.GetValue(_intOption),
+                    StringValue = bindingContext.ParseResult.GetValue(_stringArg),
                 };
             }
         }
@@ -85,7 +85,7 @@ namespace System.CommandLine.Tests.Binding
 
             for (var i = 1; i <= arity; i++)
             {
-                command.AddArgument(new Argument<int>($"i{i}"));
+                command.Arguments.Add(new Argument<int>($"i{i}"));
 
                 commandLine += $" {i}";
             }
@@ -176,7 +176,7 @@ namespace System.CommandLine.Tests.Binding
 
             for (var i = 1; i <= arity; i++)
             {
-                command.AddArgument(new Argument<int>($"i{i}"));
+                command.Arguments.Add(new Argument<int>($"i{i}"));
 
                 commandLine += $" {i}";
             }

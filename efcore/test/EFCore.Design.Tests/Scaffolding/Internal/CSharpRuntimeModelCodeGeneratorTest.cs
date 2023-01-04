@@ -176,11 +176,17 @@ namespace TestNamespace
                 assertModel: model =>
                 {
                     var lazyConstructorEntity = model.FindEntityType(typeof(LazyConstructorEntity));
-                    var lazyParameterBinding = lazyConstructorEntity.ConstructorBinding.ParameterBindings.Single();
+                    var lazyParameterBinding = lazyConstructorEntity!.ConstructorBinding!.ParameterBindings.Single();
                     Assert.Equal(typeof(ILazyLoader), lazyParameterBinding.ParameterType);
+
                     var lazyPropertyEntity = model.FindEntityType(typeof(LazyPropertyEntity));
-                    var lazyServiceProperty = lazyPropertyEntity.GetServiceProperties().Single();
+                    var lazyServiceProperty = lazyPropertyEntity!.GetServiceProperties().Single();
                     Assert.Equal(typeof(ILazyLoader), lazyServiceProperty.ClrType);
+
+                    var lazyPropertyDelegateEntity = model.FindEntityType(typeof(LazyPropertyDelegateEntity));
+                    Assert.Equal(2, lazyPropertyDelegateEntity!.GetServiceProperties().Count());
+                    Assert.Contains(lazyPropertyDelegateEntity!.GetServiceProperties(), p => p.ClrType == typeof(ILazyLoader));
+                    Assert.Contains(lazyPropertyDelegateEntity!.GetServiceProperties(), p => p.ClrType == typeof(Action<object, string>));
                 });
 
         public class LazyLoadingContext : ContextBase
@@ -190,6 +196,18 @@ namespace TestNamespace
                 base.OnModelCreating(modelBuilder);
 
                 modelBuilder.Entity<LazyConstructorEntity>();
+
+                modelBuilder.Entity<LazyPropertyDelegateEntity>(
+                    b =>
+                    {
+                        var serviceProperty = (ServiceProperty)b.Metadata.AddServiceProperty(
+                            typeof(ILazyLoader),
+                            typeof(LazyPropertyDelegateEntity).GetAnyProperty("LoaderState")!);
+
+                        serviceProperty.SetParameterBinding(
+                            new DependencyInjectionParameterBinding(typeof(object), typeof(ILazyLoader), serviceProperty),
+                            ConfigurationSource.Explicit);
+                    });
             }
         }
 
@@ -205,11 +223,23 @@ namespace TestNamespace
             public int Id { get; set; }
 
             public LazyPropertyEntity LazyPropertyEntity { get; set; }
+            public LazyPropertyDelegateEntity LazyPropertyDelegateEntity { get; set; }
         }
 
         public class LazyPropertyEntity
         {
             public ILazyLoader Loader { get; set; }
+
+            public int Id { get; set; }
+            public int LazyConstructorEntityId { get; set; }
+
+            public LazyConstructorEntity LazyConstructorEntity { get; set; }
+        }
+
+        public class LazyPropertyDelegateEntity
+        {
+            public object LoaderState { get; set; }
+            private Action<object, string> LazyLoader { get; set; }
 
             public int Id { get; set; }
             public int LazyConstructorEntityId { get; set; }
@@ -1079,7 +1109,8 @@ namespace TestNamespace
                 typeof(CSharpRuntimeModelCodeGeneratorTest.DependentBase<byte?>),
                 propertyInfo: typeof(CSharpRuntimeModelCodeGeneratorTest.PrincipalDerived<CSharpRuntimeModelCodeGeneratorTest.DependentBase<byte?>>).GetProperty(""Dependent"", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 fieldInfo: typeof(CSharpRuntimeModelCodeGeneratorTest.PrincipalDerived<CSharpRuntimeModelCodeGeneratorTest.DependentBase<byte?>>).GetField(""<Dependent>k__BackingField"", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                eagerLoaded: true);
+                eagerLoaded: true,
+                lazyLoadingEnabled: false);
 
             return runtimeForeignKey;
         }
@@ -1302,6 +1333,7 @@ namespace TestNamespace
 
             var context = runtimeEntityType.AddServiceProperty(
                 ""Context"",
+                typeof(Microsoft.EntityFrameworkCore.DbContext),
                 propertyInfo: typeof(CSharpRuntimeModelCodeGeneratorTest.OwnedType).GetProperty(""Context"", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly));
 
             var key = runtimeEntityType.AddKey(
@@ -1430,6 +1462,7 @@ namespace TestNamespace
 
             var context = runtimeEntityType.AddServiceProperty(
                 ""Context"",
+                typeof(Microsoft.EntityFrameworkCore.DbContext),
                 propertyInfo: typeof(CSharpRuntimeModelCodeGeneratorTest.OwnedType).GetProperty(""Context"", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly));
 
             var key = runtimeEntityType.AddKey(
@@ -1701,7 +1734,8 @@ namespace TestNamespace
                 typeof(ICollection<CSharpRuntimeModelCodeGeneratorTest.PrincipalBase>),
                 propertyInfo: typeof(CSharpRuntimeModelCodeGeneratorTest.PrincipalDerived<CSharpRuntimeModelCodeGeneratorTest.DependentBase<byte?>>).GetProperty(""Principals"", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 fieldInfo: typeof(CSharpRuntimeModelCodeGeneratorTest.PrincipalDerived<CSharpRuntimeModelCodeGeneratorTest.DependentBase<byte?>>).GetField(""<Principals>k__BackingField"", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                eagerLoaded: true);
+                eagerLoaded: true,
+                lazyLoadingEnabled: false);
 
             var inverse = targetEntityType.FindSkipNavigation(""Deriveds"");
             if (inverse != null)
@@ -1967,6 +2001,7 @@ namespace TestNamespace
                     Assert.Equal("<Dependent>k__BackingField", dependentNavigation.FieldInfo.Name);
                     Assert.False(dependentNavigation.IsCollection);
                     Assert.True(dependentNavigation.IsEagerLoaded);
+                    Assert.False(dependentNavigation.LazyLoadingEnabled);
                     Assert.False(dependentNavigation.IsOnDependent);
                     Assert.Equal(principalDerived, dependentNavigation.DeclaringEntityType);
                     Assert.Equal("Principal", dependentNavigation.Inverse.Name);
@@ -2015,6 +2050,7 @@ namespace TestNamespace
                     Assert.Equal(typeof(ICollection<PrincipalBase>), derivedSkipNavigation.ClrType);
                     Assert.True(derivedSkipNavigation.IsCollection);
                     Assert.True(derivedSkipNavigation.IsEagerLoaded);
+                    Assert.False(derivedSkipNavigation.LazyLoadingEnabled);
                     Assert.False(derivedSkipNavigation.IsOnDependent);
                     Assert.Equal(principalDerived, derivedSkipNavigation.DeclaringEntityType);
                     Assert.Equal("Deriveds", derivedSkipNavigation.Inverse.Name);
@@ -2250,7 +2286,7 @@ namespace TestNamespace
                             .HasForeignKey<DependentBase<byte?>>()
                             .OnDelete(DeleteBehavior.ClientNoAction);
 
-                        eb.Navigation(e => e.Dependent).AutoInclude();
+                        eb.Navigation(e => e.Dependent).AutoInclude().EnableLazyLoading(false);
 
                         eb.OwnsMany(
                             typeof(OwnedType).FullName, "ManyOwned", ob =>
@@ -2269,7 +2305,7 @@ namespace TestNamespace
                                         .HasColumnOrder(1);
                                 });
 
-                        eb.Navigation(e => e.Principals).AutoInclude();
+                        eb.Navigation(e => e.Principals).AutoInclude().EnableLazyLoading(false);
 
                         eb.ToTable("PrincipalDerived");
                     });
@@ -2520,12 +2556,12 @@ namespace TestNamespace
                 afterSaveBehavior: PropertySaveBehavior.Throw);
 
             var overrides = new StoreObjectDictionary<RuntimeRelationalPropertyOverrides>();
-            var idDerivedInsert = new RuntimeRelationalPropertyOverrides(
+            var idDerived_Insert = new RuntimeRelationalPropertyOverrides(
                 id,
                 StoreObjectIdentifier.InsertStoredProcedure(""Derived_Insert"", ""TPC""),
                 true,
                 ""DerivedId"");
-            overrides.Add(StoreObjectIdentifier.InsertStoredProcedure(""Derived_Insert"", ""TPC""), idDerivedInsert);
+            overrides.Add(StoreObjectIdentifier.InsertStoredProcedure(""Derived_Insert"", ""TPC""), idDerived_Insert);
             var idPrincipalBaseView = new RuntimeRelationalPropertyOverrides(
                 id,
                 StoreObjectIdentifier.View(""PrincipalBaseView"", ""TPC""),
@@ -2908,6 +2944,7 @@ namespace TestNamespace
                     Assert.Equal("<Dependent>k__BackingField", dependentNavigation.FieldInfo.Name);
                     Assert.False(dependentNavigation.IsCollection);
                     Assert.False(dependentNavigation.IsEagerLoaded);
+                    Assert.True(dependentNavigation.LazyLoadingEnabled);
                     Assert.False(dependentNavigation.IsOnDependent);
                     Assert.Equal(principalDerived, dependentNavigation.DeclaringEntityType);
                     Assert.Equal("Principal", dependentNavigation.Inverse.Name);
@@ -4579,23 +4616,23 @@ namespace TestNamespace
                 nullable: true);
             blob.AddAnnotation(""Cosmos:PropertyName"", ""JsonBlob"");
 
-            var id0 = runtimeEntityType.AddProperty(
+            var __id = runtimeEntityType.AddProperty(
                 ""__id"",
                 typeof(string),
                 afterSaveBehavior: PropertySaveBehavior.Throw,
                 valueGeneratorFactory: new IdValueGeneratorFactory().Create);
-            id0.AddAnnotation(""Cosmos:PropertyName"", ""id"");
+            __id.AddAnnotation(""Cosmos:PropertyName"", ""id"");
 
-            var jObject = runtimeEntityType.AddProperty(
+            var __jObject = runtimeEntityType.AddProperty(
                 ""__jObject"",
                 typeof(JObject),
                 nullable: true,
                 valueGenerated: ValueGenerated.OnAddOrUpdate,
                 beforeSaveBehavior: PropertySaveBehavior.Ignore,
                 afterSaveBehavior: PropertySaveBehavior.Ignore);
-            jObject.AddAnnotation(""Cosmos:PropertyName"", """");
+            __jObject.AddAnnotation(""Cosmos:PropertyName"", """");
 
-            var etag = runtimeEntityType.AddProperty(
+            var _etag = runtimeEntityType.AddProperty(
                 ""_etag"",
                 typeof(string),
                 nullable: true,
@@ -4609,7 +4646,7 @@ namespace TestNamespace
             runtimeEntityType.SetPrimaryKey(key);
 
             var key0 = runtimeEntityType.AddKey(
-                new[] { id0, partitionId });
+                new[] { __id, partitionId });
 
             return runtimeEntityType;
         }

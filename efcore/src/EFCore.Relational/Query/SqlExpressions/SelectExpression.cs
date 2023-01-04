@@ -440,52 +440,7 @@ public sealed partial class SelectExpression : TableExpressionBase
             }
 
             var entityProjection = new EntityProjectionExpression(entityType, propertyExpressions);
-
-            foreach (var ownedJsonNavigation in GetAllNavigationsInHierarchy(entityType)
-                         .Where(
-                             n => n.ForeignKey.IsOwnership
-                                 && n.TargetEntityType.IsMappedToJson()
-                                 && n.ForeignKey.PrincipalToDependent == n))
-            {
-                var targetEntityType = ownedJsonNavigation.TargetEntityType;
-                var jsonColumnName = targetEntityType.GetContainerColumnName()!;
-                var jsonColumnTypeMapping = targetEntityType.GetContainerColumnTypeMapping()!;
-
-                var jsonColumn = new ConcreteColumnExpression(
-                    jsonColumnName,
-                    tableReferenceExpression,
-                    jsonColumnTypeMapping.ClrType,
-                    jsonColumnTypeMapping,
-                    nullable: !ownedJsonNavigation.ForeignKey.IsRequiredDependent || ownedJsonNavigation.IsCollection);
-
-                // for json collections we need to skip ordinal key (which is always the last one)
-                // simple copy from parent is safe here, because we only do it at top level
-                // so there is no danger of multiple keys being synthesized (like we have in multi-level nav chains)
-                var keyPropertiesMap = new Dictionary<IProperty, ColumnExpression>();
-                var keyProperties = targetEntityType.FindPrimaryKey()!.Properties;
-                var keyPropertiesCount = ownedJsonNavigation.IsCollection
-                    ? keyProperties.Count - 1
-                    : keyProperties.Count;
-
-                for (var i = 0; i < keyPropertiesCount; i++)
-                {
-                    var correspondingParentKeyProperty = ownedJsonNavigation.ForeignKey.PrincipalKey.Properties[i];
-                    keyPropertiesMap[keyProperties[i]] = propertyExpressions[correspondingParentKeyProperty];
-                }
-
-                var entityShaperExpression = new RelationalEntityShaperExpression(
-                    targetEntityType,
-                    new JsonQueryExpression(
-                        targetEntityType,
-                        jsonColumn,
-                        keyPropertiesMap,
-                        ownedJsonNavigation.ClrType,
-                        ownedJsonNavigation.IsCollection),
-                    !ownedJsonNavigation.ForeignKey.IsRequiredDependent);
-
-                entityProjection.AddNavigationBinding(ownedJsonNavigation, entityShaperExpression);
-            }
-
+            AddJsonNavigationBindings(entityType, entityProjection, propertyExpressions, tableReferenceExpression);
             _projectionMapping[new ProjectionMember()] = entityProjection;
 
             var primaryKey = entityType.FindPrimaryKey();
@@ -522,6 +477,7 @@ public sealed partial class SelectExpression : TableExpressionBase
         }
 
         var entityProjection = new EntityProjectionExpression(entityType, propertyExpressions);
+        AddJsonNavigationBindings(entityType, entityProjection, propertyExpressions, tableReferenceExpression);
         _projectionMapping[new ProjectionMember()] = entityProjection;
 
         var primaryKey = entityType.FindPrimaryKey();
@@ -531,6 +487,58 @@ public sealed partial class SelectExpression : TableExpressionBase
             {
                 _identifier.Add((propertyExpressions[property], property.GetKeyValueComparer()));
             }
+        }
+    }
+
+    private void AddJsonNavigationBindings(
+        IEntityType entityType,
+        EntityProjectionExpression entityProjection,
+        Dictionary<IProperty, ColumnExpression> propertyExpressions,
+        TableReferenceExpression tableReferenceExpression)
+    {
+        foreach (var ownedJsonNavigation in GetAllNavigationsInHierarchy(entityType)
+                     .Where(
+                         n => n.ForeignKey.IsOwnership
+                             && n.TargetEntityType.IsMappedToJson()
+                             && n.ForeignKey.PrincipalToDependent == n))
+        {
+            var targetEntityType = ownedJsonNavigation.TargetEntityType;
+            var jsonColumnName = targetEntityType.GetContainerColumnName()!;
+            var jsonColumnTypeMapping = targetEntityType.GetContainerColumnTypeMapping()!;
+
+            var jsonColumn = new ConcreteColumnExpression(
+                jsonColumnName,
+                tableReferenceExpression,
+                jsonColumnTypeMapping.ClrType,
+                jsonColumnTypeMapping,
+                nullable: !ownedJsonNavigation.ForeignKey.IsRequiredDependent || ownedJsonNavigation.IsCollection);
+
+            // for json collections we need to skip ordinal key (which is always the last one)
+            // simple copy from parent is safe here, because we only do it at top level
+            // so there is no danger of multiple keys being synthesized (like we have in multi-level nav chains)
+            var keyPropertiesMap = new Dictionary<IProperty, ColumnExpression>();
+            var keyProperties = targetEntityType.FindPrimaryKey()!.Properties;
+            var keyPropertiesCount = ownedJsonNavigation.IsCollection
+                ? keyProperties.Count - 1
+                : keyProperties.Count;
+
+            for (var i = 0; i < keyPropertiesCount; i++)
+            {
+                var correspondingParentKeyProperty = ownedJsonNavigation.ForeignKey.PrincipalKey.Properties[i];
+                keyPropertiesMap[keyProperties[i]] = propertyExpressions[correspondingParentKeyProperty];
+            }
+
+            var entityShaperExpression = new RelationalEntityShaperExpression(
+                targetEntityType,
+                new JsonQueryExpression(
+                    targetEntityType,
+                    jsonColumn,
+                    keyPropertiesMap,
+                    ownedJsonNavigation.ClrType,
+                    ownedJsonNavigation.IsCollection),
+                !ownedJsonNavigation.ForeignKey.IsRequiredDependent);
+
+            entityProjection.AddNavigationBinding(ownedJsonNavigation, entityShaperExpression);
         }
     }
 
@@ -867,37 +875,43 @@ public sealed partial class SelectExpression : TableExpressionBase
             if (shaperExpression is RelationalGroupByShaperExpression groupByShaper)
             {
                 // We need to add key to projection and generate key selector in terms of projectionBindings
-                var projectionBindingMap = new Dictionary<SqlExpression, ProjectionBindingExpression>();
+                var projectionBindingMap = new Dictionary<SqlExpression, Expression>();
                 var keySelector = AddGroupByKeySelectorToProjection(
                     this, newClientProjections, projectionBindingMap, groupByShaper.KeySelector);
-                var (keyIdentifier, keyIdentifierValueComparers) = GetIdentifierAccessor(projectionBindingMap, _identifier);
+                var (keyIdentifier, keyIdentifierValueComparers) = GetIdentifierAccessor(
+                    this, newClientProjections, projectionBindingMap, _identifier);
                 _identifier.Clear();
                 _identifier.AddRange(_preGroupByIdentifier!);
                 _preGroupByIdentifier!.Clear();
 
-                static Expression AddGroupByKeySelectorToProjection(
+                Expression AddGroupByKeySelectorToProjection(
                     SelectExpression selectExpression,
                     List<Expression> clientProjectionList,
-                    Dictionary<SqlExpression, ProjectionBindingExpression> projectionBindingMap,
+                    Dictionary<SqlExpression, Expression> projectionBindingMap,
                     Expression keySelector)
                 {
                     switch (keySelector)
                     {
                         case SqlExpression sqlExpression:
+                        {
                             var index = selectExpression.AddToProjection(sqlExpression);
                             var clientProjectionToAdd = Constant(index);
                             var existingIndex = clientProjectionList.FindIndex(
                                 e => ExpressionEqualityComparer.Instance.Equals(e, clientProjectionToAdd));
                             if (existingIndex == -1)
                             {
-                                clientProjectionList.Add(Constant(index));
+                                clientProjectionList.Add(clientProjectionToAdd);
                                 existingIndex = clientProjectionList.Count - 1;
                             }
 
-                            var projectionBindingExpression = new ProjectionBindingExpression(
-                                selectExpression, existingIndex, sqlExpression.Type.MakeNullable());
+                            var projectionBindingExpression = sqlExpression.Type.IsNullableType()
+                                ? (Expression)new ProjectionBindingExpression(selectExpression, existingIndex, sqlExpression.Type)
+                                : Convert(new ProjectionBindingExpression(
+                                    selectExpression, existingIndex, sqlExpression.Type.MakeNullable()),
+                                    sqlExpression.Type);
                             projectionBindingMap[sqlExpression] = projectionBindingExpression;
                             return projectionBindingExpression;
+                        }
 
                         case NewExpression newExpression:
                             var newArguments = new Expression[newExpression.Arguments.Count];
@@ -936,6 +950,22 @@ public sealed partial class SelectExpression : TableExpressionBase
                                 AddGroupByKeySelectorToProjection(
                                     selectExpression, clientProjectionList, projectionBindingMap, unaryExpression.Operand));
 
+                        case EntityShaperExpression entityShaperExpression
+                        when entityShaperExpression.ValueBufferExpression is EntityProjectionExpression entityProjectionExpression:
+                        {
+                            var clientProjectionToAdd = AddEntityProjection(entityProjectionExpression);
+                            var existingIndex = clientProjectionList.FindIndex(
+                                e => ExpressionEqualityComparer.Instance.Equals(e, clientProjectionToAdd));
+                            if (existingIndex == -1)
+                            {
+                                clientProjectionList.Add(clientProjectionToAdd);
+                                existingIndex = clientProjectionList.Count - 1;
+                            }
+
+                            return entityShaperExpression.Update(
+                                new ProjectionBindingExpression(selectExpression, existingIndex, typeof(ValueBuffer)));
+                        }
+
                         default:
                             throw new InvalidOperationException(
                                 RelationalStrings.InvalidKeySelectorForGroupBy(keySelector, keySelector.GetType()));
@@ -943,18 +973,34 @@ public sealed partial class SelectExpression : TableExpressionBase
                 }
 
                 static (Expression, IReadOnlyList<ValueComparer>) GetIdentifierAccessor(
-                    Dictionary<SqlExpression, ProjectionBindingExpression> projectionBindingMap,
+                    SelectExpression selectExpression,
+                    List<Expression> clientProjectionList,
+                    Dictionary<SqlExpression, Expression> projectionBindingMap,
                     IEnumerable<(ColumnExpression Column, ValueComparer Comparer)> identifyingProjection)
                 {
                     var updatedExpressions = new List<Expression>();
                     var comparers = new List<ValueComparer>();
                     foreach (var (column, comparer) in identifyingProjection)
                     {
-                        var projectionBindingExpression = projectionBindingMap[column];
+                        if (!projectionBindingMap.TryGetValue(column, out var mappedExpresssion))
+                        {
+                            var index = selectExpression.AddToProjection(column);
+                            var clientProjectionToAdd = Constant(index);
+                            var existingIndex = clientProjectionList.FindIndex(
+                                e => ExpressionEqualityComparer.Instance.Equals(e, clientProjectionToAdd));
+                            if (existingIndex == -1)
+                            {
+                                clientProjectionList.Add(clientProjectionToAdd);
+                                existingIndex = clientProjectionList.Count - 1;
+                            }
+
+                            mappedExpresssion = new ProjectionBindingExpression(selectExpression, existingIndex, column.Type.MakeNullable());
+                        }
+
                         updatedExpressions.Add(
-                            projectionBindingExpression.Type.IsValueType
-                                ? Convert(projectionBindingExpression, typeof(object))
-                                : projectionBindingExpression);
+                            mappedExpresssion.Type.IsValueType
+                                ? Convert(mappedExpresssion, typeof(object))
+                                : mappedExpresssion);
                         comparers.Add(comparer);
                     }
 
@@ -1483,15 +1529,19 @@ public sealed partial class SelectExpression : TableExpressionBase
 
                         remappedConstant = Constant(newDictionary);
                     }
-                    else if (constantValue is ValueTuple<int, List<ValueTuple<IProperty, int>>, string[]> tuple)
+                    else if (constantValue is JsonProjectionInfo jsonProjectionInfo)
                     {
-                        var newList = new List<ValueTuple<IProperty, int>>();
-                        foreach (var item in tuple.Item2)
+                        var newKeyAccessInfo = new List<(IProperty?, int?, int?)>();
+                        foreach (var (keyProperty, constantKeyValue, keyProjectionIndex) in jsonProjectionInfo.KeyAccessInfo)
                         {
-                            newList.Add((item.Item1, projectionIndexMap[item.Item2]));
+                            newKeyAccessInfo.Add((keyProperty, constantKeyValue, keyProjectionIndex != null ? projectionIndexMap[keyProjectionIndex.Value] : null));
                         }
 
-                        remappedConstant = Constant((projectionIndexMap[tuple.Item1], newList, tuple.Item3));
+                        remappedConstant = Constant(
+                            new JsonProjectionInfo(
+                                jsonProjectionInfo.JsonColumnIndex,
+                                newKeyAccessInfo,
+                                jsonProjectionInfo.AdditionalPath));
                     }
                     else
                     {
@@ -1544,7 +1594,8 @@ public sealed partial class SelectExpression : TableExpressionBase
             {
                 var ordered = projections
                     .OrderBy(x => $"{x.JsonColumn.TableAlias}.{x.JsonColumn.Name}")
-                    .ThenBy(x => x.Path.Count);
+                    .ThenBy(x => x.Path.Count)
+                    .ThenBy(x => x.Path[^1].ArrayIndex != null);
 
                 var needed = new List<JsonScalarExpression>();
                 foreach (var orderedElement in ordered)
@@ -1592,25 +1643,54 @@ public sealed partial class SelectExpression : TableExpressionBase
 
         ConstantExpression AddJsonProjection(JsonQueryExpression jsonQueryExpression, JsonScalarExpression jsonScalarToAdd)
         {
-            var additionalPath = new string[0];
-
-            // this will be more tricky once we support more complicated json path options
-            additionalPath = jsonQueryExpression.Path
+            var additionalPath = jsonQueryExpression.Path
                 .Skip(jsonScalarToAdd.Path.Count)
-                .Select(x => x.Key)
                 .ToArray();
 
             var jsonColumnIndex = AddToProjection(jsonScalarToAdd);
 
-            var keyInfo = new List<(IProperty, int)>();
+            var keyAccessInfo = new List<(IProperty?, int?, int?)>();
             var keyProperties = GetMappedKeyProperties(jsonQueryExpression.EntityType.FindPrimaryKey()!);
             foreach (var keyProperty in keyProperties)
             {
                 var keyColumn = jsonQueryExpression.BindProperty(keyProperty);
-                keyInfo.Add((keyProperty, AddToProjection(keyColumn)));
+                keyAccessInfo.Add((keyProperty, null, AddToProjection(keyColumn)));
             }
 
-            return Constant((jsonColumnIndex, keyInfo, additionalPath));
+            foreach (var elementAccessSegment in jsonScalarToAdd.Path.Where(x => x.ArrayIndex != null))
+            {
+                if (elementAccessSegment.ArrayIndex is SqlConstantExpression { Value: int intValue })
+                {
+                    keyAccessInfo.Add((null, intValue, null));
+                }
+                else
+                {
+                    keyAccessInfo.Add((null, null, AddToProjection(elementAccessSegment.ArrayIndex!)));
+                }
+            }
+
+            var additionalPathList = new List<(string?, int?, int?)>();
+            foreach (var additionalPathSegment in additionalPath)
+            {
+                if (additionalPathSegment.PropertyName is not null)
+                {
+                    additionalPathList.Add((additionalPathSegment.PropertyName, null, null));
+                }
+                else if (additionalPathSegment.ArrayIndex is SqlConstantExpression { Value: int intValue } sqlConstant)
+                {
+                    additionalPathList.Add((null, intValue, null));
+                }
+                else
+                {
+                    additionalPathList.Add((null, null, AddToProjection(additionalPathSegment.ArrayIndex!)));
+                }
+            }
+
+            return Constant(
+                new JsonProjectionInfo(
+                    jsonColumnIndex,
+                    keyAccessInfo,
+                    additionalPathList.ToArray()));
         }
 
         static IReadOnlyList<IProperty> GetMappedKeyProperties(IKey key)
@@ -2005,9 +2085,7 @@ public sealed partial class SelectExpression : TableExpressionBase
                 break;
 
             case EntityShaperExpression entityShaperExpression
-                when entityShaperExpression.ValueBufferExpression is ProjectionBindingExpression projectionBindingExpression:
-                var entityProjectionExpression = (EntityProjectionExpression)((SelectExpression)projectionBindingExpression.QueryExpression)
-                        .GetProjection(projectionBindingExpression);
+                when entityShaperExpression.ValueBufferExpression is EntityProjectionExpression entityProjectionExpression:
                 foreach (var property in GetAllPropertiesInHierarchy(entityProjectionExpression.EntityType))
                 {
                     PopulateGroupByTerms(entityProjectionExpression.BindProperty(property), groupByTerms, groupByAliases, name: null);

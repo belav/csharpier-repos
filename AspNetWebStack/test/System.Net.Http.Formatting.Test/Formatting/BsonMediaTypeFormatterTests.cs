@@ -262,10 +262,10 @@ namespace System.Net.Http.Formatting
             BsonMediaTypeFormatter formatter = new BsonMediaTypeFormatter();
             HttpContent content = new StringContent(String.Empty);
             MemoryStream stream = new MemoryStream();
-#if NEWTONSOFTJSON10 // Json.NET 10's Bson package calculates the path in some exceptions differently.
-            string expectedPath = "Value";
-#else
+#if NETFX_CORE // Separate Bson package (not yet used in NETCore project) calculates the path in exceptions differently
             string expectedPath = string.Empty;
+#else
+            string expectedPath = "Value";
 #endif
             string expectedMessage = string.Format(
                 "Value is too large to fit in a signed 32 bit integer. BSON does not support unsigned values. Path '{0}'.",
@@ -340,9 +340,9 @@ namespace System.Net.Http.Formatting
             stream.Seek(0L, SeekOrigin.Begin);
 
             // Act & Assert
-            await Assert.ThrowsAsync<OverflowException>(
+            await Assert.ThrowsAsync<JsonReaderException>(
                 () => formatter.ReadFromStreamAsync(variationType, stream, content, null),
-                "Value was either too large or too small for a Decimal.");
+                "Could not convert to decimal: 7.92281625142643E+28. Path 'Value'.");
         }
 
         [Theory]

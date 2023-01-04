@@ -41,17 +41,17 @@ namespace Microsoft.Workload.Build.Tasks
 
         private const string s_nugetInsertionTag = "<!-- TEST_RESTORE_SOURCES_INSERTION_LINE -->";
         private string AllManifestsStampPath => Path.Combine(SdkWithNoWorkloadInstalledPath, ".all-manifests.stamp");
-        private static readonly string[] s_manifestIds = new[]
-        {
-            "microsoft.net.workload.mono.toolchain",
-            "microsoft.net.workload.emscripten.net6",
-            "microsoft.net.workload.emscripten.net7",
-            "microsoft.net.workload.mono.toolchain.net6",
-            "microsoft.net.workload.mono.toolchain.net7"
-        };
+        private string _tempDir = string.Empty;
+        private string _nugetCachePath = string.Empty;
 
         public override bool Execute()
         {
+            _tempDir = Path.Combine(Path.GetTempPath(), $"workload-{Path.GetRandomFileName()}");
+            if (Directory.Exists(_tempDir))
+                Directory.Delete(_tempDir, recursive: true);
+            Directory.CreateDirectory(_tempDir);
+            _nugetCachePath = Path.Combine(_tempDir, "nuget-cache");
+
             try
             {
                 if (!Directory.Exists(SdkWithNoWorkloadInstalledPath))
@@ -96,7 +96,6 @@ namespace Microsoft.Workload.Build.Tasks
                     }
                 }
 
-                string cachePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
                 string lastTargetPath = string.Empty;
                 foreach (InstallWorkloadRequest req in selectedRequests)
                 {
@@ -120,6 +119,11 @@ namespace Microsoft.Workload.Build.Tasks
             {
                 Log.LogError(laee.Message);
                 return false;
+            }
+            finally
+            {
+                if (!string.IsNullOrEmpty(_tempDir) && Directory.Exists(_tempDir))
+                    Directory.Delete(_tempDir, recursive: true);
             }
         }
 
@@ -154,8 +158,6 @@ namespace Microsoft.Workload.Build.Tasks
                 return true;
             }
 
-            ExecuteHackForInstallerMismatch();
-
             string nugetConfigContents = GetNuGetConfig();
             HashSet<string> manifestsInstalled = new();
             foreach (ITaskItem workload in WorkloadIds)
@@ -166,6 +168,12 @@ namespace Microsoft.Workload.Build.Tasks
                 {
                     Log.LogMessage(MessageImportance.High, $"** {req.WorkloadId}: Manifests are already installed **");
                     continue;
+                }
+
+                if (string.IsNullOrEmpty(req.Version))
+                {
+                    Log.LogError($"No Version set for workload manifest {req.ManifestName} in workload install requests.");
+                    return false;
                 }
 
                 Log.LogMessage(MessageImportance.High, $"{Environment.NewLine}** {req.WorkloadId}: Installing manifests **");
@@ -185,56 +193,22 @@ namespace Microsoft.Workload.Build.Tasks
             File.WriteAllText(AllManifestsStampPath, string.Empty);
 
             return true;
-
-            void ExecuteHackForInstallerMismatch()
-            {
-                // HACK - because sdk doesn't yet have the version-less manifest names in the known
-                // workloads list
-                string? txtPath = Directory.EnumerateFiles(Path.Combine(SdkWithNoWorkloadInstalledPath, "sdk"), "IncludedWorkloadManifests.txt",
-                                                new EnumerationOptions { RecurseSubdirectories = true, MaxRecursionDepth = 2})
-                                    .FirstOrDefault();
-                if (txtPath is null)
-                    throw new LogAsErrorException($"Could not find IncludedWorkloadManifests.txt in {SdkWithNoWorkloadInstalledPath}");
-
-                string stampPath = Path.Combine(Path.GetDirectoryName(txtPath)!, ".stamp");
-                if (File.Exists(stampPath))
-                    return;
-
-                List<string> lines = File.ReadAllLines(txtPath).ToList();
-                int originalCount = lines.Count;
-
-                // we want to insert the manifests in a fixed order
-                // so first remove all of them
-                foreach (string manifestId in s_manifestIds)
-                    lines.Remove(manifestId);
-                // .. and then insert
-                lines.AddRange(s_manifestIds);
-
-                // currently using emscripten.net7 instead of this,
-                // so remove it from the list
-                lines.Remove("microsoft.net.workload.emscripten");
-
-                if (lines.Count != originalCount)
-                {
-                    // Update the file only if we are making any changes
-                    File.WriteAllText(txtPath, string.Join(Environment.NewLine, lines));
-                }
-
-                File.WriteAllText(stampPath, "");
-            }
         }
 
         private bool InstallPacks(InstallWorkloadRequest req, string nugetConfigContents)
         {
-            string nugetConfigPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+            string nugetConfigPath = Path.Combine(_tempDir, $"NuGet.{Path.GetRandomFileName()}.config");
             File.WriteAllText(nugetConfigPath, nugetConfigContents);
 
             // Log.LogMessage(MessageImportance.High, $"{Environment.NewLine}** dotnet workload install {req.WorkloadId} **{Environment.NewLine}");
             (int exitCode, string output) = Utils.TryRunProcess(
                                                     Log,
                                                     Path.Combine(req.TargetPath, "dotnet"),
-                                                    $"workload install --skip-manifest-update --no-cache --configfile \"{nugetConfigPath}\" {req.WorkloadId}",
-                                                    workingDir: Path.GetTempPath(),
+                                                    $"workload install --skip-manifest-update --configfile \"{nugetConfigPath}\" --temp-dir \"{_tempDir}/workload-install-temp\" {req.WorkloadId}",
+                                                    workingDir: _tempDir,
+                                                    envVars: new Dictionary<string, string> () {
+                                                        ["NUGET_PACKAGES"] = _nugetCachePath
+                                                    },
                                                     logStdErrAsMessage: req.IgnoreErrors,
                                                     debugMessageImportance: MessageImportance.Normal);
             if (exitCode != 0)
@@ -317,7 +291,7 @@ namespace Microsoft.Workload.Build.Tasks
                                           OutputDir: outputDir,
                                           relativeSourceDir: "data");
 
-            if (!PackageInstaller.Install(new[] { pkgRef }, nugetConfigContents, Log, stopOnMissing))
+            if (!PackageInstaller.Install(new[] { pkgRef }, nugetConfigContents, _tempDir, Log, stopOnMissing, packagesPath: _nugetCachePath))
                 return false;
 
             string manifestDir = pkgRef.OutputDir;

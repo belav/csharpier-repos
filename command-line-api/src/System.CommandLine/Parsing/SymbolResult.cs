@@ -12,10 +12,9 @@ namespace System.CommandLine.Parsing
     /// </summary>
     public abstract class SymbolResult
     {
-        private readonly List<SymbolResult> _children = new();
-        private protected readonly List<Token> _tokens = new();
+        private List<SymbolResult>? _children;
+        private protected List<Token>? _tokens;
         private LocalizationResources? _resources;
-        private readonly Dictionary<Argument, ArgumentResult> _defaultArgumentValues = new();
 
         private protected SymbolResult(
             Symbol symbol, 
@@ -37,9 +36,9 @@ namespace System.CommandLine.Parsing
         /// <summary>
         /// Child symbol results in the parse tree.
         /// </summary>
-        public IReadOnlyList<SymbolResult> Children => _children;
+        public IReadOnlyList<SymbolResult> Children => _children is not null ? _children : Array.Empty<SymbolResult>();
 
-        internal void AddChild(SymbolResult symbolResult) => _children.Add(symbolResult);
+        internal void AddChild(SymbolResult symbolResult) => (_children ??= new()).Add(symbolResult);
 
         /// <summary>
         /// The parent symbol result in the parse tree.
@@ -56,7 +55,7 @@ namespace System.CommandLine.Parsing
         /// <summary>
         /// The list of tokens associated with this symbol result during parsing.
         /// </summary>
-        public IReadOnlyList<Token> Tokens => _tokens;
+        public IReadOnlyList<Token> Tokens => _tokens is not null ? _tokens : Array.Empty<Token>();
 
         internal bool IsArgumentLimitReached => RemainingArgumentCapacity == 0;
 
@@ -78,11 +77,14 @@ namespace System.CommandLine.Parsing
                     case Command command:
                         var value = 0;
 
-                        var arguments = command.Arguments;
-
-                        for (var i = 0; i < arguments.Count; i++)
+                        if (command.HasArguments)
                         {
-                            value += arguments[i].Arity.MaximumNumberOfValues;
+                            var arguments = command.Arguments;
+
+                            for (var i = 0; i < arguments.Count; i++)
+                            {
+                                value += arguments[i].Arity.MaximumNumberOfValues;
+                            }
                         }
 
                         return value;
@@ -102,7 +104,7 @@ namespace System.CommandLine.Parsing
             set => _resources = value;
         }
 
-        internal void AddToken(Token token) => _tokens.Add(token);
+        internal void AddToken(Token token) => (_tokens ??= new()).Add(token);
 
         /// <summary>
         /// Finds a result for the specific argument anywhere in the parse tree, including parent and child symbol results.
@@ -128,8 +130,8 @@ namespace System.CommandLine.Parsing
         public virtual OptionResult? FindResultFor(Option option) =>
             Root?.FindResultFor(option);
 
-        /// <inheritdoc cref="ParseResult.GetValueForArgument"/>
-        public T GetValueForArgument<T>(Argument<T> argument)
+        /// <inheritdoc cref="ParseResult.GetValue(Argument)"/>
+        public T GetValue<T>(Argument<T> argument)
         {
             if (FindResultFor(argument) is { } result &&
                 result.GetValueOrDefault<T>() is { } t)
@@ -140,8 +142,8 @@ namespace System.CommandLine.Parsing
             return (T)ArgumentConverter.GetDefaultValue(argument.ValueType)!;
         }
 
-        /// <inheritdoc cref="ParseResult.GetValueForArgument"/>
-        public object? GetValueForArgument(Argument argument)
+        /// <inheritdoc cref="ParseResult.GetValue(Argument)"/>
+        public object? GetValue(Argument argument)
         {
             if (FindResultFor(argument) is { } result &&
                 result.GetValueOrDefault<object?>() is { } t)
@@ -152,8 +154,8 @@ namespace System.CommandLine.Parsing
             return ArgumentConverter.GetDefaultValue(argument.ValueType);
         }
 
-        /// <inheritdoc cref="ParseResult.GetValueForOption"/>
-        public T? GetValueForOption<T>(Option<T> option)
+        /// <inheritdoc cref="ParseResult.GetValue(Option)"/>
+        public T? GetValue<T>(Option<T> option)
         {
             if (FindResultFor(option) is { } result &&
                 result.GetValueOrDefault<T>() is { } t)
@@ -164,8 +166,8 @@ namespace System.CommandLine.Parsing
             return (T)ArgumentConverter.GetDefaultValue(option.Argument.ValueType)!;
         }
 
-        /// <inheritdoc cref="ParseResult.GetValueForOption"/>
-        public object? GetValueForOption(Option option)
+        /// <inheritdoc cref="ParseResult.GetValue(Option)"/>
+        public object? GetValue(Option option)
         {
             if (FindResultFor(option) is { } result && 
                 result.GetValueOrDefault<object?>() is { } t)
@@ -176,38 +178,9 @@ namespace System.CommandLine.Parsing
             return ArgumentConverter.GetDefaultValue(option.Argument.ValueType);
         }
 
-        internal ArgumentResult GetOrCreateDefaultArgumentResult(Argument argument) =>
-            _defaultArgumentValues.GetOrAdd(
-                argument,
-                arg => new ArgumentResult(arg, this));
-
         internal virtual bool UseDefaultValueFor(Argument argument) => false;
 
         /// <inheritdoc/>
         public override string ToString() => $"{GetType().Name}: {this.Token()} {string.Join(" ", Tokens.Select(t => t.Value))}";
-
-        internal ParseError? UnrecognizedArgumentError(Argument argument)
-        {
-            if (argument.AllowedValues?.Count > 0 &&
-                Tokens.Count > 0)
-            {
-                for (var i = 0; i < Tokens.Count; i++)
-                {
-                    var token = Tokens[i];
-
-                    if (token.Symbol is null || token.Symbol == argument)
-                    {
-                        if (!argument.AllowedValues.Contains(token.Value))
-                        {
-                            return new ParseError(
-                                LocalizationResources.UnrecognizedArgument(token.Value, argument.AllowedValues),
-                                this);
-                        }
-                    }
-                }
-            }
-
-            return null;
-        }
     }
 }

@@ -12,6 +12,8 @@ namespace System.Formats.Tar.Tests
 {
     public abstract partial class TarTestsBase : FileCleanupTestBase
     {
+        protected static bool IsRemoteExecutorSupportedAndPrivilegedProcess => RemoteExecutor.IsSupported && PlatformDetection.IsPrivilegedProcess;
+
         protected const string InitialEntryName = "InitialEntryName.ext";
         protected readonly string ModifiedEntryName = "ModifiedEntryName.ext";
 
@@ -94,6 +96,7 @@ namespace System.Formats.Tar.Tests
         internal const string FourBytesCharacter = "\uD83D\uDE12";
         internal const char Separator = '/';
         internal const int MaxPathComponent = 255;
+        internal const long LegacyMaxFileSize = (1L << 33) - 1; // Max value of 11 octal digits = 2^33 - 1 or 8 Gb.
 
         private static readonly string[] V7TestCaseNames = new[]
         {
@@ -207,11 +210,6 @@ namespace System.Formats.Tar.Tests
             // GNU formatted files. Format used by GNU tar versions up to 1.13.25.
             gnu
         }
-        protected static bool IsRemoteExecutorSupportedAndOnUnixAndSuperUser => RemoteExecutor.IsSupported && PlatformDetection.IsUnixAndSuperUser;
-
-        protected static bool IsUnixButNotSuperUser => !PlatformDetection.IsWindows && !PlatformDetection.IsSuperUser;
-
-        protected static bool IsNotLinuxBionic => !PlatformDetection.IsLinuxBionic;
 
         protected TarTestsBase()
         {
@@ -481,7 +479,7 @@ namespace System.Formats.Tar.Tests
             return entryType;
         }
 
-        protected TarEntry InvokeTarEntryCreationConstructor(TarEntryFormat targetFormat, TarEntryType entryType, string entryName)
+        protected static TarEntry InvokeTarEntryCreationConstructor(TarEntryFormat targetFormat, TarEntryType entryType, string entryName)
             => targetFormat switch
             {
                 TarEntryFormat.V7 => new V7TarEntry(entryType, entryName),
@@ -795,6 +793,19 @@ namespace System.Formats.Tar.Tests
             Name,
             NameAndPrefix,
             Unlimited
+        }
+
+        internal static void WriteTarArchiveWithOneEntry(Stream s, TarEntryFormat entryFormat, TarEntryType entryType)
+        {
+            using TarWriter writer = new(s, leaveOpen: true);
+
+            TarEntry entry = InvokeTarEntryCreationConstructor(entryFormat, entryType, "foo");
+            if (entryType == TarEntryType.SymbolicLink)
+            {
+                entry.LinkName = "bar";
+            }
+
+            writer.WriteEntry(entry);
         }
     }
 }

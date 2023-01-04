@@ -24,8 +24,8 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_an_option_accepts_only_specific_arguments_but_a_wrong_one_is_supplied_then_an_informative_error_is_returned()
         {
-            var option = new Option<string>("-x")
-                .FromAmong("this", "that", "the-other-thing");
+            var option = new Option<string>("-x");
+            option.AcceptOnlyFromAmong("this", "that", "the-other-thing");
 
             var result = option.Parse("-x none-of-those");
 
@@ -40,8 +40,8 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_an_option_has_en_error_then_the_error_has_a_reference_to_the_option()
         {
-            var option = new Option<string>("-x")
-                .FromAmong("this", "that");
+            var option = new Option<string>("-x");
+            option.AcceptOnlyFromAmong("this", "that");
 
             var result = option.Parse("-x something_else");
 
@@ -54,7 +54,8 @@ namespace System.CommandLine.Tests
         [Fact] // https://github.com/dotnet/command-line-api/issues/1475
         public void When_FromAmong_is_used_then_the_OptionResult_ErrorMessage_is_set()
         {
-            var option = new Option<string>("--opt").FromAmong("a", "b");
+            var option = new Option<string>("--opt");
+            option.AcceptOnlyFromAmong("a", "b");
             var command = new Command("test") { option };
 
             var parseResult = command.Parse("test --opt c");
@@ -71,12 +72,14 @@ namespace System.CommandLine.Tests
         [Fact] // https://github.com/dotnet/command-line-api/issues/1475
         public void When_FromAmong_is_used_then_the_ArgumentResult_ErrorMessage_is_set()
         {
-            var option = new Argument<string>().FromAmong("a", "b");
-            var command = new Command("test") { option };
+            var argument = new Argument<string>();
+            argument.AcceptOnlyFromAmong("a", "b");
+
+            var command = new Command("test") { argument };
 
             var parseResult = command.Parse("test c");
 
-            parseResult.FindResultFor(option)
+            parseResult.FindResultFor(argument)
                        .ErrorMessage
                        .Should()
                        .Be(parseResult.Errors.Single().Message)
@@ -90,8 +93,8 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("set")
             {
-                new Argument<string>("key").FromAmong("key1", "key2"),
-                new Argument<string>("value").FromAmong("value1", "value2")
+                CreateArgumentWithAcceptOnlyFromAmong(name: "key", "key1", "key2"),
+                CreateArgumentWithAcceptOnlyFromAmong(name : "value", "value1", "value2")
             };
 
             var result = command.Parse("set key1 value1");
@@ -104,8 +107,8 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("set")
             {
-                new Argument<string>("key").FromAmong("key1", "key2"),
-                new Argument<string>("value").FromAmong("value1", "value2")
+                CreateArgumentWithAcceptOnlyFromAmong(name : "key", "key1", "key2"),
+                CreateArgumentWithAcceptOnlyFromAmong(name : "value", "value1", "value2")
             };
 
             var result = command.Parse("set not-key1 value1");
@@ -120,12 +123,40 @@ namespace System.CommandLine.Tests
         }
 
         [Fact]
+        public void When_FromAmong_is_used_multiple_times_only_the_most_recently_provided_values_are_taken_into_account()
+        {
+            Argument<string> argument = new("key");
+            argument.AcceptOnlyFromAmong("key1");
+
+            var command = new Command("set")
+            {
+                argument
+            };
+
+            var result = command.Parse("set key2");
+
+            result.Errors
+              .Should()
+              .ContainSingle()
+              .Which
+              .Message
+              .Should()
+              .Be(LocalizationResources.Instance.UnrecognizedArgument("key2", new[] { "key1" }));
+
+            argument.AcceptOnlyFromAmong("key2");
+
+            result = command.Parse("set key2");
+
+            result.Errors.Should().BeEmpty();
+        }
+
+        [Fact]
         public void When_FromAmong_is_used_for_multiple_arguments_and_invalid_input_is_provided_for_the_second_one_then_the_error_is_informative()
         {
             var command = new Command("set")
             {
-                new Argument<string>("key").FromAmong("key1", "key2"),
-                new Argument<string>("value").FromAmong("value1", "value2")
+                CreateArgumentWithAcceptOnlyFromAmong(name : "key", "key1", "key2"),
+                CreateArgumentWithAcceptOnlyFromAmong(name : "value", "value1", "value2")
             };
 
             var result = command.Parse("set key1 not-value1");
@@ -275,7 +306,7 @@ namespace System.CommandLine.Tests
                 new Option<bool>("--two")
             };
 
-            command.AddValidator(commandResult =>
+            command.Validators.Add(commandResult =>
             {
                 if (commandResult.Children.Any(sr => sr.Symbol is IdentifierSymbol id && id.HasAlias("--one")) &&
                     commandResult.Children.Any(sr => sr.Symbol is IdentifierSymbol id && id.HasAlias("--two")))
@@ -300,7 +331,7 @@ namespace System.CommandLine.Tests
         {
             var option = new Option<int>("-x");
 
-            option.AddValidator(r =>
+            option.Validators.Add(r =>
             {
                 var value = r.GetValueOrDefault<int>();
 
@@ -327,7 +358,7 @@ namespace System.CommandLine.Tests
         {
             var argument = new Argument<int>("x");
 
-            argument.AddValidator(r =>
+            argument.Validators.Add(r =>
             {
                 var value = r.GetValueOrDefault<int>();
 
@@ -359,13 +390,13 @@ namespace System.CommandLine.Tests
             var argumentValidatorWasCalled = false;
 
             var option = new Option<string>("-o");
-            option.AddValidator(_ =>
+            option.Validators.Add(_ =>
             {
                 optionValidatorWasCalled = true;
             });
 
             var argument = new Argument<string>("the-arg");
-            argument.AddValidator(_ =>
+            argument.Validators.Add(_ =>
             {
                 argumentValidatorWasCalled = true;
             });
@@ -375,7 +406,7 @@ namespace System.CommandLine.Tests
                 option,
                 argument
             };
-            rootCommand.AddValidator(_ =>
+            rootCommand.Validators.Add(_ =>
             {
                 commandValidatorWasCalled = true;
             });
@@ -393,7 +424,7 @@ namespace System.CommandLine.Tests
         public void Validators_on_global_options_are_executed_when_invoking_a_subcommand(string commandLine)
         {
             var option = new Option<FileInfo>("--file");
-            option.AddValidator(r =>
+            option.Validators.Add(r =>
             {
                 r.ErrorMessage = "Invoked validator";
             });
@@ -430,7 +461,7 @@ namespace System.CommandLine.Tests
             var handlerWasCalled = false;
 
             var globalOption = new Option<int>("--value");
-            globalOption.AddValidator(r => r.ErrorMessage = "oops!");
+            globalOption.Validators.Add(r => r.ErrorMessage = "oops!");
 
             var grandchildCommand = new Command("grandchild");
 
@@ -460,7 +491,7 @@ namespace System.CommandLine.Tests
         {
             var errorMessage = "that's not right...";
             var argument = new Argument<string>();
-            argument.AddValidator(r => r.ErrorMessage = errorMessage);
+            argument.Validators.Add(r => r.ErrorMessage = errorMessage);
 
             var cmd = new Command("get")
             {
@@ -481,9 +512,9 @@ namespace System.CommandLine.Tests
         {
             var argument = new Argument<int>();
             var errorMessage = "The value of option '-x' must be between 1 and 100.";
-            argument.AddValidator(result =>
+            argument.Validators.Add(result =>
             {
-                var value = result.GetValueForArgument(argument);
+                var value = result.GetValue(argument);
 
                 if (value < 0 || value > 100)
                 {
@@ -505,9 +536,9 @@ namespace System.CommandLine.Tests
         {
             var option = new Option<int>("-x");
             var errorMessage = "The value of option '-x' must be between 1 and 100.";
-            option.AddValidator(result =>
+            option.Validators.Add(result =>
             {
-                var value = result.GetValueForOption(option);
+                var value = result.GetValue(option);
 
                 if (value < 0 || value > 100)
                 {
@@ -529,9 +560,11 @@ namespace System.CommandLine.Tests
             [Fact]
             public void LegalFilePathsOnly_rejects_command_arguments_containing_invalid_path_characters()
             {
+                Argument<string> argument = new();
+                argument.AcceptLegalFilePathsOnly();
                 var command = new Command("the-command")
                 {
-                    new Argument<string>().LegalFilePathsOnly()
+                    argument
                 };
 
                 var invalidCharacter = Path.GetInvalidPathChars().First(c => c != '"');
@@ -549,9 +582,11 @@ namespace System.CommandLine.Tests
             [Fact]
             public void LegalFilePathsOnly_rejects_option_arguments_containing_invalid_path_characters()
             {
+                Option<string> option = new ("-x");
+                option.AcceptLegalFilePathsOnly();
                 var command = new Command("the-command")
                 {
-                    new Option<string>("-x").LegalFilePathsOnly()
+                    option
                 };
 
                 var invalidCharacter = Path.GetInvalidPathChars().First(c => c != '"');
@@ -569,9 +604,11 @@ namespace System.CommandLine.Tests
             [Fact]
             public void LegalFilePathsOnly_accepts_command_arguments_containing_valid_path_characters()
             {
+                Argument<string[]> argument = new ();
+                argument.AcceptLegalFilePathsOnly();
                 var command = new Command("the-command")
                 {
-                    new Argument<string[]>().LegalFilePathsOnly()
+                    argument
                 };
 
                 var validPathName = Directory.GetCurrentDirectory();
@@ -585,9 +622,12 @@ namespace System.CommandLine.Tests
             [Fact]
             public void LegalFilePathsOnly_accepts_option_arguments_containing_valid_path_characters()
             {
+                Option<string[]> option = new ("-x");
+                option.AcceptLegalFilePathsOnly();
+
                 var command = new Command("the-command")
                 {
-                    new Option<string[]>("-x").LegalFilePathsOnly()
+                    option
                 };
 
                 var validPathName = Directory.GetCurrentDirectory();
@@ -604,9 +644,12 @@ namespace System.CommandLine.Tests
             [Fact]
             public void LegalFileNamesOnly_rejects_command_arguments_containing_invalid_file_name_characters()
             {
+                Argument<string> argument = new();
+                argument.AcceptLegalFileNamesOnly();
+
                 var command = new Command("the-command")
                 {
-                    new Argument<string>().LegalFileNamesOnly()
+                    argument
                 };
 
                 var invalidCharacter = Path.GetInvalidFileNameChars().First(c => c != '"');
@@ -624,9 +667,12 @@ namespace System.CommandLine.Tests
             [Fact]
             public void LegalFileNamesOnly_rejects_option_arguments_containing_invalid_file_name_characters()
             {
+                Option<string> option = new("-x");
+                option.AcceptLegalFileNamesOnly();
+
                 var command = new Command("the-command")
                 {
-                    new Option<string>("-x").LegalFileNamesOnly()
+                    option
                 };
 
                 var invalidCharacter = Path.GetInvalidFileNameChars().First(c => c != '"');
@@ -644,9 +690,12 @@ namespace System.CommandLine.Tests
             [Fact]
             public void LegalFileNamesOnly_accepts_command_arguments_containing_valid_file_name_characters()
             {
+                Argument<string[]> argument = new ();
+                argument.AcceptLegalFileNamesOnly();
+
                 var command = new Command("the-command")
                 {
-                    new Argument<string[]>().LegalFileNamesOnly()
+                    argument
                 };
 
                 var validFileName = Path.GetFileName(Directory.GetCurrentDirectory());
@@ -660,9 +709,12 @@ namespace System.CommandLine.Tests
             [Fact]
             public void LegalFileNamesOnly_accepts_option_arguments_containing_valid_file_name_characters()
             {
+                Option<string[]> option = new("-x");
+                option.AcceptLegalFileNamesOnly();
+
                 var command = new Command("the-command")
                 {
-                    new Option<string[]>("-x").LegalFileNamesOnly()
+                    option
                 };
 
                 var validFileName = Path.GetFileName(Directory.GetCurrentDirectory());
@@ -681,7 +733,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new Command("move")
                 {
-                    new Argument<FileInfo>("to").ExistingOnly()
+                    new Argument<FileInfo>("to").AcceptExistingOnly()
                 };
 
                 var path = NonexistentPath();
@@ -700,7 +752,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new Command("move")
                 {
-                    new Option<FileInfo>("--to").ExistingOnly()
+                    new Option<FileInfo>("--to").AcceptExistingOnly()
                 };
 
                 var path = NonexistentPath();
@@ -719,7 +771,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new Command("move")
                 {
-                    new Argument<DirectoryInfo>("to").ExistingOnly()
+                    new Argument<DirectoryInfo>("to").AcceptExistingOnly()
                 };
 
                 var path = NonexistentPath();
@@ -738,7 +790,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new Command("move")
                 {
-                    new Option<DirectoryInfo>("--to").ExistingOnly()
+                    new Option<DirectoryInfo>("--to").AcceptExistingOnly()
                 };
 
                 var path = NonexistentPath();
@@ -757,7 +809,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new Command("move")
                 {
-                    new Argument<FileSystemInfo>().ExistingOnly()
+                    new Argument<FileSystemInfo>().AcceptExistingOnly()
                 };
 
                 var path = NonexistentPath();
@@ -776,7 +828,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new Command("move")
                 {
-                    new Option<FileSystemInfo>("--to").ExistingOnly()
+                    new Option<FileSystemInfo>("--to").AcceptExistingOnly()
                 };
 
                 var path = NonexistentPath();
@@ -795,7 +847,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new Command("move")
                 {
-                    new Argument<IEnumerable<FileInfo>>("to").ExistingOnly()
+                    new Argument<IEnumerable<FileInfo>>("to").AcceptExistingOnly()
                 };
 
                 var path = NonexistentPath();
@@ -814,7 +866,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new Command("move")
                 {
-                    new Option<IEnumerable<FileInfo>>("--to").ExistingOnly()
+                    new Option<IEnumerable<FileInfo>>("--to").AcceptExistingOnly()
                 };
 
                 var path = NonexistentPath();
@@ -833,7 +885,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new Command("move")
                 {
-                    new Argument<List<DirectoryInfo>>("to").ExistingOnly()
+                    new Argument<List<DirectoryInfo>>("to").AcceptExistingOnly()
                 };
 
                 var path = NonexistentPath();
@@ -852,7 +904,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new Command("move")
                 {
-                    new Option<DirectoryInfo[]>("--to").ExistingOnly()
+                    new Option<DirectoryInfo[]>("--to").AcceptExistingOnly()
                 };
 
                 var path = NonexistentPath();
@@ -874,7 +926,7 @@ namespace System.CommandLine.Tests
                     new Argument<FileSystemInfo[]>("to")
                     {
                         Arity = ArgumentArity.ZeroOrMore
-                    }.ExistingOnly(),
+                    }.AcceptExistingOnly(),
                     new Option<string>("--to")
                 };
 
@@ -892,7 +944,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new Command("move")
                 {
-                    new Option<FileSystemInfo[]>("--to").ExistingOnly()
+                    new Option<FileSystemInfo[]>("--to").AcceptExistingOnly()
                 };
 
                 var path = NonexistentPath();
@@ -911,7 +963,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new Command("move")
                 {
-                    new Argument<FileSystemInfo>("to").ExistingOnly()
+                    new Argument<FileSystemInfo>("to").AcceptExistingOnly()
                 };
 
                 var path = NonexistentPath();
@@ -930,7 +982,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new Command("move")
                 {
-                    new Option<FileSystemInfo[]>("--to").ExistingOnly()
+                    new Option<FileSystemInfo[]>("--to").AcceptExistingOnly()
                 };
 
                 var path = NonexistentPath();
@@ -949,7 +1001,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new Command("move")
                 {
-                    new Argument<FileInfo>().ExistingOnly()
+                    new Argument<FileInfo>().AcceptExistingOnly()
                 };
 
                 var path = ExistingFile();
@@ -963,7 +1015,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new Command("move")
                 {
-                    new Option<FileInfo>("--to").ExistingOnly()
+                    new Option<FileInfo>("--to").AcceptExistingOnly()
                 };
 
                 var path = ExistingFile();
@@ -977,7 +1029,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new Command("move")
                 {
-                    new Argument<DirectoryInfo>().ExistingOnly()
+                    new Argument<DirectoryInfo>().AcceptExistingOnly()
                 };
 
                 var path = ExistingDirectory();
@@ -991,7 +1043,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new Command("move")
                 {
-                    new Option<DirectoryInfo>("--to").ExistingOnly()
+                    new Option<DirectoryInfo>("--to").AcceptExistingOnly()
                 };
 
                 var path = ExistingDirectory();
@@ -1022,8 +1074,8 @@ namespace System.CommandLine.Tests
             var outer = new Command("outer");
             var inner = new Command("inner");
             var innerer = new Command("inner-er");
-            outer.AddCommand(inner);
-            inner.AddCommand(innerer);
+            outer.Subcommands.Add(inner);
+            inner.Subcommands.Add(innerer);
 
             var result = outer.Parse("outer inner arg");
 
@@ -1057,8 +1109,8 @@ namespace System.CommandLine.Tests
             var inner = new Command("inner");
             inner.SetHandler(() => { });
             var innerer = new Command("inner-er");
-            outer.AddCommand(inner);
-            inner.AddCommand(innerer);
+            outer.Subcommands.Add(inner);
+            inner.Subcommands.Add(innerer);
 
             var result = outer.Parse("outer inner");
 
@@ -1094,8 +1146,8 @@ namespace System.CommandLine.Tests
             var result = parser.Parse("");
 
             result.Errors.Should().BeEmpty();
-            result.GetValueForOption(optionX).Should().Be(123);
-            result.GetValueForOption(optionY).Should().Be(456);
+            result.GetValue(optionX).Should().Be(123);
+            result.GetValue(optionY).Should().Be(456);
         }
 
         [Fact] // https://github.com/dotnet/command-line-api/issues/1505
@@ -1121,8 +1173,8 @@ namespace System.CommandLine.Tests
         public void Multiple_validators_on_the_same_command_do_not_report_duplicate_errors()
         {
             var command = new RootCommand();
-            command.AddValidator(result => result.ErrorMessage = "Wrong");
-            command.AddValidator(_ => { });
+            command.Validators.Add(result => result.ErrorMessage = "Wrong");
+            command.Validators.Add(_ => { });
 
             var parseResult = command.Parse("");
 
@@ -1139,8 +1191,8 @@ namespace System.CommandLine.Tests
         public void Multiple_validators_on_the_same_option_do_not_report_duplicate_errors()
         {
             var option = new Option<string>("-x");
-            option.AddValidator(result => result.ErrorMessage = "Wrong");
-            option.AddValidator(_ => { });
+            option.Validators.Add(result => result.ErrorMessage = "Wrong");
+            option.Validators.Add(_ => { });
 
             var command = new RootCommand
             {
@@ -1162,8 +1214,8 @@ namespace System.CommandLine.Tests
         public void Multiple_validators_on_the_same_argument_do_not_report_duplicate_errors()
         {
             var argument = new Argument<string>();
-            argument.AddValidator(result => result.ErrorMessage = "Wrong");
-            argument.AddValidator(_ => { });
+            argument.Validators.Add(result => result.ErrorMessage = "Wrong");
+            argument.Validators.Add(_ => { });
 
             var command = new RootCommand
             {
@@ -1185,7 +1237,7 @@ namespace System.CommandLine.Tests
         internal void When_there_is_an_arity_error_then_further_errors_are_not_reported()
         {
             var option = new Option<string>("-o");
-            option.AddValidator(result =>
+            option.Validators.Add(result =>
             {
                 result.ErrorMessage = "OOPS";
             }); //all good;
@@ -1204,6 +1256,13 @@ namespace System.CommandLine.Tests
                        .Message
                        .Should()
                        .Be("Required argument missing for option: '-o'.");
+        }
+
+        private Argument<string> CreateArgumentWithAcceptOnlyFromAmong(string name, params string[] values)
+        {
+            Argument<string> argument = new(name);
+            argument.AcceptOnlyFromAmong(values);
+            return argument;
         }
     }
 }

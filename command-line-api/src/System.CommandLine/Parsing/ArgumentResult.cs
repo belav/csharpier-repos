@@ -64,11 +64,14 @@ namespace System.CommandLine.Parsing
                 throw new InvalidOperationException($"{nameof(OnlyTake)} can only be called once.");
             }
 
-            var passedOnTokensCount = _tokens.Count - numberOfTokens;
+            if (_tokens is not null)
+            {
+                var passedOnTokensCount = _tokens.Count - numberOfTokens;
 
-            PassedOnTokens = new List<Token>(_tokens.GetRange(numberOfTokens, passedOnTokensCount));
-            
-            _tokens.RemoveRange(numberOfTokens, passedOnTokensCount);
+                PassedOnTokens = new List<Token>(_tokens.GetRange(numberOfTokens, passedOnTokensCount));
+
+                _tokens.RemoveRange(numberOfTokens, passedOnTokensCount);
+            }
         }
 
         /// <inheritdoc/>
@@ -83,7 +86,7 @@ namespace System.CommandLine.Parsing
 
                 if (!string.IsNullOrWhiteSpace(ErrorMessage))
                 {
-                    return new ParseError(ErrorMessage!, this);
+                    return new ParseError(ErrorMessage!, Parent is OptionResult option ? option : this);
                 }
             }
 

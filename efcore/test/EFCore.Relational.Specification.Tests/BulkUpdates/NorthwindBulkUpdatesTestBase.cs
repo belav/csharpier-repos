@@ -769,7 +769,7 @@ WHERE [OrderID] < 10300"))
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Update_with_invalid_lambda_in_set_property_throws(bool async)
         => AssertTranslationFailed(
-            RelationalStrings.InvalidPropertyInSetProperty(new ExpressionPrinter().Print((OrderDetail e) => e.MaybeScalar(e => e.OrderID))),
+            RelationalStrings.InvalidPropertyInSetProperty(new ExpressionPrinter().PrintExpression((OrderDetail e) => e.MaybeScalar(e => e.OrderID))),
             () => AssertUpdate(
                 async,
                 ss => ss.Set<OrderDetail>().Where(od => od.OrderID < 10250),
@@ -1074,6 +1074,19 @@ WHERE [CustomerID] LIKE 'A%'"))
                         Assert.NotNull(c.City);
                     }
                 }));
+
+    [ConditionalTheory]
+    [MemberData(nameof(IsAsyncData))]
+    public virtual Task Update_with_two_inner_joins(bool async)
+        => AssertUpdate(
+            async,
+            ss => ss
+                .Set<OrderDetail>()
+                .Where(od => od.Product.Discontinued && od.Order.OrderDate > new DateTime(1990, 1, 1)),
+            e => e,
+            s => s.SetProperty(od => od.Quantity, 1),
+            rowsAffectedCount: 228,
+            (b, a) => Assert.All(a, od => Assert.Equal(1, od.Quantity)));
 
     protected string NormalizeDelimitersInRawString(string sql)
         => Fixture.TestStore.NormalizeDelimitersInRawString(sql);

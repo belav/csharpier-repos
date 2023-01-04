@@ -10,8 +10,41 @@ using VerifyCS = Microsoft.AspNetCore.Analyzers.Verifiers.CSharpAnalyzerVerifier
 
 public class RequestDelegateReturnTypeAnalyzerTests
 {
-    private string GetMessage(string type) =>
-        $"The method used to create a RequestDelegate returns Task<{type}>. RequestDelegate discards this value. If this isn't intended then don't return a value or change the method signature to not match RequestDelegate.";
+    [Fact]
+    public async Task AnonymousDelegate_RequestDelegate_ThrowError_NoDiagnostics()
+    {
+        // Arrange & Act & Assert
+        await VerifyCS.VerifyAnalyzerAsync(@"
+using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Builder;
+var webApp = WebApplication.Create();
+webApp.Use(async (HttpContext context, Func<Task> next) =>
+{
+    context.SetEndpoint(new Endpoint(c => throw new Exception(), EndpointMetadataCollection.Empty, ""Test""));
+    await next();
+});
+");
+    }
+
+    [Fact]
+    public async Task AnonymousDelegate_RequestDelegate_ReturnNull_NoDiagnostics()
+    {
+        // Arrange & Act & Assert
+        await VerifyCS.VerifyAnalyzerAsync(@"
+using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Builder;
+var webApp = WebApplication.Create();
+webApp.Use(async (HttpContext context, Func<Task> next) =>
+{
+    context.SetEndpoint(new Endpoint(c => null, EndpointMetadataCollection.Empty, ""Test""));
+    await next();
+});
+");
+    }
 
     [Fact]
     public async Task AnonymousDelegate_RequestDelegate_ReturnType_EndpointCtor_ReportDiagnostics()
@@ -31,7 +64,7 @@ webApp.Use(async (HttpContext context, Func<Task> next) =>
 ",
         new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
             .WithLocation(0)
-            .WithMessage(GetMessage("System.DateTime")));
+            .WithMessage(Resources.FormatAnalyzer_RequestDelegateReturnValue_Message("System.DateTime")));
     }
 
     [Fact]
@@ -50,7 +83,7 @@ webApp.MapGet(""/"", {|#0:(HttpContext context) =>
 ",
         new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
             .WithLocation(0)
-            .WithMessage(GetMessage("object?")));
+            .WithMessage(Resources.FormatAnalyzer_RequestDelegateReturnValue_Message("object?")));
     }
 
     [Fact]
@@ -73,7 +106,7 @@ webApp.Use(next =>
 ",
         new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
             .WithLocation(0)
-            .WithMessage(GetMessage("string")));
+            .WithMessage(Resources.FormatAnalyzer_RequestDelegateReturnValue_Message("string")));
     }
 
     [Fact]
@@ -89,7 +122,7 @@ webApp.MapGet(""/"", {|#0:(HttpContext context) => Task.FromResult(""hello world
 ",
         new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
             .WithLocation(0)
-            .WithMessage(GetMessage("string")));
+            .WithMessage(Resources.FormatAnalyzer_RequestDelegateReturnValue_Message("string")));
     }
 
     [Fact]
@@ -109,7 +142,7 @@ webApp.MapGet(""/"",{|#0:(HttpContext context) =>
 ",
         new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
             .WithLocation(0)
-            .WithMessage(GetMessage("string")));
+            .WithMessage(Resources.FormatAnalyzer_RequestDelegateReturnValue_Message("string")));
     }
 
     [Fact]
@@ -130,7 +163,7 @@ webApp.MapGet(""/"", {|#0:(HttpContext context) =>
 ",
         new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
             .WithLocation(0)
-            .WithMessage(GetMessage("string")));
+            .WithMessage(Resources.FormatAnalyzer_RequestDelegateReturnValue_Message("string")));
     }
 
     [Fact]
@@ -151,7 +184,7 @@ webApp.MapGet(""/"", {|#0:(HttpContext context) =>
 ",
         new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
             .WithLocation(0)
-            .WithMessage(GetMessage("string")));
+            .WithMessage(Resources.FormatAnalyzer_RequestDelegateReturnValue_Message("string")));
     }
 
     [Fact]
@@ -179,7 +212,7 @@ webApp.MapGet(""/"", {|#0:(HttpContext context) =>
 ",
         new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
             .WithLocation(0)
-            .WithMessage(GetMessage("string")));
+            .WithMessage(Resources.FormatAnalyzer_RequestDelegateReturnValue_Message("string")));
     }
 
     [Fact]
@@ -207,7 +240,7 @@ webApp.MapGet(""/"", {|#0:(HttpContext context) =>
 ",
         new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
             .WithLocation(0)
-            .WithMessage(GetMessage("int")));
+            .WithMessage(Resources.FormatAnalyzer_RequestDelegateReturnValue_Message("int")));
     }
 
     [Fact]
@@ -299,7 +332,7 @@ static Task<string> HttpMethod(HttpContext context) => Task.FromResult(""hello w
 ",
         new DiagnosticResult(DiagnosticDescriptors.DoNotReturnValueFromRequestDelegate)
             .WithLocation(0)
-            .WithMessage(GetMessage("string")));
+            .WithMessage(Resources.FormatAnalyzer_RequestDelegateReturnValue_Message("string")));
     }
 
     [Fact]

@@ -3,9 +3,9 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class DatabindingInMemoryTest : DatabindingTestBase<F1InMemoryFixture>
+public class DataBindingInMemoryTest : DataBindingTestBase<F1InMemoryFixture>
 {
-    public DatabindingInMemoryTest(F1InMemoryFixture fixture)
+    public DataBindingInMemoryTest(F1InMemoryFixture fixture)
         : base(fixture)
     {
     }

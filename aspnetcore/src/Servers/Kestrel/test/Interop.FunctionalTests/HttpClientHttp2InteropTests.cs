@@ -1345,6 +1345,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
 
     [Theory]
     [MemberData(nameof(SupportedSchemes))]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/45811")]
     public async Task Settings_MaxHeaderListSize_Server(string scheme)
     {
         var oneKbString = new string('a', 1024);
@@ -1369,10 +1370,10 @@ public class HttpClientHttp2InteropTests : LoggedTest
         {
             request.Headers.Add("header" + i, oneKbString + i);
         }
-        // Kestrel closes the connection rather than sending the recommended 431 response. https://github.com/dotnet/aspnetcore/issues/17861
-        await Assert.ThrowsAsync<HttpRequestException>(() => client.SendAsync(request)).DefaultTimeout();
-
+        var response = await client.SendAsync(request).DefaultTimeout();
         await host.StopAsync().DefaultTimeout();
+
+        Assert.Equal(HttpStatusCode.RequestHeaderFieldsTooLarge, response.StatusCode);
     }
 
     [Theory]
